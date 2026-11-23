@@ -1,0 +1,10 @@
+[package]
+name = "ria-engine-sys"
+version = "0.0.0"
+description = "Raw symbol loader for the 106 exported ac_* calls of the prebuilt Ardia engine."
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+libc = "0.2"
