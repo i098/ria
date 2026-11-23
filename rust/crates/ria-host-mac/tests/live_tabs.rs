@@ -19,7 +19,7 @@ mod mac {
     use std::path::{Path, PathBuf};
     use std::process::Command;
     use std::rc::Rc;
-    use std::time::{Duration, Instant};
+    use std::time::{Duration, Instant, SystemTime};
 
     use objc2::rc::Retained;
     use objc2::runtime::NSObject;
@@ -33,7 +33,12 @@ mod mac {
     use ria_host_mac::tabs::ardia_tab_parking::TabParking;
     use ria_host_mac::tabs::ardia_tab_registry::TabRegistry;
     use ria_host_mac::tabs::ardia_tab_strip::{StripCommandResult, StripWindow, TabStrips};
+    use ria_host_mac::tabs::ardia_web_view_navigation::NavigationReports;
+    use ria_host_mac::tabs::ardia_web_view_page_commands;
     use serde_json::json;
+
+    const FIXTURE_URL: &str = "data:text/html,%3Ctitle%3ERia%20tab%20fixture%3C/title%3E";
+    const FIXTURE_TITLE: &str = "Ria tab fixture";
 
     struct Checks {
         passed: Cell<bool>,
@@ -77,6 +82,52 @@ mod mac {
             }
         }
     );
+
+    #[derive(Default)]
+    struct NavigationChecks {
+        reports: RefCell<NavigationReports>,
+        matched: Cell<bool>,
+    }
+
+    define_class!(
+        #[unsafe(super(NSObject))]
+        #[name = "RiaTabsLiveNavigationObserver"]
+        #[ivars = NavigationChecks]
+        struct NavigationObserver;
+
+        impl NavigationObserver {
+            #[unsafe(method(tabDidChangeTitle:))]
+            fn title_changed(&self, tab: &Tab) {
+                self.report(tab);
+            }
+
+            #[unsafe(method(tabDidChangeLoading:))]
+            fn loading_changed(&self, tab: &Tab) {
+                self.report(tab);
+            }
+        }
+    );
+
+    impl NavigationObserver {
+        fn report(&self, tab: &Tab) {
+            let checks = self.ivars();
+            checks.reports.borrow_mut().emit(
+                tab,
+                None,
+                false,
+                &mut false,
+                SystemTime::now(),
+                |event| {
+                    if event["url"] == FIXTURE_URL
+                        && event["title"] == FIXTURE_TITLE
+                        && event["isLoading"] == false
+                    {
+                        checks.matched.set(true);
+                    }
+                },
+            );
+        }
+    }
 
     pub fn run() {
         if let Some(profile) = std::env::var_os("RIA_TABS_LIVE_PROFILE") {
@@ -232,37 +283,75 @@ mod mac {
 
     fn open_fixture(profile: &Profile) {
         let window = fixture_window(profile);
-        let tab = window.open_tab(
-            &NSString::from_str("data:text/html,<title>Ria%20tab%20fixture</title>"),
-            profile,
-            false,
-        );
+        let tab = window.open_tab(&NSString::from_str("about:blank"), profile, false);
+        let observer = NavigationObserver::alloc().set_ivars(NavigationChecks::default());
+        // SAFETY: The observer implements the tab callbacks and stays alive until we clear the delegate.
+        let observer: Retained<NavigationObserver> = unsafe { msg_send![super(observer), init] };
+        unsafe { tab.set_delegate(Some(&observer)) };
         window.activate_tab(&tab);
-        loaded(
-            window,
-            tab,
-            profile.retain(),
-            Instant::now() + Duration::from_secs(30),
+        window.host_view().addSubview(&tab.view());
+        let deadline = Instant::now() + Duration::from_secs(30);
+        tab.load_url(&NSString::from_str(FIXTURE_URL), true);
+        let profile = profile.retain();
+        wait_for_event(
+            deadline,
+            move || observer.ivars().matched.get(),
+            move |observed| {
+                unsafe { tab.set_delegate(None) };
+                if !observed {
+                    eprintln!("live_tabs: no matching navigation event");
+                    return shutdown(&window, &tab, false);
+                }
+                check_evaluation(window, tab, profile, deadline);
+            },
         );
     }
 
-    fn loaded(
+    fn check_evaluation(
         window: Retained<Window>,
         tab: Retained<Tab>,
         profile: Retained<Profile>,
         deadline: Instant,
     ) {
-        if tab.title().to_string() != "Ria tab fixture" {
-            if Instant::now() >= deadline {
-                shutdown(&window, &tab, false);
-                return;
-            }
-            main_queue::after(
-                Duration::from_millis(50),
-                Box::new(move || loaded(window, tab, profile, deadline)),
-            );
-            return;
-        }
+        let result = Rc::new(Cell::new(None));
+        page_commands::evaluate(
+            Some(&tab),
+            "post('result', JSON.stringify(6 * 7))",
+            false,
+            tab.frozen(),
+            {
+                let result = result.clone();
+                move |reply| {
+                    let number = reply
+                        .as_deref()
+                        .and_then(|reply| serde_json::from_str::<serde_json::Number>(reply).ok());
+                    result.set(Some(
+                        number.and_then(|number| number.as_f64()) == Some(42.0),
+                    ));
+                }
+            },
+        );
+        wait_for_event(
+            deadline,
+            {
+                let result = result.clone();
+                move || result.get().is_some()
+            },
+            move |answered| {
+                if !answered || result.get() != Some(true) {
+                    eprintln!("live_tabs: evaluation did not return JSON number 42");
+                    return shutdown(&window, &tab, false);
+                }
+                check_registry_and_parking(window, tab, profile);
+            },
+        );
+    }
+
+    fn check_registry_and_parking(
+        window: Retained<Window>,
+        tab: Retained<Tab>,
+        profile: Retained<Profile>,
+    ) {
         let mtm = MainThreadMarker::new().unwrap();
         let view = tab.view();
         let mut registry = TabRegistry::default();
@@ -277,7 +366,6 @@ mod mac {
         registry.expect_first_show_focus(&tab, true);
         pass &= registry.take_first_show_focus(&tab) && !registry.take_first_show_focus(&tab);
         let host = window.host_view();
-        host.addSubview(&view);
         let host_window = window.window();
         pass &= view
             .window()
@@ -447,7 +535,7 @@ mod mac {
                         };
                         let deadline = Instant::now() + Duration::from_secs(10);
                         event_deadline.set(Some(deadline));
-                        wait_for_strip(
+                        wait_for_event(
                             deadline,
                             {
                                 let group = group.clone();
@@ -542,7 +630,7 @@ mod mac {
         if !arrange(Number(command), Number(pinned), expected) {
             return finish(false);
         }
-        wait_for_strip(
+        wait_for_event(
             deadline,
             {
                 let engine_pinned = engine_pinned.clone();
@@ -558,7 +646,7 @@ mod mac {
         );
     }
 
-    fn wait_for_strip(
+    fn wait_for_event(
         deadline: Instant,
         matches: impl Fn() -> bool + 'static,
         finish: impl FnOnce(bool) + 'static,
@@ -570,7 +658,7 @@ mod mac {
         } else {
             main_queue::after(
                 Duration::from_millis(20),
-                Box::new(move || wait_for_strip(deadline, matches, finish)),
+                Box::new(move || wait_for_event(deadline, matches, finish)),
             );
         }
     }
@@ -676,9 +764,7 @@ mod mac {
     }
 
     fn shutdown(window: &Window, tab: &Tab, pass: bool) {
-        println!(
-            "live_tabs: title, registry, parking, typed strip and Chromium strip events: {pass}"
-        );
+        println!("live_tabs: page controls, registry, parking, and strip events: {pass}");
         RESULT.with(|result| result.set(pass));
         tab.close();
         window.close();

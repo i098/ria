@@ -36,6 +36,7 @@ pub fn open_verification_code(
     background: bool,
     completion: impl FnOnce(Value) + 'static,
 ) {
+    // ArdiaWebView+FieldProviders.mm:499-501.
     if background {
         completion(json!({"opened": true}));
         return;
@@ -294,6 +295,7 @@ impl SystemPasswordPanel {
             completion(not_shown("throttled"));
             return;
         }
+        // ArdiaWebView+FieldProviders.mm:273-279.
         self.last = Some(now);
         if background && !allow_background_panel {
             completion(json!({"shown": true}));
@@ -348,6 +350,7 @@ unsafe extern "C" {
     fn CGWindowListCopyWindowInfo(options: u32, relative_window: u32) -> *mut NSArray<AnyObject>;
 }
 
+// ArdiaWebView+FieldProviders.mm:176-205, 224-236, 247-253.
 fn panel_frames() -> (HashMap<u64, f64>, bool) {
     // SAFETY: The copy returns an owned CFArray, which is toll-free bridged to NSArray.
     let windows = unsafe { Retained::from_raw(CGWindowListCopyWindowInfo(1 | 16, 0)) };
