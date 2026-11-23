@@ -1,0 +1,36 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-3-omnibox/repo",
+  "unit": "packages/core/src/quickCreate.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "quick-create-rs",
+  "exports": [
+    {
+      "name": "matchQuickCreate",
+      "file": "packages/core/src/quickCreate.ts",
+      "line": 29,
+      "params": [
+        {
+          "name": "query",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "limit",
+          "ts_type": "number",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  id: string;\n  title: string;\n  url: string;\n  aliases: readonly string[];\n  site: string;\n}[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}
