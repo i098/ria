@@ -10,8 +10,9 @@ use std::path::{Component, Path, PathBuf};
 
 use rustix::fs::{Mode, OFlags, openat};
 use serde_json::{Map, Value, json};
+use sha2::{Digest, Sha256};
 
-use super::text::{base64_decode_lenient, base64_encode, sha256};
+use super::text::{base64_decode_lenient, base64_encode};
 use crate::call::CallError;
 
 /// An extension id: 32 letters from `a` to `p`.
@@ -21,11 +22,11 @@ pub fn is_extension_id(s: &str) -> bool {
 
 /// The id of the key in a manifest `key` field: the first 16 bytes of its SHA-256, as letters from `a` to `p`.
 pub fn id_for_key(base64_key: &str) -> Option<String> {
-    let key = base64_decode_lenient(base64_key);
+    let key = base64_decode_lenient(base64_key)?;
     if key.is_empty() {
         return None;
     }
-    let hash = sha256(&key);
+    let hash = Sha256::digest(key);
     Some(
         hash[..16]
             .iter()
@@ -35,9 +36,45 @@ pub fn id_for_key(base64_key: &str) -> Option<String> {
 }
 
 fn load_json(folder: &File, path: &Path) -> Option<Map<String, Value>> {
-    let mut text = String::new();
-    open_file(folder, path)?.read_to_string(&mut text).ok()?;
-    json5::from_str(text.trim_start_matches('\u{feff}')).ok()
+    let mut bytes = Vec::new();
+    open_file(folder, path)?.read_to_end(&mut bytes).ok()?;
+    match bytes.as_slice() {
+        [0, 0, 0xfe, 0xff, rest @ ..] => load_utf32(rest, u32::from_be_bytes),
+        [0xff, 0xfe, 0, 0, rest @ ..] => load_utf32(rest, u32::from_le_bytes),
+        [0xfe, 0xff, rest @ ..] => load_utf16(rest, u16::from_be_bytes),
+        [0xff, 0xfe, rest @ ..] => load_utf16(rest, u16::from_le_bytes),
+        [0, 0, 0, _, ..] => load_utf32(&bytes, u32::from_be_bytes),
+        [_, 0, 0, 0, ..] => load_utf32(&bytes, u32::from_le_bytes),
+        [0, _, ..] => load_utf16(&bytes, u16::from_be_bytes),
+        [_, 0, ..] => load_utf16(&bytes, u16::from_le_bytes),
+        _ => {
+            let text = std::str::from_utf8(&bytes).ok()?;
+            json5::from_str(text.trim_start_matches('\u{feff}')).ok()
+        }
+    }
+}
+
+fn load_utf16(bytes: &[u8], unit: fn([u8; 2]) -> u16) -> Option<Map<String, Value>> {
+    let (chunks, rest) = bytes.as_chunks::<2>();
+    if !rest.is_empty() {
+        return None;
+    }
+    let text: String = char::decode_utf16(chunks.iter().copied().map(unit))
+        .collect::<Result<_, _>>()
+        .ok()?;
+    json5::from_str(&text).ok()
+}
+
+fn load_utf32(bytes: &[u8], unit: fn([u8; 4]) -> u32) -> Option<Map<String, Value>> {
+    let (chunks, rest) = bytes.as_chunks::<4>();
+    if !rest.is_empty() {
+        return None;
+    }
+    let text: String = chunks
+        .iter()
+        .map(|b| char::from_u32(unit(*b)))
+        .collect::<Option<_>>()?;
+    json5::from_str(&text).ok()
 }
 
 fn open_file(folder: &File, path: &Path) -> Option<File> {
@@ -369,12 +406,68 @@ mod tests {
     }
 
     #[test]
-    fn id_for_key_hashes_the_decoded_key() {
-        // SHA-256("abc") starts ba 78 16 bf; each nibble n becomes the letter 'a' + n.
-        let id = id_for_key("YWJj").unwrap();
-        assert_eq!(id.len(), 32);
-        assert!(id.starts_with("lkhibglp"), "{id}");
+    fn id_for_key_requires_valid_padding_and_uses_the_sha256_prefix() {
+        assert_eq!(
+            id_for_key("YWJj").as_deref(),
+            Some("lkhibglpipabmpokebebeanofnkocccd")
+        );
+        assert_eq!(
+            id_for_key("Zg==").as_deref(),
+            Some("cfcpbamidgbaolmkbkafjmalkoicffol")
+        );
+        assert_eq!(id_for_key("Zg"), None);
         assert_eq!(id_for_key(""), None);
+    }
+
+    #[test]
+    fn manifest_and_locale_use_foundation_json_encodings() {
+        let dir = tempfile::tempdir().unwrap();
+        let locale = dir.path().join("_locales/fr");
+        fs::create_dir_all(&locale).unwrap();
+        for (width, big_endian, bom) in [
+            (2, true, &[0xfe, 0xff][..]),
+            (2, false, &[0xff, 0xfe][..]),
+            (4, true, &[0, 0, 0xfe, 0xff][..]),
+            (4, false, &[0xff, 0xfe, 0, 0][..]),
+        ] {
+            for prefix in [bom, &[]] {
+                let encode = |text: &str| {
+                    let mut bytes = prefix.to_vec();
+                    if width == 2 {
+                        for unit in text.encode_utf16() {
+                            bytes.extend(if big_endian {
+                                unit.to_be_bytes()
+                            } else {
+                                unit.to_le_bytes()
+                            });
+                        }
+                    } else {
+                        for unit in text.chars().map(u32::from) {
+                            bytes.extend(if big_endian {
+                                unit.to_be_bytes()
+                            } else {
+                                unit.to_le_bytes()
+                            });
+                        }
+                    }
+                    bytes
+                };
+                fs::write(
+                    dir.path().join("manifest.json"),
+                    encode("{name: '__MSG_title__'}"),
+                )
+                .unwrap();
+                fs::write(
+                    locale.join("messages.json"),
+                    encode("{title: {message: 'Bon été 🐝'}}"),
+                )
+                .unwrap();
+                assert_eq!(
+                    read_manifest(dir.path(), "fr").unwrap()["name"],
+                    "Bon été 🐝"
+                );
+            }
+        }
     }
 
     #[test]

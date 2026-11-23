@@ -125,7 +125,7 @@ fn configure_args(args: &Value) -> Result<Value, CallError> {
             let valid = if key == "siteAccess" {
                 matches!(
                     value.as_str(),
-                    Some("ON_CLICK" | "ON_SPECIFIC_SITES" | "ON_ALL_SITES")
+                    Some("onClick" | "specificSites" | "allSites")
                 )
             } else {
                 value.is_boolean()
@@ -258,6 +258,7 @@ mod tests {
             ("userScripts", json!([])),
             ("siteAccess", json!(false)),
             ("siteAccess", json!("unknown")),
+            ("siteAccess", json!("ON_CLICK")),
             ("pinnedIndex", json!("1")),
             ("pinnedIndex", json!(2147483648_i64)),
             ("pinnedIndex", json!(-2147483649_i64)),
@@ -265,6 +266,22 @@ mod tests {
             let mut args = json!({"id": "x", "options": {}});
             args["options"][key] = value;
             assert_eq!(configure_args(&args), Err(CallError::BadArguments), "{args}");
+        }
+    }
+
+    #[test]
+    fn configure_forwards_the_site_access_commands() {
+        use crate::api::{Call, extensions::Configure};
+
+        let Some(Route::Engine(route)) = super::super::route(Configure::NAME, false) else {
+            panic!("extensions.configure has no engine route");
+        };
+        for mode in ["onClick", "specificSites", "allSites"] {
+            let args = json!({"id": "ext", "options": {"siteAccess": mode}});
+            assert_eq!(
+                (route.shape)(&args),
+                Ok(json!({"id": "ext", "siteAccess": mode}))
+            );
         }
     }
 

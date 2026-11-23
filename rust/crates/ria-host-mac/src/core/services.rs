@@ -15,7 +15,7 @@ use std::collections::HashMap;
 use std::rc::Rc;
 
 use objc2::rc::Retained;
-use objc2_foundation::{NSLocale, NSString};
+use objc2_foundation::{NSBundle, NSString};
 use ria_engine::call::{CallError, CallResult, Engine};
 use ria_engine::domains::browser::{self, CallContext, Route, extensions};
 use serde_json::{Map, Value, json};
@@ -768,7 +768,8 @@ fn dated(key: &'static str, reply: Reply) -> impl FnOnce(Value) {
 }
 
 fn preferred_language() -> String {
-    NSLocale::preferredLanguages()
+    NSBundle::mainBundle()
+        .preferredLocalizations()
         .firstObject()
         .map_or_else(String::new, |language| language.to_string())
 }

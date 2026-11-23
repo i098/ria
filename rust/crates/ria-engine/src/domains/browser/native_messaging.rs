@@ -5,8 +5,10 @@
 //! Keeps the native messaging host manifests of the profile folder in step with the password managers that are installed.
 
 use std::collections::BTreeSet;
-use std::fs;
-use std::io::{ErrorKind, Write};
+use std::fs::{self, File, OpenOptions};
+use std::io::{ErrorKind, Read, Write};
+use std::os::fd::AsRawFd;
+use std::os::unix::fs::OpenOptionsExt;
 use std::path::Path;
 
 use serde_json::{Value, json};
@@ -16,6 +18,7 @@ use super::extension_package::is_extension_id;
 /// Where Chrome keeps the system manifests.
 pub const CHROME_SYSTEM_DIR: &str = "/Library/Google/Chrome/NativeMessagingHosts";
 const MANAGED_LIST: &str = ".ardia-managed.json";
+const MANAGED_ATTR: &std::ffi::CStr = c"user.ria.native-messaging";
 
 fn known_hosts() -> Vec<Value> {
     vec![
@@ -129,10 +132,61 @@ fn installed_hosts(system_dir: &Path, known: &[Value]) -> Vec<(String, Vec<u8>)>
     hosts
 }
 
-/// Writes `data` to `path` by a temporary file and a rename.
-fn write_atomic(path: &Path, data: &[u8], replace: bool) -> std::io::Result<()> {
+fn open_regular(path: &Path) -> std::io::Result<File> {
+    let file = OpenOptions::new()
+        .read(true)
+        .custom_flags(libc::O_NOFOLLOW | libc::O_NONBLOCK)
+        .open(path)?;
+    if !file.metadata()?.is_file() {
+        return Err(ErrorKind::InvalidData.into());
+    }
+    Ok(file)
+}
+
+fn mark_owned(file: &File) -> std::io::Result<()> {
+    let fd = file.as_raw_fd();
+    let name = MANAGED_ATTR.as_ptr();
+    let value = std::ptr::null();
+    // SAFETY: The descriptor and name are valid, and the attribute has no data.
+    let status = unsafe {
+        #[cfg(target_os = "macos")]
+        {
+            libc::fsetxattr(fd, name, value, 0, 0, 0)
+        }
+        #[cfg(not(target_os = "macos"))]
+        {
+            libc::fsetxattr(fd, name, value, 0, 0)
+        }
+    };
+    if status == 0 {
+        Ok(())
+    } else {
+        Err(std::io::Error::last_os_error())
+    }
+}
+
+fn is_owned(file: &File) -> bool {
+    let fd = file.as_raw_fd();
+    let name = MANAGED_ATTR.as_ptr();
+    let value = std::ptr::null_mut();
+    // SAFETY: The descriptor and name are valid. A null buffer requests only the size.
+    let size = unsafe {
+        #[cfg(target_os = "macos")]
+        {
+            libc::fgetxattr(fd, name, value, 0, 0, 0)
+        }
+        #[cfg(not(target_os = "macos"))]
+        {
+            libc::fgetxattr(fd, name, value, 0)
+        }
+    };
+    size == 0
+}
+
+fn write_owned(path: &Path, data: &[u8], replace: bool) -> std::io::Result<()> {
     let mut temp = tempfile::NamedTempFile::new_in(path.parent().unwrap())?;
     temp.write_all(data)?;
+    mark_owned(temp.as_file())?;
     if replace {
         temp.persist(path)?;
     } else {
@@ -141,49 +195,59 @@ fn write_atomic(path: &Path, data: &[u8], replace: bool) -> std::io::Result<()> 
     Ok(())
 }
 
-/// Updates `<user_data_dir>/NativeMessagingHosts`: writes the manifests of the installed hosts, and removes the ones
-/// that this function wrote earlier (the `.ardia-managed.json` list) and that are no longer installed.
-/// A manifest that this function did not write is never replaced or removed.
-pub fn sync_hosts(user_data_dir: &Path, system_dir: &Path) {
-    let dir = user_data_dir.join("NativeMessagingHosts");
-    if fs::create_dir_all(&dir).is_err() {
-        return;
-    }
-    let list_path = dir.join(MANAGED_LIST);
-    let known = known_hosts();
-    let mut managed: BTreeSet<String> = fs::read(&list_path)
-        .ok()
-        .and_then(|d| serde_json::from_slice(&d).ok())
-        .unwrap_or_default();
-    managed.retain(|name| {
-        SYSTEM_REGISTERED_HOSTS.contains(&name.as_str())
-            || known.iter().any(|manifest| manifest["name"] == name.as_str())
-    });
-
-    let mut now_managed = BTreeSet::new();
-    for (name, data) in installed_hosts(system_dir, &known) {
-        let path = manifest_path(&dir, &name);
-        let ours = managed.contains(&name);
-        if !ours && fs::symlink_metadata(&path).is_ok() {
+fn migrate_ownership(dir: &Path, known: &[Value]) -> std::io::Result<()> {
+    let list = dir.join(MANAGED_LIST);
+    let file = match open_regular(&list) {
+        Ok(file) => file,
+        Err(error) if error.kind() == ErrorKind::NotFound => return Ok(()),
+        Err(error) => return Err(error),
+    };
+    let managed: BTreeSet<String> = serde_json::from_reader(file)?;
+    for name in managed {
+        if !SYSTEM_REGISTERED_HOSTS.contains(&name.as_str())
+            && !known.iter().any(|manifest| manifest["name"] == name.as_str())
+        {
             continue;
         }
-        let written = (!ours || fs::read(&path).ok().as_deref() != Some(data.as_slice()))
-            && write_atomic(&path, &data, ours).is_ok();
-        if ours || written {
-            now_managed.insert(name);
+        match open_regular(&manifest_path(dir, &name)) {
+            Ok(file) => mark_owned(&file)?,
+            Err(error) if error.kind() == ErrorKind::NotFound => {}
+            Err(error) => return Err(error),
         }
     }
-    for name in &managed {
-        if !now_managed.contains(name)
-            && fs::remove_file(manifest_path(&dir, name))
-                .is_err_and(|err| err.kind() != ErrorKind::NotFound)
-        {
-            now_managed.insert(name.clone());
-        }
+    fs::remove_file(list)
+}
+
+/// Updates the profile's native messaging manifests without replacing or removing unmanaged files.
+pub fn sync_hosts(user_data_dir: &Path, system_dir: &Path) {
+    let dir = user_data_dir.join("NativeMessagingHosts");
+    let known = known_hosts();
+    if fs::create_dir_all(&dir).is_err() || migrate_ownership(&dir, &known).is_err() {
+        return;
     }
-    if now_managed != managed {
-        if let Ok(data) = serde_json::to_vec(&now_managed) {
-            let _ = write_atomic(&list_path, &data, true);
+    let installed = installed_hosts(system_dir, &known);
+    for name in known
+        .iter()
+        .filter_map(|manifest| manifest["name"].as_str())
+        .chain(SYSTEM_REGISTERED_HOSTS.iter().copied())
+    {
+        let path = manifest_path(&dir, name);
+        let existing = open_regular(&path);
+        let source = installed.iter().find(|(host, _)| host == name);
+        match (existing, source) {
+            (Ok(mut file), Some((_, data))) if is_owned(&file) => {
+                let mut old = Vec::new();
+                if file.read_to_end(&mut old).is_err() || old != *data {
+                    let _ = write_owned(&path, data, true);
+                }
+            }
+            (Ok(file), None) if is_owned(&file) => {
+                let _ = fs::remove_file(path);
+            }
+            (Err(error), Some((_, data))) if error.kind() == ErrorKind::NotFound => {
+                let _ = write_owned(&path, data, false);
+            }
+            _ => {}
         }
     }
 }
@@ -220,9 +284,6 @@ mod tests {
         sync_hosts(&user, &system);
         let hosts = user.join("NativeMessagingHosts");
         assert!(hosts.join("com.apple.passwordmanager.json").exists());
-        let list: BTreeSet<String> =
-            serde_json::from_slice(&fs::read(hosts.join(MANAGED_LIST)).unwrap()).unwrap();
-        assert!(list.contains("com.apple.passwordmanager"));
 
         fs::remove_file(manifest_path(&system, "com.apple.passwordmanager")).unwrap();
         sync_hosts(&user, &system);
@@ -267,7 +328,7 @@ mod tests {
     }
 
     #[test]
-    fn sync_preserves_unmanaged_paths_and_ownership_after_failures() {
+    fn sync_migrates_legacy_ownership_without_following_paths() {
         use std::os::unix::fs::symlink;
 
         let user = tempfile::tempdir().unwrap();
@@ -286,24 +347,52 @@ mod tests {
         fs::write(&outside, b"keep").unwrap();
         symlink(&outside, manifest.with_extension("json.tmp")).unwrap();
         symlink(&outside, managed.with_extension("json.tmp")).unwrap();
-        fs::write(&managed, r#"["../outside"]"#).unwrap();
+        fs::copy(manifest_path(system.path(), name), &manifest).unwrap();
+        fs::write(&managed, format!(r#"["../outside","{name}"]"#)).unwrap();
         sync_hosts(user.path(), system.path());
         assert_eq!(fs::read(&outside).unwrap(), b"keep");
+        assert!(!managed.exists());
+        let source = manifest_path(system.path(), name);
+        let mut updated: Value = serde_json::from_slice(&fs::read(&source).unwrap()).unwrap();
+        updated["description"] = json!("Updated host");
+        fs::write(&source, updated.to_string()).unwrap();
+        sync_hosts(user.path(), system.path());
+        assert_eq!(fs::read_to_string(&manifest).unwrap(), updated.to_string());
+        assert_eq!(fs::read(&outside).unwrap(), b"keep");
+        fs::remove_file(manifest_path(system.path(), name)).unwrap();
+        sync_hosts(user.path(), system.path());
+        assert!(!manifest.exists());
+
+        fs::write(&manifest, "replacement").unwrap();
+        sync_hosts(user.path(), system.path());
+        assert_eq!(fs::read(&manifest).unwrap(), b"replacement");
+    }
+
+    #[test]
+    fn sync_does_not_publish_a_manifest_if_legacy_ownership_cannot_be_retired() {
+        let user = tempfile::tempdir().unwrap();
+        let system = tempfile::tempdir().unwrap();
+        let program = system.path().join("proxy");
+        fs::write(&program, "").unwrap();
+        fs::set_permissions(&program, fs::Permissions::from_mode(0o755)).unwrap();
+        let name = "com.apple.passwordmanager";
+        system_manifest_file(system.path(), name, &program);
+        let hosts = user.path().join("NativeMessagingHosts");
+        let legacy = hosts.join(MANAGED_LIST);
+        fs::create_dir_all(&legacy).unwrap();
+        let manifest = manifest_path(&hosts, name);
+
+        sync_hosts(user.path(), system.path());
+        assert!(!manifest.exists());
+        fs::remove_dir(&legacy).unwrap();
+        sync_hosts(user.path(), system.path());
         assert!(manifest.is_file());
 
         fs::remove_file(&manifest).unwrap();
-        fs::create_dir(&manifest).unwrap();
-        sync_hosts(user.path(), system.path());
+        fs::write(&manifest, "replacement").unwrap();
         fs::remove_file(manifest_path(system.path(), name)).unwrap();
         sync_hosts(user.path(), system.path());
-        let owners = || {
-            serde_json::from_slice::<BTreeSet<String>>(&fs::read(&managed).unwrap()).unwrap()
-        };
-        assert!(owners().contains(name));
-
-        fs::remove_dir(&manifest).unwrap();
-        sync_hosts(user.path(), system.path());
-        assert!(!owners().contains(name));
+        assert_eq!(fs::read(&manifest).unwrap(), b"replacement");
     }
 
     #[test]
