@@ -22,6 +22,7 @@ The harness also records construction of `ArdiaError` and both branches of `ardi
 ## Run
 
 Set up the [shared Ardia oracle](../../GATES.md#phase-1-check-u) before you run `record`, `gate`, or `fuzz`.
+The setup exports the pinned commit, so local Ardia edits do not change the oracle.
 
 ```sh
 rust-anything diff   rust/recorded/1.6/<crate>

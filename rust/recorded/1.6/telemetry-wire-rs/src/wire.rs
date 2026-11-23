@@ -309,7 +309,7 @@ pub fn read_value(r: &mut Reader, schema: &Schema) -> Result<Value, String> {
                 let mut out = Map::new();
                 for _ in 0..n {
                     let key = r.string()?;
-                    out.insert(input_key(key), read_value(r, item)?);
+                    out.insert(key, read_value(r, item)?);
                 }
                 Value::Object(out)
             }
@@ -349,7 +349,7 @@ pub fn read_value(r: &mut Reader, schema: &Schema) -> Result<Value, String> {
                     }
                     None => {
                         let key = r.string16()?;
-                        out.insert(input_key(key), read_dyn(r)?);
+                        out.insert(key, read_dyn(r)?);
                     }
                 }
             }
@@ -363,7 +363,7 @@ pub fn read_value(r: &mut Reader, schema: &Schema) -> Result<Value, String> {
                 let mut out = Map::new();
                 for _ in 0..n {
                     let key = r.string16()?;
-                    out.insert(input_key(key), read_value(r, item)?);
+                    out.insert(key, read_value(r, item)?);
                 }
                 Value::Object(out)
             }

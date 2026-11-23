@@ -40,3 +40,18 @@ test('telemetry preserves ordinary keys that match transport tags', () => {
     assert.equal(port.logsRequest(attributes, 'test', records), original.logsRequest(attributes, 'test', records))
   }
 })
+
+test('telemetry indexes string attributes by UTF-16 code units', () => {
+  for (const text of ['', 'é', 'a😀z', '\uD800', '\uDC00']) {
+    const event = { uuid: 'u', event: 'test', distinct_id: 'd', timestamp: '2025-01-01', properties: text }
+    const log = ['warn', 'test', text, 42]
+    const request = [text, 'test', [original.logRecord('warn', 'test', {}, 42)]]
+    assert.deepEqual(port.eventRecord(event), original.eventRecord(event))
+    assert.deepEqual(port.eventRecord(event, null), original.eventRecord(event))
+    assert.deepEqual(port.logRecord(...log), original.logRecord(...log))
+    assert.deepEqual(port.logRecord(...log, null), original.logRecord(...log))
+    assert.equal(port.logsRequest(...request), original.logsRequest(...request))
+    assert.equal(port.logsRequest(...request, null), original.logsRequest(...request))
+    assert.equal(port.logsRequest(text, 'test'), original.logsRequest(text, 'test'))
+  }
+})

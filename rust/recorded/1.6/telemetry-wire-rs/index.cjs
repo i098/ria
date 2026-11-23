@@ -21,6 +21,10 @@ const replacer = function (k, v) {
       : v
 }
 const encode = v => JSON.stringify(v, replacer)
+const needsCodeUnits = value => typeof value === 'string' && /[\uD800-\uDFFF]/.test(value)
+const stringAttributes = text => text.split('').map((stringValue, index) => ({
+  key: String(index), value: { stringValue }
+}))
 const single = (v, key) => Object.keys(v).length === 1 && key in v
 const revive = v => Array.isArray(v) ? v.map(revive)
   : v !== null && typeof v === 'object'
@@ -287,10 +291,16 @@ t = o0
 }
 return t
 }
+const readEventRecord = (event, useWire) =>
+  useWire && encode(event) && wireCall(call) ? decode() : json(event)
 module.exports.eventRecord = function eventRecord (a0) {
   try {
-    if (arguments.length <= 1 && encode(a0) && wireCall(call)) return decode()
-    return json(...arguments)
+    const properties = a0?.properties
+    if (!needsCodeUnits(properties)) return readEventRecord(a0, arguments.length <= 1)
+    const { uuid, event, distinct_id, timestamp } = a0
+    const record = readEventRecord({ uuid, event, distinct_id, timestamp }, arguments.length <= 1)
+    record.attributes = stringAttributes(properties).concat(record.attributes)
+    return record
   } catch (e) {
     throw jsError(e)
   }
@@ -416,8 +426,12 @@ module.exports.logRecord = function logRecord (a0, a1, a2, a3) {
   if (illFormed(a1)) throw new TypeError('argument 2 of logRecord has a lone surrogate, which a Rust String cannot hold')
   try {
     const at = a3 === undefined ? undefined : +a3
-    if (arguments.length <= 4 && encode(a0, a1, a2, at) && wireCall(call)) return decode()
-    return json(a0, a1, a2, at)
+    const text = needsCodeUnits(a2) ? a2 : null
+    const attributes = text === null ? a2 : {}
+    const record = arguments.length <= 4 && encode(a0, a1, attributes, at) && wireCall(call)
+      ? decode() : json(a0, a1, attributes, at)
+    if (text !== null) record.attributes = stringAttributes(text)
+    return record
   } catch (e) {
     throw jsError(e)
   }
@@ -555,13 +569,18 @@ return t
 module.exports.logsRequest = function logsRequest (a0, a1, a2) {
   if (illFormed(a1)) throw new TypeError('argument 2 of logsRequest has a lone surrogate, which a Rust String cannot hold')
   try {
-    if (!Array.isArray(a2)) {
-      const request = JSON.parse(json(a0, a1, []))
-      request.resourceLogs[0].scopeLogs[0].logRecords = a2
-      return JSON.stringify(request)
-    }
-    if (arguments.length <= 3 && encode(a0, a1, a2) && wireCall(call)) return decode()
-    return json(...arguments)
+    const text = needsCodeUnits(a0) ? a0 : null
+    const resource = text === null ? a0 : {}
+    const array = Array.isArray(a2)
+    const records = array ? a2 : []
+    const output = arguments.length <= 3 && encode(resource, a1, records) && wireCall(call)
+      ? decode() : json(resource, a1, records)
+    if (text === null && array) return output
+    const request = JSON.parse(output)
+    const resourceLogs = request.resourceLogs[0]
+    if (text !== null) resourceLogs.resource.attributes = stringAttributes(text)
+    if (!array) resourceLogs.scopeLogs[0].logRecords = a2
+    return JSON.stringify(request)
   } catch (e) {
     throw jsError(e)
   }
