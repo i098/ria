@@ -1,0 +1,18 @@
+[package]
+name = "ria-app"
+version = "0.0.0"
+description = "Native Ria browser app."
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+probes = []
+
+[target.'cfg(target_os = "macos")'.dependencies]
+ria-host-mac = { path = "../ria-host-mac" }
+
+[[test]]
+name = "live"
+path = "src/launch/live.rs"
+harness = false

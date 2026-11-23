@@ -15,17 +15,15 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 
 Slice 3.3 provides the data domains in `ria-engine`. The app does not use them yet.
 
-For slice 3.6, `reader only` means that the host crate provides the reader, but app startup and the early window do not use it yet.
-
 | Scope | Unit | Language | Lines | Status | Target | Source | Port state | Slice | Disposition |
 | --- | --- | --- | ---: | --- | --- | --- | --- | --- | --- |
 | mac | `apps/browser/assets/offline-game/` | TypeScript/JavaScript | 1045 | caution | assets, copied into the bundle | analyze | todo | stay-4 | stay |
 | mac | `apps/browser/assets/offline-game/assets/` | TypeScript/JavaScript | 3375 | caution | assets, copied into the bundle | analyze | todo | stay-4 | stay |
 | mac | `apps/browser/index.js` | TypeScript/JavaScript | 10 | ready | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | analyze | todo | 3.6 | port |
-| mac | `apps/browser/macos/Ardia-macOS/AppDelegate.*` | Swift | 100 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
-| mac | `apps/browser/macos/Ardia-macOS/BrowserWindow.*` | Swift | 61 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
+| mac | `apps/browser/macos/Ardia-macOS/AppDelegate.*` | Swift | 100 | native | [`ria-app/src/launch/`](crates/ria-app/src/launch/) | hand | partial | 3.6 | port |
+| mac | `apps/browser/macos/Ardia-macOS/BrowserWindow.*` | Swift | 61 | native | [`early_window.rs`](crates/ria-host-mac/src/launch/early_window.rs) | hand | partial | 3.6 | port |
 | mac | `apps/browser/macos/Ardia-macOS/DisableFusebox.*` | Objective-C++ | 14 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
-| mac | `apps/browser/macos/Ardia-macOS/main.*` | Swift | 18 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
+| mac | `apps/browser/macos/Ardia-macOS/main.*` | Swift | 18 | native | [`main.rs`](crates/ria-app/src/main.rs) | hand | partial | 3.6 | port |
 | mac | `apps/browser/scripts/` | TypeScript/JavaScript | 9800 | blocked | stays JavaScript (drives the port through the socket) | analyze | - | stay-3 | stay |
 | mac | `apps/browser/scripts/perf/` | TypeScript/JavaScript | 9955 | blocked | stays JavaScript (drives the port through the socket) | analyze | - | stay-3 | stay |
 | mac | `apps/browser/scripts/sim/` | TypeScript/JavaScript | 1714 | blocked | stays JavaScript (drives the port through the socket) | analyze | - | stay-3 | stay |
@@ -194,7 +192,7 @@ For slice 3.6, `reader only` means that the host crate provides the reader, but 
 | mac | `engine/ardiacore/src/ardia/core/public/ArdiaCore.*` | Objective-C++ | 417 | native | stays non-Rust: engine side of the interface (ADR-C5) | hand | - | stay-1 | stay |
 | mac | `engine/ardiacore/src/ardia/core/renderer/ac_content_renderer_client.*` | C++/Objective-C++ | 529 | native | stays non-Rust: engine side of the interface (ADR-C5) | hand | - | stay-1 | stay |
 | mac | `packages/ardiacore/ios/` | TypeScript/JavaScript | 2384 | caution | `rust/crates/ria-webkit/` | analyze | todo | 5.1 | port |
-| mac | `packages/ardiacore/ios/ArdiaActivation.*` | Objective-C++ | 512 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaActivation.*` | Objective-C++ | 512 | native | [`activation.rs`](crates/ria-host-mac/src/launch/activation.rs) | hand | partial | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaChromeWindowHost.*` | Objective-C++ | 1236 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaChromeWindowInternal.*` | Objective-C++ | 74 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaContentBlocker.*` | Objective-C++ | 571 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
@@ -205,10 +203,10 @@ For slice 3.6, `reader only` means that the host crate provides the reader, but 
 | mac | `packages/ardiacore/ios/ArdiaDisplayIdentity.*` | Objective-C++ | 57 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaDisplayPlacementMath.*` | Objective-C++ | 43 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaDownloadMover.*` | Objective-C++ | 511 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
-| mac | `packages/ardiacore/ios/ArdiaEarlyWindow.*` | Objective-C++ | 857 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
-| mac | `packages/ardiacore/ios/ArdiaEarlyWindowCovers.*` | Objective-C++ | 226 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
-| mac | `packages/ardiacore/ios/ArdiaEarlyWindowInternal.*` | Objective-C++ | 88 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
-| mac | `packages/ardiacore/ios/ArdiaEarlyWindowLayouts.*` | Objective-C++ | 261 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaEarlyWindow.*` | Objective-C++ | 857 | native | [`early_window.rs`](crates/ria-host-mac/src/launch/early_window.rs) | hand | partial | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaEarlyWindowCovers.*` | Objective-C++ | 226 | native | [`early_window.rs`](crates/ria-host-mac/src/launch/early_window.rs) | hand | partial | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaEarlyWindowInternal.*` | Objective-C++ | 88 | native | [`early_window.rs`](crates/ria-host-mac/src/launch/early_window.rs) | hand | partial | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaEarlyWindowLayouts.*` | Objective-C++ | 261 | native | [`early_window_layouts.rs`](crates/ria-host-mac/src/launch/early_window_layouts.rs) | hand | partial | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaEngineBridge.*` | Objective-C++ | 224 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
 | mac | `packages/ardiacore/ios/ArdiaEvents.*` | Objective-C++ | 96 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
 | mac | `packages/ardiacore/ios/ArdiaExtensionPackage.*` | Objective-C++ | 199 | native | `rust/crates/ria-engine/src/domains/browser/extension_package.rs` | hand | partial | 3.4 | port |
@@ -225,10 +223,10 @@ For slice 3.6, `reader only` means that the host crate provides the reader, but 
 | mac | `packages/ardiacore/ios/ArdiaHoverProbeInternal.*` | Objective-C++ | 76 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaInterfaceScale.*` | Objective-C++ | 254 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaInternal.*` | Objective-C++ | 100 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
-| mac | `packages/ardiacore/ios/ArdiaLaunchConfig.*` | Objective-C++ | 381 | native | [`launch_config.rs`](crates/ria-host-mac/src/launch/launch_config.rs), `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | reader only | 3.6 | port |
-| mac | `packages/ardiacore/ios/ArdiaLaunchPicture.*` | Objective-C++ | 335 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
-| mac | `packages/ardiacore/ios/ArdiaLaunchSequence.*` | Objective-C++ | 102 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
-| mac | `packages/ardiacore/ios/ArdiaLaunchTabHolder.*` | Objective-C++ | 176 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaLaunchConfig.*` | Objective-C++ | 381 | native | [`launch_config.rs`](crates/ria-host-mac/src/launch/launch_config.rs) | hand | partial | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaLaunchPicture.*` | Objective-C++ | 335 | native | [`launch_picture.rs`](crates/ria-host-mac/src/launch/launch_picture.rs) | hand | partial | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaLaunchSequence.*` | Objective-C++ | 102 | native | [`launch_sequence.rs`](crates/ria-host-mac/src/launch/launch_sequence.rs) | hand | partial | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaLaunchTabHolder.*` | Objective-C++ | 176 | native | [`early_window.rs`](crates/ria-host-mac/src/launch/early_window.rs) | hand | partial | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaLittleFitMath.*` | Objective-C++ | 87 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaNativeMessaging.*` | Objective-C++ | 137 | native | `rust/crates/ria-engine/src/domains/browser/native_messaging.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/ios/ArdiaNavigationDownloads.*` | Objective-C++ | 79 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
@@ -258,11 +256,11 @@ For slice 3.6, `reader only` means that the host crate provides the reader, but 
 | mac | `packages/ardiacore/ios/ArdiaRevealGuards.*` | Objective-C++ | 160 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaRevealLedger.*` | Objective-C++ | 111 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaRuntime.*` | Objective-C++ | 42 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
-| mac | `packages/ardiacore/ios/ArdiaSavedDocument.*` | Objective-C++ | 35 | native | [`saved_document.rs`](crates/ria-host-mac/src/launch/saved_document.rs), `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | reader only | 3.6 | port |
-| mac | `packages/ardiacore/ios/ArdiaSavedSession.*` | Objective-C++ | 120 | native | [`saved_session.rs`](crates/ria-host-mac/src/launch/saved_session.rs), `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | reader only | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaSavedDocument.*` | Objective-C++ | 35 | native | [`saved_document.rs`](crates/ria-host-mac/src/launch/saved_document.rs) | hand | partial | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaSavedSession.*` | Objective-C++ | 120 | native | [`saved_session.rs`](crates/ria-host-mac/src/launch/saved_session.rs) | hand | partial | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaServices.*` | Objective-C++ | 566 | native | `rust/crates/ria-host-mac/Cargo.toml`, `rust/crates/ria-host-mac/src/lib.rs`, `rust/crates/ria-host-mac/src/core/` | hand | todo | 3.5 | port |
 | mac | `packages/ardiacore/ios/ArdiaStackSample.*` | Objective-C++ | 35 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
-| mac | `packages/ardiacore/ios/ArdiaStartup.*` | Objective-C++ | 72 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaStartup.*` | Objective-C++ | 72 | native | [`startup.rs`](crates/ria-host-mac/src/launch/startup.rs) | hand | partial | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaSwipe.*` | Objective-C++ | 648 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaSwipeHitTesting.*` | Objective-C++ | 149 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaSwipeInternal.*` | Objective-C++ | 66 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |

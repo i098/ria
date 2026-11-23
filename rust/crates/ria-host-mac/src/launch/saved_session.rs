@@ -4,6 +4,10 @@
 
 use std::path::Path;
 
+use ria_engine::domains::data::{
+    origins,
+    profiles::{is_private_session_id, profile_directory_name},
+};
 use serde_json::{Map, Value};
 
 use super::saved_document::{self, SavedDocument};
@@ -29,6 +33,7 @@ pub struct SavedSession {
     pub tabs: Vec<Map<String, Value>>,
     pub groups: Vec<Map<String, Value>>,
     pub splits: Vec<Map<String, Value>>,
+    orphaned_profile_data: Option<Value>,
 }
 
 impl SavedSession {
@@ -73,7 +78,43 @@ impl SavedSession {
             tabs: take_objects(&mut fields, "tabs"),
             groups: take_objects(&mut fields, "groups"),
             splits: take_objects(&mut fields, "splits"),
+            orphaned_profile_data: fields.remove("orphanedProfileData"),
         }
+    }
+
+    pub(super) fn launch_profile_directory(&self, root: &Path) -> Option<String> {
+        let hint = self.launch_tab.as_ref()?;
+        if hint.id.is_empty()
+            || !origins::of_url(&hint.url).is_some_and(|origin| {
+                origin.starts_with("http://") || origin.starts_with("https://")
+            })
+        {
+            return None;
+        }
+        let name = hint.profile.as_str();
+        if name == "Default"
+            || name.starts_with("Profile ")
+            || is_private_session_id(name)
+            || self
+                .orphaned_profile_data
+                .as_ref()
+                .and_then(Value::as_array)
+                .is_some_and(|names| names.iter().any(|entry| entry.as_str() == Some(name)))
+        {
+            return None;
+        }
+        let directory = profile_directory_name(name);
+        if Path::new(&directory)
+            .file_name()
+            .and_then(|name| name.to_str())
+            != Some(directory.as_str())
+            || (!name.is_empty()
+                && !super::profile::directory_exists(&root.join("Chromium").join(&directory))
+                    .unwrap_or(false))
+        {
+            return None;
+        }
+        Some(directory)
     }
 
     pub fn pin_of_tab<'a>(&self, tab: &'a Map<String, Value>) -> Option<&'a Value> {
@@ -206,5 +247,33 @@ mod tests {
         assert_eq!(saved.window_with_id("w").unwrap()["profile"], "p");
         assert_eq!(saved.windows.len(), 1);
         assert_eq!(saved.launch_tab.unwrap().id, "t");
+    }
+
+    #[test]
+    fn selects_only_live_regular_profiles_for_web_hints() {
+        let root = std::env::temp_dir().join(format!("ria-launch-hint-{}", std::process::id()));
+        std::fs::create_dir_all(root.join("Chromium/Profile work")).unwrap();
+        std::fs::create_dir(root.join("Chromium/Profile incognito1@work")).unwrap();
+        for (id, url, profile, orphaned, expected) in [
+            ("a", "HTTPS://example.org", "", "", Some("Default")),
+            ("a", "https://example.org", "work", "", Some("Profile work")),
+            ("a", "https://example.org", "Default", "", None),
+            ("a", "https://example.org", "Profile work", "", None),
+            ("a", "https://example.org", "work", "work", None),
+            ("a", "https://example.org", "missing", "", None),
+            ("a", "https://example.org", "incognito1@work", "", None),
+            ("a", "https://example.org", "../work", "", None),
+            ("a", "file:///tmp/private", "", "", None),
+            ("a", "https://", "", "", None),
+            ("", "https://example.org", "", "", None),
+        ] {
+            let session = session(json!({
+                "version": 11,
+                "launchTab": {"id": id, "url": url, "profile": profile},
+                "orphanedProfileData": if orphaned.is_empty() { vec![] } else { vec![orphaned] },
+            }));
+            assert_eq!(session.launch_profile_directory(&root).as_deref(), expected);
+        }
+        std::fs::remove_dir_all(root).unwrap();
     }
 }

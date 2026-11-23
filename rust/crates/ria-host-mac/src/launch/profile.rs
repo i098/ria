@@ -33,7 +33,7 @@ pub(super) fn open_directory(path: &Path) -> io::Result<File> {
     Ok(directory)
 }
 
-fn ensure_identity(path: &Path, directory: &File) -> io::Result<()> {
+pub(super) fn ensure_identity(path: &Path, directory: &File) -> io::Result<()> {
     let named = path.symlink_metadata()?;
     let opened = directory.metadata()?;
     if !named.is_dir() || (named.dev(), named.ino()) != (opened.dev(), opened.ino()) {
@@ -73,7 +73,7 @@ unsafe extern "C" {
     fn openat(directory: c_int, path: *const c_char, flags: c_int, ...) -> c_int;
 }
 
-fn open_child(directory: &File, name: &std::ffi::OsStr) -> io::Result<File> {
+pub(super) fn open_child(directory: &File, name: &std::ffi::OsStr) -> io::Result<File> {
     #[cfg(target_os = "macos")]
     const FLAGS: c_int = 0x0100_0000 | 0x0100 | 0x0004;
     #[cfg(all(target_os = "linux", target_arch = "x86_64"))]

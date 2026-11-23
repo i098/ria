@@ -117,7 +117,7 @@ Ardia means the original at `ardia/`, frozen at commit `551d3c13c`.
 ## ADR-D1: Own identity and own data; ad hoc signature
 
 - Context: the port has a new name. A second app that opens an Ardia profile can damage it. No Apple developer account is used.
-- Decision: own bundle id and own data folder. The port never opens an Ardia profile folder. Parity runs use a temporary profile. All builds have an ad hoc signature, so the port passes `--use-mock-keychain` to the engine, as Ardia does for a build that is not team-signed.
+- Decision: Ria uses its own bundle ID and data folder. It never opens an Ardia profile folder. Parity runs use a temporary profile. Ria always passes `--use-mock-keychain` to the engine. Ardia uses this switch in builds that do not have a team signature. Ria builds use an ad hoc signature under this plan.
 - Consequences: the port and Ardia share no keychain item. The passwords and cookies in the data folder are encrypted with a fixed mock key; only the file permissions and the disk encryption of the Mac protect them. Passkeys through iCloud Keychain do not work. A team-signed build is not in this plan. A later team-signed build cannot read the passwords and cookies that the mock key encrypted (an inference, not tested), and the plan has no migration step.
 
 ## ADR-D2: No call to the original owner's servers

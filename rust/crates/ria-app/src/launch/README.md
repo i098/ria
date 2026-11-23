@@ -1,0 +1,59 @@
+# macOS launch
+
+Set `ENGINE_DIR` to the directory that contains the prebuilt `Chromium Framework.framework`.
+Run the commands below from `rust/` on macOS.
+
+## Launch checks
+
+```sh
+blaze test -p ria-host-mac --lib launch::
+ENGINE_DIR="$ENGINE_DIR" blaze test -p ria-app --test live
+```
+
+If Blaze reports `Too many open files`, use `cargo` in place of `blaze`.
+
+Check N runs the native launch unit tests.
+Check L makes a temporary app bundle with a new profile and a saved launch tab.
+It serves the fixture page over loopback HTTP.
+It checks engine start, one native window, one engine tab, the fixture page title, and engine shutdown.
+It requires a successful exit within 60 seconds and checks the temporary directory for crash reports.
+It calls the shared launch entry point from the test executable, not from the `ria-app` binary.
+
+## Profile and startup
+
+By default, Ria stores data in `~/Library/Application Support/com.i098.ria` and reads configuration from `~/.config/ria`.
+For an isolated profile, set `RIA_DATA_DIR` to a new directory, an empty directory, or an existing Ria profile.
+An isolated profile reads configuration from its own `config/` subdirectory.
+Do not point `RIA_DATA_DIR` at an Ardia profile.
+Ria checks the profile directory identity before engine startup.
+For the normal profile only, Ria also checks the directory identity before it registers native messaging hosts.
+See [issue 67](https://github.com/i098/ria/issues/67) for the remaining race between the check and filesystem access.
+See [ADR-D1](../../../../DECISIONS.md#adr-d1-own-identity-and-own-data-ad-hoc-signature) for the keychain policy.
+
+Ria reopens a saved launch tab only for an HTTP or HTTPS URL, a nonempty tab ID, and a usable profile.
+Ria does not restore launch tabs from private or deleted profiles.
+If the saved launch tab is not eligible, Ria opens `about:blank` in the default profile.
+On a normal foreground launch, Ria uses the saved layout if it passes the layout checks.
+The cached picture must match the content signature.
+Ria removes the picture when the window changes size.
+This startup path does not restore all saved windows and tabs.
+
+Ria accepts raw switches from `chromiumSwitches` in `RIA_INSTANCE` and from the command line for [Ardia parity](https://github.com/ardia-browser/ardia/blob/551d3c13c1c9ede130724ea9f1056d4b586fbe55/packages/ardiacore/ios/ArdiaHost%2BLaunch.mm#L506-L526).
+Ria filters reserved engine switches from both inputs, including the profile, process type, and remote debugging switches.
+Ria accepts `RIA_REMOTE_DEBUGGING_PORT` only with an isolated profile and a build without a distribution signature.
+The same restriction applies to `RIA_TEST` and `RIA_TRACE`.
+Set `RIA_BACKGROUND=1` to start without bringing Ria to the front.
+
+## Run the app binary
+
+```sh
+blaze build -p ria-app
+scratch=$(mktemp -d)
+app="$scratch/Ria.app/Contents"
+mkdir -p "$app/MacOS" "$app/Frameworks"
+cp crates/ria-app/src/launch/Info.plist "$app/Info.plist"
+cp target/debug/ria-app "$app/MacOS/ria-app"
+cp -cR "$ENGINE_DIR/Chromium Framework.framework" "$app/Frameworks/"
+codesign --force --sign - "$app/MacOS/ria-app"
+RIA_DATA_DIR="$scratch/profile" "$app/MacOS/ria-app"
+```
