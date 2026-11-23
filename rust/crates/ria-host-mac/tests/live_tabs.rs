@@ -384,7 +384,7 @@ mod mac {
             let weak = weak.clone();
             main_queue::post(Box::new(move || _ = weak.upgrade().map(|q| q.drain())));
         });
-        let call = CallEngine::new(queue.clone());
+        let call = CallEngine::new(queue);
         call.did_start();
         let emitted = Rc::new(RefCell::new(Vec::new()));
         let engine_pinned = Rc::new(Cell::new(None));
@@ -397,16 +397,21 @@ mod mac {
             let window = window.clone();
             let state = state.clone();
             let profile = profile.clone();
+            let profile_path = profile_path.clone();
             move |event| {
-                if event["window"].as_i64() != Some(i64::from(strip_id)) {
+                if event["window"].as_i64() != Some(i64::from(strip_id))
+                    || event["profile"].as_str() != Some(profile_path.as_str())
+                    || event["offTheRecord"].as_bool() == Some(true)
+                {
                     return;
                 }
-                if let Some(row) = event["tabs"]
+                let Some(row) = event["tabs"]
                     .as_array()
                     .and_then(|rows| rows.iter().find(|row| row["tab"].as_i64() == Some(tab_id)))
-                {
-                    engine_pinned.set(row["pinned"].as_bool());
-                }
+                else {
+                    return;
+                };
+                engine_pinned.set(row["pinned"].as_bool());
                 let (strips, registry) = &mut *state.borrow_mut();
                 let scope = fixture_strip(&window, &profile);
                 if strips.observe_engine_strip(event) == Some(strip_id)
@@ -427,57 +432,77 @@ mod mac {
                 call.call("ac_tabs_group", &profile_path, false, args, {
                     let call = call.clone();
                     move |reply| {
-                        let scope = fixture_strip(&window, &profile);
-                        let pass = pass
-                            && reply.is_ok_and(|reply| {
-                                reply["group"].as_str().is_some_and(|group| {
+                        let group = reply
+                            .ok()
+                            .and_then(|reply| reply["group"].as_str().map(str::to_owned))
+                            .filter(|group| !group.is_empty());
+                        let Some(group) = group.filter(|_| pass) else {
+                            call.shutdown();
+                            return shutdown(&window, &tab, false);
+                        };
+                        let deadline = Instant::now() + Duration::from_secs(10);
+                        wait_for_strip(
+                            deadline,
+                            {
+                                let group = group.clone();
+                                move || {
+                                    emitted
+                                        .borrow()
+                                        .iter()
+                                        .any(|tx| matches_group(tx, None, strip, &group))
+                                }
+                            },
+                            move |observed| {
+                                let scope = fixture_strip(&window, &profile);
+                                let pass = observed && {
                                     let (strips, registry) = &mut *state.borrow_mut();
                                     let tx =
                                         strips.group_finished(command, &scope, registry, false);
-                                    !group.is_empty()
-                                        && matches_group(&tx, Some(command), strip, group)
-                                        && emitted
-                                            .take()
-                                            .iter()
-                                            .any(|tx| matches_group(tx, None, strip, group))
-                                })
-                            });
-                        if !pass {
-                            call.shutdown();
-                            return shutdown(&window, &tab, false);
-                        }
-                        window.open_tab(&NSString::from_str("about:blank"), &profile, false);
-                        check_engine_pins(
-                            queue,
-                            engine_pinned,
-                            &[(9.0, 1.0, true), (10.0, 0.5, false), (11.0, 1.0, true)],
-                            {
-                                let window = window.clone();
-                                let profile = profile.clone();
-                                let state = state.clone();
-                                move |command, pinned, expected| {
-                                    let (strips, registry) = &mut *state.borrow_mut();
-                                    check_arrange(
-                                        &fixture_strip(&window, &profile),
-                                        strips,
-                                        registry,
-                                        command,
-                                        pinned,
-                                        expected,
-                                    )
+                                    matches_group(&tx, Some(command), strip, &group)
+                                };
+                                if !pass {
+                                    call.shutdown();
+                                    return shutdown(&window, &tab, false);
                                 }
-                            },
-                            move |pass| {
-                                let (strips, registry) = &mut *state.borrow_mut();
-                                let pass = pass
-                                    && check_adoption(
-                                        &fixture_strip(&window, &profile),
-                                        &tab,
-                                        strips,
-                                        registry,
-                                    );
-                                call.shutdown();
-                                shutdown(&window, &tab, pass);
+                                window.open_tab(
+                                    &NSString::from_str("about:blank"),
+                                    &profile,
+                                    false,
+                                );
+                                check_engine_pins(
+                                    deadline,
+                                    engine_pinned,
+                                    &[(9.0, 1.0, true), (10.0, 0.5, false), (11.0, 1.0, true)],
+                                    {
+                                        let window = window.clone();
+                                        let profile = profile.clone();
+                                        let state = state.clone();
+                                        move |command, pinned, expected| {
+                                            let (strips, registry) = &mut *state.borrow_mut();
+                                            check_arrange(
+                                                &fixture_strip(&window, &profile),
+                                                strips,
+                                                registry,
+                                                command,
+                                                pinned,
+                                                expected,
+                                            )
+                                        }
+                                    },
+                                    move |pass| {
+                                        let pass = pass && {
+                                            let (strips, registry) = &mut *state.borrow_mut();
+                                            check_adoption(
+                                                &fixture_strip(&window, &profile),
+                                                &tab,
+                                                strips,
+                                                registry,
+                                            )
+                                        };
+                                        call.shutdown();
+                                        shutdown(&window, &tab, pass);
+                                    },
+                                );
                             },
                         );
                     }
@@ -498,7 +523,7 @@ mod mac {
     }
 
     fn check_engine_pins(
-        queue: Rc<ActionQueue>,
+        deadline: Instant,
         engine_pinned: Rc<Cell<Option<bool>>>,
         steps: &'static [(f64, f64, bool)],
         arrange: impl Fn(Number, Number, bool) -> bool + 'static,
@@ -511,14 +536,37 @@ mod mac {
         if !arrange(Number(command), Number(pinned), expected) {
             return finish(false);
         }
-        let next_queue = queue.clone();
-        queue.push(Box::new(move || {
-            if engine_pinned.get() == Some(expected) {
-                check_engine_pins(next_queue, engine_pinned, remaining, arrange, finish);
-            } else {
-                finish(false);
-            }
-        }));
+        wait_for_strip(
+            deadline,
+            {
+                let engine_pinned = engine_pinned.clone();
+                move || engine_pinned.get() == Some(expected)
+            },
+            move |observed| {
+                if observed {
+                    check_engine_pins(deadline, engine_pinned, remaining, arrange, finish);
+                } else {
+                    finish(false);
+                }
+            },
+        );
+    }
+
+    fn wait_for_strip(
+        deadline: Instant,
+        matches: impl Fn() -> bool + 'static,
+        finish: impl FnOnce(bool) + 'static,
+    ) {
+        if Instant::now() >= deadline {
+            finish(false);
+        } else if matches() {
+            finish(true);
+        } else {
+            main_queue::after(
+                Duration::from_millis(20),
+                Box::new(move || wait_for_strip(deadline, matches, finish)),
+            );
+        }
     }
 
     fn check_arrange(
