@@ -178,9 +178,6 @@ mod mac {
         fn emit(&self, topic: &str, data: Value) {
             self.hooks.emit(topic, data)
         }
-        fn manifest_for(&self, _profile: &str, _info: &Value) -> Option<Value> {
-            None
-        }
         fn app_tab_ids(&self, _chrome_tab_id: i64) -> Vec<Value> {
             vec![]
         }

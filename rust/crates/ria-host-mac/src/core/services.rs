@@ -9,16 +9,15 @@
 //! - A reply is `Result<Value, String>` (`Err` is the `error` text) instead of the `(value, error)` block pair.
 //! - `exportPasswords` has no save panel: a missing `path` answers `{"status": "cancelled"}`, as a cancelled panel does.
 //!   The window slice owns the panel.
-//! - `inspectUnpacked` and the manifest read of `listExtensions` go through [`ServiceHost::manifest_for`], because
-//!   `ArdiaExtensionPackage` is another unit.
 
 use std::cell::{Cell, RefCell};
 use std::collections::HashMap;
 use std::rc::Rc;
 
 use objc2::rc::Retained;
-use objc2_foundation::NSString;
+use objc2_foundation::{NSBundle, NSString};
 use ria_engine::call::{CallError, CallResult, Engine};
+use ria_engine::domains::browser::{self, CallContext, Route, extensions};
 use serde_json::{Map, Value, json};
 use zeroize::Zeroize;
 
@@ -36,8 +35,6 @@ pub trait ServiceHost {
     fn with_profile(&self, name: &str, done: Box<dyn FnOnce(Option<Retained<Profile>>)>);
     /// `ArdiaEvents emit:data:`.
     fn emit(&self, topic: &str, data: Value);
-    /// The manifest fields of an installed extension (`StoreFolder` and `ardia_extensions::ReadManifest`), if readable.
-    fn manifest_for(&self, profile: &str, info: &Value) -> Option<Value>;
     /// The app tab ids (JSON strings) of the tab that has this Chrome tab id, in any window and loaded profile.
     fn app_tab_ids(&self, chrome_tab_id: i64) -> Vec<Value>;
     /// `[ArdiaEarlyWindow forgetPictures]`.
@@ -393,46 +390,24 @@ impl Services {
 
     // ---- extensions ----
 
+    pub fn inspect_unpacked(&self, path: &str, reply: Reply) {
+        let args = ria_engine::api::extensions::InspectUnpackedArgs { path: path.into() };
+        reply(answer(parse(extensions::inspect_unpacked(
+            &args,
+            &preferred_language(),
+        ))));
+    }
+
     pub fn list_extensions(&self, profile: &str, reply: Reply) {
-        let host = self.host.clone();
-        let profile = profile.to_owned();
-        self.call_base(
-            "ac_extensions_list",
-            &profile.clone(),
-            None,
-            move |result| {
-                if let Some(e) = result.get("error") {
-                    return reply(Err(text(e)));
-                }
-                let Some(infos) = result["extensions"].as_array() else {
-                    return reply(Err("Unexpected extension list".into()));
-                };
-                let list: Vec<Value> = infos
-                    .iter()
-                    .filter(|i| i.is_object())
-                    .map(|i| extension_item(i, host.manifest_for(&profile, i)))
-                    .collect();
-                reply(Ok(json!({"extensions": list})));
-            },
-        );
+        self.extension_call("list", profile, json!({}), reply);
     }
 
     pub fn install_extension(&self, path: &str, profile: &str, reply: Reply) {
-        self.install("ac_extensions_install", path, profile, reply);
+        self.extension_call("install", profile, json!({"path": path}), reply);
     }
 
     pub fn install_crx(&self, path: &str, profile: &str, reply: Reply) {
-        self.install("ac_extensions_install_crx", path, profile, reply);
-    }
-
-    fn install(&self, name: &str, path: &str, profile: &str, reply: Reply) {
-        let (host, profile_name) = (self.host.clone(), profile.to_owned());
-        self.call_base(name, profile, Some(json!({"path": path})), move |result| {
-            if let Some(id) = result["id"].as_str() {
-                changed(&*host, &profile_name, id, "installed");
-            }
-            reply(answer(result));
-        });
+        self.extension_call("installCrx", profile, json!({"path": path}), reply);
     }
 
     pub fn set_extension_enabled(
@@ -442,34 +417,20 @@ impl Services {
         profile: &str,
         reply: Reply,
     ) {
-        let event = if enabled { "enabled" } else { "disabled" };
-        self.run(
-            "ac_extensions_set_enabled",
+        self.extension_call(
+            "setEnabled",
             profile,
             json!({"id": extension_id, "enabled": enabled}),
-            Some(event),
             reply,
         );
     }
 
     pub fn uninstall_extension(&self, extension_id: &str, profile: &str, reply: Reply) {
-        self.run(
-            "ac_extensions_uninstall",
-            profile,
-            json!({"id": extension_id}),
-            Some("uninstalled"),
-            reply,
-        );
+        self.extension_call("uninstall", profile, json!({"id": extension_id}), reply);
     }
 
     pub fn reload_extension(&self, extension_id: &str, profile: &str, reply: Reply) {
-        self.run(
-            "ac_extensions_reload",
-            profile,
-            json!({"id": extension_id}),
-            Some("reloaded"),
-            reply,
-        );
+        self.extension_call("reload", profile, json!({"id": extension_id}), reply);
     }
 
     pub fn configure_extension(
@@ -479,46 +440,49 @@ impl Services {
         options: &Map<String, Value>,
         reply: Reply,
     ) {
-        let mut args = json!({"id": extension_id});
-        for key in [
-            "pinned",
-            "incognito",
-            "fileAccess",
-            "userScripts",
-            "siteAccess",
-        ] {
-            if let Some(v) = options.get(key) {
-                args[key] = v.clone();
-            }
-        }
-        if let Some(i) = options.get("pinnedIndex").filter(|v| v.is_number()) {
-            args["pinnedIndex"] = json!(i.as_f64().unwrap_or(0.0) as i64);
-        }
-        self.run(
-            "ac_extensions_configure",
+        self.extension_call(
+            "configure",
             profile,
-            args,
-            Some("configured"),
+            json!({"id": extension_id, "options": options}),
             reply,
         );
     }
 
-    fn run(
-        &self,
-        name: &str,
-        profile: &str,
-        args: Value,
-        event: Option<&'static str>,
-        reply: Reply,
-    ) {
-        let (host, profile_name) = (self.host.clone(), profile.to_owned());
-        let id = args["id"].as_str().map(str::to_owned);
-        self.call_base(name, profile, Some(args), move |result| {
-            if let (Some(event), Some(id), None) = (event, &id, result.get("error")) {
-                changed(&*host, &profile_name, id, event);
-            }
-            reply(answer(result));
-        });
+    fn extension_call(&self, name: &str, profile: &str, args: Value, reply: Reply) {
+        let Some(Route::Engine(route)) = extensions::route(name) else {
+            unreachable!("service calls have an extension engine route");
+        };
+        let engine = self.engine.clone();
+        let host = self.host.clone();
+        let profile_name = host.original_name(profile);
+        let private = host.is_private(profile);
+        let ui_locale = if name == "list" {
+            preferred_language()
+        } else {
+            String::new()
+        };
+        self.host.with_profile(
+            &profile_name.clone(),
+            Box::new(move |profile| {
+                let Some(profile) = profile else {
+                    return reply(Err("profile not loaded".into()));
+                };
+                let ctx = CallContext {
+                    profile_name,
+                    profile_dir: profile.path().to_string(),
+                    private,
+                    ui_locale,
+                };
+                browser::call_engine(
+                    &engine,
+                    &route,
+                    &ctx,
+                    args,
+                    Rc::new(move |topic, data| host.emit(topic, data)),
+                    move |result| reply(answer(parse(result))),
+                );
+            }),
+        );
     }
 
     pub fn search_engine_list(&self, profile: &str, reply: Reply) {
@@ -803,54 +767,11 @@ fn dated(key: &'static str, reply: Reply) -> impl FnOnce(Value) {
     })
 }
 
-fn changed(host: &dyn ServiceHost, profile: &str, extension_id: &str, event: &str) {
-    if !extension_id.is_empty() {
-        host.emit(
-            "extensions.changed",
-            json!({"profile": host.original_name(profile), "id": extension_id, "event": event}),
-        );
-    }
-}
-
-fn extension_item(info: &Value, manifest: Option<Value>) -> Value {
-    let mut item: Map<String, Value> = info.as_object().cloned().unwrap_or_default();
-    item.retain(|_, v| !v.is_null());
-    let manifest = manifest.unwrap_or(Value::Null);
-    for key in [
-        "popup",
-        "actionTitle",
-        "actionIcon",
-        "sidePanel",
-        "hasAction",
-    ] {
-        if let Some(v) = manifest.get(key) {
-            item.insert(key.into(), v.clone());
-        }
-    }
-    item.insert(
-        "incognitoSplit".into(),
-        json!(truthy(&manifest["incognitoSplit"])),
-    );
-    item.insert(
-        "incognitoAllowed".into(),
-        manifest
-            .get("incognitoAllowed")
-            .cloned()
-            .unwrap_or(Value::Null),
-    );
-    for key in ["siteAccess", "optionsUrl", "path", "homepageUrl"] {
-        item.entry(key).or_insert(Value::Null);
-    }
-    let from_store = info["location"] == "FROM_STORE";
-    item.insert("fromWebStore".into(), json!(from_store));
-    let url = from_store.then(|| {
-        format!(
-            "https://chromewebstore.google.com/detail/{}",
-            text(&info["id"])
-        )
-    });
-    item.insert("webStoreUrl".into(), url.map_or(Value::Null, Value::String));
-    Value::Object(item)
+fn preferred_language() -> String {
+    NSBundle::mainBundle()
+        .preferredLocalizations()
+        .firstObject()
+        .map_or_else(String::new, |language| language.to_string())
 }
 
 /// `LoginOrigin`: the origin of the URL, or the URL itself.
@@ -959,21 +880,6 @@ mod tests {
         assert_eq!(
             out.borrow().clone().unwrap(),
             Ok(json!({"cards": [{"id": "a", "created": 0, "modified": 0}]}))
-        );
-    }
-
-    #[test]
-    fn extension_items_get_the_nulls_and_the_store_url() {
-        let item = extension_item(
-            &json!({"id": "abc", "location": "FROM_STORE", "path": null}),
-            Some(json!({"popup": "p.html", "incognitoSplit": true})),
-        );
-        assert_eq!(item["popup"], "p.html");
-        assert_eq!(item["incognitoSplit"], true);
-        assert_eq!(item["optionsUrl"], Value::Null);
-        assert_eq!(
-            item["webStoreUrl"],
-            "https://chromewebstore.google.com/detail/abc"
         );
     }
 }

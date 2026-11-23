@@ -8,7 +8,7 @@ Gate G1 also has the planned and the real hours of phase 1 and the corrected hou
 | Gate | Needs | Result | Date | Evidence | Drift (units, lines) |
 | --- | --- | --- | --- | --- | --- |
 | Plan | owner approval on the board | approved | 2026-11-23 | Owner, on the board: "I approve this implementation plan. Implement it as written." Plan version 5. | |
-| G0 | slices 0.5 to 0.9 are done; proofs A, B, C and D pass; owner go on the gate issue | open | | | |
+| G0 | slices 0.5 to 0.9 are done; proofs A, B, C and D pass; owner go on the gate issue | passed | 2026-11-23 | [G0 record](#g0-record) | |
 | G1 | all Phase 1 checks pass in one run | open | | | |
 | G2 | all Phase 2 checks pass in one run, with all store diffs | open | | | |
 | G3 | all Phase 3 checks pass in one run | open | | | |
