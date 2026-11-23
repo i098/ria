@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/appUrls.ts",
+  "files": 1,
+  "fingerprint": "6a320d599fa1b1d9",
+  "coverage": {
+    "lines": 52,
+    "reached": 52,
+    "files": [
+      {
+        "file": "packages/core/src/appUrls.ts",
+        "lines": 52,
+        "reached": 52,
+        "missed": ""
+      }
+    ]
+  }
+}

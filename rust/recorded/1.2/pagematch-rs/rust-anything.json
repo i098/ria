@@ -1,0 +1,67 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-2-url/repo",
+  "unit": "packages/core/src/pageMatch.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "pagematch-rs",
+  "exports": [
+    {
+      "name": "parseQuery",
+      "file": "packages/core/src/pageMatch.ts",
+      "line": 15,
+      "params": [
+        {
+          "name": "q",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "tokens",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({\n  q: string;\n  segmentStarts: [string, string] | null;\n  word: boolean;\n  spaced: string;\n  tokens: { text: string; word: boolean; spaced: string }[];\n  needle: string;\n})",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": [
+    {
+      "name": "TopList",
+      "file": "packages/core/src/pageMatch.ts",
+      "line": 103,
+      "reason": "class: public field `items`, public field `floor`"
+    },
+    {
+      "name": "matchScore",
+      "file": "packages/core/src/pageMatch.ts",
+      "line": 26,
+      "reason": "stays-ts-until-omnibox"
+    },
+    {
+      "name": "matchScoreWord",
+      "file": "packages/core/src/pageMatch.ts",
+      "line": 51,
+      "reason": "stays-ts-until-omnibox"
+    },
+    {
+      "name": "narrowing",
+      "file": "packages/core/src/pageMatch.ts",
+      "line": 74,
+      "reason": "stays-ts-until-omnibox"
+    },
+    {
+      "name": "remember",
+      "file": "packages/core/src/pageMatch.ts",
+      "line": 87,
+      "reason": "stays-ts-until-omnibox"
+    }
+  ]
+}

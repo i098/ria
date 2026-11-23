@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/idn.ts",
+  "files": 1,
+  "fingerprint": "da2004d46557cab4",
+  "coverage": {
+    "lines": 323,
+    "reached": 321,
+    "files": [
+      {
+        "file": "packages/core/src/idn.ts",
+        "lines": 323,
+        "reached": 321,
+        "missed": "99-100"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1018 @@
+{"fn":"isExtensionId","args":["emoji 👍🏽 mix"],"ok":false}
+{"fn":"isExtensionId","args":["😀"],"ok":false}
+{"fn":"isExtensionId","args":["é😀"],"ok":false}
+{"fn":"isExtensionId","args":["line1\nline2key_name-1"],"ok":false}
+{"fn":"isExtensionId","args":[""],"ok":false}
+{"fn":"isExtensionId","args":["a..b"],"ok":false}
+{"fn":"isExtensionId","args":["HELLO"],"ok":false}
+{"fn":"isExtensionId","args":["ünïcödé"],"ok":false}
+{"fn":"isExtensionId","args":["{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["﻿bom"],"ok":false}
+{"fn":"isExtensionId","args":["HELLOkey_name-1"],"ok":false}
+{"fn":"isExtensionId","args":["İstanbul"],"ok":false}
+{"fn":"isExtensionId","args":[":"],"ok":false}
+{"fn":"isExtensionId","args":["ab.leading"],"ok":false}
+{"fn":"isExtensionId","args":["abc"],"ok":false}
+{"fn":"isExtensionId","args":[".leading"],"ok":false}
+{"fn":"isExtensionId","args":["a:b:c"],"ok":false}
+{"fn":"isExtensionId","args":["./x/**/*.json"],"ok":false}
+{"fn":"isExtensionId","args":["ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isExtensionId","args":["  padded  "],"ok":false}
+{"fn":"isExtensionId","args":["key_name-1"],"ok":false}
+{"fn":"isExtensionId","args":["a"],"ok":false}
+{"fn":"isExtensionId","args":["é"],"ok":false}
+{"fn":"isExtensionId","args":["key_name-1{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["Hello World"],"ok":false}
+{"fn":"isExtensionId","args":["éİstanbul"],"ok":false}
+{"fn":"isExtensionId","args":["trailing.😀"],"ok":false}
+{"fn":"isExtensionId","args":["ab"],"ok":false}
+{"fn":"isExtensionId","args":["日本語のテキスト"],"ok":false}
+{"fn":"isExtensionId","args":[".leadinga"],"ok":false}
+{"fn":"isExtensionId","args":["trailing."],"ok":false}
+{"fn":"isExtensionId","args":["abc日本語のテキスト"],"ok":false}
+{"fn":"isExtensionId","args":["tab\tseparated"],"ok":false}
+{"fn":"isExtensionId","args":["a:b:ctab\tseparated"],"ok":false}
+{"fn":"isExtensionId","args":["hello"],"ok":false}
+{"fn":"isExtensionId","args":["ns:key.path"],"ok":false}
+{"fn":"isExtensionId","args":["{name} has {count} itemsa:b:c"],"ok":false}
+{"fn":"isExtensionId","args":["key_name-1a.b.c"],"ok":false}
+{"fn":"isExtensionId","args":["a:b:cé"],"ok":false}
+{"fn":"isExtensionId","args":["a😀b😀ctab\tseparated"],"ok":false}
+{"fn":"isExtensionId","args":["a.b.c"],"ok":false}
+{"fn":"isExtensionId","args":["hello world"],"ok":false}
+{"fn":"isExtensionId","args":["emoji 👍🏽 mixabc"],"ok":false}
+{"fn":"isExtensionId","args":["src/a/b.ts"],"ok":false}
+{"fn":"isExtensionId","args":["tab\tseparatedabc"],"ok":false}
+{"fn":"isExtensionId","args":["line1\nline2"],"ok":false}
+{"fn":"isExtensionId","args":["abc:"],"ok":false}
+{"fn":"isExtensionId","args":["Hello Worldns:key.path"],"ok":false}
+{"fn":"isExtensionId","args":["astraße"],"ok":false}
+{"fn":"isExtensionId","args":["abc./x/**/*.json"],"ok":false}
+{"fn":"isExtensionId","args":["./x/**/*.jsonline1\nline2"],"ok":false}
+{"fn":"isExtensionId","args":["日本語のテキストline1\nline2"],"ok":false}
+{"fn":"isExtensionId","args":["key_name-1./x/**/*.json"],"ok":false}
+{"fn":"isExtensionId","args":["tab\tseparated﻿bom"],"ok":false}
+{"fn":"isExtensionId","args":["straßehello world"],"ok":false}
+{"fn":"isExtensionId","args":["a😀b😀c"],"ok":false}
+{"fn":"isExtensionId","args":["  padded  src/a/b.ts"],"ok":false}
+{"fn":"isExtensionId","args":["trailing.tab\tseparated"],"ok":false}
+{"fn":"isExtensionId","args":["ünïcödésrc/a/b.ts"],"ok":false}
+{"fn":"isExtensionId","args":["é.leading"],"ok":false}
+{"fn":"isExtensionId","args":["src/a/b.ts:"],"ok":false}
+{"fn":"isExtensionId","args":["hello worldünïcödé"],"ok":false}
+{"fn":"isExtensionId","args":["日本語のテキストtab\tseparated"],"ok":false}
+{"fn":"isExtensionId","args":["a:b:cabc"],"ok":false}
+{"fn":"isExtensionId","args":[".leadingkey_name-1"],"ok":false}
+{"fn":"isExtensionId","args":["src/a/b.tsé"],"ok":false}
+{"fn":"isExtensionId","args":["straße"],"ok":false}
+{"fn":"isExtensionId","args":["ΣΊΣΥΦΟΣemoji 👍🏽 mix"],"ok":false}
+{"fn":"isExtensionId","args":["key_name-1ünïcödé"],"ok":false}
+{"fn":"isExtensionId","args":["日本語のテキストa.b.c"],"ok":false}
+{"fn":"isExtensionId","args":["﻿boma😀b😀c"],"ok":false}
+{"fn":"isExtensionId","args":["ünïcödéa.b.c"],"ok":false}
+{"fn":"isExtensionId","args":["HELLOİstanbul"],"ok":false}
+{"fn":"isExtensionId","args":["﻿bomé"],"ok":false}
+{"fn":"isExtensionId","args":["hello{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["line1\nline2😀"],"ok":false}
+{"fn":"isExtensionId","args":["{name} has {count} itemsΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isExtensionId","args":["tab\tseparateda:b:c"],"ok":false}
+{"fn":"isExtensionId","args":["ünïcödéhello"],"ok":false}
+{"fn":"isExtensionId","args":["tab\tseparated./x/**/*.json"],"ok":false}
+{"fn":"isExtensionId","args":["a.b.cabc"],"ok":false}
+{"fn":"isExtensionId","args":["tab\tseparatedtrailing."],"ok":false}
+{"fn":"isExtensionId","args":["a.b.c./x/**/*.json"],"ok":false}
+{"fn":"isExtensionId","args":["😀hello world"],"ok":false}
+{"fn":"isExtensionId","args":["ab日本語のテキスト"],"ok":false}
+{"fn":"isExtensionId","args":["abé"],"ok":false}
+{"fn":"isExtensionId","args":["key_name-1emoji 👍🏽 mix"],"ok":false}
+{"fn":"isExtensionId","args":["Hello Worldtrailing."],"ok":false}
+{"fn":"isExtensionId","args":["  padded  İstanbul"],"ok":false}
+{"fn":"isExtensionId","args":["a:b:c{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":[".leadinghello"],"ok":false}
+{"fn":"isExtensionId","args":["  padded  ﻿bom"],"ok":false}
+{"fn":"isExtensionId","args":["a😀b😀ctrailing."],"ok":false}
+{"fn":"isExtensionId","args":["{name} has {count} itemsline1\nline2"],"ok":false}
+{"fn":"isExtensionId","args":["  padded  HELLO"],"ok":false}
+{"fn":"isExtensionId","args":["abİstanbul"],"ok":false}
+{"fn":"isExtensionId","args":["a.b.c{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["aa..b"],"ok":false}
+{"fn":"isExtensionId","args":["Hello World{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["helloHello World"],"ok":false}
+{"fn":"isExtensionId","args":["éhello"],"ok":false}
+{"fn":"isExtensionId","args":[".leading{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["aba..b"],"ok":false}
+{"fn":"isExtensionId","args":["  padded  😀"],"ok":false}
+{"fn":"isExtensionId","args":["aİstanbul"],"ok":false}
+{"fn":"isExtensionId","args":["trailing.a.b.c"],"ok":false}
+{"fn":"isExtensionId","args":["ab{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["😀key_name-1"],"ok":false}
+{"fn":"isExtensionId","args":["src/a/b.tsİstanbul"],"ok":false}
+{"fn":"isExtensionId","args":["hello worlda😀b😀c"],"ok":false}
+{"fn":"isExtensionId","args":["./x/**/*.jsonkey_name-1"],"ok":false}
+{"fn":"isExtensionId","args":["hello worldHello World"],"ok":false}
+{"fn":"isExtensionId","args":["İstanbulHELLO"],"ok":false}
+{"fn":"isExtensionId","args":["a😀b😀chello"],"ok":false}
+{"fn":"isExtensionId","args":["日本語のテキスト日本語のテキスト"],"ok":false}
+{"fn":"isExtensionId","args":["a:b:ca😀b😀c"],"ok":false}
+{"fn":"isExtensionId","args":["ΣΊΣΥΦΟΣ./x/**/*.json"],"ok":false}
+{"fn":"isExtensionId","args":["日本語のテキストa:b:c"],"ok":false}
+{"fn":"isExtensionId","args":["line1\nline2hello world"],"ok":false}
+{"fn":"isExtensionId","args":["line1\nline2{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["straßea"],"ok":false}
+{"fn":"isExtensionId","args":["trailing.a..b"],"ok":false}
+{"fn":"isExtensionId","args":["ns:key.pathünïcödé"],"ok":false}
+{"fn":"isExtensionId","args":["src/a/b.tsabc"],"ok":false}
+{"fn":"isExtensionId","args":["hello worldhello world"],"ok":false}
+{"fn":"isExtensionId","args":["ab﻿bom"],"ok":false}
+{"fn":"isExtensionId","args":["abhello world"],"ok":false}
+{"fn":"isExtensionId","args":["ns:key.patha:b:c"],"ok":false}
+{"fn":"isExtensionId","args":["{name} has {count} itemskey_name-1"],"ok":false}
+{"fn":"isExtensionId","args":["😀a:b:c"],"ok":false}
+{"fn":"isExtensionId","args":["./x/**/*.jsonabc"],"ok":false}
+{"fn":"isExtensionId","args":["éHELLO"],"ok":false}
+{"fn":"isExtensionId","args":["./x/**/*.jsonhello"],"ok":false}
+{"fn":"isExtensionId","args":["ésrc/a/b.ts"],"ok":false}
+{"fn":"isExtensionId","args":["ns:key.patha😀b😀c"],"ok":false}
+{"fn":"isExtensionId","args":["trailing.ab"],"ok":false}
+{"fn":"isExtensionId","args":[".leadingemoji 👍🏽 mix"],"ok":false}
+{"fn":"isExtensionId","args":["éabc"],"ok":false}
+{"fn":"isExtensionId","args":["{name} has {count} itemsa😀b😀c"],"ok":false}
+{"fn":"isExtensionId","args":["straße😀"],"ok":false}
+{"fn":"isExtensionId","args":["trailing.HELLO"],"ok":false}
+{"fn":"isExtensionId","args":["src/a/b.tssrc/a/b.ts"],"ok":false}
+{"fn":"isExtensionId","args":["aΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isExtensionId","args":["﻿bomhello"],"ok":false}
+{"fn":"isExtensionId","args":["key_name-1a..b"],"ok":false}
+{"fn":"isExtensionId","args":["{name} has {count} items:"],"ok":false}
+{"fn":"isExtensionId","args":["  padded  a:b:c"],"ok":false}
+{"fn":"isExtensionId","args":["HELLO日本語のテキスト"],"ok":false}
+{"fn":"isExtensionId","args":["日本語のテキストkey_name-1"],"ok":false}
+{"fn":"isExtensionId","args":["a﻿bom"],"ok":false}
+{"fn":"isExtensionId","args":["abcsrc/a/b.ts"],"ok":false}
+{"fn":"isExtensionId","args":[":line1\nline2"],"ok":false}
+{"fn":"isExtensionId","args":["İstanbulline1\nline2"],"ok":false}
+{"fn":"isExtensionId","args":[":{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["é{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["aa.b.c"],"ok":false}
+{"fn":"isExtensionId","args":["HELLOHELLO"],"ok":false}
+{"fn":"isExtensionId","args":["HELLOHello World"],"ok":false}
+{"fn":"isExtensionId","args":["straßeİstanbul"],"ok":false}
+{"fn":"isExtensionId","args":["a..bstraße"],"ok":false}
+{"fn":"isExtensionId","args":["emoji 👍🏽 mixHello World"],"ok":false}
+{"fn":"isExtensionId","args":["﻿bom{name} has {count} items"],"ok":false}
+{"fn":"isExtensionId","args":["  padded  hello"],"ok":false}
+{"fn":"isExtensionId","args":["line1\nline2İstanbul"],"ok":false}
+{"fn":"isExtensionId","args":["😀ns:key.path"],"ok":false}
+{"fn":"isExtensionId","args":["hello world﻿bom"],"ok":false}
+{"fn":"isExtensionId","args":["straßestraße"],"ok":false}
+{"fn":"isExtensionId","args":["abca"],"ok":false}
+{"fn":"isExtensionId","args":["ΣΊΣΥΦΟΣ  padded  "],"ok":false}
+{"fn":"isExtensionId","args":["😀a..b"],"ok":false}
+{"fn":"isExtensionId","args":["abcé"],"ok":false}
+{"fn":"isExtensionId","args":["trailing.trailing."],"ok":false}
+{"fn":"isExtensionId","args":["hello worlda"],"ok":false}
+{"fn":"isExtensionId","args":["日本語のテキストHELLO"],"ok":false}
+{"fn":"isExtensionId","args":["abcabc"],"ok":false}
+{"fn":"isExtensionId","args":["日本語のテキスト  padded  "],"ok":false}
+{"fn":"isExtensionId","args":["./x/**/*.json日本語のテキスト"],"ok":false}
+{"fn":"isExtensionId","args":["étab\tseparated"],"ok":false}
+{"fn":"isExtensionId","args":["abca.b.c"],"ok":false}
+{"fn":"isExtensionId","args":["abcHELLO"],"ok":false}
+{"fn":"isExtensionId","args":["İstanbula:b:c"],"ok":false}
+{"fn":"isExtensionId","args":["./x/**/*.jsontab\tseparated"],"ok":false}
+{"fn":"isExtensionId","args":["hello world  padded  "],"ok":false}
+{"fn":"isExtensionId","args":["İstanbulsrc/a/b.ts"],"ok":false}
+{"fn":"isExtensionId","args":["a:b:cünïcödé"],"ok":false}
+{"fn":"isExtensionId","args":["😀straße"],"ok":false}
+{"fn":"isExtensionId","args":["ΣΊΣΥΦΟΣa..b"],"ok":false}
+{"fn":"isExtensionId","args":["ünïcödé./x/**/*.json"],"ok":false}
+{"fn":"isExtensionId","args":["src/a/b.ts日本語のテキスト"],"ok":false}
+{"fn":"isExtensionId","args":["abchello"],"ok":false}
+{"fn":"isExtensionId","args":["日本語のテキストhello"],"ok":false}
+{"fn":"isExtensionId","args":["helloline1\nline2"],"ok":false}
+{"fn":"isExtensionId","args":["straßeΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isExtensionId","args":["😀a.b.c"],"ok":false}
+{"fn":"isExtensionId","args":["a:b:c:"],"ok":false}
+{"fn":"isExtensionId","args":["😀trailing."],"ok":false}
+{"fn":"isExtensionId","args":["éhello world"],"ok":false}
+{"fn":"isExtensionId","args":["src/a/b.tshello"],"ok":false}
+{"fn":"isExtensionId","args":["./x/**/*.jsonHELLO"],"ok":false}
+{"fn":"isExtensionId","args":[".leadingsrc/a/b.ts"],"ok":false}
+{"fn":"isExtensionId","args":["héllo wörld"],"ok":false}
+{"fn":"isExtensionId","args":["👍🏽 thumbs"],"ok":false}
+{"fn":"isExtensionId","args":["日本語"],"ok":false}
+{"fn":"isExtensionId","args":["ılık ırmak"],"ok":false}
+{"fn":"isExtensionId","args":["👨‍👩‍👧 family"],"ok":false}
+{"fn":"isExtensionId","args":["a b"],"ok":false}
+{"fn":"isExtensionId","args":["a😀b"],"ok":false}
+{"fn":"isExtensionId","args":["a²b x½ y①"],"ok":false}
+{"fn":"isExtensionId","args":["aⅠb Ⅻ"],"ok":false}
+{"fn":"isExtensionId","args":["a𐐀b 𝐀bc"],"ok":false}
+{"fn":"isExtensionId","args":["कि ٣٤"],"ok":false}
+{"fn":"isExtensionId","args":["Iı İi"],"ok":false}
+{"fn":"isExtensionId","args":["K K k"],"ok":false}
+{"fn":"isExtensionId","args":["ſ s S"],"ok":false}
+{"fn":"isExtensionId","args":["x‍y 👨‍👩‍👧"],"ok":false}
+{"fn":"isExtensionId","args":["a b c　d"],"ok":false}
+{"fn":"isExtensionId","args":["١٢٣ ٤٥"],"ok":false}
+{"fn":"isExtensionId","args":["𝟘𝟙 ²³"],"ok":false}
+{"fn":"isExtensionId","args":["snake_case foo-bar o'neil"],"ok":false}
+{"fn":"isExtensionId","args":["ǅungla Ǆ"],"ok":false}
+{"fn":"isExtensionId","args":["one\r\ntwo threefour"],"ok":false}
+{"fn":"isExtensionId","args":["café café"],"ok":false}
+{"fn":"isExtensionId","args":["ΣΑΣ σας ς"],"ok":false}
+{"fn":"webStoreExtensionId","args":["src/a/b.ts"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a.b.c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a😀b😀c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["😀"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a..b:"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a"],"ok":null}
+{"fn":"webStoreExtensionId","args":["emoji 👍🏽 mixΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"webStoreExtensionId","args":["emoji 👍🏽 mix"],"ok":null}
+{"fn":"webStoreExtensionId","args":["é"],"ok":null}
+{"fn":"webStoreExtensionId","args":["  padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":["HELLO"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ünïcödé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["tab\tseparatedhello world"],"ok":null}
+{"fn":"webStoreExtensionId","args":["hello"],"ok":null}
+{"fn":"webStoreExtensionId","args":["Hello Worldemoji 👍🏽 mix"],"ok":null}
+{"fn":"webStoreExtensionId","args":[".leading"],"ok":null}
+{"fn":"webStoreExtensionId","args":["Hello World"],"ok":null}
+{"fn":"webStoreExtensionId","args":["日本語のテキスト"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a  padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":["{name} has {count} items"],"ok":null}
+{"fn":"webStoreExtensionId","args":["hello world"],"ok":null}
+{"fn":"webStoreExtensionId","args":["straße"],"ok":null}
+{"fn":"webStoreExtensionId","args":["tab\tseparated"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a..b"],"ok":null}
+{"fn":"webStoreExtensionId","args":["line1\nline2"],"ok":null}
+{"fn":"webStoreExtensionId","args":[":"],"ok":null}
+{"fn":"webStoreExtensionId","args":["src/a/b.tsstraße"],"ok":null}
+{"fn":"webStoreExtensionId","args":["İstanbul"],"ok":null}
+{"fn":"webStoreExtensionId","args":["﻿bom"],"ok":null}
+{"fn":"webStoreExtensionId","args":[":﻿bom"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ns:key.path"],"ok":null}
+{"fn":"webStoreExtensionId","args":["abc"],"ok":null}
+{"fn":"webStoreExtensionId","args":["日本語のテキスト:"],"ok":null}
+{"fn":"webStoreExtensionId","args":["src/a/b.tshello world"],"ok":null}
+{"fn":"webStoreExtensionId","args":["key_name-1"],"ok":null}
+{"fn":"webStoreExtensionId","args":["./x/**/*.json"],"ok":null}
+{"fn":"webStoreExtensionId","args":[""],"ok":null}
+{"fn":"webStoreExtensionId","args":["ΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"webStoreExtensionId","args":["trailing."],"ok":null}
+{"fn":"webStoreExtensionId","args":["trailing.key_name-1"],"ok":null}
+{"fn":"webStoreExtensionId","args":["😀HELLO"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ns:key.path.leading"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a:b:c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["key_name-1﻿bom"],"ok":null}
+{"fn":"webStoreExtensionId","args":["hello worldtrailing."],"ok":null}
+{"fn":"webStoreExtensionId","args":[".leading{name} has {count} items"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a..bé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["abcemoji 👍🏽 mix"],"ok":null}
+{"fn":"webStoreExtensionId","args":["src/a/b.tsabc"],"ok":null}
+{"fn":"webStoreExtensionId","args":["line1\nline2a😀b😀c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["日本語のテキストemoji 👍🏽 mix"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ns:key.patha"],"ok":null}
+{"fn":"webStoreExtensionId","args":["trailing.  padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":["﻿bomtrailing."],"ok":null}
+{"fn":"webStoreExtensionId","args":["src/a/b.tsa..b"],"ok":null}
+{"fn":"webStoreExtensionId","args":["HELLOa"],"ok":null}
+{"fn":"webStoreExtensionId","args":["abc  padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":["{name} has {count} itemsemoji 👍🏽 mix"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a😀b😀c﻿bom"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ΣΊΣΥΦΟΣΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"webStoreExtensionId","args":["helloHELLO"],"ok":null}
+{"fn":"webStoreExtensionId","args":["trailing.ünïcödé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["line1\nline2hello world"],"ok":null}
+{"fn":"webStoreExtensionId","args":["src/a/b.tstab\tseparated"],"ok":null}
+{"fn":"webStoreExtensionId","args":["日本語のテキスト.leading"],"ok":null}
+{"fn":"webStoreExtensionId","args":["﻿bomİstanbul"],"ok":null}
+{"fn":"webStoreExtensionId","args":[".leadingtrailing."],"ok":null}
+{"fn":"webStoreExtensionId","args":["line1\nline2é"],"ok":null}
+{"fn":"webStoreExtensionId","args":["﻿boma..b"],"ok":null}
+{"fn":"webStoreExtensionId","args":["key_name-1./x/**/*.json"],"ok":null}
+{"fn":"webStoreExtensionId","args":["😀straße"],"ok":null}
+{"fn":"webStoreExtensionId","args":["hellostraße"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ΣΊΣΥΦΟΣa.b.c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a😀b😀chello"],"ok":null}
+{"fn":"webStoreExtensionId","args":["emoji 👍🏽 mixstraße"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ΣΊΣΥΦΟΣsrc/a/b.ts"],"ok":null}
+{"fn":"webStoreExtensionId","args":["{name} has {count} itemsHELLO"],"ok":null}
+{"fn":"webStoreExtensionId","args":["hello worldHELLO"],"ok":null}
+{"fn":"webStoreExtensionId","args":["hello worldİstanbul"],"ok":null}
+{"fn":"webStoreExtensionId","args":["src/a/b.tsline1\nline2"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ab"],"ok":null}
+{"fn":"webStoreExtensionId","args":["line1\nline2line1\nline2"],"ok":null}
+{"fn":"webStoreExtensionId","args":["😀ΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"webStoreExtensionId","args":["./x/**/*.jsontab\tseparated"],"ok":null}
+{"fn":"webStoreExtensionId","args":["emoji 👍🏽 mix./x/**/*.json"],"ok":null}
+{"fn":"webStoreExtensionId","args":["日本語のテキストhello world"],"ok":null}
+{"fn":"webStoreExtensionId","args":["﻿bom.leading"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a..bİstanbul"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a..btrailing."],"ok":null}
+{"fn":"webStoreExtensionId","args":["./x/**/*.jsonünïcödé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["asrc/a/b.ts"],"ok":null}
+{"fn":"webStoreExtensionId","args":["straßeé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["src/a/b.ts😀"],"ok":null}
+{"fn":"webStoreExtensionId","args":["éemoji 👍🏽 mix"],"ok":null}
+{"fn":"webStoreExtensionId","args":["line1\nline2İstanbul"],"ok":null}
+{"fn":"webStoreExtensionId","args":["tab\tseparatedkey_name-1"],"ok":null}
+{"fn":"webStoreExtensionId","args":["Hello Worldünïcödé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["HELLOé"],"ok":null}
+{"fn":"webStoreExtensionId","args":[":emoji 👍🏽 mix"],"ok":null}
+{"fn":"webStoreExtensionId","args":["abc日本語のテキスト"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a..ba😀b😀c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["😀  padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":["a😀b😀c{name} has {count} items"],"ok":null}
+{"fn":"webStoreExtensionId","args":["hello worldabc"],"ok":null}
+{"fn":"webStoreExtensionId","args":["{name} has {count} items:"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a😀b😀cİstanbul"],"ok":null}
+{"fn":"webStoreExtensionId","args":["src/a/b.tsHello World"],"ok":null}
+{"fn":"webStoreExtensionId","args":["{name} has {count} itemsé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["日本語のテキストünïcödé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["trailing.ns:key.path"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a..b  padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":["Hello WorldΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"webStoreExtensionId","args":["  padded  ünïcödé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["日本語のテキスト  padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":["hello worldns:key.path"],"ok":null}
+{"fn":"webStoreExtensionId","args":[":key_name-1"],"ok":null}
+{"fn":"webStoreExtensionId","args":["key_name-1a😀b😀c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ünïcödéhello world"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ünïcödéline1\nline2"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a😀b😀ctrailing."],"ok":null}
+{"fn":"webStoreExtensionId","args":["straßetab\tseparated"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ab﻿bom"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ΣΊΣΥΦΟΣtrailing."],"ok":null}
+{"fn":"webStoreExtensionId","args":["tab\tseparatedünïcödé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["Hello Worlda..b"],"ok":null}
+{"fn":"webStoreExtensionId","args":["helloa.b.c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a.b.cemoji 👍🏽 mix"],"ok":null}
+{"fn":"webStoreExtensionId","args":["  padded  src/a/b.ts"],"ok":null}
+{"fn":"webStoreExtensionId","args":["aHello World"],"ok":null}
+{"fn":"webStoreExtensionId","args":["abcns:key.path"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ΣΊΣΥΦΟΣa😀b😀c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["abcsrc/a/b.ts"],"ok":null}
+{"fn":"webStoreExtensionId","args":["tab\tseparatedline1\nline2"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a.b.cİstanbul"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ΣΊΣΥΦΟΣ.leading"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ns:key.pathline1\nline2"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a.b.ca:b:c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["Hello Worldhello world"],"ok":null}
+{"fn":"webStoreExtensionId","args":["{name} has {count} itemsHello World"],"ok":null}
+{"fn":"webStoreExtensionId","args":["Hello World😀"],"ok":null}
+{"fn":"webStoreExtensionId","args":["HELLOtab\tseparated"],"ok":null}
+{"fn":"webStoreExtensionId","args":["  padded  {name} has {count} items"],"ok":null}
+{"fn":"webStoreExtensionId","args":["Hello World{name} has {count} items"],"ok":null}
+{"fn":"webStoreExtensionId","args":[":a"],"ok":null}
+{"fn":"webStoreExtensionId","args":[".leadinga"],"ok":null}
+{"fn":"webStoreExtensionId","args":["éHELLO"],"ok":null}
+{"fn":"webStoreExtensionId","args":["straßeİstanbul"],"ok":null}
+{"fn":"webStoreExtensionId","args":["emoji 👍🏽 mix  padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":[":src/a/b.ts"],"ok":null}
+{"fn":"webStoreExtensionId","args":["  padded  😀"],"ok":null}
+{"fn":"webStoreExtensionId","args":[":{name} has {count} items"],"ok":null}
+{"fn":"webStoreExtensionId","args":["{name} has {count} items日本語のテキスト"],"ok":null}
+{"fn":"webStoreExtensionId","args":["./x/**/*.jsona..b"],"ok":null}
+{"fn":"webStoreExtensionId","args":["İstanbulline1\nline2"],"ok":null}
+{"fn":"webStoreExtensionId","args":["emoji 👍🏽 mixline1\nline2"],"ok":null}
+{"fn":"webStoreExtensionId","args":["src/a/b.tsünïcödé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["line1\nline2straße"],"ok":null}
+{"fn":"webStoreExtensionId","args":["日本語のテキストstraße"],"ok":null}
+{"fn":"webStoreExtensionId","args":["tab\tseparateda:b:c"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a😀b😀cé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["﻿bomstraße"],"ok":null}
+{"fn":"webStoreExtensionId","args":["日本語のテキストİstanbul"],"ok":null}
+{"fn":"webStoreExtensionId","args":["line1\nline2ns:key.path"],"ok":null}
+{"fn":"webStoreExtensionId","args":["İstanbulkey_name-1"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ab😀"],"ok":null}
+{"fn":"webStoreExtensionId","args":["HELLO./x/**/*.json"],"ok":null}
+{"fn":"webStoreExtensionId","args":["helloabc"],"ok":null}
+{"fn":"webStoreExtensionId","args":["HELLOHELLO"],"ok":null}
+{"fn":"webStoreExtensionId","args":["aabc"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a..b﻿bom"],"ok":null}
+{"fn":"webStoreExtensionId","args":["hello worldhello"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ns:key.pathΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"webStoreExtensionId","args":["aline1\nline2"],"ok":null}
+{"fn":"webStoreExtensionId","args":["hello world😀"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ΣΊΣΥΦΟΣ  padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":["a.b.chello world"],"ok":null}
+{"fn":"webStoreExtensionId","args":["HELLOline1\nline2"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ünïcödéHELLO"],"ok":null}
+{"fn":"webStoreExtensionId","args":["aé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["😀a..b"],"ok":null}
+{"fn":"webStoreExtensionId","args":[":é"],"ok":null}
+{"fn":"webStoreExtensionId","args":["Hello World日本語のテキスト"],"ok":null}
+{"fn":"webStoreExtensionId","args":["abc﻿bom"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ans:key.path"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a😀b😀cemoji 👍🏽 mix"],"ok":null}
+{"fn":"webStoreExtensionId","args":["  padded    padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":["helloé"],"ok":null}
+{"fn":"webStoreExtensionId","args":["{name} has {count} itemshello world"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a.b.c  padded  "],"ok":null}
+{"fn":"webStoreExtensionId","args":[".leadingsrc/a/b.ts"],"ok":null}
+{"fn":"webStoreExtensionId","args":[".leading./x/**/*.json"],"ok":null}
+{"fn":"webStoreExtensionId","args":["trailing.abc"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a..bΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"webStoreExtensionId","args":["src/a/b.tsns:key.path"],"ok":null}
+{"fn":"webStoreExtensionId","args":["😀😀"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ésrc/a/b.ts"],"ok":null}
+{"fn":"webStoreExtensionId","args":["😀﻿bom"],"ok":null}
+{"fn":"webStoreExtensionId","args":["tab\tseparatedtab\tseparated"],"ok":null}
+{"fn":"webStoreExtensionId","args":["trailing.hello world"],"ok":null}
+{"fn":"webStoreExtensionId","args":["éabc"],"ok":null}
+{"fn":"webStoreExtensionId","args":["héllo wörld"],"ok":null}
+{"fn":"webStoreExtensionId","args":["👍🏽 thumbs"],"ok":null}
+{"fn":"webStoreExtensionId","args":["日本語"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ılık ırmak"],"ok":null}
+{"fn":"webStoreExtensionId","args":["👨‍👩‍👧 family"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a b"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a😀b"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a²b x½ y①"],"ok":null}
+{"fn":"webStoreExtensionId","args":["aⅠb Ⅻ"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a𐐀b 𝐀bc"],"ok":null}
+{"fn":"webStoreExtensionId","args":["कि ٣٤"],"ok":null}
+{"fn":"webStoreExtensionId","args":["Iı İi"],"ok":null}
+{"fn":"webStoreExtensionId","args":["K K k"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ſ s S"],"ok":null}
+{"fn":"webStoreExtensionId","args":["x‍y 👨‍👩‍👧"],"ok":null}
+{"fn":"webStoreExtensionId","args":["a b c　d"],"ok":null}
+{"fn":"webStoreExtensionId","args":["١٢٣ ٤٥"],"ok":null}
+{"fn":"webStoreExtensionId","args":["𝟘𝟙 ²³"],"ok":null}
+{"fn":"webStoreExtensionId","args":["snake_case foo-bar o'neil"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ǅungla Ǆ"],"ok":null}
+{"fn":"webStoreExtensionId","args":["one\r\ntwo threefour"],"ok":null}
+{"fn":"webStoreExtensionId","args":["café café"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ΣΑΣ σας ς"],"ok":null}
+{"fn":"permissionWarnings","args":[{"permissions":["﻿bomkey_name-1","aünïcödé"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["","日本語のテキストsrc/a/b.ts","é"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tab\tseparated","abab","src/a/b.ts"],"hostPermissions":["ünïcödé.leading","İstanbul"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["ΣΊΣΥΦΟΣ","ünïcödé"],"hostPermissions":["trailing."]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["ΣΊΣΥΦΟΣ","a:b:c"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[null],"error":"Cannot read properties of null (reading 'permissions')"}
+{"fn":"permissionWarnings","args":[{"permissions":["a.b.c","HELLO"],"hostPermissions":["straße"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["hello","😀","line1\nline2"],"hostPermissions":[".leading","tab\tseparated","😀"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["hellohello","ΣΊΣΥΦΟΣ","a😀b😀c"],"hostPermissions":["  padded  İstanbul"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["😀","hello world",""],"hostPermissions":[".leading./x/**/*.json"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[":","a","a.b.c"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["src/a/b.ts","Hello Worlda😀b😀c",".leading"],"hostPermissions":["",""]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tab\tseparated","日本語のテキスト","a:b:c"],"hostPermissions":["  padded  ","HELLO"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["{name} has {count} items","ünïcödé"],"hostPermissions":["😀","﻿bom","HELLO"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a..ba.b.c","abc","😀"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["ab"],"hostPermissions":["ΣΊΣΥΦΟΣ"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a:b:cab"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["﻿bom","ahello world"],"hostPermissions":["line1\nline2","./x/**/*.json"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["src/a/b.ts"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["line1\nline2"],"hostPermissions":["😀","😀"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["ünïcödéΣΊΣΥΦΟΣ","ünïcödé",""]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"a":"b"}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"permissionWarnings","args":[{"permissions":["./x/**/*.json","","emoji 👍🏽 mix"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["hello"],"hostPermissions":["a:b:c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[[]],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["./x/**/*.json","key_name-1"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["key_name-1"],"hostPermissions":["a:b:c","abc"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["﻿bom","./x/**/*.json"],"hostPermissions":[""]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["İstanbul",":ünïcödé","﻿bom"],"hostPermissions":["﻿bomab","İstanbulline1\nline2","  padded  "]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[":","Hello World"],"hostPermissions":["ab","key_name-1"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a:b:c",""],"hostPermissions":["HELLO","a😀b😀c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["İstanbul:","ns:key.pathsrc/a/b.ts"],"hostPermissions":["./x/**/*.json"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a..bns:key.path","ns:key.path"],"hostPermissions":["key_name-1","a😀b😀c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a..bline1\nline2","emoji 👍🏽 mixa:b:c"],"hostPermissions":["😀"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["ünïcödé","日本語のテキスト日本語のテキスト"],"hostPermissions":["😀a😀b😀c","Hello World","﻿bom"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[":Hello World"],"hostPermissions":["ünïcödé"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["emoji 👍🏽 mix"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["hello worlda..b",""],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["line1\nline2","é",".leading"],"hostPermissions":["a:b:c","a:b:c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a😀b😀c","Hello World","abc"],"hostPermissions":["trailing.","emoji 👍🏽 mix"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["key_name-1"],"hostPermissions":["ΣΊΣΥΦΟΣa:b:c","key_name-1"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["ΣΊΣΥΦΟΣ","./x/**/*.json","Hello World"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["",".leading"],"hostPermissions":["line1\nline2","ünïcödé","a"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["src/a/b.ts","é","a😀b😀ckey_name-1"],"hostPermissions":["日本語のテキスト日本語のテキスト","ns:key.path"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["HELLO","HELLO","  padded  .leading"],"hostPermissions":["tab\tseparated"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[":","a"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["hello"],"hostPermissions":[".leading","HELLO","hello"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a","straße","a"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["{name} has {count} itemsΣΊΣΥΦΟΣ"],"hostPermissions":["  padded  ","hello world"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["﻿bom😀","a.b.c","src/a/b.ts"],"hostPermissions":["straße"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["ns:key.path","abc"],"hostPermissions":["emoji 👍🏽 mix  padded  "]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["key_name-1",".leading"],"hostPermissions":["日本語のテキスト","ΣΊΣΥΦΟΣa","ab"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a","src/a/b.ts"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a😀b😀c:","a"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"a":{"b":"c"}}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"permissionWarnings","args":[{"permissions":["  padded  "],"hostPermissions":[".leading"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a😀b😀c","hello world"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["﻿boma","./x/**/*.json"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["abc","HELLO"],"hostPermissions":["trailing.hello"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["hello","line1\nline2","hello"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":["x"],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"permissionWarnings","args":[{"permissions":["日本語のテキスト","ab"],"hostPermissions":["trailing..leading","a..b"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["HELLO","  padded  "]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["HELLO","a",""]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["./x/**/*.json","a😀b😀c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["İstanbula"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["src/a/b.ts","İstanbul"],"hostPermissions":["日本語のテキスト.leading","Hello Worldİstanbul"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["İstanbul","src/a/b.ts","a..bhello"],"hostPermissions":["日本語のテキスト","HELLO"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["HELLO"],"hostPermissions":["  padded  ","İstanbul","a.b.c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["","a..b","line1\nline2"],"hostPermissions":[".leadingabc","a..b","a.b.cİstanbul"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["line1\nline2","ns:key.path",".leading"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["HELLO"],"hostPermissions":["straße"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["日本語のテキスト","hello world","İstanbul"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[":","ns:key.path"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["hello worldemoji 👍🏽 mix"],"hostPermissions":["{name} has {count} items","ab","line1\nline2trailing."]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["src/a/b.ts日本語のテキスト","😀ΣΊΣΥΦΟΣ","abcΣΊΣΥΦΟΣ"],"hostPermissions":["a.b.c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a..b","{name} has {count} items","﻿bom"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["﻿bom","﻿bom"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a..b  padded  ","a😀b😀c","a..b"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["😀","aa.b.c","./x/**/*.json"],"hostPermissions":["abc"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["ΣΊΣΥΦΟΣ","a.b.c"],"hostPermissions":["a.b.cHELLO","ns:key.path"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["Hello World"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["  padded  ","line1\nline2"],"hostPermissions":["HELLO","a:b:c","src/a/b.ts"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["abc","HELLO","hello world"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["aba.b.c","src/a/b.ts","é"],"hostPermissions":["a:b:c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["hello日本語のテキスト",":"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["HELLO","ns:key.path","a😀b😀c"],"hostPermissions":["İstanbul"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["İstanbul","src/a/b.ts"],"hostPermissions":["hello world","line1\nline2","日本語のテキスト"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["hello world","a😀b😀c","HELLO"],"hostPermissions":["a..b"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["hello world  padded  ","trailing.line1\nline2","trailing."]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["{name} has {count} items","trailing."],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a😀b😀c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a:b:c","é"],"hostPermissions":["é"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a:b:c","é","a"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["  padded  a😀b😀c","abc","HELLO"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a.b.cünïcödé","straße"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["ünïcödétab\tseparated","a.b.c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["trailing.emoji 👍🏽 mix","  padded  "],"hostPermissions":["./x/**/*.json","ab","tab\tseparated"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[""],"hostPermissions":["key_name-1a","  padded  "]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["ab","",":"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["日本語のテキスト","a:b:c"],"hostPermissions":["a:b:c","a","a.b.c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["ünïcödé","abc","a.b.c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[["a",1]],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"permissionWarnings","args":[{"permissions":["abc"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["./x/**/*.json"],"hostPermissions":["a..b"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["trailing.","tab\tseparated","a😀b😀c"],"hostPermissions":["  padded  ","日本語のテキスト","emoji 👍🏽 mix"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["./x/**/*.json","a..b","a..b"],"hostPermissions":["hello world"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["İstanbul"],"hostPermissions":["hellohello world"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["﻿bom"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[0],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":[":","abca:b:c","é"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["  padded  ","line1\nline2","a😀b😀c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a😀b😀c","trailing."],"hostPermissions":["﻿bom","😀"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["﻿bom","﻿bom"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["😀:","Hello World"],"hostPermissions":["","hello world"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a","  padded  ","./x/**/*.jsonab"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["日本語のテキスト","😀","Hello World"],"hostPermissions":["😀"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["İstanbul"],"hostPermissions":["tab\tseparated","😀"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a😀b😀c日本語のテキスト","﻿bom﻿bom","ns:key.path"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["é","{name} has {count} items"],"hostPermissions":["a:b:c﻿bom","é","﻿bom"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["emoji 👍🏽 mixa.b.c"],"hostPermissions":["tab\tseparated","  padded  "]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["  padded  "],"hostPermissions":["İstanbul"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a..b"],"hostPermissions":["ns:key.path","a..b"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a:b:c","line1\nline2:"],"hostPermissions":["key_name-1"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["src/a/b.ts{name} has {count} items","😀"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["straße"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["😀","Hello World","a😀b😀c"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["helloΣΊΣΥΦΟΣ"],"hostPermissions":["emoji 👍🏽 mixa:b:c","hello world"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["trailing.","a..b"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["trailing.","Hello World"],"hostPermissions":["a..b","trailing.","hello"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["trailing.","a:b:c"],"hostPermissions":[".leading"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["日本語のテキスト","İstanbul","😀"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["hello","a😀b😀c.leading","./x/**/*.json"],"hostPermissions":["a..bns:key.path","HELLO"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["{name} has {count} itemsa"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["emoji 👍🏽 mix","straße","ΣΊΣΥΦΟΣ"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["./x/**/*.json","straße./x/**/*.json",".leading"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a..b","key_name-1"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["line1\nline2","key_name-1"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[true],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a:b:c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[":trailing."],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[".leading﻿bom"],"hostPermissions":["","ΣΊΣΥΦΟΣ","abc"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a.b.c"],"hostPermissions":["a"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["straße","😀hello","a..b"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["{name} has {count} items","hello","a.b.chello world"],"hostPermissions":["src/a/b.ts"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["Hello World","a.b.c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["ΣΊΣΥΦΟΣ","  padded  ",":"],"hostPermissions":["日本語のテキスト  padded  ","src/a/b.tshello"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["é","tab\tseparated","key_name-1"],"hostPermissions":["key_name-1İstanbul"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["trailing."],"hostPermissions":["﻿bom","ΣΊΣΥΦΟΣ","./x/**/*.json"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["aa.b.c","{name} has {count} items","é"],"hostPermissions":["emoji 👍🏽 mix","İstanbul"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["abns:key.path"],"hostPermissions":["HELLO"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a.b.c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["  padded  ","ΣΊΣΥΦΟΣ"],"hostPermissions":["é","HELLOa:b:c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tab\tseparatedtrailing."],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["ΣΊΣΥΦΟΣ","  padded  ",""],"hostPermissions":["a:b:c﻿bom","abc","{name} has {count} itemsHello World"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["key_name-1","İstanbul"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["é","a..b","ünïcödé"],"hostPermissions":["ΣΊΣΥΦΟΣ"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["src/a/b.ts","﻿bom","key_name-1"],"hostPermissions":["ΣΊΣΥΦΟΣ","a:b:c","helloa😀b😀c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["İstanbul","straße"],"hostPermissions":["a:b:c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["line1\nline2","ab"],"hostPermissions":["abc","HELLO","emoji 👍🏽 mix"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a.b.c","İstanbul","hello"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["HELLO"],"hostPermissions":["a..b"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[":","key_name-1"],"hostPermissions":["straßea😀b😀c","hello world"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["key_name-1","aé",""],"hostPermissions":["😀abc","{name} has {count} items"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["ΣΊΣΥΦΟΣ./x/**/*.json","  padded  "],"hostPermissions":["./x/**/*.json﻿bom","hello"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["İstanbul","日本語のテキストa:b:c"],"hostPermissions":["hello","Hello World"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["😀","tab\tseparated"],"hostPermissions":["﻿bom"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["Hello World{name} has {count} items"],"hostPermissions":["HELLO{name} has {count} items"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a:b:c",".leading","ns:key.path"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tab\tseparated","a..b"],"hostPermissions":["helloa","a😀b😀c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["ab"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["日本語のテキスト"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["Hello World"],"hostPermissions":["straßea:b:c","éa"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"permissionWarnings","args":[{"permissions":["日本語のテキスト","日本語のテキスト"],"hostPermissions":["{name} has {count} items",""]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["é","😀  padded  ","a:b:c"],"hostPermissions":["key_name-1"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["straße","{name} has {count} items"],"hostPermissions":["hello./x/**/*.json","hello"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["{name} has {count} items","Hello World","hello./x/**/*.json"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["﻿bom","éa.b.c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["key_name-1","hellosrc/a/b.ts"],"hostPermissions":["src/a/b.ts","ab","abc"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["","ns:key.path","ns:key.patha:b:c"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[".leading",":"],"hostPermissions":["src/a/b.tsemoji 👍🏽 mix"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a😀b😀cabc"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["﻿bom"],"hostPermissions":["key_name-1","é"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["emoji 👍🏽 mix","日本語のテキスト","a"],"hostPermissions":["ünïcödé","","﻿boma.b.c"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["abc","é","﻿bom"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["{name} has {count} items"],"hostPermissions":["é","ünïcödé"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["trailing.","hello world"],"hostPermissions":["abc","日本語のテキスト","a"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["trailing.emoji 👍🏽 mix","😀"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["Hello World"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["é","tab\tseparated"],"hostPermissions":["tab\tseparated","ΣΊΣΥΦΟΣ","abc"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["hello world","a",".leading"],"hostPermissions":["a","a"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["key_name-1","a..b","a.b.c"],"hostPermissions":["ns:key.path","straße"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["ns:key.path"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["日本語のテキスト","a","{name} has {count} items"],"hostPermissions":["ab","😀","{name} has {count} items"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["ünïcödéünïcödé"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["a.b.c","  padded  "],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["😀","😀"],"hostPermissions":["HELLO"]}],"ok":[]}
+{"fn":"isExtensionId","args":["abcdefghijklmnopabcdefghijklmnop"],"ok":true}
+{"fn":"isExtensionId","args":[" abcdefghijklmnopabcdefghijklmnop\n"],"ok":false}
+{"fn":"isExtensionId","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":true}
+{"fn":"isExtensionId","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":false}
+{"fn":"isExtensionId","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":false}
+{"fn":"isExtensionId","args":["qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],"ok":false}
+{"fn":"isExtensionId","args":["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"],"ok":false}
+{"fn":"isExtensionId","args":[""],"ok":false}
+{"fn":"isExtensionId","args":["x"],"ok":false}
+{"fn":"isExtensionId","args":["abcdefghijklmnopabcdefghijklmnop "],"ok":false}
+{"fn":"isExtensionId","args":["﻿abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["https://chromewebstore.google.com/detail/name/abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["https://chromewebstore.google.com/detail/abcdefghijklmnopabcdefghijklmnop?hl=en"],"ok":false}
+{"fn":"isExtensionId","args":["https://chrome.google.com/webstore/detail/name/abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["https://chrome.google.com/webstore/detail/abcdefghijklmnopabcdefghijklmnop/reviews"],"ok":false}
+{"fn":"isExtensionId","args":["https://chrome.google.com/other/abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["https://chrome.google.com/webstore"],"ok":false}
+{"fn":"isExtensionId","args":["https://chrome.google.com/webstore/"],"ok":false}
+{"fn":"isExtensionId","args":["https://example.com/detail/abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["HTTPS://CHROMEWEBSTORE.GOOGLE.COM/detail/x/abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["https://chromewebstore.google.com/detail/x"],"ok":false}
+{"fn":"isExtensionId","args":["https://chromewebstore.google.com/"],"ok":false}
+{"fn":"isExtensionId","args":["https://chromewebstore.google.com/detail/abcdefghijklmnopabcdefghijklmnop/bbcdefghijklmnopbbcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["chromewebstore.google.com/detail/abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["not a url"],"ok":false}
+{"fn":"isExtensionId","args":["ftp://chromewebstore.google.com/abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["https://chromewebstore.google.com/detail/%61bcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["https://chromewebstore.google.com//abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["http://chromewebstore.google.com:8080/abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"isExtensionId","args":["https://user:pw@chromewebstore.google.com/abcdefghijklmnopabcdefghijklmnop"],"ok":false}
+{"fn":"webStoreExtensionId","args":["abcdefghijklmnopabcdefghijklmnop"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":[" abcdefghijklmnopabcdefghijklmnop\n"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+{"fn":"webStoreExtensionId","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":null}
+{"fn":"webStoreExtensionId","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":null}
+{"fn":"webStoreExtensionId","args":["qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],"ok":null}
+{"fn":"webStoreExtensionId","args":["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"],"ok":null}
+{"fn":"webStoreExtensionId","args":[""],"ok":null}
+{"fn":"webStoreExtensionId","args":["x"],"ok":null}
+{"fn":"webStoreExtensionId","args":["abcdefghijklmnopabcdefghijklmnop "],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["﻿abcdefghijklmnopabcdefghijklmnop"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["abcdefghijklmnopabcdefghijklmnop"],"ok":null}
+{"fn":"webStoreExtensionId","args":["https://chromewebstore.google.com/detail/name/abcdefghijklmnopabcdefghijklmnop"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["https://chromewebstore.google.com/detail/abcdefghijklmnopabcdefghijklmnop?hl=en"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["https://chrome.google.com/webstore/detail/name/abcdefghijklmnopabcdefghijklmnop"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["https://chrome.google.com/webstore/detail/abcdefghijklmnopabcdefghijklmnop/reviews"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["https://chrome.google.com/other/abcdefghijklmnopabcdefghijklmnop"],"ok":null}
+{"fn":"webStoreExtensionId","args":["https://chrome.google.com/webstore"],"ok":null}
+{"fn":"webStoreExtensionId","args":["https://chrome.google.com/webstore/"],"ok":null}
+{"fn":"webStoreExtensionId","args":["https://example.com/detail/abcdefghijklmnopabcdefghijklmnop"],"ok":null}
+{"fn":"webStoreExtensionId","args":["HTTPS://CHROMEWEBSTORE.GOOGLE.COM/detail/x/abcdefghijklmnopabcdefghijklmnop"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["https://chromewebstore.google.com/detail/x"],"ok":null}
+{"fn":"webStoreExtensionId","args":["https://chromewebstore.google.com/"],"ok":null}
+{"fn":"webStoreExtensionId","args":["https://chromewebstore.google.com/detail/abcdefghijklmnopabcdefghijklmnop/bbcdefghijklmnopbbcdefghijklmnop"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["chromewebstore.google.com/detail/abcdefghijklmnopabcdefghijklmnop"],"ok":null}
+{"fn":"webStoreExtensionId","args":["not a url"],"ok":null}
+{"fn":"webStoreExtensionId","args":["ftp://chromewebstore.google.com/abcdefghijklmnopabcdefghijklmnop"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["https://chromewebstore.google.com/detail/%61bcdefghijklmnopabcdefghijklmnop"],"ok":null}
+{"fn":"webStoreExtensionId","args":["https://chromewebstore.google.com//abcdefghijklmnopabcdefghijklmnop"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["http://chromewebstore.google.com:8080/abcdefghijklmnopabcdefghijklmnop"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"webStoreExtensionId","args":["https://user:pw@chromewebstore.google.com/abcdefghijklmnopabcdefghijklmnop"],"ok":"abcdefghijklmnopabcdefghijklmnop"}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":[]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":[]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":[]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":[]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":[]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["*://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["*://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["*://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["*://*/*"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["*://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["*://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["http://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["http://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["http://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["http://*/*"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["http://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["http://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["https://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["https://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["https://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["https://*/*"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["https://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["https://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["ws://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["ws://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["ws://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["ws://*/*"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["ws://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["ws://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["wss://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["wss://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["wss://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["wss://*/*"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["wss://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["wss://*/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["*://*.google.com/*"]}],"ok":["Read and change your data on all google.com sites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["*://*.google.com/*"]}],"ok":["Read and change your data on all google.com sites","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["*://*.google.com/*"]}],"ok":["Read and change your data on all google.com sites","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["*://*.google.com/*"]}],"ok":["Read and change your data on all google.com sites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["*://*.google.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["*://*.google.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["https://a.com/*","https://a.com/x"]}],"ok":["Read and change your data on a.com"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["https://a.com/*","https://a.com/x"]}],"ok":["Read and change your data on a.com","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["https://a.com/*","https://a.com/x"]}],"ok":["Read and change your data on a.com","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["https://a.com/*","https://a.com/x"]}],"ok":["Read and change your data on a.com","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["https://a.com/*","https://a.com/x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["https://a.com/*","https://a.com/x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["https://a.com/*","https://b.com/*"]}],"ok":["Read and change your data on a.com and b.com"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["https://a.com/*","https://b.com/*"]}],"ok":["Read and change your data on a.com and b.com","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["https://a.com/*","https://b.com/*"]}],"ok":["Read and change your data on a.com and b.com","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["https://a.com/*","https://b.com/*"]}],"ok":["Read and change your data on a.com and b.com","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["https://a.com/*","https://b.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["https://a.com/*","https://b.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["https://a.com/*","https://b.com/*","https://*.c.com/*"]}],"ok":["Read and change your data on a.com, b.com, and all c.com sites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["https://a.com/*","https://b.com/*","https://*.c.com/*"]}],"ok":["Read and change your data on a.com, b.com, and all c.com sites","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["https://a.com/*","https://b.com/*","https://*.c.com/*"]}],"ok":["Read and change your data on a.com, b.com, and all c.com sites","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["https://a.com/*","https://b.com/*","https://*.c.com/*"]}],"ok":["Read and change your data on a.com, b.com, and all c.com sites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["https://a.com/*","https://b.com/*","https://*.c.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["https://a.com/*","https://b.com/*","https://*.c.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["https://a.com/*","https://b.com/*","https://c.com/*","https://d.com/*"]}],"ok":["Read and change your data on a number of websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["https://a.com/*","https://b.com/*","https://c.com/*","https://d.com/*"]}],"ok":["Read and change your data on a number of websites","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["https://a.com/*","https://b.com/*","https://c.com/*","https://d.com/*"]}],"ok":["Read and change your data on a number of websites","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["https://a.com/*","https://b.com/*","https://c.com/*","https://d.com/*"]}],"ok":["Read and change your data on a number of websites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["https://a.com/*","https://b.com/*","https://c.com/*","https://d.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["https://a.com/*","https://b.com/*","https://c.com/*","https://d.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["chrome://x/*","about:blank","data:x","chrome-extension://abc/*"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["chrome://x/*","about:blank","data:x","chrome-extension://abc/*"]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["chrome://x/*","about:blank","data:x","chrome-extension://abc/*"]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["chrome://x/*","about:blank","data:x","chrome-extension://abc/*"]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["chrome://x/*","about:blank","data:x","chrome-extension://abc/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["chrome://x/*","about:blank","data:x","chrome-extension://abc/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["file:///*"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["file:///*"]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["file:///*"]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["file:///*"]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["file:///*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["file:///*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["nonsense"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["nonsense"]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["nonsense"]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["nonsense"]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["nonsense"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["nonsense"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["://x"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["://x"]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["://x"]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["://x"]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["://x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["://x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a://*./x"]}],"ok":["Read and change your data on *."]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["a://*./x"]}],"ok":["Read and change your data on *.","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["a://*./x"]}],"ok":["Read and change your data on *.","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["a://*./x"]}],"ok":["Read and change your data on *.","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["a://*./x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["a://*./x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a://*."]}],"ok":["Read and change your data on *."]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["a://*."]}],"ok":["Read and change your data on *.","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["a://*."]}],"ok":["Read and change your data on *.","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["a://*."]}],"ok":["Read and change your data on *.","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["a://*."]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["a://*."]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a://*.x"]}],"ok":["Read and change your data on all x sites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["a://*.x"]}],"ok":["Read and change your data on all x sites","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["a://*.x"]}],"ok":["Read and change your data on all x sites","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["a://*.x"]}],"ok":["Read and change your data on all x sites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["a://*.x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["a://*.x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a://"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["a://"]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["a://"]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["a://"]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["a://"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["a://"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["a://*"]}],"ok":["Read and change your data on *"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["a://*"]}],"ok":["Read and change your data on *","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["a://*"]}],"ok":["Read and change your data on *","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["a://*"]}],"ok":["Read and change your data on *","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["a://*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["a://*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":[":x://y"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":[":x://y"]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":[":x://y"]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":[":x://y"]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":[":x://y"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":[":x://y"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["x:y://z"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["x:y://z"]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["x:y://z"]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["x:y://z"]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["x:y://z"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["x:y://z"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["https://*.a.com/*","https://*.a.com/x"]}],"ok":["Read and change your data on all a.com sites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["https://*.a.com/*","https://*.a.com/x"]}],"ok":["Read and change your data on all a.com sites","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["https://*.a.com/*","https://*.a.com/x"]}],"ok":["Read and change your data on all a.com sites","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["https://*.a.com/*","https://*.a.com/x"]}],"ok":["Read and change your data on all a.com sites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["https://*.a.com/*","https://*.a.com/x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["https://*.a.com/*","https://*.a.com/x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["<all_urls>x"]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["<all_urls>x"]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["<all_urls>x"]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["<all_urls>x"]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["<all_urls>x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["<all_urls>x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["Chrome://x/*"]}],"ok":["Read and change your data on x"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["Chrome://x/*"]}],"ok":["Read and change your data on x","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["Chrome://x/*"]}],"ok":["Read and change your data on x","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["Chrome://x/*"]}],"ok":["Read and change your data on x","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["Chrome://x/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["Chrome://x/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["*://*/x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["*://*/x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["*://*/x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["*://*/x"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["*://*/x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["*://*/x"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["https://a.com:80/*","http://a.com/*"]}],"ok":["Read and change your data on a.com:80 and a.com"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["https://a.com:80/*","http://a.com/*"]}],"ok":["Read and change your data on a.com:80 and a.com","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["https://a.com:80/*","http://a.com/*"]}],"ok":["Read and change your data on a.com:80 and a.com","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["https://a.com:80/*","http://a.com/*"]}],"ok":["Read and change your data on a.com:80 and a.com","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["https://a.com:80/*","http://a.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["https://a.com:80/*","http://a.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":[""]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":[""]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":[""]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":[""]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":[""]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":[""]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com"]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["bookmarks"],"hostPermissions":[]}],"ok":["Read and change your bookmarks"]}
+{"fn":"permissionWarnings","args":[{"permissions":["bookmarks"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read and change your bookmarks"]}
+{"fn":"permissionWarnings","args":[{"permissions":["bookmarks"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read and change your bookmarks"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead"],"hostPermissions":[]}],"ok":["Read data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardWrite"],"hostPermissions":[]}],"ok":["Modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardWrite"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardWrite"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["contentSettings"],"hostPermissions":[]}],"ok":["Change your settings that control websites' access to features such as cookies, JavaScript, plugins, geolocation, microphone, camera etc."]}
+{"fn":"permissionWarnings","args":[{"permissions":["contentSettings"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Change your settings that control websites' access to features such as cookies, JavaScript, plugins, geolocation, microphone, camera etc."]}
+{"fn":"permissionWarnings","args":[{"permissions":["contentSettings"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Change your settings that control websites' access to features such as cookies, JavaScript, plugins, geolocation, microphone, camera etc."]}
+{"fn":"permissionWarnings","args":[{"permissions":["desktopCapture"],"hostPermissions":[]}],"ok":["Capture content of your screen"]}
+{"fn":"permissionWarnings","args":[{"permissions":["desktopCapture"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Capture content of your screen"]}
+{"fn":"permissionWarnings","args":[{"permissions":["desktopCapture"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Capture content of your screen"]}
+{"fn":"permissionWarnings","args":[{"permissions":["downloads"],"hostPermissions":[]}],"ok":["Manage your downloads"]}
+{"fn":"permissionWarnings","args":[{"permissions":["downloads"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Manage your downloads"]}
+{"fn":"permissionWarnings","args":[{"permissions":["downloads"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Manage your downloads"]}
+{"fn":"permissionWarnings","args":[{"permissions":["downloads.open"],"hostPermissions":[]}],"ok":["Open downloaded files"]}
+{"fn":"permissionWarnings","args":[{"permissions":["downloads.open"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Open downloaded files"]}
+{"fn":"permissionWarnings","args":[{"permissions":["downloads.open"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Open downloaded files"]}
+{"fn":"permissionWarnings","args":[{"permissions":["geolocation"],"hostPermissions":[]}],"ok":["Detect your physical location"]}
+{"fn":"permissionWarnings","args":[{"permissions":["geolocation"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Detect your physical location"]}
+{"fn":"permissionWarnings","args":[{"permissions":["geolocation"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Detect your physical location"]}
+{"fn":"permissionWarnings","args":[{"permissions":["management"],"hostPermissions":[]}],"ok":["Manage your apps, extensions, and themes"]}
+{"fn":"permissionWarnings","args":[{"permissions":["management"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Manage your apps, extensions, and themes"]}
+{"fn":"permissionWarnings","args":[{"permissions":["management"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Manage your apps, extensions, and themes"]}
+{"fn":"permissionWarnings","args":[{"permissions":["nativeMessaging"],"hostPermissions":[]}],"ok":["Communicate with cooperating native applications"]}
+{"fn":"permissionWarnings","args":[{"permissions":["nativeMessaging"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Communicate with cooperating native applications"]}
+{"fn":"permissionWarnings","args":[{"permissions":["nativeMessaging"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Communicate with cooperating native applications"]}
+{"fn":"permissionWarnings","args":[{"permissions":["notifications"],"hostPermissions":[]}],"ok":["Display notifications"]}
+{"fn":"permissionWarnings","args":[{"permissions":["notifications"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Display notifications"]}
+{"fn":"permissionWarnings","args":[{"permissions":["notifications"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Display notifications"]}
+{"fn":"permissionWarnings","args":[{"permissions":["privacy"],"hostPermissions":[]}],"ok":["Change your privacy-related settings"]}
+{"fn":"permissionWarnings","args":[{"permissions":["privacy"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Change your privacy-related settings"]}
+{"fn":"permissionWarnings","args":[{"permissions":["privacy"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Change your privacy-related settings"]}
+{"fn":"permissionWarnings","args":[{"permissions":["readingList"],"hostPermissions":[]}],"ok":["Read and change entries in the reading list"]}
+{"fn":"permissionWarnings","args":[{"permissions":["readingList"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read and change entries in the reading list"]}
+{"fn":"permissionWarnings","args":[{"permissions":["readingList"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read and change entries in the reading list"]}
+{"fn":"permissionWarnings","args":[{"permissions":["sessions"],"hostPermissions":[]}],"ok":["Read your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["sessions"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["sessions"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["system.storage"],"hostPermissions":[]}],"ok":["Identify and eject storage devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["system.storage"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Identify and eject storage devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["system.storage"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Identify and eject storage devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabCapture"],"hostPermissions":[]}],"ok":["Capture content of your screen"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabCapture"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Capture content of your screen"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabCapture"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Capture content of your screen"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabGroups"],"hostPermissions":[]}],"ok":["View and manage your tab groups"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabGroups"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","View and manage your tab groups"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabGroups"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","View and manage your tab groups"]}
+{"fn":"permissionWarnings","args":[{"permissions":["topSites"],"hostPermissions":[]}],"ok":["Read a list of your most frequently visited websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["topSites"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read a list of your most frequently visited websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["topSites"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read a list of your most frequently visited websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["ttsEngine"],"hostPermissions":[]}],"ok":["Read all text spoken using synthesized speech"]}
+{"fn":"permissionWarnings","args":[{"permissions":["ttsEngine"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read all text spoken using synthesized speech"]}
+{"fn":"permissionWarnings","args":[{"permissions":["ttsEngine"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read all text spoken using synthesized speech"]}
+{"fn":"permissionWarnings","args":[{"permissions":["webAuthenticationProxy"],"hostPermissions":[]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["webAuthenticationProxy"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["webAuthenticationProxy"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["history"],"hostPermissions":[]}],"ok":["Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["history"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["history"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":[]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["webNavigation"],"hostPermissions":[]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["webNavigation"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["webNavigation"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":[]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequestWithHostAccess"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequestWithHostAccess"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequestWithHostAccess"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":[]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["pageCapture"],"hostPermissions":[]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["pageCapture"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["pageCapture"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":[]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["debugger"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["storage"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["storage"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com"]}
+{"fn":"permissionWarnings","args":[{"permissions":["storage"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["alarms"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["alarms"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com"]}
+{"fn":"permissionWarnings","args":[{"permissions":["alarms"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":[]}],"ok":["Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite","history","tabs"],"hostPermissions":[]}],"ok":["Read and modify data you copy and paste","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite","history","tabs"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read and modify data you copy and paste","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["clipboardRead","clipboardWrite","history","tabs"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs","history"],"hostPermissions":[]}],"ok":["Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs","history"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs","history"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs","webNavigation"],"hostPermissions":[]}],"ok":["Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs","webNavigation"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["tabs","webNavigation"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":[]}],"ok":["Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Block content on any page"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest","declarativeNetRequestWithHostAccess"],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest","declarativeNetRequestWithHostAccess"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com"]}
+{"fn":"permissionWarnings","args":[{"permissions":["declarativeNetRequest","declarativeNetRequestWithHostAccess"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy","tabs"],"hostPermissions":[]}],"ok":["Read and change all your data on all websites","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy","tabs"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change all your data on all websites","Read your browsing history"]}
+{"fn":"permissionWarnings","args":[{"permissions":["proxy","tabs"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites"]}
+{"fn":"permissionWarnings","args":[{"permissions":["bookmarks","bookmarks"],"hostPermissions":[]}],"ok":["Read and change your bookmarks"]}
+{"fn":"permissionWarnings","args":[{"permissions":["bookmarks","bookmarks"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read and change your bookmarks"]}
+{"fn":"permissionWarnings","args":[{"permissions":["bookmarks","bookmarks"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read and change your bookmarks"]}
+{"fn":"permissionWarnings","args":[{"permissions":["sessions","history"],"hostPermissions":[]}],"ok":["Read your browsing history on all your signed-in devices","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["sessions","history"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change your data on a.com","Read your browsing history on all your signed-in devices","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["sessions","history"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read your browsing history on all your signed-in devices","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["bookmarks","clipboardRead","clipboardWrite","contentSettings","desktopCapture","downloads","downloads.open","geolocation","management","nativeMessaging","notifications","privacy","readingList","sessions","system.storage","tabCapture","tabGroups","topSites","ttsEngine","webAuthenticationProxy","history","tabs","webNavigation","declarativeNetRequest","declarativeNetRequestWithHostAccess","proxy","pageCapture","debugger","storage","alarms"],"hostPermissions":[]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste","Read and change your bookmarks","Change your settings that control websites' access to features such as cookies, JavaScript, plugins, geolocation, microphone, camera etc.","Capture content of your screen","Manage your downloads","Open downloaded files","Detect your physical location","Manage your apps, extensions, and themes","Communicate with cooperating native applications","Display notifications","Change your privacy-related settings","Read and change entries in the reading list","Read your browsing history on all your signed-in devices","Identify and eject storage devices","View and manage your tab groups","Read a list of your most frequently visited websites","Read all text spoken using synthesized speech","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["bookmarks","clipboardRead","clipboardWrite","contentSettings","desktopCapture","downloads","downloads.open","geolocation","management","nativeMessaging","notifications","privacy","readingList","sessions","system.storage","tabCapture","tabGroups","topSites","ttsEngine","webAuthenticationProxy","history","tabs","webNavigation","declarativeNetRequest","declarativeNetRequestWithHostAccess","proxy","pageCapture","debugger","storage","alarms"],"hostPermissions":["https://a.com/*"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste","Read and change your bookmarks","Change your settings that control websites' access to features such as cookies, JavaScript, plugins, geolocation, microphone, camera etc.","Capture content of your screen","Manage your downloads","Open downloaded files","Detect your physical location","Manage your apps, extensions, and themes","Communicate with cooperating native applications","Display notifications","Change your privacy-related settings","Read and change entries in the reading list","Read your browsing history on all your signed-in devices","Identify and eject storage devices","View and manage your tab groups","Read a list of your most frequently visited websites","Read all text spoken using synthesized speech","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{"permissions":["bookmarks","clipboardRead","clipboardWrite","contentSettings","desktopCapture","downloads","downloads.open","geolocation","management","nativeMessaging","notifications","privacy","readingList","sessions","system.storage","tabCapture","tabGroups","topSites","ttsEngine","webAuthenticationProxy","history","tabs","webNavigation","declarativeNetRequest","declarativeNetRequestWithHostAccess","proxy","pageCapture","debugger","storage","alarms"],"hostPermissions":["<all_urls>"]}],"ok":["Read and change all your data on all websites","Read and modify data you copy and paste","Read and change your bookmarks","Change your settings that control websites' access to features such as cookies, JavaScript, plugins, geolocation, microphone, camera etc.","Capture content of your screen","Manage your downloads","Open downloaded files","Detect your physical location","Manage your apps, extensions, and themes","Communicate with cooperating native applications","Display notifications","Change your privacy-related settings","Read and change entries in the reading list","Read your browsing history on all your signed-in devices","Identify and eject storage devices","View and manage your tab groups","Read a list of your most frequently visited websites","Read all text spoken using synthesized speech","Read and change your browsing history on all your signed-in devices"]}
+{"fn":"permissionWarnings","args":[{}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"permissionWarnings","args":[{"permissions":[]}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"permissionWarnings","args":[{"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[null],"error":"Cannot read properties of null (reading 'permissions')"}
+{"fn":"permissionWarnings","args":[{"permissions":"x","hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[1],"hostPermissions":[]}],"ok":[]}
+{"fn":"permissionWarnings","args":[{"permissions":[],"hostPermissions":[1]}],"ok":[]}

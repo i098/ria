@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/textFragment.ts",
+  "files": 1,
+  "fingerprint": "e7f860e99cc7b0f6",
+  "coverage": {
+    "lines": 73,
+    "reached": 72,
+    "files": [
+      {
+        "file": "packages/core/src/textFragment.ts",
+        "lines": 73,
+        "reached": 72,
+        "missed": "59"
+      }
+    ]
+  }
+}

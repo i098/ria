@@ -1,0 +1,128 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-2-url/repo",
+  "unit": "packages/core/src/pageText.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "pagetext-rs",
+  "exports": [
+    {
+      "name": "pageKey",
+      "file": "packages/core/src/pageText.ts",
+      "line": 8,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withRootSlash",
+      "file": "packages/core/src/pageText.ts",
+      "line": 10,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "logVisits",
+      "file": "packages/core/src/pageText.ts",
+      "line": 29,
+      "params": [
+        {
+          "name": "visits",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "hostPart",
+      "file": "packages/core/src/pageText.ts",
+      "line": 64,
+      "params": [
+        {
+          "name": "shown",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": [
+    {
+      "name": "displayUrl",
+      "file": "packages/core/src/pageText.ts",
+      "line": 4,
+      "reason": "stays-ts-until-omnibox"
+    },
+    {
+      "name": "shownWordsOf",
+      "file": "packages/core/src/pageText.ts",
+      "line": 34,
+      "reason": "stays-ts-until-omnibox"
+    },
+    {
+      "name": "pageText",
+      "file": "packages/core/src/pageText.ts",
+      "line": 36,
+      "reason": "stays-ts-until-omnibox"
+    },
+    {
+      "name": "tabPageText",
+      "file": "packages/core/src/pageText.ts",
+      "line": 50,
+      "reason": "stays-ts-until-omnibox"
+    },
+    {
+      "name": "hostOfPage",
+      "file": "packages/core/src/pageText.ts",
+      "line": 63,
+      "reason": "stays-ts-until-omnibox"
+    },
+    {
+      "name": "hostLowerOfPage",
+      "file": "packages/core/src/pageText.ts",
+      "line": 65,
+      "reason": "stays-ts-until-omnibox"
+    },
+    {
+      "name": "originOfPage",
+      "file": "packages/core/src/pageText.ts",
+      "line": 66,
+      "reason": "stays-ts-until-omnibox"
+    }
+  ],
+  "float_tolerance": 1e-12
+}

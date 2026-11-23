@@ -1,0 +1,66 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-2-url/repo",
+  "unit": "packages/core/src/idn.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "idn-rs",
+  "exports": [
+    {
+      "name": "punycodeEncode",
+      "file": "packages/core/src/idn.ts",
+      "line": 54,
+      "params": [
+        {
+          "name": "input",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "displayHost",
+      "file": "packages/core/src/idn.ts",
+      "line": 319,
+      "params": [
+        {
+          "name": "host",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "hostSpoofReason",
+      "file": "packages/core/src/idn.ts",
+      "line": 339,
+      "params": [
+        {
+          "name": "host",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "(| \"invalid\"\n  | \"disallowedCharacter\"\n  | \"invisible\"\n  | \"mixedNumbers\"\n  | \"mixedScripts\"\n  | \"deviationCharacter\"\n  | \"tldSpecificCharacter\"\n  | \"unsafeMiddleDot\"\n  | \"digitLookalikes\"\n  | \"wholeScriptConfusable\"\n  | \"nonAsciiLatinMixed\"\n  | \"dangerousPattern\"\n  | \"topDomainLookalike\") | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

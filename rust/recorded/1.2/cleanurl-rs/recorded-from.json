@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/cleanUrl.ts",
+  "files": 1,
+  "fingerprint": "693a61c12327ce31",
+  "coverage": {
+    "lines": 68,
+    "reached": 68,
+    "files": [
+      {
+        "file": "packages/core/src/cleanUrl.ts",
+        "lines": 68,
+        "reached": 68,
+        "missed": ""
+      }
+    ]
+  }
+}
