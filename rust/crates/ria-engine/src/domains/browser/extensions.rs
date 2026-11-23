@@ -5,12 +5,11 @@
 //! The `extensions` domain. The shapes of the calls that `ArdiaServices.mm` makes (`listExtensions`, `installExtension`,
 //! `setExtension`, `configureExtension` and the others) are here too.
 
-use std::cell::LazyCell;
-use std::path::{Component, Path, PathBuf};
+use std::path::Path;
 
 use serde_json::{Map, Value, json};
 
-use super::extension_package::{is_extension_id, read_manifest};
+use super::extension_package::read_manifest;
 use super::{CallContext, EngineRoute, Route, passing, string_arg};
 use crate::api::extensions::InspectUnpackedArgs;
 use crate::call::CallError;
@@ -147,79 +146,29 @@ fn configure_args(args: &Value) -> Result<Value, CallError> {
     Ok(Value::Object(out))
 }
 
-fn store_registrations(profile_dir: &Path) -> Option<Map<String, Value>> {
-    ["Secure Preferences", "Preferences"]
-        .into_iter()
-        .find_map(|name| {
-            let reader = std::io::BufReader::new(std::fs::File::open(profile_dir.join(name)).ok()?);
-            let mut prefs: Value = serde_json::from_reader(reader).ok()?;
-            match prefs.get_mut("extensions")?.get_mut("settings")?.take() {
-                Value::Object(settings) => Some(settings),
-                _ => None,
-            }
-        })
-}
-
-fn store_folder(profile_dir: &Path, registration: &Value, id: &str, version: &str) -> Option<PathBuf> {
-    if !is_extension_id(id) || version.is_empty() {
-        return None;
-    }
-    let path = Path::new(registration.get("path")?.as_str()?);
-    let extensions = profile_dir.join("Extensions");
-    let relative = if path.is_absolute() {
-        path.strip_prefix(&extensions).ok()?
-    } else {
-        path
-    };
-    let mut parts = relative.components();
-    let (Some(Component::Normal(owner)), Some(Component::Normal(folder)), None) =
-        (parts.next(), parts.next(), parts.next())
-    else {
-        return None;
-    };
-    let (registered_version, suffix) = folder.to_str()?.rsplit_once('_')?;
-    if owner != id
-        || registered_version != version
-        || suffix.is_empty()
-        || !suffix.bytes().all(|byte| byte.is_ascii_digit())
-    {
-        return None;
-    }
-    Some(extensions.join(relative))
-}
-
 /// Adds the manifest fields to each extension of the engine list.
 fn list_reply(reply: Value, ctx: &CallContext) -> Result<Value, CallError> {
     let infos = reply["extensions"]
         .as_array()
         .ok_or_else(|| CallError::Engine("Unexpected extension list".into()))?;
-    let registrations = LazyCell::new(|| store_registrations(Path::new(&ctx.profile_dir)));
     let list: Vec<Value> = infos
         .iter()
         .filter_map(Value::as_object)
-        .map(|info| list_item(info, ctx, || registrations.as_ref()))
+        .map(|info| list_item(info, ctx))
         .collect();
     Ok(json!({"extensions": list}))
 }
 
-fn list_item<'a>(
-    info: &Map<String, Value>,
-    ctx: &CallContext,
-    registrations: impl FnOnce() -> Option<&'a Map<String, Value>>,
-) -> Value {
+fn list_item(info: &Map<String, Value>, ctx: &CallContext) -> Value {
     let mut item: Map<String, Value> = info
         .iter()
         .filter(|(_, v)| !v.is_null())
         .map(|(k, v)| (k.clone(), v.clone()))
         .collect();
-    let path = info.get("path").and_then(Value::as_str);
-    let folder = path.map(PathBuf::from).or_else(|| {
-        let id = info.get("id")?.as_str()?;
-        let version = info.get("version")?.as_str()?;
-        store_folder(Path::new(&ctx.profile_dir), registrations()?.get(id)?, id, version)
-    });
-    let manifest = folder
-        .and_then(|folder| read_manifest(&folder, &ctx.ui_locale).ok())
+    let manifest = info
+        .get("path")
+        .and_then(Value::as_str)
+        .and_then(|path| read_manifest(Path::new(path), &ctx.ui_locale).ok())
         .unwrap_or(Value::Null);
     for key in [
         "popup",
@@ -365,31 +314,45 @@ mod tests {
     }
 
     #[test]
-    fn list_uses_the_registered_store_directory() {
+    fn pathless_list_preserves_live_metadata_after_same_version_reinstall() {
         let dir = tempfile::tempdir().unwrap();
         let id = "abcdefghijklmnopabcdefghijklmnop";
         let old = dir.path().join("Extensions").join(id).join("1.2_0");
         std::fs::create_dir_all(&old).unwrap();
         std::fs::write(
             old.join("manifest.json"),
-            r#"{"incognito":"split","action":{"default_popup":"old.html"}}"#,
+            r#"{
+                "incognito":"split",
+                "action":{"default_popup":"old.html","default_title":"Old"},
+                "icons":{"32":"old.png"}, "side_panel":{"default_path":"old-panel.html"}
+            }"#,
         )
         .unwrap();
+        std::fs::write(old.join("old.png"), [1, 2, 3]).unwrap();
         let settings = json!({"extensions": {"settings": {(id): {"path": format!("{id}/1.2_0")}}}});
         std::fs::write(
             dir.path().join("Secure Preferences"),
             settings.to_string(),
         )
         .unwrap();
-        let reply = json!({"extensions": [{
-            "id": id, "version": "1.2", "location": "FROM_STORE",
-            "path": null, "actionTitle": "Current"
-        }]});
-
-        let out = list_reply(reply, &ctx(dir.path())).unwrap();
+        let live = json!({
+            "id": id, "version": "1.2", "location": "FROM_STORE", "path": null,
+            "popup": "current.html", "actionTitle": "Current",
+            "actionIcon": "data:image/png;base64,BAUG", "sidePanel": "current-panel.html",
+            "hasAction": false, "incognitoSplit": false, "incognitoAllowed": false
+        });
+        let out = list_reply(json!({"extensions": [live]}), &ctx(dir.path())).unwrap();
         let item = &out["extensions"][0];
-        assert_eq!(item["popup"], "old.html");
-        assert_eq!(item["incognitoSplit"], true);
-        assert_eq!(item["actionTitle"], "Current");
+        for key in [
+            "popup",
+            "actionTitle",
+            "actionIcon",
+            "sidePanel",
+            "hasAction",
+            "incognitoSplit",
+            "incognitoAllowed",
+        ] {
+            assert_eq!(item[key], live[key], "{key}");
+        }
     }
 }
