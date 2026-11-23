@@ -10,6 +10,7 @@ pub mod errors;
 pub mod fuzzy;
 pub mod identity;
 pub mod url;
+pub mod search;
 
 #[cfg(test)]
 mod fuzzy_reference;

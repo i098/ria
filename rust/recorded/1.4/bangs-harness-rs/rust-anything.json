@@ -1,0 +1,132 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-4-search/repo",
+  "unit": "packages/core/src/bangs.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "bangs-harness-rs",
+  "exports": [
+    {
+      "name": "bangTableView",
+      "file": "packages/core/src/bangs.harness.ts",
+      "line": 8,
+      "params": [
+        {
+          "name": "slim",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "triggers",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "checkedBangTableView",
+      "file": "packages/core/src/bangs.harness.ts",
+      "line": 10,
+      "params": [
+        {
+          "name": "slim",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "triggers",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "readBangDocumentView",
+      "file": "packages/core/src/bangs.harness.ts",
+      "line": 15,
+      "params": [
+        {
+          "name": "doc",
+          "ts_type": "string | null | undefined",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "triggers",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "joinBangTablesView",
+      "file": "packages/core/src/bangs.harness.ts",
+      "line": 20,
+      "params": [
+        {
+          "name": "slims",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "triggers",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "findBangIn",
+      "file": "packages/core/src/bangs.harness.ts",
+      "line": 23,
+      "params": [
+        {
+          "name": "texts",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "slims",
+          "ts_type": "readonly string[] | null",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

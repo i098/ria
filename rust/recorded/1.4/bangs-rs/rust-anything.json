@@ -1,0 +1,193 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-4-search/repo",
+  "unit": "packages/core/src/bangs.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "bangs-rs",
+  "exports": [
+    {
+      "name": "parseLooseJson",
+      "file": "packages/core/src/bangs.ts",
+      "line": 40,
+      "params": [
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isValidBangTemplate",
+      "file": "packages/core/src/bangs.ts",
+      "line": 71,
+      "params": [
+        {
+          "name": "template",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "staysOnSite",
+      "file": "packages/core/src/bangs.ts",
+      "line": 73,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "template",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "slimBangs",
+      "file": "packages/core/src/bangs.ts",
+      "line": 83,
+      "params": [
+        {
+          "name": "json",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "bangDocument",
+      "file": "packages/core/src/bangs.ts",
+      "line": 175,
+      "params": [
+        {
+          "name": "etag",
+          "ts_type": "string | null",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "slim",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "escapeSearchTerms",
+      "file": "packages/core/src/bangs.ts",
+      "line": 222,
+      "params": [
+        {
+          "name": "terms",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "inQuery",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "fillBangTemplate",
+      "file": "packages/core/src/bangs.ts",
+      "line": 227,
+      "params": [
+        {
+          "name": "template",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "terms",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": [
+    {
+      "name": "bangTable",
+      "file": "packages/core/src/bangs.ts",
+      "line": 140,
+      "reason": "recorded through bangs.harness.ts (a BangTable has a get method)"
+    },
+    {
+      "name": "checkedBangTable",
+      "file": "packages/core/src/bangs.ts",
+      "line": 161,
+      "reason": "recorded through bangs.harness.ts (a BangTable has a get method)"
+    },
+    {
+      "name": "readBangDocument",
+      "file": "packages/core/src/bangs.ts",
+      "line": 177,
+      "reason": "recorded through bangs.harness.ts (a BangTable has a get method)"
+    },
+    {
+      "name": "joinBangTables",
+      "file": "packages/core/src/bangs.ts",
+      "line": 187,
+      "reason": "recorded through bangs.harness.ts (a BangTable has a get method)"
+    },
+    {
+      "name": "findBang",
+      "file": "packages/core/src/bangs.ts",
+      "line": 200,
+      "reason": "recorded through bangs.harness.ts (a BangTable has a get method)"
+    }
+  ]
+}

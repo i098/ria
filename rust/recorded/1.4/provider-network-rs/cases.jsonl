@@ -1,0 +1,905 @@
+{"fn":"isPublicHost","args":["a😀b😀c"],"ok":false}
+{"fn":"isPublicHost","args":["HELLO"],"ok":false}
+{"fn":"isPublicHost","args":["a"],"ok":false}
+{"fn":"isPublicHost","args":["İstanbul"],"ok":false}
+{"fn":"isPublicHost","args":[":"],"ok":false}
+{"fn":"isPublicHost","args":["./x/**/*.json"],"ok":false}
+{"fn":"isPublicHost","args":["😀"],"ok":false}
+{"fn":"isPublicHost","args":[".leading"],"ok":false}
+{"fn":"isPublicHost","args":["a..b"],"ok":false}
+{"fn":"isPublicHost","args":["😀a..b"],"ok":false}
+{"fn":"isPublicHost","args":[""],"ok":false}
+{"fn":"isPublicHost","args":["ünïcödé"],"ok":false}
+{"fn":"isPublicHost","args":["ünïcödétrailing."],"ok":false}
+{"fn":"isPublicHost","args":["emoji 👍🏽 mix"],"ok":false}
+{"fn":"isPublicHost","args":["é"],"ok":false}
+{"fn":"isPublicHost","args":["ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isPublicHost","args":["straße"],"ok":false}
+{"fn":"isPublicHost","args":["{name} has {count} items"],"ok":false}
+{"fn":"isPublicHost","args":["key_name-1"],"ok":false}
+{"fn":"isPublicHost","args":[".leadingabc"],"ok":false}
+{"fn":"isPublicHost","args":["﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["日本語のテキスト"],"ok":false}
+{"fn":"isPublicHost","args":["tab\tseparated"],"ok":false}
+{"fn":"isPublicHost","args":["Hello Worldsrc/a/b.ts"],"ok":false}
+{"fn":"isPublicHost","args":["trailing.é"],"ok":false}
+{"fn":"isPublicHost","args":["İstanbultab\tseparated"],"ok":false}
+{"fn":"isPublicHost","args":["﻿bomé"],"ok":false}
+{"fn":"isPublicHost","args":["hello"],"ok":false}
+{"fn":"isPublicHost","args":["a.b.c"],"ok":true}
+{"fn":"isPublicHost","args":["ünïcödéa:b:c"],"ok":false}
+{"fn":"isPublicHost","args":["abc"],"ok":false}
+{"fn":"isPublicHost","args":["ab"],"ok":false}
+{"fn":"isPublicHost","args":["ns:key.path"],"ok":false}
+{"fn":"isPublicHost","args":["Hello World"],"ok":false}
+{"fn":"isPublicHost","args":["a:b:c"],"ok":false}
+{"fn":"isPublicHost","args":["trailing."],"ok":false}
+{"fn":"isPublicHost","args":["hello world"],"ok":false}
+{"fn":"isPublicHost","args":["src/a/b.ts﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["日本語のテキストé"],"ok":false}
+{"fn":"isPublicHost","args":["é﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":[".leadinghello world"],"ok":false}
+{"fn":"isPublicHost","args":["emoji 👍🏽 mixHELLO"],"ok":false}
+{"fn":"isPublicHost","args":["  padded  "],"ok":false}
+{"fn":"isPublicHost","args":["aab"],"ok":false}
+{"fn":"isPublicHost","args":["src/a/b.ts"],"ok":false}
+{"fn":"isPublicHost","args":["hello﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["{name} has {count} items﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["abtrailing."],"ok":false}
+{"fn":"isPublicHost","args":["tab\tseparatedtab\tseparated"],"ok":false}
+{"fn":"isPublicHost","args":["ünïcödéns:key.path"],"ok":false}
+{"fn":"isPublicHost","args":["étrailing."],"ok":false}
+{"fn":"isPublicHost","args":["line1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["İstanbul.leading"],"ok":false}
+{"fn":"isPublicHost","args":["ab./x/**/*.json"],"ok":false}
+{"fn":"isPublicHost","args":["key_name-1abc"],"ok":false}
+{"fn":"isPublicHost","args":["ababc"],"ok":false}
+{"fn":"isPublicHost","args":["straßeHello World"],"ok":false}
+{"fn":"isPublicHost","args":["Hello Worldline1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["é.leading"],"ok":false}
+{"fn":"isPublicHost","args":["src/a/b.tsé"],"ok":false}
+{"fn":"isPublicHost","args":["src/a/b.tsa..b"],"ok":false}
+{"fn":"isPublicHost","args":["hello worldhello world"],"ok":false}
+{"fn":"isPublicHost","args":["a.b.cline1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["aé"],"ok":false}
+{"fn":"isPublicHost","args":["ns:key.pathstraße"],"ok":false}
+{"fn":"isPublicHost","args":["tab\tseparatedline1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["a.b.c😀"],"ok":false}
+{"fn":"isPublicHost","args":["tab\tseparatedhello"],"ok":false}
+{"fn":"isPublicHost","args":["ΣΊΣΥΦΟΣ﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["ab﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["helloHELLO"],"ok":false}
+{"fn":"isPublicHost","args":["Hello Worlda.b.c"],"ok":false}
+{"fn":"isPublicHost","args":["{name} has {count} itemsİstanbul"],"ok":false}
+{"fn":"isPublicHost","args":["hello worldΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isPublicHost","args":["ΣΊΣΥΦΟΣhello world"],"ok":false}
+{"fn":"isPublicHost","args":["İstanbulHello World"],"ok":false}
+{"fn":"isPublicHost","args":["ΣΊΣΥΦΟΣtrailing."],"ok":false}
+{"fn":"isPublicHost","args":["a:b:c:"],"ok":false}
+{"fn":"isPublicHost","args":["./x/**/*.jsonΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isPublicHost","args":["a..btab\tseparated"],"ok":false}
+{"fn":"isPublicHost","args":["😀ünïcödé"],"ok":false}
+{"fn":"isPublicHost","args":["emoji 👍🏽 mixİstanbul"],"ok":false}
+{"fn":"isPublicHost","args":["日本語のテキストünïcödé"],"ok":false}
+{"fn":"isPublicHost","args":["Hello WorldΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isPublicHost","args":["HELLOkey_name-1"],"ok":false}
+{"fn":"isPublicHost","args":["İstanbul😀"],"ok":false}
+{"fn":"isPublicHost","args":["tab\tseparateda.b.c"],"ok":false}
+{"fn":"isPublicHost","args":["hello worldabc"],"ok":false}
+{"fn":"isPublicHost","args":["a.b.chello"],"ok":true}
+{"fn":"isPublicHost","args":["a:b:c😀"],"ok":false}
+{"fn":"isPublicHost","args":["straßekey_name-1"],"ok":false}
+{"fn":"isPublicHost","args":["aΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isPublicHost","args":["ΣΊΣΥΦΟΣé"],"ok":false}
+{"fn":"isPublicHost","args":["éstraße"],"ok":false}
+{"fn":"isPublicHost","args":["ünïcödéHello World"],"ok":false}
+{"fn":"isPublicHost","args":["Hello World😀"],"ok":false}
+{"fn":"isPublicHost","args":["line1\nline2key_name-1"],"ok":false}
+{"fn":"isPublicHost","args":["abhello world"],"ok":false}
+{"fn":"isPublicHost","args":["a.b.ctrailing."],"ok":true}
+{"fn":"isPublicHost","args":["line1\nline2ab"],"ok":false}
+{"fn":"isPublicHost","args":["a:b:ca"],"ok":false}
+{"fn":"isPublicHost","args":["abc﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["日本語のテキスト日本語のテキスト"],"ok":false}
+{"fn":"isPublicHost","args":["aabc"],"ok":false}
+{"fn":"isPublicHost","args":["a.b.ca"],"ok":true}
+{"fn":"isPublicHost","args":["tab\tseparated{name} has {count} items"],"ok":false}
+{"fn":"isPublicHost","args":["  padded  İstanbul"],"ok":false}
+{"fn":"isPublicHost","args":["key_name-1line1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["ns:key.pathHello World"],"ok":false}
+{"fn":"isPublicHost","args":["asrc/a/b.ts"],"ok":false}
+{"fn":"isPublicHost","args":["﻿bomab"],"ok":false}
+{"fn":"isPublicHost","args":["﻿bomtab\tseparated"],"ok":false}
+{"fn":"isPublicHost","args":["./x/**/*.jsonünïcödé"],"ok":false}
+{"fn":"isPublicHost","args":[".leadingΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isPublicHost","args":["﻿bom日本語のテキスト"],"ok":false}
+{"fn":"isPublicHost","args":["trailing.line1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["emoji 👍🏽 mixa.b.c"],"ok":false}
+{"fn":"isPublicHost","args":["a:b:c﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["hello worldünïcödé"],"ok":false}
+{"fn":"isPublicHost","args":["é😀"],"ok":false}
+{"fn":"isPublicHost","args":[".leadinga..b"],"ok":false}
+{"fn":"isPublicHost","args":["ns:key.pathemoji 👍🏽 mix"],"ok":false}
+{"fn":"isPublicHost","args":[":line1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["﻿bomHELLO"],"ok":false}
+{"fn":"isPublicHost","args":["éİstanbul"],"ok":false}
+{"fn":"isPublicHost","args":["ünïcödésrc/a/b.ts"],"ok":false}
+{"fn":"isPublicHost","args":["日本語のテキストHello World"],"ok":false}
+{"fn":"isPublicHost","args":["hellohello"],"ok":false}
+{"fn":"isPublicHost","args":[":﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["tab\tseparated  padded  "],"ok":false}
+{"fn":"isPublicHost","args":["Hello World﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["ns:key.pathns:key.path"],"ok":false}
+{"fn":"isPublicHost","args":["İstanbul{name} has {count} items"],"ok":false}
+{"fn":"isPublicHost","args":["hello world日本語のテキスト"],"ok":false}
+{"fn":"isPublicHost","args":["Hello Worlda"],"ok":false}
+{"fn":"isPublicHost","args":["a😀b😀cns:key.path"],"ok":false}
+{"fn":"isPublicHost","args":["a😀b😀cabc"],"ok":false}
+{"fn":"isPublicHost","args":["  padded  ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isPublicHost","args":["helloemoji 👍🏽 mix"],"ok":false}
+{"fn":"isPublicHost","args":["straßeline1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["tab\tseparated日本語のテキスト"],"ok":false}
+{"fn":"isPublicHost","args":["abcabc"],"ok":false}
+{"fn":"isPublicHost","args":["hello worlda"],"ok":false}
+{"fn":"isPublicHost","args":["hello worldemoji 👍🏽 mix"],"ok":false}
+{"fn":"isPublicHost","args":["HELLOé"],"ok":false}
+{"fn":"isPublicHost","args":["aünïcödé"],"ok":false}
+{"fn":"isPublicHost","args":["éhello world"],"ok":false}
+{"fn":"isPublicHost","args":["Hello Worldkey_name-1"],"ok":false}
+{"fn":"isPublicHost","args":["straßesrc/a/b.ts"],"ok":false}
+{"fn":"isPublicHost","args":["a😀b😀c./x/**/*.json"],"ok":false}
+{"fn":"isPublicHost","args":["İstanbulhello world"],"ok":false}
+{"fn":"isPublicHost","args":["hellohello world"],"ok":false}
+{"fn":"isPublicHost","args":["./x/**/*.jsonsrc/a/b.ts"],"ok":false}
+{"fn":"isPublicHost","args":["./x/**/*.jsonns:key.path"],"ok":false}
+{"fn":"isPublicHost","args":["İstanbultrailing."],"ok":false}
+{"fn":"isPublicHost","args":["ΣΊΣΥΦΟΣhello"],"ok":false}
+{"fn":"isPublicHost","args":["a..b.leading"],"ok":false}
+{"fn":"isPublicHost","args":["hello worldé"],"ok":false}
+{"fn":"isPublicHost","args":["src/a/b.tsline1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["./x/**/*.jsonline1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["a..bns:key.path"],"ok":false}
+{"fn":"isPublicHost","args":["İstanbula"],"ok":false}
+{"fn":"isPublicHost","args":["a😀b😀c.leading"],"ok":false}
+{"fn":"isPublicHost","args":["😀tab\tseparated"],"ok":false}
+{"fn":"isPublicHost","args":["a..b😀"],"ok":false}
+{"fn":"isPublicHost","args":["src/a/b.tssrc/a/b.ts"],"ok":false}
+{"fn":"isPublicHost","args":["a./x/**/*.json"],"ok":false}
+{"fn":"isPublicHost","args":["  padded  ab"],"ok":false}
+{"fn":"isPublicHost","args":["atrailing."],"ok":false}
+{"fn":"isPublicHost","args":["ns:key.path.leading"],"ok":false}
+{"fn":"isPublicHost","args":["ns:key.patha..b"],"ok":false}
+{"fn":"isPublicHost","args":["ΣΊΣΥΦΟΣünïcödé"],"ok":false}
+{"fn":"isPublicHost","args":["abns:key.path"],"ok":false}
+{"fn":"isPublicHost","args":["﻿bom.leading"],"ok":false}
+{"fn":"isPublicHost","args":["abkey_name-1"],"ok":false}
+{"fn":"isPublicHost","args":["a😀b😀cline1\nline2"],"ok":false}
+{"fn":"isPublicHost","args":["a..bİstanbul"],"ok":false}
+{"fn":"isPublicHost","args":["ns:key.path./x/**/*.json"],"ok":false}
+{"fn":"isPublicHost","args":[":HELLO"],"ok":false}
+{"fn":"isPublicHost","args":["﻿boma😀b😀c"],"ok":false}
+{"fn":"isPublicHost","args":["ΣΊΣΥΦΟΣ.leading"],"ok":false}
+{"fn":"isPublicHost","args":["İstanbulstraße"],"ok":false}
+{"fn":"isPublicHost","args":["key_name-1﻿bom"],"ok":false}
+{"fn":"isPublicHost","args":["ΣΊΣΥΦΟΣΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isPublicHost","args":["  padded  ns:key.path"],"ok":false}
+{"fn":"isPublicHost","args":["HELLO  padded  "],"ok":false}
+{"fn":"isPublicHost","args":["src/a/b.ts.leading"],"ok":false}
+{"fn":"isPublicHost","args":["trailing.  padded  "],"ok":false}
+{"fn":"isPublicHost","args":["hello{name} has {count} items"],"ok":false}
+{"fn":"isPublicHost","args":["hello worldab"],"ok":false}
+{"fn":"isPublicHost","args":["line1\nline2é"],"ok":false}
+{"fn":"isPublicHost","args":["a日本語のテキスト"],"ok":false}
+{"fn":"isPublicHost","args":["😀.leading"],"ok":false}
+{"fn":"isPublicHost","args":["emoji 👍🏽 mixemoji 👍🏽 mix"],"ok":false}
+{"fn":"isPublicHost","args":["a:b:ctab\tseparated"],"ok":false}
+{"fn":"isPublicHost","args":["ünïcödéabc"],"ok":false}
+{"fn":"isPublicHost","args":["HELLOΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isPublicHost","args":["line1\nline2ünïcödé"],"ok":false}
+{"fn":"isPublicHost","args":["./x/**/*.json😀"],"ok":false}
+{"fn":"isPublicHost","args":["a😀b😀cünïcödé"],"ok":false}
+{"fn":"isPublicHost","args":["héllo wörld"],"ok":false}
+{"fn":"isPublicHost","args":["👍🏽 thumbs"],"ok":false}
+{"fn":"isPublicHost","args":["日本語"],"ok":false}
+{"fn":"isPublicHost","args":["ılık ırmak"],"ok":false}
+{"fn":"isPublicHost","args":["👨‍👩‍👧 family"],"ok":false}
+{"fn":"isPublicHost","args":["a b"],"ok":false}
+{"fn":"isPublicHost","args":["a😀b"],"ok":false}
+{"fn":"isPublicHost","args":["a²b x½ y①"],"ok":false}
+{"fn":"isPublicHost","args":["aⅠb Ⅻ"],"ok":false}
+{"fn":"isPublicHost","args":["a𐐀b 𝐀bc"],"ok":false}
+{"fn":"isPublicHost","args":["कि ٣٤"],"ok":false}
+{"fn":"isPublicHost","args":["Iı İi"],"ok":false}
+{"fn":"isPublicHost","args":["K K k"],"ok":false}
+{"fn":"isPublicHost","args":["ſ s S"],"ok":false}
+{"fn":"isPublicHost","args":["x‍y 👨‍👩‍👧"],"ok":false}
+{"fn":"isPublicHost","args":["a b c　d"],"ok":false}
+{"fn":"isPublicHost","args":["١٢٣ ٤٥"],"ok":false}
+{"fn":"isPublicHost","args":["𝟘𝟙 ²³"],"ok":false}
+{"fn":"isPublicHost","args":["snake_case foo-bar o'neil"],"ok":false}
+{"fn":"isPublicHost","args":["ǅungla Ǆ"],"ok":false}
+{"fn":"isPublicHost","args":["one\r\ntwo threefour"],"ok":false}
+{"fn":"isPublicHost","args":["café café"],"ok":false}
+{"fn":"isPublicHost","args":["ΣΑΣ σας ς"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abc",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["hello world",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["HELLO",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["src/a/b.ts",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a:b:c",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abc"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a",["a",1]],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ab",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a..b",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["😀","x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["Hello World",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["  padded  ﻿bom",0],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a.b.c",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ns:key.path",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a😀b😀c",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a😀b😀c",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["İstanbul",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ΣΊΣΥΦΟΣ",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["emoji 👍🏽 mixa.b.c",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing.",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["😀",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["İstanbul",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["HELLO日本語のテキスト",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[".leading",0],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ns:key.pathhello world",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["helloa😀b😀c",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a.b.c.leading",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ünïcödé",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[".leading"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["﻿bom",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing.",["a",1]],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ab"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ünïcödé",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["key_name-1  padded  ",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a.b.c","x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["日本語のテキスト",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[".leading",{"a":{"b":"c"}}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["emoji 👍🏽 mix",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["./x/**/*.jsonHELLO",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["İstanbul",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a.b.c",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[":a..b",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["src/a/b.ts{name} has {count} items",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["﻿bom",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["line1\nline2  padded  ",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["hello",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["./x/**/*.json",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["src/a/b.ts",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ΣΊΣΥΦΟΣ",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["Hello World"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["./x/**/*.jsonab",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a..b",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["tab\tseparated",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a{name} has {count} items"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["line1\nline2emoji 👍🏽 mix"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a😀b😀c"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["{name} has {count} items"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ns:key.path",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[":",["a",1]],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing.İstanbul",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ab",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abc",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["İstanbul"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["  padded  ",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a:b:c",0],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a:b:c",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[".leading",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abcemoji 👍🏽 mix",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["😀",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["😀",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[":",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["line1\nline2",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["éemoji 👍🏽 mix",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["key_name-1"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["key_name-1😀",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["straße",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[""],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abc",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["é",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["emoji 👍🏽 mixΣΊΣΥΦΟΣ",0],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing.Hello World",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a./x/**/*.json",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["emoji 👍🏽 mix",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["é",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ünïcödé",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ΣΊΣΥΦΟΣ",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["./x/**/*.json",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abc:",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing.",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["﻿bom",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["tab\tseparated",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[":",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["tab\tseparated",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["日本語のテキスト",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["é",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[":",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["{name} has {count} items",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ünïcödé",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["﻿bom{name} has {count} items",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a😀b😀cabc",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a:b:c:",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["HELLO",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a",{"a":"b"}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["./x/**/*.jsona😀b😀c",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["Hello World",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[".leading",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["src/a/b.ts",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abline1\nline2",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[".leadingHELLO"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["key_name-1",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing.",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["  padded  ",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing.日本語のテキスト",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["./x/**/*.json",["a",1]],"ok":false}
+{"fn":"remoteRequestAllowed","args":["﻿bom",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["éünïcödé",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["﻿bomhello",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[".leadingemoji 👍🏽 mix"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["é",["a",1]],"ok":false}
+{"fn":"remoteRequestAllowed","args":["emoji 👍🏽 mixHELLO",null],"error":"Cannot read properties of null (reading 'allowLoopback')"}
+{"fn":"remoteRequestAllowed","args":["Hello Worldtab\tseparated",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["key_name-1",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["line1\nline2",{"a":"b"}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["helloa😀b😀c",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a..b",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a😀b😀c",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["key_name-1./x/**/*.json",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["hello world",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a😀b😀ca..b",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["hello",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["straße"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a😀b😀c",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["{name} has {count} itemsline1\nline2"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a:b:c{name} has {count} items",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["😀",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["😀ünïcödé",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing.",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["line1\nline2",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ab",null],"error":"Cannot read properties of null (reading 'allowLoopback')"}
+{"fn":"remoteRequestAllowed","args":["straße",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["{name} has {count} items",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abİstanbul"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a.b.csrc/a/b.ts",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["HELLO",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["{name} has {count} itemsa:b:c",["a",1]],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abc",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["key_name-1",[]],"ok":false}
+{"fn":"remoteRequestAllowed","args":["./x/**/*.json"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ünïcödé"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ns:key.path",0],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing.a.b.c",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["﻿bom./x/**/*.json",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ΣΊΣΥΦΟΣ",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ns:key.path",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["é"],"ok":false}
+{"fn":"remoteRequestAllowed","args":[":",true],"ok":false}
+{"fn":"remoteRequestAllowed","args":["hello",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["key_name-1日本語のテキスト",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["aa😀b😀c",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[".leading",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["😀"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abstraße",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["éhello world",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["éa",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["emoji 👍🏽 mixtrailing.",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ns:key.path:"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["key_name-1",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[".leadingHELLO",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["src/a/b.tsabc",true],"ok":false}
+{"fn":"remoteRequestAllowed","args":["abünïcödé",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["Hello World",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["Hello World.leading",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ab",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a..b",["a",1]],"ok":false}
+{"fn":"remoteRequestAllowed","args":[":"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ünïcödéİstanbul"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["emoji 👍🏽 mix",{"$undefined":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["hello world﻿bom","x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing."],"ok":false}
+{"fn":"remoteRequestAllowed","args":["straße",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["trailing.a😀b😀c",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["emoji 👍🏽 mix",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["{name} has {count} itemshello world",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["  padded  ",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["hello",null],"error":"Cannot read properties of null (reading 'allowLoopback')"}
+{"fn":"remoteRequestAllowed","args":["Hello World",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a:b:c",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["emoji 👍🏽 mixtrailing."],"ok":false}
+{"fn":"remoteRequestAllowed","args":[".leading",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ΣΊΣΥΦΟΣhello",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a.b.c",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["  padded  ",null],"error":"Cannot read properties of null (reading 'allowLoopback')"}
+{"fn":"remoteRequestAllowed","args":["tab\tseparated"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["héllo wörld",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["👍🏽 thumbs",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["日本語",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ılık ırmak",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["👨‍👩‍👧 family",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a b",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a😀b",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a²b x½ y①",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["aⅠb Ⅻ",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a𐐀b 𝐀bc",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["कि ٣٤",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["Iı İi",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["K K k",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ſ s S",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["x‍y 👨‍👩‍👧",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["a b c　d",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["١٢٣ ٤٥",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["𝟘𝟙 ²³",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["snake_case foo-bar o'neil",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ǅungla Ǆ",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["one\r\ntwo threefour",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["café café",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ΣΑΣ σας ς",{}],"ok":false}
+{"fn":"sha256Hex","args":["straße"],"ok":"787f4770613d3824cbc89b6d5da90a123e41b07b90b45ea3738c216b14616140"}
+{"fn":"sha256Hex","args":["a.b.cHELLO"],"ok":"7391e146f54f3879e3d9147f55a8c51443ac14c8201835fd24ec33a954d59007"}
+{"fn":"sha256Hex","args":["{name} has {count} items"],"ok":"42ff2ad309da81ff6c5bab2538b35b5e9561d56f9ee93b7e9a5af1d03b28c40a"}
+{"fn":"sha256Hex","args":["key_name-1a:b:c"],"ok":"0fb1451ace1da0b8d37ea2f3120b69c48449743722d440b2dd298ed4ab9003b7"}
+{"fn":"sha256Hex","args":["ΣΊΣΥΦΟΣ"],"ok":"5b04c6021d490c76e976b01f599560293d202f4aecb24178b2d793f3b08a8745"}
+{"fn":"sha256Hex","args":["aabc"],"ok":"223189358b15aac5609ec6d35ccfa7df93b8f2507344c03445351586b0459228"}
+{"fn":"sha256Hex","args":["ab"],"ok":"fb8e20fc2e4c3f248c60c39bd652f3c1347298bb977b8b4d5903b85055620603"}
+{"fn":"sha256Hex","args":["﻿bom"],"ok":"2623148f0d047ef6feae63422c0d60741888ae7f45fd979ba232e1c975c14702"}
+{"fn":"sha256Hex","args":["trailing."],"ok":"44c12a4e432eba3f7fa634fd116eef3900ad9166688cb40c3f488ef3a5320316"}
+{"fn":"sha256Hex","args":["é.leading"],"ok":"85f3b5950c641d8e5f96a9961745eb9c5b0c010822940bf237f49f8ab2be299e"}
+{"fn":"sha256Hex","args":["hello"],"ok":"2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"}
+{"fn":"sha256Hex","args":["src/a/b.ts"],"ok":"eb7041468cb32feadbbbcf82b6cf05326b26c717d315fc2a4cef3eaa16b0aaed"}
+{"fn":"sha256Hex","args":["tab\tseparated"],"ok":"737304a727e038b1b7006995771a6087621516d1337a62877c80a7406b1d4b1c"}
+{"fn":"sha256Hex","args":["Hello World﻿bom"],"ok":"b5c764fd5763f86159a3c2b45b582644921789314e2b0a4bede876a3aad41cc4"}
+{"fn":"sha256Hex","args":["Hello World"],"ok":"a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e"}
+{"fn":"sha256Hex","args":["key_name-1"],"ok":"4184db5447df2761afdd05c964791a1e85947449b0c6011b4c013245b7f065b3"}
+{"fn":"sha256Hex","args":[":trailing."],"ok":"7dccd65bfea1472de9e70d6d20e965a5ec020850c51ebcdc6be5e9bafe6b647d"}
+{"fn":"sha256Hex","args":["a😀b😀cstraße"],"ok":"0e11caa966cd51ef08dd1e1d8684bf5684b7e5ad2aea99d7e03079f1d49ffdc2"}
+{"fn":"sha256Hex","args":["HELLO"],"ok":"3733cd977ff8eb18b987357e22ced99f46097f31ecb239e878ae63760e83e4d5"}
+{"fn":"sha256Hex","args":["abc"],"ok":"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"}
+{"fn":"sha256Hex","args":["hello world"],"ok":"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"}
+{"fn":"sha256Hex","args":["日本語のテキスト"],"ok":"d4192d3b01dfa9f5b08388f13e5c7492e3cfdc5611bf8c77784dc97523f03efb"}
+{"fn":"sha256Hex","args":["ns:key.path"],"ok":"090ed4bc851381c01fc77d9df176dfe517adb082c4601d1e6241d0492bf78d83"}
+{"fn":"sha256Hex","args":["helloΣΊΣΥΦΟΣ"],"ok":"13e6c4acf6b0558d6143eabb5cbcc185c0b76e9ae38ca2c7dc74d7aafb6737f3"}
+{"fn":"sha256Hex","args":["emoji 👍🏽 mix"],"ok":"7839fd7a65ab6e7d304ce23023e26614284e9c745c139718a7d4ac50e9db5330"}
+{"fn":"sha256Hex","args":[".leading"],"ok":"9c74491a21e8fc7a9b48d53d4432be058b3ae9771f0d6ce92881805dc8947feb"}
+{"fn":"sha256Hex","args":["😀abc"],"ok":"34fe23ed3807c88f68b5c146fc9970db9475a32b5c17fbbdcff760626b482bf4"}
+{"fn":"sha256Hex","args":["abca:b:c"],"ok":"6a28d414963efa8f9db26ec218d59eea1e03db6cc3cecd2885b173592c81ffe5"}
+{"fn":"sha256Hex","args":["İstanbul"],"ok":"24ec8f72b5eac4594cf4401235af1639159192194e025495d4a1055ab0f6dc9b"}
+{"fn":"sha256Hex","args":["a:b:c"],"ok":"b0ee04f880c4ff4261479e2e7822b7410aee4c7159f4185ad5b0d88a312b495e"}
+{"fn":"sha256Hex","args":["a.b.c"],"ok":"845e30448809e2bc8958eb025bfc795235d13b077a53d0c3abbd2385170dc9b8"}
+{"fn":"sha256Hex","args":[""],"ok":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"fn":"sha256Hex","args":[":"],"ok":"e7ac0786668e0ff0f02b62bd04f45ff636fd82db63b1104601c975dc005f3a67"}
+{"fn":"sha256Hex","args":["é"],"ok":"bf12767b0f2a56b2190075bae8169f656e3ce8d6357d4aff184bc6c7ea48f9f6"}
+{"fn":"sha256Hex","args":["line1\nline2"],"ok":"683376e290829b482c2655745caffa7a1dccfa10afaa62dac2b42dd6c68d0f83"}
+{"fn":"sha256Hex","args":["straßehello"],"ok":"ccee866e9487c74b9760165030f8f4696069218e3a390e981d46ae4a1f25a65c"}
+{"fn":"sha256Hex","args":["src/a/b.tsHello World"],"ok":"4aaa2588f0f352205467b7242cf86555a2e85f812840fbea6d1f9df1ee2d3d19"}
+{"fn":"sha256Hex","args":["trailing.HELLO"],"ok":"60b00f6110b16c3e250f2d1025750fcb78cab56fa29717d43f23ee3849a2fdb8"}
+{"fn":"sha256Hex","args":["日本語のテキストstraße"],"ok":"6ebc6f73da150950743eb6dea5ae9707b9be8cb5386228dac3067df22be4cc21"}
+{"fn":"sha256Hex","args":["ünïcödé"],"ok":"b09ad3e278dfb341468394a32f732467e2245b4b2876c3e15e0aaf1aa5ac242a"}
+{"fn":"sha256Hex","args":["日本語のテキストünïcödé"],"ok":"faaf9428e6cf3651cd06dfa5c209fdf072513a77300f96cbb77d9bae2149aaea"}
+{"fn":"sha256Hex","args":["straßea..b"],"ok":"bb753c6a98a39deef7a82c794fe05c3b0ed03e9c42f4d192a39855ca55074e0d"}
+{"fn":"sha256Hex","args":["😀"],"ok":"f0443a342c5ef54783a111b51ba56c938e474c32324d90c3a60c9c8e3a37e2d9"}
+{"fn":"sha256Hex","args":["a😀b😀csrc/a/b.ts"],"ok":"8bf872c35b56ea0eb4c04122758e3563553626b855c7dbeeb53e728b0a411061"}
+{"fn":"sha256Hex","args":["tab\tseparatedabc"],"ok":"cd2de02097c059a6cc415393df0ada32f05a547883f6ccc30f9a7aefc9b61cd6"}
+{"fn":"sha256Hex","args":["line1\nline2a:b:c"],"ok":"f17de350cfd32ab32c5912864d111f03c2cb150ff4e4e29bcd9041255553e6ac"}
+{"fn":"sha256Hex","args":["tab\tseparated﻿bom"],"ok":"b09d805e740872c55f10e1e5d1644368e7d1abb566294e752cd4524d9ea14d49"}
+{"fn":"sha256Hex","args":["a..b"],"ok":"f62b42414c514fa689d3e087ba397c602a4ba2c897f0ac2cb32cf770c3442bf2"}
+{"fn":"sha256Hex","args":["a😀b😀chello world"],"ok":"8a16dfe229648501c2e88ea4dae0f389b4ad7e0a49c8917729782190589f645b"}
+{"fn":"sha256Hex","args":["a"],"ok":"ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"}
+{"fn":"sha256Hex","args":["😀日本語のテキスト"],"ok":"0a1c799318a5767e494720d2c550f9d8e0c22b222141abcb924a4387fa246c34"}
+{"fn":"sha256Hex","args":["line1\nline2./x/**/*.json"],"ok":"9ab80ad949fe65a67afd1b8996b26ea2a9b5f197febd8e57d4d5c807f6ee10e4"}
+{"fn":"sha256Hex","args":["  padded  "],"ok":"3d4a55719d2ebc89e0e90d5c6ca663ba4871cb0aa98603cf716bf343db149465"}
+{"fn":"sha256Hex","args":["ns:key.path  padded  "],"ok":"3221e766f159c2dfc623d35a823eb44e1e724acb19eee7b9b013f34ee4e5e68f"}
+{"fn":"sha256Hex","args":["a..bhello"],"ok":"305bb473073577c575b7905c0d77588acda8b6e77486583cc8f492e61316df83"}
+{"fn":"sha256Hex","args":["a😀b😀c﻿bom"],"ok":"440e3820ca1b7f36503b374e6a1d930974eab1298652d9e57f5faee1cb0c191d"}
+{"fn":"sha256Hex","args":["key_name-1./x/**/*.json"],"ok":"50ce333f2f3be0e26a0e83579112aeee96ee6eee8dee2ca66b744cf7f1c44d08"}
+{"fn":"sha256Hex","args":["a:b:cé"],"ok":"7bc80cfdfb102502380a7a07a618dedb2c0715e4e8a5dad364f4d94bcd3ffd6c"}
+{"fn":"sha256Hex","args":["  padded  hello"],"ok":"4ad6932bf2bdfdb4ba4e70d6ff9278483ec035861c2310ffce5476219e8c4c92"}
+{"fn":"sha256Hex","args":["trailing.a..b"],"ok":"9f96a2e1c38e4031aa5b4a1db5fd3a5526ac3d50a81966408272c7bb8925c9e0"}
+{"fn":"sha256Hex","args":["Hello Worldé"],"ok":"391e153c160535dfa890f24219e11665ac5783f0fd1d51588b573d1ba811a230"}
+{"fn":"sha256Hex","args":["a:b:cab"],"ok":"6478aefec30b7ed34c61bd8204e1d4c988bb2d9b8c7f68ddc811f8f2b0baacd1"}
+{"fn":"sha256Hex","args":["a😀b😀cünïcödé"],"ok":"dc0f6aa5e709928a11a1cf6526b7387449303e40823ba9fdb3ae79afea921b8b"}
+{"fn":"sha256Hex","args":["tab\tseparatedline1\nline2"],"ok":"10e61f08a9c87bbb86732efa9330cd46726921673d3fcf808235c8ce21cc1300"}
+{"fn":"sha256Hex","args":["./x/**/*.json"],"ok":"018071a777fc8b5655cf853a244fa7e3e4016e259f348d4cd4a25f30831dc6f0"}
+{"fn":"sha256Hex","args":["tab\tseparateda"],"ok":"a57710b9227294196aedd0ba073cd3c8006701c8e50913f383dac08208e8cb49"}
+{"fn":"sha256Hex","args":["İstanbultab\tseparated"],"ok":"d3bf58313de54fe264a0b84b02ab4718d219eac6000103b4904c730be7659155"}
+{"fn":"sha256Hex","args":["a😀b😀c  padded  "],"ok":"2c5851979a6be9870d4b8c8321494ad3cd42d31bfd5a76242a69e3545f4c97aa"}
+{"fn":"sha256Hex","args":["a.b.cline1\nline2"],"ok":"ee48b38735b186d39b7ff1a414b8be8a561dc8e52f9a635bed898cc930fdb7a8"}
+{"fn":"sha256Hex","args":["trailing.  padded  "],"ok":"27e6d0754edb2134e9ba4133b0061cd722599c4f1b449e626c6b748e384882b3"}
+{"fn":"sha256Hex","args":[".leading./x/**/*.json"],"ok":"1470409cd690dc2d3114bd0414cb86d3510a599769203e41cfbe5122d0057968"}
+{"fn":"sha256Hex","args":["a..bns:key.path"],"ok":"7c4cadf94178ed9c32d337a13979e5fe42b2b3187a1853a27e012df7a5d77410"}
+{"fn":"sha256Hex","args":["emoji 👍🏽 mixstraße"],"ok":"bd24d84eb4d9b70423748d9bf8647cb7782c925ef25cff2ac735463350d3daf8"}
+{"fn":"sha256Hex","args":[":é"],"ok":"649b7c9cc046687c9f6f4dabc5003a5804fd8078a919ededf41d076128189307"}
+{"fn":"sha256Hex","args":[":straße"],"ok":"dd84fd014de7f6d171364db28d5cf6f25b4aa8a0c1d466e72d659dbfe13d44cf"}
+{"fn":"sha256Hex","args":["a😀b😀c"],"ok":"3b0fa9d763b5cb38e6cdd6c5d95ca5fea8cf1d5f54570b87b06f3c8c22fe47d1"}
+{"fn":"sha256Hex","args":["helloa"],"ok":"9abfe77d5eb12f4a1012ac1407ce8aeb73b76803caf2092247777b1a70cc118e"}
+{"fn":"sha256Hex","args":["ns:key.pathHELLO"],"ok":"6e773db760b53daff5b4eb8d986f4295029c3a363586a2045bd8359afe037cbb"}
+{"fn":"sha256Hex","args":["trailing.Hello World"],"ok":"aa38c7ed1fc40bdd9fd9ff61f113f7420c8bdb6716d053e1d75301a5f0def8c9"}
+{"fn":"sha256Hex","args":["a:b:c😀"],"ok":"0779ba72409ad583ee11506ed8c056ed369a730c1dedc99562f1936323c90b0c"}
+{"fn":"sha256Hex","args":["trailing.é"],"ok":"32d940a8a7a639ec5d896eed6e82c689482743ee3473a4ef471d93e86cb3dad7"}
+{"fn":"sha256Hex","args":["hellosrc/a/b.ts"],"ok":"e236921d4ea23ee15e9124923f6189d3d3ce9ec40b65975c04447e58336a9190"}
+{"fn":"sha256Hex","args":["😀a"],"ok":"2594c489f92f9dab0d549664533a349917488bea05b752aff58d0a4d1f3a163e"}
+{"fn":"sha256Hex","args":["a./x/**/*.json"],"ok":"deff3c7602205cc12b9c7e96ef4d54c35f38c183519fb6165d1f8db2d459f8cc"}
+{"fn":"sha256Hex","args":["ab{name} has {count} items"],"ok":"e06af2ed944081b138203f3ed0e7e95a749ba07982e8fb73d38543931d3cdc8b"}
+{"fn":"sha256Hex","args":["./x/**/*.json{name} has {count} items"],"ok":"0635397eb5c3ff481ad14abff6724b249c8a5bcfcd582afd848e4b19170b90a1"}
+{"fn":"sha256Hex","args":["Hello World:"],"ok":"1a073e47acd64fbd9f90f4573f9e279e8e1d4b0b560f9f1aa8a23112695a0cda"}
+{"fn":"sha256Hex","args":["abé"],"ok":"8ab8d394beeed9cb19d956c59c5ea37aa2ec7b99266b32a890fe0596f0289ef1"}
+{"fn":"sha256Hex","args":["ünïcödé.leading"],"ok":"9a76001dc3d659b0e0210311081e0e1f41f9f0f3778f6ba2a456595ef65f10e4"}
+{"fn":"sha256Hex","args":["./x/**/*.json日本語のテキスト"],"ok":"d4b867e7efab76c5bcd5dd946e98ffb72778b0a89e3a062509a5fc91bad41b34"}
+{"fn":"sha256Hex","args":["abc日本語のテキスト"],"ok":"64236f4a0e284c2bfc0587fe71b5891075a442b375904f7a244c0d41656ed7fe"}
+{"fn":"sha256Hex","args":["a..babc"],"ok":"802792af23317946b2f2bbc2540ea102d1ec8b8c224ebff4c898f37e7001408f"}
+{"fn":"sha256Hex","args":["HELLOHello World"],"ok":"5d1a327bbd2e53a822709099d25c5e7ac3a52fa1f72108ace7cab663b4f1b75c"}
+{"fn":"sha256Hex","args":["key_name-1{name} has {count} items"],"ok":"e529d7f314035d593277ff2154b4b55bf39bd2e1caec4fc021ce258baa0a85ac"}
+{"fn":"sha256Hex","args":["😀İstanbul"],"ok":"aebda622845242d7b68f5bd7e8504b4514d8324238c037e45afdaecf38ac26e1"}
+{"fn":"sha256Hex","args":["src/a/b.tsa"],"ok":"37acd32db6b482a4cdc4f39aa1ae116d062d3f16a3606a27356520cd80b52137"}
+{"fn":"sha256Hex","args":["a.b.cemoji 👍🏽 mix"],"ok":"82cb7a3609d714ac6db07a9f6fc6ce63cfeca143b56cedc3dcdce39c45fd0356"}
+{"fn":"sha256Hex","args":["::"],"ok":"71546855d6279ef70d20909b292c42c2dcb02cd06bde01485da52d13e304ebf4"}
+{"fn":"sha256Hex","args":["src/a/b.ts日本語のテキスト"],"ok":"0be255a54c8d28bd5dd29ae3e80b468f038b7f15b081b47ae0fe67e230255d72"}
+{"fn":"sha256Hex","args":[":tab\tseparated"],"ok":"f4d03d634e6f251b973d11510da933049e2fee9bfd4fd062fd829a546ecaac11"}
+{"fn":"sha256Hex","args":["ns:key.pathstraße"],"ok":"3485c08ace6fed32027f2112afc074a126153d837f561129ca29e14974dcf7dc"}
+{"fn":"sha256Hex","args":["日本語のテキストline1\nline2"],"ok":"ad6f87493211cfcbbfd168ff76c7b54e83aa8f6eb022c2edaaf0b65e9cee3537"}
+{"fn":"sha256Hex","args":["aba..b"],"ok":"7056f4c69645638b361a21a0005a5d91c94647c66006d324a04af5c4cf2635ce"}
+{"fn":"sha256Hex","args":["İstanbula:b:c"],"ok":"1776f7063b508aa9027da43c5f4470994e5bf691a8aad8d1cff71cab132e021b"}
+{"fn":"sha256Hex","args":["İstanbula"],"ok":"4a8c18274d10060b59015d3ca20a2339e71577e3e64f9382ee96fa9decbc6036"}
+{"fn":"sha256Hex","args":["HELLOline1\nline2"],"ok":"1cf6f88a8126e71b8b2814e69ee1fc8e21f9462dcd05093fdf7e393e6d32a07b"}
+{"fn":"sha256Hex","args":["a.b.c日本語のテキスト"],"ok":"4e0a700951b2dd2b1b9feccb05dc764fa437b404783e344c09f5bd271e35d3d8"}
+{"fn":"sha256Hex","args":["aba"],"ok":"e124adcce1fb2f88e1ea799c3d0820845ed343e6c739e54131fcb3a56e4bc1bd"}
+{"fn":"sha256Hex","args":["tab\tseparated.leading"],"ok":"b167cb74d42773033398fa41fec72c0785833750e8c67fe2d5030d59f397dfc4"}
+{"fn":"sha256Hex","args":[".leading😀"],"ok":"5801e4f923b2f0d2e7468bc15a682ee8d41e0ae7da974623f592d16d7bd14501"}
+{"fn":"sha256Hex","args":["helloé"],"ok":"35e7419375f93de0cc05e08b8ffe8ff7a9a06bdf0a3b576f09cfd53217e41b0b"}
+{"fn":"sha256Hex","args":["a.b.c:"],"ok":"ac6f34955bee4ee4599264aabad48181cda780341449497a528b4d47e1499dce"}
+{"fn":"sha256Hex","args":["line1\nline2line1\nline2"],"ok":"9d85bc284583d7e45815022eed80b6c8709fee4dab8b6fce069e1aad64b71dde"}
+{"fn":"sha256Hex","args":["abcé"],"ok":"1ee9f43fe41b412ddf502a1403707848b3e4d08fe5590508e168c732f72ce31b"}
+{"fn":"sha256Hex","args":["ahello"],"ok":"d8b21f4b9c82345707d3ec19b13a9d9e773ccfbee57bf747008e0325ff67b8a5"}
+{"fn":"sha256Hex","args":["a:b:c  padded  "],"ok":"f8f47b884761f5b525150953f977247fa43fa6cefb5ab981f2cf57ed91d7517f"}
+{"fn":"sha256Hex","args":["aa😀b😀c"],"ok":"918b8c15235da8a72a808e37b365a648a74f0ce770d8077e4b17517c627bacef"}
+{"fn":"sha256Hex","args":["tab\tseparatedemoji 👍🏽 mix"],"ok":"c48a5bd1cd655aeb8b0d6f929b5d4b4c87e0beabd9e975595b47a31447917702"}
+{"fn":"sha256Hex","args":["HELLO日本語のテキスト"],"ok":"c19bf81f460fee5c88a412b26de34c986d09324adff13440124f4b3d1e7f146d"}
+{"fn":"sha256Hex","args":["é{name} has {count} items"],"ok":"a885922178d9a804d4aaad911441d83a993b93e2c538bdf872360924cabf881d"}
+{"fn":"sha256Hex","args":["a:b:ca😀b😀c"],"ok":"a6b7f6f4718c0ef72ba4a3907ac94734df2a17747e51e9cc8baf02a4492e9db6"}
+{"fn":"sha256Hex","args":["line1\nline2key_name-1"],"ok":"d984793710b495cf7bb0bb07ba1a4d6233c438e7ee8a4c4838e8fb314f7bb80e"}
+{"fn":"sha256Hex","args":["{name} has {count} itemsline1\nline2"],"ok":"35ac109953362d9b5af0e0146308befc7898f587037d41b83efbdec293ae098c"}
+{"fn":"sha256Hex","args":["ns:key.pathhello world"],"ok":"f97b03cc5d57a223081fdf02bc4e311c9d2b15a8fc8f107be87ac7c6b152f9d6"}
+{"fn":"sha256Hex","args":["abHello World"],"ok":"83a7687a125ed10400bbe6d5692e0defb56c19e2ce019ce603cff93829988c40"}
+{"fn":"sha256Hex","args":[":日本語のテキスト"],"ok":"8969dcc07886d5162efa69c1b7dc15a98010c00600a4e3e3af4d9eccb3457508"}
+{"fn":"sha256Hex","args":["a:b:chello"],"ok":"f847f22a9967362c479a4c6b33591592b922dc2db50a76161c9f4ab24df9d600"}
+{"fn":"sha256Hex","args":["{name} has {count} itemsHello World"],"ok":"2457269b4036d22513c65c3de3db6a48ecd84fedd3a81252b2a9ce57717709bd"}
+{"fn":"sha256Hex","args":["key_name-1ab"],"ok":"4386e0749399f982b8b8b8047e56419928dc6fe8e0f0cf413aecf792b92e71ce"}
+{"fn":"sha256Hex","args":["﻿boma:b:c"],"ok":"7d1c5b27595db11f8cd4bedf1a66cae8de4da6a8b78339dcc10e251e06d7b09d"}
+{"fn":"sha256Hex","args":["  padded  line1\nline2"],"ok":"b457798c990de6c5849193c3bf4149951e89bf73d1dddf718738278f87581e46"}
+{"fn":"sha256Hex","args":["İstanbul:"],"ok":"47698e145b39c2094869ebd19a8193f7b4c2272e324076f96d05629d06e915ff"}
+{"fn":"sha256Hex","args":["emoji 👍🏽 mixa"],"ok":"39d8c198f98d26b8a76e0b7fb0c93786d03ea7e5de656240badd45118743079a"}
+{"fn":"sha256Hex","args":[":  padded  "],"ok":"614df76608fcc46f2ad6441015ee533be420df9707aadb1113354eb36b057cac"}
+{"fn":"sha256Hex","args":["trailing.emoji 👍🏽 mix"],"ok":"31f218b03492822ba9ec737707edcba2a24c4cf0faa66532c15ef9ba9bea72f4"}
+{"fn":"sha256Hex","args":["HELLOkey_name-1"],"ok":"5693e9938183e37f8119b83c22f9c1ab983d5180b59a69ecef623c79c785deeb"}
+{"fn":"sha256Hex","args":["Hello Worldünïcödé"],"ok":"0a16a7495c6da85b4c825e5146df0d917bc2c36368d64379990703498effbc06"}
+{"fn":"sha256Hex","args":["straßeΣΊΣΥΦΟΣ"],"ok":"12797cb3e3737b4c84e06d535d0d2b6b1c0e7641ec5dbf8a3b86bea830c20e4f"}
+{"fn":"sha256Hex","args":["aé"],"ok":"f7e7d9d8707d8947bd1e2b3684e5d345d002813201286557835686a7654afeb8"}
+{"fn":"sha256Hex","args":["HELLOns:key.path"],"ok":"9621ca424252abcfef766392b486863f7c713c38238464e98cc1008a9e04f36b"}
+{"fn":"sha256Hex","args":["hellotab\tseparated"],"ok":"995aa635ed82f3aca50171191aa7ed83338b1684c7dfd180885d1bf8eb005f9a"}
+{"fn":"sha256Hex","args":["ns:key.path{name} has {count} items"],"ok":"347d0b5c535bdfee139a207ae20e5d01e6b327d10af64546673afdf79e61bcb1"}
+{"fn":"sha256Hex","args":["hello  padded  "],"ok":"6fc7b47433ca697413e7101c8c5e6c5d31dd5bc36021d43df36f299d81063b34"}
+{"fn":"sha256Hex","args":["a😀b😀c.leading"],"ok":"51cc50dddb84e120febd5dc8ac57a666721458f1cdd2bc6d7d597f04b50d7259"}
+{"fn":"sha256Hex","args":["emoji 👍🏽 mixtrailing."],"ok":"39a09ec4fe5e17474c1c8174d6987bec38bc10a3dd80b476b07d5529d35be419"}
+{"fn":"sha256Hex","args":["aba.b.c"],"ok":"d45a0f8e93a56759192ae16c732b22ddb15be747316781262193bb783fa1b51a"}
+{"fn":"sha256Hex","args":["line1\nline2a..b"],"ok":"8906f49fd7f4fa6bbf322a88563e26c671ecaf5722f89e41f81b3b31fb33c093"}
+{"fn":"sha256Hex","args":["abtrailing."],"ok":"b449f414667f9a9196e124ef7f775f6b3cec1ece5151a7325cc1bf3365412ce6"}
+{"fn":"sha256Hex","args":["tab\tseparated日本語のテキスト"],"ok":"992cbab908b013ca2dd3840738de40ae94818221e125399bcb2d9778fd2010f7"}
+{"fn":"sha256Hex","args":["ΣΊΣΥΦΟΣa.b.c"],"ok":"b8503957fc3f6e6edabd018c26e5291c5154f42569b41c161acaba4b1fcea713"}
+{"fn":"sha256Hex","args":["  padded  ﻿bom"],"ok":"2d7d5bd492d53db191c4de434c4608793f3efbd03871dc94ec77eb3786191dd3"}
+{"fn":"sha256Hex","args":["Hello World{name} has {count} items"],"ok":"3a61a88c1aa45abb333e36378864857789f161bf7f94df3442c71f86b81e6ad2"}
+{"fn":"sha256Hex","args":["﻿bom.leading"],"ok":"229daee164a8023175bfae70d8f9b2dbe952c59186e8f2ed51adbefe54737e3b"}
+{"fn":"sha256Hex","args":[".leadingline1\nline2"],"ok":"8986111cf28ba64394be85f2b2dd21b4dbaca879e2c18700d30f33d668d594bf"}
+{"fn":"sha256Hex","args":["İstanbulhello world"],"ok":"8cd029396d110f5d4fcda5be552847be2daad802ad608bcdfde439e71ba39ce4"}
+{"fn":"sha256Hex","args":["hello worldline1\nline2"],"ok":"d3379619cb5698273b86df6a6761ea703deb3326f83b5f3e544bd36ba78a17c1"}
+{"fn":"sha256Hex","args":["emoji 👍🏽 mix😀"],"ok":"fe8e898aa0236007d4579208a8b53e587b73073f76c317e8c8606225df03c918"}
+{"fn":"sha256Hex","args":["line1\nline2Hello World"],"ok":"4a9eed7cc0274fe9f7fe901f473f1ed77e01c65268b1fabfc03cacdc24a489eb"}
+{"fn":"sha256Hex","args":["key_name-1straße"],"ok":"10f67803d7d3a6fe42ede8c48059057b5968d46629231b14602c3d71e258668e"}
+{"fn":"sha256Hex","args":["😀a.b.c"],"ok":"1ffb95406871ee3f8331c174194d8bb5bc93539755356cbd09faf238ef9b091f"}
+{"fn":"sha256Hex","args":["  padded  ./x/**/*.json"],"ok":"2c172ca5e35212d2571664c43b0fa51af4ed22e8292d968e98cfcd4142a21fec"}
+{"fn":"sha256Hex","args":["  padded  a"],"ok":"bc142009f564531f6a16aef1a88d33a037d40bdd9cfb2beb73bed5574ab07b8a"}
+{"fn":"sha256Hex","args":["emoji 👍🏽 mix{name} has {count} items"],"ok":"fdf606494d53680f6cfee57d6ebd6d1fa09aceee65360794bf6bd0ed38b248f9"}
+{"fn":"sha256Hex","args":["hello world﻿bom"],"ok":"6b4b5dd3d942a8652f97e958162803c69068d5070c57fcacf7fe80ca46af8428"}
+{"fn":"sha256Hex","args":["a.b.cab"],"ok":"5ffa1c4544d7c8f01ef54dacc9a69d921c69281431622d9a135a3c7c55f04968"}
+{"fn":"sha256Hex","args":["tab\tseparatedΣΊΣΥΦΟΣ"],"ok":"f88d41fef45f52a04d172991f01ad53d9af814b3c3d095d7caacf96e0fec26ed"}
+{"fn":"sha256Hex","args":["hello worlda😀b😀c"],"ok":"586ad6c042f5815692ae7bb61e8570753319aa006904541027405be34319e7d7"}
+{"fn":"sha256Hex","args":["tab\tseparatedünïcödé"],"ok":"fb8b4c124037349ee190b0592cb6bc4f522a641fda9ecdd14afb29a9a2607181"}
+{"fn":"sha256Hex","args":["tab\tseparatedtab\tseparated"],"ok":"5df42ebd767778ed3afdf9d08ebb443c1d6e1bf65bb1049deb1a04676c1c8d1c"}
+{"fn":"sha256Hex","args":["ababc"],"ok":"dc140e8b13ca3cb919c4277d32faea9a02102e0faa967818cca2967838fba612"}
+{"fn":"sha256Hex","args":["日本語のテキスト:"],"ok":"de3b8ac717ae01311da05308ab0ec99fc716b61bdaf98f8710c7ccf3619d16fa"}
+{"fn":"sha256Hex","args":["straßeİstanbul"],"ok":"307edc58a7584faf5d1fdb5eb3b07f087865c2f07967dd20dbc5d1fad98c53f4"}
+{"fn":"sha256Hex","args":["src/a/b.ts.leading"],"ok":"2ee75535f08aeb8611bff62855d8532fdf75573f103b0999ceac2d1ace93c304"}
+{"fn":"sha256Hex","args":["ünïcödéİstanbul"],"ok":"ad08f58d993968cdceff2812ce31fb6ae9915729b068f103dd9d6a883da51304"}
+{"fn":"sha256Hex","args":[".leadingHello World"],"ok":"fb71ff37958728bf17a01e64c2db12baf4a26781770128878c55f91ff70b4090"}
+{"fn":"sha256Hex","args":["😀./x/**/*.json"],"ok":"3ef6e62046b0590bf57d25c04684645c5dae649fad781c77c8d43c532f90d656"}
+{"fn":"sha256Hex","args":["src/a/b.tsΣΊΣΥΦΟΣ"],"ok":"7040e3897bbfa3483ed4eb4f2da4516087d0f2b494c7b29ba5b1b9041f7fecb7"}
+{"fn":"sha256Hex","args":["straßeünïcödé"],"ok":"3e366a7bc5ffc4517c4edbffe6bae3e4b2d63ac3ff6ac9713c51e628d193a837"}
+{"fn":"sha256Hex","args":["trailing.tab\tseparated"],"ok":"5a1fa01045ca4ffc01e18a76b8c4844d588b56ff088d84696df5105a222d75af"}
+{"fn":"sha256Hex","args":["key_name-1a"],"ok":"8bde45d1a3318e5f22f24b9a6bfba0be2de29bc5e3665040de1867b2b803a998"}
+{"fn":"sha256Hex","args":["tab\tseparatedhello"],"ok":"bb2314ef821ec9d94d479f390b8ad5a064d3bda98f9c729e3351fc4b21d503fd"}
+{"fn":"sha256Hex","args":["ns:key.pathkey_name-1"],"ok":"9dbc84fe44af7cb8efb61c28851bbfdba2e7ec5b4000bbda7eea2ad88bd83bf1"}
+{"fn":"sha256Hex","args":[".leadingünïcödé"],"ok":"d04941678afd297408cda5c9fcf1a40008a441fefeade044c77de24da5621e4a"}
+{"fn":"sha256Hex","args":["  padded  ünïcödé"],"ok":"c45b3c9b8d2dd7d00cac4485655e61ca981909d44d7ab42cb20afb77ec0c781e"}
+{"fn":"sha256Hex","args":["ns:key.path.leading"],"ok":"4d6a325c9cf840bbbad90683ad7799b605997b516855d145d9519afb1fce1fa1"}
+{"fn":"sha256Hex","args":["abc﻿bom"],"ok":"72c16adf0d100c3e11467466b2c200d3debaf76d224b5658bbd24043ff61deff"}
+{"fn":"sha256Hex","args":["src/a/b.tsİstanbul"],"ok":"14b283e6c0e26ad8f5e626e8af7904f67b1373ffffcce2f9d73fb17b51fa4952"}
+{"fn":"sha256Hex","args":["{name} has {count} itemssrc/a/b.ts"],"ok":"507c2a38a18d55ddd9e039667391cac579630b131222a526e184a3e1466de85d"}
+{"fn":"sha256Hex","args":["İstanbul{name} has {count} items"],"ok":"148efa761b6bf65cf5e857f755f24b6b956fd946543ee6f904eed5846be7ae91"}
+{"fn":"sha256Hex","args":["😀straße"],"ok":"3dc4bc0a637ac8078f2f940ea7e8d8a011fac6d143e2fc3b567f087ece2060a1"}
+{"fn":"sha256Hex","args":["ns:key.pathabc"],"ok":"b797465f244557eb5e0ec49d0f2aa015048571e0ebabdc87818af04cd3785705"}
+{"fn":"sha256Hex","args":["﻿bomhello world"],"ok":"37df646d4cf5cdf05a353baf5a29b6e442fd614f48403fc5094f92500f2715c8"}
+{"fn":"sha256Hex","args":["a..ba.b.c"],"ok":"3d520dd36ded169caff60b914e0c07c59aeddcbfd87444d3770938c1403ada70"}
+{"fn":"sha256Hex","args":["İstanbulns:key.path"],"ok":"a985a4487ba7f86957f4a27ee13fe60e2707ff67270efe5dd279388c799b3972"}
+{"fn":"sha256Hex","args":["HELLOa"],"ok":"1bf560f2ddb45f3dbfc9878fdd9d6ca0ddbcb32aa5c3f00ef1c87610c0cd76d4"}
+{"fn":"sha256Hex","args":["./x/**/*.jsona:b:c"],"ok":"7fad00c171c1c87fe0e02769a47311d84ccff7a595ef42f137af3d423ce463d3"}
+{"fn":"sha256Hex","args":["ns:key.pathsrc/a/b.ts"],"ok":"b1cf0190a03c6285d79ee6b17b1cad08577704b698b743dc403714a287b3c999"}
+{"fn":"sha256Hex","args":["{name} has {count} itemsΣΊΣΥΦΟΣ"],"ok":"f7f15ce950e312ca4c865665e40fad06bea20d02114d47a3b7b91cbc097b0fd2"}
+{"fn":"sha256Hex","args":["  padded  İstanbul"],"ok":"243aabd3403c9a2d65864ad4e4c2f819707ddea833ad902d3d632cda741c32a6"}
+{"fn":"sha256Hex","args":["  padded  a😀b😀c"],"ok":"a8c1447535679a3c3aa2f91a4b37ac2786bab162c07f81085fc819a90905b96c"}
+{"fn":"sha256Hex","args":["héllo wörld"],"ok":"a1003f7d04a4115711d0b48a2eaf1359ce565d2d2a6fd65098dfcffadeeef59f"}
+{"fn":"sha256Hex","args":["👍🏽 thumbs"],"ok":"2752e65dacf50732034519d1b6d574545e020fd911220a407df26a724d4b3748"}
+{"fn":"sha256Hex","args":["日本語"],"ok":"77710aedc74ecfa33685e33a6c7df5cc83004da1bdcef7fb280f5c2b2e97e0a5"}
+{"fn":"sha256Hex","args":["ılık ırmak"],"ok":"60dc09d56c2ba920b1ecc799e47c00c8c4abbc670f861e1410b3952c42e0f7e8"}
+{"fn":"sha256Hex","args":["👨‍👩‍👧 family"],"ok":"bb5f3770a5817fd95570670d8957256d8ee8edf3df5f80dba854595cf158e3b8"}
+{"fn":"sha256Hex","args":["a b"],"ok":"9507017c6d887511a5a6ac28ea7e3a438882576e1bd76fe3df27a336f49c263b"}
+{"fn":"sha256Hex","args":["a😀b"],"ok":"6fba5b2ea783ded096fc2444d540ffbdf49168df30993b155b7efb683313f110"}
+{"fn":"sha256Hex","args":["a²b x½ y①"],"ok":"a950cdbd5ee7163254f5361d9a9ed901735e4b1afe7f9279e5af77c8f6380517"}
+{"fn":"sha256Hex","args":["aⅠb Ⅻ"],"ok":"da9cf8ae08a9054643c590fa59cb714f8bfde7af8d23de73344b4000c7cac78b"}
+{"fn":"sha256Hex","args":["a𐐀b 𝐀bc"],"ok":"abf46dba5dae8b506447b2206600726690aa1cc41b7e2b1b2b07c5c64f4dfb0c"}
+{"fn":"sha256Hex","args":["कि ٣٤"],"ok":"9dc1759d14c77f7412fba6d5bb0642548a47c8dfe66c84ef88bf55fd6e30101b"}
+{"fn":"sha256Hex","args":["Iı İi"],"ok":"3de140f8595826857c8ab406130e92c1b27f0bb9fc3abe986fdefdf33e6732bd"}
+{"fn":"sha256Hex","args":["K K k"],"ok":"dcda7a5326eedb435df97e6887ddccbe45dc81fddbf924ac883fd9f0afaab34a"}
+{"fn":"sha256Hex","args":["ſ s S"],"ok":"56f470c329b2eadd3a93e3998f0e180d28c9a0d1ac5902129056ab5b876ff37c"}
+{"fn":"sha256Hex","args":["x‍y 👨‍👩‍👧"],"ok":"c7928a54bec381d87d2c4fcbfa36f792b23924e28497916899c99ed4d83c4903"}
+{"fn":"sha256Hex","args":["a b c　d"],"ok":"256164abe23ff0180daa3146bd5ecaa2e20f2bf40ba26dc29ef5763af14ee38d"}
+{"fn":"sha256Hex","args":["١٢٣ ٤٥"],"ok":"35315cd5ab81b9cadecb15f11ce73ce230da738323214b0d5a097a459aca4b8e"}
+{"fn":"sha256Hex","args":["𝟘𝟙 ²³"],"ok":"46afe9729d82fb099892e79c27ffd1ecb1a3da218c2fbc73105925be2ee215e5"}
+{"fn":"sha256Hex","args":["snake_case foo-bar o'neil"],"ok":"0598d49c834526c6486e52ae13ccb612d12f97fb92626ded8b51f553c261ffcd"}
+{"fn":"sha256Hex","args":["ǅungla Ǆ"],"ok":"16efdceea18dd59556a36e1b28ebe505a44451c6a0d170f35c18006122eb7a74"}
+{"fn":"sha256Hex","args":["one\r\ntwo threefour"],"ok":"fced7d1dddd848c1033a1cccef8fdd5b90d728d303efbd8591d6a062fc5c7b5a"}
+{"fn":"sha256Hex","args":["café café"],"ok":"886a02e53758efe926094e98b6d496578be7ff13fd4d4de7138aff348fbf816d"}
+{"fn":"sha256Hex","args":["ΣΑΣ σας ς"],"ok":"930710ee7dd71764b28b4ee0056944fa993276843b5d2cb177ebdfeed69c0be8"}
+{"fn":"providerApprovalKey","args":[{}],"ok":"omnibox-provider:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"}
+{"fn":"providerApprovalKey","args":[["a",1]],"ok":"omnibox-provider:135f17a475a61afdeeaf3759ad2e45ad1c7abb192395abe47e41fc8e395dc1a9"}
+{"fn":"providerApprovalKey","args":[0],"ok":"omnibox-provider:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"}
+{"fn":"providerApprovalKey","args":[true],"ok":"omnibox-provider:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"}
+{"fn":"providerApprovalKey","args":[{"a":"b"}],"ok":"omnibox-provider:db4a7ecb114bc66c623a06c4ff6fe8daa2f49cc270ebbf7a1f81e22ab061c837"}
+{"fn":"providerApprovalKey","args":[[]],"ok":"omnibox-provider:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"}
+{"fn":"providerApprovalKey","args":[{"a":{"b":"c"}}],"ok":"omnibox-provider:3ff0e331ca59a2a1194bac0e36359ed4540a97383e1cdf6eb95c7de9309143fc"}
+{"fn":"providerApprovalKey","args":["x"],"ok":"omnibox-provider:ba2df4903a2c14e86dc3bcca58911b44ac1d2514b7227bf6eb08cfb978f55a1b"}
+{"fn":"providerApprovalKey","args":[null],"ok":"omnibox-provider:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"}
+{"fn":"providerApprovalKey","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":"omnibox-provider:d885d7794f60a91cc3d302093cb58b6d31a487fd5e6c290c6b7e495d21d9f021"}
+{"fn":"providerApprovalKey","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":"omnibox-provider:3f7dd029f112a0bf40797f23e917fa1cfc20e21e9771487bab94186c488a858e"}
+{"fn":"providerApprovalKey","args":[[3,1,2]],"ok":"omnibox-provider:51bda7ab4e44726cde71fcb6e4b515357059bb6b6dd5146d1fc50f73f11678c6"}
+{"fn":"isPublicHost","args":["localhost"],"ok":false}
+{"fn":"isPublicHost","args":["127.0.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["10.0.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["192.168.1.2"],"ok":false}
+{"fn":"isPublicHost","args":["172.20.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["169.254.169.254"],"ok":false}
+{"fn":"isPublicHost","args":["100.64.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["[::1]"],"ok":false}
+{"fn":"isPublicHost","args":["[fd00::1]"],"ok":false}
+{"fn":"isPublicHost","args":["[fe80::1]"],"ok":false}
+{"fn":"isPublicHost","args":["printer.local"],"ok":false}
+{"fn":"isPublicHost","args":["intranet"],"ok":false}
+{"fn":"isPublicHost","args":["2130706433"],"ok":false}
+{"fn":"isPublicHost","args":["0x7f000001"],"ok":false}
+{"fn":"isPublicHost","args":["8.8.8.8"],"ok":false}
+{"fn":"isPublicHost","args":["[2606:4700::1111]"],"ok":false}
+{"fn":"isPublicHost","args":["127.1"],"ok":false}
+{"fn":"isPublicHost","args":["0177.0.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["%31%32%37.0.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["exa_mple.com"],"ok":false}
+{"fn":"isPublicHost","args":["bänk.example"],"ok":false}
+{"fn":"isPublicHost","args":["example.com"],"ok":true}
+{"fn":"isPublicHost","args":["Example.COM"],"ok":true}
+{"fn":"isPublicHost","args":["xn--bnk-sna.example"],"ok":true}
+{"fn":"isPublicHost","args":["a.b-c.io"],"ok":true}
+{"fn":"isPublicHost","args":["example.com."],"ok":true}
+{"fn":"isPublicHost","args":["a.localhost"],"ok":false}
+{"fn":"isPublicHost","args":["x.LOCAL"],"ok":false}
+{"fn":"isPublicHost","args":["x.internal"],"ok":false}
+{"fn":"isPublicHost","args":["x.lan"],"ok":false}
+{"fn":"isPublicHost","args":["a.home.arpa"],"ok":false}
+{"fn":"isPublicHost","args":["x.test"],"ok":false}
+{"fn":"isPublicHost","args":["x.invalid"],"ok":false}
+{"fn":"isPublicHost","args":["abc.onion"],"ok":false}
+{"fn":"isPublicHost","args":["localhost."],"ok":false}
+{"fn":"isPublicHost","args":["a..b"],"ok":false}
+{"fn":"isPublicHost","args":["-a.com"],"ok":false}
+{"fn":"isPublicHost","args":["a-.com"],"ok":false}
+{"fn":"isPublicHost","args":["a.c-"],"ok":false}
+{"fn":"isPublicHost","args":["a.1com"],"ok":false}
+{"fn":"isPublicHost","args":["a.co1"],"ok":true}
+{"fn":"isPublicHost","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":true}
+{"fn":"isPublicHost","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":false}
+{"fn":"isPublicHost","args":["a.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"],"ok":true}
+{"fn":"isPublicHost","args":["a.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"],"ok":false}
+{"fn":"isPublicHost","args":["a.com.."],"ok":false}
+{"fn":"isPublicHost","args":[""],"ok":false}
+{"fn":"isPublicHost","args":["."],"ok":false}
+{"fn":"isPublicHost","args":[" example.com"],"ok":false}
+{"fn":"isPublicHost","args":["example.com\n"],"ok":false}
+{"fn":"isPublicHost","args":["home.arpa"],"ok":true}
+{"fn":"isPublicHost","args":["a.b"],"ok":true}
+{"fn":"isPublicHost","args":["İ.com"],"ok":false}
+{"fn":"isPublicHost","args":["x.K.com"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://127.1/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://127.1/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://0177.0.0.1/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://0177.0.0.1/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://%31%32%37.0.0.1/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://%31%32%37.0.0.1/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://[0:0:0:0:0:0:0:1]/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://[0:0:0:0:0:0:0:1]/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://8.8.8.8/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://8.8.8.8/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://evil.example\\@a.com/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://evil.example\\@a.com/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://u@a.com/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://u@a.com/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:0443/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:0443/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:443/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:443/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:8443/s?q=x"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com:8443/s?q=x",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://Suggest.Example.com/s?q=x"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://Suggest.Example.com/s?q=x",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["http://localhost:8123/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://localhost:8123/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com/s?q=x"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com/s?q=x",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://192.168.1.1/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://192.168.1.1/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1:8123/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1:8123/s?q=x",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["http://10.0.0.1/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://10.0.0.1/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1:80/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1:80/",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1/",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1:65535/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1:65535/",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1:65536/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1:65536/",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:99999/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:99999/",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com?x"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com?x",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com#x"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com#x",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com:"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["HTTPS://A.COM/"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["HTTPS://A.COM/",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["http://a.com/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://a.com/",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com./x"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com./x",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.local/x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.local/x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:443x/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:443x/",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ftp://a.com/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["ftp://a.com/",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com/",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com/ x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com/ x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":[" https://a.com/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":[" https://a.com/",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:1/"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com:1/",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://a.com:01/"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:01/",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1/",{}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1/",{"allowLoopback":false}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1/",{"allowLoopback":{"$undefined":true}}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1/",{"allowLoopback":1}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1/",{"allowLoopback":"yes"}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1/",{"allowLoopback":0}],"ok":0}
+{"fn":"sha256Hex","args":[""],"ok":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"fn":"sha256Hex","args":["abc"],"ok":"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"}
+{"fn":"sha256Hex","args":["é漢😀"],"ok":"3ea0588400cb4af7b15d0edd7dc2fe1e359a94ab6822abe8c535f4281f330a20"}
+{"fn":"sha256Hex","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":"44f8354494a5ba03ba1792a8d3e9c534c47a9181980fde7a3f44b06ef2ae7c7f"}
+{"fn":"sha256Hex","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":"9f4390f8d30c2dd92ec9f095b65e2b9ae9b0a925a5258e241c9f1e910f734318"}
+{"fn":"sha256Hex","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":"b35439a4ac6f0948b6d6f9e3c6af0f5f590ce20f1bde7090ef7970686ec6738a"}
+{"fn":"sha256Hex","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":"7d3e74a05d7db15bce4ad9ec0658ea98e3f06eeecf16b4c6fff2da457ddc2f34"}
+{"fn":"sha256Hex","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":"ffe054fe7ae0cb6dc65c3af9b61d5209f439851db43d0ba5997337df154668eb"}
+{"fn":"sha256Hex","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":"635361c48bb9eab14198e76ea8ab7f1a41685d6ad62aa9146d301d4f17eb0ae0"}
+{"fn":"sha256Hex","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":"31eba51c313a5c08226adf18d4a359cfdfd8d2e816b13f4af952f7ea6584dcfb"}
+{"fn":"sha256Hex","args":["\u0000"],"ok":"6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"}
+{"fn":"sha256Hex","args":["The quick brown fox jumps over the lazy dog"],"ok":"d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592"}
+{"fn":"providerApprovalKey","args":[{"title":"Docs","suggest":"https://a.com/{query}","global":true}],"ok":"omnibox-provider:27148c93b59efdf3ed6cdea42493ca3ac6c38eb05bea69c6de2550265562b95e"}
+{"fn":"providerApprovalKey","args":[{"global":true,"suggest":"https://a.com/{query}","title":"Docs"}],"ok":"omnibox-provider:27148c93b59efdf3ed6cdea42493ca3ac6c38eb05bea69c6de2550265562b95e"}
+{"fn":"providerApprovalKey","args":[{"title":"Docs","suggest":"https://b.com/{query}","global":true}],"ok":"omnibox-provider:a07b97d663e6ae65ffcc7ed21caefc8a4102bcd4a193623e5feef92a5770ca29"}
+{"fn":"providerApprovalKey","args":[null],"ok":"omnibox-provider:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"}
+{"fn":"providerApprovalKey","args":[{"$undefined":true}],"ok":"omnibox-provider:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"}
+{"fn":"providerApprovalKey","args":[1],"ok":"omnibox-provider:6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"}
+{"fn":"providerApprovalKey","args":[1.5],"ok":"omnibox-provider:9f29a130438b81170b92a42650f9a94291ecad60bd47af2a3886e75f7f728725"}
+{"fn":"providerApprovalKey","args":[0],"ok":"omnibox-provider:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"}
+{"fn":"providerApprovalKey","args":[1e+21],"ok":"omnibox-provider:241c4643fa70b1dcde1205b71be4e3bebb17e9f880c8e1a33d0ead6c27271d3c"}
+{"fn":"providerApprovalKey","args":[1e-7],"ok":"omnibox-provider:5b33e02f2c5103a05d32f6ba9cb058294452bfbf393967f68bb30c1bdcbbab22"}
+{"fn":"providerApprovalKey","args":[123456789012345680000],"ok":"omnibox-provider:725abf175290195635e55a971cf88e02a46d6d56e964ec2d8bc47614b9559062"}
+{"fn":"providerApprovalKey","args":[0.1],"ok":"omnibox-provider:14be4b45f18e0d8c67b4f719b5144eee88497e413709d11d85b096d8e2346310"}
+{"fn":"providerApprovalKey","args":[{"$num":"NaN"}],"ok":"omnibox-provider:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"}
+{"fn":"providerApprovalKey","args":[{"$num":"Infinity"}],"ok":"omnibox-provider:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"}
+{"fn":"providerApprovalKey","args":["str"],"ok":"omnibox-provider:72495b0e1f3c6c961f46d3f249ce968ac758c43b88e50d32aa138681f8a38804"}
+{"fn":"providerApprovalKey","args":["é\"\\\n\t\u0001 😀"],"ok":"omnibox-provider:bdfb9b367f3790ed5bc1abab2743dab361d6b4273b971b2dbad610fdf5a4bc4a"}
+{"fn":"providerApprovalKey","args":[true],"ok":"omnibox-provider:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"}
+{"fn":"providerApprovalKey","args":[[]],"ok":"omnibox-provider:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"}
+{"fn":"providerApprovalKey","args":[{}],"ok":"omnibox-provider:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"}
+{"fn":"providerApprovalKey","args":[[1,null,{"$undefined":true},"a",[{"b":{"$undefined":true}}]]],"ok":"omnibox-provider:0be74fbbc24069b581b06dfca13cd6a073205d3143bda37516d05999fe2f93ea"}
+{"fn":"providerApprovalKey","args":[{"2":6,"10":5,"b":1,"a":{"d":{"$undefined":true},"c":[2]},"B":3,"_":4,"é":7,"😀":8,"｡":9}],"ok":"omnibox-provider:867c8531c2a3568ace91978928300e2e8063d995dcc561f97d035fb384ac6e2e"}
+{"fn":"providerApprovalKey","args":[{"x":{"$undefined":true}}],"ok":"omnibox-provider:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"}
+{"fn":"providerApprovalKey","args":[{"rows":[{"title":"t","url":"https://a.com"}],"keyword":"k"}],"ok":"omnibox-provider:52c605406aab790f509c8e15739eb9b50a77fdb2040ab79f2e633085e5177d04"}
+{"fn":"providerApprovalKey","args":[{"":1,"ÿ\"":2}],"ok":"omnibox-provider:8592ea95611c647958b315530fed76101523aa6cdd73b111d096365f6ba493e3"}
+{"fn":"sha256Hex","args":[{"$utf16":[55296]}],"ok":"83d544ccc223c057d2bf80d3f2a32982c32c3c0db8e2674820da5064783fb097"}
+{"fn":"sha256Hex","args":[{"$utf16":[97,56320,98,55357,56832]}],"ok":"4bc08937e5c23bbc0070e6c5dda2890acdb1d1b43050f7fd1a16862345812cad"}
+{"fn":"providerApprovalKey","args":[{"$utf16":[55296]}],"ok":"omnibox-provider:8c0c59dd0d275aadcd462a5fe12eb352cbdfeaf961eae4f85a4660521df7d2f5"}
+{"fn":"isPublicHost","args":["localhost"],"ok":false}
+{"fn":"isPublicHost","args":["127.0.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["10.0.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["192.168.1.2"],"ok":false}
+{"fn":"isPublicHost","args":["172.20.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["169.254.169.254"],"ok":false}
+{"fn":"isPublicHost","args":["100.64.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["[::1]"],"ok":false}
+{"fn":"isPublicHost","args":["[fd00::1]"],"ok":false}
+{"fn":"isPublicHost","args":["[fe80::1]"],"ok":false}
+{"fn":"isPublicHost","args":["printer.local"],"ok":false}
+{"fn":"isPublicHost","args":["intranet"],"ok":false}
+{"fn":"isPublicHost","args":["2130706433"],"ok":false}
+{"fn":"isPublicHost","args":["0x7f000001"],"ok":false}
+{"fn":"isPublicHost","args":["8.8.8.8"],"ok":false}
+{"fn":"isPublicHost","args":["[2606:4700::1111]"],"ok":false}
+{"fn":"isPublicHost","args":["127.1"],"ok":false}
+{"fn":"isPublicHost","args":["0177.0.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["%31%32%37.0.0.1"],"ok":false}
+{"fn":"isPublicHost","args":["exa_mple.com"],"ok":false}
+{"fn":"isPublicHost","args":["bänk.example"],"ok":false}
+{"fn":"isPublicHost","args":["example.com"],"ok":true}
+{"fn":"isPublicHost","args":["Example.COM"],"ok":true}
+{"fn":"isPublicHost","args":["xn--bnk-sna.example"],"ok":true}
+{"fn":"isPublicHost","args":["a.b-c.io"],"ok":true}
+{"fn":"isPublicHost","args":["example.com."],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://127.1/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://0177.0.0.1/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://%31%32%37.0.0.1/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://[0:0:0:0:0:0:0:1]/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://8.8.8.8/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://evil.example\\@a.com/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://u@a.com/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:0443/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:443/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com:8443/s?q=x"],"ok":true}
+{"fn":"isPublicHost","args":["a.com"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://Suggest.Example.com/s?q=x"],"ok":true}
+{"fn":"isPublicHost","args":["Suggest.Example.com"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["http://localhost:8123/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"remoteRequestAllowed","args":["https://a.com/s?q=x"],"ok":true}
+{"fn":"remoteRequestAllowed","args":["https://192.168.1.1/s?q=x"],"ok":false}
+{"fn":"isPublicHost","args":["192.168.1.1"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1:8123/s?q=x"],"ok":false}
+{"fn":"remoteRequestAllowed","args":["http://127.0.0.1:8123/s?q=x",{"allowLoopback":true}],"ok":true}
+{"fn":"remoteRequestAllowed","args":["http://10.0.0.1/s?q=x",{"allowLoopback":true}],"ok":false}
+{"fn":"sha256Hex","args":[""],"ok":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"fn":"sha256Hex","args":["abc"],"ok":"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"}
+{"fn":"sha256Hex","args":["é漢😀"],"ok":"3ea0588400cb4af7b15d0edd7dc2fe1e359a94ab6822abe8c535f4281f330a20"}
+{"fn":"sha256Hex","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":"44f8354494a5ba03ba1792a8d3e9c534c47a9181980fde7a3f44b06ef2ae7c7f"}
+{"fn":"sha256Hex","args":["{\"global\":true,\"suggest\":\"https://a.com/{query}\",\"title\":\"Docs\"}"],"ok":"27148c93b59efdf3ed6cdea42493ca3ac6c38eb05bea69c6de2550265562b95e"}
+{"fn":"sha256Hex","args":["{\"global\":true,\"suggest\":\"https://b.com/{query}\",\"title\":\"Docs\"}"],"ok":"a07b97d663e6ae65ffcc7ed21caefc8a4102bcd4a193623e5feef92a5770ca29"}

@@ -1,0 +1,192 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-4-search/repo",
+  "unit": "packages/core/src/siteSearch.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "sitesearch-rs",
+  "exports": [
+    {
+      "name": "providerScope",
+      "file": "packages/core/src/siteSearch.ts",
+      "line": 50,
+      "params": [
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "providers",
+          "ts_type": "readonly { id: string; title: string; keyword: string; host?: string; url?: string }[]",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "({\n  kind: \"engine\" | \"site\" | \"history\" | \"provider\";\n  name: string;\n  host: string;\n  url: string;\n  engineId?: string;\n  providerId?: string;\n}) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "findScope",
+      "file": "packages/core/src/siteSearch.ts",
+      "line": 67,
+      "params": [
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "arg1",
+          "ts_type": "{\n  engines: readonly {\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}[];\n  sites?: readonly { host: string; name: string; url: string; keyword?: string }[];\n  hosts?: readonly string[];\n  providers?: readonly { id: string; title: string; keyword: string; host?: string; url?: string }[];\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({\n  kind: \"engine\" | \"site\" | \"history\" | \"provider\";\n  name: string;\n  host: string;\n  url: string;\n  engineId?: string;\n  providerId?: string;\n}) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "scopedSearchUrl",
+      "file": "packages/core/src/siteSearch.ts",
+      "line": 95,
+      "params": [
+        {
+          "name": "scope",
+          "ts_type": "({\n  kind: \"engine\" | \"site\" | \"history\" | \"provider\";\n  name: string;\n  host: string;\n  url: string;\n  engineId?: string;\n  providerId?: string;\n})",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "query",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "defaultEngine",
+          "ts_type": "Pick<{\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}, \"url\">",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "offeredSiteSearch",
+      "file": "packages/core/src/siteSearch.ts",
+      "line": 101,
+      "params": [
+        {
+          "name": "typed",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "completion",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "sources",
+          "ts_type": "{\n  engines: readonly {\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}[];\n  sites?: readonly { host: string; name: string; url: string; keyword?: string }[];\n  hosts?: readonly string[];\n  providers?: readonly { id: string; title: string; keyword: string; host?: string; url?: string }[];\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({\n  kind: \"engine\" | \"site\" | \"history\" | \"provider\";\n  name: string;\n  host: string;\n  url: string;\n  engineId?: string;\n  providerId?: string;\n}) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "keywordBySpace",
+      "file": "packages/core/src/siteSearch.ts",
+      "line": 124,
+      "params": [
+        {
+          "name": "typed",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "next",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ keyword: string; from: string } | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "asksForBackspace",
+      "file": "packages/core/src/siteSearch.ts",
+      "line": 129,
+      "params": [
+        {
+          "name": "scope",
+          "ts_type": "({\n  kind: \"engine\" | \"site\" | \"history\" | \"provider\";\n  name: string;\n  host: string;\n  url: string;\n  engineId?: string;\n  providerId?: string;\n}) | null",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "siteSearchKey",
+      "file": "packages/core/src/siteSearch.ts",
+      "line": 133,
+      "params": [
+        {
+          "name": "key",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "modifiers",
+          "ts_type": "{ shiftKey?: boolean; altKey?: boolean; metaKey?: boolean; ctrlKey?: boolean }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "state",
+          "ts_type": "({\n  typed: string;\n  completion: string;\n  scope: ({\n  kind: \"engine\" | \"site\" | \"history\" | \"provider\";\n  name: string;\n  host: string;\n  url: string;\n  engineId?: string;\n  providerId?: string;\n}) | null;\n  offered: ({\n  kind: \"engine\" | \"site\" | \"history\" | \"provider\";\n  name: string;\n  host: string;\n  url: string;\n  engineId?: string;\n  providerId?: string;\n}) | null;\n  scopeFrom: string;\n})",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "(| { kind: \"enter\"; scope: ({\n  kind: \"engine\" | \"site\" | \"history\" | \"provider\";\n  name: string;\n  host: string;\n  url: string;\n  engineId?: string;\n  providerId?: string;\n}); from: string }\n  | { kind: \"leave\"; text: string }\n  | { kind: \"accept\"; text: string }) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

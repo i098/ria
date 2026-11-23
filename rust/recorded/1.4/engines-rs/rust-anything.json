@@ -1,0 +1,324 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-4-search/repo",
+  "unit": "packages/core/src/engines.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "engines-rs",
+  "exports": [
+    {
+      "name": "validSearchTemplate",
+      "file": "packages/core/src/engines.ts",
+      "line": 89,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "url is string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "customEngineFrom",
+      "file": "packages/core/src/engines.ts",
+      "line": 91,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ id: string; name: string; keyword: string; url: string } | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "customEnginesFrom",
+      "file": "packages/core/src/engines.ts",
+      "line": 98,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ id: string; name: string; keyword: string; url: string }[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "allEngines",
+      "file": "packages/core/src/engines.ts",
+      "line": 101,
+      "params": [
+        {
+          "name": "custom",
+          "ts_type": "readonly { id: string; name: string; keyword: string; url: string }[]",
+          "optional": true,
+          "rest": false
+        },
+        {
+          "name": "extension",
+          "ts_type": "readonly {\n  profile: string;\n  extensionId: string;\n  extensionName: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  isDefault: boolean;\n}[]",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "extensionEngineId",
+      "file": "packages/core/src/engines.ts",
+      "line": 119,
+      "params": [
+        {
+          "name": "extensionId",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "controllingExtensionEngine",
+      "file": "packages/core/src/engines.ts",
+      "line": 121,
+      "params": [
+        {
+          "name": "extension",
+          "ts_type": "readonly {\n  profile: string;\n  extensionId: string;\n  extensionName: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  isDefault: boolean;\n}[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  profile: string;\n  extensionId: string;\n  extensionName: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  isDefault: boolean;\n} | undefined",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "engineById",
+      "file": "packages/core/src/engines.ts",
+      "line": 125,
+      "params": [
+        {
+          "name": "engines",
+          "ts_type": "readonly {\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "id",
+          "ts_type": "string | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "searchUrl",
+      "file": "packages/core/src/engines.ts",
+      "line": 129,
+      "params": [
+        {
+          "name": "engine",
+          "ts_type": "Pick<{\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}, \"url\">",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "query",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "suggestRequestUrl",
+      "file": "packages/core/src/engines.ts",
+      "line": 131,
+      "params": [
+        {
+          "name": "engine",
+          "ts_type": "{\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "query",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "engineHost",
+      "file": "packages/core/src/engines.ts",
+      "line": 134,
+      "params": [
+        {
+          "name": "engine",
+          "ts_type": "Pick<{\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}, \"url\">",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "suggestReplyJson",
+      "file": "packages/core/src/engines.ts",
+      "line": 142,
+      "params": [
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "parseRemoteSuggestions",
+      "file": "packages/core/src/engines.ts",
+      "line": 144,
+      "params": [
+        {
+          "name": "body",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ queries: string[]; sites: { url: string; title: string }[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "parseSuggestions",
+      "file": "packages/core/src/engines.ts",
+      "line": 161,
+      "params": [
+        {
+          "name": "body",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "validateEngine",
+      "file": "packages/core/src/engines.ts",
+      "line": 165,
+      "params": [
+        {
+          "name": "input",
+          "ts_type": "{ name: string; keyword: string; url: string }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "engines",
+          "ts_type": "readonly {\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "ignoreId",
+          "ts_type": "string",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "makeCustomEngine",
+      "file": "packages/core/src/engines.ts",
+      "line": 178,
+      "params": [
+        {
+          "name": "input",
+          "ts_type": "{ name: string; keyword: string; url: string }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "id",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ id: string; name: string; keyword: string; url: string }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

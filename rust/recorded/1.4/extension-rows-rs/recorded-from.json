@@ -1,0 +1,23 @@
+{
+  "unit": "packages/core/src/extensionRows.ts",
+  "files": 1,
+  "fingerprint": "4478dfbee7b6349d",
+  "coverage": {
+    "lines": 112,
+    "reached": 97,
+    "files": [
+      {
+        "file": "packages/core/src/extensionRows.ts",
+        "lines": 25,
+        "reached": 25,
+        "missed": ""
+      },
+      {
+        "file": "packages/core/src/fuzzy.ts",
+        "lines": 87,
+        "reached": 72,
+        "missed": "22-36"
+      }
+    ]
+  }
+}

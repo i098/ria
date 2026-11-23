@@ -1,0 +1,108 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-4-search/repo",
+  "unit": "packages/core/src/providerConfig.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "providerconfig-rs",
+  "exports": [
+    {
+      "name": "isProviderKeyword",
+      "file": "packages/core/src/providerConfig.ts",
+      "line": 32,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "value is string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isRemoteEndpoint",
+      "file": "packages/core/src/providerConfig.ts",
+      "line": 34,
+      "params": [
+        {
+          "name": "template",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "readProviderEntries",
+      "file": "packages/core/src/providerConfig.ts",
+      "line": 91,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "name",
+          "ts_type": "string",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "{ entries: {\n  keyword?: string;\n  title?: string;\n  global?: boolean;\n  rows?: ({ title: string; url: string; subtitle?: string; icon?: string | null; badge?: string })[];\n  url?: string;\n  suggest?: string;\n}[]; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isProviderEntryList",
+      "file": "packages/core/src/providerConfig.ts",
+      "line": 110,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "value is {\n  keyword?: string;\n  title?: string;\n  global?: boolean;\n  rows?: ({ title: string; url: string; subtitle?: string; icon?: string | null; badge?: string })[];\n  url?: string;\n  suggest?: string;\n}[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "providerConfigs",
+      "file": "packages/core/src/providerConfig.ts",
+      "line": 119,
+      "params": [
+        {
+          "name": "entries",
+          "ts_type": "readonly {\n  keyword?: string;\n  title?: string;\n  global?: boolean;\n  rows?: ({ title: string; url: string; subtitle?: string; icon?: string | null; badge?: string })[];\n  url?: string;\n  suggest?: string;\n}[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  id: string;\n  title: string;\n  keyword?: string;\n  global: boolean;\n  rows: ({ title: string; url: string; subtitle?: string; icon?: string | null; badge?: string })[];\n  url?: string;\n  suggest?: string;\n}[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

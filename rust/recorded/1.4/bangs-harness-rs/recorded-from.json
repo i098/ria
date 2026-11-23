@@ -1,0 +1,23 @@
+{
+  "unit": "packages/core/src/bangs.harness.ts",
+  "files": 1,
+  "fingerprint": "09ea1d3b8f7fef37",
+  "coverage": {
+    "lines": 230,
+    "reached": 150,
+    "files": [
+      {
+        "file": "packages/core/src/bangs.harness.ts",
+        "lines": 20,
+        "reached": 20,
+        "missed": ""
+      },
+      {
+        "file": "packages/core/src/bangs.ts",
+        "lines": 210,
+        "reached": 130,
+        "missed": "14-24, 26-38, 41-66, 84-113"
+      }
+    ]
+  }
+}

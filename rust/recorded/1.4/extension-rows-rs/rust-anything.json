@@ -1,0 +1,42 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-4-search/repo",
+  "unit": "packages/core/src/extensionRows.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "extensionrows-rs",
+  "exports": [
+    {
+      "name": "extensionSuggestions",
+      "file": "packages/core/src/extensionRows.ts",
+      "line": 18,
+      "params": [
+        {
+          "name": "query",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "extensions",
+          "ts_type": "readonly ({\n  id: string;\n  title: string;\n  icon: string | null;\n  action: boolean;\n  options: boolean;\n})[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "limit",
+          "ts_type": "number",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "{ rows: (| {\n      kind: \"page\";\n      url: string;\n      title: string;\n      favicon: string | null;\n      tabId?: string;\n      bookmarked?: boolean;\n      visited?: boolean;\n    }\n  | { kind: \"search\"; query: string; url: string; engine: string; suggested?: boolean; bang?: true }\n  | { kind: \"calc\"; expression: string; value: string; url: string }\n  | { kind: \"action\"; id: string; title: string; icon?: string; hint?: string }\n  | { kind: \"create\"; id: string; title: string; url: string; site: string }\n  | { kind: \"extension\"; id: string; title: string; icon: string | null; open: \"action\" | \"options\" }\n  | { kind: \"provider\"; providerId: string; provider: string; title: string; url: string; subtitle?: string; icon: string | null })[]; exact: boolean }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}
