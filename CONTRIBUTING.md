@@ -29,7 +29,10 @@ node rust/parity/compare.selftest.mjs
 rust/tools/check-headers.sh
 ```
 
-The `test` job leaves out two things, on purpose. The jail escape tests (`rust/crates/ria-plugin-broker/crates/jail/tests/escape.rs`) need a `bwrap` that `scripts/build-bwrap.sh` builds (`ARDIA_BWRAP`). Check L of `ria-engine-sys` (`tests/live.rs`) needs macOS and the prebuilt engine; on Linux it prints "skipped".
+The `test` job skips the jail escape tests (`rust/crates/ria-plugin-broker/crates/jail/tests/escape.rs`).
+Those tests need a `bwrap` that `scripts/build-bwrap.sh` builds (`ARDIA_BWRAP`).
+The live engine checks report a skip on Linux.
+See the check sources for [`ria-engine-sys`](rust/crates/ria-engine-sys/tests/live.rs) and [`ria-engine`](rust/crates/ria-engine/src/domains/data/live.rs) for the macOS requirements.
 
 Two more gates run locally, not in CI:
 

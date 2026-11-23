@@ -396,6 +396,8 @@ unsafe extern "C" {
 #[cfg(target_os = "macos")]
 pub mod main_queue {
     use std::ffi::c_void;
+    use std::io::Write;
+    use std::panic::{AssertUnwindSafe, catch_unwind};
     use std::time::Duration;
 
     unsafe extern "C" {
@@ -417,7 +419,10 @@ pub mod main_queue {
     extern "C" fn run(context: *mut c_void) {
         // SAFETY: `context` is the `Box<Box<dyn FnOnce()>>` made in `after` or `post`; libdispatch runs the work once.
         let work = unsafe { Box::from_raw(context.cast::<Box<dyn FnOnce()>>()) };
-        work();
+        if let Err(_panic) = catch_unwind(AssertUnwindSafe(work)) {
+            let _ = writeln!(std::io::stderr(), "Ria: panic in main queue callback");
+            std::process::abort();
+        }
     }
 
     /// Runs `work` on the main queue after `delay`.
