@@ -1,5 +1,7 @@
 // Ria original, no Ardia source.
 
+// This fixture does not check mouse or keyboard input delivery.
+
 #[cfg(not(target_os = "macos"))]
 fn main() {
     eprintln!("live_tabs: skipped, the prebuilt engine runs on macOS only");
@@ -31,7 +33,7 @@ mod mac {
     use ria_host_mac::tabs::ardia_tab_parking::TabParking;
     use ria_host_mac::tabs::ardia_tab_registry::TabRegistry;
     use ria_host_mac::tabs::ardia_tab_strip::{StripCommandResult, StripWindow, TabStrips};
-    use serde_json::{Value, json};
+    use serde_json::json;
 
     struct Checks {
         passed: Cell<bool>,

@@ -10,9 +10,6 @@ Source of truth for what is ported and where it goes. One row for each unit.
 - `partial` means Rust code exists, but integration or live checks are incomplete.
 - `implemented` records code in the repository, not app integration or a gate result.
 
-Slice 3.8 rows marked `in work` have Rust helpers from Part 1 but do not have production page-host integration.
-For `ArdiaWebView.*`, Part 1 ports only `ArdiaWebView+ContextMenu.mm`.
-
 Counts: 1255 rows, 814 in scope `mac`, 441 `out`.
 Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 units and 59739 lines, absorb 84 units and 5559 lines, delete 6 units and 173 lines, later 25 units and 1726 lines, done 1 units and 9945 lines.
 
