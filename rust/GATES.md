@@ -22,7 +22,7 @@ Slice 0.10. Plan v5 section 8.5 (gate G0), limits of sections 6.6, 6.7 and 8.4.
 Sources: PR https://github.com/i098/ria/pull/17, `rust/proofs/abc-host/README.md`, `rust/RESOURCES.md`, `rust/proofs/d-fuzzy/README.md`.
 Mac numbers: arm64, macOS 26.2, Chromium 158.0.8127.36 (prebuilt engine). Proof D: Linux x64, node v26.12.1, rust-anything 3.3.0.
 
-Owner decision: open
+Owner decision: go, 2026-11-23: "G0 owner decision: go".
 
 ### Result of each proof
 

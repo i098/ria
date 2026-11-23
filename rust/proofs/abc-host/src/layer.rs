@@ -85,7 +85,7 @@ fn view(s: &State, _: &mut Cx<State>) -> El {
     }
     let bar = el().key("bar").h(6.0).w(40.0 + 160.0 * (0.5 + 0.5 * s.phase.sin())).radius(3.0).fill(tok::accent(1, s.dark));
     let root = col().w_full().h_full().padding(12.0).gap(10.0);
-    let title = text("Halyard layer").font(type_::TITLE).color(t.text);
+    let title = text("Ria layer").font(type_::TITLE).color(t.text);
     if transparent {
         // Proof C: a title and one button over the glass, nothing else.
         return root.child(title).child(button).child(text(format!("Shared {}", s.shown)).key("shared").font(type_::BODY).color(t.text)).child(bar);
@@ -112,7 +112,7 @@ fn poll(s: &mut State, t: f64, _tx: &mut Tx) -> bool {
 fn spec() -> AppSpec<State> {
     AppSpec {
         poll: Some(poll),
-        ..AppSpec::new("Halyard layer", (320.0, 560.0), || State { presses: 0, shown: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new("") }, view)
+        ..AppSpec::new("Ria layer", (320.0, 560.0), || State { presses: 0, shown: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new("") }, view)
     }
 }
 
@@ -244,7 +244,7 @@ pub struct Ivars {
 define_class!(
     #[unsafe(super(NSView))]
     #[thread_kind = MainThreadOnly]
-    #[name = "HalyardRuneView"]
+    #[name = "RiaRuneView"]
     #[ivars = Ivars]
     pub struct RuneView;
 
@@ -771,7 +771,7 @@ impl RuneView {
             if iv.ax_asked.swap(false, Ordering::Relaxed) {
                 iv.a11y_link.borrow_mut().activate();
             }
-            if let Some(update) = iv.a11y_link.borrow_mut().service(host.runtime_mut(), "Halyard layer") {
+            if let Some(update) = iv.a11y_link.borrow_mut().service(host.runtime_mut(), "Ria layer") {
                 if let Some(adapter) = iv.a11y.borrow_mut().as_mut() {
                     if let Some(events) = adapter.update_if_active(|| update) {
                         events.raise();

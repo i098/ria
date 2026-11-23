@@ -3,7 +3,7 @@ name = "abc-host"
 version = "0.0.0"
 edition = "2024"
 license = "Apache-2.0"
-description = "Halyard Phase 0 proofs A, B and C: a Rust host for the prebuilt Ardia engine with Rune layers."
+description = "Ria Phase 0 proofs A, B and C: a Rust host for the prebuilt Ardia engine with Rune layers."
 publish = false
 
 # Own workspace: this crate builds on its own until the base slice owns rust/Cargo.toml.

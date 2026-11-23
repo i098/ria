@@ -1,6 +1,6 @@
-//! Halyard Phase 0, proofs A, B and C: a Rust host for the prebuilt Ardia engine.
+//! Ria Phase 0, proofs A, B and C: a Rust host for the prebuilt Ardia engine.
 //!
-//! The binary lives in `Halyard Proof.app/Contents/MacOS` beside `Contents/Frameworks/Chromium
+//! The binary lives in `Ria Proof.app/Contents/MacOS` beside `Contents/Frameworks/Chromium
 //! Framework.framework` (see `run.sh`). It loads that framework, hands it a delegate, and the
 //! engine runs the main loop. When the engine starts, `proof.rs` opens one window and one tab and
 //! runs the chosen scenario.
@@ -26,7 +26,7 @@ use proof::{Config, Kind};
 
 define_class!(
     #[unsafe(super(NSObject))]
-    #[name = "HalyardEngineDelegate"]
+    #[name = "RiaEngineDelegate"]
     struct EngineDelegate;
 
     impl EngineDelegate {
