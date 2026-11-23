@@ -410,7 +410,7 @@ mod mac {
                 if strips.observe_engine_strip(event) == Some(strip_id)
                     && let Some(tx) = strips.changed(&scope, registry, None)
                 {
-                    emitted.borrow_mut().push(serde_json::to_value(tx).unwrap());
+                    emitted.borrow_mut().push(tx);
                 }
             }
         });
@@ -441,12 +441,10 @@ mod mac {
                                         strips.group_finished(command, &scope, registry, false);
                                     !group.is_empty()
                                         && matches_group(&tx, Some(command), strip, group)
-                                        && emitted.take().into_iter().any(|payload| {
-                                            serde_json::from_value::<TabStripTransaction>(payload)
-                                                .is_ok_and(|tx| {
-                                                    matches_group(&tx, None, strip, group)
-                                                })
-                                        })
+                                        && emitted
+                                            .take()
+                                            .iter()
+                                            .any(|tx| matches_group(tx, None, strip, group))
                                 })
                             });
                         engine_pinned.set(false);
@@ -506,6 +504,14 @@ mod mac {
         };
         let pass = arranged.cmd == Some(command)
             && arranged.rejected.is_none()
+            && arranged.strips.iter().any(|state| {
+                state.strip == Number::from(strip_id)
+                    && state.tabs.iter().any(|row| {
+                        row.key.as_deref() == Some("fixture")
+                            && row.index == Number(0.0)
+                            && row.pinned
+                    })
+            })
             && adopted == Adoption::Adopted
             && removed
             && strips.active(strip_id).is_none()

@@ -277,10 +277,11 @@ impl TabStrips {
                 }
             }
             TabStripCommand::Arrange { keys, pinned, .. } => {
+                let pinned_count = pinned.0 as isize;
                 let mut placed = 0;
                 for (index, key) in keys.iter().enumerate() {
                     if let Some(tab) = by_key.get(key.as_str()) {
-                        let pinned = (index as f64) < pinned.0;
+                        let pinned = (index as isize) < pinned_count;
                         self.set_pinned(tab, pinned);
                         scope.window.place_tab(tab, placed, pinned);
                         placed += 1;
