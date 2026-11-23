@@ -330,6 +330,23 @@ mod mac {
             pass = false;
         }
 
+        let mut parking = TabParking::new(mtm);
+        parking.hold_link_tabs(&urls, "Default", Instant::now(), |url| {
+            Some(window.open_tab(&NSString::from_str(url), &profile, false))
+        });
+        if let Some(dismissed) = parking.first_link_tab().map(Message::retain) {
+            parking.dismiss_link_tab(&dismissed, |_| {});
+        }
+        pass &= serde_json::to_value(parking.route_link_tabs(&urls[..1])).unwrap()
+            == json!({"dismissed": [0]});
+        pass &= serde_json::to_value(parking.route_link_tabs(&urls[1..])).unwrap()
+            == json!({"profile": "Default", "adoptIds": ["link:1"], "dismissed": []});
+        if let Some(adopted) = parking.park_link_tab("link:1", "adopted") {
+            parking.discard_tab(&adopted, "adopted", |_| {});
+        } else {
+            pass = false;
+        }
+
         check_strip_events(window, restored, profile, registry, pass);
     }
 
