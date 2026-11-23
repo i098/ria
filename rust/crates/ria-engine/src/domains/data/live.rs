@@ -208,22 +208,6 @@ mod mac {
         fn destroyed(&self) -> bool {
             false
         }
-        fn passwords_offered(&self) -> bool {
-            true
-        }
-        fn set_passwords_offered(&self, _: bool) {}
-        fn addresses_autofilled(&self) -> bool {
-            true
-        }
-        fn set_addresses_autofilled(&self, _: bool) {}
-        fn cards_autofilled(&self) -> bool {
-            true
-        }
-        fn set_cards_autofilled(&self, _: bool) {}
-        fn preload_pages(&self) -> bool {
-            true
-        }
-        fn set_preload_pages(&self, _: bool) {}
         fn fetch_icon(&self, _: &str, _: usize, done: Box<dyn FnOnce(Option<Vec<u8>>)>) {
             done(None)
         }
@@ -353,12 +337,13 @@ mod mac {
         });
         LIVE.with(|l| *l.borrow_mut() = Some(live.clone()));
 
-        let exported = std::env::temp_dir().join(format!("ria-live-{}.html", std::process::id()));
+        let data = PathBuf::from(std::env::var_os("RIA_LIVE_DATA").unwrap());
+        let exported = data.join("bookmarks.html");
         let profile: Profile = Rc::new(LiveProfile(dir.clone()));
         let registry = ProfileRegistry::new(Rc::new(LiveCore(profile)), Rc::new(NoEvents));
         let ctx = DataCtx {
             engine: engine.clone(),
-            favicons: Rc::new(Favicons::new(registry.clone(), std::env::temp_dir())),
+            favicons: Rc::new(Favicons::new(registry.clone(), data)),
             registry,
             services: Rc::new(LiveServices(exported.to_string_lossy().into_owned())),
             chromium: Rc::new(NoPages),
@@ -370,47 +355,25 @@ mod mac {
         // the reply must parse into `C::Reply`.
         let site = "https://example.com";
         let url = "https://example.com/";
-        expect::<api::bookmarks::Tree>(&live, &ctx, "bookmarks", "tree", json!({}), |r| {
-            r.bar.k == ria_engine::types::EngineBookmarkK::F
-        });
-        expect::<api::bookmarks::Apply>(
-            &live,
-            &ctx,
-            "bookmarks",
-            "apply",
-            json!({"ops": []}),
-            |r| r.applied.0 == 0.0,
-        );
-        expect::<api::bookmarks::Watch>(&live, &ctx, "bookmarks", "watch", json!({}), |_| true);
-        expect::<api::bookmarks::ExportHtml>(&live, &ctx, "bookmarks", "exportHtml", json!({}), {
-            |r| r.as_deref().is_some_and(|p| p.ends_with(".html"))
-        });
-        expect::<api::downloads::Settings>(&live, &ctx, "downloads", "settings", json!({}), |r| {
-            !r.folder.is_empty()
-        });
-        expect::<api::downloads::SetSettings>(
-            &live,
-            &ctx,
-            "downloads",
-            "setSettings",
-            json!({"askWhereToSave": false}),
-            |_| true,
-        );
-        expect::<api::favicons::Set>(
-            &live,
-            &ctx,
-            "favicons",
-            "set",
-            json!({"page": url, "icon": "https://example.com/icon.png", "png": PNG}),
-            |r| r.stored,
-        );
-        expect::<api::favicons::Get>(
-            &live,
-            &ctx,
-            "favicons",
-            "get",
-            json!({"pages": [url], "icons": [], "size": 16}),
-            |_| true,
+        let bookmark_seen = Rc::new(Cell::new(false));
+        check_bookmarks(&live, &ctx, exported, url, bookmark_seen.clone());
+        check_download_settings(&live, &ctx);
+
+        let icon = "https://example.com/icon.png";
+        expect_then::<api::favicons::Set>(
+            &live, &ctx, "favicons", "set",
+            json!({"page": url, "icon": icon, "png": PNG}),
+            move |live, ctx, r| {
+                expect::<api::favicons::Get>(
+                    live, ctx, "favicons", "get",
+                    json!({"pages": [url], "icons": [icon], "size": 16}),
+                    move |r| {
+                        r.pages.get(url).is_some_and(|entry| entry.icon == icon && !entry.png.is_empty())
+                            && r.icons.get(icon).is_some_and(|entry| !entry.png.is_empty())
+                    },
+                );
+                r.stored
+            },
         );
         expect::<api::favicons::Fetch>(
             &live,
@@ -437,53 +400,24 @@ mod mac {
                 seen.set(true);
             }
         });
-        let history_live = live.clone();
-        let history_ctx = ctx.clone();
-        expect::<api::history::Watch>(&live, &ctx, "history", "watch", json!({}), move |_| {
-            expect::<api::history::Add>(
-                &history_live,
-                &history_ctx,
-                "history",
-                "add",
-                json!({"pages": [{"u": url, "t": "Example", "v": [1_700_000_000_000_i64]}], "toleranceMs": 0}),
-                |r| r.added.0 == 1.0,
-            );
-            expect::<api::history::Import>(
-                &history_live,
-                &history_ctx,
-                "history",
-                "import",
-                json!({"rows": [{"u": "https://example.org/", "t": "Org", "n": 1, "l": 1_700_000_000_000_i64}]}),
-                |_| true,
-            );
-            expect::<api::history::Query>(
-                &history_live,
-                &history_ctx,
-                "history",
-                "query",
-                json!({"maxUrls": 10, "maxVisits": 10}),
-                |_| true,
-            );
-            expect::<api::history::DeleteUrls>(
-                &history_live,
-                &history_ctx,
-                "history",
-                "deleteUrls",
-                json!({"urls": ["https://example.org/"]}),
-                |_| true,
-            );
-            true
-        });
-        // A refused or stopped request gives `{netError}` or `{stopped}` without `status`, which `api::search::SuggestReply` (slice 3.2) requires; so the reply is read as a plain map.
+        expect_then::<api::history::Watch>(
+            &live, &ctx, "history", "watch", json!({}),
+            move |live, ctx, _| {
+                check_history(live, ctx, url);
+                true
+            },
+        );
+        let listener = std::net::TcpListener::bind(("127.0.0.1", 0)).unwrap();
+        let suggest_url = format!("http://{}/suggest", listener.local_addr().unwrap());
         expect::<api::search::StopSuggest>(
             &live,
             &ctx,
             "search",
             "suggest",
-            json!({"url": "http://127.0.0.1:1/suggest", "id": 1}),
-            |r| {
-                r.as_ref()
-                    .is_some_and(|m| m.contains_key("netError") || m.contains_key("stopped"))
+            json!({"url": suggest_url, "id": 1}),
+            move |r| {
+                drop(listener);
+                r.as_ref().and_then(|m| m.get("stopped")) == Some(&Value::Bool(true))
             },
         );
         expect::<api::search::StopSuggest>(
@@ -494,21 +428,21 @@ mod mac {
             json!({"id": 1}),
             |_| true,
         );
-        expect::<api::sites::WriteStorage>(
+        expect_then::<api::sites::WriteStorage>(
             &live,
             &ctx,
             "sites",
             "writeStorage",
             json!({"origin": site, "set": [["k", "v"]], "remove": []}),
-            |_| true,
-        );
-        expect::<api::sites::ReadStorage>(
-            &live,
-            &ctx,
-            "sites",
-            "readStorage",
-            json!({"origin": site}),
-            |_| true,
+            move |live, ctx, r| {
+                expect::<api::sites::ReadStorage>(
+                    live, ctx, "sites", "readStorage", json!({"origin": site}),
+                    |r| r.items.as_ref().is_some_and(|items| {
+                        items.iter().any(|(key, value)| key == "k" && value == "v")
+                    }),
+                );
+                r.written.0 == 1.0
+            },
         );
         expect::<api::sites::RegistrableDomains>(
             &live,
@@ -567,7 +501,10 @@ mod mac {
             Rc::new(move |waited: Duration| {
                 let outstanding = *watch.outstanding.borrow();
                 let seen = history_seen.get();
-                if (outstanding != 0 || !seen) && waited < Duration::from_secs(60) {
+                let bookmark_changed = bookmark_seen.get();
+                if (outstanding != 0 || !seen || !bookmark_changed)
+                    && waited < Duration::from_secs(60)
+                {
                     return false;
                 }
                 record(
@@ -575,6 +512,12 @@ mod mac {
                     "history.changed includes the inserted URL",
                     seen,
                     url.into(),
+                );
+                record(
+                    &watch,
+                    "bookmarks.changed follows bookmark insertion",
+                    bookmark_changed,
+                    String::new(),
                 );
                 if outstanding != 0 {
                     record(
@@ -596,6 +539,126 @@ mod mac {
             }),
             Duration::ZERO,
         );
+    }
+
+    fn check_bookmarks(
+        live: &Rc<Live>,
+        ctx: &DataCtx,
+        exported: PathBuf,
+        url: &'static str,
+        seen: Rc<Cell<bool>>,
+    ) {
+        api::subscribe::<api::events::BookmarksChanged>(&ctx.engine, "bookmarks.changed", move |event| {
+            if event.is_ok() {
+                seen.set(true);
+            }
+        });
+        expect_then::<api::bookmarks::Watch>(
+            live, ctx, "bookmarks", "watch", json!({}),
+            move |live, ctx, _| {
+                expect_then::<api::bookmarks::Tree>(
+                    live, ctx, "bookmarks", "tree", json!({}),
+                    move |live, ctx, tree| {
+                        expect_then::<api::bookmarks::Apply>(
+                            live, ctx, "bookmarks", "apply",
+                            json!({"ops": [{"op": "add", "id": "3df75ccb-f536-4d07-a8fc-90b729ff3299",
+                                "k": "u", "t": "Ria live bookmark", "u": url, "a": 1_700_000_000_000_i64,
+                                "parent": tree.bar.id}]}),
+                            move |live, ctx, r| {
+                                expect::<api::bookmarks::ExportHtml>(
+                                    live, ctx, "bookmarks", "exportHtml", json!({}),
+                                    move |result| {
+                                        result.as_deref().is_some_and(|path| Path::new(path) == exported.as_path())
+                                            && std::fs::read_to_string(&exported).is_ok_and(|html| {
+                                                html.contains(url) && html.contains("Ria live bookmark")
+                                            })
+                                    },
+                                );
+                                r.applied.0 == 1.0 && r.invalid.is_empty()
+                            },
+                        );
+                        tree.bar.k == ria_engine::types::EngineBookmarkK::F
+                    },
+                );
+                true
+            },
+        );
+    }
+
+    fn check_download_settings(live: &Rc<Live>, ctx: &DataCtx) {
+        expect_then::<api::downloads::Settings>(
+            live, ctx, "downloads", "settings", json!({}),
+            |live, ctx, before| {
+                let ask = !before.ask_where_to_save;
+                expect_then::<api::downloads::SetSettings>(
+                    live, ctx, "downloads", "setSettings", json!({"askWhereToSave": ask}),
+                    move |live, ctx, r| {
+                        expect::<api::downloads::Settings>(
+                            live, ctx, "downloads", "settings", json!({}),
+                            move |after| after.ask_where_to_save == ask,
+                        );
+                        r.ask_where_to_save == ask
+                    },
+                );
+                !before.folder.is_empty()
+            },
+        );
+    }
+
+    fn check_history(live: &Rc<Live>, ctx: &DataCtx, added: &'static str) {
+        const IMPORTED: &str = "https://example.org/";
+        expect_then::<api::history::Add>(
+            live, ctx, "history", "add",
+            json!({"pages": [{"u": added, "t": "Example", "v": [1_700_000_000_000_i64]}], "toleranceMs": 0}),
+            move |live, ctx, r| {
+                expect_then::<api::history::Import>(
+                    live, ctx, "history", "import",
+                    json!({"rows": [{"u": IMPORTED, "t": "Org", "n": 1, "l": 1_700_000_000_000_i64}]}),
+                    move |live, ctx, _| {
+                        expect_then::<api::history::Query>(
+                            live, ctx, "history", "query", json!({"maxUrls": 10, "maxVisits": 10}),
+                            move |live, ctx, before| {
+                                expect_then::<api::history::DeleteUrls>(
+                                    live, ctx, "history", "deleteUrls", json!({"urls": [IMPORTED]}),
+                                    move |live, ctx, _| {
+                                        expect::<api::history::Query>(
+                                            live, ctx, "history", "query",
+                                            json!({"maxUrls": 10, "maxVisits": 10}),
+                                            move |after| {
+                                                after.entries.iter().any(|entry| entry.u == added)
+                                                    && after.entries.iter().all(|entry| entry.u != IMPORTED)
+                                            },
+                                        );
+                                        true
+                                    },
+                                );
+                                before.entries.iter().any(|entry| entry.u == added)
+                                    && before.entries.iter().any(|entry| entry.u == IMPORTED)
+                            },
+                        );
+                        true
+                    },
+                );
+                r.added.0 == 1.0
+            },
+        );
+    }
+
+    fn expect_then<C: Call + 'static>(
+        live: &Rc<Live>,
+        ctx: &DataCtx,
+        domain: &'static str,
+        name: &'static str,
+        args: Value,
+        pass: impl FnOnce(&Rc<Live>, &DataCtx, &C::Reply) -> bool + 'static,
+    ) where
+        C::Reply: std::fmt::Debug,
+    {
+        let next_live = live.clone();
+        let next_ctx = ctx.clone();
+        expect::<C>(live, ctx, domain, name, args, move |reply| {
+            pass(&next_live, &next_ctx, reply)
+        });
     }
 
     fn poll(step: Rc<dyn Fn(Duration) -> bool>, waited: Duration) {

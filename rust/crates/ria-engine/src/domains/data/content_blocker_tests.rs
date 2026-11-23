@@ -153,22 +153,6 @@ impl CoreProfile for FakeProfile {
     fn destroyed(&self) -> bool {
         false
     }
-    fn passwords_offered(&self) -> bool {
-        false
-    }
-    fn set_passwords_offered(&self, _: bool) {}
-    fn addresses_autofilled(&self) -> bool {
-        false
-    }
-    fn set_addresses_autofilled(&self, _: bool) {}
-    fn cards_autofilled(&self) -> bool {
-        false
-    }
-    fn set_cards_autofilled(&self, _: bool) {}
-    fn preload_pages(&self) -> bool {
-        false
-    }
-    fn set_preload_pages(&self, _: bool) {}
     fn fetch_icon(&self, _: &str, _: usize, done: Box<dyn FnOnce(Option<Vec<u8>>)>) {
         done(None)
     }

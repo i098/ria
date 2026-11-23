@@ -36,7 +36,6 @@ pub struct BadCallArgs(pub String);
 #[derive(Debug, Clone)]
 pub struct CallArgs {
     pub profile: String,
-    pub json: String,
     values: Map<String, Value>,
 }
 
@@ -45,7 +44,6 @@ impl CallArgs {
         match serde_json::from_str::<Value>(json) {
             Ok(Value::Object(values)) => Ok(Self {
                 profile: profile.to_owned(),
-                json: json.to_owned(),
                 values,
             }),
             _ => Err(BadCallArgs("the arguments aren't a JSON object".into())),
@@ -157,42 +155,12 @@ impl CallReply {
         }
     }
 
-    /// `engine`: the reply text of the engine; `{"error": ...}` becomes a rejection.
-    pub fn engine(self, json: &str) {
-        match engine_error(json) {
-            Some(message) => self.fail("ERR_ENGINE", message),
-            None => (self.0)(Ok(json.to_owned())),
-        }
-    }
-
-    /// `service`: a service answer, a value or an error text.
-    pub fn service(self, value: Option<Value>, error: Option<String>) {
-        match error {
-            Some(error) => self.fail("ERR_ENGINE", error),
-            None => self.ok(value),
-        }
-    }
-
     pub fn settle(self, settled: Settled) {
         (self.0)(settled);
     }
 
     pub fn fail(self, code: &str, message: impl Into<String>) {
         (self.0)(Err(Rejection::new(code, message)));
-    }
-}
-
-/// `CallReply.engineError`: the text of an `error` member of an engine reply, if there is one.
-pub fn engine_error(json: &str) -> Option<String> {
-    if !json.contains("\"error\"") {
-        return None;
-    }
-    let Ok(reply) = serde_json::from_str::<Value>(json) else {
-        return Some("the engine's reply isn't JSON".to_owned());
-    };
-    match reply.get("error")? {
-        Value::String(text) => Some(text.clone()),
-        other => Some(other.to_string()),
     }
 }
 
@@ -306,14 +274,7 @@ mod tests {
     }
 
     #[test]
-    fn engine_errors_become_rejections() {
-        assert_eq!(engine_error(r#"{"ok":true}"#), None);
-        assert_eq!(engine_error(r#"{"error":"boom"}"#), Some("boom".into()));
-        assert_eq!(engine_error(r#"{"error":4}"#), Some("4".into()));
-        assert_eq!(
-            engine_error(r#"not json "error""#),
-            Some("the engine's reply isn't JSON".into())
-        );
+    fn module_names_use_the_ardia_prefix() {
         assert_eq!(
             CallTable::<()> {
                 domain: "contentBlocker",

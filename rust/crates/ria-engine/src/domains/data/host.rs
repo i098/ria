@@ -17,15 +17,6 @@ pub trait CoreProfile {
     fn off_the_record(&self) -> bool;
     fn destroyed(&self) -> bool;
 
-    fn passwords_offered(&self) -> bool;
-    fn set_passwords_offered(&self, on: bool);
-    fn addresses_autofilled(&self) -> bool;
-    fn set_addresses_autofilled(&self, on: bool);
-    fn cards_autofilled(&self) -> bool;
-    fn set_cards_autofilled(&self, on: bool);
-    fn preload_pages(&self) -> bool;
-    fn set_preload_pages(&self, on: bool);
-
     /// `fetchIcon:maxBytes:completion:`: the bytes of the icon, or `None`.
     fn fetch_icon(&self, url: &str, max_bytes: usize, done: Box<dyn FnOnce(Option<Vec<u8>>)>);
     /// `loadComponentExtension:`: the id of the loaded extension, or an empty string when it did not load.

@@ -63,11 +63,22 @@ fn png(image: &DynamicImage, pixels: u32) -> Option<(Vec<u8>, u32)> {
 /// The bytes of a `data:` URL: base64 when the header says so, otherwise percent-encoded.
 fn data_url_bytes(url: &str) -> Option<Vec<u8>> {
     let (header, body) = url.strip_prefix("data:")?.split_once(',')?;
-    if header.ends_with(";base64") {
-        let compact: String = body.chars().filter(|c| !c.is_whitespace()).collect();
-        return STANDARD.decode(compact).ok();
+    if !header.ends_with(";base64") {
+        return Some(percent_decode(body));
     }
-    Some(percent_decode(body))
+    let decoded;
+    let body = if body.contains('%') {
+        decoded = percent_decode(body);
+        std::str::from_utf8(&decoded).ok()?
+    } else {
+        body
+    };
+    if body.chars().any(char::is_whitespace) {
+        let compact: String = body.chars().filter(|c| !c.is_whitespace()).collect();
+        STANDARD.decode(compact).ok()
+    } else {
+        STANDARD.decode(body).ok()
+    }
 }
 
 fn percent_decode(text: &str) -> Vec<u8> {
@@ -227,6 +238,12 @@ mod tests {
         assert_eq!(safe_name(Some(&"a".repeat(81))), None);
         let url = format!("data:image/png;base64,{}", STANDARD.encode(tiny_png(2, 2)));
         assert_eq!(data_url_bytes(&url), Some(tiny_png(2, 2)));
+        let payload = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/iZk9HQAAAABJRU5ErkJggg==";
+        let escaped = payload.replace('=', "%3D");
+        let bytes = data_url_bytes(&format!("data:image/png;base64,%20{escaped}")).unwrap();
+        let image = image::load_from_memory(&bytes).unwrap().to_rgba8();
+        assert_eq!(image.dimensions(), (1, 1));
+        assert_eq!(image.get_pixel(0, 0).0, [255, 0, 0, 255]);
         assert_eq!(
             data_url_bytes("data:text/plain,a%20b"),
             Some(b"a b".to_vec())

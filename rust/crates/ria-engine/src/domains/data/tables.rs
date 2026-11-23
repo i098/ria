@@ -111,7 +111,7 @@ pub fn save_card(
     );
 }
 
-fn autofill_table() -> &'static [(&'static str, Handler<DataCtx>)] {
+const fn autofill_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("settings", settings),
         ("setSettings", set_settings),
@@ -158,7 +158,7 @@ fn export_html(ctx: &DataCtx, args: CallArgs, reply: CallReply) -> Done {
     Ok(())
 }
 
-fn bookmarks_table() -> &'static [(&'static str, Handler<DataCtx>)] {
+const fn bookmarks_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("tree", passing!("ac_bookmarks_tree")),
         ("apply", passing!("ac_bookmarks_apply")),
@@ -174,7 +174,7 @@ fn run_command(ctx: &DataCtx, action: &str, args: &CallArgs, reply: CallReply) -
     Ok(())
 }
 
-fn downloads_table() -> &'static [(&'static str, Handler<DataCtx>)] {
+const fn downloads_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("cancel", |ctx, args, reply| {
             run_command(ctx, "cancel", &args, reply)
@@ -193,7 +193,7 @@ fn downloads_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     ]
 }
 
-fn favicons_table() -> &'static [(&'static str, Handler<DataCtx>)] {
+const fn favicons_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("get", passing!("ac_favicons_get")),
         ("set", passing!("ac_favicons_set")),
@@ -206,7 +206,7 @@ fn favicons_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     ]
 }
 
-fn history_table() -> &'static [(&'static str, Handler<DataCtx>)] {
+const fn history_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("query", passing!("ac_history_query")),
         ("add", passing!("ac_history_add")),
@@ -261,7 +261,7 @@ pub fn update_password(
     ctx.service("updatePassword", profile, payload, reply);
 }
 
-fn passwords_table() -> &'static [(&'static str, Handler<DataCtx>)] {
+const fn passwords_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("list", service!("listPasswords")),
         ("unlock", service!("unlockPasswords")),
@@ -322,7 +322,7 @@ fn passwords_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     ]
 }
 
-fn permissions_table() -> &'static [(&'static str, Handler<DataCtx>)] {
+const fn permissions_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("resolve", |ctx, args, reply| {
             let id = args.text("id")?;
@@ -365,7 +365,7 @@ fn permissions_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     ]
 }
 
-fn profiles_table() -> &'static [(&'static str, Handler<DataCtx>)] {
+const fn profiles_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("loaded", |ctx, _, reply| {
             reply.ok(Some(
@@ -410,7 +410,7 @@ fn profiles_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     ]
 }
 
-fn search_table() -> &'static [(&'static str, Handler<DataCtx>)] {
+const fn search_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("suggest", passing!("ac_search_suggest")),
         ("stopSuggest", passing!("ac_search_suggest_stop")),
@@ -445,7 +445,7 @@ fn done_service(reply: CallReply) -> super::host::ServiceDone {
     })
 }
 
-fn sites_table() -> &'static [(&'static str, Handler<DataCtx>)] {
+const fn sites_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("settings", |ctx, args, reply| {
             engine(ctx, &args)?.site_settings(
@@ -550,20 +550,18 @@ pub fn run_data_call(
 
 /// The tables of the data domains, in the order of the modules. The content blocker table is in
 /// `content_blocker_module`.
-pub fn tables() -> Vec<CallTable<DataCtx>> {
-    [
-        ("autofill", autofill_table()),
-        ("bookmarks", bookmarks_table()),
-        ("downloads", downloads_table()),
-        ("favicons", favicons_table()),
-        ("history", history_table()),
-        ("passwords", passwords_table()),
-        ("permissions", permissions_table()),
-        ("profiles", profiles_table()),
-        ("search", search_table()),
-        ("sites", sites_table()),
-    ]
-    .into_iter()
-    .map(|(domain, handlers)| CallTable { domain, handlers })
-    .collect()
+pub fn tables() -> &'static [CallTable<DataCtx>] {
+    static TABLES: [CallTable<DataCtx>; 10] = [
+        CallTable { domain: "autofill", handlers: autofill_table() },
+        CallTable { domain: "bookmarks", handlers: bookmarks_table() },
+        CallTable { domain: "downloads", handlers: downloads_table() },
+        CallTable { domain: "favicons", handlers: favicons_table() },
+        CallTable { domain: "history", handlers: history_table() },
+        CallTable { domain: "passwords", handlers: passwords_table() },
+        CallTable { domain: "permissions", handlers: permissions_table() },
+        CallTable { domain: "profiles", handlers: profiles_table() },
+        CallTable { domain: "search", handlers: search_table() },
+        CallTable { domain: "sites", handlers: sites_table() },
+    ];
+    &TABLES
 }

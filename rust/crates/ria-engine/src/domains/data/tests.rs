@@ -91,22 +91,6 @@ impl CoreProfile for FakeProfile {
     fn destroyed(&self) -> bool {
         false
     }
-    fn passwords_offered(&self) -> bool {
-        true
-    }
-    fn set_passwords_offered(&self, _: bool) {}
-    fn addresses_autofilled(&self) -> bool {
-        true
-    }
-    fn set_addresses_autofilled(&self, _: bool) {}
-    fn cards_autofilled(&self) -> bool {
-        true
-    }
-    fn set_cards_autofilled(&self, _: bool) {}
-    fn preload_pages(&self) -> bool {
-        true
-    }
-    fn set_preload_pages(&self, _: bool) {}
     fn fetch_icon(&self, _: &str, _: usize, done: Box<dyn FnOnce(Option<Vec<u8>>)>) {
         done(None)
     }
@@ -118,10 +102,13 @@ impl CoreProfile for FakeProfile {
     fn release_navigation_hold(&self, _: &str) {}
 }
 
+type BaseLoad = Box<dyn FnOnce(Option<Profile>)>;
 type PrivateLoad = Box<dyn FnOnce(Option<Profile>, Option<String>)>;
 
 #[derive(Default)]
 struct FakeCore {
+    defer_base_load: bool,
+    pending_base: RefCell<Option<BaseLoad>>,
     pending_private: RefCell<Option<PrivateLoad>>,
     released: RefCell<Vec<Profile>>,
 }
@@ -130,11 +117,15 @@ impl CoreEngine for FakeCore {
     fn default_profile(&self) -> Option<Profile> {
         None
     }
-    fn load_profile(&self, directory: &str, done: Box<dyn FnOnce(Option<Profile>)>) {
-        done(Some(Rc::new(FakeProfile {
-            directory: directory.into(),
-            private: false,
-        })))
+    fn load_profile(&self, directory: &str, done: BaseLoad) {
+        if self.defer_base_load {
+            assert!(self.pending_base.replace(Some(done)).is_none());
+        } else {
+            done(Some(Rc::new(FakeProfile {
+                directory: directory.into(),
+                private: false,
+            })));
+        }
     }
     fn off_the_record_profile_for(&self, _: &Profile, done: PrivateLoad) {
         assert!(self.pending_private.replace(Some(done)).is_none());
@@ -459,6 +450,52 @@ fn releasing_a_private_session_settles_waiters_and_releases_the_late_profile() {
         replies_again.borrow_mut().push(profile.is_some());
     });
     assert_eq!(*replies.borrow(), [false, false, false]);
+}
+
+#[test]
+fn releasing_a_cached_private_session_stops_lookup() {
+    let core = Rc::new(FakeCore::default());
+    let registry = ProfileRegistry::new(core.clone(), Rc::new(NoEvents));
+    let session = "incognito1@work";
+    let profile: Profile = Rc::new(FakeProfile {
+        directory: "Profile work".into(),
+        private: true,
+    });
+    let expected = profile.clone();
+    registry.with_profile(session, move |resolved| {
+        assert!(Rc::ptr_eq(&resolved.unwrap(), &expected));
+    });
+    core.pending_private.take().unwrap()(Some(profile.clone()), None);
+    assert!(Rc::ptr_eq(&registry.loaded_profile(session).unwrap(), &profile));
+    registry.mark_private_released(session);
+    assert!(registry.loaded_profile(session).is_none());
+    registry.with_profile(session, |resolved| assert!(resolved.is_none()));
+    assert!(core.pending_private.borrow().is_none());
+}
+
+#[test]
+fn releasing_a_session_before_its_base_loads_skips_private_creation() {
+    let core = Rc::new(FakeCore {
+        defer_base_load: true,
+        ..FakeCore::default()
+    });
+    let registry = ProfileRegistry::new(core.clone(), Rc::new(NoEvents));
+    let session = "incognito1@work";
+    let settled = Rc::new(RefCell::new(None));
+    let reply = settled.clone();
+    registry.with_profile(session, move |profile| {
+        *reply.borrow_mut() = Some(profile.is_some());
+    });
+    let finish = core.pending_base.take().expect("base load started");
+    assert_eq!(*settled.borrow(), None);
+    registry.mark_private_released(session);
+    assert_eq!(*settled.borrow(), Some(false));
+    finish(Some(Rc::new(FakeProfile {
+        directory: "Profile work".into(),
+        private: false,
+    })));
+    assert!(registry.loaded_profile("work").is_some());
+    assert!(core.pending_private.borrow().is_none());
 }
 
 #[test]

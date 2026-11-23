@@ -197,7 +197,7 @@ fn download_mover() {
         let attribute = c"user.ardia.quarantine";
         #[cfg(target_os = "macos")]
         let attribute = c"com.apple.quarantine";
-        let quarantine = *b"0083;00000000;Ardia;";
+        const QUARANTINE: &[u8] = b"0083;00000000;Ardia;";
         let cpath = std::ffi::CString::new(path.clone()).unwrap();
         // SAFETY: valid C strings and a value buffer of the specified length.
         let set = unsafe {
@@ -206,8 +206,8 @@ fn download_mover() {
                 libc::setxattr(
                     cpath.as_ptr(),
                     attribute.as_ptr(),
-                    quarantine.as_ptr().cast(),
-                    quarantine.len(),
+                    QUARANTINE.as_ptr().cast(),
+                    QUARANTINE.len(),
                     0,
                 )
             }
@@ -216,8 +216,8 @@ fn download_mover() {
                 libc::setxattr(
                     cpath.as_ptr(),
                     attribute.as_ptr(),
-                    quarantine.as_ptr().cast(),
-                    quarantine.len(),
+                    QUARANTINE.as_ptr().cast(),
+                    QUARANTINE.len(),
                     0,
                     0,
                 )
@@ -231,7 +231,7 @@ fn download_mover() {
         assert_eq!(text(&moved), "first");
         assert!(!exists(&path));
         let cmoved = std::ffi::CString::new(moved.clone()).unwrap();
-        let mut copied = [0u8; quarantine.len()];
+        let mut copied = [0u8; QUARANTINE.len()];
         // SAFETY: valid C strings and a writable buffer of the specified length.
         let size = unsafe {
             #[cfg(target_os = "linux")]
@@ -255,8 +255,8 @@ fn download_mover() {
                 )
             }
         };
-        assert_eq!(size, quarantine.len() as isize);
-        assert_eq!(copied, quarantine);
+        assert_eq!(size, QUARANTINE.len() as isize);
+        assert_eq!(&copied, QUARANTINE);
         assert_eq!(result["event"]["path"], json!(moved));
 
         let second = env.finished(&mover, "report.pdf", "second", none.clone());

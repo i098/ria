@@ -96,7 +96,7 @@ fn dev_fail_next_message(b: &ContentBlocker, _: CallArgs, reply: CallReply) -> O
 }
 
 fn dev_delay_next_load(b: &ContentBlocker, args: CallArgs, reply: CallReply) -> Outcome {
-    let delay = Duration::try_from_secs_f64(args.double("ms")? / 1000.0)
+    let delay = Duration::try_from_secs_f64(args.double("ms")?.max(0.0) / 1000.0)
         .map_err(|_| BadCallArgs("ms is outside the supported delay range".into()))?;
     b.dev_delay_next_load(delay);
     reply.ok(None);
@@ -180,5 +180,20 @@ mod tests {
         assert!(
             matches!(run(&b, "setEnabled", "", "{}"), Some(Err(r)) if r.code == "ERR_BAD_ARGS")
         );
+    }
+
+    #[test]
+    fn a_negative_delay_cancels_a_pending_delay() {
+        let (b, _, _) = setup();
+        assert_eq!(
+            run(&b, "devDelayNextLoad", "", r#"{"ms":60000}"#),
+            Some(Ok("null".into()))
+        );
+        assert_eq!(
+            run(&b, "devDelayNextLoad", "", r#"{"ms":-1}"#),
+            Some(Ok("null".into()))
+        );
+        b.load("");
+        assert!(b.is_loaded(""));
     }
 }

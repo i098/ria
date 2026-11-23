@@ -103,16 +103,15 @@ impl NavigationDownloads {
         if url.is_empty() {
             return false;
         }
-        let mut when = self.with_saved(now, |entries| entries.get(url).copied());
-        if when.is_none() && is_private {
-            when = self
-                .private
-                .borrow()
-                .get(profile)
-                .and_then(|m| m.get(url))
-                .copied();
-        }
-        when.is_some_and(|when| now - when < TTL)
+        let fresh = |when: &f64| now - when < TTL;
+        self.with_saved(now, |entries| entries.get(url).is_some_and(fresh))
+            || (is_private
+                && self
+                    .private
+                    .borrow()
+                    .get(profile)
+                    .and_then(|m| m.get(url))
+                    .is_some_and(fresh))
     }
 
     pub fn forget_private(&self, profile: &str) {
@@ -132,6 +131,11 @@ mod tests {
         store.note_at("https://a/f.zip", "", false, 1000.0);
         assert!(store.was_at("https://a/f.zip", "", false, 1000.0 + TTL - 1.0));
         assert!(!store.was_at("https://a/f.zip", "", false, 1000.0 + TTL));
+        store.note_at("https://a/f.zip", "incognito1@x", true, 1000.0 + TTL);
+        assert!(store.was_at("https://a/f.zip", "incognito1@x", true, 1001.0 + TTL));
+        assert!(!store.was_at("https://a/f.zip", "incognito2@x", true, 1001.0 + TTL));
+        assert!(!store.was_at("https://a/f.zip", "", false, 1001.0 + TTL));
+        assert!(!store.was_at("https://a/f.zip", "incognito1@x", true, 1000.0 + 2.0 * TTL));
         store.note_at("https://p/f.zip", "incognito1@x", true, 1000.0);
         assert!(store.was_at("https://p/f.zip", "incognito1@x", true, 1001.0));
         assert!(!store.was_at("https://p/f.zip", "x", false, 1001.0));
