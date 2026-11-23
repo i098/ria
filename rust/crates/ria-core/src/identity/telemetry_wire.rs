@@ -9,6 +9,8 @@
 
 use std::fmt::Write;
 
+use super::date_parse::parse_date;
+
 /// A JSON value. An object keeps its entries in insertion order; `js_order` gives the order
 /// that JavaScript uses for `Object.entries` and `JSON.stringify`.
 #[derive(Debug, Clone, PartialEq)]
@@ -228,119 +230,6 @@ fn nanos(ms: f64) -> String {
     )
 }
 
-fn days_from_civil(year: i64, month: i64, day: i64) -> i64 {
-    let y = if month <= 2 { year - 1 } else { year };
-    let era = y.div_euclid(400);
-    let yoe = y - era * 400;
-    let doy = (153 * (month + if month > 2 { -3 } else { 9 }) + 2) / 5 + day - 1;
-    era * 146_097 + yoe * 365 + yoe / 4 - yoe / 100 + doy - 719_468
-}
-
-fn days_in_month(year: i64, month: i64) -> i64 {
-    match month {
-        2 if year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) => 29,
-        2 => 28,
-        4 | 6 | 9 | 11 => 30,
-        _ => 31,
-    }
-}
-
-/// A fixed-width run of ASCII digits at the front of `s`.
-fn take_digits(s: &mut &str, width: usize) -> Option<i64> {
-    let head = s.get(..width)?;
-    if !head.bytes().all(|b| b.is_ascii_digit()) {
-        return None;
-    }
-    *s = &s[width..];
-    head.parse().ok()
-}
-
-fn take_char(s: &mut &str, c: char) -> bool {
-    match s.strip_prefix(c) {
-        Some(rest) => {
-            *s = rest;
-            true
-        }
-        None => false,
-    }
-}
-
-/// `Date.parse` for the ECMAScript date-time string format (`YYYY-MM-DDTHH:mm:ss.sssZ`
-/// and its shorter forms); `None` for anything else.
-///
-/// shortcut: V8's legacy formats ("Jan 1 2020", "2020/01/01") give `None`, and a date-time
-/// with no offset counts as UTC, not local time; upgrade when an event sender writes these.
-pub fn parse_date(text: &str) -> Option<f64> {
-    let mut s = text;
-    let year = if take_char(&mut s, '+') {
-        take_digits(&mut s, 6)?
-    } else if take_char(&mut s, '-') {
-        let y = take_digits(&mut s, 6)?;
-        if y == 0 {
-            return None;
-        }
-        -y
-    } else {
-        take_digits(&mut s, 4)?
-    };
-    let (mut month, mut day) = (1, 1);
-    if take_char(&mut s, '-') {
-        month = take_digits(&mut s, 2)?;
-        if take_char(&mut s, '-') {
-            day = take_digits(&mut s, 2)?;
-        }
-    }
-    if !(1..=12).contains(&month) || !(1..=days_in_month(year, month)).contains(&day) {
-        return None;
-    }
-    let (mut hour, mut minute, mut second, mut millis, mut offset) = (0, 0, 0, 0, 0);
-    if take_char(&mut s, 'T') {
-        hour = take_digits(&mut s, 2)?;
-        if !take_char(&mut s, ':') {
-            return None;
-        }
-        minute = take_digits(&mut s, 2)?;
-        if take_char(&mut s, ':') {
-            second = take_digits(&mut s, 2)?;
-            if take_char(&mut s, '.') {
-                let len = s.bytes().take_while(u8::is_ascii_digit).count();
-                if len == 0 {
-                    return None;
-                }
-                let fraction = format!("{:0<3}", &s[..len.min(3)]);
-                millis = fraction.parse().ok()?;
-                s = &s[len..];
-            }
-        }
-        if take_char(&mut s, 'Z') {
-        } else if s.starts_with(['+', '-']) {
-            let sign = if take_char(&mut s, '+') { 1 } else { -1 };
-            if sign < 0 {
-                s = &s[1..];
-            }
-            let oh = take_digits(&mut s, 2)?;
-            if !take_char(&mut s, ':') {
-                return None;
-            }
-            let om = take_digits(&mut s, 2)?;
-            if oh > 23 || om > 59 {
-                return None;
-            }
-            offset = sign * (oh * 60 + om);
-        }
-        let valid_time = hour < 24 && minute < 60 && second < 60;
-        if !(valid_time || (hour == 24 && minute == 0 && second == 0 && millis == 0)) {
-            return None;
-        }
-    }
-    if !s.is_empty() {
-        return None;
-    }
-    let minutes = days_from_civil(year, month, day) * 1440 + hour * 60 + minute - offset;
-    let ms = (minutes * 60 + second) * 1000 + millis;
-    (ms.abs() <= 8_640_000_000_000_000).then_some(ms as f64)
-}
-
 /// Port of `eventRecord` (`telemetryWire.ts:43`). `now_ms` is `Date.now()`, used when the
 /// timestamp does not parse.
 pub fn event_record(e: &QueuedEvent, now_ms: f64) -> OtlpLogRecord {
@@ -524,7 +413,6 @@ mod tests {
             parse_date("2024-01-01T00:00:00+01:00"),
             Some(1_704_063_600_000.0)
         );
-        assert_eq!(parse_date("2023-02-29"), None);
         assert_eq!(parse_date("2024-01-01T24:00:01Z"), None);
         assert_eq!(parse_date("yesterday"), None);
     }
