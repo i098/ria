@@ -1,0 +1,52 @@
+[
+  {
+    "name": "ntp-dark",
+    "png": "eb0e0de121189fbd31c664187c3acbea93bb44fce110f691a61b7282cb60ebfc",
+    "setup": null
+  },
+  {
+    "name": "ntp-light",
+    "png": "e360de6dbae079286f078b24be55c4462c17808baebd601ceabe555369a8e197",
+    "setup": null
+  },
+  {
+    "name": "tab-dark",
+    "png": "a8c59cbb43b5b57d6a7a116aff0cc8c83fa60ec5a3b8c8848a157e2560bb9100",
+    "setup": null
+  },
+  {
+    "name": "tab-light",
+    "png": "2e6cf41b56c7cb1b65435892a800acdf76eb58554cb3004b0ba22cc6fcdd28d1",
+    "setup": null
+  },
+  {
+    "name": "pinned-active-dark",
+    "png": "2b9208b3a1ed756c72991d06a3e0eb5fac12ac8a843da41dab1c7b86f76917b4",
+    "setup": null
+  },
+  {
+    "name": "group-collapsed-dark",
+    "png": "5f87884af930288fa5d4255415cc7b024eb768f4830d249cdd5a9603d6c904bf",
+    "setup": null
+  },
+  {
+    "name": "sidebar-closed-dark",
+    "png": "cc7c4d648cf0afb5d00e2f31a1dd27f82297a76c23ef74110627895403249cfa",
+    "setup": null
+  },
+  {
+    "name": "command-bar-dark",
+    "png": "d10de6a3916285993707175d838e3ac62fe325115f32d2f9e62b67c4e5e2d2c4",
+    "setup": null
+  },
+  {
+    "name": "downloads-dark",
+    "png": "09f1d8fbb63970db13b79118b2f5b5a209c96c30eab0a65d7029544cf20fceba",
+    "setup": null
+  },
+  {
+    "name": "split-dark",
+    "png": "0c185083d8432cc4c613ad0370a12348f3ef456c65d78885d089fabbecf5a871",
+    "setup": null
+  }
+]
