@@ -1,6 +1,6 @@
-// Ported from Ardia (https://github.com/ardia-browser/ardia), commit 551d3c13c:
-// engine/chromium/src/chrome/browser/ardia/ac_*.cc (names of the exported `ac_*` calls).
-// Copyright 2026 Mantra Patel, Apache-2.0. This file is a Rust port with changes.
+// Ported from ardia engine/chromium/src/chrome/browser/ardia/ac_*.cc at 551d3c13c.
+// Copyright 2026 Mantra Patel, Apache-2.0.
+// This file is a Rust port of that file, with changes.
 
 /// The 106 `ac_*` calls that the engine exports, sorted. Found by `grep -rhoE 'AC_(ENGINE|PROFILE|ARGS)_CALL(ac_...)' ac_*.cc`.
 pub const CALLS: [&str; 106] = [

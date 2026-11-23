@@ -1,7 +1,6 @@
-// Ported from Ardia (https://github.com/ardia-browser/ardia), commit 551d3c13c:
-// packages/ardiacore/ios/ArdiaEngineBridge.mm (`call:`, `callWithSecret:`, `callForSecretReply:`, `Dispatch`, `InstallSink`)
-// and packages/sync/ios/SyncModule.swift:356 (the 30 s timeout of `ac_passwords_logins`).
-// Copyright 2026 Mantra Patel, Apache-2.0. This file is a Rust port with changes.
+// Ported from ardia packages/ardiacore/ios/ArdiaEngineBridge.mm at 551d3c13c.
+// Copyright 2026 Mantra Patel, Apache-2.0.
+// This file is a Rust port of that file, with changes.
 
 //! The call layer (plan section 6.4): every reply and every event is a deferred entry.
 //! The engine pointers are copied inside the callback, and the work goes into the [`ActionQueue`].

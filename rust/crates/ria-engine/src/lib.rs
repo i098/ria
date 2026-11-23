@@ -1,4 +1,6 @@
-// Copyright 2026 Mantra Patel, Apache-2.0. Rust port of parts of Ardia (https://github.com/ardia-browser/ardia, commit 551d3c13c) with changes.
+// Ported from ardia packages/ardiacore/ios/ArdiaEngineBridge.mm at 551d3c13c.
+// Copyright 2026 Mantra Patel, Apache-2.0.
+// This file is a Rust port of that file, with changes.
 
 //! Call layer over the engine.
 

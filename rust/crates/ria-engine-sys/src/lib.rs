@@ -1,7 +1,6 @@
-// Ported from Ardia (https://github.com/ardia-browser/ardia), commit 551d3c13c:
-// packages/ardiacore/ios/ArdiaEngineBridge.mm (`Symbol`, `InstallSink`) and
-// engine/chromium/src/chrome/browser/ardia/public/ac_engine.h (the C types).
-// Copyright 2026 Mantra Patel, Apache-2.0. This file is a Rust port with changes.
+// Ported from ardia packages/ardiacore/ios/ArdiaEngineBridge.mm at 551d3c13c.
+// Copyright 2026 Mantra Patel, Apache-2.0.
+// This file is a Rust port of that file, with changes.
 
 //! Raw access to the `ac_*` calls of the engine. The engine is already loaded into the
 //! process (`dlopen` of `Chromium Framework`), so each call is found with `dlsym(RTLD_DEFAULT)`.
