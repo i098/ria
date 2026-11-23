@@ -1,0 +1,2540 @@
+{"fn": "matchQuickCreate", "args": ["new"]}
+{"fn": "matchQuickCreate", "args": ["new", 0]}
+{"fn": "matchQuickCreate", "args": ["new", 1]}
+{"fn": "matchQuickCreate", "args": ["new", 2]}
+{"fn": "matchQuickCreate", "args": ["new", 3]}
+{"fn": "matchQuickCreate", "args": ["new", 4]}
+{"fn": "matchQuickCreate", "args": ["new", 5]}
+{"fn": "matchQuickCreate", "args": ["new", 10]}
+{"fn": "matchQuickCreate", "args": ["new", 17]}
+{"fn": "matchQuickCreate", "args": ["new", 18]}
+{"fn": "matchQuickCreate", "args": ["new", 100]}
+{"fn": "matchQuickCreate", "args": ["new", -1]}
+{"fn": "matchQuickCreate", "args": ["new", -2]}
+{"fn": "matchQuickCreate", "args": ["new", -17]}
+{"fn": "matchQuickCreate", "args": ["new", -18]}
+{"fn": "matchQuickCreate", "args": ["new", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new "]}
+{"fn": "matchQuickCreate", "args": ["new ", 0]}
+{"fn": "matchQuickCreate", "args": ["new ", 1]}
+{"fn": "matchQuickCreate", "args": ["new ", 2]}
+{"fn": "matchQuickCreate", "args": ["new ", 3]}
+{"fn": "matchQuickCreate", "args": ["new ", 4]}
+{"fn": "matchQuickCreate", "args": ["new ", 5]}
+{"fn": "matchQuickCreate", "args": ["new ", 10]}
+{"fn": "matchQuickCreate", "args": ["new ", 17]}
+{"fn": "matchQuickCreate", "args": ["new ", 18]}
+{"fn": "matchQuickCreate", "args": ["new ", 100]}
+{"fn": "matchQuickCreate", "args": ["new ", -1]}
+{"fn": "matchQuickCreate", "args": ["new ", -2]}
+{"fn": "matchQuickCreate", "args": ["new ", -17]}
+{"fn": "matchQuickCreate", "args": ["new ", -18]}
+{"fn": "matchQuickCreate", "args": ["new ", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new ", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new ", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new ", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new ", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new doc"]}
+{"fn": "matchQuickCreate", "args": ["new doc", 0]}
+{"fn": "matchQuickCreate", "args": ["new doc", 1]}
+{"fn": "matchQuickCreate", "args": ["new doc", 2]}
+{"fn": "matchQuickCreate", "args": ["new doc", 3]}
+{"fn": "matchQuickCreate", "args": ["new doc", 4]}
+{"fn": "matchQuickCreate", "args": ["new doc", 5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 10]}
+{"fn": "matchQuickCreate", "args": ["new doc", 17]}
+{"fn": "matchQuickCreate", "args": ["new doc", 18]}
+{"fn": "matchQuickCreate", "args": ["new doc", 100]}
+{"fn": "matchQuickCreate", "args": ["new doc", -1]}
+{"fn": "matchQuickCreate", "args": ["new doc", -2]}
+{"fn": "matchQuickCreate", "args": ["new doc", -17]}
+{"fn": "matchQuickCreate", "args": ["new doc", -18]}
+{"fn": "matchQuickCreate", "args": ["new doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["New Doc"]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 0]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 1]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 2]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 3]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 4]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 5]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 10]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 17]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 18]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 100]}
+{"fn": "matchQuickCreate", "args": ["New Doc", -1]}
+{"fn": "matchQuickCreate", "args": ["New Doc", -2]}
+{"fn": "matchQuickCreate", "args": ["New Doc", -17]}
+{"fn": "matchQuickCreate", "args": ["New Doc", -18]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["New Doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["New Doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC"]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 0]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 1]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 2]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 3]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 4]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 5]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 10]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 17]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 18]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 100]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", -1]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", -2]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", -17]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", -18]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 1.5]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 2.9]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", -1.5]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 0.5]}
+{"fn": "matchQuickCreate", "args": ["NEW DOC", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["create sheet"]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 0]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 1]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 2]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 3]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 4]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 5]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 10]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 17]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 18]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 100]}
+{"fn": "matchQuickCreate", "args": ["create sheet", -1]}
+{"fn": "matchQuickCreate", "args": ["create sheet", -2]}
+{"fn": "matchQuickCreate", "args": ["create sheet", -17]}
+{"fn": "matchQuickCreate", "args": ["create sheet", -18]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 1.5]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 2.9]}
+{"fn": "matchQuickCreate", "args": ["create sheet", -1.5]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 0.5]}
+{"fn": "matchQuickCreate", "args": ["create sheet", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet"]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 0]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 1]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 2]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 3]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 4]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 5]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 10]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 17]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 18]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 100]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", -1]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", -2]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", -17]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", -18]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 1.5]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 2.9]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", -1.5]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 0.5]}
+{"fn": "matchQuickCreate", "args": ["Create  Sheet", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["  new doc"]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 0]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 1]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 2]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 3]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 4]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 5]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 10]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 17]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 18]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 100]}
+{"fn": "matchQuickCreate", "args": ["  new doc", -1]}
+{"fn": "matchQuickCreate", "args": ["  new doc", -2]}
+{"fn": "matchQuickCreate", "args": ["  new doc", -17]}
+{"fn": "matchQuickCreate", "args": ["  new doc", -18]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["  new doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["  new doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc"]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 0]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 1]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 2]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 3]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 4]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 5]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 10]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 17]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 18]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 100]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", -1]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", -2]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", -17]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", -18]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["\tnew doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc"]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 0]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 1]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 2]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 3]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 4]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 5]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 10]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 17]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 18]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 100]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", -1]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", -2]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", -17]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", -18]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new\ndoc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new \n"]}
+{"fn": "matchQuickCreate", "args": ["new \n", 0]}
+{"fn": "matchQuickCreate", "args": ["new \n", 1]}
+{"fn": "matchQuickCreate", "args": ["new \n", 2]}
+{"fn": "matchQuickCreate", "args": ["new \n", 3]}
+{"fn": "matchQuickCreate", "args": ["new \n", 4]}
+{"fn": "matchQuickCreate", "args": ["new \n", 5]}
+{"fn": "matchQuickCreate", "args": ["new \n", 10]}
+{"fn": "matchQuickCreate", "args": ["new \n", 17]}
+{"fn": "matchQuickCreate", "args": ["new \n", 18]}
+{"fn": "matchQuickCreate", "args": ["new \n", 100]}
+{"fn": "matchQuickCreate", "args": ["new \n", -1]}
+{"fn": "matchQuickCreate", "args": ["new \n", -2]}
+{"fn": "matchQuickCreate", "args": ["new \n", -17]}
+{"fn": "matchQuickCreate", "args": ["new \n", -18]}
+{"fn": "matchQuickCreate", "args": ["new \n", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new \n", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new \n", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new \n", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new \n", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new\n"]}
+{"fn": "matchQuickCreate", "args": ["new\n", 0]}
+{"fn": "matchQuickCreate", "args": ["new\n", 1]}
+{"fn": "matchQuickCreate", "args": ["new\n", 2]}
+{"fn": "matchQuickCreate", "args": ["new\n", 3]}
+{"fn": "matchQuickCreate", "args": ["new\n", 4]}
+{"fn": "matchQuickCreate", "args": ["new\n", 5]}
+{"fn": "matchQuickCreate", "args": ["new\n", 10]}
+{"fn": "matchQuickCreate", "args": ["new\n", 17]}
+{"fn": "matchQuickCreate", "args": ["new\n", 18]}
+{"fn": "matchQuickCreate", "args": ["new\n", 100]}
+{"fn": "matchQuickCreate", "args": ["new\n", -1]}
+{"fn": "matchQuickCreate", "args": ["new\n", -2]}
+{"fn": "matchQuickCreate", "args": ["new\n", -17]}
+{"fn": "matchQuickCreate", "args": ["new\n", -18]}
+{"fn": "matchQuickCreate", "args": ["new\n", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new\n", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new\n", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new\n", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new\n", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new   "]}
+{"fn": "matchQuickCreate", "args": ["new   ", 0]}
+{"fn": "matchQuickCreate", "args": ["new   ", 1]}
+{"fn": "matchQuickCreate", "args": ["new   ", 2]}
+{"fn": "matchQuickCreate", "args": ["new   ", 3]}
+{"fn": "matchQuickCreate", "args": ["new   ", 4]}
+{"fn": "matchQuickCreate", "args": ["new   ", 5]}
+{"fn": "matchQuickCreate", "args": ["new   ", 10]}
+{"fn": "matchQuickCreate", "args": ["new   ", 17]}
+{"fn": "matchQuickCreate", "args": ["new   ", 18]}
+{"fn": "matchQuickCreate", "args": ["new   ", 100]}
+{"fn": "matchQuickCreate", "args": ["new   ", -1]}
+{"fn": "matchQuickCreate", "args": ["new   ", -2]}
+{"fn": "matchQuickCreate", "args": ["new   ", -17]}
+{"fn": "matchQuickCreate", "args": ["new   ", -18]}
+{"fn": "matchQuickCreate", "args": ["new   ", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new   ", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new   ", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new   ", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new   ", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new  doc  "]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 0]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 1]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 2]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 3]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 4]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 5]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 10]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 17]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 18]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 100]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", -1]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", -2]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", -17]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", -18]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new  doc  ", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new doc\n"]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 0]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 1]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 2]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 3]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 4]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 5]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 10]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 17]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 18]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 100]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", -1]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", -2]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", -17]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", -18]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new doc\n", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new doc\r"]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 0]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 1]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 2]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 3]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 4]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 5]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 10]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 17]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 18]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 100]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", -1]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", -2]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", -17]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", -18]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new doc\r", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new d"]}
+{"fn": "matchQuickCreate", "args": ["new d", 0]}
+{"fn": "matchQuickCreate", "args": ["new d", 1]}
+{"fn": "matchQuickCreate", "args": ["new d", 2]}
+{"fn": "matchQuickCreate", "args": ["new d", 3]}
+{"fn": "matchQuickCreate", "args": ["new d", 4]}
+{"fn": "matchQuickCreate", "args": ["new d", 5]}
+{"fn": "matchQuickCreate", "args": ["new d", 10]}
+{"fn": "matchQuickCreate", "args": ["new d", 17]}
+{"fn": "matchQuickCreate", "args": ["new d", 18]}
+{"fn": "matchQuickCreate", "args": ["new d", 100]}
+{"fn": "matchQuickCreate", "args": ["new d", -1]}
+{"fn": "matchQuickCreate", "args": ["new d", -2]}
+{"fn": "matchQuickCreate", "args": ["new d", -17]}
+{"fn": "matchQuickCreate", "args": ["new d", -18]}
+{"fn": "matchQuickCreate", "args": ["new d", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new d", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new d", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new d", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new d", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new g"]}
+{"fn": "matchQuickCreate", "args": ["new g", 0]}
+{"fn": "matchQuickCreate", "args": ["new g", 1]}
+{"fn": "matchQuickCreate", "args": ["new g", 2]}
+{"fn": "matchQuickCreate", "args": ["new g", 3]}
+{"fn": "matchQuickCreate", "args": ["new g", 4]}
+{"fn": "matchQuickCreate", "args": ["new g", 5]}
+{"fn": "matchQuickCreate", "args": ["new g", 10]}
+{"fn": "matchQuickCreate", "args": ["new g", 17]}
+{"fn": "matchQuickCreate", "args": ["new g", 18]}
+{"fn": "matchQuickCreate", "args": ["new g", 100]}
+{"fn": "matchQuickCreate", "args": ["new g", -1]}
+{"fn": "matchQuickCreate", "args": ["new g", -2]}
+{"fn": "matchQuickCreate", "args": ["new g", -17]}
+{"fn": "matchQuickCreate", "args": ["new g", -18]}
+{"fn": "matchQuickCreate", "args": ["new g", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new g", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new g", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new g", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new g", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new google"]}
+{"fn": "matchQuickCreate", "args": ["new google", 0]}
+{"fn": "matchQuickCreate", "args": ["new google", 1]}
+{"fn": "matchQuickCreate", "args": ["new google", 2]}
+{"fn": "matchQuickCreate", "args": ["new google", 3]}
+{"fn": "matchQuickCreate", "args": ["new google", 4]}
+{"fn": "matchQuickCreate", "args": ["new google", 5]}
+{"fn": "matchQuickCreate", "args": ["new google", 10]}
+{"fn": "matchQuickCreate", "args": ["new google", 17]}
+{"fn": "matchQuickCreate", "args": ["new google", 18]}
+{"fn": "matchQuickCreate", "args": ["new google", 100]}
+{"fn": "matchQuickCreate", "args": ["new google", -1]}
+{"fn": "matchQuickCreate", "args": ["new google", -2]}
+{"fn": "matchQuickCreate", "args": ["new google", -17]}
+{"fn": "matchQuickCreate", "args": ["new google", -18]}
+{"fn": "matchQuickCreate", "args": ["new google", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new google", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new google", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new google", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new google", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new google d"]}
+{"fn": "matchQuickCreate", "args": ["new google d", 0]}
+{"fn": "matchQuickCreate", "args": ["new google d", 1]}
+{"fn": "matchQuickCreate", "args": ["new google d", 2]}
+{"fn": "matchQuickCreate", "args": ["new google d", 3]}
+{"fn": "matchQuickCreate", "args": ["new google d", 4]}
+{"fn": "matchQuickCreate", "args": ["new google d", 5]}
+{"fn": "matchQuickCreate", "args": ["new google d", 10]}
+{"fn": "matchQuickCreate", "args": ["new google d", 17]}
+{"fn": "matchQuickCreate", "args": ["new google d", 18]}
+{"fn": "matchQuickCreate", "args": ["new google d", 100]}
+{"fn": "matchQuickCreate", "args": ["new google d", -1]}
+{"fn": "matchQuickCreate", "args": ["new google d", -2]}
+{"fn": "matchQuickCreate", "args": ["new google d", -17]}
+{"fn": "matchQuickCreate", "args": ["new google d", -18]}
+{"fn": "matchQuickCreate", "args": ["new google d", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new google d", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new google d", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new google d", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new google d", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new go"]}
+{"fn": "matchQuickCreate", "args": ["new go", 0]}
+{"fn": "matchQuickCreate", "args": ["new go", 1]}
+{"fn": "matchQuickCreate", "args": ["new go", 2]}
+{"fn": "matchQuickCreate", "args": ["new go", 3]}
+{"fn": "matchQuickCreate", "args": ["new go", 4]}
+{"fn": "matchQuickCreate", "args": ["new go", 5]}
+{"fn": "matchQuickCreate", "args": ["new go", 10]}
+{"fn": "matchQuickCreate", "args": ["new go", 17]}
+{"fn": "matchQuickCreate", "args": ["new go", 18]}
+{"fn": "matchQuickCreate", "args": ["new go", 100]}
+{"fn": "matchQuickCreate", "args": ["new go", -1]}
+{"fn": "matchQuickCreate", "args": ["new go", -2]}
+{"fn": "matchQuickCreate", "args": ["new go", -17]}
+{"fn": "matchQuickCreate", "args": ["new go", -18]}
+{"fn": "matchQuickCreate", "args": ["new go", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new go", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new go", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new go", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new go", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new t"]}
+{"fn": "matchQuickCreate", "args": ["new t", 0]}
+{"fn": "matchQuickCreate", "args": ["new t", 1]}
+{"fn": "matchQuickCreate", "args": ["new t", 2]}
+{"fn": "matchQuickCreate", "args": ["new t", 3]}
+{"fn": "matchQuickCreate", "args": ["new t", 4]}
+{"fn": "matchQuickCreate", "args": ["new t", 5]}
+{"fn": "matchQuickCreate", "args": ["new t", 10]}
+{"fn": "matchQuickCreate", "args": ["new t", 17]}
+{"fn": "matchQuickCreate", "args": ["new t", 18]}
+{"fn": "matchQuickCreate", "args": ["new t", 100]}
+{"fn": "matchQuickCreate", "args": ["new t", -1]}
+{"fn": "matchQuickCreate", "args": ["new t", -2]}
+{"fn": "matchQuickCreate", "args": ["new t", -17]}
+{"fn": "matchQuickCreate", "args": ["new t", -18]}
+{"fn": "matchQuickCreate", "args": ["new t", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new t", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new t", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new t", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new t", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new ticket"]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 0]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 1]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 2]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 3]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 4]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 5]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 10]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 17]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 18]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 100]}
+{"fn": "matchQuickCreate", "args": ["new ticket", -1]}
+{"fn": "matchQuickCreate", "args": ["new ticket", -2]}
+{"fn": "matchQuickCreate", "args": ["new ticket", -17]}
+{"fn": "matchQuickCreate", "args": ["new ticket", -18]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new ticket", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new ticket", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new issue"]}
+{"fn": "matchQuickCreate", "args": ["new issue", 0]}
+{"fn": "matchQuickCreate", "args": ["new issue", 1]}
+{"fn": "matchQuickCreate", "args": ["new issue", 2]}
+{"fn": "matchQuickCreate", "args": ["new issue", 3]}
+{"fn": "matchQuickCreate", "args": ["new issue", 4]}
+{"fn": "matchQuickCreate", "args": ["new issue", 5]}
+{"fn": "matchQuickCreate", "args": ["new issue", 10]}
+{"fn": "matchQuickCreate", "args": ["new issue", 17]}
+{"fn": "matchQuickCreate", "args": ["new issue", 18]}
+{"fn": "matchQuickCreate", "args": ["new issue", 100]}
+{"fn": "matchQuickCreate", "args": ["new issue", -1]}
+{"fn": "matchQuickCreate", "args": ["new issue", -2]}
+{"fn": "matchQuickCreate", "args": ["new issue", -17]}
+{"fn": "matchQuickCreate", "args": ["new issue", -18]}
+{"fn": "matchQuickCreate", "args": ["new issue", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new issue", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new issue", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new issue", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new issue", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new wiki"]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 0]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 1]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 2]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 3]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 4]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 5]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 10]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 17]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 18]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 100]}
+{"fn": "matchQuickCreate", "args": ["new wiki", -1]}
+{"fn": "matchQuickCreate", "args": ["new wiki", -2]}
+{"fn": "matchQuickCreate", "args": ["new wiki", -17]}
+{"fn": "matchQuickCreate", "args": ["new wiki", -18]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new wiki", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new wiki", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new ppt"]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 0]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 1]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 2]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 3]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 4]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 5]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 10]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 17]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 18]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 100]}
+{"fn": "matchQuickCreate", "args": ["new ppt", -1]}
+{"fn": "matchQuickCreate", "args": ["new ppt", -2]}
+{"fn": "matchQuickCreate", "args": ["new ppt", -17]}
+{"fn": "matchQuickCreate", "args": ["new ppt", -18]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new ppt", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new ppt", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new p"]}
+{"fn": "matchQuickCreate", "args": ["new p", 0]}
+{"fn": "matchQuickCreate", "args": ["new p", 1]}
+{"fn": "matchQuickCreate", "args": ["new p", 2]}
+{"fn": "matchQuickCreate", "args": ["new p", 3]}
+{"fn": "matchQuickCreate", "args": ["new p", 4]}
+{"fn": "matchQuickCreate", "args": ["new p", 5]}
+{"fn": "matchQuickCreate", "args": ["new p", 10]}
+{"fn": "matchQuickCreate", "args": ["new p", 17]}
+{"fn": "matchQuickCreate", "args": ["new p", 18]}
+{"fn": "matchQuickCreate", "args": ["new p", 100]}
+{"fn": "matchQuickCreate", "args": ["new p", -1]}
+{"fn": "matchQuickCreate", "args": ["new p", -2]}
+{"fn": "matchQuickCreate", "args": ["new p", -17]}
+{"fn": "matchQuickCreate", "args": ["new p", -18]}
+{"fn": "matchQuickCreate", "args": ["new p", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new p", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new p", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new p", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new p", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new pow"]}
+{"fn": "matchQuickCreate", "args": ["new pow", 0]}
+{"fn": "matchQuickCreate", "args": ["new pow", 1]}
+{"fn": "matchQuickCreate", "args": ["new pow", 2]}
+{"fn": "matchQuickCreate", "args": ["new pow", 3]}
+{"fn": "matchQuickCreate", "args": ["new pow", 4]}
+{"fn": "matchQuickCreate", "args": ["new pow", 5]}
+{"fn": "matchQuickCreate", "args": ["new pow", 10]}
+{"fn": "matchQuickCreate", "args": ["new pow", 17]}
+{"fn": "matchQuickCreate", "args": ["new pow", 18]}
+{"fn": "matchQuickCreate", "args": ["new pow", 100]}
+{"fn": "matchQuickCreate", "args": ["new pow", -1]}
+{"fn": "matchQuickCreate", "args": ["new pow", -2]}
+{"fn": "matchQuickCreate", "args": ["new pow", -17]}
+{"fn": "matchQuickCreate", "args": ["new pow", -18]}
+{"fn": "matchQuickCreate", "args": ["new pow", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new pow", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new pow", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new pow", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new pow", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new xyz"]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 0]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 1]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 2]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 3]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 4]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 5]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 10]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 17]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 18]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 100]}
+{"fn": "matchQuickCreate", "args": ["new xyz", -1]}
+{"fn": "matchQuickCreate", "args": ["new xyz", -2]}
+{"fn": "matchQuickCreate", "args": ["new xyz", -17]}
+{"fn": "matchQuickCreate", "args": ["new xyz", -18]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new xyz", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new xyz", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new a"]}
+{"fn": "matchQuickCreate", "args": ["new a", 0]}
+{"fn": "matchQuickCreate", "args": ["new a", 1]}
+{"fn": "matchQuickCreate", "args": ["new a", 2]}
+{"fn": "matchQuickCreate", "args": ["new a", 3]}
+{"fn": "matchQuickCreate", "args": ["new a", 4]}
+{"fn": "matchQuickCreate", "args": ["new a", 5]}
+{"fn": "matchQuickCreate", "args": ["new a", 10]}
+{"fn": "matchQuickCreate", "args": ["new a", 17]}
+{"fn": "matchQuickCreate", "args": ["new a", 18]}
+{"fn": "matchQuickCreate", "args": ["new a", 100]}
+{"fn": "matchQuickCreate", "args": ["new a", -1]}
+{"fn": "matchQuickCreate", "args": ["new a", -2]}
+{"fn": "matchQuickCreate", "args": ["new a", -17]}
+{"fn": "matchQuickCreate", "args": ["new a", -18]}
+{"fn": "matchQuickCreate", "args": ["new a", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new a", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new a", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new a", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new a", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new  a  b"]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 0]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 1]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 2]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 3]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 4]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 5]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 10]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 17]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 18]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 100]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", -1]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", -2]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", -17]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", -18]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new  a  b", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new video call"]}
+{"fn": "matchQuickCreate", "args": ["new video call", 0]}
+{"fn": "matchQuickCreate", "args": ["new video call", 1]}
+{"fn": "matchQuickCreate", "args": ["new video call", 2]}
+{"fn": "matchQuickCreate", "args": ["new video call", 3]}
+{"fn": "matchQuickCreate", "args": ["new video call", 4]}
+{"fn": "matchQuickCreate", "args": ["new video call", 5]}
+{"fn": "matchQuickCreate", "args": ["new video call", 10]}
+{"fn": "matchQuickCreate", "args": ["new video call", 17]}
+{"fn": "matchQuickCreate", "args": ["new video call", 18]}
+{"fn": "matchQuickCreate", "args": ["new video call", 100]}
+{"fn": "matchQuickCreate", "args": ["new video call", -1]}
+{"fn": "matchQuickCreate", "args": ["new video call", -2]}
+{"fn": "matchQuickCreate", "args": ["new video call", -17]}
+{"fn": "matchQuickCreate", "args": ["new video call", -18]}
+{"fn": "matchQuickCreate", "args": ["new video call", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new video call", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new video call", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new video call", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new video call", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new video"]}
+{"fn": "matchQuickCreate", "args": ["new video", 0]}
+{"fn": "matchQuickCreate", "args": ["new video", 1]}
+{"fn": "matchQuickCreate", "args": ["new video", 2]}
+{"fn": "matchQuickCreate", "args": ["new video", 3]}
+{"fn": "matchQuickCreate", "args": ["new video", 4]}
+{"fn": "matchQuickCreate", "args": ["new video", 5]}
+{"fn": "matchQuickCreate", "args": ["new video", 10]}
+{"fn": "matchQuickCreate", "args": ["new video", 17]}
+{"fn": "matchQuickCreate", "args": ["new video", 18]}
+{"fn": "matchQuickCreate", "args": ["new video", 100]}
+{"fn": "matchQuickCreate", "args": ["new video", -1]}
+{"fn": "matchQuickCreate", "args": ["new video", -2]}
+{"fn": "matchQuickCreate", "args": ["new video", -17]}
+{"fn": "matchQuickCreate", "args": ["new video", -18]}
+{"fn": "matchQuickCreate", "args": ["new video", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new video", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new video", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new video", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new video", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new video  call"]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 0]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 1]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 2]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 3]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 4]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 5]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 10]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 17]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 18]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 100]}
+{"fn": "matchQuickCreate", "args": ["new video  call", -1]}
+{"fn": "matchQuickCreate", "args": ["new video  call", -2]}
+{"fn": "matchQuickCreate", "args": ["new video  call", -17]}
+{"fn": "matchQuickCreate", "args": ["new video  call", -18]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new video  call", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new video  call", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new vid"]}
+{"fn": "matchQuickCreate", "args": ["new vid", 0]}
+{"fn": "matchQuickCreate", "args": ["new vid", 1]}
+{"fn": "matchQuickCreate", "args": ["new vid", 2]}
+{"fn": "matchQuickCreate", "args": ["new vid", 3]}
+{"fn": "matchQuickCreate", "args": ["new vid", 4]}
+{"fn": "matchQuickCreate", "args": ["new vid", 5]}
+{"fn": "matchQuickCreate", "args": ["new vid", 10]}
+{"fn": "matchQuickCreate", "args": ["new vid", 17]}
+{"fn": "matchQuickCreate", "args": ["new vid", 18]}
+{"fn": "matchQuickCreate", "args": ["new vid", 100]}
+{"fn": "matchQuickCreate", "args": ["new vid", -1]}
+{"fn": "matchQuickCreate", "args": ["new vid", -2]}
+{"fn": "matchQuickCreate", "args": ["new vid", -17]}
+{"fn": "matchQuickCreate", "args": ["new vid", -18]}
+{"fn": "matchQuickCreate", "args": ["new vid", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new vid", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new vid", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new vid", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new vid", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["newdoc"]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 0]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 1]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 2]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 3]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 4]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 5]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 10]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 17]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 18]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 100]}
+{"fn": "matchQuickCreate", "args": ["newdoc", -1]}
+{"fn": "matchQuickCreate", "args": ["newdoc", -2]}
+{"fn": "matchQuickCreate", "args": ["newdoc", -17]}
+{"fn": "matchQuickCreate", "args": ["newdoc", -18]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["newdoc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["newdoc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new-doc"]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 0]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 1]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 2]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 3]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 4]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 5]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 10]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 17]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 18]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 100]}
+{"fn": "matchQuickCreate", "args": ["new-doc", -1]}
+{"fn": "matchQuickCreate", "args": ["new-doc", -2]}
+{"fn": "matchQuickCreate", "args": ["new-doc", -17]}
+{"fn": "matchQuickCreate", "args": ["new-doc", -18]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new-doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new-doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new_doc"]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 0]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 1]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 2]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 3]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 4]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 5]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 10]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 17]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 18]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 100]}
+{"fn": "matchQuickCreate", "args": ["new_doc", -1]}
+{"fn": "matchQuickCreate", "args": ["new_doc", -2]}
+{"fn": "matchQuickCreate", "args": ["new_doc", -17]}
+{"fn": "matchQuickCreate", "args": ["new_doc", -18]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new_doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new_doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["newer"]}
+{"fn": "matchQuickCreate", "args": ["newer", 0]}
+{"fn": "matchQuickCreate", "args": ["newer", 1]}
+{"fn": "matchQuickCreate", "args": ["newer", 2]}
+{"fn": "matchQuickCreate", "args": ["newer", 3]}
+{"fn": "matchQuickCreate", "args": ["newer", 4]}
+{"fn": "matchQuickCreate", "args": ["newer", 5]}
+{"fn": "matchQuickCreate", "args": ["newer", 10]}
+{"fn": "matchQuickCreate", "args": ["newer", 17]}
+{"fn": "matchQuickCreate", "args": ["newer", 18]}
+{"fn": "matchQuickCreate", "args": ["newer", 100]}
+{"fn": "matchQuickCreate", "args": ["newer", -1]}
+{"fn": "matchQuickCreate", "args": ["newer", -2]}
+{"fn": "matchQuickCreate", "args": ["newer", -17]}
+{"fn": "matchQuickCreate", "args": ["newer", -18]}
+{"fn": "matchQuickCreate", "args": ["newer", 1.5]}
+{"fn": "matchQuickCreate", "args": ["newer", 2.9]}
+{"fn": "matchQuickCreate", "args": ["newer", -1.5]}
+{"fn": "matchQuickCreate", "args": ["newer", 0.5]}
+{"fn": "matchQuickCreate", "args": ["newer", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["news"]}
+{"fn": "matchQuickCreate", "args": ["news", 0]}
+{"fn": "matchQuickCreate", "args": ["news", 1]}
+{"fn": "matchQuickCreate", "args": ["news", 2]}
+{"fn": "matchQuickCreate", "args": ["news", 3]}
+{"fn": "matchQuickCreate", "args": ["news", 4]}
+{"fn": "matchQuickCreate", "args": ["news", 5]}
+{"fn": "matchQuickCreate", "args": ["news", 10]}
+{"fn": "matchQuickCreate", "args": ["news", 17]}
+{"fn": "matchQuickCreate", "args": ["news", 18]}
+{"fn": "matchQuickCreate", "args": ["news", 100]}
+{"fn": "matchQuickCreate", "args": ["news", -1]}
+{"fn": "matchQuickCreate", "args": ["news", -2]}
+{"fn": "matchQuickCreate", "args": ["news", -17]}
+{"fn": "matchQuickCreate", "args": ["news", -18]}
+{"fn": "matchQuickCreate", "args": ["news", 1.5]}
+{"fn": "matchQuickCreate", "args": ["news", 2.9]}
+{"fn": "matchQuickCreate", "args": ["news", -1.5]}
+{"fn": "matchQuickCreate", "args": ["news", 0.5]}
+{"fn": "matchQuickCreate", "args": ["news", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["created"]}
+{"fn": "matchQuickCreate", "args": ["created", 0]}
+{"fn": "matchQuickCreate", "args": ["created", 1]}
+{"fn": "matchQuickCreate", "args": ["created", 2]}
+{"fn": "matchQuickCreate", "args": ["created", 3]}
+{"fn": "matchQuickCreate", "args": ["created", 4]}
+{"fn": "matchQuickCreate", "args": ["created", 5]}
+{"fn": "matchQuickCreate", "args": ["created", 10]}
+{"fn": "matchQuickCreate", "args": ["created", 17]}
+{"fn": "matchQuickCreate", "args": ["created", 18]}
+{"fn": "matchQuickCreate", "args": ["created", 100]}
+{"fn": "matchQuickCreate", "args": ["created", -1]}
+{"fn": "matchQuickCreate", "args": ["created", -2]}
+{"fn": "matchQuickCreate", "args": ["created", -17]}
+{"fn": "matchQuickCreate", "args": ["created", -18]}
+{"fn": "matchQuickCreate", "args": ["created", 1.5]}
+{"fn": "matchQuickCreate", "args": ["created", 2.9]}
+{"fn": "matchQuickCreate", "args": ["created", -1.5]}
+{"fn": "matchQuickCreate", "args": ["created", 0.5]}
+{"fn": "matchQuickCreate", "args": ["created", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["create"]}
+{"fn": "matchQuickCreate", "args": ["create", 0]}
+{"fn": "matchQuickCreate", "args": ["create", 1]}
+{"fn": "matchQuickCreate", "args": ["create", 2]}
+{"fn": "matchQuickCreate", "args": ["create", 3]}
+{"fn": "matchQuickCreate", "args": ["create", 4]}
+{"fn": "matchQuickCreate", "args": ["create", 5]}
+{"fn": "matchQuickCreate", "args": ["create", 10]}
+{"fn": "matchQuickCreate", "args": ["create", 17]}
+{"fn": "matchQuickCreate", "args": ["create", 18]}
+{"fn": "matchQuickCreate", "args": ["create", 100]}
+{"fn": "matchQuickCreate", "args": ["create", -1]}
+{"fn": "matchQuickCreate", "args": ["create", -2]}
+{"fn": "matchQuickCreate", "args": ["create", -17]}
+{"fn": "matchQuickCreate", "args": ["create", -18]}
+{"fn": "matchQuickCreate", "args": ["create", 1.5]}
+{"fn": "matchQuickCreate", "args": ["create", 2.9]}
+{"fn": "matchQuickCreate", "args": ["create", -1.5]}
+{"fn": "matchQuickCreate", "args": ["create", 0.5]}
+{"fn": "matchQuickCreate", "args": ["create", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["create doc"]}
+{"fn": "matchQuickCreate", "args": ["create doc", 0]}
+{"fn": "matchQuickCreate", "args": ["create doc", 1]}
+{"fn": "matchQuickCreate", "args": ["create doc", 2]}
+{"fn": "matchQuickCreate", "args": ["create doc", 3]}
+{"fn": "matchQuickCreate", "args": ["create doc", 4]}
+{"fn": "matchQuickCreate", "args": ["create doc", 5]}
+{"fn": "matchQuickCreate", "args": ["create doc", 10]}
+{"fn": "matchQuickCreate", "args": ["create doc", 17]}
+{"fn": "matchQuickCreate", "args": ["create doc", 18]}
+{"fn": "matchQuickCreate", "args": ["create doc", 100]}
+{"fn": "matchQuickCreate", "args": ["create doc", -1]}
+{"fn": "matchQuickCreate", "args": ["create doc", -2]}
+{"fn": "matchQuickCreate", "args": ["create doc", -17]}
+{"fn": "matchQuickCreate", "args": ["create doc", -18]}
+{"fn": "matchQuickCreate", "args": ["create doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["create doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["create doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["create doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["create doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["create  "]}
+{"fn": "matchQuickCreate", "args": ["create  ", 0]}
+{"fn": "matchQuickCreate", "args": ["create  ", 1]}
+{"fn": "matchQuickCreate", "args": ["create  ", 2]}
+{"fn": "matchQuickCreate", "args": ["create  ", 3]}
+{"fn": "matchQuickCreate", "args": ["create  ", 4]}
+{"fn": "matchQuickCreate", "args": ["create  ", 5]}
+{"fn": "matchQuickCreate", "args": ["create  ", 10]}
+{"fn": "matchQuickCreate", "args": ["create  ", 17]}
+{"fn": "matchQuickCreate", "args": ["create  ", 18]}
+{"fn": "matchQuickCreate", "args": ["create  ", 100]}
+{"fn": "matchQuickCreate", "args": ["create  ", -1]}
+{"fn": "matchQuickCreate", "args": ["create  ", -2]}
+{"fn": "matchQuickCreate", "args": ["create  ", -17]}
+{"fn": "matchQuickCreate", "args": ["create  ", -18]}
+{"fn": "matchQuickCreate", "args": ["create  ", 1.5]}
+{"fn": "matchQuickCreate", "args": ["create  ", 2.9]}
+{"fn": "matchQuickCreate", "args": ["create  ", -1.5]}
+{"fn": "matchQuickCreate", "args": ["create  ", 0.5]}
+{"fn": "matchQuickCreate", "args": ["create  ", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["creat doc"]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 0]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 1]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 2]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 3]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 4]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 5]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 10]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 17]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 18]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 100]}
+{"fn": "matchQuickCreate", "args": ["creat doc", -1]}
+{"fn": "matchQuickCreate", "args": ["creat doc", -2]}
+{"fn": "matchQuickCreate", "args": ["creat doc", -17]}
+{"fn": "matchQuickCreate", "args": ["creat doc", -18]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["creat doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["creat doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC"]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 0]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 1]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 2]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 3]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 4]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 5]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 10]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 17]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 18]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 100]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", -1]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", -2]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", -17]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", -18]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 1.5]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 2.9]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", -1.5]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 0.5]}
+{"fn": "matchQuickCreate", "args": ["CREATE DOC", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc"]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 0]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 1]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 2]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 3]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 4]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 5]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 10]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 17]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 18]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 100]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", -1]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", -2]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", -17]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", -18]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["ǹew doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new İ"]}
+{"fn": "matchQuickCreate", "args": ["new İ", 0]}
+{"fn": "matchQuickCreate", "args": ["new İ", 1]}
+{"fn": "matchQuickCreate", "args": ["new İ", 2]}
+{"fn": "matchQuickCreate", "args": ["new İ", 3]}
+{"fn": "matchQuickCreate", "args": ["new İ", 4]}
+{"fn": "matchQuickCreate", "args": ["new İ", 5]}
+{"fn": "matchQuickCreate", "args": ["new İ", 10]}
+{"fn": "matchQuickCreate", "args": ["new İ", 17]}
+{"fn": "matchQuickCreate", "args": ["new İ", 18]}
+{"fn": "matchQuickCreate", "args": ["new İ", 100]}
+{"fn": "matchQuickCreate", "args": ["new İ", -1]}
+{"fn": "matchQuickCreate", "args": ["new İ", -2]}
+{"fn": "matchQuickCreate", "args": ["new İ", -17]}
+{"fn": "matchQuickCreate", "args": ["new İ", -18]}
+{"fn": "matchQuickCreate", "args": ["new İ", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new İ", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new İ", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new İ", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new İ", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new DOC "]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 0]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 1]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 2]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 3]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 4]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 5]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 10]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 17]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 18]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 100]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", -1]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", -2]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", -17]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", -18]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new DOC ", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new doc"]}
+{"fn": "matchQuickCreate", "args": ["new doc", 0]}
+{"fn": "matchQuickCreate", "args": ["new doc", 1]}
+{"fn": "matchQuickCreate", "args": ["new doc", 2]}
+{"fn": "matchQuickCreate", "args": ["new doc", 3]}
+{"fn": "matchQuickCreate", "args": ["new doc", 4]}
+{"fn": "matchQuickCreate", "args": ["new doc", 5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 10]}
+{"fn": "matchQuickCreate", "args": ["new doc", 17]}
+{"fn": "matchQuickCreate", "args": ["new doc", 18]}
+{"fn": "matchQuickCreate", "args": ["new doc", 100]}
+{"fn": "matchQuickCreate", "args": ["new doc", -1]}
+{"fn": "matchQuickCreate", "args": ["new doc", -2]}
+{"fn": "matchQuickCreate", "args": ["new doc", -17]}
+{"fn": "matchQuickCreate", "args": ["new doc", -18]}
+{"fn": "matchQuickCreate", "args": ["new doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new doc"]}
+{"fn": "matchQuickCreate", "args": ["new doc", 0]}
+{"fn": "matchQuickCreate", "args": ["new doc", 1]}
+{"fn": "matchQuickCreate", "args": ["new doc", 2]}
+{"fn": "matchQuickCreate", "args": ["new doc", 3]}
+{"fn": "matchQuickCreate", "args": ["new doc", 4]}
+{"fn": "matchQuickCreate", "args": ["new doc", 5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 10]}
+{"fn": "matchQuickCreate", "args": ["new doc", 17]}
+{"fn": "matchQuickCreate", "args": ["new doc", 18]}
+{"fn": "matchQuickCreate", "args": ["new doc", 100]}
+{"fn": "matchQuickCreate", "args": ["new doc", -1]}
+{"fn": "matchQuickCreate", "args": ["new doc", -2]}
+{"fn": "matchQuickCreate", "args": ["new doc", -17]}
+{"fn": "matchQuickCreate", "args": ["new doc", -18]}
+{"fn": "matchQuickCreate", "args": ["new doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new　doc"]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 0]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 1]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 2]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 3]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 4]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 5]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 10]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 17]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 18]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 100]}
+{"fn": "matchQuickCreate", "args": ["new　doc", -1]}
+{"fn": "matchQuickCreate", "args": ["new　doc", -2]}
+{"fn": "matchQuickCreate", "args": ["new　doc", -17]}
+{"fn": "matchQuickCreate", "args": ["new　doc", -18]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new　doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new　doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new  "]}
+{"fn": "matchQuickCreate", "args": ["new  ", 0]}
+{"fn": "matchQuickCreate", "args": ["new  ", 1]}
+{"fn": "matchQuickCreate", "args": ["new  ", 2]}
+{"fn": "matchQuickCreate", "args": ["new  ", 3]}
+{"fn": "matchQuickCreate", "args": ["new  ", 4]}
+{"fn": "matchQuickCreate", "args": ["new  ", 5]}
+{"fn": "matchQuickCreate", "args": ["new  ", 10]}
+{"fn": "matchQuickCreate", "args": ["new  ", 17]}
+{"fn": "matchQuickCreate", "args": ["new  ", 18]}
+{"fn": "matchQuickCreate", "args": ["new  ", 100]}
+{"fn": "matchQuickCreate", "args": ["new  ", -1]}
+{"fn": "matchQuickCreate", "args": ["new  ", -2]}
+{"fn": "matchQuickCreate", "args": ["new  ", -17]}
+{"fn": "matchQuickCreate", "args": ["new  ", -18]}
+{"fn": "matchQuickCreate", "args": ["new  ", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new  ", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new  ", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new  ", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new  ", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new doc "]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 0]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 1]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 2]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 3]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 4]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 5]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 10]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 17]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 18]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 100]}
+{"fn": "matchQuickCreate", "args": ["new doc ", -1]}
+{"fn": "matchQuickCreate", "args": ["new doc ", -2]}
+{"fn": "matchQuickCreate", "args": ["new doc ", -17]}
+{"fn": "matchQuickCreate", "args": ["new doc ", -18]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new doc ", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new doc ", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new d "]}
+{"fn": "matchQuickCreate", "args": ["new d ", 0]}
+{"fn": "matchQuickCreate", "args": ["new d ", 1]}
+{"fn": "matchQuickCreate", "args": ["new d ", 2]}
+{"fn": "matchQuickCreate", "args": ["new d ", 3]}
+{"fn": "matchQuickCreate", "args": ["new d ", 4]}
+{"fn": "matchQuickCreate", "args": ["new d ", 5]}
+{"fn": "matchQuickCreate", "args": ["new d ", 10]}
+{"fn": "matchQuickCreate", "args": ["new d ", 17]}
+{"fn": "matchQuickCreate", "args": ["new d ", 18]}
+{"fn": "matchQuickCreate", "args": ["new d ", 100]}
+{"fn": "matchQuickCreate", "args": ["new d ", -1]}
+{"fn": "matchQuickCreate", "args": ["new d ", -2]}
+{"fn": "matchQuickCreate", "args": ["new d ", -17]}
+{"fn": "matchQuickCreate", "args": ["new d ", -18]}
+{"fn": "matchQuickCreate", "args": ["new d ", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new d ", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new d ", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new d ", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new d ", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc"]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 0]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 1]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 2]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 3]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 4]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 5]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 10]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 17]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 18]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 100]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", -1]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", -2]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", -17]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", -18]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["﻿new doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc"]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 0]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 1]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 2]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 3]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 4]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 5]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 10]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 17]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 18]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 100]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", -1]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", -2]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", -17]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", -18]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new﻿doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀"]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 0]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 1]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 2]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 3]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 4]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 5]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 10]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 17]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 18]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 100]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", -1]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", -2]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", -17]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", -18]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new doc 😀", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new 😀"]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 0]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 1]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 2]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 3]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 4]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 5]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 10]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 17]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 18]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 100]}
+{"fn": "matchQuickCreate", "args": ["new 😀", -1]}
+{"fn": "matchQuickCreate", "args": ["new 😀", -2]}
+{"fn": "matchQuickCreate", "args": ["new 😀", -17]}
+{"fn": "matchQuickCreate", "args": ["new 😀", -18]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new 😀", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new 😀", 1e+308]}
+{"fn": "matchQuickCreate", "args": [""]}
+{"fn": "matchQuickCreate", "args": ["", 0]}
+{"fn": "matchQuickCreate", "args": ["", 1]}
+{"fn": "matchQuickCreate", "args": ["", 2]}
+{"fn": "matchQuickCreate", "args": ["", 3]}
+{"fn": "matchQuickCreate", "args": ["", 4]}
+{"fn": "matchQuickCreate", "args": ["", 5]}
+{"fn": "matchQuickCreate", "args": ["", 10]}
+{"fn": "matchQuickCreate", "args": ["", 17]}
+{"fn": "matchQuickCreate", "args": ["", 18]}
+{"fn": "matchQuickCreate", "args": ["", 100]}
+{"fn": "matchQuickCreate", "args": ["", -1]}
+{"fn": "matchQuickCreate", "args": ["", -2]}
+{"fn": "matchQuickCreate", "args": ["", -17]}
+{"fn": "matchQuickCreate", "args": ["", -18]}
+{"fn": "matchQuickCreate", "args": ["", 1.5]}
+{"fn": "matchQuickCreate", "args": ["", 2.9]}
+{"fn": "matchQuickCreate", "args": ["", -1.5]}
+{"fn": "matchQuickCreate", "args": ["", 0.5]}
+{"fn": "matchQuickCreate", "args": ["", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["   "]}
+{"fn": "matchQuickCreate", "args": ["   ", 0]}
+{"fn": "matchQuickCreate", "args": ["   ", 1]}
+{"fn": "matchQuickCreate", "args": ["   ", 2]}
+{"fn": "matchQuickCreate", "args": ["   ", 3]}
+{"fn": "matchQuickCreate", "args": ["   ", 4]}
+{"fn": "matchQuickCreate", "args": ["   ", 5]}
+{"fn": "matchQuickCreate", "args": ["   ", 10]}
+{"fn": "matchQuickCreate", "args": ["   ", 17]}
+{"fn": "matchQuickCreate", "args": ["   ", 18]}
+{"fn": "matchQuickCreate", "args": ["   ", 100]}
+{"fn": "matchQuickCreate", "args": ["   ", -1]}
+{"fn": "matchQuickCreate", "args": ["   ", -2]}
+{"fn": "matchQuickCreate", "args": ["   ", -17]}
+{"fn": "matchQuickCreate", "args": ["   ", -18]}
+{"fn": "matchQuickCreate", "args": ["   ", 1.5]}
+{"fn": "matchQuickCreate", "args": ["   ", 2.9]}
+{"fn": "matchQuickCreate", "args": ["   ", -1.5]}
+{"fn": "matchQuickCreate", "args": ["   ", 0.5]}
+{"fn": "matchQuickCreate", "args": ["   ", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["doc"]}
+{"fn": "matchQuickCreate", "args": ["doc", 0]}
+{"fn": "matchQuickCreate", "args": ["doc", 1]}
+{"fn": "matchQuickCreate", "args": ["doc", 2]}
+{"fn": "matchQuickCreate", "args": ["doc", 3]}
+{"fn": "matchQuickCreate", "args": ["doc", 4]}
+{"fn": "matchQuickCreate", "args": ["doc", 5]}
+{"fn": "matchQuickCreate", "args": ["doc", 10]}
+{"fn": "matchQuickCreate", "args": ["doc", 17]}
+{"fn": "matchQuickCreate", "args": ["doc", 18]}
+{"fn": "matchQuickCreate", "args": ["doc", 100]}
+{"fn": "matchQuickCreate", "args": ["doc", -1]}
+{"fn": "matchQuickCreate", "args": ["doc", -2]}
+{"fn": "matchQuickCreate", "args": ["doc", -17]}
+{"fn": "matchQuickCreate", "args": ["doc", -18]}
+{"fn": "matchQuickCreate", "args": ["doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new new"]}
+{"fn": "matchQuickCreate", "args": ["new new", 0]}
+{"fn": "matchQuickCreate", "args": ["new new", 1]}
+{"fn": "matchQuickCreate", "args": ["new new", 2]}
+{"fn": "matchQuickCreate", "args": ["new new", 3]}
+{"fn": "matchQuickCreate", "args": ["new new", 4]}
+{"fn": "matchQuickCreate", "args": ["new new", 5]}
+{"fn": "matchQuickCreate", "args": ["new new", 10]}
+{"fn": "matchQuickCreate", "args": ["new new", 17]}
+{"fn": "matchQuickCreate", "args": ["new new", 18]}
+{"fn": "matchQuickCreate", "args": ["new new", 100]}
+{"fn": "matchQuickCreate", "args": ["new new", -1]}
+{"fn": "matchQuickCreate", "args": ["new new", -2]}
+{"fn": "matchQuickCreate", "args": ["new new", -17]}
+{"fn": "matchQuickCreate", "args": ["new new", -18]}
+{"fn": "matchQuickCreate", "args": ["new new", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new new", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new new", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new new", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new new", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new create"]}
+{"fn": "matchQuickCreate", "args": ["new create", 0]}
+{"fn": "matchQuickCreate", "args": ["new create", 1]}
+{"fn": "matchQuickCreate", "args": ["new create", 2]}
+{"fn": "matchQuickCreate", "args": ["new create", 3]}
+{"fn": "matchQuickCreate", "args": ["new create", 4]}
+{"fn": "matchQuickCreate", "args": ["new create", 5]}
+{"fn": "matchQuickCreate", "args": ["new create", 10]}
+{"fn": "matchQuickCreate", "args": ["new create", 17]}
+{"fn": "matchQuickCreate", "args": ["new create", 18]}
+{"fn": "matchQuickCreate", "args": ["new create", 100]}
+{"fn": "matchQuickCreate", "args": ["new create", -1]}
+{"fn": "matchQuickCreate", "args": ["new create", -2]}
+{"fn": "matchQuickCreate", "args": ["new create", -17]}
+{"fn": "matchQuickCreate", "args": ["new create", -18]}
+{"fn": "matchQuickCreate", "args": ["new create", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new create", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new create", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new create", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new create", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new meeting"]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 0]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 1]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 2]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 3]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 4]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 5]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 10]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 17]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 18]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 100]}
+{"fn": "matchQuickCreate", "args": ["new meeting", -1]}
+{"fn": "matchQuickCreate", "args": ["new meeting", -2]}
+{"fn": "matchQuickCreate", "args": ["new meeting", -17]}
+{"fn": "matchQuickCreate", "args": ["new meeting", -18]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new meeting", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new meeting", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new meet"]}
+{"fn": "matchQuickCreate", "args": ["new meet", 0]}
+{"fn": "matchQuickCreate", "args": ["new meet", 1]}
+{"fn": "matchQuickCreate", "args": ["new meet", 2]}
+{"fn": "matchQuickCreate", "args": ["new meet", 3]}
+{"fn": "matchQuickCreate", "args": ["new meet", 4]}
+{"fn": "matchQuickCreate", "args": ["new meet", 5]}
+{"fn": "matchQuickCreate", "args": ["new meet", 10]}
+{"fn": "matchQuickCreate", "args": ["new meet", 17]}
+{"fn": "matchQuickCreate", "args": ["new meet", 18]}
+{"fn": "matchQuickCreate", "args": ["new meet", 100]}
+{"fn": "matchQuickCreate", "args": ["new meet", -1]}
+{"fn": "matchQuickCreate", "args": ["new meet", -2]}
+{"fn": "matchQuickCreate", "args": ["new meet", -17]}
+{"fn": "matchQuickCreate", "args": ["new meet", -18]}
+{"fn": "matchQuickCreate", "args": ["new meet", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new meet", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new meet", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new meet", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new meet", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new m"]}
+{"fn": "matchQuickCreate", "args": ["new m", 0]}
+{"fn": "matchQuickCreate", "args": ["new m", 1]}
+{"fn": "matchQuickCreate", "args": ["new m", 2]}
+{"fn": "matchQuickCreate", "args": ["new m", 3]}
+{"fn": "matchQuickCreate", "args": ["new m", 4]}
+{"fn": "matchQuickCreate", "args": ["new m", 5]}
+{"fn": "matchQuickCreate", "args": ["new m", 10]}
+{"fn": "matchQuickCreate", "args": ["new m", 17]}
+{"fn": "matchQuickCreate", "args": ["new m", 18]}
+{"fn": "matchQuickCreate", "args": ["new m", 100]}
+{"fn": "matchQuickCreate", "args": ["new m", -1]}
+{"fn": "matchQuickCreate", "args": ["new m", -2]}
+{"fn": "matchQuickCreate", "args": ["new m", -17]}
+{"fn": "matchQuickCreate", "args": ["new m", -18]}
+{"fn": "matchQuickCreate", "args": ["new m", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new m", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new m", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new m", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new m", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new me"]}
+{"fn": "matchQuickCreate", "args": ["new me", 0]}
+{"fn": "matchQuickCreate", "args": ["new me", 1]}
+{"fn": "matchQuickCreate", "args": ["new me", 2]}
+{"fn": "matchQuickCreate", "args": ["new me", 3]}
+{"fn": "matchQuickCreate", "args": ["new me", 4]}
+{"fn": "matchQuickCreate", "args": ["new me", 5]}
+{"fn": "matchQuickCreate", "args": ["new me", 10]}
+{"fn": "matchQuickCreate", "args": ["new me", 17]}
+{"fn": "matchQuickCreate", "args": ["new me", 18]}
+{"fn": "matchQuickCreate", "args": ["new me", 100]}
+{"fn": "matchQuickCreate", "args": ["new me", -1]}
+{"fn": "matchQuickCreate", "args": ["new me", -2]}
+{"fn": "matchQuickCreate", "args": ["new me", -17]}
+{"fn": "matchQuickCreate", "args": ["new me", -18]}
+{"fn": "matchQuickCreate", "args": ["new me", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new me", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new me", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new me", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new me", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new mee"]}
+{"fn": "matchQuickCreate", "args": ["new mee", 0]}
+{"fn": "matchQuickCreate", "args": ["new mee", 1]}
+{"fn": "matchQuickCreate", "args": ["new mee", 2]}
+{"fn": "matchQuickCreate", "args": ["new mee", 3]}
+{"fn": "matchQuickCreate", "args": ["new mee", 4]}
+{"fn": "matchQuickCreate", "args": ["new mee", 5]}
+{"fn": "matchQuickCreate", "args": ["new mee", 10]}
+{"fn": "matchQuickCreate", "args": ["new mee", 17]}
+{"fn": "matchQuickCreate", "args": ["new mee", 18]}
+{"fn": "matchQuickCreate", "args": ["new mee", 100]}
+{"fn": "matchQuickCreate", "args": ["new mee", -1]}
+{"fn": "matchQuickCreate", "args": ["new mee", -2]}
+{"fn": "matchQuickCreate", "args": ["new mee", -17]}
+{"fn": "matchQuickCreate", "args": ["new mee", -18]}
+{"fn": "matchQuickCreate", "args": ["new mee", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new mee", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new mee", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new mee", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new mee", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new n"]}
+{"fn": "matchQuickCreate", "args": ["new n", 0]}
+{"fn": "matchQuickCreate", "args": ["new n", 1]}
+{"fn": "matchQuickCreate", "args": ["new n", 2]}
+{"fn": "matchQuickCreate", "args": ["new n", 3]}
+{"fn": "matchQuickCreate", "args": ["new n", 4]}
+{"fn": "matchQuickCreate", "args": ["new n", 5]}
+{"fn": "matchQuickCreate", "args": ["new n", 10]}
+{"fn": "matchQuickCreate", "args": ["new n", 17]}
+{"fn": "matchQuickCreate", "args": ["new n", 18]}
+{"fn": "matchQuickCreate", "args": ["new n", 100]}
+{"fn": "matchQuickCreate", "args": ["new n", -1]}
+{"fn": "matchQuickCreate", "args": ["new n", -2]}
+{"fn": "matchQuickCreate", "args": ["new n", -17]}
+{"fn": "matchQuickCreate", "args": ["new n", -18]}
+{"fn": "matchQuickCreate", "args": ["new n", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new n", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new n", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new n", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new n", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new notion"]}
+{"fn": "matchQuickCreate", "args": ["new notion", 0]}
+{"fn": "matchQuickCreate", "args": ["new notion", 1]}
+{"fn": "matchQuickCreate", "args": ["new notion", 2]}
+{"fn": "matchQuickCreate", "args": ["new notion", 3]}
+{"fn": "matchQuickCreate", "args": ["new notion", 4]}
+{"fn": "matchQuickCreate", "args": ["new notion", 5]}
+{"fn": "matchQuickCreate", "args": ["new notion", 10]}
+{"fn": "matchQuickCreate", "args": ["new notion", 17]}
+{"fn": "matchQuickCreate", "args": ["new notion", 18]}
+{"fn": "matchQuickCreate", "args": ["new notion", 100]}
+{"fn": "matchQuickCreate", "args": ["new notion", -1]}
+{"fn": "matchQuickCreate", "args": ["new notion", -2]}
+{"fn": "matchQuickCreate", "args": ["new notion", -17]}
+{"fn": "matchQuickCreate", "args": ["new notion", -18]}
+{"fn": "matchQuickCreate", "args": ["new notion", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new notion", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new notion", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new notion", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new notion", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new note"]}
+{"fn": "matchQuickCreate", "args": ["new note", 0]}
+{"fn": "matchQuickCreate", "args": ["new note", 1]}
+{"fn": "matchQuickCreate", "args": ["new note", 2]}
+{"fn": "matchQuickCreate", "args": ["new note", 3]}
+{"fn": "matchQuickCreate", "args": ["new note", 4]}
+{"fn": "matchQuickCreate", "args": ["new note", 5]}
+{"fn": "matchQuickCreate", "args": ["new note", 10]}
+{"fn": "matchQuickCreate", "args": ["new note", 17]}
+{"fn": "matchQuickCreate", "args": ["new note", 18]}
+{"fn": "matchQuickCreate", "args": ["new note", 100]}
+{"fn": "matchQuickCreate", "args": ["new note", -1]}
+{"fn": "matchQuickCreate", "args": ["new note", -2]}
+{"fn": "matchQuickCreate", "args": ["new note", -17]}
+{"fn": "matchQuickCreate", "args": ["new note", -18]}
+{"fn": "matchQuickCreate", "args": ["new note", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new note", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new note", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new note", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new note", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new page"]}
+{"fn": "matchQuickCreate", "args": ["new page", 0]}
+{"fn": "matchQuickCreate", "args": ["new page", 1]}
+{"fn": "matchQuickCreate", "args": ["new page", 2]}
+{"fn": "matchQuickCreate", "args": ["new page", 3]}
+{"fn": "matchQuickCreate", "args": ["new page", 4]}
+{"fn": "matchQuickCreate", "args": ["new page", 5]}
+{"fn": "matchQuickCreate", "args": ["new page", 10]}
+{"fn": "matchQuickCreate", "args": ["new page", 17]}
+{"fn": "matchQuickCreate", "args": ["new page", 18]}
+{"fn": "matchQuickCreate", "args": ["new page", 100]}
+{"fn": "matchQuickCreate", "args": ["new page", -1]}
+{"fn": "matchQuickCreate", "args": ["new page", -2]}
+{"fn": "matchQuickCreate", "args": ["new page", -17]}
+{"fn": "matchQuickCreate", "args": ["new page", -18]}
+{"fn": "matchQuickCreate", "args": ["new page", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new page", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new page", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new page", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new page", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new f"]}
+{"fn": "matchQuickCreate", "args": ["new f", 0]}
+{"fn": "matchQuickCreate", "args": ["new f", 1]}
+{"fn": "matchQuickCreate", "args": ["new f", 2]}
+{"fn": "matchQuickCreate", "args": ["new f", 3]}
+{"fn": "matchQuickCreate", "args": ["new f", 4]}
+{"fn": "matchQuickCreate", "args": ["new f", 5]}
+{"fn": "matchQuickCreate", "args": ["new f", 10]}
+{"fn": "matchQuickCreate", "args": ["new f", 17]}
+{"fn": "matchQuickCreate", "args": ["new f", 18]}
+{"fn": "matchQuickCreate", "args": ["new f", 100]}
+{"fn": "matchQuickCreate", "args": ["new f", -1]}
+{"fn": "matchQuickCreate", "args": ["new f", -2]}
+{"fn": "matchQuickCreate", "args": ["new f", -17]}
+{"fn": "matchQuickCreate", "args": ["new f", -18]}
+{"fn": "matchQuickCreate", "args": ["new f", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new f", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new f", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new f", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new f", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new figma"]}
+{"fn": "matchQuickCreate", "args": ["new figma", 0]}
+{"fn": "matchQuickCreate", "args": ["new figma", 1]}
+{"fn": "matchQuickCreate", "args": ["new figma", 2]}
+{"fn": "matchQuickCreate", "args": ["new figma", 3]}
+{"fn": "matchQuickCreate", "args": ["new figma", 4]}
+{"fn": "matchQuickCreate", "args": ["new figma", 5]}
+{"fn": "matchQuickCreate", "args": ["new figma", 10]}
+{"fn": "matchQuickCreate", "args": ["new figma", 17]}
+{"fn": "matchQuickCreate", "args": ["new figma", 18]}
+{"fn": "matchQuickCreate", "args": ["new figma", 100]}
+{"fn": "matchQuickCreate", "args": ["new figma", -1]}
+{"fn": "matchQuickCreate", "args": ["new figma", -2]}
+{"fn": "matchQuickCreate", "args": ["new figma", -17]}
+{"fn": "matchQuickCreate", "args": ["new figma", -18]}
+{"fn": "matchQuickCreate", "args": ["new figma", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new figma", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new figma", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new figma", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new figma", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new fig"]}
+{"fn": "matchQuickCreate", "args": ["new fig", 0]}
+{"fn": "matchQuickCreate", "args": ["new fig", 1]}
+{"fn": "matchQuickCreate", "args": ["new fig", 2]}
+{"fn": "matchQuickCreate", "args": ["new fig", 3]}
+{"fn": "matchQuickCreate", "args": ["new fig", 4]}
+{"fn": "matchQuickCreate", "args": ["new fig", 5]}
+{"fn": "matchQuickCreate", "args": ["new fig", 10]}
+{"fn": "matchQuickCreate", "args": ["new fig", 17]}
+{"fn": "matchQuickCreate", "args": ["new fig", 18]}
+{"fn": "matchQuickCreate", "args": ["new fig", 100]}
+{"fn": "matchQuickCreate", "args": ["new fig", -1]}
+{"fn": "matchQuickCreate", "args": ["new fig", -2]}
+{"fn": "matchQuickCreate", "args": ["new fig", -17]}
+{"fn": "matchQuickCreate", "args": ["new fig", -18]}
+{"fn": "matchQuickCreate", "args": ["new fig", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new fig", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new fig", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new fig", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new fig", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new figj"]}
+{"fn": "matchQuickCreate", "args": ["new figj", 0]}
+{"fn": "matchQuickCreate", "args": ["new figj", 1]}
+{"fn": "matchQuickCreate", "args": ["new figj", 2]}
+{"fn": "matchQuickCreate", "args": ["new figj", 3]}
+{"fn": "matchQuickCreate", "args": ["new figj", 4]}
+{"fn": "matchQuickCreate", "args": ["new figj", 5]}
+{"fn": "matchQuickCreate", "args": ["new figj", 10]}
+{"fn": "matchQuickCreate", "args": ["new figj", 17]}
+{"fn": "matchQuickCreate", "args": ["new figj", 18]}
+{"fn": "matchQuickCreate", "args": ["new figj", 100]}
+{"fn": "matchQuickCreate", "args": ["new figj", -1]}
+{"fn": "matchQuickCreate", "args": ["new figj", -2]}
+{"fn": "matchQuickCreate", "args": ["new figj", -17]}
+{"fn": "matchQuickCreate", "args": ["new figj", -18]}
+{"fn": "matchQuickCreate", "args": ["new figj", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new figj", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new figj", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new figj", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new figj", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new b"]}
+{"fn": "matchQuickCreate", "args": ["new b", 0]}
+{"fn": "matchQuickCreate", "args": ["new b", 1]}
+{"fn": "matchQuickCreate", "args": ["new b", 2]}
+{"fn": "matchQuickCreate", "args": ["new b", 3]}
+{"fn": "matchQuickCreate", "args": ["new b", 4]}
+{"fn": "matchQuickCreate", "args": ["new b", 5]}
+{"fn": "matchQuickCreate", "args": ["new b", 10]}
+{"fn": "matchQuickCreate", "args": ["new b", 17]}
+{"fn": "matchQuickCreate", "args": ["new b", 18]}
+{"fn": "matchQuickCreate", "args": ["new b", 100]}
+{"fn": "matchQuickCreate", "args": ["new b", -1]}
+{"fn": "matchQuickCreate", "args": ["new b", -2]}
+{"fn": "matchQuickCreate", "args": ["new b", -17]}
+{"fn": "matchQuickCreate", "args": ["new b", -18]}
+{"fn": "matchQuickCreate", "args": ["new b", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new b", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new b", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new b", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new b", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new board"]}
+{"fn": "matchQuickCreate", "args": ["new board", 0]}
+{"fn": "matchQuickCreate", "args": ["new board", 1]}
+{"fn": "matchQuickCreate", "args": ["new board", 2]}
+{"fn": "matchQuickCreate", "args": ["new board", 3]}
+{"fn": "matchQuickCreate", "args": ["new board", 4]}
+{"fn": "matchQuickCreate", "args": ["new board", 5]}
+{"fn": "matchQuickCreate", "args": ["new board", 10]}
+{"fn": "matchQuickCreate", "args": ["new board", 17]}
+{"fn": "matchQuickCreate", "args": ["new board", 18]}
+{"fn": "matchQuickCreate", "args": ["new board", 100]}
+{"fn": "matchQuickCreate", "args": ["new board", -1]}
+{"fn": "matchQuickCreate", "args": ["new board", -2]}
+{"fn": "matchQuickCreate", "args": ["new board", -17]}
+{"fn": "matchQuickCreate", "args": ["new board", -18]}
+{"fn": "matchQuickCreate", "args": ["new board", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new board", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new board", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new board", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new board", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new w"]}
+{"fn": "matchQuickCreate", "args": ["new w", 0]}
+{"fn": "matchQuickCreate", "args": ["new w", 1]}
+{"fn": "matchQuickCreate", "args": ["new w", 2]}
+{"fn": "matchQuickCreate", "args": ["new w", 3]}
+{"fn": "matchQuickCreate", "args": ["new w", 4]}
+{"fn": "matchQuickCreate", "args": ["new w", 5]}
+{"fn": "matchQuickCreate", "args": ["new w", 10]}
+{"fn": "matchQuickCreate", "args": ["new w", 17]}
+{"fn": "matchQuickCreate", "args": ["new w", 18]}
+{"fn": "matchQuickCreate", "args": ["new w", 100]}
+{"fn": "matchQuickCreate", "args": ["new w", -1]}
+{"fn": "matchQuickCreate", "args": ["new w", -2]}
+{"fn": "matchQuickCreate", "args": ["new w", -17]}
+{"fn": "matchQuickCreate", "args": ["new w", -18]}
+{"fn": "matchQuickCreate", "args": ["new w", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new w", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new w", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new w", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new w", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new word"]}
+{"fn": "matchQuickCreate", "args": ["new word", 0]}
+{"fn": "matchQuickCreate", "args": ["new word", 1]}
+{"fn": "matchQuickCreate", "args": ["new word", 2]}
+{"fn": "matchQuickCreate", "args": ["new word", 3]}
+{"fn": "matchQuickCreate", "args": ["new word", 4]}
+{"fn": "matchQuickCreate", "args": ["new word", 5]}
+{"fn": "matchQuickCreate", "args": ["new word", 10]}
+{"fn": "matchQuickCreate", "args": ["new word", 17]}
+{"fn": "matchQuickCreate", "args": ["new word", 18]}
+{"fn": "matchQuickCreate", "args": ["new word", 100]}
+{"fn": "matchQuickCreate", "args": ["new word", -1]}
+{"fn": "matchQuickCreate", "args": ["new word", -2]}
+{"fn": "matchQuickCreate", "args": ["new word", -17]}
+{"fn": "matchQuickCreate", "args": ["new word", -18]}
+{"fn": "matchQuickCreate", "args": ["new word", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new word", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new word", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new word", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new word", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new e"]}
+{"fn": "matchQuickCreate", "args": ["new e", 0]}
+{"fn": "matchQuickCreate", "args": ["new e", 1]}
+{"fn": "matchQuickCreate", "args": ["new e", 2]}
+{"fn": "matchQuickCreate", "args": ["new e", 3]}
+{"fn": "matchQuickCreate", "args": ["new e", 4]}
+{"fn": "matchQuickCreate", "args": ["new e", 5]}
+{"fn": "matchQuickCreate", "args": ["new e", 10]}
+{"fn": "matchQuickCreate", "args": ["new e", 17]}
+{"fn": "matchQuickCreate", "args": ["new e", 18]}
+{"fn": "matchQuickCreate", "args": ["new e", 100]}
+{"fn": "matchQuickCreate", "args": ["new e", -1]}
+{"fn": "matchQuickCreate", "args": ["new e", -2]}
+{"fn": "matchQuickCreate", "args": ["new e", -17]}
+{"fn": "matchQuickCreate", "args": ["new e", -18]}
+{"fn": "matchQuickCreate", "args": ["new e", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new e", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new e", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new e", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new e", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new excel"]}
+{"fn": "matchQuickCreate", "args": ["new excel", 0]}
+{"fn": "matchQuickCreate", "args": ["new excel", 1]}
+{"fn": "matchQuickCreate", "args": ["new excel", 2]}
+{"fn": "matchQuickCreate", "args": ["new excel", 3]}
+{"fn": "matchQuickCreate", "args": ["new excel", 4]}
+{"fn": "matchQuickCreate", "args": ["new excel", 5]}
+{"fn": "matchQuickCreate", "args": ["new excel", 10]}
+{"fn": "matchQuickCreate", "args": ["new excel", 17]}
+{"fn": "matchQuickCreate", "args": ["new excel", 18]}
+{"fn": "matchQuickCreate", "args": ["new excel", 100]}
+{"fn": "matchQuickCreate", "args": ["new excel", -1]}
+{"fn": "matchQuickCreate", "args": ["new excel", -2]}
+{"fn": "matchQuickCreate", "args": ["new excel", -17]}
+{"fn": "matchQuickCreate", "args": ["new excel", -18]}
+{"fn": "matchQuickCreate", "args": ["new excel", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new excel", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new excel", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new excel", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new excel", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new r"]}
+{"fn": "matchQuickCreate", "args": ["new r", 0]}
+{"fn": "matchQuickCreate", "args": ["new r", 1]}
+{"fn": "matchQuickCreate", "args": ["new r", 2]}
+{"fn": "matchQuickCreate", "args": ["new r", 3]}
+{"fn": "matchQuickCreate", "args": ["new r", 4]}
+{"fn": "matchQuickCreate", "args": ["new r", 5]}
+{"fn": "matchQuickCreate", "args": ["new r", 10]}
+{"fn": "matchQuickCreate", "args": ["new r", 17]}
+{"fn": "matchQuickCreate", "args": ["new r", 18]}
+{"fn": "matchQuickCreate", "args": ["new r", 100]}
+{"fn": "matchQuickCreate", "args": ["new r", -1]}
+{"fn": "matchQuickCreate", "args": ["new r", -2]}
+{"fn": "matchQuickCreate", "args": ["new r", -17]}
+{"fn": "matchQuickCreate", "args": ["new r", -18]}
+{"fn": "matchQuickCreate", "args": ["new r", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new r", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new r", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new r", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new r", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new repo"]}
+{"fn": "matchQuickCreate", "args": ["new repo", 0]}
+{"fn": "matchQuickCreate", "args": ["new repo", 1]}
+{"fn": "matchQuickCreate", "args": ["new repo", 2]}
+{"fn": "matchQuickCreate", "args": ["new repo", 3]}
+{"fn": "matchQuickCreate", "args": ["new repo", 4]}
+{"fn": "matchQuickCreate", "args": ["new repo", 5]}
+{"fn": "matchQuickCreate", "args": ["new repo", 10]}
+{"fn": "matchQuickCreate", "args": ["new repo", 17]}
+{"fn": "matchQuickCreate", "args": ["new repo", 18]}
+{"fn": "matchQuickCreate", "args": ["new repo", 100]}
+{"fn": "matchQuickCreate", "args": ["new repo", -1]}
+{"fn": "matchQuickCreate", "args": ["new repo", -2]}
+{"fn": "matchQuickCreate", "args": ["new repo", -17]}
+{"fn": "matchQuickCreate", "args": ["new repo", -18]}
+{"fn": "matchQuickCreate", "args": ["new repo", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new repo", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new repo", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new repo", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new repo", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new s"]}
+{"fn": "matchQuickCreate", "args": ["new s", 0]}
+{"fn": "matchQuickCreate", "args": ["new s", 1]}
+{"fn": "matchQuickCreate", "args": ["new s", 2]}
+{"fn": "matchQuickCreate", "args": ["new s", 3]}
+{"fn": "matchQuickCreate", "args": ["new s", 4]}
+{"fn": "matchQuickCreate", "args": ["new s", 5]}
+{"fn": "matchQuickCreate", "args": ["new s", 10]}
+{"fn": "matchQuickCreate", "args": ["new s", 17]}
+{"fn": "matchQuickCreate", "args": ["new s", 18]}
+{"fn": "matchQuickCreate", "args": ["new s", 100]}
+{"fn": "matchQuickCreate", "args": ["new s", -1]}
+{"fn": "matchQuickCreate", "args": ["new s", -2]}
+{"fn": "matchQuickCreate", "args": ["new s", -17]}
+{"fn": "matchQuickCreate", "args": ["new s", -18]}
+{"fn": "matchQuickCreate", "args": ["new s", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new s", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new s", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new s", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new s", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new sl"]}
+{"fn": "matchQuickCreate", "args": ["new sl", 0]}
+{"fn": "matchQuickCreate", "args": ["new sl", 1]}
+{"fn": "matchQuickCreate", "args": ["new sl", 2]}
+{"fn": "matchQuickCreate", "args": ["new sl", 3]}
+{"fn": "matchQuickCreate", "args": ["new sl", 4]}
+{"fn": "matchQuickCreate", "args": ["new sl", 5]}
+{"fn": "matchQuickCreate", "args": ["new sl", 10]}
+{"fn": "matchQuickCreate", "args": ["new sl", 17]}
+{"fn": "matchQuickCreate", "args": ["new sl", 18]}
+{"fn": "matchQuickCreate", "args": ["new sl", 100]}
+{"fn": "matchQuickCreate", "args": ["new sl", -1]}
+{"fn": "matchQuickCreate", "args": ["new sl", -2]}
+{"fn": "matchQuickCreate", "args": ["new sl", -17]}
+{"fn": "matchQuickCreate", "args": ["new sl", -18]}
+{"fn": "matchQuickCreate", "args": ["new sl", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new sl", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new sl", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new sl", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new sl", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new sheet"]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 0]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 1]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 2]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 3]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 4]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 5]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 10]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 17]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 18]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 100]}
+{"fn": "matchQuickCreate", "args": ["new sheet", -1]}
+{"fn": "matchQuickCreate", "args": ["new sheet", -2]}
+{"fn": "matchQuickCreate", "args": ["new sheet", -17]}
+{"fn": "matchQuickCreate", "args": ["new sheet", -18]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new sheet", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new sheet", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet"]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 0]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 1]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 2]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 3]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 4]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 5]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 10]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 17]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 18]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 100]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", -1]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", -2]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", -17]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", -18]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new spreadsheet", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new s p"]}
+{"fn": "matchQuickCreate", "args": ["new s p", 0]}
+{"fn": "matchQuickCreate", "args": ["new s p", 1]}
+{"fn": "matchQuickCreate", "args": ["new s p", 2]}
+{"fn": "matchQuickCreate", "args": ["new s p", 3]}
+{"fn": "matchQuickCreate", "args": ["new s p", 4]}
+{"fn": "matchQuickCreate", "args": ["new s p", 5]}
+{"fn": "matchQuickCreate", "args": ["new s p", 10]}
+{"fn": "matchQuickCreate", "args": ["new s p", 17]}
+{"fn": "matchQuickCreate", "args": ["new s p", 18]}
+{"fn": "matchQuickCreate", "args": ["new s p", 100]}
+{"fn": "matchQuickCreate", "args": ["new s p", -1]}
+{"fn": "matchQuickCreate", "args": ["new s p", -2]}
+{"fn": "matchQuickCreate", "args": ["new s p", -17]}
+{"fn": "matchQuickCreate", "args": ["new s p", -18]}
+{"fn": "matchQuickCreate", "args": ["new s p", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new s p", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new s p", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new s p", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new s p", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new sheets"]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 0]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 1]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 2]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 3]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 4]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 5]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 10]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 17]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 18]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 100]}
+{"fn": "matchQuickCreate", "args": ["new sheets", -1]}
+{"fn": "matchQuickCreate", "args": ["new sheets", -2]}
+{"fn": "matchQuickCreate", "args": ["new sheets", -17]}
+{"fn": "matchQuickCreate", "args": ["new sheets", -18]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new sheets", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new sheets", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new si"]}
+{"fn": "matchQuickCreate", "args": ["new si", 0]}
+{"fn": "matchQuickCreate", "args": ["new si", 1]}
+{"fn": "matchQuickCreate", "args": ["new si", 2]}
+{"fn": "matchQuickCreate", "args": ["new si", 3]}
+{"fn": "matchQuickCreate", "args": ["new si", 4]}
+{"fn": "matchQuickCreate", "args": ["new si", 5]}
+{"fn": "matchQuickCreate", "args": ["new si", 10]}
+{"fn": "matchQuickCreate", "args": ["new si", 17]}
+{"fn": "matchQuickCreate", "args": ["new si", 18]}
+{"fn": "matchQuickCreate", "args": ["new si", 100]}
+{"fn": "matchQuickCreate", "args": ["new si", -1]}
+{"fn": "matchQuickCreate", "args": ["new si", -2]}
+{"fn": "matchQuickCreate", "args": ["new si", -17]}
+{"fn": "matchQuickCreate", "args": ["new si", -18]}
+{"fn": "matchQuickCreate", "args": ["new si", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new si", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new si", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new si", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new si", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new k"]}
+{"fn": "matchQuickCreate", "args": ["new k", 0]}
+{"fn": "matchQuickCreate", "args": ["new k", 1]}
+{"fn": "matchQuickCreate", "args": ["new k", 2]}
+{"fn": "matchQuickCreate", "args": ["new k", 3]}
+{"fn": "matchQuickCreate", "args": ["new k", 4]}
+{"fn": "matchQuickCreate", "args": ["new k", 5]}
+{"fn": "matchQuickCreate", "args": ["new k", 10]}
+{"fn": "matchQuickCreate", "args": ["new k", 17]}
+{"fn": "matchQuickCreate", "args": ["new k", 18]}
+{"fn": "matchQuickCreate", "args": ["new k", 100]}
+{"fn": "matchQuickCreate", "args": ["new k", -1]}
+{"fn": "matchQuickCreate", "args": ["new k", -2]}
+{"fn": "matchQuickCreate", "args": ["new k", -17]}
+{"fn": "matchQuickCreate", "args": ["new k", -18]}
+{"fn": "matchQuickCreate", "args": ["new k", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new k", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new k", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new k", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new k", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new form"]}
+{"fn": "matchQuickCreate", "args": ["new form", 0]}
+{"fn": "matchQuickCreate", "args": ["new form", 1]}
+{"fn": "matchQuickCreate", "args": ["new form", 2]}
+{"fn": "matchQuickCreate", "args": ["new form", 3]}
+{"fn": "matchQuickCreate", "args": ["new form", 4]}
+{"fn": "matchQuickCreate", "args": ["new form", 5]}
+{"fn": "matchQuickCreate", "args": ["new form", 10]}
+{"fn": "matchQuickCreate", "args": ["new form", 17]}
+{"fn": "matchQuickCreate", "args": ["new form", 18]}
+{"fn": "matchQuickCreate", "args": ["new form", 100]}
+{"fn": "matchQuickCreate", "args": ["new form", -1]}
+{"fn": "matchQuickCreate", "args": ["new form", -2]}
+{"fn": "matchQuickCreate", "args": ["new form", -17]}
+{"fn": "matchQuickCreate", "args": ["new form", -18]}
+{"fn": "matchQuickCreate", "args": ["new form", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new form", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new form", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new form", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new form", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new survey"]}
+{"fn": "matchQuickCreate", "args": ["new survey", 0]}
+{"fn": "matchQuickCreate", "args": ["new survey", 1]}
+{"fn": "matchQuickCreate", "args": ["new survey", 2]}
+{"fn": "matchQuickCreate", "args": ["new survey", 3]}
+{"fn": "matchQuickCreate", "args": ["new survey", 4]}
+{"fn": "matchQuickCreate", "args": ["new survey", 5]}
+{"fn": "matchQuickCreate", "args": ["new survey", 10]}
+{"fn": "matchQuickCreate", "args": ["new survey", 17]}
+{"fn": "matchQuickCreate", "args": ["new survey", 18]}
+{"fn": "matchQuickCreate", "args": ["new survey", 100]}
+{"fn": "matchQuickCreate", "args": ["new survey", -1]}
+{"fn": "matchQuickCreate", "args": ["new survey", -2]}
+{"fn": "matchQuickCreate", "args": ["new survey", -17]}
+{"fn": "matchQuickCreate", "args": ["new survey", -18]}
+{"fn": "matchQuickCreate", "args": ["new survey", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new survey", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new survey", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new survey", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new survey", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new h"]}
+{"fn": "matchQuickCreate", "args": ["new h", 0]}
+{"fn": "matchQuickCreate", "args": ["new h", 1]}
+{"fn": "matchQuickCreate", "args": ["new h", 2]}
+{"fn": "matchQuickCreate", "args": ["new h", 3]}
+{"fn": "matchQuickCreate", "args": ["new h", 4]}
+{"fn": "matchQuickCreate", "args": ["new h", 5]}
+{"fn": "matchQuickCreate", "args": ["new h", 10]}
+{"fn": "matchQuickCreate", "args": ["new h", 17]}
+{"fn": "matchQuickCreate", "args": ["new h", 18]}
+{"fn": "matchQuickCreate", "args": ["new h", 100]}
+{"fn": "matchQuickCreate", "args": ["new h", -1]}
+{"fn": "matchQuickCreate", "args": ["new h", -2]}
+{"fn": "matchQuickCreate", "args": ["new h", -17]}
+{"fn": "matchQuickCreate", "args": ["new h", -18]}
+{"fn": "matchQuickCreate", "args": ["new h", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new h", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new h", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new h", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new h", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new i"]}
+{"fn": "matchQuickCreate", "args": ["new i", 0]}
+{"fn": "matchQuickCreate", "args": ["new i", 1]}
+{"fn": "matchQuickCreate", "args": ["new i", 2]}
+{"fn": "matchQuickCreate", "args": ["new i", 3]}
+{"fn": "matchQuickCreate", "args": ["new i", 4]}
+{"fn": "matchQuickCreate", "args": ["new i", 5]}
+{"fn": "matchQuickCreate", "args": ["new i", 10]}
+{"fn": "matchQuickCreate", "args": ["new i", 17]}
+{"fn": "matchQuickCreate", "args": ["new i", 18]}
+{"fn": "matchQuickCreate", "args": ["new i", 100]}
+{"fn": "matchQuickCreate", "args": ["new i", -1]}
+{"fn": "matchQuickCreate", "args": ["new i", -2]}
+{"fn": "matchQuickCreate", "args": ["new i", -17]}
+{"fn": "matchQuickCreate", "args": ["new i", -18]}
+{"fn": "matchQuickCreate", "args": ["new i", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new i", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new i", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new i", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new i", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new invite"]}
+{"fn": "matchQuickCreate", "args": ["new invite", 0]}
+{"fn": "matchQuickCreate", "args": ["new invite", 1]}
+{"fn": "matchQuickCreate", "args": ["new invite", 2]}
+{"fn": "matchQuickCreate", "args": ["new invite", 3]}
+{"fn": "matchQuickCreate", "args": ["new invite", 4]}
+{"fn": "matchQuickCreate", "args": ["new invite", 5]}
+{"fn": "matchQuickCreate", "args": ["new invite", 10]}
+{"fn": "matchQuickCreate", "args": ["new invite", 17]}
+{"fn": "matchQuickCreate", "args": ["new invite", 18]}
+{"fn": "matchQuickCreate", "args": ["new invite", 100]}
+{"fn": "matchQuickCreate", "args": ["new invite", -1]}
+{"fn": "matchQuickCreate", "args": ["new invite", -2]}
+{"fn": "matchQuickCreate", "args": ["new invite", -17]}
+{"fn": "matchQuickCreate", "args": ["new invite", -18]}
+{"fn": "matchQuickCreate", "args": ["new invite", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new invite", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new invite", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new invite", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new invite", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new inv"]}
+{"fn": "matchQuickCreate", "args": ["new inv", 0]}
+{"fn": "matchQuickCreate", "args": ["new inv", 1]}
+{"fn": "matchQuickCreate", "args": ["new inv", 2]}
+{"fn": "matchQuickCreate", "args": ["new inv", 3]}
+{"fn": "matchQuickCreate", "args": ["new inv", 4]}
+{"fn": "matchQuickCreate", "args": ["new inv", 5]}
+{"fn": "matchQuickCreate", "args": ["new inv", 10]}
+{"fn": "matchQuickCreate", "args": ["new inv", 17]}
+{"fn": "matchQuickCreate", "args": ["new inv", 18]}
+{"fn": "matchQuickCreate", "args": ["new inv", 100]}
+{"fn": "matchQuickCreate", "args": ["new inv", -1]}
+{"fn": "matchQuickCreate", "args": ["new inv", -2]}
+{"fn": "matchQuickCreate", "args": ["new inv", -17]}
+{"fn": "matchQuickCreate", "args": ["new inv", -18]}
+{"fn": "matchQuickCreate", "args": ["new inv", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new inv", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new inv", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new inv", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new inv", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new c"]}
+{"fn": "matchQuickCreate", "args": ["new c", 0]}
+{"fn": "matchQuickCreate", "args": ["new c", 1]}
+{"fn": "matchQuickCreate", "args": ["new c", 2]}
+{"fn": "matchQuickCreate", "args": ["new c", 3]}
+{"fn": "matchQuickCreate", "args": ["new c", 4]}
+{"fn": "matchQuickCreate", "args": ["new c", 5]}
+{"fn": "matchQuickCreate", "args": ["new c", 10]}
+{"fn": "matchQuickCreate", "args": ["new c", 17]}
+{"fn": "matchQuickCreate", "args": ["new c", 18]}
+{"fn": "matchQuickCreate", "args": ["new c", 100]}
+{"fn": "matchQuickCreate", "args": ["new c", -1]}
+{"fn": "matchQuickCreate", "args": ["new c", -2]}
+{"fn": "matchQuickCreate", "args": ["new c", -17]}
+{"fn": "matchQuickCreate", "args": ["new c", -18]}
+{"fn": "matchQuickCreate", "args": ["new c", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new c", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new c", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new c", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new c", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new calendar"]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 0]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 1]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 2]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 3]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 4]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 5]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 10]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 17]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 18]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 100]}
+{"fn": "matchQuickCreate", "args": ["new calendar", -1]}
+{"fn": "matchQuickCreate", "args": ["new calendar", -2]}
+{"fn": "matchQuickCreate", "args": ["new calendar", -17]}
+{"fn": "matchQuickCreate", "args": ["new calendar", -18]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new calendar", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new calendar", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new call"]}
+{"fn": "matchQuickCreate", "args": ["new call", 0]}
+{"fn": "matchQuickCreate", "args": ["new call", 1]}
+{"fn": "matchQuickCreate", "args": ["new call", 2]}
+{"fn": "matchQuickCreate", "args": ["new call", 3]}
+{"fn": "matchQuickCreate", "args": ["new call", 4]}
+{"fn": "matchQuickCreate", "args": ["new call", 5]}
+{"fn": "matchQuickCreate", "args": ["new call", 10]}
+{"fn": "matchQuickCreate", "args": ["new call", 17]}
+{"fn": "matchQuickCreate", "args": ["new call", 18]}
+{"fn": "matchQuickCreate", "args": ["new call", 100]}
+{"fn": "matchQuickCreate", "args": ["new call", -1]}
+{"fn": "matchQuickCreate", "args": ["new call", -2]}
+{"fn": "matchQuickCreate", "args": ["new call", -17]}
+{"fn": "matchQuickCreate", "args": ["new call", -18]}
+{"fn": "matchQuickCreate", "args": ["new call", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new call", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new call", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new call", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new call", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new con"]}
+{"fn": "matchQuickCreate", "args": ["new con", 0]}
+{"fn": "matchQuickCreate", "args": ["new con", 1]}
+{"fn": "matchQuickCreate", "args": ["new con", 2]}
+{"fn": "matchQuickCreate", "args": ["new con", 3]}
+{"fn": "matchQuickCreate", "args": ["new con", 4]}
+{"fn": "matchQuickCreate", "args": ["new con", 5]}
+{"fn": "matchQuickCreate", "args": ["new con", 10]}
+{"fn": "matchQuickCreate", "args": ["new con", 17]}
+{"fn": "matchQuickCreate", "args": ["new con", 18]}
+{"fn": "matchQuickCreate", "args": ["new con", 100]}
+{"fn": "matchQuickCreate", "args": ["new con", -1]}
+{"fn": "matchQuickCreate", "args": ["new con", -2]}
+{"fn": "matchQuickCreate", "args": ["new con", -17]}
+{"fn": "matchQuickCreate", "args": ["new con", -18]}
+{"fn": "matchQuickCreate", "args": ["new con", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new con", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new con", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new con", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new con", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new confluence page"]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 0]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 1]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 2]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 3]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 4]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 5]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 10]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 17]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 18]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 100]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", -1]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", -2]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", -17]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", -18]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new confluence page", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new confluence p"]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 0]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 1]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 2]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 3]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 4]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 5]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 10]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 17]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 18]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 100]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", -1]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", -2]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", -17]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", -18]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new confluence p", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new g i"]}
+{"fn": "matchQuickCreate", "args": ["new g i", 0]}
+{"fn": "matchQuickCreate", "args": ["new g i", 1]}
+{"fn": "matchQuickCreate", "args": ["new g i", 2]}
+{"fn": "matchQuickCreate", "args": ["new g i", 3]}
+{"fn": "matchQuickCreate", "args": ["new g i", 4]}
+{"fn": "matchQuickCreate", "args": ["new g i", 5]}
+{"fn": "matchQuickCreate", "args": ["new g i", 10]}
+{"fn": "matchQuickCreate", "args": ["new g i", 17]}
+{"fn": "matchQuickCreate", "args": ["new g i", 18]}
+{"fn": "matchQuickCreate", "args": ["new g i", 100]}
+{"fn": "matchQuickCreate", "args": ["new g i", -1]}
+{"fn": "matchQuickCreate", "args": ["new g i", -2]}
+{"fn": "matchQuickCreate", "args": ["new g i", -17]}
+{"fn": "matchQuickCreate", "args": ["new g i", -18]}
+{"fn": "matchQuickCreate", "args": ["new g i", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new g i", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new g i", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new g i", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new g i", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new gist"]}
+{"fn": "matchQuickCreate", "args": ["new gist", 0]}
+{"fn": "matchQuickCreate", "args": ["new gist", 1]}
+{"fn": "matchQuickCreate", "args": ["new gist", 2]}
+{"fn": "matchQuickCreate", "args": ["new gist", 3]}
+{"fn": "matchQuickCreate", "args": ["new gist", 4]}
+{"fn": "matchQuickCreate", "args": ["new gist", 5]}
+{"fn": "matchQuickCreate", "args": ["new gist", 10]}
+{"fn": "matchQuickCreate", "args": ["new gist", 17]}
+{"fn": "matchQuickCreate", "args": ["new gist", 18]}
+{"fn": "matchQuickCreate", "args": ["new gist", 100]}
+{"fn": "matchQuickCreate", "args": ["new gist", -1]}
+{"fn": "matchQuickCreate", "args": ["new gist", -2]}
+{"fn": "matchQuickCreate", "args": ["new gist", -17]}
+{"fn": "matchQuickCreate", "args": ["new gist", -18]}
+{"fn": "matchQuickCreate", "args": ["new gist", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new gist", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new gist", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new gist", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new gist", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new gi"]}
+{"fn": "matchQuickCreate", "args": ["new gi", 0]}
+{"fn": "matchQuickCreate", "args": ["new gi", 1]}
+{"fn": "matchQuickCreate", "args": ["new gi", 2]}
+{"fn": "matchQuickCreate", "args": ["new gi", 3]}
+{"fn": "matchQuickCreate", "args": ["new gi", 4]}
+{"fn": "matchQuickCreate", "args": ["new gi", 5]}
+{"fn": "matchQuickCreate", "args": ["new gi", 10]}
+{"fn": "matchQuickCreate", "args": ["new gi", 17]}
+{"fn": "matchQuickCreate", "args": ["new gi", 18]}
+{"fn": "matchQuickCreate", "args": ["new gi", 100]}
+{"fn": "matchQuickCreate", "args": ["new gi", -1]}
+{"fn": "matchQuickCreate", "args": ["new gi", -2]}
+{"fn": "matchQuickCreate", "args": ["new gi", -17]}
+{"fn": "matchQuickCreate", "args": ["new gi", -18]}
+{"fn": "matchQuickCreate", "args": ["new gi", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new gi", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new gi", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new gi", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new gi", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new github"]}
+{"fn": "matchQuickCreate", "args": ["new github", 0]}
+{"fn": "matchQuickCreate", "args": ["new github", 1]}
+{"fn": "matchQuickCreate", "args": ["new github", 2]}
+{"fn": "matchQuickCreate", "args": ["new github", 3]}
+{"fn": "matchQuickCreate", "args": ["new github", 4]}
+{"fn": "matchQuickCreate", "args": ["new github", 5]}
+{"fn": "matchQuickCreate", "args": ["new github", 10]}
+{"fn": "matchQuickCreate", "args": ["new github", 17]}
+{"fn": "matchQuickCreate", "args": ["new github", 18]}
+{"fn": "matchQuickCreate", "args": ["new github", 100]}
+{"fn": "matchQuickCreate", "args": ["new github", -1]}
+{"fn": "matchQuickCreate", "args": ["new github", -2]}
+{"fn": "matchQuickCreate", "args": ["new github", -17]}
+{"fn": "matchQuickCreate", "args": ["new github", -18]}
+{"fn": "matchQuickCreate", "args": ["new github", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new github", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new github", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new github", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new github", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new github repo"]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 0]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 1]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 2]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 3]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 4]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 5]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 10]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 17]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 18]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 100]}
+{"fn": "matchQuickCreate", "args": ["new github repo", -1]}
+{"fn": "matchQuickCreate", "args": ["new github repo", -2]}
+{"fn": "matchQuickCreate", "args": ["new github repo", -17]}
+{"fn": "matchQuickCreate", "args": ["new github repo", -18]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new github repo", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new github repo", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new github g"]}
+{"fn": "matchQuickCreate", "args": ["new github g", 0]}
+{"fn": "matchQuickCreate", "args": ["new github g", 1]}
+{"fn": "matchQuickCreate", "args": ["new github g", 2]}
+{"fn": "matchQuickCreate", "args": ["new github g", 3]}
+{"fn": "matchQuickCreate", "args": ["new github g", 4]}
+{"fn": "matchQuickCreate", "args": ["new github g", 5]}
+{"fn": "matchQuickCreate", "args": ["new github g", 10]}
+{"fn": "matchQuickCreate", "args": ["new github g", 17]}
+{"fn": "matchQuickCreate", "args": ["new github g", 18]}
+{"fn": "matchQuickCreate", "args": ["new github g", 100]}
+{"fn": "matchQuickCreate", "args": ["new github g", -1]}
+{"fn": "matchQuickCreate", "args": ["new github g", -2]}
+{"fn": "matchQuickCreate", "args": ["new github g", -17]}
+{"fn": "matchQuickCreate", "args": ["new github g", -18]}
+{"fn": "matchQuickCreate", "args": ["new github g", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new github g", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new github g", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new github g", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new github g", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new l"]}
+{"fn": "matchQuickCreate", "args": ["new l", 0]}
+{"fn": "matchQuickCreate", "args": ["new l", 1]}
+{"fn": "matchQuickCreate", "args": ["new l", 2]}
+{"fn": "matchQuickCreate", "args": ["new l", 3]}
+{"fn": "matchQuickCreate", "args": ["new l", 4]}
+{"fn": "matchQuickCreate", "args": ["new l", 5]}
+{"fn": "matchQuickCreate", "args": ["new l", 10]}
+{"fn": "matchQuickCreate", "args": ["new l", 17]}
+{"fn": "matchQuickCreate", "args": ["new l", 18]}
+{"fn": "matchQuickCreate", "args": ["new l", 100]}
+{"fn": "matchQuickCreate", "args": ["new l", -1]}
+{"fn": "matchQuickCreate", "args": ["new l", -2]}
+{"fn": "matchQuickCreate", "args": ["new l", -17]}
+{"fn": "matchQuickCreate", "args": ["new l", -18]}
+{"fn": "matchQuickCreate", "args": ["new l", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new l", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new l", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new l", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new l", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new linear"]}
+{"fn": "matchQuickCreate", "args": ["new linear", 0]}
+{"fn": "matchQuickCreate", "args": ["new linear", 1]}
+{"fn": "matchQuickCreate", "args": ["new linear", 2]}
+{"fn": "matchQuickCreate", "args": ["new linear", 3]}
+{"fn": "matchQuickCreate", "args": ["new linear", 4]}
+{"fn": "matchQuickCreate", "args": ["new linear", 5]}
+{"fn": "matchQuickCreate", "args": ["new linear", 10]}
+{"fn": "matchQuickCreate", "args": ["new linear", 17]}
+{"fn": "matchQuickCreate", "args": ["new linear", 18]}
+{"fn": "matchQuickCreate", "args": ["new linear", 100]}
+{"fn": "matchQuickCreate", "args": ["new linear", -1]}
+{"fn": "matchQuickCreate", "args": ["new linear", -2]}
+{"fn": "matchQuickCreate", "args": ["new linear", -17]}
+{"fn": "matchQuickCreate", "args": ["new linear", -18]}
+{"fn": "matchQuickCreate", "args": ["new linear", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new linear", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new linear", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new linear", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new linear", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new linear i"]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 0]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 1]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 2]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 3]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 4]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 5]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 10]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 17]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 18]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 100]}
+{"fn": "matchQuickCreate", "args": ["new linear i", -1]}
+{"fn": "matchQuickCreate", "args": ["new linear i", -2]}
+{"fn": "matchQuickCreate", "args": ["new linear i", -17]}
+{"fn": "matchQuickCreate", "args": ["new linear i", -18]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new linear i", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new linear i", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new j"]}
+{"fn": "matchQuickCreate", "args": ["new j", 0]}
+{"fn": "matchQuickCreate", "args": ["new j", 1]}
+{"fn": "matchQuickCreate", "args": ["new j", 2]}
+{"fn": "matchQuickCreate", "args": ["new j", 3]}
+{"fn": "matchQuickCreate", "args": ["new j", 4]}
+{"fn": "matchQuickCreate", "args": ["new j", 5]}
+{"fn": "matchQuickCreate", "args": ["new j", 10]}
+{"fn": "matchQuickCreate", "args": ["new j", 17]}
+{"fn": "matchQuickCreate", "args": ["new j", 18]}
+{"fn": "matchQuickCreate", "args": ["new j", 100]}
+{"fn": "matchQuickCreate", "args": ["new j", -1]}
+{"fn": "matchQuickCreate", "args": ["new j", -2]}
+{"fn": "matchQuickCreate", "args": ["new j", -17]}
+{"fn": "matchQuickCreate", "args": ["new j", -18]}
+{"fn": "matchQuickCreate", "args": ["new j", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new j", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new j", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new j", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new j", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new jira"]}
+{"fn": "matchQuickCreate", "args": ["new jira", 0]}
+{"fn": "matchQuickCreate", "args": ["new jira", 1]}
+{"fn": "matchQuickCreate", "args": ["new jira", 2]}
+{"fn": "matchQuickCreate", "args": ["new jira", 3]}
+{"fn": "matchQuickCreate", "args": ["new jira", 4]}
+{"fn": "matchQuickCreate", "args": ["new jira", 5]}
+{"fn": "matchQuickCreate", "args": ["new jira", 10]}
+{"fn": "matchQuickCreate", "args": ["new jira", 17]}
+{"fn": "matchQuickCreate", "args": ["new jira", 18]}
+{"fn": "matchQuickCreate", "args": ["new jira", 100]}
+{"fn": "matchQuickCreate", "args": ["new jira", -1]}
+{"fn": "matchQuickCreate", "args": ["new jira", -2]}
+{"fn": "matchQuickCreate", "args": ["new jira", -17]}
+{"fn": "matchQuickCreate", "args": ["new jira", -18]}
+{"fn": "matchQuickCreate", "args": ["new jira", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new jira", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new jira", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new jira", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new jira", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new presentation"]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 0]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 1]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 2]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 3]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 4]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 5]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 10]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 17]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 18]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 100]}
+{"fn": "matchQuickCreate", "args": ["new presentation", -1]}
+{"fn": "matchQuickCreate", "args": ["new presentation", -2]}
+{"fn": "matchQuickCreate", "args": ["new presentation", -17]}
+{"fn": "matchQuickCreate", "args": ["new presentation", -18]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new presentation", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new presentation", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new deck"]}
+{"fn": "matchQuickCreate", "args": ["new deck", 0]}
+{"fn": "matchQuickCreate", "args": ["new deck", 1]}
+{"fn": "matchQuickCreate", "args": ["new deck", 2]}
+{"fn": "matchQuickCreate", "args": ["new deck", 3]}
+{"fn": "matchQuickCreate", "args": ["new deck", 4]}
+{"fn": "matchQuickCreate", "args": ["new deck", 5]}
+{"fn": "matchQuickCreate", "args": ["new deck", 10]}
+{"fn": "matchQuickCreate", "args": ["new deck", 17]}
+{"fn": "matchQuickCreate", "args": ["new deck", 18]}
+{"fn": "matchQuickCreate", "args": ["new deck", 100]}
+{"fn": "matchQuickCreate", "args": ["new deck", -1]}
+{"fn": "matchQuickCreate", "args": ["new deck", -2]}
+{"fn": "matchQuickCreate", "args": ["new deck", -17]}
+{"fn": "matchQuickCreate", "args": ["new deck", -18]}
+{"fn": "matchQuickCreate", "args": ["new deck", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new deck", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new deck", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new deck", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new deck", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new design"]}
+{"fn": "matchQuickCreate", "args": ["new design", 0]}
+{"fn": "matchQuickCreate", "args": ["new design", 1]}
+{"fn": "matchQuickCreate", "args": ["new design", 2]}
+{"fn": "matchQuickCreate", "args": ["new design", 3]}
+{"fn": "matchQuickCreate", "args": ["new design", 4]}
+{"fn": "matchQuickCreate", "args": ["new design", 5]}
+{"fn": "matchQuickCreate", "args": ["new design", 10]}
+{"fn": "matchQuickCreate", "args": ["new design", 17]}
+{"fn": "matchQuickCreate", "args": ["new design", 18]}
+{"fn": "matchQuickCreate", "args": ["new design", 100]}
+{"fn": "matchQuickCreate", "args": ["new design", -1]}
+{"fn": "matchQuickCreate", "args": ["new design", -2]}
+{"fn": "matchQuickCreate", "args": ["new design", -17]}
+{"fn": "matchQuickCreate", "args": ["new design", -18]}
+{"fn": "matchQuickCreate", "args": ["new design", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new design", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new design", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new design", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new design", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard"]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 0]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 1]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 2]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 3]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 4]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 5]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 10]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 17]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 18]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 100]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", -1]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", -2]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", -17]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", -18]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new whiteboard", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new workbook"]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 0]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 1]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 2]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 3]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 4]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 5]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 10]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 17]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 18]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 100]}
+{"fn": "matchQuickCreate", "args": ["new workbook", -1]}
+{"fn": "matchQuickCreate", "args": ["new workbook", -2]}
+{"fn": "matchQuickCreate", "args": ["new workbook", -17]}
+{"fn": "matchQuickCreate", "args": ["new workbook", -18]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new workbook", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new workbook", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new snippet"]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 0]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 1]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 2]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 3]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 4]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 5]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 10]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 17]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 18]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 100]}
+{"fn": "matchQuickCreate", "args": ["new snippet", -1]}
+{"fn": "matchQuickCreate", "args": ["new snippet", -2]}
+{"fn": "matchQuickCreate", "args": ["new snippet", -17]}
+{"fn": "matchQuickCreate", "args": ["new snippet", -18]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new snippet", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new snippet", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new repository"]}
+{"fn": "matchQuickCreate", "args": ["new repository", 0]}
+{"fn": "matchQuickCreate", "args": ["new repository", 1]}
+{"fn": "matchQuickCreate", "args": ["new repository", 2]}
+{"fn": "matchQuickCreate", "args": ["new repository", 3]}
+{"fn": "matchQuickCreate", "args": ["new repository", 4]}
+{"fn": "matchQuickCreate", "args": ["new repository", 5]}
+{"fn": "matchQuickCreate", "args": ["new repository", 10]}
+{"fn": "matchQuickCreate", "args": ["new repository", 17]}
+{"fn": "matchQuickCreate", "args": ["new repository", 18]}
+{"fn": "matchQuickCreate", "args": ["new repository", 100]}
+{"fn": "matchQuickCreate", "args": ["new repository", -1]}
+{"fn": "matchQuickCreate", "args": ["new repository", -2]}
+{"fn": "matchQuickCreate", "args": ["new repository", -17]}
+{"fn": "matchQuickCreate", "args": ["new repository", -18]}
+{"fn": "matchQuickCreate", "args": ["new repository", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new repository", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new repository", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new repository", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new repository", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new document"]}
+{"fn": "matchQuickCreate", "args": ["new document", 0]}
+{"fn": "matchQuickCreate", "args": ["new document", 1]}
+{"fn": "matchQuickCreate", "args": ["new document", 2]}
+{"fn": "matchQuickCreate", "args": ["new document", 3]}
+{"fn": "matchQuickCreate", "args": ["new document", 4]}
+{"fn": "matchQuickCreate", "args": ["new document", 5]}
+{"fn": "matchQuickCreate", "args": ["new document", 10]}
+{"fn": "matchQuickCreate", "args": ["new document", 17]}
+{"fn": "matchQuickCreate", "args": ["new document", 18]}
+{"fn": "matchQuickCreate", "args": ["new document", 100]}
+{"fn": "matchQuickCreate", "args": ["new document", -1]}
+{"fn": "matchQuickCreate", "args": ["new document", -2]}
+{"fn": "matchQuickCreate", "args": ["new document", -17]}
+{"fn": "matchQuickCreate", "args": ["new document", -18]}
+{"fn": "matchQuickCreate", "args": ["new document", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new document", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new document", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new document", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new document", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new gdoc"]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 0]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 1]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 2]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 3]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 4]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 5]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 10]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 17]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 18]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 100]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", -1]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", -2]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", -17]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", -18]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new gdoc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new google doc"]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 0]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 1]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 2]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 3]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 4]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 5]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 10]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 17]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 18]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 100]}
+{"fn": "matchQuickCreate", "args": ["new google doc", -1]}
+{"fn": "matchQuickCreate", "args": ["new google doc", -2]}
+{"fn": "matchQuickCreate", "args": ["new google doc", -17]}
+{"fn": "matchQuickCreate", "args": ["new google doc", -18]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new google doc", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new google doc", 1e+308]}
+{"fn": "matchQuickCreate", "args": ["new google docs"]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 0]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 1]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 2]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 3]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 4]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 5]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 10]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 17]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 18]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 100]}
+{"fn": "matchQuickCreate", "args": ["new google docs", -1]}
+{"fn": "matchQuickCreate", "args": ["new google docs", -2]}
+{"fn": "matchQuickCreate", "args": ["new google docs", -17]}
+{"fn": "matchQuickCreate", "args": ["new google docs", -18]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 1.5]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 2.9]}
+{"fn": "matchQuickCreate", "args": ["new google docs", -1.5]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 0.5]}
+{"fn": "matchQuickCreate", "args": ["new google docs", 1e+308]}

@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/calculator.ts",
+  "files": 1,
+  "fingerprint": "a5db1c840cab32b1",
+  "coverage": {
+    "lines": 293,
+    "reached": 293,
+    "files": [
+      {
+        "file": "packages/core/src/calculator.ts",
+        "lines": 293,
+        "reached": 293,
+        "missed": ""
+      }
+    ]
+  }
+}

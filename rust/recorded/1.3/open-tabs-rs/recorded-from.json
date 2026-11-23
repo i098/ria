@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/openTabs.ts",
+  "files": 1,
+  "fingerprint": "06a49db7eae5b0a9",
+  "coverage": {
+    "lines": 10,
+    "reached": 10,
+    "files": [
+      {
+        "file": "packages/core/src/openTabs.ts",
+        "lines": 10,
+        "reached": 10,
+        "missed": ""
+      }
+    ]
+  }
+}

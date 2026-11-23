@@ -2,8 +2,8 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-//! `hostOf` and `searchUrlFor` of `omnibox.ts`, as far as the search modules need them. Slice 1.3
-//! ports `omnibox.ts` in full; this copy is private to `search` until that slice lands.
+//! Search-local copies of `hostOf` and `searchUrlFor`.
+//! For the full port, see [`crate::omnibox::omnibox`].
 
 use super::js_text::{encode_uri_component, is_line_terminator, js_trim};
 
