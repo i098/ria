@@ -5,12 +5,15 @@
 //! Keeps the native messaging host manifests of the profile folder in step with the password managers that are installed.
 
 use std::collections::BTreeSet;
-use std::fs::{self, File, OpenOptions};
+use std::fs::{self, File};
 use std::io::{ErrorKind, Read, Write};
 use std::os::fd::AsRawFd;
-use std::os::unix::fs::OpenOptionsExt;
 use std::path::Path;
 
+use rustix::fs::{
+    Access, AtFlags, CWD, Mode, OFlags, RenameFlags, accessat, mkdirat, open, openat, renameat,
+    renameat_with, unlinkat,
+};
 use serde_json::{Value, json};
 
 use super::extension_package::is_extension_id;
@@ -79,8 +82,8 @@ fn manifest_path(dir: &Path, name: &str) -> std::path::PathBuf {
 }
 
 fn is_executable(path: &Path) -> bool {
-    use std::os::unix::fs::PermissionsExt;
-    fs::metadata(path).is_ok_and(|m| m.is_file() && m.permissions().mode() & 0o111 != 0)
+    fs::metadata(path).is_ok_and(|m| m.is_file())
+        && accessat(CWD, path, Access::EXEC_OK, AtFlags::EACCESS).is_ok()
 }
 
 fn is_usable(manifest: &Value, name: &str) -> bool {
@@ -132,11 +135,9 @@ fn installed_hosts(system_dir: &Path, known: &[Value]) -> Vec<(String, Vec<u8>)>
     hosts
 }
 
-fn open_regular(path: &Path) -> std::io::Result<File> {
-    let file = OpenOptions::new()
-        .read(true)
-        .custom_flags(libc::O_NOFOLLOW | libc::O_NONBLOCK)
-        .open(path)?;
+fn open_regular(dir: &File, name: &str) -> std::io::Result<File> {
+    let flags = OFlags::RDONLY | OFlags::NOFOLLOW | OFlags::NONBLOCK | OFlags::CLOEXEC;
+    let file = File::from(openat(dir, name, flags, Mode::empty())?);
     if !file.metadata()?.is_file() {
         return Err(ErrorKind::InvalidData.into());
     }
@@ -183,46 +184,68 @@ fn is_owned(file: &File) -> bool {
     size == 0
 }
 
-fn write_owned(path: &Path, data: &[u8], replace: bool) -> std::io::Result<()> {
-    let temp = temp_with_data(path, data)?;
-    mark_owned(temp.as_file())?;
-    if replace {
-        temp.persist(path)?;
-    } else {
-        temp.persist_noclobber(path)?;
+fn publish(
+    dir: &File,
+    name: &str,
+    data: &[u8],
+    replace: bool,
+    prepare: impl FnOnce(&File) -> std::io::Result<bool>,
+) -> std::io::Result<bool> {
+    let temp = format!(".ria-{:016x}.tmp", fastrand::u64(..));
+    let flags = OFlags::WRONLY | OFlags::CREATE | OFlags::EXCL | OFlags::CLOEXEC;
+    let mut file = File::from(openat(dir, temp.as_str(), flags, Mode::RUSR | Mode::WUSR)?);
+    let result = (|| {
+        file.write_all(data)?;
+        let owned = prepare(&file)?;
+        if replace {
+            renameat(dir, temp.as_str(), dir, name)?;
+        } else {
+            renameat_with(dir, temp.as_str(), dir, name, RenameFlags::NOREPLACE)?;
+        }
+        Ok(owned)
+    })();
+    if result.is_err() {
+        let _ = unlinkat(dir, temp.as_str(), AtFlags::empty());
     }
-    Ok(())
+    result
 }
 
-fn temp_with_data(path: &Path, data: &[u8]) -> std::io::Result<tempfile::NamedTempFile> {
-    let mut temp = tempfile::NamedTempFile::new_in(path.parent().unwrap())?;
-    temp.write_all(data)?;
-    Ok(temp)
+fn write_manifest(
+    dir: &File,
+    name: &str,
+    data: &[u8],
+    replace: bool,
+    mark: impl FnOnce(&File) -> std::io::Result<()>,
+) -> std::io::Result<bool> {
+    publish(dir, name, data, replace, |file| match mark(file) {
+        Ok(()) => Ok(true),
+        Err(_) if !replace => Ok(false),
+        Err(error) => Err(error),
+    })
 }
 
-fn save_managed_list(dir: &Path, names: &BTreeSet<&str>) -> std::io::Result<()> {
-    let list = dir.join(MANAGED_LIST);
-    let previous: Option<BTreeSet<String>> = open_regular(&list)
-        .ok()
-        .and_then(|file| serde_json::from_reader(file).ok());
+fn save_managed_list(dir: &File, names: &BTreeSet<&str>) -> std::io::Result<()> {
+    let previous: Option<BTreeSet<String>> = match open_regular(dir, MANAGED_LIST) {
+        Ok(file) => serde_json::from_reader(file).ok(),
+        Err(error) if error.kind() == ErrorKind::NotFound && names.is_empty() => return Ok(()),
+        Err(_) => None,
+    };
     if previous
         .as_ref()
         .is_some_and(|previous| previous.iter().map(String::as_str).eq(names.iter().copied()))
     {
         return Ok(());
     }
-    let data = serde_json::to_vec(names)?;
-    temp_with_data(&list, &data)?.persist(list)?;
+    publish(dir, MANAGED_LIST, &serde_json::to_vec(names)?, true, |_| Ok(false))?;
     Ok(())
 }
 
 /// Updates the profile's native messaging manifests without replacing or removing unmanaged files.
 pub fn sync_hosts(user_data_dir: &Path, system_dir: &Path) {
-    let dir = user_data_dir.join("NativeMessagingHosts");
-    let known = known_hosts();
-    if fs::create_dir_all(&dir).is_err() {
+    let Ok(dir) = open_hosts_dir(user_data_dir) else {
         return;
-    }
+    };
+    let known = known_hosts();
     let installed = installed_hosts(system_dir, &known);
     let mut managed = BTreeSet::new();
     for name in known
@@ -230,24 +253,27 @@ pub fn sync_hosts(user_data_dir: &Path, system_dir: &Path) {
         .filter_map(|manifest| manifest["name"].as_str())
         .chain(SYSTEM_REGISTERED_HOSTS.iter().copied())
     {
-        let path = manifest_path(&dir, name);
-        let existing = open_regular(&path);
+        let file_name = format!("{name}.json");
+        let existing = open_regular(&dir, &file_name);
         let source = installed.iter().find(|(host, _)| host == name);
         match (existing, source) {
             (Ok(mut file), Some((_, data))) if is_owned(&file) => {
                 let mut old = Vec::new();
                 if file.read_to_end(&mut old).is_err() || old != *data {
-                    let _ = write_owned(&path, data, true);
+                    let _ = write_manifest(&dir, &file_name, data, true, mark_owned);
                 }
                 managed.insert(name);
             }
             (Ok(file), None) if is_owned(&file) => {
-                if fs::remove_file(path).is_err_and(|error| error.kind() != ErrorKind::NotFound) {
+                if unlinkat(&dir, file_name.as_str(), AtFlags::empty())
+                    .is_err_and(|error| error != rustix::io::Errno::NOENT)
+                {
                     managed.insert(name);
                 }
             }
             (Err(error), Some((_, data))) if error.kind() == ErrorKind::NotFound => {
-                if write_owned(&path, data, false).is_ok() {
+                if write_manifest(&dir, &file_name, data, false, mark_owned).is_ok_and(|owned| owned)
+                {
                     managed.insert(name);
                 }
             }
@@ -257,10 +283,62 @@ pub fn sync_hosts(user_data_dir: &Path, system_dir: &Path) {
     let _ = save_managed_list(&dir, &managed);
 }
 
+fn open_hosts_dir(user_data_dir: &Path) -> std::io::Result<File> {
+    let flags = OFlags::RDONLY | OFlags::DIRECTORY | OFlags::CLOEXEC;
+    fs::create_dir_all(user_data_dir)?;
+    let root = open(user_data_dir, flags, Mode::empty())?;
+    let name = "NativeMessagingHosts";
+    match mkdirat(&root, name, Mode::from_raw_mode(0o777)) {
+        Ok(()) | Err(rustix::io::Errno::EXIST) => {}
+        Err(error) => return Err(error.into()),
+    }
+    Ok(File::from(openat(
+        &root,
+        name,
+        flags | OFlags::NOFOLLOW,
+        Mode::empty(),
+    )?))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
     use std::os::unix::fs::PermissionsExt;
+
+    #[test]
+    fn sync_never_writes_to_a_linked_hosts_directory() {
+        let user = tempfile::tempdir().unwrap();
+        let system = tempfile::tempdir().unwrap();
+        let other = tempfile::tempdir().unwrap();
+        let program = system.path().join("proxy");
+        fs::write(&program, "").unwrap();
+        fs::set_permissions(&program, fs::Permissions::from_mode(0o700)).unwrap();
+        system_manifest_file(system.path(), "com.apple.passwordmanager", &program);
+        std::os::unix::fs::symlink(other.path(), user.path().join("NativeMessagingHosts")).unwrap();
+
+        sync_hosts(user.path(), system.path());
+
+        assert!(fs::read_dir(other.path()).unwrap().next().is_none());
+    }
+
+    #[test]
+    fn unmarked_install_is_published_and_not_claimed_on_the_next_sync() {
+        let user = tempfile::tempdir().unwrap();
+        let system = tempfile::tempdir().unwrap();
+        let dir = open_hosts_dir(user.path()).unwrap();
+        let name = "com.apple.passwordmanager.json";
+        let data = br#"{"name":"com.apple.passwordmanager"}"#;
+        let unsupported = |_: &File| Err(rustix::io::Errno::NOTSUP.into());
+        assert!(!write_manifest(&dir, name, data, false, unsupported).unwrap());
+        save_managed_list(&dir, &BTreeSet::new()).unwrap();
+        let hosts = user.path().join("NativeMessagingHosts");
+        assert!(!hosts.join(MANAGED_LIST).exists());
+        assert_eq!(fs::read(hosts.join(name)).unwrap(), data);
+
+        sync_hosts(user.path(), system.path());
+
+        assert_eq!(fs::read(hosts.join(name)).unwrap(), data);
+    }
 
     fn temp(name: &str) -> std::path::PathBuf {
         let dir = std::env::temp_dir().join(format!("ria-nm-{name}-{}", std::process::id()));

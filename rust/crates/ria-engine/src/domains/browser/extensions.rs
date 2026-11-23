@@ -5,7 +5,8 @@
 //! The `extensions` domain. The shapes of the calls that `ArdiaServices.mm` makes (`listExtensions`, `installExtension`,
 //! `setExtension`, `configureExtension` and the others) are here too.
 
-use std::path::{Path, PathBuf};
+use std::cell::LazyCell;
+use std::path::{Component, Path, PathBuf};
 
 use serde_json::{Map, Value, json};
 
@@ -146,20 +147,45 @@ fn configure_args(args: &Value) -> Result<Value, CallError> {
     Ok(Value::Object(out))
 }
 
-/// The folder of an installed store extension: the entry of `<profile>/Extensions/<id>` that starts with `<version>_`.
-fn store_folder(profile_dir: &Path, id: &str, version: &str) -> Option<PathBuf> {
+fn store_registrations(profile_dir: &Path) -> Option<Map<String, Value>> {
+    ["Secure Preferences", "Preferences"]
+        .into_iter()
+        .find_map(|name| {
+            let reader = std::io::BufReader::new(std::fs::File::open(profile_dir.join(name)).ok()?);
+            let mut prefs: Value = serde_json::from_reader(reader).ok()?;
+            match prefs.get_mut("extensions")?.get_mut("settings")?.take() {
+                Value::Object(settings) => Some(settings),
+                _ => None,
+            }
+        })
+}
+
+fn store_folder(profile_dir: &Path, registration: &Value, id: &str, version: &str) -> Option<PathBuf> {
     if !is_extension_id(id) || version.is_empty() {
         return None;
     }
-    let dir = profile_dir.join("Extensions").join(id);
-    let prefix = format!("{version}_");
-    let mut names: Vec<_> = std::fs::read_dir(&dir)
-        .ok()?
-        .filter_map(|e| e.ok()?.file_name().into_string().ok())
-        .filter(|n| n.starts_with(&prefix))
-        .collect();
-    names.sort();
-    names.first().map(|n| dir.join(n))
+    let path = Path::new(registration.get("path")?.as_str()?);
+    let extensions = profile_dir.join("Extensions");
+    let relative = if path.is_absolute() {
+        path.strip_prefix(&extensions).ok()?
+    } else {
+        path
+    };
+    let mut parts = relative.components();
+    let (Some(Component::Normal(owner)), Some(Component::Normal(folder)), None) =
+        (parts.next(), parts.next(), parts.next())
+    else {
+        return None;
+    };
+    let (registered_version, suffix) = folder.to_str()?.rsplit_once('_')?;
+    if owner != id
+        || registered_version != version
+        || suffix.is_empty()
+        || !suffix.bytes().all(|byte| byte.is_ascii_digit())
+    {
+        return None;
+    }
+    Some(extensions.join(relative))
 }
 
 /// Adds the manifest fields to each extension of the engine list.
@@ -167,15 +193,20 @@ fn list_reply(reply: Value, ctx: &CallContext) -> Result<Value, CallError> {
     let infos = reply["extensions"]
         .as_array()
         .ok_or_else(|| CallError::Engine("Unexpected extension list".into()))?;
+    let registrations = LazyCell::new(|| store_registrations(dir_of(ctx)));
     let list: Vec<Value> = infos
         .iter()
         .filter_map(Value::as_object)
-        .map(|info| list_item(info, ctx))
+        .map(|info| list_item(info, ctx, || registrations.as_ref()))
         .collect();
     Ok(json!({"extensions": list}))
 }
 
-fn list_item(info: &Map<String, Value>, ctx: &CallContext) -> Value {
+fn list_item<'a>(
+    info: &Map<String, Value>,
+    ctx: &CallContext,
+    registrations: impl FnOnce() -> Option<&'a Map<String, Value>>,
+) -> Value {
     let mut item: Map<String, Value> = info
         .iter()
         .filter(|(_, v)| !v.is_null())
@@ -183,11 +214,9 @@ fn list_item(info: &Map<String, Value>, ctx: &CallContext) -> Value {
         .collect();
     let path = info.get("path").and_then(Value::as_str);
     let folder = path.map(PathBuf::from).or_else(|| {
-        store_folder(
-            dir_of(ctx),
-            info.get("id")?.as_str()?,
-            info.get("version")?.as_str()?,
-        )
+        let id = info.get("id")?.as_str()?;
+        let version = info.get("version")?.as_str()?;
+        store_folder(dir_of(ctx), registrations()?.get(id)?, id, version)
     });
     let manifest = folder
         .and_then(|f| read_manifest(&f, &ctx.ui_locale).ok())
@@ -334,16 +363,29 @@ mod tests {
     }
 
     #[test]
-    fn store_folder_finds_the_version_folder() {
-        let dir = std::env::temp_dir().join(format!("ria-store-{}", std::process::id()));
+    fn list_uses_the_registered_store_directory() {
+        let dir = tempfile::tempdir().unwrap();
         let id = "abcdefghijklmnopabcdefghijklmnop";
-        std::fs::create_dir_all(dir.join("Extensions").join(id).join("1.2_0")).unwrap();
-        assert_eq!(
-            store_folder(&dir, id, "1.2"),
-            Some(dir.join("Extensions").join(id).join("1.2_0"))
-        );
-        assert_eq!(store_folder(&dir, id, "1.3"), None);
-        assert_eq!(store_folder(&dir, "bad", "1.2"), None);
-        let _ = std::fs::remove_dir_all(&dir);
+        let reply = json!({"extensions": [{"id": id, "version": "1.2", "location": "FROM_STORE"}]});
+        for suffix in ["0", "1", "2"] {
+            let folder = dir
+                .path()
+                .join("Extensions")
+                .join(id)
+                .join(format!("1.2_{suffix}"));
+            std::fs::create_dir_all(&folder).unwrap();
+            let manifest = json!({"action": {"default_popup": format!("{suffix}.html")}});
+            std::fs::write(folder.join("manifest.json"), manifest.to_string()).unwrap();
+        }
+        let prefs = dir.path().join("Secure Preferences");
+        let settings = json!({"extensions": {"settings": {(id): {"path": format!("{id}/1.2_1")}}}});
+        std::fs::write(&prefs, settings.to_string()).unwrap();
+        let ctx = ctx(dir.path());
+        let out = list_reply(reply.clone(), &ctx).unwrap();
+        assert_eq!(out["extensions"][0]["popup"], "1.html");
+
+        std::fs::remove_file(prefs).unwrap();
+        let out = list_reply(reply, &ctx).unwrap();
+        assert!(out["extensions"][0].get("popup").is_none());
     }
 }

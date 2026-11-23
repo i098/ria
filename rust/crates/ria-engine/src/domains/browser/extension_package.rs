@@ -50,7 +50,7 @@ fn load_json(package: &Package<'_>, path: &Path) -> Option<Map<String, Value>> {
         [_, 0, ..] => load_utf16(&bytes, u16::from_le_bytes),
         _ => {
             let text = std::str::from_utf8(&bytes).ok()?;
-            json5::from_str(text.trim_start_matches('\u{feff}')).ok()
+            parse_json(text.trim_start_matches('\u{feff}'))
         }
     }
 }
@@ -63,7 +63,7 @@ fn load_utf16(bytes: &[u8], unit: fn([u8; 2]) -> u16) -> Option<Map<String, Valu
     let text: String = char::decode_utf16(chunks.iter().copied().map(unit))
         .collect::<Result<_, _>>()
         .ok()?;
-    json5::from_str(&text).ok()
+    parse_json(&text)
 }
 
 fn load_utf32(bytes: &[u8], unit: fn([u8; 4]) -> u32) -> Option<Map<String, Value>> {
@@ -75,7 +75,49 @@ fn load_utf32(bytes: &[u8], unit: fn([u8; 4]) -> u32) -> Option<Map<String, Valu
         .iter()
         .map(|b| char::from_u32(unit(*b)))
         .collect::<Option<_>>()?;
-    json5::from_str(&text).ok()
+    parse_json(&text)
+}
+
+fn parse_json(text: &str) -> Option<Map<String, Value>> {
+    let mut chars = text.chars().peekable();
+    let mut depth = 0usize;
+    while let Some(ch) = chars.next() {
+        match ch {
+            '"' | '\'' => {
+                while let Some(c) = chars.next() {
+                    if c == ch {
+                        break;
+                    }
+                    if c == '\\' {
+                        chars.next();
+                    }
+                }
+            }
+            '/' if chars.next_if_eq(&'/').is_some() => {
+                for c in chars.by_ref() {
+                    if matches!(c, '\n' | '\r' | '\u{2028}' | '\u{2029}') {
+                        break;
+                    }
+                }
+            }
+            '/' if chars.next_if_eq(&'*').is_some() => {
+                while let Some(c) = chars.next() {
+                    if c == '*' && chars.next_if_eq(&'/').is_some() {
+                        break;
+                    }
+                }
+            }
+            '{' | '[' => {
+                depth += 1;
+                if depth > 128 {
+                    return None;
+                }
+            }
+            '}' | ']' => depth = depth.saturating_sub(1),
+            _ => {}
+        }
+    }
+    json5::from_str(text).ok()
 }
 
 struct Package<'a> {
@@ -416,6 +458,27 @@ mod tests {
         let _ = fs::remove_dir_all(&dir);
         fs::create_dir_all(&dir).unwrap();
         dir
+    }
+
+    #[test]
+    fn package_bounds_json_nesting_but_ignores_brackets_in_text() {
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("manifest.json");
+        let brackets = "[".repeat(128);
+        let name = format!("Escaped '\u{2028}{brackets}");
+        fs::write(&path, format!("/* {brackets} */ {{name: \"{name}\"}}")).unwrap();
+        assert_eq!(read_manifest(dir.path(), "en").unwrap()["name"], name);
+        fs::write(
+            path,
+            format!("{{name: 'test', extra: {brackets}0{}}}", "]".repeat(128)),
+        )
+        .unwrap();
+        assert_eq!(
+            read_manifest(dir.path(), "en"),
+            Err(CallError::Engine(
+                "Manifest file is missing or unreadable".into()
+            ))
+        );
     }
 
     #[test]
