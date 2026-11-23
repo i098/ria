@@ -8,6 +8,8 @@ A native Rust and [Rune](https://github.com/anomalyco/rune) port of the [Ardia](
 
 ```sh
 (cd rust && blaze check)                                     # workspace compiles
+cargo fmt --manifest-path rust/Cargo.toml --check            # format
+cargo clippy --manifest-path rust/Cargo.toml                 # lint: no issues
 node rust/parity/compare.selftest.mjs                        # parity comparer: 15 checks passed
 (cd rust/parity/captures/states && sha256sum -c SHA256SUMS)  # reference captures: all OK
 ```
@@ -25,9 +27,7 @@ rust/tools/blaze/install.sh     # installs the patched blaze into ~/.cargo/bin; 
 (cd rust && blaze check)
 ```
 
-Ria builds with [blaze](https://github.com/indexable-inc/blaze) at one pinned commit plus two patches kept in [`rust/tools/blaze/`](rust/tools/blaze/README.md).
-Without blaze, use the format and Clippy commands in the [local CI checklist](CONTRIBUTING.md#ci-and-quality-gates).
-Blaze is the only supported build tool. Note in your PR if you could not run `blaze check`. Full steps: [`setup.md`](setup.md).
+Ria builds with [blaze](https://github.com/indexable-inc/blaze) at one pinned commit plus two patches kept in [`rust/tools/blaze/`](rust/tools/blaze/README.md). Without blaze, run `cargo fmt` and `cargo clippy` (first block above); they check the workspace. Blaze is the only supported build tool, so say in your PR that you could not run `blaze check`. Full steps: [`setup.md`](setup.md).
 
 ## Phases
 
