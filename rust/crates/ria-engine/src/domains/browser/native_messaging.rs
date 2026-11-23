@@ -6,19 +6,18 @@
 
 use std::fs::{self, File};
 use std::io::{ErrorKind, Read, Write};
-use std::os::fd::AsRawFd;
 use std::path::Path;
 
 use rustix::fs::{
-    Access, AtFlags, CWD, Mode, OFlags, RenameFlags, accessat, mkdirat, open, openat, renameat,
-    renameat_with, unlinkat,
+    Access, AtFlags, CWD, Mode, OFlags, RenameFlags, XattrFlags, accessat, fgetxattr_query,
+    fsetxattr, mkdirat, open, openat, renameat, renameat_with, unlinkat,
 };
 use serde_json::{Value, json};
 
 use super::extension_package::is_extension_id;
 
 /// Where Chrome keeps the system manifests.
-pub const CHROME_SYSTEM_DIR: &str = "/Library/Google/Chrome/NativeMessagingHosts";
+const CHROME_SYSTEM_DIR: &str = "/Library/Google/Chrome/NativeMessagingHosts";
 const MANAGED_ATTR: &std::ffi::CStr = c"user.ria.native-messaging";
 
 fn known_hosts() -> Vec<Value> {
@@ -107,30 +106,16 @@ fn is_usable(manifest: &Value, name: &str) -> bool {
             .is_some_and(|p| Path::new(p).is_absolute() && is_executable(Path::new(p)))
 }
 
-fn system_manifest(system_dir: &Path, name: &str) -> Option<Vec<u8>> {
-    let data = fs::read(manifest_path(system_dir, name)).ok()?;
-    let parsed: Value = serde_json::from_slice(&data).ok()?;
-    is_usable(&parsed, name).then_some(data)
-}
-
-/// The manifests to install, by host name: the system manifest when it is usable, else the built-in one.
-fn installed_hosts(system_dir: &Path, known: &[Value]) -> Vec<(String, Vec<u8>)> {
-    let mut hosts = Vec::new();
-    for manifest in known {
-        let name = manifest["name"].as_str().unwrap_or_default().to_owned();
-        if let Some(system) = system_manifest(system_dir, &name) {
-            hosts.push((name, system));
-        } else if is_usable(manifest, &name) {
-            let pretty = serde_json::to_vec_pretty(manifest).unwrap_or_default();
-            hosts.push((name, pretty));
-        }
-    }
-    for name in SYSTEM_REGISTERED_HOSTS {
-        if let Some(system) = system_manifest(system_dir, name) {
-            hosts.push(((*name).to_owned(), system));
-        }
-    }
-    hosts
+fn system_manifest(system_dir: &Path, name: &str) -> std::io::Result<Option<Vec<u8>>> {
+    let mut file = match File::open(manifest_path(system_dir, name)) {
+        Ok(file) => file,
+        Err(error) if error.kind() == ErrorKind::NotFound => return Ok(None),
+        Err(error) => return Err(error),
+    };
+    let mut data = Vec::new();
+    file.read_to_end(&mut data)?;
+    let usable = serde_json::from_slice(&data).is_ok_and(|parsed| is_usable(&parsed, name));
+    Ok(usable.then_some(data))
 }
 
 fn open_regular(dir: &File, name: &str) -> std::io::Result<File> {
@@ -143,43 +128,11 @@ fn open_regular(dir: &File, name: &str) -> std::io::Result<File> {
 }
 
 fn mark_owned(file: &File) -> std::io::Result<()> {
-    let fd = file.as_raw_fd();
-    let name = MANAGED_ATTR.as_ptr();
-    let value = std::ptr::null();
-    // SAFETY: The descriptor and name are valid, and the attribute has no data.
-    let status = unsafe {
-        #[cfg(target_os = "macos")]
-        {
-            libc::fsetxattr(fd, name, value, 0, 0, 0)
-        }
-        #[cfg(not(target_os = "macos"))]
-        {
-            libc::fsetxattr(fd, name, value, 0, 0)
-        }
-    };
-    if status == 0 {
-        Ok(())
-    } else {
-        Err(std::io::Error::last_os_error())
-    }
+    Ok(fsetxattr(file, MANAGED_ATTR, &[], XattrFlags::empty())?)
 }
 
 fn is_owned(file: &File) -> bool {
-    let fd = file.as_raw_fd();
-    let name = MANAGED_ATTR.as_ptr();
-    let value = std::ptr::null_mut();
-    // SAFETY: The descriptor and name are valid. A null buffer requests only the size.
-    let size = unsafe {
-        #[cfg(target_os = "macos")]
-        {
-            libc::fgetxattr(fd, name, value, 0, 0, 0)
-        }
-        #[cfg(not(target_os = "macos"))]
-        {
-            libc::fgetxattr(fd, name, value, 0)
-        }
-    };
-    size == 0
+    fgetxattr_query(file, MANAGED_ATTR) == Ok(0)
 }
 
 fn write_manifest(
@@ -213,31 +166,46 @@ fn write_manifest(
 }
 
 /// Updates the profile's native messaging manifests without replacing or removing unmanaged files.
-pub fn sync_hosts(user_data_dir: &Path, system_dir: &Path) {
+pub fn sync_hosts(user_data_dir: &Path) {
+    sync_hosts_from(user_data_dir, Path::new(CHROME_SYSTEM_DIR));
+}
+
+fn sync_hosts_from(user_data_dir: &Path, system_dir: &Path) {
     let Ok(dir) = open_hosts_dir(user_data_dir) else {
         return;
     };
     let known = known_hosts();
-    let installed = installed_hosts(system_dir, &known);
-    for name in known
+    for (name, builtin) in known
         .iter()
-        .filter_map(|manifest| manifest["name"].as_str())
-        .chain(SYSTEM_REGISTERED_HOSTS.iter().copied())
+        .filter_map(|manifest| Some((manifest["name"].as_str()?, Some(manifest))))
+        .chain(SYSTEM_REGISTERED_HOSTS.iter().map(|&name| (name, None)))
     {
+        let Ok(source) = system_manifest(system_dir, name) else {
+            continue;
+        };
+        let source = match (source, builtin) {
+            (Some(data), _) => Some(data),
+            (None, Some(manifest)) if is_usable(manifest, name) => {
+                let Ok(data) = serde_json::to_vec_pretty(manifest) else {
+                    continue;
+                };
+                Some(data)
+            }
+            _ => None,
+        };
         let file_name = format!("{name}.json");
         let existing = open_regular(&dir, &file_name);
-        let source = installed.iter().find(|(host, _)| host == name);
-        match (existing, source) {
-            (Ok(mut file), Some((_, data))) if is_owned(&file) => {
+        match (existing, source.as_deref()) {
+            (Ok(mut file), Some(data)) if is_owned(&file) => {
                 let mut old = Vec::new();
-                if file.read_to_end(&mut old).is_err() || old != *data {
+                if file.read_to_end(&mut old).is_err() || old != data {
                     let _ = write_manifest(&dir, &file_name, data, true, mark_owned);
                 }
             }
             (Ok(file), None) if is_owned(&file) => {
                 let _ = unlinkat(&dir, file_name.as_str(), AtFlags::empty());
             }
-            (Err(error), Some((_, data))) if error.kind() == ErrorKind::NotFound => {
+            (Err(error), Some(data)) if error.kind() == ErrorKind::NotFound => {
                 let _ = write_manifest(&dir, &file_name, data, false, mark_owned);
             }
             _ => {}
@@ -278,7 +246,7 @@ mod tests {
         system_manifest_file(system.path(), "com.apple.passwordmanager", &program);
         std::os::unix::fs::symlink(other.path(), user.path().join("NativeMessagingHosts")).unwrap();
 
-        sync_hosts(user.path(), system.path());
+        sync_hosts_from(user.path(), system.path());
 
         assert!(fs::read_dir(other.path()).unwrap().next().is_none());
     }
@@ -295,7 +263,7 @@ mod tests {
         let hosts = user.path().join("NativeMessagingHosts");
         assert_eq!(fs::read(hosts.join(name)).unwrap(), data);
 
-        sync_hosts(user.path(), system.path());
+        sync_hosts_from(user.path(), system.path());
 
         assert_eq!(fs::read(hosts.join(name)).unwrap(), data);
     }
@@ -332,19 +300,29 @@ mod tests {
     }
 
     #[test]
-    fn syncs_a_system_host_then_removes_it_when_it_goes() {
+    fn sync_keeps_a_host_on_source_read_error_and_removes_it_when_absent() {
         let (user, system) = (temp("user"), temp("system"));
         let program = system.join("proxy");
         fs::write(&program, "").unwrap();
         fs::set_permissions(&program, fs::Permissions::from_mode(0o755)).unwrap();
         system_manifest_file(&system, "com.apple.passwordmanager", &program);
 
-        sync_hosts(&user, &system);
+        sync_hosts_from(&user, &system);
         let hosts = user.join("NativeMessagingHosts");
         assert!(hosts.join("com.apple.passwordmanager.json").exists());
 
-        fs::remove_file(manifest_path(&system, "com.apple.passwordmanager")).unwrap();
-        sync_hosts(&user, &system);
+        let source = manifest_path(&system, "com.apple.passwordmanager");
+        let installed = fs::read(hosts.join("com.apple.passwordmanager.json")).unwrap();
+        fs::remove_file(&source).unwrap();
+        fs::create_dir(&source).unwrap();
+        sync_hosts_from(&user, &system);
+        assert_eq!(
+            fs::read(hosts.join("com.apple.passwordmanager.json")).unwrap(),
+            installed
+        );
+        fs::remove_dir(source).unwrap();
+
+        sync_hosts_from(&user, &system);
         assert!(!hosts.join("com.apple.passwordmanager.json").exists());
         let _ = fs::remove_dir_all(&user);
         let _ = fs::remove_dir_all(&system);
@@ -361,7 +339,7 @@ mod tests {
         fs::create_dir_all(&hosts).unwrap();
         fs::write(hosts.join("com.apple.passwordmanager.json"), "mine").unwrap();
 
-        sync_hosts(&user, &system);
+        sync_hosts_from(&user, &system);
         assert_eq!(
             fs::read(hosts.join("com.apple.passwordmanager.json")).unwrap(),
             b"mine"
@@ -403,21 +381,21 @@ mod tests {
         let outside = user.path().join("outside.json");
         fs::write(&outside, b"keep").unwrap();
         symlink(&outside, manifest.with_extension("json.tmp")).unwrap();
-        sync_hosts(user.path(), system.path());
+        sync_hosts_from(user.path(), system.path());
         assert_eq!(fs::read(&outside).unwrap(), b"keep");
         let source = manifest_path(system.path(), name);
         let mut updated: Value = serde_json::from_slice(&fs::read(&source).unwrap()).unwrap();
         updated["description"] = json!("Updated host");
         fs::write(&source, updated.to_string()).unwrap();
-        sync_hosts(user.path(), system.path());
+        sync_hosts_from(user.path(), system.path());
         assert_eq!(fs::read_to_string(&manifest).unwrap(), updated.to_string());
         assert_eq!(fs::read(&outside).unwrap(), b"keep");
         fs::remove_file(manifest_path(system.path(), name)).unwrap();
-        sync_hosts(user.path(), system.path());
+        sync_hosts_from(user.path(), system.path());
         assert!(!manifest.exists());
 
         fs::write(&manifest, "replacement").unwrap();
-        sync_hosts(user.path(), system.path());
+        sync_hosts_from(user.path(), system.path());
         assert_eq!(fs::read(&manifest).unwrap(), b"replacement");
     }
 
@@ -436,18 +414,18 @@ mod tests {
         let manifest = manifest_path(&hosts, name);
         fs::write(&manifest, "replacement").unwrap();
         fs::write(&legacy, json!([name]).to_string()).unwrap();
-        sync_hosts(user.path(), system.path());
+        sync_hosts_from(user.path(), system.path());
         assert_eq!(fs::read(&manifest).unwrap(), b"replacement");
 
         fs::write(&legacy, json!([name]).to_string()).unwrap();
         fs::remove_file(manifest_path(system.path(), name)).unwrap();
-        sync_hosts(user.path(), system.path());
+        sync_hosts_from(user.path(), system.path());
         assert_eq!(fs::read(&manifest).unwrap(), b"replacement");
 
         fs::remove_file(&manifest).unwrap();
         fs::write(&legacy, "[").unwrap();
         system_manifest_file(system.path(), name, &program);
-        sync_hosts(user.path(), system.path());
+        sync_hosts_from(user.path(), system.path());
         assert!(manifest.is_file());
         assert_eq!(fs::read(legacy).unwrap(), b"[");
     }
@@ -475,7 +453,7 @@ mod tests {
             let mut value = valid.clone();
             value[key] = invalid;
             fs::write(&source, value.to_string()).unwrap();
-            sync_hosts(user.path(), system.path());
+            sync_hosts_from(user.path(), system.path());
             assert!(!target.exists(), "{value}");
         }
     }
