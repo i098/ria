@@ -6,10 +6,14 @@ A native Rust and [Rune](https://github.com/anomalyco/rune) port of the [Ardia](
 
 ## What works today
 
+The macOS app starts the prebuilt Chromium engine and opens a native window.
+It uses its own profile and opens the saved launch tab when one is available.
+To build a local app bundle and start Ria, follow the [macOS launch guide](rust/crates/ria-app/src/launch/README.md).
+
 ```sh
 (cd rust && blaze check)                                     # workspace compiles
 cargo fmt --manifest-path rust/Cargo.toml --check            # format
-cargo clippy --manifest-path rust/Cargo.toml                 # lint: no issues
+cargo clippy --manifest-path rust/Cargo.toml                 # lint
 node rust/parity/compare.selftest.mjs                        # parity comparer: 15 checks passed
 (cd rust/parity/captures/states && sha256sum -c SHA256SUMS)  # reference captures: all OK
 ```

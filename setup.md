@@ -39,4 +39,5 @@ cargo clippy --manifest-path rust/Cargo.toml
 
 ## Run
 
-There is no app yet. The Phase 0 host `rust/proofs/abc-host` runs on a Mac with the prebuilt Ardia engine; see `rust/proofs/abc-host/README.md`.
+Follow the [macOS launch guide](rust/crates/ria-app/src/launch/README.md) to start Ria.
+For the separate Phase 0 engine proof, see the [proof host guide](rust/proofs/abc-host/README.md).

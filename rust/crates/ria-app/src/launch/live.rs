@@ -118,10 +118,11 @@ mod mac {
         let status = status.expect("Ria did not exit within 60 seconds");
         assert!(status.success(), "engine exit: {status}");
         assert!(out.contains("engineDidStart"));
-        assert!(out
-            .lines()
-            .filter(|line| line.starts_with("windowOpened "))
-            .eq(["windowOpened windows=1 tabs=1"]));
+        assert!(
+            out.lines()
+                .filter(|line| line.starts_with("windowOpened "))
+                .eq(["windowOpened windows=1 tabs=1"])
+        );
         assert!(out.contains("tabTitle Ria proof page"));
         assert!(out.contains("engineWillShutDown"));
         assert!(!has_crash_report(root), "a crash report exists");
