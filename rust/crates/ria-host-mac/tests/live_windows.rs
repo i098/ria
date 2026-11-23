@@ -377,6 +377,9 @@ mod mac {
         println!(
             "live_windows: engine shortcut, controller claims, titlebar hit testing, visibility, acted fullscreen, and native close checked"
         );
+        println!(
+            "live_windows: native sharing after trailing placement without resize not checked (indicator and child pill)"
+        );
     }
 
     #[derive(Default)]
@@ -389,9 +392,11 @@ mod mac {
             main_queue::post(Box::new(|| {
                 let engine = Engine::shared().unwrap();
                 engine.load_profile(ns_string!("Default"), move |profile| {
-                    check_windows(&profile.expect("Default profile"));
-                    main_queue::post(Box::new(|| {
-                        let _: () = Engine::shared().unwrap().quit();
+                    main_queue::post(Box::new(move || {
+                        check_windows(&profile.expect("Default profile"));
+                        main_queue::post(Box::new(|| {
+                            let _: () = Engine::shared().unwrap().quit();
+                        }));
                     }));
                 });
             }));
