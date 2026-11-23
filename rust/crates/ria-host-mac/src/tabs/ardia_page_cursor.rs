@@ -322,7 +322,9 @@ fn invisible(image: &NSImage) -> bool {
     let data = bitmap.bitmapData();
     !data.is_null()
         && unsafe { std::slice::from_raw_parts(data, (SIDE * SIDE * 4) as usize) }
-            .chunks_exact(4)
+            .as_chunks::<4>()
+            .0
+            .iter()
             .all(|pixel| pixel[3] == 0)
 }
 
