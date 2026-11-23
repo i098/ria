@@ -288,8 +288,11 @@ mod mac {
         controllers.reconsider_sight(&window);
         assert!(!controllers.user_sees(&window));
         let events = sight_events.get();
+        let app = NSApplication::sharedApplication(mtm);
+        assert!(!app.isActive(), "The visibility check requires an inactive app");
         window.orderFrontRegardless();
-        wait_for("No visible sight reply and notification", || {
+        wait_for("No Window Server visibility reply and notification", || {
+            assert!(!app.isActive(), "The app activated during the visibility check");
             controllers.user_sees(&window) && sight_events.get() > events
         });
         let placement = Placement {
@@ -378,6 +381,7 @@ mod mac {
         println!(
             "live_windows: engine shortcut, controller claims, titlebar hit testing, visibility, acted fullscreen, and native close checked"
         );
+        println!("live_windows: foreground AppKit fullscreen entry and exit not checked");
         println!(
             "live_windows: native sharing after trailing placement without resize not checked (indicator and child pill)"
         );

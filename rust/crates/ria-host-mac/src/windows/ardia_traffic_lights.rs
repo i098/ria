@@ -27,7 +27,6 @@ const BUTTONS: [NSWindowButton; 3] = [
     NSWindowButton::MiniaturizeButton,
     NSWindowButton::ZoomButton,
 ];
-static TITLEBAR_CENTER: u8 = 0;
 const RETAIN_NONATOMIC: usize = 1;
 
 type TitlebarFrame = unsafe extern "C-unwind" fn(&NSView, Sel) -> NSRect;
@@ -148,11 +147,6 @@ impl TrafficLights {
 
     pub fn set_placement(&self, placement: Placement) {
         let previous = self.placement.replace(placement);
-        if previous.center.map(|at| at.y) != placement.center.map(|at| at.y)
-            && let Some(window) = self.window.load()
-        {
-            set_titlebar_center(&window, placement);
-        }
         if previous != placement {
             self.retile();
         }
@@ -215,11 +209,6 @@ impl TrafficLights {
 impl Drop for TrafficLights {
     fn drop(&mut self) {
         INSET_WINDOWS.with(|windows| windows.borrow_mut().remove(&self.window_key));
-        if let Some(window) = self.window.load() {
-            if self.placement.get().center.is_some() {
-                set_titlebar_center(&window, Placement::default());
-            }
-        }
         let center = NSNotificationCenter::defaultCenter();
         for observer in self.observers.get_mut() {
             // SAFETY: These observer tokens came from this notification center.
@@ -227,20 +216,6 @@ impl Drop for TrafficLights {
                 center.removeObserver(observer);
             }
         }
-    }
-}
-
-fn set_titlebar_center(window: &NSWindow, placement: Placement) {
-    let center = placement.center.map(|point| NSNumber::numberWithDouble(point.y));
-    unsafe {
-        ffi::objc_setAssociatedObject(
-            ptr::from_ref::<AnyObject>(window).cast_mut(),
-            ptr::from_ref(&TITLEBAR_CENTER).cast(),
-            center.as_deref().map_or(ptr::null_mut(), |point| {
-                ptr::from_ref::<AnyObject>(point).cast_mut()
-            }),
-            RETAIN_NONATOMIC,
-        );
     }
 }
 
@@ -266,24 +241,13 @@ unsafe extern "C-unwind" fn extended_titlebar_frame(frame: &NSView, selector: Se
     let Some(window) = frame.window() else {
         return titlebar;
     };
-    if window.styleMask().contains(NSWindowStyleMask::FullScreen) {
-        return titlebar;
-    }
-    let center = unsafe {
-        ffi::objc_getAssociatedObject(
-            ptr::from_ref::<AnyObject>(&window),
-            ptr::from_ref(&TITLEBAR_CENTER).cast(),
-        )
-        .cast::<NSNumber>()
-        .as_ref()
-    };
-    let Some(center) = center else {
+    let Some(center) = inset_placement(&window).and_then(|placement| placement.center) else {
         return titlebar;
     };
     let height = window
         .standardWindowButton(NSWindowButton::CloseButton)
         .map_or(14., |button| button.frame().size.height);
-    let reach = (center.doubleValue() + height / 2.).ceil();
+    let reach = (center.y + height / 2.).ceil();
     let flipped = frame.isFlipped();
     let bottom = if flipped {
         titlebar.origin.y + titlebar.size.height
