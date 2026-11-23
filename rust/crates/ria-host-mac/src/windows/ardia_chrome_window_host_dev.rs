@@ -284,7 +284,9 @@ impl DevActions {
             }
             return "uncovered".into();
         }
-        let covers = self.covers.get_or_init(NSMapTable::weakToStrongObjectsMapTable);
+        let covers = self
+            .covers
+            .get_or_init(NSMapTable::weakToStrongObjectsMapTable);
         let cover = covers.objectForKey(Some(window)).unwrap_or_else(|| {
             let cover = unsafe {
                 let cover = NSWindow::initWithContentRect_styleMask_backing_defer(

@@ -2,6 +2,12 @@
 
 //! Run from the repository root on a Mac:
 //! `ENGINE_DIR=/path/to/framework-parent cargo test --manifest-path rust/Cargo.toml -p ria-host-mac --test live_windows`.
+//!
+//! Window-host Check L uses a temporary Chromium profile without activating the app.
+//! It does not isolate AppKit user defaults.
+//! The check skips on Linux.
+//! This check covers root embedding, minimum size after a scale change, simulated fullscreen, and popup tab attachment and closure.
+//! It checks Little Fit and origin text with fixture inputs, not with a live display move or a visible URL label.
 
 #[cfg(not(target_os = "macos"))]
 fn main() {

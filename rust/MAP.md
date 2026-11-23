@@ -200,7 +200,7 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/ArdiaContentBlockerInternal.*` | Objective-C++ | 37 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/ArdiaContentBlockerLite.*` | Objective-C++ | 142 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/ArdiaContentBlockerPage.*` | Objective-C++ | 106 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
-| mac | `packages/ardiacore/ios/ArdiaDisplayIdentity.*` | Objective-C++ | 57 | native | `rust/crates/ria-host-mac/src/windows/` | hand | done | 3.7 | port |
+| mac | `packages/ardiacore/ios/ArdiaDisplayIdentity.*` | Objective-C++ | 57 | native | `rust/crates/ria-host-mac/src/windows/` | hand | partial | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaDisplayPlacementMath.*` | Objective-C++ | 43 | native | `rust/crates/ria-host-mac/src/windows/` | hand | done | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaDownloadMover.*` | Objective-C++ | 511 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/ArdiaEarlyWindow.*` | Objective-C++ | 857 | native | [`early_window.rs`](crates/ria-host-mac/src/launch/early_window.rs) | hand | partial | 3.6 | port |
@@ -212,7 +212,7 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/ArdiaExtensionPackage.*` | Objective-C++ | 199 | native | `rust/crates/ria-engine/src/domains/browser/extension_package.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/ios/ArdiaFavicons.*` | Objective-C++ | 128 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/ArdiaFieldTiming.*` | Objective-C++ | 160 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
-| mac | `packages/ardiacore/ios/ArdiaFocusState.*` | Objective-C++ | 256 | native | `rust/crates/ria-host-mac/src/windows/` | hand | done | 3.7 | port |
+| mac | `packages/ardiacore/ios/ArdiaFocusState.*` | Objective-C++ | 256 | native | `rust/crates/ria-host-mac/src/windows/` | hand | partial | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaFreezeArming.*` | Objective-C++ | 70 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaFreezeCapture.*` | Objective-C++ | 579 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaFreezeWatch.*` | Objective-C++ | 332 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
@@ -221,7 +221,7 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/ArdiaHostInternal.*` | Objective-C++ | 33 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
 | mac | `packages/ardiacore/ios/ArdiaHoverProbe.*` | Objective-C++ | 748 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaHoverProbeInternal.*` | Objective-C++ | 76 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
-| mac | `packages/ardiacore/ios/ArdiaInterfaceScale.*` | Objective-C++ | 254 | native | `rust/crates/ria-host-mac/src/windows/` | hand | done | 3.7 | port |
+| mac | `packages/ardiacore/ios/ArdiaInterfaceScale.*` | Objective-C++ | 254 | native | `rust/crates/ria-host-mac/src/windows/` | hand | partial | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaInternal.*` | Objective-C++ | 100 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
 | mac | `packages/ardiacore/ios/ArdiaLaunchConfig.*` | Objective-C++ | 381 | native | [`launch_config.rs`](crates/ria-host-mac/src/launch/launch_config.rs) | hand | partial | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaLaunchPicture.*` | Objective-C++ | 335 | native | [`launch_picture.rs`](crates/ria-host-mac/src/launch/launch_picture.rs) | hand | partial | 3.6 | port |
@@ -248,7 +248,7 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/ArdiaPictureInPictureInternal.*` | Objective-C++ | 218 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
 | mac | `packages/ardiacore/ios/ArdiaPixelGridModule.*` | Objective-C++ | 134 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaPointerTrace.*` | Objective-C++ | 123 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
-| mac | `packages/ardiacore/ios/ArdiaPopupOriginStrip.*` | Objective-C++ | 106 | native | `rust/crates/ria-host-mac/src/windows/` | hand | done | 3.7 | port |
+| mac | `packages/ardiacore/ios/ArdiaPopupOriginStrip.*` | Objective-C++ | 106 | native | `rust/crates/ria-host-mac/src/windows/` | hand | partial | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaPopupWindow.*` | Objective-C++ | 496 | native | `rust/crates/ria-host-mac/src/windows/` | hand | partial | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaProfiles.*` | Objective-C++ | 242 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/ArdiaRendererScrollObserver.*` | Objective-C++ | 87 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |

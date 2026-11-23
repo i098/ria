@@ -8,9 +8,9 @@ use std::ptr::NonNull;
 use std::rc::Rc;
 
 use block2::RcBlock;
-use objc2::{MainThreadMarker, MainThreadOnly, sel};
 use objc2::rc::Retained;
 use objc2::runtime::{AnyObject, NSObjectProtocol};
+use objc2::{MainThreadMarker, MainThreadOnly, sel};
 use objc2_app_kit::{
     NSApplication, NSApplicationDidBecomeActiveNotification,
     NSApplicationDidResignActiveNotification, NSResponder, NSScreen, NSWindow,

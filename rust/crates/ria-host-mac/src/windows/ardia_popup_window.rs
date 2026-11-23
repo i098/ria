@@ -55,7 +55,10 @@ fn permission_kind(kind: &str) -> (&'static str, Option<&'static str>, Option<&'
         "clipboard" => ("doc.on.clipboard", "clipboard"),
         "midi" => ("pianokeys", "MIDI devices"),
         "localFonts" => ("textformat", "fonts"),
-        "windowManagement" => ("macwindow.on.rectangle", "displays to open and place windows"),
+        "windowManagement" => (
+            "macwindow.on.rectangle",
+            "displays to open and place windows",
+        ),
         "fileSystem" => ("folder", "files"),
         "keyboardLock" => ("keyboard", "keyboard"),
         "pointerLock" => ("cursorarrow", "mouse pointer"),
@@ -65,13 +68,21 @@ fn permission_kind(kind: &str) -> (&'static str, Option<&'static str>, Option<&'
         "ar" => ("visionpro", "augmented reality data"),
         "handTracking" => ("hand.raised", "hand tracking"),
         "screen" => {
-            return ("rectangle.on.rectangle", None, Some("Allow %@ to share your screen?"));
+            return (
+                "rectangle.on.rectangle",
+                None,
+                Some("Allow %@ to share your screen?"),
+            );
         }
         "notifications" => {
             return ("bell", None, Some("Allow %@ to send you notifications?"));
         }
         "multipleDownloads" => {
-            return ("arrow.down.circle", None, Some("Allow %@ to download multiple files?"));
+            return (
+                "arrow.down.circle",
+                None,
+                Some("Allow %@ to download multiple files?"),
+            );
         }
         "idleDetection" => {
             return (
@@ -88,7 +99,11 @@ fn permission_kind(kind: &str) -> (&'static str, Option<&'static str>, Option<&'
             );
         }
         "diskQuota" => {
-            return ("internaldrive", None, Some("Allow %@ to store files on your device?"));
+            return (
+                "internaldrive",
+                None,
+                Some("Allow %@ to store files on your device?"),
+            );
         }
         "protocolHandler" => {
             return ("envelope", None, Some("Make %@ your default mail app?"));
@@ -418,10 +433,9 @@ impl Popup {
         };
         let alert = NSAlert::new(owner.mtm);
         alert.setMessageText(&NSString::from_str(&request.question));
-        let config = NSImageSymbolConfiguration::configurationWithPointSize_weight(
-            32.,
-            unsafe { NSFontWeightRegular },
-        );
+        let config = NSImageSymbolConfiguration::configurationWithPointSize_weight(32., unsafe {
+            NSFontWeightRegular
+        });
         if let Some(icon) = NSImage::imageWithSystemSymbolName_accessibilityDescription(
             &NSString::from_str(request.symbol),
             None,
