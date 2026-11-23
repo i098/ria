@@ -280,6 +280,15 @@ define_class!(
                 .is_none_or(|owner| (owner.should_close)(&window.window()))
         }
 
+        #[unsafe(method(window:tab:didChangeFullscreen:))]
+        fn tab_fullscreen(&self, _window: &Window, tab: &Tab, entered: bool) {
+            if let Some(controller) = self.ivars().0.upgrade()
+                && !controller.utility()
+            {
+                controller.fullscreen.page_changed(tab, entered);
+            }
+        }
+
         #[unsafe(method(window:preHandleKeyEvent:))]
         fn pre_handle_key(&self, _window: &Window, event: &NSEvent) -> bool {
             self.ivars().0.upgrade().is_some_and(|controller| controller.owner.upgrade().is_some_and(|owner| {

@@ -24,10 +24,9 @@ fn main() {
 #[cfg(target_os = "macos")]
 mod mac {
     use std::cell::{Cell, RefCell};
-    use std::ffi::CString;
     use std::io::{BufRead, BufReader, Write};
     use std::net::TcpListener;
-    use std::path::{Path, PathBuf};
+    use std::path::PathBuf;
     use std::process::Command;
     use std::rc::Rc;
     use std::time::{Duration, Instant};
@@ -35,7 +34,8 @@ mod mac {
     use block2::RcBlock;
     use objc2::runtime::{AnyObject, Bool};
     use objc2::{
-        DefinedClass, MainThreadMarker, MainThreadOnly, Message, define_class, msg_send, rc::Retained,
+        DefinedClass, MainThreadMarker, MainThreadOnly, Message, define_class, msg_send,
+        rc::Retained,
     };
     use objc2_app_kit::{
         NSApplication, NSBackingStoreType, NSColor, NSEvent, NSEventModifierFlags, NSEventType,
@@ -45,14 +45,14 @@ mod mac {
         NSWindowWillEnterFullScreenNotification, NSWindowWillExitFullScreenNotification,
     };
     use objc2_foundation::{
-        NSBundle, NSDate, NSIntersectionRect, NSNotification, NSNotificationCenter, NSPoint, NSRect,
-        NSRunLoop, NSSize, NSString, NSUserDefaults, ns_string,
+        NSBundle, NSDate, NSIntersectionRect, NSNotification, NSNotificationCenter, NSPoint,
+        NSRect, NSRunLoop, NSSize, NSString, NSUserDefaults, ns_string,
     };
     use ria_engine::call::main_queue;
     use ria_host_mac::core::bindings::{Engine, Profile, Tab, Window};
     use ria_host_mac::core::delegate::{EngineDelegate, Hooks};
     use ria_host_mac::core::host::State;
-    use ria_host_mac::launch::launch_config::LaunchConfig;
+    use ria_host_mac::launch::host_launch::{self, LaunchEvent};
     use ria_host_mac::windows::ardia_chrome_window_host::ChromeWindowHost;
     use ria_host_mac::windows::ardia_chrome_window_host_little_fit::little_frame_for_size;
     use ria_host_mac::windows::ardia_display_identity::frame_on_screen;
@@ -64,7 +64,6 @@ mod mac {
     };
     use ria_host_mac::windows::ardia_traffic_lights::Placement;
     use ria_host_mac::windows::ardia_window_controller::{Controllers, WindowKind};
-    use ria_host_mac::windows::ardia_window_full_screen::configure_acted_transition;
     use serde_json::Value;
 
     const FRAMEWORK: &str = "Chromium Framework.framework";
@@ -116,7 +115,9 @@ mod mac {
                 .success()
         );
         let status = Command::new(&exe)
-            .env("RIA_WINDOWS_DATA", &data)
+            .env("RIA_WINDOWS_DATA", "1")
+            .env("RIA_DATA_DIR", &data)
+            .env("RIA_BACKGROUND", "1")
             .env("RIA_TEST", "fakeFullScreenMs=500")
             .status();
         NSUserDefaults::standardUserDefaults()
@@ -126,55 +127,23 @@ mod mac {
     }
 
     pub fn child() {
-        let executable = std::env::current_exe().unwrap();
-        let contents = executable.parent().and_then(Path::parent).unwrap();
-        let library = contents
-            .join("Frameworks")
-            .join(FRAMEWORK)
-            .join("Versions/Current/Chromium Framework");
-        let library = CString::new(library.as_os_str().as_encoded_bytes()).unwrap();
-        // SAFETY: Load the framework and register its Objective-C classes before using the bindings.
-        assert!(
-            !unsafe { libc::dlopen(library.as_ptr(), libc::RTLD_NOW | libc::RTLD_GLOBAL) }
-                .is_null()
-        );
+        let shutdown = Rc::new(Cell::new(false));
         let identifier = NSBundle::mainBundle().bundleIdentifier().unwrap();
         assert!(identifier.to_string().starts_with("sh.ria.windows-live."));
         NSUserDefaults::standardUserDefaults().setDouble_forKey(1., ns_string!("interfaceScale"));
         assert_eq!(ardia_interface_scale::scale(), 1.);
-        let data = std::env::var("RIA_WINDOWS_DATA").unwrap();
-        let test = std::env::var("RIA_TEST").unwrap();
-        let config = LaunchConfig::from_environment(
-            [("RIA_DATA_DIR", data.as_str()), ("RIA_TEST", test.as_str())],
-            &std::env::home_dir().unwrap(),
-            Path::new(&data),
-            false,
-        )
+        let exited = shutdown.clone();
+        let exit = host_launch::run(Rc::new(move |event| match event {
+            LaunchEvent::WindowOpened { .. } => main_queue::post(Box::new(|| {
+                check_windows(&Engine::shared().unwrap().default_profile());
+            })),
+            LaunchEvent::EngineWillShutDown => exited.set(true),
+            LaunchEvent::Error(error) => panic!("{error}"),
+            _ => {}
+        }))
         .unwrap();
-        assert!(config.test_instance);
-        configure_acted_transition(&config);
-        drop(config);
-        let argv: Vec<_> = [
-            std::env::args().next().unwrap(),
-            format!("--user-data-dir={data}/Chromium"),
-            "--use-mock-keychain".into(),
-            "--profile-directory=Default".into(),
-            "--no-first-run".into(),
-            "--disable-stack-profiler".into(),
-        ]
-        .into_iter()
-        .map(|arg| CString::new(arg).unwrap())
-        .collect();
-        let hooks = Rc::new(WindowHooks::default());
-        let delegate = EngineDelegate::new(
-            hooks.clone(),
-            State::new(),
-            Some("/* window check */".into()),
-        );
-        // SAFETY: This is the main thread and the framework has been loaded.
-        let exit = unsafe { delegate.run(&argv) };
         assert_eq!(exit, 0);
-        assert!(hooks.shutdown.get());
+        assert!(shutdown.get());
         println!("live_windows: engine shut down cleanly");
     }
 
@@ -205,7 +174,7 @@ mod mac {
 
     fn check_reserved_replies(app: &NSApplication, mtm: MainThreadMarker) {
         assert!(!app.isActive());
-        let delegate = EngineDelegate::new(Rc::new(WindowHooks::default()), State::new(), None);
+        let delegate = EngineDelegate::new(Rc::new(WindowHooks), State::new(), None);
         let menu = NSMenu::new(mtm);
         let modifiers = NSEventModifierFlags::Command;
         let bindings = [
@@ -367,6 +336,8 @@ mod mac {
                 true,
             )
             .expect("mouse action did not enqueue the event");
+        assert_eq!(mouse.windowNumber(), window.windowNumber());
+        assert_eq!(mouse.eventNumber(), 7);
         assert_eq!(mouse.buttonNumber(), 2);
         assert_eq!(mouse.clickCount(), 2);
         assert!(
@@ -383,7 +354,7 @@ mod mac {
     #[derive(Default)]
     struct MouseFixture {
         key: Cell<bool>,
-        events: RefCell<Vec<NSEventType>>,
+        events: RefCell<Vec<(NSEventType, NSPoint)>>,
     }
 
     define_class!(
@@ -407,7 +378,10 @@ mod mac {
                     | Event::LeftMouseDragged
                     | Event::RightMouseDown
                     | Event::RightMouseUp => {
-                        self.ivars().events.borrow_mut().push(event.r#type());
+                        self.ivars()
+                            .events
+                            .borrow_mut()
+                            .push((event.r#type(), event.locationInWindow()));
                     }
                     _ => unsafe { msg_send![super(self), sendEvent: event] },
                 }
@@ -451,23 +425,44 @@ mod mac {
         assert_eq!(accepts(), baseline);
 
         window.orderFrontRegardless();
-        run("click:20,60");
-        run("click:20,60,right");
-        run("drag:20,60;80,90");
+        let frame_height = unsafe { text.superview().unwrap() }.bounds().size.height;
+        let left = NSPoint::new(20., frame_height - 60.);
+        let right = NSPoint::new(35., frame_height - 75.);
+        let end = NSPoint::new(80., frame_height - 90.);
+        let left_hit = run("click:20,60");
+        assert_eq!(left_hit.split(" < ").next(), Some("NSTextView"));
+        assert_eq!(run("click:35,75,right"), left_hit);
+        assert_eq!(run("drag:20,60;80,90"), format!("{left_hit} (14 events)"));
         let app = app.retain();
         main_queue::after(
             Duration::from_millis(500),
             Box::new(move || {
-                let mut expected = [Event::LeftMouseDragged; 18];
-                expected[..5].copy_from_slice(&[
-                    Event::LeftMouseDown,
-                    Event::LeftMouseUp,
-                    Event::RightMouseDown,
-                    Event::RightMouseUp,
-                    Event::LeftMouseDown,
-                ]);
-                expected[17] = Event::LeftMouseUp;
-                assert_eq!(window.ivars().events.borrow().as_slice(), &expected);
+                let mut expected = vec![
+                    (Event::LeftMouseDown, left),
+                    (Event::LeftMouseUp, left),
+                    (Event::RightMouseDown, right),
+                    (Event::RightMouseUp, right),
+                    (Event::LeftMouseDown, left),
+                ];
+                for step in 1..=12 {
+                    expected.push((
+                        Event::LeftMouseDragged,
+                        NSPoint::new(
+                            left.x + 5. * f64::from(step),
+                            left.y - 2.5 * f64::from(step),
+                        ),
+                    ));
+                }
+                expected.push((Event::LeftMouseUp, end));
+                let events = window.ivars().events.borrow();
+                assert_eq!(events.len(), expected.len());
+                for (&(kind, point), (expected_kind, expected_point)) in events.iter().zip(expected)
+                {
+                    assert_eq!(kind, expected_kind);
+                    assert!((point.x - expected_point.x).abs() < 0.01);
+                    assert!((point.y - expected_point.y).abs() < 0.01);
+                }
+                drop(events);
                 assert!(!app.isActive());
                 window.close();
             }),
@@ -676,6 +671,42 @@ mod mac {
             let reply = host.dev_action(window, action, true).unwrap();
             serde_json::from_str::<Value>(&reply).unwrap()
         };
+        let fresh = host.make_window(profile, None).unwrap();
+        let before_sight = probe(&host, &fresh, "fakeFullScreen:1:50");
+        assert_eq!(before_sight["fullScreen"], true);
+        assert!(before_sight.get("pageFullScreen").is_none());
+        assert!(controllers.user_sees(&fresh));
+        let page = &probe(&host, &fresh, "fullScreen")["pageFullScreen"];
+        assert_eq!(page["transitioning"], false);
+        assert_eq!(page["settling"], false);
+        host.close_window(&fresh);
+
+        let page_window = host.make_window(profile, None).unwrap();
+        let controller = controllers.for_window(&page_window).unwrap();
+        let tab = controller
+            .core
+            .open_tab(ns_string!("about:blank"), profile, false);
+        let delegate: Retained<AnyObject> = unsafe { msg_send![&*controller.core, delegate] };
+        let change_page = |entering| {
+            let _: () = unsafe {
+                msg_send![&*delegate, window: &*controller.core, tab: &*tab,
+                    didChangeFullscreen: Bool::new(entering)]
+            };
+        };
+        assert!(
+            probe(&host, &page_window, "fullScreen")
+                .get("pageFullScreen")
+                .is_none()
+        );
+        change_page(true);
+        let page = &probe(&host, &page_window, "fakeFullScreen")["pageFullScreen"];
+        assert_eq!(page["page"], tab.browser_id());
+        assert_eq!(page["telling"], 1);
+        change_page(false);
+        let page = &probe(&host, &page_window, "fullScreen")["pageFullScreen"];
+        assert!(page["page"].is_null());
+        assert_eq!(page["telling"], 2);
+        host.close_window(&page_window);
         let idle = serde_json::json!({
             "fullScreen": false,
             "styleMask": false,
@@ -695,7 +726,10 @@ mod mac {
                 host.dev_action(&made, action, true).as_deref(),
                 Some(expected)
             );
-            assert_eq!(probe(&host, &made, "fullScreen")["pageFullScreen"]["seen"], seen);
+            assert_eq!(
+                probe(&host, &made, "fullScreen")["pageFullScreen"]["seen"],
+                seen
+            );
         }
         let notes = Rc::new(RefCell::new(Vec::new()));
         let tokens = names.map(|name| {
@@ -798,6 +832,12 @@ mod mac {
         );
         let profile = profile.retain();
         notes.borrow_mut().clear();
+        let entered_at = Rc::new(Cell::new(None));
+        let enter_time = entered_at.clone();
+        let start = Instant::now();
+        let enter_token = observe(&made, names[1], move || {
+            enter_time.set(Some(start.elapsed()))
+        });
         assert_eq!(
             probe(&host, &made, "fakeFullScreen:1:50"),
             fullscreen_state(true, true)
@@ -806,6 +846,8 @@ mod mac {
         main_queue::after(
             Duration::from_millis(100),
             Box::new(move || {
+                assert!(entered_at.get().unwrap() >= Duration::from_millis(50));
+                unsafe { center.removeObserver(&enter_token) };
                 assert_eq!(notes.borrow().as_slice(), &names[..2]);
                 assert_eq!(
                     probe(&host, &made, "fullScreen"),
@@ -833,7 +875,8 @@ mod mac {
                             fullscreen_state(false, false)
                         );
                         assert_eq!(
-                            host.dev_action(&made, "fakeFullScreenMs:0", true).as_deref(),
+                            host.dev_action(&made, "fakeFullScreenMs:0", true)
+                                .as_deref(),
                             Some("0")
                         );
                         for token in tokens.into_iter().chain([exit_token]) {
@@ -943,6 +986,22 @@ mod mac {
         );
         assert!(visible_label.size.width > 0. && visible_label.size.height > 0.);
         assert_eq!(label.stringValue().to_string(), origin);
+        assert!(window.alphaValue() > 0. && strip.alphaValue() > 0. && label.alphaValue() > 0.);
+        let capture = || {
+            let bitmap = strip
+                .bitmapImageRepForCachingDisplayInRect(visible_label)
+                .unwrap();
+            strip.cacheDisplayInRect_toBitmapImageRep(visible_label, &bitmap);
+            bitmap.TIFFRepresentation().unwrap()
+        };
+        let with_text = capture();
+        label.setStringValue(ns_string!(""));
+        let without_text = capture();
+        label.setStringValue(&NSString::from_str(&origin));
+        assert!(
+            !with_text.isEqualToData(&without_text),
+            "The origin text must change the rendered pixels"
+        );
         println!("live_windows: popup rendered its 28-point origin strip with {origin}");
         popup.close();
         check_popup_closed(popups, Instant::now() + Duration::from_secs(5));
@@ -963,25 +1022,11 @@ mod mac {
         );
     }
 
-    #[derive(Default)]
-    struct WindowHooks {
-        shutdown: Cell<bool>,
-    }
+    struct WindowHooks;
 
     impl Hooks for WindowHooks {
-        fn engine_started(&self) {
-            main_queue::post(Box::new(|| {
-                let engine = Engine::shared().unwrap();
-                engine.load_profile(ns_string!("Default"), move |profile| {
-                    main_queue::post(Box::new(move || {
-                        check_windows(&profile.expect("Default profile"));
-                    }));
-                });
-            }));
-        }
-        fn engine_shut_down(&self) {
-            self.shutdown.set(true);
-        }
+        fn engine_started(&self) {}
+        fn engine_shut_down(&self) {}
         fn emit(&self, _: &str, _: Value) {}
         fn listens(&self, _: &str) -> bool {
             false
