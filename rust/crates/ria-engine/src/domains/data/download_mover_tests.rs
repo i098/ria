@@ -583,9 +583,20 @@ fn download_mover() {
                 paused.recv_timeout(Duration::from_secs(10)).unwrap();
             }
         });
-        let work = mover.start_move(path, "~/Downloads/Large".into()).unwrap();
+        let folder = "~/Downloads/Large";
+        let work = mover.start_move(path.clone(), folder.into()).unwrap();
         let worker = reached_hash.recv_timeout(Duration::from_secs(10)).unwrap();
         assert_ne!(worker, std::thread::current().id());
+        let journal_key = "ArdiaDownloadMoveJournal";
+        let journal = env.defaults.get(journal_key).expect("active move is journaled");
+        assert_eq!(journal["large"]["source"], path);
+        let duplicate = mover
+            .start_move(path, folder.into())
+            .unwrap()
+            .join()
+            .unwrap();
+        assert_eq!(reason(&duplicate), "busy");
+        assert_eq!(env.defaults.get(journal_key), Some(journal));
         let event = mover.note_download_event(
             &json!({"id": "meanwhile", "path": "/elsewhere", "state": "downloading"}),
         );
@@ -594,6 +605,7 @@ fn download_mover() {
         let result = work.join().unwrap();
         unhook(&mover);
         assert_eq!(reason(&result), "ok");
+        assert!(env.defaults.get(journal_key).is_none());
         assert_eq!(
             fs::metadata(env.at("Downloads/Large/large.bin"))
                 .unwrap()

@@ -46,10 +46,6 @@ macro_rules! service {
     };
 }
 
-fn toggles_error(error: String) -> String {
-    error
-}
-
 /// Reads the `profileToggles` answer: an object of booleans.
 fn toggle(value: &Value, key: &str) -> Option<bool> {
     value.as_object()?.get(key)?.as_bool()
@@ -66,7 +62,7 @@ fn settings(ctx: &DataCtx, args: CallArgs, reply: CallReply) -> Done {
                 "cards": toggle(&toggles, "cards").unwrap_or(true),
             }))),
             Ok(_) => reply.fail("ERR_ENGINE", "no autofill settings"),
-            Err(error) => reply.fail("ERR_ENGINE", toggles_error(error)),
+            Err(error) => reply.fail("ERR_ENGINE", error),
         }),
     );
     Ok(())

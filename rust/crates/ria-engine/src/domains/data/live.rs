@@ -443,23 +443,6 @@ mod mac {
             json!({"hosts": ["www.example.com"]}),
             |r| r.domains == ["example.com"],
         );
-        // An unknown profile gives the Ardia error text.
-        *live.outstanding.borrow_mut() += 1;
-        let unknown = live.clone();
-        ctx.engine_call(
-            "ac_bookmarks_tree",
-            "never-loaded-profile",
-            json!({}),
-            move |value| {
-                record(
-                    &unknown,
-                    "a profile that does not load is an error",
-                    value.get("error").is_some(),
-                    value.to_string(),
-                );
-                *unknown.outstanding.borrow_mut() -= 1;
-            },
-        );
         let missing = ria_engine_sys::missing_calls();
         record(
             &live,

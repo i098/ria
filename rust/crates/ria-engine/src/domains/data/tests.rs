@@ -223,6 +223,10 @@ struct Rig {
 }
 
 fn rig() -> Rig {
+    rig_with_core(Rc::new(FakeCore::default()))
+}
+
+fn rig_with_core(core: Rc<FakeCore>) -> Rig {
     ANSWERS.with(|a| a.borrow_mut().clear());
     CALLS.with(|c| c.borrow_mut().clear());
     TIMERS.with(|t| t.borrow_mut().clear());
@@ -235,7 +239,7 @@ fn rig() -> Rig {
         prefix: "wk-",
         ..FakeEngine::default()
     });
-    let registry = ProfileRegistry::new(Rc::new(FakeCore::default()), Rc::new(NoEvents));
+    let registry = ProfileRegistry::new(core, Rc::new(NoEvents));
     let ctx = DataCtx {
         engine,
         favicons: Rc::new(Favicons::new(registry.clone(), std::env::temp_dir())),
@@ -359,6 +363,7 @@ fn the_aggregate_waits_for_both_engines_and_rejects_the_module_call_on_failure()
             (None, None),
             (Some("first engine failed"), None),
             (None, Some("second engine failed")),
+            (Some("first engine failed"), Some("second engine failed")),
         ] {
             let rig = rig();
             let out = run_table(
@@ -436,6 +441,26 @@ fn engine_passing_calls_add_off_the_record_and_use_the_original_profile() {
             "no bookmarks"
         )))
     );
+}
+
+#[test]
+fn bookmark_dispatch_rejects_an_unloaded_profile_without_calling_the_engine() {
+    let core = Rc::new(FakeCore {
+        defer_base_load: true,
+        ..FakeCore::default()
+    });
+    let rig = rig_with_core(core.clone());
+    let out = run_table(&rig, "bookmarks", "tree", "missing", json!({}));
+    core.pending_base.take().expect("requested profile load")(None);
+    rig.queue.drain();
+    assert_eq!(
+        out.take(),
+        Some(Err(super::call_table::Rejection::new(
+            "ERR_ENGINE",
+            "profile not loaded",
+        )))
+    );
+    CALLS.with(|calls| assert!(calls.borrow().is_empty()));
 }
 
 #[test]

@@ -62,7 +62,7 @@ pub trait BlockerHost {
 }
 
 type ErrorDone = Box<dyn FnOnce(Option<String>)>;
-type HiddenDone = Box<dyn FnOnce(Option<Vec<String>>, Option<String>)>;
+type ResultDone<T> = Box<dyn FnOnce(Result<T, String>)>;
 
 #[derive(Default)]
 pub(super) struct State {
@@ -785,23 +785,19 @@ impl ContentBlocker {
         );
     }
 
-    pub fn add_list(&self, url: &str, completion: Done) {
+    pub fn add_list(&self, url: &str, completion: ResultDone<Value>) {
         self.call_default(
             script_with(ADD_LIST, &[url.into()]),
             move |b, added, error| {
-                let added = added.filter(Value::is_object);
-                let error = error.or_else(|| added.is_none().then(|| "no answer".to_owned()));
-                if let (None, Some(added)) = (&error, &added) {
-                    b.0.host
-                        .did_change(json!({"list": added["id"], "listEnabled": true}));
+                if let Some(error) = error {
+                    return completion(Err(error));
                 }
-                b.lists_changed(
-                    error,
-                    Box::new(move |e| match e {
-                        Some(e) => completion(None, Some(e)),
-                        None => completion(added, None),
-                    }),
-                );
+                let Some(added) = added.filter(Value::is_object) else {
+                    return completion(Err("no answer".to_owned()));
+                };
+                b.0.host
+                    .did_change(json!({"list": added["id"], "listEnabled": true}));
+                b.lists_changed(None, Box::new(move |_| completion(Ok(added))));
             },
         );
     }
@@ -851,13 +847,15 @@ impl ContentBlocker {
         });
     }
 
-    pub fn hidden_elements(&self, profile: &str, completion: HiddenDone) {
+    pub fn hidden_elements(&self, profile: &str, completion: ResultDone<Vec<String>>) {
         self.call(
             &original_profile_name(profile),
             with_hiding_rules(READ_HIDDEN),
-            Box::new(move |filters, error| match error {
-                Some(error) => completion(None, Some(error)),
-                None => completion(Some(strings(filters)), None),
+            Box::new(move |filters, error| {
+                completion(match error {
+                    Some(error) => Err(error),
+                    None => Ok(strings(filters)),
+                })
             }),
             true,
         );

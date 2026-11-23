@@ -6,8 +6,6 @@
 
 use std::time::Duration;
 
-use serde_json::Value;
-
 use super::call_table::{BadCallArgs, CallArgs, CallReply, CallTable, Handler};
 use super::content_blocker::ContentBlocker;
 
@@ -40,11 +38,9 @@ fn set_list_enabled(b: &ContentBlocker, args: CallArgs, reply: CallReply) -> Out
 fn add_list(b: &ContentBlocker, args: CallArgs, reply: CallReply) -> Outcome {
     b.add_list(
         &args.text("url")?,
-        Box::new(move |added, error| match error {
-            Some(error) => reply.fail(CODE, error),
-            None => reply.ok(Some(
-                added.unwrap_or_else(|| Value::Object(Default::default())),
-            )),
+        Box::new(move |result| match result {
+            Ok(added) => reply.ok(Some(added)),
+            Err(error) => reply.fail(CODE, error),
         }),
     );
     Ok(())
@@ -71,9 +67,9 @@ fn set_allowed(b: &ContentBlocker, args: CallArgs, reply: CallReply) -> Outcome 
 fn hidden_elements(b: &ContentBlocker, args: CallArgs, reply: CallReply) -> Outcome {
     b.hidden_elements(
         &args.profile,
-        Box::new(move |filters, error| match error {
-            Some(error) => reply.fail(CODE, error),
-            None => reply.ok(Some(filters.unwrap_or_default().into())),
+        Box::new(move |result| match result {
+            Ok(filters) => reply.ok(Some(filters.into())),
+            Err(error) => reply.fail(CODE, error),
         }),
     );
     Ok(())
@@ -133,7 +129,12 @@ mod tests {
     use crate::domains::data::call_table::{Rejection, Settled};
     use crate::domains::data::content_blocker::tests::setup;
 
-    fn run(b: &ContentBlocker, name: &str, profile: &str, args: &str) -> Option<Settled> {
+    fn dispatch(
+        b: &ContentBlocker,
+        name: &str,
+        profile: &str,
+        args: &str,
+    ) -> Rc<RefCell<Option<Settled>>> {
         let out = Rc::new(RefCell::new(None));
         let sink = out.clone();
         CALLS.run(
@@ -143,7 +144,11 @@ mod tests {
             args,
             CallReply::new(move |s| *sink.borrow_mut() = Some(s)),
         );
-        out.take()
+        out
+    }
+
+    fn run(b: &ContentBlocker, name: &str, profile: &str, args: &str) -> Option<Settled> {
+        dispatch(b, name, profile, args).take()
     }
 
     #[test]
@@ -180,6 +185,36 @@ mod tests {
         assert!(
             matches!(run(&b, "setEnabled", "", "{}"), Some(Err(r)) if r.code == "ERR_BAD_ARGS")
         );
+    }
+
+    #[test]
+    fn list_and_hidden_element_calls_return_payloads_or_errors() {
+        let url = r#"{"url":"https://example.com/list.txt"}"#;
+        for (call, args, script_reply, expected) in [
+            (
+                "addList", url, r#"{"value":{"id":"custom"}}"#,
+                Ok(r#"{"id":"custom"}"#.into()),
+            ),
+            (
+                "addList", url, r#"{"value":null}"#,
+                Err(Rejection::new(CODE, "no answer")),
+            ),
+            (
+                "hiddenElements", "{}", r#"{"value":["example.com##.ad"]}"#,
+                Ok(r#"["example.com##.ad"]"#.into()),
+            ),
+            (
+                "hiddenElements", "{}", r#"{"error":"read failed"}"#,
+                Err(Rejection::new(CODE, "read failed")),
+            ),
+        ] {
+            let (blocker, _, scripts, _resources) = setup();
+            let reply = dispatch(&blocker, call, "", args);
+            let tab = scripts.tab(0);
+            tab.load();
+            tab.answer(script_reply);
+            assert_eq!(reply.take(), Some(expected), "{call}: {script_reply}");
+        }
     }
 
     #[test]
