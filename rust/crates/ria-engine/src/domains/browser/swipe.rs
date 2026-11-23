@@ -16,15 +16,41 @@ pub const MAIN_THREAD_FUNCTIONS: &[&str] = &["switchPager", "selectPager", "step
 /// for `devSimulate`.
 pub const DEBUG_FUNCTIONS: &[&str] = &["devPagerState", "devSimulate"];
 
-/// The answer of `devSimulate` in a release build.
-pub fn release_simulate_answer() -> serde_json::Value {
-    serde_json::json!({"error": "DEV builds only"})
+pub fn debug_reply(call: &str, run: impl FnOnce() -> serde_json::Value) -> Option<serde_json::Value> {
+    if !DEBUG_FUNCTIONS.contains(&call) {
+        return None;
+    }
+    Some(if cfg!(debug_assertions) {
+        run()
+    } else if call == "devSimulate" {
+        serde_json::json!({"error": "DEV builds only"})
+    } else {
+        serde_json::Value::Null
+    })
 }
 
 #[cfg(test)]
 mod tests {
+    use serde_json::{Value, json};
+
     #[test]
-    fn release_builds_refuse_simulation() {
-        assert_eq!(super::release_simulate_answer()["error"], "DEV builds only");
+    fn development_calls_follow_the_build_mode() {
+        for (name, release) in [
+            ("devPagerState", Value::Null),
+            ("devSimulate", json!({"error": "DEV builds only"})),
+        ] {
+            let ran = std::cell::Cell::new(false);
+            let result = super::debug_reply(name, || {
+                ran.set(true);
+                json!({"ran": true})
+            });
+            if cfg!(debug_assertions) {
+                assert_eq!(result, Some(json!({"ran": true})));
+                assert!(ran.get());
+            } else {
+                assert_eq!(result, Some(release));
+                assert!(!ran.get());
+            }
+        }
     }
 }

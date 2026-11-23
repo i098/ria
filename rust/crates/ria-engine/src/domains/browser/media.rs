@@ -47,9 +47,34 @@ mod tests {
     use super::*;
 
     #[test]
-    fn each_call_of_the_api_file_has_a_host_route() {
-        super::super::assert_routes_cover("media", include_str!("../../api/media.rs"));
-        assert!(matches!(route("selectDevice"), Some(Route::Host)));
+    fn media_calls_go_to_the_host() {
+        use crate::api::{Call, media::*};
+
+        for name in [
+            DisplayMediaSources::NAME,
+            DisplayMediaThumbnails::NAME,
+            ScreenRecordingAllowed::NAME,
+            RequestScreenRecording::NAME,
+            SelectDevice::NAME,
+            CancelDeviceChooser::NAME,
+            RefreshDeviceChooser::NAME,
+            OpenBluetoothSettings::NAME,
+            DevShowBluetoothChooser::NAME,
+            DevChooserEvents::NAME,
+            ShowCastDialog::NAME,
+            StartCasting::NAME,
+            StopCasting::NAME,
+            CloseCastDialog::NAME,
+            WatchCastRoutes::NAME,
+            TerminateCastRoute::NAME,
+            ChangeCaptureSource::NAME,
+            StopCapture::NAME,
+        ] {
+            assert!(
+                matches!(super::super::route(name, false), Some(Route::Host)),
+                "{name}"
+            );
+        }
     }
 
     #[test]

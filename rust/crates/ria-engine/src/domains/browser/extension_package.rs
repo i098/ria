@@ -4,11 +4,15 @@
 
 //! Reads the manifest of an unpacked extension folder.
 
+use std::fs::File;
+use std::io::Read;
 use std::path::{Component, Path, PathBuf};
 
+use rustix::fs::{Mode, OFlags, openat};
 use serde_json::{Map, Value, json};
 
-use super::text::{base64_decode_lenient, base64_encode, parse_json5_subset, sha256};
+use super::text::{base64_decode_lenient, base64_encode, sha256};
+use crate::call::CallError;
 
 /// An extension id: 32 letters from `a` to `p`.
 pub fn is_extension_id(s: &str) -> bool {
@@ -30,43 +34,50 @@ pub fn id_for_key(base64_key: &str) -> Option<String> {
     )
 }
 
-fn load_json(path: &Path) -> Option<Map<String, Value>> {
-    let text = std::fs::read_to_string(path).ok()?;
-    match parse_json5_subset(&text)? {
-        Value::Object(map) => Some(map),
-        _ => None,
-    }
+fn load_json(folder: &File, path: &Path) -> Option<Map<String, Value>> {
+    let mut text = String::new();
+    open_file(folder, path)?.read_to_string(&mut text).ok()?;
+    json5::from_str(text.trim_start_matches('\u{feff}')).ok()
 }
 
-/// `path` with `.` and `..` resolved by name. `NSString.stringByStandardizingPath` also follows symlinks.
-// shortcut: symbolic links are not resolved, so a link inside the folder can point outside it; resolve them when links in extensions matter.
-fn standardize(path: &Path) -> PathBuf {
-    let mut out = PathBuf::new();
-    for part in path.components() {
-        match part {
-            Component::ParentDir => {
-                out.pop();
+fn open_file(folder: &File, path: &Path) -> Option<File> {
+    let mut normalized = PathBuf::new();
+    let path = if path.components().any(|part| part == Component::ParentDir) {
+        for part in path.components() {
+            match part {
+                Component::Normal(name) => normalized.push(name),
+                Component::CurDir => {}
+                Component::ParentDir if normalized.pop() => {}
+                _ => return None,
             }
-            Component::CurDir => {}
-            other => out.push(other),
         }
+        normalized.as_path()
+    } else {
+        path
+    };
+    let mut components = path
+        .components()
+        .filter(|part| *part != Component::CurDir)
+        .peekable();
+    let mut directory = None;
+    while let Some(Component::Normal(name)) = components.next() {
+        let parent = directory.as_ref().unwrap_or(folder);
+        let flags = OFlags::RDONLY | OFlags::NOFOLLOW | OFlags::CLOEXEC;
+        if components.peek().is_none() {
+            let fd = openat(parent, name, flags | OFlags::NONBLOCK, Mode::empty()).ok()?;
+            let file = File::from(fd);
+            return file.metadata().ok()?.is_file().then_some(file);
+        }
+        let fd = openat(parent, name, flags | OFlags::DIRECTORY, Mode::empty()).ok()?;
+        directory = Some(File::from(fd));
     }
-    out
+    None
 }
 
 /// A `data:` URL for an image file inside `folder`, or `None` for a path outside it, an empty file or an unknown type.
-pub fn data_url(folder: &Path, relative_path: &str) -> Option<String> {
-    if relative_path.is_empty() {
-        return None;
-    }
-    let rel = relative_path.strip_prefix('/').unwrap_or(relative_path);
-    let root = standardize(folder);
-    let path = standardize(&folder.join(rel));
-    if path.components().count() <= root.components().count() || !path.starts_with(&root) {
-        return None;
-    }
-    let data = std::fs::read(&path).ok().filter(|d| !d.is_empty())?;
-    let kind = match path.extension()?.to_str()?.to_lowercase().as_str() {
+fn data_url(folder: &File, relative_path: &str) -> Option<String> {
+    let path = Path::new(relative_path.strip_prefix('/').unwrap_or(relative_path));
+    let kind = match path.extension()?.to_str()?.to_ascii_lowercase().as_str() {
         "png" => "image/png",
         "jpg" | "jpeg" => "image/jpeg",
         "gif" => "image/gif",
@@ -76,6 +87,10 @@ pub fn data_url(folder: &Path, relative_path: &str) -> Option<String> {
         "bmp" => "image/bmp",
         _ => return None,
     };
+    let mut data = Vec::new();
+    if open_file(folder, path)?.read_to_end(&mut data).ok()? == 0 {
+        return None;
+    }
     Some(format!("data:{kind};base64,{}", base64_encode(&data)))
 }
 
@@ -88,13 +103,10 @@ fn localize(value: Option<&Value>, messages: &Messages) -> Option<String> {
         return Some(s.to_owned());
     }
     let key = s[6..s.len() - 2].to_lowercase();
-    messages
-        .iter()
-        .find(|(k, _)| k.to_lowercase() == key)
-        .map_or_else(
-            || Some(s.to_owned()),
-            |(_, v)| Some(v["message"].as_str()?.to_owned()),
-        )
+    messages.get(&key).map_or_else(
+        || Some(s.to_owned()),
+        |v| Some(v["message"].as_str()?.to_owned()),
+    )
 }
 
 fn valid_messages(messages: &Messages) -> bool {
@@ -104,7 +116,7 @@ fn valid_messages(messages: &Messages) -> bool {
 }
 
 /// The merged messages of the locales in order: the UI locale, its language, the manifest default, `en`, `en_US`.
-fn messages(folder: &Path, manifest: &Messages, ui_locale: &str) -> Result<Messages, String> {
+fn messages(folder: &File, manifest: &Messages, ui_locale: &str) -> Result<Messages, CallError> {
     let mut ui = ui_locale.replace('-', "_");
     if ui == "en" {
         ui = "en_US".into();
@@ -126,21 +138,26 @@ fn messages(folder: &Path, manifest: &Messages, ui_locale: &str) -> Result<Messa
     let mut merged = Messages::new();
     let mut loaded: Vec<String> = Vec::new();
     for locale in candidates {
-        if loaded.contains(&locale) {
+        if locale.is_empty()
+            || !locale
+                .bytes()
+                .all(|c| c.is_ascii_alphanumeric() || matches!(c, b'_' | b'-'))
+            || loaded.contains(&locale)
+        {
             continue;
         }
-        let file = folder.join("_locales").join(&locale).join("messages.json");
+        let file = Path::new("_locales").join(&locale).join("messages.json");
         loaded.push(locale.clone());
-        let Some(found) = load_json(&file) else {
+        let Some(found) = load_json(folder, &file) else {
             continue;
         };
         if !valid_messages(&found) {
-            return Err(format!(
+            return Err(CallError::Engine(format!(
                 "The localization file _locales/{locale}/messages.json is invalid"
-            ));
+            )));
         }
         for (key, value) in found {
-            merged.entry(key).or_insert(value);
+            merged.entry(key.to_lowercase()).or_insert(value);
         }
     }
     Ok(merged)
@@ -202,16 +219,14 @@ fn text_or_null(value: Option<String>) -> Value {
     value.map_or(Value::Null, Value::String)
 }
 
-/// The summary of the manifest in `folder`, or `{"error": ...}`. A field with no value is left out.
+/// The summary of the manifest in `folder`. A field with no value is left out.
 /// `ui_locale` is the first preferred language of the app (for example `en`, `ja` or `pt-BR`).
-pub fn read_manifest(folder: &Path, ui_locale: &str) -> Value {
-    let Some(m) = load_json(&folder.join("manifest.json")) else {
-        return json!({"error": "Manifest file is missing or unreadable"});
-    };
-    let messages = match messages(folder, &m, ui_locale) {
-        Ok(messages) => messages,
-        Err(error) => return json!({"error": error}),
-    };
+pub fn read_manifest(folder: &Path, ui_locale: &str) -> Result<Value, CallError> {
+    let flags = OFlags::RDONLY | OFlags::DIRECTORY | OFlags::CLOEXEC;
+    let missing = || CallError::Engine("Manifest file is missing or unreadable".into());
+    let folder = File::from(rustix::fs::open(folder, flags, Mode::empty()).map_err(|_| missing())?);
+    let m = load_json(&folder, Path::new("manifest.json")).ok_or_else(missing)?;
+    let messages = messages(&folder, &m, ui_locale)?;
     let action = ["action", "browser_action", "page_action"]
         .iter()
         .find_map(|k| m.get(*k).filter(|v| v.is_object()));
@@ -279,7 +294,7 @@ pub fn read_manifest(folder: &Path, ui_locale: &str) -> Value {
     );
     put(
         "icon",
-        text_or_null(icon_path(m.get("icons"), 128).and_then(|p| data_url(folder, &p))),
+        text_or_null(icon_path(m.get("icons"), 128).and_then(|p| data_url(&folder, &p))),
     );
     put("permissions", json!(permissions));
     put(
@@ -301,7 +316,7 @@ pub fn read_manifest(folder: &Path, ui_locale: &str) -> Value {
     );
     let action_icon = icon_path(action_get("default_icon"), 32)
         .or_else(|| icon_path(m.get("icons"), 32))
-        .and_then(|p| data_url(folder, &p));
+        .and_then(|p| data_url(&folder, &p));
     put("actionIcon", text_or_null(action_icon));
     put(
         "optionsPage",
@@ -331,7 +346,7 @@ pub fn read_manifest(folder: &Path, ui_locale: &str) -> Value {
         "id",
         text_or_null(m.get("key").and_then(Value::as_str).and_then(id_for_key)),
     );
-    Value::Object(out)
+    Ok(Value::Object(out))
 }
 
 #[cfg(test)]
@@ -366,9 +381,15 @@ mod tests {
     fn manifest_is_localized_and_sorted_into_permissions_and_hosts() {
         let dir = folder("manifest");
         fs::create_dir_all(dir.join("_locales/en")).unwrap();
+        fs::create_dir_all(dir.join("_locales/en_US")).unwrap();
+        fs::write(
+            dir.join("_locales/en_US/messages.json"),
+            "{ title: { message: 'Hello', /* before close */ }, }",
+        )
+        .unwrap();
         fs::write(
             dir.join("_locales/en/messages.json"),
-            r#"{"Title":{"message":"Hello"}}"#,
+            r#"{"TITLE":{"message":"Fallback"}}"#,
         )
         .unwrap();
         fs::write(dir.join("i.png"), [1u8, 2, 3]).unwrap();
@@ -376,16 +397,16 @@ mod tests {
             dir.join("manifest.json"),
             r#"{
               // comment
-              "name": "__MSG_title__", "version": "1.0", "manifest_version": 3,
+              name: '__MSG_title__', version: '1.0', manifest_version: 3,
               "permissions": ["tabs", "https://a.com/*"], "host_permissions": ["https://b.com/*"],
               "content_scripts": [{"matches": ["https://a.com/*"]}],
-              "action": {"default_popup": "p.html", "default_icon": "i.png"},
+              "action": {"default_popup": "p.html", "default_icon": "./i.png"},
               "icons": {"16": "i.png", "128": "../out.png"},
               "incognito": "split",
             }"#,
         )
         .unwrap();
-        let v = read_manifest(&dir, "en-US");
+        let v = read_manifest(&dir, "en-US").unwrap();
         assert_eq!(v["name"], "Hello");
         assert_eq!(v["permissions"], json!(["tabs"]));
         assert_eq!(
@@ -407,17 +428,54 @@ mod tests {
     fn missing_manifest_and_bad_locale_report_an_error() {
         let dir = folder("errors");
         assert_eq!(
-            read_manifest(&dir, "en")["error"],
-            "Manifest file is missing or unreadable"
+            read_manifest(&dir, "en"),
+            Err(CallError::Engine(
+                "Manifest file is missing or unreadable".into()
+            ))
         );
         fs::write(dir.join("manifest.json"), "{}").unwrap();
         fs::create_dir_all(dir.join("_locales/en")).unwrap();
         fs::write(dir.join("_locales/en/messages.json"), r#"{"a":1}"#).unwrap();
         assert_eq!(
-            read_manifest(&dir, "en")["error"],
-            "The localization file _locales/en/messages.json is invalid"
+            read_manifest(&dir, "en"),
+            Err(CallError::Engine(
+                "The localization file _locales/en/messages.json is invalid".into()
+            ))
         );
         let _ = fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn package_reads_do_not_follow_links_outside_the_folder() {
+        use std::os::unix::fs::symlink;
+
+        let dir = tempfile::tempdir().unwrap();
+        let package = dir.path().join("package");
+        fs::create_dir(&package).unwrap();
+        let manifest = package.join("manifest.json");
+        fs::write(dir.path().join("outside.json"), "{}").unwrap();
+        symlink(dir.path().join("outside.json"), &manifest).unwrap();
+        assert!(read_manifest(&package, "en").is_err());
+        fs::remove_file(&manifest).unwrap();
+
+        fs::write(dir.path().join("icon.png"), [1, 2, 3]).unwrap();
+        fs::write(
+            dir.path().join("messages.json"),
+            "{title: {message: 'outside'}}",
+        )
+        .unwrap();
+        symlink(dir.path().join("icon.png"), package.join("icon.png")).unwrap();
+        fs::create_dir(package.join("_locales")).unwrap();
+        symlink(dir.path(), package.join("_locales/en")).unwrap();
+        fs::write(
+            manifest,
+            "{name: '__MSG_title__', icons: {'32': 'icon.png'}, action: {default_icon: 'icon.png'}}",
+        )
+        .unwrap();
+        let result = read_manifest(&package, "en").unwrap();
+        assert_eq!(result["name"], "__MSG_title__");
+        assert!(result.get("icon").is_none());
+        assert!(result.get("actionIcon").is_none());
     }
 
     #[test]

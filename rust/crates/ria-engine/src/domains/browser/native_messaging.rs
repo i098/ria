@@ -6,9 +6,12 @@
 
 use std::collections::BTreeSet;
 use std::fs;
+use std::io::{ErrorKind, Write};
 use std::path::Path;
 
 use serde_json::{Value, json};
+
+use super::extension_package::is_extension_id;
 
 /// Where Chrome keeps the system manifests.
 pub const CHROME_SYSTEM_DIR: &str = "/Library/Google/Chrome/NativeMessagingHosts";
@@ -80,7 +83,21 @@ fn is_executable(path: &Path) -> bool {
 fn is_usable(manifest: &Value, name: &str) -> bool {
     manifest["name"] == name
         && manifest["type"] == "stdio"
-        && manifest["allowed_origins"].is_array()
+        && manifest["description"]
+            .as_str()
+            .is_some_and(|s| !s.is_empty())
+        && manifest["allowed_origins"].as_array().is_some_and(|origins| {
+            origins.iter().all(|origin| {
+                origin
+                    .as_str()
+                    .and_then(|s| s.strip_prefix("chrome-extension://"))
+                    .and_then(|s| s.split_once('/'))
+                    .is_some_and(|(id, _)| is_extension_id(id))
+            })
+        })
+        && manifest
+            .get("supports_native_initiated_connections")
+            .is_none_or(Value::is_boolean)
         && manifest["path"]
             .as_str()
             .is_some_and(|p| Path::new(p).is_absolute() && is_executable(Path::new(p)))
@@ -93,14 +110,14 @@ fn system_manifest(system_dir: &Path, name: &str) -> Option<Vec<u8>> {
 }
 
 /// The manifests to install, by host name: the system manifest when it is usable, else the built-in one.
-fn installed_hosts(system_dir: &Path) -> Vec<(String, Vec<u8>)> {
+fn installed_hosts(system_dir: &Path, known: &[Value]) -> Vec<(String, Vec<u8>)> {
     let mut hosts = Vec::new();
-    for manifest in known_hosts() {
+    for manifest in known {
         let name = manifest["name"].as_str().unwrap_or_default().to_owned();
         if let Some(system) = system_manifest(system_dir, &name) {
             hosts.push((name, system));
-        } else if is_usable(&manifest, &name) {
-            let pretty = serde_json::to_vec_pretty(&manifest).unwrap_or_default();
+        } else if is_usable(manifest, &name) {
+            let pretty = serde_json::to_vec_pretty(manifest).unwrap_or_default();
             hosts.push((name, pretty));
         }
     }
@@ -113,9 +130,15 @@ fn installed_hosts(system_dir: &Path) -> Vec<(String, Vec<u8>)> {
 }
 
 /// Writes `data` to `path` by a temporary file and a rename.
-fn write_atomic(path: &Path, data: &[u8]) -> bool {
-    let temp = path.with_extension("json.tmp");
-    fs::write(&temp, data).is_ok() && fs::rename(&temp, path).is_ok()
+fn write_atomic(path: &Path, data: &[u8], replace: bool) -> std::io::Result<()> {
+    let mut temp = tempfile::NamedTempFile::new_in(path.parent().unwrap())?;
+    temp.write_all(data)?;
+    if replace {
+        temp.persist(path)?;
+    } else {
+        temp.persist_noclobber(path)?;
+    }
+    Ok(())
 }
 
 /// Updates `<user_data_dir>/NativeMessagingHosts`: writes the manifests of the installed hosts, and removes the ones
@@ -127,30 +150,40 @@ pub fn sync_hosts(user_data_dir: &Path, system_dir: &Path) {
         return;
     }
     let list_path = dir.join(MANAGED_LIST);
-    let managed: BTreeSet<String> = fs::read(&list_path)
+    let known = known_hosts();
+    let mut managed: BTreeSet<String> = fs::read(&list_path)
         .ok()
         .and_then(|d| serde_json::from_slice(&d).ok())
         .unwrap_or_default();
+    managed.retain(|name| {
+        SYSTEM_REGISTERED_HOSTS.contains(&name.as_str())
+            || known.iter().any(|manifest| manifest["name"] == name.as_str())
+    });
 
     let mut now_managed = BTreeSet::new();
-    for (name, data) in installed_hosts(system_dir) {
+    for (name, data) in installed_hosts(system_dir, &known) {
         let path = manifest_path(&dir, &name);
         let ours = managed.contains(&name);
-        if !ours && path.exists() {
+        if !ours && fs::symlink_metadata(&path).is_ok() {
             continue;
         }
-        if fs::read(&path).ok().as_deref() != Some(&data) && !write_atomic(&path, &data) {
-            continue;
+        let written = (!ours || fs::read(&path).ok().as_deref() != Some(data.as_slice()))
+            && write_atomic(&path, &data, ours).is_ok();
+        if ours || written {
+            now_managed.insert(name);
         }
-        now_managed.insert(name);
     }
-    for name in managed.difference(&now_managed) {
-        let _ = fs::remove_file(manifest_path(&dir, name));
+    for name in &managed {
+        if !now_managed.contains(name)
+            && fs::remove_file(manifest_path(&dir, name))
+                .is_err_and(|err| err.kind() != ErrorKind::NotFound)
+        {
+            now_managed.insert(name.clone());
+        }
     }
     if now_managed != managed {
-        let names: Vec<&String> = now_managed.iter().collect();
-        if let Ok(data) = serde_json::to_vec(&names) {
-            let _ = write_atomic(&list_path, &data);
+        if let Ok(data) = serde_json::to_vec(&now_managed) {
+            let _ = write_atomic(&list_path, &data, true);
         }
     }
 }
@@ -169,7 +202,9 @@ mod tests {
 
     fn system_manifest_file(system: &Path, name: &str, path: &Path) {
         let manifest = json!({
-            "name": name, "type": "stdio", "allowed_origins": [], "path": path,
+            "name": name, "description": "Test host", "type": "stdio",
+            "allowed_origins": ["chrome-extension://abcdefghijklmnopabcdefghijklmnop/"],
+            "path": path,
         });
         fs::write(manifest_path(system, name), manifest.to_string()).unwrap();
     }
@@ -185,9 +220,9 @@ mod tests {
         sync_hosts(&user, &system);
         let hosts = user.join("NativeMessagingHosts");
         assert!(hosts.join("com.apple.passwordmanager.json").exists());
-        let list: Vec<String> =
+        let list: BTreeSet<String> =
             serde_json::from_slice(&fs::read(hosts.join(MANAGED_LIST)).unwrap()).unwrap();
-        assert_eq!(list, ["com.apple.passwordmanager"]);
+        assert!(list.contains("com.apple.passwordmanager"));
 
         fs::remove_file(manifest_path(&system, "com.apple.passwordmanager")).unwrap();
         sync_hosts(&user, &system);
@@ -221,10 +256,81 @@ mod tests {
         let dir = temp("exec");
         let file = dir.join("p");
         fs::write(&file, "").unwrap();
-        let manifest = json!({"name": "n", "type": "stdio", "allowed_origins": [], "path": file});
+        let manifest = json!({
+            "name": "n", "description": "Test host", "type": "stdio",
+            "allowed_origins": [], "path": file,
+        });
         assert!(!is_usable(&manifest, "n"));
         fs::set_permissions(&file, fs::Permissions::from_mode(0o700)).unwrap();
         assert!(is_usable(&manifest, "n"));
         let _ = fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn sync_preserves_unmanaged_paths_and_ownership_after_failures() {
+        use std::os::unix::fs::symlink;
+
+        let user = tempfile::tempdir().unwrap();
+        let system = tempfile::tempdir().unwrap();
+        let program = system.path().join("proxy");
+        fs::write(&program, "").unwrap();
+        fs::set_permissions(&program, fs::Permissions::from_mode(0o755)).unwrap();
+        let name = "com.apple.passwordmanager";
+        system_manifest_file(system.path(), name, &program);
+
+        let hosts = user.path().join("NativeMessagingHosts");
+        fs::create_dir(&hosts).unwrap();
+        let manifest = manifest_path(&hosts, name);
+        let managed = hosts.join(MANAGED_LIST);
+        let outside = user.path().join("outside.json");
+        fs::write(&outside, b"keep").unwrap();
+        symlink(&outside, manifest.with_extension("json.tmp")).unwrap();
+        symlink(&outside, managed.with_extension("json.tmp")).unwrap();
+        fs::write(&managed, r#"["../outside"]"#).unwrap();
+        sync_hosts(user.path(), system.path());
+        assert_eq!(fs::read(&outside).unwrap(), b"keep");
+        assert!(manifest.is_file());
+
+        fs::remove_file(&manifest).unwrap();
+        fs::create_dir(&manifest).unwrap();
+        sync_hosts(user.path(), system.path());
+        fs::remove_file(manifest_path(system.path(), name)).unwrap();
+        sync_hosts(user.path(), system.path());
+        let owners = || {
+            serde_json::from_slice::<BTreeSet<String>>(&fs::read(&managed).unwrap()).unwrap()
+        };
+        assert!(owners().contains(name));
+
+        fs::remove_dir(&manifest).unwrap();
+        sync_hosts(user.path(), system.path());
+        assert!(!owners().contains(name));
+    }
+
+    #[test]
+    fn chromium_manifest_fields_are_checked_before_copying_a_system_host() {
+        let user = tempfile::tempdir().unwrap();
+        let system = tempfile::tempdir().unwrap();
+        let program = system.path().join("proxy");
+        fs::write(&program, "").unwrap();
+        fs::set_permissions(&program, fs::Permissions::from_mode(0o755)).unwrap();
+        let name = "com.apple.passwordmanager";
+        system_manifest_file(system.path(), name, &program);
+        let source = manifest_path(system.path(), name);
+        let target = manifest_path(&user.path().join("NativeMessagingHosts"), name);
+        let valid: Value = serde_json::from_slice(&fs::read(&source).unwrap()).unwrap();
+        for (key, invalid) in [
+            ("description", Value::Null),
+            ("allowed_origins", json!([17])),
+            ("allowed_origins", json!(["<all_urls>"])),
+            ("allowed_origins", json!(["chrome-extension://*/"])),
+            ("allowed_origins", json!(["chrome-extension://abcd/"])),
+            ("supports_native_initiated_connections", json!("true")),
+        ] {
+            let mut value = valid.clone();
+            value[key] = invalid;
+            fs::write(&source, value.to_string()).unwrap();
+            sync_hosts(user.path(), system.path());
+            assert!(!target.exists(), "{value}");
+        }
     }
 }

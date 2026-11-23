@@ -11,7 +11,14 @@ use serde_json::{Map, Value, json};
 
 use super::extension_package::{is_extension_id, read_manifest};
 use super::{CallContext, EngineRoute, Route, dir_of, passing, string_arg};
+use crate::api::extensions::InspectUnpackedArgs;
 use crate::call::CallError;
+
+pub fn inspect_unpacked(args: &InspectUnpackedArgs, ui_locale: &str) -> Result<Value, CallError> {
+    let mut manifest = read_manifest(Path::new(&args.path), ui_locale)?;
+    manifest["path"] = json!(args.path);
+    Ok(manifest)
+}
 
 /// Calls that the host answers: the file panel, the install prompt and the action state of the tab.
 pub const HOST_CALLS: &[&str] = &[
@@ -26,6 +33,7 @@ pub fn route(call: &str) -> Option<Route> {
     let engine = |symbol, shape, reply, changed| {
         Some(Route::Engine(EngineRoute {
             symbol,
+            base_profile: true,
             shape,
             reply,
             changed,
@@ -112,19 +120,28 @@ fn configure_args(args: &Value) -> Result<Value, CallError> {
     let options = args["options"].as_object().ok_or(CallError::BadArguments)?;
     let mut out = Map::new();
     out.insert("id".into(), json!(string_arg(args, "id")?));
-    for key in [
-        "pinned",
-        "incognito",
-        "fileAccess",
-        "userScripts",
-        "siteAccess",
-    ] {
+    for key in ["pinned", "incognito", "fileAccess", "userScripts", "siteAccess"] {
         if let Some(value) = options.get(key).filter(|v| !v.is_null()) {
+            let valid = if key == "siteAccess" {
+                matches!(
+                    value.as_str(),
+                    Some("ON_CLICK" | "ON_SPECIFIC_SITES" | "ON_ALL_SITES")
+                )
+            } else {
+                value.is_boolean()
+            };
+            if !valid {
+                return Err(CallError::BadArguments);
+            }
             out.insert(key.into(), value.clone());
         }
     }
-    if let Some(index) = options.get("pinnedIndex").and_then(Value::as_f64) {
-        out.insert("pinnedIndex".into(), json!(index as i64));
+    if let Some(value) = options.get("pinnedIndex").filter(|v| !v.is_null()) {
+        let index = value.as_f64().ok_or(CallError::BadArguments)?.trunc();
+        if !(f64::from(i32::MIN)..=f64::from(i32::MAX)).contains(&index) {
+            return Err(CallError::BadArguments);
+        }
+        out.insert("pinnedIndex".into(), json!(index as i32));
     }
     Ok(Value::Object(out))
 }
@@ -172,7 +189,9 @@ fn list_item(info: &Map<String, Value>, ctx: &CallContext) -> Value {
             info.get("version")?.as_str()?,
         )
     });
-    let manifest = folder.map_or(Value::Null, |f| read_manifest(&f, &ctx.ui_locale));
+    let manifest = folder
+        .and_then(|f| read_manifest(&f, &ctx.ui_locale).ok())
+        .unwrap_or(Value::Null);
     for key in [
         "popup",
         "actionTitle",
@@ -232,6 +251,40 @@ mod tests {
             configure_args(&json!({"id": "x"})),
             Err(CallError::BadArguments)
         );
+        for (key, value) in [
+            ("pinned", json!(0)),
+            ("incognito", json!("true")),
+            ("fileAccess", json!("false")),
+            ("userScripts", json!([])),
+            ("siteAccess", json!(false)),
+            ("siteAccess", json!("unknown")),
+            ("pinnedIndex", json!("1")),
+            ("pinnedIndex", json!(2147483648_i64)),
+            ("pinnedIndex", json!(-2147483649_i64)),
+        ] {
+            let mut args = json!({"id": "x", "options": {}});
+            args["options"][key] = value;
+            assert_eq!(configure_args(&args), Err(CallError::BadArguments), "{args}");
+        }
+    }
+
+    #[test]
+    fn inspection_returns_a_typed_package_or_a_call_error() {
+        use crate::api::{Call, extensions::InspectUnpacked};
+
+        let dir = tempfile::tempdir().unwrap();
+        let args = InspectUnpackedArgs {
+            path: dir.path().to_str().unwrap().to_owned(),
+        };
+        assert!(matches!(
+            inspect_unpacked(&args, "en"),
+            Err(CallError::Engine(_))
+        ));
+        std::fs::write(dir.path().join("manifest.json"), "{name: 'Example'}").unwrap();
+        let value = inspect_unpacked(&args, "en").unwrap();
+        let package: <InspectUnpacked as Call>::Reply = serde_json::from_value(value).unwrap();
+        assert_eq!(package.path, args.path);
+        assert_eq!(package.name, "Example");
     }
 
     #[test]

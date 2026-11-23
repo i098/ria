@@ -51,8 +51,31 @@ mod tests {
     use super::*;
 
     #[test]
-    fn each_call_of_the_api_file_has_a_host_route() {
-        super::super::assert_routes_cover("webView", include_str!("../../api/web_view.rs"));
+    fn web_view_calls_go_to_the_host() {
+        use crate::api::{Call, web_view::*};
+
+        for name in [
+            SetDisplayMediaPicker::NAME,
+            SetPeekModifier::NAME,
+            SetSplitLinkModifier::NAME,
+            SetPeekOtherSiteTabs::NAME,
+            SetSelectionPopover::NAME,
+            SetBlockAutoplayEverywhere::NAME,
+            SetCommandScrollZoom::NAME,
+            SetLittleArdiaOpensNewTabLinks::NAME,
+            SetPopupsOpenAsTabs::NAME,
+            SetAutoPictureInPicture::NAME,
+            SetVideoUpscaling::NAME,
+            SetVideoUpscalingTestConditions::NAME,
+            VideoUpscalingState::NAME,
+            TakeContentDrift::NAME,
+            TakeFirstPaintHolds::NAME,
+        ] {
+            assert!(
+                matches!(super::super::route(name, false), Some(Route::Host)),
+                "{name}"
+            );
+        }
     }
 
     #[test]

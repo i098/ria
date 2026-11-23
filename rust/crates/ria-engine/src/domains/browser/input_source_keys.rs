@@ -36,8 +36,9 @@ mod tests {
     #[test]
     fn counts_consumed_keys_and_resets_on_take() {
         take_web_kit_tab_keys();
-        assert!(is_input_source_key(KEY_CODE_EISU) && is_input_source_key(KEY_CODE_KANA));
-        assert!(!is_input_source_key(0));
+        assert!(is_input_source_key(0x66));
+        assert!(is_input_source_key(0x68));
+        assert!(!is_input_source_key(0x67));
         note_web_kit_tab_key();
         note_web_kit_tab_key();
         assert_eq!(take_web_kit_tab_keys(), 2);

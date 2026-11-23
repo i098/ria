@@ -1,9 +1,6 @@
 // Ria original, no Ardia source.
 
-//! Small text helpers that the extension package code needs: SHA-256, base64 and a JSON5 subset.
-//! They stay local so the crate takes no new dependency for 3 short functions.
-
-use serde_json::Value;
+//! SHA-256 and Base64 helpers for extension packages.
 
 const K: [u32; 64] = [
     0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
@@ -111,60 +108,6 @@ pub fn base64_decode_lenient(text: &str) -> Vec<u8> {
     out
 }
 
-/// Parses JSON with `//` and `/* */` comments and trailing commas.
-// shortcut: the rest of JSON5 (single quotes, bare keys, hex numbers) is not read; add a parser when a manifest needs it.
-pub fn parse_json5_subset(text: &str) -> Option<Value> {
-    let text = text.strip_prefix('\u{feff}').unwrap_or(text);
-    let chars: Vec<char> = text.chars().collect();
-    let mut out = String::with_capacity(text.len());
-    let mut i = 0;
-    while i < chars.len() {
-        match chars[i] {
-            '"' => {
-                out.push('"');
-                i += 1;
-                while i < chars.len() {
-                    out.push(chars[i]);
-                    match chars[i] {
-                        '\\' if i + 1 < chars.len() => {
-                            out.push(chars[i + 1]);
-                            i += 1;
-                        }
-                        '"' => break,
-                        _ => {}
-                    }
-                    i += 1;
-                }
-                i += 1;
-            }
-            '/' if chars.get(i + 1) == Some(&'/') => {
-                while i < chars.len() && chars[i] != '\n' {
-                    i += 1;
-                }
-            }
-            '/' if chars.get(i + 1) == Some(&'*') => {
-                i += 2;
-                while i < chars.len() && !(chars[i] == '*' && chars.get(i + 1) == Some(&'/')) {
-                    i += 1;
-                }
-                i += 2;
-            }
-            ',' => {
-                let next = chars[i + 1..].iter().find(|c| !c.is_whitespace());
-                if !matches!(next, Some('}' | ']')) {
-                    out.push(',');
-                }
-                i += 1;
-            }
-            c => {
-                out.push(c);
-                i += 1;
-            }
-        }
-    }
-    serde_json::from_str(&out).ok()
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -188,19 +131,19 @@ mod tests {
     }
 
     #[test]
-    fn base64_round_trips_and_skips_unknown_bytes() {
-        for data in [&b""[..], b"a", b"ab", b"abc", b"abcd", &[0xff, 0xfe, 0x00]] {
-            assert_eq!(base64_decode_lenient(&base64_encode(data)), data);
+    fn base64_matches_rfc4648_vectors_and_ignores_whitespace() {
+        for (plain, encoded) in [
+            ("", ""),
+            ("f", "Zg=="),
+            ("fo", "Zm8="),
+            ("foo", "Zm9v"),
+            ("foob", "Zm9vYg=="),
+            ("fooba", "Zm9vYmE="),
+            ("foobar", "Zm9vYmFy"),
+        ] {
+            assert_eq!(base64_encode(plain.as_bytes()), encoded);
+            assert_eq!(base64_decode_lenient(encoded), plain.as_bytes());
         }
-        assert_eq!(base64_encode(b"ab"), "YWI=");
-        assert_eq!(base64_decode_lenient("YW\nJj"), b"abc");
-    }
-
-    #[test]
-    fn json5_subset_drops_comments_and_trailing_commas() {
-        let v =
-            parse_json5_subset("{ // c\n \"a\": [1, 2,], /* x */ \"b\": \"//no,]\", }").unwrap();
-        assert_eq!(v["a"], serde_json::json!([1, 2]));
-        assert_eq!(v["b"], "//no,]");
+        assert_eq!(base64_decode_lenient("Zm\n8="), b"fo");
     }
 }

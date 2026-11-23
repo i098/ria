@@ -7,27 +7,22 @@
 use std::collections::{BTreeMap, BTreeSet};
 
 use serde_json::{Map, Value, json};
+use unicode_segmentation::UnicodeSegmentation;
 
 /// `s` cut at the start of the character that holds UTF-16 unit `max` (`rangeOfComposedCharacterSequenceAtIndex:`).
 /// A string of `max` units or fewer stays whole.
-// shortcut: a character is a code point plus the combining marks U+0300..U+036F, U+200D and U+FE0F, not a full grapheme cluster; use a segmentation crate when other scripts need it.
 fn truncate_utf16(s: &str, max: usize) -> &str {
     if s.encode_utf16().count() <= max {
         return s;
     }
     let mut units = 0;
-    let mut cut = 0;
-    for (i, c) in s.char_indices() {
-        let joins = matches!(c, '\u{300}'..='\u{36f}' | '\u{200d}' | '\u{fe0f}');
-        if !joins {
-            cut = i;
-        }
-        units += c.len_utf16();
+    for (i, grapheme) in s.grapheme_indices(true) {
+        units += grapheme.encode_utf16().count();
         if units > max {
-            break;
+            return &s[..i];
         }
     }
-    &s[..cut]
+    s
 }
 
 fn text(d: &Map<String, Value>, key: &str, max: usize) -> Option<String> {
@@ -197,5 +192,8 @@ mod tests {
         assert_eq!(truncate_utf16("ab\u{1f600}", 4), "ab\u{1f600}");
         assert_eq!(truncate_utf16("ae\u{301}x", 2), "a");
         assert_eq!(truncate_utf16("ae\u{301}xy", 3), "ae\u{301}");
+        assert_eq!(truncate_utf16("ab👍🏽x", 4), "ab");
+        assert_eq!(truncate_utf16("ab👩‍💻x", 5), "ab");
+        assert_eq!(truncate_utf16("ab🇯🇵x", 4), "ab");
     }
 }

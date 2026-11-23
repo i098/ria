@@ -3,8 +3,7 @@
 // This file is a Rust port of that file, with changes.
 
 //! The `tabs` domain. `lastTabPolicy` goes to the engine; the host answers the other calls.
-//! The test instance calls (`devPictureInPictureAction`, `devPagePhase`, `devClosePage`) are in the list too: the host
-//! refuses them when the instance is not a test instance (`LaunchConfig.shared.testInstance`).
+//! The host answers the three test instance calls only when they are registered for a test instance.
 
 use super::{Route, passing};
 
@@ -43,17 +42,14 @@ pub const HOST_FUNCTIONS: &[&str] = &[
     "discardOffered",
 ];
 
-pub fn route(call: &str) -> Option<Route> {
+pub fn route(call: &str, test_instance: bool) -> Option<Route> {
     match call {
         "lastTabPolicy" => Some(passing("ac_tabs_last_tab_policy")),
-        c if HOST_CALLS.contains(&c) || TEST_INSTANCE_CALLS.contains(&c) => Some(Route::Host),
+        c if HOST_CALLS.contains(&c) || (test_instance && TEST_INSTANCE_CALLS.contains(&c)) => {
+            Some(Route::Host)
+        }
         _ => None,
     }
-}
-
-/// Whether the call is answered only when the instance is a test instance.
-pub fn is_test_instance_call(call: &str) -> bool {
-    TEST_INSTANCE_CALLS.contains(&call)
 }
 
 #[cfg(test)]
@@ -61,18 +57,43 @@ mod tests {
     use super::*;
 
     #[test]
-    fn each_call_of_the_api_file_has_a_route() {
-        super::super::assert_routes_cover("tabs", include_str!("../../api/tabs.rs"));
+    fn tabs_calls_go_to_the_host_except_for_last_tab_policy() {
+        use super::super::route;
+        use crate::api::{Call, tabs::*};
+
+        for name in [
+            RouteLinkTabs::NAME,
+            StripCommand::NAME,
+            Strips::NAME,
+            ReportCommits::NAME,
+            DevBrowserId::NAME,
+            DevEvents::NAME,
+            DevWindowNumber::NAME,
+            DevFocusPage::NAME,
+            DevPictureInPicture::NAME,
+            DevPostPeekMouseUp::NAME,
+            DevScrollZoom::NAME,
+        ] {
+            assert!(matches!(route(name, false), Some(Route::Host)), "{name}");
+        }
+        let Some(Route::Engine(policy)) = route(LastTabPolicy::NAME, false) else {
+            panic!("lastTabPolicy is an engine call");
+        };
+        assert_eq!(policy.symbol, "ac_tabs_last_tab_policy");
     }
 
     #[test]
-    fn last_tab_policy_passes_to_its_symbol_and_the_strip_topic_keeps_both_names() {
-        let Some(Route::Engine(route)) = route("lastTabPolicy") else {
-            panic!("lastTabPolicy is an engine call");
-        };
-        assert_eq!(route.symbol, "ac_tabs_last_tab_policy");
-        assert!(is_test_instance_call("devClosePage") && !is_test_instance_call("strips"));
-        assert_eq!(super::super::event_name("tabs.strip"), Some("tabs.strips"));
-        assert_eq!(super::super::event_name("tabs.strips"), None);
+    fn test_instance_calls_are_not_registered_in_normal_instances() {
+        use super::super::route;
+        use crate::api::{Call, tabs::*};
+
+        for name in [
+            DevPictureInPictureAction::NAME,
+            DevPagePhase::NAME,
+            DevClosePage::NAME,
+        ] {
+            assert!(route(name, false).is_none(), "{name}");
+            assert!(matches!(route(name, true), Some(Route::Host)), "{name}");
+        }
     }
 }

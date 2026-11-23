@@ -38,6 +38,7 @@ pub enum Route {
 /// A call that goes to an engine symbol.
 pub struct EngineRoute {
     pub symbol: &'static str,
+    base_profile: bool,
     /// The arguments of the symbol from the arguments of the call (without `profile`).
     pub shape: fn(&Value) -> Result<Value, CallError>,
     /// The reply of the call from the reply of the symbol.
@@ -52,7 +53,7 @@ pub struct EngineRoute {
 pub struct CallContext {
     /// The name of the original (not private) profile, for events.
     pub profile_name: String,
-    /// The folder of the profile, as `Engine::call` takes it.
+    /// The folder of the original profile, as `Engine::call` takes it.
     pub profile_dir: String,
     pub private: bool,
     /// The first preferred language of the app, for extension locale files.
@@ -62,50 +63,45 @@ pub struct CallContext {
 /// Sends an event to the handlers of the app (`ArdiaEvents emit:` of Ardia).
 pub type Emit = Rc<dyn Fn(&str, Value)>;
 
-/// The route of a call, for example `extensions.list`. `None` when the name is not a call of these domains.
-pub fn route(name: &str) -> Option<Route> {
+/// The route of a call, or `None` if it is not registered for this instance.
+pub fn route(name: &str, test_instance: bool) -> Option<Route> {
     let (domain, call) = name.split_once('.')?;
     match domain {
         "extensions" => extensions::route(call),
         "media" => media::route(call),
-        "tabs" => tabs::route(call),
+        "tabs" => tabs::route(call, test_instance),
         "webView" => web_view::route(call),
         "windows" => windows::route(call),
         _ => None,
     }
 }
 
-/// The name in `api.ts` of an engine event topic that these domains handle. The C name `tabs.strip` is `tabs.strips`.
-pub fn event_name(topic: &str) -> Option<&'static str> {
-    match topic {
-        "tabs.strip" => Some("tabs.strips"),
-        _ => None,
-    }
-}
-
 /// Runs an engine route: shapes the arguments, calls the symbol, shapes the reply, and emits `extensions.changed`.
-/// `completion` runs on a drain, once. When the arguments do not fit the call, it returns the error and does not run
-/// `completion`.
+/// `completion` runs once: immediately for invalid arguments, or on a drain after dispatch.
 pub fn call_engine(
     engine: &Engine,
     route: &EngineRoute,
     ctx: &CallContext,
-    args: &Value,
+    args: Value,
     emit: Emit,
     completion: impl FnOnce(CallResult) + 'static,
-) -> Result<(), CallError> {
-    let shaped = (route.shape)(args)?;
+) {
+    let shaped = match (route.shape)(&args) {
+        Ok(shaped) => shaped,
+        Err(error) => return completion(Err(error)),
+    };
     let (reply_fn, changed_fn) = (route.reply, route.changed);
-    let (ctx, args) = (ctx.clone(), args.clone());
-    let profile_dir = ctx.profile_dir.clone();
+    let profile_dir = ctx.profile_dir.as_str();
+    let private = ctx.private && !route.base_profile;
+    let ctx = ctx.clone();
     engine.call(
         route.symbol,
-        &profile_dir,
-        ctx.private,
+        profile_dir,
+        private,
         shaped,
         move |result| {
             let result = result.and_then(|reply| {
-                if let Some((id, event)) = changed_fn(&args, &reply) {
+                if let Some((id, event)) = changed_fn(&args, &reply).filter(|(id, _)| !id.is_empty()) {
                     emit(
                         "extensions.changed",
                         serde_json::json!({"profile": ctx.profile_name, "id": id, "event": event}),
@@ -116,13 +112,13 @@ pub fn call_engine(
             completion(result)
         },
     );
-    Ok(())
 }
 
 /// An engine route that passes its arguments and its reply as they are.
 pub(crate) const fn passing(symbol: &'static str) -> Route {
     Route::Engine(EngineRoute {
         symbol,
+        base_profile: false,
         shape: |args| Ok(args.clone()),
         reply: |reply, _| Ok(reply),
         changed: |_, _| None,
@@ -140,20 +136,79 @@ pub(crate) fn dir_of(ctx: &CallContext) -> &Path {
     Path::new(&ctx.profile_dir)
 }
 
-/// Each call of `domain` in the generated API file `api_source` has a route, and each route name is in the file.
 #[cfg(test)]
-pub(crate) fn assert_routes_cover(domain: &str, api_source: &str) {
-    let marker = format!("const NAME: &'static str = \"{domain}.");
-    let names: Vec<&str> = api_source
-        .lines()
-        .filter_map(|l| l.trim().strip_prefix(&marker)?.strip_suffix("\";"))
-        .collect();
-    assert!(!names.is_empty(), "no call of {domain} in the API file");
-    for name in names {
-        assert!(
-            route(&format!("{domain}.{name}")).is_some(),
-            "{domain}.{name} has no route"
-        );
+mod tests {
+    use super::*;
+    use crate::api::{Call, extensions::*};
+    use crate::call::ActionQueue;
+    use ria_engine_sys::ReplyFn;
+    use std::cell::RefCell;
+    use std::ffi::{CStr, c_char, c_void};
+
+    thread_local! {
+        static WIRED: RefCell<Option<(String, Value)>> = const { RefCell::new(None) };
     }
-    assert!(route(&format!("{domain}.noSuchCall")).is_none());
+
+    unsafe extern "C" fn capture(
+        profile: *const c_char,
+        args: *const c_char,
+        reply: ReplyFn,
+        context: *mut c_void,
+    ) {
+        // SAFETY: Engine::call keeps the strings and reply context live for this call.
+        unsafe {
+            let profile = CStr::from_ptr(profile).to_string_lossy().into_owned();
+            let args = serde_json::from_slice(CStr::from_ptr(args).to_bytes()).ok();
+            WIRED.set(args.map(|args| (profile, args)));
+            reply(context, c"{\"id\":\"ext\",\"extensions\":[]}".as_ptr());
+        }
+    }
+
+    #[test]
+    fn private_extension_calls_use_the_service_or_bridge_profile() {
+        use serde_json::json;
+
+        let queue = ActionQueue::new();
+        let engine = Engine::with(queue.clone(), |_| Some(capture), |_, _| {});
+        engine.did_start();
+        let ctx = CallContext {
+            profile_name: "base".into(),
+            profile_dir: "/profiles/base".into(),
+            private: true,
+            ui_locale: "en".into(),
+        };
+        for (name, args, expected_private) in [
+            (List::NAME, json!({}), false),
+            (Install::NAME, json!({"path": "/ext"}), false),
+            (InstallCrx::NAME, json!({"path": "/ext.crx"}), false),
+            (SetEnabled::NAME, json!({"id": "ext", "enabled": true}), false),
+            (Uninstall::NAME, json!({"id": "ext"}), false),
+            (Reload::NAME, json!({"id": "ext"}), false),
+            (
+                Configure::NAME,
+                json!({"id": "ext", "options": {"fileAccess": true}}),
+                false,
+            ),
+            (WatchActions::NAME, json!({}), true),
+            (SyncState::NAME, json!({}), true),
+            (SyncApply::NAME, json!({}), true),
+            (LoadHealth::NAME, json!({}), true),
+        ] {
+            let Some(Route::Engine(route)) = route(name, false) else {
+                panic!("{name} does not have an engine route");
+            };
+            call_engine(&engine, &route, &ctx, args, Rc::new(|_, _| {}), |result| {
+                assert!(result.is_ok(), "{result:?}");
+            });
+            let (profile, wired) = WIRED.take().expect("engine did not receive arguments");
+            assert_eq!(profile, "/profiles/base");
+            assert_eq!(
+                wired.get("offTheRecord"),
+                expected_private.then_some(&Value::Bool(true)),
+                "{name}"
+            );
+            assert_eq!(queue.drain(), 1);
+        }
+        engine.shutdown();
+    }
 }
