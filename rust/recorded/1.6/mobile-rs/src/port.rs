@@ -1,5 +1,6 @@
 // Ria original, no Ardia source.
 
+use ria_core::errors::{ArdiaError, ardia_error};
 use ria_core::identity::mobile::{Mobile, MobileSearch, MobileSuggestOptions};
 use ria_core::omnibox::suggestion::{
     BookmarkRow, HistoryRow, SourceTab, Suggestion, SuggestionSource,
@@ -120,6 +121,14 @@ fn call(mobile: &mut Mobile, step: &Value) -> Result<Value, &'static str> {
     let arg = &step[1];
     let extra = &step[2];
     Ok(match text(&step[0]) {
+        "ardiaError" => {
+            let message = text(arg);
+            let error = match extra.as_str() {
+                Some(code) => ardia_error(&ArdiaError::new(code, message)),
+                None => ardia_error(&std::io::Error::other(message.to_owned())),
+            };
+            json!({"name":"ArdiaError", "code":error.code, "message":error.message})
+        }
         "mobileLoadBangDocument" => json!(mobile.load_bang_document(text(arg))),
         "mobileBangDocument" => json!(mobile.make_bang_document(text(arg), extra.as_str())),
         "mobileSetSources" => json!(mobile.set_sources(source(arg))?),

@@ -1,12 +1,13 @@
 #!/bin/sh
-# Builds `.review-ardia/` in each crate folder of slice 1.4: the TypeScript original that
-# `rust-anything fuzz` runs (the `root` of each `rust-anything.json`). Usage: review-root.sh <ardia checkout at 551d3c13c>
 set -eu
-ardia=${1:?usage: review-root.sh <ardia checkout>}
-for dir in "$(dirname "$0")"/*-rs; do
-  rm -rf "$dir/.review-ardia"
-  mkdir -p "$dir/.review-ardia/packages"
-  cp -R "$ardia/packages/core" "$dir/.review-ardia/packages/"
-  # The harness of `bangs-harness-rs` is not part of Ardia.
-  if [ -f "$dir/bangs.harness.ts" ]; then cp "$dir/bangs.harness.ts" "$dir/.review-ardia/packages/core/src/"; fi
-done
+recorded=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+ardia="$recorded/../../ardia"
+root="$recorded/.review-ardia"
+if [ ! -f "$ardia/packages/core/package.json" ]; then
+  printf '%s\n' 'Run git submodule update --init --checkout ardia from the repository root.' >&2
+  exit 1
+fi
+rm -rf "$root"
+mkdir -p "$root/packages"
+cp -R "$ardia/packages/core" "$root/packages/"
+cp "$recorded"/*/*-rs/*.harness.ts "$recorded"/*/*.harness.ts "$root/packages/core/src/"

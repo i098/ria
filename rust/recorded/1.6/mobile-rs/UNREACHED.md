@@ -1,6 +1,6 @@
 # Lines that `mobile-rs` does not reach
 
-`rust-anything gate` prints: the recorded cases ran 12808 of 14093 lines (90 %). The lines below are the rest.
+The recorded cases ran 12822 of 14100 lines (91 %). The lines below are the rest.
 Lines of a file that belongs to another unit count as covered by that unit, named in the table. Other lines are lines that no input can reach, with the reason.
 
 | File (`packages/core/src/`) | Lines | Why |
@@ -13,7 +13,6 @@ Lines of a file that belongs to another unit count as covered by that unit, name
 | `candidatePool.ts` | 55-64, 82-85, 125-136, 155-167, 171-183 | Covered by unit `candidate-pool-rs` (slice 1.3); its coverage reaches these lines. |
 | `cleanUrl.ts` | 40-41, 62-63, 77-78 | Covered by unit `cleanurl-rs` (slice 1.2); its coverage reaches these lines. |
 | `engines.ts` | 105-115, 122-123, 166-176, 179-180 | Covered by unit `engines-rs` (slice 1.4); its coverage reaches these lines. |
-| `errors.ts` | 4-8, 12-13 | No input of any crate reaches these lines. `ArdiaError` and `ardiaError` (`errors.ts:1-13`) are re-exported by `index.ts:7`, but none of the 13 `mobile` exports constructs or calls them. The callers are outside `packages/core`: `apps/browser/src/state/history/engineSync.ts`, `apps/browser/src/state/import/fileImports.ts`, `apps/browser/src/state/import/runImport.ts`, `packages/ardiacore/src/WebView.tsx`, `packages/ardiacore/src/engine/call.ts`, `packages/import/src/index.ts`. No unit of phase 1 has a crate for `errors.ts`, so no other unit covers it. `ria_core::errors` ports it. |
 | `extensionRows.ts` | 20-27 | Covered by unit `extension-rows-rs` (slice 1.4); its coverage reaches these lines. |
 | `fuzzy.ts` | 11-19, 22-36, 40-43, 52-57, 62-76, 85-95 | Covered by unit `fuzzy-rs` (slice 1.1); its coverage reaches these lines. |
 | `idn.ts` | 99-100 | No input of any crate reaches these lines. The `catch` of `scx` (`idn.ts:96-100`) runs only when the JavaScript engine rejects `\p{Script_Extensions=<name>}`. Node v26.12.1 accepts all 45 names in `SCRIPTS` (`idn.ts:88-92`), so no input reaches lines 99-100. |

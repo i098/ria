@@ -1,6 +1,6 @@
 {
   "schema": "rust-anything/bridge@1",
-  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-6-identity/repo",
+  "root": "../../.review-ardia",
   "unit": "packages/core/src/ingestKeys.ts",
   "language": "ts",
   "kind": "napi",

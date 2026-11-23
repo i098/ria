@@ -1,10 +1,10 @@
 {
   "unit": "packages/core/src/mobile.harness.ts",
   "files": 1,
-  "fingerprint": "9b5a0253a9616b68",
+  "fingerprint": "ec1adc494d4b2dde",
   "coverage": {
-    "lines": 14093,
-    "reached": 12808,
+    "lines": 14100,
+    "reached": 12822,
     "files": [
       {
         "file": "packages/core/src/anonymousIdentity.ts",
@@ -57,8 +57,8 @@
       {
         "file": "packages/core/src/errors.ts",
         "lines": 12,
-        "reached": 5,
-        "missed": "4-8, 12-13"
+        "reached": 12,
+        "missed": ""
       },
       {
         "file": "packages/core/src/extensionRows.ts",
@@ -92,8 +92,8 @@
       },
       {
         "file": "packages/core/src/mobile.harness.ts",
-        "lines": 27,
-        "reached": 27,
+        "lines": 34,
+        "reached": 34,
         "missed": ""
       },
       {

@@ -271,17 +271,14 @@ fn float_value(x: f64) -> Value {
 }
 
 fn value_float(v: &Value) -> Option<f64> {
-    match v {
-        Value::Number(n) => n.as_f64(),
-        Value::Object(o) => match o.get("$num")?.as_str()? {
-            "NaN" => Some(f64::NAN),
-            "Infinity" => Some(f64::INFINITY),
-            "-Infinity" => Some(f64::NEG_INFINITY),
-            "-0" => Some(-0.0),
-            _ => None,
-        },
-        _ => None,
+    crate::js::as_number(v)
+}
+
+fn input_key(mut key: String) -> String {
+    if key.starts_with('$') {
+        key.insert(0, '$');
     }
+    key
 }
 
 /// Reads a value of `schema` as JSON: null for nil, `{"$num": ...}` for NaN and infinities.
@@ -312,7 +309,7 @@ pub fn read_value(r: &mut Reader, schema: &Schema) -> Result<Value, String> {
                 let mut out = Map::new();
                 for _ in 0..n {
                     let key = r.string()?;
-                    out.insert(key, read_value(r, item)?);
+                    out.insert(input_key(key), read_value(r, item)?);
                 }
                 Value::Object(out)
             }
@@ -352,7 +349,7 @@ pub fn read_value(r: &mut Reader, schema: &Schema) -> Result<Value, String> {
                     }
                     None => {
                         let key = r.string16()?;
-                        out.insert(key, read_dyn(r)?);
+                        out.insert(input_key(key), read_dyn(r)?);
                     }
                 }
             }
@@ -366,7 +363,7 @@ pub fn read_value(r: &mut Reader, schema: &Schema) -> Result<Value, String> {
                 let mut out = Map::new();
                 for _ in 0..n {
                     let key = r.string16()?;
-                    out.insert(key, read_value(r, item)?);
+                    out.insert(input_key(key), read_value(r, item)?);
                 }
                 Value::Object(out)
             }
@@ -429,7 +426,7 @@ pub fn read_dyn(r: &mut Reader) -> Result<Value, String> {
             let mut out = Map::new();
             for _ in 0..n {
                 let key = String::from_utf16_lossy(&units(r)?);
-                out.insert(key, read_dyn(r)?);
+                out.insert(input_key(key), read_dyn(r)?);
             }
             Value::Object(out)
         }
