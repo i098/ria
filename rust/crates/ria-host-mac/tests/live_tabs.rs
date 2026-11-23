@@ -357,14 +357,7 @@ mod mac {
         mut registry: TabRegistry,
         pass: bool,
     ) {
-        let scopes = [StripWindow {
-            window: &window,
-            profile: &profile,
-            profile_name: "Default",
-            app_window: Some("fixture"),
-            host_changes: false,
-            standalone: false,
-        }];
+        let scopes = [fixture_strip(&window, &profile)];
         let mut strips = TabStrips::default();
         let strip_id = window.chrome_window_id_for_profile(&profile);
         let strip = Number::from(strip_id);
@@ -391,10 +384,10 @@ mod mac {
             let weak = weak.clone();
             main_queue::post(Box::new(move || _ = weak.upgrade().map(|q| q.drain())));
         });
-        let call = CallEngine::new(queue);
+        let call = CallEngine::new(queue.clone());
         call.did_start();
         let emitted = Rc::new(RefCell::new(Vec::new()));
-        let engine_pinned = Rc::new(Cell::new(false));
+        let engine_pinned = Rc::new(Cell::new(None));
         let tab_id = i64::from(tab.tab_id());
         let profile_path = profile.path().to_string();
         let state = Rc::new(RefCell::new((strips, registry)));
@@ -408,22 +401,14 @@ mod mac {
                 if event["window"].as_i64() != Some(i64::from(strip_id)) {
                     return;
                 }
-                if event["tabs"].as_array().is_some_and(|rows| {
-                    rows.iter().any(|row| {
-                        row["tab"].as_i64() == Some(tab_id) && row["pinned"].as_bool() == Some(true)
-                    })
-                }) {
-                    engine_pinned.set(true);
+                if let Some(row) = event["tabs"]
+                    .as_array()
+                    .and_then(|rows| rows.iter().find(|row| row["tab"].as_i64() == Some(tab_id)))
+                {
+                    engine_pinned.set(row["pinned"].as_bool());
                 }
                 let (strips, registry) = &mut *state.borrow_mut();
-                let scope = StripWindow {
-                    window: &window,
-                    profile: &profile,
-                    profile_name: "Default",
-                    app_window: Some("fixture"),
-                    host_changes: false,
-                    standalone: false,
-                };
+                let scope = fixture_strip(&window, &profile);
                 if strips.observe_engine_strip(event) == Some(strip_id)
                     && let Some(tx) = strips.changed(&scope, registry, None)
                 {
@@ -442,18 +427,11 @@ mod mac {
                 call.call("ac_tabs_group", &profile_path, false, args, {
                     let call = call.clone();
                     move |reply| {
-                        let scope = StripWindow {
-                            window: &window,
-                            profile: &profile,
-                            profile_name: "Default",
-                            app_window: Some("fixture"),
-                            host_changes: false,
-                            standalone: false,
-                        };
-                        let (strips, registry) = &mut *state.borrow_mut();
+                        let scope = fixture_strip(&window, &profile);
                         let pass = pass
                             && reply.is_ok_and(|reply| {
                                 reply["group"].as_str().is_some_and(|group| {
+                                    let (strips, registry) = &mut *state.borrow_mut();
                                     let tx =
                                         strips.group_finished(command, &scope, registry, false);
                                     !group.is_empty()
@@ -464,16 +442,116 @@ mod mac {
                                             .any(|tx| matches_group(tx, None, strip, group))
                                 })
                             });
-                        engine_pinned.set(false);
-                        let pass = pass && check_adoption(&scope, &tab, strips, registry);
-                        main_queue::post(Box::new(move || {
+                        if !pass {
                             call.shutdown();
-                            shutdown(&window, &tab, pass && engine_pinned.get());
-                        }));
+                            return shutdown(&window, &tab, false);
+                        }
+                        window.open_tab(&NSString::from_str("about:blank"), &profile, false);
+                        check_engine_pins(
+                            queue,
+                            engine_pinned,
+                            &[(9.0, 1.0, true), (10.0, 0.5, false), (11.0, 1.0, true)],
+                            {
+                                let window = window.clone();
+                                let profile = profile.clone();
+                                let state = state.clone();
+                                move |command, pinned, expected| {
+                                    let (strips, registry) = &mut *state.borrow_mut();
+                                    check_arrange(
+                                        &fixture_strip(&window, &profile),
+                                        strips,
+                                        registry,
+                                        command,
+                                        pinned,
+                                        expected,
+                                    )
+                                }
+                            },
+                            move |pass| {
+                                let (strips, registry) = &mut *state.borrow_mut();
+                                let pass = pass
+                                    && check_adoption(
+                                        &fixture_strip(&window, &profile),
+                                        &tab,
+                                        strips,
+                                        registry,
+                                    );
+                                call.shutdown();
+                                shutdown(&window, &tab, pass);
+                            },
+                        );
                     }
                 });
             }
         });
+    }
+
+    fn fixture_strip<'a>(window: &'a Window, profile: &'a Profile) -> StripWindow<'a> {
+        StripWindow {
+            window,
+            profile,
+            profile_name: "Default",
+            app_window: Some("fixture"),
+            host_changes: false,
+            standalone: false,
+        }
+    }
+
+    fn check_engine_pins(
+        queue: Rc<ActionQueue>,
+        engine_pinned: Rc<Cell<Option<bool>>>,
+        steps: &'static [(f64, f64, bool)],
+        arrange: impl Fn(Number, Number, bool) -> bool + 'static,
+        finish: impl FnOnce(bool) + 'static,
+    ) {
+        let Some((&(command, pinned, expected), remaining)) = steps.split_first() else {
+            return finish(true);
+        };
+        engine_pinned.set(None);
+        if !arrange(Number(command), Number(pinned), expected) {
+            return finish(false);
+        }
+        let next_queue = queue.clone();
+        queue.push(Box::new(move || {
+            if engine_pinned.get() == Some(expected) {
+                check_engine_pins(next_queue, engine_pinned, remaining, arrange, finish);
+            } else {
+                finish(false);
+            }
+        }));
+    }
+
+    fn check_arrange(
+        source: &StripWindow<'_>,
+        strips: &mut TabStrips,
+        registry: &mut TabRegistry,
+        command: Number,
+        pinned: Number,
+        expected: bool,
+    ) -> bool {
+        let strip = Number::from(source.window.chrome_window_id_for_profile(source.profile));
+        let StripCommandResult::Done(arranged) = strips.command(
+            command,
+            TabStripCommand::Arrange {
+                strip,
+                keys: vec!["fixture".into()],
+                pinned,
+            },
+            std::slice::from_ref(source),
+            registry,
+        ) else {
+            return false;
+        };
+        arranged.cmd == Some(command)
+            && arranged.rejected.is_none()
+            && arranged.strips.iter().any(|state| {
+                state.strip == strip
+                    && state.tabs.iter().any(|row| {
+                        row.key.as_deref() == Some("fixture")
+                            && row.index == Number(0.0)
+                            && row.pinned == expected
+                    })
+            })
     }
 
     fn check_adoption(
@@ -483,37 +561,6 @@ mod mac {
         registry: &mut TabRegistry,
     ) -> bool {
         let strip_id = source.window.chrome_window_id_for_profile(source.profile);
-        source
-            .window
-            .open_tab(&NSString::from_str("about:blank"), source.profile, false);
-        for (command, pinned, expected) in [(9.0, 0.5, false), (10.0, 1.0, true)] {
-            let command = Number(command);
-            let StripCommandResult::Done(arranged) = strips.command(
-                command,
-                TabStripCommand::Arrange {
-                    strip: Number::from(strip_id),
-                    keys: vec!["fixture".into()],
-                    pinned: Number(pinned),
-                },
-                std::slice::from_ref(source),
-                registry,
-            ) else {
-                return false;
-            };
-            if arranged.cmd != Some(command)
-                || arranged.rejected.is_some()
-                || !arranged.strips.iter().any(|state| {
-                    state.strip == Number::from(strip_id)
-                        && state.tabs.iter().any(|row| {
-                            row.key.as_deref() == Some("fixture")
-                                && row.index == Number(0.0)
-                                && row.pinned == expected
-                        })
-                })
-            {
-                return false;
-            }
-        }
         let destination = fixture_window(source.profile);
         strips.activated(strip_id, tab);
         let observer = RemovalObserver::alloc().set_ivars(Cell::new(std::ptr::null()));
