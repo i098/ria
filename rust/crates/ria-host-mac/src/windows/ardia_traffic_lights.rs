@@ -3,19 +3,23 @@
 // This file is a Rust port of that file, with changes.
 
 use std::cell::{Cell, RefCell};
+use std::ptr;
 use std::rc::Rc;
+use std::sync::OnceLock;
 use std::time::Duration;
 
 use block2::RcBlock;
 use objc2::rc::{Retained, Weak};
-use objc2::runtime::{AnyObject, NSObjectProtocol, Sel};
-use objc2::{class, msg_send, sel};
+use objc2::runtime::{AnyClass, AnyObject, NSObjectProtocol, Sel};
+use objc2::{ffi, msg_send, sel};
 use objc2_app_kit::{
     NSAppearance, NSAppearanceNameAqua, NSAppearanceNameDarkAqua, NSColor, NSView, NSWindow,
     NSWindowButton, NSWindowDidExitFullScreenNotification, NSWindowDidResizeNotification,
     NSWindowStyleMask, NSWindowTabbingMode, NSWindowTitleVisibility,
 };
-use objc2_foundation::{NSArray, NSNotification, NSNotificationCenter, NSPoint, NSSize, ns_string};
+use objc2_foundation::{
+    NSArray, NSNotification, NSNotificationCenter, NSNumber, NSPoint, NSRect, NSSize, ns_string,
+};
 use ria_engine::call::main_queue;
 
 const LIGHTS_SETTLE: Duration = Duration::from_millis(50);
@@ -24,6 +28,11 @@ const BUTTONS: [NSWindowButton; 3] = [
     NSWindowButton::MiniaturizeButton,
     NSWindowButton::ZoomButton,
 ];
+static TITLEBAR_CENTER: u8 = 0;
+const RETAIN_NONATOMIC: usize = 1;
+
+type TitlebarFrame = unsafe extern "C-unwind" fn(&NSView, Sel) -> NSRect;
+static ORIGINAL_TITLEBAR_FRAME: OnceLock<TitlebarFrame> = OnceLock::new();
 
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Placement {
@@ -32,27 +41,17 @@ pub struct Placement {
 }
 
 impl Placement {
-    fn center(self, window_width: f64, size: NSSize, scale: f64) -> NSPoint {
+    fn center(self, window_width: f64, size: NSSize) -> NSPoint {
         match self.center {
-            Some(at) => NSPoint::new(
-                if self.trailing {
-                    window_width - at.x * scale
-                } else {
-                    at.x * scale
-                },
-                at.y * scale,
-            ),
-            None => NSPoint::new(
-                (18. + size.width / 2.) * scale,
-                (20. + size.height / 2.) * scale,
-            ),
+            Some(at) if self.trailing => NSPoint::new(window_width - at.x, at.y),
+            Some(at) => at,
+            None => NSPoint::new(18. + size.width / 2., 20. + size.height / 2.),
         }
     }
 }
 
 pub struct TrafficLights {
     window: Weak<NSWindow>,
-    scale: Cell<f64>,
     placement: Cell<Placement>,
     shown: Cell<Option<Placement>>,
     move_turn: Cell<u64>,
@@ -60,7 +59,7 @@ pub struct TrafficLights {
 }
 
 impl TrafficLights {
-    pub fn configure(window: &NSWindow, scale: f64) -> Rc<Self> {
+    pub fn configure(window: &NSWindow) -> Rc<Self> {
         let frame = window.frame();
         window.setStyleMask(window.styleMask() | NSWindowStyleMask::FullSizeContentView);
         if window.frame() != frame {
@@ -69,7 +68,7 @@ impl TrafficLights {
         window.setTitlebarAppearsTransparent(true);
         window.setTitleVisibility(NSWindowTitleVisibility::Hidden);
         window.setTitle(ns_string!("Ria"));
-        window.setContentMinSize(NSSize::new(500. * scale, 460. * scale));
+        window.setContentMinSize(NSSize::new(500., 460.));
         let provider = RcBlock::new(|appearance: std::ptr::NonNull<NSAppearance>| {
             // SAFETY: AppKit supplies the current appearance, and both names are AppKit constants.
             let dark = unsafe {
@@ -97,13 +96,12 @@ impl TrafficLights {
             window.setReleasedWhenClosed(false);
         }
         window.setTabbingMode(NSWindowTabbingMode::Disallowed);
-        Self::inset(window, scale)
+        Self::inset(window)
     }
 
-    pub fn inset(window: &NSWindow, scale: f64) -> Rc<Self> {
+    pub fn inset(window: &NSWindow) -> Rc<Self> {
         let lights = Rc::new(Self {
             window: Weak::from(window),
-            scale: Cell::new(scale),
             placement: Cell::default(),
             shown: Cell::default(),
             move_turn: Cell::default(),
@@ -141,14 +139,14 @@ impl TrafficLights {
         self.placement.get()
     }
 
-    pub fn set_scale(&self, scale: f64) {
-        if self.scale.replace(scale) != scale {
-            self.refit();
-        }
-    }
-
     pub fn set_placement(&self, placement: Placement) {
-        let changed = self.placement.replace(placement) != placement;
+        let previous = self.placement.replace(placement);
+        let changed = previous != placement;
+        if previous.center.map(|at| at.y) != placement.center.map(|at| at.y)
+            && let Some(window) = self.window.load()
+        {
+            set_titlebar_center(&window, placement);
+        }
         if self.shown.take().is_some() || changed {
             self.retile(true);
         }
@@ -168,10 +166,11 @@ impl TrafficLights {
         };
         let size = close.frame().size;
         let width = window.frame().size.width;
-        let scale = self.scale.get();
-        let laid_out = self.placement.get().center(width, size, scale);
-        let target = placement.center(width, size, scale);
+        let base = self.placement.get();
+        let laid_out = base.center(width, size);
+        let target = placement.center(width, size);
         if placement.trailing != current.trailing
+            || base.center.is_some() != placement.center.is_some()
             || laid_out.y != target.y
             || window.styleMask().contains(NSWindowStyleMask::FullScreen)
         {
@@ -201,9 +200,10 @@ impl TrafficLights {
 
     fn refit(&self) {
         if let Some(shown) = self.shown.take() {
-            self.placement.set(shown);
+            self.set_placement(shown);
+        } else {
+            self.retile(true);
         }
-        self.retile(true);
     }
 
     fn retile(&self, reset: bool) {
@@ -214,6 +214,9 @@ impl TrafficLights {
             return;
         };
         if reset {
+            if self.placement.get().center.is_some() {
+                install_titlebar_extension(frame.class());
+            }
             for name in [
                 sel!(_updateTitlebarContainerViewFrameIfNecessary),
                 sel!(_updateButtonPositions),
@@ -237,7 +240,7 @@ impl TrafficLights {
         let size = close_rect.size;
         let frame_size = frame.bounds().size;
         let placement = self.shown.get().unwrap_or_else(|| self.placement.get());
-        let at = placement.center(window.frame().size.width, size, self.scale.get());
+        let at = placement.center(window.frame().size.width, size);
         let target_x = at.x - size.width / 2.;
         let target_y = if frame.isFlipped() {
             at.y - size.height / 2.
@@ -263,6 +266,11 @@ impl TrafficLights {
 
 impl Drop for TrafficLights {
     fn drop(&mut self) {
+        if self.placement.get().center.is_some()
+            && let Some(window) = self.window.load()
+        {
+            set_titlebar_center(&window, Placement::default());
+        }
         let center = NSNotificationCenter::defaultCenter();
         for observer in self.observers.get_mut() {
             // SAFETY: These observer tokens came from this notification center.
@@ -271,6 +279,76 @@ impl Drop for TrafficLights {
             }
         }
     }
+}
+
+fn set_titlebar_center(window: &NSWindow, placement: Placement) {
+    let center = placement.center.map(|point| NSNumber::numberWithDouble(point.y));
+    unsafe {
+        ffi::objc_setAssociatedObject(
+            ptr::from_ref::<AnyObject>(window).cast_mut(),
+            ptr::from_ref(&TITLEBAR_CENTER).cast(),
+            center.as_deref().map_or(ptr::null_mut(), |point| {
+                ptr::from_ref::<AnyObject>(point).cast_mut()
+            }),
+            RETAIN_NONATOMIC,
+        );
+    }
+}
+
+fn install_titlebar_extension(class: &'static AnyClass) {
+    if ORIGINAL_TITLEBAR_FRAME.get().is_some() {
+        return;
+    }
+    let Some(method) = class.instance_method(sel!(_currentTitlebarContainerViewFrame)) else {
+        return;
+    };
+    unsafe {
+        let original = std::mem::transmute::<_, TitlebarFrame>(method.implementation());
+        if ORIGINAL_TITLEBAR_FRAME.set(original).is_ok() {
+            let replacement = std::mem::transmute::<TitlebarFrame, _>(extended_titlebar_frame);
+            let _ = ffi::method_setImplementation(method, replacement);
+        }
+    }
+}
+
+unsafe extern "C-unwind" fn extended_titlebar_frame(frame: &NSView, selector: Sel) -> NSRect {
+    let original = ORIGINAL_TITLEBAR_FRAME.get().expect("Titlebar implementation");
+    let mut titlebar = unsafe { original(frame, selector) };
+    let Some(window) = frame.window() else {
+        return titlebar;
+    };
+    if window.styleMask().contains(NSWindowStyleMask::FullScreen) {
+        return titlebar;
+    }
+    let center = unsafe {
+        ffi::objc_getAssociatedObject(
+            ptr::from_ref::<AnyObject>(&window),
+            ptr::from_ref(&TITLEBAR_CENTER).cast(),
+        )
+        .cast::<NSNumber>()
+        .as_ref()
+    };
+    let Some(center) = center else {
+        return titlebar;
+    };
+    let height = window
+        .standardWindowButton(NSWindowButton::CloseButton)
+        .map_or(14., |button| button.frame().size.height);
+    let reach = (center.doubleValue() + height / 2.).ceil();
+    let flipped = frame.isFlipped();
+    let bottom = if flipped {
+        titlebar.origin.y + titlebar.size.height
+    } else {
+        frame.bounds().size.height - titlebar.origin.y
+    };
+    let grow = reach - bottom;
+    if grow > 0. {
+        titlebar.size.height += grow;
+        if !flipped {
+            titlebar.origin.y -= grow;
+        }
+    }
+    titlebar
 }
 
 fn move_view(view: &NSView, together: &NSView, dx: f64, dy: f64) {
@@ -322,33 +400,4 @@ fn adjust_sharing(window: &NSWindow, frame: &NSView, dx: f64, dy: f64) {
 pub fn frame_view(window: &NSWindow) -> Option<Retained<NSView>> {
     // SAFETY: The view hierarchy is accessible on the main thread.
     unsafe { window.contentView()?.superview() }
-}
-
-pub fn frame_corner_radius(window: &NSWindow) -> Option<f64> {
-    let frame = frame_view(window)?;
-    if frame.respondsToSelector(sel!(roundedCornerRadius)) {
-        // SAFETY: NSThemeFrame's selector takes no arguments and returns a float.
-        let radius: f32 = unsafe { msg_send![&*frame, roundedCornerRadius] };
-        if radius.is_finite() && radius > 0. {
-            return Some(radius.into());
-        }
-    }
-    if frame.respondsToSelector(sel!(layer)) {
-        // SAFETY: The AppKit layer getter returns a nullable object, and CALayer supplies cornerRadius.
-        let layer: Option<Retained<AnyObject>> = unsafe { msg_send![&*frame, layer] };
-        if let Some(layer) =
-            layer.and_then(|layer| layer.downcast::<objc2::runtime::NSObject>().ok())
-            && layer.isKindOfClass(class!(CALayer))
-        {
-            let radius: f64 = unsafe { msg_send![&*layer, cornerRadius] };
-            if radius.is_finite() && radius > 0. {
-                return Some(radius);
-            }
-        }
-    }
-    None
-}
-
-pub fn window_corner_radius(window: &NSWindow) -> f64 {
-    frame_corner_radius(window).unwrap_or(19.)
 }

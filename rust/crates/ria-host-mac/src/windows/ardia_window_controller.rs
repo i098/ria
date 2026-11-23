@@ -8,11 +8,11 @@ use std::collections::HashMap;
 use std::rc::{Rc, Weak};
 use std::time::Duration;
 
-use block2::{DynBlock, RcBlock};
+use block2::RcBlock;
 use objc2::rc::{Retained, Weak as ObjcWeak};
-use objc2::runtime::{AnyObject, Bool, NSObject};
+use objc2::runtime::{AnyObject, NSObject};
 use objc2::{AnyThread, DefinedClass, MainThreadMarker, define_class, msg_send};
-use objc2_app_kit::{NSApplication, NSEvent, NSView, NSWindow, NSWindowWillCloseNotification};
+use objc2_app_kit::{NSApplication, NSEvent, NSWindow, NSWindowWillCloseNotification};
 use objc2_foundation::{
     NSComparisonResult, NSNotification, NSNotificationCenter, NSPoint, NSRect, NSSize, NSString,
     NSUUID,
@@ -39,13 +39,9 @@ pub struct Controller {
     pub core: Retained<Window>,
     pub fullscreen: Rc<FullScreen>,
     pub traffic_lights: Option<Rc<TrafficLights>>,
-    pub root: RefCell<Option<Retained<NSView>>>,
-    pub app_window_id: RefCell<Option<Retained<NSString>>>,
-    pub host_changes: Cell<usize>,
     kind: Cell<WindowKind>,
     token: Option<Retained<NSString>>,
     show_inactive: Cell<bool>,
-    chrome_active: RefCell<Option<ObjcWeak<Tab>>>,
     closing: RefCell<Vec<ObjcWeak<Tab>>>,
     profile: Option<ObjcWeak<Profile>>,
     mtm: MainThreadMarker,
@@ -127,11 +123,11 @@ impl Controllers {
     pub fn make_normal(self: &Rc<Self>) -> Rc<Controller> {
         self.make(WindowKind::Normal, None)
     }
-    pub fn make_chrome(self: &Rc<Self>, profile: &Profile) -> Rc<Controller> {
-        self.make(WindowKind::AwaitingApp, Some(profile))
+    pub fn make_chrome(self: &Rc<Self>) -> Rc<Controller> {
+        self.make(WindowKind::AwaitingApp, None)
     }
-    pub fn make_stray(self: &Rc<Self>, profile: &Profile) -> Rc<Controller> {
-        self.make(WindowKind::Stray, Some(profile))
+    pub fn make_stray(self: &Rc<Self>) -> Rc<Controller> {
+        self.make(WindowKind::Stray, None)
     }
 
     pub fn standalone(self: &Rc<Self>, profile: &Profile) -> Rc<Controller> {
@@ -187,15 +183,8 @@ impl Controllers {
         }
         let window = core.window();
         let token = (kind == WindowKind::AwaitingApp).then(|| NSUUID::UUID().UUIDString());
-        let traffic_lights = decorated.then(|| TrafficLights::configure(&window, 1.));
-        let fullscreen = FullScreen::new(
-            &core,
-            self.mtm,
-            self.background,
-            self.allow_occlusion,
-            |_| false,
-            || false,
-        );
+        let traffic_lights = decorated.then(|| TrafficLights::configure(&window));
+        let fullscreen = FullScreen::new(&core, self.mtm, self.background, self.allow_occlusion);
         let key = std::ptr::from_ref(&*window);
         let controller = Rc::new_cyclic(|weak: &Weak<Controller>| {
             let delegate = Delegate::new(weak.clone());
@@ -222,13 +211,9 @@ impl Controllers {
                 core,
                 fullscreen,
                 traffic_lights,
-                root: RefCell::default(),
-                app_window_id: RefCell::default(),
-                host_changes: Cell::default(),
                 kind: Cell::new(kind),
                 token,
                 show_inactive: Cell::default(),
-                chrome_active: RefCell::default(),
                 closing: RefCell::default(),
                 profile: profile.map(ObjcWeak::from),
                 mtm: self.mtm,
@@ -250,14 +235,6 @@ impl Controllers {
                         return;
                     }
                     controller.kind.set(WindowKind::Stray);
-                    if controller
-                        .profile
-                        .as_ref()
-                        .and_then(ObjcWeak::load)
-                        .is_none_or(|profile| controller.core.tabs_for_profile(&profile).is_empty())
-                    {
-                        controller.core.close();
-                    }
                 }),
             );
         }
@@ -302,7 +279,7 @@ impl Controller {
     }
 
     pub fn app_changing(&self) -> bool {
-        self.host_changes.get() > 0 || self.closing.borrow().iter().any(|tab| tab.load().is_some())
+        self.closing.borrow().iter().any(|tab| tab.load().is_some())
     }
 
     fn remove_closing(&self, tab: &Tab) {
@@ -346,37 +323,17 @@ define_class!(
             }
         }
 
-        #[unsafe(method(window:didActivateTab:))]
-        fn activated_tab(&self, _window: &Window, tab: &Tab) {
-            if let Some(controller) = self.ivars().0.upgrade() && controller.kind() == WindowKind::AwaitingApp {
-                controller.chrome_active.replace(Some(ObjcWeak::from(tab)));
-            }
-        }
-
         #[unsafe(method(window:didRemoveTab:))]
         fn removed_tab(&self, _window: &Window, tab: &Tab) {
-            let Some(controller) = self.ivars().0.upgrade() else { return; };
-            let weak = Rc::downgrade(&controller);
-            let profile = tab.profile();
-            let tab = ObjcWeak::from(tab);
-            main_queue::post(Box::new(move || {
-                let Some(controller) = weak.upgrade() else { return; };
-                if let Some(tab) = tab.load() { controller.remove_closing(&tab); }
-                let occupied = [profile, controller.profile.as_ref().and_then(ObjcWeak::load)]
-                    .into_iter().flatten().any(|profile| !controller.core.tabs_for_profile(&profile).is_empty());
-                if controller.kind() != WindowKind::Normal && !occupied { controller.core.close(); }
-            }));
+            if let Some(controller) = self.ivars().0.upgrade() {
+                controller.remove_closing(tab);
+            }
         }
 
         #[unsafe(method(windowShouldClose:))]
         fn should_close(&self, window: &Window) -> bool {
             self.ivars().0.upgrade().and_then(|controller| controller.owner.upgrade())
                 .is_none_or(|owner| (owner.should_close)(&window.window()))
-        }
-
-        #[unsafe(method(window:confirmCloseWithDownloads:completion:))]
-        fn confirm_close_with_downloads(&self, _window: &Window, _count: i32, completion: &DynBlock<dyn Fn(Bool)>) {
-            completion.call((Bool::YES,));
         }
 
         #[unsafe(method(window:preHandleKeyEvent:))]

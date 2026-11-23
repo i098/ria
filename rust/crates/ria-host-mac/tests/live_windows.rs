@@ -23,20 +23,25 @@ mod mac {
     use std::path::{Path, PathBuf};
     use std::process::Command;
     use std::rc::Rc;
-    use std::time::Duration;
+    use std::time::{Duration, Instant};
 
     use block2::RcBlock;
-    use objc2::{MainThreadMarker, rc::Retained};
+    use objc2::{MainThreadMarker, rc::Retained, runtime::AnyObject, sel};
     use objc2_app_kit::{
-        NSApplication, NSEvent, NSEventModifierFlags, NSMenu, NSMenuItem,
-        NSUserInterfaceItemIdentification, NSWindowButton, NSWindowDidEnterFullScreenNotification,
+        NSApplication, NSEvent, NSEventModifierFlags, NSEventType, NSMenu, NSMenuItem,
+        NSUserInterfaceItemIdentification, NSView, NSWindow, NSWindowButton,
+        NSWindowDidEnterFullScreenNotification, NSWindowDidExitFullScreenNotification,
     };
-    use objc2_foundation::{NSNotification, NSNotificationCenter, NSPoint, ns_string};
+    use objc2_foundation::{
+        NSDate, NSNotification, NSNotificationCenter, NSPoint, NSRunLoop, NSString, ns_string,
+    };
     use ria_engine::call::main_queue;
     use ria_host_mac::core::bindings::{Engine, Profile, Tab, Window};
     use ria_host_mac::core::delegate::{EngineDelegate, Hooks};
     use ria_host_mac::core::host::State;
-    use ria_host_mac::windows::ardia_reserved_keys::is_reserved_binding;
+    use ria_host_mac::windows::ardia_reserved_keys::{
+        KeyContext, is_reserved_binding, is_reserved_key_event,
+    };
     use ria_host_mac::windows::ardia_traffic_lights::Placement;
     use ria_host_mac::windows::ardia_window_controller::{Controllers, WindowKind};
     use serde_json::Value;
@@ -129,41 +134,93 @@ mod mac {
         println!("live_windows: engine shut down cleanly");
     }
 
-    fn check_windows(profile: &Profile) {
-        let mtm = MainThreadMarker::new().unwrap();
+    fn wait_for(message: &str, mut ready: impl FnMut() -> bool) {
+        let deadline = Instant::now() + Duration::from_secs(10);
+        while !ready() {
+            assert!(Instant::now() < deadline, "{message}");
+            NSRunLoop::currentRunLoop().runUntilDate(&NSDate::dateWithTimeIntervalSinceNow(0.01));
+        }
+    }
+
+    fn observe(window: &NSWindow, name: &NSString) -> (Retained<AnyObject>, Rc<Cell<usize>>) {
+        let count = Rc::new(Cell::new(0));
+        let tally = count.clone();
+        let callback = RcBlock::new(move |_: std::ptr::NonNull<NSNotification>| {
+            tally.set(tally.get() + 1);
+        });
+        let token = unsafe {
+            NSNotificationCenter::defaultCenter().addObserverForName_object_queue_usingBlock(
+                Some(name),
+                Some(window),
+                None,
+                &callback,
+            )
+        };
+        (token.into(), count)
+    }
+
+    fn check_shortcut(core: &Window, profile: &Profile, mtm: MainThreadMarker) {
+        let window = core.window();
+        let tab = core.open_tab(ns_string!("about:blank"), profile, true);
+        let host = core.host_view();
+        let page = tab.view();
+        page.setFrame(host.bounds());
+        host.addSubview(&page);
         let app = NSApplication::sharedApplication(mtm);
+        app.activate();
+        window.makeKeyAndOrderFront(None);
+        wait_for("The page did not finish loading", || {
+            !tab.loading() && tab.has_live_frame(ns_string!(""))
+        });
+        tab.focus();
+        let responder = window
+            .firstResponder()
+            .and_then(|responder| responder.downcast::<NSView>().ok())
+            .filter(|responder| responder.isDescendantOf(&page))
+            .expect("The engine page must have keyboard focus");
+
         let menu = NSMenu::new(mtm);
+        menu.setAutoenablesItems(false);
         let item = NSMenuItem::new(mtm);
+        let f8 = ns_string!("\u{f70b}");
+        item.setTitle(ns_string!("Hide test window"));
         item.setIdentifier(Some(ns_string!("ardia.command.closeTab")));
-        item.setKeyEquivalent(ns_string!("w"));
-        item.setKeyEquivalentModifierMask(NSEventModifierFlags::Command);
+        item.setKeyEquivalent(f8);
+        item.setKeyEquivalentModifierMask(NSEventModifierFlags::empty());
+        unsafe {
+            item.setAction(Some(sel!(orderOut:)));
+            item.setTarget(Some(&window));
+        }
         menu.addItem(&item);
         let previous_menu = app.mainMenu();
         app.setMainMenu(Some(&menu));
-        assert!(is_reserved_binding(
-            &app,
-            ns_string!("W"),
-            ns_string!(""),
-            NSEventModifierFlags::Command
-        ));
-        assert!(!is_reserved_binding(
-            &app,
-            ns_string!("w"),
-            ns_string!(""),
-            NSEventModifierFlags::Shift
-        ));
-        item.setHidden(true);
-        assert!(!is_reserved_binding(
-            &app,
-            ns_string!("w"),
-            ns_string!(""),
-            NSEventModifierFlags::Command
-        ));
-        app.setMainMenu(previous_menu.as_deref());
 
-        let controllers = Controllers::new(mtm, true, false, |_| false, |_, _| false);
+        let event = NSEvent::keyEventWithType_location_modifierFlags_timestamp_windowNumber_context_characters_charactersIgnoringModifiers_isARepeat_keyCode(
+            NSEventType::KeyDown,
+            NSPoint::ZERO,
+            NSEventModifierFlags::empty(),
+            0.,
+            window.windowNumber(),
+            None,
+            f8,
+            f8,
+            false,
+            100,
+        )
+        .expect("F8 key event");
+        assert!(window.isVisible());
+        responder.keyDown(&event);
+        wait_for("The engine did not dispatch F8 to the menu action", || {
+            !window.isVisible()
+        });
+        app.setMainMenu(previous_menu.as_deref());
+    }
+
+    fn check_windows(profile: &Profile) {
+        let mtm = MainThreadMarker::new().unwrap();
+        let controllers = Controllers::new(mtm, true, true, |_| true, |_, _| false);
         let normal = controllers.make_normal();
-        let chrome = controllers.make_chrome(profile);
+        let chrome = controllers.make_chrome();
         let token = chrome.chrome_token().unwrap();
         assert_eq!(chrome.kind(), WindowKind::AwaitingApp);
         assert!(Rc::ptr_eq(
@@ -172,7 +229,7 @@ mod mac {
         ));
         assert_eq!(chrome.kind(), WindowKind::Normal);
         assert!(controllers.claim_chrome(token).is_none());
-        let stray = controllers.make_stray(profile);
+        let stray = controllers.make_stray();
         assert_eq!(stray.kind(), WindowKind::Stray);
         assert!(controllers.user_sees(&stray.core.window()));
         let standalone = controllers.standalone(profile);
@@ -185,8 +242,17 @@ mod mac {
         let lights = normal.traffic_lights.as_ref().unwrap();
         let before = window.frame();
         assert!(window.titlebarAppearsTransparent());
+        let (sight_observer, sight_events) = observe(&window, ns_string!("ArdiaWindowSeenDidChange"));
+        window.orderOut(None);
+        controllers.reconsider_sight(&window);
+        assert!(!controllers.user_sees(&window));
+        let events = sight_events.get();
+        window.orderFrontRegardless();
+        wait_for("No visible sight reply and notification", || {
+            controllers.user_sees(&window) && sight_events.get() > events
+        });
         let placement = Placement {
-            center: Some(NSPoint::new(50., 27.)),
+            center: Some(NSPoint::new(50., 80.)),
             trailing: false,
         };
         lights.set_placement(placement);
@@ -196,42 +262,54 @@ mod mac {
         let frame = ria_host_mac::windows::ardia_traffic_lights::frame_view(&window).unwrap();
         let rect = close.convertRect_toView(close.bounds(), Some(&frame));
         assert!((rect.origin.x + rect.size.width / 2. - 50.).abs() < 1.);
-        assert!(controllers.user_sees(&window));
-        let enter_events = Rc::new(Cell::new(0));
-        let enter = {
-            let events = enter_events.clone();
-            RcBlock::new(move |_: std::ptr::NonNull<NSNotification>| events.set(events.get() + 1))
+        let mid_y = rect.origin.y + rect.size.height / 2.;
+        let y_from_top = if frame.isFlipped() {
+            mid_y
+        } else {
+            frame.bounds().size.height - mid_y
         };
-        let center = NSNotificationCenter::defaultCenter();
-        // SAFETY: The block reads no notification data and filters for this live window.
-        let observer = unsafe {
-            center.addObserverForName_object_queue_usingBlock(
-                Some(NSWindowDidEnterFullScreenNotification),
-                Some(&window),
-                None,
-                &enter,
-            )
-        };
-        let observer: Retained<objc2::runtime::AnyObject> = observer.into();
+        assert!((y_from_top - 80.).abs() < 1.);
+        let button_center = frame.convertPoint_toView(NSPoint::new(50., mid_y), None);
+        assert!(
+            frame
+                .hitTest(button_center)
+                .is_some_and(|hit| hit.isDescendantOf(&close))
+        );
+
+        let events = sight_events.get();
+        window.orderOut(None);
+        wait_for("No hidden sight reply and notification", || {
+            !controllers.user_sees(&window) && sight_events.get() > events
+        });
+        assert!(!controllers.user_sees_only_through_window_server(&window));
+
+        let (enter_observer, enter_events) =
+            observe(&window, unsafe { NSWindowDidEnterFullScreenNotification });
+        let (exit_observer, exit_events) =
+            observe(&window, unsafe { NSWindowDidExitFullScreenNotification });
         normal
             .fullscreen
             .act_window_full_screen(true, Duration::ZERO, None);
-        // SAFETY: This token was registered with this notification center above.
-        unsafe { center.removeObserver(&observer) };
-        assert_eq!(enter_events.get(), 1);
+        assert_eq!((enter_events.get(), exit_events.get()), (1, 0));
         assert!(normal.core.acted_full_screen() && normal.fullscreen.is_full_screen());
         assert!(!normal.fullscreen.transitioning());
         normal
             .fullscreen
             .act_window_full_screen(false, Duration::ZERO, None);
+        assert_eq!((enter_events.get(), exit_events.get()), (1, 1));
         assert!(!normal.core.acted_full_screen() && !normal.fullscreen.is_full_screen());
         assert_eq!(window.frame(), before);
         assert!(!normal.fullscreen.transitioning());
+        let center = NSNotificationCenter::defaultCenter();
+        for observer in [sight_observer, enter_observer, exit_observer] {
+            unsafe { center.removeObserver(&observer) };
+        }
+        check_shortcut(&normal.core, profile, mtm);
         for controller in [&normal, &chrome, &stray, &standalone] {
             controller.core.close();
         }
         println!(
-            "live_windows: reserved bindings, controller claims, native layout, and fullscreen transition checked"
+            "live_windows: engine shortcut, controller claims, titlebar hit testing, visibility, and fullscreen events checked"
         );
     }
 
@@ -274,11 +352,17 @@ mod mac {
         fn hold_until_hosted(&self, _: &Tab, _: &str, _: Value) {}
         fn drop_popup_window_permission(&self, _: &str) {}
         fn drop_held_event(&self, _: &str, _: &str) {}
-        fn is_reserved_binding(&self, _: &str, _: &str, _: usize) -> bool {
-            false
+        fn is_reserved_binding(&self, key: &str, unshifted: &str, modifiers: usize) -> bool {
+            let app = NSApplication::sharedApplication(MainThreadMarker::new().unwrap());
+            is_reserved_binding(
+                &app,
+                &NSString::from_str(key),
+                &NSString::from_str(unshifted),
+                NSEventModifierFlags::from_bits_retain(modifiers),
+            )
         }
-        fn is_reserved_key_event(&self, _: &NSEvent) -> bool {
-            false
+        fn is_reserved_key_event(&self, event: &NSEvent) -> bool {
+            is_reserved_key_event(MainThreadMarker::new().unwrap(), event, KeyContext::Windowed)
         }
         fn window_for_new_browser(&self, _: &Profile, _: &str) -> Option<Retained<Window>> {
             None

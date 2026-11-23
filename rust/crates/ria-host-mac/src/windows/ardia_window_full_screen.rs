@@ -2,7 +2,7 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-use std::cell::{Cell, RefCell};
+use std::cell::RefCell;
 use std::rc::Rc;
 use std::time::Duration;
 
@@ -28,6 +28,9 @@ use super::ardia_window_sight_math::{Rect, counts_as_cover, partly_visible};
 use crate::core::bindings::Window;
 
 type WindowInfo = NSDictionary<NSString, AnyObject>;
+
+const CG_WINDOW_LIST_OPTION_ON_SCREEN_ABOVE_WINDOW: u32 = 1 << 1;
+const CG_WINDOW_LIST_OPTION_INCLUDING_WINDOW: u32 = 1 << 3;
 
 #[link(name = "CoreGraphics", kind = "framework")]
 unsafe extern "C" {
@@ -61,7 +64,9 @@ fn window_server_shows(window: &NSWindow) -> bool {
     };
     // SAFETY: The flags select on-screen windows above this window, including this window.
     // The Copy result is +1 and the array and its dictionaries are toll-free bridged.
-    let Some(info) = (unsafe { Retained::from_raw(CGWindowListCopyWindowInfo(2 | 16, id)) }) else {
+    let options =
+        CG_WINDOW_LIST_OPTION_ON_SCREEN_ABOVE_WINDOW | CG_WINDOW_LIST_OPTION_INCLUDING_WINDOW;
+    let Some(info) = (unsafe { Retained::from_raw(CGWindowListCopyWindowInfo(options, id)) }) else {
         return false;
     };
     let mut mine = None;
@@ -136,9 +141,6 @@ pub struct FullScreen {
     allow_occlusion: bool,
     state: RefCell<Transition>,
     observers: Vec<Retained<AnyObject>>,
-    watching_server: Cell<bool>,
-    plays_for_pip: Box<dyn Fn(&NSWindow) -> bool>,
-    active_for_pip: Box<dyn Fn() -> bool>,
 }
 
 impl FullScreen {
@@ -147,8 +149,6 @@ impl FullScreen {
         mtm: MainThreadMarker,
         background: bool,
         allow_occlusion: bool,
-        plays_for_pip: impl Fn(&NSWindow) -> bool + 'static,
-        active_for_pip: impl Fn() -> bool + 'static,
     ) -> Rc<Self> {
         let window = core.window();
         // SAFETY: AppKit posts these notifications on the main thread and each callback holds a weak Rust reference.
@@ -197,9 +197,6 @@ impl FullScreen {
                     ..Transition::default()
                 }),
                 observers,
-                watching_server: Cell::new(false),
-                plays_for_pip: Box::new(plays_for_pip),
-                active_for_pip: Box::new(active_for_pip),
             }
         })
     }
@@ -224,7 +221,7 @@ impl FullScreen {
         self.state.borrow().transitioning
     }
 
-    fn notified(self: &Rc<Self>, name: &NSString) {
+    fn notified(&self, name: &NSString) {
         // SAFETY: These names are AppKit static notification constants.
         let (close, will, did, left_app) = unsafe {
             (
@@ -256,14 +253,14 @@ impl FullScreen {
         self.update_seen(left_app);
     }
 
-    fn update_seen(self: &Rc<Self>, left_app: bool) {
+    fn update_seen(&self, left_app: bool) {
         let Some(core) = self.core.load() else {
             return;
         };
         let window = core.window();
         let app = NSApplication::sharedApplication(self.mtm);
         let active = app.isActive();
-        let (visible, overruled, wants_watch) = {
+        let (visible, overruled) = {
             let state = self.state.borrow();
             if state.closed {
                 return;
@@ -274,7 +271,7 @@ impl FullScreen {
                 return;
             }
             if occlusion_acted && state.acted_occlusion.is_none() {
-                (true, state.overruled, false)
+                (true, state.overruled)
             } else {
                 let app_kit = state.acted_occlusion.unwrap_or_else(|| {
                     window
@@ -290,23 +287,10 @@ impl FullScreen {
                 (
                     if active { app_kit || server } else { server },
                     !app_kit && server,
-                    !active || !app_kit,
                 )
             }
         };
-        if wants_watch && (self.plays_for_pip)(&window) && !self.watching_server.replace(true) {
-            let weak = Rc::downgrade(self);
-            main_queue::after(
-                Duration::from_secs(1),
-                Box::new(move || {
-                    if let Some(fullscreen) = weak.upgrade() {
-                        fullscreen.watching_server.set(false);
-                        fullscreen.update_seen(false);
-                    }
-                }),
-            );
-        }
-        let active_fullscreen = active && !(self.active_for_pip)() && self.is_full_screen();
+        let active_fullscreen = active && self.is_full_screen();
         let changed = {
             let mut state = self.state.borrow_mut();
             if state.settling && !state.transitioning && visible {

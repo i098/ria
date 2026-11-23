@@ -4,7 +4,7 @@
 
 use std::cell::Cell;
 
-use objc2::{MainThreadMarker, MainThreadOnly, rc::Retained};
+use objc2::{MainThreadMarker, rc::Retained};
 use objc2_app_kit::{
     NSApplication, NSEvent, NSEventModifierFlags as Mods, NSEventType, NSMenu, NSMenuItem,
     NSUserInterfaceItemIdentification, NSView, NSWindow,
@@ -41,7 +41,6 @@ pub enum KeyContext {
     #[default]
     Windowed,
     FullScreenBrowser,
-    FullScreenPage,
 }
 
 impl KeyContext {
@@ -49,7 +48,6 @@ impl KeyContext {
         match self {
             Self::Windowed => RESERVED.contains(&identifier),
             Self::FullScreenBrowser => identifier == FULL_SCREEN || RESERVED.contains(&identifier),
-            Self::FullScreenPage => matches!(identifier, QUIT | FULL_SCREEN),
         }
     }
 }
@@ -248,29 +246,6 @@ impl ReservedKeys {
                 .mainMenu()
                 .is_some_and(|menu| menu.performKeyEquivalent(event))
     }
-}
-
-pub fn keeps_reserved_key_in_dev_tools(
-    app: &NSApplication,
-    event: &NSEvent,
-    context: KeyContext,
-    dev_tools: &NSView,
-) -> bool {
-    if modifiers(b'c'.into(), event.modifierFlags()) != (Mods::Command | Mods::Shift)
-        || !event
-            .charactersIgnoringModifiers()
-            .is_some_and(|key| key.lowercaseString().isEqualToString(ns_string!("c")))
-        || !reserved_menu_item(app, event, context)
-            .and_then(|item| item.identifier())
-            .is_some_and(|id| id.isEqualToString(ns_string!("ardia.command.copyUrl")))
-    {
-        return false;
-    }
-    event
-        .window(app.mtm())
-        .and_then(|window| window.firstResponder())
-        .and_then(|responder| responder.downcast::<NSView>().ok())
-        .is_some_and(|focused| focused.isDescendantOf(dev_tools))
 }
 
 pub fn is_reserved_key_event(mtm: MainThreadMarker, event: &NSEvent, context: KeyContext) -> bool {
