@@ -220,7 +220,7 @@ pub fn log_record_wire() -> napi::Result<f64> {
         let level: String = r.string16()?;
         let message: String = r.string16()?;
         let attributes: serde_json::Value = wire::read_value(r, &S_LOG_RECORD_2)?;
-        let at: Option<serde_json::Value> = wire::read_dyn_opt(r)?;
+        let at: serde_json::Value = wire::read_dyn(r)?;
         let out = &port::log_record(level, message, attributes, at)?;
         wire::write_value(w, out, &S_LOG_RECORD_OUT)?;
         Ok(())
@@ -251,8 +251,8 @@ pub fn logs_request_wire() -> napi::Result<f64> {
     wire_io(|r, w| {
         let resource: serde_json::Value = wire::read_value(r, &S_LOGS_REQUEST_0)?;
         let scope: String = r.string16()?;
-        let records: Vec<serde_json::Value> =
-            r.list(|r| wire::read_value(r, S_LOGS_REQUEST_2.inner()))?;
+        let records =
+            serde_json::Value::Array(r.list(|r| wire::read_value(r, S_LOGS_REQUEST_2.inner()))?);
         let out = &port::logs_request(resource, scope, records)?;
         w.string16(out);
         Ok(())

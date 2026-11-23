@@ -83,11 +83,129 @@ fn entries_of(object: &Map<String, Value>) -> Result<Vec<(String, Json)>, String
     Ok(entries)
 }
 
+/// `Object.entries(value)` of an `attributes` argument. A string gives one entry for each UTF-16
+/// unit, an array one for each index, and a number or a boolean none; `null` and `undefined` throw.
 fn object_entries(value: &Value) -> Result<Vec<(String, Json)>, String> {
+    const NOT_OBJECT: &str = "TypeError: Cannot convert undefined or null to object";
+    const SURROGATE: &str = "a lone surrogate, which a Rust String cannot hold";
     match value {
+        Value::Object(_) if is_undefined(value) => Err(NOT_OBJECT.into()),
+        Value::Object(_) if special_number(value).is_some() => Ok(vec![]),
+        Value::Object(o) if o.contains_key("$utf16") => Err(SURROGATE.into()),
         Value::Object(o) => entries_of(o),
-        _ => Err("TypeError: expected an object of attributes".into()),
+        Value::Null => Err(NOT_OBJECT.into()),
+        Value::Bool(_) | Value::Number(_) => Ok(vec![]),
+        Value::String(s) => {
+            let mut entries = Vec::new();
+            for (i, c) in s.chars().enumerate() {
+                if c.len_utf16() != 1 {
+                    return Err(SURROGATE.into());
+                }
+                entries.push((i.to_string(), Json::String(c.to_string())));
+            }
+            Ok(entries)
+        }
+        Value::Array(items) => {
+            let mut entries = Vec::new();
+            for (i, v) in items.iter().enumerate() {
+                let json = if is_undefined(v) {
+                    Json::Null
+                } else {
+                    json_of(v)?
+                };
+                entries.push((i.to_string(), json));
+            }
+            Ok(entries)
+        }
     }
+}
+
+/// JS `ToString` of a value inside an array that `ToNumber` joins with commas. An object gives
+/// `[object Object]`; `null` and `undefined` give an empty string; a lone surrogate never parses.
+fn join_text(value: &Value) -> String {
+    match value {
+        Value::Null => String::new(),
+        Value::Bool(b) => b.to_string(),
+        Value::Number(n) => wire::js_number_to_string(n.as_f64().unwrap_or(f64::NAN)),
+        Value::String(s) => s.clone(),
+        Value::Array(items) => items.iter().map(join_text).collect::<Vec<_>>().join(","),
+        Value::Object(_) if is_undefined(value) => String::new(),
+        Value::Object(_) => match special_number(value) {
+            Some(n) => wire::js_number_to_string(n),
+            None if value.get("$utf16").is_some() => "\u{FFFD}".into(),
+            None => "[object Object]".into(),
+        },
+    }
+}
+
+/// JS `StringToNumber`: white space is trimmed, an empty string is 0, and `0x`, `0o` and `0b`
+/// give integers; anything else that is not a decimal literal is NaN.
+fn string_to_number(text: &str) -> f64 {
+    let is_space = |c: char| c.is_whitespace() || c == '\u{FEFF}';
+    let s = text.trim_matches(is_space);
+    if s.is_empty() {
+        return 0.0;
+    }
+    let radix = match s.get(..2) {
+        Some("0x" | "0X") => 16,
+        Some("0o" | "0O") => 8,
+        Some("0b" | "0B") => 2,
+        _ => 0,
+    };
+    if radix != 0 {
+        let digits = &s[2..];
+        if digits.is_empty() || !digits.chars().all(|c| c.is_digit(radix)) {
+            return f64::NAN;
+        }
+        // shortcut: digits past 128 bits add up in f64, so the last bit can differ from JS.
+        return u128::from_str_radix(digits, radix).map_or_else(
+            |_| {
+                digits.chars().fold(0.0, |n, c| {
+                    n * f64::from(radix) + f64::from(c.to_digit(radix).unwrap_or(0))
+                })
+            },
+            |n| n as f64,
+        );
+    }
+    let (sign, rest) = match s.as_bytes()[0] {
+        b'-' => (-1.0, &s[1..]),
+        b'+' => (1.0, &s[1..]),
+        _ => (1.0, s),
+    };
+    if rest == "Infinity" {
+        return sign * f64::INFINITY;
+    }
+    let (mantissa, exponent) = rest
+        .split_once(['e', 'E'])
+        .map_or((rest, None), |(m, e)| (m, Some(e)));
+    let (int, frac) = mantissa
+        .split_once('.')
+        .map_or((mantissa, None), |(i, f)| (i, Some(f)));
+    let all_digits = |t: &str| t.bytes().all(|b| b.is_ascii_digit());
+    let mantissa_ok = all_digits(int)
+        && frac.is_none_or(all_digits)
+        && !(int.is_empty() && frac.is_none_or(str::is_empty));
+    let exponent_ok = exponent.is_none_or(|e| {
+        let digits = e.strip_prefix(['+', '-']).unwrap_or(e);
+        !digits.is_empty() && all_digits(digits)
+    });
+    if !mantissa_ok || !exponent_ok {
+        return f64::NAN;
+    }
+    sign * rest.parse::<f64>().unwrap_or(f64::NAN)
+}
+
+/// `ToNumber` of the `at` argument of `logRecord`; `undefined` is the default `Date.now()`.
+fn at_ms(at: &Value) -> Result<f64, String> {
+    Ok(match at {
+        Value::Null => 0.0,
+        Value::Bool(b) => f64::from(u8::from(*b)),
+        Value::Number(n) => n.as_f64().ok_or("TypeError: number out of range")?,
+        Value::String(s) => string_to_number(s),
+        Value::Array(_) => string_to_number(&join_text(at)),
+        Value::Object(_) if is_undefined(at) => now_ms(),
+        Value::Object(_) => special_number(at).unwrap_or(f64::NAN),
+    })
 }
 
 fn string_field(object: &Map<String, Value>, key: &str) -> Result<String, String> {
@@ -111,6 +229,7 @@ pub fn event_record(e: Value) -> Result<Value, String> {
         timestamp: string_field(object, "timestamp")?,
         properties: object
             .get("properties")
+            .filter(|v| !v.is_null() && !is_undefined(v)) // `...null` spreads nothing
             .map_or(Ok(vec![]), object_entries)?,
     };
     record_value(&wire::event_record(&event, now_ms()))
@@ -121,19 +240,9 @@ pub fn log_record(
     level: String,
     message: String,
     attributes: Value,
-    at: Option<Value>,
+    at: Value,
 ) -> Result<Value, String> {
-    let at_ms = match at {
-        None => now_ms(),
-        Some(Value::Null) => 0.0,
-        Some(ref v) if is_undefined(v) => now_ms(),
-        Some(Value::Bool(b)) => f64::from(u8::from(b)),
-        Some(Value::Number(n)) => n.as_f64().ok_or("TypeError: number out of range")?,
-        Some(ref v) if special_number(v).is_some() => special_number(v).unwrap_or(f64::NAN),
-        Some(Value::Object(_)) => f64::NAN,
-        Some(Value::Array(a)) if a.is_empty() => 0.0,
-        Some(_) => return Err("`at` is a string or a list, which `Math.round` coerces".into()),
-    };
+    let at_ms = at_ms(&at)?;
     let level = if level == "error" {
         LogLevel::Error
     } else {
@@ -148,12 +257,17 @@ pub fn log_record(
 }
 
 /// Port of `logsRequest` (`packages/core/src/telemetryWire.ts:64`).
-pub fn logs_request(resource: Value, scope: String, records: Vec<Value>) -> Result<String, String> {
-    let records = records.iter().map(json_of).collect::<Result<Vec<_>, _>>()?;
-    Ok(wire::logs_request(
+pub fn logs_request(resource: Value, scope: String, records: Value) -> Result<String, String> {
+    // `logRecords` takes any JSON value; `undefined` leaves the key out.
+    let records = if is_undefined(&records) {
+        None
+    } else {
+        Some(json_of(&records)?)
+    };
+    Ok(wire::logs_request_of(
         &object_entries(&resource)?,
         &scope,
-        &records,
+        records,
     ))
 }
 

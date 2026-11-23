@@ -30,12 +30,13 @@ rust-anything fuzz   rust/recorded/1.6/<crate> --seed <new seed>
 ```
 
 Initialize the pinned Ardia submodule before recording the mobile sequence.
+The `root` of `mobile-rs` is `.review-ardia` in the crate folder; `fuzz` reads the original from there too.
 Run these commands from the repository root:
 
 ```sh
-mkdir -p .review-ardia
-cp -R ardia/packages .review-ardia/
-cp rust/recorded/1.6/mobile.harness.ts .review-ardia/packages/core/src/
+mkdir -p rust/recorded/1.6/mobile-rs/.review-ardia
+cp -R ardia/packages rust/recorded/1.6/mobile-rs/.review-ardia/
+cp rust/recorded/1.6/mobile.harness.ts rust/recorded/1.6/mobile-rs/.review-ardia/packages/core/src/
 TZ=UTC rust-anything record rust/recorded/1.6/mobile-rs --count 0 --inputs rust/recorded/1.6/mobile.inputs.jsonl
 rust-anything build rust/recorded/1.6/mobile-rs
 ```

@@ -326,13 +326,18 @@ impl OtlpLogRecord {
 /// Port of `logsRequest` (`telemetryWire.ts:64`). The records pass through unchanged, as in
 /// the original; build them with `OtlpLogRecord::to_json`.
 pub fn logs_request(resource: &[(String, Json)], scope: &str, records: &[Json]) -> String {
-    let scope_logs = Json::Object(vec![
-        (
-            "scope".into(),
-            Json::Object(vec![("name".into(), Json::String(scope.into()))]),
-        ),
-        ("logRecords".into(), Json::Array(records.to_vec())),
-    ]);
+    logs_request_of(resource, scope, Some(Json::Array(records.to_vec())))
+}
+
+/// `logsRequest` for a `records` argument of any JSON type; `None` is `undefined`, which
+/// `JSON.stringify` leaves out.
+pub fn logs_request_of(resource: &[(String, Json)], scope: &str, records: Option<Json>) -> String {
+    let mut scope_entries = vec![(
+        "scope".to_owned(),
+        Json::Object(vec![("name".into(), Json::String(scope.into()))]),
+    )];
+    scope_entries.extend(records.map(|r| ("logRecords".to_owned(), r)));
+    let scope_logs = Json::Object(scope_entries);
     let resource_logs = Json::Object(vec![
         (
             "resource".into(),

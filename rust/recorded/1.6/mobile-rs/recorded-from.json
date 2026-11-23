@@ -4,7 +4,7 @@
   "fingerprint": "9b5a0253a9616b68",
   "coverage": {
     "lines": 14093,
-    "reached": 12805,
+    "reached": 12808,
     "files": [
       {
         "file": "packages/core/src/anonymousIdentity.ts",
@@ -99,8 +99,8 @@
       {
         "file": "packages/core/src/mobile.ts",
         "lines": 121,
-        "reached": 110,
-        "missed": "13, 15-21, 105-107"
+        "reached": 113,
+        "missed": "13, 15-21"
       },
       {
         "file": "packages/core/src/omnibox.ts",

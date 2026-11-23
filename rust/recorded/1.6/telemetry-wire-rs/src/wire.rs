@@ -398,15 +398,6 @@ fn js_string(units: Vec<u16>) -> Value {
 
 /// Any JS value, tagged: 0 undefined, 1 null, 2 false, 3 true, 4 number, 5 string, 6 array,
 /// 7 object.
-/// An optional JS value: `undefined` and `null` are `None`, as JSON gives for an `Option`.
-pub fn read_dyn_opt(r: &mut Reader) -> Result<Option<Value>, String> {
-    if matches!(r.bytes.get(r.at), Some(0 | 1)) {
-        r.at += 1;
-        return Ok(None);
-    }
-    read_dyn(r).map(Some)
-}
-
 pub fn read_dyn(r: &mut Reader) -> Result<Value, String> {
     let units = |r: &mut Reader| -> Result<Vec<u16>, String> {
         let n = r.count()?;
