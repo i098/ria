@@ -301,7 +301,15 @@ mod mac {
         assert_eq!(run("fakeActiveClicks"), "1");
         assert!(run("type:Native probe").starts_with("NSTextView"));
         assert_eq!(text.string().to_string(), "Native probe");
-        assert!(run("ax").starts_with("AXWindow: Native probe fixture"));
+        window.orderFrontRegardless();
+        let tree = run("ax");
+        assert!(
+            tree.lines().next().is_some_and(|line| {
+                line.starts_with("AXWindow: ") && line.contains("Native probe fixture")
+            }),
+            "{tree}"
+        );
+        assert!(tree.lines().any(|line| line == " AXButton"), "{tree}");
 
         let received = Rc::new(Cell::new(0));
         let count = received.clone();
@@ -320,7 +328,6 @@ mod mac {
         // SAFETY: The token belongs to this notification center.
         unsafe { NSNotificationCenter::defaultCenter().removeObserver(&token) };
 
-        window.orderFrontRegardless();
         let windows: Vec<Value> = serde_json::from_str(&run("subroles")).unwrap();
         assert!(
             windows
