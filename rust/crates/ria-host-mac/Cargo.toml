@@ -1,0 +1,28 @@
+[package]
+name = "ria-host-mac"
+version = "0.0.0"
+description = "Mac host: objc2 bindings of ArdiaCore.h, the engine delegate and the host services on top of the engine."
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+serde_json = "1"
+zeroize = "1"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+block2 = "0.6"
+objc2 = "0.6"
+objc2-app-kit = "0.3"
+objc2-foundation = "0.3"
+ria-engine = { path = "../ria-engine" }
+
+# Check L (`cargo test -p ria-host-mac --test live`). It has its own `main`, because the engine owns the main thread.
+# The file is under `src/core/`, the only folder of this slice that a test may use.
+[target.'cfg(target_os = "macos")'.dev-dependencies]
+libc = "0.2"
+
+[[test]]
+name = "live"
+path = "src/core/live.rs"
+harness = false
