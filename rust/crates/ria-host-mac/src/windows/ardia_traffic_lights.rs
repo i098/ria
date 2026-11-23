@@ -103,7 +103,7 @@ impl TrafficLights {
         Self::inset(window)
     }
 
-    pub fn inset(window: &NSWindow) -> Rc<Self> {
+    fn inset(window: &NSWindow) -> Rc<Self> {
         let lights = Rc::new(Self {
             window: Weak::from(window),
             window_key: ptr::from_ref(window),
