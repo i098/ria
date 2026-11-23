@@ -11,7 +11,8 @@ use objc2::{
     AllocAnyThread, DefinedClass, MainThreadMarker, MainThreadOnly, class, define_class, msg_send,
 };
 use objc2_app_kit::{
-    NSAutoresizingMaskOptions, NSColor, NSImage, NSImageView, NSScreen, NSView, NSWindow,
+    NSApplication, NSAutoresizingMaskOptions, NSColor, NSImage, NSImageView, NSScreen, NSView,
+    NSWindow,
 };
 use objc2_foundation::{NSData, NSPoint, NSRect, NSSize, NSString};
 
@@ -135,7 +136,8 @@ impl BrowserWindow {
             }
         }
         observer(LaunchEvent::WindowOpened {
-            tab_id: tab.tab_id(),
+            windows: NSApplication::sharedApplication(mtm).windows().count(),
+            tabs: core.tabs_for_profile(profile).count(),
         });
         let title = tab.title();
         if title.length() != 0 {

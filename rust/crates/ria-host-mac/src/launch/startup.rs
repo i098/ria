@@ -13,9 +13,7 @@ pub(super) fn engine_arguments(
     config: &LaunchConfig,
     executable: &Path,
     arguments: impl IntoIterator<Item = String>,
-    team_signed: bool,
 ) -> io::Result<Vec<CString>> {
-    let mock_keychain = config.isolated || !team_signed;
     let data = config.data_directory().join("Chromium");
     let data = data
         .to_str()
@@ -28,10 +26,8 @@ pub(super) fn engine_arguments(
         "--enable-features=WebContentsDiscard,BrowserInitiatedAutomaticPictureInPicture,MacOcclusionForceShutoff,ImprovedStartupBestEffortDelay:StartupDelayStopOnLoadingTimedOut/true,CPUMeasurementInFreezingPolicy:freezing_visible_protection_time/0s".into(),
         "--profile-directory=Default".into(),
         "--js-flags=--no-memory-reducer".into(),
+        "--use-mock-keychain".into(),
     ];
-    if mock_keychain {
-        switches.push("--use-mock-keychain".into());
-    }
     if config.background {
         if !config.instance_flag("allowOcclusion") {
             switches.push("--disable-backgrounding-occluded-windows".into());
@@ -43,42 +39,44 @@ pub(super) fn engine_arguments(
         switches.push("--disable-modal-animations".into());
     }
     switches.extend(config.engine_switches());
-    if mock_keychain {
-        if let Some(port) = config.remote_debugging_port {
-            switches.push(format!("--remote-debugging-port={port}"));
-            switches.push("--remote-allow-origins=*".into());
+    if config.test_instance
+        && let Some(port) = config.remote_debugging_port
+    {
+        switches.push(format!("--remote-debugging-port={port}"));
+    }
+    if let Some(extra) = config.instance("chromiumSwitches") {
+        switches.extend(
+            extra
+                .trim()
+                .strip_prefix("--")
+                .into_iter()
+                .flat_map(|extra| {
+                    extra
+                        .split(" --")
+                        .filter_map(|item| {
+                            let item = item.trim();
+                            (!item.is_empty()).then(|| format!("--{item}"))
+                        })
+                        .filter(|arg| forwarded(arg, config.background))
+                }),
+        );
+    }
+    let mut arguments = arguments.into_iter().peekable();
+    while let Some(argument) = arguments.next() {
+        let [b'-', first, ..] = argument.as_bytes() else {
+            switches.push(argument);
+            continue;
+        };
+        if !forwarded(&argument, config.background) {
+            continue;
         }
-        if let Some(extra) = config.instance("chromiumSwitches") {
-            switches.extend(
-                extra
-                    .trim()
-                    .strip_prefix("--")
-                    .into_iter()
-                    .flat_map(|extra| {
-                        extra
-                            .split(" --")
-                            .filter_map(|item| {
-                                let item = item.trim();
-                                (!item.is_empty()).then(|| format!("--{item}"))
-                            })
-                            .filter(|arg| forwarded(arg, config.background))
-                    }),
-            );
-        }
-        let mut arguments = arguments.into_iter().peekable();
-        while let Some(argument) = arguments.next() {
-            let [b'-', first, ..] = argument.as_bytes() else {
-                switches.push(argument);
-                continue;
-            };
-            if first.is_ascii_alphabetic()
-                && !argument.starts_with("-psn_")
-                && arguments.peek().is_some()
-            {
-                arguments.next();
-            } else if forwarded(&argument, config.background) {
-                switches.push(argument);
-            }
+        if first.is_ascii_alphabetic()
+            && !argument.starts_with("-psn_")
+            && arguments.peek().is_some()
+        {
+            arguments.next();
+        } else {
+            switches.push(argument);
         }
     }
     let mut argv = vec![CString::new(executable.as_os_str().as_encoded_bytes())?];
@@ -91,9 +89,13 @@ pub(super) fn engine_arguments(
 fn forwarded(arg: &str, background: bool) -> bool {
     // Keep the engine inside the directory that launch configuration admitted.
     let switch = arg.trim_start_matches('-');
+    let name = switch.split_once('=').map_or(switch, |(name, _)| name);
     !switch.starts_with("ardia-")
         && !switch.starts_with("user-data-dir")
         && !switch.starts_with("profile-directory")
+        && name != "type"
+        && !name.starts_with("remote-debugging-")
+        && name != "remote-allow-origins"
         && !(background
             && (switch.starts_with("use-fake-ui-for-media-stream")
                 || switch.starts_with("auto-accept-camera-and-microphone-capture")))
@@ -106,10 +108,15 @@ fn merge_features(mut switches: Vec<String>) -> Vec<String> {
         .map(|i| switches.split_off(i));
     let mut features = Vec::new();
     switches.retain(|arg| {
-        for (enable, prefix) in [(true, "--enable-features="), (false, "--disable-features=")] {
-            if let Some(list) = arg.strip_prefix(prefix) {
+        let switch = arg
+            .strip_prefix("--")
+            .or_else(|| arg.strip_prefix('-'))
+            .unwrap_or("");
+        for (enable, prefix) in [(true, "enable-features="), (false, "disable-features=")] {
+            if let Some(list) = switch.strip_prefix(prefix) {
                 features.extend(
                     list.split(',')
+                        .map(str::trim)
                         .filter(|feature| !feature.is_empty())
                         .map(|feature| (enable, feature.to_owned())),
                 );
@@ -122,7 +129,8 @@ fn merge_features(mut switches: Vec<String>) -> Vec<String> {
     let mut enabled = Vec::new();
     let mut disabled = Vec::new();
     for (enable, feature) in features.iter().rev() {
-        if seen.insert(feature.split(['<', ':']).next().unwrap_or_default()) {
+        let name = feature.split(['<', ':']).next().unwrap_or_default();
+        if !(*enable && name == "DevToolsAcceptDebuggingConnections") && seen.insert(name) {
             if *enable {
                 enabled.push(feature.as_str());
             } else {
@@ -176,5 +184,70 @@ mod tests {
             true
         ));
         assert!(forwarded("--enable-features=A", true));
+    }
+
+    #[test]
+    fn engine_argv_reserves_process_type_and_debugging() {
+        let home = std::env::temp_dir().join(format!("ria-startup-{}", std::process::id()));
+        for (directory, distribution, debugging) in [
+            (None, false, false),
+            (Some("scratch"), true, false),
+            (Some("scratch"), false, true),
+        ] {
+            let settings = [
+                ("RIA_REMOTE_DEBUGGING_PORT", "9224"),
+                (
+                    "RIA_INSTANCE",
+                    "chromiumSwitches=--type=renderer --remote-debugging-port=9333 --remote-allow-origins=* --enable-features=DevToolsAcceptDebuggingConnections,ConfigFeature",
+                ),
+            ];
+            let config = LaunchConfig::from_environment(
+                settings
+                    .into_iter()
+                    .chain(directory.map(|dir| ("RIA_DATA_DIR", dir))),
+                &home,
+                &home,
+                distribution,
+            )
+            .unwrap();
+            let argv = engine_arguments(
+                &config,
+                Path::new("ria"),
+                [
+                    "--type",
+                    "--remote-debugging-pipe",
+                    "--enable-features=CliFeature",
+                    "-remote-debugging-port=9444",
+                ]
+                .map(String::from),
+            )
+            .unwrap();
+            let argv: Vec<_> = argv.iter().map(|arg| arg.to_str().unwrap()).collect();
+            assert!(argv.contains(&"--use-mock-keychain"));
+            assert!(argv.iter().all(|arg| !arg.starts_with("--type")));
+            assert!(!argv.contains(&"--remote-allow-origins=*"));
+            let debugger: Vec<_> = argv
+                .iter()
+                .copied()
+                .filter(|arg| arg.trim_start_matches('-').starts_with("remote-debugging-"))
+                .collect();
+            assert_eq!(
+                debugger,
+                if debugging {
+                    &["--remote-debugging-port=9224"][..]
+                } else {
+                    &[]
+                }
+            );
+            assert!(
+                argv.iter()
+                    .any(|arg| arg.ends_with(",ConfigFeature,CliFeature"))
+            );
+            assert!(argv.iter().any(|arg| {
+                arg.starts_with("--disable-features=")
+                    && arg.contains("DevToolsAcceptDebuggingConnections")
+            }));
+        }
+        std::fs::remove_dir_all(home).unwrap();
     }
 }

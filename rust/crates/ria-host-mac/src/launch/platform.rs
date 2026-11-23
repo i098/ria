@@ -31,7 +31,7 @@ unsafe extern "C" {
     fn dlerror() -> *const c_char;
 }
 
-pub(super) fn signatures() -> (bool, bool) {
+pub(super) fn signed_for_distribution() -> bool {
     fn check(code: *mut c_void, text: &str) -> Option<bool> {
         let text = NSString::from_str(text);
         let mut requirement = null_mut();
@@ -53,17 +53,12 @@ pub(super) fn signatures() -> (bool, bool) {
     let mut code = null_mut();
     // SAFETY: the location is writable. CopySelf gives us one owned reference on success.
     if unsafe { SecCodeCopySelf(0, &mut code) } != 0 {
-        return (true, false);
+        return true;
     }
     let distribution = check(code, "anchor apple generic and (certificate leaf[field.1.2.840.113635.100.6.1.9] exists or certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists)").unwrap_or(true);
-    let team = check(
-        code,
-        "anchor apple generic and certificate leaf[subject.OU] exists",
-    )
-    .unwrap_or(false);
     // SAFETY: balance the owned CopySelf result.
     unsafe { CFRelease(code) };
-    (distribution, team)
+    distribution
 }
 
 pub(super) fn load_engine(executable: &Path) -> io::Result<()> {

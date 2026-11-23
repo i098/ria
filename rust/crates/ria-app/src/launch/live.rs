@@ -26,7 +26,7 @@ mod mac {
     use std::path::{Path, PathBuf};
     use std::process::{Command, ExitCode};
     use std::rc::Rc;
-    use std::time::{Duration, SystemTime, UNIX_EPOCH};
+    use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
     use ria_host_mac::launch::launch_config::LaunchConfig;
@@ -82,7 +82,9 @@ mod mac {
         let page = root.join("page.html");
         fs::write(&page, PAGE).unwrap();
         fs::write(data.join("session.json"), format!(r#"{{"version":11,"launchTab":{{"id":"fixture","profile":"Default","url":"file://{}"}}}}"#, page.display())).unwrap();
-        let output = Command::new(&bin)
+        let stdout = root.join("stdout");
+        let stderr = root.join("stderr");
+        let mut child = Command::new(&bin)
             .arg("--live-child")
             .env("HOME", &home)
             .env("CFFIXED_USER_HOME", &home)
@@ -93,19 +95,38 @@ mod mac {
             .env_remove("RIA_TEST")
             .env_remove("RIA_TRACE")
             .env_remove("RIA_REMOTE_DEBUGGING_PORT")
-            .output()
+            .stdout(fs::File::create(&stdout).unwrap())
+            .stderr(fs::File::create(&stderr).unwrap())
+            .spawn()
             .expect("run Ria in a new profile");
-        let out = String::from_utf8_lossy(&output.stdout);
-        eprint!("{}", String::from_utf8_lossy(&output.stderr));
+        let deadline = Instant::now() + Duration::from_secs(60);
+        let status = loop {
+            if let Some(status) = child.try_wait().expect("wait for Ria") {
+                break Some(status);
+            }
+            if Instant::now() >= deadline {
+                let _ = child.kill();
+                child.wait().expect("reap Ria after timeout");
+                break None;
+            }
+            std::thread::sleep(Duration::from_millis(50));
+        };
+        let out = fs::read(&stdout).unwrap();
+        let out = String::from_utf8_lossy(&out);
+        eprint!("{}", String::from_utf8_lossy(&fs::read(&stderr).unwrap()));
         print!("{out}");
-        assert!(output.status.success(), "engine exit: {}", output.status);
+        let status = status.expect("Ria did not exit within 60 seconds");
+        assert!(status.success(), "engine exit: {status}");
         assert!(out.contains("engineDidStart"));
-        assert_eq!(out.matches("windowOpened tab=").count(), 1);
+        assert!(out
+            .lines()
+            .filter(|line| line.starts_with("windowOpened "))
+            .eq(["windowOpened windows=1 tabs=1"]));
         assert!(out.contains("tabTitle Ria proof page"));
         assert!(out.contains("engineWillShutDown"));
         assert!(!has_crash_report(root), "a crash report exists");
         println!(
-            "launch live: engine exit 0; one window; fixture title; shutdown; no crash report"
+            "launch live: engine exit 0; one window; one tab; fixture title; shutdown; no crash report"
         );
     }
 
@@ -140,8 +161,8 @@ mod mac {
                 println!("engineDidStart");
                 host_launch::after(Duration::from_secs(45), host_launch::quit);
             }
-            LaunchEvent::WindowOpened { tab_id } if tab_id > 0 => {
-                println!("windowOpened tab={tab_id}")
+            LaunchEvent::WindowOpened { windows, tabs } => {
+                println!("windowOpened windows={windows} tabs={tabs}");
             }
             LaunchEvent::TabTitle(title) if title == TITLE && !check_title.replace(true) => {
                 println!("tabTitle {title}");

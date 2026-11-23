@@ -217,6 +217,12 @@ impl LaunchConfig {
         &self.data_directory
     }
 
+    pub(super) fn check_profile_directory(&self) -> io::Result<()> {
+        profile::ensure_identity(&self.data_directory, &self.data_handle)?;
+        profile::directory_exists(&self.data_directory.join("Chromium"))?;
+        Ok(())
+    }
+
     pub(super) fn read_data_file(&self, name: &Path) -> Option<Vec<u8>> {
         if name.file_name().map(Path::new) != Some(name) || !profile::has_marker(&self.data_handle)
         {
@@ -626,6 +632,11 @@ mod tests {
         let original = launch("original");
         fs::create_dir(&original.config_directory).unwrap();
         let original = launch("original");
+        assert!(original.check_profile_directory().is_ok());
+        let chromium = original.data_directory.join("Chromium");
+        symlink(&original.data_directory, &chromium).unwrap();
+        assert!(original.check_profile_directory().is_err());
+        fs::remove_file(chromium).unwrap();
         let other = launch("other");
         fs::create_dir(&other.config_directory).unwrap();
         fs::write(other.config_directory.join("config.json"), b"{}").unwrap();
@@ -646,9 +657,11 @@ mod tests {
 
         fs::rename(&original.data_directory, home.join("old-data")).unwrap();
         symlink(&other.data_directory, &original.data_directory).unwrap();
+        assert!(original.check_profile_directory().is_err());
         assert!(SavedSession::read(&original).is_none());
         fs::remove_file(&original.data_directory).unwrap();
         fs::rename(&other.data_directory, &original.data_directory).unwrap();
+        assert!(original.check_profile_directory().is_err());
         assert!(SavedSession::read(&original).is_none());
         assert!(original.switch_on("foreign"));
         fs::remove_dir_all(home).unwrap();

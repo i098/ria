@@ -5,7 +5,6 @@
 use std::cell::{Cell, RefCell};
 
 pub const ENGINE_STARTED: u8 = 1;
-pub const APP_KIT_WILL_FINISH: u8 = 1 << 1;
 pub const APP_KIT_FINISHED: u8 = 1 << 2;
 pub const APP_READY: u8 = 1 << 3;
 

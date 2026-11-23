@@ -32,7 +32,7 @@ use super::startup;
 #[derive(Debug)]
 pub enum LaunchEvent {
     EngineStarted,
-    WindowOpened { tab_id: i32 },
+    WindowOpened { windows: usize, tabs: usize },
     TabTitle(String),
     EngineWillShutDown,
     Error(String),
@@ -58,7 +58,7 @@ pub fn quit() {
 
 fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
     let executable = std::env::current_exe()?;
-    let (distribution, team) = platform::signatures();
+    let distribution = platform::signed_for_distribution();
     let home = std::env::home_dir().ok_or_else(|| io::Error::other("home directory not found"))?;
     let env: Vec<_> = std::env::vars_os()
         .filter_map(|(key, value)| Some((key.into_string().ok()?, value.into_string().ok()?)))
@@ -69,8 +69,12 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
         &std::env::current_dir()?,
         distribution,
     )?;
-    let argv = startup::engine_arguments(&config, &executable, std::env::args().skip(1), team)?;
-    super::startup_preferences::prepare(config.data_directory())?;
+    let argv = startup::engine_arguments(&config, &executable, std::env::args().skip(1))?;
+    if !config.isolated {
+        let chromium = config.data_directory().join("Chromium");
+        config.check_profile_directory()?;
+        ria_engine::domains::browser::native_messaging::sync_hosts(&chromium);
+    }
     let session = SavedSession::read(&config);
     platform::load_engine(&executable)?;
     let sequence = Rc::new(LaunchSequence::default());
@@ -95,6 +99,7 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
         }));
     });
     let delegate = EngineDelegate::new(runtime.clone(), State::new(), None);
+    runtime.config.check_profile_directory()?;
     // SAFETY: the engine is loaded, mtm proves the thread, and the delegate and argv live until return.
     let code = unsafe { delegate.run(&argv) };
     if code == 0 && runtime.failed.get() {
@@ -136,22 +141,27 @@ impl Runtime {
         {
             return self.fail("invalid launch profile name");
         }
+        if self.config.check_profile_directory().is_err() {
+            return self.fail("launch profile directory changed");
+        }
         let weak = self.this.clone();
         engine.load_profile(&NSString::from_str(name), move |profile| {
-            if let Some(runtime) = weak.upgrade() {
-                if let Some(profile) = profile {
-                    runtime.profile_ready(&profile);
-                } else {
-                    runtime.fail("could not load launch profile");
+            let weak = weak.clone();
+            later(move || {
+                if let Some(runtime) = weak.upgrade()
+                    && runtime.sequence.engine_running()
+                {
+                    if let Some(profile) = profile {
+                        runtime.profile_ready(&profile);
+                    } else {
+                        runtime.fail("could not load launch profile");
+                    }
                 }
-            }
+            });
         });
     }
 
     fn profile_ready(&self, profile: &Profile) {
-        if !self.sequence.engine_running() {
-            return;
-        }
         let reason = self.sequence.reason();
         let show = reason != LaunchReason::Hidden
             && !NSApplication::sharedApplication(self.mtm).isHidden();

@@ -33,7 +33,7 @@ pub(super) fn open_directory(path: &Path) -> io::Result<File> {
     Ok(directory)
 }
 
-fn ensure_identity(path: &Path, directory: &File) -> io::Result<()> {
+pub(super) fn ensure_identity(path: &Path, directory: &File) -> io::Result<()> {
     let named = path.symlink_metadata()?;
     let opened = directory.metadata()?;
     if !named.is_dir() || (named.dev(), named.ino()) != (opened.dev(), opened.ino()) {

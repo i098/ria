@@ -12,4 +12,3 @@ mod profile;
 pub mod saved_document;
 pub mod saved_session;
 mod startup;
-mod startup_preferences;

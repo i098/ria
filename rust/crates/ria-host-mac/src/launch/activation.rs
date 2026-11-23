@@ -20,7 +20,7 @@ use objc2_foundation::{
     NSObjectProtocol, NSString,
 };
 
-use super::launch_sequence::{APP_KIT_WILL_FINISH, LaunchReason, LaunchSequence};
+use super::launch_sequence::{LaunchReason, LaunchSequence};
 
 thread_local! {
     static LAUNCH: RefCell<Weak<LaunchSequence>> = const { RefCell::new(Weak::new()) };
@@ -34,13 +34,12 @@ impl Observers {
         LAUNCH.with(|slot| slot.replace(Rc::downgrade(launch)));
         BACKGROUND.set(background);
         let will = RcBlock::new(|_: NonNull<NSNotification>| {
-            with_launch(|launch, mtm| {
-                if BACKGROUND.get() {
-                    NSApplication::sharedApplication(mtm)
-                        .setActivationPolicy(NSApplicationActivationPolicy::Prohibited);
-                }
-                launch.reach(APP_KIT_WILL_FINISH);
-            });
+            if BACKGROUND.get()
+                && let Some(mtm) = MainThreadMarker::new()
+            {
+                NSApplication::sharedApplication(mtm)
+                    .setActivationPolicy(NSApplicationActivationPolicy::Prohibited);
+            }
         });
         let did = RcBlock::new(|_: NonNull<NSNotification>| {
             with_launch(|launch, mtm| {
