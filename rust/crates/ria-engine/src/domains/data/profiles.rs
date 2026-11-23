@@ -7,7 +7,6 @@
 
 use std::cell::RefCell;
 use std::collections::{HashMap, HashSet};
-use std::path::PathBuf;
 use std::rc::Rc;
 
 use serde_json::json;
@@ -68,14 +67,6 @@ pub fn app_disposition(chrome: &str) -> &'static str {
         "split_view" => "split",
         _ => "foreground",
     }
-}
-
-/// `ardia_host::InstalledDataDirectory`: `~/Library/Application Support/<bundle id>/Chromium`.
-pub fn installed_data_directory(home: &str, bundle_id: Option<&str>) -> PathBuf {
-    PathBuf::from(home)
-        .join("Library/Application Support")
-        .join(bundle_id.unwrap_or("com.ardia.browser"))
-        .join("Chromium")
 }
 
 #[derive(Default)]

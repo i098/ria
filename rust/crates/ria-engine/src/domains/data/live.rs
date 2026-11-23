@@ -29,6 +29,8 @@ fn main() {
 mod mac {
     use std::cell::{Cell, RefCell};
     use std::ffi::{CString, c_char, c_int};
+    use std::io::Write;
+    use std::panic::{AssertUnwindSafe, catch_unwind};
     use std::path::{Path, PathBuf};
     use std::process::Command;
     use std::rc::Rc;
@@ -109,6 +111,16 @@ mod mac {
         static LIVE: RefCell<Option<Rc<Live>>> = const { RefCell::new(None) };
     }
 
+    fn callback<T>(name: &str, work: impl FnOnce() -> T) -> T {
+        match catch_unwind(AssertUnwindSafe(work)) {
+            Ok(value) => value,
+            Err(_) => {
+                let _ = writeln!(std::io::stderr(), "Ria data live: panic in {name}");
+                std::process::abort();
+            }
+        }
+    }
+
     define_class!(
         #[unsafe(super(NSObject))]
         #[name = "RiaDataLiveDelegate"]
@@ -117,22 +129,26 @@ mod mac {
         impl Delegate {
             #[unsafe(method(engineDidStart))]
             fn engine_did_start(&self) {
-                started();
+                callback("engineDidStart", started);
             }
 
             #[unsafe(method(engineWillShutDown))]
             fn engine_will_shut_down(&self) {
-                if let Some(live) = LIVE.with(|l| l.borrow().clone()) {
-                    live.engine.shutdown();
-                }
+                callback("engineWillShutDown", || {
+                    if let Some(live) = LIVE.with(|l| l.borrow().clone()) {
+                        live.engine.shutdown();
+                    }
+                });
             }
 
             #[unsafe(method(engineQuitCancelled))]
-            fn engine_quit_cancelled(&self) {}
+            fn engine_quit_cancelled(&self) {
+                callback("engineQuitCancelled", || ());
+            }
 
             #[unsafe(method_id(engineWindowForNewBrowserOfProfile:type:))]
             fn window_for_new_browser(&self, _profile: &AnyObject, _kind: &NSString) -> Option<Retained<AnyObject>> {
-                None
+                callback("engineWindowForNewBrowserOfProfile:type:", || None)
             }
         }
     );
@@ -305,16 +321,18 @@ mod mac {
         }
         let again = engine.clone();
         let block = RcBlock::new(move |profile: *mut AnyObject| {
-            match unsafe { Retained::retain(profile) } {
-                Some(profile) => go(&again, &profile),
-                None => {
-                    println!(
-                        "{}",
-                        json!({"live": "error", "detail": "loadProfile returned nil"})
-                    );
-                    std::process::exit(2);
+            callback("loadProfile completion", || {
+                match unsafe { Retained::retain(profile) } {
+                    Some(profile) => go(&again, &profile),
+                    None => {
+                        println!(
+                            "{}",
+                            json!({"live": "error", "detail": "loadProfile returned nil"})
+                        );
+                        std::process::exit(2);
+                    }
                 }
-            }
+            });
         });
         let name = NSString::from_str("Default");
         let _: () = unsafe { msg_send![&*engine, loadProfile: &*name, completion: &*block] };

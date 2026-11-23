@@ -60,7 +60,7 @@ impl Defaults for MemoryDefaults {
 
 /// Called with the current step name and the staging folder path.
 #[cfg(test)]
-pub type StepHook = Box<dyn FnMut(&str, &str) + Send>;
+pub type StepHook = Arc<dyn Fn(&str, &str) + Send + Sync>;
 
 struct Identity {
     sha256: String,
@@ -512,7 +512,8 @@ impl DownloadMover {
 
     #[cfg(test)]
     fn step(&self, name: &str, staging: &File) {
-        if let Some(hook) = self.step_hook.lock().unwrap().as_mut() {
+        let hook = self.step_hook.lock().unwrap().clone();
+        if let Some(hook) = hook {
             hook(name, &directory_path(staging).unwrap_or_default());
         }
     }

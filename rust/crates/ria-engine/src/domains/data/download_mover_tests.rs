@@ -93,8 +93,8 @@ fn reason(result: &Value) -> String {
     }
 }
 
-fn hook(mover: &DownloadMover, f: impl FnMut(&str, &str) + Send + 'static) {
-    *mover.step_hook.lock().unwrap() = Some(Box::new(f));
+fn hook(mover: &DownloadMover, f: impl Fn(&str, &str) + Send + Sync + 'static) {
+    *mover.step_hook.lock().unwrap() = Some(Arc::new(f));
 }
 
 fn unhook(mover: &DownloadMover) {
@@ -577,10 +577,15 @@ fn download_mover() {
                                           "sha256": sha256(&vec![0u8; size as usize]), "received": size}));
         let (hashing, reached_hash) = mpsc::channel();
         let (resume, paused) = mpsc::channel();
+        let paused = std::sync::Mutex::new(paused);
         hook(&mover, move |step, _| {
             if step == "hashing" {
                 hashing.send(std::thread::current().id()).unwrap();
-                paused.recv_timeout(Duration::from_secs(10)).unwrap();
+                paused
+                    .lock()
+                    .unwrap()
+                    .recv_timeout(Duration::from_secs(10))
+                    .unwrap();
             }
         });
         let folder = "~/Downloads/Large";
@@ -596,14 +601,37 @@ fn download_mover() {
             .join()
             .unwrap();
         assert_eq!(reason(&duplicate), "busy");
-        assert_eq!(env.defaults.get(journal_key), Some(journal));
+        assert_eq!(env.defaults.get(journal_key).as_ref(), Some(&journal));
         let event = mover.note_download_event(
             &json!({"id": "meanwhile", "path": "/elsewhere", "state": "downloading"}),
         );
         assert_eq!(event["path"], "/elsewhere");
+
+        let other = env.finished(&mover, "other.bin", "another download", none.clone());
+        let other_id = env.last_id();
+        let landed = env.at("Downloads/Large/other.bin");
+        let (checkpoints, observed) = mpsc::channel();
+        let defaults = env.defaults.clone();
+        hook(&mover, move |step, _| {
+            if matches!(step, "hashing" | "placed") {
+                checkpoints.send(defaults.get(journal_key).unwrap()).unwrap();
+            }
+        });
+        let other_move = mover.start_move(other.clone(), folder.into()).unwrap();
+        let inserted = observed.recv_timeout(Duration::from_secs(10)).unwrap();
+        assert_eq!(inserted["large"], journal["large"]);
+        assert_eq!(inserted[&other_id]["source"], other);
+        assert!(inserted[&other_id].get("placed").is_none());
+        let placed = observed.recv_timeout(Duration::from_secs(10)).unwrap();
+        assert_eq!(placed["large"], journal["large"]);
+        assert_eq!(placed[&other_id]["source"], other);
+        assert_eq!(placed[&other_id]["placed"], landed);
+        assert_eq!(reason(&other_move.join().unwrap()), "ok");
+        assert_eq!(env.defaults.get(journal_key), Some(journal));
+        unhook(&mover);
+
         resume.send(()).unwrap();
         let result = work.join().unwrap();
-        unhook(&mover);
         assert_eq!(reason(&result), "ok");
         assert!(env.defaults.get(journal_key).is_none());
         assert_eq!(

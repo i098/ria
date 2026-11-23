@@ -6,6 +6,7 @@
 //! hidden `blank.html` page of the extension, with retries while uBlock Origin restarts and one deadline.
 
 use std::cell::{Cell, RefCell};
+use std::fmt::{Display, Write};
 use std::rc::Rc;
 use std::time::Duration;
 
@@ -15,29 +16,22 @@ use super::content_blocker::{ContentBlocker, EXTENSION_ID, OFF_DIRECTIVE};
 use super::content_blocker_page::{Done, Page};
 use super::host::Profile;
 
-/// `ScriptWith`: `format` with each `%@` replaced by the JSON of the next argument (`null` when there are fewer).
+/// `ScriptWith`: `format` with each `%@` replaced by the JSON of the next argument.
 pub fn script_with(format: &str, args: &[Value]) -> String {
-    let mut out = String::with_capacity(format.len());
-    for (i, part) in format.split("%@").enumerate() {
-        if i > 0
-            && let Some(arg) = args.get(i - 1)
-        {
-            out.push_str(&serde_json::to_string(arg).unwrap_or_else(|_| "null".into()));
-        }
-        out.push_str(part);
-    }
-    out
+    fill(format, args)
 }
 
-/// `format` with each `%@` replaced by the next raw text (`stringWithFormat:`).
-fn fill(format: &str, args: &[&str]) -> String {
+/// `format` with each `%@` replaced by the next displayed argument.
+fn fill(format: &str, args: impl IntoIterator<Item = impl Display>) -> String {
+    let mut parts = format.split("%@");
+    let mut args = args.into_iter();
     let mut out = String::with_capacity(format.len());
-    for (i, part) in format.split("%@").enumerate() {
-        if i > 0 {
-            out.push_str(args.get(i - 1).copied().unwrap_or(""));
-        }
+    out.push_str(parts.next().unwrap());
+    for part in parts {
+        write!(out, "{}", args.next().expect("missing script argument")).unwrap();
         out.push_str(part);
     }
+    assert!(args.next().is_none(), "extra script argument");
     out
 }
 
@@ -416,8 +410,6 @@ mod tests {
             script_with("[%@, %@]", &[json!("a\"b"), json!(true)]),
             r#"["a\"b", true]"#
         );
-        assert_eq!(script_with("%@-%@", &[json!(1)]), "1-");
-        assert_eq!(script_with("none", &[json!(1)]), "none");
     }
 
     #[test]
