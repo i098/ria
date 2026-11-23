@@ -33,10 +33,8 @@ pub struct SavedSession {
 
 impl SavedSession {
     pub fn read(directory: &Path) -> Option<Self> {
-        if directory.as_os_str().is_empty() {
-            return None;
-        }
-        saved_document::read(&directory.join("session.json"), 0..=VERSION).map(Self::from_document)
+        saved_document::read(directory, Path::new("session.json"), 0..=VERSION)
+            .map(Self::from_document)
     }
 
     pub fn parse(data: &[u8]) -> Option<Self> {
@@ -186,11 +184,17 @@ mod tests {
     #[test]
     fn reads_a_real_session_file() {
         let root = std::env::temp_dir().join(format!("ria-session-test-{}", std::process::id()));
-        std::fs::create_dir(&root).unwrap();
+        super::super::profile::claim(&root).unwrap();
         let document = br#"{"version":11,"focusedWindowId":"w","windows":[null,{"id":"w","profile":"p"}],"launchTab":{"id":"t","url":"https://example.com","profile":"p"}}"#;
         std::fs::write(root.join("session.json"), document).unwrap();
         let saved = SavedSession::read(&root);
+        let outside = root.join("..").join(format!("ria-outside-session-{}", std::process::id()));
+        std::fs::rename(root.join("session.json"), &outside).unwrap();
+        std::os::unix::fs::symlink(&outside, root.join("session.json")).unwrap();
+        let linked = SavedSession::read(&root);
+        std::fs::remove_file(outside).unwrap();
         std::fs::remove_dir_all(&root).unwrap();
+        assert!(linked.is_none());
         let saved = saved.unwrap();
         assert_eq!(saved.focused_window_id.as_deref(), Some("w"));
         assert_eq!(saved.window_with_id("w").unwrap()["profile"], "p");

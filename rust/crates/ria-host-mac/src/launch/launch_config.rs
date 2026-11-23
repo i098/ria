@@ -10,6 +10,8 @@ use std::sync::OnceLock;
 
 use serde_json::Value;
 
+use super::profile;
+
 pub const BUNDLE_ID: &str = "com.i098.ria";
 
 const INSTANCE_KEYS: &[&str] = &[
@@ -58,7 +60,6 @@ const APP_TEST_KEYS: &[&str] = &[
     "importSecret",
     "importDiaBundleId",
     "importDiaWindows",
-    "cliInstallScript",
     "legacySource",
     "legacyCrashAfter",
     "bangsUrl",
@@ -87,7 +88,6 @@ const COMMA_KEYS: &[&str] = &[
     "importSourceDir",
     "importSafariHome",
     "importSecret",
-    "cliInstallScript",
     "legacySource",
     "bangsUrl",
     "liveMock",
@@ -108,7 +108,6 @@ pub struct LaunchConfig {
     pub config_directory: PathBuf,
     pub background: bool,
     pub remote_debugging_port: Option<u16>,
-    pub prewarm: bool,
     pub isolated: bool,
     pub test_instance: bool,
     pub child_environment: BTreeMap<String, String>,
@@ -130,7 +129,6 @@ impl LaunchConfig {
         let mut data_dir = None;
         let mut background = false;
         let mut remote_debugging_port = None;
-        let mut prewarm = false;
         let mut instance = BTreeMap::new();
         let mut switches = BTreeMap::new();
         let mut trace = BTreeSet::new();
@@ -141,7 +139,6 @@ impl LaunchConfig {
                 "RIA_DATA_DIR" => data_dir = present(value),
                 "RIA_BACKGROUND" => background = !matches!(value, "" | "0"),
                 "RIA_REMOTE_DEBUGGING_PORT" => remote_debugging_port = port(value),
-                "RIA_PREWARM" => prewarm = !value.is_empty(),
                 "RIA_INSTANCE" => instance = keyed_entries(value, INSTANCE_KEYS, &[], name),
                 "RIA_SWITCHES" => {
                     switches = value.split(',').filter_map(switch_entry).collect();
@@ -168,40 +165,8 @@ impl LaunchConfig {
                 }
             }
         }
-        let support = home.join("Library/Application Support");
-        let default_data = standardize(&support.join(BUNDLE_ID))?;
-        let default_config = standardize(&home.join(".config/ria"))?;
-        let ardia_roots = [
-            standardize(&support.join("com.ardia.browser"))?,
-            standardize(&support.join("Ardia"))?,
-            standardize(&home.join(".config/ardia"))?,
-        ];
-        let in_ardia = |path: &Path| ardia_roots.iter().any(|root| overlaps(path, root));
-        let scratch = data_dir
-            .map(|path| standardize(&current_dir.join(path)))
-            .transpose()?
-            .filter(|path| path != &default_data);
-        let isolated = scratch.is_some();
-        let (data_directory, config_directory) = if let Some(data) = scratch {
-            let config = standardize(&data.join("config"))?;
-            if [&data, &config].into_iter().any(|path| {
-                in_ardia(path) || overlaps(path, &default_data) || overlaps(path, &default_config)
-            }) {
-                return Err(io::Error::new(
-                    ErrorKind::InvalidInput,
-                    "RIA_DATA_DIR overlaps an installed profile or config directory",
-                ));
-            }
-            (data, config)
-        } else {
-            if in_ardia(&default_data) || in_ardia(&default_config) {
-                return Err(io::Error::new(
-                    ErrorKind::InvalidInput,
-                    "a default Ria directory overlaps an installed Ardia directory",
-                ));
-            }
-            (default_data, default_config)
-        };
+        let (data_directory, config_directory, isolated) =
+            launch_directories(data_dir, home, current_dir)?;
         let test_instance = isolated && !signed_for_distribution;
         if !test_instance && (!trace.is_empty() || !test.is_empty()) {
             let reason = if isolated {
@@ -218,7 +183,6 @@ impl LaunchConfig {
             config_directory,
             background,
             remote_debugging_port,
-            prewarm,
             isolated,
             test_instance,
             child_environment,
@@ -315,6 +279,47 @@ impl LaunchConfig {
         }
         args
     }
+}
+
+fn launch_directories(
+    override_path: Option<&str>,
+    home: &Path,
+    current_dir: &Path,
+) -> io::Result<(PathBuf, PathBuf, bool)> {
+    let default_data = home.join("Library/Application Support").join(BUNDLE_ID);
+    let (data, isolated) = if let Some(path) = override_path {
+        let data = standardize(&current_dir.join(path))?;
+        let installed = standardize(&default_data).ok();
+        match installed {
+            Some(root) if root == data => (root, false),
+            installed => {
+                let default_config = standardize(&home.join(".config/ria")).ok();
+                if installed
+                    .iter()
+                    .chain(default_config.iter())
+                    .any(|root| overlaps(root, &data))
+                {
+                    return Err(io::Error::new(
+                        ErrorKind::InvalidInput,
+                        "RIA_DATA_DIR overlaps the normal Ria profile or config directory",
+                    ));
+                }
+                (data, true)
+            }
+        }
+    } else {
+        (standardize(&default_data)?, false)
+    };
+    let config = if isolated {
+        let config = data.join("config");
+        profile::check_subdirectory(&config)?;
+        config
+    } else {
+        standardize(&home.join(".config/ria"))?
+    };
+    profile::check_subdirectory(&data.join("Chromium"))?;
+    profile::claim(&data)?;
+    Ok((data, config, isolated))
 }
 
 fn standardize(path: &Path) -> io::Result<PathBuf> {
@@ -419,8 +424,7 @@ fn switch_entry(piece: &str) -> Option<(String, bool)> {
 }
 
 fn cached_switches(directory: &Path) -> BTreeMap<String, bool> {
-    let cache = std::fs::read(directory.join("switches-cache.json"))
-        .ok()
+    let cache = profile::read(directory, Path::new("switches-cache.json"))
         .and_then(|data| serde_json::from_slice::<Value>(&data).ok());
     cache
         .as_ref()
@@ -435,12 +439,13 @@ fn cached_switches(directory: &Path) -> BTreeMap<String, bool> {
 #[cfg(test)]
 mod tests {
     use super::LaunchConfig;
-    use std::path::Path;
     use std::{fs, os::unix::fs::symlink};
 
     #[test]
     fn normal_ria_root_keeps_test_settings_disabled() {
-        let home = Path::new("/home/ria-launch-test");
+        let home = std::env::temp_dir().join(format!("ria-normal-test-{}", std::process::id()));
+        fs::create_dir(&home).unwrap();
+        let home = home.canonicalize().unwrap();
         let root = home.join("Library/Application Support/com.i098.ria");
         let config = LaunchConfig::from_environment(
             [
@@ -448,11 +453,12 @@ mod tests {
                 ("RIA_TEST", "loginsDelay=25,pipHover"),
                 ("RIA_TRACE", "pip"),
             ],
-            home,
-            Path::new("/"),
+            &home,
+            &home,
             false,
         )
         .unwrap();
+        fs::remove_dir_all(&home).unwrap();
 
         assert_eq!(config.data_directory, root);
         assert_eq!(config.config_directory, home.join(".config/ria"));
@@ -467,10 +473,12 @@ mod tests {
     fn rejects_ardia_roots_without_falling_back_to_ria() {
         let home = std::env::temp_dir().join(format!("ria-ardia-test-{}", std::process::id()));
         let support = home.join("Library/Application Support");
-        let ardia = support.join("com.ardia.browser");
+        fs::create_dir_all(&support).unwrap();
+        let ardia = home.join("old-scratch");
         let ria = support.join("com.i098.ria");
-        let alias = home.join("alias");
-        fs::create_dir_all(&ardia).unwrap();
+        let alias = support.join("com.ardia.browser");
+        fs::create_dir(&ardia).unwrap();
+        fs::write(ardia.join("session.json"), br#"{"version":11}"#).unwrap();
         symlink(&ardia, &alias).unwrap();
         let scratch = home.join("scratch");
         fs::create_dir(&scratch).unwrap();
@@ -487,6 +495,7 @@ mod tests {
             )
         });
         symlink(&ardia, &ria).unwrap();
+        let saved = super::super::saved_session::SavedSession::read(&ardia);
         let aliased_default = LaunchConfig::from_environment([], &home, &home, false);
         fs::remove_dir_all(&home).unwrap();
 
@@ -494,6 +503,31 @@ mod tests {
             assert!(result.is_err());
         }
         assert!(aliased_default.is_err());
+        assert!(saved.is_none());
+    }
+
+    #[test]
+    fn dangling_unused_paths_do_not_block_launch() {
+        let home = std::env::temp_dir().join(format!("ria-dangling-test-{}", std::process::id()));
+        fs::create_dir_all(home.join(".config")).unwrap();
+        symlink("missing", home.join(".config/ardia")).unwrap();
+        fs::create_dir(home.join("ria-dotfiles")).unwrap();
+        symlink("../ria-dotfiles", home.join(".config/ria")).unwrap();
+        let normal = LaunchConfig::from_environment([], &home, &home, false).unwrap();
+        fs::remove_file(home.join(".config/ria")).unwrap();
+        symlink("missing", home.join(".config/ria")).unwrap();
+        fs::remove_dir_all(&normal.data_directory).unwrap();
+        symlink("missing", normal.data_directory).unwrap();
+        let scratch =
+            LaunchConfig::from_environment([("RIA_DATA_DIR", "scratch")], &home, &home, false)
+                .unwrap();
+        let resolved_home = home.canonicalize().unwrap();
+        fs::remove_dir_all(&home).unwrap();
+
+        assert!(!normal.isolated);
+        assert_eq!(normal.config_directory, resolved_home.join("ria-dotfiles"));
+        assert_eq!(scratch.data_directory, resolved_home.join("scratch"));
+        assert!(scratch.test_instance);
     }
 
     #[test]
@@ -523,7 +557,10 @@ mod tests {
 
     #[test]
     fn filters_engine_settings_and_child_environment() {
-        let expected = Path::new("/tmp").canonicalize().unwrap().join("run/profile");
+        let home = std::env::temp_dir().join(format!("ria-filter-test-{}", std::process::id()));
+        fs::create_dir(&home).unwrap();
+        let home = home.canonicalize().unwrap();
+        let expected = home.join("profile");
         let config = LaunchConfig::from_environment(
             [
                 ("RIA_DATA_DIR", "profile"),
@@ -533,18 +570,24 @@ mod tests {
                     "downloadsDir=/tmp/a,b,allowAudio=off,unknown=42",
                 ),
                 ("RIA_SWITCHES", "two=off,one=true,bad=yes"),
-                ("RIA_TEST", "nativeDragRefused,loginsDelay=25,pipHover"),
+                (
+                    "RIA_TEST",
+                    "cliInstallScript=/tmp/install,nativeDragRefused,loginsDelay=25,pipHover",
+                ),
                 ("RIA_TRACE", "pip,visibility,nope,pip"),
+                ("RIA_PREWARM", "1"),
                 ("LANG", "en_US.UTF-8"),
             ],
-            Path::new("/home/user"),
-            Path::new("/tmp/run"),
+            &home,
+            &home,
             false,
         )
         .unwrap();
+        fs::remove_dir_all(&home).unwrap();
         assert_eq!(config.config_directory, expected.join("config"));
         assert!(!config.instance_flag("allowAudio"));
         assert!(config.test_flag("pipHover"));
+        assert_eq!(config.test_value("cliInstallScript"), None);
         assert_eq!(
             config.engine_switches(),
             [
@@ -563,27 +606,39 @@ mod tests {
     #[test]
     fn cached_switches_use_only_booleans_and_explicit_overrides_win() {
         let root = std::env::temp_dir().join(format!("ria-switches-test-{}", std::process::id()));
-        std::fs::create_dir(&root).unwrap();
-        std::fs::write(
-            root.join("switches-cache.json"),
-            br#"{"switches":{"cached":false,"overridden":false,"ignored":0}}"#,
-        )
-        .unwrap();
+        fs::create_dir(&root).unwrap();
+        let home = root.join("home");
+        let data = root.join("profile");
         let config = LaunchConfig::from_environment(
-            [
-                ("RIA_DATA_DIR", root.to_str().unwrap()),
-                ("RIA_SWITCHES", "overridden=on"),
-            ],
-            Path::new("/home/user"),
-            Path::new("/tmp/run"),
+            [("RIA_DATA_DIR", "profile"), ("RIA_SWITCHES", "overridden=on")],
+            &home,
+            &root,
             false,
         )
         .unwrap();
+        std::fs::write(
+            data.join("switches-cache.json"),
+            br#"{"switches":{"cached":false,"overridden":false,"ignored":0}}"#,
+        )
+        .unwrap();
+        let reopened =
+            LaunchConfig::from_environment([("RIA_DATA_DIR", "profile")], &home, &root, false)
+                .unwrap();
+        let reopened_value = reopened.switch_on("overridden");
         let cached = config.switch_on("cached");
         let overridden = config.switch_on("overridden");
         let ignored = config.switch_on("ignored");
+        let outside = root.join("outside.json");
+        fs::rename(data.join("switches-cache.json"), &outside).unwrap();
+        symlink(outside, data.join("switches-cache.json")).unwrap();
+        let linked =
+            LaunchConfig::from_environment([("RIA_DATA_DIR", "profile")], &home, &root, false)
+                .unwrap();
+        let ignored_link = linked.switch_on("cached");
         std::fs::remove_dir_all(root).unwrap();
+        assert!(ignored_link);
         assert!(!cached);
+        assert!(!reopened_value);
         assert!(overridden);
         assert!(ignored);
         assert!(!config.experiment_on("cached"));
@@ -592,6 +647,9 @@ mod tests {
 
     #[test]
     fn disables_trace_and_test_values_without_unsigned_scratch_profile() {
+        let home = std::env::temp_dir().join(format!("ria-test-gate-{}", std::process::id()));
+        fs::create_dir(&home).unwrap();
+        let home = home.canonicalize().unwrap();
         for (data_dir, distribution) in [("", false), ("profile", true)] {
             let config = LaunchConfig::from_environment(
                 [
@@ -599,8 +657,8 @@ mod tests {
                     ("RIA_TRACE", "pip"),
                     ("RIA_TEST", "loginsDelay=25"),
                 ],
-                Path::new("/home/user"),
-                Path::new("/tmp/run"),
+                &home,
+                &home,
                 distribution,
             )
             .unwrap();
@@ -614,10 +672,11 @@ mod tests {
             if data_dir.is_empty() {
                 assert_eq!(
                     config.data_directory,
-                    Path::new("/home/user/Library/Application Support/com.i098.ria")
+                    home.join("Library/Application Support/com.i098.ria")
                 );
-                assert_eq!(config.config_directory, Path::new("/home/user/.config/ria"));
+                assert_eq!(config.config_directory, home.join(".config/ria"));
             }
         }
+        fs::remove_dir_all(&home).unwrap();
     }
 }
