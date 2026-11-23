@@ -20,6 +20,8 @@ Each PR runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The checks 
 ```sh
 cargo fmt --manifest-path rust/Cargo.toml --check
 cargo clippy --manifest-path rust/Cargo.toml --workspace --all-targets -- -D warnings
+rustup target add aarch64-apple-darwin
+cargo clippy --locked --manifest-path rust/Cargo.toml --target aarch64-apple-darwin -p ria-host-mac --all-targets -- -D warnings
 cargo test --manifest-path rust/Cargo.toml --workspace --exclude ardia-plugin-jail
 cargo test --manifest-path rust/Cargo.toml -p ardia-plugin-jail --lib
 node rust/parity/compare.selftest.mjs
