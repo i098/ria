@@ -1,6 +1,6 @@
-// Source: packages/plugin-broker/crates/host/src/sandbox.rs in Ardia at commit 551d3c13c.
+// Ported from ardia packages/plugin-broker/crates/host/src/sandbox.rs at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
-// Rust port with changes: header added and moved into the Ria workspace.
+// This file is a Rust port of that file, with changes.
 use std::os::fd::RawFd;
 
 pub struct ConfinePoint<'a> {
