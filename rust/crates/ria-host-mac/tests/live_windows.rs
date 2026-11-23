@@ -29,11 +29,12 @@ mod mac {
     use objc2::{MainThreadMarker, rc::Retained, runtime::AnyObject, sel};
     use objc2_app_kit::{
         NSApplication, NSEvent, NSEventModifierFlags, NSEventType, NSMenu, NSMenuItem,
-        NSUserInterfaceItemIdentification, NSView, NSWindow, NSWindowButton,
+        NSScreen, NSUserInterfaceItemIdentification, NSView, NSWindow, NSWindowButton,
         NSWindowDidEnterFullScreenNotification, NSWindowDidExitFullScreenNotification,
     };
     use objc2_foundation::{
-        NSDate, NSNotification, NSNotificationCenter, NSPoint, NSRunLoop, NSString, ns_string,
+        NSDate, NSNotification, NSNotificationCenter, NSPoint, NSRect, NSRunLoop, NSSize, NSString,
+        ns_string,
     };
     use ria_engine::call::main_queue;
     use ria_host_mac::core::bindings::{Engine, Profile, Tab, Window};
@@ -216,6 +217,47 @@ mod mac {
         app.setMainMenu(previous_menu.as_deref());
     }
 
+    fn check_native_close(mtm: MainThreadMarker) {
+        let allow = Rc::new(Cell::new(false));
+        let requests = Rc::new(Cell::new(0));
+        let controllers = Controllers::new(
+            mtm,
+            true,
+            true,
+            {
+                let allow = allow.clone();
+                let requests = requests.clone();
+                move |_| {
+                    requests.set(requests.get() + 1);
+                    allow.get()
+                }
+            },
+            |_, _| false,
+        );
+        let controller = controllers.make_normal();
+        let window = controller.core.window();
+        window.orderFrontRegardless();
+        window.performClose(None);
+        wait_for("The engine did not ask whether the window could close", || {
+            requests.get() > 0
+        });
+        assert_eq!(requests.get(), 1);
+        assert!(window.isVisible());
+        let registered = controllers
+            .for_window(&window)
+            .expect("The vetoed window must stay registered");
+        assert!(Rc::ptr_eq(&registered, &controller));
+        assert_eq!(controllers.all().len(), 1);
+
+        allow.set(true);
+        window.performClose(None);
+        wait_for("The accepted close did not remove the window", || {
+            controllers.for_window(&window).is_none()
+        });
+        assert_eq!(requests.get(), 2);
+        assert!(controllers.all().is_empty());
+    }
+
     fn check_windows(profile: &Profile) {
         let mtm = MainThreadMarker::new().unwrap();
         let controllers = Controllers::new(mtm, true, true, |_| true, |_, _| false);
@@ -240,7 +282,6 @@ mod mac {
 
         let window = normal.core.window();
         let lights = normal.traffic_lights.as_ref().unwrap();
-        let before = window.frame();
         assert!(window.titlebarAppearsTransparent());
         let (sight_observer, sight_events) = observe(&window, ns_string!("ArdiaWindowSeenDidChange"));
         window.orderOut(None);
@@ -287,13 +328,29 @@ mod mac {
             observe(&window, unsafe { NSWindowDidEnterFullScreenNotification });
         let (exit_observer, exit_events) =
             observe(&window, unsafe { NSWindowDidExitFullScreenNotification });
+        let screen = window
+            .screen()
+            .or_else(|| NSScreen::mainScreen(mtm))
+            .expect("Acted fullscreen requires a screen");
+        let screen_frame = screen.frame();
+        window.setFrame_display(
+            NSRect::new(
+                NSPoint::new(screen_frame.origin.x + 40., screen_frame.origin.y + 40.),
+                NSSize::new(600., 500.),
+            ),
+            false,
+        );
+        let before = window.frame();
+        assert_ne!(before, screen_frame);
         normal
             .fullscreen
             .act_window_full_screen(true, Duration::ZERO);
+        assert_eq!(window.frame(), screen_frame);
         normal
             .fullscreen
             .act_window_full_screen(true, Duration::ZERO);
         assert_eq!((enter_events.get(), exit_events.get()), (1, 0));
+        assert_eq!(window.frame(), screen_frame);
         assert!(normal.core.acted_full_screen() && normal.fullscreen.is_full_screen());
         assert!(!normal.fullscreen.transitioning());
         normal
@@ -314,8 +371,9 @@ mod mac {
         for controller in [&normal, &chrome, &stray, &standalone] {
             controller.core.close();
         }
+        check_native_close(mtm);
         println!(
-            "live_windows: engine shortcut, controller claims, titlebar hit testing, visibility, and acted fullscreen events checked"
+            "live_windows: engine shortcut, controller claims, titlebar hit testing, visibility, acted fullscreen, and native close checked"
         );
     }
 

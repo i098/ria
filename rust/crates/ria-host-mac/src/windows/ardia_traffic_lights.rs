@@ -6,7 +6,6 @@ use std::cell::{Cell, RefCell};
 use std::ptr;
 use std::rc::Rc;
 use std::sync::OnceLock;
-use std::time::Duration;
 
 use block2::RcBlock;
 use objc2::rc::{Retained, Weak};
@@ -20,9 +19,7 @@ use objc2_app_kit::{
 use objc2_foundation::{
     NSArray, NSNotification, NSNotificationCenter, NSNumber, NSPoint, NSRect, NSSize, ns_string,
 };
-use ria_engine::call::main_queue;
 
-const LIGHTS_SETTLE: Duration = Duration::from_millis(50);
 const BUTTONS: [NSWindowButton; 3] = [
     NSWindowButton::CloseButton,
     NSWindowButton::MiniaturizeButton,
@@ -53,8 +50,6 @@ impl Placement {
 pub struct TrafficLights {
     window: Weak<NSWindow>,
     placement: Cell<Placement>,
-    shown: Cell<Option<Placement>>,
-    move_turn: Cell<u64>,
     observers: RefCell<Vec<Retained<AnyObject>>>,
 }
 
@@ -103,8 +98,6 @@ impl TrafficLights {
         let lights = Rc::new(Self {
             window: Weak::from(window),
             placement: Cell::default(),
-            shown: Cell::default(),
-            move_turn: Cell::default(),
             observers: RefCell::default(),
         });
         // SAFETY: These notifications carry the NSWindow supplied as the object filter.
@@ -117,7 +110,7 @@ impl TrafficLights {
             let weak = Rc::downgrade(&lights);
             let callback = RcBlock::new(move |_: std::ptr::NonNull<NSNotification>| {
                 if let Some(lights) = weak.upgrade() {
-                    lights.refit();
+                    lights.retile();
                 }
             });
             // SAFETY: The block receives an NSNotification and does not outlive its observer token.
@@ -131,7 +124,7 @@ impl TrafficLights {
             };
             lights.observers.borrow_mut().push(observer.into());
         }
-        lights.retile(true);
+        lights.retile();
         lights
     }
 
@@ -141,90 +134,34 @@ impl TrafficLights {
 
     pub fn set_placement(&self, placement: Placement) {
         let previous = self.placement.replace(placement);
-        let changed = previous != placement;
         if previous.center.map(|at| at.y) != placement.center.map(|at| at.y)
             && let Some(window) = self.window.load()
         {
             set_titlebar_center(&window, placement);
         }
-        if self.shown.take().is_some() || changed {
-            self.retile(true);
+        if previous != placement {
+            self.retile();
         }
     }
 
-    pub fn move_to(self: &Rc<Self>, placement: Placement) {
-        let current = self.shown.get().unwrap_or_else(|| self.placement.get());
-        if current == placement {
-            return;
-        }
-        let Some(window) = self.window.load() else {
-            return;
-        };
-        let Some(close) = window.standardWindowButton(NSWindowButton::CloseButton) else {
-            self.set_placement(placement);
-            return;
-        };
-        let size = close.frame().size;
-        let width = window.frame().size.width;
-        let base = self.placement.get();
-        let laid_out = base.center(width, size);
-        let target = placement.center(width, size);
-        if placement.trailing != current.trailing
-            || base.center.is_some() != placement.center.is_some()
-            || laid_out.y != target.y
-            || window.styleMask().contains(NSWindowStyleMask::FullScreen)
-        {
-            self.set_placement(placement);
-            return;
-        }
-        self.shown
-            .set((laid_out.x != target.x).then_some(placement));
-        self.retile(false);
-        let turn = self.move_turn.get().wrapping_add(1);
-        self.move_turn.set(turn);
-        if self.shown.get().is_none() {
-            return;
-        }
-        let weak = Rc::downgrade(self);
-        main_queue::after(
-            LIGHTS_SETTLE,
-            Box::new(move || {
-                if let Some(lights) = weak.upgrade()
-                    && lights.move_turn.get() == turn
-                {
-                    lights.refit();
-                }
-            }),
-        );
-    }
-
-    fn refit(&self) {
-        if let Some(shown) = self.shown.take() {
-            self.set_placement(shown);
-        } else {
-            self.retile(true);
-        }
-    }
-
-    fn retile(&self, reset: bool) {
+    fn retile(&self) {
         let Some(window) = self.window.load() else {
             return;
         };
         let Some(frame) = frame_view(&window) else {
             return;
         };
-        if reset {
-            if self.placement.get().center.is_some() {
-                install_titlebar_extension(frame.class());
-            }
-            for name in [
-                sel!(_updateTitlebarContainerViewFrameIfNecessary),
-                sel!(_updateButtonPositions),
-                sel!(_updateMouseTracking),
-                sel!(_positionSharingIndicator),
-            ] {
-                send_no_args(&frame, name);
-            }
+        let placement = self.placement.get();
+        if placement.center.is_some() {
+            install_titlebar_extension(frame.class());
+        }
+        for name in [
+            sel!(_updateTitlebarContainerViewFrameIfNecessary),
+            sel!(_updateButtonPositions),
+            sel!(_updateMouseTracking),
+            sel!(_positionSharingIndicator),
+        ] {
+            send_no_args(&frame, name);
         }
         let buttons = BUTTONS.map(|kind| window.standardWindowButton(kind));
         let Some(close) = buttons.iter().flatten().next() else {
@@ -239,7 +176,6 @@ impl TrafficLights {
         let close_rect = close.convertRect_toView(close.bounds(), Some(&frame));
         let size = close_rect.size;
         let frame_size = frame.bounds().size;
-        let placement = self.shown.get().unwrap_or_else(|| self.placement.get());
         let at = placement.center(window.frame().size.width, size);
         let target_x = at.x - size.width / 2.;
         let target_y = if frame.isFlipped() {
