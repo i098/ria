@@ -375,7 +375,7 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 | mac | `packages/core/scripts/` | TypeScript/JavaScript | 39 | ready | ria-core | analyze | todo | stay-3 | stay |
 | mac | `packages/core/src/anonymousIdentity.ts` | TypeScript/JavaScript | 86 | ready | `rust/crates/ria-core/src/identity/`, `rust/recorded/1.6/` | analyze | todo | 1.6 | port |
 | mac | `packages/core/src/appUrls.ts` | TypeScript/JavaScript | 52 | ready | `rust/crates/ria-core/src/url/`, `rust/recorded/1.2/` | analyze | todo | 1.2 | port |
-| mac | `packages/core/src/bangList.ts` | TypeScript/JavaScript | 10706 | caution | `rust/crates/ria-core/src/search/bang_list.rs`, `rust/crates/ria-core/src/search/bang_list.tsv`, `rust/tools/bang-tsv/` | analyze | todo | 1.5 | port |
+| mac | `packages/core/src/bangList.ts` | TypeScript/JavaScript | 10706 | caution | `rust/crates/ria-core/src/search/bang_list.rs`, `rust/crates/ria-core/src/search/bang_list.tsv`, `rust/tools/bang-tsv/` | analyze | done | 1.5 | port |
 | mac | `packages/core/src/bangs.ts` | TypeScript/JavaScript | 210 | ready | `rust/crates/ria-core/src/search/`, `rust/recorded/1.4/` | analyze | todo | 1.4 | port |
 | mac | `packages/core/src/calculator.ts` | TypeScript/JavaScript | 293 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
 | mac | `packages/core/src/candidatePool.ts` | TypeScript/JavaScript | 172 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |

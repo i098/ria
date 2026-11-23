@@ -23,8 +23,8 @@ The extractor reads the pinned Git object and takes the JavaScript string values
 `samples.tsv` records each list's row count and 100 evenly spaced rows with zero-based indexes, including both ends.
 The Rust test compares both lists with that fixture.
 
-Blaze does not support the writable static `__RUST_STD_INTERNAL_VAL` that the Rust test harness uses.
-Run the parity test with Cargo, as in [CI](../../../CONTRIBUTING.md#ci-and-quality-gates):
+Run the parity test with Cargo, as in [CI](../../../CONTRIBUTING.md#ci-and-quality-gates).
+See the [Blaze test-harness limit](../blaze/README.md#rust-test-harness-limit).
 
 ```sh
 cargo test --manifest-path rust/Cargo.toml -p ria-core --lib bundled_lists_match_frozen_ardia_samples
