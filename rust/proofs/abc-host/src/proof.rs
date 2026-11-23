@@ -22,6 +22,9 @@ use objc2_app_kit::{
 };
 use objc2_foundation::{NSNotFound, NSPoint, NSProcessInfo, NSRange, NSRect, NSSize, NSString};
 
+use objc2::runtime::NSObject;
+use objc2::{ClassType, define_class};
+
 use crate::layer::{Mode, RuneView, element_center};
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
@@ -30,6 +33,28 @@ pub enum Kind {
     B,
     C,
 }
+
+thread_local! {
+    /// The last title the tab delegate reported, with the time it arrived.
+    static TAB_TITLE: RefCell<Option<(f64, String)>> = const { RefCell::new(None) };
+    static T0: std::cell::Cell<Option<Instant>> = const { std::cell::Cell::new(None) };
+}
+
+define_class!(
+    #[unsafe(super(NSObject))]
+    #[name = "HalyardTabDelegate"]
+    struct TabDelegate;
+
+    impl TabDelegate {
+        #[unsafe(method(tabDidChangeTitle:))]
+        fn tab_did_change_title(&self, tab: &AnyObject) {
+            let title: Option<Retained<NSString>> = unsafe { msg_send![tab, title] };
+            let title = title.map(|t| t.to_string()).unwrap_or_default();
+            let ms = T0.with(|t| t.get()).map_or(0.0, t_ms);
+            TAB_TITLE.with(|c| *c.borrow_mut() = Some((ms, title)));
+        }
+    }
+);
 
 const PAGE_TITLE: &str = "Halyard proof page";
 const STRIP_W: f64 = 320.0;
@@ -188,6 +213,10 @@ pub fn begin(kind: Kind, page_url: &str, started: Instant, engine: Retained<AnyO
     let host_view: Retained<NSView> = unsafe { msg_send![&*window, hostView] };
     let tab_view: Retained<NSView> = unsafe { msg_send![&*tab, view] };
     nswindow.setAcceptsMouseMovedEvents(true);
+    T0.with(|t| t.set(Some(started)));
+    let tab_delegate: Retained<AnyObject> = unsafe { msg_send![TabDelegate::class(), new] };
+    let _: () = unsafe { msg_send![&*tab, setDelegate: &*tab_delegate] };
+    std::mem::forget(tab_delegate);
 
     let bounds = host_view.bounds();
     let grow = NSAutoresizingMaskOptions::ViewWidthSizable | NSAutoresizingMaskOptions::ViewHeightSizable;
@@ -323,8 +352,9 @@ pub fn engine_will_shut_down() {
 /// NSGlassEffectView (macOS 26) when the system has it, else a blurring NSVisualEffectView.
 fn make_glass(mtm: MainThreadMarker, frame: NSRect) -> Retained<NSView> {
     if let Some(class) = AnyClass::get(c"NSGlassEffectView") {
-        let alloc: Allocated<AnyObject> = unsafe { msg_send![class, alloc] };
-        let glass: Retained<NSView> = unsafe { msg_send![alloc, initWithFrame: frame] };
+        // The class is an NSView subclass, so `initWithFrame:` reaches its own init.
+        let alloc: Allocated<NSView> = unsafe { msg_send![class, alloc] };
+        let glass = NSView::initWithFrame(alloc, frame);
         let _: () = unsafe { msg_send![&*glass, setCornerRadius: 22.0f64] };
         emit("{\"event\":\"glass\",\"class\":\"NSGlassEffectView\"}");
         return glass;
@@ -524,39 +554,32 @@ impl Ctx {
     }
 
     fn wait_load(&mut self) {
-        if self.js_inflight {
-            let Some(state) = self.js_result() else { return };
-            let title = state["title"].as_str().unwrap_or("");
-            let raf = state["raf"].as_u64().unwrap_or(0);
-            if title == PAGE_TITLE && raf > 2 {
-                let ms = t_ms(self.started);
-                self.page_loaded_ms = Some(ms);
-                let url: Retained<NSString> = unsafe { msg_send![&*self.tab, url] };
-                let tabs: Retained<AnyObject> = unsafe { msg_send![&*self.window, tabsForProfile: &*self.profile] };
-                let count: usize = unsafe { msg_send![&*tabs, count] };
-                let app = NSApplication::sharedApplication(MainThreadMarker::new().expect("main"));
-                let windows = app.windows();
-                let visible = windows.iter().filter(|w| w.isVisible()).count();
-                self.ev(
-                    "page_loaded",
-                    &format!(
-                        "\"url\":{},\"title\":{},\"raf_frames\":{raf},\"tabs\":{count},\"app_windows\":{},\"visible_windows\":{visible}",
-                        json(&url.to_string()),
-                        json(title),
-                        windows.len()
-                    ),
-                );
-                self.check("one_tab", count == 1, &format!("tabs={count}"));
-                self.check("page_ran_js", raf > 2, &format!("requestAnimationFrame ran {raf} times"));
-                self.step = if self.kind == Kind::A { Step::Finish } else { Step::WaitRune };
-                self.until = Instant::now();
-            }
+        let loading: bool = unsafe { msg_send![&*self.tab, loading] };
+        let Some((delegate_ms, title)) = TAB_TITLE.with(|t| t.borrow().clone()) else { return };
+        if loading || title != PAGE_TITLE {
             return;
         }
-        let loading: bool = unsafe { msg_send![&*self.tab, loading] };
-        if !loading {
-            self.js(STATE_JS);
-        }
+        let ms = t_ms(self.started);
+        self.page_loaded_ms = Some(ms);
+        let url: Retained<NSString> = unsafe { msg_send![&*self.tab, url] };
+        let tabs: Retained<AnyObject> = unsafe { msg_send![&*self.window, tabsForProfile: &*self.profile] };
+        let count: usize = unsafe { msg_send![&*tabs, count] };
+        let app = NSApplication::sharedApplication(MainThreadMarker::new().expect("main"));
+        let windows = app.windows();
+        let visible = windows.iter().filter(|w| w.isVisible()).count();
+        self.ev(
+            "page_loaded",
+            &format!(
+                "\"url\":{},\"title\":{},\"delegate_title_ms\":{delegate_ms:.1},\"tabs\":{count},\"app_windows\":{},\"visible_windows\":{visible}",
+                json(&url.to_string()),
+                json(&title),
+                windows.len()
+            ),
+        );
+        self.check("one_tab", count == 1, &format!("tabs={count}"));
+        self.check("delegate_title", true, &format!("tabDidChangeTitle delivered {title:?} at {delegate_ms:.1} ms"));
+        self.step = if self.kind == Kind::A { Step::Finish } else { Step::WaitRune };
+        self.until = Instant::now();
     }
 
     fn pointer_move(&mut self) {

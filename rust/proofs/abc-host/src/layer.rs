@@ -303,7 +303,8 @@ define_class!(
 
         #[unsafe(method(mouseDragged:))]
         fn mouse_dragged(&self, event: &NSEvent) {
-            self.mouse_moved(event);
+            let (x, y) = self.point(event);
+            self.with_host(|h| h.runtime_mut().pointer_move(x, y));
         }
 
         #[unsafe(method(mouseExited:))]
@@ -593,7 +594,7 @@ impl RuneView {
     /// The pointer position inside the view, from an event with a window or a screen location.
     fn point(&self, event: &NSEvent) -> (f32, f32) {
         let at = event.locationInWindow();
-        let in_window = if event.window().is_some() {
+        let in_window = if event.window(self.mtm()).is_some() {
             at
         } else {
             self.window().map_or(at, |w| w.convertPointFromScreen(at))
