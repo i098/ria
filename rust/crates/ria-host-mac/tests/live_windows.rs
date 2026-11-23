@@ -467,6 +467,20 @@ mod mac {
                 .unwrap()
         });
         assert!(host.is_fullscreen(&made));
+        host.dev_action(&made, "fakeFullScreen:0:0", true).unwrap();
+        host.set_traffic_lights(
+            &window,
+            Placement {
+                center: Some(NSPoint::new(160., 80.)),
+                trailing: true,
+            },
+            true,
+        );
+        wait_for("trailing traffic lights did not settle", || {
+            let rect = close.convertRect_toView(close.bounds(), Some(&frame));
+            let expected = window.frame().size.width - 160.;
+            (rect.origin.x + rect.size.width / 2. - expected).abs() < 1.
+        });
         let root = NSView::initWithFrame(mtm.alloc(), NSRect::ZERO);
         host.embed_root(&made, &root);
         assert!(

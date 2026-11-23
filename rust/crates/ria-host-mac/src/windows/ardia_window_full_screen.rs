@@ -474,7 +474,7 @@ impl FullScreen {
             core.set_acted_full_screen(false);
         }
         unsafe {
-            center.postNotificationName_object(
+            NSNotificationCenter::defaultCenter().postNotificationName_object(
                 if entering {
                     NSWindowDidEnterFullScreenNotification
                 } else {

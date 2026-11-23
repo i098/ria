@@ -228,7 +228,6 @@ impl ChromeWindowHost {
         if let Some(controller) = self.controllers.for_window(window)
             && let Some(lights) = &controller.traffic_lights
         {
-            lights.set_scale(scale::scale());
             if animate {
                 lights.move_to(placement);
             } else {
