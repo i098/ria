@@ -249,8 +249,16 @@ define_class!(
 impl EngineDelegate {
     /// Makes the delegate. `page_script` is the text of `page_script.js` (Ardia reads it from the bundle); the
     /// delegate gives it to the engine at `engineDidStart`.
-    pub fn new(hooks: Rc<dyn Hooks>, state: Rc<State>, page_script: Option<String>) -> Retained<Self> {
-        let this = Self::alloc().set_ivars(Ivars { hooks, state, page_script });
+    pub fn new(
+        hooks: Rc<dyn Hooks>,
+        state: Rc<State>,
+        page_script: Option<String>,
+    ) -> Retained<Self> {
+        let this = Self::alloc().set_ivars(Ivars {
+            hooks,
+            state,
+            page_script,
+        });
         unsafe { msg_send![super(this), init] }
     }
 
@@ -278,7 +286,10 @@ fn object(payload: &Payload) -> Map<String, Value> {
 }
 
 fn opened(payload: &Map<String, Value>) -> bool {
-    payload.get("open").and_then(Value::as_bool).unwrap_or(false)
+    payload
+        .get("open")
+        .and_then(Value::as_bool)
+        .unwrap_or(false)
 }
 
 fn id(payload: &Map<String, Value>) -> i32 {

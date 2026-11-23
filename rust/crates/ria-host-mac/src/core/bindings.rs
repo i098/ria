@@ -13,13 +13,15 @@
 use std::ffi::{c_char, c_int, c_void};
 
 use block2::DynBlock;
+use block2::RcBlock;
 use objc2::encode::{Encode, Encoding};
 use objc2::rc::Retained;
 use objc2::runtime::{AnyObject, NSObject};
 use objc2::{extern_class, extern_methods};
 use objc2_app_kit::{NSColor, NSEvent, NSImage, NSView, NSWindow};
-use block2::RcBlock;
-use objc2_foundation::{NSArray, NSData, NSDate, NSDictionary, NSNumber, NSRect, NSSize, NSString, NSTimeInterval};
+use objc2_foundation::{
+    NSArray, NSData, NSDate, NSDictionary, NSNumber, NSRect, NSSize, NSString, NSTimeInterval,
+};
 
 /// `NSDictionary<NSString *, id>`: the shape of each payload of the engine.
 pub type Payload = NSDictionary<NSString, AnyObject>;
@@ -78,7 +80,11 @@ impl Engine {
         #[unsafe(method(defaultProfile))]
         pub fn default_profile(&self) -> Retained<Profile>;
         #[unsafe(method(loadProfile:completion:))]
-        fn load_profile_raw(&self, directory_name: &NSString, completion: &DynBlock<dyn Fn(*mut AnyObject)>);
+        fn load_profile_raw(
+            &self,
+            directory_name: &NSString,
+            completion: &DynBlock<dyn Fn(*mut AnyObject)>,
+        );
         #[unsafe(method(quit))]
         pub fn quit(&self);
         #[unsafe(method(setPageScript:))]
@@ -117,7 +123,11 @@ impl Engine {
         #[unsafe(method(openDeviceChooserSettings:))]
         pub fn open_device_chooser_settings(chooser_id: c_int);
         #[unsafe(method(deleteProfile:completion:))]
-        pub fn delete_profile(&self, profile: &Profile, completion: Option<&DynBlock<dyn Fn(bool)>>);
+        pub fn delete_profile(
+            &self,
+            profile: &Profile,
+            completion: Option<&DynBlock<dyn Fn(bool)>>,
+        );
         #[unsafe(method(releaseProfile:))]
         pub fn release_profile(&self, profile: &Profile);
         #[unsafe(method(resolveExternalApp:open:remember:))]
@@ -141,7 +151,11 @@ impl Engine {
         #[unsafe(method(setPagesPickDisplayMedia:))]
         pub fn set_pages_pick_display_media(on: bool);
         #[unsafe(method(offTheRecordProfileFor:completion:))]
-        fn off_the_record_profile_for_raw(&self, profile: &Profile, completion: &DynBlock<dyn Fn(*mut AnyObject, *mut AnyObject)>);
+        fn off_the_record_profile_for_raw(
+            &self,
+            profile: &Profile,
+            completion: &DynBlock<dyn Fn(*mut AnyObject, *mut AnyObject)>,
+        );
         #[unsafe(method(chromiumVersion))]
         pub fn chromium_version(&self) -> Retained<NSString>;
         #[unsafe(method(keepAliveState))]
@@ -151,7 +165,11 @@ impl Engine {
 
         // Category `IdleProfiles`.
         #[unsafe(method(sleepIdleProfile:hostedTabs:))]
-        pub fn sleep_idle_profile(&self, profile: &Profile, hosted_tabs: &NSArray<Tab>) -> Option<Retained<NSString>>;
+        pub fn sleep_idle_profile(
+            &self,
+            profile: &Profile,
+            hosted_tabs: &NSArray<Tab>,
+        ) -> Option<Retained<NSString>>;
         #[unsafe(method(unloadIdleProfile:))]
         pub fn unload_idle_profile(&self, profile: &Profile) -> Retained<NSString>;
 
@@ -222,7 +240,12 @@ impl Profile {
 
         // Category `Icons`.
         #[unsafe(method(fetchIcon:maxBytes:completion:))]
-        fn fetch_icon_raw(&self, url: &NSString, max_bytes: usize, completion: &DynBlock<dyn Fn(*mut AnyObject)>);
+        fn fetch_icon_raw(
+            &self,
+            url: &NSString,
+            max_bytes: usize,
+            completion: &DynBlock<dyn Fn(*mut AnyObject)>,
+        );
     );
 }
 
@@ -242,7 +265,10 @@ impl Window {
         #[unsafe(method(isChromeFramelessWindow:))]
         pub fn is_chrome_frameless_window(window: &NSWindow) -> bool;
         #[unsafe(method(initWithContentRect:))]
-        pub unsafe fn init_with_content_rect(this: objc2::rc::Allocated<Self>, rect: NSRect) -> Retained<Self>;
+        pub unsafe fn init_with_content_rect(
+            this: objc2::rc::Allocated<Self>,
+            rect: NSRect,
+        ) -> Retained<Self>;
         #[unsafe(method(window))]
         pub fn window(&self) -> Retained<NSWindow>;
         #[unsafe(method(hostView))]
@@ -252,9 +278,19 @@ impl Window {
         pub unsafe fn set_delegate(&self, delegate: Option<&AnyObject>);
 
         #[unsafe(method(openTab:profile:foreground:))]
-        pub fn open_tab(&self, url: &NSString, profile: &Profile, foreground: bool) -> Retained<Tab>;
+        pub fn open_tab(
+            &self,
+            url: &NSString,
+            profile: &Profile,
+            foreground: bool,
+        ) -> Retained<Tab>;
         #[unsafe(method(openExtensionView:profile:kind:))]
-        pub fn open_extension_view(&self, url: &NSString, profile: &Profile, kind: &NSString) -> Option<Retained<Tab>>;
+        pub fn open_extension_view(
+            &self,
+            url: &NSString,
+            profile: &Profile,
+            kind: &NSString,
+        ) -> Option<Retained<Tab>>;
         #[unsafe(method(activeProfile))]
         pub fn active_profile(&self) -> Option<Retained<Profile>>;
         #[unsafe(method(setActiveProfile:))]
@@ -283,9 +319,19 @@ impl Window {
         #[unsafe(method(canAdoptTab:))]
         pub fn can_adopt_tab(&self, tab: &Tab) -> Adoption;
         #[unsafe(method(restoreTab:profile:foreground:))]
-        pub fn restore_tab(&self, state: Option<&NSString>, profile: &Profile, foreground: bool) -> Option<Retained<Tab>>;
+        pub fn restore_tab(
+            &self,
+            state: Option<&NSString>,
+            profile: &Profile,
+            foreground: bool,
+        ) -> Option<Retained<Tab>>;
         #[unsafe(method(duplicateTab:profile:foreground:))]
-        pub fn duplicate_tab(&self, source: &Tab, profile: &Profile, foreground: bool) -> Option<Retained<Tab>>;
+        pub fn duplicate_tab(
+            &self,
+            source: &Tab,
+            profile: &Profile,
+            foreground: bool,
+        ) -> Option<Retained<Tab>>;
         #[unsafe(method(placeTab:index:pinned:))]
         pub fn place_tab(&self, tab: &Tab, index: c_int, pinned: bool);
         #[unsafe(method(internal))]
@@ -299,7 +345,10 @@ impl Window {
 
         // Category `Picture`.
         #[unsafe(method(copyPictureOfChromeWindow:completion:))]
-        pub fn copy_picture_of_chrome_window(window: &NSWindow, completion: &DynBlock<dyn Fn(CGImageRef)>);
+        pub fn copy_picture_of_chrome_window(
+            window: &NSWindow,
+            completion: &DynBlock<dyn Fn(CGImageRef)>,
+        );
     );
 }
 
@@ -349,7 +398,12 @@ impl Tab {
         #[unsafe(method(passwordPrompt))]
         pub fn password_prompt(&self) -> Option<Retained<Payload>>;
         #[unsafe(method(resolvePasswordPrompt:username:password:))]
-        pub fn resolve_password_prompt(&self, action: &NSString, username: Option<&NSString>, password: Option<&NSString>);
+        pub fn resolve_password_prompt(
+            &self,
+            action: &NSString,
+            username: Option<&NSString>,
+            password: Option<&NSString>,
+        );
         #[unsafe(method(autofillPrompt))]
         pub fn autofill_prompt(&self) -> Option<Retained<Payload>>;
         #[unsafe(method(resolveAutofillPrompt:action:))]
@@ -484,7 +538,12 @@ impl Tab {
         #[unsafe(method(devToolsView))]
         pub fn dev_tools_view(&self) -> Option<Retained<NSView>>;
         #[unsafe(method(devToolsLayoutForSize:devTools:page:))]
-        pub unsafe fn dev_tools_layout_for_size(&self, size: NSSize, dev_tools_frame: *mut NSRect, page_frame: *mut NSRect);
+        pub unsafe fn dev_tools_layout_for_size(
+            &self,
+            size: NSSize,
+            dev_tools_frame: *mut NSRect,
+            page_frame: *mut NSRect,
+        );
         #[unsafe(method(devToolsCall:params:timeout:completion:))]
         fn dev_tools_call_raw(
             &self,
@@ -498,7 +557,11 @@ impl Tab {
         #[unsafe(method(mediaCaptureSourceId))]
         pub fn media_capture_source_id(&self) -> Option<Retained<NSString>>;
         #[unsafe(method(copyPicture:completion:))]
-        pub fn copy_picture(&self, timeout: NSTimeInterval, completion: &DynBlock<dyn Fn(CGImageRef)>);
+        pub fn copy_picture(
+            &self,
+            timeout: NSTimeInterval,
+            completion: &DynBlock<dyn Fn(CGImageRef)>,
+        );
         #[unsafe(method(stopCapture))]
         pub fn stop_capture(&self) -> bool;
         #[unsafe(method(noteShownByHost:))]
@@ -530,9 +593,15 @@ impl Tab {
         #[unsafe(method(executeExtensionAction:))]
         pub fn execute_extension_action(&self, extension_id: &NSString) -> Retained<NSString>;
         #[unsafe(method(actionStatesForExtensions:))]
-        pub fn action_states_for_extensions(&self, extension_ids: &NSArray<NSString>) -> Retained<NSDictionary<NSString, NSDictionary>>;
+        pub fn action_states_for_extensions(
+            &self,
+            extension_ids: &NSArray<NSString>,
+        ) -> Retained<NSDictionary<NSString, NSDictionary>>;
         #[unsafe(method(sidePanelURLForExtension:))]
-        pub fn side_panel_url_for_extension(&self, extension_id: &NSString) -> Option<Retained<NSString>>;
+        pub fn side_panel_url_for_extension(
+            &self,
+            extension_id: &NSString,
+        ) -> Option<Retained<NSString>>;
     );
 }
 
@@ -567,35 +636,74 @@ pub type Event = NSEvent;
 
 impl Engine {
     /// `-loadProfile:completion:`. The completion may run before this call returns.
-    pub fn load_profile(&self, directory_name: &NSString, completion: impl Fn(Option<Retained<Profile>>) + 'static) {
-        self.load_profile_raw(directory_name, &RcBlock::new(move |p: *mut AnyObject| completion(unsafe { Retained::retain(p.cast::<Profile>()) })));
+    pub fn load_profile(
+        &self,
+        directory_name: &NSString,
+        completion: impl Fn(Option<Retained<Profile>>) + 'static,
+    ) {
+        self.load_profile_raw(
+            directory_name,
+            &RcBlock::new(move |p: *mut AnyObject| {
+                completion(unsafe { Retained::retain(p.cast::<Profile>()) })
+            }),
+        );
     }
 
     /// `-offTheRecordProfileFor:completion:`: the completion gets the private profile or the error text.
-    pub fn off_the_record_profile_for(&self, profile: &Profile, completion: impl Fn(Option<Retained<Profile>>, Option<String>) + 'static) {
+    pub fn off_the_record_profile_for(
+        &self,
+        profile: &Profile,
+        completion: impl Fn(Option<Retained<Profile>>, Option<String>) + 'static,
+    ) {
         self.off_the_record_profile_for_raw(
             profile,
-            &RcBlock::new(move |p: *mut AnyObject, e: *mut AnyObject| completion(unsafe { Retained::retain(p.cast::<Profile>()) }, unsafe { e.cast::<NSString>().as_ref() }.map(|e| e.to_string()))),
+            &RcBlock::new(move |p: *mut AnyObject, e: *mut AnyObject| {
+                completion(
+                    unsafe { Retained::retain(p.cast::<Profile>()) },
+                    unsafe { e.cast::<NSString>().as_ref() }.map(|e| e.to_string()),
+                )
+            }),
         );
     }
 
     /// `+endTracing:completion:`: the completion gets the path of the trace, or `None`.
     pub fn end_tracing(keep: bool, completion: impl Fn(Option<String>) + 'static) {
-        Self::end_tracing_raw(keep, &RcBlock::new(move |p: *mut AnyObject| completion(unsafe { p.cast::<NSString>().as_ref() }.map(|p| p.to_string()))));
+        Self::end_tracing_raw(
+            keep,
+            &RcBlock::new(move |p: *mut AnyObject| {
+                completion(unsafe { p.cast::<NSString>().as_ref() }.map(|p| p.to_string()))
+            }),
+        );
     }
 }
 
 impl Profile {
     /// `-fetchIcon:maxBytes:completion:`: the completion gets the bytes, or `None`.
-    pub fn fetch_icon(&self, url: &NSString, max_bytes: usize, completion: impl Fn(Option<Vec<u8>>) + 'static) {
-        self.fetch_icon_raw(url, max_bytes, &RcBlock::new(move |d: *mut AnyObject| completion(unsafe { d.cast::<NSData>().as_ref() }.map(NSData::to_vec))));
+    pub fn fetch_icon(
+        &self,
+        url: &NSString,
+        max_bytes: usize,
+        completion: impl Fn(Option<Vec<u8>>) + 'static,
+    ) {
+        self.fetch_icon_raw(
+            url,
+            max_bytes,
+            &RcBlock::new(move |d: *mut AnyObject| {
+                completion(unsafe { d.cast::<NSData>().as_ref() }.map(NSData::to_vec))
+            }),
+        );
     }
 }
 
 impl Tab {
     /// `-evaluate:completion:`: the completion gets the JSON text of the result, or `None`.
     pub fn evaluate(&self, code: &NSString, completion: impl Fn(Option<String>) + 'static) {
-        self.evaluate_raw(code, &RcBlock::new(move |j: *mut AnyObject| completion(unsafe { j.cast::<NSString>().as_ref() }.map(|j| j.to_string()))));
+        self.evaluate_raw(
+            code,
+            &RcBlock::new(move |j: *mut AnyObject| {
+                completion(unsafe { j.cast::<NSString>().as_ref() }.map(|j| j.to_string()))
+            }),
+        );
     }
 
     /// `-devToolsCall:params:timeout:completion:`: the completion gets the result or the error text.
@@ -610,15 +718,31 @@ impl Tab {
             method,
             params,
             timeout,
-            &RcBlock::new(move |r: *mut AnyObject, e: *mut AnyObject| completion(unsafe { Retained::retain(r.cast::<NSDictionary>()) }, unsafe { e.cast::<NSString>().as_ref() }.map(|e| e.to_string()))),
+            &RcBlock::new(move |r: *mut AnyObject, e: *mut AnyObject| {
+                completion(
+                    unsafe { Retained::retain(r.cast::<NSDictionary>()) },
+                    unsafe { e.cast::<NSString>().as_ref() }.map(|e| e.to_string()),
+                )
+            }),
         );
     }
 
     /// `-enterPictureInPictureForClickAt:completion:`: the completion gets the route and whether the window opened.
-    pub fn enter_picture_in_picture_for_click_at(&self, click_time: NSTimeInterval, completion: impl Fn(String, bool) + 'static) {
+    pub fn enter_picture_in_picture_for_click_at(
+        &self,
+        click_time: NSTimeInterval,
+        completion: impl Fn(String, bool) + 'static,
+    ) {
         self.enter_picture_in_picture_for_click_at_raw(
             click_time,
-            &RcBlock::new(move |route: *mut AnyObject, opened: bool| completion(unsafe { route.cast::<NSString>().as_ref() }.map(|r| r.to_string()).unwrap_or_default(), opened)),
+            &RcBlock::new(move |route: *mut AnyObject, opened: bool| {
+                completion(
+                    unsafe { route.cast::<NSString>().as_ref() }
+                        .map(|r| r.to_string())
+                        .unwrap_or_default(),
+                    opened,
+                )
+            }),
         );
     }
 }

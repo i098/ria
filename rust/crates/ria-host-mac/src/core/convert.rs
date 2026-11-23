@@ -13,8 +13,10 @@ use serde_json::Value;
 /// Returns `Value::Null` for a value that JSON cannot hold (for example an `NSDate`).
 pub fn to_json(object: &AnyObject) -> Value {
     // `+isValidJSONObject:` is false for a bare string or number, so wrap the value in an array.
-    let wrapper: Retained<AnyObject> = unsafe { msg_send![class!(NSArray), arrayWithObject: object] };
-    let valid: bool = unsafe { msg_send![class!(NSJSONSerialization), isValidJSONObject: &*wrapper] };
+    let wrapper: Retained<AnyObject> =
+        unsafe { msg_send![class!(NSArray), arrayWithObject: object] };
+    let valid: bool =
+        unsafe { msg_send![class!(NSJSONSerialization), isValidJSONObject: &*wrapper] };
     if !valid {
         return Value::Null;
     }

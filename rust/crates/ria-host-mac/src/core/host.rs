@@ -86,7 +86,11 @@ impl State {
 
 /// `+resolvePermission:result:remember:`.
 pub fn resolve_permission(request_id: &str, result: &str, remember: bool) {
-    Engine::resolve_permission(&NSString::from_str(request_id), &NSString::from_str(result), remember);
+    Engine::resolve_permission(
+        &NSString::from_str(request_id),
+        &NSString::from_str(result),
+        remember,
+    );
 }
 
 /// `+resolveExternalApp:open:remember:`.
