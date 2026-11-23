@@ -7,7 +7,7 @@ use std::path::Path;
 
 use serde_json::{Map, Value};
 
-use super::profile;
+use super::launch_config::LaunchConfig;
 
 /// A JSON object with a version in the range accepted by its reader.
 pub struct SavedDocument {
@@ -15,8 +15,12 @@ pub struct SavedDocument {
     pub fields: Map<String, Value>,
 }
 
-pub fn read(directory: &Path, name: &Path, versions: RangeInclusive<i32>) -> Option<SavedDocument> {
-    parse(&profile::read(directory, name)?, versions)
+pub fn read(
+    config: &LaunchConfig,
+    name: &Path,
+    versions: RangeInclusive<i32>,
+) -> Option<SavedDocument> {
+    parse(&config.read_data_file(name)?, versions)
 }
 
 pub fn parse(data: &[u8], versions: RangeInclusive<i32>) -> Option<SavedDocument> {

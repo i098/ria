@@ -4,6 +4,7 @@
 
 use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
+use std::fs::File;
 use std::io::{self, ErrorKind};
 use std::os::unix::fs::MetadataExt;
 use std::path::{Component, Path, PathBuf};
@@ -105,8 +106,10 @@ const TRACE_AREAS: &[&str] = &[
 
 /// Launch settings for one process, read before Chromium starts.
 pub struct LaunchConfig {
-    pub data_directory: PathBuf,
+    data_directory: PathBuf,
     config_directory: PathBuf,
+    data_handle: File,
+    config_handle: Option<File>,
     pub background: bool,
     pub remote_debugging_port: Option<u16>,
     pub isolated: bool,
@@ -168,6 +171,19 @@ impl LaunchConfig {
         }
         let (data_directory, config_directory, isolated) =
             launch_directories(data_dir, home, current_dir)?;
+        let config_handle = profile::directory_exists(&config_directory)?
+            .then(|| profile::open_directory(&config_directory))
+            .transpose()?;
+        let data_handle = profile::claim(&data_directory)?;
+        profile::check_tree(
+            &data_directory.join("Chromium"),
+            &[
+                "SingletonLock",
+                "SingletonSocket",
+                "SingletonCookie",
+                "RunningChromeVersion",
+            ],
+        )?;
         let test_instance = isolated && !signed_for_distribution;
         if !test_instance && (!trace.is_empty() || !test.is_empty()) {
             let reason = if isolated {
@@ -182,6 +198,8 @@ impl LaunchConfig {
         Ok(Self {
             data_directory,
             config_directory,
+            data_handle,
+            config_handle,
             background,
             remote_debugging_port,
             isolated,
@@ -195,8 +213,21 @@ impl LaunchConfig {
         })
     }
 
+    pub fn data_directory(&self) -> &Path {
+        &self.data_directory
+    }
+
+    pub(super) fn read_data_file(&self, name: &Path) -> Option<Vec<u8>> {
+        if name.file_name().map(Path::new) != Some(name) || !profile::has_marker(&self.data_handle)
+        {
+            return None;
+        }
+        profile::read(&self.data_directory, &self.data_handle, name).ok()
+    }
+
     pub fn read_config_file(&self, name: &Path) -> io::Result<Vec<u8>> {
-        profile::read_config_file(&self.config_directory, name)
+        let directory = self.config_handle.as_ref().ok_or(ErrorKind::NotFound)?;
+        profile::read(&self.config_directory, directory, name)
     }
 
     pub fn instance(&self, key: &str) -> Option<&str> {
@@ -215,7 +246,7 @@ impl LaunchConfig {
         self.switch_override(key)
             .or_else(|| {
                 self.cached_switches
-                    .get_or_init(|| cached_switches(&self.data_directory))
+                    .get_or_init(|| cached_switches(self))
                     .get(key)
                     .copied()
             })
@@ -247,7 +278,7 @@ impl LaunchConfig {
         if self.isolated {
             args.push(format!(
                 "--ardia-data-dir={}",
-                self.data_directory.display()
+                self.data_directory().display()
             ));
         }
         if let Some(downloads) = self.instance("downloadsDir") {
@@ -293,6 +324,7 @@ fn launch_directories(
 ) -> io::Result<(PathBuf, PathBuf, bool)> {
     let installed_data = home.join("Library/Application Support").join(BUNDLE_ID);
     let installed_config = home.join(".config/ria");
+    let ardia_data = home.join("Library/Application Support/com.ardia.browser");
     let ardia_config = home.join(".config/ardia");
     let (data, isolated) = if let Some(path) = override_path {
         let requested = current_dir.join(path);
@@ -320,19 +352,10 @@ fn launch_directories(
     } else {
         standardize(&home.join(".config"))?.join("ria")
     };
-    profile::directory_exists(&config)?;
-    reject_overlap(&config, &ardia_config)?;
-    reject_overlap(&data, &ardia_config)?;
-    profile::claim(&data)?;
-    profile::check_tree(
-        &data.join("Chromium"),
-        &[
-            "SingletonLock",
-            "SingletonSocket",
-            "SingletonCookie",
-            "RunningChromeVersion",
-        ],
-    )?;
+    for selected in [&data, &config] {
+        reject_overlap(selected, &ardia_data)?;
+        reject_overlap(selected, &ardia_config)?;
+    }
     Ok((data, config, isolated))
 }
 
@@ -351,15 +374,18 @@ fn resolve_directory(path: &Path, allow_missing_link: bool, links: &mut u8) -> i
                 result.push(name);
                 match result.symlink_metadata() {
                     Ok(metadata) if metadata.is_dir() => {}
+                    Ok(metadata) if metadata.is_symlink() && !allow_missing_link => {
+                        if !result.metadata()?.is_dir() {
+                            return Err(ErrorKind::NotADirectory.into());
+                        }
+                        result = result.canonicalize()?;
+                    }
                     Ok(metadata) if metadata.is_symlink() => {
                         *links = links.checked_sub(1).ok_or(ErrorKind::InvalidInput)?;
                         let target = result.read_link()?;
                         result.pop();
                         result =
                             resolve_directory(&result.join(target), allow_missing_link, links)?;
-                        if !allow_missing_link {
-                            result.metadata()?;
-                        }
                     }
                     Ok(_) => return Err(ErrorKind::NotADirectory.into()),
                     Err(error) if error.kind() == ErrorKind::NotFound => {}
@@ -399,22 +425,20 @@ fn reject_overlap(path: &Path, reserved: &Path) -> io::Result<()> {
 }
 
 fn same_directory(a: &Path, b: &Path) -> bool {
-    let mut paths = (a, b);
-    loop {
-        match (paths.0.metadata(), paths.1.metadata()) {
-            (Ok(a), Ok(b)) => return a.dev() == b.dev() && a.ino() == b.ino(),
-            (Err(a), Err(b))
-                if a.kind() == ErrorKind::NotFound && b.kind() == ErrorKind::NotFound => {}
-            _ => return false,
+    if a == b {
+        return true;
+    }
+    match (a.metadata(), b.metadata()) {
+        (Ok(a), Ok(b)) => (a.dev(), a.ino()) == (b.dev(), b.ino()),
+        (Err(a_err), Err(b_err))
+            if a_err.kind() == ErrorKind::NotFound && b_err.kind() == ErrorKind::NotFound =>
+        {
+            a.file_name() == b.file_name()
+                && a.parent()
+                    .zip(b.parent())
+                    .is_some_and(|(a, b)| same_directory(a, b))
         }
-        let (Some(a), Some(b)) = (paths.0.file_name(), paths.1.file_name()) else {
-            return paths.0 == paths.1;
-        };
-        let (a, b) = (a.as_encoded_bytes(), b.as_encoded_bytes());
-        if !a.eq_ignore_ascii_case(b) && (a.is_ascii() || b.is_ascii()) {
-            return false;
-        }
-        paths = (paths.0.parent().unwrap(), paths.1.parent().unwrap());
+        _ => false,
     }
 }
 
@@ -482,8 +506,9 @@ fn switch_entry(piece: &str) -> Option<(String, bool)> {
     Some((name.to_owned(), on))
 }
 
-fn cached_switches(directory: &Path) -> BTreeMap<String, bool> {
-    let cache = profile::read(directory, Path::new("switches-cache.json"))
+fn cached_switches(config: &LaunchConfig) -> BTreeMap<String, bool> {
+    let cache = config
+        .read_data_file(Path::new("switches-cache.json"))
         .and_then(|data| serde_json::from_slice::<Value>(&data).ok());
     cache
         .as_ref()
@@ -555,18 +580,78 @@ mod tests {
             )
         });
         symlink(&ardia, &ria).unwrap();
-        let saved = super::super::saved_session::SavedSession::read(&ardia);
         let aliased_default = LaunchConfig::from_environment([], &home, &home, false);
         fs::remove_dir_all(&home).unwrap();
 
         for result in overrides {
             assert!(result.is_err());
         }
-        assert_eq!(
-            aliased_default.err().unwrap().to_string(),
-            "non-empty data directory has no Ria profile marker"
-        );
-        assert!(saved.is_none());
+        assert!(aliased_default.is_err());
+    }
+
+    #[test]
+    fn never_claims_the_installed_ardia_data_root() {
+        let home = std::env::temp_dir().join(format!("ria-installed-ardia-{}", std::process::id()));
+        let support = home.join("Library/Application Support");
+        let ardia = support.join("com.ardia.browser");
+        fs::create_dir_all(&support).unwrap();
+        let launch = |path: &std::path::Path| {
+            LaunchConfig::from_environment(
+                [("RIA_DATA_DIR", path.to_str().unwrap())],
+                &home,
+                &home,
+                false,
+            )
+        };
+        assert!(launch(&ardia).is_err());
+        assert!(!ardia.exists());
+        fs::create_dir(&ardia).unwrap();
+        assert!(launch(&ardia).is_err());
+        symlink(&ardia, support.join("com.i098.ria")).unwrap();
+        assert!(LaunchConfig::from_environment([], &home, &home, false).is_err());
+        assert!(fs::read_dir(&ardia).unwrap().next().is_none());
+        fs::remove_dir_all(home).unwrap();
+    }
+
+    #[test]
+    fn readers_refuse_replaced_profile_and_config_directories() {
+        use super::super::saved_session::SavedSession;
+        use std::path::Path;
+
+        let home =
+            std::env::temp_dir().join(format!("ria-replaced-profile-{}", std::process::id()));
+        let launch = |name| {
+            LaunchConfig::from_environment([("RIA_DATA_DIR", name)], &home, &home, false).unwrap()
+        };
+        let original = launch("original");
+        fs::create_dir(&original.config_directory).unwrap();
+        let original = launch("original");
+        let other = launch("other");
+        fs::create_dir(&other.config_directory).unwrap();
+        fs::write(other.config_directory.join("config.json"), b"{}").unwrap();
+        fs::write(
+            other.data_directory.join("session.json"),
+            br#"{"version":11}"#,
+        )
+        .unwrap();
+        fs::write(
+            other.data_directory.join("switches-cache.json"),
+            br#"{"switches":{"foreign":false}}"#,
+        )
+        .unwrap();
+
+        fs::rename(&original.config_directory, home.join("old-config")).unwrap();
+        fs::rename(&other.config_directory, &original.config_directory).unwrap();
+        assert!(original.read_config_file(Path::new("config.json")).is_err());
+
+        fs::rename(&original.data_directory, home.join("old-data")).unwrap();
+        symlink(&other.data_directory, &original.data_directory).unwrap();
+        assert!(SavedSession::read(&original).is_none());
+        fs::remove_file(&original.data_directory).unwrap();
+        fs::rename(&other.data_directory, &original.data_directory).unwrap();
+        assert!(SavedSession::read(&original).is_none());
+        assert!(original.switch_on("foreign"));
+        fs::remove_dir_all(home).unwrap();
     }
 
     #[test]
@@ -661,6 +746,13 @@ mod tests {
         }
 
         fs::remove_file(&installed).unwrap();
+        symlink("../../caf\u{e9}", &installed).unwrap();
+        let unrelated =
+            LaunchConfig::from_environment([("RIA_DATA_DIR", "東京")], &home, &home, false)
+                .unwrap();
+        assert!(unrelated.data_directory().ends_with("東京"));
+        assert!(!home.join("caf\u{e9}").exists());
+        fs::remove_file(&installed).unwrap();
         fs::create_dir(home.join("caf\u{e9}")).unwrap();
         symlink("../../caf\u{e9}", &installed).unwrap();
         if home.join("cafe\u{301}").is_dir() {
@@ -697,6 +789,9 @@ mod tests {
             let default = config.data_directory.join("Chromium/Default");
             fs::create_dir_all(&default).unwrap();
             fs::write(default.join("Preferences"), b"{}").unwrap();
+            symlink("missing", default.join("Dangling")).unwrap();
+            assert!(launch().is_err());
+            fs::remove_file(default.join("Dangling")).unwrap();
             symlink(
                 "host-123",
                 config.data_directory.join("Chromium/SingletonLock"),
@@ -738,6 +833,16 @@ mod tests {
         )
         .unwrap();
         let expected = root.canonicalize().unwrap().join("other/profile");
+        symlink("removed/../profile", root.join("other/dangling")).unwrap();
+        assert!(
+            LaunchConfig::from_environment(
+                [("RIA_DATA_DIR", "other/dangling")],
+                &root,
+                &root,
+                false,
+            )
+            .is_err()
+        );
         fs::remove_dir_all(&root).unwrap();
 
         assert_eq!(config.data_directory, expected);
