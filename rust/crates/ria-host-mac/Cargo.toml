@@ -24,3 +24,8 @@ libc = "0.2"
 name = "live"
 path = "src/core/live.rs"
 harness = false
+
+[[test]]
+name = "live_tabs"
+path = "tests/live_tabs.rs"
+harness = false
