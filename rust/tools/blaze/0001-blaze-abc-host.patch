@@ -1,0 +1,202 @@
+diff --git a/crates/hir-ty-codegen/mod.rs b/crates/hir-ty-codegen/mod.rs
+index 1db0b45e2..a86e76803 100644
+--- a/crates/hir-ty-codegen/mod.rs
++++ b/crates/hir-ty-codegen/mod.rs
+@@ -8598,7 +8598,10 @@ impl<'cx, 'db> FunctionCx<'cx, 'db> {
+         ret: Ty<'db>,
+         args: impl IntoIterator<Item = Ty<'db>>,
+     ) -> Result<FnAbi> {
+-        let args: Vec<Ty<'db>> = args.into_iter().collect();
++        // A signature type can be a projection that is not yet its type (objc2's
++        // `<CGRect as ConvertArgument>::__Inner`): the ABI goes by what it is.
++        let ret = self.normalize(ret);
++        let args: Vec<Ty<'db>> = args.into_iter().map(|ty| self.normalize(ty)).collect();
+         if !abi.is_rustic_abi() {
+             for &ty in args.iter().chain([&ret]) {
+                 if self.scalable(ty)?.is_some() {
+@@ -9022,6 +9025,7 @@ impl<'cx, 'db> FunctionCx<'cx, 'db> {
+                     };
+                     for (field, ty) in self.cg.db.field_types(variant).iter() {
+                         let ty = ty.ty().instantiate(self.interner, subst).skip_norm_wip();
++                        let ty = self.normalize(ty);
+                         let field = layout.fields.offset(u32::from(field.into_raw()) as usize);
+                         self.scalar_leaves(ty, offset + field.bytes(), leaves)?;
+                     }
+@@ -9081,7 +9085,9 @@ impl<'cx, 'db> FunctionCx<'cx, 'db> {
+                     let fields = self.cg.db.field_types(id.into());
+                     fields
+                         .iter()
+-                        .map(|(_, ty)| ty.ty().instantiate(self.interner, subst).skip_norm_wip())
++                        .map(|(_, ty)| {
++                            self.normalize(ty.ty().instantiate(self.interner, subst).skip_norm_wip())
++                        })
+                         .collect()
+                 }
+                 _ => return Ok(None),
+@@ -9170,6 +9176,7 @@ impl<'cx, 'db> FunctionCx<'cx, 'db> {
+         }
+         for (_, field) in db.field_types(id.into()).iter() {
+             let field = field.ty().instantiate(self.interner, subst).skip_norm_wip();
++            let field = self.normalize(field);
+             if !self.layout(field)?.is_1zst() {
+                 return self.decays_in_c(field);
+             }
+@@ -9291,6 +9298,7 @@ impl<'cx, 'db> FunctionCx<'cx, 'db> {
+                     };
+                     for (field, ty) in self.cg.db.field_types(variant).iter() {
+                         let ty = ty.ty().instantiate(self.interner, subst).skip_norm_wip();
++                        let ty = self.normalize(ty);
+                         let field = layout.fields.offset(u32::from(field.into_raw()) as usize);
+                         if !self.classify(ty, offset + field.bytes(), classes)? {
+                             return Ok(false);
+diff --git a/crates/hir/src/named.rs b/crates/hir/src/named.rs
+index a027560ca..b834695ea 100644
+--- a/crates/hir/src/named.rs
++++ b/crates/hir/src/named.rs
+@@ -140,11 +140,11 @@ impl<DB: HirDatabase> Walk<'_, '_, DB> {
+             }
+             if let Some(path) = ast::Path::cast(node.clone()) {
+                 if let Some(head) = looked_up(&path) {
+-                    self.name(head.text().as_str());
++                    self.name(&head.text());
+                 }
+             } else if let Some(extern_crate) = ast::ExternCrate::cast(node.clone()) {
+                 if let Some(name) = extern_crate.name_ref() {
+-                    self.name(name.text().as_str());
++                    self.name(&name.text());
+                 }
+             } else if let Some(call) = ast::MacroCall::cast(node.clone()) {
+                 self.unexpanded.push(Unexpanded::Call(call));
+diff --git a/harness/wholeprogram.py b/harness/wholeprogram.py
+index bd76a5f86..72b05d522 100644
+--- a/harness/wholeprogram.py
++++ b/harness/wholeprogram.py
+@@ -19,6 +19,8 @@ finished them (#200).
+   cfg_alloc      a `#[global_allocator]` under a `#[cfg]` that is false, as ripgrep's
+   trait_block    a method a trait provides calls a function declared in its body
+   c_main         `#![no_main]` and a `main` of C's, as bun's, with a body of 16 384 statements
++  std_threads    `thread::spawn` and `thread_local!` `.with`: statics of std with state
++  c_abi_projection  C ABI arguments and results written as projections (objc2's `define_class!`)
+ 
+ The backend is `BLAZE_BACKEND`'s; `--release` builds both with the release profile. With
+ LLVM, a build of a whole program, whichever `main` it has, leaves no function to Cranelift
+@@ -30,7 +32,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
+ sys.path.insert(0, HERE)
+ import apps
+ 
+-CASES = ["default_alloc", "custom_alloc", "lib_alloc", "cfg_alloc", "trait_block", "c_main"]
++CASES = ["default_alloc", "custom_alloc", "lib_alloc", "cfg_alloc", "trait_block", "c_main", "std_threads", "c_abi_projection"]
+ # What `backend::Backend::emit` leaves to Cranelift only in a build that is not of a whole program.
+ NOT_WHOLE = ("a body larger than LLVM is given in a build", "a handler LLVM lowers only for a tier")
+ 
+diff --git a/harness/wholeprogram/Cargo.toml b/harness/wholeprogram/Cargo.toml
+index 69e2eb0dc..3325d0223 100644
+--- a/harness/wholeprogram/Cargo.toml
++++ b/harness/wholeprogram/Cargo.toml
+@@ -1,3 +1,3 @@
+ [workspace]
+-members = ["default_alloc", "custom_alloc", "counter", "lib_alloc", "cfg_alloc", "trait_block", "c_main"]
++members = ["default_alloc", "custom_alloc", "counter", "lib_alloc", "cfg_alloc", "trait_block", "c_main", "std_threads", "c_abi_projection"]
+ resolver = "2"
+diff --git a/harness/wholeprogram/c_abi_projection/Cargo.toml b/harness/wholeprogram/c_abi_projection/Cargo.toml
+new file mode 100644
+index 000000000..186f11dbd
+--- /dev/null
++++ b/harness/wholeprogram/c_abi_projection/Cargo.toml
+@@ -0,0 +1,4 @@
++[package]
++name = "c_abi_projection"
++version = "0.1.0"
++edition = "2024"
+diff --git a/harness/wholeprogram/c_abi_projection/src/main.rs b/harness/wholeprogram/c_abi_projection/src/main.rs
+new file mode 100644
+index 000000000..14021950d
+--- /dev/null
++++ b/harness/wholeprogram/c_abi_projection/src/main.rs
+@@ -0,0 +1,47 @@
++// A value in the C ABI whose type is written as a projection, as objc2's `define_class!`
++// writes the arguments of a method (`<CGRect as ConvertArgument>::__Inner`): the ABI is the
++// one of the type it names.
++trait Convert<P> {
++    type Inner;
++}
++
++#[derive(Clone, Copy)]
++#[repr(C)]
++struct Point {
++    x: f64,
++    y: f64,
++}
++
++#[derive(Clone, Copy)]
++#[repr(C)]
++struct Rect {
++    origin: Point,
++    size: Point,
++}
++
++impl Convert<()> for Rect {
++    type Inner = Rect;
++}
++
++impl Convert<()> for Point {
++    type Inner = Point;
++}
++
++extern "C" fn area(r: <Rect as Convert<()>>::Inner) -> f64 {
++    r.size.x * r.size.y + r.origin.x
++}
++
++extern "C" fn swap(p: <Point as Convert<()>>::Inner) -> <Point as Convert<()>>::Inner {
++    Point { x: p.y, y: p.x }
++}
++
++fn through<T: Convert<()>, R>(f: extern "C" fn(T::Inner) -> R, value: T::Inner) -> R {
++    f(value)
++}
++
++fn main() {
++    let rect = Rect { origin: Point { x: 1.0, y: 2.0 }, size: Point { x: 3.0, y: 4.0 } };
++    let area = through::<Rect, f64>(std::hint::black_box(area), rect);
++    let swapped = through::<Point, Point>(std::hint::black_box(swap), rect.origin);
++    println!("{area} {} {}", swapped.x, swapped.y);
++}
+diff --git a/harness/wholeprogram/std_threads/Cargo.toml b/harness/wholeprogram/std_threads/Cargo.toml
+new file mode 100644
+index 000000000..7523a2abf
+--- /dev/null
++++ b/harness/wholeprogram/std_threads/Cargo.toml
+@@ -0,0 +1,4 @@
++[package]
++name = "std_threads"
++version = "0.1.0"
++edition = "2024"
+diff --git a/harness/wholeprogram/std_threads/src/main.rs b/harness/wholeprogram/std_threads/src/main.rs
+new file mode 100644
+index 000000000..ddf8dc133
+--- /dev/null
++++ b/harness/wholeprogram/std_threads/src/main.rs
+@@ -0,0 +1,23 @@
++// `thread::spawn` reaches std's `MIN` (the stack size floor, a static in a function of
++// `std::sys::thread`), and `LocalKey::with` reaches the `__RUST_STD_INTERNAL_VAL` of a
++// `thread_local!`: statics with state that blaze links to the standard library's own copy.
++use std::cell::{Cell, RefCell};
++
++thread_local! {
++    static COUNT: Cell<u32> = const { Cell::new(1) };
++    static NAMES: RefCell<Vec<String>> = RefCell::new(vec!["main".to_owned()]);
++}
++
++fn main() {
++    let worker = std::thread::Builder::new()
++        .name("worker".to_owned())
++        .spawn(|| {
++            COUNT.with(|it| it.set(it.get() + 40));
++            NAMES.with(|it| it.borrow_mut().push("worker".to_owned()));
++            (COUNT.with(Cell::get), NAMES.with(|it| it.borrow().len()))
++        })
++        .unwrap();
++    let (count, names) = worker.join().unwrap();
++    COUNT.with(|it| it.set(it.get() + 1));
++    println!("{count} {names} {} {}", COUNT.with(Cell::get), NAMES.with(|it| it.borrow().len()));
++}
