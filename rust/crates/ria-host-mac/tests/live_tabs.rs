@@ -466,24 +466,38 @@ mod mac {
         registry: &mut TabRegistry,
     ) -> bool {
         let strip_id = source.window.chrome_window_id_for_profile(source.profile);
-        let destination = fixture_window(source.profile);
         source
             .window
             .open_tab(&NSString::from_str("about:blank"), source.profile, false);
-        let command = Number(9.0);
-        let StripCommandResult::Done(arranged) = strips.command(
-            command,
-            TabStripCommand::Arrange {
-                strip: Number::from(strip_id),
-                keys: vec!["fixture".into()],
-                pinned: Number(1.0),
-            },
-            std::slice::from_ref(source),
-            registry,
-        ) else {
-            destination.close();
-            return false;
-        };
+        for (command, pinned, expected) in [(9.0, 0.5, false), (10.0, 1.0, true)] {
+            let command = Number(command);
+            let StripCommandResult::Done(arranged) = strips.command(
+                command,
+                TabStripCommand::Arrange {
+                    strip: Number::from(strip_id),
+                    keys: vec!["fixture".into()],
+                    pinned: Number(pinned),
+                },
+                std::slice::from_ref(source),
+                registry,
+            ) else {
+                return false;
+            };
+            if arranged.cmd != Some(command)
+                || arranged.rejected.is_some()
+                || !arranged.strips.iter().any(|state| {
+                    state.strip == Number::from(strip_id)
+                        && state.tabs.iter().any(|row| {
+                            row.key.as_deref() == Some("fixture")
+                                && row.index == Number(0.0)
+                                && row.pinned == expected
+                        })
+                })
+            {
+                return false;
+            }
+        }
+        let destination = fixture_window(source.profile);
         strips.activated(strip_id, tab);
         let observer = RemovalObserver::alloc().set_ivars(Cell::new(std::ptr::null()));
         let observer: Retained<RemovalObserver> = unsafe { msg_send![super(observer), init] };
@@ -502,17 +516,7 @@ mod mac {
             host_changes: false,
             standalone: false,
         };
-        let pass = arranged.cmd == Some(command)
-            && arranged.rejected.is_none()
-            && arranged.strips.iter().any(|state| {
-                state.strip == Number::from(strip_id)
-                    && state.tabs.iter().any(|row| {
-                        row.key.as_deref() == Some("fixture")
-                            && row.index == Number(0.0)
-                            && row.pinned
-                    })
-            })
-            && adopted == Adoption::Adopted
+        let pass = adopted == Adoption::Adopted
             && removed
             && strips.active(strip_id).is_none()
             && strips.changed(&target, registry, None).is_some_and(|tx| {

@@ -222,6 +222,19 @@ mod tests {
     }
 
     #[test]
+    fn reload_expiry_preserves_another_keys_transfer() {
+        let mut ledger = TransferLedger::default();
+        let expired = ledger.hold_for_reload("a");
+        let other = ledger.prepare("b");
+        assert_eq!(ledger.park("b"), Some(other));
+
+        assert!(ledger.expire_reload_hold("a", expired));
+        assert!(!ledger.is_prepared("a"));
+        assert_eq!(ledger.parked_generation("b"), Some(other));
+        assert_eq!(ledger.park("b"), Some(other));
+    }
+
+    #[test]
     fn stale_reload_and_retirement_leave_the_new_generation_intact() {
         let mut ledger = TransferLedger::default();
         let first = ledger.hold_for_reload("tab");

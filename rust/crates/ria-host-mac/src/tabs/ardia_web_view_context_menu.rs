@@ -746,7 +746,7 @@ mod tests {
         let filename = shared.file_name().unwrap().to_owned();
         let prefix = "😀".repeat(39);
         let source = format!("https://example.com/{prefix}👩‍💻{}.png", "😀".repeat(30));
-        let long = live.share(b"cat", "image/png", &source).unwrap();
+        let long = live.share(b"long", "image/png", &source).unwrap();
         let long_filename = long.file_name().unwrap().to_owned();
         for owner in [&live_path, &abandoned_path] {
             let share = owner.join(unique_id());
@@ -756,11 +756,15 @@ mod tests {
         drop(abandoned);
         SharedImages::remove_stale(&base);
         let preserved_live = live_path.exists();
+        let shared_bytes = fs::read(&shared);
+        let long_bytes = fs::read(&long);
         let removed_abandoned = !abandoned_path.exists();
         let preserved_flat = flat.is_dir();
         drop(live);
         fs::remove_dir_all(&base).unwrap();
         assert!(preserved_live);
+        assert_eq!(shared_bytes.unwrap(), b"cat");
+        assert_eq!(long_bytes.unwrap(), b"long");
         assert!(removed_abandoned);
         assert!(preserved_flat);
         assert_eq!(filename, "cat photo.png");
