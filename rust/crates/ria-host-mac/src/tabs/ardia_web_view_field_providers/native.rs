@@ -14,7 +14,7 @@ use objc2_app_kit::{
     NSApplication, NSMenuItem, NSScreen, NSView, NSWorkspace, NSWorkspaceOpenConfiguration,
 };
 use objc2_foundation::{
-    NSArray, NSFileManager, NSMethodSignature, NSRange, NSRect, NSString, NSURL,
+    NSArray, NSDictionary, NSFileManager, NSMethodSignature, NSRange, NSRect, NSString, NSURL,
 };
 use ria_engine::call::main_queue;
 use serde_json::{Value, json};
@@ -350,7 +350,10 @@ impl SystemPasswordPanel {
 
 #[link(name = "CoreGraphics", kind = "framework")]
 unsafe extern "C" {
-    fn CGWindowListCopyWindowInfo(options: u32, relative_window: u32) -> *mut NSArray<AnyObject>;
+    fn CGWindowListCopyWindowInfo(
+        options: u32,
+        relative_window: u32,
+    ) -> *mut NSArray<NSDictionary<NSString, AnyObject>>;
 }
 
 // ArdiaWebView+FieldProviders.mm:176-205, 224-236, 247-253.
