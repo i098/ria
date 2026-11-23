@@ -21,13 +21,13 @@ Phase 0 does no Ria UI work. The Ria side of every command below is for later ph
 ## Where the reference lives
 
 - States and animation JSON: this directory, `captures/`. `captures/states/SHA256SUMS` lists every state file.
-- Animation frames (3513 PNG files, 132 MB): the firstmate data folder `…/p0-parity-rig/animation-frames/` (the reference host keeps them; they are not in git).
+- Animation frames (3513 PNG files, 132 MB): not in git; the reference host keeps them.
   Their checksums are in `captures/animations/frames.SHA256SUMS` (paths relative to that directory).
 - Verify: `(cd captures/states && sha256sum -c SHA256SUMS)`.
 
 ## Run Ardia (macOS only)
 
-The rig needs a Mac with Xcode, Node, pnpm and CocoaPods. The working copy used here is on the Mac `mac` in `/tmp/ria-parity`.
+The rig needs a Mac with Xcode, Node, pnpm and CocoaPods. 
 
 ```sh
 git clone --filter=blob:none https://github.com/ardia-browser/ardia.git ardia
