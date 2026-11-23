@@ -482,29 +482,38 @@ impl FullScreen {
             let owner = Weak::new(&*tab);
             let weak = weak.clone();
             let remaining = remaining.clone();
-            PageCover::cover(&tab, false, move |cover| {
-                let Some(fullscreen) = weak.upgrade().filter(|fullscreen| {
+            let current = move || {
+                weak.upgrade().filter(|fullscreen| {
                     let state = fullscreen.state.borrow();
                     !state.closed && state.page.turn == turn
-                }) else {
+                })
+            };
+            let attach = current.clone();
+            PageCover::cover(
+                &tab,
+                false,
+                move || attach().is_some(),
+                move |cover| {
+                    let Some(fullscreen) = current() else {
+                        if let Some(cover) = cover {
+                            cover.uncover(false);
+                        }
+                        return;
+                    };
                     if let Some(cover) = cover {
-                        cover.uncover(false);
+                        fullscreen
+                            .state
+                            .borrow_mut()
+                            .page
+                            .pending_covers
+                            .push((owner, cover));
                     }
-                    return;
-                };
-                if let Some(cover) = cover {
-                    fullscreen
-                        .state
-                        .borrow_mut()
-                        .page
-                        .pending_covers
-                        .push((owner, cover));
-                }
-                remaining.set(remaining.get() - 1);
-                if remaining.get() == 0 {
-                    fullscreen.finish_picture(entering, turn);
-                }
-            });
+                    remaining.set(remaining.get() - 1);
+                    if remaining.get() == 0 {
+                        fullscreen.finish_picture(entering, turn);
+                    }
+                },
+            );
         }
     }
 
@@ -683,6 +692,13 @@ impl FullScreen {
     }
 
     pub(super) fn act_occlusion(&self, visible: Option<bool>) {
+        let mut state = self.state.borrow_mut();
+        state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
+        drop(state);
+        self.set_acted_occlusion(visible);
+    }
+
+    fn set_acted_occlusion(&self, visible: Option<bool>) {
         let Some((_, window)) = self.live_window() else {
             return;
         };
@@ -731,13 +747,15 @@ impl FullScreen {
         let Some((core, window)) = self.live_window() else {
             return;
         };
-        {
+        let turn = {
             let mut state = self.state.borrow_mut();
             if state.acting || core.acted_full_screen() == entering {
                 return;
             }
             state.acting = true;
-        }
+            state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
+            state.occlusion_turn
+        };
         let center = NSNotificationCenter::defaultCenter();
         // SAFETY: These AppKit notification names and the window are valid for this call.
         unsafe {
@@ -765,15 +783,13 @@ impl FullScreen {
                 window.setFrame_display(frame, true);
             }
         }
-        if let Some(wait) = ACTED_OCCLUSION_GAP.get().and_then(|gap| {
-            Duration::try_from_secs_f64((transition.as_secs_f64() + gap).max(0.)).ok()
-        }) {
-            let turn = {
-                let mut state = self.state.borrow_mut();
-                state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
-                state.occlusion_turn
-            };
-            self.act_occlusion(Some(false));
+        let current = self.state.borrow().occlusion_turn == turn;
+        if current
+            && let Some(wait) = ACTED_OCCLUSION_GAP.get().and_then(|gap| {
+                Duration::try_from_secs_f64((transition.as_secs_f64() + gap).max(0.)).ok()
+            })
+        {
+            self.set_acted_occlusion(Some(false));
             let weak = Rc::downgrade(self);
             main_queue::after(
                 wait,
@@ -781,7 +797,7 @@ impl FullScreen {
                     if let Some(fullscreen) = weak.upgrade() {
                         let current = fullscreen.state.borrow().occlusion_turn == turn;
                         if current {
-                            fullscreen.act_occlusion(Some(true));
+                            fullscreen.set_acted_occlusion(Some(true));
                         }
                     }
                 }),

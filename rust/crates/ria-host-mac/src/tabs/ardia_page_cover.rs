@@ -72,7 +72,12 @@ define_class!(
 );
 
 impl PageCover {
-    pub fn cover(tab: &Tab, disabled: bool, done: impl FnOnce(Option<Retained<Self>>) + 'static) {
+    pub fn cover(
+        tab: &Tab,
+        disabled: bool,
+        may_attach: impl Fn() -> bool + 'static,
+        done: impl FnOnce(Option<Retained<Self>>) + 'static,
+    ) {
         let page = tab.view();
         let Some(window) = page
             .window()
@@ -87,6 +92,7 @@ impl PageCover {
         let pictured = page.bounds().size;
         let done = Rc::new(Cell::new(Some(done)));
         let deadline = done.clone();
+        let may_attach = Rc::new(may_attach);
         main_queue::after(
             Duration::from_millis(400),
             Box::new(move || {
@@ -103,6 +109,7 @@ impl PageCover {
                 let tab = weak_tab.clone();
                 let window = weak_window.clone();
                 let host = host.clone();
+                let may_attach = may_attach.clone();
                 main_queue::post(Box::new(move || {
                     let Some(done) = done.take() else { return };
                     let cover = (|| {
@@ -122,6 +129,9 @@ impl PageCover {
                             (Some(a), Some(b)) if std::ptr::eq(&*a, &*b) => {}
                             (None, None) => {}
                             _ => return None,
+                        }
+                        if !may_attach() {
+                            return None;
                         }
                         let mtm = MainThreadMarker::new()?;
                         let this = <Self as MainThreadOnly>::alloc(mtm).set_ivars(Ivars {
@@ -172,7 +182,7 @@ impl PageCover {
         ));
         for tab in tabs {
             let shared = shared.clone();
-            Self::cover(tab, disabled, move |cover| {
+            Self::cover(tab, disabled, || true, move |cover| {
                 if let Some(cover) = cover {
                     shared.1.borrow_mut().push(cover);
                 }

@@ -53,6 +53,7 @@ mod mac {
     use ria_host_mac::core::delegate::{EngineDelegate, Hooks};
     use ria_host_mac::core::host::State;
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
+    use ria_host_mac::tabs::ardia_page_cover::PageCover;
     use ria_host_mac::windows::ardia_chrome_window_host::ChromeWindowHost;
     use ria_host_mac::windows::ardia_chrome_window_host_little_fit::little_frame_for_size;
     use ria_host_mac::windows::ardia_display_identity::frame_on_screen;
@@ -762,6 +763,8 @@ mod mac {
         assert!(!tab.view().isHiddenOrHasHiddenAncestor());
         change_page(true);
         let page_host = host.clone();
+        let stale_checked = Rc::new(Cell::new(false));
+        let completed = stale_checked.clone();
         main_queue::post(Box::new(move || {
             main_queue::after(
                 Duration::from_millis(425),
@@ -772,8 +775,37 @@ mod mac {
                     assert_eq!(after["fullScreen"], true);
                     assert_eq!(after["pageFullScreen"]["waitingForPage"], 0);
                     assert_eq!(after["pageFullScreen"]["picturing"], false);
-                    assert_eq!(probe(&page_host, &page_window, "fullScreen"), after);
-                    page_host.close_window(&page_window);
+                    let cancelled = Rc::new(Cell::new(false));
+                    let snapshot_arrived = Rc::new(Cell::new(false));
+                    let snapshot_checked = Rc::new(Cell::new(false));
+                    let permit = cancelled.clone();
+                    let arrived = snapshot_arrived.clone();
+                    let checked = snapshot_checked.clone();
+                    PageCover::cover(
+                        &tab,
+                        false,
+                        move || {
+                            arrived.set(true);
+                            !permit.get()
+                        },
+                        move |cover| {
+                            assert!(cover.is_none());
+                            checked.set(true);
+                        },
+                    );
+                    assert!(!snapshot_checked.get());
+                    cancelled.set(true);
+                    main_queue::after(
+                        Duration::from_millis(450),
+                        Box::new(move || {
+                            assert!(snapshot_arrived.get() && snapshot_checked.get());
+                            assert_eq!(after["pageFullScreen"]["covered"], false);
+                            assert_eq!(probe(&page_host, &page_window, "fullScreen"), after);
+                            assert_eq!(probe(&page_host, &page_window, "fakeFullScreen"), after);
+                            page_host.close_window(&page_window);
+                            completed.set(true);
+                        }),
+                    );
                 }),
             );
         }));
@@ -936,8 +968,9 @@ mod mac {
                     fullscreen_state(true, true)
                 );
                 main_queue::after(
-                    Duration::from_millis(550),
+                    Duration::from_millis(950),
                     Box::new(move || {
+                        assert!(stale_checked.get());
                         assert!(exit_at.get().unwrap() >= Duration::from_millis(500));
                         assert_eq!(notes.borrow().as_slice(), &names);
                         assert_eq!(
