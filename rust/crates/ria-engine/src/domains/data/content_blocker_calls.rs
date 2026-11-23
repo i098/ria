@@ -421,7 +421,7 @@ mod tests {
 
     #[test]
     fn calls_run_in_order_and_retry_a_restart() {
-        let (blocker, host, scripts) = setup();
+        let (blocker, host, scripts, _resources) = setup();
         let got = Answers::default();
         blocker.call("", "1".into(), got.done(), true);
         blocker.call("", "2".into(), got.done(), true);
@@ -443,7 +443,7 @@ mod tests {
 
     #[test]
     fn errors_after_the_deadline_are_final() {
-        let (blocker, host, scripts) = setup();
+        let (blocker, host, scripts, _resources) = setup();
         let got = Answers::default();
         blocker.call("", "1".into(), got.done(), true);
         let tab = scripts.tab(0);
@@ -455,7 +455,7 @@ mod tests {
 
     #[test]
     fn a_stuck_call_times_out_and_an_idle_page_closes() {
-        let (blocker, host, scripts) = setup();
+        let (blocker, host, scripts, _resources) = setup();
         let got = Answers::default();
         blocker.call("", "1".into(), got.done(), true);
         let tab = scripts.tab(0);
@@ -477,7 +477,7 @@ mod tests {
 
     #[test]
     fn a_call_without_a_started_host_is_unavailable() {
-        let (blocker, host, _) = setup();
+        let (blocker, host, _, _resources) = setup();
         host.started.set(false);
         let got = Answers::default();
         blocker.call("", "1".into(), got.done(), true);

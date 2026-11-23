@@ -27,33 +27,44 @@ pub struct FakeHost {
     pub events: RefCell<Vec<(String, Value)>>,
 }
 
-fn temp_dir() -> PathBuf {
-    static N: AtomicUsize = AtomicUsize::new(0);
-    let dir = std::env::temp_dir().join(format!(
-        "ria-blocker-{}-{}",
-        std::process::id(),
-        N.fetch_add(1, Ordering::Relaxed)
-    ));
-    std::fs::create_dir_all(&dir).unwrap();
-    dir
+pub struct FixtureDir(PathBuf);
+
+impl FixtureDir {
+    fn new() -> Self {
+        static N: AtomicUsize = AtomicUsize::new(0);
+        let path = std::env::temp_dir().join(format!(
+            "ria-blocker-{}-{}",
+            std::process::id(),
+            N.fetch_add(1, Ordering::Relaxed)
+        ));
+        std::fs::create_dir(&path).unwrap();
+        Self(path)
+    }
+}
+
+impl Drop for FixtureDir {
+    fn drop(&mut self) {
+        let _ = std::fs::remove_dir_all(&self.0);
+    }
 }
 
 impl FakeHost {
-    pub fn new() -> Rc<Self> {
-        let resources = temp_dir();
-        let ublock = resources.join("Extensions").join("ublock");
+    pub fn new() -> (Rc<Self>, FixtureDir) {
+        let resources = FixtureDir::new();
+        let ublock = resources.0.join("Extensions").join("ublock");
         std::fs::create_dir_all(&ublock).unwrap();
         std::fs::write(ublock.join("manifest.json"), r#"{"version":"1.2.3"}"#).unwrap();
-        Rc::new(Self {
+        let host = Rc::new(Self {
             started: Cell::new(true),
             now: Cell::default(),
             timers: RefCell::default(),
             posted: RefCell::default(),
             profiles: RefCell::default(),
-            resources,
+            resources: resources.0.clone(),
             changes: RefCell::default(),
             events: RefCell::default(),
-        })
+        });
+        (host, resources)
     }
 
     pub fn advance(&self, by: Duration) {
@@ -271,8 +282,8 @@ impl Answers {
 }
 
 /// A blocker with a loaded default profile.
-pub fn setup() -> (ContentBlocker, Rc<FakeHost>, Rc<FakeScripts>) {
-    let host = FakeHost::new();
+pub fn setup() -> (ContentBlocker, Rc<FakeHost>, Rc<FakeScripts>, FixtureDir) {
+    let (host, resources) = FakeHost::new();
     let profile: Profile = Rc::new(FakeProfile::default());
     host.profiles.borrow_mut().insert(String::new(), profile);
     let scripts = Rc::new(FakeScripts::default());
@@ -280,7 +291,17 @@ pub fn setup() -> (ContentBlocker, Rc<FakeHost>, Rc<FakeScripts>) {
         ContentBlocker::new(host.clone(), scripts.clone()),
         host,
         scripts,
+        resources,
     )
+}
+
+#[test]
+fn the_fixture_releases_its_directory_even_when_the_host_is_retained() {
+    let (host, resources) = FakeHost::new();
+    let manifest = host.resources.join("Extensions/ublock/manifest.json");
+    assert!(manifest.is_file());
+    drop(resources);
+    assert!(!host.resources.exists());
 }
 
 #[test]
@@ -331,7 +352,7 @@ fn a_state_read_is_shaped_and_published() {
 
 #[test]
 fn the_default_profile_settles_then_state_reads() {
-    let (blocker, host, scripts) = setup();
+    let (blocker, host, scripts, _resources) = setup();
     blocker.load("");
     let got = Rc::new(RefCell::new(None));
     let sink = got.clone();
@@ -352,7 +373,7 @@ fn the_default_profile_settles_then_state_reads() {
 
 #[test]
 fn private_profiles_keep_hidden_elements_to_themselves() {
-    let (blocker, _, _) = setup();
+    let (blocker, _, _, _resources) = setup();
     let got = Rc::new(RefCell::new(None));
     let sink = got.clone();
     blocker.hide_elements(

@@ -256,10 +256,9 @@ mod mac {
         }
     }
 
-    /// A page engine that has no page: nothing to resolve, nothing to clear.
-    struct NoPages;
+    struct LivePages(Option<DataCtx>);
 
-    impl PageEngine for NoPages {
+    impl PageEngine for LivePages {
         fn owns(&self, _: &str) -> bool {
             false
         }
@@ -279,12 +278,15 @@ mod mac {
         }
         fn clear_browsing_data(
             &self,
-            _: &str,
-            _: &[String],
-            _: f64,
+            profile: &str,
+            types: &[String],
+            since: f64,
             done: Box<dyn FnOnce(Option<String>)>,
         ) {
-            done(None)
+            match &self.0 {
+                Some(ctx) => clear_chromium_browsing_data(ctx, profile, types, since, done),
+                None => done(None),
+            }
         }
         fn delete_profile_data(&self, _: &str, done: Box<dyn FnOnce(Vec<String>)>) {
             done(vec![])
@@ -346,9 +348,13 @@ mod mac {
             favicons: Rc::new(Favicons::new(registry.clone(), data)),
             registry,
             services: Rc::new(LiveServices(exported.to_string_lossy().into_owned())),
-            chromium: Rc::new(NoPages),
-            webkit: Rc::new(NoPages),
+            chromium: Rc::new(LivePages(None)),
+            webkit: Rc::new(LivePages(None)),
             after: main_queue::after,
+        };
+        let ctx = DataCtx {
+            chromium: Rc::new(LivePages(Some(ctx.clone()))),
+            ..ctx
         };
 
         // Each call of the slice that reaches the engine, with fixture arguments. `C` is the typed call of slice 3.2:
@@ -428,22 +434,7 @@ mod mac {
             json!({"id": 1}),
             |_| true,
         );
-        expect_then::<api::sites::WriteStorage>(
-            &live,
-            &ctx,
-            "sites",
-            "writeStorage",
-            json!({"origin": site, "set": [["k", "v"]], "remove": []}),
-            move |live, ctx, r| {
-                expect::<api::sites::ReadStorage>(
-                    live, ctx, "sites", "readStorage", json!({"origin": site}),
-                    |r| r.items.as_ref().is_some_and(|items| {
-                        items.iter().any(|(key, value)| key == "k" && value == "v")
-                    }),
-                );
-                r.written.0 == 1.0
-            },
-        );
+        check_storage_clear(&live, &ctx, site);
         expect::<api::sites::RegistrableDomains>(
             &live,
             &ctx,
@@ -451,24 +442,6 @@ mod mac {
             "registrableDomains",
             json!({"hosts": ["www.example.com"]}),
             |r| r.domains == ["example.com"],
-        );
-        // `profiles.clearBrowsingData` goes to both page engines; Chromium clears through the engine.
-        *live.outstanding.borrow_mut() += 1;
-        let cleared = live.clone();
-        clear_chromium_browsing_data(
-            &ctx,
-            "",
-            &["cache".to_owned()],
-            0.0,
-            Box::new(move |error| {
-                record(
-                    &cleared,
-                    "browsing data clears the cache",
-                    error.is_none(),
-                    format!("{error:?}"),
-                );
-                *cleared.outstanding.borrow_mut() -= 1;
-            }),
         );
         // An unknown profile gives the Ardia error text.
         *live.outstanding.borrow_mut() += 1;
@@ -538,6 +511,41 @@ mod mac {
                 true
             }),
             Duration::ZERO,
+        );
+    }
+
+    fn check_storage_clear(live: &Rc<Live>, ctx: &DataCtx, origin: &'static str) {
+        expect_then::<api::sites::WriteStorage>(
+            live, ctx, "sites", "writeStorage",
+            json!({"origin": origin, "set": [["k", "v"]], "remove": []}),
+            move |live, ctx, written| {
+                if written.written.0 != 1.0 {
+                    return false;
+                }
+                expect_then::<api::sites::ReadStorage>(
+                    live, ctx, "sites", "readStorage", json!({"origin": origin}),
+                    move |live, ctx, seeded| {
+                        if !seeded.items.as_ref().is_some_and(|items| {
+                            items.iter().any(|(key, value)| key == "k" && value == "v")
+                        }) {
+                            return false;
+                        }
+                        expect_then::<api::profiles::ClearBrowsingData>(
+                            live, ctx, "profiles", "clearBrowsingData",
+                            json!({"types": ["siteData"], "since": 0}),
+                            move |live, ctx, ()| {
+                                expect::<api::sites::ReadStorage>(
+                                    live, ctx, "sites", "readStorage", json!({"origin": origin}),
+                                    |cleared| cleared.items.as_ref().is_none_or(Vec::is_empty),
+                                );
+                                true
+                            },
+                        );
+                        true
+                    },
+                );
+                true
+            },
         );
     }
 

@@ -10,7 +10,8 @@ use std::fs;
 use std::io::Write;
 use std::os::unix::fs::{MetadataExt, PermissionsExt};
 use std::panic::{AssertUnwindSafe, catch_unwind};
-use std::rc::Rc;
+use std::sync::{Arc, mpsc};
+use std::time::Duration;
 
 use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
@@ -21,7 +22,7 @@ struct Env {
     home: String,
     source: String,
     next_id: Cell<u32>,
-    defaults: Rc<MemoryDefaults>,
+    defaults: Arc<MemoryDefaults>,
 }
 
 impl Env {
@@ -92,12 +93,12 @@ fn reason(result: &Value) -> String {
     }
 }
 
-fn hook(mover: &DownloadMover, f: impl FnMut(&str, &str) + 'static) {
-    *mover.step_hook.borrow_mut() = Some(Box::new(f));
+fn hook(mover: &DownloadMover, f: impl FnMut(&str, &str) + Send + 'static) {
+    *mover.step_hook.lock().unwrap() = Some(Box::new(f));
 }
 
 fn unhook(mover: &DownloadMover) {
-    *mover.step_hook.borrow_mut() = None;
+    *mover.step_hook.lock().unwrap() = None;
 }
 
 #[test]
@@ -114,7 +115,7 @@ fn download_mover() {
         source: format!("{home}/src"),
         home,
         next_id: Cell::new(0),
-        defaults: Rc::new(MemoryDefaults::default()),
+        defaults: Arc::new(MemoryDefaults::default()),
     };
     fs::create_dir_all(env.at("Downloads")).unwrap();
     let mut mover = env.mover();
@@ -568,25 +569,30 @@ fn download_mover() {
         mover = restarted;
     }
     {
-        let mover = Rc::new(mover);
+        let mover = Arc::new(mover);
         let size = 8u64 << 20;
         let path = format!("{}/large.bin", env.source);
         fs::File::create(&path).unwrap().set_len(size).unwrap();
         mover.note_download_event(&json!({"id": "large", "path": path, "state": "finished", "dangerous": false, "offTheRecord": false,
                                           "sha256": sha256(&vec![0u8; size as usize]), "received": size}));
-        let noted = Rc::new(Cell::new(false));
-        let (inner, seen) = (Rc::downgrade(&mover), noted.clone());
+        let (hashing, reached_hash) = mpsc::channel();
+        let (resume, paused) = mpsc::channel();
         hook(&mover, move |step, _| {
-            if step == "claimed" {
-                let event = inner.upgrade().unwrap().note_download_event(
-                    &json!({"id": "meanwhile", "path": "/elsewhere", "state": "downloading"}),
-                );
-                seen.set(event["path"] == "/elsewhere");
+            if step == "hashing" {
+                hashing.send(std::thread::current().id()).unwrap();
+                paused.recv_timeout(Duration::from_secs(10)).unwrap();
             }
         });
-        let result = mover.move_download(&path, "~/Downloads/Large");
+        let work = mover.start_move(path, "~/Downloads/Large".into()).unwrap();
+        let worker = reached_hash.recv_timeout(Duration::from_secs(10)).unwrap();
+        assert_ne!(worker, std::thread::current().id());
+        let event = mover.note_download_event(
+            &json!({"id": "meanwhile", "path": "/elsewhere", "state": "downloading"}),
+        );
+        assert_eq!(event["path"], "/elsewhere");
+        resume.send(()).unwrap();
+        let result = work.join().unwrap();
         unhook(&mover);
-        assert!(noted.get());
         assert_eq!(reason(&result), "ok");
         assert_eq!(
             fs::metadata(env.at("Downloads/Large/large.bin"))

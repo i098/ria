@@ -20,7 +20,7 @@ use super::call_table::{CallReply, Settled};
 use super::ctx::DataCtx;
 use super::favicons::Favicons;
 use super::host::{CoreEngine, CoreProfile, EventSink, PageEngine, Profile, ServiceDone, Services};
-use super::page_engines::{clear_browsing_data, clear_chromium_browsing_data};
+use super::page_engines::clear_chromium_browsing_data;
 use super::profile_data::delete_default;
 use super::profiles::ProfileRegistry;
 use super::tables::tables;
@@ -355,7 +355,11 @@ fn the_service_accepts_only_boolean_true_and_keeps_engine_errors() {
 #[test]
 fn the_aggregate_waits_for_both_engines_and_rejects_the_module_call_on_failure() {
     for webkit_first in [false, true] {
-        for error in [None, Some("failed to clear")] {
+        for (first_error, second_error) in [
+            (None, None),
+            (Some("first engine failed"), None),
+            (None, Some("second engine failed")),
+        ] {
             let rig = rig();
             let out = run_table(
                 &rig,
@@ -379,21 +383,19 @@ fn the_aggregate_waits_for_both_engines_and_rejects_the_module_call_on_failure()
             } else {
                 (&rig.chromium, &rig.webkit)
             };
-            first.pending.take().unwrap()(error.map(str::to_owned));
+            first.pending.take().unwrap()(first_error.map(str::to_owned));
             fire_timers();
             assert!(
                 out.borrow().is_none(),
                 "no reply before both engines answered"
             );
-            second.pending.take().unwrap()(None);
+            second.pending.take().unwrap()(second_error.map(str::to_owned));
             fire_timers();
-            let expected = match error {
+            let expected = match first_error.or(second_error) {
                 None => Ok("null".to_owned()),
                 Some(e) => Err(super::call_table::Rejection::new("ERR_ENGINE", e)),
             };
             assert_eq!(out.borrow_mut().take(), Some(expected));
-            // Without the page engines of the aggregate, the one-shot function gives the same answer.
-            let _ = clear_browsing_data;
         }
     }
 }
@@ -476,15 +478,18 @@ fn releasing_a_cached_private_session_stops_lookup() {
         directory: "Profile work".into(),
         private: true,
     });
-    let expected = profile.clone();
-    registry.with_profile(session, move |resolved| {
-        assert!(Rc::ptr_eq(&resolved.unwrap(), &expected));
-    });
+    let reply = Rc::new(RefCell::new(None));
+    let first = reply.clone();
+    registry.with_profile(session, move |resolved| *first.borrow_mut() = Some(resolved));
     core.pending_private.take().unwrap()(Some(profile.clone()), None);
+    let resolved = reply.take().expect("the first lookup settled").unwrap();
+    assert!(Rc::ptr_eq(&resolved, &profile));
     assert!(Rc::ptr_eq(&registry.loaded_profile(session).unwrap(), &profile));
     registry.mark_private_released(session);
     assert!(registry.loaded_profile(session).is_none());
-    registry.with_profile(session, |resolved| assert!(resolved.is_none()));
+    let second = reply.clone();
+    registry.with_profile(session, move |resolved| *second.borrow_mut() = Some(resolved));
+    assert!(matches!(reply.take(), Some(None)));
     assert!(core.pending_private.borrow().is_none());
 }
 

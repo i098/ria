@@ -233,7 +233,7 @@ mod tests {
 
     #[test]
     fn a_page_runs_after_load_and_fails_when_it_leaves_its_origin() {
-        let host = FakeHost::new();
+        let (host, _resources) = FakeHost::new();
         let tab = FakeTab::new("chrome-extension://x/blank.html");
         let page = Page::new(tab.clone(), "chrome-extension://x/", host.clone());
         let got = Rc::new(RefCell::new(Vec::new()));
@@ -277,7 +277,7 @@ mod tests {
 
     #[test]
     fn an_aborted_load_does_not_fail_the_page() {
-        let host = FakeHost::new();
+        let (host, _resources) = FakeHost::new();
         let tab = FakeTab::new("chrome-extension://x/blank.html");
         let page = Page::new(tab.clone(), "chrome-extension://x/", host);
         tab.delegate().did_fail_load(-3, "aborted");

@@ -6,7 +6,6 @@
 //! staging folder, verified by size and SHA-256, then renamed without replacement; a journal in the defaults store
 //! lets a new mover put back or commit a move that a crash interrupted.
 
-use std::cell::RefCell;
 use std::collections::{HashMap, HashSet};
 use std::ffi::CString;
 use std::fs::File;
@@ -14,7 +13,8 @@ use std::hash::{BuildHasher, Hasher};
 use std::io::{self, Read, Seek};
 use std::os::fd::{AsRawFd, FromRawFd, RawFd};
 use std::os::unix::fs::MetadataExt;
-use std::rc::Rc;
+use std::sync::{Arc, Mutex};
+use std::thread::{self, JoinHandle};
 
 use serde_json::{Map, Value, json};
 use sha2::{Digest, Sha256};
@@ -34,7 +34,7 @@ const DIR_FLAGS: libc::c_int =
     libc::O_RDONLY | libc::O_DIRECTORY | libc::O_NOFOLLOW | libc::O_CLOEXEC;
 
 /// The persistent key-value store of the mover (`NSUserDefaults` in the original).
-pub trait Defaults {
+pub trait Defaults: Send + Sync {
     fn get(&self, key: &str) -> Option<Value>;
     fn set(&self, key: &str, value: Value);
     fn remove(&self, key: &str);
@@ -43,24 +43,24 @@ pub trait Defaults {
 /// A `Defaults` that keeps values in memory.
 #[cfg(test)]
 #[derive(Default)]
-pub struct MemoryDefaults(RefCell<HashMap<String, Value>>);
+pub struct MemoryDefaults(Mutex<HashMap<String, Value>>);
 
 #[cfg(test)]
 impl Defaults for MemoryDefaults {
     fn get(&self, key: &str) -> Option<Value> {
-        self.0.borrow().get(key).cloned()
+        self.0.lock().unwrap().get(key).cloned()
     }
     fn set(&self, key: &str, value: Value) {
-        self.0.borrow_mut().insert(key.to_owned(), value);
+        self.0.lock().unwrap().insert(key.to_owned(), value);
     }
     fn remove(&self, key: &str) {
-        self.0.borrow_mut().remove(key);
+        self.0.lock().unwrap().remove(key);
     }
 }
 
-/// Called with the step name (`claimed`, `verified`, `placed`) and the staging folder path.
+/// Called with the current step name and the staging folder path.
 #[cfg(test)]
-pub type StepHook = Box<dyn FnMut(&str, &str)>;
+pub type StepHook = Box<dyn FnMut(&str, &str) + Send>;
 
 struct Identity {
     sha256: String,
@@ -79,10 +79,11 @@ struct State {
 
 pub struct DownloadMover {
     home: String,
-    defaults: Rc<dyn Defaults>,
-    state: RefCell<State>,
+    defaults: Arc<dyn Defaults>,
+    state: Mutex<State>,
+    persistence: Mutex<()>,
     #[cfg(test)]
-    pub(super) step_hook: RefCell<Option<StepHook>>,
+    pub(super) step_hook: Mutex<Option<StepHook>>,
 }
 
 fn failure(reason: &str) -> Value {
@@ -308,7 +309,7 @@ fn open_own_staging(source: RawFd, name: &str) -> Option<File> {
 }
 
 impl DownloadMover {
-    pub fn new(home: &str, defaults: Rc<dyn Defaults>) -> Self {
+    pub fn new(home: &str, defaults: Arc<dyn Defaults>) -> Self {
         let mut state = State::default();
         if let Some(Value::Array(entries)) = defaults.get(MOVED_DEFAULT) {
             for entry in entries {
@@ -326,15 +327,16 @@ impl DownloadMover {
         let mover = Self {
             home: home.to_owned(),
             defaults,
-            state: RefCell::new(state),
+            state: Mutex::new(state),
+            persistence: Mutex::new(()),
             #[cfg(test)]
-            step_hook: RefCell::new(None),
+            step_hook: Mutex::new(None),
         };
         mover.reconcile_journal();
         mover
     }
 
-    fn remember(&self, state: &mut State, id: &str, from: &str, to: &str) {
+    fn remember(state: &mut State, id: &str, from: &str, to: &str) -> Value {
         let from = state
             .moved
             .iter()
@@ -352,10 +354,11 @@ impl DownloadMover {
             .iter()
             .map(|(id, from, to)| json!({"id": id, "from": from, "to": to}))
             .collect();
-        self.defaults.set(MOVED_DEFAULT, Value::Array(saved));
+        Value::Array(saved)
     }
 
     fn journal(&self, id: &str, entry: Option<&Map<String, Value>>) {
+        let _guard = self.persistence.lock().unwrap();
         let mut journal = match self.defaults.get(JOURNAL_DEFAULT) {
             Some(Value::Object(journal)) => journal,
             _ => Map::new(),
@@ -375,7 +378,7 @@ impl DownloadMover {
         let Some(Value::Object(journal)) = self.defaults.get(JOURNAL_DEFAULT) else {
             return;
         };
-        let state = &mut *self.state.borrow_mut();
+        let state = &mut *self.state.lock().unwrap();
         for (id, entry) in &journal {
             let (Some(source), Some(staging), Some(name)) = (
                 entry["source"].as_str(),
@@ -389,13 +392,13 @@ impl DownloadMover {
                 lstat_at(libc::AT_FDCWD, path).is_ok_and(|info| is_kind(info.mode, libc::S_IFREG))
             };
             if let Some(placed) = entry["placed"].as_str().filter(|placed| regular(placed)) {
-                self.remember(state, id, source, placed);
+                self.defaults.set(MOVED_DEFAULT, Self::remember(state, id, source, placed));
             } else if regular(&staged) {
                 let source_free = matches!(lstat_at(libc::AT_FDCWD, source), Err(error) if errno(&error) == libc::ENOENT);
                 if !source_free
                     || rename_excl(libc::AT_FDCWD, &staged, libc::AT_FDCWD, source).is_err()
                 {
-                    self.remember(state, id, source, &staged);
+                    self.defaults.set(MOVED_DEFAULT, Self::remember(state, id, source, &staged));
                 }
             }
             remove_dir_at(libc::AT_FDCWD, staging);
@@ -408,7 +411,7 @@ impl DownloadMover {
         let Some(id) = download["id"].as_str().filter(|id| !id.is_empty()) else {
             return download.clone();
         };
-        let state = &mut *self.state.borrow_mut();
+        let state = &mut *self.state.lock().unwrap();
         let mut event = download.clone();
         if let Some((_, from, to)) = state.moved.iter().rev().find(|entry| entry.0 == id)
             && download["path"].as_str() == Some(from.as_str())
@@ -445,19 +448,25 @@ impl DownloadMover {
 
     /// Sets the folders, besides `~/Downloads`, that moves may target; entries that are not `~/` paths are dropped.
     pub fn set_approved_folders(&self, folders: &[String]) {
-        self.state.borrow_mut().approved = folders
+        self.state.lock().unwrap().approved = folders
             .iter()
             .filter_map(|folder| folder_components(folder))
             .collect();
     }
 
-    /// Moves the download at `path` into `folder` (`~/...`) and returns `{ok, path, event}` or `{ok: false, reason, ...}`.
-    pub fn move_download(&self, path: &str, folder: &str) -> Value {
+    pub fn start_move(self: &Arc<Self>, path: String, folder: String) -> io::Result<JoinHandle<Value>> {
+        let mover = Arc::clone(self);
+        thread::Builder::new()
+            .name("ria-download-move".into())
+            .spawn(move || mover.move_download(&path, &folder))
+    }
+
+    pub(super) fn move_download(&self, path: &str, folder: &str) -> Value {
         if path.is_empty() {
             return failure("notADownload");
         }
         let (id, record, identity, approved) = {
-            let state = &mut *self.state.borrow_mut();
+            let state = &mut *self.state.lock().unwrap();
             let id = state
                 .record_order
                 .iter()
@@ -496,14 +505,14 @@ impl DownloadMover {
                 state.approved.clone(),
             )
         };
-        let result = self.run_move(&id, &record, &identity, &approved, path, folder);
-        self.state.borrow_mut().in_flight.remove(&id);
+        let result = self.run_move(&id, record, &identity, &approved, path, folder);
+        self.state.lock().unwrap().in_flight.remove(&id);
         result
     }
 
     #[cfg(test)]
     fn step(&self, name: &str, staging: &File) {
-        if let Some(hook) = self.step_hook.borrow_mut().as_mut() {
+        if let Some(hook) = self.step_hook.lock().unwrap().as_mut() {
             hook(name, &directory_path(staging).unwrap_or_default());
         }
     }
@@ -511,7 +520,7 @@ impl DownloadMover {
     fn run_move(
         &self,
         id: &str,
-        record: &Value,
+        mut record: Value,
         identity: &Identity,
         approved: &[Vec<String>],
         path: &str,
@@ -617,12 +626,16 @@ impl DownloadMover {
         let keep_staged = |reason: &str, name: &str| {
             let staged_path = directory_path(&staging).map(|dir| join(&dir, name));
             if let Some(staged_path) = staged_path.as_deref().filter(|_| name == source_name) {
-                let state = &mut *self.state.borrow_mut();
-                self.remember(state, id, path, staged_path);
-                if let Some(event) = state.records.get_mut(id) {
-                    event["path"] = json!(staged_path);
-                    event["filename"] = json!(last_component(staged_path));
-                }
+                let _guard = self.persistence.lock().unwrap();
+                let saved = {
+                    let state = &mut *self.state.lock().unwrap();
+                    if let Some(event) = state.records.get_mut(id) {
+                        event["path"] = json!(staged_path);
+                        event["filename"] = json!(last_component(staged_path));
+                    }
+                    Self::remember(state, id, path, staged_path)
+                };
+                self.defaults.set(MOVED_DEFAULT, saved);
             }
             self.journal(id, None);
             staged_failure(reason, staged_path)
@@ -663,6 +676,8 @@ impl DownloadMover {
         if verified.nlink() != 1 {
             return give_back("linked");
         }
+        #[cfg(test)]
+        self.step("hashing", &staging);
         if verified.size() as i64 != identity.size
             || sha256_of(&mut claimed).as_deref() != Some(identity.sha256.as_str())
         {
@@ -724,14 +739,19 @@ impl DownloadMover {
             return staged_failure("linked", Some(final_path));
         }
 
-        let mut event = record.clone();
-        {
-            let state = &mut *self.state.borrow_mut();
-            self.remember(state, id, path, &final_path);
-            event["path"] = json!(final_path);
-            event["filename"] = json!(placed);
-            state.records.insert(id.to_owned(), event.clone());
-        }
+        let event = {
+            let _guard = self.persistence.lock().unwrap();
+            let (saved, event) = {
+                let state = &mut *self.state.lock().unwrap();
+                let saved = Self::remember(state, id, path, &final_path);
+                let event = state.records.get_mut(id).unwrap_or(&mut record);
+                event["path"] = json!(final_path);
+                event["filename"] = json!(placed);
+                (saved, event.clone())
+            };
+            self.defaults.set(MOVED_DEFAULT, saved);
+            event
+        };
         finish();
         json!({"ok": true, "path": final_path, "event": event})
     }
