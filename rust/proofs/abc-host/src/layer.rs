@@ -15,12 +15,12 @@ use std::time::Instant;
 use objc2::rc::Retained;
 use objc2::runtime::{AnyClass, AnyObject, Sel};
 use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, class, define_class, msg_send, sel};
-use objc2_app_kit::{NSEvent, NSEventModifierFlags, NSTextInputClient, NSTrackingArea, NSTrackingAreaOptions, NSView};
+use objc2_app_kit::{NSAppearanceCustomization, NSEvent, NSEventModifierFlags, NSTextInputClient, NSTrackingArea, NSTrackingAreaOptions, NSView};
 use objc2_foundation::{
     NSArray, NSAttributedString, NSAttributedStringKey, NSNotFound, NSObjectProtocol, NSPoint, NSRange, NSRect, NSSize, NSString,
 };
 use rune::embed::LayerHost;
-use rune::{AppSpec, Clause, Cx, El, Ime, Key, KeyEvent, Mods, ScrollSpec, TextEdit, Tx, WheelEvent, col, el, text, tok};
+use rune::{AppSpec, Clause, Cx, El, Ime, Key, KeyEvent, Mods, ScrollSpec, TextEdit, Tx, col, el, text, tok};
 use rune::tok::type_;
 
 #[link(name = "QuartzCore", kind = "framework")]
@@ -42,6 +42,7 @@ pub struct State {
     pub presses: u32,
     pub hover: bool,
     pub phase: f32,
+    pub dark: bool,
     pub field: TextEdit,
 }
 
@@ -49,10 +50,14 @@ thread_local! {
     /// Last scroll offset the list reported; the proof reads it as "the wheel reached Rune".
     pub static SCROLL_Y: Cell<f32> = const { Cell::new(0.0) };
     static TRANSPARENT: Cell<bool> = const { Cell::new(false) };
+    /// The appearance the view reported on the last tick, and the theme the last built tree used.
+    static SYSTEM_DARK: Cell<bool> = const { Cell::new(true) };
+    pub static DRAWN_DARK: Cell<bool> = const { Cell::new(true) };
 }
 
 fn view(s: &State, _: &mut Cx<State>) -> El {
-    let t = tok::theme(true);
+    DRAWN_DARK.with(|c| c.set(s.dark));
+    let t = tok::theme(s.dark);
     let transparent = TRANSPARENT.with(Cell::get);
     let button = el()
         .key("inc")
@@ -63,16 +68,16 @@ fn view(s: &State, _: &mut Cx<State>) -> El {
         .h(36.0)
         .radius(8.0)
         .center()
-        .fill(if s.hover { tok::accent(0, true) } else { t.control_off })
+        .fill(if s.hover { tok::accent(0, s.dark) } else { t.control_off })
         .on_press(|s: &mut State| s.presses += 1)
         .on_hover_change(|s: &mut State, hovered, _tx| s.hover = hovered)
         .child(text(format!("Pressed {}", s.presses)).font(type_::TITLE).color(t.text));
     let field = text_input_row(&s.field);
-    let mut list = col().key("list").w_full().gap(4.0).on_scroll_offset(|p| SCROLL_Y.with(|c| c.set(p.offset[1])));
+    let mut list = col().key("list").w_full().gap(4.0);
     for i in 0..60 {
         list = list.child(text(format!("row {i}")).font(type_::BODY).color(t.text_secondary).h(22.0));
     }
-    let bar = el().key("bar").h(6.0).w(40.0 + 160.0 * (0.5 + 0.5 * s.phase.sin())).radius(3.0).fill(tok::accent(1, true));
+    let bar = el().key("bar").h(6.0).w(40.0 + 160.0 * (0.5 + 0.5 * s.phase.sin())).radius(3.0).fill(tok::accent(1, s.dark));
     let root = col().w_full().h_full().padding(12.0).gap(10.0);
     let title = text("Halyard layer").font(type_::TITLE).color(t.text);
     if transparent {
@@ -84,22 +89,23 @@ fn view(s: &State, _: &mut Cx<State>) -> El {
         .child(button)
         .child(field)
         .child(bar)
-        .child(col().key("scroll").w_full().grow(1.0).scroll(ScrollSpec { stick_bottom: false }).child(list))
+        .child(col().key("scroll").w_full().grow(1.0).scroll(ScrollSpec { stick_bottom: false }).on_scroll_offset(|p| SCROLL_Y.with(|c| c.set(p.offset[1]))).child(list))
 }
 
 fn text_input_row(edit: &TextEdit) -> El {
-    rune::text_input(edit, type_::BODY).key("field").w_full().h(32.0).single_line()
+    rune::text_input(edit, type_::BODY).key("field").on_edit(|s: &mut State| &mut s.field).w_full().h(32.0).single_line()
 }
 
 fn poll(s: &mut State, t: f64, _tx: &mut Tx) -> bool {
     s.phase = (t * 3.0) as f32;
+    s.dark = SYSTEM_DARK.with(Cell::get);
     true
 }
 
 fn spec() -> AppSpec<State> {
     AppSpec {
         poll: Some(poll),
-        ..AppSpec::new("Halyard layer", (320.0, 560.0), || State { presses: 0, hover: false, phase: 0.0, field: TextEdit::new("") }, view)
+        ..AppSpec::new("Halyard layer", (320.0, 560.0), || State { presses: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new("") }, view)
     }
 }
 
@@ -152,10 +158,11 @@ impl Stats {
         let mut cpu: Vec<f64> = v.iter().map(|s| s.cpu_us as f64 / 1000.0).collect();
         cpu.sort_by(f64::total_cmp);
         let late = intervals.iter().filter(|i| **i > nominal * 1.5).count();
+        let over = intervals.iter().filter(|i| **i > 20.7).count();
         let drew = v.iter().filter(|s| s.drew).count();
         let mean = if intervals.is_empty() { 0.0 } else { intervals.iter().sum::<f64>() / intervals.len() as f64 };
         Some(format!(
-            "{{\"event\":\"frame_times\",\"phase\":\"{name}\",\"seconds\":{wall:.2},\"ticks\":{},\"drew\":{drew},\"display_hz\":{:.1},\"nominal_ms\":{nominal:.3},\"interval_ms\":{{\"mean\":{mean:.3},\"p50\":{:.3},\"p95\":{:.3},\"p99\":{:.3},\"max\":{:.3}}},\"fps\":{:.1},\"late_over_1.5x\":{late},\"callback_ms\":{{\"p50\":{:.3},\"p95\":{:.3},\"max\":{:.3}}},\"rune_cpu_ms\":{{\"p50\":{:.3},\"p95\":{:.3},\"max\":{:.3}}}}}",
+            "{{\"event\":\"frame_times\",\"phase\":\"{name}\",\"seconds\":{wall:.2},\"ticks\":{},\"drew\":{drew},\"display_hz\":{:.1},\"nominal_ms\":{nominal:.3},\"interval_ms\":{{\"mean\":{mean:.3},\"p50\":{:.3},\"p95\":{:.3},\"p99\":{:.3},\"max\":{:.3}}},\"fps\":{:.1},\"late_over_1.5x\":{late},\"over_20.7ms\":{over},\"callback_ms\":{{\"p50\":{:.3},\"p95\":{:.3},\"max\":{:.3}}},\"rune_cpu_ms\":{{\"p50\":{:.3},\"p95\":{:.3},\"max\":{:.3}}}}}",
             v.len(),
             self.refresh_hz,
             percentile(&sorted, 0.5),
@@ -198,9 +205,21 @@ impl rune::accesskit::ActionHandler for Actions {
 // ---------------------------------------------------------------------------------------------
 // The view.
 
+/// What the view handed to the Rune runtime: the "Rune event log" of check B1.
+#[derive(Default)]
+pub struct EventLog {
+    pub moves: Vec<(f32, f32)>,
+    pub wheels: u32,
+    pub keys: u32,
+}
+
 pub struct Ivars {
+    pub rect_frames: Cell<u32>,
+    pub rect_bad: Cell<u32>,
+    pub check_rect: Cell<bool>,
+    pub log: RefCell<EventLog>,
     mode: Mode,
-    host: RefCell<Option<LayerHost<State>>>,
+    host: RefCell<Option<Box<LayerHost<State>>>>,
     marked: RefCell<Option<String>>,
     mods: Cell<Mods>,
     link: RefCell<Option<Retained<AnyObject>>>,
@@ -298,6 +317,7 @@ define_class!(
         #[unsafe(method(mouseMoved:))]
         fn mouse_moved(&self, event: &NSEvent) {
             let (x, y) = self.point(event);
+            self.ivars().log.borrow_mut().moves.push((x, y));
             self.with_host(|h| h.runtime_mut().pointer_move(x, y));
         }
 
@@ -345,16 +365,11 @@ define_class!(
         #[unsafe(method(scrollWheel:))]
         fn scroll_wheel(&self, event: &NSEvent) {
             let (x, y) = self.point(event);
-            let mut wheel = WheelEvent::default();
-            wheel.dx = event.scrollingDeltaX() as f32;
-            wheel.dy = event.scrollingDeltaY() as f32;
-            wheel.x = x;
-            wheel.y = y;
-            wheel.mods = mods(event);
-            wheel.precise = event.hasPreciseScrollingDeltas();
+            let (dx, dy) = (event.scrollingDeltaX() as f32, event.scrollingDeltaY() as f32);
+            self.ivars().log.borrow_mut().wheels += 1;
             self.with_host(|h| {
                 h.runtime_mut().pointer_move(x, y);
-                h.runtime_mut().wheel_event(wheel);
+                h.runtime_mut().wheel_xy(x, y, dx, dy);
             });
         }
 
@@ -366,6 +381,7 @@ define_class!(
             if m.cmd {
                 let chars = event.charactersIgnoringModifiers().map(|s| s.to_string()).unwrap_or_default();
                 if let Some(c) = chars.chars().next() {
+                    self.ivars().log.borrow_mut().keys += 1;
                     self.with_host(|h| h.runtime_mut().key(KeyEvent { key: Key::Command(c.to_ascii_lowercase()), mods: m }));
                     return;
                 }
@@ -402,6 +418,7 @@ define_class!(
                 "pageDown" | "scrollPageDown" => Key::PageDown,
                 _ => return,
             };
+            self.ivars().log.borrow_mut().keys += 1;
             self.with_host(|h| h.runtime_mut().key(KeyEvent { key, mods: m }));
         }
 
@@ -495,6 +512,7 @@ define_class!(
             if was_marked {
                 self.with_host(|h| h.runtime_mut().ime(Ime::Commit(text)));
             } else {
+                self.ivars().log.borrow_mut().keys += 1;
                 self.with_host(|h| h.runtime_mut().key(KeyEvent { key: Key::Text(text), mods: m }));
             }
         }
@@ -516,6 +534,19 @@ define_class!(
         }
     }
 );
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+struct FrameRateRange {
+    minimum: f32,
+    maximum: f32,
+    preferred: f32,
+}
+
+// SAFETY: matches `CAFrameRateRange`: three floats.
+unsafe impl objc2::Encode for FrameRateRange {
+    const ENCODING: objc2::Encoding = objc2::Encoding::Struct("CAFrameRateRange", &[objc2::Encoding::Float, objc2::Encoding::Float, objc2::Encoding::Float]);
+}
 
 fn plain_string(object: &AnyObject) -> String {
     let is_attributed: bool = unsafe { msg_send![object, isKindOfClass: class!(NSAttributedString)] };
@@ -550,6 +581,10 @@ impl RuneView {
     pub fn new(mtm: MainThreadMarker, mode: Mode, frame: NSRect) -> Retained<Self> {
         TRANSPARENT.with(|t| t.set(mode == Mode::Above));
         let ivars = Ivars {
+            rect_frames: Cell::new(0),
+            rect_bad: Cell::new(0),
+            check_rect: Cell::new(false),
+            log: RefCell::new(EventLog::default()),
             mode,
             host: RefCell::new(None),
             marked: RefCell::new(None),
@@ -576,11 +611,26 @@ impl RuneView {
     }
 
     pub fn with_host<R>(&self, f: impl FnOnce(&mut LayerHost<State>) -> R) -> Option<R> {
-        self.ivars().host.borrow_mut().as_mut().map(f)
+        self.ivars().host.borrow_mut().as_mut().map(|h| f(&mut **h))
     }
 
     pub fn stats(&self) -> std::cell::RefMut<'_, Stats> {
         self.ivars().stats.borrow_mut()
+    }
+
+    pub fn rect_check(&self, on: bool) {
+        let iv = self.ivars();
+        iv.rect_frames.set(0);
+        iv.rect_bad.set(0);
+        iv.check_rect.set(on);
+    }
+
+    pub fn rect_result(&self) -> (u32, u32) {
+        (self.ivars().rect_frames.get(), self.ivars().rect_bad.get())
+    }
+
+    pub fn ivars_log(&self) -> std::cell::RefMut<'_, EventLog> {
+        self.ivars().log.borrow_mut()
     }
 
     pub fn ticks(&self) -> u64 {
@@ -629,7 +679,7 @@ impl RuneView {
         match made {
             Ok(mut host) => {
                 host.runtime_mut().transparent = transparent;
-                *self.ivars().host.borrow_mut() = Some(host);
+                *self.ivars().host.borrow_mut() = Some(Box::new(host));
             }
             Err(e) => {
                 *self.ivars().last_error.borrow_mut() = Some(e);
@@ -649,6 +699,9 @@ impl RuneView {
             let run_loop: *mut AnyObject = msg_send![class!(NSRunLoop), mainRunLoop];
             let _: () = msg_send![&*link, addToRunLoop: run_loop, forMode: objc2_foundation::NSRunLoopCommonModes];
         }
+        let hz: f32 = std::env::var("ABC_HZ").ok().and_then(|v| v.parse().ok()).unwrap_or(60.0);
+        let range = FrameRateRange { minimum: hz, maximum: hz, preferred: hz };
+        let _: () = unsafe { msg_send![&*link, setPreferredFrameRateRange: range] };
         *self.ivars().link.borrow_mut() = Some(link);
     }
 
@@ -676,6 +729,27 @@ impl RuneView {
         iv.ticks.set(iv.ticks.get() + 1);
         if duration > 0.0 {
             iv.stats.borrow_mut().refresh_hz = 1.0 / duration;
+        }
+        let dark = {
+            let name = self.effectiveAppearance().name().to_string();
+            name.contains("Dark")
+        };
+        SYSTEM_DARK.with(|c| c.set(dark));
+        if iv.check_rect.get() {
+            // The layer rectangle must equal the view bounds, and the drawable the bounds in pixels, in every frame.
+            let layer: *mut AnyObject = unsafe { msg_send![self, layer] };
+            let lb: NSRect = unsafe { msg_send![layer, bounds] };
+            let drawable: NSSize = unsafe { msg_send![layer, drawableSize] };
+            let b = self.bounds().size;
+            let scale = self.scale() as f64;
+            let ok = (lb.size.width - b.width).abs() < 0.01
+                && (lb.size.height - b.height).abs() < 0.01
+                && (drawable.width - b.width * scale).abs() < 1.0
+                && (drawable.height - b.height * scale).abs() < 1.0;
+            iv.rect_frames.set(iv.rect_frames.get() + 1);
+            if !ok {
+                iv.rect_bad.set(iv.rect_bad.get() + 1);
+            }
         }
         crate::proof::on_tick(self);
         let (drew, cpu_us) = {
@@ -728,6 +802,7 @@ impl RuneView {
             focus: rt.has_focus(),
             scroll_y: SCROLL_Y.with(Cell::get),
             transparent: rt.transparent,
+            regions: rt.hit_regions().iter().take(12).cloned().collect(),
         }
     }
 }
@@ -743,6 +818,7 @@ pub struct Probe {
     pub focus: bool,
     pub scroll_y: f32,
     pub transparent: bool,
+    pub regions: Vec<[f32; 4]>,
 }
 
 /// Center of a keyed element in the view's own points, once laid out.

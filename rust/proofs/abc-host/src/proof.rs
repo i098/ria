@@ -84,6 +84,9 @@ enum Step {
     TypeKeys,
     EditKeys,
     Ime,
+    Hiragana,
+    Counts,
+    Dark,
     Resize,
     ResizeEnd,
     Transparency,
@@ -120,6 +123,9 @@ struct Ctx {
     page_widths: Vec<f64>,
     quit_at: Option<Instant>,
     page_loaded_ms: Option<f64>,
+    expected_moves: Vec<(f32, f32)>,
+    dark_from: bool,
+    tick_at_change: u64,
 }
 
 thread_local! {
@@ -288,6 +294,9 @@ pub fn begin(kind: Kind, page_url: &str, started: Instant, engine: Retained<AnyO
         page_widths: Vec::new(),
         quit_at: None,
         page_loaded_ms: None,
+        expected_moves: Vec::new(),
+        dark_from: true,
+        tick_at_change: 0,
     };
     CTX.with(|c| *c.borrow_mut() = Some(ctx));
     start_timer();
@@ -448,6 +457,35 @@ fn key(win: &NSWindow, down: bool, chars: &str, code: u16, flags: NSEventModifie
     .expect("key event")
 }
 
+#[link(name = "Carbon", kind = "framework")]
+unsafe extern "C" {
+    static kTISPropertyInputSourceID: *const AnyObject;
+    fn TISCreateInputSourceList(properties: *const AnyObject, include_all_installed: bool) -> *mut AnyObject;
+    fn TISEnableInputSource(source: *const AnyObject) -> i32;
+    fn TISDisableInputSource(source: *const AnyObject) -> i32;
+}
+
+/// Enables or disables one installed input source (the user's list is restored after the check).
+fn tis_set_enabled(id: &str, enable: bool) -> i32 {
+    // SAFETY: Carbon TIS calls on the main thread with a toll-free NSDictionary; the list is released.
+    unsafe {
+        let key = kTISPropertyInputSourceID;
+        let value = NSString::from_str(id);
+        let dict: Retained<AnyObject> = msg_send![class!(NSDictionary), dictionaryWithObject: &*value, forKey: key];
+        let list = TISCreateInputSourceList(&*dict, true);
+        if list.is_null() {
+            return -1;
+        }
+        let list: Retained<AnyObject> = Retained::from_raw(list).expect("non-null");
+        let count: usize = msg_send![&*list, count];
+        if count == 0 {
+            return -2;
+        }
+        let source: *const AnyObject = msg_send![&*list, objectAtIndex: 0usize];
+        if enable { TISEnableInputSource(source) } else { TISDisableInputSource(source) }
+    }
+}
+
 unsafe extern "C" {
     fn CGEventCreateScrollWheelEvent2(source: *const std::ffi::c_void, units: u32, count: u32, w1: i32, w2: i32, w3: i32) -> *mut std::ffi::c_void;
     fn CGEventSetLocation(event: *mut std::ffi::c_void, at: NSPoint);
@@ -507,14 +545,18 @@ impl Ctx {
                 if self.sub == 0 {
                     self.rune().stats().begin("steady_page_and_rune_animating");
                     self.sub = 1;
-                    self.until = Instant::now() + Duration::from_secs(5);
+                    self.until = Instant::now() + Duration::from_millis(10_300);
                 } else if self.ready() {
                     self.step = Step::SteadyEnd;
                 }
             }
             Step::SteadyEnd => {
-                if let Some(line) = self.rune().stats().end() {
+                let ended = self.rune().stats().end();
+                if let Some(line) = ended {
                     emit(&line);
+                    let v: serde_json::Value = serde_json::from_str(&line).unwrap_or_default();
+                    let (ticks, over, hz) = (v["ticks"].as_u64().unwrap_or(0), v["over_20.7ms"].as_u64().unwrap_or(99), v["fps"].as_f64().unwrap_or(0.0));
+                    self.check("frame_times_600", ticks >= 600 && over <= 6, &format!("{ticks} frames at {hz:.1} Hz, {over} longer than 20.7 ms"));
                 }
                 self.sub = 0;
                 self.step = Step::PointerMove;
@@ -526,6 +568,9 @@ impl Ctx {
             Step::TypeKeys => self.type_keys(),
             Step::EditKeys => self.edit_keys(),
             Step::Ime => self.ime(),
+            Step::Hiragana => self.hiragana(),
+            Step::Counts => self.counts(),
+            Step::Dark => self.dark(),
             Step::Resize => self.resize(),
             Step::ResizeEnd => self.resize_end(),
             Step::Transparency => self.transparency(),
@@ -632,7 +677,7 @@ impl Ctx {
             self.until = Instant::now() + Duration::from_millis(30);
         } else if self.sub > 6 && self.ready() {
             let y = self.rune().probe().scroll_y;
-            self.check("wheel_scroll", y > 100.0, &format!("list scroll offset {y:.1} points after 6 x -40 px wheel events"));
+            self.check("wheel_scroll", y > 100.0, &format!("list scroll offset {y:.1} points after 6 x -40 px wheel events; list center {:?} wheels {}", self.center("scroll"), self.rune().ivars_log().wheels));
             self.sub = 0;
             self.step = Step::FocusField;
         }
@@ -640,16 +685,23 @@ impl Ctx {
 
     fn focus_field(&mut self) {
         if self.sub == 0 {
+            // Hover first and let one frame resolve the hit, as a real pointer does.
+            let Some(c) = self.center("field") else { return };
+            let at = self.to_window(c);
+            self.rune().mouseMoved(&mouse(&self.nswindow, NSEventType::MouseMoved, at, 0));
+            self.sub = 2;
+            self.until = Instant::now() + Duration::from_millis(120);
+        } else if self.sub == 2 && self.ready() {
             let Some(c) = self.center("field") else { return };
             let at = self.to_window(c);
             self.nswindow.sendEvent(&mouse(&self.nswindow, NSEventType::LeftMouseDown, at, 1));
             self.nswindow.sendEvent(&mouse(&self.nswindow, NSEventType::LeftMouseUp, at, 1));
             self.sub = 1;
             self.until = Instant::now() + Duration::from_millis(300);
-        } else if self.ready() {
+        } else if self.sub == 1 && self.ready() {
             let p = self.rune().probe();
             let first: bool = self.nswindow.firstResponder().is_some_and(|r| std::ptr::eq(&*r as *const _ as *const u8, &**self.rune() as *const _ as *const u8));
-            self.check("text_field_focus", p.focus && first, &format!("runtime focus={} view is first responder={first}", p.focus));
+            self.check("text_field_focus", p.focus && first, &format!("runtime focus={} view is first responder={first} center {:?} regions {:?}", p.focus, self.center("field"), p.regions));
             self.sub = 0;
             self.step = Step::TypeKeys;
         }
@@ -745,6 +797,137 @@ impl Ctx {
                 self.check("ime_commit", p.field.contains("你好") && !p.composing, &format!("field text {:?} composing={}", p.field, p.composing));
                 self.check("ime_candidate_rect", rect.size.height > 0.0, &format!("firstRectForCharacterRange {rect:?}"));
                 self.sub = 0;
+                self.step = Step::Hiragana;
+            }
+            _ => {}
+        }
+    }
+
+    /// Check B2: with the Hiragana input source, `n i h o n`, space and return type 日本.
+    fn hiragana(&mut self) {
+        const KEYS: [(&str, u16); 7] = [("n", 45), ("i", 34), ("h", 4), ("o", 31), ("n", 45), (" ", 49), ("\r", 36)];
+        const SOURCE: &str = "com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese";
+        let none = NSEventModifierFlags::empty();
+        if self.sub == 0 && std::env::var_os("ABC_IME_FOREGROUND").is_none() {
+            // A text input method only serves the active application; activating it would bring this window to the front.
+            self.ev("ime_hiragana_skipped", "\"reason\":\"the app is not active and the proof must not come to the front; set ABC_IME_FOREGROUND=1 to run it\"");
+            self.step = Step::Counts;
+        } else if self.sub == 0 {
+            NSApplication::sharedApplication(MainThreadMarker::new().expect("main")).activate();
+            let ctx: Option<Retained<AnyObject>> = unsafe { msg_send![&**self.rune(), inputContext] };
+            let Some(ctx) = ctx else {
+                self.check("ime_hiragana", false, "view has no NSTextInputContext");
+                self.sub = 0;
+                self.step = Step::Counts;
+                return;
+            };
+            let status = tis_set_enabled(SOURCE, true);
+            self.ev("input_source_enabled", &format!("\"id\":\"{SOURCE}\",\"status\":{status}"));
+            let _: () = unsafe { msg_send![&*ctx, activate] };
+            let _: () = unsafe { msg_send![&*ctx, setSelectedKeyboardInputSource: &*NSString::from_str(SOURCE)] };
+            let app_active = NSApplication::sharedApplication(MainThreadMarker::new().expect("main")).isActive();
+            self.ev("app_state", &format!("\"app_active\":{app_active}"));
+            let now: Option<Retained<NSString>> = unsafe { msg_send![&*ctx, selectedKeyboardInputSource] };
+            self.ev("input_source_selected", &format!("\"id\":{}", json(&now.map(|s| s.to_string()).unwrap_or_default())));
+            // Empty the field: Cmd+A then Backspace.
+            self.nswindow.sendEvent(&key(&self.nswindow, true, "a", 0, NSEventModifierFlags::Command));
+            self.nswindow.sendEvent(&key(&self.nswindow, true, "\u{7f}", 51, none));
+            self.sub = 1;
+            self.until = Instant::now() + Duration::from_millis(300);
+        } else if (1..=6).contains(&self.sub) && self.ready() {
+            let (c, code) = KEYS[self.sub as usize - 1];
+            self.nswindow.sendEvent(&key(&self.nswindow, true, c, code, none));
+            self.nswindow.sendEvent(&key(&self.nswindow, false, c, code, none));
+            self.sub += 1;
+            self.until = Instant::now() + Duration::from_millis(250);
+        } else if self.sub == 7 && self.ready() {
+            // After the space the conversion text is marked: report it, and take the screenshot.
+            let marked: bool = unsafe { msg_send![&**self.rune(), hasMarkedText] };
+            let p = self.rune().probe();
+            self.check("ime_hiragana_marked", marked && p.preedit.is_some(), &format!("hasMarkedText={marked} preedit {:?}", p.preedit));
+            self.ev("shot", &format!("\"name\":\"b-ime-marked-text\",\"window_id\":{}", self.nswindow.windowNumber()));
+            self.sub = 8;
+            self.until = Instant::now() + Duration::from_millis(2500);
+        } else if self.sub == 8 && self.ready() {
+            let (c, code) = KEYS[6];
+            self.nswindow.sendEvent(&key(&self.nswindow, true, c, code, none));
+            self.nswindow.sendEvent(&key(&self.nswindow, false, c, code, none));
+            self.sub = 9;
+            self.until = Instant::now() + Duration::from_millis(500);
+        } else if self.sub == 9 && self.ready() {
+            let p = self.rune().probe();
+            self.check("ime_hiragana", p.field.contains("日本") && !p.composing, &format!("field text {:?}, composing={}", p.field, p.composing));
+            let status = tis_set_enabled(SOURCE, false);
+            self.ev("input_source_disabled", &format!("\"status\":{status}"));
+            self.sub = 0;
+            self.step = Step::Counts;
+        }
+    }
+
+    /// Check B1: 100 pointer moves, 20 wheel events and 50 key presses reach the Rune runtime, positions within 1 pt.
+    fn counts(&mut self) {
+        if self.sub == 0 {
+            *self.rune().ivars_log() = Default::default();
+            self.expected_moves.clear();
+            for i in 0..100 {
+                let p = (12.0 + i as f32 * 2.9, 90.0 + (i as f32 * 0.7).sin() * 30.0 + i as f32 * 2.0);
+                self.expected_moves.push(p);
+                let ev = mouse(&self.nswindow, NSEventType::MouseMoved, self.to_window(p), 0);
+                self.rune().mouseMoved(&ev);
+            }
+            let Some(list) = self.center("scroll") else { return };
+            let screen = self.nswindow.convertPointToScreen(self.to_window(list));
+            for _ in 0..20 {
+                if let Some(ev) = scroll(screen, -3) {
+                    self.rune().scrollWheel(&ev);
+                }
+            }
+            let none = NSEventModifierFlags::empty();
+            for _ in 0..50 {
+                self.nswindow.sendEvent(&key(&self.nswindow, true, "a", 0, none));
+                self.nswindow.sendEvent(&key(&self.nswindow, false, "a", 0, none));
+            }
+            self.sub = 1;
+            self.until = Instant::now() + Duration::from_millis(300);
+        } else if self.ready() {
+            let (moves, wheels, keys) = {
+                let log = self.rune().ivars_log();
+                (log.moves.clone(), log.wheels, log.keys)
+            };
+            let worst = moves.iter().zip(&self.expected_moves).map(|(a, b)| (a.0 - b.0).abs().max((a.1 - b.1).abs())).fold(0.0f32, f32::max);
+            let ok = moves.len() == 100 && wheels == 20 && keys == 50 && worst <= 1.0;
+            self.check("event_counts", ok, &format!("moves={} wheels={wheels} keys={keys} worst position error {worst:.3} pt", moves.len()));
+            self.sub = 0;
+            self.step = Step::Dark;
+        }
+    }
+
+    /// Check B5: an appearance change reaches the Rune theme in the next frame.
+    fn dark(&mut self) {
+        use objc2_app_kit::{NSAppearance, NSAppearanceCustomization, NSAppearanceNameAqua, NSAppearanceNameDarkAqua};
+        let dark_now = crate::layer::DRAWN_DARK.with(|c| c.get());
+        match self.sub {
+            0 => {
+                // The window follows the system until now; force the opposite look on this window only.
+                let name = if dark_now { unsafe { NSAppearanceNameAqua } } else { unsafe { NSAppearanceNameDarkAqua } };
+                self.dark_from = dark_now;
+                self.tick_at_change = self.rune().ticks();
+                self.nswindow.setAppearance(NSAppearance::appearanceNamed(name).as_deref());
+                self.sub = 1;
+                self.until = Instant::now() + Duration::from_millis(400);
+            }
+            1 if dark_now != self.dark_from => {
+                let frames = self.rune().ticks() - self.tick_at_change;
+                self.check("dark_mode_theme", frames <= 2, &format!("theme dark {} -> {dark_now} after {frames} display-link frames", self.dark_from));
+                self.sub = 2;
+            }
+            1 if self.ready() => {
+                self.check("dark_mode_theme", false, "theme did not change in 400 ms");
+                self.sub = 2;
+            }
+            2 => {
+                self.nswindow.setAppearance(None);
+                self.sub = 0;
                 self.step = Step::Resize;
             }
             _ => {}
@@ -757,19 +940,20 @@ impl Ctx {
             self.base_frame = self.nswindow.frame();
             self.page_widths.clear();
             self.rune().stats().begin("window_resize_live");
+            self.rune().rect_check(true);
             self.sub = 1;
             self.until = Instant::now();
         }
 
         let k = self.sub as f64;
         // 150 ticks of a smooth width swing: +260 points and back.
-        let swing = (k / 150.0 * std::f64::consts::PI).sin() * 260.0;
+        let swing = (k / 300.0 * std::f64::consts::PI).sin() * 260.0;
         let mut f = self.base_frame;
         f.size.width += swing;
         self.nswindow.setFrame_display(f, true);
         self.page_widths.push(self.tab_view.frame().size.width);
         self.sub += 1;
-        if self.sub > 150 {
+        if self.sub > 300 {
             self.step = Step::ResizeEnd;
             self.sub = 0;
         }
@@ -785,6 +969,9 @@ impl Ctx {
         let drawable: objc2_foundation::NSSize = unsafe { msg_send![layer, drawableSize] };
         let scale = self.nswindow.backingScaleFactor();
         let want = (strip.width * scale, strip.height * scale);
+        let (frames, bad) = self.rune().rect_result();
+        self.rune().rect_check(false);
+        self.check("resize_layer_equals_bounds", frames >= 250 && bad == 0, &format!("{frames} frames checked over the resize, {bad} with a layer rect or drawable different from the view bounds"));
         self.check("resize_page_follows", hi - lo > 200.0, &format!("page view width ranged {lo:.0}..{hi:.0}"));
         self.check("resize_strip_fixed", (strip.width - STRIP_W).abs() < 0.5, &format!("strip width {:.1}", strip.width));
         self.check(
