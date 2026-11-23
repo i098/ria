@@ -34,7 +34,7 @@ How Rust reaches the classes:
 | protocol Ardia calls | `extern_protocol!` (`objc2/src/macros/extern_protocol.rs:156`) | Used as `&ProtocolObject<dyn P>`. |
 | protocol Rust implements | `define_class!` (`objc2/src/macros/define_class.rs:446`) with `impl P for Class` | Rust owns the object and passes it as `ProtocolObject::from_ref` (`objc2/src/runtime/protocol_object.rs:88`) or `from_retained` (line 112). |
 | `nullable T*` | `Option<&T>` / `Option<Retained<T>>` | |
-| `BOOL` | `objc2::runtime::Bool` at the block boundary | Rust `bool` does not have the Objective-C block encoding. Convert with `as_bool()` after the call crosses the boundary. See the [Mac host bindings](../crates/ria-host-mac/src/core/bindings.rs). |
+| `BOOL` | `objc2::runtime::Bool` in block signatures | Block arguments require `Encode`, which Rust `bool` does not implement. Convert received block values with `as_bool()`. For direct method arguments and results, `extern_methods!` handles the conversion. See the [Mac host bindings](../crates/ria-host-mac/src/core/bindings.rs). |
 | `NSString*` | `NSString` from `objc2-foundation` | |
 | `NSDictionary<NSString*, id>*` | `NSDictionary<NSString, AnyObject>` | Untyped JSON-like payload. No schema in the header (`H:19, 23, 26, 29, 36, 43, 46`). |
 | block `void (^)(...)` | `&block2::Block<dyn Fn(..)>`, built with `RcBlock::new` (`block2-0.6.2/src/rc_block.rs:38`) | Escaping: Ardia copies the block and keeps it (see section 4). |
