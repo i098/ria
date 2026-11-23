@@ -180,9 +180,15 @@ mod tests {
 
     #[test]
     fn line_terminator_in_hash_is_an_error_like_the_original() {
-        assert_eq!(app_url_origin("ardia://x#a\nb"), Err(LINE_TERMINATOR_IN_HASH));
+        assert_eq!(
+            app_url_origin("ardia://x#a\nb"),
+            Err(LINE_TERMINATOR_IN_HASH)
+        );
         assert!(app_url_route("ardia://x?q#h\u{2028}i").is_err());
-        assert_eq!(app_url_origin("ardia://x#ab").unwrap().as_deref(), Some("ardia://x"));
+        assert_eq!(
+            app_url_origin("ardia://x#ab").unwrap().as_deref(),
+            Some("ardia://x")
+        );
         assert_eq!(app_url_route("https://x#a\nb"), Ok(None));
     }
 }

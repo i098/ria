@@ -318,10 +318,7 @@ mod tests {
     #[test]
     fn scores_match_the_original_branches() {
         let q = parse_query("git", &["git"]);
-        assert_eq!(
-            match_score(&mut page("github.com/x", "GitHub"), &q),
-            40.0
-        );
+        assert_eq!(match_score(&mut page("github.com/x", "GitHub"), &q), 40.0);
         let word = parse_query("gi", &["gi"]);
         assert_eq!(match_score_word(&page("github.com", "x"), &word), 100.0);
     }
