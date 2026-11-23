@@ -37,7 +37,8 @@ impl SavedSession {
             .map(Self::from_document)
     }
 
-    pub fn parse(data: &[u8]) -> Option<Self> {
+    #[cfg(test)]
+    fn parse(data: &[u8]) -> Option<Self> {
         saved_document::parse(data, 0..=VERSION).map(Self::from_document)
     }
 

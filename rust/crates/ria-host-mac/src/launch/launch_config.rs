@@ -311,13 +311,21 @@ fn launch_directories(
         (standardize(&default_data)?, false)
     };
     let config = if isolated {
-        let config = data.join("config");
-        profile::check_subdirectory(&config)?;
-        config
+        data.join("config")
     } else {
         standardize(&home.join(".config/ria"))?
     };
-    profile::check_subdirectory(&data.join("Chromium"))?;
+    if standardize(&home.join(".config/ardia")).is_ok_and(|ardia| overlaps(&config, &ardia)) {
+        return Err(io::Error::new(
+            ErrorKind::InvalidInput,
+            "the Ria config directory overlaps the Ardia config directory",
+        ));
+    }
+    profile::check_tree(&config, &[])?;
+    profile::check_tree(
+        &data.join("Chromium"),
+        &["SingletonLock", "SingletonSocket", "SingletonCookie"],
+    )?;
     profile::claim(&data)?;
     Ok((data, config, isolated))
 }
@@ -528,6 +536,70 @@ mod tests {
         assert_eq!(normal.config_directory, resolved_home.join("ria-dotfiles"));
         assert_eq!(scratch.data_directory, resolved_home.join("scratch"));
         assert!(scratch.test_instance);
+    }
+
+    #[test]
+    fn rejects_a_config_destination_shared_with_ardia() {
+        let home = std::env::temp_dir().join(format!("ria-shared-config-{}", std::process::id()));
+        fs::create_dir_all(home.join(".config")).unwrap();
+        fs::create_dir(home.join("dotfiles")).unwrap();
+        symlink("../dotfiles", home.join(".config/ria")).unwrap();
+        symlink("../dotfiles", home.join(".config/ardia")).unwrap();
+        let shared = LaunchConfig::from_environment([], &home, &home, false);
+        fs::remove_file(home.join(".config/ria")).unwrap();
+        fs::create_dir(home.join(".config/ria")).unwrap();
+        symlink("../../dotfiles", home.join(".config/ria/hooks")).unwrap();
+        let linked_hooks = LaunchConfig::from_environment([], &home, &home, false);
+
+        let scratch =
+            LaunchConfig::from_environment([("RIA_DATA_DIR", "scratch")], &home, &home, false)
+                .unwrap();
+        fs::create_dir(&scratch.config_directory).unwrap();
+        fs::remove_file(home.join(".config/ardia")).unwrap();
+        symlink(&scratch.config_directory, home.join(".config/ardia")).unwrap();
+        let shared_scratch =
+            LaunchConfig::from_environment([("RIA_DATA_DIR", "scratch")], &home, &home, false);
+        fs::remove_dir_all(&home).unwrap();
+
+        assert!(shared.is_err());
+        assert!(linked_hooks.is_err());
+        assert!(shared_scratch.is_err());
+    }
+
+    #[test]
+    fn rejects_nested_chromium_links_outside_a_marked_profile() {
+        let home = std::env::temp_dir().join(format!("ria-chromium-link-{}", std::process::id()));
+        let ardia = home.join("old-scratch/Chromium/Default");
+        fs::create_dir_all(&ardia).unwrap();
+
+        for override_path in ["", "scratch"] {
+            let launch = || {
+                LaunchConfig::from_environment(
+                    [("RIA_DATA_DIR", override_path)],
+                    &home,
+                    &home,
+                    false,
+                )
+            };
+            let config = launch().unwrap();
+            let default = config.data_directory.join("Chromium/Default");
+            fs::create_dir_all(&default).unwrap();
+            fs::write(default.join("Preferences"), b"{}").unwrap();
+            symlink(
+                "host-123",
+                config.data_directory.join("Chromium/SingletonLock"),
+            )
+            .unwrap();
+            assert!(launch().is_ok());
+            symlink(ardia.join("Preferences"), default.join("Linked")).unwrap();
+            fs::write(ardia.join("Preferences"), b"{}").unwrap();
+            assert!(launch().is_err());
+            fs::remove_dir_all(&default).unwrap();
+            symlink(&ardia, &default).unwrap();
+            assert!(launch().is_err());
+        }
+
+        fs::remove_dir_all(&home).unwrap();
     }
 
     #[test]

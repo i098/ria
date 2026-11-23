@@ -38,13 +38,35 @@ pub(super) fn read(directory: &Path, name: &Path) -> Option<Vec<u8>> {
     fs::read(file).ok()
 }
 
-pub(super) fn check_subdirectory(directory: &Path) -> io::Result<()> {
-    match directory.symlink_metadata() {
-        Ok(metadata) if metadata.is_dir() => Ok(()),
+pub(super) fn check_tree(root: &Path, root_links: &[&str]) -> io::Result<()> {
+    match root.symlink_metadata() {
+        Ok(metadata) if metadata.is_dir() => check_entries(root, root, root_links),
         Err(error) if error.kind() == ErrorKind::NotFound => Ok(()),
         Err(error) => Err(error),
         Ok(_) => Err(ErrorKind::NotADirectory.into()),
     }
+}
+
+fn check_entries(root: &Path, directory: &Path, allowed_links: &[&str]) -> io::Result<()> {
+    for entry in fs::read_dir(directory)? {
+        let entry = entry?;
+        let kind = entry.file_type()?;
+        if kind.is_dir() {
+            check_entries(root, &entry.path(), &[])?;
+        } else if kind.is_symlink() {
+            let name = entry.file_name();
+            if allowed_links.iter().any(|&link| name == link)
+                || entry.path().canonicalize()?.starts_with(root)
+            {
+                continue;
+            }
+            return Err(io::Error::new(
+                ErrorKind::InvalidInput,
+                "a link points outside the config or Chromium directory",
+            ));
+        }
+    }
+    Ok(())
 }
 
 fn is_regular_file(path: &Path) -> bool {
