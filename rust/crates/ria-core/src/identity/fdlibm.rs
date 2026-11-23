@@ -9,9 +9,8 @@
 // Copyright 2016 the V8 project authors. All rights reserved.
 // Use of this source code is governed by the BSD-style license in Ria's NOTICE.
 
-//! `Math.sin`, `Math.cos`, `Math.atan` and `Math.atan2` as V8 computes them (`src/base/ieee754.cc`,
-//! from FreeBSD fdlibm). The system libm differs from V8 in the last bit for about 3% of inputs,
-//! so `theme` calls these to match Ardia bit for bit.
+//! These functions use FreeBSD fdlibm from V8's `src/base/ieee754.cc`.
+//! Theme calculations use them because the system `libm` can round differently from V8.
 
 #![allow(
     clippy::approx_constant,

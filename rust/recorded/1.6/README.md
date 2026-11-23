@@ -14,8 +14,9 @@ recorded cases of the TypeScript original (`cases.jsonl`), its inputs (`<name>.i
 `tabGroups.ts` has only a constant and a type: `rust-anything bridge` refuses it ("exports no
 functions"), so it has no crate. `identity::tab_groups` carries it.
 
-The mobile harness calls all 13 mobile exports in order on one session. The input replaces saved
-pages, search engines, and bang tables, and checks the state after each replacement.
+The mobile harness calls all 13 mobile exports in order in one session.
+The [input sequence](mobile.inputs.jsonl) replaces saved pages, search engines, and bang tables.
+The sequence checks the state after each replacement.
 
 ## Run
 
@@ -28,7 +29,7 @@ rust-anything gate   rust/recorded/1.6/<crate>
 rust-anything fuzz   rust/recorded/1.6/<crate> --seed <new seed>
 ```
 
-To record the mobile sequence from a fresh checkout, initialize the pinned Ardia submodule.
+Initialize the pinned Ardia submodule before recording the mobile sequence.
 Run these commands from the repository root:
 
 ```sh
@@ -37,12 +38,14 @@ cp -R ardia/packages .review-ardia/
 cp rust/recorded/1.6/mobile.harness.ts .review-ardia/packages/core/src/
 TZ=UTC rust-anything record rust/recorded/1.6/mobile-rs --count 0 --inputs rust/recorded/1.6/mobile.inputs.jsonl
 rust-anything build rust/recorded/1.6/mobile-rs
-rust-anything gate rust/recorded/1.6/mobile-rs
 ```
 
-`telemetry-wire-rs` reads `Date.now()` when a timestamp does not parse. Use the hook for recording
-and replay. It fixes the clock and sets the time zone to UTC.
-See [known-diffs.jsonl](known-diffs.jsonl) for the exception outside the UTC recording.
+Use the [mobile gate command](../../GATES.md#phase-1-check-u) after the build.
+
+`telemetryWire.ts` reads `Date.now()` when a timestamp does not parse.
+Use the clock hook and the same `RIA_NOW_MS` for `record`, `diff`, `gate`, and `fuzz`.
+The hook sets the time zone to UTC.
+See [known-diffs.jsonl](known-diffs.jsonl) for the parity exception outside UTC.
 
 ```sh
 TZ=UTC RIA_NOW_MS=1795417631295 NODE_OPTIONS=--import=$PWD/rust/recorded/1.6/telemetry-wire-rs/clock-freeze.mjs \

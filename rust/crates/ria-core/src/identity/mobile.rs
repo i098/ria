@@ -17,12 +17,12 @@ use crate::omnibox::suggestion::{
 };
 use crate::search::bang_list::BANG_LISTS;
 use crate::search::bangs::{
-    BangTable, bang_document, bang_table, find_bang, join_bang_tables, parse_json, read_bang_document,
-    slim_bangs,
+    BangTable, bang_document, bang_table, find_bang, join_bang_tables, parse_json,
+    read_bang_document, slim_bangs,
 };
 use crate::search::engines::{
-    BUILT_IN_ENGINES, CustomSearchEngine, SearchEngine, all_engines, engine_by_id, parse_suggestions,
-    suggest_request_url, valid_search_template,
+    BUILT_IN_ENGINES, CustomSearchEngine, SearchEngine, all_engines, engine_by_id,
+    parse_suggestions, suggest_request_url, valid_search_template,
 };
 use crate::search::js_text::js_trim;
 use crate::search::site_search::{ScopeKind, ScopeSources, SearchScope, find_scope};

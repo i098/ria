@@ -6,8 +6,8 @@
 //! `builtins-date.cc`): the ECMAScript date-time format, then the legacy format that Safari
 //! accepts. `eventRecord` (`telemetryWire.ts:43`) calls `Date.parse` on a stored string.
 //!
-//! shortcut: a string with no offset counts as UTC, where V8 uses the local time zone; upgrade
-//! when a caller needs local time (Ardia writes only `toISOString()` text, with `Z`).
+//! shortcut: Interpret offsetless legacy dates and ISO date-times as UTC until a caller needs
+//! local time. See `rust/recorded/1.6/known-diffs.jsonl` for the parity exception.
 
 use crate::search::js_text::is_js_space;
 

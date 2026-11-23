@@ -9,12 +9,7 @@ Rust port of `packages/core/src/telemetryWire.ts`, bridged with napi-rs. Generat
 - `logsRequest` (`packages/core/src/telemetryWire.ts:64`)
 - `outcome` (`packages/core/src/telemetryWire.ts:72`)
 
-## Loop
+## Run
 
-```sh
-rust-anything record .   # record what the TS code does
-rust-anything build .    # build the napi-rs module
-rust-anything diff .     # run the recorded cases against Rust
-rust-anything shadow .   # run both in the app, log mismatches
-rust-anything gate .     # fmt, clippy, tests, unsafe, API, diff
-```
+See [the slice instructions](../README.md#run) for recording and replay with the required clock hook.
+Build the napi-rs module with `rust-anything build .` from this directory.
