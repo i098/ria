@@ -4,6 +4,7 @@
 
 //! Reads the manifest of an unpacked extension folder.
 
+use std::collections::HashSet;
 use std::fs::File;
 use std::io::Read;
 use std::path::{Component, Path, PathBuf};
@@ -35,9 +36,9 @@ pub fn id_for_key(base64_key: &str) -> Option<String> {
     )
 }
 
-fn load_json(folder: &File, path: &Path) -> Option<Map<String, Value>> {
+fn load_json(package: &Package<'_>, path: &Path) -> Option<Map<String, Value>> {
     let mut bytes = Vec::new();
-    open_file(folder, path)?.read_to_end(&mut bytes).ok()?;
+    package.open_file(path)?.read_to_end(&mut bytes).ok()?;
     match bytes.as_slice() {
         [0, 0, 0xfe, 0xff, rest @ ..] => load_utf32(rest, u32::from_be_bytes),
         [0xff, 0xfe, 0, 0, rest @ ..] => load_utf32(rest, u32::from_le_bytes),
@@ -77,21 +78,39 @@ fn load_utf32(bytes: &[u8], unit: fn([u8; 4]) -> u32) -> Option<Map<String, Valu
     json5::from_str(&text).ok()
 }
 
-fn open_file(folder: &File, path: &Path) -> Option<File> {
-    let mut normalized = PathBuf::new();
-    let path = if path.components().any(|part| part == Component::ParentDir) {
-        for part in path.components() {
-            match part {
-                Component::Normal(name) => normalized.push(name),
-                Component::CurDir => {}
-                Component::ParentDir if normalized.pop() => {}
-                _ => return None,
+struct Package<'a> {
+    path: &'a Path,
+    root: File,
+}
+
+impl Package<'_> {
+    fn open_file(&self, path: &Path) -> Option<File> {
+        let mut normalized = PathBuf::new();
+        let path = if path.components().any(|part| part == Component::ParentDir) {
+            for part in path.components() {
+                match part {
+                    Component::Normal(name) => normalized.push(name),
+                    Component::CurDir => {}
+                    Component::ParentDir if normalized.pop() => {}
+                    _ => return None,
+                }
             }
+            normalized.as_path()
+        } else {
+            path
+        };
+        if path.is_absolute() {
+            return None;
         }
-        normalized.as_path()
-    } else {
-        path
-    };
+        open_without_links(&self.root, path).or_else(|| {
+            let root = self.path.canonicalize().ok()?;
+            let target = root.join(path).canonicalize().ok()?;
+            open_without_links(&self.root, target.strip_prefix(root).ok()?)
+        })
+    }
+}
+
+fn open_without_links(folder: &File, path: &Path) -> Option<File> {
     let mut components = path
         .components()
         .filter(|part| *part != Component::CurDir)
@@ -112,7 +131,7 @@ fn open_file(folder: &File, path: &Path) -> Option<File> {
 }
 
 /// A `data:` URL for an image file inside `folder`, or `None` for a path outside it, an empty file or an unknown type.
-fn data_url(folder: &File, relative_path: &str) -> Option<String> {
+fn data_url(package: &Package<'_>, relative_path: &str) -> Option<String> {
     let path = Path::new(relative_path.strip_prefix('/').unwrap_or(relative_path));
     let kind = match path.extension()?.to_str()?.to_ascii_lowercase().as_str() {
         "png" => "image/png",
@@ -125,7 +144,7 @@ fn data_url(folder: &File, relative_path: &str) -> Option<String> {
         _ => return None,
     };
     let mut data = Vec::new();
-    if open_file(folder, path)?.read_to_end(&mut data).ok()? == 0 {
+    if package.open_file(path)?.read_to_end(&mut data).ok()? == 0 {
         return None;
     }
     Some(format!("data:{kind};base64,{}", base64_encode(&data)))
@@ -153,7 +172,11 @@ fn valid_messages(messages: &Messages) -> bool {
 }
 
 /// The merged messages of the locales in order: the UI locale, its language, the manifest default, `en`, `en_US`.
-fn messages(folder: &File, manifest: &Messages, ui_locale: &str) -> Result<Messages, CallError> {
+fn messages(
+    package: &Package<'_>,
+    manifest: &Messages,
+    ui_locale: &str,
+) -> Result<Messages, CallError> {
     let mut ui = ui_locale.replace('-', "_");
     if ui == "en" {
         ui = "en_US".into();
@@ -185,7 +208,7 @@ fn messages(folder: &File, manifest: &Messages, ui_locale: &str) -> Result<Messa
         }
         let file = Path::new("_locales").join(&locale).join("messages.json");
         loaded.push(locale.clone());
-        let Some(found) = load_json(folder, &file) else {
+        let Some(found) = load_json(package, &file) else {
             continue;
         };
         if !valid_messages(&found) {
@@ -237,15 +260,11 @@ fn leading_int(s: &str) -> i64 {
     s[..end].parse().unwrap_or(0)
 }
 
-fn strings(list: Option<&Value>) -> Vec<String> {
+fn strings(list: Option<&Value>) -> impl Iterator<Item = &str> {
     list.and_then(Value::as_array)
-        .map(|items| {
-            items
-                .iter()
-                .filter_map(|i| i.as_str().map(str::to_owned))
-                .collect()
-        })
-        .unwrap_or_default()
+        .into_iter()
+        .flatten()
+        .filter_map(Value::as_str)
 }
 
 fn is_host_pattern(s: &str) -> bool {
@@ -261,38 +280,39 @@ fn text_or_null(value: Option<String>) -> Value {
 pub fn read_manifest(folder: &Path, ui_locale: &str) -> Result<Value, CallError> {
     let flags = OFlags::RDONLY | OFlags::DIRECTORY | OFlags::CLOEXEC;
     let missing = || CallError::Engine("Manifest file is missing or unreadable".into());
-    let folder = File::from(rustix::fs::open(folder, flags, Mode::empty()).map_err(|_| missing())?);
-    let m = load_json(&folder, Path::new("manifest.json")).ok_or_else(missing)?;
-    let messages = messages(&folder, &m, ui_locale)?;
+    let package = Package {
+        path: folder,
+        root: File::from(rustix::fs::open(folder, flags, Mode::empty()).map_err(|_| missing())?),
+    };
+    let m = load_json(&package, Path::new("manifest.json")).ok_or_else(missing)?;
+    let messages = messages(&package, &m, ui_locale)?;
     let action = ["action", "browser_action", "page_action"]
         .iter()
         .find_map(|k| m.get(*k).filter(|v| v.is_object()));
-    let mut hosts: Vec<String> = Vec::new();
+    let mut hosts = Vec::new();
+    let mut seen = HashSet::new();
+    let mut add_host = |host| {
+        if seen.insert(host) {
+            hosts.push(host);
+        }
+    };
     let mut permissions = Vec::new();
     for p in strings(m.get("permissions")) {
-        if is_host_pattern(&p) {
-            hosts.push(p);
+        if is_host_pattern(p) {
+            add_host(p);
         } else {
             permissions.push(p);
         }
     }
-    hosts.extend(strings(m.get("host_permissions")));
+    strings(m.get("host_permissions")).for_each(&mut add_host);
     for script in m
         .get("content_scripts")
         .and_then(Value::as_array)
         .into_iter()
         .flatten()
     {
-        hosts.extend(strings(script.get("matches")));
+        strings(script.get("matches")).for_each(&mut add_host);
     }
-    let mut seen = Vec::new();
-    hosts.retain(|h| {
-        let new = !seen.contains(h);
-        if new {
-            seen.push(h.clone());
-        }
-        new
-    });
 
     let action_get = |key: &str| action.and_then(|a| a.get(key));
     let options = match m.get("options_ui") {
@@ -331,12 +351,12 @@ pub fn read_manifest(folder: &Path, ui_locale: &str) -> Result<Value, CallError>
     );
     put(
         "icon",
-        text_or_null(icon_path(m.get("icons"), 128).and_then(|p| data_url(&folder, &p))),
+        text_or_null(icon_path(m.get("icons"), 128).and_then(|p| data_url(&package, &p))),
     );
     put("permissions", json!(permissions));
     put(
         "optionalPermissions",
-        json!(strings(m.get("optional_permissions"))),
+        json!(strings(m.get("optional_permissions")).collect::<Vec<_>>()),
     );
     put("hostPermissions", json!(hosts));
     put("hasAction", json!(action.is_some()));
@@ -353,7 +373,7 @@ pub fn read_manifest(folder: &Path, ui_locale: &str) -> Result<Value, CallError>
     );
     let action_icon = icon_path(action_get("default_icon"), 32)
         .or_else(|| icon_path(m.get("icons"), 32))
-        .and_then(|p| data_url(&folder, &p));
+        .and_then(|p| data_url(&package, &p));
     put("actionIcon", text_or_null(action_icon));
     put(
         "optionsPage",
@@ -454,18 +474,19 @@ mod tests {
                 };
                 fs::write(
                     dir.path().join("manifest.json"),
-                    encode("{name: '__MSG_title__'}"),
+                    encode(
+                        "{name: '__MSG_title__', description: 'Line\u{2028}Paragraph\u{2029}End'}",
+                    ),
                 )
                 .unwrap();
                 fs::write(
                     locale.join("messages.json"),
-                    encode("{title: {message: 'Bon été 🐝'}}"),
+                    encode("{title: {message: 'Bon\u{2028}été\u{2029}🐝'}}"),
                 )
                 .unwrap();
-                assert_eq!(
-                    read_manifest(dir.path(), "fr").unwrap()["name"],
-                    "Bon été 🐝"
-                );
+                let result = read_manifest(dir.path(), "fr").unwrap();
+                assert_eq!(result["name"], "Bon\u{2028}été\u{2029}🐝");
+                assert_eq!(result["description"], "Line\u{2028}Paragraph\u{2029}End");
             }
         }
     }
@@ -491,8 +512,9 @@ mod tests {
             r#"{
               // comment
               name: '__MSG_title__', version: '1.0', manifest_version: 3,
-              "permissions": ["tabs", "https://a.com/*"], "host_permissions": ["https://b.com/*"],
-              "content_scripts": [{"matches": ["https://a.com/*"]}],
+              "permissions": ["tabs", "https://z.com/*"],
+              "host_permissions": ["https://b.com/*", "https://z.com/*"],
+              "content_scripts": [{"matches": ["https://b.com/*", "https://a.com/*"]}],
               "action": {"default_popup": "p.html", "default_icon": "./i.png"},
               "icons": {"16": "i.png", "128": "../out.png"},
               "incognito": "split",
@@ -504,7 +526,7 @@ mod tests {
         assert_eq!(v["permissions"], json!(["tabs"]));
         assert_eq!(
             v["hostPermissions"],
-            json!(["https://a.com/*", "https://b.com/*"])
+            json!(["https://z.com/*", "https://b.com/*", "https://a.com/*"])
         );
         assert_eq!(v["hasAction"], true);
         assert_eq!(v["popup"], "p.html");
@@ -536,6 +558,35 @@ mod tests {
             ))
         );
         let _ = fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn package_reads_follow_links_within_the_folder() {
+        use std::os::unix::fs::symlink;
+
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path();
+        fs::create_dir(root.join("build")).unwrap();
+        fs::create_dir(root.join("_locales")).unwrap();
+        fs::write(
+            root.join("build/manifest.json"),
+            "{name: '__MSG_title__', icons: {'128': 'icon.png'}, action: {default_icon: 'icon.png'}}",
+        )
+        .unwrap();
+        fs::write(root.join("build/icon.png"), [1, 2, 3]).unwrap();
+        fs::write(
+            root.join("build/messages.json"),
+            "{title: {message: 'One\u{2028}Two\u{2029}Three'}}",
+        )
+        .unwrap();
+        symlink("build/manifest.json", root.join("manifest.json")).unwrap();
+        symlink("../build", root.join("_locales/en")).unwrap();
+        symlink(root.join("build/icon.png"), root.join("icon.png")).unwrap();
+
+        let result = read_manifest(root, "en").unwrap();
+        assert_eq!(result["name"], "One\u{2028}Two\u{2029}Three");
+        assert_eq!(result["icon"], "data:image/png;base64,AQID");
+        assert_eq!(result["actionIcon"], "data:image/png;base64,AQID");
     }
 
     #[test]

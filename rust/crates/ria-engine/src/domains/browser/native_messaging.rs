@@ -184,8 +184,7 @@ fn is_owned(file: &File) -> bool {
 }
 
 fn write_owned(path: &Path, data: &[u8], replace: bool) -> std::io::Result<()> {
-    let mut temp = tempfile::NamedTempFile::new_in(path.parent().unwrap())?;
-    temp.write_all(data)?;
+    let temp = temp_with_data(path, data)?;
     mark_owned(temp.as_file())?;
     if replace {
         temp.persist(path)?;
@@ -195,37 +194,37 @@ fn write_owned(path: &Path, data: &[u8], replace: bool) -> std::io::Result<()> {
     Ok(())
 }
 
-fn migrate_ownership(dir: &Path, known: &[Value]) -> std::io::Result<()> {
+fn temp_with_data(path: &Path, data: &[u8]) -> std::io::Result<tempfile::NamedTempFile> {
+    let mut temp = tempfile::NamedTempFile::new_in(path.parent().unwrap())?;
+    temp.write_all(data)?;
+    Ok(temp)
+}
+
+fn save_managed_list(dir: &Path, names: &BTreeSet<&str>) -> std::io::Result<()> {
     let list = dir.join(MANAGED_LIST);
-    let file = match open_regular(&list) {
-        Ok(file) => file,
-        Err(error) if error.kind() == ErrorKind::NotFound => return Ok(()),
-        Err(error) => return Err(error),
-    };
-    let managed: BTreeSet<String> = serde_json::from_reader(file)?;
-    for name in managed {
-        if !SYSTEM_REGISTERED_HOSTS.contains(&name.as_str())
-            && !known.iter().any(|manifest| manifest["name"] == name.as_str())
-        {
-            continue;
-        }
-        match open_regular(&manifest_path(dir, &name)) {
-            Ok(file) => mark_owned(&file)?,
-            Err(error) if error.kind() == ErrorKind::NotFound => {}
-            Err(error) => return Err(error),
-        }
+    let previous: Option<BTreeSet<String>> = open_regular(&list)
+        .ok()
+        .and_then(|file| serde_json::from_reader(file).ok());
+    if previous
+        .as_ref()
+        .is_some_and(|previous| previous.iter().map(String::as_str).eq(names.iter().copied()))
+    {
+        return Ok(());
     }
-    fs::remove_file(list)
+    let data = serde_json::to_vec(names)?;
+    temp_with_data(&list, &data)?.persist(list)?;
+    Ok(())
 }
 
 /// Updates the profile's native messaging manifests without replacing or removing unmanaged files.
 pub fn sync_hosts(user_data_dir: &Path, system_dir: &Path) {
     let dir = user_data_dir.join("NativeMessagingHosts");
     let known = known_hosts();
-    if fs::create_dir_all(&dir).is_err() || migrate_ownership(&dir, &known).is_err() {
+    if fs::create_dir_all(&dir).is_err() {
         return;
     }
     let installed = installed_hosts(system_dir, &known);
+    let mut managed = BTreeSet::new();
     for name in known
         .iter()
         .filter_map(|manifest| manifest["name"].as_str())
@@ -240,16 +239,22 @@ pub fn sync_hosts(user_data_dir: &Path, system_dir: &Path) {
                 if file.read_to_end(&mut old).is_err() || old != *data {
                     let _ = write_owned(&path, data, true);
                 }
+                managed.insert(name);
             }
             (Ok(file), None) if is_owned(&file) => {
-                let _ = fs::remove_file(path);
+                if fs::remove_file(path).is_err_and(|error| error.kind() != ErrorKind::NotFound) {
+                    managed.insert(name);
+                }
             }
             (Err(error), Some((_, data))) if error.kind() == ErrorKind::NotFound => {
-                let _ = write_owned(&path, data, false);
+                if write_owned(&path, data, false).is_ok() {
+                    managed.insert(name);
+                }
             }
             _ => {}
         }
     }
+    let _ = save_managed_list(&dir, &managed);
 }
 
 #[cfg(test)]
@@ -328,7 +333,7 @@ mod tests {
     }
 
     #[test]
-    fn sync_migrates_legacy_ownership_without_following_paths() {
+    fn sync_updates_and_removes_owned_manifests_without_using_fixed_temp_paths() {
         use std::os::unix::fs::symlink;
 
         let user = tempfile::tempdir().unwrap();
@@ -347,11 +352,13 @@ mod tests {
         fs::write(&outside, b"keep").unwrap();
         symlink(&outside, manifest.with_extension("json.tmp")).unwrap();
         symlink(&outside, managed.with_extension("json.tmp")).unwrap();
-        fs::copy(manifest_path(system.path(), name), &manifest).unwrap();
         fs::write(&managed, format!(r#"["../outside","{name}"]"#)).unwrap();
         sync_hosts(user.path(), system.path());
         assert_eq!(fs::read(&outside).unwrap(), b"keep");
-        assert!(!managed.exists());
+        let saved =
+            || serde_json::from_slice::<BTreeSet<String>>(&fs::read(&managed).unwrap()).unwrap();
+        assert!(saved().contains(name));
+        assert!(!saved().contains("../outside"));
         let source = manifest_path(system.path(), name);
         let mut updated: Value = serde_json::from_slice(&fs::read(&source).unwrap()).unwrap();
         updated["description"] = json!("Updated host");
@@ -362,6 +369,7 @@ mod tests {
         fs::remove_file(manifest_path(system.path(), name)).unwrap();
         sync_hosts(user.path(), system.path());
         assert!(!manifest.exists());
+        assert!(!saved().contains(name));
 
         fs::write(&manifest, "replacement").unwrap();
         sync_hosts(user.path(), system.path());
@@ -369,7 +377,7 @@ mod tests {
     }
 
     #[test]
-    fn sync_does_not_publish_a_manifest_if_legacy_ownership_cannot_be_retired() {
+    fn sync_does_not_adopt_a_replacement_or_stop_on_a_corrupt_list() {
         let user = tempfile::tempdir().unwrap();
         let system = tempfile::tempdir().unwrap();
         let program = system.path().join("proxy");
@@ -379,20 +387,25 @@ mod tests {
         system_manifest_file(system.path(), name, &program);
         let hosts = user.path().join("NativeMessagingHosts");
         let legacy = hosts.join(MANAGED_LIST);
-        fs::create_dir_all(&legacy).unwrap();
+        fs::create_dir_all(&hosts).unwrap();
         let manifest = manifest_path(&hosts, name);
-
-        sync_hosts(user.path(), system.path());
-        assert!(!manifest.exists());
-        fs::remove_dir(&legacy).unwrap();
-        sync_hosts(user.path(), system.path());
-        assert!(manifest.is_file());
-
-        fs::remove_file(&manifest).unwrap();
         fs::write(&manifest, "replacement").unwrap();
+        fs::write(&legacy, json!([name]).to_string()).unwrap();
+        sync_hosts(user.path(), system.path());
+        assert_eq!(fs::read(&manifest).unwrap(), b"replacement");
+
+        fs::write(&legacy, json!([name]).to_string()).unwrap();
         fs::remove_file(manifest_path(system.path(), name)).unwrap();
         sync_hosts(user.path(), system.path());
         assert_eq!(fs::read(&manifest).unwrap(), b"replacement");
+
+        fs::remove_file(&manifest).unwrap();
+        fs::write(&legacy, "[").unwrap();
+        system_manifest_file(system.path(), name, &program);
+        sync_hosts(user.path(), system.path());
+        assert!(manifest.is_file());
+        let saved: BTreeSet<String> = serde_json::from_slice(&fs::read(legacy).unwrap()).unwrap();
+        assert!(saved.contains(name));
     }
 
     #[test]
