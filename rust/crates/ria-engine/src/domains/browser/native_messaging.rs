@@ -101,15 +101,17 @@ fn is_usable(manifest: &Value, name: &str) -> std::io::Result<bool> {
         && manifest["description"]
             .as_str()
             .is_some_and(|s| !s.is_empty())
-        && manifest["allowed_origins"].as_array().is_some_and(|origins| {
-            origins.iter().all(|origin| {
-                origin
-                    .as_str()
-                    .and_then(|s| s.strip_prefix("chrome-extension://"))
-                    .and_then(|s| s.split_once('/'))
-                    .is_some_and(|(id, _)| is_extension_id(id))
+        && manifest["allowed_origins"]
+            .as_array()
+            .is_some_and(|origins| {
+                origins.iter().all(|origin| {
+                    origin
+                        .as_str()
+                        .and_then(|s| s.strip_prefix("chrome-extension://"))
+                        .and_then(|s| s.split_once('/'))
+                        .is_some_and(|(id, _)| is_extension_id(id))
+                })
             })
-        })
         && manifest
             .get("supports_native_initiated_connections")
             .is_none_or(Value::is_boolean);
@@ -184,7 +186,11 @@ fn write_manifest(
     result
 }
 
-/// Updates the profile's native messaging manifests without replacing or removing unmanaged files.
+/// Updates native messaging manifests under the Chromium user data directory.
+///
+/// For an existing manifest, only the `user.ria.native-messaging` attribute marks Ria ownership.
+/// The Ardia `.ardia-managed.json` inventory can name a file that the user replaced.
+/// An I/O error that prevents reading the source or checking its executable leaves the registration unchanged.
 pub fn sync_hosts(user_data_dir: &Path) {
     sync_hosts_from(user_data_dir, Path::new(CHROME_SYSTEM_DIR));
 }

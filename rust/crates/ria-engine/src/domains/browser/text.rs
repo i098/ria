@@ -49,7 +49,9 @@ mod tests {
 
     #[test]
     fn base64_rejects_incomplete_groups_and_bad_padding() {
-        for invalid in ["Z", "Zg", "Zg=", "Zg===", "Zm8", "Zm=8", "Zm9v=", "Zg==Zg=="] {
+        for invalid in [
+            "Z", "Zg", "Zg=", "Zg===", "Zm8", "Zm=8", "Zm9v=", "Zg==Zg==",
+        ] {
             assert_eq!(base64_decode_lenient(invalid), None, "{invalid}");
         }
     }

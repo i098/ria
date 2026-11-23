@@ -8,7 +8,8 @@ use std::path::Path;
 
 use serde_json::Value;
 
-/// Whether the profile cycles tabs most recent first. `None` when the file is missing or is not a JSON object.
+/// Returns `None` if `Preferences` cannot be read as a JSON object.
+/// Returns `Some(false)` if the object has no Boolean `helium.browser.mru_tab_cycling` value.
 pub fn is_most_recent_first(profile_dir: &Path) -> Option<bool> {
     let data = std::fs::read(profile_dir.join("Preferences")).ok()?;
     let prefs: Value = serde_json::from_slice(&data)

@@ -7,6 +7,7 @@ Source of truth for what is ported and where it goes. One row for each unit.
 - The `plugin-broker` row is by hand: it is Rust and `analyze` does not list it.
 - Scope `mac` is the first scope (ADR-C3). Scope `out` rows are listed so that every unit of `analyze` has a row, and are not ported.
 - Column `Target` is the path that the slice writes. Column `Slice` is the one slice that owns the unit (port plan, section 8). Column `Disposition` is `port`, `stay` (not ported, used as it is), `absorb` (a React Native wrapper: Rust needs no wrapper), `delete` (React Native only), `later` (not ported in this plan), `done` (Rust already) or `out`. Column `Port state` starts as `todo` for scope `mac`.
+- `partial` means Rust code exists, but integration or live checks are incomplete.
 
 Counts: 1255 rows, 814 in scope `mac`, 441 `out`.
 Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 units and 59739 lines, absorb 84 units and 5559 lines, delete 6 units and 173 lines, later 25 units and 1726 lines, done 1 units and 9945 lines.
@@ -205,7 +206,7 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 | mac | `packages/ardiacore/ios/ArdiaEarlyWindowLayouts.*` | Objective-C++ | 261 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaEngineBridge.*` | Objective-C++ | 224 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
 | mac | `packages/ardiacore/ios/ArdiaEvents.*` | Objective-C++ | 96 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
-| mac | `packages/ardiacore/ios/ArdiaExtensionPackage.*` | Objective-C++ | 199 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
+| mac | `packages/ardiacore/ios/ArdiaExtensionPackage.*` | Objective-C++ | 199 | native | `rust/crates/ria-engine/src/domains/browser/extension_package.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/ios/ArdiaFavicons.*` | Objective-C++ | 128 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
 | mac | `packages/ardiacore/ios/ArdiaFieldTiming.*` | Objective-C++ | 160 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaFocusState.*` | Objective-C++ | 256 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
@@ -224,9 +225,9 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 | mac | `packages/ardiacore/ios/ArdiaLaunchSequence.*` | Objective-C++ | 102 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaLaunchTabHolder.*` | Objective-C++ | 176 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaLittleFitMath.*` | Objective-C++ | 87 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
-| mac | `packages/ardiacore/ios/ArdiaNativeMessaging.*` | Objective-C++ | 137 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
+| mac | `packages/ardiacore/ios/ArdiaNativeMessaging.*` | Objective-C++ | 137 | native | `rust/crates/ria-engine/src/domains/browser/native_messaging.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/ios/ArdiaNavigationDownloads.*` | Objective-C++ | 79 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
-| mac | `packages/ardiacore/ios/ArdiaNowPlaying.*` | Objective-C++ | 124 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
+| mac | `packages/ardiacore/ios/ArdiaNowPlaying.*` | Objective-C++ | 124 | native | `rust/crates/ria-engine/src/domains/browser/now_playing.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/ios/ArdiaPageCover.*` | Objective-C++ | 125 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaPageCursor.*` | Objective-C++ | 224 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaPageDrawWait.*` | Objective-C++ | 67 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
@@ -274,17 +275,17 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 | mac | `packages/ardiacore/ios/ArdiaWindowSightMath.*` | Objective-C++ | 55 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
 | mac | `packages/ardiacore/ios/AutofillModule.*` | Swift | 36 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
 | mac | `packages/ardiacore/ios/BookmarksModule.*` | Swift | 37 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
-| mac | `packages/ardiacore/ios/ChromeTabCyclingPref.*` | Swift | 12 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
+| mac | `packages/ardiacore/ios/ChromeTabCyclingPref.*` | Swift | 12 | native | `rust/crates/ria-engine/src/domains/browser/tab_cycling.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/ios/ChromiumTabView.*` | Swift | 19 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
 | mac | `packages/ardiacore/ios/ContentBlockerModule.*` | Swift | 57 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
 | mac | `packages/ardiacore/ios/DownloadsModule.*` | Swift | 32 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
 | mac | `packages/ardiacore/ios/EngineCall.*` | Swift | 137 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
 | mac | `packages/ardiacore/ios/EngineModule.*` | Swift | 62 | native | `rust/crates/ria-engine/src/api/ (generated)`, `rust/crates/ria-engine/src/types/`, `rust/tools/engine-api-gen/` | hand | todo | 3.2 | port |
-| mac | `packages/ardiacore/ios/ExtensionsModule.*` | Swift | 62 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
+| mac | `packages/ardiacore/ios/ExtensionsModule.*` | Swift | 62 | native | `rust/crates/ria-engine/src/domains/browser/extensions.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/ios/FaviconsModule.*` | Swift | 15 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
 | mac | `packages/ardiacore/ios/HistoryModule.*` | Swift | 19 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
-| mac | `packages/ardiacore/ios/InputSourceKeys.*` | Swift | 33 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
-| mac | `packages/ardiacore/ios/MediaModule.*` | Swift | 63 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
+| mac | `packages/ardiacore/ios/InputSourceKeys.*` | Swift | 33 | native | `rust/crates/ria-engine/src/domains/browser/input_source_keys.rs` | hand | partial | 3.4 | port |
+| mac | `packages/ardiacore/ios/MediaModule.*` | Swift | 63 | native | `rust/crates/ria-engine/src/domains/browser/media.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/ios/NSImage.*` | Swift | 27 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/Origins.*` | Swift | 23 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
 | mac | `packages/ardiacore/ios/PageEngine.*` | Swift | 168 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
@@ -304,9 +305,9 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 | mac | `packages/ardiacore/ios/SearchModule.*` | Swift | 19 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
 | mac | `packages/ardiacore/ios/SitesModule.*` | Swift | 57 | native | `rust/crates/ria-engine/src/domains/data/` | hand | todo | 3.3 | port |
 | mac | `packages/ardiacore/ios/SwipeArea.*` | Swift | 54 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
-| mac | `packages/ardiacore/ios/SwipeModule.*` | Swift | 66 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
-| mac | `packages/ardiacore/ios/SystemState.*` | Swift | 67 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
-| mac | `packages/ardiacore/ios/TabsModule.*` | Swift | 73 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
+| mac | `packages/ardiacore/ios/SwipeModule.*` | Swift | 66 | native | `rust/crates/ria-engine/src/domains/browser/swipe.rs` | hand | partial | 3.4 | port |
+| mac | `packages/ardiacore/ios/SystemState.*` | Swift | 67 | native | `rust/crates/ria-engine/src/domains/browser/system_state.rs` | hand | partial | 3.4 | port |
+| mac | `packages/ardiacore/ios/TabsModule.*` | Swift | 73 | native | `rust/crates/ria-engine/src/domains/browser/tabs.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/ios/WebKitAutoPictureInPicture.*` | Swift | 29 | native | `rust/crates/ria-webkit/` | hand | todo | 5.1 | port |
 | mac | `packages/ardiacore/ios/WebKitAutofill.*` | Swift | 637 | native | `rust/crates/ria-webkit/` | hand | todo | 5.1 | port |
 | mac | `packages/ardiacore/ios/WebKitAutofillDropdown.*` | Swift | 276 | native | `rust/crates/ria-webkit/` | hand | todo | 5.1 | port |
@@ -346,8 +347,8 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 | mac | `packages/ardiacore/ios/WebKitTabView.*` | Swift | 20 | native | `rust/crates/ria-webkit/` | hand | todo | 5.1 | port |
 | mac | `packages/ardiacore/ios/WebKitTransfers.*` | Swift | 108 | native | `rust/crates/ria-webkit/` | hand | todo | 5.1 | port |
 | mac | `packages/ardiacore/ios/WebKitWebView.*` | Swift | 141 | native | `rust/crates/ria-webkit/` | hand | todo | 5.1 | port |
-| mac | `packages/ardiacore/ios/WebViewModule.*` | Swift | 46 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
-| mac | `packages/ardiacore/ios/WindowsModule.*` | Swift | 19 | native | `rust/crates/ria-engine/src/domains/browser/` | hand | todo | 3.4 | port |
+| mac | `packages/ardiacore/ios/WebViewModule.*` | Swift | 46 | native | `rust/crates/ria-engine/src/domains/browser/web_view.rs` | hand | partial | 3.4 | port |
+| mac | `packages/ardiacore/ios/WindowsModule.*` | Swift | 19 | native | `rust/crates/ria-engine/src/domains/browser/windows.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/scripts/` | TypeScript/JavaScript | 8911 | caution | ria-engine / ria-host-mac | analyze | todo | stay-2 | stay |
 | mac | `packages/ardiacore/src/WebView.tsx` | TypeScript/JavaScript | 115 | keep | `rust/crates/ria-engine/src/api/ (generated)`, `rust/crates/ria-engine/src/types/`, `rust/tools/engine-api-gen/` | analyze | todo | 3.2 | port |
 | mac | `packages/ardiacore/src/autofill.ts` | TypeScript/JavaScript | 32 | ready | `rust/crates/ria-engine/src/api/ (generated)`, `rust/crates/ria-engine/src/types/`, `rust/tools/engine-api-gen/` | analyze | todo | 3.2 | port |

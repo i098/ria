@@ -16,7 +16,10 @@ pub const MAIN_THREAD_FUNCTIONS: &[&str] = &["switchPager", "selectPager", "step
 /// for `devSimulate`.
 pub const DEBUG_FUNCTIONS: &[&str] = &["devPagerState", "devSimulate"];
 
-pub fn debug_reply(call: &str, run: impl FnOnce() -> serde_json::Value) -> Option<serde_json::Value> {
+pub fn debug_reply(
+    call: &str,
+    run: impl FnOnce() -> serde_json::Value,
+) -> Option<serde_json::Value> {
     if !DEBUG_FUNCTIONS.contains(&call) {
         return None;
     }

@@ -120,7 +120,13 @@ fn configure_args(args: &Value) -> Result<Value, CallError> {
     let options = args["options"].as_object().ok_or(CallError::BadArguments)?;
     let mut out = Map::new();
     out.insert("id".into(), json!(string_arg(args, "id")?));
-    for key in ["pinned", "incognito", "fileAccess", "userScripts", "siteAccess"] {
+    for key in [
+        "pinned",
+        "incognito",
+        "fileAccess",
+        "userScripts",
+        "siteAccess",
+    ] {
         if let Some(value) = options.get(key).filter(|v| !v.is_null()) {
             let valid = if key == "siteAccess" {
                 matches!(
@@ -146,7 +152,8 @@ fn configure_args(args: &Value) -> Result<Value, CallError> {
     Ok(Value::Object(out))
 }
 
-/// Adds the manifest fields to each extension of the engine list.
+/// Reads manifest fields only from a path in the engine reply.
+/// A path from profile preferences can refer to a different installation of the same extension version.
 fn list_reply(reply: Value, ctx: &CallContext) -> Result<Value, CallError> {
     let infos = reply["extensions"]
         .as_array()
@@ -245,7 +252,11 @@ mod tests {
         ] {
             let mut args = json!({"id": "x", "options": {}});
             args["options"][key] = value;
-            assert_eq!(configure_args(&args), Err(CallError::BadArguments), "{args}");
+            assert_eq!(
+                configure_args(&args),
+                Err(CallError::BadArguments),
+                "{args}"
+            );
         }
     }
 
@@ -336,11 +347,7 @@ mod tests {
         .unwrap();
         std::fs::write(old.join("old.png"), [1, 2, 3]).unwrap();
         let settings = json!({"extensions": {"settings": {(id): {"path": format!("{id}/1.2_0")}}}});
-        std::fs::write(
-            dir.path().join("Secure Preferences"),
-            settings.to_string(),
-        )
-        .unwrap();
+        std::fs::write(dir.path().join("Secure Preferences"), settings.to_string()).unwrap();
         let live = json!({
             "id": id, "version": "1.2", "location": "FROM_STORE", "path": null,
             "popup": "current.html", "actionTitle": "Current",

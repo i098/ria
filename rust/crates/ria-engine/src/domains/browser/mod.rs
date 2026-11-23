@@ -75,7 +75,7 @@ pub fn route(name: &str, test_instance: bool) -> Option<Route> {
     }
 }
 
-/// Runs an engine route: shapes the arguments, calls the symbol, shapes the reply, and emits `extensions.changed`.
+/// Runs an engine route and emits `extensions.changed` for successful extension changes with an ID.
 /// `completion` runs once: immediately for invalid arguments, or on a drain after dispatch.
 pub fn call_engine(
     engine: &Engine,
@@ -93,24 +93,18 @@ pub fn call_engine(
     let profile_dir = ctx.profile_dir.as_str();
     let private = ctx.private && !route.base_profile;
     let ctx = ctx.clone();
-    engine.call(
-        route.symbol,
-        profile_dir,
-        private,
-        shaped,
-        move |result| {
-            let result = result.and_then(|reply| {
-                if let Some((id, event)) = changed_fn(&args, &reply).filter(|(id, _)| !id.is_empty()) {
-                    emit(
-                        "extensions.changed",
-                        serde_json::json!({"profile": ctx.profile_name, "id": id, "event": event}),
-                    );
-                }
-                reply_fn(reply, &ctx)
-            });
-            completion(result)
-        },
-    );
+    engine.call(route.symbol, profile_dir, private, shaped, move |result| {
+        let result = result.and_then(|reply| {
+            if let Some((id, event)) = changed_fn(&args, &reply).filter(|(id, _)| !id.is_empty()) {
+                emit(
+                    "extensions.changed",
+                    serde_json::json!({"profile": ctx.profile_name, "id": id, "event": event}),
+                );
+            }
+            reply_fn(reply, &ctx)
+        });
+        completion(result)
+    });
 }
 
 /// An engine route that passes its arguments and its reply as they are.
@@ -176,7 +170,11 @@ mod tests {
             (List::NAME, json!({}), false),
             (Install::NAME, json!({"path": "/ext"}), false),
             (InstallCrx::NAME, json!({"path": "/ext.crx"}), false),
-            (SetEnabled::NAME, json!({"id": "ext", "enabled": true}), false),
+            (
+                SetEnabled::NAME,
+                json!({"id": "ext", "enabled": true}),
+                false,
+            ),
             (Uninstall::NAME, json!({"id": "ext"}), false),
             (Reload::NAME, json!({"id": "ext"}), false),
             (

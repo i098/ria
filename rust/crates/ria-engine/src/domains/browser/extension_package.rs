@@ -213,7 +213,8 @@ fn valid_messages(messages: &Messages) -> bool {
         .all(|entry| entry.get("message").is_some_and(Value::is_string))
 }
 
-/// The merged messages of the locales in order: the UI locale, its language, the manifest default, `en`, `en_US`.
+/// Merges messages in this order: the UI locale, its language, the manifest default, `en`, `en_US`.
+/// Treats the UI locale `en` as `en_US`. The first value for each key wins.
 fn messages(
     package: &Package<'_>,
     manifest: &Messages,
