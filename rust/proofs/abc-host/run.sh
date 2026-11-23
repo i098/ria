@@ -8,7 +8,7 @@ proof=${1:?usage: run.sh a|b|c}
 shift || true
 engine=${ENGINE_DIR:?set ENGINE_DIR to the fetched prebuilt engine}
 out=${OUT_DIR:-$here/target/proof}
-cargo build --release --manifest-path "$here/Cargo.toml"
+(cd "$here" && blaze build --release)
 app="$out/Halyard Proof.app"
 rm -rf "$app"
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Frameworks"
