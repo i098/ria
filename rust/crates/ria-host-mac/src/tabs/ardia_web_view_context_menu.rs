@@ -15,7 +15,7 @@ use objc2::rc::{Retained, Weak};
 use objc2::runtime::{AnyObject, NSObject};
 use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, define_class, msg_send};
 use objc2_app_kit::{NSEvent, NSEventMask, NSEventType, NSView, NSWindow};
-use objc2_foundation::{NSArray, NSData, NSPoint, NSRange, NSString, NSURL, NSUUID};
+use objc2_foundation::{NSData, NSPoint, NSRange, NSString, NSURL, NSUUID};
 use ria_engine::call::main_queue;
 use serde_json::{Value, json};
 
@@ -367,12 +367,15 @@ define_class!(
         #[unsafe(method_id(tab:runContextMenu:))]
         fn run_menu(&self, tab: &Tab, menu: &Payload) -> Option<Retained<AnyObject>> {
             let rows = menu.objectForKey(&NSString::from_str("items"));
-            self.handle_menu(tab, Some(menu), rows.as_deref())
-        }
-
-        #[unsafe(method(tab:didShowContextMenu:))]
-        fn did_show_menu(&self, tab: &Tab, rows: &NSArray<AnyObject>) {
-            let _ = self.handle_menu(tab, None, Some(rows));
+            if let Some(pick) = self.ivars().pick.take() {
+                rows.as_deref().and_then(|rows| {
+                    let rows = to_json(rows);
+                    find_pick(items(&rows), &pick).as_ref().map(from_json)
+                })
+            } else {
+                self.capture(tab, menu, rows.as_deref());
+                None
+            }
         }
 
         #[unsafe(method(tab:contextMenuCommand:text:modifiers:))]
@@ -417,21 +420,7 @@ impl ContextMenuDelegate {
         *self.ivars().background.borrow_mut() = Some(registry);
     }
 
-    fn handle_menu(
-        &self,
-        tab: &Tab,
-        menu: Option<&Payload>,
-        rows: Option<&AnyObject>,
-    ) -> Option<Retained<AnyObject>> {
-        if let Some(pick) = self.ivars().pick.take() {
-            let rows = to_json(rows?);
-            return find_pick(items(&rows), &pick).as_ref().map(from_json);
-        }
-        self.capture(tab, menu, rows);
-        None
-    }
-
-    fn capture(&self, tab: &Tab, menu: Option<&Payload>, rows: Option<&AnyObject>) {
+    fn capture(&self, tab: &Tab, menu: &Payload, rows: Option<&AnyObject>) {
         let background = self.ivars().background.borrow();
         let Some(registry) = background.as_ref() else {
             return;
@@ -444,7 +433,7 @@ impl ContextMenuDelegate {
             return;
         };
         let link = menu
-            .and_then(|menu| menu.objectForKey(&NSString::from_str("link")))
+            .objectForKey(&NSString::from_str("link"))
             .and_then(|link| link.downcast::<NSString>().ok())
             .map_or_else(String::new, |link| link.to_string());
         self.queue(MenuEvent::Captured {
@@ -604,10 +593,15 @@ impl SharedImages {
         let safe: String = base
             .chars()
             .filter(|c| !c.is_control())
-            .take(80)
             .map(|c| if matches!(c, ':' | '/') { '-' } else { c })
             .collect();
         let name = if safe.is_empty() { "Image" } else { &safe };
+        let name = NSString::from_str(name);
+        let name = if name.length() > 80 {
+            name.substringToIndex(name.rangeOfComposedCharacterSequenceAtIndex(80).location)
+        } else {
+            name
+        };
         let path = folder.join(format!("{name}.{ext}"));
         let written = OpenOptions::new()
             .write(true)
@@ -750,6 +744,10 @@ mod tests {
             .share(b"cat", "image/png", "https://example.com/cat%20photo.png")
             .unwrap();
         let filename = shared.file_name().unwrap().to_owned();
+        let prefix = "😀".repeat(39);
+        let source = format!("https://example.com/{prefix}👩‍💻{}.png", "😀".repeat(30));
+        let long = live.share(b"cat", "image/png", &source).unwrap();
+        let long_filename = long.file_name().unwrap().to_owned();
         for owner in [&live_path, &abandoned_path] {
             let share = owner.join(unique_id());
             DirBuilder::new().mode(0o700).create(&share).unwrap();
@@ -766,5 +764,9 @@ mod tests {
         assert!(removed_abandoned);
         assert!(preserved_flat);
         assert_eq!(filename, "cat photo.png");
+        assert_eq!(
+            long_filename.to_str(),
+            Some(format!("{prefix}.png").as_str())
+        );
     }
 }

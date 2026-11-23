@@ -157,19 +157,17 @@ impl Watch {
         else {
             return;
         };
+        let pointer = NSEvent::mouseLocation();
         if !self.background
-            && NSWindow::windowNumberAtPoint_belowWindowWithWindowNumber(
-                NSEvent::mouseLocation(),
-                0,
-                mtm,
-            ) != window.windowNumber()
+            && NSWindow::windowNumberAtPoint_belowWindowWithWindowNumber(pointer, 0, mtm)
+                != window.windowNumber()
         {
             return;
         }
         let Some(content) = window.contentView() else {
             return;
         };
-        let Some(hit) = view_at(&window, event.locationInWindow()) else {
+        let Some(hit) = view_at(&window, window.convertPointFromScreen(pointer)) else {
             return;
         };
         if enclosing_page(&hit) || !self.is_surface(&window, &hit) {

@@ -357,16 +357,26 @@ mod mac {
         let call = CallEngine::new(queue);
         call.did_start();
         let emitted = Rc::new(RefCell::new(Vec::new()));
+        let engine_pinned = Rc::new(Cell::new(false));
+        let tab_id = i64::from(tab.tab_id());
         let profile_path = profile.path().to_string();
         let state = Rc::new(RefCell::new((strips, registry)));
         call.on_event("tabs.strip", {
             let emitted = emitted.clone();
+            let engine_pinned = engine_pinned.clone();
             let window = window.clone();
             let state = state.clone();
             let profile = profile.clone();
             move |event| {
                 if event["window"].as_i64() != Some(i64::from(strip_id)) {
                     return;
+                }
+                if event["tabs"].as_array().is_some_and(|rows| {
+                    rows.iter().any(|row| {
+                        row["tab"].as_i64() == Some(tab_id) && row["pinned"].as_bool() == Some(true)
+                    })
+                }) {
+                    engine_pinned.set(true);
                 }
                 let (strips, registry) = &mut *state.borrow_mut();
                 let scope = StripWindow {
@@ -407,18 +417,24 @@ mod mac {
                         let pass = pass
                             && reply.is_ok_and(|reply| {
                                 reply["group"].as_str().is_some_and(|group| {
-                                    let tx = strips.group_finished(command, &scope, registry, false);
+                                    let tx =
+                                        strips.group_finished(command, &scope, registry, false);
                                     !group.is_empty()
                                         && matches_group(&tx, Some(command), strip, group)
                                         && emitted.take().into_iter().any(|payload| {
                                             serde_json::from_value::<TabStripTransaction>(payload)
-                                                .is_ok_and(|tx| matches_group(&tx, None, strip, group))
+                                                .is_ok_and(|tx| {
+                                                    matches_group(&tx, None, strip, group)
+                                                })
                                         })
                                 })
                             });
+                        engine_pinned.set(false);
                         let pass = pass && check_adoption(&scope, &tab, strips, registry);
-                        call.shutdown();
-                        shutdown(&window, &tab, pass);
+                        main_queue::post(Box::new(move || {
+                            call.shutdown();
+                            shutdown(&window, &tab, pass && engine_pinned.get());
+                        }));
                     }
                 });
             }
