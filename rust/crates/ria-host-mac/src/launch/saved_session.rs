@@ -85,8 +85,9 @@ impl SavedSession {
     pub(super) fn launch_profile_directory(&self, root: &Path) -> Option<String> {
         let hint = self.launch_tab.as_ref()?;
         if hint.id.is_empty()
-            || !origins::of_url(&hint.url)
-                .is_some_and(|origin| origin.starts_with("http://") || origin.starts_with("https://"))
+            || !origins::of_url(&hint.url).is_some_and(|origin| {
+                origin.starts_with("http://") || origin.starts_with("https://")
+            })
         {
             return None;
         }
@@ -103,7 +104,10 @@ impl SavedSession {
             return None;
         }
         let directory = profile_directory_name(name);
-        if Path::new(&directory).file_name().and_then(|name| name.to_str()) != Some(directory.as_str())
+        if Path::new(&directory)
+            .file_name()
+            .and_then(|name| name.to_str())
+            != Some(directory.as_str())
             || (!name.is_empty()
                 && !super::profile::directory_exists(&root.join("Chromium").join(&directory))
                     .unwrap_or(false))

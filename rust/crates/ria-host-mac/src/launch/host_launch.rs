@@ -149,7 +149,8 @@ impl Runtime {
                     if let Some(profile) = profile.filter(usable) {
                         runtime.profile_ready(&profile, restore_hint);
                     } else if restore_hint
-                        && let Some(profile) = Engine::shared().map(|engine| engine.default_profile())
+                        && let Some(profile) =
+                            Engine::shared().map(|engine| engine.default_profile())
                         && usable(&profile)
                     {
                         runtime.profile_ready(&profile, false);

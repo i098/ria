@@ -7,7 +7,7 @@ A native Rust and [Rune](https://github.com/anomalyco/rune) port of the [Ardia](
 ## What works today
 
 The macOS app starts the prebuilt Chromium engine and opens a native window.
-It uses its own profile and opens the saved launch tab when one is available.
+It uses its own profile and can reopen a saved launch tab.
 To build a local app bundle and start Ria, follow the [macOS launch guide](rust/crates/ria-app/src/launch/README.md).
 
 ```sh
