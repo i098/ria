@@ -24,6 +24,8 @@ pub const DEFAULT_LIMIT: usize = 8;
 /// Port of `recentTabSuggestions` (`openTabs.ts:5`): up to `limit` tabs with a URL, other than
 /// `exclude`, most recently active first (ties keep their order). Each row keeps its `tab_id`,
 /// even an empty one.
+///
+/// The app does not pass `NaN` timestamps. For long lists with `NaN`, the order can differ from V8.
 pub fn recent_tab_suggestions(
     tabs: &[OpenTabRow],
     exclude: Option<&str>,
@@ -44,9 +46,7 @@ pub fn recent_tab_suggestions(
         if shown.len() >= 8 {
             let descending = compare(&shown[1], &shown[0]).is_lt();
             run = 2;
-            while run < shown.len()
-                && compare(&shown[run], &shown[run - 1]).is_lt() == descending
-            {
+            while run < shown.len() && compare(&shown[run], &shown[run - 1]).is_lt() == descending {
                 run += 1;
             }
             if descending {

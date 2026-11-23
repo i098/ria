@@ -4,9 +4,8 @@
 
 //! The omnibox calculator: arithmetic, functions, and unit and temperature conversion.
 //!
-//! The source runs JS regexes and JS number formatting; `ria-core` has no regex crate, so each
-//! pattern is matched by hand with the same backtracking order, over `char`s with the JS `\s`
-//! set (`is_js_space`) and ASCII-only `\w`, `\d` and case folding.
+//! The manual matchers preserve JavaScript backtracking order and the JavaScript `\s` set.
+//! They also preserve ASCII-only `\w`, `\d`, and case folding.
 //!
 //! shortcut: the source gives `None` when the JS stack overflows, at a depth that depends on the
 //! engine. Here the parser counts the frames the source would use and gives `None` past

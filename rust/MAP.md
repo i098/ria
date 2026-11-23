@@ -377,8 +377,8 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 | mac | `packages/core/src/appUrls.ts` | TypeScript/JavaScript | 52 | ready | `rust/crates/ria-core/src/url/`, `rust/recorded/1.2/` | analyze | todo | 1.2 | port |
 | mac | `packages/core/src/bangList.ts` | TypeScript/JavaScript | 10706 | caution | `rust/crates/ria-core/src/search/bang_list.rs`, `rust/crates/ria-core/src/search/bang_list.tsv`, `rust/tools/bang-tsv/` | analyze | done | 1.5 | port |
 | mac | `packages/core/src/bangs.ts` | TypeScript/JavaScript | 210 | ready | `rust/crates/ria-core/src/search/`, `rust/recorded/1.4/` | analyze | todo | 1.4 | port |
-| mac | `packages/core/src/calculator.ts` | TypeScript/JavaScript | 293 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
-| mac | `packages/core/src/candidatePool.ts` | TypeScript/JavaScript | 172 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
+| mac | `packages/core/src/calculator.ts` | TypeScript/JavaScript | 293 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
+| mac | `packages/core/src/candidatePool.ts` | TypeScript/JavaScript | 172 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
 | mac | `packages/core/src/cleanUrl.ts` | TypeScript/JavaScript | 68 | ready | `rust/crates/ria-core/src/url/`, `rust/recorded/1.2/` | analyze | todo | 1.2 | port |
 | mac | `packages/core/src/engines.ts` | TypeScript/JavaScript | 158 | ready | `rust/crates/ria-core/src/search/`, `rust/recorded/1.4/` | analyze | todo | 1.4 | port |
 | mac | `packages/core/src/errors.ts` | TypeScript/JavaScript | 12 | caution | `rust/crates/ria-core/Cargo.toml`, `rust/crates/ria-core/src/lib.rs`, `rust/crates/ria-core/src/fuzzy.rs`, `rust/crates/ria-core/src/fuzzy_reference.rs`, `rust/crates/ria-core/src/errors.rs`, `rust/tools/check-headers.sh`, `rust/recorded/1.1/` | analyze | todo | 1.1 | port |
@@ -389,20 +389,20 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 | mac | `packages/core/src/index.ts` | TypeScript/JavaScript | 24 | ready | `rust/crates/ria-core/Cargo.toml`, `rust/crates/ria-core/src/lib.rs`, `rust/crates/ria-core/src/fuzzy.rs`, `rust/crates/ria-core/src/fuzzy_reference.rs`, `rust/crates/ria-core/src/errors.rs`, `rust/tools/check-headers.sh`, `rust/recorded/1.1/` | analyze | todo | 1.1 | port |
 | mac | `packages/core/src/ingestKeys.ts` | TypeScript/JavaScript | 14 | ready | `rust/crates/ria-core/src/identity/`, `rust/recorded/1.6/` | analyze | todo | 1.6 | port |
 | mac | `packages/core/src/mobile.ts` | TypeScript/JavaScript | 121 | ready | `rust/crates/ria-core/src/identity/`, `rust/recorded/1.6/` | analyze | todo | 1.6 | port |
-| mac | `packages/core/src/omnibox.ts` | TypeScript/JavaScript | 182 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
-| mac | `packages/core/src/openTabs.ts` | TypeScript/JavaScript | 10 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
+| mac | `packages/core/src/omnibox.ts` | TypeScript/JavaScript | 182 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
+| mac | `packages/core/src/openTabs.ts` | TypeScript/JavaScript | 10 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
 | mac | `packages/core/src/pageMatch.ts` | TypeScript/JavaScript | 109 | ready | `rust/crates/ria-core/src/url/`, `rust/recorded/1.2/` | analyze | todo | 1.2 | port |
 | mac | `packages/core/src/pageText.ts` | TypeScript/JavaScript | 55 | ready | `rust/crates/ria-core/src/url/`, `rust/recorded/1.2/` | analyze | todo | 1.2 | port |
 | mac | `packages/core/src/providerConfig.ts` | TypeScript/JavaScript | 122 | ready | `rust/crates/ria-core/src/search/`, `rust/recorded/1.4/` | analyze | todo | 1.4 | port |
 | mac | `packages/core/src/providerNetwork.ts` | TypeScript/JavaScript | 90 | ready | `rust/crates/ria-core/src/search/`, `rust/recorded/1.4/` | analyze | todo | 1.4 | port |
 | mac | `packages/core/src/providerRows.ts` | TypeScript/JavaScript | 122 | ready | `rust/crates/ria-core/src/search/`, `rust/recorded/1.4/` | analyze | todo | 1.4 | port |
-| mac | `packages/core/src/quickCreate.ts` | TypeScript/JavaScript | 38 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
+| mac | `packages/core/src/quickCreate.ts` | TypeScript/JavaScript | 38 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
 | mac | `packages/core/src/siteSearch.ts` | TypeScript/JavaScript | 123 | ready | `rust/crates/ria-core/src/search/`, `rust/recorded/1.4/` | analyze | todo | 1.4 | port |
-| mac | `packages/core/src/suggest.reference.ts` | TypeScript/JavaScript | 470 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
-| mac | `packages/core/src/suggest.ts` | TypeScript/JavaScript | 217 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
-| mac | `packages/core/src/suggestFetcher.ts` | TypeScript/JavaScript | 73 | caution | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
-| mac | `packages/core/src/suggestion.ts` | TypeScript/JavaScript | 50 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
-| mac | `packages/core/src/suggestionRows.ts` | TypeScript/JavaScript | 64 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | todo | 1.3 | port |
+| mac | `packages/core/src/suggest.reference.ts` | TypeScript/JavaScript | 470 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
+| mac | `packages/core/src/suggest.ts` | TypeScript/JavaScript | 217 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
+| mac | `packages/core/src/suggestFetcher.ts` | TypeScript/JavaScript | 73 | caution | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
+| mac | `packages/core/src/suggestion.ts` | TypeScript/JavaScript | 50 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
+| mac | `packages/core/src/suggestionRows.ts` | TypeScript/JavaScript | 64 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
 | mac | `packages/core/src/tabGroups.ts` | TypeScript/JavaScript | 2 | ready | `rust/crates/ria-core/src/identity/`, `rust/recorded/1.6/` | analyze | todo | 1.6 | port |
 | mac | `packages/core/src/telemetryWire.ts` | TypeScript/JavaScript | 67 | ready | `rust/crates/ria-core/src/identity/`, `rust/recorded/1.6/` | analyze | todo | 1.6 | port |
 | mac | `packages/core/src/textFragment.ts` | TypeScript/JavaScript | 73 | ready | `rust/crates/ria-core/src/url/`, `rust/recorded/1.2/` | analyze | todo | 1.2 | port |

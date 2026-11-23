@@ -35,8 +35,7 @@ pub enum ExtensionOpen {
     Options,
 }
 
-/// The `kind: "extension"` variant of `Suggestion` (`suggestion.ts:30`), the only one this module
-/// builds; `suggestion.ts` is ported in its own slice.
+/// Search-local type for extension rows. See [`crate::omnibox::suggestion::Suggestion`].
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Suggestion {
     Extension {

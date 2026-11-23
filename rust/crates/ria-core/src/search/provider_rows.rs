@@ -106,8 +106,7 @@ pub struct ProviderSection {
     pub rows: JsValue,
 }
 
-/// The `kind: "provider"` variant of `Suggestion` (`suggestion.ts`), defined here until the
-/// slice that ports `suggestion.ts` lands. `kind` is implied.
+/// Search-local type for provider rows. See [`crate::omnibox::suggestion::Suggestion`].
 #[derive(Clone, Debug, PartialEq)]
 pub struct ProviderSuggestion {
     pub provider_id: String,

@@ -2,9 +2,8 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-//! JS-shaped binding of the pure string functions of `ria-core` `url::page_text`. The rest of
-//! `pageText.ts` (`displayUrl`, which needs `urlForDisplay` of slice 1.3, and the cached
-//! `PageText` accessors) stays TypeScript until the omnibox moves.
+//! This bridge covers the pure string functions in `ria_core::url::page_text`.
+//! For display text used by suggestions, see `ria_core::omnibox::candidate_pool::page_text`.
 
 #![forbid(unsafe_code)]
 

@@ -2,9 +2,8 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-//! JS-shaped binding of `parseQuery` of `ria-core` `url::page_match`. The scoring functions
-//! take cached `PageText` objects and the narrowing chain is module state; both stay
-//! TypeScript until the omnibox moves (slice 1.3).
+//! This bridge covers `ria_core::url::page_match::parse_query`.
+//! For use of scoring and narrowing, see `ria_core::omnibox::suggest::build_suggestions`.
 
 #![forbid(unsafe_code)]
 
