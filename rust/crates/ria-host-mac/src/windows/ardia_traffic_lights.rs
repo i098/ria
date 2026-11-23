@@ -197,11 +197,14 @@ impl TrafficLights {
             return;
         }
         self.moved.set(Some(placement));
+        if let Some(frame) = frame_view(&window) {
+            tuck_buttons(&window, &frame, to.x - from.x);
+        }
         let turn = self.move_turn.get().wrapping_add(1);
         self.move_turn.set(turn);
         let weak = Rc::downgrade(self);
         main_queue::after(
-            Duration::from_millis(120),
+            Duration::from_millis(50),
             Box::new(move || {
                 if let Some(lights) = weak.upgrade()
                     && lights.move_turn.get() == turn
@@ -239,36 +242,38 @@ impl TrafficLights {
             send_no_args(&frame, name);
         }
         sync_sharing_windows(&window);
-        let buttons = BUTTONS.map(|kind| window.standardWindowButton(kind));
-        let Some(close) = buttons.iter().flatten().next() else {
-            return;
-        };
-        if window.styleMask().contains(NSWindowStyleMask::FullScreen) {
-            for button in buttons.iter().flatten() {
-                button.setHidden(false);
-            }
-            return;
-        }
-        let left = close.convertRect_toView(close.bounds(), Some(&frame));
+        tuck_buttons(&window, &frame, 0.);
+    }
+}
+
+fn tuck_buttons(window: &NSWindow, frame: &NSView, dx: f64) {
+    let buttons = BUTTONS.map(|kind| window.standardWindowButton(kind));
+    let Some(close) = buttons.iter().flatten().next() else {
+        return;
+    };
+    let outside = if window.styleMask().contains(NSWindowStyleMask::FullScreen) {
+        false
+    } else {
+        let left = close.convertRect_toView(close.bounds(), Some(frame));
         let right =
             buttons
                 .iter()
                 .flatten()
                 .fold(left.origin.x + left.size.width, |right, button| {
-                    let bounds = button.convertRect_toView(button.bounds(), Some(&frame));
+                    let bounds = button.convertRect_toView(button.bounds(), Some(frame));
                     right.max(bounds.origin.x + bounds.size.width)
                 });
-        let height = frame.bounds().size.height;
-        let outside = right <= 0.
-            || left.origin.x >= frame.bounds().size.width
+        let bounds = frame.bounds();
+        right + dx <= 0.
+            || left.origin.x + dx >= bounds.size.width
             || if frame.isFlipped() {
                 left.origin.y + left.size.height <= 0.
             } else {
-                left.origin.y >= height
-            };
-        for button in buttons.iter().flatten() {
-            button.setHidden(outside);
-        }
+                left.origin.y >= bounds.size.height
+            }
+    };
+    for button in buttons.iter().flatten() {
+        button.setHidden(outside);
     }
 }
 

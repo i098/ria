@@ -501,6 +501,15 @@ mod mac {
         host.set_traffic_lights(
             &window,
             Placement {
+                center: Some(NSPoint::new(-100., 80.)),
+                trailing: true,
+            },
+            true,
+        );
+        assert!(close.isHidden());
+        host.set_traffic_lights(
+            &window,
+            Placement {
                 center: Some(NSPoint::new(160., 80.)),
                 trailing: true,
             },
