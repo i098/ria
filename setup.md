@@ -30,7 +30,12 @@ rust/tools/blaze/install.sh
 
 ## Test and lint
 
-Run the [local CI checks](CONTRIBUTING.md#ci-and-quality-gates).
+```sh
+node rust/parity/compare.selftest.mjs
+(cd rust/parity/captures/states && sha256sum -c SHA256SUMS)
+cargo fmt --manifest-path rust/Cargo.toml --check
+cargo clippy --manifest-path rust/Cargo.toml
+```
 
 ## Run
 

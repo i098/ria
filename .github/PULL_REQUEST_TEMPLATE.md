@@ -15,4 +15,4 @@ Closes #
 ## Checklist
 
 - [ ] PR title and commits follow Conventional Commits: `type(scope): imperative summary`
-- [ ] `blaze check` and the [local CI checks](https://github.com/i098/ria/blob/main/CONTRIBUTING.md#ci-and-quality-gates) pass
+- [ ] `blaze check`, `cargo fmt --check` and `cargo clippy` pass

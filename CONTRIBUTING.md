@@ -4,10 +4,13 @@ Thank you for helping. Read the [Code of Conduct](CODE_OF_CONDUCT.md) first.
 
 ## Set up, build, test
 
-Follow [`setup.md`](setup.md). Before a PR, run `blaze check` and the CI checks below.
+Follow [`setup.md`](setup.md). Before a PR, run:
 
 ```sh
 (cd rust && blaze check)
+cargo fmt --manifest-path rust/Cargo.toml --check
+cargo clippy --manifest-path rust/Cargo.toml
+node rust/parity/compare.selftest.mjs
 ```
 
 ## CI and quality gates
@@ -26,8 +29,6 @@ node rust/parity/compare.selftest.mjs
 rust/tools/check-headers.sh
 ```
 
-The Apple ARM64 Clippy command checks the Mac host bindings on Linux without running the engine.
-
 The `test` job leaves out two things, on purpose. The jail escape tests (`rust/crates/ria-plugin-broker/crates/jail/tests/escape.rs`) need a `bwrap` that `scripts/build-bwrap.sh` builds (`ARDIA_BWRAP`). Check L of `ria-engine-sys` (`tests/live.rs`) needs macOS and the prebuilt engine; on Linux it prints "skipped".
 
 Two more gates run locally, not in CI:
@@ -41,7 +42,6 @@ Save a new baseline with `sentrux gate --save .` only when the owner agrees.
 
 Build and test Rust code with Blaze.
 Use Cargo for `fmt`, `clippy`, and [tests that Blaze cannot run](rust/tools/bang-tsv/README.md).
-Use the Cargo commands above to reproduce CI.
 Follow Google's Rust Style Guide.
 Add tests only for algorithmic logic, boundary IO and integration flows.
 
