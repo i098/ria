@@ -23,7 +23,7 @@ unsafe extern "C" {
 
 #[link(name = "CoreFoundation", kind = "framework")]
 unsafe extern "C" {
-    fn CFRelease(value: *mut c_void);
+    fn CFRelease(value: *const c_void);
 }
 
 unsafe extern "C" {
