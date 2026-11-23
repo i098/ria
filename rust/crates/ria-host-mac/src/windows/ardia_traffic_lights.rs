@@ -534,7 +534,7 @@ pub(super) fn frame_corner_radius(window: &NSWindow) -> Option<f64> {
         }
     }
     // SAFETY: AppKit returns the view's CALayer, whose cornerRadius is a CGFloat.
-    let layer: Retained<AnyObject> = unsafe { msg_send![&*frame, layer] }?;
-    let radius: f64 = unsafe { msg_send![&*layer, cornerRadius] };
+    let layer: Option<Retained<AnyObject>> = unsafe { msg_send![&*frame, layer] };
+    let radius: f64 = unsafe { msg_send![&*layer?, cornerRadius] };
     (radius.is_finite() && radius > 0.).then_some(radius)
 }
