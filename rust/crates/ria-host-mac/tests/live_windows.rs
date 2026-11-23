@@ -28,7 +28,7 @@ mod mac {
 
     use block2::RcBlock;
     use objc2::runtime::{AnyObject, Bool};
-    use objc2::{MainThreadMarker, msg_send, rc::Retained};
+    use objc2::{MainThreadMarker, Message, msg_send, rc::Retained};
     use objc2_app_kit::{
         NSApplication, NSColor, NSEvent, NSEventModifierFlags, NSEventType, NSMenu, NSMenuItem,
         NSScreen, NSUserInterfaceItemIdentification, NSView, NSWindow, NSWindowButton,
@@ -460,27 +460,6 @@ mod mac {
         let delayed = host.dev_action(&made, "fakeFullScreen:1:50", true).unwrap();
         let delayed: Value = serde_json::from_str(&delayed).unwrap();
         assert_eq!(delayed["transitioning"], true);
-        wait_for("developer fullscreen completion", || {
-            let reply = host.dev_action(&made, "fullScreen", true).unwrap();
-            !serde_json::from_str::<Value>(&reply).unwrap()["transitioning"]
-                .as_bool()
-                .unwrap()
-        });
-        assert!(host.is_fullscreen(&made));
-        host.dev_action(&made, "fakeFullScreen:0:0", true).unwrap();
-        host.set_traffic_lights(
-            &window,
-            Placement {
-                center: Some(NSPoint::new(160., 80.)),
-                trailing: true,
-            },
-            true,
-        );
-        wait_for("trailing traffic lights did not settle", || {
-            let rect = close.convertRect_toView(close.bounds(), Some(&frame));
-            let expected = window.frame().size.width - 160.;
-            (rect.origin.x + rect.size.width / 2. - expected).abs() < 1.
-        });
         let root = NSView::initWithFrame(mtm.alloc(), NSRect::ZERO);
         host.embed_root(&made, &root);
         assert!(
@@ -506,7 +485,6 @@ mod mac {
         );
         host.remove_root(&made);
         assert!(host.root_view(&made).is_none());
-        host.close_window(&made);
         let fitted = little_frame_for_size(
             NSSize::new(900., 700.),
             NSSize::new(100., 100.),
@@ -520,30 +498,56 @@ mod mac {
             popup_origin_text("https://example.test:8443/private?q=secret"),
             "example.test:8443"
         );
-        let popups = Popups::new(mtm, true);
-        let browser_popup = popups.for_chrome(Some(&window), false);
-        assert_eq!(popups.count(), 1);
-        assert!(
-            browser_popup
-                .window()
-                .styleMask()
-                .contains(objc2_app_kit::NSWindowStyleMask::Resizable)
+        host.set_traffic_lights(
+            &window,
+            Placement {
+                center: Some(NSPoint::new(160., 80.)),
+                trailing: true,
+            },
+            true,
         );
-        let tab = browser_popup.open_tab(ns_string!("about:blank"), profile, false);
-        main_queue::post(Box::new(move || {
-            let window = browser_popup.window();
-            let page = tab.view();
-            assert!(
-                page.window()
-                    .is_some_and(|owner| std::ptr::eq(&*owner, &*window))
-            );
-            assert!(page.frame().size.height < browser_popup.host_view().bounds().size.height);
-            browser_popup.close();
-            check_popup_closed(popups, Instant::now() + Duration::from_secs(5));
-        }));
-        for controller in [&normal, &chrome, &stray, &standalone] {
-            controller.core.close();
-        }
+        let profile = profile.retain();
+        main_queue::after(
+            Duration::from_millis(250),
+            Box::new(move || {
+                let reply = host.dev_action(&made, "fullScreen", true).unwrap();
+                let reply: Value = serde_json::from_str(&reply).unwrap();
+                assert_eq!(reply["transitioning"], false);
+                assert!(host.is_fullscreen(&made));
+                host.dev_action(&made, "fakeFullScreen:0:0", true).unwrap();
+                host.close_window(&made);
+                let rect = close.convertRect_toView(close.bounds(), Some(&frame));
+                let expected = window.frame().size.width - 160.;
+                assert!((rect.origin.x + rect.size.width / 2. - expected).abs() < 1.);
+
+                let popups = Popups::new(mtm, true);
+                let browser_popup = popups.for_chrome(Some(&window), false);
+                assert_eq!(popups.count(), 1);
+                assert!(
+                    browser_popup
+                        .window()
+                        .styleMask()
+                        .contains(objc2_app_kit::NSWindowStyleMask::Resizable)
+                );
+                let tab = browser_popup.open_tab(ns_string!("about:blank"), &profile, false);
+                main_queue::post(Box::new(move || {
+                    let window = browser_popup.window();
+                    let page = tab.view();
+                    assert!(
+                        page.window()
+                            .is_some_and(|owner| std::ptr::eq(&*owner, &*window))
+                    );
+                    assert!(
+                        page.frame().size.height < browser_popup.host_view().bounds().size.height
+                    );
+                    browser_popup.close();
+                    check_popup_closed(popups, Instant::now() + Duration::from_secs(5));
+                }));
+                for controller in [&normal, &chrome, &stray, &standalone] {
+                    controller.core.close();
+                }
+            }),
+        );
     }
 
     fn check_popup_closed(popups: Rc<Popups>, deadline: Instant) {
