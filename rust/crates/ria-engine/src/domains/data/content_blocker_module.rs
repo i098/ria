@@ -201,6 +201,14 @@ mod tests {
                 Err(Rejection::new(CODE, "no answer")),
             ),
             (
+                "addList", url, r#"{"value":{}}"#,
+                Err(Rejection::new(CODE, "no answer")),
+            ),
+            (
+                "addList", url, r#"{"value":["custom",true,false,2,false]}"#,
+                Err(Rejection::new(CODE, "no answer")),
+            ),
+            (
                 "hiddenElements", "{}", r#"{"value":["example.com##.ad"]}"#,
                 Ok(r#"["example.com##.ad"]"#.into()),
             ),
@@ -209,11 +217,22 @@ mod tests {
                 Err(Rejection::new(CODE, "read failed")),
             ),
         ] {
-            let (blocker, _, scripts, _resources) = setup();
+            let (blocker, host, scripts, _resources) = setup();
             let reply = dispatch(&blocker, call, "", args);
             let tab = scripts.tab(0);
             tab.load();
             tab.answer(script_reply);
+            if call == "addList" {
+                let changes = host.changes.borrow();
+                if expected.is_ok() {
+                    assert_eq!(changes.as_slice(), &[serde_json::json!({
+                        "list": "custom",
+                        "listEnabled": true,
+                    })]);
+                } else {
+                    assert!(changes.is_empty(), "{script_reply}");
+                }
+            }
             let actual = reply.take().expect("the call settled");
             if call == "addList"
                 && let (Ok(actual), Ok(expected)) = (&actual, &expected)

@@ -12,7 +12,10 @@ use std::path::PathBuf;
 use std::rc::{Rc, Weak};
 use std::time::Duration;
 
+use serde::Deserialize;
 use serde_json::{Value, json};
+
+use crate::types::AddedFilterList;
 
 use super::content_blocker_calls::{Op, script_with};
 use super::content_blocker_lite::lite_settings_pending;
@@ -790,7 +793,9 @@ impl ContentBlocker {
                 if let Some(error) = error {
                     return completion(Err(error));
                 }
-                let Some(added) = added.filter(Value::is_object) else {
+                let Some(added) = added.filter(|value| {
+                    value.is_object() && AddedFilterList::deserialize(value).is_ok()
+                }) else {
                     return completion(Err("no answer".to_owned()));
                 };
                 b.0.host
