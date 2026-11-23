@@ -2,7 +2,7 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 use std::time::Duration;
 
@@ -28,6 +28,11 @@ use super::ardia_window_sight_math::{Rect, counts_as_cover, partly_visible};
 use crate::core::bindings::Window;
 
 type WindowInfo = NSDictionary<NSString, AnyObject>;
+
+thread_local! {
+    pub(super) static ACTED_TRANSITION: Cell<Duration> = const { Cell::new(Duration::ZERO) };
+    pub(super) static ACTED_OCCLUSION_GAP: Cell<Option<f64>> = const { Cell::new(None) };
+}
 
 const CG_WINDOW_LIST_OPTION_ON_SCREEN_ABOVE_WINDOW: u32 = 1 << 1;
 const CG_WINDOW_LIST_OPTION_INCLUDING_WINDOW: u32 = 1 << 3;
@@ -361,6 +366,15 @@ impl FullScreen {
         }
     }
 
+    pub(super) fn occlusion_visible(&self, window: &NSWindow) -> bool {
+        let acted = self.state.borrow().acted_occlusion;
+        acted.unwrap_or_else(|| {
+            window
+                .occlusionState()
+                .contains(NSWindowOcclusionState::Visible)
+        })
+    }
+
     pub(super) fn act_window_server(&self, shows: bool) {
         self.state.borrow_mut().acted_server = shows;
     }
@@ -372,18 +386,17 @@ impl FullScreen {
             }
             return;
         }
-        self.act_window_full_screen(!self.is_full_screen());
+        self.act_window_full_screen_with_timing(!self.is_full_screen(), ACTED_TRANSITION.get());
     }
 
     pub fn act_window_full_screen(self: &Rc<Self>, entering: bool) {
-        self.act_window_full_screen_with_timing(entering, Duration::ZERO, None);
+        self.act_window_full_screen_with_timing(entering, Duration::ZERO);
     }
 
     pub(super) fn act_window_full_screen_with_timing(
         self: &Rc<Self>,
         entering: bool,
         transition: Duration,
-        occlusion_gap: Option<f64>,
     ) {
         let Some((core, window)) = self.live_window() else {
             return;
@@ -422,7 +435,7 @@ impl FullScreen {
                 window.setFrame_display(frame, true);
             }
         }
-        if let Some(wait) = occlusion_gap.and_then(|gap| {
+        if let Some(wait) = ACTED_OCCLUSION_GAP.get().and_then(|gap| {
             Duration::try_from_secs_f64((transition.as_secs_f64() + gap).max(0.)).ok()
         }) {
             let turn = {

@@ -2,18 +2,24 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-use std::cell::{Cell, OnceCell};
+use std::cell::OnceCell;
+use std::ffi::c_void;
+use std::ptr::NonNull;
+use std::sync::Once;
 use std::time::Duration;
 
+use block2::RcBlock;
 use objc2::rc::Retained;
-use objc2::{MainThreadOnly, Message};
+use objc2::runtime::{AnyClass, AnyObject, Bool, Sel};
+use objc2::{MainThreadOnly, Message, ffi, msg_send, sel};
 use objc2_app_kit::{
     NSApplication, NSBackingStoreType, NSColor, NSEvent, NSEventMask, NSEventModifierFlags,
     NSEventType, NSResponder, NSUserInterfaceItemIdentification, NSView, NSWindow, NSWindowButton,
-    NSWindowOcclusionState, NSWindowOrderingMode, NSWindowStyleMask,
+    NSWindowOrderingMode, NSWindowStyleMask, NSWorkspace,
 };
 use objc2_foundation::{
-    NSDate, NSDefaultRunLoopMode, NSInsetRect, NSMapTable, NSPoint, NSProcessInfo, NSString,
+    NSArray, NSDate, NSDefaultRunLoopMode, NSInsetRect, NSMapTable, NSNotificationCenter,
+    NSObjectProtocol, NSPoint, NSProcessInfo, NSRange, NSString,
 };
 use ria_engine::call::main_queue;
 use serde_json::json;
@@ -23,11 +29,16 @@ use super::ardia_interface_scale::root_of_window;
 use super::ardia_reserved_keys::reserved_menu_item;
 use super::ardia_traffic_lights::frame_view;
 use super::ardia_window_controller::Controllers;
+use super::ardia_window_full_screen::{ACTED_OCCLUSION_GAP, ACTED_TRANSITION};
+
+#[link(name = "CoreGraphics", kind = "framework")]
+unsafe extern "C" {
+    fn CGEventSetFlags(event: *const c_void, flags: u64);
+    fn CGEventSetIntegerValueField(event: *const c_void, field: u32, value: i64);
+}
 
 #[derive(Default)]
 pub(super) struct DevActions {
-    transition: Cell<Duration>,
-    gap: Cell<Option<f64>>,
     covers: OnceCell<Retained<NSMapTable<NSWindow, NSWindow>>>,
 }
 
@@ -69,12 +80,9 @@ fn describe_first_responder(responder: Option<Retained<NSResponder>>) -> String 
     }
 }
 
-fn hit(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
-    let Some(frame) = frame_view(window) else {
-        return String::new();
-    };
+fn window_point(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> NSPoint {
     let mut fields = spec.split(',');
-    let point = match (fields.next(), fields.next()) {
+    match (fields.next(), fields.next()) {
         (Some(x), Some(y)) => {
             let x = NSString::from_str(x).doubleValue();
             let y = NSString::from_str(y).doubleValue();
@@ -90,12 +98,372 @@ fn hit(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
                     None,
                 )
             } else {
-                NSPoint::new(x, frame.bounds().size.height - y)
+                NSPoint::new(
+                    x,
+                    frame_view(window).map_or(0., |frame| frame.bounds().size.height) - y,
+                )
             }
         }
         _ => NSPoint::new(-1., -1.),
+    }
+}
+
+fn hit(window: &NSWindow, point: NSPoint) -> Option<Retained<NSView>> {
+    frame_view(window)?.hitTest(point)
+}
+
+fn mouse_event(
+    window: &NSWindow,
+    kind: NSEventType,
+    point: NSPoint,
+    count: isize,
+    number: isize,
+    pressure: f32,
+) -> Option<Retained<NSEvent>> {
+    NSEvent::mouseEventWithType_location_modifierFlags_timestamp_windowNumber_context_eventNumber_clickCount_pressure(
+        kind, point, NSEventModifierFlags::empty(), NSProcessInfo::processInfo().systemUptime(),
+        window.windowNumber(), None, number, count, pressure,
+    )
+}
+
+fn with_mouse_fields(
+    event: Retained<NSEvent>,
+    flags: Option<u64>,
+    other: bool,
+) -> Option<Retained<NSEvent>> {
+    if flags.is_none() && !other {
+        return Some(event);
+    }
+    let cg = event.CGEvent()?;
+    let pointer = std::ptr::from_ref(&*cg).cast();
+    // SAFETY: `cg` holds the event alive while Core Graphics updates its fields.
+    unsafe {
+        if let Some(flags) = flags.filter(|flags| *flags != 0) {
+            CGEventSetFlags(pointer, flags);
+        }
+        if other {
+            const MOUSE_EVENT_BUTTON_NUMBER: u32 = 3;
+            const CENTER_BUTTON: i64 = 2;
+            CGEventSetIntegerValueField(pointer, MOUSE_EVENT_BUTTON_NUMBER, CENTER_BUTTON);
+        }
+    }
+    NSEvent::eventWithCGEvent(&cg)
+}
+
+fn click(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
+    let point = window_point(host, window, spec);
+    let target = hit(window, point);
+    let reply = describe_view(target.clone());
+    let page = target.as_ref().is_some_and(|target| {
+        AnyClass::get(c"RenderWidgetHostViewCocoa").is_some_and(|class| target.isKindOfClass(class))
+    });
+    let right = spec.ends_with(",right");
+    let (down, up) = if right {
+        (NSEventType::RightMouseDown, NSEventType::RightMouseUp)
+    } else {
+        (NSEventType::LeftMouseDown, NSEventType::LeftMouseUp)
     };
-    describe_view(frame.hitTest(point))
+    let window = window.retain();
+    main_queue::post(Box::new(move || {
+        let Some(down) = mouse_event(&window, down, point, 1, 0, 1.) else {
+            return;
+        };
+        let Some(up) = mouse_event(&window, up, point, 1, 0, 1.) else {
+            return;
+        };
+        if let Some(target) = target.filter(|_| page) {
+            if right {
+                target.rightMouseDown(&down);
+                target.rightMouseUp(&up);
+            } else {
+                target.mouseDown(&down);
+                target.mouseUp(&up);
+            }
+        } else {
+            window.sendEvent(&down);
+            window.sendEvent(&up);
+        }
+    }));
+    reply
+}
+
+fn mouse(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
+    use NSEventType as Event;
+    let mut fields = spec.split(':');
+    let (Some(kind), Some(at)) = (fields.next(), fields.next()) else {
+        return "mouse:<down|up|dragged|moved|rightdown|rightup|otherdown|otherup>:<x>,<y>[,<clickCount>[,<flags>[,<eventNumber>]]]".into();
+    };
+    let kind = match kind {
+        "down" => Event::LeftMouseDown,
+        "up" => Event::LeftMouseUp,
+        "dragged" => Event::LeftMouseDragged,
+        "moved" => Event::MouseMoved,
+        "rightdown" => Event::RightMouseDown,
+        "rightup" => Event::RightMouseUp,
+        "otherdown" => Event::OtherMouseDown,
+        "otherup" => Event::OtherMouseUp,
+        _ => return "unknown mouse event".into(),
+    };
+    let mut fields = at.split(',').skip(2);
+    let count = fields
+        .next()
+        .map_or((kind != Event::MouseMoved) as isize, |n| {
+            NSString::from_str(n).integerValue()
+        });
+    let flags = fields
+        .next()
+        .map(|n| NSString::from_str(n).longLongValue() as u64);
+    let number = fields
+        .next()
+        .map_or(0, |n| NSString::from_str(n).integerValue());
+    let pressure = if matches!(
+        kind,
+        Event::LeftMouseUp | Event::RightMouseUp | Event::MouseMoved
+    ) {
+        0.
+    } else {
+        1.
+    };
+    let point = window_point(host, window, at);
+    let other = matches!(kind, Event::OtherMouseDown | Event::OtherMouseUp);
+    if let Some(event) = mouse_event(window, kind, point, count, number, pressure)
+        .and_then(|event| with_mouse_fields(event, flags, other))
+    {
+        NSApplication::sharedApplication(window.mtm()).postEvent_atStart(&event, false);
+    }
+    describe_view(hit(window, point))
+}
+
+fn drag(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
+    let mut flags = 0;
+    let points: Vec<_> = spec
+        .split(';')
+        .filter_map(|spec| {
+            if let Some(value) = spec.strip_prefix("flags=") {
+                flags = NSString::from_str(value).longLongValue() as u64;
+                None
+            } else {
+                Some(window_point(host, window, spec))
+            }
+        })
+        .collect();
+    let [start, .., end] = points.as_slice() else {
+        return "drag:[flags=<modifier flags>;]<x>,<y>;<x>,<y>[;…]".into();
+    };
+    let app = NSApplication::sharedApplication(window.mtm());
+    let mut index = 0;
+    let mut schedule = |kind, point| {
+        let delay = if index == 0 { 0 } else { 150 + index * 16 };
+        index += 1;
+        if let Some(event) = mouse_event(window, kind, point, 1, 0, 1.)
+            .and_then(|event| with_mouse_fields(event, (flags != 0).then_some(flags), false))
+        {
+            let app = app.clone();
+            main_queue::after(
+                Duration::from_millis(delay),
+                Box::new(move || app.sendEvent(&event)),
+            );
+        }
+    };
+    schedule(NSEventType::LeftMouseDown, *start);
+    for pair in points.windows(2) {
+        let (a, b) = (pair[0], pair[1]);
+        for step in 1..=12 {
+            let t = f64::from(step) / 12.;
+            schedule(
+                NSEventType::LeftMouseDragged,
+                NSPoint::new(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t),
+            );
+        }
+    }
+    schedule(NSEventType::LeftMouseUp, *end);
+    format!("{} ({index} events)", describe_view(hit(window, *start)))
+}
+
+fn fake_active_clicks() -> String {
+    static INSTALL: Once = Once::new();
+    INSTALL.call_once(|| {
+        let selector = sel!(acceptsFirstMouse:);
+        for class in [c"NSTextView", c"RenderWidgetHostViewCocoa", c"WKWebView"]
+            .into_iter()
+            .filter_map(AnyClass::get)
+        {
+            let Some(method) = class.instance_method(selector) else {
+                continue;
+            };
+            // SAFETY: The selector takes an NSEvent and returns BOOL on NSView subclasses.
+            let original: unsafe extern "C-unwind" fn(&NSView, Sel, Option<&NSEvent>) -> Bool =
+                unsafe { std::mem::transmute(method.implementation()) };
+            let callback = RcBlock::new(move |view: NonNull<NSView>, event: *const NSEvent| {
+                // SAFETY: AppKit passes live arguments to this method on the main thread.
+                let view = unsafe { view.as_ref() };
+                if view.window().is_some_and(|window| window.isKeyWindow()) {
+                    Bool::YES
+                } else {
+                    unsafe { original(view, selector, event.as_ref()) }
+                }
+            });
+            // SAFETY: The runtime copies the block. Replace on this class, not its superclass.
+            unsafe {
+                let imp = ffi::imp_implementationWithBlock(RcBlock::as_ptr(&callback).cast());
+                ffi::class_replaceMethod(
+                    std::ptr::from_ref(class).cast_mut(),
+                    selector,
+                    imp,
+                    ffi::method_getTypeEncoding(method),
+                );
+            }
+        }
+    });
+    "1".into()
+}
+
+fn post_notification(window: &NSWindow, value: &str) -> String {
+    let Some((scope, name)) = value
+        .split_once(':')
+        .filter(|(_, name)| !name.contains(':'))
+    else {
+        return "postNotification:<workspace|app|window|windows>:<name>".into();
+    };
+    let app = NSApplication::sharedApplication(window.mtm());
+    let name = NSString::from_str(name);
+    let center = NSNotificationCenter::defaultCenter();
+    // SAFETY: All notification senders are live AppKit objects on the main thread.
+    unsafe {
+        match scope {
+            "workspace" => {
+                let workspace = NSWorkspace::sharedWorkspace();
+                workspace
+                    .notificationCenter()
+                    .postNotificationName_object(&name, Some(&workspace));
+            }
+            "app" => center.postNotificationName_object(&name, Some(&app)),
+            "window" => center.postNotificationName_object(&name, Some(window)),
+            "windows" => {
+                for each in app.windows().iter() {
+                    center.postNotificationName_object(&name, Some(&each));
+                }
+            }
+            _ => return "unknown center".into(),
+        }
+    }
+    "posted".into()
+}
+
+fn subroles(window: &NSWindow) -> String {
+    let app = NSApplication::sharedApplication(window.mtm());
+    let windows: Vec<_> = app
+        .orderedWindows()
+        .iter()
+        .filter(|window| window.isVisible() && window.parentWindow().is_none())
+        .map(|window| {
+            // SAFETY: The window implements AppKit's accessibility subrole selector.
+            let subrole: Option<Retained<NSString>> =
+                unsafe { msg_send![&*window, accessibilitySubrole] };
+            json!({
+                "number": window.windowNumber(),
+                "title": window.title().to_string(),
+                "identifier": window.identifier().map_or_else(String::new, |id| id.to_string()),
+                "subrole": subrole.map_or_else(String::new, |value| value.to_string()),
+            })
+        })
+        .collect();
+    json!(windows).to_string()
+}
+
+fn accessibility_tree(window: &NSWindow) -> String {
+    fn walk(element: &AnyObject, depth: usize, lines: &mut Vec<String>) {
+        if lines.len() > 400 || depth > 40 {
+            return;
+        }
+        // SAFETY: The elements conform to the Objective-C object protocol.
+        let responds = |selector| unsafe {
+            let supports: Bool = msg_send![element, respondsToSelector: selector];
+            supports.as_bool()
+        };
+        let mut line = " ".repeat(depth);
+        let role = sel!(accessibilityRole);
+        if responds(role) {
+            // SAFETY: AppKit declares this selector as returning an NSString.
+            let role: Option<Retained<NSString>> = unsafe { msg_send![element, accessibilityRole] };
+            if let Some(role) = role {
+                line.push_str(&role.to_string());
+            }
+        } else {
+            line.push('?');
+        }
+        let mut separator = ": ";
+        for selector in [
+            sel!(accessibilityTitle),
+            sel!(accessibilityLabel),
+            sel!(accessibilityValue),
+        ] {
+            if !responds(selector) {
+                continue;
+            }
+            // SAFETY: These AppKit accessibility getters return objects.
+            let value: Option<Retained<AnyObject>> =
+                unsafe { msg_send![element, performSelector: selector] };
+            if let Some(text) = value
+                .and_then(|value| value.downcast::<NSString>().ok())
+                .filter(|text| !text.is_empty())
+            {
+                line.push_str(separator);
+                line.push_str(&text.to_string());
+                separator = " | ";
+            }
+        }
+        lines.push(line);
+        if responds(sel!(accessibilityChildren)) {
+            // SAFETY: AppKit declares this selector as returning an array of accessibility objects.
+            let children: Option<Retained<NSArray<AnyObject>>> =
+                unsafe { msg_send![element, accessibilityChildren] };
+            if let Some(children) = children {
+                for child in children.iter() {
+                    walk(&child, depth + 1, lines);
+                    if lines.len() > 400 {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    let mut lines = Vec::new();
+    walk(window, 0, &mut lines);
+    lines.join("\n")
+}
+
+fn type_text(window: &NSWindow, text: &str) -> String {
+    let text = NSString::from_str(text);
+    for index in 0..text.length() {
+        let unit = text.substringWithRange(NSRange::new(index, 1));
+        for kind in [NSEventType::KeyDown, NSEventType::KeyUp] {
+            if let (Some(responder), Some(event)) = (
+                window.firstResponder(),
+                key_event(window, kind, NSEventModifierFlags::empty(), &unit, 0),
+            ) {
+                if kind == NSEventType::KeyDown {
+                    responder.keyDown(&event);
+                } else {
+                    responder.keyUp(&event);
+                }
+            }
+        }
+    }
+    describe_first_responder(window.firstResponder())
+}
+
+fn key_event(
+    window: &NSWindow,
+    kind: NSEventType,
+    flags: NSEventModifierFlags,
+    chars: &NSString,
+    code: u16,
+) -> Option<Retained<NSEvent>> {
+    NSEvent::keyEventWithType_location_modifierFlags_timestamp_windowNumber_context_characters_charactersIgnoringModifiers_isARepeat_keyCode(
+        kind, NSPoint::ZERO, flags, NSProcessInfo::processInfo().systemUptime(),
+        window.windowNumber(), None, chars, chars, false, code,
+    )
 }
 
 fn key_action(controllers: &Controllers, window: &NSWindow, name: &str, value: &str) -> String {
@@ -109,10 +477,7 @@ fn key_action(controllers: &Controllers, window: &NSWindow, name: &str, value: &
     let code = fields
         .next()
         .map_or(0, |code| NSString::from_str(code).intValue() as u16);
-    let event = NSEvent::keyEventWithType_location_modifierFlags_timestamp_windowNumber_context_characters_charactersIgnoringModifiers_isARepeat_keyCode(
-        NSEventType::KeyDown, NSPoint::ZERO, flags, NSProcessInfo::processInfo().systemUptime(),
-        window.windowNumber(), None, &chars, &chars, false, code,
-    );
+    let event = key_event(window, NSEventType::KeyDown, flags, &chars, code);
     let app = NSApplication::sharedApplication(window.mtm());
     if name == "reserved" {
         return event
@@ -172,12 +537,12 @@ impl DevActions {
         match name {
             "fakeFullScreenMs" => {
                 let transition = duration(milliseconds(value));
-                self.transition.set(transition);
+                ACTED_TRANSITION.set(transition);
                 Some(format!("{:.0}", transition.as_secs_f64() * 1000.))
             }
             "fakeFullScreenOcclusionMs" => {
                 let gap = milliseconds(value);
-                self.gap.set((gap != -1.).then_some(gap / 1000.));
+                ACTED_OCCLUSION_GAP.set((gap != -1.).then_some(gap / 1000.));
                 Some(format!("{gap:.0}"))
             }
             "fullScreen" | "fakeFullScreen" => {
@@ -192,13 +557,9 @@ impl DevActions {
                     let entering = fields.next() == Some("1");
                     let transition = fields
                         .next()
-                        .map_or(self.transition.get(), |ms| duration(milliseconds(ms)));
+                        .map_or(Duration::ZERO, |ms| duration(milliseconds(ms)));
                     if entering != fullscreen.is_full_screen() {
-                        fullscreen.act_window_full_screen_with_timing(
-                            entering,
-                            transition,
-                            self.gap.get(),
-                        );
+                        fullscreen.act_window_full_screen_with_timing(entering, transition);
                     }
                 }
                 Some(
@@ -207,7 +568,6 @@ impl DevActions {
                         "styleMask": window.styleMask().contains(NSWindowStyleMask::FullScreen),
                         "acted": controller.core.acted_full_screen(),
                         "chromeCounts": controller.core.acted_full_screen(),
-                        "transitioning": fullscreen.transitioning(),
                     })
                     .to_string(),
                 )
@@ -217,11 +577,7 @@ impl DevActions {
                 controller
                     .fullscreen
                     .act_occlusion((value != "off").then_some(value == "visible"));
-                Some(flag(
-                    window
-                        .occlusionState()
-                        .contains(NSWindowOcclusionState::Visible),
-                ))
+                Some(flag(controller.fullscreen.occlusion_visible(window)))
             }
             "fakeWindowServer" => {
                 controllers
@@ -231,7 +587,18 @@ impl DevActions {
                 Some("ok".into())
             }
             "focusState" => Some(host.focus_state(window.mtm())),
-            "hit" => Some(hit(host, window, value)),
+            "hit" => Some(describe_view(hit(
+                window,
+                window_point(host, window, value),
+            ))),
+            "click" => Some(click(host, window, value)),
+            "mouse" => Some(mouse(host, window, value)),
+            "drag" => Some(drag(host, window, value)),
+            "fakeActiveClicks" => Some(fake_active_clicks()),
+            "postNotification" => Some(post_notification(window, value)),
+            "subroles" => Some(subroles(window)),
+            "ax" => Some(accessibility_tree(window)),
+            "type" => Some(type_text(window, value)),
             "reserved" | "keys" => Some(key_action(controllers, window, name, value)),
             "performClose" => {
                 let window = window.retain();

@@ -10,7 +10,7 @@ use objc2::rc::Retained;
 use objc2_app_kit::NSScreen;
 use objc2_foundation::{NSNumber, NSPoint, NSRect, NSSize, NSString, ns_string};
 
-use super::ardia_display_placement_math::{has_most, place};
+use super::ardia_display_placement_math::on_screen;
 use super::ardia_window_sight_math::Rect;
 
 #[link(name = "CoreGraphics", kind = "framework")]
@@ -59,16 +59,12 @@ pub fn screen_with_identifier(
 
 pub fn frame_on_screen(mtm: MainThreadMarker, frame: NSRect, target: &NSScreen) -> NSRect {
     let screens = NSScreen::screens(mtm);
-    if !screens.containsObject(target) {
-        return frame;
-    }
-    let frame = rect(frame);
-    let holds = has_most(
-        frame,
-        rect(target.frame()),
+    let fitted = on_screen(
+        rect(frame),
         screens.iter().map(|screen| rect(screen.frame())),
+        screens.indexOfObject(target),
+        rect(target.visibleFrame()),
     );
-    let fitted = place(frame, rect(target.visibleFrame()), holds);
     NSRect::new(
         NSPoint::new(fitted.x, fitted.y),
         NSSize::new(fitted.width, fitted.height),
