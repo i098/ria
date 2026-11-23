@@ -19,7 +19,7 @@ A name marked [INFERENCE] is not yet in code.
 | profile | `state/profiles` | One user data directory and its settings. | `ria-state::profiles` |
 | window | `state/windows` | One browser window. | `ria-state::windows` |
 | omnibox | `packages/core`, `components/omnibox` | Address and search field with suggestions. | `ria-core::omnibox` (logic), `ria-ui::omnibox` (view) |
-| bang | `packages/core/src/bangList.ts` | `!` shortcut to a search site. | `ria-core::bangs` |
+| bang | `packages/core/src/bangList.ts` | `!` shortcut to a search site. | `ria_core::search::bangs` (lookup), `ria_core::search::bang_list` (data) |
 | Peek | `state/peek`, `components/peek` | Preview card above a page. | `ria-ui::peek` |
 | sidebar | `state/sidebar`, `components/sidebar` | Vertical list of spaces, pins and tabs. | `ria-state::sidebar`, `ria-ui::sidebar` |
 | tab strip | `components/tabstrip` | Horizontal tab row. | `ria-ui::tabstrip` |

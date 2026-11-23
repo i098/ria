@@ -48,6 +48,11 @@ After, on the Mac (arm64, macOS 26.2), blaze `0.0.0-dev (f585269)` installed by 
 
 The previous Mac binary is kept as `~/.cargo/bin/blaze.v1-0.20261027.bak`.
 
+## Rust test harness limit
+
+Blaze stops at the writable static `__RUST_STD_INTERNAL_VAL` before the `ria-core` bang-list parity test runs.
+The fix in item 2 covers the `thread_local!` proof above, not this test harness.
+
 ## Patch 0002: the store key of LLVM's code (objc2 `declare.rs:275`)
 
 Symptom, before (blaze `0.0.0-dev (f585269)` with patch 0001 only, Mac, proof C of `abc-host`; proof B had the same abort with 3 against 2):

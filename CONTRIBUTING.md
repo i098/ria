@@ -38,7 +38,10 @@ fallow audit        # advisory; fallow reads TypeScript/JavaScript only, so it c
 
 Save a new baseline with `sentrux gate --save .` only when the owner agrees.
 
-Build and test Rust code with blaze. Use cargo only for `fmt` and `clippy`. Follow Google's Rust Style Guide. Add tests only for algorithmic logic, boundary IO and integration flows.
+Build and test Rust code with Blaze.
+Use Cargo for `fmt`, `clippy`, and [tests that Blaze cannot run](rust/tools/bang-tsv/README.md).
+Follow Google's Rust Style Guide.
+Add tests only for algorithmic logic, boundary IO and integration flows.
 
 ## Flow
 

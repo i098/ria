@@ -1,0 +1,3 @@
+{
+  "entry": ["rust/tools/bang-tsv/extract.mjs"]
+}
