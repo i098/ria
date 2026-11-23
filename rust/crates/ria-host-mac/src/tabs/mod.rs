@@ -18,7 +18,6 @@ pub mod ardia_web_view_input_monitors;
 pub mod ardia_web_view_navigation;
 pub mod ardia_web_view_page_commands;
 pub mod ardia_web_view_page_messages;
-pub mod ardia_web_view_page_tab;
 pub mod ardia_web_view_painting;
 
 fn superview(view: &objc2_app_kit::NSView) -> Option<objc2::rc::Retained<objc2_app_kit::NSView>> {

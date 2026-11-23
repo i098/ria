@@ -56,7 +56,7 @@ impl Provider {
     }
 }
 
-pub struct FieldProviders {
+struct FieldProviders {
     session: String,
     generation: f64,
     providers: HashMap<String, Provider>,
@@ -72,7 +72,7 @@ impl Default for FieldProviders {
     }
 }
 
-impl FieldProviders {
+impl ProviderPage {
     /// Returns `None` for a rejected update and `Some(true)` for a changed set.
     pub fn update<'a>(
         &mut self,
@@ -81,10 +81,10 @@ impl FieldProviders {
         session: &str,
         original_profile: impl Fn(&str) -> String,
     ) -> Option<bool> {
-        let new_session = self.session != session;
+        let new_session = self.fields.session != session;
         if !generation.is_finite()
             || session.is_empty()
-            || (!new_session && generation < self.generation)
+            || (!new_session && generation < self.fields.generation)
         {
             return None;
         }
@@ -111,17 +111,22 @@ impl FieldProviders {
                 providers.insert(original_profile(profile), provider);
             }
         }
-        let changed = new_session || generation != self.generation || providers != self.providers;
+        let changed = new_session
+            || generation != self.fields.generation
+            || providers != self.fields.providers;
         if changed {
-            self.session = session.into();
-            self.generation = generation;
-            self.providers = providers;
+            self.fields = FieldProviders {
+                session: session.into(),
+                generation,
+                providers,
+            };
+            self.clear_provider_state();
         }
         Some(changed)
     }
 
     pub fn get(&self, original_profile: &str) -> Option<Provider> {
-        self.providers.get(original_profile).copied()
+        self.fields.providers.get(original_profile).copied()
     }
 }
 
@@ -136,6 +141,7 @@ struct Offer {
 
 #[derive(Default)]
 pub struct ProviderPage {
+    fields: FieldProviders,
     navigation: u64,
     sequence: f64,
     focus: Option<Field>,
@@ -146,7 +152,7 @@ pub struct ProviderPage {
 pub const FOCUS_QUERY_WAIT: Duration = Duration::from_millis(200);
 
 impl ProviderPage {
-    pub fn clear_provider_state(&mut self) {
+    fn clear_provider_state(&mut self) {
         self.sequence = 0.0;
         self.focus = None;
         self.offers.clear();
@@ -261,15 +267,14 @@ impl ProviderPage {
     pub fn redeem(
         &mut self,
         token: &str,
-        providers: &FieldProviders,
         original_profile: &str,
         generation: f64,
         frame_alive: impl FnOnce(&str) -> bool,
         handler: impl FnOnce(&NSURL) -> Option<Retained<NSURL>>,
     ) -> Result<(Retained<NSURL>, Retained<NSURL>), &'static str> {
         let offer = self.offers.remove(token).ok_or("unknownToken")?;
-        if (generation >= 0.0 && generation != providers.generation)
-            || offer.generation != providers.generation
+        if (generation >= 0.0 && generation != self.fields.generation)
+            || offer.generation != self.fields.generation
         {
             return Err("stale");
         }
@@ -277,7 +282,7 @@ impl ProviderPage {
             return Err("navigated");
         }
         if offer.profile != original_profile
-            || !providers
+            || !self
                 .get(original_profile)
                 .is_some_and(|provider| provider.code_setup)
         {
@@ -341,7 +346,7 @@ mod tests {
 
     #[test]
     fn an_old_generation_cannot_replace_the_current_providers() {
-        let mut providers = FieldProviders::default();
+        let mut providers = ProviderPage::default();
         let login = json!({"profile": "Default", "fields": ["login"]});
         assert_eq!(
             providers.update([&login], 3.0, "session", |profile| profile.to_owned()),
@@ -357,6 +362,60 @@ mod tests {
             Some(true)
         );
         assert!(providers.get("Default").is_none());
+    }
+
+    #[test]
+    fn a_new_session_clears_focus_and_verification_offers_at_the_same_generation() {
+        let mut page = ProviderPage::default();
+        let profile = json!({"profile": "Default", "fields": ["oneTimeCode"], "codeSetup": true});
+        let profiles = [&profile];
+        let handler = || NSURL::fileURLWithPath(&NSString::from_str("/Fixture.app"));
+        let offer = |page: &mut ProviderPage| {
+            page.offer(
+                page.get("Default"),
+                3.0,
+                "Default",
+                "main",
+                "otpauth://totp/Fixture?secret=TEST",
+                |_| Some((handler(), "Fixture".into())),
+            )
+            .unwrap()["token"]
+                .as_str()
+                .unwrap()
+                .to_owned()
+        };
+        let now = Instant::now();
+        assert_eq!(page.update(profiles, 3.0, "old", str::to_owned), Some(true));
+        let _ = page.note_focus(Some(Field::Code), 5.0, 3.0, 3.0, "", now);
+        let old = offer(&mut page);
+        assert_eq!(
+            page.update(profiles, 3.0, "old", str::to_owned),
+            Some(false)
+        );
+        assert_eq!(
+            page.panel_field(page.get("Default"), None, 3.0),
+            Ok(Field::Code)
+        );
+
+        assert_eq!(page.update(profiles, 3.0, "new", str::to_owned), Some(true));
+        assert_eq!(
+            page.panel_field(page.get("Default"), None, 3.0),
+            Err("notFocused")
+        );
+        assert!(matches!(
+            page.redeem(&old, "Default", 3.0, |_| true, |_| Some(handler())),
+            Err("unknownToken")
+        ));
+        let _ = page.note_focus(Some(Field::Code), 1.0, 3.0, 3.0, "", now);
+        assert_eq!(
+            page.panel_field(page.get("Default"), None, 3.0),
+            Ok(Field::Code)
+        );
+        let current = offer(&mut page);
+        assert!(
+            page.redeem(&current, "Default", 3.0, |_| true, |_| Some(handler()))
+                .is_ok()
+        );
     }
 
     #[test]

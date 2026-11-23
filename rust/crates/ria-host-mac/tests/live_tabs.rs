@@ -34,7 +34,7 @@ mod mac {
     use ria_host_mac::tabs::ardia_tab_registry::TabRegistry;
     use ria_host_mac::tabs::ardia_tab_strip::{StripCommandResult, StripWindow, TabStrips};
     use ria_host_mac::tabs::ardia_web_view_navigation::NavigationReports;
-    use ria_host_mac::tabs::ardia_web_view_page_commands;
+    use ria_host_mac::tabs::ardia_web_view_page_commands as page_commands;
     use serde_json::json;
 
     const FIXTURE_URL: &str = "data:text/html,%3Ctitle%3ERia%20tab%20fixture%3C/title%3E";
