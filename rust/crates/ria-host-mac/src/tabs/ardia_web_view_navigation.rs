@@ -406,11 +406,12 @@ fn reported_title<'a>(title: &'a str, url: &str, loading: bool) -> &'a str {
     {
         shown = &shown[..shown.len() - 1];
     }
-    if title == shown || (shown.contains("%20") && title == shown.replace("%20", " ")) {
-        ""
-    } else {
-        title
+    let decoded;
+    if shown.contains("%20") {
+        decoded = shown.replace("%20", " ");
+        shown = &decoded;
     }
+    if title == shown { "" } else { title }
 }
 
 #[cfg(test)]
@@ -459,6 +460,10 @@ mod tests {
         assert_eq!(
             reported_title("example.test/a b", "https://example.test/a%20b", true),
             ""
+        );
+        assert_eq!(
+            reported_title("example.test/a%20b", "https://example.test/a%20b", true),
+            "example.test/a%20b"
         );
         assert_eq!(
             reported_title("example.test", "https://example.test/?", true),

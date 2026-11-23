@@ -397,7 +397,8 @@ impl NotificationFrames {
         let report = json!({
             "id": id, "title": title, "origin": origin,
             "body": text(value, "body", 4096).unwrap_or_default(),
-            "icon": text(value, "icon", 1 << 20), "tag": text(value, "tag", 1024),
+            "icon": text(value, "icon", 1 << 20),
+            "tag": text(value, "tag", 1024).unwrap_or_default(),
             "silent": flag(value, "silent"), "requireInteraction": flag(value, "requireInteraction"),
             "tabId": app_tab_id, "isMainFrame": main,
         });

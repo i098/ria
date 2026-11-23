@@ -139,6 +139,7 @@ struct AutoFillHold {
 thread_local! {
     static HOLD: RefCell<Option<AutoFillHold>> = const { RefCell::new(None) };
     static PANEL_WATCH: Cell<u64> = const { Cell::new(0) };
+    static PANEL_LAST_OPEN: Cell<Option<Instant>> = const { Cell::new(None) };
 }
 
 fn auto_fill_selector() -> Sel {
@@ -255,14 +256,10 @@ fn watch_system_panel(watch: u64, deadline: Instant, closed: impl FnOnce() + 'st
     );
 }
 
-#[derive(Default)]
-pub struct SystemPasswordPanel {
-    last: Option<Instant>,
-}
+pub struct SystemPasswordPanel;
 
 impl SystemPasswordPanel {
     pub fn open(
-        &mut self,
         mtm: MainThreadMarker,
         page: &NSView,
         background: bool,
@@ -288,15 +285,21 @@ impl SystemPasswordPanel {
             return;
         }
         let now = Instant::now();
-        if self
-            .last
-            .is_some_and(|last| now.duration_since(last) < Duration::from_millis(600))
-        {
+        let throttled = PANEL_LAST_OPEN.with(|last| {
+            if last
+                .get()
+                .is_some_and(|at| now.duration_since(at) < Duration::from_millis(600))
+            {
+                return true;
+            }
+            last.set(Some(now));
+            false
+        });
+        if throttled {
             completion(not_shown("throttled"));
             return;
         }
         // ArdiaWebView+FieldProviders.mm:273-279.
-        self.last = Some(now);
         if background && !allow_background_panel {
             completion(json!({"shown": true}));
             return;

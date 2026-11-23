@@ -105,10 +105,6 @@ impl FirstPaint {
         std::mem::take(&mut self.created) && loading
     }
 
-    pub fn record_scripted(&mut self) {
-        self.scripted = true;
-    }
-
     pub fn load_wait(&self) -> Option<(u64, bool)> {
         self.is_holding(self.generation)
             .then_some((self.generation, self.scripted))

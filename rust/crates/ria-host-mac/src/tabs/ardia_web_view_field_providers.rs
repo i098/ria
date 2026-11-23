@@ -2,7 +2,9 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
+use std::cell::RefCell;
 use std::collections::HashMap;
+use std::rc::{Rc, Weak};
 use std::time::{Duration, Instant};
 
 use objc2::rc::Retained;
@@ -56,35 +58,56 @@ impl Provider {
     }
 }
 
-struct FieldProviders {
+#[derive(Default)]
+pub struct FieldProviders {
+    shared: Rc<RefCell<ProviderSet>>,
+}
+
+struct ProviderSet {
     session: String,
     generation: f64,
     providers: HashMap<String, Provider>,
+    pages: Vec<Weak<RefCell<PageState>>>,
 }
 
-impl Default for FieldProviders {
+impl Default for ProviderSet {
     fn default() -> Self {
         Self {
             session: String::new(),
             generation: -1.0,
             providers: HashMap::new(),
+            pages: Vec::new(),
         }
     }
 }
 
-impl ProviderPage {
+impl FieldProviders {
+    pub fn new_page(&self) -> ProviderPage {
+        let state = Rc::new(RefCell::new(PageState::default()));
+        let mut shared = self.shared.borrow_mut();
+        shared.pages.retain(|page| page.strong_count() != 0);
+        shared.pages.push(Rc::downgrade(&state));
+        ProviderPage {
+            fields: self.shared.clone(),
+            state,
+            navigation: 0,
+            query: None,
+        }
+    }
+
     /// Returns `None` for a rejected update and `Some(true)` for a changed set.
     pub fn update<'a>(
-        &mut self,
+        &self,
         profiles: impl IntoIterator<Item = &'a Value>,
         generation: f64,
         session: &str,
         original_profile: impl Fn(&str) -> String,
     ) -> Option<bool> {
-        let new_session = self.fields.session != session;
+        let mut shared = self.shared.borrow_mut();
+        let new_session = shared.session != session;
         if !generation.is_finite()
             || session.is_empty()
-            || (!new_session && generation < self.fields.generation)
+            || (!new_session && generation < shared.generation)
         {
             return None;
         }
@@ -111,22 +134,21 @@ impl ProviderPage {
                 providers.insert(original_profile(profile), provider);
             }
         }
-        let changed = new_session
-            || generation != self.fields.generation
-            || providers != self.fields.providers;
+        let changed =
+            new_session || generation != shared.generation || providers != shared.providers;
         if changed {
-            self.fields = FieldProviders {
-                session: session.into(),
-                generation,
-                providers,
-            };
-            self.clear_provider_state();
+            shared.session = session.into();
+            shared.generation = generation;
+            shared.providers = providers;
+            shared.pages.retain(|page| {
+                let Some(page) = page.upgrade() else {
+                    return false;
+                };
+                *page.borrow_mut() = PageState::default();
+                true
+            });
         }
         Some(changed)
-    }
-
-    pub fn get(&self, original_profile: &str) -> Option<Provider> {
-        self.fields.providers.get(original_profile).copied()
     }
 }
 
@@ -139,28 +161,34 @@ struct Offer {
     handler: Retained<NSURL>,
 }
 
-#[derive(Default)]
 pub struct ProviderPage {
-    fields: FieldProviders,
+    fields: Rc<RefCell<ProviderSet>>,
+    state: Rc<RefCell<PageState>>,
     navigation: u64,
+    query: Option<(String, Instant)>,
+}
+
+#[derive(Default)]
+struct PageState {
     sequence: f64,
     focus: Option<Field>,
     offers: HashMap<String, Offer>,
-    query: Option<(String, Instant)>,
 }
 
 pub const FOCUS_QUERY_WAIT: Duration = Duration::from_millis(200);
 
 impl ProviderPage {
-    fn clear_provider_state(&mut self) {
-        self.sequence = 0.0;
-        self.focus = None;
-        self.offers.clear();
+    pub fn get(&self, original_profile: &str) -> Option<Provider> {
+        self.fields
+            .borrow()
+            .providers
+            .get(original_profile)
+            .copied()
     }
 
     pub fn reset(&mut self) -> bool {
         self.navigation = self.navigation.wrapping_add(1);
-        self.clear_provider_state();
+        *self.state.borrow_mut() = PageState::default();
         self.query.take().is_some()
     }
 
@@ -185,19 +213,19 @@ impl ProviderPage {
         field: Option<Field>,
         sequence: f64,
         generation: f64,
-        current_generation: f64,
         query: &str,
         now: Instant,
     ) -> Option<bool> {
-        if generation != current_generation
+        let mut state = self.state.borrow_mut();
+        if generation != self.fields.borrow().generation
             || !sequence.is_finite()
             || sequence < 1.0
-            || sequence <= self.sequence
+            || sequence <= state.sequence
         {
             return None;
         }
-        self.sequence = sequence;
-        self.focus = field;
+        state.sequence = sequence;
+        state.focus = field;
         let (_, deadline) = self.query.as_ref().filter(|(id, _)| id == query)?;
         let on_time = now <= *deadline;
         self.query = None;
@@ -206,15 +234,17 @@ impl ProviderPage {
 
     pub fn panel_field(
         &self,
-        provider: Option<Provider>,
+        original_profile: &str,
         requested: Option<Field>,
         generation: f64,
     ) -> Result<Field, &'static str> {
-        let provider = provider.ok_or("noProvider")?;
+        let provider = self.get(original_profile).ok_or("noProvider")?;
         if (requested.is_some() || generation >= 0.0) && generation != provider.generation {
             return Err("stale");
         }
-        self.focus
+        self.state
+            .borrow()
+            .focus
             .filter(|focus| {
                 provider.allows(*focus) && requested.is_none_or(|requested| requested == *focus)
             })
@@ -222,35 +252,41 @@ impl ProviderPage {
     }
 
     pub fn forget_frame(&mut self, frame: Option<&str>) {
-        self.offers
+        self.state
+            .borrow_mut()
+            .offers
             .retain(|_, offer| frame.is_some_and(|frame| offer.frame != frame));
     }
 
     pub fn offer(
         &mut self,
-        provider: Option<Provider>,
-        generation: f64,
         original_profile: &str,
+        generation: f64,
         frame: &str,
         text: &str,
         handler: impl FnOnce(&NSURL) -> Option<(Retained<NSURL>, String)>,
     ) -> Option<Value> {
-        let provider =
-            provider.filter(|provider| provider.code_setup && generation == provider.generation)?;
-        if self.offers.len() >= 8 {
-            return None;
-        }
-        let url = setup_url(text)?;
-        if self.offers.values().any(|offer| *offer.url == *url) {
-            return None;
-        }
+        let provider = self
+            .get(original_profile)
+            .filter(|provider| provider.code_setup && generation == provider.generation)?;
+        let url = {
+            let state = self.state.borrow();
+            if state.offers.len() >= 8 {
+                return None;
+            }
+            let url = setup_url(text)?;
+            if state.offers.values().any(|offer| *offer.url == *url) {
+                return None;
+            }
+            url
+        };
         let (handler, app) = handler(&url)?;
         if app.is_empty() {
             return None;
         }
         let token = new_id();
         let report = json!({"token": token, "app": app});
-        self.offers.insert(
+        self.state.borrow_mut().offers.insert(
             token,
             Offer {
                 url,
@@ -272,9 +308,15 @@ impl ProviderPage {
         frame_alive: impl FnOnce(&str) -> bool,
         handler: impl FnOnce(&NSURL) -> Option<Retained<NSURL>>,
     ) -> Result<(Retained<NSURL>, Retained<NSURL>), &'static str> {
-        let offer = self.offers.remove(token).ok_or("unknownToken")?;
-        if (generation >= 0.0 && generation != self.fields.generation)
-            || offer.generation != self.fields.generation
+        let offer = self
+            .state
+            .borrow_mut()
+            .offers
+            .remove(token)
+            .ok_or("unknownToken")?;
+        let current_generation = self.fields.borrow().generation;
+        if (generation >= 0.0 && generation != current_generation)
+            || offer.generation != current_generation
         {
             return Err("stale");
         }
@@ -346,7 +388,8 @@ mod tests {
 
     #[test]
     fn an_old_generation_cannot_replace_the_current_providers() {
-        let mut providers = ProviderPage::default();
+        let providers = FieldProviders::default();
+        let page = providers.new_page();
         let login = json!({"profile": "Default", "fields": ["login"]});
         assert_eq!(
             providers.update([&login], 3.0, "session", |profile| profile.to_owned()),
@@ -356,25 +399,25 @@ mod tests {
             providers.update([], 2.0, "session", |profile| profile.to_owned()),
             None
         );
-        assert!(providers.get("Default").unwrap().login);
+        assert!(page.get("Default").unwrap().login);
         assert_eq!(
             providers.update([], 2.0, "new session", |profile| profile.to_owned()),
             Some(true)
         );
-        assert!(providers.get("Default").is_none());
+        assert!(page.get("Default").is_none());
     }
 
     #[test]
-    fn a_new_session_clears_focus_and_verification_offers_at_the_same_generation() {
-        let mut page = ProviderPage::default();
+    fn a_new_session_invalidates_both_pages_at_the_same_generation() {
+        let providers = FieldProviders::default();
+        let mut first = providers.new_page();
         let profile = json!({"profile": "Default", "fields": ["oneTimeCode"], "codeSetup": true});
         let profiles = [&profile];
         let handler = || NSURL::fileURLWithPath(&NSString::from_str("/Fixture.app"));
         let offer = |page: &mut ProviderPage| {
             page.offer(
-                page.get("Default"),
-                3.0,
                 "Default",
+                3.0,
                 "main",
                 "otpauth://totp/Fixture?secret=TEST",
                 |_| Some((handler(), "Fixture".into())),
@@ -385,42 +428,48 @@ mod tests {
                 .to_owned()
         };
         let now = Instant::now();
-        assert_eq!(page.update(profiles, 3.0, "old", str::to_owned), Some(true));
-        let _ = page.note_focus(Some(Field::Code), 5.0, 3.0, 3.0, "", now);
-        let old = offer(&mut page);
         assert_eq!(
-            page.update(profiles, 3.0, "old", str::to_owned),
+            providers.update(profiles, 3.0, "old", str::to_owned),
+            Some(true)
+        );
+        let mut second = providers.new_page();
+        let tokens = [&mut first, &mut second].map(|page| {
+            let _ = page.note_focus(Some(Field::Code), 5.0, 3.0, "", now);
+            offer(page)
+        });
+        assert_eq!(
+            providers.update(profiles, 3.0, "old", str::to_owned),
             Some(false)
         );
-        assert_eq!(
-            page.panel_field(page.get("Default"), None, 3.0),
-            Ok(Field::Code)
-        );
+        for page in [&first, &second] {
+            assert_eq!(page.panel_field("Default", None, 3.0), Ok(Field::Code));
+        }
 
-        assert_eq!(page.update(profiles, 3.0, "new", str::to_owned), Some(true));
         assert_eq!(
-            page.panel_field(page.get("Default"), None, 3.0),
-            Err("notFocused")
+            providers.update(profiles, 3.0, "new", str::to_owned),
+            Some(true)
         );
-        assert!(matches!(
-            page.redeem(&old, "Default", 3.0, |_| true, |_| Some(handler())),
-            Err("unknownToken")
-        ));
-        let _ = page.note_focus(Some(Field::Code), 1.0, 3.0, 3.0, "", now);
-        assert_eq!(
-            page.panel_field(page.get("Default"), None, 3.0),
-            Ok(Field::Code)
-        );
-        let current = offer(&mut page);
-        assert!(
-            page.redeem(&current, "Default", 3.0, |_| true, |_| Some(handler()))
-                .is_ok()
-        );
+        for (page, old) in [&mut first, &mut second].into_iter().zip(tokens) {
+            assert_eq!(page.panel_field("Default", None, 3.0), Err("notFocused"));
+            let current = offer(page);
+            assert!(matches!(
+                page.redeem(&old, "Default", 3.0, |_| true, |_| Some(handler())),
+                Err("unknownToken")
+            ));
+            let _ = page.note_focus(Some(Field::Code), 1.0, 3.0, "", now);
+            assert_eq!(page.panel_field("Default", None, 3.0), Ok(Field::Code));
+            assert!(
+                page.redeem(&current, "Default", 3.0, |_| true, |_| Some(handler()))
+                    .is_ok()
+            );
+        }
     }
 
     #[test]
     fn a_late_focus_query_does_not_open_the_panel() {
-        let mut page = ProviderPage::default();
+        let providers = FieldProviders::default();
+        providers.update([], 2.0, "session", str::to_owned);
+        let mut page = providers.new_page();
         let now = Instant::now();
         let query = page.begin_query(now).0.to_owned();
         assert_eq!(
@@ -428,14 +477,13 @@ mod tests {
                 Some(Field::Password),
                 1.0,
                 2.0,
-                2.0,
                 &query,
                 now + Duration::from_millis(201)
             ),
             Some(false)
         );
         assert_eq!(
-            page.note_focus(Some(Field::Password), 2.0, 2.0, 2.0, &query, now),
+            page.note_focus(Some(Field::Password), 2.0, 2.0, &query, now),
             None
         );
     }
