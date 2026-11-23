@@ -1,0 +1,167 @@
+{
+  "state": "ntp-dark",
+  "cgWindow": {
+    "id": 190102,
+    "bounds": {
+      "X": 80,
+      "Height": 800,
+      "Y": 1280,
+      "Width": 1280
+    }
+  },
+  "socketGeometry": {
+    "display": "048AECE5-5B4D-43E4-9665-48A46883E8C3",
+    "pageFullScreen": false,
+    "visible": true,
+    "miniaturized": false,
+    "zoomed": false,
+    "frame": [
+      80,
+      80,
+      1280,
+      800
+    ],
+    "fullScreen": false
+  },
+  "socketWindows": [
+    {
+      "id": "w1",
+      "kind": "normal",
+      "focused": true,
+      "profile": "default",
+      "profileName": "Personal",
+      "tabs": [
+        {
+          "id": "p1",
+          "url": "file:///tmp/ria-parity-data/pages/mail.html",
+          "title": "Inbox",
+          "profile": "default",
+          "active": false,
+          "pinned": true,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "p2",
+          "url": "file:///tmp/ria-parity-data/pages/calendar.html",
+          "title": "Calendar",
+          "profile": "default",
+          "active": false,
+          "pinned": true,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "p3",
+          "url": "file:///tmp/ria-parity-data/pages/docs.html",
+          "title": "Design doc",
+          "profile": "default",
+          "active": false,
+          "pinned": true,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "r1",
+          "url": "file:///tmp/ria-parity-data/pages/research1.html",
+          "title": "Swift concurrency",
+          "profile": "default",
+          "active": false,
+          "pinned": false,
+          "group": "g1",
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "r2",
+          "url": "file:///tmp/ria-parity-data/pages/research2.html",
+          "title": "Metal shaders",
+          "profile": "default",
+          "active": false,
+          "pinned": false,
+          "group": "g1",
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "t1",
+          "url": "file:///tmp/ria-parity-data/pages/notes.html",
+          "title": "Meeting notes",
+          "profile": "default",
+          "active": false,
+          "pinned": false,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "t2",
+          "url": "file:///tmp/ria-parity-data/pages/reading.html",
+          "title": "Reading list",
+          "profile": "default",
+          "active": false,
+          "pinned": false,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "t3",
+          "url": "",
+          "title": "",
+          "profile": "default",
+          "active": true,
+          "pinned": false,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "k1",
+          "url": "file:///tmp/ria-parity-data/pages/work1.html",
+          "title": "Roadmap",
+          "profile": "work",
+          "active": false,
+          "pinned": false,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "k2",
+          "url": "file:///tmp/ria-parity-data/pages/work2.html",
+          "title": "Quarterly plan",
+          "profile": "work",
+          "active": false,
+          "pinned": false,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        }
+      ]
+    }
+  ],
+  "regionsInWindowPoints": {
+    "tiles": [
+      9,
+      54,
+      172,
+      41
+    ],
+    "pinnedGroups": [
+      9,
+      101,
+      172,
+      0
+    ],
+    "list": [
+      9,
+      116,
+      172,
+      257
+    ]
+  }
+}
