@@ -95,10 +95,11 @@ impl ChromeWindowHost {
                     .into(),
             ]
         };
+        let focus = FocusState::watch(mtm, controllers.clone());
         Self {
             state,
             controllers,
-            focus: FocusState::watch(mtm),
+            focus,
             dev: DevActions::default(),
             sizing,
             observers,
@@ -139,7 +140,6 @@ impl ChromeWindowHost {
         &self,
         profile: &Profile,
         chrome_token: Option<&NSString>,
-        app_window_id: Option<&NSString>,
     ) -> Option<Retained<NSWindow>> {
         if !self.state.is_started() {
             return None;
@@ -147,11 +147,6 @@ impl ChromeWindowHost {
         let controller = chrome_token
             .and_then(|token| self.controllers.claim_chrome(token))
             .unwrap_or_else(|| self.controllers.make_normal());
-        if let Some(id) = app_window_id
-            .filter(|id| !id.is_empty() && !id.hasPrefix(objc2_foundation::ns_string!("link:")))
-        {
-            controller.app_window_id.replace(Some(id.retain()));
-        }
         let window = controller.core.window();
         self.activate_profile(&controller, profile);
         Some(window)
@@ -257,8 +252,7 @@ impl ChromeWindowHost {
     }
 
     pub fn focus_state(&self, mtm: MainThreadMarker) -> String {
-        self.focus
-            .summary(&NSApplication::sharedApplication(mtm), &self.controllers)
+        self.focus.summary(&NSApplication::sharedApplication(mtm))
     }
 
     pub fn dev_action(

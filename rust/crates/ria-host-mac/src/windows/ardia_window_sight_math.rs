@@ -20,16 +20,16 @@ impl Rect {
         }
     }
 
-    fn right(self) -> f64 {
+    pub(super) fn max_x(self) -> f64 {
         self.x + self.width
     }
 
-    fn bottom(self) -> f64 {
+    pub(super) fn max_y(self) -> f64 {
         self.y + self.height
     }
 
     fn contains(self, x: f64, y: f64) -> bool {
-        self.x < x && x < self.right() && self.y < y && y < self.bottom()
+        self.x < x && x < self.max_x() && self.y < y && y < self.max_y()
     }
 }
 
@@ -47,12 +47,12 @@ pub fn visible_area(window: Rect, covers: &[Rect], displays: &[Rect]) -> f64 {
     }
     let rects = || covers.iter().chain(displays).copied();
     let xs = edges(
-        [window.x, window.right()],
-        rects().flat_map(|r| [r.x, r.right()]),
+        [window.x, window.max_x()],
+        rects().flat_map(|r| [r.x, r.max_x()]),
     );
     let ys = edges(
-        [window.y, window.bottom()],
-        rects().flat_map(|r| [r.y, r.bottom()]),
+        [window.y, window.max_y()],
+        rects().flat_map(|r| [r.y, r.max_y()]),
     );
     let mut area = 0.;
     for x in xs.windows(2) {

@@ -5,31 +5,37 @@
 use std::cell::RefCell;
 use std::collections::VecDeque;
 use std::ptr::NonNull;
+use std::rc::Rc;
 
 use block2::RcBlock;
-use objc2::MainThreadMarker;
+use objc2::{MainThreadMarker, MainThreadOnly, sel};
 use objc2::rc::Retained;
-use objc2::runtime::AnyObject;
+use objc2::runtime::{AnyObject, NSObjectProtocol};
 use objc2_app_kit::{
     NSApplication, NSApplicationDidBecomeActiveNotification,
-    NSApplicationDidResignActiveNotification, NSResponder, NSWindow,
+    NSApplicationDidResignActiveNotification, NSResponder, NSScreen, NSWindow,
     NSWindowDidBecomeKeyNotification, NSWindowDidBecomeMainNotification,
     NSWindowDidResignKeyNotification, NSWindowDidResignMainNotification,
 };
-use objc2_foundation::{NSNotification, NSNotificationCenter};
+use objc2_foundation::{
+    NSDate, NSDateFormatter, NSNotification, NSNotificationCenter, NSNumber,
+    NSObjectNSKeyValueCoding, ns_string,
+};
 
-use super::ardia_window_controller::{Controllers, WindowKind};
+use super::ardia_window_controller::Controllers;
 
 const HISTORY_LENGTH: usize = 40;
 
 type Observers = Vec<Retained<AnyObject>>;
 
 pub struct FocusState {
+    controllers: Rc<Controllers>,
+    clock: Retained<NSDateFormatter>,
     history: RefCell<VecDeque<String>>,
     observers: Observers,
 }
 
-fn describe_window(window: &NSWindow) -> String {
+fn describe_window(window: &NSWindow, controllers: &Controllers) -> String {
     let mut flags = Vec::new();
     for (shown, flag) in [
         (window.isVisible(), "visible"),
@@ -40,11 +46,6 @@ fn describe_window(window: &NSWindow) -> String {
         (window.isMainWindow(), "main"),
         (window.canBecomeKeyWindow(), "canKey"),
         (window.canBecomeMainWindow(), "canMain"),
-        (window.attachedSheet().is_some(), "sheet"),
-        (
-            window.isVisible() && !window.isOnActiveSpace(),
-            "otherSpace",
-        ),
     ] {
         if shown {
             flags.push(flag);
@@ -56,8 +57,38 @@ fn describe_window(window: &NSWindow) -> String {
     if let Some(parent) = &parent {
         flags.push(parent);
     }
+    if window.attachedSheet().is_some() {
+        flags.push("sheet");
+    }
+    if window.respondsToSelector(sel!(preventKeyWindow))
+        && window
+            .valueForKey(ns_string!("preventKeyWindow"))
+            .and_then(|value| value.downcast::<NSNumber>().ok())
+            .is_some_and(|value| value.boolValue())
+    {
+        flags.push("preventKey");
+    }
+    if window.isVisible() && !window.isOnActiveSpace() {
+        flags.push("otherSpace");
+    }
+    let screen = window.screen().map(|screen| {
+        let index = NSScreen::screens(window.mtm()).indexOfObject(&screen);
+        format!("screen{index}")
+    });
+    if let Some(screen) = &screen {
+        flags.push(screen);
+    }
+    let role = controllers.for_window(window).map_or("", |controller| {
+        if controller.utility() || controller.core.internal() {
+            " internal"
+        } else if controller.root.borrow().is_some() {
+            " browser"
+        } else {
+            " ardia"
+        }
+    });
     format!(
-        "{}#{} level {:?} [{}]",
+        "{}#{}{role} level {} [{}]",
         window.class().name().to_string_lossy(),
         window.windowNumber(),
         window.level(),
@@ -81,8 +112,10 @@ fn describe_responder(mut responder: Option<Retained<NSResponder>>) -> String {
 }
 
 impl FocusState {
-    pub fn watch(_mtm: MainThreadMarker) -> std::rc::Rc<Self> {
-        std::rc::Rc::new_cyclic(|weak: &std::rc::Weak<Self>| {
+    pub fn watch(_mtm: MainThreadMarker, controllers: Rc<Controllers>) -> Rc<Self> {
+        let clock = NSDateFormatter::new();
+        clock.setDateFormat(Some(ns_string!("HH:mm:ss.SSS")));
+        Rc::new_cyclic(|weak: &std::rc::Weak<Self>| {
             let center = NSNotificationCenter::defaultCenter();
             // SAFETY: AppKit publishes these notifications on the main thread.
             let names = unsafe {
@@ -129,6 +162,8 @@ impl FocusState {
                 })
                 .collect();
             Self {
+                controllers,
+                clock,
                 history: RefCell::new(VecDeque::with_capacity(HISTORY_LENGTH)),
                 observers,
             }
@@ -136,22 +171,38 @@ impl FocusState {
     }
 
     pub fn record(&self, change: &str, window: Option<&NSWindow>) {
+        let time = self.clock.stringFromDate(&NSDate::date());
+        let entry = match window {
+            Some(window) => format!(
+                "{time} {change} {}",
+                describe_window(window, &self.controllers)
+            ),
+            None => format!("{time} {change}"),
+        };
         let mut history = self.history.borrow_mut();
         if history.len() == HISTORY_LENGTH {
             history.pop_front();
         }
-        history.push_back(match window {
-            Some(window) => format!("{change} {}", describe_window(window)),
-            None => change.into(),
-        });
+        history.push_back(entry);
     }
 
-    pub fn summary(&self, app: &NSApplication, controllers: &Controllers) -> String {
-        let describe =
-            |window: Option<&NSWindow>| window.map_or_else(|| "none".into(), describe_window);
+    pub fn summary(&self, app: &NSApplication) -> String {
+        let describe = |window: Option<&NSWindow>| {
+            window.map_or_else(
+                || "none".into(),
+                |window| describe_window(window, &self.controllers),
+            )
+        };
         let key = app.keyWindow();
         let main = app.mainWindow();
         let active = if app.isActive() { "active" } else { "inactive" };
+        let mut main_line = format!("main {}", describe(main.as_deref()));
+        if let Some(main) = main.as_deref()
+            && !key.as_deref().is_some_and(|key| std::ptr::eq(key, main))
+        {
+            main_line.push_str(", responder ");
+            main_line.push_str(&describe_responder(main.firstResponder()));
+        }
         let mut lines = vec![
             format!(
                 "app {active}, modal {}",
@@ -162,7 +213,7 @@ impl FocusState {
                 describe(key.as_deref()),
                 describe_responder(key.as_ref().and_then(|window| window.firstResponder()))
             ),
-            format!("main {}", describe(main.as_deref())),
+            main_line,
         ];
         for window in app.windows().iter() {
             let same =
@@ -173,10 +224,11 @@ impl FocusState {
             {
                 continue;
             }
-            let mut line = format!("window {}", describe_window(&window));
-            if let Some(controller) = controllers.for_window(&window)
-                && controller.kind() == WindowKind::Normal
-                && controller.root.borrow().is_some()
+            let mut line = format!("window {}", describe(Some(&window)));
+            if self
+                .controllers
+                .for_window(&window)
+                .is_some_and(|controller| controller.root.borrow().is_some())
             {
                 line.push_str(", responder ");
                 line.push_str(&describe_responder(window.firstResponder()));

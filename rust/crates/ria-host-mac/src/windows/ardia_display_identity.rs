@@ -10,7 +10,8 @@ use objc2::rc::Retained;
 use objc2_app_kit::NSScreen;
 use objc2_foundation::{NSNumber, NSPoint, NSRect, NSSize, NSString, ns_string};
 
-use super::ardia_display_placement_math::{Rect, has_most, place};
+use super::ardia_display_placement_math::{has_most, place};
+use super::ardia_window_sight_math::Rect;
 
 #[link(name = "CoreGraphics", kind = "framework")]
 unsafe extern "C" {
@@ -70,7 +71,7 @@ pub fn frame_on_screen(mtm: MainThreadMarker, frame: NSRect, target: &NSScreen) 
     let fitted = place(frame, rect(target.visibleFrame()), holds);
     NSRect::new(
         NSPoint::new(fitted.x, fitted.y),
-        NSSize::new(fitted.w, fitted.h),
+        NSSize::new(fitted.width, fitted.height),
     )
 }
 

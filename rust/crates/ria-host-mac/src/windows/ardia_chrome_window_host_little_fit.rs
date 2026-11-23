@@ -6,11 +6,11 @@ use objc2::MainThreadOnly;
 use objc2_app_kit::{NSScreen, NSWindow};
 use objc2_foundation::{NSPoint, NSRect, NSSize};
 
-use super::ardia_display_placement_math::Rect;
 use super::ardia_little_fit_math::{
     Display, Placement, Size, fit, fit_landing, flip_from_top_left,
 };
 use super::ardia_window_full_screen::on_screen_window_bounds;
+use super::ardia_window_sight_math::Rect;
 
 fn from_rect(rect: NSRect) -> Rect {
     Rect::new(
@@ -22,7 +22,10 @@ fn from_rect(rect: NSRect) -> Rect {
 }
 
 fn to_rect(rect: Rect) -> NSRect {
-    NSRect::new(NSPoint::new(rect.x, rect.y), NSSize::new(rect.w, rect.h))
+    NSRect::new(
+        NSPoint::new(rect.x, rect.y),
+        NSSize::new(rect.width, rect.height),
+    )
 }
 
 pub fn little_frame_for_size(size: NSSize, minimum: NSSize, visible: NSRect) -> NSRect {

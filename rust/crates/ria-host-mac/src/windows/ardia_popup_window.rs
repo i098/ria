@@ -14,13 +14,14 @@ use objc2::runtime::{AnyObject, NSObject};
 use objc2::{AnyThread, DefinedClass, MainThreadMarker, Message, define_class, msg_send};
 use objc2_app_kit::{
     NSAlert, NSAlertFirstButtonReturn, NSAlertSecondButtonReturn, NSApplication,
-    NSAutoresizingMaskOptions as Mask, NSEvent, NSModalResponse, NSModalResponseAbort, NSScreen,
+    NSAutoresizingMaskOptions as Mask, NSEvent, NSFontWeightRegular, NSImage,
+    NSImageSymbolConfiguration, NSModalResponse, NSModalResponseAbort, NSScreen,
     NSUserInterfaceItemIdentification, NSWindow, NSWindowCollectionBehavior, NSWindowOrderingMode,
     NSWindowStyleMask, NSWindowTabbingMode, NSWindowWillCloseNotification,
 };
 use objc2_foundation::{
     NSComparisonResult, NSNotification, NSNotificationCenter, NSPoint, NSRect, NSSize, NSString,
-    ns_string,
+    NSURL, ns_string,
 };
 use ria_engine::call::main_queue;
 use serde_json::Value;
@@ -42,6 +43,120 @@ pub struct Popups {
 struct Permission {
     id: String,
     question: String,
+    symbol: &'static str,
+}
+
+fn permission_kind(kind: &str) -> (&'static str, Option<&'static str>, Option<&'static str>) {
+    let (symbol, noun) = match kind {
+        "camera" => ("video", "camera"),
+        "microphone" => ("mic", "microphone"),
+        "cameraPanTiltZoom" => ("video", "camera's pan, tilt and zoom"),
+        "location" => ("location", "location"),
+        "clipboard" => ("doc.on.clipboard", "clipboard"),
+        "midi" => ("pianokeys", "MIDI devices"),
+        "localFonts" => ("textformat", "fonts"),
+        "windowManagement" => ("macwindow.on.rectangle", "displays to open and place windows"),
+        "fileSystem" => ("folder", "files"),
+        "keyboardLock" => ("keyboard", "keyboard"),
+        "pointerLock" => ("cursorarrow", "mouse pointer"),
+        "sensors" => ("gyroscope", "motion sensors"),
+        "localNetwork" => ("network", "devices on your local network"),
+        "vr" => ("visionpro", "virtual reality devices"),
+        "ar" => ("visionpro", "augmented reality data"),
+        "handTracking" => ("hand.raised", "hand tracking"),
+        "screen" => {
+            return ("rectangle.on.rectangle", None, Some("Allow %@ to share your screen?"));
+        }
+        "notifications" => {
+            return ("bell", None, Some("Allow %@ to send you notifications?"));
+        }
+        "multipleDownloads" => {
+            return ("arrow.down.circle", None, Some("Allow %@ to download multiple files?"));
+        }
+        "idleDetection" => {
+            return (
+                "person.crop.circle.badge.clock",
+                None,
+                Some("Allow %@ to know when you're actively using this device?"),
+            );
+        }
+        "storageAccess" => {
+            return (
+                "externaldrive",
+                None,
+                Some("Allow %@ to use cookies and site data while embedded?"),
+            );
+        }
+        "diskQuota" => {
+            return ("internaldrive", None, Some("Allow %@ to store files on your device?"));
+        }
+        "protocolHandler" => {
+            return ("envelope", None, Some("Make %@ your default mail app?"));
+        }
+        "identityProvider" => {
+            return (
+                "person.badge.key",
+                None,
+                Some("Allow %@ to sign you in with an identity provider?"),
+            );
+        }
+        "webAppInstallation" => {
+            return ("app.badge", None, Some("Allow %@ to install web apps?"));
+        }
+        "capturedSurfaceControl" => {
+            return (
+                "rectangle.on.rectangle",
+                None,
+                Some("Allow %@ to scroll and zoom the tab you share?"),
+            );
+        }
+        _ => return ("questionmark.circle", None, None),
+    };
+    (symbol, Some(noun), None)
+}
+
+fn permission_prompt(request: &Value) -> (String, &'static str) {
+    let origin = request["origin"].as_str().unwrap_or("");
+    let host = NSURL::URLWithString(&NSString::from_str(origin))
+        .and_then(|url| url.host())
+        .map(|host| host.to_string())
+        .unwrap_or_default();
+    let site = host.strip_prefix("www.").unwrap_or(&host);
+    let site = if site.is_empty() { origin } else { site };
+    let mut kinds = request["permissions"]
+        .as_array()
+        .into_iter()
+        .flatten()
+        .filter_map(Value::as_str)
+        .map(|kind| (kind, permission_kind(kind)))
+        .peekable();
+    let symbol = kinds
+        .peek()
+        .map_or("questionmark.circle", |(_, (symbol, _, _))| *symbol);
+    let mut nouns = Vec::new();
+    let mut access = true;
+    if let Some((kind, (_, noun, question))) = kinds.next() {
+        if let Some(question) = question
+            && kinds.peek().is_none()
+        {
+            return (question.replacen("%@", site, 1), symbol);
+        }
+        access = question.is_none() && !kind.is_empty();
+        nouns.push(noun.unwrap_or(kind));
+    }
+    for (kind, (_, noun, question)) in kinds {
+        access &= question.is_none() && !kind.is_empty();
+        nouns.push(noun.unwrap_or(kind));
+    }
+    let verb = if access { "access your" } else { "use" };
+    let question = match nouns.split_last() {
+        Some((last, rest)) if !rest.is_empty() => {
+            format!("Allow {site} to {verb} {} and {last}?", rest.join(", "))
+        }
+        Some((last, _)) => format!("Allow {site} to {verb} {last}?"),
+        None => format!("Allow {site} to {verb} ?"),
+    };
+    (question, symbol)
 }
 
 struct Popup {
@@ -89,18 +204,11 @@ impl Popups {
             })
             .cloned();
         let Some(popup) = popup else { return false };
-        let origin = request["origin"].as_str().unwrap_or("");
-        let kinds = request["permissions"]
-            .as_array()
-            .into_iter()
-            .flatten()
-            .filter_map(Value::as_str)
-            .collect::<Vec<_>>()
-            .join(", ");
-        let question = format!("Allow {origin} to use {kinds}?");
+        let (question, symbol) = permission_prompt(request);
         popup.permissions.borrow_mut().push_back(Permission {
             id: id.into(),
             question,
+            symbol,
         });
         popup.show_permission();
         true
@@ -310,6 +418,18 @@ impl Popup {
         };
         let alert = NSAlert::new(owner.mtm);
         alert.setMessageText(&NSString::from_str(&request.question));
+        let config = NSImageSymbolConfiguration::configurationWithPointSize_weight(
+            32.,
+            unsafe { NSFontWeightRegular },
+        );
+        if let Some(icon) = NSImage::imageWithSystemSymbolName_accessibilityDescription(
+            &NSString::from_str(request.symbol),
+            None,
+        )
+        .and_then(|icon| icon.imageWithSymbolConfiguration(&config))
+        {
+            unsafe { alert.setIcon(Some(&icon)) };
+        }
         alert.addButtonWithTitle(ns_string!("Allow"));
         alert
             .addButtonWithTitle(ns_string!("Don't Allow"))
@@ -594,6 +714,39 @@ impl PopupDelegate {
     fn changed(&self) {
         if let Some(popup) = self.ivars().0.upgrade() {
             popup.update();
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::permission_prompt;
+    use serde_json::json;
+
+    #[test]
+    fn permission_prompts_use_site_specific_words_and_the_first_symbol() {
+        for (permissions, question, symbol) in [
+            (
+                vec!["capturedSurfaceControl"],
+                "Allow example.test to scroll and zoom the tab you share?",
+                "rectangle.on.rectangle",
+            ),
+            (
+                vec!["camera", "microphone", "location"],
+                "Allow example.test to access your camera, microphone and location?",
+                "video",
+            ),
+            (
+                vec!["notifications", "futureKind"],
+                "Allow example.test to use notifications and futureKind?",
+                "bell",
+            ),
+        ] {
+            let request = json!({
+                "origin": "https://www.example.test:8443/room",
+                "permissions": permissions,
+            });
+            assert_eq!(permission_prompt(&request), (question.into(), symbol));
         }
     }
 }

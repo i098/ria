@@ -39,7 +39,6 @@ pub struct Controller {
     pub fullscreen: Rc<FullScreen>,
     pub traffic_lights: Option<Rc<TrafficLights>>,
     pub(super) root: RefCell<Option<Retained<NSView>>>,
-    pub(super) app_window_id: RefCell<Option<Retained<NSString>>>,
     kind: Cell<WindowKind>,
     token: Option<Retained<NSString>>,
     profile: Option<ObjcWeak<Profile>>,
@@ -206,7 +205,6 @@ impl Controllers {
                 fullscreen,
                 traffic_lights,
                 root: RefCell::default(),
-                app_window_id: RefCell::default(),
                 kind: Cell::new(kind),
                 token,
                 profile: profile.map(ObjcWeak::from),
@@ -244,11 +242,11 @@ impl Controller {
         self.token.as_deref()
     }
 
-    fn utility(&self) -> bool {
+    pub(super) fn utility(&self) -> bool {
         matches!(self.kind(), WindowKind::Stray | WindowKind::Standalone)
     }
 
-    fn key_context(&self) -> KeyContext {
+    pub(super) fn key_context(&self) -> KeyContext {
         if self.fullscreen.is_full_screen() {
             KeyContext::FullScreenBrowser
         } else {

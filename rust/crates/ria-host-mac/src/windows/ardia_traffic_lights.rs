@@ -501,7 +501,7 @@ fn sync_sharing_windows(window: &NSWindow) {
     }
 }
 
-fn frame_view(window: &NSWindow) -> Option<Retained<NSView>> {
+pub(super) fn frame_view(window: &NSWindow) -> Option<Retained<NSView>> {
     // SAFETY: The view hierarchy is accessible on the main thread.
     unsafe { window.contentView()?.superview() }
 }
@@ -530,7 +530,24 @@ fn translate_buttons(window: &NSWindow, dx: f64) -> bool {
 }
 
 pub(super) fn frame_corner_radius(window: &NSWindow) -> Option<f64> {
+    if window.styleMask().contains(NSWindowStyleMask::FullScreen) {
+        return None;
+    }
     let frame = frame_view(window)?;
+    for selector in [sel!(cornerRadius), sel!(_cornerRadius)] {
+        if frame.respondsToSelector(selector)
+            && let Some(method) = frame.class().instance_method(selector)
+        {
+            let radius = unsafe {
+                let call: unsafe extern "C-unwind" fn(&NSView, Sel) -> f64 =
+                    std::mem::transmute(method.implementation());
+                call(&frame, selector)
+            };
+            if radius.is_finite() && radius > 0. {
+                return Some(radius);
+            }
+        }
+    }
     if frame.respondsToSelector(sel!(roundedCornerRadius)) {
         // SAFETY: NSThemeFrame's selector takes no arguments and returns a float.
         let radius: f32 = unsafe { msg_send![&*frame, roundedCornerRadius] };
@@ -538,8 +555,5 @@ pub(super) fn frame_corner_radius(window: &NSWindow) -> Option<f64> {
             return Some(radius.into());
         }
     }
-    // SAFETY: AppKit returns the view's CALayer, whose cornerRadius is a CGFloat.
-    let layer: Option<Retained<AnyObject>> = unsafe { msg_send![&*frame, layer] };
-    let radius: f64 = unsafe { msg_send![&*layer?, cornerRadius] };
-    (radius.is_finite() && radius > 0.).then_some(radius)
+    None
 }

@@ -2,7 +2,8 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-use super::ardia_display_placement_math::{Rect, overlap_area};
+use super::ardia_display_placement_math::overlap_area;
+use super::ardia_window_sight_math::Rect;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Size {
@@ -44,11 +45,11 @@ fn fit_origin(start: f64, extent: f64, side: f64) -> f64 {
 }
 
 fn fit_with_share(visible: Rect, wanted: Size, minimum: Size, share: f64) -> Rect {
-    let w = fit_side(wanted.w, minimum.w, visible.w, share);
-    let h = fit_side(wanted.h, minimum.h, visible.h, share);
+    let w = fit_side(wanted.w, minimum.w, visible.width, share);
+    let h = fit_side(wanted.h, minimum.h, visible.height, share);
     Rect::new(
-        fit_origin(visible.x, visible.w, w),
-        fit_origin(visible.y, visible.h, h),
+        fit_origin(visible.x, visible.width, w),
+        fit_origin(visible.y, visible.height, h),
         w,
         h,
     )
@@ -80,7 +81,7 @@ pub fn screen_holding(bounds: Rect, frames: impl IntoIterator<Item = Rect>) -> O
 
 pub fn flip_from_top_left(rect: Rect, primary_height: f64) -> Rect {
     Rect {
-        y: primary_height - rect.y - rect.h,
+        y: primary_height - rect.y - rect.height,
         ..rect
     }
 }
@@ -102,7 +103,7 @@ pub fn fit_landing(
     (!contains(visible, landed, CONTAIN_TOLERANCE)).then(|| {
         fit_with_share(
             visible,
-            Size::new(landed.w, landed.h),
+            Size::new(landed.width, landed.height),
             minimum,
             WHOLE_SCREEN,
         )
@@ -181,7 +182,7 @@ mod tests {
             assert!(contains(visible, fitted, CONTAIN_TOLERANCE));
         }
         let floor = fit(BUILT_IN, Size::new(100., 100.), MINIMUM);
-        assert_eq!((floor.w, floor.h), (420., 300.));
+        assert_eq!((floor.width, floor.height), (420., 300.));
         assert!(contains(BUILT_IN, floor, CONTAIN_TOLERANCE));
     }
 
@@ -320,7 +321,7 @@ mod tests {
         );
         assert_eq!(
             fit_landing(
-                Rect::new(200., 200., laptop.w, laptop.h),
+                Rect::new(200., 200., laptop.width, laptop.height),
                 &DISPLAYS,
                 MINIMUM,
                 laptop_placement
@@ -343,7 +344,7 @@ mod tests {
             laptop_placement,
         )
         .unwrap();
-        assert_eq!((resized.w, resized.h), (1300., 800.));
+        assert_eq!((resized.width, resized.height), (1300., 800.));
         assert!(contains(DISPLAYS[1].visible, resized, CONTAIN_TOLERANCE));
         assert_eq!(fit_landing(moved, &DISPLAYS, MINIMUM, None), None);
     }
@@ -352,7 +353,7 @@ mod tests {
     fn rounding_stays_inside_tests() {
         let visible = Rect::new(0., 0., 419.5, 299.5);
         let fitted = fit(visible, Size::new(900., 640.), MINIMUM);
-        assert!(fitted.w <= visible.w && fitted.h <= visible.h);
+        assert!(fitted.width <= visible.width && fitted.height <= visible.height);
         assert!(contains(visible, fitted, 0.));
         assert_eq!(
             fit(

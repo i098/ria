@@ -443,9 +443,7 @@ mod mac {
         let state = State::new();
         state.started.set(true);
         let host = ChromeWindowHost::new(mtm, state, controllers.clone());
-        let made = host
-            .make_window(profile, None, Some(ns_string!("ria:live")))
-            .unwrap();
+        let made = host.make_window(profile, None).unwrap();
         assert_eq!(
             host.dev_action(&made, "fakeFullScreen:1", false).as_deref(),
             Some("test instances only")

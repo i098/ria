@@ -2,27 +2,7 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct Rect {
-    pub x: f64,
-    pub y: f64,
-    pub w: f64,
-    pub h: f64,
-}
-
-impl Rect {
-    pub const fn new(x: f64, y: f64, w: f64, h: f64) -> Self {
-        Self { x, y, w, h }
-    }
-
-    pub fn max_x(self) -> f64 {
-        self.x + self.w
-    }
-
-    pub fn max_y(self) -> f64 {
-        self.y + self.h
-    }
-}
+use super::ardia_window_sight_math::Rect;
 
 pub fn overlap_area(a: Rect, b: Rect) -> f64 {
     let w = a.max_x().min(b.max_x()) - a.x.max(b.x);
@@ -50,8 +30,8 @@ pub fn on_screen(frame: Rect, screens: &[Rect], target: usize, visible: Rect) ->
 }
 
 pub(super) fn place(frame: Rect, visible: Rect, holds_most: bool) -> Rect {
-    let w = frame.w.min(visible.w);
-    let h = frame.h.min(visible.h);
+    let w = frame.width.min(visible.width);
+    let h = frame.height.min(visible.height);
     if holds_most {
         Rect::new(
             frame.x.clamp(visible.x, visible.max_x() - w),
@@ -61,8 +41,8 @@ pub(super) fn place(frame: Rect, visible: Rect, holds_most: bool) -> Rect {
         )
     } else {
         Rect::new(
-            (visible.x + (visible.w - w) / 2.).round(),
-            (visible.y + (visible.h - h) / 2.).round(),
+            (visible.x + (visible.width - w) / 2.).round(),
+            (visible.y + (visible.height - h) / 2.).round(),
             w,
             h,
         )
@@ -93,7 +73,7 @@ mod tests {
         let saved = Rect::new(100., 80., 1200., 760.);
         let placed = on_screen(saved, &screens, 1, RIGHT_VISIBLE);
         assert!(inside(placed, RIGHT_VISIBLE));
-        assert_eq!((placed.w, placed.h), (saved.w, saved.h));
+        assert_eq!((placed.width, placed.height), (saved.width, saved.height));
         assert!(holds_most(placed, &screens, 1));
         assert!(!holds_most(placed, &screens, 0));
     }
