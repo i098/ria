@@ -35,6 +35,10 @@ The live engine checks report a skip on Linux.
 See the check sources for [`ria-engine-sys`](rust/crates/ria-engine-sys/tests/live.rs) and [`ria-engine`](rust/crates/ria-engine/src/domains/data/live.rs) for the macOS requirements.
 See the [app launch check](rust/crates/ria-app/src/launch/README.md#launch-checks) for the macOS app test.
 
+Follow the [macOS run instructions](rust/crates/ria-host-mac/tests/live_windows.rs#L3-L4) for `live_windows`.
+This check also skips on Linux.
+The harness uses a temporary profile and does not activate the app.
+
 Two more gates run locally, not in CI:
 
 ```sh

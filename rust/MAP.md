@@ -252,7 +252,7 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/ArdiaPopupWindow.*` | Objective-C++ | 496 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaProfiles.*` | Objective-C++ | 242 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/ArdiaRendererScrollObserver.*` | Objective-C++ | 87 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
-| mac | `packages/ardiacore/ios/ArdiaReservedKeys.*` | Objective-C++ | 174 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
+| mac | `packages/ardiacore/ios/ArdiaReservedKeys.*` | Objective-C++ | 174 | native | `rust/crates/ria-host-mac/src/windows/ardia_reserved_keys.rs` | hand | done | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaRevealGuards.*` | Objective-C++ | 160 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaRevealLedger.*` | Objective-C++ | 111 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaRuntime.*` | Objective-C++ | 42 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
@@ -269,13 +269,13 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/ArdiaTabPresses.*` | Objective-C++ | 136 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaTabRegistry.*` | Objective-C++ | 185 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaTabStrip.*` | Objective-C++ | 279 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
-| mac | `packages/ardiacore/ios/ArdiaTrafficLights.*` | Objective-C++ | 543 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
+| mac | `packages/ardiacore/ios/ArdiaTrafficLights.*` | Objective-C++ | 543 | native | `rust/crates/ria-host-mac/src/windows/ardia_traffic_lights.rs` | hand | done | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaTransferLedger.*` | Objective-C++ | 136 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaWebView.*` | Objective-C++/Swift | 6535 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaWebViewInternal.*` | Objective-C++ | 431 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
-| mac | `packages/ardiacore/ios/ArdiaWindowController.*` | Objective-C++ | 428 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
-| mac | `packages/ardiacore/ios/ArdiaWindowFullScreen.*` | Objective-C++ | 575 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
-| mac | `packages/ardiacore/ios/ArdiaWindowSightMath.*` | Objective-C++ | 55 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
+| mac | `packages/ardiacore/ios/ArdiaWindowController.*` | Objective-C++ | 428 | native | `rust/crates/ria-host-mac/src/windows/ardia_window_controller.rs` | hand | partial | 3.7 | port |
+| mac | `packages/ardiacore/ios/ArdiaWindowFullScreen.*` | Objective-C++ | 575 | native | `rust/crates/ria-host-mac/src/windows/ardia_window_full_screen.rs` | hand | done | 3.7 | port |
+| mac | `packages/ardiacore/ios/ArdiaWindowSightMath.*` | Objective-C++ | 55 | native | `rust/crates/ria-host-mac/src/windows/ardia_window_sight_math.rs` | hand | done | 3.7 | port |
 | mac | `packages/ardiacore/ios/AutofillModule.*` | Swift | 36 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/BookmarksModule.*` | Swift | 37 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/ChromeTabCyclingPref.*` | Swift | 12 | native | `rust/crates/ria-engine/src/domains/browser/tab_cycling.rs` | hand | partial | 3.4 | port |
