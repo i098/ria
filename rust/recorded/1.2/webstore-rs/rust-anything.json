@@ -1,0 +1,66 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-2-url/repo",
+  "unit": "packages/core/src/webStore.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "webstore-rs",
+  "exports": [
+    {
+      "name": "isExtensionId",
+      "file": "packages/core/src/webStore.ts",
+      "line": 3,
+      "params": [
+        {
+          "name": "s",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "webStoreExtensionId",
+      "file": "packages/core/src/webStore.ts",
+      "line": 5,
+      "params": [
+        {
+          "name": "urlOrId",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "permissionWarnings",
+      "file": "packages/core/src/webStore.ts",
+      "line": 21,
+      "params": [
+        {
+          "name": "pkg",
+          "ts_type": "{ permissions: string[]; hostPermissions: string[] }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

@@ -1,0 +1,163 @@
+{"fn":"chooseTextFragment","args":[{"selected":"fox","before":"The quick brown ","after":" jumps over","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"quick brown fox","before":"The ","after":" jumps over the","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"lazy dog","before":"over the ","after":". The quick","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"moon","before":"at the ","after":".","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"hello","before":"","after":" world","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"Hello","before":"World! ","after":" world, hello","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"","before":"a","after":"b","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"   ","before":"a","after":"b","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"\n\n","before":"a","after":"b","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"ox jum","before":"The quick brown f","after":"s over","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"quick","before":"The ","after":" brown","pageText":""}]}
+{"fn":"chooseTextFragment","args":[{"selected":"x","before":"","after":"","pageText":"x x x"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a b","before":"","after":"","pageText":"a b a b a b a b a b"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a","before":"b c d e f g h","after":"i j k l m n","pageText":"a a a a a a"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps.","before":"","after":" A lazy","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"The quick brown fox jumps\nover the lazy dog.\nThe quick brown fox sleeps.","before":"","after":"","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"one two three four five six seven eight nine ten eleven","before":"x ","after":" y","pageText":"one two three four five six seven eight nine ten eleven twelve"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a b c d e f g h i j","before":"","after":"","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"café","before":"Naïve ","after":" ÉCOLE","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"École","before":"café ","after":".","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"日本語","before":"","after":"の","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"日本語のテキスト","before":"","after":" 日本語","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"\n  a  \n  b\n","before":"","after":"","pageText":"a b a b"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a\nb","before":"x","after":"y","pageText":"a b a b"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a\r\nb c","before":"","after":"","pageText":"a b c a b c"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a b","before":"","after":"","pageText":"a b"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"ab","before":"","after":"","pageText":"a b"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a﻿b","before":"","after":"","pageText":"a b a b"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"x\ny","before":"p q r s t u","after":"v","pageText":"x y x y x y"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"x\ny\nz","before":"","after":"","pageText":"x y z x y z x y z"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"fox","before":"brow","after":"n jumps","pageText":"The quick brown fox jumps over the lazy dog. The quick brown fox sleeps. A lazy dog barks at the moon. Hello world, hello World! Naïve café ÉCOLE. 日本語のテキスト 日本語のテキスト"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"ox","before":"f","after":"x","pageText":"fox fox box"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"_a1","before":"b_","after":"c_","pageText":"b__a1c_ b__a1c_"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a","before":"ß","after":"ß","pageText":"ßaß ßaß"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"İ","before":"","after":"","pageText":"i̇ İ"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"ǅ","before":"","after":"","pageText":"ǆ ǅ Ǆ"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"Σ","before":"","after":"","pageText":"σ ς Σ"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"alpha beta gamma delta epsilon zeta eta theta iota kappa lambda","before":"","after":"","pageText":"alpha beta gamma delta epsilon zeta eta theta iota kappa lambda alpha beta gamma delta epsilon zeta eta theta iota kappa lambda"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a b c\nd e f g h i j k","before":"pre fix words here now","after":"","pageText":"a b c d e f g h i j k a b c d e f g h i j k"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a b\nc d","before":"","after":"x","pageText":"a b c d"}]}
+{"fn":"chooseTextFragment","args":[{}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a"}]}
+{"fn":"chooseTextFragment","args":[{"selected":"a","before":"","after":""}]}
+{"fn":"chooseTextFragment","args":[null]}
+{"fn":"chooseTextFragment","args":["str"]}
+{"fn":"chooseTextFragment","args":[5]}
+{"fn":"chooseTextFragment","args":[{"selected":1,"before":"","after":"","pageText":""}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"start":"a"}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"start":"a b","prefix":"p"}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"start":"a","suffix":"s"}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"prefix":"p-q","start":"a-b","end":"e-f","suffix":"s-t"}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"start":"a","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"start":"","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"start":"a","prefix":"","suffix":""}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"start":"ünï côdé 日本","end":"!~*'()-_."}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"start":"a&b=c,d"}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"start":"x y+z%"}]}
+{"fn":"withTextFragment","args":["https://a.com/",{"start":"😀"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"start":"a"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"start":"a b","prefix":"p"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"start":"a","suffix":"s"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"prefix":"p-q","start":"a-b","end":"e-f","suffix":"s-t"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"start":"a","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"start":"","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"start":"a","prefix":"","suffix":""}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"start":"ünï côdé 日本","end":"!~*'()-_."}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"start":"a&b=c,d"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"start":"x y+z%"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag",{"start":"😀"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"start":"a"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"start":"a b","prefix":"p"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"start":"a","suffix":"s"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"prefix":"p-q","start":"a-b","end":"e-f","suffix":"s-t"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"start":"a","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"start":"","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"start":"a","prefix":"","suffix":""}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"start":"ünï côdé 日本","end":"!~*'()-_."}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"start":"a&b=c,d"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"start":"x y+z%"}]}
+{"fn":"withTextFragment","args":["https://a.com/#frag:~:text=old",{"start":"😀"}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"start":"a"}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"start":"a b","prefix":"p"}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"start":"a","suffix":"s"}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"prefix":"p-q","start":"a-b","end":"e-f","suffix":"s-t"}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"start":"a","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"start":"","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"start":"a","prefix":"","suffix":""}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"start":"ünï côdé 日本","end":"!~*'()-_."}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"start":"a&b=c,d"}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"start":"x y+z%"}]}
+{"fn":"withTextFragment","args":["https://a.com/#:~:text=old",{"start":"😀"}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"start":"a"}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"start":"a b","prefix":"p"}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"start":"a","suffix":"s"}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"prefix":"p-q","start":"a-b","end":"e-f","suffix":"s-t"}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"start":"a","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"start":"","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"start":"a","prefix":"","suffix":""}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"start":"ünï côdé 日本","end":"!~*'()-_."}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"start":"a&b=c,d"}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"start":"x y+z%"}]}
+{"fn":"withTextFragment","args":["https://a.com/#a#b",{"start":"😀"}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"start":"a"}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"start":"a b","prefix":"p"}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"start":"a","suffix":"s"}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"prefix":"p-q","start":"a-b","end":"e-f","suffix":"s-t"}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"start":"a","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"start":"","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"start":"a","prefix":"","suffix":""}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"start":"ünï côdé 日本","end":"!~*'()-_."}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"start":"a&b=c,d"}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"start":"x y+z%"}]}
+{"fn":"withTextFragment","args":["https://a.com/?q=1",{"start":"😀"}]}
+{"fn":"withTextFragment","args":["",{"start":"a"}]}
+{"fn":"withTextFragment","args":["",{"start":"a b","prefix":"p"}]}
+{"fn":"withTextFragment","args":["",{"start":"a","suffix":"s"}]}
+{"fn":"withTextFragment","args":["",{"prefix":"p-q","start":"a-b","end":"e-f","suffix":"s-t"}]}
+{"fn":"withTextFragment","args":["",{"start":"a","end":"b"}]}
+{"fn":"withTextFragment","args":["",{"start":"","end":"b"}]}
+{"fn":"withTextFragment","args":["",{"start":"a","prefix":"","suffix":""}]}
+{"fn":"withTextFragment","args":["",{"start":"ünï côdé 日本","end":"!~*'()-_."}]}
+{"fn":"withTextFragment","args":["",{"start":"a&b=c,d"}]}
+{"fn":"withTextFragment","args":["",{"start":"x y+z%"}]}
+{"fn":"withTextFragment","args":["",{"start":"😀"}]}
+{"fn":"withTextFragment","args":["#",{"start":"a"}]}
+{"fn":"withTextFragment","args":["#",{"start":"a b","prefix":"p"}]}
+{"fn":"withTextFragment","args":["#",{"start":"a","suffix":"s"}]}
+{"fn":"withTextFragment","args":["#",{"prefix":"p-q","start":"a-b","end":"e-f","suffix":"s-t"}]}
+{"fn":"withTextFragment","args":["#",{"start":"a","end":"b"}]}
+{"fn":"withTextFragment","args":["#",{"start":"","end":"b"}]}
+{"fn":"withTextFragment","args":["#",{"start":"a","prefix":"","suffix":""}]}
+{"fn":"withTextFragment","args":["#",{"start":"ünï côdé 日本","end":"!~*'()-_."}]}
+{"fn":"withTextFragment","args":["#",{"start":"a&b=c,d"}]}
+{"fn":"withTextFragment","args":["#",{"start":"x y+z%"}]}
+{"fn":"withTextFragment","args":["#",{"start":"😀"}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"start":"a"}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"start":"a b","prefix":"p"}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"start":"a","suffix":"s"}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"prefix":"p-q","start":"a-b","end":"e-f","suffix":"s-t"}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"start":"a","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"start":"","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"start":"a","prefix":"","suffix":""}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"start":"ünï côdé 日本","end":"!~*'()-_."}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"start":"a&b=c,d"}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"start":"x y+z%"}]}
+{"fn":"withTextFragment","args":["https://a.com/#x:~:y:~:z",{"start":"😀"}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"start":"a"}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"start":"a b","prefix":"p"}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"start":"a","suffix":"s"}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"prefix":"p-q","start":"a-b","end":"e-f","suffix":"s-t"}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"start":"a","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"start":"","end":"b"}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"start":"a","prefix":"","suffix":""}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"start":"ünï côdé 日本","end":"!~*'()-_."}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"start":"a&b=c,d"}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"start":"x y+z%"}]}
+{"fn":"withTextFragment","args":["https://a.com/#é",{"start":"😀"}]}
+{"fn": "chooseTextFragment", "args": [{"selected": "a b c\nd e f", "before": "x y ", "after": "", "pageText": "a b c a b c a b c d e f"}]}
+{"fn": "chooseTextFragment", "args": [{"selected": "a b c\nd e f", "before": "", "after": "", "pageText": "a b c a b c a b c d e f"}]}
+{"fn": "chooseTextFragment", "args": [{"selected": "a b c d\ne f g h", "before": "p q r ", "after": "s", "pageText": "a b c d e f g h a b c d e f g h"}]}
+{"fn": "chooseTextFragment", "args": [{"selected": "a b\nc d", "before": "w ", "after": "", "pageText": "a b c d a b c d"}]}
+{"fn": "chooseTextFragment", "args": [{"selected": "a a a a a a a a a a a a\nb", "before": "z ", "after": "", "pageText": "a a a a a a a a a a a a b a a a a a a a a a a a a b"}]}
+{"fn": "chooseTextFragment", "args": [{"selected": "a a a a a a a a a a a a", "before": "", "after": "", "pageText": "a a a a a a a a a a a a a a a a a a a a a a a a"}]}

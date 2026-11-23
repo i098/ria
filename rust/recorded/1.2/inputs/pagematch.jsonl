@@ -1,0 +1,80 @@
+{"fn": "parseQuery", "args": ["", []]}
+{"fn": "parseQuery", "args": ["", ["a"]]}
+{"fn": "parseQuery", "args": ["", ["ab", "c"]]}
+{"fn": "parseQuery", "args": ["", ["a.b"]]}
+{"fn": "parseQuery", "args": ["", ["longer", "x"]]}
+{"fn": "parseQuery", "args": ["", ["\u65e5\u672c"]]}
+{"fn": "parseQuery", "args": ["", ["a", "a"]]}
+{"fn": "parseQuery", "args": ["", ["", "z"]]}
+{"fn": "parseQuery", "args": ["a", []]}
+{"fn": "parseQuery", "args": ["a", ["a"]]}
+{"fn": "parseQuery", "args": ["a", ["ab", "c"]]}
+{"fn": "parseQuery", "args": ["a", ["a.b"]]}
+{"fn": "parseQuery", "args": ["a", ["longer", "x"]]}
+{"fn": "parseQuery", "args": ["a", ["\u65e5\u672c"]]}
+{"fn": "parseQuery", "args": ["a", ["a", "a"]]}
+{"fn": "parseQuery", "args": ["a", ["", "z"]]}
+{"fn": "parseQuery", "args": ["ab c", []]}
+{"fn": "parseQuery", "args": ["ab c", ["a"]]}
+{"fn": "parseQuery", "args": ["ab c", ["ab", "c"]]}
+{"fn": "parseQuery", "args": ["ab c", ["a.b"]]}
+{"fn": "parseQuery", "args": ["ab c", ["longer", "x"]]}
+{"fn": "parseQuery", "args": ["ab c", ["\u65e5\u672c"]]}
+{"fn": "parseQuery", "args": ["ab c", ["a", "a"]]}
+{"fn": "parseQuery", "args": ["ab c", ["", "z"]]}
+{"fn": "parseQuery", "args": ["a.b", []]}
+{"fn": "parseQuery", "args": ["a.b", ["a"]]}
+{"fn": "parseQuery", "args": ["a.b", ["ab", "c"]]}
+{"fn": "parseQuery", "args": ["a.b", ["a.b"]]}
+{"fn": "parseQuery", "args": ["a.b", ["longer", "x"]]}
+{"fn": "parseQuery", "args": ["a.b", ["\u65e5\u672c"]]}
+{"fn": "parseQuery", "args": ["a.b", ["a", "a"]]}
+{"fn": "parseQuery", "args": ["a.b", ["", "z"]]}
+{"fn": "parseQuery", "args": ["x/y", []]}
+{"fn": "parseQuery", "args": ["x/y", ["a"]]}
+{"fn": "parseQuery", "args": ["x/y", ["ab", "c"]]}
+{"fn": "parseQuery", "args": ["x/y", ["a.b"]]}
+{"fn": "parseQuery", "args": ["x/y", ["longer", "x"]]}
+{"fn": "parseQuery", "args": ["x/y", ["\u65e5\u672c"]]}
+{"fn": "parseQuery", "args": ["x/y", ["a", "a"]]}
+{"fn": "parseQuery", "args": ["x/y", ["", "z"]]}
+{"fn": "parseQuery", "args": ["\u65e5\u672c", []]}
+{"fn": "parseQuery", "args": ["\u65e5\u672c", ["a"]]}
+{"fn": "parseQuery", "args": ["\u65e5\u672c", ["ab", "c"]]}
+{"fn": "parseQuery", "args": ["\u65e5\u672c", ["a.b"]]}
+{"fn": "parseQuery", "args": ["\u65e5\u672c", ["longer", "x"]]}
+{"fn": "parseQuery", "args": ["\u65e5\u672c", ["\u65e5\u672c"]]}
+{"fn": "parseQuery", "args": ["\u65e5\u672c", ["a", "a"]]}
+{"fn": "parseQuery", "args": ["\u65e5\u672c", ["", "z"]]}
+{"fn": "parseQuery", "args": ["A1", []]}
+{"fn": "parseQuery", "args": ["A1", ["a"]]}
+{"fn": "parseQuery", "args": ["A1", ["ab", "c"]]}
+{"fn": "parseQuery", "args": ["A1", ["a.b"]]}
+{"fn": "parseQuery", "args": ["A1", ["longer", "x"]]}
+{"fn": "parseQuery", "args": ["A1", ["\u65e5\u672c"]]}
+{"fn": "parseQuery", "args": ["A1", ["a", "a"]]}
+{"fn": "parseQuery", "args": ["A1", ["", "z"]]}
+{"fn": "parseQuery", "args": ["  ", []]}
+{"fn": "parseQuery", "args": ["  ", ["a"]]}
+{"fn": "parseQuery", "args": ["  ", ["ab", "c"]]}
+{"fn": "parseQuery", "args": ["  ", ["a.b"]]}
+{"fn": "parseQuery", "args": ["  ", ["longer", "x"]]}
+{"fn": "parseQuery", "args": ["  ", ["\u65e5\u672c"]]}
+{"fn": "parseQuery", "args": ["  ", ["a", "a"]]}
+{"fn": "parseQuery", "args": ["  ", ["", "z"]]}
+{"fn": "parseQuery", "args": ["caf\u00e9", []]}
+{"fn": "parseQuery", "args": ["caf\u00e9", ["a"]]}
+{"fn": "parseQuery", "args": ["caf\u00e9", ["ab", "c"]]}
+{"fn": "parseQuery", "args": ["caf\u00e9", ["a.b"]]}
+{"fn": "parseQuery", "args": ["caf\u00e9", ["longer", "x"]]}
+{"fn": "parseQuery", "args": ["caf\u00e9", ["\u65e5\u672c"]]}
+{"fn": "parseQuery", "args": ["caf\u00e9", ["a", "a"]]}
+{"fn": "parseQuery", "args": ["caf\u00e9", ["", "z"]]}
+{"fn": "parseQuery", "args": ["a b", []]}
+{"fn": "parseQuery", "args": ["a b", ["a"]]}
+{"fn": "parseQuery", "args": ["a b", ["ab", "c"]]}
+{"fn": "parseQuery", "args": ["a b", ["a.b"]]}
+{"fn": "parseQuery", "args": ["a b", ["longer", "x"]]}
+{"fn": "parseQuery", "args": ["a b", ["\u65e5\u672c"]]}
+{"fn": "parseQuery", "args": ["a b", ["a", "a"]]}
+{"fn": "parseQuery", "args": ["a b", ["", "z"]]}

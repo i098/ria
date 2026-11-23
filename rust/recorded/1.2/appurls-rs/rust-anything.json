@@ -1,0 +1,84 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-2-url/repo",
+  "unit": "packages/core/src/appUrls.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "appurls-rs",
+  "exports": [
+    {
+      "name": "toAppUrl",
+      "file": "packages/core/src/appUrls.ts",
+      "line": 19,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "toEngineUrl",
+      "file": "packages/core/src/appUrls.ts",
+      "line": 27,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "appUrlOrigin",
+      "file": "packages/core/src/appUrls.ts",
+      "line": 41,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "appUrlRoute",
+      "file": "packages/core/src/appUrls.ts",
+      "line": 52,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "(| { kind: \"page\"; page: (typeof APP_PAGE_HOSTS)[number] }\n  | { kind: \"settings\"; section: string | null }\n  | { kind: \"newTab\" }\n  | { kind: \"engine\"; url: string }) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

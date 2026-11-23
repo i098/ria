@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/webStore.ts",
+  "files": 1,
+  "fingerprint": "1ea807cad299492a",
+  "coverage": {
+    "lines": 71,
+    "reached": 71,
+    "files": [
+      {
+        "file": "packages/core/src/webStore.ts",
+        "lines": 71,
+        "reached": 71,
+        "missed": ""
+      }
+    ]
+  }
+}
