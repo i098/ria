@@ -490,16 +490,35 @@ impl ShareData {
     }
 }
 
-unsafe extern "C" {
-    fn getuid() -> u32;
-}
-
 pub struct SharedImages {
     own: PathBuf,
     _lock: File,
 }
 
 impl SharedImages {
+    /// Remove legacy shares and shares whose owning process released its lock.
+    pub fn remove_stale(base: &Path) {
+        let root = base.join("Ria Shared Images");
+        if !is_private_dir(&root) {
+            return;
+        }
+        let Ok(entries) = fs::read_dir(root) else {
+            return;
+        };
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if valid_share_dir(&path) {
+                let _ = remove_share_folder(&path);
+            } else if entry.file_name().to_str().is_some_and(|name| {
+                name.split_once('-').is_some_and(|(pid, id)| {
+                    !pid.is_empty() && pid.bytes().all(|c| c.is_ascii_digit()) && is_uuid(id)
+                })
+            }) {
+                let _ = remove_inactive_owner(&path);
+            }
+        }
+    }
+
     pub fn new(base: &Path) -> io::Result<Self> {
         let root = base.join("Ria Shared Images");
         if let Err(error) = DirBuilder::new().mode(0o700).create(&root)
@@ -597,7 +616,7 @@ fn unique_id() -> String {
 
 fn is_private_dir(path: &Path) -> bool {
     // SAFETY: getuid has no preconditions.
-    let uid = unsafe { getuid() };
+    let uid = unsafe { libc::getuid() };
     fs::symlink_metadata(path)
         .is_ok_and(|info| info.is_dir() && info.uid() == uid && info.mode() & 0o077 == 0)
 }
@@ -605,11 +624,35 @@ fn is_private_dir(path: &Path) -> bool {
 fn valid_share_dir(path: &Path) -> bool {
     path.file_name()
         .and_then(|name| name.to_str())
-        .is_some_and(|name| {
-            NSUUID::initWithUUIDString(objc2::AnyThread::alloc(), &NSString::from_str(name))
-                .is_some()
-        })
+        .is_some_and(is_uuid)
         && is_private_dir(path)
+}
+
+fn is_uuid(name: &str) -> bool {
+    NSUUID::initWithUUIDString(objc2::AnyThread::alloc(), &NSString::from_str(name)).is_some()
+}
+
+fn remove_inactive_owner(path: &Path) -> io::Result<()> {
+    if !is_private_dir(path) {
+        return Err(io::ErrorKind::InvalidInput.into());
+    }
+    let lock_path = path.join(".lock");
+    let lock = OpenOptions::new()
+        .read(true)
+        .custom_flags(libc::O_NOFOLLOW | libc::O_NONBLOCK)
+        .open(&lock_path)?;
+    if !lock.metadata()?.is_file() {
+        return Err(io::ErrorKind::InvalidData.into());
+    }
+    lock.try_lock().map_err(io::Error::from)?;
+    for entry in fs::read_dir(path)? {
+        let entry = entry?;
+        if entry.file_name() != ".lock" {
+            remove_share_folder(&entry.path())?;
+        }
+    }
+    fs::remove_file(lock_path)?;
+    fs::remove_dir(path)
 }
 
 fn remove_share_folder(path: &Path) -> io::Result<()> {
@@ -640,5 +683,28 @@ mod tests {
             find_pick(items(&input), " A&B C\t8 "),
             Some(json!({"command": 42, "path": [0, 0], "flags": 8}))
         );
+    }
+
+    #[test]
+    fn cleanup_keeps_locked_shares_and_removes_abandoned_shares() {
+        let base = std::env::temp_dir().join(unique_id());
+        DirBuilder::new().mode(0o700).create(&base).unwrap();
+        let live = SharedImages::new(&base).unwrap();
+        let abandoned = SharedImages::new(&base).unwrap();
+        let live_path = live.own.clone();
+        let abandoned_path = abandoned.own.clone();
+        for owner in [&live_path, &abandoned_path] {
+            let share = owner.join(unique_id());
+            DirBuilder::new().mode(0o700).create(&share).unwrap();
+            fs::write(share.join("image.png"), b"image").unwrap();
+        }
+        drop(abandoned);
+        SharedImages::remove_stale(&base);
+        let preserved_live = live_path.exists();
+        let removed_abandoned = !abandoned_path.exists();
+        drop(live);
+        fs::remove_dir_all(&base).unwrap();
+        assert!(preserved_live);
+        assert!(removed_abandoned);
     }
 }
