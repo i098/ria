@@ -1,7 +1,7 @@
 // Generates the --inputs JSONL for bangs-rs and bangs-harness-rs from the real bang list sample.
-// Usage: node /tmp/ria14b/gen.mjs  -> /tmp/ria14b/bangs-inputs.jsonl, /tmp/ria14b/harness-inputs.jsonl
+// Usage: node gen.mjs (from this folder)  -> ./bangs-inputs.jsonl, ./harness-inputs.jsonl
 import { writeFileSync } from "node:fs";
-const { BANG_LIST, BANG_LIST_UNICODE, BANG_LIST_ETAG } = await import("/tmp/ria14/bangList.ts");
+const { BANG_LIST, BANG_LIST_UNICODE, BANG_LIST_ETAG } = await import("../../../../packages/core/src/bangList.ts");
 
 let seed = 0x5eed1234;
 const rand = () => ((seed = (Math.imul(seed, 1103515245) + 12345) >>> 0) / 2 ** 32);
@@ -118,7 +118,7 @@ add("bangDocument", BANG_LIST_ETAG, slim1000);
 for (const [t, q] of [["é ü", false], ["é ü", true], ["a+b & c/d #x 100%", true], ["a+b & c/d #x 100%", false], ["it's (ok)*!~", true], ["it's (ok)*!~", false], ["\"#%:<>?[\\]^`{|}", false], ["\"#%:<>?[\\]^`{|}", true], ["\u0000\u001f\u007f \t\n", false], ["日本 語 😀", false], ["%20", true], ["", true], ["", false], ["a/b;c=d@e$f,g&h", false], ["\u2028", false]]) add("escapeSearchTerms", t, q);
 for (const [tpl, terms] of [["https://a.example/{searchTerms}/x?q={searchTerms}", "p q"], ["https://github.com/search?q={searchTerms}", "react hooks"], ["https://github.com/{searchTerms}", "a b?c#d%e"], ["https://mail.google.com/mail/u/0/#search/{searchTerms}", "from:me"], ["https://ziglang.org/documentation/master/std/#?{searchTerms}", "std.mem a b"], ["https://x.example/", "q"], ["https://x.example/?a=1&q={searchtrms}", "q"], ["{searchTerms}?", "a b"], ["?{searchTerms}", "a b"], ["https://x.example/{searchTerms}{searchTerms}", "é"], ["https://x.example/?q={searchTerms}&r={searchTerms}", "1+1=2"], ["https://x.example/{searchTerms", "x"], ["", ""]]) add("fillBangTemplate", tpl, terms);
 
-writeFileSync("/tmp/ria14b/bangs-inputs.jsonl", out.map((c) => JSON.stringify(c)).join("\n") + "\n");
+writeFileSync("./bangs-inputs.jsonl", out.map((c) => JSON.stringify(c)).join("\n") + "\n");
 
 // ---- harness ----
 const h = [];
@@ -187,5 +187,5 @@ hadd("findBangIn", ["!gh react", "!x @evil.example", "!x"], null);
 hadd("findBangIn", ["!gh react", ""], []);
 hadd("findBangIn", ["!x @evil.example", "!x", "!x a", "!c q", "!c", "!h a b"], ["x\tX\tx.example{s}\nc\tCtl\tc.example/\u0001{s}\nh\tH\th.example/#{s}"]);
 
-writeFileSync("/tmp/ria14b/harness-inputs.jsonl", h.map((c) => JSON.stringify(c)).join("\n") + "\n");
+writeFileSync("./harness-inputs.jsonl", h.map((c) => JSON.stringify(c)).join("\n") + "\n");
 console.log(out.length, h.length);

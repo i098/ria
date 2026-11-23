@@ -1,5 +1,5 @@
-import { BUILT_IN_ENGINES, allEngines } from "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-4-search/repo/packages/core/src/engines.ts";
-import { offeredSiteSearch } from "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-4-search/repo/packages/core/src/siteSearch.ts";
+import { BUILT_IN_ENGINES, allEngines } from "../../../../packages/core/src/engines.ts";
+import { offeredSiteSearch } from "../../../../packages/core/src/siteSearch.ts";
 const out = { engines: [], site: [], ext: [] };
 const E = (fn, ...args) => out.engines.push({ fn, args });
 const S = (fn, ...args) => out.site.push({ fn, args });
@@ -68,5 +68,5 @@ for (const q of ["ublock", "password", "reader", "video speed", "ub", "zzq", "Da
 X("extensionSuggestions", "ublock", []); X("extensionSuggestions", "ab", [ext("ab", "AB")]); X("extensionSuggestions", "ab", [ext("ab", "AB", false, false)]);
 const fs = await import("node:fs");
 const enc = (v) => JSON.stringify(v, (k, x) => x === undefined ? { "$undefined": true } : x);
-for (const [k, f] of [["engines", "engines"], ["site", "site-search"], ["ext", "extension-rows"]]) fs.writeFileSync("/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-4-search/inputs/" + f + ".jsonl", out[k].map(enc).join("\n") + "\n");
+for (const [k, f] of [["engines", "engines"], ["site", "site-search"], ["ext", "extension-rows"]]) fs.writeFileSync("./" + f + ".jsonl", out[k].map(enc).join("\n") + "\n");
 console.log(out.engines.length, out.site.length, out.ext.length);

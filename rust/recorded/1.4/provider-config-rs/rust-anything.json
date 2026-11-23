@@ -1,6 +1,6 @@
 {
   "schema": "rust-anything/bridge@1",
-  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-4-search/repo",
+  "root": ".",
   "unit": "packages/core/src/providerConfig.ts",
   "language": "ts",
   "kind": "napi",
