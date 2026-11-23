@@ -190,8 +190,7 @@ mod tests {
                 for j in 0..400 {
                     let y = window.y + (f64::from(j) + 0.5) * dy;
                     let includes = |r: &Rect| {
-                        (0. ..r.width).contains(&(x - r.x))
-                            && (0. ..r.height).contains(&(y - r.y))
+                        (0. ..r.width).contains(&(x - r.x)) && (0. ..r.height).contains(&(y - r.y))
                     };
                     if BOTH.iter().any(includes) && !covers.iter().any(includes) {
                         sampled += dx * dy;

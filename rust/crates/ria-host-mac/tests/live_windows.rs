@@ -169,8 +169,18 @@ mod mac {
         let menu = NSMenu::new(mtm);
         let modifiers = NSEventModifierFlags::Command;
         let bindings = [
-            (ns_string!("w"), ns_string!("ardia.command.closeTab"), 13, true),
-            (ns_string!("b"), ns_string!("ria.test.nonreserved"), 11, false),
+            (
+                ns_string!("w"),
+                ns_string!("ardia.command.closeTab"),
+                13,
+                true,
+            ),
+            (
+                ns_string!("b"),
+                ns_string!("ria.test.nonreserved"),
+                11,
+                false,
+            ),
         ];
         for (key, id, _, _) in bindings {
             let item = NSMenuItem::new(mtm);
@@ -205,26 +215,22 @@ mod mac {
     fn check_native_close(mtm: MainThreadMarker) {
         let allow = Rc::new(Cell::new(false));
         let requests = Rc::new(Cell::new(0));
-        let controllers = Controllers::new(
-            mtm,
-            true,
-            true,
-            {
-                let allow = allow.clone();
-                let requests = requests.clone();
-                move |_| {
-                    requests.set(requests.get() + 1);
-                    allow.get()
-                }
-            },
-        );
+        let controllers = Controllers::new(mtm, true, true, {
+            let allow = allow.clone();
+            let requests = requests.clone();
+            move |_| {
+                requests.set(requests.get() + 1);
+                allow.get()
+            }
+        });
         let controller = controllers.make_normal();
         let window = controller.core.window();
         window.orderFrontRegardless();
         window.performClose(None);
-        wait_for("The engine did not ask whether the window could close", || {
-            requests.get() > 0
-        });
+        wait_for(
+            "The engine did not ask whether the window could close",
+            || requests.get() > 0,
+        );
         assert_eq!(requests.get(), 1);
         assert!(window.isVisible());
         let registered = controllers
@@ -281,11 +287,17 @@ mod mac {
         assert!(!controllers.user_sees(&window));
         let events = sight_events.get();
         let app = NSApplication::sharedApplication(mtm);
-        assert!(!app.isActive(), "The visibility check requires an inactive app");
+        assert!(
+            !app.isActive(),
+            "The visibility check requires an inactive app"
+        );
         check_reserved_replies(&app, mtm);
         window.orderFrontRegardless();
         wait_for("No Window Server visibility reply and notification", || {
-            assert!(!app.isActive(), "The app activated during the visibility check");
+            assert!(
+                !app.isActive(),
+                "The app activated during the visibility check"
+            );
             controllers.user_sees(&window) && sight_events.get() > events
         });
         let cover = chrome.core.window();
@@ -419,7 +431,9 @@ mod mac {
         println!(
             "live_windows: reserved key replies, controller claims, titlebar hit testing, visibility, acted fullscreen, and native close checked"
         );
-        println!("live_windows: Chromium key dispatch to an AppKit menu action not checked; the harness does not activate the app or make a window key");
+        println!(
+            "live_windows: Chromium key dispatch to an AppKit menu action not checked; the harness does not activate the app or make a window key"
+        );
         println!("live_windows: foreground AppKit fullscreen entry and exit not checked");
         println!(
             "live_windows: native sharing after trailing placement without resize not checked (indicator and child pill)"
@@ -477,7 +491,11 @@ mod mac {
             )
         }
         fn is_reserved_key_event(&self, event: &NSEvent) -> bool {
-            is_reserved_key_event(MainThreadMarker::new().unwrap(), event, KeyContext::Windowed)
+            is_reserved_key_event(
+                MainThreadMarker::new().unwrap(),
+                event,
+                KeyContext::Windowed,
+            )
         }
         fn window_for_new_browser(&self, _: &Profile, _: &str) -> Option<Retained<Window>> {
             None
