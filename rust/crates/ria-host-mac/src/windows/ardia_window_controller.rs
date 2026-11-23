@@ -47,8 +47,6 @@ pub struct Controller {
     close_observer: Retained<AnyObject>,
 }
 
-type KeyHandler = dyn Fn(&NSWindow, &NSEvent) -> bool;
-
 pub struct Controllers {
     mtm: MainThreadMarker,
     background: bool,
@@ -56,7 +54,6 @@ pub struct Controllers {
     windows: RefCell<HashMap<*const NSWindow, Rc<Controller>>>,
     keys: ReservedKeys,
     should_close: Box<dyn Fn(&NSWindow) -> bool>,
-    refuses_unhandled_key: Box<KeyHandler>,
 }
 
 impl Controllers {
@@ -65,7 +62,6 @@ impl Controllers {
         background: bool,
         allow_occlusion: bool,
         should_close: impl Fn(&NSWindow) -> bool + 'static,
-        refuses_unhandled_key: impl Fn(&NSWindow, &NSEvent) -> bool + 'static,
     ) -> Rc<Self> {
         Rc::new(Self {
             mtm,
@@ -74,7 +70,6 @@ impl Controllers {
             windows: RefCell::default(),
             keys: ReservedKeys::default(),
             should_close: Box::new(should_close),
-            refuses_unhandled_key: Box::new(refuses_unhandled_key),
         })
     }
 
@@ -295,7 +290,7 @@ define_class!(
             self.ivars().0.upgrade().is_some_and(|controller| controller.owner.upgrade().is_some_and(|owner| {
                 let app = NSApplication::sharedApplication(controller.mtm);
                 let window = window.window();
-                owner.keys.keeps_sidebar_key_in_page(&app, &window, event) || (owner.refuses_unhandled_key)(&window, event)
+                owner.keys.keeps_sidebar_key_in_page(&app, &window, event)
             }))
         }
     }

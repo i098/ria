@@ -4,7 +4,6 @@
 
 use std::cell::RefCell;
 use std::rc::Rc;
-use std::time::Duration;
 
 use block2::RcBlock;
 use objc2::MainThreadMarker;
@@ -22,7 +21,6 @@ use objc2_foundation::{
     NSArray, NSDictionary, NSNotification, NSNotificationCenter, NSNumber, NSRect, NSString,
     ns_string,
 };
-use ria_engine::call::main_queue;
 
 use super::ardia_window_sight_math::{Rect, counts_as_cover, partly_visible};
 use crate::core::bindings::Window;
@@ -313,19 +311,17 @@ impl FullScreen {
         self.update_seen(false);
     }
 
-    pub fn toggle(self: &Rc<Self>, transition: Duration) {
-        let Some(core) = self.core.load() else {
-            return;
-        };
-        let window = core.window();
+    pub fn toggle(&self) {
         if !self.background {
-            window.toggleFullScreen(None);
+            if let Some(core) = self.core.load() {
+                core.window().toggleFullScreen(None);
+            }
             return;
         }
-        self.act_window_full_screen(!self.is_full_screen(), transition);
+        self.act_window_full_screen(!self.is_full_screen());
     }
 
-    pub fn act_window_full_screen(self: &Rc<Self>, entering: bool, transition: Duration) {
+    pub fn act_window_full_screen(&self, entering: bool) {
         let Some(core) = self.core.load() else {
             return;
         };
@@ -365,43 +361,28 @@ impl FullScreen {
                 window.setFrame_display(frame, true);
             }
         }
-        let weak = Rc::downgrade(self);
-        let finish = move || {
-            let Some(fullscreen) = weak.upgrade() else {
+        {
+            let mut state = self.state.borrow_mut();
+            if state.closed {
                 return;
-            };
-            let Some(core) = fullscreen.core.load() else {
-                return;
-            };
-            {
-                let mut state = fullscreen.state.borrow_mut();
-                if state.closed {
-                    return;
-                }
-                state.acting = false;
-                if !entering {
-                    state.acted = false;
-                }
             }
+            state.acting = false;
             if !entering {
-                core.set_acted_full_screen(false);
+                state.acted = false;
             }
-            // SAFETY: These AppKit notification names and the window are valid for this call.
-            unsafe {
-                NSNotificationCenter::defaultCenter().postNotificationName_object(
-                    if entering {
-                        NSWindowDidEnterFullScreenNotification
-                    } else {
-                        NSWindowDidExitFullScreenNotification
-                    },
-                    Some(&core.window()),
-                );
-            }
-        };
-        if transition.is_zero() {
-            finish();
-        } else {
-            main_queue::after(transition, Box::new(finish));
+        }
+        if !entering {
+            core.set_acted_full_screen(false);
+        }
+        unsafe {
+            center.postNotificationName_object(
+                if entering {
+                    NSWindowDidEnterFullScreenNotification
+                } else {
+                    NSWindowDidExitFullScreenNotification
+                },
+                Some(&window),
+            );
         }
     }
 }

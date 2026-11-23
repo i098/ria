@@ -232,7 +232,6 @@ mod mac {
                     allow.get()
                 }
             },
-            |_, _| false,
         );
         let controller = controllers.make_normal();
         let window = controller.core.window();
@@ -260,7 +259,7 @@ mod mac {
 
     fn check_windows(profile: &Profile) {
         let mtm = MainThreadMarker::new().unwrap();
-        let controllers = Controllers::new(mtm, true, true, |_| true, |_, _| false);
+        let controllers = Controllers::new(mtm, true, true, |_| true);
         let normal = controllers.make_normal();
         let chrome = controllers.make_chrome();
         let token = chrome.chrome_token().unwrap();
@@ -317,6 +316,17 @@ mod mac {
                 .is_some_and(|hit| hit.isDescendantOf(&close))
         );
 
+        let before_placement = window.frame();
+        lights.set_placement(Placement {
+            center: Some(NSPoint::new(120., 80.)),
+            trailing: true,
+        });
+        let trailing = close.convertRect_toView(close.bounds(), Some(&frame));
+        let trailing_x = trailing.origin.x + trailing.size.width / 2.;
+        assert!((trailing_x - (before_placement.size.width - 120.)).abs() < 1.);
+        assert!((trailing.origin.y + trailing.size.height / 2. - mid_y).abs() < 1.);
+        assert_eq!(window.frame(), before_placement);
+
         let events = sight_events.get();
         window.orderOut(None);
         wait_for("No hidden sight reply and notification", || {
@@ -342,23 +352,15 @@ mod mac {
         );
         let before = window.frame();
         assert_ne!(before, screen_frame);
-        normal
-            .fullscreen
-            .act_window_full_screen(true, Duration::ZERO);
+        normal.fullscreen.toggle();
         assert_eq!(window.frame(), screen_frame);
-        normal
-            .fullscreen
-            .act_window_full_screen(true, Duration::ZERO);
+        normal.fullscreen.act_window_full_screen(true);
         assert_eq!((enter_events.get(), exit_events.get()), (1, 0));
         assert_eq!(window.frame(), screen_frame);
         assert!(normal.core.acted_full_screen() && normal.fullscreen.is_full_screen());
         assert!(!normal.fullscreen.transitioning());
-        normal
-            .fullscreen
-            .act_window_full_screen(false, Duration::ZERO);
-        normal
-            .fullscreen
-            .act_window_full_screen(false, Duration::ZERO);
+        normal.fullscreen.toggle();
+        normal.fullscreen.act_window_full_screen(false);
         assert_eq!((enter_events.get(), exit_events.get()), (1, 1));
         assert!(!normal.core.acted_full_screen() && !normal.fullscreen.is_full_screen());
         assert_eq!(window.frame(), before);
