@@ -26,4 +26,4 @@ Notes:
 - The memory difference between 1 and 2 layers is inside the spread of the runs (about 40 MB).
 - Steady state with the page and Rune animating together, proof B (1 window, 1 tab): 620 frames in 10.3 s, 0 frames longer than 20.7 ms.
 - Live window resize, proof B: 300 frames, 0 frames with a layer rect or drawable different from the view bounds, 0 longer than 20.7 ms.
-- Proof B step: `b-rune-beside-page.png` in the firstmate data folder.
+- Proof B step: `b-rune-beside-page.png` (a scratch capture, not in git).

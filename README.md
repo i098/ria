@@ -1,54 +1,63 @@
 # Ria
 
-A native Rust + Rune browser for Mac.
-Ria is a port of [Ardia](https://github.com/ardia-browser/ardia) (Copyright 2026 Mantra Patel, Apache-2.0).
-The goal is equality with Ardia at commit `551d3c13c` in behaviour, data formats and every animation, within the tolerances of check P (plan section 8.4). The Chromium engine of Ardia stays as it is.
+A native Rust and [Rune](https://github.com/anomalyco/rune) port of the [Ardia](https://github.com/ardia-browser/ardia) browser for macOS.
 
-## Scope
+**State: early.** Phase 0 (proofs) passed. Phase 1 (core logic) is in work. There is no app to download yet.
 
-In: the Mac app of Ardia, ported to Rust with the Rune UI framework (`anomalyco/rune`); the Ardia engine used as it is; all animations equal to the original; the plan holds Ardia at `551d3c13c` until G6.
-Out: Linux, Windows and phone apps; changes to the Chromium engine; new features; contributions to `ardia-browser/ardia`; a public release; a team-signed or notarized build; an updater; a sync with a newer Ardia commit; a real app icon.
+## What works today
 
-## Plan
+```sh
+(cd rust && blaze check)                                     # workspace compiles
+cargo fmt --manifest-path rust/Cargo.toml --check            # format
+cargo clippy --manifest-path rust/Cargo.toml                 # lint: no issues
+node rust/parity/compare.selftest.mjs                        # parity comparer: 15 checks passed
+(cd rust/parity/captures/states && sha256sum -c SHA256SUMS)  # reference captures: all OK
+```
 
-The approved plan is version 5: 7 phases, 137 slices, 213 PRs.
+Run these from the repository root.
 
-| Phase | Slices | PRs | Gate |
-| --- | ---: | ---: | --- |
-| 0 Decide and prove | 10 | 10 | G0 |
-| 1 Core logic | 8 | 8 | G1 |
-| 2 State and data | 49 | 62 | G2 |
-| 3 Rust host on the engine | 16 | 24 | G3 |
-| 4 UI in Rune | 32 | 75 | G4 |
-| 5 Native services | 17 | 29 | G5 |
-| 6 Prove and cut over | 5 | 5 | G6 |
-| Total | 137 | 213 | |
+The Mac proofs of Phase 0 (Rust host on the Ardia engine, Rune layers, accessibility) and the Linux proof of the port loop passed. Results: [`rust/GATES.md`](rust/GATES.md).
 
-G0 is a go or no-go on the port with evidence. G1 to G5 pass when all checks of the phase pass in one run. G6 is the owner's go on use of the app.
+## Build and test
 
-## Build order
+```sh
+git clone --recurse-submodules https://github.com/i098/ria
+cd ria
+rust/tools/blaze/install.sh     # installs the patched blaze into ~/.cargo/bin; 10 to 15 minutes cold
+(cd rust && blaze check)
+```
 
-Two lanes run in parallel: Linux and Mac. Both lanes start at G0. Phase 1 starts at G0, and phase 2 starts at G1.
-On the Mac lane, slices 3.1 to 3.11 and 4.31 start at G0. On the Linux lane, the Linux parts of phase 4 start at G2: slice 4.1 first, then the other UI slices in parallel.
-Slice 2.29 comes before slice 3.12. G2 comes before slice 4.1.
-Gate slices are Linux work, except G4 (slice 4.32), which is Mac work. Mac work shares one machine, one slice at a time.
+Ria builds with [blaze](https://github.com/indexable-inc/blaze) at one pinned commit plus two patches kept in [`rust/tools/blaze/`](rust/tools/blaze/README.md). Without blaze, run `cargo fmt` and `cargo clippy` (first block above); they check the workspace. Blaze is the only supported build tool, so say in your PR that you could not run `blaze check`. Full steps: [`setup.md`](setup.md).
 
-## Phase 0 state
+## Phases
 
-| Slice | Work | State |
+| Phase | Work | State |
 | --- | --- | --- |
-| 0.1–0.4 | base, data notes, engine notes, proof D | merged (PRs 3, 6, 7, 8) |
-| 0.5 | parity rig | in work |
-| 0.6–0.8 | proofs A to C | in work |
-| 0.9 | apply plan v5 review | merged ([PR 11](https://github.com/i098/ria/pull/11)) |
-| 0.10 | gate G0 | todo |
+| 0 | Decide and prove | done |
+| 1 | Core logic | in work |
+| 2 | State and data | todo |
+| 3 | Rust host on the engine | todo |
+| 4 | UI in Rune | todo |
+| 5 | Native services | todo |
+| 6 | Prove and cut over | todo |
 
-## Where the detail is
+The goal is equality with Ardia at commit `551d3c13c` in behaviour, data formats and animation, within the tolerances of the parity rig. Out of scope: Linux, Windows and phone apps; changes to the Chromium engine; new features.
 
-- `ardia/`: the original, a git submodule frozen at `551d3c13c`.
-- `rust/MAP.md`: the unit map: 1,255 units, 814 in the Mac scope and 441 out, with a slice and a disposition for each unit.
-- `rust/DECISIONS.md`: the decision records (ADRs).
-- `rust/GLOSSARY.md`: the words the plan and the repository use.
-- `rust/GATES.md`: the plan approval and the result of each gate.
-- `rust/ANIMATIONS.md`: the 356 animation rows: 278 in React components (part A), 26 in state, lib and platform code (part B), 52 native (part C).
-- `LICENSE` and `NOTICE`: Apache-2.0, with credit to Ardia.
+## Repository map
+
+| Path | Content |
+| --- | --- |
+| `ardia/` | Ardia, a git submodule frozen at `551d3c13c` |
+| `rust/` | Cargo workspace, proofs, parity rig, blaze patches |
+| `rust/MAP.md` | Unit map: each Ardia unit with its target |
+| `rust/DECISIONS.md` | Decision records |
+| `rust/GATES.md` | Gate results |
+| `rust/ANIMATIONS.md` | Animation inventory |
+
+## Contribute
+
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md). Report a vulnerability as [`SECURITY.md`](SECURITY.md) says.
+
+## License
+
+Apache-2.0, see [`LICENSE`](LICENSE). Ria is a port of Ardia, copyright 2026 Mantra Patel; see [`NOTICE`](NOTICE).
