@@ -233,20 +233,24 @@ fn mouse(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
 }
 
 fn drag(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
-    let mut flags = 0;
-    let points: Vec<_> = spec
-        .split(';')
-        .filter_map(|spec| {
-            if let Some(value) = spec.strip_prefix("flags=") {
-                flags = NSString::from_str(value).longLongValue() as u64;
-                None
-            } else {
-                Some(window_point(host, window, spec))
-            }
-        })
-        .collect();
-    let [start, .., end] = points.as_slice() else {
-        return "drag:[flags=<modifier flags>;]<x>,<y>;<x>,<y>[;…]".into();
+    const USAGE: &str = "drag:[flags=<modifier flags>;]<x>,<y>;<x>,<y>[;…]";
+    let (flags, points) = if let Some(prefix) = spec.strip_prefix("flags=") {
+        let Some((value, points)) = prefix.split_once(';') else {
+            return USAGE.into();
+        };
+        (NSString::from_str(value).longLongValue() as u64, points)
+    } else {
+        (0, spec)
+    };
+    let mut path = Vec::new();
+    for point in points.split(';') {
+        if point.starts_with("flags=") {
+            return USAGE.into();
+        }
+        path.push(window_point(host, window, point));
+    }
+    let [start, .., end] = path.as_slice() else {
+        return USAGE.into();
     };
     let app = NSApplication::sharedApplication(window.mtm());
     let mut index = 0;
@@ -264,7 +268,7 @@ fn drag(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
         }
     };
     schedule(NSEventType::LeftMouseDown, *start);
-    for pair in points.windows(2) {
+    for pair in path.windows(2) {
         let (a, b) = (pair[0], pair[1]);
         for step in 1..=12 {
             let t = f64::from(step) / 12.;

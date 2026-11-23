@@ -456,7 +456,17 @@ mod mac {
         let left_hit = run("click:20,60");
         assert_eq!(left_hit.split(" < ").next(), Some("NSTextView"));
         assert_eq!(run("click:35,75,right"), left_hit);
-        assert_eq!(run("drag:20,60;80,90"), format!("{left_hit} (14 events)"));
+        for malformed in [
+            "drag:20,60;flags=0;80,90",
+            "drag:flags=0;flags=0;20,60;80,90",
+            "drag:20,60;80,90;flags=0",
+        ] {
+            assert!(run(malformed).starts_with("drag:[flags="));
+        }
+        assert_eq!(
+            run("drag:flags=0;20,60;80,90"),
+            format!("{left_hit} (14 events)")
+        );
         let app = app.retain();
         main_queue::after(
             Duration::from_millis(500),
@@ -701,9 +711,26 @@ mod mac {
         assert!(before_sight.get("pageFullScreen").is_none());
         assert!(controllers.user_sees(&fresh));
         let page = &probe(&host, &fresh, "fullScreen")["pageFullScreen"];
-        assert_eq!(page["transitioning"], false);
-        assert_eq!(page["settling"], false);
+        assert_eq!(page["transitioning"], true);
+        assert_eq!(page["settling"], true);
         host.close_window(&fresh);
+        let occluded = host.make_window(profile, None).unwrap();
+        occluded.orderOut(None);
+        assert_eq!(
+            host.dev_action(&occluded, "fakeOcclusion:hidden", true).as_deref(),
+            Some("0")
+        );
+        assert!(
+            probe(&host, &occluded, "fullScreen")
+                .get("pageFullScreen")
+                .is_none()
+        );
+        assert!(!controllers.user_sees(&occluded));
+        assert_eq!(
+            probe(&host, &occluded, "fakeFullScreen")["pageFullScreen"]["seen"],
+            false
+        );
+        host.close_window(&occluded);
 
         let page_window = host.make_window(profile, None).unwrap();
         let controller = controllers.for_window(&page_window).unwrap();

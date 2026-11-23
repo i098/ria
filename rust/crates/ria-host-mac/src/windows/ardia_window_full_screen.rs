@@ -165,7 +165,8 @@ fn window_is_full_screen(core: &Window, window: &NSWindow) -> bool {
 
 #[derive(Default)]
 struct Transition {
-    page: Option<PageState>,
+    page: PageState,
+    expose_page: bool,
     acting: bool,
     restore_frame: Option<NSRect>,
     acted_occlusion: Option<bool>,
@@ -184,6 +185,7 @@ struct PageState {
     telling: usize,
     picturing: bool,
     covers: Vec<(Weak<Tab>, Retained<PageCover>)>,
+    pending_covers: Vec<(Weak<Tab>, Retained<PageCover>)>,
     turn: u64,
     transitioning: bool,
     ours: bool,
@@ -197,15 +199,7 @@ impl PageState {
         self.turn = self.turn.wrapping_add(1);
         self.waiting_for = 0;
         self.picturing = false;
-    }
-}
-
-impl Transition {
-    fn page(&mut self) -> &mut PageState {
-        self.page.get_or_insert_with(|| PageState {
-            seen: true,
-            ..PageState::default()
-        })
+        uncover(std::mem::take(&mut self.pending_covers), false);
     }
 }
 
@@ -289,7 +283,13 @@ impl FullScreen {
                 mtm,
                 background,
                 allow_occlusion,
-                state: RefCell::default(),
+                state: RefCell::new(Transition {
+                    page: PageState {
+                        seen: true,
+                        ..PageState::default()
+                    },
+                    ..Transition::default()
+                }),
                 observers,
             }
         })
@@ -310,24 +310,25 @@ impl FullScreen {
     }
 
     pub fn seen(&self) -> bool {
-        self.state.borrow_mut().page().seen
+        let mut state = self.state.borrow_mut();
+        state.expose_page = true;
+        state.page.seen
     }
     pub fn seen_only_by_window_server(&self) -> bool {
         let mut state = self.state.borrow_mut();
-        let page = state.page();
-        page.seen && page.overruled
+        state.expose_page = true;
+        state.page.seen && state.page.overruled
     }
     pub fn transitioning(&self) -> bool {
-        self.state
-            .borrow()
-            .page
-            .as_ref()
-            .is_some_and(|page| page.transitioning)
+        self.state.borrow().page.transitioning
     }
 
     pub(super) fn page_state(&self, full_screen: bool) -> Option<serde_json::Value> {
         let state = self.state.borrow();
-        let page = state.page.as_ref()?;
+        if !state.expose_page {
+            return None;
+        }
+        let page = &state.page;
         Some(serde_json::json!({
             "page": page.tab.as_ref().and_then(Weak::load).map(|tab| tab.browser_id()),
             "entered": page.entered,
@@ -350,7 +351,8 @@ impl FullScreen {
         if state.closed {
             return;
         }
-        let page = state.page();
+        state.expose_page = true;
+        let page = &mut state.page;
         page.cancel_draw();
         if entering {
             page.tab = Some(Weak::new(tab));
@@ -375,7 +377,7 @@ impl FullScreen {
             }
             let done = move || {
                 if let Some(fullscreen) = weak.upgrade() {
-                    fullscreen.state.borrow_mut().page().telling -= 1;
+                    fullscreen.state.borrow_mut().page.telling -= 1;
                     fullscreen.sync_page();
                 }
             };
@@ -397,9 +399,7 @@ impl FullScreen {
             if state.acting {
                 return;
             }
-            let Some(page) = state.page.as_mut() else {
-                return;
-            };
+            let page = &mut state.page;
             if page.transitioning {
                 return;
             }
@@ -450,7 +450,7 @@ impl FullScreen {
         };
         {
             let mut state = self.state.borrow_mut();
-            let page = state.page();
+            let page = &mut state.page;
             if page.turn != turn {
                 return;
             }
@@ -472,64 +472,76 @@ impl FullScreen {
                 }
             }
         }
+        if tabs.is_empty() {
+            self.finish_picture(entering, turn);
+            return;
+        }
+        let remaining = Rc::new(Cell::new(tabs.len()));
         let weak = Rc::downgrade(self);
-        let owners: Vec<_> = tabs.iter().map(|tab| Weak::new(&**tab)).collect();
-        PageCover::cover_tabs(&tabs, false, move |covers| {
-            let covers = covers
-                .into_iter()
-                .filter_map(|cover| {
-                    let owner = unsafe { cover.superview() }.and_then(|view| {
-                        owners.iter().find(|owner| {
-                            owner
-                                .load()
-                                .is_some_and(|tab| std::ptr::eq(&*tab.view(), &*view))
-                        })
-                    });
-                    if let Some(owner) = owner {
-                        Some((owner.clone(), cover))
-                    } else {
+        for tab in tabs {
+            let owner = Weak::new(&*tab);
+            let weak = weak.clone();
+            let remaining = remaining.clone();
+            PageCover::cover(&tab, false, move |cover| {
+                let Some(fullscreen) = weak.upgrade().filter(|fullscreen| {
+                    let state = fullscreen.state.borrow();
+                    !state.closed && state.page.turn == turn
+                }) else {
+                    if let Some(cover) = cover {
                         cover.uncover(false);
-                        None
                     }
-                })
-                .collect();
-            let Some(fullscreen) = weak.upgrade() else {
-                return uncover(covers, false);
-            };
-            let Some((core, window)) = fullscreen.live_window() else {
-                return uncover(covers, false);
-            };
-            let (toggle, old) = {
-                let mut state = fullscreen.state.borrow_mut();
-                let acting = state.acting;
-                let page = state.page();
-                if page.turn != turn {
-                    drop(state);
-                    return uncover(covers, false);
+                    return;
+                };
+                if let Some(cover) = cover {
+                    fullscreen
+                        .state
+                        .borrow_mut()
+                        .page
+                        .pending_covers
+                        .push((owner, cover));
                 }
-                page.picturing = false;
-                let toggle = !acting
-                    && !page.transitioning
-                    && window_is_full_screen(&core, &window) != entering
-                    && page.tab.as_ref().and_then(Weak::load).is_some() == entering;
-                if toggle {
-                    page.entered = entering;
-                    page.asked = if entering { 1 } else { -1 };
-                    if !entering {
-                        page.left_tab = None;
-                    }
-                    (true, std::mem::replace(&mut page.covers, covers))
-                } else {
-                    (false, covers)
+                remaining.set(remaining.get() - 1);
+                if remaining.get() == 0 {
+                    fullscreen.finish_picture(entering, turn);
                 }
-            };
-            uncover(old, false);
-            if toggle {
-                fullscreen.toggle();
-            } else {
-                fullscreen.sync_page();
+            });
+        }
+    }
+
+    fn finish_picture(self: &Rc<Self>, entering: bool, turn: u64) {
+        let Some((core, window)) = self.live_window() else {
+            return;
+        };
+        let (toggle, old) = {
+            let mut state = self.state.borrow_mut();
+            let acting = state.acting;
+            let page = &mut state.page;
+            if page.turn != turn {
+                return;
             }
-        });
+            page.picturing = false;
+            let covers = std::mem::take(&mut page.pending_covers);
+            let toggle = !acting
+                && !page.transitioning
+                && window_is_full_screen(&core, &window) != entering
+                && page.tab.as_ref().and_then(Weak::load).is_some() == entering;
+            if toggle {
+                page.entered = entering;
+                page.asked = if entering { 1 } else { -1 };
+                if !entering {
+                    page.left_tab = None;
+                }
+                (true, std::mem::replace(&mut page.covers, covers))
+            } else {
+                (false, covers)
+            }
+        };
+        uncover(old, false);
+        if toggle {
+            self.toggle();
+        } else {
+            self.sync_page();
+        }
     }
 
     fn notified(self: &Rc<Self>, name: &NSString) {
@@ -550,11 +562,11 @@ impl FullScreen {
                 return;
             }
             state.closed = close;
-            let Some(page) = state.page.as_mut() else {
-                return;
-            };
-            if will {
+            let page = &mut state.page;
+            if close || will {
                 page.cancel_draw();
+            }
+            if will {
                 page.transitioning = true;
                 page.settling = true;
                 page.ours = page.asked == if entering { 1 } else { -1 };
@@ -585,9 +597,7 @@ impl FullScreen {
         }
         self.update_seen(left_app);
         if did {
-            if let Some(page) = self.state.borrow_mut().page.as_mut() {
-                page.ours = false;
-            }
+            self.state.borrow_mut().page.ours = false;
             let weak = Rc::downgrade(self);
             main_queue::post(Box::new(move || {
                 if let Some(fullscreen) = weak.upgrade().filter(|item| item.live_window().is_some())
@@ -638,10 +648,7 @@ impl FullScreen {
         };
         let active_fullscreen = active && window_is_full_screen(&core, &window);
         let changed = {
-            let mut state = self.state.borrow_mut();
-            let Some(state) = state.page.as_mut() else {
-                return;
-            };
+            let state = &mut self.state.borrow_mut().page;
             if state.settling && !state.transitioning && visible {
                 state.settling = false;
             }
@@ -671,7 +678,7 @@ impl FullScreen {
     }
 
     pub fn reconsider_sight(&self) {
-        self.state.borrow_mut().page();
+        self.state.borrow_mut().expose_page = true;
         self.update_seen(false);
     }
 
