@@ -29,7 +29,7 @@ mod mac {
     use block2::RcBlock;
     use objc2::{MainThreadMarker, rc::Retained, runtime::AnyObject};
     use objc2_app_kit::{
-        NSApplication, NSEvent, NSEventModifierFlags, NSScreen, NSWindow, NSWindowButton,
+        NSApplication, NSColor, NSEvent, NSEventModifierFlags, NSScreen, NSWindow, NSWindowButton,
         NSWindowDidEnterFullScreenNotification, NSWindowDidExitFullScreenNotification,
     };
     use objc2_foundation::{
@@ -241,6 +241,28 @@ mod mac {
             assert!(!app.isActive(), "The app activated during the visibility check");
             controllers.user_sees(&window) && sight_events.get() > events
         });
+        let cover = chrome.core.window();
+        cover.setFrame_display(window.frame(), true);
+        cover.setBackgroundColor(Some(&NSColor::blackColor()));
+        cover.setOpaque(true);
+        cover.setAlphaValue(1.);
+        for covered in [true, false] {
+            let events = sight_events.get();
+            if covered {
+                cover.orderFrontRegardless();
+            } else {
+                cover.orderOut(None);
+            }
+            wait_for(
+                "No inactive sight reply and notification after changing cover",
+                || {
+                    assert!(!app.isActive(), "The app activated during the cover check");
+                    assert!(window.isVisible(), "The target must stay ordered in");
+                    controllers.reconsider_sight(&window);
+                    controllers.user_sees(&window) != covered && sight_events.get() > events
+                },
+            );
+        }
         let placement = Placement {
             center: Some(NSPoint::new(50., 80.)),
             trailing: false,
@@ -328,9 +350,6 @@ mod mac {
         );
         println!("live_windows: Chromium key dispatch to an AppKit menu action not checked; the harness does not activate the app or make a window key");
         println!("live_windows: foreground AppKit fullscreen entry and exit not checked");
-        println!(
-            "live_windows: inactive visibility checked; a fully covered, ordered-in window was not tested"
-        );
         println!(
             "live_windows: native sharing after trailing placement without resize not checked (indicator and child pill)"
         );

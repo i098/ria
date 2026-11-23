@@ -142,7 +142,7 @@ pub struct FullScreen {
 }
 
 impl FullScreen {
-    pub fn new(
+    pub(super) fn new(
         core: &Window,
         mtm: MainThreadMarker,
         background: bool,

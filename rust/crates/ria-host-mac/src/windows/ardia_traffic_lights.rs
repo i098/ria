@@ -58,7 +58,7 @@ pub struct TrafficLights {
 }
 
 impl TrafficLights {
-    pub fn configure(window: &NSWindow) -> Rc<Self> {
+    pub(super) fn configure(window: &NSWindow) -> Rc<Self> {
         let frame = window.frame();
         window.setStyleMask(window.styleMask() | NSWindowStyleMask::FullSizeContentView);
         if window.frame() != frame {
