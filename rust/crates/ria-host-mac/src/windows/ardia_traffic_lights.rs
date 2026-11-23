@@ -6,6 +6,7 @@ use std::cell::{Cell, RefCell};
 use std::collections::{HashMap, HashSet};
 use std::ptr;
 use std::rc::Rc;
+use std::time::Duration;
 
 use block2::RcBlock;
 use objc2::rc::{Retained, Weak};
@@ -20,6 +21,9 @@ use objc2_foundation::{
     NSArray, NSDictionary, NSNotification, NSNotificationCenter, NSNumber, NSPoint, NSRect, NSSize,
     NSString, ns_string,
 };
+use ria_engine::call::main_queue;
+
+use super::ardia_interface_scale::scale;
 
 const BUTTONS: [NSWindowButton; 3] = [
     NSWindowButton::CloseButton,
@@ -42,11 +46,19 @@ pub struct Placement {
 
 impl Placement {
     fn center(self, window_width: f64, size: NSSize) -> NSPoint {
-        match self.center {
-            Some(at) if self.trailing => NSPoint::new(window_width - at.x, at.y),
-            Some(at) => at,
-            None => NSPoint::new(18. + size.width / 2., 20. + size.height / 2.),
-        }
+        let scale = scale();
+        let at = self
+            .center
+            .unwrap_or_else(|| NSPoint::new(18. + size.width / 2., 20. + size.height / 2.));
+        let x = at.x * scale;
+        NSPoint::new(
+            if self.trailing && self.center.is_some() {
+                window_width - x
+            } else {
+                x
+            },
+            at.y * scale,
+        )
     }
 }
 
@@ -54,6 +66,8 @@ pub struct TrafficLights {
     window: Weak<NSWindow>,
     window_key: *const NSWindow,
     placement: Cell<Placement>,
+    moved: Cell<Option<Placement>>,
+    move_turn: Cell<u64>,
     observers: RefCell<Vec<Retained<AnyObject>>>,
 }
 
@@ -103,6 +117,8 @@ impl TrafficLights {
             window: Weak::from(window),
             window_key: ptr::from_ref(window),
             placement: Cell::default(),
+            moved: Cell::default(),
+            move_turn: Cell::default(),
             observers: RefCell::default(),
         });
         INSET_WINDOWS.with(|windows| {
@@ -118,19 +134,25 @@ impl TrafficLights {
             [
                 NSWindowDidResizeNotification,
                 NSWindowDidExitFullScreenNotification,
+                ns_string!("ArdiaInterfaceScaleDidChange"),
             ]
         } {
             let weak = Rc::downgrade(&lights);
             let callback = RcBlock::new(move |_: std::ptr::NonNull<NSNotification>| {
                 if let Some(lights) = weak.upgrade() {
-                    lights.retile();
+                    if let Some(placement) = lights.moved.get() {
+                        lights.set_placement(placement);
+                    } else {
+                        lights.retile();
+                    }
                 }
             });
             // SAFETY: The block receives an NSNotification and does not outlive its observer token.
             let observer = unsafe {
                 NSNotificationCenter::defaultCenter().addObserverForName_object_queue_usingBlock(
                     Some(name),
-                    Some(window),
+                    (!name.isEqualToString(ns_string!("ArdiaInterfaceScaleDidChange")))
+                        .then_some(window),
                     None,
                     &callback,
                 )
@@ -142,10 +164,56 @@ impl TrafficLights {
     }
 
     pub fn set_placement(&self, placement: Placement) {
-        let previous = self.placement.replace(placement);
-        if previous != placement {
+        let changed = self.placement.replace(placement) != placement;
+        if self.moved.take().is_some() {
+            if let Some(window) = self.window.load() {
+                translate_buttons(&window, 0.);
+            }
+            self.retile();
+        } else if changed {
             self.retile();
         }
+    }
+
+    pub(super) fn move_to(self: &Rc<Self>, placement: Placement) {
+        let Some(window) = self.window.load() else {
+            return;
+        };
+        let laid_out = self.placement.get();
+        let Some(close) = window.standardWindowButton(NSWindowButton::CloseButton) else {
+            return self.set_placement(placement);
+        };
+        let width = window.frame().size.width;
+        let size = close.frame().size;
+        let from = laid_out.center(width, size);
+        let to = placement.center(width, size);
+        if laid_out.trailing != placement.trailing
+            || from.y != to.y
+            || from.x == to.x
+            || window.styleMask().contains(NSWindowStyleMask::FullScreen)
+            || !translate_buttons(&window, to.x - from.x)
+        {
+            self.set_placement(placement);
+            return;
+        }
+        self.moved.set(Some(placement));
+        if let Some(frame) = frame_view(&window) {
+            tuck_buttons(&window, &frame, to.x - from.x);
+        }
+        let turn = self.move_turn.get().wrapping_add(1);
+        self.move_turn.set(turn);
+        let weak = Rc::downgrade(self);
+        main_queue::after(
+            Duration::from_millis(50),
+            Box::new(move || {
+                if let Some(lights) = weak.upgrade()
+                    && lights.move_turn.get() == turn
+                    && let Some(placement) = lights.moved.get()
+                {
+                    lights.set_placement(placement);
+                }
+            }),
+        );
     }
 
     fn retile(&self) {
@@ -174,36 +242,38 @@ impl TrafficLights {
             send_no_args(&frame, name);
         }
         sync_sharing_windows(&window);
-        let buttons = BUTTONS.map(|kind| window.standardWindowButton(kind));
-        let Some(close) = buttons.iter().flatten().next() else {
-            return;
-        };
-        if window.styleMask().contains(NSWindowStyleMask::FullScreen) {
-            for button in buttons.iter().flatten() {
-                button.setHidden(false);
-            }
-            return;
-        }
-        let left = close.convertRect_toView(close.bounds(), Some(&frame));
+        tuck_buttons(&window, &frame, 0.);
+    }
+}
+
+fn tuck_buttons(window: &NSWindow, frame: &NSView, dx: f64) {
+    let buttons = BUTTONS.map(|kind| window.standardWindowButton(kind));
+    let Some(close) = buttons.iter().flatten().next() else {
+        return;
+    };
+    let outside = if window.styleMask().contains(NSWindowStyleMask::FullScreen) {
+        false
+    } else {
+        let left = close.convertRect_toView(close.bounds(), Some(frame));
         let right =
             buttons
                 .iter()
                 .flatten()
                 .fold(left.origin.x + left.size.width, |right, button| {
-                    let bounds = button.convertRect_toView(button.bounds(), Some(&frame));
+                    let bounds = button.convertRect_toView(button.bounds(), Some(frame));
                     right.max(bounds.origin.x + bounds.size.width)
                 });
-        let height = frame.bounds().size.height;
-        let outside = right <= 0.
-            || left.origin.x >= frame.bounds().size.width
+        let bounds = frame.bounds();
+        right + dx <= 0.
+            || left.origin.x + dx >= bounds.size.width
             || if frame.isFlipped() {
                 left.origin.y + left.size.height <= 0.
             } else {
-                left.origin.y >= height
-            };
-        for button in buttons.iter().flatten() {
-            button.setHidden(outside);
-        }
+                left.origin.y >= bounds.size.height
+            }
+    };
+    for button in buttons.iter().flatten() {
+        button.setHidden(outside);
     }
 }
 
@@ -244,7 +314,7 @@ fn extended_titlebar_frame(frame: &NSView, mut titlebar: NSRect) -> NSRect {
     let height = window
         .standardWindowButton(NSWindowButton::CloseButton)
         .map_or(14., |button| button.frame().size.height);
-    let reach = (center.y + height / 2.).ceil();
+    let reach = (center.y * scale() + height / 2.).ceil();
     let flipped = frame.isFlipped();
     let bottom = if flipped {
         titlebar.origin.y + titlebar.size.height
@@ -431,7 +501,59 @@ fn sync_sharing_windows(window: &NSWindow) {
     }
 }
 
-fn frame_view(window: &NSWindow) -> Option<Retained<NSView>> {
+pub(super) fn frame_view(window: &NSWindow) -> Option<Retained<NSView>> {
     // SAFETY: The view hierarchy is accessible on the main thread.
     unsafe { window.contentView()?.superview() }
+}
+
+fn translate_buttons(window: &NSWindow, dx: f64) -> bool {
+    let Some(transaction) = AnyClass::get(c"CATransaction") else {
+        return false;
+    };
+    let buttons = BUTTONS.map(|kind| window.standardWindowButton(kind));
+    let layers =
+        buttons.map(|button| button.and_then(|button| unsafe { msg_send![&*button, layer] }));
+    let [Some(a), Some(b), Some(c)]: [Option<Retained<AnyObject>>; 3] = layers else {
+        return false;
+    };
+    let offset = NSNumber::numberWithDouble(dx);
+    // SAFETY: CATransaction and CALayer support these selectors and the translation key path.
+    unsafe {
+        let _: () = msg_send![transaction, begin];
+        let _: () = msg_send![transaction, setDisableActions: objc2::runtime::Bool::YES];
+        for layer in [a, b, c] {
+            let _: () = msg_send![&*layer, setValue: &*offset, forKeyPath: ns_string!("transform.translation.x")];
+        }
+        let _: () = msg_send![transaction, commit];
+    }
+    true
+}
+
+pub(super) fn frame_corner_radius(window: &NSWindow) -> Option<f64> {
+    if window.styleMask().contains(NSWindowStyleMask::FullScreen) {
+        return None;
+    }
+    let frame = frame_view(window)?;
+    for selector in [sel!(cornerRadius), sel!(_cornerRadius)] {
+        if frame.respondsToSelector(selector)
+            && let Some(method) = frame.class().instance_method(selector)
+        {
+            let radius = unsafe {
+                let call: unsafe extern "C-unwind" fn(&NSView, Sel) -> f64 =
+                    std::mem::transmute(method.implementation());
+                call(&frame, selector)
+            };
+            if radius.is_finite() && radius > 0. {
+                return Some(radius);
+            }
+        }
+    }
+    if frame.respondsToSelector(sel!(roundedCornerRadius)) {
+        // SAFETY: NSThemeFrame's selector takes no arguments and returns a float.
+        let radius: f32 = unsafe { msg_send![&*frame, roundedCornerRadius] };
+        if radius.is_finite() && radius > 0. {
+            return Some(radius.into());
+        }
+    }
+    None
 }

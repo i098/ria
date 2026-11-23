@@ -12,7 +12,7 @@ use block2::RcBlock;
 use objc2::rc::{Retained, Weak as ObjcWeak};
 use objc2::runtime::{AnyObject, NSObject};
 use objc2::{AnyThread, DefinedClass, MainThreadMarker, define_class, msg_send};
-use objc2_app_kit::{NSApplication, NSEvent, NSWindow, NSWindowWillCloseNotification};
+use objc2_app_kit::{NSApplication, NSEvent, NSView, NSWindow, NSWindowWillCloseNotification};
 use objc2_foundation::{
     NSComparisonResult, NSNotification, NSNotificationCenter, NSPoint, NSRect, NSSize, NSString,
     NSUUID,
@@ -38,6 +38,7 @@ pub struct Controller {
     pub core: Retained<Window>,
     pub fullscreen: Rc<FullScreen>,
     pub traffic_lights: Option<Rc<TrafficLights>>,
+    pub(super) root: RefCell<Option<Retained<NSView>>>,
     kind: Cell<WindowKind>,
     token: Option<Retained<NSString>>,
     profile: Option<ObjcWeak<Profile>>,
@@ -203,6 +204,7 @@ impl Controllers {
                 core,
                 fullscreen,
                 traffic_lights,
+                root: RefCell::default(),
                 kind: Cell::new(kind),
                 token,
                 profile: profile.map(ObjcWeak::from),
@@ -240,11 +242,11 @@ impl Controller {
         self.token.as_deref()
     }
 
-    fn utility(&self) -> bool {
+    pub(super) fn utility(&self) -> bool {
         matches!(self.kind(), WindowKind::Stray | WindowKind::Standalone)
     }
 
-    fn key_context(&self) -> KeyContext {
+    pub(super) fn key_context(&self) -> KeyContext {
         if self.fullscreen.is_full_screen() {
             KeyContext::FullScreenBrowser
         } else {
