@@ -289,13 +289,19 @@ mod mac {
             observe(&window, unsafe { NSWindowDidExitFullScreenNotification });
         normal
             .fullscreen
-            .act_window_full_screen(true, Duration::ZERO, None);
+            .act_window_full_screen(true, Duration::ZERO);
+        normal
+            .fullscreen
+            .act_window_full_screen(true, Duration::ZERO);
         assert_eq!((enter_events.get(), exit_events.get()), (1, 0));
         assert!(normal.core.acted_full_screen() && normal.fullscreen.is_full_screen());
         assert!(!normal.fullscreen.transitioning());
         normal
             .fullscreen
-            .act_window_full_screen(false, Duration::ZERO, None);
+            .act_window_full_screen(false, Duration::ZERO);
+        normal
+            .fullscreen
+            .act_window_full_screen(false, Duration::ZERO);
         assert_eq!((enter_events.get(), exit_events.get()), (1, 1));
         assert!(!normal.core.acted_full_screen() && !normal.fullscreen.is_full_screen());
         assert_eq!(window.frame(), before);
@@ -309,7 +315,7 @@ mod mac {
             controller.core.close();
         }
         println!(
-            "live_windows: engine shortcut, controller claims, titlebar hit testing, visibility, and fullscreen events checked"
+            "live_windows: engine shortcut, controller claims, titlebar hit testing, visibility, and acted fullscreen events checked"
         );
     }
 

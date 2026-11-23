@@ -126,9 +126,6 @@ struct Transition {
     acted: bool,
     acting: bool,
     restore_frame: Option<NSRect>,
-    acted_occlusion: Option<bool>,
-    acted_server: bool,
-    occlusion_turn: u64,
     overruled: bool,
     seen: bool,
     closed: bool,
@@ -265,25 +262,16 @@ impl FullScreen {
             if state.closed {
                 return;
             }
-            let occlusion_acted =
-                self.background && (!self.allow_occlusion || state.acted_occlusion.is_some());
-            if !occlusion_acted && screen_locked() {
-                return;
-            }
-            if occlusion_acted && state.acted_occlusion.is_none() {
-                (true, state.overruled)
+            if self.background && !self.allow_occlusion {
+                (true, false)
             } else {
-                let app_kit = state.acted_occlusion.unwrap_or_else(|| {
-                    window
-                        .occlusionState()
-                        .contains(NSWindowOcclusionState::Visible)
-                });
-                let server = (!active || !app_kit)
-                    && if state.acted_occlusion.is_some() {
-                        window.isVisible() && !window.isMiniaturized() && state.acted_server
-                    } else {
-                        window_server_shows(&window)
-                    };
+                if screen_locked() {
+                    return;
+                }
+                let app_kit = window
+                    .occlusionState()
+                    .contains(NSWindowOcclusionState::Visible);
+                let server = (!active || !app_kit) && window_server_shows(&window);
                 (
                     if active { app_kit || server } else { server },
                     !app_kit && server,
@@ -321,28 +309,11 @@ impl FullScreen {
         }
     }
 
-    pub fn reconsider_sight(self: &Rc<Self>) {
+    pub fn reconsider_sight(&self) {
         self.update_seen(false);
     }
 
-    pub fn act_occlusion(&self, visible: Option<bool>) {
-        self.state.borrow_mut().acted_occlusion = visible;
-        if let Some(core) = self.core.load() {
-            // SAFETY: This notification's object is the live AppKit window.
-            unsafe {
-                NSNotificationCenter::defaultCenter().postNotificationName_object(
-                    NSWindowDidChangeOcclusionStateNotification,
-                    Some(&core.window()),
-                )
-            };
-        }
-    }
-
-    pub fn act_window_server(&self, shows: bool) {
-        self.state.borrow_mut().acted_server = shows;
-    }
-
-    pub fn toggle(self: &Rc<Self>, transition: Duration, occlusion_gap: Option<f64>) {
+    pub fn toggle(self: &Rc<Self>, transition: Duration) {
         let Some(core) = self.core.load() else {
             return;
         };
@@ -351,22 +322,17 @@ impl FullScreen {
             window.toggleFullScreen(None);
             return;
         }
-        self.act_window_full_screen(!self.is_full_screen(), transition, occlusion_gap);
+        self.act_window_full_screen(!self.is_full_screen(), transition);
     }
 
-    pub fn act_window_full_screen(
-        self: &Rc<Self>,
-        entering: bool,
-        transition: Duration,
-        occlusion_gap: Option<f64>,
-    ) {
+    pub fn act_window_full_screen(self: &Rc<Self>, entering: bool, transition: Duration) {
         let Some(core) = self.core.load() else {
             return;
         };
         let window = core.window();
         {
             let mut state = self.state.borrow_mut();
-            if state.closed || state.acting {
+            if state.closed || state.acting || state.acted == entering {
                 return;
             }
             state.acting = true;
@@ -397,32 +363,6 @@ impl FullScreen {
             let restore = self.state.borrow_mut().restore_frame.take();
             if let Some(frame) = restore {
                 window.setFrame_display(frame, true);
-            }
-        }
-        if let Some(gap) = occlusion_gap {
-            let turn = {
-                let mut state = self.state.borrow_mut();
-                state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
-                state.occlusion_turn
-            };
-            self.act_occlusion(Some(false));
-            let weak = Rc::downgrade(self);
-            let seconds = (transition.as_secs_f64() + gap).max(0.);
-            if let Ok(wait) = Duration::try_from_secs_f64(seconds) {
-                main_queue::after(
-                    wait,
-                    Box::new(move || {
-                        if let Some(fullscreen) = weak.upgrade() {
-                            let current = {
-                                let state = fullscreen.state.borrow();
-                                !state.closed && state.occlusion_turn == turn
-                            };
-                            if current {
-                                fullscreen.act_occlusion(Some(true));
-                            }
-                        }
-                    }),
-                );
             }
         }
         let weak = Rc::downgrade(self);

@@ -25,7 +25,6 @@ use super::ardia_window_full_screen::FullScreen;
 use crate::core::bindings::{Profile, Tab, Window};
 
 const CHROME_CLAIM: Duration = Duration::from_secs(20);
-const CLOSING: Duration = Duration::from_secs(3);
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum WindowKind {
@@ -41,8 +40,6 @@ pub struct Controller {
     pub traffic_lights: Option<Rc<TrafficLights>>,
     kind: Cell<WindowKind>,
     token: Option<Retained<NSString>>,
-    show_inactive: Cell<bool>,
-    closing: RefCell<Vec<ObjcWeak<Tab>>>,
     profile: Option<ObjcWeak<Profile>>,
     mtm: MainThreadMarker,
     owner: Weak<Controllers>,
@@ -213,8 +210,6 @@ impl Controllers {
                 traffic_lights,
                 kind: Cell::new(kind),
                 token,
-                show_inactive: Cell::default(),
-                closing: RefCell::default(),
                 profile: profile.map(ObjcWeak::from),
                 mtm: self.mtm,
                 owner: Rc::downgrade(self),
@@ -249,43 +244,9 @@ impl Controller {
     pub fn chrome_token(&self) -> Option<&NSString> {
         self.token.as_deref()
     }
-    pub fn show_inactive(&self) -> bool {
-        self.show_inactive.get()
-    }
 
     fn utility(&self) -> bool {
         matches!(self.kind(), WindowKind::Stray | WindowKind::Standalone)
-    }
-
-    pub fn note_closing(self: &Rc<Self>, tab: &Tab) {
-        let mut closing = self.closing.borrow_mut();
-        closing.retain(|tab| tab.load().is_some());
-        if !closing
-            .iter()
-            .any(|each| each.load().is_some_and(|each| std::ptr::eq(&*each, tab)))
-        {
-            closing.push(ObjcWeak::from(tab));
-        }
-        let weak = Rc::downgrade(self);
-        let tab = ObjcWeak::from(tab);
-        main_queue::after(
-            CLOSING,
-            Box::new(move || {
-                if let (Some(controller), Some(tab)) = (weak.upgrade(), tab.load()) {
-                    controller.remove_closing(&tab);
-                }
-            }),
-        );
-    }
-
-    pub fn app_changing(&self) -> bool {
-        self.closing.borrow().iter().any(|tab| tab.load().is_some())
-    }
-
-    fn remove_closing(&self, tab: &Tab) {
-        self.closing
-            .borrow_mut()
-            .retain(|each| each.load().is_some_and(|each| !std::ptr::eq(&*each, tab)));
     }
 
     fn key_context(&self) -> KeyContext {
@@ -316,20 +277,6 @@ define_class!(
     struct Delegate;
 
     impl Delegate {
-        #[unsafe(method(window:showRequestedActive:))]
-        fn show_requested_active(&self, _window: &Window, active: bool) {
-            if let Some(controller) = self.ivars().0.upgrade() && controller.kind() == WindowKind::AwaitingApp {
-                controller.show_inactive.set(!active);
-            }
-        }
-
-        #[unsafe(method(window:didRemoveTab:))]
-        fn removed_tab(&self, _window: &Window, tab: &Tab) {
-            if let Some(controller) = self.ivars().0.upgrade() {
-                controller.remove_closing(tab);
-            }
-        }
-
         #[unsafe(method(windowShouldClose:))]
         fn should_close(&self, window: &Window) -> bool {
             self.ivars().0.upgrade().and_then(|controller| controller.owner.upgrade())

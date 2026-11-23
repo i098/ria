@@ -260,7 +260,7 @@ impl TrafficLights {
         for button in buttons.iter().flatten() {
             button.setHidden(outside);
         }
-        adjust_sharing(&window, &frame, dx, dy);
+        adjust_sharing(&window, &frame, dx);
     }
 }
 
@@ -376,15 +376,35 @@ fn send_no_args(object: &AnyObject, selector: Sel) {
     }
 }
 
-fn adjust_sharing(window: &NSWindow, frame: &NSView, dx: f64, dy: f64) {
+fn adjust_sharing(window: &NSWindow, frame: &NSView, dx: f64) {
+    static TUCKED: u8 = 0;
     if frame.respondsToSelector(sel!(sharingIndicator)) {
         // SAFETY: The private selector takes no arguments and returns a nullable object.
         let indicator: Option<Retained<AnyObject>> = unsafe { msg_send![frame, sharingIndicator] };
         if let Some(indicator) = indicator.and_then(|indicator| indicator.downcast::<NSView>().ok())
         {
-            move_view(&indicator, frame, dx, dy);
+            if dx != 0. {
+                move_view(&indicator, frame, dx, 0.);
+            }
             let shown = indicator.convertRect_toView(indicator.bounds(), Some(frame));
-            indicator.setHidden(!objc2_foundation::NSContainsRect(frame.bounds(), shown));
+            let outside = !objc2_foundation::NSContainsRect(frame.bounds(), shown);
+            let key = ptr::from_ref(&TUCKED).cast();
+            let object = ptr::from_ref::<AnyObject>(&indicator);
+            unsafe {
+                let was_tucked = !ffi::objc_getAssociatedObject(object, key).is_null();
+                if outside != was_tucked {
+                    let tucked = outside.then(|| NSNumber::numberWithBool(true));
+                    ffi::objc_setAssociatedObject(
+                        object.cast_mut(),
+                        key,
+                        tucked.as_deref().map_or(ptr::null_mut(), |value| {
+                            ptr::from_ref::<AnyObject>(value).cast_mut()
+                        }),
+                        RETAIN_NONATOMIC,
+                    );
+                    indicator.setHidden(outside);
+                }
+            }
         }
     }
     if let Some(children) = window.childWindows() {
