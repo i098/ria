@@ -8,6 +8,7 @@
 pub mod endpoints;
 pub mod errors;
 pub mod fuzzy;
+pub mod identity;
 
 #[cfg(test)]
 mod fuzzy_reference;

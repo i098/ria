@@ -1,0 +1,60 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-6-identity/repo",
+  "unit": "packages/core/src/anonymousIdentity.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "anonymous-identity-rs",
+  "exports": [
+    {
+      "name": "hslHex",
+      "file": "packages/core/src/anonymousIdentity.ts",
+      "line": 64,
+      "params": [
+        {
+          "name": "hue",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "saturation",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "lightness",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "anonymousIdentity",
+      "file": "packages/core/src/anonymousIdentity.ts",
+      "line": 80,
+      "params": [
+        {
+          "name": "id",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ name: string; avatar: { colors: [string, string, string]; angle: number } }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

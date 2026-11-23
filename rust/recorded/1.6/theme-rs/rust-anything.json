@@ -1,0 +1,817 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-6-identity/repo",
+  "unit": "packages/core/src/theme.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "theme-rs",
+  "exports": [
+    {
+      "name": "padColor",
+      "file": "packages/core/src/theme.ts",
+      "line": 80,
+      "params": [
+        {
+          "name": "x",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "y",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "lightness",
+          "ts_type": "unknown",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "{ r: number; g: number; b: number; a: number }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "padPosition",
+      "file": "packages/core/src/theme.ts",
+      "line": 89,
+      "params": [
+        {
+          "name": "color",
+          "ts_type": "{ r: number; g: number; b: number; a: number }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ x: number; y: number }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "oklab",
+      "file": "packages/core/src/theme.ts",
+      "line": 98,
+      "params": [
+        {
+          "name": "c",
+          "ts_type": "{ r: number; g: number; b: number; a: number }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[number, number, number]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "fromOklab",
+      "file": "packages/core/src/theme.ts",
+      "line": 110,
+      "params": [
+        {
+          "name": "arg0",
+          "ts_type": "[number, number, number]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[number, number, number]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "colorHex",
+      "file": "packages/core/src/theme.ts",
+      "line": 121,
+      "params": [
+        {
+          "name": "color",
+          "ts_type": "{ r: number; g: number; b: number; a: number }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "hexColor",
+      "file": "packages/core/src/theme.ts",
+      "line": 125,
+      "params": [
+        {
+          "name": "hex",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ r: number; g: number; b: number; a: number }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "mixOklab",
+      "file": "packages/core/src/theme.ts",
+      "line": 132,
+      "params": [
+        {
+          "name": "a",
+          "ts_type": "{ r: number; g: number; b: number; a: number }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "b",
+          "ts_type": "{ r: number; g: number; b: number; a: number }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "t",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[number, number, number]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "lookAngle",
+      "file": "packages/core/src/theme.ts",
+      "line": 137,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "Pick<{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}, \"angle\">",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themeArea",
+      "file": "packages/core/src/theme.ts",
+      "line": 156,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "x",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "y",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "width",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "height",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[number, number, number]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themeDark",
+      "file": "packages/core/src/theme.ts",
+      "line": 166,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "appDark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "resolveTheme",
+      "file": "packages/core/src/theme.ts",
+      "line": 170,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "dark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "darkenedLook",
+      "file": "packages/core/src/theme.ts",
+      "line": 177,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "keep",
+          "ts_type": "unknown",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "requestedDarkFor",
+      "file": "packages/core/src/theme.ts",
+      "line": 181,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "appDark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "source",
+          "ts_type": "(\"own\" | \"app\" | \"utility\")",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "shownLook",
+      "file": "packages/core/src/theme.ts",
+      "line": 185,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "appDark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "source",
+          "ts_type": "(\"own\" | \"app\" | \"utility\")",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ look: {\n  stops: { color: ThemeColor; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: ThemeColor; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}; requestedDark: boolean; dark: boolean }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "arcLayerAlpha",
+      "file": "packages/core/src/theme.ts",
+      "line": 194,
+      "params": [
+        {
+          "name": "intensity",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themeLayerAlpha",
+      "file": "packages/core/src/theme.ts",
+      "line": 198,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themeUnderlayAlpha",
+      "file": "packages/core/src/theme.ts",
+      "line": 202,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "dark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themeGrainAlpha",
+      "file": "packages/core/src/theme.ts",
+      "line": 207,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "flatColors",
+      "file": "packages/core/src/theme.ts",
+      "line": 211,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themeAccent",
+      "file": "packages/core/src/theme.ts",
+      "line": 215,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themePalette",
+      "file": "packages/core/src/theme.ts",
+      "line": 219,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "backdropUnderColor",
+      "file": "packages/core/src/theme.ts",
+      "line": 233,
+      "params": [
+        {
+          "name": "underlayAlpha",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "dark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themeUnderColor",
+      "file": "packages/core/src/theme.ts",
+      "line": 238,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "dark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "opaqueThemeTint",
+      "file": "packages/core/src/theme.ts",
+      "line": 248,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "dark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[string, string]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themeLuminance",
+      "file": "packages/core/src/theme.ts",
+      "line": 257,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "dark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "readableDark",
+      "file": "packages/core/src/theme.ts",
+      "line": 263,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "dark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "stopLightness",
+      "file": "packages/core/src/theme.ts",
+      "line": 270,
+      "params": [
+        {
+          "name": "stop",
+          "ts_type": "{ color: { r: number; g: number; b: number; a: number }; x: number; y: number }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withStopAt",
+      "file": "packages/core/src/theme.ts",
+      "line": 274,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "index",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "x",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "y",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withStopLightness",
+      "file": "packages/core/src/theme.ts",
+      "line": 279,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "index",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "lightness",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withAngle",
+      "file": "packages/core/src/theme.ts",
+      "line": 284,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "degrees",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withAddedStop",
+      "file": "packages/core/src/theme.ts",
+      "line": 288,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withoutStop",
+      "file": "packages/core/src/theme.ts",
+      "line": 297,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "index",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withTexture",
+      "file": "packages/core/src/theme.ts",
+      "line": 302,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "texture",
+          "ts_type": "(typeof THEME_TEXTURES)[number]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n})",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "startingTheme",
+      "file": "packages/core/src/theme.ts",
+      "line": 306,
+      "params": [
+        {
+          "name": "swatch",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "sanitizeTheme",
+      "file": "packages/core/src/theme.ts",
+      "line": 347,
+      "params": [
+        {
+          "name": "v",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": [],
+  "float_tolerance": 1e-12
+}

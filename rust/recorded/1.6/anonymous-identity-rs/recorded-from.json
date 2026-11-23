@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/anonymousIdentity.ts",
+  "files": 1,
+  "fingerprint": "2cf8b73cf1b9e832",
+  "coverage": {
+    "lines": 86,
+    "reached": 86,
+    "files": [
+      {
+        "file": "packages/core/src/anonymousIdentity.ts",
+        "lines": 86,
+        "reached": 86,
+        "missed": ""
+      }
+    ]
+  }
+}

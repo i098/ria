@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/telemetryWire.ts",
+  "files": 1,
+  "fingerprint": "de831ecee7636105",
+  "coverage": {
+    "lines": 67,
+    "reached": 67,
+    "files": [
+      {
+        "file": "packages/core/src/telemetryWire.ts",
+        "lines": 67,
+        "reached": 67,
+        "missed": ""
+      }
+    ]
+  }
+}

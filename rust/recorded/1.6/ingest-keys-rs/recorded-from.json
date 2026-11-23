@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/ingestKeys.ts",
+  "files": 1,
+  "fingerprint": "09d131e7b63061a2",
+  "coverage": {
+    "lines": 14,
+    "reached": 14,
+    "files": [
+      {
+        "file": "packages/core/src/ingestKeys.ts",
+        "lines": 14,
+        "reached": 14,
+        "missed": ""
+      }
+    ]
+  }
+}

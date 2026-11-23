@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-6-identity/repo",
+  "unit": "packages/core/src/ingestKeys.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "ingest-keys-rs",
+  "exports": [
+    {
+      "name": "ingestSourceOf",
+      "file": "packages/core/src/ingestKeys.ts",
+      "line": 15,
+      "params": [
+        {
+          "name": "key",
+          "ts_type": "string | null | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "(\"app\" | \"cli\" | \"site\") | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}
