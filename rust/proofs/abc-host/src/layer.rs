@@ -241,41 +241,6 @@ pub struct Ivars {
     pub last_error: RefCell<Option<String>>,
 }
 
-/// `setMarkedText:selectedRange:replacementRange:`, added with `class_addMethod` after `define_class!`:
-/// blaze 0.0.0-dev (f585269) gives `define_class!` an argument list of 2 for this selector (3 arguments), so objc2 refuses it.
-unsafe extern "C-unwind" fn set_marked_text(this: &RuneView, _cmd: Sel, string: &AnyObject, selected: NSRange, _replacement: NSRange) {
-    let text = plain_string(string);
-    if text.is_empty() {
-        *this.ivars().marked.borrow_mut() = None;
-        this.with_host(|h| h.runtime_mut().ime(Ime::Preedit(String::new(), None, Vec::new())));
-        return;
-    }
-    let cursor = if selected.location == NSNotFound as usize {
-        None
-    } else {
-        let start = utf16_to_byte(&text, selected.location);
-        let end = utf16_to_byte(&text, selected.location + selected.length);
-        Some((start, end))
-    };
-    let clauses = match cursor {
-        Some((a, b)) if a != b => vec![Clause::new(0..text.len()), Clause::new(a..b).target()],
-        _ => Vec::new(),
-    };
-    *this.ivars().marked.borrow_mut() = Some(text.clone());
-    this.with_host(|h| h.runtime_mut().ime(Ime::Preedit(text, cursor, clauses)));
-}
-
-fn add_set_marked_text() {
-    let imp: unsafe extern "C-unwind" fn() = unsafe { std::mem::transmute(set_marked_text as unsafe extern "C-unwind" fn(&RuneView, Sel, &AnyObject, NSRange, NSRange)) };
-    // SAFETY: adds one method to a class we own, with the type encoding of its signature. The second and later calls
-    // find the method there and return NO (no `Once`: blaze refuses `call_once`).
-    let _ = unsafe {
-        let class = objc2::ffi::objc_getClass(c"HalyardRuneView".as_ptr());
-        let selector = objc2::ffi::sel_registerName(c"setMarkedText:selectedRange:replacementRange:".as_ptr());
-        objc2::ffi::class_addMethod(class as *mut _, selector.expect("selector"), imp, c"v56@0:8@16{_NSRange=QQ}24{_NSRange=QQ}40".as_ptr())
-    };
-}
-
 define_class!(
     #[unsafe(super(NSView))]
     #[thread_kind = MainThreadOnly]
@@ -506,6 +471,29 @@ define_class!(
             NSRange { location: NSNotFound as usize, length: 0 }
         }
 
+        #[unsafe(method(setMarkedText:selectedRange:replacementRange:))]
+        fn set_marked_text(&self, string: &AnyObject, selected: NSRange, _replacement: NSRange) {
+            let text = plain_string(string);
+            if text.is_empty() {
+                *self.ivars().marked.borrow_mut() = None;
+                self.with_host(|h| h.runtime_mut().ime(Ime::Preedit(String::new(), None, Vec::new())));
+                return;
+            }
+            let cursor = if selected.location == NSNotFound as usize {
+                None
+            } else {
+                let start = utf16_to_byte(&text, selected.location);
+                let end = utf16_to_byte(&text, selected.location + selected.length);
+                Some((start, end))
+            };
+            let clauses = match cursor {
+                Some((a, b)) if a != b => vec![Clause::new(0..text.len()), Clause::new(a..b).target()],
+                _ => Vec::new(),
+            };
+            *self.ivars().marked.borrow_mut() = Some(text.clone());
+            self.with_host(|h| h.runtime_mut().ime(Ime::Preedit(text, cursor, clauses)));
+        }
+
         #[unsafe(method(unmarkText))]
         fn unmark_text(&self) {
             if let Some(text) = self.ivars().marked.borrow_mut().take() {
@@ -598,8 +586,6 @@ fn mods(event: &NSEvent) -> Mods {
 
 impl RuneView {
     pub fn new(mtm: MainThreadMarker, mode: Mode, frame: NSRect) -> Retained<Self> {
-        let _ = <Self as objc2::ClassType>::class(); // registers the class
-        add_set_marked_text();
         TRANSPARENT.with(|t| t.set(mode == Mode::Above));
         let ivars = Ivars {
             rect_frames: Cell::new(0),

@@ -11,13 +11,9 @@ Each step prints one JSON line. A proof passes when `result` has `"pass":true` a
 and `ulimit -n 10240` on the Mac (the git fetch of the Rune checkout opens many files). The older `blaze 0.20261027.0`
 refused 3 groups of functions here; see `rust/tools/blaze/README.md` for the errors and the fix.
 
-With the patched blaze (`0.0.0-dev f585269`) the crate builds; results of the blaze-built binary on the Mac:
-
-- A: pass, 3 checks.
-- B: pass, 22 checks, after one change in this crate: `setMarkedText:selectedRange:replacementRange:` is added with `class_addMethod` after `define_class!`, because under blaze `define_class!` gives that 3-argument selector an argument list of 2 and objc2 panics at class registration (`selector ... accepts 3 arguments, but function accepts 2`).
-- C: FAILS to start. `accesskit_macos` (objc2 0.5.3) panics when its class is declared: `selector setAccessibilitySelectedTextRange: accepts 1 arguments, but function accepts 2`. Same family as the B error (the argument list `F::Arguments::ENCODINGS` has the wrong length under blaze). The code is in a dependency, so this crate cannot work around it.
-- `ulimit -n 10240` is needed or the Rune git fetch fails with `Too many open files`.
-- The load-case numbers in `rust/RESOURCES.md` were measured with `cargo build --release` before the blaze patch; they have not been repeated with blaze.
+With the patched blaze (`0.0.0-dev f585269` plus `rust/tools/blaze/` patches 0001 and 0002) the crate builds and the blaze-built binary passes on the Mac:
+A 3 checks, B 22 checks, C 11 checks, 0 fail each. `ulimit -n 10240` is needed or the Rune git fetch fails with `Too many open files`.
+The load-case numbers in `rust/RESOURCES.md` were measured with `cargo build --release` before blaze built this crate; they have not been repeated with blaze.
 
 ## Proof B and C results (Mac arm64, macOS 26.2)
 
