@@ -13,7 +13,7 @@ use std::time::{Duration, Instant};
 use block2::RcBlock;
 use objc2::rc::{Retained, Weak};
 use objc2::runtime::{AnyObject, NSObject};
-use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, Message, define_class, msg_send};
+use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, define_class, msg_send};
 use objc2_app_kit::{NSEvent, NSEventMask, NSEventType, NSView};
 use objc2_foundation::{NSData, NSPoint, NSRange, NSString, NSURL, NSUUID};
 use ria_engine::call::main_queue;
@@ -232,31 +232,21 @@ impl ElementPickMonitor {
             NSEvent::addLocalMonitorForEventsMatchingMask_handler(
                 NSEventMask::LeftMouseUp | NSEventMask::KeyDown,
                 &RcBlock::new(move |event: std::ptr::NonNull<NSEvent>| {
-                    let retained = event.as_ref().retain();
-                    let note_input = note_input.clone();
-                    main_queue::post(Box::new(move || {
-                        let Some(window) = retained.window(mtm) else {
-                            return;
-                        };
-                        let view = if retained.r#type() == NSEventType::KeyDown {
-                            if !matches!(retained.keyCode(), 36 | 76) {
-                                return;
-                            }
-                            window
-                                .firstResponder()
-                                .and_then(|responder| responder.downcast::<NSView>().ok())
-                        } else {
-                            window.contentView().and_then(|content| {
-                                let root = super::superview(&content).unwrap_or(content);
-                                root.hitTest(
-                                    root.convertPoint_fromView(retained.locationInWindow(), None),
-                                )
-                            })
-                        };
-                        if let Some(view) = view {
-                            note_input(&view);
-                        }
-                    }));
+                    let input = event.as_ref();
+                    let view = input.window(mtm).and_then(|window| match input.r#type() {
+                        NSEventType::KeyDown if matches!(input.keyCode(), 36 | 76) => window
+                            .firstResponder()
+                            .and_then(|responder| responder.downcast::<NSView>().ok()),
+                        NSEventType::LeftMouseUp => window.contentView().and_then(|content| {
+                            let root = super::superview(&content).unwrap_or(content);
+                            root.hitTest(root.convertPoint_fromView(input.locationInWindow(), None))
+                        }),
+                        _ => None,
+                    });
+                    if let Some(view) = view {
+                        let note_input = note_input.clone();
+                        main_queue::post(Box::new(move || note_input(&view)));
+                    }
                     event.as_ptr()
                 }),
             )
@@ -526,14 +516,15 @@ impl SharedImages {
         {
             return Err(error);
         }
+        Self::remove_stale(base);
         let own = root.join(format!("{}-{}", std::process::id(), unique_id()));
         DirBuilder::new().mode(0o700).create(&own)?;
         let lock = OpenOptions::new()
             .write(true)
             .create_new(true)
             .mode(0o600)
+            .custom_flags(libc::O_NOFOLLOW | libc::O_EXLOCK | libc::O_NONBLOCK)
             .open(own.join(".lock"))?;
-        lock.try_lock().map_err(io::Error::from)?;
         Ok(Self { own, _lock: lock })
     }
 
@@ -682,6 +673,28 @@ mod tests {
         assert_eq!(
             find_pick(items(&input), " A&B C\t8 "),
             Some(json!({"command": 42, "path": [0, 0], "flags": 8}))
+        );
+    }
+
+    #[test]
+    fn menu_descriptions_use_engine_types_and_preserve_visibility() {
+        let input = [
+            json!({"id": 17, "label": "A&&&B", "type": 2, "visible": false, "enabled": true, "checked": true}),
+            json!({"separator": true}),
+        ];
+        assert_eq!(
+            describe_menu(&input, false),
+            [
+                json!({"id": 17, "label": "A&B", "type": 3, "visible": false, "enabled": true}),
+                json!({"id": 0, "label": "", "type": 4, "visible": true, "enabled": false}),
+            ],
+        );
+        assert_eq!(
+            describe_menu(&input, true),
+            [
+                json!({"id": 17, "title": "A&B", "enabled": true, "hidden": true, "separator": false, "checked": true}),
+                json!({"id": 0, "title": "", "enabled": false, "hidden": false, "separator": true, "checked": false}),
+            ],
         );
     }
 

@@ -307,6 +307,25 @@ mod mac {
             StripCommandResult::Group { .. } => false,
         };
 
+        let urls = ["about:blank#dismissed".into(), "about:blank#adopt".into()];
+        parking.hold_link_tabs(&urls, "Default", Instant::now(), |url| {
+            Some(window.open_tab(&NSString::from_str(url), &profile, false))
+        });
+        if let Some(dismissed) = parking.first_link_tab().map(Message::retain) {
+            parking.dismiss_link_tab(&dismissed, |_| {});
+            let route = parking.route_link_tabs(&urls);
+            pass &= route.profile == Some("Default")
+                && route.dismissed == [0]
+                && route.adopt_ids == [None, Some("link:1".into())];
+            if let Some(adopted) = parking.park_link_tab("link:1", "adopted") {
+                parking.discard_tab(&adopted, "adopted", |_| {});
+            } else {
+                pass = false;
+            }
+        } else {
+            pass = false;
+        }
+
         let mut pick = ElementPick::default();
         let armed = pick.arm(&tab, 1);
         pass &= !pick.take(&tab, 1, armed);

@@ -78,16 +78,26 @@ impl PageCover {
         let weak_window = Weak::new(&*window);
         let host = super::superview(&page).as_deref().map(Weak::new);
         let pictured = page.bounds().size;
-        let done = Cell::new(Some(done));
+        let done = Rc::new(Cell::new(Some(done)));
+        let deadline = done.clone();
+        main_queue::after(
+            Duration::from_millis(400),
+            Box::new(move || {
+                if let Some(done) = deadline.take() {
+                    done(None);
+                }
+            }),
+        );
         tab.copy_picture(
             0.25,
             &RcBlock::new(move |image| {
-                let Some(done) = done.take() else { return };
+                let done = done.clone();
                 let image = Picture::retain(image);
                 let tab = weak_tab.clone();
                 let window = weak_window.clone();
                 let host = host.clone();
                 main_queue::post(Box::new(move || {
+                    let Some(done) = done.take() else { return };
                     let cover = (|| {
                         let (picture, tab, window) = (image?, tab.load()?, window.load()?);
                         let page = tab.view();

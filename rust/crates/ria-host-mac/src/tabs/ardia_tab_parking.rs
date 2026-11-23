@@ -77,7 +77,13 @@ impl TabParking {
 
     pub fn park(&mut self, key: String, tab: Retained<Tab>) {
         self.parking_view.addSubview(&tab.view());
-        self.parked.insert(key, tab);
+        let current = std::ptr::from_ref(&*tab);
+        if let Some(previous) = self.parked.insert(key, tab)
+            && std::ptr::from_ref(&*previous) != current
+        {
+            close_open_tab(&previous);
+            self.holders.remove(&std::ptr::from_ref(&*previous));
+        }
     }
 
     pub fn parked_tab(&self, key: &str) -> Option<&Tab> {
@@ -95,7 +101,7 @@ impl TabParking {
     pub fn release_transfer(&mut self, key: &str) {
         self.closed_launch.remove(key);
         if let Some(tab) = self.unpark(key) {
-            tab.close_now();
+            close_open_tab(&tab);
             self.holders.remove(&std::ptr::from_ref(&*tab));
         }
     }
@@ -175,7 +181,7 @@ impl TabParking {
                 .is_some_and(|parked| std::ptr::eq(&**parked, &*tab))
             {
                 self.parked.remove(&key);
-                tab.close_now();
+                close_open_tab(&tab);
                 self.holders.remove(&std::ptr::from_ref(&*tab));
             }
         }
