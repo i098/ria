@@ -1,9 +1,14 @@
 # blaze with the abc-host patch
 
 `blaze` (https://github.com/indexable-inc/blaze) at commit `f5852696ea0a3c2c865ed2cdb4379e41900f279b`
-(2026-10-30, the last commit of the v1 line that has `blaze build` and `blaze run`), plus
-`0001-blaze-abc-host.patch`. With it, `blaze build --release` builds the Rune host crate
-`rust/proofs/abc-host` on the Mac. The patch lives only in this repository.
+(2026-10-30, the last commit of the v1 line that has `blaze build` and `blaze run`), plus the patches
+`0001-blaze-abc-host.patch` and `0002-blaze-store-key-readonly-data.patch` (`install.sh` applies every `*.patch` in name order).
+With them, `blaze build --release` builds the Rune host crate `rust/proofs/abc-host` on the Mac and the
+result runs proofs A, B and C. The patches live only in this repository.
+
+The newest commit of blaze (`2dd8afbda0c7`, 2026-11-22) has no `hir-ty-codegen` crate: it is the v2 line. Its canary
+release `0.20261122.0` did not start on the Mac (`the pinned toolchain ... not there`) and on Linux (`io_uring_setup failed with ENOMEM`),
+so the v1 commit above stays the base.
 
 Install (Mac arm64 or Linux x86_64; clones the commit, applies the patch, builds with blaze's LLVM, installs
 `blaze`, `blaze-engine` and `blaze-rustc` into `~/.cargo/bin`):
@@ -42,3 +47,38 @@ After, on the Mac (arm64, macOS 26.2), blaze `0.0.0-dev (f585269)` installed by 
 - `blaze check` in `rust/`: `Finished dev profile [blaze] target(s) in 2.64s`.
 
 The previous Mac binary is kept as `~/.cargo/bin/blaze.v1-0.20261027.bak`.
+
+## Patch 0002: the store key of LLVM's code (objc2 `declare.rs:275`)
+
+Symptom, before (blaze `0.0.0-dev (f585269)` with patch 0001 only, Mac, proof C of `abc-host`; proof B had the same abort with 3 against 2):
+
+    thread 'main' panicked at objc2-0.5.3/src/runtime/declare.rs:275:9:
+    assertion `left == right` failed: selector setAccessibilitySelectedTextRange: accepts 1 arguments, but function accepts 2
+
+Cause: it is not a miscompile of `F::Arguments::ENCODINGS`; each function body is compiled right. blaze keeps the code LLVM made for a
+function in a store (`~/.cache/blaze/store`, or `BLAZE_CACHE`), under a key (`StoredCode::key`, `crates/hir-ty-codegen/cached.rs`) of the function's
+Cranelift IR and of the constants it reads. The key had the *bytes* of the read-only data that holds no address. A constant such as
+`&[Encoding]` is an address of the array and a length, so it was left out. LLVM folds `enc.len()` from it (`told_constants`). Two builds that have the
+same IR and other slices then got the same key. A function stored by an earlier build (here: with a slice of 1 element) was reused by the next
+one that needed 3, or 2. [INFERENCE] In the proofs the store held the code of an earlier build (proofs A and B, or other crates), which is how a function with another slice came back; the fixture shows the same with two small programs.
+
+Fix: the key has the whole `ConstBlob` of each read-only datum that LLVM is told (`recorder.readonly()`): the bytes, the alignment, and each address
+(offset, target id, addend) it holds. The key version moved from 9 to 10, so no stored entry of the old key is read. No crate is named.
+
+Fixture (in the patch, `harness/wholeprogram`): `assoc_const_lib` (a trait with an associated const slice, implemented for tuples of 0 to 3 types; a trait of
+`extern "C" fn` types of 2 to 5 parameters, with several arities; `add_method` reads the length through a generic function), and two programs that use it,
+`assoc_const_slice_lib` (the table in the library) and `assoc_const_slice` (the same code in the crate of `main`). The harness builds them in this order
+against one store (`BLAZE_CACHE` of the run); each prints 4 lines that end `ok`.
+
+Before and after, same fixture, `blaze run --release -p ...` with a new `BLAZE_CACHE` and `BLAZE_HOME` for the pair (Linux x86_64; Mac arm64 after):
+
+| Run | Before (patch 0001 only) | After (patch 0001 and 0002) |
+|-----|--------------------------|-----------------------------|
+| `assoc_const_slice` alone | 4 lines `ok` | 4 lines `ok` |
+| `assoc_const_slice_lib`, then `assoc_const_slice` | second: `setMarked:selectedRange:replacementRange:: selector 3 function 1 MISMATCH` | both: 4 lines `ok` (cargo prints the same) |
+| `assoc_const_slice`, then `assoc_const_slice_lib` | second: `selector 3 function 1 MISMATCH` | both: 4 lines `ok` |
+
+The Mac, after, with `~/.cargo/bin/blaze` installed by `install.sh` (`0.0.0-dev (f585269)` + both patches): the pair prints 4 lines `ok` each, in the order that
+failed. The branch `fm/ria-0-6-8-mac-proofs` (https://github.com/i098/ria/pull/17), `blaze build --release` in `rust/proofs/abc-host`: `Finished release profile [blaze] target(s) in 159.47s`.
+`run.sh c`: `{"proof":"C","event":"result","pass":true,"checks":11,"fails":0}`, with no objc2 abort. `run.sh b`: `pass: true, checks: 22`. `run.sh a`: `pass: true, checks: 3`.
+With patch 0002 the `class_addMethod` workaround of proof B is not needed.
