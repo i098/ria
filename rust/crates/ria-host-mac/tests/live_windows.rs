@@ -19,7 +19,7 @@ fn main() {
 
 #[cfg(target_os = "macos")]
 mod mac {
-    use std::cell::Cell;
+    use std::cell::{Cell, RefCell};
     use std::ffi::CString;
     use std::path::{Path, PathBuf};
     use std::process::Command;
@@ -27,10 +27,13 @@ mod mac {
     use std::time::{Duration, Instant};
 
     use block2::RcBlock;
-    use objc2::{MainThreadMarker, rc::Retained, runtime::AnyObject};
+    use objc2::runtime::{AnyObject, Bool};
+    use objc2::{MainThreadMarker, msg_send, rc::Retained};
     use objc2_app_kit::{
-        NSApplication, NSColor, NSEvent, NSEventModifierFlags, NSScreen, NSWindow, NSWindowButton,
+        NSApplication, NSColor, NSEvent, NSEventModifierFlags, NSEventType, NSMenu, NSMenuItem,
+        NSScreen, NSUserInterfaceItemIdentification, NSWindow, NSWindowButton,
         NSWindowDidEnterFullScreenNotification, NSWindowDidExitFullScreenNotification,
+        NSWindowWillEnterFullScreenNotification, NSWindowWillExitFullScreenNotification,
     };
     use objc2_foundation::{
         NSDate, NSNotification, NSNotificationCenter, NSPoint, NSRect, NSRunLoop, NSSize, NSString,
@@ -143,21 +146,60 @@ mod mac {
         }
     }
 
-    fn observe(window: &NSWindow, name: &NSString) -> (Retained<AnyObject>, Rc<Cell<usize>>) {
-        let count = Rc::new(Cell::new(0));
-        let tally = count.clone();
-        let callback = RcBlock::new(move |_: std::ptr::NonNull<NSNotification>| {
-            tally.set(tally.get() + 1);
-        });
+    fn observe(
+        window: &NSWindow,
+        name: &NSString,
+        callback: impl Fn() + 'static,
+    ) -> Retained<AnyObject> {
+        let block = RcBlock::new(move |_: std::ptr::NonNull<NSNotification>| callback());
         let token = unsafe {
             NSNotificationCenter::defaultCenter().addObserverForName_object_queue_usingBlock(
                 Some(name),
                 Some(window),
                 None,
-                &callback,
+                &block,
             )
         };
-        (token.into(), count)
+        token.into()
+    }
+
+    fn check_reserved_replies(app: &NSApplication, mtm: MainThreadMarker) {
+        assert!(!app.isActive());
+        let delegate = EngineDelegate::new(Rc::new(WindowHooks::default()), State::new(), None);
+        let menu = NSMenu::new(mtm);
+        let modifiers = NSEventModifierFlags::Command;
+        let bindings = [
+            (ns_string!("w"), ns_string!("ardia.command.closeTab"), 13, true),
+            (ns_string!("b"), ns_string!("ria.test.nonreserved"), 11, false),
+        ];
+        for (key, id, _, _) in bindings {
+            let item = NSMenuItem::new(mtm);
+            item.setTitle(id);
+            item.setIdentifier(Some(id));
+            item.setKeyEquivalent(key);
+            item.setKeyEquivalentModifierMask(modifiers);
+            menu.addItem(&item);
+        }
+        let previous_menu = app.mainMenu();
+        app.setMainMenu(Some(&menu));
+        let replies = bindings.map(|(key, _, key_code, expected)| {
+            let event = NSEvent::keyEventWithType_location_modifierFlags_timestamp_windowNumber_context_characters_charactersIgnoringModifiers_isARepeat_keyCode(
+                NSEventType::KeyDown, NSPoint::ZERO, modifiers, 0., 0, None, key, key, false,
+                key_code,
+            )
+            .expect("Test key event");
+            let binding: Bool = unsafe {
+                msg_send![delegate.as_object(), engineIsReservedKey: key, unshiftedKey: key, modifiers: modifiers.bits()]
+            };
+            let key_event: Bool =
+                unsafe { msg_send![delegate.as_object(), engineIsReservedKeyEvent: &*event] };
+            ((binding.as_bool(), key_event.as_bool()), (expected, expected))
+        });
+        app.setMainMenu(previous_menu.as_deref());
+        assert!(!app.isActive());
+        for (actual, expected) in replies {
+            assert_eq!(actual, expected);
+        }
     }
 
     fn check_native_close(mtm: MainThreadMarker) {
@@ -229,13 +271,18 @@ mod mac {
         let window = normal.core.window();
         let lights = normal.traffic_lights.as_ref().unwrap();
         assert!(window.titlebarAppearsTransparent());
-        let (sight_observer, sight_events) = observe(&window, ns_string!("ArdiaWindowSeenDidChange"));
+        let sight_events = Rc::new(Cell::new(0));
+        let tally = sight_events.clone();
+        let sight_observer = observe(&window, ns_string!("ArdiaWindowSeenDidChange"), move || {
+            tally.set(tally.get() + 1);
+        });
         window.orderOut(None);
         controllers.reconsider_sight(&window);
         assert!(!controllers.user_sees(&window));
         let events = sight_events.get();
         let app = NSApplication::sharedApplication(mtm);
         assert!(!app.isActive(), "The visibility check requires an inactive app");
+        check_reserved_replies(&app, mtm);
         window.orderFrontRegardless();
         wait_for("No Window Server visibility reply and notification", || {
             assert!(!app.isActive(), "The app activated during the visibility check");
@@ -306,10 +353,6 @@ mod mac {
         });
         assert!(!controllers.user_sees_only_through_window_server(&window));
 
-        let (enter_observer, enter_events) =
-            observe(&window, unsafe { NSWindowDidEnterFullScreenNotification });
-        let (exit_observer, exit_events) =
-            observe(&window, unsafe { NSWindowDidExitFullScreenNotification });
         let screen = window
             .screen()
             .or_else(|| NSScreen::mainScreen(mtm))
@@ -324,21 +367,49 @@ mod mac {
         );
         let before = window.frame();
         assert_ne!(before, screen_frame);
+        let events = Rc::new(RefCell::new(Vec::new()));
+        let names = unsafe {
+            [
+                NSWindowWillEnterFullScreenNotification,
+                NSWindowDidEnterFullScreenNotification,
+                NSWindowWillExitFullScreenNotification,
+                NSWindowDidExitFullScreenNotification,
+            ]
+        };
+        let observers = names.map(|name| {
+            let events = events.clone();
+            let observed_window = window.clone();
+            observe(&window, name, move || {
+                events.borrow_mut().push((name, observed_window.frame()));
+            })
+        });
         normal.fullscreen.toggle();
         assert_eq!(window.frame(), screen_frame);
         normal.fullscreen.act_window_full_screen(true);
-        assert_eq!((enter_events.get(), exit_events.get()), (1, 0));
+        assert_eq!(
+            events.borrow().as_slice(),
+            &[(names[0], before), (names[1], screen_frame)]
+        );
         assert_eq!(window.frame(), screen_frame);
         assert!(normal.core.acted_full_screen() && normal.fullscreen.is_full_screen());
         assert!(!normal.fullscreen.transitioning());
         normal.fullscreen.toggle();
         normal.fullscreen.act_window_full_screen(false);
-        assert_eq!((enter_events.get(), exit_events.get()), (1, 1));
+        assert_eq!(
+            events.borrow().as_slice(),
+            &[
+                (names[0], before),
+                (names[1], screen_frame),
+                (names[2], screen_frame),
+                (names[3], before),
+            ]
+        );
         assert!(!normal.core.acted_full_screen() && !normal.fullscreen.is_full_screen());
         assert_eq!(window.frame(), before);
         assert!(!normal.fullscreen.transitioning());
         let center = NSNotificationCenter::defaultCenter();
-        for observer in [sight_observer, enter_observer, exit_observer] {
+        assert!(!app.isActive());
+        for observer in observers.into_iter().chain([sight_observer]) {
             unsafe { center.removeObserver(&observer) };
         }
         for controller in [&normal, &chrome, &stray, &standalone] {
@@ -346,7 +417,7 @@ mod mac {
         }
         check_native_close(mtm);
         println!(
-            "live_windows: controller claims, titlebar hit testing, visibility, acted fullscreen, and native close checked"
+            "live_windows: reserved key replies, controller claims, titlebar hit testing, visibility, acted fullscreen, and native close checked"
         );
         println!("live_windows: Chromium key dispatch to an AppKit menu action not checked; the harness does not activate the app or make a window key");
         println!("live_windows: foreground AppKit fullscreen entry and exit not checked");
