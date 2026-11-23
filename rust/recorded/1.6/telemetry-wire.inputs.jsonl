@@ -1,0 +1,597 @@
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-02-29T23:59:59.999Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-02-29T23:59:59.999Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-02-29T23:59:59.999Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2023-02-29T00:00:00Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2023-02-29T00:00:00Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2023-02-29T00:00:00Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "1970-01-01T00:00:00.000Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "1970-01-01T00:00:00.000Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "1970-01-01T00:00:00.000Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "1969-12-31T23:59:59.999Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "1969-12-31T23:59:59.999Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "1969-12-31T23:59:59.999Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.1Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.1Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.1Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123456Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123456Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123456Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.9999Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.9999Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.9999Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30+05:30", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30+05:30", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30+05:30", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30-08:00", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30-08:00", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30-08:00", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T24:00:00Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T24:00:00Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T24:00:00Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T24:00:01Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T24:00:01Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T24:00:01Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-13-01", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-13-01", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-13-01", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-00-10", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-00-10", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-00-10", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-32", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-32", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-32", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "+275760-09-13T00:00:00.000Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "+275760-09-13T00:00:00.000Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "+275760-09-13T00:00:00.000Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "+275760-09-13T00:00:00.001Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "+275760-09-13T00:00:00.001Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "+275760-09-13T00:00:00.001Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "-000001-01-01T00:00:00Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "-000001-01-01T00:00:00Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "-000001-01-01T00:00:00Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "-000000-01-01T00:00:00Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "-000000-01-01T00:00:00Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "-000000-01-01T00:00:00Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "+002024-01-15T00:00:00Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "+002024-01-15T00:00:00Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "+002024-01-15T00:00:00Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "0000-01-01T00:00:00Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "0000-01-01T00:00:00Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "0000-01-01T00:00:00Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "9999-12-31T23:59:59.999Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "9999-12-31T23:59:59.999Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "9999-12-31T23:59:59.999Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123+01:00", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123+01:00", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123+01:00", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T25:00:00Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T25:00:00Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T25:00:00Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:60:00Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:60:00Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:60:00Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.5-00:30", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.5-00:30", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.5-00:30", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2100-02-29", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2100-02-29", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2100-02-29", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2000-02-29", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2000-02-29", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2000-02-29", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "1900-02-29", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "1900-02-29", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "1900-02-29", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {"a": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}}]}
+{"fn": "eventRecord", "args": [{"uuid": "id-1", "event": "tab_open", "distinct_id": "d-1", "timestamp": "2024-01-15T10:20:30.123Z", "properties": {"k": {"10": 1, "9": 2, "a": 3}}}]}
+{"fn": "eventRecord", "args": [{"uuid": "é😀", "event": "日本語", "distinct_id": "", "timestamp": "2024-06-01T00:00:00Z", "properties": {}}]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, 0]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, 0]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 0]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 0]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, 1.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, 1.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, 2.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, 2.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 2.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 2.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, -0.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, -0.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -0.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -0.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, -1.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, -1.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -1.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -1.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, 1700000000000]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, 1700000000000]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, 1e+21]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, 1e+21]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+21]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+21]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, 1e+22]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, 1e+22]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+22]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+22]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, -1e+21]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, -1e+21]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -1e+21]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -1e+21]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, 1e+300]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, 1e+300]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+300]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+300]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {}, 5e-324]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"a": 1}, 5e-324]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 5e-324]}
+{"fn": "logRecord", "args": ["warn", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 5e-324]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, 0]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, 0]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 0]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 0]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, 1.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, 1.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, 2.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, 2.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 2.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 2.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, -0.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, -0.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -0.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -0.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, -1.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, -1.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -1.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -1.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, 1700000000000]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, 1700000000000]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, 1e+21]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, 1e+21]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+21]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+21]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, 1e+22]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, 1e+22]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+22]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+22]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, -1e+21]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, -1e+21]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -1e+21]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -1e+21]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, 1e+300]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, 1e+300]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+300]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+300]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {}, 5e-324]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"a": 1}, 5e-324]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 5e-324]}
+{"fn": "logRecord", "args": ["error", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 5e-324]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, 0]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, 0]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 0]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 0]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, 1.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, 1.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, 2.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, 2.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 2.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 2.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, -0.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, -0.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -0.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -0.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, -1.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, -1.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -1.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -1.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, 1700000000000]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, 1700000000000]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, 1e+21]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, 1e+21]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+21]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+21]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, 1e+22]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, 1e+22]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+22]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+22]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, -1e+21]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, -1e+21]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -1e+21]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -1e+21]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, 1e+300]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, 1e+300]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+300]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+300]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {}, 5e-324]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"a": 1}, 5e-324]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 5e-324]}
+{"fn": "logRecord", "args": ["info", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 5e-324]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, 0]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, 0]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 0]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 0]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, 1.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, 1.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, 2.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, 2.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 2.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 2.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, -0.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, -0.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -0.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -0.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, -1.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, -1.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -1.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -1.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, 1700000000000]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, 1700000000000]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, 1e+21]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, 1e+21]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+21]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+21]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, 1e+22]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, 1e+22]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+22]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+22]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, -1e+21]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, -1e+21]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -1e+21]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -1e+21]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, 1e+300]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, 1e+300]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+300]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+300]}
+{"fn": "logRecord", "args": ["", "msg é\n", {}, 5e-324]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"a": 1}, 5e-324]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 5e-324]}
+{"fn": "logRecord", "args": ["", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 5e-324]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, 0]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, 0]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 0]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 0]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, 1.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, 1.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, 2.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, 2.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 2.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 2.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, -0.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, -0.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -0.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -0.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, -1.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, -1.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -1.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -1.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, 1700000000000]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, 1700000000000]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000.4]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000000.5]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, 1e+21]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, 1e+21]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+21]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+21]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, 1e+22]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, 1e+22]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+22]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+22]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, -1e+21]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, -1e+21]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, -1e+21]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, -1e+21]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, 1e+300]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, 1e+300]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1e+300]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1e+300]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {}, 5e-324]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"a": 1}, 5e-324]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 5e-324]}
+{"fn": "logRecord", "args": ["ERROR", "msg é\n", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 5e-324]}
+{"fn": "logRecord", "args": ["error", "m", {}, 1700000000123]}
+{"fn": "logRecord", "args": ["error", "m", {"a": 1}, 1700000000123]}
+{"fn": "logRecord", "args": ["error", "m", {"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, 1700000000123]}
+{"fn": "logRecord", "args": ["error", "m", {"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, 1700000000123]}
+{"fn": "logRecord", "args": ["error", "m", {"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, 1700000000123]}
+{"fn": "logRecord", "args": ["error", "m", {"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, 1700000000123]}
+{"fn": "logRecord", "args": ["error", "m", {"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, 1700000000123]}
+{"fn": "logRecord", "args": ["error", "m", {"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, 1700000000123]}
+{"fn": "logRecord", "args": ["error", "m", {"k": {"10": 1, "9": 2, "a": 3}}, 1700000000123]}
+{"fn": "logsRequest", "args": [{}, "ardia.analytics", []]}
+{"fn": "logsRequest", "args": [{}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{}, "ardia.app", []]}
+{"fn": "logsRequest", "args": [{}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{}, "", []]}
+{"fn": "logsRequest", "args": [{}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{}, "é\"\\", []]}
+{"fn": "logsRequest", "args": [{}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"a": 1}, "ardia.analytics", []]}
+{"fn": "logsRequest", "args": [{"a": 1}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"a": 1}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"a": 1}, "ardia.app", []]}
+{"fn": "logsRequest", "args": [{"a": 1}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"a": 1}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"a": 1}, "", []]}
+{"fn": "logsRequest", "args": [{"a": 1}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"a": 1}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"a": 1}, "é\"\\", []]}
+{"fn": "logsRequest", "args": [{"a": 1}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"a": 1}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "ardia.analytics", []]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "ardia.app", []]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "", []]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "é\"\\", []]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"n": 1.5, "b": true, "s": "x", "nul": null, "arr": [1, "a", null, {"k": []}], "obj": {"z": 1, "a": {"y": 2}}}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "ardia.analytics", []]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "ardia.app", []]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "", []]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "é\"\\", []]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"big": 9007199254740991, "bigger": 9007199254740993, "neg": -5, "negzero": -0.0, "e": 1e+21, "small": 1.5e-07, "frac": 0.1, "huge": 1e+300, "tiny": 5e-324}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "ardia.analytics", []]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "ardia.app", []]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "", []]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "é\"\\", []]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"event": "override", "uuid": "u2", "distinct_id": "d2", "extra": 1}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "ardia.analytics", []]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "ardia.app", []]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "", []]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "é\"\\", []]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"10": "ten", "2": "two", "b": 1, "01": "z", "4294967295": "x", "4294967294": "y"}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "ardia.analytics", []]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "ardia.app", []]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "", []]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "é\"\\", []]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"quote": "a\"b\\c\n\t\u0001\u001f  é😀"}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "ardia.analytics", []]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "ardia.app", []]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "", []]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "é\"\\", []]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"arr": [1e+21, 1e-06, 1e-07, -0.0, 123456789012345680000]}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "ardia.analytics", []]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "ardia.analytics", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "ardia.app", []]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "ardia.app", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "", []]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "é\"\\", []]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "logsRequest", "args": [{"k": {"10": 1, "9": 2, "a": 3}}, "é\"\\", [{"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}, {"timeUnixNano": "1000000", "severityNumber": 9, "severityText": "INFO", "body": {"stringValue": "e"}, "attributes": [{"key": "a", "value": {"stringValue": "x"}}, {"key": "n", "value": {"intValue": "5"}}, {"key": "d", "value": {"doubleValue": 1.5}}, {"key": "b", "value": {"boolValue": true}}]}]]}
+{"fn": "outcome", "args": [200, 0]}
+{"fn": "outcome", "args": [200, 1]}
+{"fn": "outcome", "args": [200, 2]}
+{"fn": "outcome", "args": [200, 100]}
+{"fn": "outcome", "args": [200, -1]}
+{"fn": "outcome", "args": [200, 1.5]}
+{"fn": "outcome", "args": [201, 0]}
+{"fn": "outcome", "args": [201, 1]}
+{"fn": "outcome", "args": [201, 2]}
+{"fn": "outcome", "args": [201, 100]}
+{"fn": "outcome", "args": [201, -1]}
+{"fn": "outcome", "args": [201, 1.5]}
+{"fn": "outcome", "args": [299, 0]}
+{"fn": "outcome", "args": [299, 1]}
+{"fn": "outcome", "args": [299, 2]}
+{"fn": "outcome", "args": [299, 100]}
+{"fn": "outcome", "args": [299, -1]}
+{"fn": "outcome", "args": [299, 1.5]}
+{"fn": "outcome", "args": [300, 0]}
+{"fn": "outcome", "args": [300, 1]}
+{"fn": "outcome", "args": [300, 2]}
+{"fn": "outcome", "args": [300, 100]}
+{"fn": "outcome", "args": [300, -1]}
+{"fn": "outcome", "args": [300, 1.5]}
+{"fn": "outcome", "args": [199, 0]}
+{"fn": "outcome", "args": [199, 1]}
+{"fn": "outcome", "args": [199, 2]}
+{"fn": "outcome", "args": [199, 100]}
+{"fn": "outcome", "args": [199, -1]}
+{"fn": "outcome", "args": [199, 1.5]}
+{"fn": "outcome", "args": [100, 0]}
+{"fn": "outcome", "args": [100, 1]}
+{"fn": "outcome", "args": [100, 2]}
+{"fn": "outcome", "args": [100, 100]}
+{"fn": "outcome", "args": [100, -1]}
+{"fn": "outcome", "args": [100, 1.5]}
+{"fn": "outcome", "args": [400, 0]}
+{"fn": "outcome", "args": [400, 1]}
+{"fn": "outcome", "args": [400, 2]}
+{"fn": "outcome", "args": [400, 100]}
+{"fn": "outcome", "args": [400, -1]}
+{"fn": "outcome", "args": [400, 1.5]}
+{"fn": "outcome", "args": [401, 0]}
+{"fn": "outcome", "args": [401, 1]}
+{"fn": "outcome", "args": [401, 2]}
+{"fn": "outcome", "args": [401, 100]}
+{"fn": "outcome", "args": [401, -1]}
+{"fn": "outcome", "args": [401, 1.5]}
+{"fn": "outcome", "args": [413, 0]}
+{"fn": "outcome", "args": [413, 1]}
+{"fn": "outcome", "args": [413, 2]}
+{"fn": "outcome", "args": [413, 100]}
+{"fn": "outcome", "args": [413, -1]}
+{"fn": "outcome", "args": [413, 1.5]}
+{"fn": "outcome", "args": [429, 0]}
+{"fn": "outcome", "args": [429, 1]}
+{"fn": "outcome", "args": [429, 2]}
+{"fn": "outcome", "args": [429, 100]}
+{"fn": "outcome", "args": [429, -1]}
+{"fn": "outcome", "args": [429, 1.5]}
+{"fn": "outcome", "args": [500, 0]}
+{"fn": "outcome", "args": [500, 1]}
+{"fn": "outcome", "args": [500, 2]}
+{"fn": "outcome", "args": [500, 100]}
+{"fn": "outcome", "args": [500, -1]}
+{"fn": "outcome", "args": [500, 1.5]}
+{"fn": "outcome", "args": [503, 0]}
+{"fn": "outcome", "args": [503, 1]}
+{"fn": "outcome", "args": [503, 2]}
+{"fn": "outcome", "args": [503, 100]}
+{"fn": "outcome", "args": [503, -1]}
+{"fn": "outcome", "args": [503, 1.5]}
+{"fn": "outcome", "args": [0, 0]}
+{"fn": "outcome", "args": [0, 1]}
+{"fn": "outcome", "args": [0, 2]}
+{"fn": "outcome", "args": [0, 100]}
+{"fn": "outcome", "args": [0, -1]}
+{"fn": "outcome", "args": [0, 1.5]}
+{"fn": "outcome", "args": [-1, 0]}
+{"fn": "outcome", "args": [-1, 1]}
+{"fn": "outcome", "args": [-1, 2]}
+{"fn": "outcome", "args": [-1, 100]}
+{"fn": "outcome", "args": [-1, -1]}
+{"fn": "outcome", "args": [-1, 1.5]}
+{"fn": "outcome", "args": [200.5, 0]}
+{"fn": "outcome", "args": [200.5, 1]}
+{"fn": "outcome", "args": [200.5, 2]}
+{"fn": "outcome", "args": [200.5, 100]}
+{"fn": "outcome", "args": [200.5, -1]}
+{"fn": "outcome", "args": [200.5, 1.5]}
+{"fn": "outcome", "args": [299.999, 0]}
+{"fn": "outcome", "args": [299.999, 1]}
+{"fn": "outcome", "args": [299.999, 2]}
+{"fn": "outcome", "args": [299.999, 100]}
+{"fn": "outcome", "args": [299.999, -1]}
+{"fn": "outcome", "args": [299.999, 1.5]}
+{"fn": "outcome", "args": [300.0, 0]}
+{"fn": "outcome", "args": [300.0, 1]}
+{"fn": "outcome", "args": [300.0, 2]}
+{"fn": "outcome", "args": [300.0, 100]}
+{"fn": "outcome", "args": [300.0, -1]}
+{"fn": "outcome", "args": [300.0, 1.5]}
+{"fn": "outcome", "args": [1000000000.0, 0]}
+{"fn": "outcome", "args": [1000000000.0, 1]}
+{"fn": "outcome", "args": [1000000000.0, 2]}
+{"fn": "outcome", "args": [1000000000.0, 100]}
+{"fn": "outcome", "args": [1000000000.0, -1]}
+{"fn": "outcome", "args": [1000000000.0, 1.5]}

@@ -1,0 +1,120 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-6-identity/repo",
+  "unit": "packages/core/src/telemetryWire.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "telemetry-wire-rs",
+  "exports": [
+    {
+      "name": "eventRecord",
+      "file": "packages/core/src/telemetryWire.ts",
+      "line": 43,
+      "params": [
+        {
+          "name": "e",
+          "ts_type": "{ uuid: string; event: string; distinct_id: string; timestamp: string; properties: Record<string, unknown> }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  timeUnixNano: string;\n  severityNumber: number;\n  severityText: string;\n  body: { stringValue: string };\n  attributes: { key: string; value: ({ stringValue: string } | { intValue: string } | { doubleValue: number } | { boolValue: boolean }) }[];\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "logRecord",
+      "file": "packages/core/src/telemetryWire.ts",
+      "line": 54,
+      "params": [
+        {
+          "name": "level",
+          "ts_type": "\"warn\" | \"error\"",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "message",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "attributes",
+          "ts_type": "Record<string, unknown>",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "at",
+          "ts_type": "unknown",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  timeUnixNano: string;\n  severityNumber: number;\n  severityText: string;\n  body: { stringValue: string };\n  attributes: { key: string; value: ({ stringValue: string } | { intValue: string } | { doubleValue: number } | { boolValue: boolean }) }[];\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "logsRequest",
+      "file": "packages/core/src/telemetryWire.ts",
+      "line": 64,
+      "params": [
+        {
+          "name": "resource",
+          "ts_type": "Record<string, unknown>",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "scope",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "records",
+          "ts_type": "{\n  timeUnixNano: string;\n  severityNumber: number;\n  severityText: string;\n  body: { stringValue: string };\n  attributes: { key: string; value: ({ stringValue: string } | { intValue: string } | { doubleValue: number } | { boolValue: boolean }) }[];\n}[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "outcome",
+      "file": "packages/core/src/telemetryWire.ts",
+      "line": 72,
+      "params": [
+        {
+          "name": "status",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "count",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "(\"sent\" | \"drop\" | \"split\" | \"retry\")",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

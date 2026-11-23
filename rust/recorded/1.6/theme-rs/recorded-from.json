@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/theme.ts",
+  "files": 1,
+  "fingerprint": "68e5a684adc2a553",
+  "coverage": {
+    "lines": 291,
+    "reached": 291,
+    "files": [
+      {
+        "file": "packages/core/src/theme.ts",
+        "lines": 291,
+        "reached": 291,
+        "missed": ""
+      }
+    ]
+  }
+}
