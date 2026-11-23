@@ -2,9 +2,9 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-//! Moves a finished download into an approved folder under the home directory. The file is claimed into a private
-//! staging folder, verified by size and SHA-256, then renamed without replacement; a journal in the defaults store
-//! lets a new mover put back or commit a move that a crash interrupted.
+//! Moves a finished download into an approved folder under the home directory.
+//! Moves between folders stage the file, verify its size and SHA-256, and rename it without replacing an existing file.
+//! After an interruption, the journal lets a new mover recover a file it finds at a recorded path.
 
 use std::collections::{HashMap, HashSet};
 use std::ffi::CString;
@@ -392,13 +392,15 @@ impl DownloadMover {
                 lstat_at(libc::AT_FDCWD, path).is_ok_and(|info| is_kind(info.mode, libc::S_IFREG))
             };
             if let Some(placed) = entry["placed"].as_str().filter(|placed| regular(placed)) {
-                self.defaults.set(MOVED_DEFAULT, Self::remember(state, id, source, placed));
+                self.defaults
+                    .set(MOVED_DEFAULT, Self::remember(state, id, source, placed));
             } else if regular(&staged) {
                 let source_free = matches!(lstat_at(libc::AT_FDCWD, source), Err(error) if errno(&error) == libc::ENOENT);
                 if !source_free
                     || rename_excl(libc::AT_FDCWD, &staged, libc::AT_FDCWD, source).is_err()
                 {
-                    self.defaults.set(MOVED_DEFAULT, Self::remember(state, id, source, &staged));
+                    self.defaults
+                        .set(MOVED_DEFAULT, Self::remember(state, id, source, &staged));
                 }
             }
             remove_dir_at(libc::AT_FDCWD, staging);
@@ -454,7 +456,11 @@ impl DownloadMover {
             .collect();
     }
 
-    pub fn start_move(self: &Arc<Self>, path: String, folder: String) -> io::Result<JoinHandle<Value>> {
+    pub fn start_move(
+        self: &Arc<Self>,
+        path: String,
+        folder: String,
+    ) -> io::Result<JoinHandle<Value>> {
         let mover = Arc::clone(self);
         thread::Builder::new()
             .name("ria-download-move".into())

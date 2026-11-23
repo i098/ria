@@ -477,7 +477,10 @@ fn regular_profile_registration_notifies_hooks_once_before_lookup_returns() {
     }
 
     let core = Rc::new(FakeCore {
-        default: Some(Rc::new(FakeProfile { directory: "Default".into(), private: false })),
+        default: Some(Rc::new(FakeProfile {
+            directory: "Default".into(),
+            private: false,
+        })),
         ..FakeCore::default()
     });
     let registry = ProfileRegistry::new(core, Rc::new(NoEvents));
@@ -541,15 +544,22 @@ fn releasing_a_cached_private_session_stops_lookup() {
     });
     let reply = Rc::new(RefCell::new(None));
     let first = reply.clone();
-    registry.with_profile(session, move |resolved| *first.borrow_mut() = Some(resolved));
+    registry.with_profile(session, move |resolved| {
+        *first.borrow_mut() = Some(resolved)
+    });
     core.pending_private.take().unwrap()(Some(profile.clone()), None);
     let resolved = reply.take().expect("the first lookup settled").unwrap();
     assert!(Rc::ptr_eq(&resolved, &profile));
-    assert!(Rc::ptr_eq(&registry.loaded_profile(session).unwrap(), &profile));
+    assert!(Rc::ptr_eq(
+        &registry.loaded_profile(session).unwrap(),
+        &profile
+    ));
     registry.mark_private_released(session);
     assert!(registry.loaded_profile(session).is_none());
     let second = reply.clone();
-    registry.with_profile(session, move |resolved| *second.borrow_mut() = Some(resolved));
+    registry.with_profile(session, move |resolved| {
+        *second.borrow_mut() = Some(resolved)
+    });
     assert!(matches!(reply.take(), Some(None)));
     assert!(core.pending_private.borrow().is_none());
 }

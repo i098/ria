@@ -622,7 +622,10 @@ fn download_mover() {
         let worker = reached_hash.recv_timeout(Duration::from_secs(10)).unwrap();
         assert_ne!(worker, std::thread::current().id());
         let journal_key = "ArdiaDownloadMoveJournal";
-        let journal = env.defaults.get(journal_key).expect("active move is journaled");
+        let journal = env
+            .defaults
+            .get(journal_key)
+            .expect("active move is journaled");
         assert_eq!(journal["large"]["source"], path);
         let duplicate = mover
             .start_move(path, folder.into())
@@ -643,7 +646,9 @@ fn download_mover() {
         let defaults = env.defaults.clone();
         hook(&mover, move |step, _| {
             if matches!(step, "hashing" | "placed") {
-                checkpoints.send(defaults.get(journal_key).unwrap()).unwrap();
+                checkpoints
+                    .send(defaults.get(journal_key).unwrap())
+                    .unwrap();
             }
         });
         let other_move = mover.start_move(other.clone(), folder.into()).unwrap();

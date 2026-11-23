@@ -28,7 +28,9 @@ pub fn of_url(url: &str) -> Option<String> {
         if matches!(scheme.as_str(), "http" | "https") {
             return None;
         }
-        let authority = raw.split_once(':')?.1
+        let authority = raw
+            .split_once(':')?
+            .1
             .trim_start_matches(['/', '\\', '\t', '\n', '\r'])
             .split(['/', '\\', '?', '#'])
             .next()?
@@ -36,7 +38,8 @@ pub fn of_url(url: &str) -> Option<String> {
             .next()?;
         let (host, port) = authority.rsplit_once(':')?;
         if host.ends_with(']') || !host.starts_with('[') {
-            let port: String = port.trim_end_matches(|c: char| c <= ' ')
+            let port: String = port
+                .trim_end_matches(|c: char| c <= ' ')
                 .chars()
                 .filter(|c| !matches!(c, '\t' | '\n' | '\r'))
                 .collect();
@@ -93,10 +96,19 @@ mod tests {
             of_url("https://[::1]:9000/"),
             Some("https://[::1]:9000".into())
         );
-        assert_eq!(of_url("ftp://user:21@EXAMPLE.com/"), Some("ftp://example.com".into()));
-        assert_eq!(of_url("ftp://user@EXAMPLE.com:021/"), Some("ftp://example.com:21".into()));
+        assert_eq!(
+            of_url("ftp://user:21@EXAMPLE.com/"),
+            Some("ftp://example.com".into())
+        );
+        assert_eq!(
+            of_url("ftp://user@EXAMPLE.com:021/"),
+            Some("ftp://example.com:21".into())
+        );
         assert_eq!(of_url("ftp://[::1]:21/"), Some("ftp://[::1]:21".into()));
-        assert_eq!(of_url("wss://example.com:443/"), Some("wss://example.com:443".into()));
+        assert_eq!(
+            of_url("wss://example.com:443/"),
+            Some("wss://example.com:443".into())
+        );
         assert_eq!(of_url("mailto:a@b.c"), None);
         assert_eq!(of_url("not a url"), None);
         assert_eq!(of_parts("HTTPS", "A.b", 0), "https://a.b");

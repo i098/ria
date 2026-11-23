@@ -1,13 +1,12 @@
 // Ria original, no Ardia source.
 
-//! Check L of slice 3.3: the data domains of `ria-engine` against the prebuilt engine. It runs as
-//! `blaze test -p ria-engine --test live` (the `[[test]]` entry of `ria-engine/Cargo.toml` points here, so the row of
-//! slice 3.3 holds the file).
-//!
-//! Needs a Mac and `ENGINE_DIR=<dir that holds "Chromium Framework.framework">`. The engine owns the main thread,
-//! so this test has its own `main`. It wraps itself in an app bundle beside a copy of the framework (the engine
-//! starts its helper processes from the bundle), starts the engine there with a temporary profile, and makes
-//! calls with fixture arguments. Each reply must parse and each event that a call causes must arrive.
+//! Check L of slice 3.3 exercises the data domains of `ria-engine` against the prebuilt engine.
+//! From `rust/` on macOS, set `ENGINE_DIR` to the directory that contains `Chromium Framework.framework`.
+//! Run `blaze test -p ria-engine --test live`.
+//! The check has its own `main` because the engine owns the main thread.
+//! It copies the framework into a temporary app bundle so the engine can start its helper processes.
+//! The check uses a temporary profile to verify selected replies and events.
+//! It does not exercise the content blocker because it has no extension page.
 
 #![allow(unsafe_code)]
 
@@ -416,14 +415,22 @@ mod mac {
 
         let icon = "https://example.com/icon.png";
         expect_then::<api::favicons::Set>(
-            &live, &ctx, "favicons", "set",
+            &live,
+            &ctx,
+            "favicons",
+            "set",
             json!({"page": url, "icon": icon, "png": PNG}),
             move |live, ctx, r| {
                 expect::<api::favicons::Get>(
-                    live, ctx, "favicons", "get",
+                    live,
+                    ctx,
+                    "favicons",
+                    "get",
                     json!({"pages": [url], "icons": [icon], "size": 16}),
                     move |r| {
-                        r.pages.get(url).is_some_and(|entry| entry.icon == icon && !entry.png.is_empty())
+                        r.pages
+                            .get(url)
+                            .is_some_and(|entry| entry.icon == icon && !entry.png.is_empty())
                             && r.icons.get(icon).is_some_and(|entry| !entry.png.is_empty())
                     },
                 );
@@ -456,7 +463,11 @@ mod mac {
             }
         });
         expect_then::<api::history::Watch>(
-            &live, &ctx, "history", "watch", json!({}),
+            &live,
+            &ctx,
+            "history",
+            "watch",
+            json!({}),
             move |live, ctx, _| {
                 check_history(live, ctx, url);
                 true
@@ -540,14 +551,21 @@ mod mac {
 
     fn check_storage_clear(live: &Rc<Live>, ctx: &DataCtx, origin: &'static str) {
         expect_then::<api::sites::WriteStorage>(
-            live, ctx, "sites", "writeStorage",
+            live,
+            ctx,
+            "sites",
+            "writeStorage",
             json!({"origin": origin, "set": [["k", "v"]], "remove": []}),
             move |live, ctx, written| {
                 if written.written.0 != 1.0 {
                     return false;
                 }
                 expect_then::<api::sites::ReadStorage>(
-                    live, ctx, "sites", "readStorage", json!({"origin": origin}),
+                    live,
+                    ctx,
+                    "sites",
+                    "readStorage",
+                    json!({"origin": origin}),
                     move |live, ctx, seeded| {
                         if !seeded.items.as_ref().is_some_and(|items| {
                             items.iter().any(|(key, value)| key == "k" && value == "v")
@@ -555,11 +573,18 @@ mod mac {
                             return false;
                         }
                         expect_then::<api::profiles::ClearBrowsingData>(
-                            live, ctx, "profiles", "clearBrowsingData",
+                            live,
+                            ctx,
+                            "profiles",
+                            "clearBrowsingData",
                             json!({"types": ["siteData"], "since": 0}),
                             move |live, ctx, ()| {
                                 expect::<api::sites::ReadStorage>(
-                                    live, ctx, "sites", "readStorage", json!({"origin": origin}),
+                                    live,
+                                    ctx,
+                                    "sites",
+                                    "readStorage",
+                                    json!({"origin": origin}),
                                     |cleared| cleared.items.as_ref().is_none_or(Vec::is_empty),
                                 );
                                 true
@@ -593,25 +618,41 @@ mod mac {
             },
         );
         expect_then::<api::bookmarks::Watch>(
-            live, ctx, "bookmarks", "watch", json!({}),
+            live,
+            ctx,
+            "bookmarks",
+            "watch",
+            json!({}),
             move |live, ctx, _| {
                 expect_then::<api::bookmarks::Tree>(
-                    live, ctx, "bookmarks", "tree", json!({}),
+                    live,
+                    ctx,
+                    "bookmarks",
+                    "tree",
+                    json!({}),
                     move |live, ctx, tree| {
                         armed.set(true);
                         expect_then::<api::bookmarks::Apply>(
-                            live, ctx, "bookmarks", "apply",
+                            live,
+                            ctx,
+                            "bookmarks",
+                            "apply",
                             json!({"ops": [{"op": "add", "id": "3df75ccb-f536-4d07-a8fc-90b729ff3299",
                                 "k": "u", "t": "Ria live bookmark", "u": url, "a": 1_700_000_000_000_i64,
                                 "parent": tree.bar.id}]}),
                             move |live, ctx, r| {
                                 expect::<api::bookmarks::ExportHtml>(
-                                    live, ctx, "bookmarks", "exportHtml", json!({}),
+                                    live,
+                                    ctx,
+                                    "bookmarks",
+                                    "exportHtml",
+                                    json!({}),
                                     move |result| {
-                                        result.as_deref().is_some_and(|path| Path::new(path) == exported.as_path())
-                                            && std::fs::read_to_string(&exported).is_ok_and(|html| {
-                                                html.contains(url) && html.contains("Ria live bookmark")
-                                            })
+                                        result.as_deref().is_some_and(|path| {
+                                            Path::new(path) == exported.as_path()
+                                        }) && std::fs::read_to_string(&exported).is_ok_and(|html| {
+                                            html.contains(url) && html.contains("Ria live bookmark")
+                                        })
                                     },
                                 );
                                 r.applied.0 == 1.0 && r.invalid.is_empty()
@@ -627,14 +668,26 @@ mod mac {
 
     fn check_download_settings(live: &Rc<Live>, ctx: &DataCtx) {
         expect_then::<api::downloads::Settings>(
-            live, ctx, "downloads", "settings", json!({}),
+            live,
+            ctx,
+            "downloads",
+            "settings",
+            json!({}),
             |live, ctx, before| {
                 let ask = !before.ask_where_to_save;
                 expect_then::<api::downloads::SetSettings>(
-                    live, ctx, "downloads", "setSettings", json!({"askWhereToSave": ask}),
+                    live,
+                    ctx,
+                    "downloads",
+                    "setSettings",
+                    json!({"askWhereToSave": ask}),
                     move |live, ctx, r| {
                         expect::<api::downloads::Settings>(
-                            live, ctx, "downloads", "settings", json!({}),
+                            live,
+                            ctx,
+                            "downloads",
+                            "settings",
+                            json!({}),
                             move |after| after.ask_where_to_save == ask,
                         );
                         r.ask_where_to_save == ask
@@ -648,25 +701,45 @@ mod mac {
     fn check_history(live: &Rc<Live>, ctx: &DataCtx, added: &'static str) {
         const IMPORTED: &str = "https://example.org/";
         expect_then::<api::history::Add>(
-            live, ctx, "history", "add",
+            live,
+            ctx,
+            "history",
+            "add",
             json!({"pages": [{"u": added, "t": "Example", "v": [1_700_000_000_000_i64]}], "toleranceMs": 0}),
             move |live, ctx, r| {
                 expect_then::<api::history::Import>(
-                    live, ctx, "history", "import",
+                    live,
+                    ctx,
+                    "history",
+                    "import",
                     json!({"rows": [{"u": IMPORTED, "t": "Org", "n": 1, "l": 1_700_000_000_000_i64}]}),
                     move |live, ctx, _| {
                         expect_then::<api::history::Query>(
-                            live, ctx, "history", "query", json!({"maxUrls": 10, "maxVisits": 10}),
+                            live,
+                            ctx,
+                            "history",
+                            "query",
+                            json!({"maxUrls": 10, "maxVisits": 10}),
                             move |live, ctx, before| {
                                 expect_then::<api::history::DeleteUrls>(
-                                    live, ctx, "history", "deleteUrls", json!({"urls": [IMPORTED]}),
+                                    live,
+                                    ctx,
+                                    "history",
+                                    "deleteUrls",
+                                    json!({"urls": [IMPORTED]}),
                                     move |live, ctx, _| {
                                         expect::<api::history::Query>(
-                                            live, ctx, "history", "query",
+                                            live,
+                                            ctx,
+                                            "history",
+                                            "query",
                                             json!({"maxUrls": 10, "maxVisits": 10}),
                                             move |after| {
                                                 after.entries.iter().any(|entry| entry.u == added)
-                                                    && after.entries.iter().all(|entry| entry.u != IMPORTED)
+                                                    && after
+                                                        .entries
+                                                        .iter()
+                                                        .all(|entry| entry.u != IMPORTED)
                                             },
                                         );
                                         true

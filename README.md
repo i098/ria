@@ -36,7 +36,7 @@ Ria builds with [blaze](https://github.com/indexable-inc/blaze) at one pinned co
 | 0 | Decide and prove | done |
 | 1 | Core logic | in work |
 | 2 | State and data | todo |
-| 3 | Rust host on the engine | in work |
+| 3 | Rust host on the engine | [in work](rust/MAP.md) |
 | 4 | UI in Rune | todo |
 | 5 | Native services | todo |
 | 6 | Prove and cut over | todo |

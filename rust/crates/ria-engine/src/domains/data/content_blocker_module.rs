@@ -192,28 +192,42 @@ mod tests {
         let url = r#"{"url":"https://example.com/list.txt"}"#;
         for (call, args, script_reply, expected) in [
             (
-                "addList", url,
+                "addList",
+                url,
                 r#"{"value":{"id":"custom","custom":true,"existed":false,"filters":2,"failed":false}}"#,
-                Ok(r#"{"custom":true,"existed":false,"failed":false,"filters":2,"id":"custom"}"#.to_owned()),
+                Ok(
+                    r#"{"custom":true,"existed":false,"failed":false,"filters":2,"id":"custom"}"#
+                        .to_owned(),
+                ),
             ),
             (
-                "addList", url, r#"{"value":null}"#,
+                "addList",
+                url,
+                r#"{"value":null}"#,
                 Err(Rejection::new(CODE, "no answer")),
             ),
             (
-                "addList", url, r#"{"value":{}}"#,
+                "addList",
+                url,
+                r#"{"value":{}}"#,
                 Err(Rejection::new(CODE, "no answer")),
             ),
             (
-                "addList", url, r#"{"value":["custom",true,false,2,false]}"#,
+                "addList",
+                url,
+                r#"{"value":["custom",true,false,2,false]}"#,
                 Err(Rejection::new(CODE, "no answer")),
             ),
             (
-                "hiddenElements", "{}", r#"{"value":["example.com##.ad"]}"#,
+                "hiddenElements",
+                "{}",
+                r#"{"value":["example.com##.ad"]}"#,
                 Ok(r#"["example.com##.ad"]"#.into()),
             ),
             (
-                "hiddenElements", "{}", r#"{"error":"read failed"}"#,
+                "hiddenElements",
+                "{}",
+                r#"{"error":"read failed"}"#,
                 Err(Rejection::new(CODE, "read failed")),
             ),
         ] {
@@ -225,10 +239,13 @@ mod tests {
             if call == "addList" {
                 let changes = host.changes.borrow();
                 if expected.is_ok() {
-                    assert_eq!(changes.as_slice(), &[serde_json::json!({
-                        "list": "custom",
-                        "listEnabled": true,
-                    })]);
+                    assert_eq!(
+                        changes.as_slice(),
+                        &[serde_json::json!({
+                            "list": "custom",
+                            "listEnabled": true,
+                        })]
+                    );
                 } else {
                     assert!(changes.is_empty(), "{script_reply}");
                 }

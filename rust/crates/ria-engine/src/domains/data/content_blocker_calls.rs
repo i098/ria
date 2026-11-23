@@ -132,7 +132,7 @@ const PRELUDE: &str = concat!(
 pub(super) fn attempt_script(fail_next: bool, left_ms: u64, expression: &str) -> String {
     fill(
         PRELUDE,
-        &[
+        [
             if fail_next { "true" } else { "false" },
             &script_with("%@", &[OFF_DIRECTIVE.into()]),
             &script_with("%@", &[format!("chrome-extension://{EXTENSION_ID}").into()]),
@@ -312,7 +312,11 @@ impl ContentBlocker {
                     return None;
                 }
                 let ms = u64::try_from(left.as_millis()).unwrap_or(u64::MAX);
-                Some(attempt_script(script_op.fail_next.get(), ms, &script_op.expression))
+                Some(attempt_script(
+                    script_op.fail_next.get(),
+                    ms,
+                    &script_op.expression,
+                ))
             }),
             Box::new(move |value, error| {
                 if op.attempt.get() != attempt {
@@ -470,7 +474,10 @@ mod tests {
                 tab.load();
             }
             host.run_posted();
-            assert_eq!(tab.scripts.borrow().len(), usize::from(load_before_deadline));
+            assert_eq!(
+                tab.scripts.borrow().len(),
+                usize::from(load_before_deadline)
+            );
             let timeout = (None, Some("the call timed out".into()));
             assert_eq!(got.take(), vec![timeout.clone(), timeout]);
         }

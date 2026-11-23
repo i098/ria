@@ -548,16 +548,46 @@ pub fn run_data_call(
 /// `content_blocker_module`.
 pub fn tables() -> &'static [CallTable<DataCtx>] {
     static TABLES: [CallTable<DataCtx>; 10] = [
-        CallTable { domain: "autofill", handlers: autofill_table() },
-        CallTable { domain: "bookmarks", handlers: bookmarks_table() },
-        CallTable { domain: "downloads", handlers: downloads_table() },
-        CallTable { domain: "favicons", handlers: favicons_table() },
-        CallTable { domain: "history", handlers: history_table() },
-        CallTable { domain: "passwords", handlers: passwords_table() },
-        CallTable { domain: "permissions", handlers: permissions_table() },
-        CallTable { domain: "profiles", handlers: profiles_table() },
-        CallTable { domain: "search", handlers: search_table() },
-        CallTable { domain: "sites", handlers: sites_table() },
+        CallTable {
+            domain: "autofill",
+            handlers: autofill_table(),
+        },
+        CallTable {
+            domain: "bookmarks",
+            handlers: bookmarks_table(),
+        },
+        CallTable {
+            domain: "downloads",
+            handlers: downloads_table(),
+        },
+        CallTable {
+            domain: "favicons",
+            handlers: favicons_table(),
+        },
+        CallTable {
+            domain: "history",
+            handlers: history_table(),
+        },
+        CallTable {
+            domain: "passwords",
+            handlers: passwords_table(),
+        },
+        CallTable {
+            domain: "permissions",
+            handlers: permissions_table(),
+        },
+        CallTable {
+            domain: "profiles",
+            handlers: profiles_table(),
+        },
+        CallTable {
+            domain: "search",
+            handlers: search_table(),
+        },
+        CallTable {
+            domain: "sites",
+            handlers: sites_table(),
+        },
     ];
     &TABLES
 }
