@@ -36,7 +36,7 @@ Install plus loop: about 8 min.
   - A repeated space in the query: the first edit of the whitespace collapse did not apply, `diff` caught it.
   - JS `trim` and `\s` differ from Rust `trim` (U+FEFF, U+0085). The port uses the JS set.
 - Lone surrogates: the napi bridge cannot pass them to a Rust `String`. Two cases are in `fuzzy-rs/known-diffs.jsonl` (the skill says ask first; this is a bridge limit, not a port choice). A pure Rust app does not have this limit.
-- `bench`: Rust is slower than V8 across the bridge (`fuzzyScore` 0.87x, `matchActions` 0.23x). That is expected for one small function and does not matter for Halyard (the port is for correctness proof, not speed).
+- `bench`: Rust is slower than V8 across the bridge (`fuzzyScore` 0.87x, `matchActions` 0.23x). That is expected for one small function and does not matter for Ria (the port is for correctness proof, not speed).
 - `matchActions` caches prepared names in a `WeakMap`. The port does not cache; the cache is not observable except through the two errors above.
 - Inputs outside `ActionCandidate` (string `keywords`, odd titles) only fail with the error classes the recording covers. Marked `shortcut:` in `port.rs`.
 - `fuzzy-rs/rust-anything.json` keeps the scratch `root` path of the run. Re-run `bridge` against the Ardia submodule when the base lands.

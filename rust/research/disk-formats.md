@@ -6,7 +6,8 @@ Scope: the Mac app (`apps/browser/src`, `apps/browser/macos`, `packages/*/ios` e
 
 ## 1. Where the data lives
 
-Ardia uses four roots. Halyard must keep all four.
+Ardia uses four roots. Ria must keep all four.
+The port keeps the 4 formats in its own data folder and never opens an Ardia profile folder (ADR-D1).
 
 | Root | Default macOS path | With `ARDIA_DATA_DIR=<D>` | Resolved at |
 |---|---|---|---|
@@ -231,7 +232,7 @@ Hand-versioned (no `versionedJson`): `switches-cache.json` writes `{version:1, s
 
 ### 3.13 Chromium-owned files
 
-The engine owns everything else under `Chromium/`: `Local State`, `SingletonLock` (checked by `packages/ardiacore/ios/ArdiaStartup.mm:17-18`), each profile's `Preferences`, `History`, `Bookmarks`, `Cookies`, `Login Data`, `Extensions/`, `Local Extension Settings/` (read at `packages/ardiacore/ios/ArdiaContentBlockerLite.mm:66`). Bookmarks and history live in Chromium; JS only keeps `bookmarks-cache.json`. Halyard must treat these as engine files and not parse them [INFERENCE for the file list beyond the cited names].
+The engine owns everything else under `Chromium/`: `Local State`, `SingletonLock` (checked by `packages/ardiacore/ios/ArdiaStartup.mm:17-18`), each profile's `Preferences`, `History`, `Bookmarks`, `Cookies`, `Login Data`, `Extensions/`, `Local Extension Settings/` (read at `packages/ardiacore/ios/ArdiaContentBlockerLite.mm:66`). Bookmarks and history live in Chromium; JS only keeps `bookmarks-cache.json`. Ria must treat these as engine files and not parse them [INFERENCE for the file list beyond the cited names].
 
 ## 4. Non-file stores
 
@@ -270,7 +271,7 @@ With `ARDIA_DATA_DIR`, `standardUserDefaults` is swizzled to the suite `<D>/Pref
 
 ## 5. Test and dev only files (App dir, scratch instance)
 
-Not part of user data. Listed so Halyard does not mistake them for state.
+Not part of user data. Listed so Ria does not mistake them for state.
 
 | File | Writer | Reader |
 |---|---|---|
