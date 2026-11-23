@@ -183,6 +183,7 @@ struct PageState {
     entered: bool,
     asked: i8,
     waiting_for: i8,
+    waiting_for_draw: bool,
     telling: usize,
     picturing: bool,
     covers: Vec<(Weak<Tab>, Retained<PageCover>)>,
@@ -199,6 +200,7 @@ impl PageState {
     fn cancel_draw(&mut self) {
         self.turn = self.turn.wrapping_add(1);
         self.waiting_for = 0;
+        self.waiting_for_draw = false;
         self.picturing = false;
         uncover(std::mem::take(&mut self.pending_covers), false);
     }
@@ -232,6 +234,7 @@ pub struct FullScreen {
     background: bool,
     allow_occlusion: bool,
     state: RefCell<Transition>,
+    cover_decision: Cell<Option<Box<dyn FnOnce()>>>,
     observers: Vec<Retained<AnyObject>>,
 }
 
@@ -291,9 +294,15 @@ impl FullScreen {
                     },
                     ..Transition::default()
                 }),
+                cover_decision: Cell::new(None),
                 observers,
             }
         })
+    }
+
+    #[doc(hidden)]
+    pub fn observe_next_cover_decision(&self, observe: impl FnOnce() + 'static) {
+        self.cover_decision.set(Some(Box::new(observe)));
     }
 
     fn live_window(&self) -> Option<(Retained<Window>, Retained<NSWindow>)> {
@@ -420,10 +429,11 @@ impl FullScreen {
             if page.waiting_for != 0 && page.waiting_for != target {
                 page.cancel_draw();
             }
-            if page.telling != 0 || page.picturing || page.waiting_for == target {
+            page.waiting_for = target;
+            if page.telling != 0 || page.picturing || page.waiting_for_draw {
                 return;
             }
-            page.waiting_for = target;
+            page.waiting_for_draw = true;
             let tab = tab.or_else(|| page.left_tab.as_ref().and_then(Weak::load));
             (tab, entering, page.turn)
         };
@@ -456,6 +466,7 @@ impl FullScreen {
                 return;
             }
             page.waiting_for = 0;
+            page.waiting_for_draw = false;
             page.picturing = true;
         }
         let mut tabs: Vec<_> = tab.and_then(|tab| tab.load()).into_iter().collect();
@@ -483,19 +494,24 @@ impl FullScreen {
             let owner = Weak::new(&*tab);
             let weak = weak.clone();
             let remaining = remaining.clone();
-            let current = move || {
-                weak.upgrade().filter(|fullscreen| {
+            let current = move |report_decision| {
+                let fullscreen = weak.upgrade()?;
+                let permitted = {
                     let state = fullscreen.state.borrow();
                     !state.closed && state.page.turn == turn
-                })
+                };
+                if report_decision && let Some(observe) = fullscreen.cover_decision.take() {
+                    observe();
+                }
+                permitted.then_some(fullscreen)
             };
             let attach = current.clone();
             PageCover::cover(
                 &tab,
                 false,
-                move || attach().is_some(),
+                move || attach(true).is_some(),
                 move |cover| {
-                    let Some(fullscreen) = current() else {
+                    let Some(fullscreen) = current(false) else {
                         if let Some(cover) = cover {
                             cover.uncover(false);
                         }
@@ -566,7 +582,7 @@ impl FullScreen {
                 name.isEqualToString(NSApplicationDidResignActiveNotification),
             )
         };
-        let (covers, exit_page) = {
+        let covers = {
             let mut state = self.state.borrow_mut();
             if state.closed {
                 return;
@@ -588,18 +604,11 @@ impl FullScreen {
             if did {
                 page.transitioning = false;
             }
-            let exit_page = if did && !entering && !page.ours {
-                page.entered = false;
-                page.tab.clone()
-            } else {
-                None
-            };
-            let covers = if close || did {
+            if close || did {
                 std::mem::take(&mut page.covers)
             } else {
                 Vec::new()
-            };
-            (covers, exit_page)
+            }
         };
         uncover(covers, did);
         if close {
@@ -607,12 +616,19 @@ impl FullScreen {
         }
         self.update_seen(left_app);
         if did {
-            self.state.borrow_mut().page.ours = false;
+            let ours = std::mem::take(&mut self.state.borrow_mut().page.ours);
             let weak = Rc::downgrade(self);
             main_queue::post(Box::new(move || {
                 if let Some(fullscreen) = weak.upgrade().filter(|item| item.live_window().is_some())
                 {
-                    if let Some(tab) = exit_page.and_then(|tab| tab.load()) {
+                    let exit_page = if !entering && !ours {
+                        let page = &mut fullscreen.state.borrow_mut().page;
+                        page.entered = false;
+                        page.tab.as_ref().and_then(Weak::load)
+                    } else {
+                        None
+                    };
+                    if let Some(tab) = exit_page {
                         tab.exit_fullscreen();
                     } else {
                         fullscreen.sync_page();

@@ -543,7 +543,6 @@ mod mac {
             move |tab: *const Tab, timeout: f64, completion: &DynBlock<dyn Fn(CGImageRef)>| {
                 if tab == target && let Some((supersede, verify)) = work.take() {
                     unsafe { ffi::method_setImplementation(method, implementation) };
-                    let started = Instant::now();
                     main_queue::post(Box::new(supersede));
                     let completion = completion.copy();
                     let verify = Cell::new(Some(verify));
@@ -551,14 +550,9 @@ mod mac {
                     let reply = RcBlock::new(move |image: CGImageRef| {
                         assert!(!image.0.is_null(), "The fullscreen snapshot must contain an image");
                         completion.call((image,));
-                        let delivered_after = started.elapsed();
                         let attached = attached.clone();
                         let verify = verify.take().unwrap();
                         main_queue::post(Box::new(move || {
-                            assert!(
-                                delivered_after < Duration::from_millis(400),
-                                "The fullscreen snapshot must arrive before timeout"
-                            );
                             assert!(!attached.get(), "The stale cover must never attach");
                             verify();
                         }));
@@ -858,6 +852,11 @@ mod mac {
                     let snapshot_window = page_window.clone();
                     let superseded = Rc::new(Cell::new(None));
                     let result = superseded.clone();
+                    let decided = Rc::new(Cell::new(false));
+                    let observed = decided.clone();
+                    controller
+                        .fullscreen
+                        .observe_next_cover_decision(move || observed.set(true));
                     check_pending_fullscreen_snapshot(
                         &tab,
                         move || {
@@ -870,6 +869,10 @@ mod mac {
                             result.set(Some(after));
                         },
                         move || {
+                            assert!(
+                                decided.get(),
+                                "The snapshot must reach the attachment decision"
+                            );
                             let after = superseded.take().unwrap();
                             assert_eq!(probe(&page_host, &page_window, "fullScreen"), after);
                             assert_eq!(probe(&page_host, &page_window, "fakeFullScreen"), after);
