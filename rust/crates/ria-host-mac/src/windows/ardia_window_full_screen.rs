@@ -121,7 +121,6 @@ fn screen_locked() -> bool {
 struct Transition {
     transitioning: bool,
     settling: bool,
-    acted: bool,
     acting: bool,
     restore_frame: Option<NSRect>,
     overruled: bool,
@@ -196,13 +195,19 @@ impl FullScreen {
         })
     }
 
+    fn live_window(&self) -> Option<(Retained<Window>, Retained<NSWindow>)> {
+        if self.state.borrow().closed {
+            return None;
+        }
+        let core = self.core.load()?;
+        let window = core.window();
+        Some((core, window))
+    }
+
     pub fn is_full_screen(&self) -> bool {
-        self.state.borrow().acted
-            || self.core.load().is_some_and(|core| {
-                core.window()
-                    .styleMask()
-                    .contains(NSWindowStyleMask::FullScreen)
-            })
+        self.live_window().is_some_and(|(core, window)| {
+            core.acted_full_screen() || window.styleMask().contains(NSWindowStyleMask::FullScreen)
+        })
     }
 
     pub fn seen(&self) -> bool {
@@ -249,34 +254,29 @@ impl FullScreen {
     }
 
     fn update_seen(&self, left_app: bool) {
-        let Some(core) = self.core.load() else {
+        let Some((core, window)) = self.live_window() else {
             return;
         };
-        let window = core.window();
         let app = NSApplication::sharedApplication(self.mtm);
         let active = app.isActive();
-        let (visible, overruled) = {
-            let state = self.state.borrow();
-            if state.closed {
+        let (visible, overruled) = if self.background && !self.allow_occlusion {
+            (true, false)
+        } else {
+            if screen_locked() {
                 return;
             }
-            if self.background && !self.allow_occlusion {
-                (true, false)
-            } else {
-                if screen_locked() {
-                    return;
-                }
-                let app_kit = window
-                    .occlusionState()
-                    .contains(NSWindowOcclusionState::Visible);
-                let server = (!active || !app_kit) && window_server_shows(&window);
-                (
-                    if active { app_kit || server } else { server },
-                    !app_kit && server,
-                )
-            }
+            let app_kit = window
+                .occlusionState()
+                .contains(NSWindowOcclusionState::Visible);
+            let server = (!active || !app_kit) && window_server_shows(&window);
+            (
+                if active { app_kit || server } else { server },
+                !app_kit && server,
+            )
         };
-        let active_fullscreen = active && self.is_full_screen();
+        let active_fullscreen = active
+            && (core.acted_full_screen()
+                || window.styleMask().contains(NSWindowStyleMask::FullScreen));
         let changed = {
             let mut state = self.state.borrow_mut();
             if state.settling && !state.transitioning && visible {
@@ -313,8 +313,8 @@ impl FullScreen {
 
     pub fn toggle(&self) {
         if !self.background {
-            if let Some(core) = self.core.load() {
-                core.window().toggleFullScreen(None);
+            if let Some((_, window)) = self.live_window() {
+                window.toggleFullScreen(None);
             }
             return;
         }
@@ -322,13 +322,12 @@ impl FullScreen {
     }
 
     pub fn act_window_full_screen(&self, entering: bool) {
-        let Some(core) = self.core.load() else {
+        let Some((core, window)) = self.live_window() else {
             return;
         };
-        let window = core.window();
         {
             let mut state = self.state.borrow_mut();
-            if state.closed || state.acting || state.acted == entering {
+            if state.acting || core.acted_full_screen() == entering {
                 return;
             }
             state.acting = true;
@@ -345,12 +344,11 @@ impl FullScreen {
                 Some(&window),
             );
         }
+        if self.state.borrow().closed {
+            return;
+        }
         if entering {
-            {
-                let mut state = self.state.borrow_mut();
-                state.restore_frame = Some(window.frame());
-                state.acted = true;
-            }
+            self.state.borrow_mut().restore_frame = Some(window.frame());
             core.set_acted_full_screen(true);
             if let Some(screen) = window.screen().or_else(|| NSScreen::mainScreen(self.mtm)) {
                 window.setFrame_display(screen.frame(), true);
@@ -367,9 +365,6 @@ impl FullScreen {
                 return;
             }
             state.acting = false;
-            if !entering {
-                state.acted = false;
-            }
         }
         if !entering {
             core.set_acted_full_screen(false);

@@ -256,6 +256,11 @@ mod mac {
         });
         assert_eq!(requests.get(), 2);
         assert!(controllers.all().is_empty());
+        assert!(!controller.fullscreen.is_full_screen());
+        controller.fullscreen.reconsider_sight();
+        controller.fullscreen.toggle();
+        controller.fullscreen.act_window_full_screen(true);
+        assert!(!controller.core.acted_full_screen());
     }
 
     fn check_windows(profile: &Profile) {
@@ -382,6 +387,9 @@ mod mac {
             "live_windows: engine shortcut, controller claims, titlebar hit testing, visibility, acted fullscreen, and native close checked"
         );
         println!("live_windows: foreground AppKit fullscreen entry and exit not checked");
+        println!(
+            "live_windows: inactive visibility checked; a fully covered, ordered-in window was not tested"
+        );
         println!(
             "live_windows: native sharing after trailing placement without resize not checked (indicator and child pill)"
         );
