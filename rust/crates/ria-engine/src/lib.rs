@@ -6,4 +6,5 @@
 
 pub mod api;
 pub mod call;
+pub mod domains;
 pub mod types;

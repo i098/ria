@@ -1,0 +1,279 @@
+// Ported from ardia packages/ardiacore/ios/ExtensionsModule.swift at 551d3c13c.
+// Copyright 2026 Mantra Patel, Apache-2.0.
+// This file is a Rust port of that file, with changes.
+
+//! The `extensions` domain. The shapes of the calls that `ArdiaServices.mm` makes (`listExtensions`, `installExtension`,
+//! `setExtension`, `configureExtension` and the others) are here too.
+
+use std::path::{Path, PathBuf};
+
+use serde_json::{Map, Value, json};
+
+use super::extension_package::{is_extension_id, read_manifest};
+use super::{CallContext, EngineRoute, Route, dir_of, passing, string_arg};
+use crate::call::CallError;
+
+/// Calls that the host answers: the file panel, the install prompt and the action state of the tab.
+pub const HOST_CALLS: &[&str] = &[
+    "inspectUnpacked",
+    "chooseFolder",
+    "resolveInstallPrompt",
+    "actionStates",
+    "sidePanelUrl",
+];
+
+pub fn route(call: &str) -> Option<Route> {
+    let engine = |symbol, shape, reply, changed| {
+        Some(Route::Engine(EngineRoute {
+            symbol,
+            shape,
+            reply,
+            changed,
+        }))
+    };
+    match call {
+        "list" => engine(
+            "ac_extensions_list",
+            |_| Ok(json!({})),
+            list_reply,
+            |_, _| None,
+        ),
+        "install" => engine(
+            "ac_extensions_install",
+            path_args,
+            |r, _| Ok(r),
+            |_, reply| installed(reply),
+        ),
+        "installCrx" => engine(
+            "ac_extensions_install_crx",
+            path_args,
+            |r, _| Ok(r),
+            |_, reply| installed(reply),
+        ),
+        "setEnabled" => engine(
+            "ac_extensions_set_enabled",
+            set_enabled_args,
+            |r, _| Ok(r),
+            |args, _| {
+                let event = if args["enabled"] == true {
+                    "enabled"
+                } else {
+                    "disabled"
+                };
+                Some((string_arg(args, "id").ok()?, event))
+            },
+        ),
+        "uninstall" => engine(
+            "ac_extensions_uninstall",
+            id_args,
+            |r, _| Ok(r),
+            |args, _| Some((string_arg(args, "id").ok()?, "uninstalled")),
+        ),
+        "reload" => engine(
+            "ac_extensions_reload",
+            id_args,
+            |r, _| Ok(r),
+            |args, _| Some((string_arg(args, "id").ok()?, "reloaded")),
+        ),
+        "configure" => engine(
+            "ac_extensions_configure",
+            configure_args,
+            |r, _| Ok(r),
+            |args, _| Some((string_arg(args, "id").ok()?, "configured")),
+        ),
+        "watchActions" => Some(passing("ac_extensions_watch_actions")),
+        "syncState" => Some(passing("ac_extensions_sync_state")),
+        "syncApply" => Some(passing("ac_extensions_sync_apply")),
+        "loadHealth" => Some(passing("ac_extensions_load_health")),
+        c if HOST_CALLS.contains(&c) => Some(Route::Host),
+        _ => None,
+    }
+}
+
+fn installed(reply: &Value) -> Option<(String, &'static str)> {
+    Some((reply["id"].as_str()?.to_owned(), "installed"))
+}
+
+fn path_args(args: &Value) -> Result<Value, CallError> {
+    Ok(json!({"path": string_arg(args, "path")?}))
+}
+
+fn id_args(args: &Value) -> Result<Value, CallError> {
+    Ok(json!({"id": string_arg(args, "id")?}))
+}
+
+fn set_enabled_args(args: &Value) -> Result<Value, CallError> {
+    let enabled = args["enabled"].as_bool().ok_or(CallError::BadArguments)?;
+    Ok(json!({"id": string_arg(args, "id")?, "enabled": enabled}))
+}
+
+/// `id` and the options that the engine knows; `pinnedIndex` as an integer.
+fn configure_args(args: &Value) -> Result<Value, CallError> {
+    let options = args["options"].as_object().ok_or(CallError::BadArguments)?;
+    let mut out = Map::new();
+    out.insert("id".into(), json!(string_arg(args, "id")?));
+    for key in [
+        "pinned",
+        "incognito",
+        "fileAccess",
+        "userScripts",
+        "siteAccess",
+    ] {
+        if let Some(value) = options.get(key).filter(|v| !v.is_null()) {
+            out.insert(key.into(), value.clone());
+        }
+    }
+    if let Some(index) = options.get("pinnedIndex").and_then(Value::as_f64) {
+        out.insert("pinnedIndex".into(), json!(index as i64));
+    }
+    Ok(Value::Object(out))
+}
+
+/// The folder of an installed store extension: the entry of `<profile>/Extensions/<id>` that starts with `<version>_`.
+fn store_folder(profile_dir: &Path, id: &str, version: &str) -> Option<PathBuf> {
+    if !is_extension_id(id) || version.is_empty() {
+        return None;
+    }
+    let dir = profile_dir.join("Extensions").join(id);
+    let prefix = format!("{version}_");
+    let mut names: Vec<_> = std::fs::read_dir(&dir)
+        .ok()?
+        .filter_map(|e| e.ok()?.file_name().into_string().ok())
+        .filter(|n| n.starts_with(&prefix))
+        .collect();
+    names.sort();
+    names.first().map(|n| dir.join(n))
+}
+
+/// Adds the manifest fields to each extension of the engine list.
+fn list_reply(reply: Value, ctx: &CallContext) -> Result<Value, CallError> {
+    let infos = reply["extensions"]
+        .as_array()
+        .ok_or_else(|| CallError::Engine("Unexpected extension list".into()))?;
+    let list: Vec<Value> = infos
+        .iter()
+        .filter_map(Value::as_object)
+        .map(|info| list_item(info, ctx))
+        .collect();
+    Ok(json!({"extensions": list}))
+}
+
+fn list_item(info: &Map<String, Value>, ctx: &CallContext) -> Value {
+    let mut item: Map<String, Value> = info
+        .iter()
+        .filter(|(_, v)| !v.is_null())
+        .map(|(k, v)| (k.clone(), v.clone()))
+        .collect();
+    let path = info.get("path").and_then(Value::as_str);
+    let folder = path.map(PathBuf::from).or_else(|| {
+        store_folder(
+            dir_of(ctx),
+            info.get("id")?.as_str()?,
+            info.get("version")?.as_str()?,
+        )
+    });
+    let manifest = folder.map_or(Value::Null, |f| read_manifest(&f, &ctx.ui_locale));
+    for key in [
+        "popup",
+        "actionTitle",
+        "actionIcon",
+        "sidePanel",
+        "hasAction",
+    ] {
+        if let Some(value) = manifest.get(key) {
+            item.insert(key.into(), value.clone());
+        }
+    }
+    item.insert(
+        "incognitoSplit".into(),
+        json!(manifest["incognitoSplit"] == true),
+    );
+    item.insert(
+        "incognitoAllowed".into(),
+        manifest
+            .get("incognitoAllowed")
+            .cloned()
+            .unwrap_or(Value::Null),
+    );
+    for key in ["siteAccess", "optionsUrl", "path", "homepageUrl"] {
+        item.entry(key).or_insert(Value::Null);
+    }
+    let from_store = info.get("location").and_then(Value::as_str) == Some("FROM_STORE");
+    item.insert("fromWebStore".into(), json!(from_store));
+    let url = from_store
+        .then(|| info.get("id").and_then(Value::as_str))
+        .flatten()
+        .map(|id| format!("https://chromewebstore.google.com/detail/{id}"));
+    item.insert("webStoreUrl".into(), json!(url));
+    Value::Object(item)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn ctx(dir: &Path) -> CallContext {
+        CallContext {
+            profile_name: "p".into(),
+            profile_dir: dir.to_string_lossy().into(),
+            private: false,
+            ui_locale: "en".into(),
+        }
+    }
+
+    #[test]
+    fn configure_keeps_known_options_and_truncates_the_pin_index() {
+        let args = json!({"id": "x", "options": {"pinned": true, "pinnedIndex": 2.9, "other": 1, "siteAccess": null}});
+        assert_eq!(
+            configure_args(&args).unwrap(),
+            json!({"id": "x", "pinned": true, "pinnedIndex": 2})
+        );
+        assert_eq!(
+            configure_args(&json!({"id": "x"})),
+            Err(CallError::BadArguments)
+        );
+    }
+
+    #[test]
+    fn list_reply_merges_the_manifest_of_a_path_extension() {
+        let dir = std::env::temp_dir().join(format!("ria-extlist-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        std::fs::write(
+            dir.join("manifest.json"),
+            r#"{"name":"n","version":"1","action":{"default_popup":"p.html"},"incognito":"split"}"#,
+        )
+        .unwrap();
+        let reply = json!({"extensions": [{"id": "a", "path": dir, "location": "FROM_STORE", "siteAccess": null}]});
+        let out = list_reply(reply, &ctx(&dir)).unwrap();
+        let item = &out["extensions"][0];
+        assert_eq!(item["popup"], "p.html");
+        assert_eq!(item["hasAction"], true);
+        assert_eq!(item["incognitoSplit"], true);
+        assert_eq!(item["fromWebStore"], true);
+        assert_eq!(
+            item["webStoreUrl"],
+            "https://chromewebstore.google.com/detail/a"
+        );
+        assert_eq!(item["siteAccess"], Value::Null);
+        assert_eq!(item["homepageUrl"], Value::Null);
+        assert_eq!(
+            list_reply(json!({}), &ctx(&dir)),
+            Err(CallError::Engine("Unexpected extension list".into()))
+        );
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn store_folder_finds_the_version_folder() {
+        let dir = std::env::temp_dir().join(format!("ria-store-{}", std::process::id()));
+        let id = "abcdefghijklmnopabcdefghijklmnop";
+        std::fs::create_dir_all(dir.join("Extensions").join(id).join("1.2_0")).unwrap();
+        assert_eq!(
+            store_folder(&dir, id, "1.2"),
+            Some(dir.join("Extensions").join(id).join("1.2_0"))
+        );
+        assert_eq!(store_folder(&dir, id, "1.3"), None);
+        assert_eq!(store_folder(&dir, "bad", "1.2"), None);
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+}
