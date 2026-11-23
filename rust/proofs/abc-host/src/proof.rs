@@ -42,7 +42,7 @@ thread_local! {
 
 define_class!(
     #[unsafe(super(NSObject))]
-    #[name = "HalyardTabDelegate"]
+    #[name = "RiaTabDelegate"]
     struct TabDelegate;
 
     impl TabDelegate {
@@ -56,7 +56,7 @@ define_class!(
     }
 );
 
-const PAGE_TITLE: &str = "Halyard proof page";
+const PAGE_TITLE: &str = "Ria proof page";
 const STRIP_W: f64 = 320.0;
 const GLASS: (f64, f64) = (340.0, 220.0);
 
@@ -1073,7 +1073,7 @@ impl Ctx {
             };
             let on_button = self.center("inc").map(|c| hit(self, self.to_window(c))).unwrap_or_default();
             let on_page = hit(self, NSPoint::new(self.base_frame_width() * 0.5 + 60.0, 160.0));
-            self.check("hit_test_layer_over_page", on_button.contains("HalyardRuneView") && !on_page.contains("HalyardRuneView"), &format!("over the button: {on_button}; over a bare part of the page: {on_page}"));
+            self.check("hit_test_layer_over_page", on_button.contains("RiaRuneView") && !on_page.contains("RiaRuneView"), &format!("over the button: {on_button}; over a bare part of the page: {on_page}"));
             self.sub = 0;
             self.step = Step::AxSelfCheck;
         }

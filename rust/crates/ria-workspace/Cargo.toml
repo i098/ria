@@ -1,5 +1,5 @@
 [package]
-name = "halyard-workspace"
+name = "ria-workspace"
 version = "0.0.0"
 description = "Placeholder so the workspace has one crate; blaze check refuses a workspace with none. Remove when the first real crate lands."
 edition.workspace = true

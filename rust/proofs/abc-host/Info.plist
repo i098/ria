@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
   <key>CFBundleExecutable</key><string>abc-host</string>
-  <key>CFBundleIdentifier</key><string>sh.halyard.proof</string>
-  <key>CFBundleName</key><string>Halyard Proof</string>
+  <key>CFBundleIdentifier</key><string>sh.ria.proof</string>
+  <key>CFBundleName</key><string>Ria Proof</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleVersion</key><string>0</string>
   <key>CFBundleShortVersionString</key><string>0.0.0</string>
