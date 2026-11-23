@@ -1,12 +1,13 @@
 // Ria original, no Ardia source.
 
-//! Check L of slice 3.3 exercises the data domains of `ria-engine` against the prebuilt engine.
+//! Check L of slice 3.3 exercises selected `ria-engine` data calls against prebuilt Chromium.
 //! From `rust/` on macOS, set `ENGINE_DIR` to the directory that contains `Chromium Framework.framework`.
 //! Run `blaze test -p ria-engine --test live`.
 //! The check has its own `main` because the engine owns the main thread.
 //! It copies the framework into a temporary app bundle so the engine can start its helper processes.
 //! The check uses a temporary profile to verify selected replies and events.
-//! It does not exercise the content blocker because it has no extension page.
+//! The harness supplies the bookmark export path instead of opening a native save panel.
+//! It does not exercise WebKit, private profile lifecycle, or the content blocker.
 
 #![allow(unsafe_code)]
 

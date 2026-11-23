@@ -8,10 +8,12 @@ Source of truth for what is ported and where it goes. One row for each unit.
 - Scope `mac` is the first scope (ADR-C3). Scope `out` rows are listed so that every unit of `analyze` has a row, and are not ported.
 - Column `Target` is the path that the slice writes. Column `Slice` is the one slice that owns the unit (port plan, section 8). Column `Disposition` is `port`, `stay` (not ported, used as it is), `absorb` (a React Native wrapper: Rust needs no wrapper), `delete` (React Native only), `later` (not ported in this plan), `done` (Rust already) or `out`. Column `Port state` starts as `todo` for scope `mac`.
 - `partial` means Rust code exists, but integration or live checks are incomplete.
-- `implemented` means the Rust code is in the repository. It does not record a gate result.
+- `implemented` records code in the repository, not app integration or a gate result.
 
 Counts: 1255 rows, 814 in scope `mac`, 441 `out`.
 Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 units and 59739 lines, absorb 84 units and 5559 lines, delete 6 units and 173 lines, later 25 units and 1726 lines, done 1 units and 9945 lines.
+
+Slice 3.3 provides the data domains in `ria-engine`. The app does not use them yet.
 
 For slice 3.6, `reader only` means that the host crate provides the reader, but app startup and the early window do not use it yet.
 
