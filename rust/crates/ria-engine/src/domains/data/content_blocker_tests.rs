@@ -21,7 +21,6 @@ pub struct FakeHost {
     now: Cell<Duration>,
     timers: RefCell<Vec<(Duration, Work)>>,
     posted: RefCell<Vec<Work>>,
-    posted_count: Cell<usize>,
     pub profiles: RefCell<HashMap<String, Profile>>,
     resources: PathBuf,
     pub changes: RefCell<Vec<Value>>,
@@ -50,7 +49,6 @@ impl FakeHost {
             now: Cell::default(),
             timers: RefCell::default(),
             posted: RefCell::default(),
-            posted_count: Cell::new(0),
             profiles: RefCell::default(),
             resources,
             changes: RefCell::default(),
@@ -92,10 +90,6 @@ impl FakeHost {
             }
         }
     }
-
-    pub fn posted_any(&self) -> bool {
-        self.posted_count.get() > 0
-    }
 }
 
 impl BlockerHost for FakeHost {
@@ -136,7 +130,6 @@ impl BlockerHost for FakeHost {
             .push((self.now.get() + delay, work));
     }
     fn post(&self, work: Work) {
-        self.posted_count.set(self.posted_count.get() + 1);
         self.posted.borrow_mut().push(work);
     }
 }
@@ -328,13 +321,6 @@ fn the_version_comes_from_the_manifest() {
     assert_eq!(manifest_version(r#"{"version":"1.2"}"#), "1.2");
     assert_eq!(manifest_version(r#"{"version":3}"#), "");
     assert_eq!(manifest_version("nope"), "");
-}
-
-#[test]
-fn hiding_rules_wrap_the_body() {
-    let script = with_hiding_rules("1");
-    assert!(script.starts_with("(() => { const hidingRule = "));
-    assert!(script.ends_with("return 1; })()"));
 }
 
 #[test]

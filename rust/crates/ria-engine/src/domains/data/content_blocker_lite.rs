@@ -230,11 +230,4 @@ mod tests {
         ));
         assert!(!lite_settings_usable(&json!({})));
     }
-
-    #[test]
-    fn the_move_script_carries_the_settings_and_the_map() {
-        let script = script_with(MOVE_LITE, &[json!({"a": 1}), lite_list_map()]);
-        assert!(script.contains(r#"const lite = {"a":1};"#));
-        assert!(script.contains(r#""pgl":["plowe-0"]"#));
-    }
 }

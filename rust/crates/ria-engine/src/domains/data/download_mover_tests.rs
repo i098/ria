@@ -193,37 +193,70 @@ fn download_mover() {
     }
     {
         let path = env.finished(&mover, "report.pdf", "first", none.clone());
-        let attribute = c"user.ardia.quarantine";
-        let cpath = std::ffi::CString::new(path.clone()).unwrap();
-        // SAFETY: valid C strings and a 20-byte value; the file system may refuse user xattrs.
         #[cfg(target_os = "linux")]
-        let tagged = unsafe {
-            libc::setxattr(
-                cpath.as_ptr(),
-                attribute.as_ptr(),
-                c"0083;00000000;Ardia;".as_ptr().cast(),
-                20,
-                0,
-            )
-        } == 0;
-        #[cfg(not(target_os = "linux"))]
-        let tagged = false;
+        let attribute = c"user.ardia.quarantine";
+        #[cfg(target_os = "macos")]
+        let attribute = c"com.apple.quarantine";
+        let quarantine = *b"0083;00000000;Ardia;";
+        let cpath = std::ffi::CString::new(path.clone()).unwrap();
+        // SAFETY: valid C strings and a value buffer of the specified length.
+        let set = unsafe {
+            #[cfg(target_os = "linux")]
+            {
+                libc::setxattr(
+                    cpath.as_ptr(),
+                    attribute.as_ptr(),
+                    quarantine.as_ptr().cast(),
+                    quarantine.len(),
+                    0,
+                )
+            }
+            #[cfg(target_os = "macos")]
+            {
+                libc::setxattr(
+                    cpath.as_ptr(),
+                    attribute.as_ptr(),
+                    quarantine.as_ptr().cast(),
+                    quarantine.len(),
+                    0,
+                    0,
+                )
+            }
+        };
+        assert_eq!(set, 0, "{}", std::io::Error::last_os_error());
         let result = mover.move_download(&path, "~/Downloads/Sorted/2026");
         assert_eq!(reason(&result), "ok");
         let moved = env.at("Downloads/Sorted/2026/report.pdf");
         assert_eq!(result["path"], json!(moved));
         assert_eq!(text(&moved), "first");
         assert!(!exists(&path));
-        #[cfg(target_os = "linux")]
-        if tagged {
-            let cmoved = std::ffi::CString::new(moved.clone()).unwrap();
-            // SAFETY: a size query with a null buffer.
-            assert!(
-                unsafe {
-                    libc::getxattr(cmoved.as_ptr(), attribute.as_ptr(), std::ptr::null_mut(), 0)
-                } > 0
-            );
-        }
+        let cmoved = std::ffi::CString::new(moved.clone()).unwrap();
+        let mut copied = [0u8; quarantine.len()];
+        // SAFETY: valid C strings and a writable buffer of the specified length.
+        let size = unsafe {
+            #[cfg(target_os = "linux")]
+            {
+                libc::getxattr(
+                    cmoved.as_ptr(),
+                    attribute.as_ptr(),
+                    copied.as_mut_ptr().cast(),
+                    copied.len(),
+                )
+            }
+            #[cfg(target_os = "macos")]
+            {
+                libc::getxattr(
+                    cmoved.as_ptr(),
+                    attribute.as_ptr(),
+                    copied.as_mut_ptr().cast(),
+                    copied.len(),
+                    0,
+                    0,
+                )
+            }
+        };
+        assert_eq!(size, quarantine.len() as isize);
+        assert_eq!(copied, quarantine);
         assert_eq!(result["event"]["path"], json!(moved));
 
         let second = env.finished(&mover, "report.pdf", "second", none.clone());

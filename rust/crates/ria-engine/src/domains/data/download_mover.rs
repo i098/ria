@@ -41,9 +41,11 @@ pub trait Defaults {
 }
 
 /// A `Defaults` that keeps values in memory.
+#[cfg(test)]
 #[derive(Default)]
 pub struct MemoryDefaults(RefCell<HashMap<String, Value>>);
 
+#[cfg(test)]
 impl Defaults for MemoryDefaults {
     fn get(&self, key: &str) -> Option<Value> {
         self.0.borrow().get(key).cloned()
@@ -57,6 +59,7 @@ impl Defaults for MemoryDefaults {
 }
 
 /// Called with the step name (`claimed`, `verified`, `placed`) and the staging folder path.
+#[cfg(test)]
 pub type StepHook = Box<dyn FnMut(&str, &str)>;
 
 struct Identity {
@@ -78,7 +81,8 @@ pub struct DownloadMover {
     home: String,
     defaults: Rc<dyn Defaults>,
     state: RefCell<State>,
-    pub step_hook: RefCell<Option<StepHook>>,
+    #[cfg(test)]
+    pub(super) step_hook: RefCell<Option<StepHook>>,
 }
 
 fn failure(reason: &str) -> Value {
@@ -323,6 +327,7 @@ impl DownloadMover {
             home: home.to_owned(),
             defaults,
             state: RefCell::new(state),
+            #[cfg(test)]
             step_hook: RefCell::new(None),
         };
         mover.reconcile_journal();
@@ -496,6 +501,7 @@ impl DownloadMover {
         result
     }
 
+    #[cfg(test)]
     fn step(&self, name: &str, staging: &File) {
         if let Some(hook) = self.step_hook.borrow_mut().as_mut() {
             hook(name, &directory_path(staging).unwrap_or_default());
@@ -637,6 +643,7 @@ impl DownloadMover {
                 "failed"
             });
         }
+        #[cfg(test)]
         self.step("claimed", &staging);
 
         let Ok(mut claimed) = open_at(
@@ -661,6 +668,7 @@ impl DownloadMover {
         {
             return give_back("changed");
         }
+        #[cfg(test)]
         self.step("verified", &staging);
 
         let safe = safe_file_name(source_name);
@@ -692,6 +700,7 @@ impl DownloadMover {
         let final_path = join(&directory, &placed);
         journal.insert("placed".into(), json!(final_path));
         self.journal(id, Some(&journal));
+        #[cfg(test)]
         self.step("placed", &staging);
 
         let landed = lstat_at(dst, &placed).ok();

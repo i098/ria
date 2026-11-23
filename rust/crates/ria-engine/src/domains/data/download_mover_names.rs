@@ -93,24 +93,18 @@ pub fn name_with_suffix(name: &str, suffix: &str) -> String {
 
 /// A file name with no control, bidi or path characters, no leading dots and at most 255 bytes.
 pub fn safe_file_name(name: &str) -> String {
-    let mut clean = String::new();
-    for piece in clusters(name) {
-        let c = piece.chars().next().map_or(0, |c| c as u32);
-        if c < 0x20
-            || c == 0x7F
-            || (0x202A..=0x202E).contains(&c)
-            || (0x2066..=0x2069).contains(&c)
-            || c == 0x200E
-            || c == 0x200F
-            || c == 0xFEFF
+    let mut clean = String::with_capacity(name.len());
+    for ch in name.chars() {
+        if ch.is_control()
+            || matches!(
+                ch,
+                '\u{061C}' | '\u{200E}' | '\u{200F}' | '\u{202A}'..='\u{202E}'
+                    | '\u{2066}'..='\u{2069}' | '\u{FEFF}'
+            )
         {
             continue;
         }
-        clean.push_str(if c == '/' as u32 || c == ':' as u32 {
-            "_"
-        } else {
-            piece
-        });
+        clean.push(if matches!(ch, '/' | ':') { '_' } else { ch });
     }
     let mut trimmed = clean.trim_matches(char::is_whitespace);
     while let Some(rest) = trimmed.strip_prefix('.') {
@@ -137,6 +131,10 @@ mod tests {
         assert_eq!(safe_file_name("a/b:c.txt"), "a_b_c.txt");
         assert_eq!(safe_file_name("in\u{202E}gnp.exe"), "ingnp.exe");
         assert_eq!(safe_file_name("tab\there\n.txt"), "tabhere.txt");
+        assert_eq!(
+            safe_file_name("a\u{200D}:\u{200D}\u{202E}\u{061C}b\u{200D}\n\u{0085}.txt"),
+            "a\u{200D}_\u{200D}b\u{200D}.txt"
+        );
         assert_eq!(safe_file_name(" .. "), "download");
         let long_name = "é".repeat(400) + ".pdf";
         let cut = safe_file_name(&long_name);

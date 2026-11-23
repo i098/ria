@@ -218,11 +218,15 @@ impl ProfileRegistry {
 
     /// A private session name that the app released: no new private profile is made for it.
     pub fn mark_private_released(&self, name: &str) {
-        self.0
-            .state
-            .borrow_mut()
-            .released_private
-            .insert(name.to_owned());
+        let waiters = {
+            let mut state = self.0.state.borrow_mut();
+            state.released_private.insert(name.to_owned());
+            state.profiles.remove(name);
+            state.waiters.remove(name)
+        };
+        for waiter in waiters.into_iter().flatten() {
+            waiter(None);
+        }
     }
 
     /// Runs `deletion` when the load of `name` finishes, before the load waiters (`DeletionsAfterLoad`).
@@ -341,6 +345,9 @@ impl ProfileRegistry {
         let original = original_profile_name(name);
         let (registry, owned) = (self.clone(), name.to_owned());
         self.with_profile(&original.clone(), move |base| {
+            if !registry.0.state.borrow().waiters.contains_key(&owned) {
+                return;
+            }
             let answer = {
                 let (registry, owned, original) =
                     (registry.clone(), owned.clone(), original.clone());

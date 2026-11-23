@@ -73,7 +73,7 @@ pub(super) struct State {
     pub(super) busy: HashSet<String>,
     pub(super) uses: HashMap<String, u64>,
     pub(super) fail_next_message: bool,
-    delay_next_load_ms: f64,
+    delay_next_load: Duration,
     default_settled: bool,
     launched: bool,
     settled_waiters: Vec<Box<dyn FnOnce()>>,
@@ -666,9 +666,9 @@ impl ContentBlocker {
                 }),
             );
         };
-        let delay = std::mem::take(&mut self.0.state.borrow_mut().delay_next_load_ms);
-        if delay > 0.0 {
-            host.after(Duration::from_secs_f64(delay / 1000.0), Box::new(load));
+        let delay = std::mem::take(&mut self.0.state.borrow_mut().delay_next_load);
+        if !delay.is_zero() {
+            host.after(delay, Box::new(load));
         } else {
             load();
         }
@@ -906,8 +906,8 @@ impl ContentBlocker {
         self.0.state.borrow_mut().fail_next_message = true;
     }
 
-    pub fn dev_delay_next_load(&self, ms: f64) {
-        self.0.state.borrow_mut().delay_next_load_ms = ms;
+    pub(super) fn dev_delay_next_load(&self, delay: Duration) {
+        self.0.state.borrow_mut().delay_next_load = delay;
     }
 }
 

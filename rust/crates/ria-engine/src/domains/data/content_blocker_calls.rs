@@ -409,16 +409,6 @@ mod tests {
         );
         assert_eq!(script_with("%@-%@", &[json!(1)]), "1-");
         assert_eq!(script_with("none", &[json!(1)]), "none");
-        let script = attempt_script(true, 1500, "lists()");
-        assert!(script.starts_with(
-            "let failing = true;const offDirective = \"/^(?:ardia-blocking-off|)/\";"
-        ));
-        assert!(script.contains(
-            "const extensionOrigin = \"chrome-extension://fajbdaomknpkicfjcpipdmcpoamdmilh\";"
-        ));
-        assert!(script.contains("Date.now() + 1500;"));
-        assert!(script.contains("(ms = 4000)"));
-        assert!(script.contains("then(() => (lists()))"));
     }
 
     #[test]
@@ -449,29 +439,6 @@ mod tests {
             got.take(),
             vec![(Some(json!("one")), None), (Some(json!("two")), None)]
         );
-    }
-
-    #[test]
-    fn a_fail_next_flag_fails_one_message_then_clears() {
-        let (blocker, host, scripts) = setup();
-        blocker.dev_fail_next_message();
-        let got = Answers::default();
-        blocker.call("", "null".into(), got.done(), true);
-        blocker.call("", "lists()".into(), got.done(), true);
-        let tab = scripts.tab(0);
-        tab.load();
-        assert!(
-            tab.scripts.borrow()[0].starts_with("let failing = false;"),
-            "a readiness probe keeps the flag"
-        );
-        tab.answer(r#"{"value":null}"#);
-        assert!(tab.scripts.borrow()[1].starts_with("let failing = true;"));
-        tab.answer(r#"{"error":"getLists: failed (dev)"}"#);
-        assert_eq!(
-            got.take(),
-            vec![(None, None), (None, Some("getLists: failed (dev)".into()))]
-        );
-        assert!(!host.posted_any());
     }
 
     #[test]

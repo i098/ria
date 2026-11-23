@@ -4,6 +4,8 @@
 
 //! The `contentBlocker` call table.
 
+use std::time::Duration;
+
 use serde_json::Value;
 
 use super::call_table::{BadCallArgs, CallArgs, CallReply, CallTable, Handler};
@@ -94,7 +96,9 @@ fn dev_fail_next_message(b: &ContentBlocker, _: CallArgs, reply: CallReply) -> O
 }
 
 fn dev_delay_next_load(b: &ContentBlocker, args: CallArgs, reply: CallReply) -> Outcome {
-    b.dev_delay_next_load(args.double("ms")?);
+    let delay = Duration::try_from_secs_f64(args.double("ms")? / 1000.0)
+        .map_err(|_| BadCallArgs("ms is outside the supported delay range".into()))?;
+    b.dev_delay_next_load(delay);
     reply.ok(None);
     Ok(())
 }
@@ -153,6 +157,9 @@ mod tests {
         assert_eq!(
             run(&b, "devDelayNextLoad", "", r#"{"ms":5}"#),
             Some(Ok("null".into()))
+        );
+        assert!(
+            matches!(run(&b, "devDelayNextLoad", "", r#"{"ms":1e30}"#), Some(Err(r)) if r.code == "ERR_BAD_ARGS")
         );
         assert_eq!(
             run(

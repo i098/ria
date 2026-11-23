@@ -7,8 +7,9 @@
 //! arguments as they are to the engine symbol (`EngineCall.passing`); a handler of a native call goes through
 //! `Services`. The name of each call and its symbol are the same as in Ardia.
 
-use serde::Deserialize;
 use serde_json::{Map, Value, json};
+
+use crate::types::{PageEngine, PermissionResult};
 
 use super::call_table::{BadCallArgs, CallArgs, CallReply, CallTable, Handler};
 use super::content_blocker::ContentBlocker;
@@ -166,16 +167,6 @@ fn bookmarks_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     ]
 }
 
-fn command(action: &'static str) -> Handler<DataCtx> {
-    // A closure cannot capture, so one function for each action.
-    match action {
-        "cancel" => |ctx, args, reply| run_command(ctx, "cancel", &args, reply),
-        "pause" => |ctx, args, reply| run_command(ctx, "pause", &args, reply),
-        "resume" => |ctx, args, reply| run_command(ctx, "resume", &args, reply),
-        _ => |ctx, args, reply| run_command(ctx, "keep", &args, reply),
-    }
-}
-
 fn run_command(ctx: &DataCtx, action: &str, args: &CallArgs, reply: CallReply) -> Done {
     let id = args.text("id")?;
     ctx.owner(&id).download_command(action, &id);
@@ -184,22 +175,22 @@ fn run_command(ctx: &DataCtx, action: &str, args: &CallArgs, reply: CallReply) -
 }
 
 fn downloads_table() -> &'static [(&'static str, Handler<DataCtx>)] {
-    // `command` returns plain function pointers, so the table is built once per call and leaked: it is tiny and
-    // `CallTable` wants a static slice.
-    Box::leak(Box::new([
-        ("cancel", command("cancel")),
-        ("pause", command("pause")),
-        ("resume", command("resume")),
-        ("keep", command("keep")),
-        (
-            "settings",
-            passing!("ac_downloads_settings") as Handler<DataCtx>,
-        ),
-        (
-            "setSettings",
-            passing!("ac_downloads_set_settings") as Handler<DataCtx>,
-        ),
-    ]))
+    &[
+        ("cancel", |ctx, args, reply| {
+            run_command(ctx, "cancel", &args, reply)
+        }),
+        ("pause", |ctx, args, reply| {
+            run_command(ctx, "pause", &args, reply)
+        }),
+        ("resume", |ctx, args, reply| {
+            run_command(ctx, "resume", &args, reply)
+        }),
+        ("keep", |ctx, args, reply| {
+            run_command(ctx, "keep", &args, reply)
+        }),
+        ("settings", passing!("ac_downloads_settings")),
+        ("setSettings", passing!("ac_downloads_set_settings")),
+    ]
 }
 
 fn favicons_table() -> &'static [(&'static str, Handler<DataCtx>)] {
@@ -331,31 +322,17 @@ fn passwords_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     ]
 }
 
-#[derive(Deserialize)]
-#[serde(rename_all = "lowercase")]
-enum PermissionResult {
-    Accept,
-    Deny,
-    Dismiss,
-}
-
-impl PermissionResult {
-    fn raw(&self) -> &'static str {
-        match self {
-            Self::Accept => "accept",
-            Self::Deny => "deny",
-            Self::Dismiss => "dismiss",
-        }
-    }
-}
-
 fn permissions_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("resolve", |ctx, args, reply| {
             let id = args.text("id")?;
-            let result: PermissionResult = args.choice("result")?;
+            let result = match args.choice::<PermissionResult>("result")? {
+                PermissionResult::Accept => "accept",
+                PermissionResult::Deny => "deny",
+                PermissionResult::Dismiss => "dismiss",
+            };
             ctx.owner(&id)
-                .resolve_permission(&id, result.raw(), args.bool("remember")?);
+                .resolve_permission(&id, result, args.bool("remember")?);
             reply.ok(None);
             Ok(())
         }),
@@ -451,20 +428,13 @@ fn search_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     ]
 }
 
-#[derive(Deserialize)]
-#[serde(rename_all = "lowercase")]
-enum EngineName {
-    Chromium,
-    Webkit,
-}
-
 fn engine<'a>(
     ctx: &'a DataCtx,
     args: &CallArgs,
 ) -> Result<&'a std::rc::Rc<dyn super::host::PageEngine>, BadCallArgs> {
-    Ok(match args.choice::<EngineName>("engine")? {
-        EngineName::Chromium => &ctx.chromium,
-        EngineName::Webkit => &ctx.webkit,
+    Ok(match args.choice::<PageEngine>("engine")? {
+        PageEngine::Chromium => &ctx.chromium,
+        PageEngine::Webkit => &ctx.webkit,
     })
 }
 

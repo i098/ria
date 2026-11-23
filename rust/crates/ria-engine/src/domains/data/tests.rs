@@ -73,17 +73,20 @@ fn fire_timers() {
     }
 }
 
-struct FakeProfile;
+struct FakeProfile {
+    directory: String,
+    private: bool,
+}
 
 impl CoreProfile for FakeProfile {
     fn path(&self) -> String {
-        "/data/Profile unloaded-profile".into()
+        format!("/data/{}", self.directory)
     }
     fn directory_name(&self) -> String {
-        "Profile unloaded-profile".into()
+        self.directory.clone()
     }
     fn off_the_record(&self) -> bool {
-        false
+        self.private
     }
     fn destroyed(&self) -> bool {
         false
@@ -115,23 +118,30 @@ impl CoreProfile for FakeProfile {
     fn release_navigation_hold(&self, _: &str) {}
 }
 
-struct FakeCore;
+type PrivateLoad = Box<dyn FnOnce(Option<Profile>, Option<String>)>;
+
+#[derive(Default)]
+struct FakeCore {
+    pending_private: RefCell<Option<PrivateLoad>>,
+    released: RefCell<Vec<Profile>>,
+}
 
 impl CoreEngine for FakeCore {
     fn default_profile(&self) -> Option<Profile> {
         None
     }
-    fn load_profile(&self, _: &str, done: Box<dyn FnOnce(Option<Profile>)>) {
-        done(Some(Rc::new(FakeProfile)))
+    fn load_profile(&self, directory: &str, done: Box<dyn FnOnce(Option<Profile>)>) {
+        done(Some(Rc::new(FakeProfile {
+            directory: directory.into(),
+            private: false,
+        })))
     }
-    fn off_the_record_profile_for(
-        &self,
-        _: &Profile,
-        done: Box<dyn FnOnce(Option<Profile>, Option<String>)>,
-    ) {
-        done(None, Some("no private profile".into()))
+    fn off_the_record_profile_for(&self, _: &Profile, done: PrivateLoad) {
+        assert!(self.pending_private.replace(Some(done)).is_none());
     }
-    fn release_profile(&self, _: &Profile) {}
+    fn release_profile(&self, profile: &Profile) {
+        self.released.borrow_mut().push(profile.clone());
+    }
 }
 
 struct NoEvents;
@@ -234,7 +244,7 @@ fn rig() -> Rig {
         prefix: "wk-",
         ..FakeEngine::default()
     });
-    let registry = ProfileRegistry::new(Rc::new(FakeCore), Rc::new(NoEvents));
+    let registry = ProfileRegistry::new(Rc::new(FakeCore::default()), Rc::new(NoEvents));
     let ctx = DataCtx {
         engine,
         favicons: Rc::new(Favicons::new(registry.clone(), std::env::temp_dir())),
@@ -389,15 +399,22 @@ fn engine_passing_calls_add_off_the_record_and_use_the_original_profile() {
         a.borrow_mut()
             .insert("*".into(), json!({"bar": {}, "other": {}}))
     });
-    let out = run_table(&rig, "bookmarks", "tree", "", json!({"q": 1}));
+    let out = run_table(
+        &rig,
+        "bookmarks",
+        "tree",
+        "incognito1@work",
+        json!({"q": 1}),
+    );
     assert_eq!(
         out.borrow_mut().take(),
         Some(Ok(r#"{"bar":{},"other":{}}"#.to_owned()))
     );
     let (path, args) = CALLS.with(|c| c.borrow()[0].clone());
+    assert_eq!(path, "/data/Profile work");
     assert_eq!(
-        (path.as_str(), args.as_str()),
-        ("/data/Profile unloaded-profile", r#"{"q":1}"#)
+        serde_json::from_str::<Value>(&args).unwrap(),
+        json!({"q": 1, "offTheRecord": true})
     );
     ANSWERS.with(|a| {
         a.borrow_mut()
@@ -411,6 +428,37 @@ fn engine_passing_calls_add_off_the_record_and_use_the_original_profile() {
             "no bookmarks"
         )))
     );
+}
+
+#[test]
+fn releasing_a_private_session_settles_waiters_and_releases_the_late_profile() {
+    let core = Rc::new(FakeCore::default());
+    let registry = ProfileRegistry::new(core.clone(), Rc::new(NoEvents));
+    let session = "incognito1@work";
+    let replies = Rc::new(RefCell::new(Vec::new()));
+    for _ in 0..2 {
+        let replies = replies.clone();
+        registry.with_profile(session, move |profile| {
+            replies.borrow_mut().push(profile.is_some());
+        });
+    }
+    let finish = core.pending_private.take().expect("private load started");
+    registry.mark_private_released(session);
+    assert_eq!(*replies.borrow(), [false, false]);
+
+    let late: Profile = Rc::new(FakeProfile {
+        directory: "Profile work".into(),
+        private: true,
+    });
+    finish(Some(late.clone()), None);
+    assert_eq!(*replies.borrow(), [false, false]);
+    assert!(matches!(&core.released.borrow()[..], [one] if Rc::ptr_eq(one, &late)));
+    assert!(registry.loaded_profile(session).is_none());
+    let replies_again = replies.clone();
+    registry.with_profile(session, move |profile| {
+        replies_again.borrow_mut().push(profile.is_some());
+    });
+    assert_eq!(*replies.borrow(), [false, false, false]);
 }
 
 #[test]

@@ -27,7 +27,7 @@ fn main() {
 
 #[cfg(target_os = "macos")]
 mod mac {
-    use std::cell::RefCell;
+    use std::cell::{Cell, RefCell};
     use std::ffi::{CString, c_char, c_int};
     use std::path::{Path, PathBuf};
     use std::process::Command;
@@ -49,6 +49,7 @@ mod mac {
     };
     use ria_engine::domains::data::page_engines::clear_chromium_browsing_data;
     use ria_engine::domains::data::profiles::ProfileRegistry;
+    use ria_engine::types::HistoryWireChange;
     use serde_json::{Value, json};
 
     const INFO_PLIST: &str = r#"<?xml version="1.0" encoding="UTF-8"?>
@@ -183,15 +184,12 @@ mod mac {
             .expect("the engine started");
         let checks = live.checks.borrow();
         let failed = checks.iter().filter(|c| !c.1).count();
+        let pass = code == 0 && failed == 0 && *live.finished.borrow();
         println!(
             "{}",
-            json!({"live": "result", "exit_code": code, "checks": checks.len(), "failed": failed, "pass": code == 0 && failed == 0 && !checks.is_empty()})
+            json!({"live": "result", "exit_code": code, "checks": checks.len(), "failed": failed, "pass": pass})
         );
-        std::process::exit(if code == 0 && failed == 0 && !checks.is_empty() {
-            0
-        } else {
-            1
-        });
+        std::process::exit(if pass { 0 } else { 1 });
     }
 
     /// The one profile that the engine loaded: the registry gets it from `LiveCore`.
@@ -426,39 +424,56 @@ mod mac {
                 })
             },
         );
-        expect::<api::history::Watch>(&live, &ctx, "history", "watch", json!({}), |_| true);
-        expect::<api::history::Add>(
-            &live,
-            &ctx,
-            "history",
-            "add",
-            json!({"pages": [{"u": url, "t": "Example", "v": [1_700_000_000_000_i64]}], "toleranceMs": 0}),
-            |r| r.added.0 == 1.0,
-        );
-        expect::<api::history::Import>(
-            &live,
-            &ctx,
-            "history",
-            "import",
-            json!({"rows": [{"u": "https://example.org/", "t": "Org", "n": 1, "l": 1_700_000_000_000_i64}]}),
-            |_| true,
-        );
-        expect::<api::history::Query>(
-            &live,
-            &ctx,
-            "history",
-            "query",
-            json!({"maxUrls": 10, "maxVisits": 10}),
-            |_| true,
-        );
-        expect::<api::history::DeleteUrls>(
-            &live,
-            &ctx,
-            "history",
-            "deleteUrls",
-            json!({"urls": ["https://example.org/"]}),
-            |_| true,
-        );
+        let history_seen = Rc::new(Cell::new(false));
+        let seen = history_seen.clone();
+        api::subscribe::<api::events::HistoryChanged>(&engine, "history.changed", move |batch| {
+            if batch.is_ok_and(|batch| {
+                batch.changes.iter().any(|change| match change {
+                    HistoryWireChange::Visit { u, .. } => u == url,
+                    HistoryWireChange::Modified { rows } => rows.iter().any(|row| row.u == url),
+                    HistoryWireChange::Deleted { .. } => false,
+                })
+            }) {
+                seen.set(true);
+            }
+        });
+        let history_live = live.clone();
+        let history_ctx = ctx.clone();
+        expect::<api::history::Watch>(&live, &ctx, "history", "watch", json!({}), move |_| {
+            expect::<api::history::Add>(
+                &history_live,
+                &history_ctx,
+                "history",
+                "add",
+                json!({"pages": [{"u": url, "t": "Example", "v": [1_700_000_000_000_i64]}], "toleranceMs": 0}),
+                |r| r.added.0 == 1.0,
+            );
+            expect::<api::history::Import>(
+                &history_live,
+                &history_ctx,
+                "history",
+                "import",
+                json!({"rows": [{"u": "https://example.org/", "t": "Org", "n": 1, "l": 1_700_000_000_000_i64}]}),
+                |_| true,
+            );
+            expect::<api::history::Query>(
+                &history_live,
+                &history_ctx,
+                "history",
+                "query",
+                json!({"maxUrls": 10, "maxVisits": 10}),
+                |_| true,
+            );
+            expect::<api::history::DeleteUrls>(
+                &history_live,
+                &history_ctx,
+                "history",
+                "deleteUrls",
+                json!({"urls": ["https://example.org/"]}),
+                |_| true,
+            );
+            true
+        });
         // A refused or stopped request gives `{netError}` or `{stopped}` without `status`, which `api::search::SuggestReply` (slice 3.2) requires; so the reply is read as a plain map.
         expect::<api::search::StopSuggest>(
             &live,
@@ -550,20 +565,34 @@ mod mac {
         let engine_object = engine_object.clone();
         poll(
             Rc::new(move |waited: Duration| {
-                if *watch.outstanding.borrow() == 0 || waited >= Duration::from_secs(60) {
-                    if !*watch.finished.borrow() {
-                        *watch.finished.borrow_mut() = true;
-                        for (name, ok, detail) in watch.checks.borrow().iter() {
-                            println!(
-                                "{}",
-                                json!({"live": "check", "name": name, "pass": ok, "detail": detail})
-                            );
-                        }
-                        let _: () = unsafe { msg_send![&*engine_object, quit] };
-                    }
-                    return true;
+                let outstanding = *watch.outstanding.borrow();
+                let seen = history_seen.get();
+                if (outstanding != 0 || !seen) && waited < Duration::from_secs(60) {
+                    return false;
                 }
-                false
+                record(
+                    &watch,
+                    "history.changed includes the inserted URL",
+                    seen,
+                    url.into(),
+                );
+                if outstanding != 0 {
+                    record(
+                        &watch,
+                        "all calls settled",
+                        false,
+                        format!("{outstanding} calls did not settle before shutdown"),
+                    );
+                }
+                *watch.finished.borrow_mut() = true;
+                for (name, ok, detail) in watch.checks.borrow().iter() {
+                    println!(
+                        "{}",
+                        json!({"live": "check", "name": name, "pass": ok, "detail": detail})
+                    );
+                }
+                let _: () = unsafe { msg_send![&*engine_object, quit] };
+                true
             }),
             Duration::ZERO,
         );
@@ -590,7 +619,7 @@ mod mac {
         domain: &'static str,
         name: &'static str,
         args: Value,
-        pass: fn(&C::Reply) -> bool,
+        pass: impl FnOnce(&C::Reply) -> bool + 'static,
     ) where
         C::Reply: std::fmt::Debug,
     {
