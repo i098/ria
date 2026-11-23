@@ -16,8 +16,7 @@ objc2-foundation = "0.3"
 ria-engine = { path = "../ria-engine" }
 libc = "0.2"
 
-# Check L (`cargo test -p ria-host-mac --test live`). It has its own `main`, because the engine owns the main thread.
-# The file is under `src/core/`, the only folder of this slice that a test may use.
+# The live checks need their own `main` because the engine owns the main thread.
 [[test]]
 name = "live"
 path = "src/core/live.rs"
