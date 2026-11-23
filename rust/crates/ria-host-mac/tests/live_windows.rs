@@ -1,6 +1,7 @@
 // Ria original, no Ardia source.
 
-//! Run on a Mac: `ENGINE_DIR=<framework-parent> blaze test -p ria-host-mac --test live_windows`.
+//! Run from the repository root on a Mac:
+//! `ENGINE_DIR=/path/to/framework-parent cargo test --manifest-path rust/Cargo.toml -p ria-host-mac --test live_windows`.
 
 #[cfg(not(target_os = "macos"))]
 fn main() {
@@ -299,7 +300,7 @@ mod mac {
         let close = window
             .standardWindowButton(NSWindowButton::CloseButton)
             .unwrap();
-        let frame = ria_host_mac::windows::ardia_traffic_lights::frame_view(&window).unwrap();
+        let frame = unsafe { window.contentView().unwrap().superview().unwrap() };
         let rect = close.convertRect_toView(close.bounds(), Some(&frame));
         assert!((rect.origin.x + rect.size.width / 2. - 50.).abs() < 1.);
         let mid_y = rect.origin.y + rect.size.height / 2.;

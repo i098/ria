@@ -465,7 +465,7 @@ fn sync_sharing_windows(window: &NSWindow) {
     }
 }
 
-pub fn frame_view(window: &NSWindow) -> Option<Retained<NSView>> {
+fn frame_view(window: &NSWindow) -> Option<Retained<NSView>> {
     // SAFETY: The view hierarchy is accessible on the main thread.
     unsafe { window.contentView()?.superview() }
 }
