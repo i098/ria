@@ -294,6 +294,7 @@ mod mac {
         let Some(restored) = parking.unpark("fixture") else {
             return shutdown(&window, &tab, false);
         };
+        pass &= parking.parked_tab("fixture").is_none();
         let restored_view = restored.view();
         pass &= std::ptr::eq(&*restored, &*tab) && std::ptr::eq(&*restored_view, &*view);
         host.addSubview(&restored_view);
@@ -352,7 +353,7 @@ mod mac {
         let strip = Number::from(strip_id);
         let command = Number(8.0);
 
-        let StripCommandResult::Group { args, .. } = strips.command(
+        let StripCommandResult::Group(args) = strips.command(
             command,
             TabStripCommand::Group {
                 strip,

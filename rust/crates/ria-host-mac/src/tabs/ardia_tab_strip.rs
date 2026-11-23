@@ -41,7 +41,7 @@ pub struct TabStrips {
 
 pub enum StripCommandResult {
     Done(TabStripTransaction),
-    Group { strip: i32, args: Value },
+    Group(Value),
 }
 
 impl TabStrips {
@@ -312,7 +312,7 @@ impl TabStrips {
                     if let Some(collapsed) = collapsed {
                         args["collapsed"] = collapsed.into();
                     }
-                    return StripCommandResult::Group { strip, args };
+                    return StripCommandResult::Group(args);
                 }
                 true
             }
