@@ -47,22 +47,27 @@ pub(super) fn engine_arguments(
     if let Some(extra) = config.instance("chromiumSwitches") {
         switches.extend(
             extra
-                .trim()
+                .trim_matches(chromium_whitespace)
                 .strip_prefix("--")
                 .into_iter()
                 .flat_map(|extra| {
                     extra
                         .split(" --")
                         .filter_map(|item| {
-                            let item = item.trim();
+                            let item = item.trim_matches(chromium_whitespace);
                             (!item.is_empty()).then(|| format!("--{item}"))
                         })
                         .filter(|arg| forwarded(arg, config.background))
                 }),
         );
     }
-    let mut arguments = arguments.into_iter().peekable();
+    let mut arguments = arguments.into_iter().map(normalize_argument).peekable();
     while let Some(argument) = arguments.next() {
+        if argument == "--" {
+            switches.push(argument);
+            switches.extend(arguments);
+            break;
+        }
         let [b'-', first, ..] = argument.as_bytes() else {
             switches.push(argument);
             continue;
@@ -72,7 +77,7 @@ pub(super) fn engine_arguments(
         }
         if first.is_ascii_alphabetic()
             && !argument.starts_with("-psn_")
-            && arguments.peek().is_some()
+            && arguments.peek().is_some_and(|next| next != "--")
         {
             arguments.next();
         } else {
@@ -84,6 +89,22 @@ pub(super) fn engine_arguments(
         argv.push(CString::new(argument)?);
     }
     Ok(argv)
+}
+
+fn chromium_whitespace(c: char) -> bool {
+    matches!(c, ' ' | '\t'..='\r')
+}
+
+fn normalize_argument(mut argument: String) -> String {
+    let start = argument.len() - argument.trim_start_matches(chromium_whitespace).len();
+    let end = argument.trim_end_matches(chromium_whitespace).len();
+    if start >= end {
+        argument.clear();
+    } else {
+        argument.truncate(end);
+        argument.drain(..start);
+    }
+    argument
 }
 
 fn forwarded(arg: &str, background: bool) -> bool {
@@ -198,7 +219,7 @@ mod tests {
                 ("RIA_REMOTE_DEBUGGING_PORT", "9224"),
                 (
                     "RIA_INSTANCE",
-                    "chromiumSwitches=--type=renderer --remote-debugging-port=9333 --remote-allow-origins=* --enable-features=DevToolsAcceptDebuggingConnections,ConfigFeature",
+                    "chromiumSwitches=  --type=renderer --remote-debugging-port=9333 --remote-allow-origins=* --enable-features=DevToolsAcceptDebuggingConnections,ConfigFeature",
                 ),
             ];
             let config = LaunchConfig::from_environment(
@@ -214,10 +235,14 @@ mod tests {
                 &config,
                 Path::new("ria"),
                 [
-                    "--type",
-                    "--remote-debugging-pipe",
-                    "--enable-features=CliFeature",
+                    "\t --type=renderer ",
+                    "  --user-data-dir=/foreign ",
+                    "\u{b}-profile-directory=foreign ",
+                    " \t--remote-debugging-pipe\r",
+                    "\t --enable-features=CliFeature ",
                     "-remote-debugging-port=9444",
+                    " \t--\r ",
+                    " --disable-features=Positional ",
                 ]
                 .map(String::from),
             )
@@ -226,6 +251,14 @@ mod tests {
             assert!(argv.contains(&"--use-mock-keychain"));
             assert!(argv.iter().all(|arg| !arg.starts_with("--type")));
             assert!(!argv.contains(&"--remote-allow-origins=*"));
+            assert_eq!(
+                argv.iter()
+                    .filter(|arg| arg.starts_with("--user-data-dir="))
+                    .count(),
+                1
+            );
+            assert!(!argv.iter().any(|arg| arg.contains("foreign")));
+            assert!(argv.ends_with(&["--", "--disable-features=Positional"]));
             let debugger: Vec<_> = argv
                 .iter()
                 .copied()

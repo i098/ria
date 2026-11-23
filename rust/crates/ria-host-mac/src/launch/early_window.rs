@@ -5,16 +5,20 @@
 
 use std::cell::RefCell;
 
-use objc2::rc::Retained;
-use objc2::runtime::NSObject;
+use block2::RcBlock;
+use objc2::rc::{Retained, Weak};
+use objc2::runtime::{NSObject, ProtocolObject};
 use objc2::{
     AllocAnyThread, DefinedClass, MainThreadMarker, MainThreadOnly, class, define_class, msg_send,
 };
 use objc2_app_kit::{
     NSApplication, NSAutoresizingMaskOptions, NSColor, NSImage, NSImageView, NSScreen, NSView,
-    NSWindow,
+    NSWindow, NSWindowDidResizeNotification,
 };
-use objc2_foundation::{NSData, NSPoint, NSRect, NSSize, NSString};
+use objc2_foundation::{
+    NSData, NSNotification, NSNotificationCenter, NSObjectProtocol, NSPoint, NSRect, NSSize,
+    NSString,
+};
 
 use crate::core::bindings::{Profile, Tab, Window};
 
@@ -122,6 +126,22 @@ impl BrowserWindow {
             picture.setImage(Some(&image));
             host.addSubview(&picture);
             delegate.ivars().picture.replace(Some(picture));
+            let weak = Weak::new(&*delegate);
+            let resize = RcBlock::new(move |_: std::ptr::NonNull<NSNotification>| {
+                if let Some(delegate) = weak.load() {
+                    delegate.drop_picture();
+                }
+            });
+            let center = NSNotificationCenter::defaultCenter();
+            let token = unsafe {
+                center.addObserverForName_object_queue_usingBlock(
+                    Some(NSWindowDidResizeNotification),
+                    Some(&window),
+                    None,
+                    &resize,
+                )
+            };
+            delegate.ivars().resize_observer.replace(Some(token));
             let release = delegate.clone();
             super::host_launch::after(std::time::Duration::from_secs(5), move || {
                 release.drop_picture()
@@ -159,6 +179,7 @@ struct TabIvars {
     window: Retained<NSWindow>,
     observer: Observer,
     picture: RefCell<Option<Retained<NSImageView>>>,
+    resize_observer: RefCell<Option<Retained<ProtocolObject<dyn NSObjectProtocol>>>>,
 }
 
 define_class!(
@@ -193,12 +214,16 @@ impl TabDelegate {
             window,
             observer,
             picture: RefCell::default(),
+            resize_observer: RefCell::default(),
         });
         // SAFETY: ivars are set and NSObject's initializer takes no arguments.
         unsafe { msg_send![super(this), init] }
     }
 
     fn drop_picture(&self) {
+        if let Some(token) = self.ivars().resize_observer.take() {
+            unsafe { NSNotificationCenter::defaultCenter().removeObserver((*token).as_ref()) };
+        }
         if let Some(picture) = self.ivars().picture.take() {
             picture.removeFromSuperview();
         }

@@ -23,6 +23,8 @@ fn main() -> std::process::ExitCode {
 mod mac {
     use std::cell::Cell;
     use std::fs;
+    use std::io::{BufRead, BufReader, ErrorKind, Read, Write};
+    use std::net::TcpListener;
     use std::path::{Path, PathBuf};
     use std::process::{Command, ExitCode};
     use std::rc::Rc;
@@ -79,9 +81,14 @@ mod mac {
         )
         .unwrap();
         assert!(config.test_instance);
-        let page = root.join("page.html");
-        fs::write(&page, PAGE).unwrap();
-        fs::write(data.join("session.json"), format!(r#"{{"version":11,"launchTab":{{"id":"fixture","profile":"Default","url":"file://{}"}}}}"#, page.display())).unwrap();
+        let listener = TcpListener::bind(("127.0.0.1", 0)).unwrap();
+        listener.set_nonblocking(true).unwrap();
+        let url = format!("http://{}/", listener.local_addr().unwrap());
+        fs::write(
+            data.join("session.json"),
+            format!(r#"{{"version":11,"launchTab":{{"id":"fixture","profile":"","url":"{url}"}}}}"#),
+        )
+        .unwrap();
         let stdout = root.join("stdout");
         let stderr = root.join("stderr");
         let mut child = Command::new(&bin)
@@ -109,6 +116,7 @@ mod mac {
                 child.wait().expect("reap Ria after timeout");
                 break None;
             }
+            serve_fixture(&listener);
             std::thread::sleep(Duration::from_millis(50));
         };
         let out = fs::read(&stdout).unwrap();
@@ -128,6 +136,34 @@ mod mac {
         assert!(!has_crash_report(root), "a crash report exists");
         println!(
             "launch live: engine exit 0; one window; one tab; fixture title; shutdown; no crash report"
+        );
+    }
+
+    fn serve_fixture(listener: &TcpListener) {
+        let mut stream = match listener.accept() {
+            Ok((stream, _)) => stream,
+            Err(error) if error.kind() == ErrorKind::WouldBlock => return,
+            Err(error) => panic!("accept fixture connection: {error}"),
+        };
+        stream.set_nonblocking(false).unwrap();
+        let timeout = Some(Duration::from_millis(100));
+        stream.set_read_timeout(timeout).unwrap();
+        stream.set_write_timeout(timeout).unwrap();
+        let mut request = BufReader::new((&mut stream).take(4096));
+        let mut line = Vec::new();
+        loop {
+            line.clear();
+            if !request.read_until(b'\n', &mut line).is_ok_and(|n| n > 0) {
+                return;
+            }
+            if line == b"\r\n" {
+                break;
+            }
+        }
+        let _ = write!(
+            stream,
+            "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{PAGE}",
+            PAGE.len()
         );
     }
 

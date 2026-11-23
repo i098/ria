@@ -14,6 +14,7 @@ If Blaze reports `Too many open files`, use `cargo` in place of `blaze`.
 
 Check N runs the native launch unit tests.
 Check L makes a temporary app bundle with a new profile and a saved launch tab.
+It serves the fixture page over loopback HTTP.
 It checks engine start, one native window, one engine tab, the fixture page title, and engine shutdown.
 It requires a successful exit within 60 seconds and checks the temporary directory for crash reports.
 It calls the shared launch entry point from the test executable, not from the `ria-app` binary.
@@ -27,8 +28,10 @@ For the normal profile only, Ria also checks the directory identity before it re
 See [issue 67](https://github.com/i098/ria/issues/67) for the remaining race between the check and filesystem access.
 See [ADR-D1](../../../../DECISIONS.md#adr-d1-own-identity-and-own-data-ad-hoc-signature) for the keychain policy.
 
-Ria opens `about:blank` if it cannot read a saved launch tab.
+Ria restores only HTTP or HTTPS launch tabs with a nonempty ID and an available, non-private profile.
+If the saved launch tab is not eligible, Ria opens `about:blank` in the default profile.
 For eligible windows, Ria uses the saved layout and shows the cached picture only if its content signature matches.
+Ria removes the cached picture when the window changes size.
 This startup path does not restore all saved windows and tabs.
 
 Ria accepts raw switches from `chromiumSwitches` in `RIA_INSTANCE` and from the command line for [Ardia parity](https://github.com/ardia-browser/ardia/blob/551d3c13c1c9ede130724ea9f1056d4b586fbe55/packages/ardiacore/ios/ArdiaHost%2BLaunch.mm#L506-L526).

@@ -4,7 +4,6 @@
 
 use std::cell::{Cell, RefCell};
 use std::io;
-use std::path::Path;
 use std::rc::{Rc, Weak};
 
 use objc2::MainThreadMarker;
@@ -128,31 +127,32 @@ impl Runtime {
         let Some(engine) = Engine::shared() else {
             return self.fail("engine did not become available");
         };
-        let saved_tab = self
-            .session
-            .as_ref()
-            .and_then(|session| session.launch_tab.as_ref());
-        let name = saved_tab.map_or("Default", |tab| tab.profile.as_str());
-        let name = if name.is_empty() { "Default" } else { name };
-        if !matches!(
-            Path::new(name).components().next(),
-            Some(std::path::Component::Normal(_))
-        ) || Path::new(name).file_name().and_then(|name| name.to_str()) != Some(name)
-        {
-            return self.fail("invalid launch profile name");
-        }
         if self.config.check_profile_directory().is_err() {
             return self.fail("launch profile directory changed");
         }
+        let directory = self
+            .session
+            .as_ref()
+            .and_then(|session| session.launch_profile_directory(self.config.data_directory()));
+        let restore_hint = directory.is_some();
         let weak = self.this.clone();
-        engine.load_profile(&NSString::from_str(name), move |profile| {
+        let name = NSString::from_str(directory.as_deref().unwrap_or("Default"));
+        engine.load_profile(&name, move |profile| {
             let weak = weak.clone();
             later(move || {
                 if let Some(runtime) = weak.upgrade()
                     && runtime.sequence.engine_running()
                 {
-                    if let Some(profile) = profile {
-                        runtime.profile_ready(&profile);
+                    let usable = |profile: &Retained<Profile>| {
+                        !profile.off_the_record() && !profile.destroyed()
+                    };
+                    if let Some(profile) = profile.filter(usable) {
+                        runtime.profile_ready(&profile, restore_hint);
+                    } else if restore_hint
+                        && let Some(profile) = Engine::shared().map(|engine| engine.default_profile())
+                        && usable(&profile)
+                    {
+                        runtime.profile_ready(&profile, false);
                     } else {
                         runtime.fail("could not load launch profile");
                     }
@@ -161,21 +161,18 @@ impl Runtime {
         });
     }
 
-    fn profile_ready(&self, profile: &Profile) {
+    fn profile_ready(&self, profile: &Profile, restore_hint: bool) {
         let reason = self.sequence.reason();
         let show = reason != LaunchReason::Hidden
             && !NSApplication::sharedApplication(self.mtm).isHidden();
-        let layout = self
-            .session
-            .as_ref()
+        let session = self.session.as_ref().filter(|_| restore_hint);
+        let layout = session
             .filter(|_| show && reason == LaunchReason::Normal)
             .and_then(|session| {
                 early_window_layouts::read(&self.config, session, activation::dark(self.mtm))
             });
         self.sequence.reach(APP_READY);
-        let url = self
-            .session
-            .as_ref()
+        let url = session
             .and_then(|session| session.launch_tab.as_ref())
             .map_or("about:blank", |tab| tab.url.as_str());
         let window = BrowserWindow::open(
