@@ -277,11 +277,6 @@ fn iterate(v: &Value) -> Result<Vec<Value>, String> {
 /// at `items.length >= limit`: a fractional limit rounds up, and NaN never stops. The rows kept
 /// are the input rows themselves, as in JS.
 pub fn output_items(limit: f64, batches: Value) -> Result<Vec<Value>, String> {
-    let limit = if limit.is_nan() {
-        usize::MAX
-    } else {
-        limit.max(0.0).ceil() as usize
-    };
     let mut out = Output::new(limit);
     let mut kept = Vec::new();
     for batch in iterate(&batches)? {

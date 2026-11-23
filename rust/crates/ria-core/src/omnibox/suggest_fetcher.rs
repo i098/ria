@@ -18,6 +18,7 @@ use crate::search::engines::{
     RemoteSuggestions, SearchEngine, SuggestReply, parse_remote_suggestions, strip_reply_prefix,
     suggest_request_url,
 };
+use crate::search::js_text::js_trim;
 
 /// The default delay before a request, in milliseconds.
 pub const DEFAULT_DELAY_MS: u32 = 120;
@@ -123,31 +124,46 @@ impl SuggestFetcher {
 pub fn reply_suggestions(text: &str) -> RemoteSuggestions {
     parse_json(strip_reply_prefix(text)).map_or_else(
         |_| RemoteSuggestions::default(),
-        |body| parse_remote_suggestions(&suggest_reply(&body)),
+        |body| {
+            suggest_reply(&body).map_or_else(RemoteSuggestions::default, |reply| {
+                parse_remote_suggestions(&reply)
+            })
+        },
     )
 }
 
 /// The parts of a parsed reply `parseRemoteSuggestions` reads (`engines.ts:145`).
-fn suggest_reply(body: &Json) -> SuggestReply<'_> {
+fn suggest_reply(body: &Json) -> Option<SuggestReply<'_>> {
     let Json::Array(body) = body else {
-        return SuggestReply::default();
+        return None;
     };
     let Some(Json::Array(items)) = body.get(1) else {
-        return SuggestReply::default();
+        return None;
     };
     let titles = match body.get(2) {
         Some(Json::Array(t)) => strings(t),
         _ => Vec::new(),
     };
+    let suggestions = strings(items);
     let types = match body.get(4).and_then(|x| x.get("google:suggesttype")) {
-        Some(Json::Array(t)) => t.iter().take(items.len()).map(js_string).collect(),
+        Some(Json::Array(t)) => t
+            .iter()
+            .zip(&suggestions)
+            .map(|(value, suggestion)| {
+                if suggestion.is_some_and(|s| !js_trim(s).is_empty()) {
+                    js_string(value)
+                } else {
+                    Some(String::new())
+                }
+            })
+            .collect::<Option<Vec<_>>>()?,
         _ => Vec::new(),
     };
-    SuggestReply {
-        suggestions: strings(items),
+    Some(SuggestReply {
+        suggestions,
         titles,
         types,
-    }
+    })
 }
 
 /// Each item when it is a string.
@@ -164,7 +180,7 @@ fn strings(items: &[Json]) -> Vec<Option<&str>> {
 /// `String(value)` as far as comparing it with a suggest type needs: a number prints as some
 /// digits, which never equal a type name. An array joins its items with commas, a `null` item as
 /// nothing; nesting uses a stack, because a reply can nest arrays to any depth.
-fn js_string(value: &Json) -> String {
+fn js_string(value: &Json) -> Option<String> {
     let Json::Array(top) = value else {
         return js_scalar(value);
     };
@@ -181,21 +197,22 @@ fn js_string(value: &Json) -> String {
         match item {
             Json::Array(inner) => stack.push((inner.iter(), true)),
             Json::Null => {}
-            scalar => out.push_str(&js_scalar(scalar)),
+            scalar => out.push_str(&js_scalar(scalar)?),
         }
     }
-    out
+    Some(out)
 }
 
-fn js_scalar(value: &Json) -> String {
-    match value {
+fn js_scalar(value: &Json) -> Option<String> {
+    Some(match value {
         Json::Null => "null".into(),
         Json::Bool(b) => b.to_string(),
         Json::Number(n) => n.to_string(),
         Json::String(s) => s.clone(),
         Json::Array(_) => String::new(),
+        Json::Object(_) if value.get("toString").is_some() => return None,
         Json::Object(_) => "[object Object]".into(),
-    }
+    })
 }
 
 #[cfg(test)]
@@ -234,14 +251,27 @@ mod tests {
 
     #[test]
     fn navigation_types_read_through_arrays() {
-        let body = parse_json(
-            r#"["q",["https://a.test"],["A"],[],{"google:suggesttype":[["NAVIGATION"]]}]"#,
-        )
-        .expect("json");
-        let got = parse_remote_suggestions(&suggest_reply(&body));
+        let got = reply_suggestions(
+            r#"["q",["https://a.test","other"," "],["A"],[],{"google:suggesttype":[["NAVIGATION"],{},{"toString":null}]}]"#,
+        );
         assert_eq!(got.sites.len(), 1);
-        assert_eq!(js_string(&Json::Object(vec![])), "[object Object]");
+        assert_eq!(got.queries, ["other"]);
         assert_eq!(reply_suggestions("{"), RemoteSuggestions::default());
+    }
+
+    #[test]
+    fn a_type_coercion_error_caches_an_empty_reply() {
+        for kind in [r#"{"toString":null}"#, r#"[["QUERY"],[{"toString":null}]]"#] {
+            let mut fetcher = SuggestFetcher::new(1);
+            let Next::Fetch(ticket) = fetcher.request(&engine(), "a") else {
+                panic!("expected a fetch");
+            };
+            let reply =
+                format!(r#"["a",["ab","ac"],[],[],{{"google:suggesttype":["QUERY",{kind}]}}]"#);
+            let empty = RemoteSuggestions::default();
+            assert_eq!(fetcher.finish(&ticket, Some(&reply)), Some(empty.clone()));
+            assert!(matches!(fetcher.request(&engine(), "a"), Next::Cached(_, s) if s == empty));
+        }
     }
 
     #[test]

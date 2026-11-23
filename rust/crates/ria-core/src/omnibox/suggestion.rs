@@ -208,7 +208,7 @@ pub enum Preference {
 /// `PartialEq`: [`BangTable`] has neither.
 #[derive(Clone)]
 pub struct SuggestOptions<'a> {
-    pub limit: usize,
+    pub limit: f64,
     pub now: Option<f64>,
     pub engine: Option<SuggestEngine>,
     pub preference: Preference,
@@ -225,7 +225,7 @@ pub struct SuggestOptions<'a> {
 }
 
 /// The default `limit` of `buildSuggestions`.
-pub const DEFAULT_LIMIT: usize = 8;
+pub const DEFAULT_LIMIT: f64 = 8.0;
 
 impl Default for SuggestOptions<'_> {
     fn default() -> Self {

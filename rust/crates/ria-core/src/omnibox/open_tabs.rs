@@ -34,11 +34,42 @@ pub fn recent_tab_suggestions(
         .filter(|t| !t.url.is_empty() && exclude != Some(t.id.as_str()))
         .collect();
     // `b - a` is NaN for equal infinities, which `Array.prototype.sort` takes as a tie.
-    shown.sort_by(|a, b| {
+    let compare = |a: &&OpenTabRow, b: &&OpenTabRow| {
         b.last_active_at
             .partial_cmp(&a.last_active_at)
             .unwrap_or(Ordering::Equal)
-    });
+    };
+    if shown.len() > 1 && shown.iter().any(|t| t.last_active_at.is_nan()) {
+        let mut run = 1;
+        if shown.len() >= 8 {
+            let descending = compare(&shown[1], &shown[0]).is_lt();
+            run = 2;
+            while run < shown.len()
+                && compare(&shown[run], &shown[run - 1]).is_lt() == descending
+            {
+                run += 1;
+            }
+            if descending {
+                shown[..run].reverse();
+            }
+        }
+        for start in run..shown.len() {
+            let (mut left, mut right) = (0, start);
+            while left < right {
+                let mid = left + (right - left) / 2;
+                if compare(&shown[start], &shown[mid]).is_lt() {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            if left < start {
+                shown[left..=start].rotate_right(1);
+            }
+        }
+    } else {
+        shown.sort_by(compare);
+    }
     shown
         .into_iter()
         .take(limit)
@@ -81,5 +112,18 @@ mod tests {
             .map(|s| s.url().unwrap_or_default().to_string())
             .collect();
         assert_eq!(ids, ["https://b", "https://d"]);
+    }
+
+    #[test]
+    fn orders_nan_timestamps_like_v8_for_recent_tabs() {
+        let tabs = [
+            row("a", "https://a", 0.0),
+            row("b", "https://b", 2.0),
+            row("c", "https://c", f64::NAN),
+            row("d", "https://d", 1.0),
+        ];
+        let rows = recent_tab_suggestions(&tabs, None, 4);
+        let urls: Vec<_> = rows.iter().filter_map(Suggestion::url).collect();
+        assert_eq!(urls, ["https://b", "https://d", "https://a", "https://c"]);
     }
 }

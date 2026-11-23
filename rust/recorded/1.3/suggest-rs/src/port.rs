@@ -142,7 +142,7 @@ fn options_of<'a>(
     SuggestOptions {
         limit: get(v, "limit")
             .and_then(js::as_number)
-            .map_or(defaults.limit, |n| n as usize),
+            .unwrap_or(defaults.limit),
         now: get(v, "now").and_then(js::as_number),
         engine: get(v, "engine").map(|e| SuggestEngine {
             name: text(e, "name"),

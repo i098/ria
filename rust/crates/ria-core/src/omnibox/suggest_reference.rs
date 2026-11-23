@@ -500,7 +500,12 @@ impl Reference {
             .unwrap_or_else(|| (0..pool.list.len()).collect());
         let parsed = parse_query(&q, &tokens);
         let mut matched = Vec::new();
-        let mut top = TopList::new(limit + 1);
+        let rank_limit = limit + 1.0;
+        let mut top = TopList::new(if rank_limit.is_nan() {
+            usize::MAX
+        } else {
+            rank_limit as usize
+        });
         let mut on_site = scope.map(|_| TopList::new(4));
         let mut inline: Option<Ranked<At>> = None;
         let all = pages
@@ -1070,7 +1075,7 @@ mod tests {
         let engine = &BUILT_IN_ENGINES[0];
         let base = SuggestOptions {
             now: Some(NOW),
-            limit: *r.pick(&[8, 8, 8, 1, 3, 12]),
+            limit: *r.pick(&[8.0, 8.0, 8.0, 1.0, 3.0, 12.0]),
             engine: Some(SuggestEngine {
                 name: engine.name.clone(),
                 url: engine.url.clone(),

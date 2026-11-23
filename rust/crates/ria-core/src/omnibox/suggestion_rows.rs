@@ -61,11 +61,11 @@ pub fn suggestion_key(s: &Suggestion) -> String {
 pub struct Output {
     items: Vec<Suggestion>,
     seen: HashSet<String>,
-    limit: usize,
+    limit: f64,
 }
 
 impl Output {
-    pub fn new(limit: usize) -> Self {
+    pub fn new(limit: f64) -> Self {
         Self {
             items: Vec::new(),
             seen: HashSet::new(),
@@ -76,7 +76,7 @@ impl Output {
     /// Adds `row` unless the list is full or holds its key; `true` when added. The original
     /// checks that with `items.includes(row)`.
     pub fn push(&mut self, row: Suggestion) -> bool {
-        if self.items.len() >= self.limit {
+        if self.items.len() as f64 >= self.limit {
             return false;
         }
         if !self.seen.insert(suggestion_key(&row)) {
@@ -154,7 +154,7 @@ mod tests {
 
     #[test]
     fn output_keeps_the_first_row_of_a_key_up_to_the_limit() {
-        let mut out = Output::new(2);
+        let mut out = Output::new(2.0);
         assert!(out.push(page("https://a.test", None)));
         assert!(!out.push(page("https://a.test/", None)));
         assert!(out.push(page("https://a.test/#x", Some("1"))));

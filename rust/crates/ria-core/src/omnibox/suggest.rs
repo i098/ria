@@ -234,7 +234,13 @@ pub fn build_suggestions(
     };
     let parsed = parse_query(&q, &tokens);
     let mut matched = Vec::new();
-    let mut top = TopList::new(limit.saturating_add(1));
+    let rank_limit = limit + 1.0;
+    let mut top = TopList::new(if rank_limit.is_nan() {
+        usize::MAX
+    } else {
+        rank_limit as usize
+    });
+    let rank_has_floor = rank_limit.fract() == 0.0;
     let mut on_site = scope.map(|_| TopList::new(4));
     let mut inline: Option<Ranked<Cand>> = None;
     let pages_len = pages.as_ref().map_or(pool.list.len(), Vec::len);
@@ -278,6 +284,7 @@ pub fn build_suggestions(
             }
             let base = c.log_visits - age + if c.bookmarked { 20.0 } else { 0.0 };
             if scope.is_none()
+                && rank_has_floor
                 && top.floor >= m + base - derank + 7.0
                 && (!completes
                     || inline
@@ -313,7 +320,15 @@ pub fn build_suggestions(
             {
                 inline = Some(r.clone());
             }
-            if top.floor < s || top.items.len() < limit.saturating_add(1) {
+            let floor = if rank_has_floor {
+                top.floor
+            } else {
+                f64::NEG_INFINITY
+            };
+            if floor < s || (top.items.len() as f64) < rank_limit {
+                if rank_limit == 0.0 {
+                    return Err("Cannot read properties of undefined (reading 's')");
+                }
                 top.offer(r);
             }
         }
@@ -600,7 +615,7 @@ fn provider_scope_suggestions(
     query: &str,
     scope: &SearchScope,
     sections: &[ProviderSection],
-    limit: usize,
+    limit: f64,
 ) -> SuggestionResult {
     let id = scope.provider_id.as_deref().unwrap_or("");
     let mut items: Vec<ProviderSuggestion> = Vec::new();
@@ -619,8 +634,8 @@ fn provider_scope_suggestions(
     }
     if let Some(section) = sections.iter().find(|x| x.id == id) {
         let seen: Vec<String> = items.iter().map(|x| x.url.clone()).collect();
-        for row in safe_provider_rows(id, &scope.name, &section.rows, limit as f64) {
-            if !seen.contains(&row.url) && items.len() < limit {
+        for row in safe_provider_rows(id, &scope.name, &section.rows, limit) {
+            if !seen.contains(&row.url) && (items.len() as f64) < limit {
                 items.push(row);
             }
         }
@@ -795,5 +810,29 @@ mod tests {
             })
             .collect();
         assert_eq!(queries, ["a", "b"]);
+    }
+
+    #[test]
+    fn forced_search_uses_fractional_and_nan_limits() {
+        let mut options = SuggestOptions {
+            remote: vec!["b".into(), "c".into(), "d".into()],
+            ..SuggestOptions::default()
+        };
+        for (limit, expected) in [
+            (2.5, &["a", "b", "c"][..]),
+            (f64::NAN, &["a", "b", "c", "d"][..]),
+        ] {
+            options.limit = limit;
+            let result = run("?a", &SuggestionSource::default(), &options);
+            let queries: Vec<_> = result
+                .items
+                .iter()
+                .filter_map(|row| match row {
+                    Suggestion::Search { query, .. } => Some(query.as_str()),
+                    _ => None,
+                })
+                .collect();
+            assert_eq!(queries, expected);
+        }
     }
 }
