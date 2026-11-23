@@ -183,13 +183,21 @@ struct PageState {
     waiting_for: i8,
     telling: usize,
     picturing: bool,
-    covers: Vec<Retained<PageCover>>,
+    covers: Vec<(Weak<Tab>, Retained<PageCover>)>,
     turn: u64,
     transitioning: bool,
     ours: bool,
     settling: bool,
     seen: bool,
     overruled: bool,
+}
+
+impl PageState {
+    fn cancel_draw(&mut self) {
+        self.turn = self.turn.wrapping_add(1);
+        self.waiting_for = 0;
+        self.picturing = false;
+    }
 }
 
 impl Transition {
@@ -201,9 +209,18 @@ impl Transition {
     }
 }
 
-fn uncover(covers: Vec<Retained<PageCover>>, fade: bool) {
-    for cover in covers {
-        cover.uncover(fade);
+fn uncover(covers: Vec<(Weak<Tab>, Retained<PageCover>)>, after_draw: bool) {
+    for (owner, cover) in covers {
+        if after_draw && let Some(tab) = owner.load() {
+            after_page_draw(&tab, |_, _| true, move || {
+                main_queue::after(
+                    Duration::from_millis(34),
+                    Box::new(move || cover.uncover(true)),
+                );
+            });
+        } else {
+            cover.uncover(false);
+        }
     }
 }
 
@@ -334,9 +351,7 @@ impl FullScreen {
             return;
         }
         let page = state.page();
-        page.turn = page.turn.wrapping_add(1);
-        page.waiting_for = 0;
-        page.picturing = false;
+        page.cancel_draw();
         if entering {
             page.tab = Some(Weak::new(tab));
         } else if page
@@ -385,22 +400,29 @@ impl FullScreen {
             let Some(page) = state.page.as_mut() else {
                 return;
             };
-            if page.transitioning || page.picturing || page.waiting_for != 0 {
+            if page.transitioning {
                 return;
             }
             let tab = page.tab.as_ref().and_then(Weak::load);
             let entering = tab.is_some() && !full && !page.entered;
             let exiting = tab.is_none() && full && page.entered;
             if !entering && !exiting {
+                if page.waiting_for != 0 || page.picturing {
+                    page.cancel_draw();
+                }
                 if tab.is_none() {
                     page.entered = false;
                 }
                 return;
             }
-            if page.telling != 0 {
+            let target = if entering { 1 } else { -1 };
+            if page.waiting_for != 0 && page.waiting_for != target {
+                page.cancel_draw();
+            }
+            if page.telling != 0 || page.picturing || page.waiting_for == target {
                 return;
             }
-            page.waiting_for = if entering { 1 } else { -1 };
+            page.waiting_for = target;
             let tab = tab.or_else(|| page.left_tab.as_ref().and_then(Weak::load));
             (tab, entering, page.turn)
         };
@@ -451,7 +473,26 @@ impl FullScreen {
             }
         }
         let weak = Rc::downgrade(self);
+        let owners: Vec<_> = tabs.iter().map(|tab| Weak::new(&**tab)).collect();
         PageCover::cover_tabs(&tabs, false, move |covers| {
+            let covers = covers
+                .into_iter()
+                .filter_map(|cover| {
+                    let owner = unsafe { cover.superview() }.and_then(|view| {
+                        owners.iter().find(|owner| {
+                            owner
+                                .load()
+                                .is_some_and(|tab| std::ptr::eq(&*tab.view(), &*view))
+                        })
+                    });
+                    if let Some(owner) = owner {
+                        Some((owner.clone(), cover))
+                    } else {
+                        cover.uncover(false);
+                        None
+                    }
+                })
+                .collect();
             let Some(fullscreen) = weak.upgrade() else {
                 return uncover(covers, false);
             };
@@ -513,10 +554,14 @@ impl FullScreen {
                 return;
             };
             if will {
+                page.cancel_draw();
                 page.transitioning = true;
                 page.settling = true;
                 page.ours = page.asked == if entering { 1 } else { -1 };
                 page.asked = 0;
+                for (_, cover) in &page.covers {
+                    cover.repicture();
+                }
             }
             if did {
                 page.transitioning = false;
@@ -534,21 +579,7 @@ impl FullScreen {
             };
             (covers, exit_page)
         };
-        if did && !covers.is_empty() {
-            let tab = self.state.borrow().page.as_ref().and_then(|page| {
-                page.tab
-                    .as_ref()
-                    .or(page.left_tab.as_ref())
-                    .and_then(Weak::load)
-            });
-            if let Some(tab) = tab {
-                after_page_draw(&tab, |_, _| true, move || uncover(covers, true));
-            } else {
-                uncover(covers, true);
-            }
-        } else {
-            uncover(covers, false);
-        }
+        uncover(covers, did);
         if close {
             return;
         }

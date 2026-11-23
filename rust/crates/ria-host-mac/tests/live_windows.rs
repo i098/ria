@@ -261,7 +261,12 @@ mod mac {
         assert!(!controller.fullscreen.is_full_screen());
     }
 
-    fn check_dev_actions(host: &ChromeWindowHost, window: &NSWindow, app: &NSApplication) {
+    fn check_dev_actions(
+        host: &ChromeWindowHost,
+        window: &NSWindow,
+        second: &NSWindow,
+        app: &NSApplication,
+    ) {
         let run = |action| host.dev_action(window, action, true).unwrap();
         for action in [
             "click",
@@ -303,17 +308,31 @@ mod mac {
         let token = observe(window, ns_string!("RiaProbeNotification"), move || {
             count.set(count.get() + 1)
         });
+        second.orderFrontRegardless();
+        let received_second = Rc::new(Cell::new(0));
+        let count = received_second.clone();
+        let second_token = observe(second, ns_string!("RiaProbeNotification"), move || {
+            count.set(count.get() + 1)
+        });
         assert_eq!(
             run("postNotification:window:RiaProbeNotification"),
             "posted"
         );
+        assert_eq!(received.get(), 1);
+        assert_eq!(received_second.get(), 0);
         assert_eq!(
             run("postNotification:windows:RiaProbeNotification"),
             "posted"
         );
         assert_eq!(received.get(), 2);
+        assert_eq!(received_second.get(), 1);
         // SAFETY: The token belongs to this notification center.
-        unsafe { NSNotificationCenter::defaultCenter().removeObserver(&token) };
+        unsafe {
+            let center = NSNotificationCenter::defaultCenter();
+            center.removeObserver(&token);
+            center.removeObserver(&second_token);
+        }
+        second.orderOut(None);
 
         let windows: Vec<Value> = serde_json::from_str(&run("subroles")).unwrap();
         assert!(
@@ -326,6 +345,8 @@ mod mac {
         window.orderOut(None);
         text.removeFromSuperview();
 
+        let frame = unsafe { window.contentView().unwrap().superview() }.unwrap();
+        let expected_point = NSPoint::new(-20., frame.bounds().size.height + 20.);
         assert_eq!(run("mouse:otherdown:-20,-20,2,1048576,7"), "");
         let mouse = app
             .nextEventMatchingMask_untilDate_inMode_dequeue(
@@ -336,6 +357,9 @@ mod mac {
                 true,
             )
             .expect("mouse action did not enqueue the event");
+        let point = mouse.locationInWindow();
+        assert!((point.x - expected_point.x).abs() < 0.01);
+        assert!((point.y - expected_point.y).abs() < 0.01);
         assert_eq!(mouse.windowNumber(), window.windowNumber());
         assert_eq!(mouse.eventNumber(), 7);
         assert_eq!(mouse.buttonNumber(), 2);
@@ -659,19 +683,19 @@ mod mac {
         let state = State::new();
         state.started.set(true);
         let controllers = Controllers::new(mtm, true, false, |_| true);
-        let host = ChromeWindowHost::new(mtm, state, controllers.clone());
+        let host = Rc::new(ChromeWindowHost::new(mtm, state, controllers.clone()));
         let made = host.make_window(profile, None).unwrap();
         assert_eq!(
             host.dev_action(&made, "fakeFullScreen:1", false).as_deref(),
             Some("test instances only")
         );
         assert!(!host.is_fullscreen(&made));
-        check_dev_actions(&host, &made, &app);
+        let fresh = host.make_window(profile, None).unwrap();
+        check_dev_actions(&host, &made, &fresh, &app);
         let probe = |host: &ChromeWindowHost, window: &NSWindow, action| {
             let reply = host.dev_action(window, action, true).unwrap();
             serde_json::from_str::<Value>(&reply).unwrap()
         };
-        let fresh = host.make_window(profile, None).unwrap();
         let before_sight = probe(&host, &fresh, "fakeFullScreen:1:50");
         assert_eq!(before_sight["fullScreen"], true);
         assert!(before_sight.get("pageFullScreen").is_none());
@@ -685,7 +709,7 @@ mod mac {
         let controller = controllers.for_window(&page_window).unwrap();
         let tab = controller
             .core
-            .open_tab(ns_string!("about:blank"), profile, false);
+            .open_tab(ns_string!("about:blank"), profile, true);
         let delegate: Retained<AnyObject> = unsafe { msg_send![&*controller.core, delegate] };
         let change_page = |entering| {
             let _: () = unsafe {
@@ -706,7 +730,26 @@ mod mac {
         let page = &probe(&host, &page_window, "fullScreen")["pageFullScreen"];
         assert!(page["page"].is_null());
         assert_eq!(page["telling"], 2);
-        host.close_window(&page_window);
+        controller.core.show_inactive();
+        assert!(tab.view().window().is_some());
+        assert!(!tab.view().isHiddenOrHasHiddenAncestor());
+        change_page(true);
+        let page_host = host.clone();
+        main_queue::post(Box::new(move || {
+            main_queue::after(
+                Duration::from_millis(425),
+                Box::new(move || {
+                    let before = probe(&page_host, &page_window, "fullScreen");
+                    assert_eq!(before["pageFullScreen"]["waitingForPage"], 1);
+                    let after = probe(&page_host, &page_window, "fakeFullScreen:1");
+                    assert_eq!(after["fullScreen"], true);
+                    assert_eq!(after["pageFullScreen"]["waitingForPage"], 0);
+                    assert_eq!(after["pageFullScreen"]["picturing"], false);
+                    assert_eq!(probe(&page_host, &page_window, "fullScreen"), after);
+                    page_host.close_window(&page_window);
+                }),
+            );
+        }));
         let idle = serde_json::json!({
             "fullScreen": false,
             "styleMask": false,
