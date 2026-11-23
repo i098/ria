@@ -38,13 +38,39 @@ pub(super) fn read(directory: &Path, name: &Path) -> Option<Vec<u8>> {
     fs::read(file).ok()
 }
 
-pub(super) fn check_tree(root: &Path, root_links: &[&str]) -> io::Result<()> {
-    match root.symlink_metadata() {
-        Ok(metadata) if metadata.is_dir() => check_entries(root, root, root_links),
-        Err(error) if error.kind() == ErrorKind::NotFound => Ok(()),
+pub(super) fn read_config_file(root: &Path, name: &Path) -> io::Result<Vec<u8>> {
+    if root.canonicalize()? != root {
+        return Err(ErrorKind::InvalidInput.into());
+    }
+    let mut path = root.to_owned();
+    let mut parts = name.components().peekable();
+    while let Some(Component::Normal(part)) = parts.next() {
+        path.push(part);
+        if parts.peek().is_none() {
+            if !path.symlink_metadata()?.is_file() {
+                return Err(ErrorKind::InvalidInput.into());
+            }
+            return fs::read(path);
+        }
+        directory_exists(&path)?;
+    }
+    Err(ErrorKind::InvalidInput.into())
+}
+
+pub(super) fn directory_exists(path: &Path) -> io::Result<bool> {
+    match path.symlink_metadata() {
+        Ok(metadata) if metadata.is_dir() => Ok(true),
+        Err(error) if error.kind() == ErrorKind::NotFound => Ok(false),
         Err(error) => Err(error),
         Ok(_) => Err(ErrorKind::NotADirectory.into()),
     }
+}
+
+pub(super) fn check_tree(root: &Path, root_links: &[&str]) -> io::Result<()> {
+    if directory_exists(root)? {
+        check_entries(root, root, root_links)?;
+    }
+    Ok(())
 }
 
 fn check_entries(root: &Path, directory: &Path, allowed_links: &[&str]) -> io::Result<()> {
@@ -62,7 +88,7 @@ fn check_entries(root: &Path, directory: &Path, allowed_links: &[&str]) -> io::R
             }
             return Err(io::Error::new(
                 ErrorKind::InvalidInput,
-                "a link points outside the config or Chromium directory",
+                "a link points outside the Chromium directory",
             ));
         }
     }
@@ -70,5 +96,6 @@ fn check_entries(root: &Path, directory: &Path, allowed_links: &[&str]) -> io::R
 }
 
 fn is_regular_file(path: &Path) -> bool {
-    path.symlink_metadata().is_ok_and(|metadata| metadata.is_file())
+    path.symlink_metadata()
+        .is_ok_and(|metadata| metadata.is_file())
 }

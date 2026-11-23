@@ -189,7 +189,9 @@ mod tests {
         let document = br#"{"version":11,"focusedWindowId":"w","windows":[null,{"id":"w","profile":"p"}],"launchTab":{"id":"t","url":"https://example.com","profile":"p"}}"#;
         std::fs::write(root.join("session.json"), document).unwrap();
         let saved = SavedSession::read(&root);
-        let outside = root.join("..").join(format!("ria-outside-session-{}", std::process::id()));
+        let outside = root
+            .join("..")
+            .join(format!("ria-outside-session-{}", std::process::id()));
         std::fs::rename(root.join("session.json"), &outside).unwrap();
         std::os::unix::fs::symlink(&outside, root.join("session.json")).unwrap();
         let linked = SavedSession::read(&root);

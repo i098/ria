@@ -5,6 +5,7 @@
 use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
 use std::io::{self, ErrorKind};
+use std::os::unix::fs::MetadataExt;
 use std::path::{Component, Path, PathBuf};
 use std::sync::OnceLock;
 
@@ -105,7 +106,7 @@ const TRACE_AREAS: &[&str] = &[
 /// Launch settings for one process, read before Chromium starts.
 pub struct LaunchConfig {
     pub data_directory: PathBuf,
-    pub config_directory: PathBuf,
+    config_directory: PathBuf,
     pub background: bool,
     pub remote_debugging_port: Option<u16>,
     pub isolated: bool,
@@ -192,6 +193,10 @@ impl LaunchConfig {
             trace,
             test,
         })
+    }
+
+    pub fn read_config_file(&self, name: &Path) -> io::Result<Vec<u8>> {
+        profile::read_config_file(&self.config_directory, name)
     }
 
     pub fn instance(&self, key: &str) -> Option<&str> {
@@ -286,51 +291,56 @@ fn launch_directories(
     home: &Path,
     current_dir: &Path,
 ) -> io::Result<(PathBuf, PathBuf, bool)> {
-    let default_data = home.join("Library/Application Support").join(BUNDLE_ID);
+    let installed_data = home.join("Library/Application Support").join(BUNDLE_ID);
+    let installed_config = home.join(".config/ria");
+    let ardia_config = home.join(".config/ardia");
     let (data, isolated) = if let Some(path) = override_path {
-        let data = standardize(&current_dir.join(path))?;
-        let installed = standardize(&default_data).ok();
-        match installed {
-            Some(root) if root == data => (root, false),
-            installed => {
-                let default_config = standardize(&home.join(".config/ria")).ok();
-                if installed
-                    .iter()
-                    .chain(default_config.iter())
-                    .any(|root| overlaps(root, &data))
-                {
-                    return Err(io::Error::new(
-                        ErrorKind::InvalidInput,
-                        "RIA_DATA_DIR overlaps the normal Ria profile or config directory",
-                    ));
-                }
-                (data, true)
-            }
+        let requested = current_dir.join(path);
+        let data = standardize(&requested)?;
+        let normal = requested.file_name() == installed_data.file_name()
+            && requested
+                .parent()
+                .zip(installed_data.parent())
+                .is_some_and(|(a, b)| {
+                    standardize(a)
+                        .ok()
+                        .zip(standardize(b).ok())
+                        .is_some_and(|(a, b)| a == b)
+                });
+        if !normal {
+            reject_overlap(&data, &installed_data)?;
         }
+        (data, !normal)
     } else {
-        (standardize(&default_data)?, false)
+        (standardize(&installed_data)?, false)
     };
+    reject_overlap(&data, &installed_config)?;
     let config = if isolated {
         data.join("config")
     } else {
-        standardize(&home.join(".config/ria"))?
+        standardize(&home.join(".config"))?.join("ria")
     };
-    if standardize(&home.join(".config/ardia")).is_ok_and(|ardia| overlaps(&config, &ardia)) {
-        return Err(io::Error::new(
-            ErrorKind::InvalidInput,
-            "the Ria config directory overlaps the Ardia config directory",
-        ));
-    }
-    profile::check_tree(&config, &[])?;
+    profile::directory_exists(&config)?;
+    reject_overlap(&config, &ardia_config)?;
+    reject_overlap(&data, &ardia_config)?;
+    profile::claim(&data)?;
     profile::check_tree(
         &data.join("Chromium"),
-        &["SingletonLock", "SingletonSocket", "SingletonCookie"],
+        &[
+            "SingletonLock",
+            "SingletonSocket",
+            "SingletonCookie",
+            "RunningChromeVersion",
+        ],
     )?;
-    profile::claim(&data)?;
     Ok((data, config, isolated))
 }
 
 fn standardize(path: &Path) -> io::Result<PathBuf> {
+    resolve_directory(path, false, &mut 40)
+}
+
+fn resolve_directory(path: &Path, allow_missing_link: bool, links: &mut u8) -> io::Result<PathBuf> {
     let mut result = PathBuf::new();
     for component in path.components() {
         match component {
@@ -342,9 +352,13 @@ fn standardize(path: &Path) -> io::Result<PathBuf> {
                 match result.symlink_metadata() {
                     Ok(metadata) if metadata.is_dir() => {}
                     Ok(metadata) if metadata.is_symlink() => {
-                        result = result.canonicalize()?;
-                        if !result.metadata()?.is_dir() {
-                            return Err(ErrorKind::NotADirectory.into());
+                        *links = links.checked_sub(1).ok_or(ErrorKind::InvalidInput)?;
+                        let target = result.read_link()?;
+                        result.pop();
+                        result =
+                            resolve_directory(&result.join(target), allow_missing_link, links)?;
+                        if !allow_missing_link {
+                            result.metadata()?;
                         }
                     }
                     Ok(_) => return Err(ErrorKind::NotADirectory.into()),
@@ -358,13 +372,50 @@ fn standardize(path: &Path) -> io::Result<PathBuf> {
     Ok(result)
 }
 
-fn overlaps(a: &Path, b: &Path) -> bool {
-    fn contains(root: &Path, path: &Path) -> bool {
-        let root = root.as_os_str().as_encoded_bytes();
-        path.ancestors()
-            .any(|part| part.as_os_str().as_encoded_bytes().eq_ignore_ascii_case(root))
+fn reject_overlap(path: &Path, reserved: &Path) -> io::Result<()> {
+    let overlaps = |root: &Path| {
+        path.ancestors().any(|parent| same_directory(parent, root))
+            || root.ancestors().any(|parent| same_directory(parent, path))
+    };
+    let aliased = match resolve_directory(reserved, true, &mut 40) {
+        Ok(destination) => destination != reserved && overlaps(&destination),
+        Err(error)
+            if matches!(
+                error.kind(),
+                ErrorKind::NotADirectory | ErrorKind::InvalidInput
+            ) =>
+        {
+            false
+        }
+        Err(error) => return Err(error),
+    };
+    if overlaps(reserved) || aliased {
+        return Err(io::Error::new(
+            ErrorKind::InvalidInput,
+            "a launch directory overlaps a reserved profile or config directory",
+        ));
     }
-    contains(a, b) || contains(b, a)
+    Ok(())
+}
+
+fn same_directory(a: &Path, b: &Path) -> bool {
+    let mut paths = (a, b);
+    loop {
+        match (paths.0.metadata(), paths.1.metadata()) {
+            (Ok(a), Ok(b)) => return a.dev() == b.dev() && a.ino() == b.ino(),
+            (Err(a), Err(b))
+                if a.kind() == ErrorKind::NotFound && b.kind() == ErrorKind::NotFound => {}
+            _ => return false,
+        }
+        let (Some(a), Some(b)) = (paths.0.file_name(), paths.1.file_name()) else {
+            return paths.0 == paths.1;
+        };
+        let (a, b) = (a.as_encoded_bytes(), b.as_encoded_bytes());
+        if !a.eq_ignore_ascii_case(b) && (a.is_ascii() || b.is_ascii()) {
+            return false;
+        }
+        paths = (paths.0.parent().unwrap(), paths.1.parent().unwrap());
+    }
 }
 
 fn present(value: &str) -> Option<&str> {
@@ -487,6 +538,7 @@ mod tests {
         let alias = support.join("com.ardia.browser");
         fs::create_dir(&ardia).unwrap();
         fs::write(ardia.join("session.json"), br#"{"version":11}"#).unwrap();
+        symlink("missing-engine-data", ardia.join("Chromium")).unwrap();
         symlink(&ardia, &alias).unwrap();
         let scratch = home.join("scratch");
         fs::create_dir(&scratch).unwrap();
@@ -510,7 +562,10 @@ mod tests {
         for result in overrides {
             assert!(result.is_err());
         }
-        assert!(aliased_default.is_err());
+        assert_eq!(
+            aliased_default.err().unwrap().to_string(),
+            "non-empty data directory has no Ria profile marker"
+        );
         assert!(saved.is_none());
     }
 
@@ -519,10 +574,13 @@ mod tests {
         let home = std::env::temp_dir().join(format!("ria-dangling-test-{}", std::process::id()));
         fs::create_dir_all(home.join(".config")).unwrap();
         symlink("missing", home.join(".config/ardia")).unwrap();
-        fs::create_dir(home.join("ria-dotfiles")).unwrap();
-        symlink("../ria-dotfiles", home.join(".config/ria")).unwrap();
         let normal = LaunchConfig::from_environment([], &home, &home, false).unwrap();
-        fs::remove_file(home.join(".config/ria")).unwrap();
+        let ardia_config = home.join(".config/ardia");
+        fs::remove_file(&ardia_config).unwrap();
+        fs::write(&ardia_config, b"not a directory").unwrap();
+        assert!(LaunchConfig::from_environment([], &home, &home, false).is_ok());
+        fs::remove_file(&ardia_config).unwrap();
+        symlink("ardia", &ardia_config).unwrap();
         symlink("missing", home.join(".config/ria")).unwrap();
         fs::remove_dir_all(&normal.data_directory).unwrap();
         symlink("missing", normal.data_directory).unwrap();
@@ -533,37 +591,91 @@ mod tests {
         fs::remove_dir_all(&home).unwrap();
 
         assert!(!normal.isolated);
-        assert_eq!(normal.config_directory, resolved_home.join("ria-dotfiles"));
+        assert_eq!(normal.config_directory, resolved_home.join(".config/ria"));
         assert_eq!(scratch.data_directory, resolved_home.join("scratch"));
         assert!(scratch.test_instance);
     }
 
     #[test]
-    fn rejects_a_config_destination_shared_with_ardia() {
+    fn confines_config_roots_and_requested_files() {
         let home = std::env::temp_dir().join(format!("ria-shared-config-{}", std::process::id()));
         fs::create_dir_all(home.join(".config")).unwrap();
-        fs::create_dir(home.join("dotfiles")).unwrap();
-        symlink("../dotfiles", home.join(".config/ria")).unwrap();
-        symlink("../dotfiles", home.join(".config/ardia")).unwrap();
-        let shared = LaunchConfig::from_environment([], &home, &home, false);
+        fs::create_dir_all(home.join("old-scratch/config")).unwrap();
+        fs::write(home.join("old-scratch/config/hooks.json"), b"{}").unwrap();
+        symlink("../old-scratch/config", home.join(".config/ria")).unwrap();
+        let aliased = LaunchConfig::from_environment([], &home, &home, false);
         fs::remove_file(home.join(".config/ria")).unwrap();
-        fs::create_dir(home.join(".config/ria")).unwrap();
-        symlink("../../dotfiles", home.join(".config/ria/hooks")).unwrap();
-        let linked_hooks = LaunchConfig::from_environment([], &home, &home, false);
+        fs::create_dir_all(home.join(".config/ria/themes")).unwrap();
+        fs::write(home.join(".config/ria/config.json"), b"{}").unwrap();
+        symlink("missing", home.join(".config/ria/themes/old-theme.json")).unwrap();
+        symlink(
+            "../../old-scratch/config/hooks.json",
+            home.join(".config/ria/hooks.json"),
+        )
+        .unwrap();
+        symlink("../../old-scratch/config", home.join(".config/ria/linked")).unwrap();
+        let normal = LaunchConfig::from_environment([], &home, &home, false).unwrap();
+        let local = normal.read_config_file(std::path::Path::new("config.json"));
+        let escaped = [
+            "hooks.json",
+            "linked/hooks.json",
+            "../../old-scratch/config/hooks.json",
+        ]
+        .map(|name| normal.read_config_file(std::path::Path::new(name)));
 
         let scratch =
             LaunchConfig::from_environment([("RIA_DATA_DIR", "scratch")], &home, &home, false)
                 .unwrap();
-        fs::create_dir(&scratch.config_directory).unwrap();
-        fs::remove_file(home.join(".config/ardia")).unwrap();
+        assert!(!scratch.config_directory.exists());
         symlink(&scratch.config_directory, home.join(".config/ardia")).unwrap();
         let shared_scratch =
             LaunchConfig::from_environment([("RIA_DATA_DIR", "scratch")], &home, &home, false);
+        fs::create_dir(&scratch.config_directory).unwrap();
+        let existing_shared_scratch =
+            LaunchConfig::from_environment([("RIA_DATA_DIR", "scratch")], &home, &home, false);
         fs::remove_dir_all(&home).unwrap();
 
-        assert!(shared.is_err());
-        assert!(linked_hooks.is_err());
+        assert!(aliased.is_err());
+        assert_eq!(local.unwrap(), b"{}");
+        assert!(escaped.iter().all(Result::is_err));
         assert!(shared_scratch.is_err());
+        assert!(existing_shared_scratch.is_err());
+    }
+
+    #[test]
+    fn rejects_reserved_aliases_before_creating_a_data_root() {
+        let home = std::env::temp_dir().join(format!("ria-reserved-test-{}", std::process::id()));
+        let support = home.join("Library/Application Support");
+        let installed = support.join("com.i098.ria");
+        fs::create_dir_all(&support).unwrap();
+        fs::create_dir(home.join(".config")).unwrap();
+        symlink("../../first-profile", &installed).unwrap();
+        symlink("../config-target", home.join(".config/ria")).unwrap();
+        symlink("../ardia-config-target", home.join(".config/ardia")).unwrap();
+
+        for target in ["first-profile", "config-target", "ardia-config-target"] {
+            let result =
+                LaunchConfig::from_environment([("RIA_DATA_DIR", target)], &home, &home, false);
+            assert!(result.is_err());
+            assert!(!home.join(target).exists());
+        }
+
+        fs::remove_file(&installed).unwrap();
+        fs::create_dir(home.join("caf\u{e9}")).unwrap();
+        symlink("../../caf\u{e9}", &installed).unwrap();
+        if home.join("cafe\u{301}").is_dir() {
+            assert!(
+                LaunchConfig::from_environment(
+                    [("RIA_DATA_DIR", "cafe\u{301}")],
+                    &home,
+                    &home,
+                    false,
+                )
+                .is_err()
+            );
+            assert!(!home.join("caf\u{e9}/.ria-profile").exists());
+        }
+        fs::remove_dir_all(&home).unwrap();
     }
 
     #[test]
@@ -590,8 +702,17 @@ mod tests {
                 config.data_directory.join("Chromium/SingletonLock"),
             )
             .unwrap();
+            symlink(
+                "158.0.8127.36",
+                config.data_directory.join("Chromium/RunningChromeVersion"),
+            )
+            .unwrap();
             assert!(launch().is_ok());
-            symlink(ardia.join("Preferences"), default.join("Linked")).unwrap();
+            symlink(
+                ardia.join("Preferences"),
+                default.join("RunningChromeVersion"),
+            )
+            .unwrap();
             fs::write(ardia.join("Preferences"), b"{}").unwrap();
             assert!(launch().is_err());
             fs::remove_dir_all(&default).unwrap();
@@ -682,7 +803,10 @@ mod tests {
         let home = root.join("home");
         let data = root.join("profile");
         let config = LaunchConfig::from_environment(
-            [("RIA_DATA_DIR", "profile"), ("RIA_SWITCHES", "overridden=on")],
+            [
+                ("RIA_DATA_DIR", "profile"),
+                ("RIA_SWITCHES", "overridden=on"),
+            ],
             &home,
             &root,
             false,
