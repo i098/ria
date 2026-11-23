@@ -1,0 +1,17 @@
+{
+  "unit": "packages/core/src/fuzzy.ts",
+  "files": 1,
+  "fingerprint": "adb5624c333f7109",
+  "coverage": {
+    "lines": 87,
+    "reached": 87,
+    "files": [
+      {
+        "file": "packages/core/src/fuzzy.ts",
+        "lines": 87,
+        "reached": 87,
+        "missed": ""
+      }
+    ]
+  }
+}
