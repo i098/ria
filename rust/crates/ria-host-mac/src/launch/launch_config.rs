@@ -4,18 +4,17 @@
 
 use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
+use std::io::{self, ErrorKind};
 use std::path::{Component, Path, PathBuf};
 use std::sync::OnceLock;
 
-use serde_json::{Value, json};
+use serde_json::Value;
 
 pub const BUNDLE_ID: &str = "com.i098.ria";
 
 const INSTANCE_KEYS: &[&str] = &[
-    "jsLocation",
     "chromiumSwitches",
     "downloadsDir",
-    "updateFeed",
     "allowAudio",
     "allowOcclusion",
     "releaseNotes",
@@ -80,7 +79,6 @@ const APP_TEST_KEYS: &[&str] = &[
 const COMMA_KEYS: &[&str] = &[
     "chromiumSwitches",
     "downloadsDir",
-    "updateFeed",
     "cliHome",
     "cliBinDir",
     "cliUrl",
@@ -111,7 +109,6 @@ pub struct LaunchConfig {
     pub background: bool,
     pub remote_debugging_port: Option<u16>,
     pub prewarm: bool,
-    pub feedback_url: Option<String>,
     pub isolated: bool,
     pub test_instance: bool,
     pub child_environment: BTreeMap<String, String>,
@@ -129,12 +126,11 @@ impl LaunchConfig {
         home: &Path,
         current_dir: &Path,
         signed_for_distribution: bool,
-    ) -> Self {
+    ) -> io::Result<Self> {
         let mut data_dir = None;
         let mut background = false;
         let mut remote_debugging_port = None;
         let mut prewarm = false;
-        let mut feedback_url = None;
         let mut instance = BTreeMap::new();
         let mut switches = BTreeMap::new();
         let mut trace = BTreeSet::new();
@@ -142,13 +138,10 @@ impl LaunchConfig {
         let mut child_environment = BTreeMap::new();
         for (name, value) in environment {
             match name {
-                "RIA_DATA_DIR" => {
-                    data_dir = present(value).map(|path| standardize(&current_dir.join(path)));
-                }
+                "RIA_DATA_DIR" => data_dir = present(value),
                 "RIA_BACKGROUND" => background = !matches!(value, "" | "0"),
                 "RIA_REMOTE_DEBUGGING_PORT" => remote_debugging_port = port(value),
                 "RIA_PREWARM" => prewarm = !value.is_empty(),
-                "RIA_FEEDBACK_URL" => feedback_url = present(value).map(str::to_owned),
                 "RIA_INSTANCE" => instance = keyed_entries(value, INSTANCE_KEYS, &[], name),
                 "RIA_SWITCHES" => {
                     switches = value.split(',').filter_map(switch_entry).collect();
@@ -175,7 +168,40 @@ impl LaunchConfig {
                 }
             }
         }
-        let isolated = data_dir.is_some();
+        let support = home.join("Library/Application Support");
+        let default_data = standardize(&support.join(BUNDLE_ID))?;
+        let default_config = standardize(&home.join(".config/ria"))?;
+        let ardia_roots = [
+            standardize(&support.join("com.ardia.browser"))?,
+            standardize(&support.join("Ardia"))?,
+            standardize(&home.join(".config/ardia"))?,
+        ];
+        let in_ardia = |path: &Path| ardia_roots.iter().any(|root| overlaps(path, root));
+        let scratch = data_dir
+            .map(|path| standardize(&current_dir.join(path)))
+            .transpose()?
+            .filter(|path| path != &default_data);
+        let isolated = scratch.is_some();
+        let (data_directory, config_directory) = if let Some(data) = scratch {
+            let config = standardize(&data.join("config"))?;
+            if [&data, &config].into_iter().any(|path| {
+                in_ardia(path) || overlaps(path, &default_data) || overlaps(path, &default_config)
+            }) {
+                return Err(io::Error::new(
+                    ErrorKind::InvalidInput,
+                    "RIA_DATA_DIR overlaps an installed profile or config directory",
+                ));
+            }
+            (data, config)
+        } else {
+            if in_ardia(&default_data) || in_ardia(&default_config) {
+                return Err(io::Error::new(
+                    ErrorKind::InvalidInput,
+                    "a default Ria directory overlaps an installed Ardia directory",
+                ));
+            }
+            (default_data, default_config)
+        };
         let test_instance = isolated && !signed_for_distribution;
         if !test_instance && (!trace.is_empty() || !test.is_empty()) {
             let reason = if isolated {
@@ -187,18 +213,12 @@ impl LaunchConfig {
             trace.clear();
             test.clear();
         }
-        let config_directory = data_dir
-            .as_ref()
-            .map_or_else(|| home.join(".config/ria"), |dir| dir.join("config"));
-        let data_directory =
-            data_dir.unwrap_or_else(|| home.join("Library/Application Support").join(BUNDLE_ID));
-        Self {
+        Ok(Self {
             data_directory,
             config_directory,
             background,
             remote_debugging_port,
             prewarm,
-            feedback_url,
             isolated,
             test_instance,
             child_environment,
@@ -207,7 +227,7 @@ impl LaunchConfig {
             cached_switches: OnceLock::new(),
             trace,
             test,
-        }
+        })
     }
 
     pub fn instance(&self, key: &str) -> Option<&str> {
@@ -295,33 +315,43 @@ impl LaunchConfig {
         }
         args
     }
-
-    pub fn snapshot(&self) -> Value {
-        json!({
-            "dataDirectory": self.isolated.then_some(&self.data_directory),
-            "configDirectory": self.config_directory,
-            "background": self.background,
-            "isolated": self.isolated,
-            "testInstance": self.test_instance,
-            "instance": self.instance,
-            "switches": self.switches,
-            "trace": self.trace,
-            "test": self.test,
-            "feedbackURL": self.feedback_url,
-        })
-    }
 }
 
-fn standardize(path: &Path) -> PathBuf {
+fn standardize(path: &Path) -> io::Result<PathBuf> {
     let mut result = PathBuf::new();
     for component in path.components() {
-        if component == Component::ParentDir {
-            result.pop();
-        } else {
-            result.push(component);
+        match component {
+            Component::ParentDir => {
+                result.pop();
+            }
+            Component::Normal(name) => {
+                result.push(name);
+                match result.symlink_metadata() {
+                    Ok(metadata) if metadata.is_dir() => {}
+                    Ok(metadata) if metadata.is_symlink() => {
+                        result = result.canonicalize()?;
+                        if !result.metadata()?.is_dir() {
+                            return Err(ErrorKind::NotADirectory.into());
+                        }
+                    }
+                    Ok(_) => return Err(ErrorKind::NotADirectory.into()),
+                    Err(error) if error.kind() == ErrorKind::NotFound => {}
+                    Err(error) => return Err(error),
+                }
+            }
+            _ => result.push(component),
         }
     }
-    result
+    Ok(result)
+}
+
+fn overlaps(a: &Path, b: &Path) -> bool {
+    fn contains(root: &Path, path: &Path) -> bool {
+        let root = root.as_os_str().as_encoded_bytes();
+        path.ancestors()
+            .any(|part| part.as_os_str().as_encoded_bytes().eq_ignore_ascii_case(root))
+    }
+    contains(a, b) || contains(b, a)
 }
 
 fn present(value: &str) -> Option<&str> {
@@ -406,9 +436,94 @@ fn cached_switches(directory: &Path) -> BTreeMap<String, bool> {
 mod tests {
     use super::LaunchConfig;
     use std::path::Path;
+    use std::{fs, os::unix::fs::symlink};
+
+    #[test]
+    fn normal_ria_root_keeps_test_settings_disabled() {
+        let home = Path::new("/home/ria-launch-test");
+        let root = home.join("Library/Application Support/com.i098.ria");
+        let config = LaunchConfig::from_environment(
+            [
+                ("RIA_DATA_DIR", root.to_str().unwrap()),
+                ("RIA_TEST", "loginsDelay=25,pipHover"),
+                ("RIA_TRACE", "pip"),
+            ],
+            home,
+            Path::new("/"),
+            false,
+        )
+        .unwrap();
+
+        assert_eq!(config.data_directory, root);
+        assert_eq!(config.config_directory, home.join(".config/ria"));
+        assert!(!config.isolated);
+        assert!(!config.test_instance);
+        assert!(!config.test_flag("pipHover"));
+        assert!(!config.traced("pip"));
+        assert!(config.engine_switches().is_empty());
+    }
+
+    #[test]
+    fn rejects_ardia_roots_without_falling_back_to_ria() {
+        let home = std::env::temp_dir().join(format!("ria-ardia-test-{}", std::process::id()));
+        let support = home.join("Library/Application Support");
+        let ardia = support.join("com.ardia.browser");
+        let ria = support.join("com.i098.ria");
+        let alias = home.join("alias");
+        fs::create_dir_all(&ardia).unwrap();
+        symlink(&ardia, &alias).unwrap();
+        let scratch = home.join("scratch");
+        fs::create_dir(&scratch).unwrap();
+        symlink(&ardia, scratch.join("config")).unwrap();
+        let dangling = home.join("dangling");
+        symlink(ardia.join("missing"), &dangling).unwrap();
+
+        let overrides = [&ardia, &alias, &scratch, &dangling].map(|directory| {
+            LaunchConfig::from_environment(
+                [("RIA_DATA_DIR", directory.to_str().unwrap())],
+                &home,
+                &home,
+                false,
+            )
+        });
+        symlink(&ardia, &ria).unwrap();
+        let aliased_default = LaunchConfig::from_environment([], &home, &home, false);
+        fs::remove_dir_all(&home).unwrap();
+
+        for result in overrides {
+            assert!(result.is_err());
+        }
+        assert!(aliased_default.is_err());
+    }
+
+    #[test]
+    fn resolves_a_symlink_before_parent_traversal_to_a_new_profile() {
+        let root = std::env::temp_dir().join(format!("ria-path-test-{}", std::process::id()));
+        fs::create_dir_all(root.join("other/nested")).unwrap();
+        fs::create_dir(root.join("run")).unwrap();
+        symlink("../other/nested", root.join("run/link")).unwrap();
+
+        let config = LaunchConfig::from_environment(
+            [("RIA_DATA_DIR", "link/../profile")],
+            &root,
+            &root.join("run"),
+            false,
+        )
+        .unwrap();
+        let expected = root.canonicalize().unwrap().join("other/profile");
+        fs::remove_dir_all(&root).unwrap();
+
+        assert_eq!(config.data_directory, expected);
+        assert_eq!(config.config_directory, expected.join("config"));
+        assert_eq!(
+            config.engine_switches(),
+            [format!("--ardia-data-dir={}", expected.display())]
+        );
+    }
 
     #[test]
     fn filters_engine_settings_and_child_environment() {
+        let expected = Path::new("/tmp").canonicalize().unwrap().join("run/profile");
         let config = LaunchConfig::from_environment(
             [
                 ("RIA_DATA_DIR", "profile"),
@@ -425,22 +540,20 @@ mod tests {
             Path::new("/home/user"),
             Path::new("/tmp/run"),
             false,
-        );
-        assert_eq!(
-            config.config_directory,
-            Path::new("/tmp/run/profile/config")
-        );
+        )
+        .unwrap();
+        assert_eq!(config.config_directory, expected.join("config"));
         assert!(!config.instance_flag("allowAudio"));
         assert!(config.test_flag("pipHover"));
         assert_eq!(
             config.engine_switches(),
             [
-                "--ardia-background",
-                "--ardia-data-dir=/tmp/run/profile",
-                "--ardia-downloads-dir=/tmp/a,b",
-                "--ardia-switches=one=on,two=off",
-                "--ardia-test=loginsDelay=25,nativeDragRefused",
-                "--ardia-trace=pip,visibility",
+                "--ardia-background".to_owned(),
+                format!("--ardia-data-dir={}", expected.display()),
+                "--ardia-downloads-dir=/tmp/a,b".to_owned(),
+                "--ardia-switches=one=on,two=off".to_owned(),
+                "--ardia-test=loginsDelay=25,nativeDragRefused".to_owned(),
+                "--ardia-trace=pip,visibility".to_owned(),
             ]
         );
         assert_eq!(config.child_environment.len(), 1);
@@ -464,7 +577,8 @@ mod tests {
             Path::new("/home/user"),
             Path::new("/tmp/run"),
             false,
-        );
+        )
+        .unwrap();
         let cached = config.switch_on("cached");
         let overridden = config.switch_on("overridden");
         let ignored = config.switch_on("ignored");
@@ -488,7 +602,8 @@ mod tests {
                 Path::new("/home/user"),
                 Path::new("/tmp/run"),
                 distribution,
-            );
+            )
+            .unwrap();
             assert!(!config.traced("pip"));
             assert_eq!(config.test_value("loginsDelay"), None);
             assert!(
