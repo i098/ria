@@ -320,6 +320,18 @@ fn text_or_null(value: Option<String>) -> Value {
 /// The summary of the manifest in `folder`. A field with no value is left out.
 /// `ui_locale` is the first preferred language of the app (for example `en`, `ja` or `pt-BR`).
 pub fn read_manifest(folder: &Path, ui_locale: &str) -> Result<Value, CallError> {
+    manifest_summary(folder, ui_locale, true)
+}
+
+pub(super) fn read_list_manifest(folder: &Path, ui_locale: &str) -> Result<Value, CallError> {
+    manifest_summary(folder, ui_locale, false)
+}
+
+fn manifest_summary(
+    folder: &Path,
+    ui_locale: &str,
+    include_package_icon: bool,
+) -> Result<Value, CallError> {
     let flags = OFlags::RDONLY | OFlags::DIRECTORY | OFlags::CLOEXEC;
     let missing = || CallError::Engine("Manifest file is missing or unreadable".into());
     let package = Package {
@@ -391,10 +403,12 @@ pub fn read_manifest(folder: &Path, ui_locale: &str) -> Result<Value, CallError>
             .cloned()
             .unwrap_or(json!(2)),
     );
-    put(
-        "icon",
-        text_or_null(icon_path(m.get("icons"), 128).and_then(|p| data_url(&package, &p))),
-    );
+    if include_package_icon {
+        put(
+            "icon",
+            text_or_null(icon_path(m.get("icons"), 128).and_then(|p| data_url(&package, &p))),
+        );
+    }
     put("permissions", json!(permissions));
     put(
         "optionalPermissions",

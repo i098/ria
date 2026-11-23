@@ -78,13 +78,25 @@ fn manifest_path(dir: &Path, name: &str) -> std::path::PathBuf {
     dir.join(format!("{name}.json"))
 }
 
-fn is_executable(path: &Path) -> bool {
-    fs::metadata(path).is_ok_and(|m| m.is_file())
-        && accessat(CWD, path, Access::EXEC_OK, AtFlags::EACCESS).is_ok()
+fn is_executable(path: &Path) -> std::io::Result<bool> {
+    match fs::metadata(path) {
+        Ok(metadata) if !metadata.is_file() => return Ok(false),
+        Ok(_) => {}
+        Err(error) if matches!(error.kind(), ErrorKind::NotFound | ErrorKind::NotADirectory) => {
+            return Ok(false);
+        }
+        Err(error) => return Err(error),
+    }
+    use rustix::io::Errno;
+    match accessat(CWD, path, Access::EXEC_OK, AtFlags::EACCESS) {
+        Ok(()) => Ok(true),
+        Err(Errno::ACCESS | Errno::NOENT | Errno::NOTDIR) => Ok(false),
+        Err(error) => Err(error.into()),
+    }
 }
 
-fn is_usable(manifest: &Value, name: &str) -> bool {
-    manifest["name"] == name
+fn is_usable(manifest: &Value, name: &str) -> std::io::Result<bool> {
+    let valid = manifest["name"] == name
         && manifest["type"] == "stdio"
         && manifest["description"]
             .as_str()
@@ -100,10 +112,15 @@ fn is_usable(manifest: &Value, name: &str) -> bool {
         })
         && manifest
             .get("supports_native_initiated_connections")
-            .is_none_or(Value::is_boolean)
-        && manifest["path"]
-            .as_str()
-            .is_some_and(|p| Path::new(p).is_absolute() && is_executable(Path::new(p)))
+            .is_none_or(Value::is_boolean);
+    match manifest["path"].as_str().map(Path::new) {
+        Some(path)
+            if valid && path.is_absolute() && !path.as_os_str().as_encoded_bytes().contains(&0) =>
+        {
+            is_executable(path)
+        }
+        _ => Ok(false),
+    }
 }
 
 fn system_manifest(system_dir: &Path, name: &str) -> std::io::Result<Option<Vec<u8>>> {
@@ -114,8 +131,10 @@ fn system_manifest(system_dir: &Path, name: &str) -> std::io::Result<Option<Vec<
     };
     let mut data = Vec::new();
     file.read_to_end(&mut data)?;
-    let usable = serde_json::from_slice(&data).is_ok_and(|parsed| is_usable(&parsed, name));
-    Ok(usable.then_some(data))
+    let Ok(parsed) = serde_json::from_slice(&data) else {
+        return Ok(None);
+    };
+    Ok(is_usable(&parsed, name)?.then_some(data))
 }
 
 fn open_regular(dir: &File, name: &str) -> std::io::Result<File> {
@@ -185,11 +204,18 @@ fn sync_hosts_from(user_data_dir: &Path, system_dir: &Path) {
         };
         let source = match (source, builtin) {
             (Some(data), _) => Some(data),
-            (None, Some(manifest)) if is_usable(manifest, name) => {
-                let Ok(data) = serde_json::to_vec_pretty(manifest) else {
+            (None, Some(manifest)) => {
+                let Ok(usable) = is_usable(manifest, name) else {
                     continue;
                 };
-                Some(data)
+                if !usable {
+                    None
+                } else {
+                    let Ok(data) = serde_json::to_vec_pretty(manifest) else {
+                        continue;
+                    };
+                    Some(data)
+                }
             }
             _ => None,
         };
@@ -300,7 +326,7 @@ mod tests {
     }
 
     #[test]
-    fn sync_keeps_a_host_on_source_read_error_and_removes_it_when_absent() {
+    fn sync_keeps_a_host_on_source_errors_and_removes_it_when_absent() {
         let (user, system) = (temp("user"), temp("system"));
         let program = system.join("proxy");
         fs::write(&program, "").unwrap();
@@ -313,6 +339,14 @@ mod tests {
 
         let source = manifest_path(&system, "com.apple.passwordmanager");
         let installed = fs::read(hosts.join("com.apple.passwordmanager.json")).unwrap();
+        fs::remove_file(&program).unwrap();
+        std::os::unix::fs::symlink("proxy", &program).unwrap();
+        sync_hosts_from(&user, &system);
+        assert_eq!(
+            fs::read(hosts.join("com.apple.passwordmanager.json")).unwrap(),
+            installed
+        );
+
         fs::remove_file(&source).unwrap();
         fs::create_dir(&source).unwrap();
         sync_hosts_from(&user, &system);
@@ -357,9 +391,9 @@ mod tests {
             "name": "n", "description": "Test host", "type": "stdio",
             "allowed_origins": [], "path": file,
         });
-        assert!(!is_usable(&manifest, "n"));
+        assert!(!is_usable(&manifest, "n").unwrap());
         fs::set_permissions(&file, fs::Permissions::from_mode(0o700)).unwrap();
-        assert!(is_usable(&manifest, "n"));
+        assert!(is_usable(&manifest, "n").unwrap());
         let _ = fs::remove_dir_all(&dir);
     }
 

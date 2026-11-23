@@ -9,7 +9,7 @@ use std::path::Path;
 
 use serde_json::{Map, Value, json};
 
-use super::extension_package::read_manifest;
+use super::extension_package::{read_list_manifest, read_manifest};
 use super::{CallContext, EngineRoute, Route, passing, string_arg};
 use crate::api::extensions::InspectUnpackedArgs;
 use crate::call::CallError;
@@ -168,7 +168,7 @@ fn list_item(info: &Map<String, Value>, ctx: &CallContext) -> Value {
     let manifest = info
         .get("path")
         .and_then(Value::as_str)
-        .and_then(|path| read_manifest(Path::new(path), &ctx.ui_locale).ok())
+        .and_then(|path| read_list_manifest(Path::new(path), &ctx.ui_locale).ok())
         .unwrap_or(Value::Null);
     for key in [
         "popup",
@@ -290,13 +290,19 @@ mod tests {
         std::fs::create_dir_all(&dir).unwrap();
         std::fs::write(
             dir.join("manifest.json"),
-            r#"{"name":"n","version":"1","action":{"default_popup":"p.html"},"incognito":"split"}"#,
+            r#"{"name":"n","version":"1","icons":{"32":"icon.png"},"action":{"default_popup":"p.html"},"incognito":"split"}"#,
         )
         .unwrap();
-        let reply = json!({"extensions": [{"id": "a", "path": dir, "location": "FROM_STORE", "siteAccess": null}]});
+        std::fs::write(dir.join("icon.png"), [1, 2, 3]).unwrap();
+        let reply = json!({"extensions": [{
+            "id": "a", "path": dir, "location": "FROM_STORE", "siteAccess": null,
+            "icon": "data:image/png;base64,BAUG"
+        }]});
         let out = list_reply(reply, &ctx(&dir)).unwrap();
         let item = &out["extensions"][0];
         assert_eq!(item["popup"], "p.html");
+        assert_eq!(item["icon"], "data:image/png;base64,BAUG");
+        assert_eq!(item["actionIcon"], "data:image/png;base64,AQID");
         assert_eq!(item["hasAction"], true);
         assert_eq!(item["incognitoSplit"], true);
         assert_eq!(item["fromWebStore"], true);
