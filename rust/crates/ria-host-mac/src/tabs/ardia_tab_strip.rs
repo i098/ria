@@ -45,7 +45,8 @@ pub enum StripCommandResult {
 }
 
 impl TabStrips {
-    /// Apply the engine's `tabs.strip` event. Return the strip ID if the public group state changed.
+    /// Return the strip ID when `tabs.strip` changes the cached groups, tab membership, or close-selection flag.
+    /// A close event clears this cache and returns `None`.
     pub fn observe_engine_strip(&mut self, event: &Value) -> Option<i32> {
         let id = i32::try_from(event.get("window")?.as_i64()?).ok()?;
         if event["closed"].as_bool() == Some(true) {
