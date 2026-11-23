@@ -9,6 +9,7 @@ pub mod endpoints;
 pub mod errors;
 pub mod fuzzy;
 pub mod identity;
+pub mod search;
 pub mod url;
 
 #[cfg(test)]

@@ -1,0 +1,171 @@
+{"fn": "isPublicHost", "args": ["localhost"]}
+{"fn": "isPublicHost", "args": ["127.0.0.1"]}
+{"fn": "isPublicHost", "args": ["10.0.0.1"]}
+{"fn": "isPublicHost", "args": ["192.168.1.2"]}
+{"fn": "isPublicHost", "args": ["172.20.0.1"]}
+{"fn": "isPublicHost", "args": ["169.254.169.254"]}
+{"fn": "isPublicHost", "args": ["100.64.0.1"]}
+{"fn": "isPublicHost", "args": ["[::1]"]}
+{"fn": "isPublicHost", "args": ["[fd00::1]"]}
+{"fn": "isPublicHost", "args": ["[fe80::1]"]}
+{"fn": "isPublicHost", "args": ["printer.local"]}
+{"fn": "isPublicHost", "args": ["intranet"]}
+{"fn": "isPublicHost", "args": ["2130706433"]}
+{"fn": "isPublicHost", "args": ["0x7f000001"]}
+{"fn": "isPublicHost", "args": ["8.8.8.8"]}
+{"fn": "isPublicHost", "args": ["[2606:4700::1111]"]}
+{"fn": "isPublicHost", "args": ["127.1"]}
+{"fn": "isPublicHost", "args": ["0177.0.0.1"]}
+{"fn": "isPublicHost", "args": ["%31%32%37.0.0.1"]}
+{"fn": "isPublicHost", "args": ["exa_mple.com"]}
+{"fn": "isPublicHost", "args": ["bänk.example"]}
+{"fn": "isPublicHost", "args": ["example.com"]}
+{"fn": "isPublicHost", "args": ["Example.COM"]}
+{"fn": "isPublicHost", "args": ["xn--bnk-sna.example"]}
+{"fn": "isPublicHost", "args": ["a.b-c.io"]}
+{"fn": "isPublicHost", "args": ["example.com."]}
+{"fn": "isPublicHost", "args": ["a.localhost"]}
+{"fn": "isPublicHost", "args": ["x.LOCAL"]}
+{"fn": "isPublicHost", "args": ["x.internal"]}
+{"fn": "isPublicHost", "args": ["x.lan"]}
+{"fn": "isPublicHost", "args": ["a.home.arpa"]}
+{"fn": "isPublicHost", "args": ["x.test"]}
+{"fn": "isPublicHost", "args": ["x.invalid"]}
+{"fn": "isPublicHost", "args": ["abc.onion"]}
+{"fn": "isPublicHost", "args": ["localhost."]}
+{"fn": "isPublicHost", "args": ["a..b"]}
+{"fn": "isPublicHost", "args": ["-a.com"]}
+{"fn": "isPublicHost", "args": ["a-.com"]}
+{"fn": "isPublicHost", "args": ["a.c-"]}
+{"fn": "isPublicHost", "args": ["a.1com"]}
+{"fn": "isPublicHost", "args": ["a.co1"]}
+{"fn": "isPublicHost", "args": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"]}
+{"fn": "isPublicHost", "args": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"]}
+{"fn": "isPublicHost", "args": ["a.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"]}
+{"fn": "isPublicHost", "args": ["a.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"]}
+{"fn": "isPublicHost", "args": ["a.com.."]}
+{"fn": "isPublicHost", "args": [""]}
+{"fn": "isPublicHost", "args": ["."]}
+{"fn": "isPublicHost", "args": [" example.com"]}
+{"fn": "isPublicHost", "args": ["example.com\n"]}
+{"fn": "isPublicHost", "args": ["home.arpa"]}
+{"fn": "isPublicHost", "args": ["a.b"]}
+{"fn": "isPublicHost", "args": ["İ.com"]}
+{"fn": "isPublicHost", "args": ["x.K.com"]}
+{"fn": "remoteRequestAllowed", "args": ["https://127.1/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://127.1/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://0177.0.0.1/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://0177.0.0.1/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://%31%32%37.0.0.1/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://%31%32%37.0.0.1/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://[0:0:0:0:0:0:0:1]/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://[0:0:0:0:0:0:0:1]/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://8.8.8.8/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://8.8.8.8/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://evil.example\\@a.com/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://evil.example\\@a.com/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://u@a.com/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://u@a.com/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:0443/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:0443/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:443/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:443/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:8443/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:8443/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://Suggest.Example.com/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://Suggest.Example.com/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["http://localhost:8123/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["http://localhost:8123/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://192.168.1.1/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://192.168.1.1/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1:8123/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1:8123/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["http://10.0.0.1/s?q=x"]}
+{"fn": "remoteRequestAllowed", "args": ["http://10.0.0.1/s?q=x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1:80/"]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1:80/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1/"]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1:65535/"]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1:65535/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1:65536/"]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1:65536/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:99999/"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:99999/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com?x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com?x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com#x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com#x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["HTTPS://A.COM/"]}
+{"fn": "remoteRequestAllowed", "args": ["HTTPS://A.COM/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["http://a.com/"]}
+{"fn": "remoteRequestAllowed", "args": ["http://a.com/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com./x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com./x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.local/x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.local/x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:443x/"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:443x/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["ftp://a.com/"]}
+{"fn": "remoteRequestAllowed", "args": ["ftp://a.com/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com/"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com/ x"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com/ x", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": [" https://a.com/"]}
+{"fn": "remoteRequestAllowed", "args": [" https://a.com/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:1/"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:1/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:01/"]}
+{"fn": "remoteRequestAllowed", "args": ["https://a.com:01/", {"allowLoopback": true}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1/", {}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1/", {"allowLoopback": false}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1/", {"allowLoopback": {"$undefined": true}}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1/", {"allowLoopback": 1}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1/", {"allowLoopback": "yes"}]}
+{"fn": "remoteRequestAllowed", "args": ["http://127.0.0.1/", {"allowLoopback": 0}]}
+{"fn": "sha256Hex", "args": [""]}
+{"fn": "sha256Hex", "args": ["abc"]}
+{"fn": "sha256Hex", "args": ["é漢😀"]}
+{"fn": "sha256Hex", "args": ["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]}
+{"fn": "sha256Hex", "args": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn": "sha256Hex", "args": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn": "sha256Hex", "args": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn": "sha256Hex", "args": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn": "sha256Hex", "args": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn": "sha256Hex", "args": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn": "sha256Hex", "args": ["\u0000"]}
+{"fn": "sha256Hex", "args": ["The quick brown fox jumps over the lazy dog"]}
+{"fn": "providerApprovalKey", "args": [{"title": "Docs", "suggest": "https://a.com/{query}", "global": true}]}
+{"fn": "providerApprovalKey", "args": [{"global": true, "suggest": "https://a.com/{query}", "title": "Docs"}]}
+{"fn": "providerApprovalKey", "args": [{"title": "Docs", "suggest": "https://b.com/{query}", "global": true}]}
+{"fn": "providerApprovalKey", "args": [null]}
+{"fn": "providerApprovalKey", "args": [{"$undefined": true}]}
+{"fn": "providerApprovalKey", "args": [1]}
+{"fn": "providerApprovalKey", "args": [1.5]}
+{"fn": "providerApprovalKey", "args": [-0.0]}
+{"fn": "providerApprovalKey", "args": [1e+21]}
+{"fn": "providerApprovalKey", "args": [1e-07]}
+{"fn": "providerApprovalKey", "args": [123456789012345680000]}
+{"fn": "providerApprovalKey", "args": [0.1]}
+{"fn": "providerApprovalKey", "args": [{"$num": "NaN"}]}
+{"fn": "providerApprovalKey", "args": [{"$num": "Infinity"}]}
+{"fn": "providerApprovalKey", "args": ["str"]}
+{"fn": "providerApprovalKey", "args": ["é\"\\\n\t\u0001 😀"]}
+{"fn": "providerApprovalKey", "args": [true]}
+{"fn": "providerApprovalKey", "args": [[]]}
+{"fn": "providerApprovalKey", "args": [{}]}
+{"fn": "providerApprovalKey", "args": [[1, null, {"$undefined": true}, "a", [{"b": {"$undefined": true}}]]]}
+{"fn": "providerApprovalKey", "args": [{"b": 1, "a": {"d": {"$undefined": true}, "c": [2]}, "B": 3, "_": 4, "10": 5, "2": 6, "é": 7, "😀": 8, "｡": 9}]}
+{"fn": "providerApprovalKey", "args": [{"x": {"$undefined": true}}]}
+{"fn": "providerApprovalKey", "args": [{"rows": [{"title": "t", "url": "https://a.com"}], "keyword": "k"}]}
+{"fn": "providerApprovalKey", "args": [{"": 1, "ÿ\"": 2}]}
+{"fn":"sha256Hex","args":[{"$utf16":[55296]}]}
+{"fn":"sha256Hex","args":[{"$utf16":[97,56320,98,55357,56832]}]}
+{"fn":"providerApprovalKey","args":[{"$utf16":[55296]}]}

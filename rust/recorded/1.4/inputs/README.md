@@ -1,0 +1,1 @@
+The generators read the Ardia sources at `packages/core/src` (a checkout of the `ardia` submodule, with `bangList.ts`) relative to the repository root, and write the JSONL input files next to themselves. Run them from this folder.

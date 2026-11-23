@@ -1,0 +1,11 @@
+{"fn":"readProviderEntries","args":[[{"keyword":"go","url":"https://linear.app/team/issue/{query}"},{"keyword":"t","title":"Team","rows":[{"title":"Wiki","url":"https://wiki.example.com"},{"title":"Bad","url":"javascript:alert(1)"}]},{"keyword":"go","url":"https://other.com/{query}"},{"suggest":"https://s.example.com/?q={query}"},{"suggest":"http://s.example.com/?q={query}","global":true},{"keyword":"x","global":true,"rows":[]},{"url":"https://a.com/{query}"},{"keyword":"bad word","rows":[]},{"keyword":"n","rows":[{"title":"a","url":"https://a.com"}],"extra":1},{"title":"Docs","suggest":"https://docs.example.com/s?q={query}","global":true}]]}
+{"fn":"isRemoteEndpoint","args":["https://s.example.com/?q={query}"]}
+{"fn":"isRemoteEndpoint","args":["http://s.example.com/?q={query}"]}
+{"fn":"isRemoteEndpoint","args":["https://docs.example.com/s?q={query}"]}
+{"fn":"readProviderEntries","args":[[{"keyword":"go","url":"https://linear.app/team/issue/{query}"},{"keyword":"t","title":"Team","rows":[{"title":"Wiki","url":"https://wiki.example.com"}]},{"title":"Docs","suggest":"https://docs.example.com/s?q={query}","global":true}]]}
+{"fn":"readProviderEntries","args":[[{"keyword":"a"}]]}
+{"fn":"providerConfigs","args":[[{"keyword":"go","url":"https://linear.app/team/issue/{query}"},{"keyword":"t","title":"Team","rows":[{"title":"Wiki","url":"https://wiki.example.com"}]},{"title":"Docs","suggest":"https://docs.example.com/s?q={query}","global":true}]]}
+{"fn":"isRemoteEndpoint","args":["https://a.com/s?q={query}"]}
+{"fn":"isRemoteEndpoint","args":["http://127.0.0.1:8123/s?q={query}"]}
+{"fn":"isRemoteEndpoint","args":["http://a.com/s?q={query}"]}
+{"fn":"isRemoteEndpoint","args":["https://a.com/s"]}
