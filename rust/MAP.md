@@ -11,6 +11,8 @@ Source of truth for what is ported and where it goes. One row for each unit.
 Counts: 1255 rows, 814 in scope `mac`, 441 `out`.
 Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 units and 59739 lines, absorb 84 units and 5559 lines, delete 6 units and 173 lines, later 25 units and 1726 lines, done 1 units and 9945 lines.
 
+For slice 3.6, `reader only` means that the host crate provides the reader, but app startup and the early window do not use it yet.
+
 | Scope | Unit | Language | Lines | Status | Target | Source | Port state | Slice | Disposition |
 | --- | --- | --- | ---: | --- | --- | --- | --- | --- | --- |
 | mac | `apps/browser/assets/offline-game/` | TypeScript/JavaScript | 1045 | caution | assets, copied into the bundle | analyze | todo | stay-4 | stay |
@@ -219,7 +221,7 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 | mac | `packages/ardiacore/ios/ArdiaHoverProbeInternal.*` | Objective-C++ | 76 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaInterfaceScale.*` | Objective-C++ | 254 | native | `rust/crates/ria-host-mac/src/windows/` | hand | todo | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaInternal.*` | Objective-C++ | 100 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
-| mac | `packages/ardiacore/ios/ArdiaLaunchConfig.*` | Objective-C++ | 381 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaLaunchConfig.*` | Objective-C++ | 381 | native | [`launch_config.rs`](crates/ria-host-mac/src/launch/launch_config.rs), `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | reader only | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaLaunchPicture.*` | Objective-C++ | 335 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaLaunchSequence.*` | Objective-C++ | 102 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaLaunchTabHolder.*` | Objective-C++ | 176 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
@@ -252,8 +254,8 @@ Disposition of the 814 `mac` rows: port 584 units and 227294 lines, stay 114 uni
 | mac | `packages/ardiacore/ios/ArdiaRevealGuards.*` | Objective-C++ | 160 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaRevealLedger.*` | Objective-C++ | 111 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaRuntime.*` | Objective-C++ | 42 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
-| mac | `packages/ardiacore/ios/ArdiaSavedDocument.*` | Objective-C++ | 35 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
-| mac | `packages/ardiacore/ios/ArdiaSavedSession.*` | Objective-C++ | 120 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaSavedDocument.*` | Objective-C++ | 35 | native | [`saved_document.rs`](crates/ria-host-mac/src/launch/saved_document.rs), `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | reader only | 3.6 | port |
+| mac | `packages/ardiacore/ios/ArdiaSavedSession.*` | Objective-C++ | 120 | native | [`saved_session.rs`](crates/ria-host-mac/src/launch/saved_session.rs), `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | reader only | 3.6 | port |
 | mac | `packages/ardiacore/ios/ArdiaServices.*` | Objective-C++ | 566 | native | `rust/crates/ria-host-mac/Cargo.toml`, `rust/crates/ria-host-mac/src/lib.rs`, `rust/crates/ria-host-mac/src/core/` | hand | todo | 3.5 | port |
 | mac | `packages/ardiacore/ios/ArdiaStackSample.*` | Objective-C++ | 35 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaStartup.*` | Objective-C++ | 72 | native | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | hand | todo | 3.6 | port |
