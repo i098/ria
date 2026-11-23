@@ -6,21 +6,23 @@
 //! the bang table that the module-level variables of `mobile.ts` hold. `HostURL`, the `URL`
 //! polyfill for engines that lack one, has no port: Rust has no such engine.
 
-use crate::identity::telemetry_wire::js_number_to_string;
 use crate::omnibox::candidate_pool::Pool;
-use crate::omnibox::omnibox::{breadcrumb, fixup_url, search_url_for, url_for_display};
-use crate::omnibox::suggest::{Narrowing, build_suggestions};
+use crate::omnibox::omnibox::{
+    breadcrumb, fixup_url, search_url_for, split_scheme, url_for_display,
+};
+use crate::omnibox::suggest::{Narrowing, build_suggestions_lazy};
+use crate::omnibox::suggest_fetcher::suggest_reply;
 use crate::omnibox::suggestion::{
     SuggestEngine, SuggestOptions, Suggestion, SuggestionResult, SuggestionSource,
 };
 use crate::search::bang_list::BANG_LISTS;
 use crate::search::bangs::{
-    BangTable, Json, bang_document, bang_table, find_bang, join_bang_tables, parse_json,
-    read_bang_document, slim_bangs,
+    BangTable, bang_document, bang_table, find_bang, join_bang_tables, parse_json, read_bang_document,
+    slim_bangs,
 };
 use crate::search::engines::{
-    BUILT_IN_ENGINES, CustomSearchEngine, SearchEngine, SuggestReply, all_engines, engine_by_id,
-    parse_suggestions, suggest_request_url, valid_search_template,
+    BUILT_IN_ENGINES, CustomSearchEngine, SearchEngine, all_engines, engine_by_id, parse_suggestions,
+    suggest_request_url, valid_search_template,
 };
 use crate::search::js_text::js_trim;
 use crate::search::site_search::{ScopeKind, ScopeSources, SearchScope, find_scope};
@@ -122,62 +124,17 @@ impl Default for Mobile {
     }
 }
 
-/// `String(v)` of an element of `google:suggesttype`.
-fn js_string(v: &Json) -> String {
-    match v {
-        Json::Null => "null".into(),
-        Json::Bool(b) => b.to_string(),
-        Json::Number(n) => js_number_to_string(*n),
-        Json::String(s) => s.clone(),
-        Json::Array(items) => items
-            .iter()
-            .map(|x| match x {
-                Json::Null => String::new(),
-                x => js_string(x),
-            })
-            .collect::<Vec<_>>()
-            .join(","),
-        Json::Object(_) => "[object Object]".into(),
+fn pool_of<'a>(
+    source: &SuggestionSource,
+    cached: &'a mut Option<(Pool, Narrowing)>,
+) -> Result<&'a mut (Pool, Narrowing), &'static str> {
+    if cached.is_none() {
+        *cached = Some((
+            Pool::new(&source.history, &source.bookmarks)?,
+            Narrowing::default(),
+        ));
     }
-}
-
-fn strings(items: &[Json]) -> Vec<Option<&str>> {
-    items
-        .iter()
-        .map(|v| match v {
-            Json::String(s) => Some(s.as_str()),
-            _ => None,
-        })
-        .collect()
-}
-
-/// `mobileParseRemote` (`mobile.ts:109`): a body that is not JSON gives no suggestions.
-fn parse_remote(body: &str) -> Vec<String> {
-    let Ok(Json::Array(body)) = &parse_json(body) else {
-        return vec![];
-    };
-    let Some(Json::Array(items)) = body.get(1) else {
-        return vec![];
-    };
-    let titles = match body.get(2) {
-        Some(Json::Array(t)) => strings(t),
-        _ => vec![],
-    };
-    let types = match body
-        .get(4)
-        .and_then(|extras| extras.get("google:suggesttype"))
-    {
-        Some(Json::Array(t)) => t.iter().map(js_string).collect(),
-        _ => vec![],
-    };
-    let reply = SuggestReply {
-        suggestions: strings(items),
-        titles,
-        types,
-    };
-    let mut queries = parse_suggestions(&reply);
-    queries.truncate(8);
-    queries
+    Ok(cached.as_mut().expect("the pool was just built"))
 }
 
 impl Mobile {
@@ -205,16 +162,8 @@ impl Mobile {
     pub fn set_sources(&mut self, source: SuggestionSource) -> Result<bool, &'static str> {
         self.source = source;
         self.pool = None;
-        self.pool_of()?;
+        pool_of(&self.source, &mut self.pool)?;
         Ok(true)
-    }
-
-    fn pool_of(&mut self) -> Result<&mut (Pool, Narrowing), &'static str> {
-        if self.pool.is_none() {
-            let pool = Pool::new(&self.source.history, &self.source.bookmarks)?;
-            self.pool = Some((pool, Narrowing::default()));
-        }
-        Ok(self.pool.as_mut().expect("the pool was just built"))
     }
 
     /// `mobileSetSearch` (`mobile.ts:74`).
@@ -276,8 +225,6 @@ impl Mobile {
         if text.contains('!') {
             self.bang_table_once();
         }
-        self.pool_of()?;
-        let (pool, narrowing) = self.pool.as_mut().expect("the pool was just built");
         let opts = SuggestOptions {
             limit: options.limit.unwrap_or(8.0),
             now: options.now,
@@ -298,7 +245,12 @@ impl Mobile {
             bangs: self.bangs.as_ref().filter(|_| text.contains('!')),
             ..SuggestOptions::default()
         };
-        let mut result = build_suggestions(text, &self.source, &opts, pool, narrowing)?;
+        let source = &self.source;
+        let cached = &mut self.pool;
+        let mut result = build_suggestions_lazy(text, source, &opts, || {
+            let (pool, narrowing) = pool_of(source, cached)?;
+            Ok((pool, narrowing))
+        })?;
         result.items.retain(|s| {
             matches!(
                 s,
@@ -354,7 +306,7 @@ impl Mobile {
     pub fn suggest_request(&mut self, text: &str, scope: Option<&SearchScope>) -> Option<String> {
         let text = js_trim(text);
         let query = js_trim(text.strip_prefix('?').unwrap_or(text));
-        if query.is_empty() || has_scheme_slashes(query) {
+        if query.is_empty() || split_scheme(query).is_some_and(|(_, rest)| rest.starts_with("//")) {
             return None;
         }
         if query.contains('!') && find_bang(query, Some(self.bang_table_once())).is_some() {
@@ -370,9 +322,14 @@ impl Mobile {
         suggest_request_url(from, query)
     }
 
-    /// `mobileParseRemote` (`mobile.ts:128`).
+    /// `mobileParseRemote` (`mobile.ts:122`): a body that is not JSON gives no suggestions.
     pub fn parse_remote(body: &str) -> Vec<String> {
-        parse_remote(body)
+        let mut queries = parse_json(body)
+            .ok()
+            .and_then(|body| suggest_reply(&body).map(|reply| parse_suggestions(&reply)))
+            .unwrap_or_default();
+        queries.truncate(8);
+        queries
     }
 
     /// `mobileFindScope` (`mobile.ts:136`).
@@ -403,17 +360,6 @@ impl Mobile {
             trail: crumb.trail,
         })
     }
-}
-
-/// `/^[a-z][a-z0-9+.-]*:\/\//i`.
-fn has_scheme_slashes(text: &str) -> bool {
-    let mut chars = text.chars();
-    chars.next().is_some_and(|c| c.is_ascii_alphabetic())
-        && text.split_once("://").is_some_and(|(scheme, _)| {
-            scheme
-                .chars()
-                .all(|c| c.is_ascii_alphanumeric() || "+.-".contains(c))
-        })
 }
 
 #[cfg(test)]

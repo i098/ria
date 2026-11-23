@@ -16,6 +16,12 @@ Gate G1 also has the planned and the real hours of phase 1 and the corrected hou
 | G5 | all Phase 5 checks pass in one run | open | | | |
 | G6 | full parity run and resource check pass; owner go | open | | | |
 
+## Phase 1: Check U
+
+| Slice | Unit | Evidence | Gate command |
+| --- | --- | --- | --- |
+| 1.6 | `mobile.ts` | [Stateful mobile recording](recorded/1.6/mobile-rs/) | `rust-anything gate rust/recorded/1.6/mobile-rs` |
+
 ## G0 record
 
 Slice 0.10. Plan v5 section 8.5 (gate G0), limits of sections 6.6, 6.7 and 8.4.

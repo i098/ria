@@ -394,7 +394,7 @@ For slice 3.6, `reader only` means that the host crate provides the reader, but 
 | mac | `packages/core/src/idn.ts` | TypeScript/JavaScript | 323 | ready | `rust/crates/ria-core/src/url/`, `rust/recorded/1.2/` | analyze | todo | 1.2 | port |
 | mac | `packages/core/src/index.ts` | TypeScript/JavaScript | 24 | ready | `rust/crates/ria-core/Cargo.toml`, `rust/crates/ria-core/src/lib.rs`, `rust/crates/ria-core/src/fuzzy.rs`, `rust/crates/ria-core/src/fuzzy_reference.rs`, `rust/crates/ria-core/src/errors.rs`, `rust/tools/check-headers.sh`, `rust/recorded/1.1/` | analyze | todo | 1.1 | port |
 | mac | `packages/core/src/ingestKeys.ts` | TypeScript/JavaScript | 14 | ready | `rust/crates/ria-core/src/identity/`, `rust/recorded/1.6/` | analyze | todo | 1.6 | port |
-| mac | `packages/core/src/mobile.ts` | TypeScript/JavaScript | 121 | ready | `rust/crates/ria-core/src/identity/`, `rust/recorded/1.6/` | analyze | todo | 1.6 | port |
+| mac | `packages/core/src/mobile.ts` | TypeScript/JavaScript | 121 | ready | `rust/crates/ria-core/src/identity/mobile.rs`, `rust/recorded/1.6/mobile-rs/` | analyze | partial | 1.6 | port |
 | mac | `packages/core/src/omnibox.ts` | TypeScript/JavaScript | 182 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
 | mac | `packages/core/src/openTabs.ts` | TypeScript/JavaScript | 10 | ready | `rust/crates/ria-core/src/omnibox/`, `rust/recorded/1.3/` | analyze | done | 1.3 | port |
 | mac | `packages/core/src/pageMatch.ts` | TypeScript/JavaScript | 109 | ready | `rust/crates/ria-core/src/url/`, `rust/recorded/1.2/` | analyze | todo | 1.2 | port |

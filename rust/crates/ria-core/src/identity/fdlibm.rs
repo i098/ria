@@ -1,4 +1,13 @@
 // Ria original, no Ardia source.
+// Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+//
+// Developed at SunSoft, a Sun Microsystems, Inc. business.
+// Permission to use, copy, modify, and distribute this
+// software is freely granted, provided that this notice
+// is preserved.
+//
+// Copyright 2016 the V8 project authors. All rights reserved.
+// Use of this source code is governed by the BSD-style license in Ria's NOTICE.
 
 //! `Math.sin`, `Math.cos`, `Math.atan` and `Math.atan2` as V8 computes them (`src/base/ieee754.cc`,
 //! from FreeBSD fdlibm). The system libm differs from V8 in the last bit for about 3% of inputs,
@@ -25,15 +34,7 @@ fn with_hi(x: f64, h: i32) -> f64 {
 }
 
 /// `x * 2^n`, exact while the result stays a normal number.
-fn scalbn(mut x: f64, mut n: i32) -> f64 {
-    while n > 1000 {
-        x *= f64::from_bits((1023 + 1000_u64) << 52);
-        n -= 1000;
-    }
-    while n < -1000 {
-        x *= f64::from_bits((1023 - 1000_u64) << 52);
-        n += 1000;
-    }
+fn scalbn(x: f64, n: i32) -> f64 {
     x * f64::from_bits(((1023 + i64::from(n)) as u64) << 52)
 }
 

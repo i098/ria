@@ -1,4 +1,6 @@
 // Ria original, no Ardia source.
+// Copyright 2011 the V8 project authors. All rights reserved.
+// Use of this source code is governed by the BSD-style license in Ria's NOTICE.
 
 //! `Date.parse` as V8 does it (`src/date/dateparser*.{h,cc}`, `ParseDateTimeString` in
 //! `builtins-date.cc`): the ECMAScript date-time format, then the legacy format that Safari
@@ -151,7 +153,8 @@ impl<'a> Scanner<'a> {
     }
 
     fn is_space(&self) -> bool {
-        char::from_u32(u32::from(self.ch())).is_some_and(is_js_space)
+        !matches!(self.ch(), 0x2028 | 0x2029)
+            && char::from_u32(u32::from(self.ch())).is_some_and(is_js_space)
     }
 
     fn is_word_char(&self) -> bool {

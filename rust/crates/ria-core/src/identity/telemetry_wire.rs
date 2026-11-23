@@ -418,6 +418,20 @@ mod tests {
     }
 
     #[test]
+    fn legacy_date_line_separators_fall_back_to_now() {
+        for separator in ['\u{2028}', '\u{2029}'] {
+            let event = QueuedEvent {
+                uuid: "id".into(),
+                event: "started".into(),
+                distinct_id: "install".into(),
+                timestamp: format!("2024-01-01 12:00{separator}GMT"),
+                properties: Vec::new(),
+            };
+            assert_eq!(event_record(&event, 42.0).time_unix_nano, "42000000");
+        }
+    }
+
+    #[test]
     fn object_keys_put_array_indexes_first() {
         let o = Json::Object(vec![
             ("b".into(), Json::Null),

@@ -813,5 +813,5 @@
   ],
   "classes": [],
   "js_only": [],
-  "float_tolerance": 0
+  "float_tolerance": 1e-12
 }

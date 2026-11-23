@@ -7,13 +7,15 @@ recorded cases of the TypeScript original (`cases.jsonl`), its inputs (`<name>.i
 | --- | --- | --- |
 | `anonymous-identity-rs` | `anonymousIdentity.ts` | `identity::anonymous_identity` |
 | `ingest-keys-rs` | `ingestKeys.ts` | `identity::ingest_keys` |
+| `mobile-rs` | `mobile.ts` via `mobile.harness.ts` | `identity::mobile` |
 | `telemetry-wire-rs` | `telemetryWire.ts` | `identity::telemetry_wire` |
 | `theme-rs` | `theme.ts` | `identity::theme` |
 
 `tabGroups.ts` has only a constant and a type: `rust-anything bridge` refuses it ("exports no
 functions"), so it has no crate. `identity::tab_groups` carries it.
 
-`mobile.ts` is not in this slice yet: it calls the modules of slices 1.2, 1.3 and 1.4.
+The mobile harness calls all 13 mobile exports in order on one session. The input replaces saved
+pages, search engines, and bang tables, and checks the state after each replacement.
 
 ## Run
 
@@ -26,10 +28,23 @@ rust-anything gate   rust/recorded/1.6/<crate>
 rust-anything fuzz   rust/recorded/1.6/<crate> --seed <new seed>
 ```
 
-`telemetry-wire-rs` reads `Date.now()` when a timestamp does not parse. Fix the clock for the
-original and the port with the test hook:
+To record the mobile sequence from a fresh checkout, initialize the pinned Ardia submodule.
+Run these commands from the repository root:
 
 ```sh
-RIA_NOW_MS=1795417631295 NODE_OPTIONS=--import=$PWD/rust/recorded/1.6/telemetry-wire-rs/clock-freeze.mjs \
+mkdir -p .review-ardia
+cp -R ardia/packages .review-ardia/
+cp rust/recorded/1.6/mobile.harness.ts .review-ardia/packages/core/src/
+TZ=UTC rust-anything record rust/recorded/1.6/mobile-rs --count 0 --inputs rust/recorded/1.6/mobile.inputs.jsonl
+rust-anything build rust/recorded/1.6/mobile-rs
+rust-anything gate rust/recorded/1.6/mobile-rs
+```
+
+`telemetry-wire-rs` reads `Date.now()` when a timestamp does not parse. Use the hook for recording
+and replay. It fixes the clock and sets the time zone to UTC.
+See [known-diffs.jsonl](known-diffs.jsonl) for the exception outside the UTC recording.
+
+```sh
+TZ=UTC RIA_NOW_MS=1795417631295 NODE_OPTIONS=--import=$PWD/rust/recorded/1.6/telemetry-wire-rs/clock-freeze.mjs \
   rust-anything diff rust/recorded/1.6/telemetry-wire-rs
 ```
