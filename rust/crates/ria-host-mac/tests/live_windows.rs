@@ -31,11 +31,11 @@ mod mac {
     use std::rc::Rc;
     use std::time::{Duration, Instant};
 
-    use block2::RcBlock;
-    use objc2::runtime::{AnyObject, Bool};
+    use block2::{DynBlock, RcBlock};
+    use objc2::runtime::{AnyObject, Bool, Sel};
     use objc2::{
-        DefinedClass, MainThreadMarker, MainThreadOnly, Message, define_class, msg_send,
-        rc::Retained,
+        ClassType, DefinedClass, MainThreadMarker, MainThreadOnly, Message, define_class, ffi,
+        msg_send, rc::Retained, sel,
     };
     use objc2_app_kit::{
         NSApplication, NSBackingStoreType, NSColor, NSEvent, NSEventModifierFlags, NSEventType,
@@ -49,7 +49,7 @@ mod mac {
         NSRect, NSRunLoop, NSSize, NSString, NSUserDefaults, ns_string,
     };
     use ria_engine::call::main_queue;
-    use ria_host_mac::core::bindings::{Engine, Profile, Tab, Window};
+    use ria_host_mac::core::bindings::{CGImageRef, Engine, Profile, Tab, Window};
     use ria_host_mac::core::delegate::{EngineDelegate, Hooks};
     use ria_host_mac::core::host::State;
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
@@ -504,6 +504,78 @@ mod mac {
         );
     }
 
+    fn check_pending_fullscreen_snapshot(
+        tab: &Tab,
+        supersede: impl FnOnce() + 'static,
+        verify: impl FnOnce() + 'static,
+    ) {
+        let page = std::ptr::from_ref(&*tab.view());
+        let attached = Rc::new(Cell::new(false));
+        let attachment = attached.clone();
+        let selector = sel!(viewWillMoveToSuperview:);
+        let class = PageCover::class();
+        let method = class.instance_method(selector).unwrap();
+        let original: unsafe extern "C-unwind" fn(*const NSView, Sel, *const NSView) =
+            unsafe { std::mem::transmute(method.implementation()) };
+        let attach = RcBlock::new(move |view: *const NSView, parent: *const NSView| {
+            if parent == page {
+                attachment.set(true);
+            }
+            unsafe { original(view, selector, parent) };
+        });
+        unsafe {
+            ffi::class_replaceMethod(
+                std::ptr::from_ref(class).cast_mut(),
+                selector,
+                ffi::imp_implementationWithBlock(RcBlock::as_ptr(&attach).cast()),
+                ffi::method_getTypeEncoding(method),
+            );
+        }
+
+        let target = std::ptr::from_ref(tab);
+        let selector = sel!(copyPicture:completion:);
+        let method = tab.class().instance_method(selector).unwrap();
+        let implementation = method.implementation();
+        let original: unsafe extern "C-unwind" fn(*const Tab, Sel, f64, &DynBlock<dyn Fn(CGImageRef)>) =
+            unsafe { std::mem::transmute(implementation) };
+        let work = Cell::new(Some((supersede, verify)));
+        let snapshot = RcBlock::new(
+            move |tab: *const Tab, timeout: f64, completion: &DynBlock<dyn Fn(CGImageRef)>| {
+                if tab == target && let Some((supersede, verify)) = work.take() {
+                    unsafe { ffi::method_setImplementation(method, implementation) };
+                    let started = Instant::now();
+                    main_queue::post(Box::new(supersede));
+                    let completion = completion.copy();
+                    let verify = Cell::new(Some(verify));
+                    let attached = attached.clone();
+                    let reply = RcBlock::new(move |image: CGImageRef| {
+                        assert!(!image.0.is_null(), "The fullscreen snapshot must contain an image");
+                        completion.call((image,));
+                        let attached = attached.clone();
+                        let verify = verify.take().unwrap();
+                        main_queue::post(Box::new(move || {
+                            assert!(
+                                started.elapsed() < Duration::from_millis(400),
+                                "The fullscreen snapshot must reach the attachment check before timeout"
+                            );
+                            assert!(!attached.get(), "The stale cover must never attach");
+                            verify();
+                        }));
+                    });
+                    unsafe { original(tab, selector, timeout, &reply) };
+                } else {
+                    unsafe { original(tab, selector, timeout, completion) };
+                }
+            },
+        );
+        unsafe {
+            ffi::method_setImplementation(
+                method,
+                ffi::imp_implementationWithBlock(RcBlock::as_ptr(&snapshot).cast()),
+            );
+        }
+    }
+
     fn check_windows(profile: &Profile) {
         let mtm = MainThreadMarker::new().unwrap();
         let controllers = Controllers::new(mtm, true, true, |_| true);
@@ -739,11 +811,15 @@ mod mac {
             .core
             .open_tab(ns_string!("about:blank"), profile, true);
         let delegate: Retained<AnyObject> = unsafe { msg_send![&*controller.core, delegate] };
-        let change_page = |entering| {
-            let _: () = unsafe {
-                msg_send![&*delegate, window: &*controller.core, tab: &*tab,
-                    didChangeFullscreen: Bool::new(entering)]
-            };
+        let change_page = {
+            let core = controller.core.clone();
+            let tab = tab.clone();
+            move |entering| {
+                let _: () = unsafe {
+                    msg_send![&*delegate, window: &*core, tab: &*tab,
+                        didChangeFullscreen: Bool::new(entering)]
+                };
+            }
         };
         assert!(
             probe(&host, &page_window, "fullScreen")
@@ -775,37 +851,32 @@ mod mac {
                     assert_eq!(after["fullScreen"], true);
                     assert_eq!(after["pageFullScreen"]["waitingForPage"], 0);
                     assert_eq!(after["pageFullScreen"]["picturing"], false);
-                    let cancelled = Rc::new(Cell::new(false));
-                    let snapshot_arrived = Rc::new(Cell::new(false));
-                    let snapshot_checked = Rc::new(Cell::new(false));
-                    let permit = cancelled.clone();
-                    let arrived = snapshot_arrived.clone();
-                    let checked = snapshot_checked.clone();
-                    PageCover::cover(
+                    change_page(false);
+                    probe(&page_host, &page_window, "fakeFullScreen:0");
+                    let snapshot_host = page_host.clone();
+                    let snapshot_window = page_window.clone();
+                    let superseded = Rc::new(Cell::new(None));
+                    let result = superseded.clone();
+                    check_pending_fullscreen_snapshot(
                         &tab,
-                        false,
                         move || {
-                            arrived.set(true);
-                            !permit.get()
-                        },
-                        move |cover| {
-                            assert!(cover.is_none());
-                            checked.set(true);
-                        },
-                    );
-                    assert!(!snapshot_checked.get());
-                    cancelled.set(true);
-                    main_queue::after(
-                        Duration::from_millis(450),
-                        Box::new(move || {
-                            assert!(snapshot_arrived.get() && snapshot_checked.get());
+                            let before = probe(&snapshot_host, &snapshot_window, "fullScreen");
+                            assert_eq!(before["pageFullScreen"]["picturing"], true);
+                            let after = probe(&snapshot_host, &snapshot_window, "fakeFullScreen:1");
+                            assert_eq!(after["fullScreen"], true);
+                            assert_eq!(after["pageFullScreen"]["picturing"], false);
                             assert_eq!(after["pageFullScreen"]["covered"], false);
+                            result.set(Some(after));
+                        },
+                        move || {
+                            let after = superseded.take().unwrap();
                             assert_eq!(probe(&page_host, &page_window, "fullScreen"), after);
                             assert_eq!(probe(&page_host, &page_window, "fakeFullScreen"), after);
                             page_host.close_window(&page_window);
                             completed.set(true);
-                        }),
+                        },
                     );
+                    change_page(true);
                 }),
             );
         }));
@@ -941,7 +1012,7 @@ mod mac {
             enter_time.set(Some(start.elapsed()))
         });
         assert_eq!(
-            probe(&host, &made, "fakeFullScreen:1:50"),
+            probe(&host, &made, "fakeFullScreen:1: 50"),
             fullscreen_state(true, true)
         );
         assert_eq!(notes.borrow().as_slice(), &names[..1]);
@@ -967,15 +1038,55 @@ mod mac {
                     probe(&host, &made, "fakeFullScreen"),
                     fullscreen_state(true, true)
                 );
+                let restored = host.make_window(&profile, None).unwrap();
+                let overridden = host.make_window(&profile, None).unwrap();
+                for window in [&restored, &overridden] {
+                    controllers.for_window(window).unwrap().core.show_inactive();
+                    assert!(window.isVisible());
+                    assert_eq!(
+                        host.dev_action(window, "fakeWindowServer:shows", true).as_deref(),
+                        Some("ok")
+                    );
+                }
+                assert_eq!(
+                    host.dev_action(&restored, "fakeFullScreenOcclusionMs: 500", true)
+                        .as_deref(),
+                    Some("500")
+                );
+                for window in [&restored, &overridden] {
+                    assert_eq!(probe(&host, window, "fakeFullScreen:1")["fullScreen"], true);
+                    assert!(controllers.user_sees_only_through_window_server(window));
+                }
+                assert_eq!(
+                    host.dev_action(&restored, "fakeFullScreenOcclusionMs:-1", true)
+                        .as_deref(),
+                    Some("-1")
+                );
+                for window in [&restored, &overridden] {
+                    assert_eq!(probe(&host, window, "fakeFullScreen:0")["fullScreen"], false);
+                    assert!(controllers.user_sees_only_through_window_server(window));
+                }
+                assert_eq!(
+                    host.dev_action(&overridden, "fakeOcclusion:hidden", true).as_deref(),
+                    Some("0")
+                );
                 main_queue::after(
-                    Duration::from_millis(950),
+                    Duration::from_millis(1700),
                     Box::new(move || {
                         assert!(stale_checked.get());
+                        assert!(!controllers.user_sees_only_through_window_server(&restored));
+                        assert!(controllers.user_sees_only_through_window_server(&overridden));
+                        host.close_window(&restored);
+                        host.close_window(&overridden);
                         assert!(exit_at.get().unwrap() >= Duration::from_millis(500));
                         assert_eq!(notes.borrow().as_slice(), &names);
                         assert_eq!(
                             probe(&host, &made, "fullScreen"),
                             fullscreen_state(false, false)
+                        );
+                        assert_eq!(
+                            host.dev_action(&made, "fakeFullScreenMs: 50", true).as_deref(),
+                            Some("50")
                         );
                         assert_eq!(
                             host.dev_action(&made, "fakeFullScreenMs:0", true)
@@ -1080,8 +1191,19 @@ mod mac {
             .iter()
             .find_map(|view| view.downcast::<NSTextField>().ok())
             .unwrap();
-        assert_eq!(strip.frame().size.height, 28.);
-        assert_eq!(page.frame().size.height, host.bounds().size.height - 28.);
+        assert!(unsafe { page.superview() }.is_some_and(|parent| std::ptr::eq(&*parent, &*host)));
+        let bounds = host.bounds();
+        let mut strip_frame = bounds;
+        strip_frame.size.height = 28.;
+        let mut page_frame = bounds;
+        page_frame.size.height -= 28.;
+        if host.isFlipped() {
+            page_frame.origin.y += 28.;
+        } else {
+            strip_frame.origin.y += page_frame.size.height;
+        }
+        assert_eq!(strip.frame(), strip_frame);
+        assert_eq!(page.frame(), page_frame);
         assert!(!label.isHiddenOrHasHiddenAncestor());
         let visible_label = NSIntersectionRect(
             strip.visibleRect(),
@@ -1090,11 +1212,10 @@ mod mac {
         assert!(visible_label.size.width > 0. && visible_label.size.height > 0.);
         assert_eq!(label.stringValue().to_string(), origin);
         assert!(window.alphaValue() > 0. && strip.alphaValue() > 0. && label.alphaValue() > 0.);
+        let region = strip.convertRect_toView(visible_label, Some(&host));
         let capture = || {
-            let bitmap = strip
-                .bitmapImageRepForCachingDisplayInRect(visible_label)
-                .unwrap();
-            strip.cacheDisplayInRect_toBitmapImageRep(visible_label, &bitmap);
+            let bitmap = host.bitmapImageRepForCachingDisplayInRect(region).unwrap();
+            host.cacheDisplayInRect_toBitmapImageRep(region, &bitmap);
             bitmap.TIFFRepresentation().unwrap()
         };
         let with_text = capture();

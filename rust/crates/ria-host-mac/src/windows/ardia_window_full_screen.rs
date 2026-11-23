@@ -48,7 +48,7 @@ pub(super) fn set_acted_transition(value: &str) -> Duration {
 }
 
 pub(super) fn transition_duration(value: &str) -> Duration {
-    let ms = value.parse::<f64>().unwrap_or_default();
+    let ms = NSString::from_str(value).doubleValue();
     Duration::try_from_secs_f64(ms / 1000.).unwrap_or_default()
 }
 
@@ -753,7 +753,6 @@ impl FullScreen {
                 return;
             }
             state.acting = true;
-            state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
             state.occlusion_turn
         };
         let center = NSNotificationCenter::defaultCenter();
@@ -789,6 +788,8 @@ impl FullScreen {
                 Duration::try_from_secs_f64((transition.as_secs_f64() + gap).max(0.)).ok()
             })
         {
+            let turn = turn.wrapping_add(1);
+            self.state.borrow_mut().occlusion_turn = turn;
             self.set_acted_occlusion(Some(false));
             let weak = Rc::downgrade(self);
             main_queue::after(

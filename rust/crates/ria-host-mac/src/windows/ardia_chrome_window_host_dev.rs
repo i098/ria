@@ -44,13 +44,6 @@ pub(super) struct DevActions {
     covers: OnceCell<Retained<NSMapTable<NSWindow, NSWindow>>>,
 }
 
-fn milliseconds(text: &str) -> f64 {
-    text.parse::<f64>()
-        .ok()
-        .filter(|value| value.is_finite())
-        .unwrap_or(0.)
-}
-
 fn flag(value: bool) -> String {
     u8::from(value).to_string()
 }
@@ -542,8 +535,8 @@ impl DevActions {
                 Some(format!("{:.0}", transition.as_secs_f64() * 1000.))
             }
             "fakeFullScreenOcclusionMs" => {
-                let gap = milliseconds(value);
-                ACTED_OCCLUSION_GAP.set((gap != -1.).then_some(gap / 1000.));
+                let gap = NSString::from_str(value).doubleValue();
+                ACTED_OCCLUSION_GAP.set((gap.is_finite() && gap != -1.).then_some(gap / 1000.));
                 Some(format!("{gap:.0}"))
             }
             "fullScreen" | "fakeFullScreen" => {
