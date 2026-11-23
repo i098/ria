@@ -509,7 +509,27 @@ mod mac {
         supersede: impl FnOnce() + 'static,
         verify: impl FnOnce() + 'static,
     ) {
-        let page = std::ptr::from_ref(&*tab.view());
+        let view = tab.view();
+        let page = std::ptr::from_ref(&*view);
+        let parent = unsafe { view.superview() }.unwrap();
+        let expected_parent = std::ptr::from_ref(&*parent);
+        let checked_parent = Rc::new(Cell::new(false));
+        let checked = checked_parent.clone();
+        let superview = sel!(superview);
+        let method = view.class().instance_method(superview).unwrap();
+        let implementation = method.implementation();
+        let original: unsafe extern "C-unwind" fn(*const NSView, Sel) -> *const NSView =
+            unsafe { std::mem::transmute(implementation) };
+        let lookup = RcBlock::new(move |view: *const NSView| {
+            let parent = unsafe { original(view, superview) };
+            if view == page && parent == expected_parent {
+                checked.set(true);
+            }
+            parent
+        });
+        let lookup_imp = unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&lookup).cast()) };
+        let superview_method = method;
+        let superview_imp = implementation;
         let attached = Rc::new(Cell::new(false));
         let attachment = attached.clone();
         let selector = sel!(viewWillMoveToSuperview:);
@@ -547,12 +567,25 @@ mod mac {
                     let completion = completion.copy();
                     let verify = Cell::new(Some(verify));
                     let attached = attached.clone();
+                    let checked_parent = checked_parent.clone();
                     let reply = RcBlock::new(move |image: CGImageRef| {
                         assert!(!image.0.is_null(), "The fullscreen snapshot must contain an image");
+                        main_queue::post(Box::new(move || unsafe {
+                            ffi::method_setImplementation(superview_method, lookup_imp);
+                        }));
                         completion.call((image,));
                         let attached = attached.clone();
+                        let checked_parent = checked_parent.clone();
                         let verify = verify.take().unwrap();
                         main_queue::post(Box::new(move || {
+                            unsafe {
+                                ffi::method_setImplementation(superview_method, superview_imp);
+                                ffi::imp_removeBlock(lookup_imp);
+                            }
+                            assert!(
+                                checked_parent.get(),
+                                "The snapshot handler must validate the parent before attachment"
+                            );
                             assert!(!attached.get(), "The stale cover must never attach");
                             verify();
                         }));
@@ -569,6 +602,76 @@ mod mac {
                 ffi::imp_implementationWithBlock(RcBlock::as_ptr(&snapshot).cast()),
             );
         }
+    }
+
+    fn check_exit_settlement(
+        host: Rc<ChromeWindowHost>,
+        controllers: &Controllers,
+        profile: &Profile,
+    ) -> Rc<Cell<bool>> {
+        let window = host.make_window(profile, None).unwrap();
+        let controller = controllers.for_window(&window).unwrap();
+        let core = controller.core.clone();
+        let replacement = core.open_tab(ns_string!("about:blank"), profile, false);
+        let tab = core.open_tab(ns_string!("about:blank"), profile, true);
+        let delegate: Retained<AnyObject> = unsafe { msg_send![&*core, delegate] };
+        let change = move |tab: &Tab, entering| {
+            let _: () = unsafe {
+                msg_send![&*delegate, window: &*core, tab: tab,
+                    didChangeFullscreen: Bool::new(entering)]
+            };
+        };
+        controller.core.show_inactive();
+        change(&tab, true);
+        let completed = Rc::new(Cell::new(false));
+        let done = completed.clone();
+        let observed_window = window.clone();
+        let notification = unsafe { NSWindowDidEnterFullScreenNotification };
+        let entered = Cell::new(Some(move || {
+            let selector = sel!(exitFullscreen);
+            let method = tab.class().instance_method(selector).unwrap();
+            let implementation = method.implementation();
+            let original: unsafe extern "C-unwind" fn(*const Tab, Sel) =
+                unsafe { std::mem::transmute(implementation) };
+            let calls = Rc::new(RefCell::new(Vec::new()));
+            let received = calls.clone();
+            let exit = RcBlock::new(move |tab: *const Tab| {
+                received.borrow_mut().push(tab);
+                unsafe { original(tab, selector) };
+            });
+            let imp = unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&exit).cast()) };
+            unsafe { ffi::method_setImplementation(method, imp) };
+            change(&tab, false);
+            for action in ["fullScreen", "fakeFullScreen"] {
+                let state = host.dev_action(&window, action, true).unwrap();
+                let state: Value = serde_json::from_str(&state).unwrap();
+                assert_eq!(state["pageFullScreen"]["waitingForPage"], -1);
+            }
+            change(&tab, true);
+            host.dev_action(&window, "fakeFullScreen:0", true).unwrap();
+            assert!(calls.borrow().is_empty());
+            change(&replacement, true);
+            main_queue::post(Box::new(move || {
+                unsafe {
+                    ffi::method_setImplementation(method, implementation);
+                    ffi::imp_removeBlock(imp);
+                }
+                assert_eq!(
+                    calls.borrow().as_slice(),
+                    &[std::ptr::from_ref(&*replacement)]
+                );
+                host.close_window(&window);
+                done.set(true);
+            }));
+        }));
+        let token = Rc::new(Cell::<Option<Retained<AnyObject>>>::new(None));
+        let observer = token.clone();
+        token.set(Some(observe(&observed_window, notification, move || {
+            let token = observer.take().unwrap();
+            unsafe { NSNotificationCenter::defaultCenter().removeObserver(&token) };
+            main_queue::post(Box::new(entered.take().unwrap()));
+        })));
+        completed
     }
 
     fn check_windows(profile: &Profile) {
@@ -799,6 +902,7 @@ mod mac {
             false
         );
         host.close_window(&occluded);
+        let exit_checked = check_exit_settlement(host.clone(), &controllers, profile);
 
         let page_window = host.make_window(profile, None).unwrap();
         let controller = controllers.for_window(&page_window).unwrap();
@@ -825,6 +929,12 @@ mod mac {
         let page = &probe(&host, &page_window, "fakeFullScreen")["pageFullScreen"];
         assert_eq!(page["page"], tab.browser_id());
         assert_eq!(page["telling"], 1);
+        for action in ["fullScreen", "fakeFullScreen"] {
+            assert_eq!(
+                probe(&host, &page_window, action)["pageFullScreen"]["waitingForPage"],
+                1
+            );
+        }
         change_page(false);
         let page = &probe(&host, &page_window, "fullScreen")["pageFullScreen"];
         assert!(page["page"].is_null());
@@ -852,11 +962,6 @@ mod mac {
                     let snapshot_window = page_window.clone();
                     let superseded = Rc::new(Cell::new(None));
                     let result = superseded.clone();
-                    let decided = Rc::new(Cell::new(false));
-                    let observed = decided.clone();
-                    controller
-                        .fullscreen
-                        .observe_next_cover_decision(move || observed.set(true));
                     check_pending_fullscreen_snapshot(
                         &tab,
                         move || {
@@ -869,10 +974,6 @@ mod mac {
                             result.set(Some(after));
                         },
                         move || {
-                            assert!(
-                                decided.get(),
-                                "The snapshot must reach the attachment decision"
-                            );
                             let after = superseded.take().unwrap();
                             assert_eq!(probe(&page_host, &page_window, "fullScreen"), after);
                             assert_eq!(probe(&page_host, &page_window, "fakeFullScreen"), after);
@@ -1092,6 +1193,7 @@ mod mac {
                     Duration::from_millis(1700),
                     Box::new(move || {
                         assert!(stale_checked.get());
+                        assert!(exit_checked.get());
                         assert!(!controllers.user_sees_only_through_window_server(&restored));
                         assert!(controllers.user_sees_only_through_window_server(&overridden));
                         host.close_window(&restored);

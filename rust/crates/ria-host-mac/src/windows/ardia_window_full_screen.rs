@@ -186,8 +186,8 @@ struct PageState {
     waiting_for_draw: bool,
     telling: usize,
     picturing: bool,
-    covers: Vec<(Weak<Tab>, Retained<PageCover>)>,
-    pending_covers: Vec<(Weak<Tab>, Retained<PageCover>)>,
+    covers: Vec<Retained<PageCover>>,
+    pending_covers: Vec<Retained<PageCover>>,
     turn: u64,
     transitioning: bool,
     ours: bool,
@@ -206,9 +206,9 @@ impl PageState {
     }
 }
 
-fn uncover(covers: Vec<(Weak<Tab>, Retained<PageCover>)>, after_draw: bool) {
-    for (owner, cover) in covers {
-        if after_draw && let Some(tab) = owner.load() {
+fn uncover(covers: Vec<Retained<PageCover>>, after_draw: bool) {
+    for cover in covers {
+        if after_draw && let Some(tab) = cover.owner() {
             after_page_draw(&tab, |_, _| true, move || {
                 main_queue::after(
                     Duration::from_millis(34),
@@ -234,7 +234,6 @@ pub struct FullScreen {
     background: bool,
     allow_occlusion: bool,
     state: RefCell<Transition>,
-    cover_decision: Cell<Option<Box<dyn FnOnce()>>>,
     observers: Vec<Retained<AnyObject>>,
 }
 
@@ -294,15 +293,9 @@ impl FullScreen {
                     },
                     ..Transition::default()
                 }),
-                cover_decision: Cell::new(None),
                 observers,
             }
         })
-    }
-
-    #[doc(hidden)]
-    pub fn observe_next_cover_decision(&self, observe: impl FnOnce() + 'static) {
-        self.cover_decision.set(Some(Box::new(observe)));
     }
 
     fn live_window(&self) -> Option<(Retained<Window>, Retained<NSWindow>)> {
@@ -376,6 +369,7 @@ impl FullScreen {
         }
         page.telling += 1;
         drop(state);
+        self.sync_page();
         let weak = Rc::downgrade(self);
         let tab = Weak::new(tab);
         main_queue::post(Box::new(move || {
@@ -420,7 +414,7 @@ impl FullScreen {
                 if page.waiting_for != 0 || page.picturing {
                     page.cancel_draw();
                 }
-                if tab.is_none() {
+                if tab.is_none() && page.telling == 0 {
                     page.entered = false;
                 }
                 return;
@@ -491,39 +485,28 @@ impl FullScreen {
         let remaining = Rc::new(Cell::new(tabs.len()));
         let weak = Rc::downgrade(self);
         for tab in tabs {
-            let owner = Weak::new(&*tab);
             let weak = weak.clone();
             let remaining = remaining.clone();
-            let current = move |report_decision| {
-                let fullscreen = weak.upgrade()?;
-                let permitted = {
+            let current = move || {
+                weak.upgrade().filter(|fullscreen| {
                     let state = fullscreen.state.borrow();
                     !state.closed && state.page.turn == turn
-                };
-                if report_decision && let Some(observe) = fullscreen.cover_decision.take() {
-                    observe();
-                }
-                permitted.then_some(fullscreen)
+                })
             };
             let attach = current.clone();
             PageCover::cover(
                 &tab,
                 false,
-                move || attach(true).is_some(),
+                move || attach().is_some(),
                 move |cover| {
-                    let Some(fullscreen) = current(false) else {
+                    let Some(fullscreen) = current() else {
                         if let Some(cover) = cover {
                             cover.uncover(false);
                         }
                         return;
                     };
                     if let Some(cover) = cover {
-                        fullscreen
-                            .state
-                            .borrow_mut()
-                            .page
-                            .pending_covers
-                            .push((owner, cover));
+                        fullscreen.state.borrow_mut().page.pending_covers.push(cover);
                     }
                     remaining.set(remaining.get() - 1);
                     if remaining.get() == 0 {
@@ -597,7 +580,7 @@ impl FullScreen {
                 page.settling = true;
                 page.ours = page.asked == if entering { 1 } else { -1 };
                 page.asked = 0;
-                for (_, cover) in &page.covers {
+                for cover in &page.covers {
                     cover.repicture();
                 }
             }

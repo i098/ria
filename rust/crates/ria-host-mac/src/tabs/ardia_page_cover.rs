@@ -72,6 +72,10 @@ define_class!(
 );
 
 impl PageCover {
+    pub(crate) fn owner(&self) -> Option<Retained<Tab>> {
+        self.ivars().tab.load()
+    }
+
     pub fn cover(
         tab: &Tab,
         disabled: bool,
