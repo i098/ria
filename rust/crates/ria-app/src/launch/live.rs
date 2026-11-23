@@ -86,7 +86,9 @@ mod mac {
         let url = format!("http://{}/", listener.local_addr().unwrap());
         fs::write(
             data.join("session.json"),
-            format!(r#"{{"version":11,"launchTab":{{"id":"fixture","profile":"","url":"{url}"}}}}"#),
+            format!(
+                r#"{{"version":11,"launchTab":{{"id":"fixture","profile":"","url":"{url}"}}}}"#
+            ),
         )
         .unwrap();
         let stdout = root.join("stdout");
