@@ -64,7 +64,8 @@ fn window_server_shows(window: &NSWindow) -> bool {
     // The Copy result is +1 and the array and its dictionaries are toll-free bridged.
     let options =
         CG_WINDOW_LIST_OPTION_ON_SCREEN_ABOVE_WINDOW | CG_WINDOW_LIST_OPTION_INCLUDING_WINDOW;
-    let Some(info) = (unsafe { Retained::from_raw(CGWindowListCopyWindowInfo(options, id)) }) else {
+    let Some(info) = (unsafe { Retained::from_raw(CGWindowListCopyWindowInfo(options, id)) })
+    else {
         return false;
     };
     let mut mine = None;

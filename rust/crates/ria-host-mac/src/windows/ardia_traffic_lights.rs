@@ -156,7 +156,11 @@ impl TrafficLights {
             return;
         };
         install_close_origin(frame.class());
-        install_after_layout(frame.class(), sel!(_positionSharingIndicator), update_indicator);
+        install_after_layout(
+            frame.class(),
+            sel!(_positionSharingIndicator),
+            update_indicator,
+        );
         let placement = self.placement.get();
         if placement.center.is_some() {
             install_titlebar_extension(frame.class());
@@ -181,13 +185,14 @@ impl TrafficLights {
             return;
         }
         let left = close.convertRect_toView(close.bounds(), Some(&frame));
-        let right = buttons
-            .iter()
-            .flatten()
-            .fold(left.origin.x + left.size.width, |right, button| {
-                let bounds = button.convertRect_toView(button.bounds(), Some(&frame));
-                right.max(bounds.origin.x + bounds.size.width)
-            });
+        let right =
+            buttons
+                .iter()
+                .flatten()
+                .fold(left.origin.x + left.size.width, |right, button| {
+                    let bounds = button.convertRect_toView(button.bounds(), Some(&frame));
+                    right.max(bounds.origin.x + bounds.size.width)
+                });
         let height = frame.bounds().size.height;
         let outside = right <= 0.
             || left.origin.x >= frame.bounds().size.width
@@ -403,7 +408,12 @@ fn update_sharing_window(pill: &NSWindow) {
         pill.setIgnoresMouseEvents(true);
     } else if let Some(saved) = tucked {
         unsafe {
-            ffi::objc_setAssociatedObject(object.cast_mut(), key, ptr::null_mut(), RETAIN_NONATOMIC);
+            ffi::objc_setAssociatedObject(
+                object.cast_mut(),
+                key,
+                ptr::null_mut(),
+                RETAIN_NONATOMIC,
+            );
         }
         pill.setAlphaValue(saved.objectForKey(alpha).unwrap().doubleValue());
         pill.setIgnoresMouseEvents(saved.objectForKey(ignores).unwrap().boolValue());
