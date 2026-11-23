@@ -10,6 +10,7 @@
 #![allow(unsafe_code)]
 
 mod layer;
+mod load;
 mod proof;
 
 use std::ffi::{CString, c_char, c_int};
@@ -77,7 +78,7 @@ fn main() {
     };
     let page_url = arg("--page").expect("--page <url> is required");
     let data_dir = arg("--data-dir").expect("--data-dir <dir> is required");
-    proof::set_config(Config { kind, page_url, started });
+    proof::set_config(Config { kind, page_url, started, load: arg("--load").and_then(|n| n.parse().ok()) });
 
     let framework = CString::new(framework_binary().to_str().expect("utf-8 path")).expect("no NUL");
     // SAFETY: loads the engine framework once, before any Objective-C class of it is used.

@@ -40,6 +40,7 @@ pub enum Mode {
 
 pub struct State {
     pub presses: u32,
+    pub shown: u32,
     pub hover: bool,
     pub phase: f32,
     pub dark: bool,
@@ -49,6 +50,8 @@ pub struct State {
 thread_local! {
     /// Last scroll offset the list reported; the proof reads it as "the wheel reached Rune".
     pub static SCROLL_Y: Cell<f32> = const { Cell::new(0.0) };
+    /// The one counter every layer reads (the proof's stand-in for the one `AppState`).
+    static SHARED: Cell<u32> = const { Cell::new(0) };
     static TRANSPARENT: Cell<bool> = const { Cell::new(false) };
     /// The appearance the view reported on the last tick, and the theme the last built tree used.
     static SYSTEM_DARK: Cell<bool> = const { Cell::new(true) };
@@ -69,7 +72,10 @@ fn view(s: &State, _: &mut Cx<State>) -> El {
         .radius(8.0)
         .center()
         .fill(if s.hover { tok::accent(0, s.dark) } else { t.control_off })
-        .on_press(|s: &mut State| s.presses += 1)
+        .on_press(|s: &mut State| {
+            s.presses += 1;
+            SHARED.with(|c| c.set(c.get() + 1));
+        })
         .on_hover_change(|s: &mut State, hovered, _tx| s.hover = hovered)
         .child(text(format!("Pressed {}", s.presses)).font(type_::TITLE).color(t.text));
     let field = text_input_row(&s.field);
@@ -82,7 +88,7 @@ fn view(s: &State, _: &mut Cx<State>) -> El {
     let title = text("Halyard layer").font(type_::TITLE).color(t.text);
     if transparent {
         // Proof C: a title and one button over the glass, nothing else.
-        return root.child(title).child(button).child(bar);
+        return root.child(title).child(button).child(text(format!("Shared {}", s.shown)).key("shared").font(type_::BODY).color(t.text)).child(bar);
     }
     root.fill(t.bg)
         .child(title)
@@ -98,6 +104,7 @@ fn text_input_row(edit: &TextEdit) -> El {
 
 fn poll(s: &mut State, t: f64, _tx: &mut Tx) -> bool {
     s.phase = (t * 3.0) as f32;
+    s.shown = SHARED.with(Cell::get);
     s.dark = SYSTEM_DARK.with(Cell::get);
     true
 }
@@ -105,7 +112,7 @@ fn poll(s: &mut State, t: f64, _tx: &mut Tx) -> bool {
 fn spec() -> AppSpec<State> {
     AppSpec {
         poll: Some(poll),
-        ..AppSpec::new("Halyard layer", (320.0, 560.0), || State { presses: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new("") }, view)
+        ..AppSpec::new("Halyard layer", (320.0, 560.0), || State { presses: 0, shown: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new("") }, view)
     }
 }
 
@@ -794,6 +801,7 @@ impl RuneView {
         let rt = host.runtime();
         Probe {
             presses: rt.state.presses,
+            shown: rt.state.shown,
             hover: rt.state.hover,
             field: rt.state.field.text.clone(),
             composing: rt.state.field.is_composing(),
@@ -810,6 +818,7 @@ impl RuneView {
 #[derive(Default, Debug, Clone)]
 pub struct Probe {
     pub presses: u32,
+    pub shown: u32,
     pub hover: bool,
     pub field: String,
     pub composing: bool,

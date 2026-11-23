@@ -66,7 +66,7 @@ pub fn emit(line: &str) {
     let _ = out.flush();
 }
 
-fn json(s: &str) -> String {
+pub(crate) fn json(s: &str) -> String {
     serde_json::to_string(s).unwrap_or_default()
 }
 
@@ -111,6 +111,7 @@ struct Ctx {
     host_view: Retained<NSView>,
     tab_view: Retained<NSView>,
     rune: Option<Retained<RuneView>>,
+    rune2: Option<Retained<RuneView>>,
     glass: Option<Retained<NSView>>,
     step: Step,
     until: Instant,
@@ -132,7 +133,7 @@ thread_local! {
     static CTX: RefCell<Option<Ctx>> = const { RefCell::new(None) };
 }
 
-fn t_ms(since: Instant) -> f64 {
+pub(crate) fn t_ms(since: Instant) -> f64 {
     since.elapsed().as_secs_f64() * 1000.0
 }
 
@@ -227,6 +228,7 @@ pub fn begin(kind: Kind, page_url: &str, started: Instant, engine: Retained<AnyO
     let bounds = host_view.bounds();
     let grow = NSAutoresizingMaskOptions::ViewWidthSizable | NSAutoresizingMaskOptions::ViewHeightSizable;
     let mut rune = None;
+    let mut rune2 = None;
     let mut glass = None;
     match kind {
         Kind::A | Kind::C => tab_view.setFrame(bounds),
@@ -258,7 +260,13 @@ pub fn begin(kind: Kind, page_url: &str, started: Instant, engine: Retained<AnyO
             let view = RuneView::new(mtm, Mode::Above, frame);
             view.setAutoresizingMask(margins);
             host_view.addSubview_positioned_relativeTo(&view, NSWindowOrderingMode::Above, Some(&g));
+            // The second layer: its own Rune runtime, bottom left, reading the same counter.
+            let frame2 = NSRect::new(NSPoint::new(24.0, bounds.size.height - 160.0), NSSize::new(300.0, 120.0));
+            let view2 = RuneView::new(mtm, Mode::Above, frame2);
+            view2.setAutoresizingMask(NSAutoresizingMaskOptions::ViewMaxXMargin | NSAutoresizingMaskOptions::ViewMinYMargin);
+            host_view.addSubview_positioned_relativeTo(&view2, NSWindowOrderingMode::Above, Some(&view));
             glass = Some(g);
+            rune2 = Some(view2);
             rune = Some(view);
         }
     }
@@ -282,6 +290,7 @@ pub fn begin(kind: Kind, page_url: &str, started: Instant, engine: Retained<AnyO
         host_view,
         tab_view,
         rune,
+        rune2,
         glass,
         step: Step::WaitLoad,
         until: Instant::now(),
@@ -306,6 +315,7 @@ pub struct Config {
     pub kind: Kind,
     pub page_url: String,
     pub started: Instant,
+    pub load: Option<u32>,
 }
 
 thread_local! {
@@ -339,11 +349,15 @@ pub fn engine_started() {
 }
 
 fn go(engine: Retained<AnyObject>, profile: Retained<AnyObject>) {
-    let (kind, url, started) = CONFIG.with(|c| {
+    let (kind, url, started, load) = CONFIG.with(|c| {
         let c = c.borrow();
         let c = c.as_ref().expect("config set before the engine runs");
-        (c.kind, c.page_url.clone(), c.started)
+        (c.kind, c.page_url.clone(), c.started, c.load)
     });
+    if let Some(layers) = load {
+        crate::load::begin(layers, &url, started, engine, profile);
+        return;
+    }
     begin(kind, &url, started, engine, profile);
 }
 
@@ -409,7 +423,8 @@ fn on_timer() {
 }
 
 /// Called by the Rune view on each display-link tick, before it draws.
-pub fn on_tick(_view: &RuneView) {
+pub fn on_tick(view: &RuneView) {
+    crate::load::on_tick(view);
     CTX.with(|c| {
         let Ok(mut guard) = c.try_borrow_mut() else { return };
         if let Some(ctx) = guard.as_mut() {
@@ -509,6 +524,10 @@ fn scroll(screen: NSPoint, dy: i32) -> Option<Retained<NSEvent>> {
 }
 
 impl Ctx {
+    fn base_frame_width(&self) -> f64 {
+        self.host_view.bounds().size.width
+    }
+
     fn rune(&self) -> &RuneView {
         self.rune.as_ref().expect("rune view")
     }
@@ -1022,15 +1041,41 @@ impl Ctx {
         } else if self.sub == 1 && self.ready() {
             let p = self.rune().probe();
             self.check("above_click_reaches_rune", p.presses == 1, &format!("button press count={}", p.presses));
-            self.js("JSON.stringify({clicks:window.__clicks||0})");
-            self.sub = 2;
-        } else if self.sub == 2 {
-            if let Some(v) = self.js_result() {
-                let clicks = v["clicks"].as_u64().unwrap_or(99);
-                self.check("above_click_not_in_page", clicks == 0, &format!("page mousedown count={clicks}"));
-                self.sub = 0;
-                self.step = Step::AxSelfCheck;
+            if let Some(v2) = self.rune2.clone() {
+                let (a, b) = (self.rune().probe().shown, v2.probe().shown);
+                self.check("two_layers_share_counter", a == 1 && b == 1 && v2.probe().presses == 0, &format!("layer 1 shows {a}, layer 2 shows {b}, layer 2 own presses {} after one click in layer 1", v2.probe().presses));
+                let kids: Option<Retained<AnyObject>> = unsafe { msg_send![&*self.host_view, accessibilityChildren] };
+                let n: usize = kids.as_ref().map_or(0, |k| unsafe { msg_send![&**k, count] });
+                let names: Vec<String> = (0..n)
+                    .map(|i| {
+                        let o: Retained<AnyObject> = unsafe { msg_send![kids.as_ref().expect("kids"), objectAtIndex: i] };
+                        format!("{}", o.class().name().to_string_lossy())
+                    })
+                    .collect();
+                let order = {
+                    let subs = self.host_view.subviews();
+                    let idx = |v: &NSView| subs.iter().position(|s| std::ptr::eq(&*s as *const NSView, v as *const NSView));
+                    (idx(&self.tab_view), idx(&self.rune()), idx(&v2))
+                };
+                self.check("ax_window_children", names.iter().filter(|c| *c == "AccessKitNode").count() == 2 && matches!(order, (Some(p), Some(r1), Some(r2)) if p < r1 && r1 < r2), &format!("host view has {n} accessibility children {names:?}; subview order page/layer1/layer2 = {order:?}"));
             }
+            self.sub = 2;
+            self.until = Instant::now() + Duration::from_millis(500);
+        } else if self.sub == 2 && self.ready() {
+            let title = TAB_TITLE.with(|c| c.borrow().as_ref().map(|t| t.1.clone())).unwrap_or_default();
+            self.check("above_click_not_in_page", title == PAGE_TITLE, &format!("page title after the click on the layer: {title:?} (the page sets '... clicked' on a mousedown)"));
+            // Control: the same hit test finds the Rune layer over the button and the page view over a bare part of the page.
+            let hit = |c: &Self, at: NSPoint| -> String {
+                let local = c.host_view.convertPoint_fromView(at, None);
+                let sup = unsafe { c.host_view.superview() }.expect("host view has a superview");
+                let v = c.host_view.hitTest(c.host_view.convertPoint_toView(local, Some(&sup)));
+                v.map(|v| v.class().name().to_string_lossy().into_owned()).unwrap_or_else(|| "nil".into())
+            };
+            let on_button = self.center("inc").map(|c| hit(self, self.to_window(c))).unwrap_or_default();
+            let on_page = hit(self, NSPoint::new(self.base_frame_width() * 0.5 + 60.0, 160.0));
+            self.check("hit_test_layer_over_page", on_button.contains("HalyardRuneView") && !on_page.contains("HalyardRuneView"), &format!("over the button: {on_button}; over a bare part of the page: {on_page}"));
+            self.sub = 0;
+            self.step = Step::AxSelfCheck;
         }
     }
 
