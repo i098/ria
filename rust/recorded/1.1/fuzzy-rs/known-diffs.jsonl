@@ -1,0 +1,2 @@
+{"fn":"fuzzyScore","args":[{"$utf16":[55296]},"x"],"actual":{"error":"argument 1 of fuzzyScore has a lone surrogate, which a Rust String cannot hold"},"reason":"napi bridge: a Rust String cannot hold a lone surrogate; JS takes it. Not reachable in a pure Rust app"}
+{"fn":"fuzzyScore","args":["x",{"$utf16":[56320,120]}],"actual":{"error":"argument 2 of fuzzyScore has a lone surrogate, which a Rust String cannot hold"},"reason":"napi bridge: a Rust String cannot hold a lone surrogate; JS takes it. Not reachable in a pure Rust app"}
