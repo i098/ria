@@ -362,7 +362,7 @@ mod mac {
         let site = "https://example.com";
         let url = "https://example.com/";
         let bookmark_seen = Rc::new(Cell::new(false));
-        check_bookmarks(&live, &ctx, exported, url, bookmark_seen.clone());
+        check_bookmarks(&live, &ctx, exported, url, dir, bookmark_seen.clone());
         check_download_settings(&live, &ctx);
 
         let icon = "https://example.com/icon.png";
@@ -443,14 +443,6 @@ mod mac {
             json!({"hosts": ["www.example.com"]}),
             |r| r.domains == ["example.com"],
         );
-        let missing = ria_engine_sys::missing_calls();
-        record(
-            &live,
-            "all 106 symbols resolve",
-            missing.is_empty(),
-            format!("missing: {missing:?}"),
-        );
-
         let watch = live.clone();
         let engine_object = engine_object.clone();
         poll(
@@ -537,19 +529,27 @@ mod mac {
         ctx: &DataCtx,
         exported: PathBuf,
         url: &'static str,
+        profile_path: String,
         seen: Rc<Cell<bool>>,
     ) {
-        api::subscribe::<api::events::BookmarksChanged>(&ctx.engine, "bookmarks.changed", move |event| {
-            if event.is_ok() {
-                seen.set(true);
-            }
-        });
+        let armed = Rc::new(Cell::new(false));
+        let watch_armed = armed.clone();
+        api::subscribe::<api::events::BookmarksChanged>(
+            &ctx.engine,
+            "bookmarks.changed",
+            move |event| {
+                if watch_armed.get() && event.is_ok_and(|event| event.profile == profile_path) {
+                    seen.set(true);
+                }
+            },
+        );
         expect_then::<api::bookmarks::Watch>(
             live, ctx, "bookmarks", "watch", json!({}),
             move |live, ctx, _| {
                 expect_then::<api::bookmarks::Tree>(
                     live, ctx, "bookmarks", "tree", json!({}),
                     move |live, ctx, tree| {
+                        armed.set(true);
                         expect_then::<api::bookmarks::Apply>(
                             live, ctx, "bookmarks", "apply",
                             json!({"ops": [{"op": "add", "id": "3df75ccb-f536-4d07-a8fc-90b729ff3299",

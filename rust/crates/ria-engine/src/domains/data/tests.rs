@@ -107,6 +107,7 @@ type PrivateLoad = Box<dyn FnOnce(Option<Profile>, Option<String>)>;
 
 #[derive(Default)]
 struct FakeCore {
+    default: Option<Profile>,
     defer_base_load: bool,
     pending_base: RefCell<Option<BaseLoad>>,
     pending_private: RefCell<Option<PrivateLoad>>,
@@ -115,7 +116,7 @@ struct FakeCore {
 
 impl CoreEngine for FakeCore {
     fn default_profile(&self) -> Option<Profile> {
-        None
+        self.default.clone()
     }
     fn load_profile(&self, directory: &str, done: BaseLoad) {
         if self.defer_base_load {
@@ -461,6 +462,37 @@ fn bookmark_dispatch_rejects_an_unloaded_profile_without_calling_the_engine() {
         )))
     );
     CALLS.with(|calls| assert!(calls.borrow().is_empty()));
+}
+
+#[test]
+fn regular_profile_registration_notifies_hooks_once_before_lookup_returns() {
+    use super::host::ProfileLoadHooks;
+
+    #[derive(Default)]
+    struct Hooks(RefCell<Vec<String>>);
+    impl ProfileLoadHooks for Hooks {
+        fn profile_loaded(&self, name: &str) {
+            self.0.borrow_mut().push(name.into());
+        }
+    }
+
+    let core = Rc::new(FakeCore {
+        default: Some(Rc::new(FakeProfile { directory: "Default".into(), private: false })),
+        ..FakeCore::default()
+    });
+    let registry = ProfileRegistry::new(core, Rc::new(NoEvents));
+    let hooks = Rc::new(Hooks::default());
+    registry.set_load_hooks(hooks.clone());
+    for (name, expected) in [("", &[""][..]), ("work", &["", "work"][..])] {
+        for _ in 0..2 {
+            let hooks = hooks.clone();
+            registry.with_profile(name, move |profile| {
+                assert!(profile.is_some());
+                assert_eq!(hooks.0.borrow().as_slice(), expected);
+            });
+        }
+    }
+    assert_eq!(hooks.0.borrow().as_slice(), ["", "work"]);
 }
 
 #[test]

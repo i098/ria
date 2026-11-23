@@ -265,6 +265,9 @@ impl ContentBlocker {
         if !host.is_started() {
             return self.finish(&op, None, Some("unavailable".into()));
         }
+        if host.now() >= op.deadline {
+            return self.finish(&op, None, Some("the call timed out".into()));
+        }
         self.forget_if_gone(&profile);
         if !self.is_loaded(&profile) {
             if !op.loads_profile {
@@ -286,8 +289,6 @@ impl ContentBlocker {
             return self.finish(&op, None, Some("not loaded".into()));
         };
         let left = op.deadline.saturating_sub(host.now());
-        let left_ms = u64::try_from(left.as_millis()).unwrap_or(u64::MAX);
-        let script = attempt_script(op.fail_next.get(), left_ms, &op.expression);
         let attempt = op.attempt.get() + 1;
         op.attempt.set(attempt);
         let (blocker, timed_op, timed_page) = (self.clone(), op.clone(), page.clone());
@@ -309,8 +310,16 @@ impl ContentBlocker {
             }),
         );
         let (blocker, run_page) = (self.clone(), page.clone());
-        page.run(
-            script,
+        let script_op = op.clone();
+        page.run_when_ready(
+            Box::new(move || {
+                let left = script_op.deadline.checked_sub(host.now())?;
+                if left.is_zero() {
+                    return None;
+                }
+                let ms = u64::try_from(left.as_millis()).unwrap_or(u64::MAX);
+                Some(attempt_script(script_op.fail_next.get(), ms, &script_op.expression))
+            }),
             Box::new(move |value, error| {
                 if op.attempt.get() != attempt {
                     return;
@@ -451,6 +460,28 @@ mod tests {
         host.advance(OP_TIME);
         tab.answer(r#"{"error":"getLists: no reply"}"#);
         assert_eq!(got.take(), vec![(None, Some("getLists: no reply".into()))]);
+    }
+
+    #[test]
+    fn expired_operations_do_not_evaluate_after_queue_or_page_waits() {
+        for load_before_deadline in [false, true] {
+            let (blocker, host, scripts, _resources) = setup();
+            let got = Answers::default();
+            blocker.call("", "1".into(), got.done(), true);
+            blocker.call("", "2".into(), got.done(), true);
+            let tab = scripts.tab(0);
+            if load_before_deadline {
+                tab.load();
+                host.fire(OP_TIME + Duration::from_secs(2));
+            } else {
+                host.advance(OP_TIME);
+                tab.load();
+            }
+            host.run_posted();
+            assert_eq!(tab.scripts.borrow().len(), usize::from(load_before_deadline));
+            let timeout = (None, Some("the call timed out".into()));
+            assert_eq!(got.take(), vec![timeout.clone(), timeout]);
+        }
     }
 
     #[test]

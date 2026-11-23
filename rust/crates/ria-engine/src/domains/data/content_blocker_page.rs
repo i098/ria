@@ -17,6 +17,7 @@ use super::host::Profile;
 
 /// The answer of a script: a value (`None` for `null`) or an error text.
 pub type Done = Box<dyn FnOnce(Option<Value>, Option<String>)>;
+type ReadyScript = Box<dyn FnOnce() -> Option<String>>;
 
 /// `ArdiaCoreTab`, the part that a hidden extension page uses.
 pub trait ExtensionTab {
@@ -101,7 +102,7 @@ pub struct Page {
     origin: String,
     host: Rc<dyn BlockerHost>,
     dead: Cell<bool>,
-    calls: RefCell<VecDeque<(String, Done)>>,
+    calls: RefCell<VecDeque<(ReadyScript, Done)>>,
     inflight: RefCell<Option<Done>>,
     started: Cell<bool>,
     loaded: Cell<bool>,
@@ -138,6 +139,10 @@ impl Page {
     }
 
     pub fn run(self: &Rc<Self>, script: String, done: Done) {
+        self.run_when_ready(Box::new(move || Some(script)), done);
+    }
+
+    pub(super) fn run_when_ready(self: &Rc<Self>, script: ReadyScript, done: Done) {
         if self.dead.get() {
             return done(None, Some("closed".into()));
         }
@@ -161,6 +166,11 @@ impl Page {
             return self.left_own_page();
         }
         let Some((script, done)) = self.calls.borrow_mut().pop_front() else {
+            return;
+        };
+        let Some(script) = script() else {
+            done(None, Some("the call timed out".into()));
+            self.next();
             return;
         };
         *self.inflight.borrow_mut() = Some(done);

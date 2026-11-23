@@ -192,8 +192,9 @@ mod tests {
         let url = r#"{"url":"https://example.com/list.txt"}"#;
         for (call, args, script_reply, expected) in [
             (
-                "addList", url, r#"{"value":{"id":"custom"}}"#,
-                Ok(r#"{"id":"custom"}"#.into()),
+                "addList", url,
+                r#"{"value":{"id":"custom","custom":true,"existed":false,"filters":2,"failed":false}}"#,
+                Ok(r#"{"custom":true,"existed":false,"failed":false,"filters":2,"id":"custom"}"#.to_owned()),
             ),
             (
                 "addList", url, r#"{"value":null}"#,
@@ -213,7 +214,17 @@ mod tests {
             let tab = scripts.tab(0);
             tab.load();
             tab.answer(script_reply);
-            assert_eq!(reply.take(), Some(expected), "{call}: {script_reply}");
+            let actual = reply.take().expect("the call settled");
+            if call == "addList"
+                && let (Ok(actual), Ok(expected)) = (&actual, &expected)
+            {
+                use crate::types::AddedFilterList;
+                let actual: AddedFilterList = serde_json::from_str(actual).unwrap();
+                let expected: AddedFilterList = serde_json::from_str(expected).unwrap();
+                assert_eq!(actual, expected);
+            } else {
+                assert_eq!(actual, expected, "{call}: {script_reply}");
+            }
         }
     }
 

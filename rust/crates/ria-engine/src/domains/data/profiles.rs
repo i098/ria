@@ -127,6 +127,10 @@ impl ProfileRegistry {
             self.0
                 .events
                 .emit("profiles.loaded", json!({ "profile": name }));
+            let hooks = self.0.hooks.borrow().clone();
+            if let Some(hooks) = hooks {
+                hooks.profile_loaded(name);
+            }
         }
     }
 
@@ -319,10 +323,6 @@ impl ProfileRegistry {
         };
         if let Some(profile) = &profile {
             self.remember(name, profile.clone());
-            let hooks = self.0.hooks.borrow().clone();
-            if let Some(hooks) = hooks {
-                hooks.profile_loaded(name);
-            }
         }
         for waiter in pending {
             waiter(profile.clone());

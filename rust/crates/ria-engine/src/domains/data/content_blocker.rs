@@ -75,7 +75,6 @@ pub(super) struct State {
     pub(super) fail_next_message: bool,
     delay_next_load: Duration,
     default_settled: bool,
-    launched: bool,
     settled_waiters: Vec<Box<dyn FnOnce()>>,
     extension_path: Option<Option<PathBuf>>,
 }
@@ -357,7 +356,7 @@ impl ContentBlocker {
     }
 
     fn launching(&self) -> bool {
-        !self.0.state.borrow().launched
+        !self.0.state.borrow().default_settled
     }
 
     /// `StartPreparing`: finds the bundled extension once and deletes the copies of old builds.
@@ -472,7 +471,6 @@ impl ContentBlocker {
         let waiters = {
             let mut state = self.0.state.borrow_mut();
             state.default_settled = true;
-            state.launched = true;
             std::mem::take(&mut state.settled_waiters)
         };
         for waiter in waiters {
