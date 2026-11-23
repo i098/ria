@@ -19,6 +19,15 @@ pub mod ardia_web_view_navigation;
 pub mod ardia_web_view_page_commands;
 pub mod ardia_web_view_page_messages;
 pub mod ardia_web_view_painting;
+pub mod ardia_web_view_peek;
+pub mod ardia_web_view_picture_in_picture;
+pub mod ardia_web_view_recording;
+pub mod ardia_web_view_reveal_input;
+pub mod ardia_web_view_reveals;
+pub mod ardia_web_view_site;
+pub mod ardia_web_view_site_data;
+pub mod ardia_web_view_stand_in;
+pub mod ardia_web_view_tab;
 
 fn superview(view: &objc2_app_kit::NSView) -> Option<objc2::rc::Retained<objc2_app_kit::NSView>> {
     // SAFETY: The live AppKit hierarchy is confined to the main thread.
