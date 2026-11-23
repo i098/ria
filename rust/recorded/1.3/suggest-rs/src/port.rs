@@ -398,8 +398,13 @@ pub fn suggest_typed(
         return Err(e);
     }
     let source = source_of(&source);
-    let mut pool =
-        Pool::new(&source.history, &source.bookmarks).map_err(|e| format!("TypeError: {e}"))?;
+    // Only a text that reads the source builds the pool; the other paths return before it.
+    let mut pool = if raws.iter().any(|raw| reads_source(raw, &options)) {
+        Pool::new(&source.history, &source.bookmarks)
+    } else {
+        Pool::new(&[], &[])
+    }
+    .map_err(|e| format!("TypeError: {e}"))?;
     let mut narrowing = Narrowing::default();
     raws.iter()
         .map(|raw| {

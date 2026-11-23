@@ -140,7 +140,7 @@ fn suggest_reply(body: &Json) -> SuggestReply<'_> {
         _ => Vec::new(),
     };
     let types = match body.get(4).and_then(|x| x.get("google:suggesttype")) {
-        Some(Json::Array(t)) => t.iter().map(js_string).collect(),
+        Some(Json::Array(t)) => t.iter().take(items.len()).map(js_string).collect(),
         _ => Vec::new(),
     };
     SuggestReply {
@@ -162,21 +162,38 @@ fn strings(items: &[Json]) -> Vec<Option<&str>> {
 }
 
 /// `String(value)` as far as comparing it with a suggest type needs: a number prints as some
-/// digits, which never equal a type name.
+/// digits, which never equal a type name. An array joins its items with commas, a `null` item as
+/// nothing; nesting uses a stack, because a reply can nest arrays to any depth.
 fn js_string(value: &Json) -> String {
+    let Json::Array(top) = value else {
+        return js_scalar(value);
+    };
+    let mut out = String::new();
+    let mut stack = vec![(top.iter(), true)];
+    while let Some((items, first)) = stack.last_mut() {
+        let Some(item) = items.next() else {
+            stack.pop();
+            continue;
+        };
+        if !std::mem::take(first) {
+            out.push(',');
+        }
+        match item {
+            Json::Array(inner) => stack.push((inner.iter(), true)),
+            Json::Null => {}
+            scalar => out.push_str(&js_scalar(scalar)),
+        }
+    }
+    out
+}
+
+fn js_scalar(value: &Json) -> String {
     match value {
         Json::Null => "null".into(),
         Json::Bool(b) => b.to_string(),
         Json::Number(n) => n.to_string(),
         Json::String(s) => s.clone(),
-        Json::Array(items) => items
-            .iter()
-            .map(|v| match v {
-                Json::Null => String::new(),
-                v => js_string(v),
-            })
-            .collect::<Vec<_>>()
-            .join(","),
+        Json::Array(_) => String::new(),
         Json::Object(_) => "[object Object]".into(),
     }
 }
@@ -225,5 +242,16 @@ mod tests {
         assert_eq!(got.sites.len(), 1);
         assert_eq!(js_string(&Json::Object(vec![])), "[object Object]");
         assert_eq!(reply_suggestions("{"), RemoteSuggestions::default());
+    }
+
+    #[test]
+    fn deeply_nested_types_do_not_overflow_the_stack() {
+        let n = 200_000;
+        let reply = format!(
+            r#"["a",["ab"],[],[],{{"google:suggesttype":[{}"QUERY"{}]}}]"#,
+            "[".repeat(n),
+            "]".repeat(n)
+        );
+        assert_eq!(reply_suggestions(&reply).queries, ["ab"]);
     }
 }
