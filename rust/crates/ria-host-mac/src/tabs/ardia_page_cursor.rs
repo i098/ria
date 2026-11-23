@@ -37,7 +37,6 @@ struct Watch {
     last_page: RefCell<Option<Weak<NSCursor>>>,
     visibility: RefCell<Option<(Weak<NSCursor>, bool)>>,
     stats: RefCell<CursorStats>,
-    background: bool,
     is_surface: Box<WindowQuery>,
     is_hidden_page: Box<WindowQuery>,
     surface_cursor: Box<CursorQuery>,
@@ -57,7 +56,6 @@ pub struct PageCursor {
 impl PageCursor {
     pub fn install(
         _mtm: MainThreadMarker,
-        background: bool,
         is_surface: impl Fn(&NSWindow) -> bool + 'static,
         is_hidden_page: impl Fn(&NSWindow) -> bool + 'static,
         surface_cursor: impl Fn(&NSView) -> SurfaceCursor + 'static,
@@ -71,7 +69,6 @@ impl PageCursor {
             last_page: RefCell::default(),
             visibility: RefCell::default(),
             stats: RefCell::default(),
-            background,
             is_surface: Box::new(is_surface),
             is_hidden_page: Box::new(is_hidden_page),
             surface_cursor: Box::new(surface_cursor),
@@ -157,17 +154,10 @@ impl Watch {
         else {
             return;
         };
-        let pointer = NSEvent::mouseLocation();
-        if !self.background
-            && NSWindow::windowNumberAtPoint_belowWindowWithWindowNumber(pointer, 0, mtm)
-                != window.windowNumber()
-        {
-            return;
-        }
         let Some(content) = window.contentView() else {
             return;
         };
-        let Some(hit) = view_at(&window, window.convertPointFromScreen(pointer)) else {
+        let Some(hit) = view_under_pointer(&window, mtm) else {
             return;
         };
         if enclosing_page(&hit) || !self.is_surface(&window, &hit) {
@@ -272,7 +262,14 @@ impl Watch {
     }
 }
 
-fn view_at(window: &NSWindow, point: NSPoint) -> Option<Retained<NSView>> {
+fn view_under_pointer(window: &NSWindow, mtm: MainThreadMarker) -> Option<Retained<NSView>> {
+    let pointer = NSEvent::mouseLocation();
+    if NSWindow::windowNumberAtPoint_belowWindowWithWindowNumber(pointer, 0, mtm)
+        != window.windowNumber()
+    {
+        return None;
+    }
+    let point = window.convertPointFromScreen(pointer);
     let root = window.contentView()?;
     let parent = super::superview(&root)?;
     root.hitTest(parent.convertPoint_fromView(point, None))
@@ -413,10 +410,7 @@ unsafe extern "C-unwind" fn should_change_cursor(page: &NSView, sel: Sel) -> Boo
     let Some(window) = page.window() else {
         return Bool::YES;
     };
-    let Some(hit) = view_at(
-        &window,
-        window.convertPointFromScreen(NSEvent::mouseLocation()),
-    ) else {
+    let Some(hit) = MainThreadMarker::new().and_then(|mtm| view_under_pointer(&window, mtm)) else {
         return Bool::YES;
     };
     if hit.isDescendantOf(page) || !active.is_surface(&window, &hit) {

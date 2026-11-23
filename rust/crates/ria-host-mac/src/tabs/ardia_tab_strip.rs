@@ -108,9 +108,16 @@ impl TabStrips {
         }
     }
 
-    fn snapshot(&mut self, scope: &StripWindow<'_>, registry: &mut TabRegistry) -> StripState {
-        let window = scope.window.window().windowNumber();
+    fn snapshot(
+        &mut self,
+        scope: &StripWindow<'_>,
+        registry: &mut TabRegistry,
+    ) -> Option<StripState> {
         let id = scope.window.chrome_window_id_for_profile(scope.profile);
+        if id < 0 {
+            return None;
+        }
+        let window = scope.window.window().windowNumber();
         let active = self.active(id);
         let groups = self.groups.get(&id);
         let rows = scope.window.tabs_for_profile(scope.profile);
@@ -132,13 +139,11 @@ impl TabStrips {
                 group: groups.and_then(|group| group.tabs.get(&tab.tab_id()).cloned()),
             })
             .collect();
-        if id >= 0 {
-            self.known
-                .entry(window)
-                .or_default()
-                .insert(id, scope.profile_name.into());
-        }
-        StripState {
+        self.known
+            .entry(window)
+            .or_default()
+            .insert(id, scope.profile_name.into());
+        Some(StripState {
             strip: id.into(),
             window: Number(window as f64),
             app_window: scope.app_window.map(str::to_owned),
@@ -148,7 +153,7 @@ impl TabStrips {
                 .and_then(|group| group.active_picked_on_close.then_some(true)),
             groups: Some(groups.map_or_else(Vec::new, |group| group.groups.clone())),
             closed: None,
-        }
+        })
     }
 
     fn send(
@@ -184,7 +189,7 @@ impl TabStrips {
             return None;
         }
         let cause = cause.or_else(|| scope.host_changes.then_some(Number(-1.0)));
-        let strip = self.snapshot(scope, registry);
+        let strip = self.snapshot(scope, registry)?;
         if cause.is_none_or(|cause| cause == Number(-1.0))
             && self.sent.get(&(strip.strip.0 as i32)) == Some(&strip)
         {
@@ -222,7 +227,9 @@ impl TabStrips {
     ) -> TabStripTransaction {
         let mut strips = Vec::new();
         for scope in scopes.iter().filter(|scope| !scope.standalone) {
-            let strip = self.snapshot(scope, registry);
+            let Some(strip) = self.snapshot(scope, registry) else {
+                continue;
+            };
             self.sent.insert(strip.strip.0 as i32, strip.clone());
             strips.push(strip);
         }
@@ -246,6 +253,9 @@ impl TabStrips {
             | TabStripCommand::Arrange { strip, .. }
             | TabStripCommand::Group { strip, .. } => strip.0 as i32,
         };
+        if strip < 0 {
+            return StripCommandResult::Done(self.send(Some(number), vec![], true));
+        }
         let Some(scope) = scopes
             .iter()
             .rfind(|scope| scope.window.chrome_window_id_for_profile(scope.profile) == strip)
@@ -317,7 +327,9 @@ impl TabStrips {
         registry: &mut TabRegistry,
         rejected: bool,
     ) -> TabStripTransaction {
-        let snapshot = self.snapshot(scope, registry);
+        let Some(snapshot) = self.snapshot(scope, registry) else {
+            return self.send(Some(number), vec![], true);
+        };
         self.send(Some(number), vec![snapshot], rejected)
     }
 }

@@ -276,17 +276,34 @@ mod mac {
             .is_some_and(|found| std::ptr::eq(&*found, &*tab));
         registry.expect_first_show_focus(&tab, true);
         pass &= registry.take_first_show_focus(&tab) && !registry.take_first_show_focus(&tab);
-        registry.hold_until_hosted(&tab, "test".into(), json!({"id":"held"}));
-        pass &= registry.release_held_events(&tab)
-            == [("test".into(), json!({"id":"held", "tabId":"fixture"}))];
-
+        let host = window.host_view();
+        host.addSubview(&view);
+        let host_window = window.window();
+        pass &= view
+            .window()
+            .is_some_and(|attached| std::ptr::eq(&*attached, &*host_window));
         let mut parking = TabParking::new(mtm);
+        registry.set_view(&tab, None);
         parking.park("fixture".into(), tab.clone());
+        pass &= view.window().is_none() && registry.app_tab_id(&tab).is_none();
         pass &= parking
             .parked_tab("fixture")
-            .is_some_and(|found| std::ptr::eq(found, &*tab));
-        pass &= parking.unpark("fixture").is_some();
-        window.host_view().addSubview(&view);
+            .is_some_and(|parked| std::ptr::eq(parked, &*tab));
+        registry.hold_until_hosted(&tab, "test".into(), json!({"id":"held"}));
+        pass &= registry.release_held_events(&tab).is_empty();
+        let Some(restored) = parking.unpark("fixture") else {
+            return shutdown(&window, &tab, false);
+        };
+        let restored_view = restored.view();
+        pass &= std::ptr::eq(&*restored, &*tab) && std::ptr::eq(&*restored_view, &*view);
+        host.addSubview(&restored_view);
+        pass &= restored_view
+            .window()
+            .is_some_and(|attached| std::ptr::eq(&*attached, &*host_window));
+        registry.set_view(&restored, Some((&restored_view, "fixture".into())));
+        pass &= registry.release_held_events(&restored)
+            == [("test".into(), json!({"id":"held", "tabId":"fixture"}))];
+        pass &= registry.release_held_events(&restored).is_empty();
 
         let urls = ["about:blank#dismissed".into(), "about:blank#adopt".into()];
         parking.hold_link_tabs(&urls, "Default", Instant::now(), |url| {
@@ -298,9 +315,9 @@ mod mac {
             pass &= !parking.take_dismissed_link_mark("link:00");
             pass &= parking.take_dismissed_link_mark("link:0");
             let route = parking.route_link_tabs(&urls);
-            pass &= route.profile == Some("Default")
-                && route.dismissed == [0]
-                && route.adopt_ids == [None, Some("link:1".into())];
+            pass &= serde_json::to_value(route).unwrap()
+                == json!({"profile": "Default", "dismissed": [0], "adoptIds": [null, "link:1"]});
+            pass &= serde_json::to_value(parking.route_link_tabs(&urls)).unwrap() == json!({});
             pass &= parking.park_link_tab("link:+1", "alias").is_none();
             pass &= parking.park_link_tab("link:01", "alias").is_none();
             if let Some(adopted) = parking.park_link_tab("link:1", "adopted") {
@@ -312,7 +329,7 @@ mod mac {
             pass = false;
         }
 
-        check_strip_events(window, tab, profile, registry, pass);
+        check_strip_events(window, restored, profile, registry, pass);
     }
 
     fn check_strip_events(

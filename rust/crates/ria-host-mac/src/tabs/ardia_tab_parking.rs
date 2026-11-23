@@ -10,6 +10,7 @@ use objc2::rc::{Retained, Weak};
 use objc2::runtime::AnyObject;
 use objc2_app_kit::NSView;
 use objc2_foundation::NSRect;
+use ria_engine::types::{LinkRoute, Number};
 
 use crate::core::bindings::{Adoption, Profile, Tab, Window};
 
@@ -32,12 +33,6 @@ struct Launch {
 struct Link {
     url: Option<String>,
     tab: Retained<Tab>,
-}
-
-pub struct LinkRoute<'a> {
-    pub profile: Option<&'a str>,
-    pub adopt_ids: Vec<Option<String>>,
-    pub dismissed: Vec<usize>,
 }
 
 pub struct TabParking {
@@ -321,14 +316,14 @@ impl TabParking {
         mark_index(mark).is_some_and(|index| self.dismissed_marks.remove(&index))
     }
 
-    pub fn route_link_tabs(&mut self, urls: &[String]) -> LinkRoute<'_> {
+    pub fn route_link_tabs(&mut self, urls: &[String]) -> LinkRoute {
         let mut dismissed = Vec::new();
         let mut any = false;
         let mut adopt_ids = Vec::with_capacity(urls.len());
         for (index, url) in urls.iter().enumerate() {
             if let Some(at) = self.dismissed_links.iter().position(|item| item == url) {
                 self.dismissed_links.remove(at);
-                dismissed.push(index);
+                dismissed.push(Number(index as f64));
                 adopt_ids.push(None);
             } else if let Some((mark, link)) = self
                 .links
@@ -342,13 +337,10 @@ impl TabParking {
                 adopt_ids.push(None);
             }
         }
-        if !any {
-            adopt_ids.clear();
-        }
         LinkRoute {
-            profile: any.then_some(self.link_profile.as_str()),
-            adopt_ids,
-            dismissed,
+            profile: any.then(|| self.link_profile.clone()),
+            adopt_ids: any.then_some(adopt_ids),
+            dismissed: (any || !dismissed.is_empty()).then_some(dismissed),
         }
     }
 
