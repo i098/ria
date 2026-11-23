@@ -1,0 +1,12 @@
+[package]
+name = "ria-engine"
+version = "0.0.0"
+description = "Call layer over the engine: action queue, settled cell, timeouts, private-profile and secret rules."
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+ria-engine-sys = { path = "../ria-engine-sys" }
+serde_json = "1"
+zeroize = "1"

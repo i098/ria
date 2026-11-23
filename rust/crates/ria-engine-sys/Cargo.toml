@@ -1,0 +1,26 @@
+[package]
+name = "ria-engine-sys"
+version = "0.0.0"
+description = "Raw symbol loader for the 106 exported ac_* calls of the prebuilt Ardia engine."
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+libc = "0.2"
+
+# Check L (`cargo test -p ria-engine-sys --test live`) drives the call layer of `ria-engine` against the engine.
+# A dev-dependency cycle is allowed: `ria-engine` depends on this crate for its normal build only.
+[dev-dependencies]
+ria-engine = { path = "../ria-engine" }
+serde_json = "1"
+
+[target.'cfg(target_os = "macos")'.dev-dependencies]
+block2 = "0.6"
+objc2 = "0.6"
+objc2-foundation = "0.3"
+
+# It has its own `main`, because the engine owns the main thread.
+[[test]]
+name = "live"
+harness = false
