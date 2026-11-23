@@ -30,10 +30,13 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: clippy
+          targets: aarch64-apple-darwin
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: rust
       - run: cargo clippy --manifest-path rust/Cargo.toml --workspace --all-targets -- -D warnings
+      - name: Check Mac host bindings
+        run: cargo clippy --locked --manifest-path rust/Cargo.toml --target aarch64-apple-darwin -p ria-host-mac --all-targets -- -D warnings
 
   test:
     name: test

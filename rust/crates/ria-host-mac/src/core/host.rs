@@ -15,6 +15,7 @@ use std::collections::BTreeMap;
 use std::rc::Rc;
 
 use block2::RcBlock;
+use objc2::runtime::Bool;
 use objc2_foundation::NSString;
 use serde_json::Value;
 
@@ -150,7 +151,9 @@ pub fn test_chooser_events() -> Value {
 
 /// `+beginTracing:`.
 pub fn begin_tracing(completion: impl Fn(bool) + 'static) {
-    Engine::begin_tracing(&RcBlock::new(completion));
+    Engine::begin_tracing(&RcBlock::new(move |started: Bool| {
+        completion(started.as_bool())
+    }));
 }
 
 /// `+endTracing:completion:`: the completion gets the path of the trace, or `None`.

@@ -16,7 +16,7 @@ use block2::DynBlock;
 use block2::RcBlock;
 use objc2::encode::{Encode, Encoding};
 use objc2::rc::Retained;
-use objc2::runtime::{AnyObject, NSObject};
+use objc2::runtime::{AnyObject, Bool, NSObject};
 use objc2::{extern_class, extern_methods};
 use objc2_app_kit::{NSColor, NSEvent, NSImage, NSView, NSWindow};
 use objc2_foundation::{
@@ -126,7 +126,7 @@ impl Engine {
         pub fn delete_profile(
             &self,
             profile: &Profile,
-            completion: Option<&DynBlock<dyn Fn(bool)>>,
+            completion: Option<&DynBlock<dyn Fn(Bool)>>,
         );
         #[unsafe(method(releaseProfile:))]
         pub fn release_profile(&self, profile: &Profile);
@@ -175,7 +175,7 @@ impl Engine {
 
         // Category `Tracing`.
         #[unsafe(method(beginTracing:))]
-        pub fn begin_tracing(completion: &DynBlock<dyn Fn(bool)>);
+        pub fn begin_tracing(completion: &DynBlock<dyn Fn(Bool)>);
         #[unsafe(method(endTracing:completion:))]
         fn end_tracing_raw(keep: bool, completion: &DynBlock<dyn Fn(*mut AnyObject)>);
         #[unsafe(method(isTracing))]
@@ -580,7 +580,7 @@ impl Tab {
         fn enter_picture_in_picture_for_click_at_raw(
             &self,
             click_time: NSTimeInterval,
-            completion: &DynBlock<dyn Fn(*mut AnyObject, bool)>,
+            completion: &DynBlock<dyn Fn(*mut AnyObject, Bool)>,
         );
         #[unsafe(method(shareThisTabInsteadFor:))]
         pub fn share_this_tab_instead_for(&self, capturer: &Tab) -> bool;
@@ -735,12 +735,12 @@ impl Tab {
     ) {
         self.enter_picture_in_picture_for_click_at_raw(
             click_time,
-            &RcBlock::new(move |route: *mut AnyObject, opened: bool| {
+            &RcBlock::new(move |route: *mut AnyObject, opened: Bool| {
                 completion(
                     unsafe { route.cast::<NSString>().as_ref() }
                         .map(|r| r.to_string())
                         .unwrap_or_default(),
-                    opened,
+                    opened.as_bool(),
                 )
             }),
         );

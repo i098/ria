@@ -107,10 +107,10 @@ define_class!(
         fn permission_request(&self, _engine: &Engine, request: &Payload, tab: Option<&Tab>) {
             let hooks = &self.ivars().hooks;
             let mut payload = object(request);
-            if let Some(tab) = tab {
-                if hooks.ask_permission_in_popup_window(tab, &Value::Object(payload.clone())) {
-                    return;
-                }
+            if let Some(tab) = tab
+                && hooks.ask_permission_in_popup_window(tab, &Value::Object(payload.clone()))
+            {
+                return;
             }
             payload.insert("tabId".into(), hooks.app_tab_id_value(tab));
             match tab {
