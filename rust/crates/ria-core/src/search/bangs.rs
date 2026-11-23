@@ -190,6 +190,11 @@ pub fn parse_loose_json(text: &str) -> Result<Json, JsonError> {
     JsonParser::new(&strip_loose(text)).parse()
 }
 
+/// `JSON.parse`, with V8's error messages.
+pub fn parse_json(text: &str) -> Result<Json, JsonError> {
+    JsonParser::new(text).parse()
+}
+
 /// A container `JsonParser` is filling; an object holds the key of the value being parsed.
 enum Frame {
     Array(Vec<Json>),

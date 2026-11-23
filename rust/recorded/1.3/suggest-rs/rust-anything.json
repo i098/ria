@@ -1,0 +1,42 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-3-omnibox/repo",
+  "unit": "packages/core/src/suggest.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "suggest-rs",
+  "exports": [
+    {
+      "name": "suggestTyped",
+      "file": "packages/core/src/suggest.harness.ts",
+      "line": 10,
+      "params": [
+        {
+          "name": "raws",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "source",
+          "ts_type": "({\n  tabs: readonly { id: string; url: string; title: string; customTitle?: string | null; favicon: string | null }[];\n  history: readonly { url: string; title: string; favicon: string | null; visits: number; lastVisit: number }[];\n  bookmarks?: readonly { url: string; title: string; favicon: string | null }[];\n})",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "options",
+          "ts_type": "(Omit<({\n  limit?: number;\n  now?: number;\n  engine?: Pick<{\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}, \"name\" | \"url\">;\n  preference?: \"website\" | \"search\";\n  remote?: readonly string[];\n  remoteSites?: readonly { url: string; title: string }[];\n  actions?: readonly { id: string; title: string; keywords?: readonly string[] } & { icon?: string; hint?: string }[];\n  extensions?: readonly ({\n  id: string;\n  title: string;\n  icon: string | null;\n  action: boolean;\n  options: boolean;\n})[];\n  currentTabId?: string;\n  currentUrl?: string;\n  scope?: ({\n  kind: \"engine\" | \"site\" | \"history\" | \"provider\";\n  name: string;\n  host: string;\n  url: string;\n  engineId?: string;\n  providerId?: string;\n}) | null;\n  preventInline?: boolean;\n  bangs?: ({ size: number; get(trigger: string): { trigger: string; name: string; template: string; home: string } | undefined }) | null;\n  providers?: readonly { id: string; title: string; rows: readonly ({ title: string; url: string; subtitle?: string; icon?: string | null; badge?: string })[] }[];\n}), \"bangs\"> & { bangs?: string | null })",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  items: (| {\n      kind: \"page\";\n      url: string;\n      title: string;\n      favicon: string | null;\n      tabId?: string;\n      bookmarked?: boolean;\n      visited?: boolean;\n    }\n  | { kind: \"search\"; query: string; url: string; engine: string; suggested?: boolean; bang?: true }\n  | { kind: \"calc\"; expression: string; value: string; url: string }\n  | { kind: \"action\"; id: string; title: string; icon?: string; hint?: string }\n  | { kind: \"create\"; id: string; title: string; url: string; site: string }\n  | { kind: \"extension\"; id: string; title: string; icon: string | null; open: \"action\" | \"options\" }\n  | { kind: \"provider\"; providerId: string; provider: string; title: string; url: string; subtitle?: string; icon: string | null })[];\n  completion: string;\n  via?: Readonly<Record<string, (\"literal\" | \"renamed_tab\" | \"engine_site\" | \"search_first_inline\" | \"spaced_address\")>>;\n}[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-3-omnibox/repo",
+  "unit": "packages/core/src/candidatePool.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "candidate-pool-rs",
+  "exports": [
+    {
+      "name": "poolGrid",
+      "file": "packages/core/src/candidatePool.harness.ts",
+      "line": 14,
+      "params": [
+        {
+          "name": "histories",
+          "ts_type": "({\n  tabs: readonly { id: string; url: string; title: string; customTitle?: string | null; favicon: string | null }[];\n  history: readonly { url: string; title: string; favicon: string | null; visits: number; lastVisit: number }[];\n  bookmarks?: readonly { url: string; title: string; favicon: string | null }[];\n})[\"history\"][]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "bookmarkLists",
+          "ts_type": "(NonNullable<({\n  tabs: readonly { id: string; url: string; title: string; customTitle?: string | null; favicon: string | null }[];\n  history: readonly { url: string; title: string; favicon: string | null; visits: number; lastVisit: number }[];\n  bookmarks?: readonly { url: string; title: string; favicon: string | null }[];\n})[\"bookmarks\"]> | null)[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "keys",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "preparedPool",
+      "file": "packages/core/src/candidatePool.harness.ts",
+      "line": 19,
+      "params": [
+        {
+          "name": "source",
+          "ts_type": "({\n  tabs: readonly { id: string; url: string; title: string; customTitle?: string | null; favicon: string | null }[];\n  history: readonly { url: string; title: string; favicon: string | null; visits: number; lastVisit: number }[];\n  bookmarks?: readonly { url: string; title: string; favicon: string | null }[];\n})",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "deadline",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "keys",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "tabsOverView",
+      "file": "packages/core/src/candidatePool.harness.ts",
+      "line": 26,
+      "params": [
+        {
+          "name": "source",
+          "ts_type": "({\n  tabs: readonly { id: string; url: string; title: string; customTitle?: string | null; favicon: string | null }[];\n  history: readonly { url: string; title: string; favicon: string | null; visits: number; lastVisit: number }[];\n  bookmarks?: readonly { url: string; title: string; favicon: string | null }[];\n})",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "currentTabId",
+          "ts_type": "string | null",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "savedVisits",
+      "file": "packages/core/src/candidatePool.harness.ts",
+      "line": 33,
+      "params": [
+        {
+          "name": "history",
+          "ts_type": "({\n  tabs: readonly { id: string; url: string; title: string; customTitle?: string | null; favicon: string | null }[];\n  history: readonly { url: string; title: string; favicon: string | null; visits: number; lastVisit: number }[];\n  bookmarks?: readonly { url: string; title: string; favicon: string | null }[];\n})[\"history\"]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "urls",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "savedBookmarks",
+      "file": "packages/core/src/candidatePool.harness.ts",
+      "line": 37,
+      "params": [
+        {
+          "name": "bookmarks",
+          "ts_type": "NonNullable<({\n  tabs: readonly { id: string; url: string; title: string; customTitle?: string | null; favicon: string | null }[];\n  history: readonly { url: string; title: string; favicon: string | null; visits: number; lastVisit: number }[];\n  bookmarks?: readonly { url: string; title: string; favicon: string | null }[];\n})[\"bookmarks\"]>",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "urls",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

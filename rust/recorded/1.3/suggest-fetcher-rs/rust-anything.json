@@ -1,0 +1,36 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-3-omnibox/repo",
+  "unit": "packages/core/src/suggestFetcher.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "suggest-fetcher-rs",
+  "exports": [
+    {
+      "name": "runFetcher",
+      "file": "packages/core/src/suggestFetcher.harness.ts",
+      "line": 20,
+      "params": [
+        {
+          "name": "steps",
+          "ts_type": "(| { op: \"request\"; engine: {\n  id: string;\n  name: string;\n  keyword: string;\n  url: string;\n  suggestUrl?: string;\n  custom?: boolean;\n  extension?: { id: string; name: string };\n}; query: string }\n  | { op: \"cancel\" }\n  // run the pending timer, if any\n  | { op: \"fire\" }\n  // answer the oldest open fetch: a response, a response whose body fails to read, or a failure\n  | { op: \"reply\"; ok: boolean; body: string }\n  | { op: \"unreadable\" }\n  | { op: \"fail\" })[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "cacheSize",
+          "ts_type": "number",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "Promise<unknown[]>",
+      "is_async": true,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

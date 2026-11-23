@@ -1,0 +1,125 @@
+{
+  "unit": "packages/core/src/suggest.harness.ts",
+  "files": 1,
+  "fingerprint": "53fa0c85f05a5e56",
+  "coverage": {
+    "lines": 2383,
+    "reached": 1963,
+    "files": [
+      {
+        "file": "packages/core/src/appUrls.ts",
+        "lines": 52,
+        "reached": 35,
+        "missed": "14-15, 28-30, 36-37, 53-62"
+      },
+      {
+        "file": "packages/core/src/bangs.ts",
+        "lines": 210,
+        "reached": 99,
+        "missed": "14-24, 26-38, 41-66, 84-113, 162-173, 178-185, 188-198"
+      },
+      {
+        "file": "packages/core/src/calculator.ts",
+        "lines": 293,
+        "reached": 279,
+        "missed": "118-119, 121, 130-132, 134-136, 159-160, 181-183"
+      },
+      {
+        "file": "packages/core/src/candidatePool.ts",
+        "lines": 172,
+        "reached": 159,
+        "missed": "109-121"
+      },
+      {
+        "file": "packages/core/src/cleanUrl.ts",
+        "lines": 68,
+        "reached": 30,
+        "missed": "31-34, 36-42, 44-48, 53-70, 73-74, 77-78"
+      },
+      {
+        "file": "packages/core/src/engines.ts",
+        "lines": 158,
+        "reached": 105,
+        "missed": "92-96, 102-117, 122-123, 126-127, 145-159, 166-176, 179-180"
+      },
+      {
+        "file": "packages/core/src/extensionRows.ts",
+        "lines": 25,
+        "reached": 25,
+        "missed": ""
+      },
+      {
+        "file": "packages/core/src/fuzzy.ts",
+        "lines": 87,
+        "reached": 72,
+        "missed": "22-36"
+      },
+      {
+        "file": "packages/core/src/idn.ts",
+        "lines": 323,
+        "reached": 296,
+        "missed": "26-29, 99-100, 153, 155, 157, 164-165, 167-168, 248, 254-255, 340-350"
+      },
+      {
+        "file": "packages/core/src/omnibox.ts",
+        "lines": 182,
+        "reached": 145,
+        "missed": "68-71, 167-171, 176-181, 184-189, 194-209"
+      },
+      {
+        "file": "packages/core/src/pageMatch.ts",
+        "lines": 109,
+        "reached": 109,
+        "missed": ""
+      },
+      {
+        "file": "packages/core/src/pageText.ts",
+        "lines": 55,
+        "reached": 55,
+        "missed": ""
+      },
+      {
+        "file": "packages/core/src/providerRows.ts",
+        "lines": 122,
+        "reached": 87,
+        "missed": "33, 80-83, 86-102, 105-117"
+      },
+      {
+        "file": "packages/core/src/quickCreate.ts",
+        "lines": 38,
+        "reached": 38,
+        "missed": ""
+      },
+      {
+        "file": "packages/core/src/siteSearch.ts",
+        "lines": 123,
+        "reached": 67,
+        "missed": "51-56, 58-60, 62-65, 68-72, 74-89, 91-93, 102-105, 125-127, 130-131, 134-143"
+      },
+      {
+        "file": "packages/core/src/suggest.harness.ts",
+        "lines": 12,
+        "reached": 12,
+        "missed": ""
+      },
+      {
+        "file": "packages/core/src/suggest.ts",
+        "lines": 217,
+        "reached": 217,
+        "missed": ""
+      },
+      {
+        "file": "packages/core/src/suggestionRows.ts",
+        "lines": 64,
+        "reached": 60,
+        "missed": "66-69"
+      },
+      {
+        "file": "packages/core/src/tlds.ts",
+        "lines": 73,
+        "reached": 73,
+        "missed": ""
+      }
+    ]
+  }
+}

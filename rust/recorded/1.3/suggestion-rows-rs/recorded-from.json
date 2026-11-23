@@ -1,0 +1,59 @@
+{
+  "unit": "packages/core/src/suggestionRows.harness.ts",
+  "files": 1,
+  "fingerprint": "a9a26238c6621712",
+  "coverage": {
+    "lines": 842,
+    "reached": 412,
+    "files": [
+      {
+        "file": "packages/core/src/appUrls.ts",
+        "lines": 52,
+        "reached": 17,
+        "missed": "11-17, 20-25, 28-30, 34-39, 42-44, 53-62"
+      },
+      {
+        "file": "packages/core/src/cleanUrl.ts",
+        "lines": 68,
+        "reached": 30,
+        "missed": "31-34, 36-42, 44-48, 53-70, 73-74, 77-78"
+      },
+      {
+        "file": "packages/core/src/idn.ts",
+        "lines": 323,
+        "reached": 131,
+        "missed": "11-17, 22-52, 55-86, 99-100, 123-128, 130-134, 136-143, 147-158, 160-170, 229-256, 258-265, 300-302, 306-315, 320-337, 340-350"
+      },
+      {
+        "file": "packages/core/src/omnibox.ts",
+        "lines": 182,
+        "reached": 40,
+        "missed": "10-14, 17-18, 30-38, 44-48, 52-60, 68-71, 74-76, 82-100, 105-114, 119-121, 123-128, 130-135, 137-155, 162-164, 167-171, 176-181, 184-189, 194-209, 212-217"
+      },
+      {
+        "file": "packages/core/src/pageText.ts",
+        "lines": 55,
+        "reached": 32,
+        "missed": "5-6, 37-46, 51-61"
+      },
+      {
+        "file": "packages/core/src/suggestionRows.harness.ts",
+        "lines": 25,
+        "reached": 25,
+        "missed": ""
+      },
+      {
+        "file": "packages/core/src/suggestionRows.ts",
+        "lines": 64,
+        "reached": 64,
+        "missed": ""
+      },
+      {
+        "file": "packages/core/src/tlds.ts",
+        "lines": 73,
+        "reached": 73,
+        "missed": ""
+      }
+    ]
+  }
+}

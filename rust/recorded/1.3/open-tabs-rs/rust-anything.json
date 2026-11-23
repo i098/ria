@@ -1,0 +1,36 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-3-omnibox/repo",
+  "unit": "packages/core/src/openTabs.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "open-tabs-rs",
+  "exports": [
+    {
+      "name": "recentTabSuggestions",
+      "file": "packages/core/src/openTabs.ts",
+      "line": 5,
+      "params": [
+        {
+          "name": "tabs",
+          "ts_type": "readonly ({ id: string; url: string; title: string; favicon: string | null; lastActiveAt: number })[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "options",
+          "ts_type": "{ exclude?: string; limit?: number }",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "(| {\n      kind: \"page\";\n      url: string;\n      title: string;\n      favicon: string | null;\n      tabId?: string;\n      bookmarked?: boolean;\n      visited?: boolean;\n    }\n  | { kind: \"search\"; query: string; url: string; engine: string; suggested?: boolean; bang?: true }\n  | { kind: \"calc\"; expression: string; value: string; url: string }\n  | { kind: \"action\"; id: string; title: string; icon?: string; hint?: string }\n  | { kind: \"create\"; id: string; title: string; url: string; site: string }\n  | { kind: \"extension\"; id: string; title: string; icon: string | null; open: \"action\" | \"options\" }\n  | { kind: \"provider\"; providerId: string; provider: string; title: string; url: string; subtitle?: string; icon: string | null })[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}
