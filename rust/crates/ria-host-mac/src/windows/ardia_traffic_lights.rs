@@ -6,7 +6,6 @@ use std::cell::{Cell, RefCell};
 use std::collections::{HashMap, HashSet};
 use std::ptr;
 use std::rc::Rc;
-use std::sync::OnceLock;
 
 use block2::RcBlock;
 use objc2::rc::{Retained, Weak};
@@ -28,9 +27,6 @@ const BUTTONS: [NSWindowButton; 3] = [
     NSWindowButton::ZoomButton,
 ];
 const RETAIN_NONATOMIC: usize = 1;
-
-type TitlebarFrame = unsafe extern "C-unwind" fn(&NSView, Sel) -> NSRect;
-static ORIGINAL_TITLEBAR_FRAME: OnceLock<TitlebarFrame> = OnceLock::new();
 
 thread_local! {
     static INSET_WINDOWS: RefCell<HashMap<*const NSWindow, std::rc::Weak<TrafficLights>>> =
@@ -220,24 +216,20 @@ impl Drop for TrafficLights {
 }
 
 fn install_titlebar_extension(class: &'static AnyClass) {
-    if ORIGINAL_TITLEBAR_FRAME.get().is_some() {
-        return;
-    }
-    let Some(method) = class.instance_method(sel!(_currentTitlebarContainerViewFrame)) else {
-        return;
-    };
-    unsafe {
-        let original = std::mem::transmute::<_, TitlebarFrame>(method.implementation());
-        if ORIGINAL_TITLEBAR_FRAME.set(original).is_ok() {
-            let replacement = std::mem::transmute::<TitlebarFrame, _>(extended_titlebar_frame);
-            let _ = ffi::method_setImplementation(method, replacement);
-        }
-    }
+    let selector = sel!(_currentTitlebarContainerViewFrame);
+    install_layout_hook(class, selector, |original| {
+        let original: unsafe extern "C-unwind" fn(&NSView, Sel) -> NSRect =
+            unsafe { std::mem::transmute(original) };
+        let layout = RcBlock::new(move |frame: ptr::NonNull<NSView>| {
+            let frame = unsafe { frame.as_ref() };
+            let titlebar = unsafe { original(frame, selector) };
+            extended_titlebar_frame(frame, titlebar)
+        });
+        unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&layout).cast()) }
+    });
 }
 
-unsafe extern "C-unwind" fn extended_titlebar_frame(frame: &NSView, selector: Sel) -> NSRect {
-    let original = ORIGINAL_TITLEBAR_FRAME.get().expect("Titlebar implementation");
-    let mut titlebar = unsafe { original(frame, selector) };
+fn extended_titlebar_frame(frame: &NSView, mut titlebar: NSRect) -> NSRect {
     let Some(window) = frame.window() else {
         return titlebar;
     };

@@ -117,6 +117,10 @@ fn screen_locked() -> bool {
     })
 }
 
+fn window_is_full_screen(core: &Window, window: &NSWindow) -> bool {
+    core.acted_full_screen() || window.styleMask().contains(NSWindowStyleMask::FullScreen)
+}
+
 #[derive(Default)]
 struct Transition {
     transitioning: bool,
@@ -205,9 +209,8 @@ impl FullScreen {
     }
 
     pub fn is_full_screen(&self) -> bool {
-        self.live_window().is_some_and(|(core, window)| {
-            core.acted_full_screen() || window.styleMask().contains(NSWindowStyleMask::FullScreen)
-        })
+        self.live_window()
+            .is_some_and(|(core, window)| window_is_full_screen(&core, &window))
     }
 
     pub fn seen(&self) -> bool {
@@ -274,9 +277,7 @@ impl FullScreen {
                 !app_kit && server,
             )
         };
-        let active_fullscreen = active
-            && (core.acted_full_screen()
-                || window.styleMask().contains(NSWindowStyleMask::FullScreen));
+        let active_fullscreen = active && window_is_full_screen(&core, &window);
         let changed = {
             let mut state = self.state.borrow_mut();
             if state.settling && !state.transitioning && visible {

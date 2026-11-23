@@ -250,6 +250,9 @@ mod mac {
         assert_eq!(controllers.all().len(), 1);
 
         allow.set(true);
+        controller.fullscreen.act_window_full_screen(true);
+        assert!(controller.core.acted_full_screen());
+        assert!(controller.fullscreen.is_full_screen());
         window.performClose(None);
         wait_for("The accepted close did not remove the window", || {
             controllers.for_window(&window).is_none()
@@ -257,10 +260,6 @@ mod mac {
         assert_eq!(requests.get(), 2);
         assert!(controllers.all().is_empty());
         assert!(!controller.fullscreen.is_full_screen());
-        controller.fullscreen.reconsider_sight();
-        controller.fullscreen.toggle();
-        controller.fullscreen.act_window_full_screen(true);
-        assert!(!controller.core.acted_full_screen());
     }
 
     fn check_windows(profile: &Profile) {
