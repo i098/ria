@@ -1,0 +1,16 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Halyard proof page</title>
+<style>
+html,body{margin:0;height:100%;font:15px -apple-system,system-ui,sans-serif;color:#fff;background:#10131a}
+.bars{position:fixed;inset:0;background:repeating-linear-gradient(90deg,#e4572e 0 80px,#17bebb 80px 160px,#ffc914 160px 240px,#76b041 240px 320px);animation:slide 4s linear infinite}
+@keyframes slide{to{background-position:320px 0}}
+.card{position:relative;margin:24px;padding:16px;width:360px;background:rgba(0,0,0,.55);border-radius:12px}
+input{width:100%;box-sizing:border-box;padding:8px;font-size:15px}
+</style></head><body>
+<div class="bars"></div>
+<div class="card"><h1 id="h">Ardia engine page</h1>
+<p>raf frames: <b id="n">0</b></p><input id="f" placeholder="page input"></div>
+<script>
+window.__raf=0;(function t(){window.__raf++;document.getElementById('n').textContent=window.__raf;requestAnimationFrame(t)})();
+document.addEventListener('mousedown',()=>{document.title='Halyard proof page clicked'});
+</script></body></html>

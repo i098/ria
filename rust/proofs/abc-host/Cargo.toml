@@ -1,0 +1,34 @@
+[package]
+name = "abc-host"
+version = "0.0.0"
+edition = "2024"
+license = "Apache-2.0"
+description = "Halyard Phase 0 proofs A, B and C: a Rust host for the prebuilt Ardia engine with Rune layers."
+publish = false
+
+# Own workspace: this crate builds on its own until the base slice owns rust/Cargo.toml.
+[workspace]
+
+[dependencies]
+accesskit_macos = "0.27.2"
+block2 = "0.6"
+libc = "0.2"
+objc2 = "0.6"
+objc2-app-kit = "0.3"
+objc2-foundation = "0.3"
+objc2-quartz-core = "0.3"
+serde_json = "1"
+rune = { git = "https://github.com/anomalyco/rune", rev = "5b27303b0f5e7e100747d83f4eb7bf4925cd05f7" }
+
+# Rune's own `[patch]` table does not apply to a workspace that depends on it
+# (rune/Cargo.toml:106-107), so the same patches are repeated here at the same rev.
+[patch.crates-io]
+accesskit_macos = { git = "https://github.com/anomalyco/rune", rev = "5b27303b0f5e7e100747d83f4eb7bf4925cd05f7" }
+accesskit_windows = { git = "https://github.com/anomalyco/rune", rev = "5b27303b0f5e7e100747d83f4eb7bf4925cd05f7" }
+parley_engine = { git = "https://github.com/anomalyco/rune", rev = "5b27303b0f5e7e100747d83f4eb7bf4925cd05f7" }
+sctk-adwaita = { git = "https://github.com/anomalyco/rune", rev = "5b27303b0f5e7e100747d83f4eb7bf4925cd05f7" }
+wgpu-hal = { git = "https://github.com/anomalyco/rune", rev = "5b27303b0f5e7e100747d83f4eb7bf4925cd05f7" }
+winit = { git = "https://github.com/anomalyco/rune", rev = "5b27303b0f5e7e100747d83f4eb7bf4925cd05f7" }
+
+[profile.release]
+debug = 1
