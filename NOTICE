@@ -6,6 +6,9 @@ Ria's own source files are licensed under the Apache License, Version 2.0 (see L
 Ria is a port of Ardia (https://github.com/ardia-browser/ardia), copyright 2026 Mantra Patel, to Rust and the Rune UI
 framework. Ardia is pinned as a git submodule at ardia/. Ria is its own product: it does not use the Ardia name or icon.
 
+Ria bundles the !bang data by Kagi Search and imput under the MIT License.
+See rust/crates/ria-core/src/search/bang_list.LICENSE for the full license, which also covers the sampled rows.
+
 The text below is the NOTICE file of Ardia at the pinned commit 551d3c13c. It applies to Ardia and to the third-party
 software that Ardia builds on and ships.
 

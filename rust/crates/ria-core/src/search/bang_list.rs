@@ -27,9 +27,10 @@ mod tests {
             let count = expected.next().unwrap().parse::<usize>().unwrap();
             let rows: Vec<_> = list.lines().collect();
             assert_eq!(rows.len(), count, "{name} row count");
-            for sample in 0..100 {
-                let index = sample * (count - 1) / 99;
-                assert_eq!(rows[index], expected.next().unwrap(), "{name} row {index}");
+            for _ in 0..100 {
+                let (index, row) = expected.next().unwrap().split_once('\t').unwrap();
+                let index = index.parse::<usize>().unwrap();
+                assert_eq!(rows[index], row, "{name} row {index}");
             }
         }
         assert_eq!(expected.next(), None);

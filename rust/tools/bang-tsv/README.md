@@ -1,17 +1,31 @@
 # Bundled bang lists
 
-`bang_list.tsv` contains both runtime strings from Ardia's `packages/core/src/bangList.ts` at `551d3c13c` (Copyright 2026 Mantra Patel, Apache-2.0).
+`bang_list.tsv` and `samples.tsv` contain data from Ardia's [`packages/core/src/bangList.ts`](https://github.com/ardia-browser/ardia/blob/551d3c13c1c9ede130724ea9f1056d4b586fbe55/packages/core/src/bangList.ts).
+Ardia took this snapshot from [Helium's bang list](https://services.helium.imput.net/bangs.json).
+The data is copyright Kagi Search and imput under the [MIT License](../../crates/ria-core/src/search/bang_list.LICENSE).
 The primary list comes first, and the Unicode list comes second.
 Keep the lists separate at lookup time so the primary list takes precedence.
 
 Run these commands from the Ria root with Node.js and the frozen `ardia/` submodule initialized:
 
 ```sh
-node rust/tools/bang-tsv/extract.mjs data > rust/crates/ria-core/src/search/bang_list.tsv
-node rust/tools/bang-tsv/extract.mjs samples > rust/tools/bang-tsv/samples.tsv
-(cd rust && blaze test -p ria-core --lib)
+regenerate() (
+  temp=$(mktemp "$2.XXXXXX") || exit 1
+  trap 'rm -f "$temp"' EXIT
+  node rust/tools/bang-tsv/extract.mjs "$1" > "$temp" && mv "$temp" "$2"
+)
+
+regenerate data rust/crates/ria-core/src/search/bang_list.tsv &&
+  regenerate samples rust/tools/bang-tsv/samples.tsv
 ```
 
-Pass an Ardia checkout path after `data` or `samples` to use that checkout instead of the submodule.
 The extractor reads the pinned Git object and takes the JavaScript string values, not the raw template text.
-The Rust test checks each list's row count and 100 evenly spaced rows, including both ends.
+`samples.tsv` records each list's row count and 100 evenly spaced rows with zero-based indexes, including both ends.
+The Rust test compares both lists with that fixture.
+
+Blaze does not support the writable static `__RUST_STD_INTERNAL_VAL` that the Rust test harness uses.
+Run the parity test with Cargo, as in [CI](../../../CONTRIBUTING.md#ci-and-quality-gates):
+
+```sh
+cargo test --manifest-path rust/Cargo.toml -p ria-core --lib bundled_lists_match_frozen_ardia_samples
+```

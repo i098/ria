@@ -1,202 +1,202 @@
 10078
-5	Fiverr	fiverr.com/gigs/search?query={s}
-dn	Dagens Nyheter	www.dn.se/sok/?q={s}&page=1&sort=relevance
-kj	King James Bible Study	www.biblestudytools.com/search/?q={s}&s=Bibles&t=kjv
-pu	PulseUniform - Nursing Uniforms, Medical Scrubs, Lab Coats and Accessories	www.pulseuniform.com/search.asp?q={s}
-wf	fr.wikipedia.org	fr.wikipedia.org/wiki/Special:Search?search={s}
-ads adsbeta	ADS bumblebee	ui.adsabs.harvard.edu/#search/q={s}
-bbr bkr	Basketball-Reference	www.basketball-reference.com/player_search.cgi?search={s}
-cbr	Comic Book Roundup	comicbookroundup.com/search_results.php?f_search={s}
-cvr	Danish Central Business Register	datacvr.virk.dk/data/visninger?soeg={s}
-dul	Duke University Libraries	library.duke.edu/find/all?Ntt={s}
-exp	IrfanTOOR Exploits	irfantoor.com/exploits?s={s}
-gbc	Great British Chefs	www.greatbritishchefs.com/search2#?pi=1&ps=48&st={s}&orderby=
-gpo ebuild emerge genpkg ebuilds gentoopkg gpackages	Gentoo Packages	packages.gentoo.org/packages/search?q={s}
-htw	HTW Dresden	www.htw-dresden.de/suche.html?tx_kesearch_pi1[sword]={s}
-jpj	We Sell Car Plate Number Online, Malaysia	www.buycarplate.com/?m=scr&searchval={s}
-loc	Library of Congress Catalog (loc.gov)	www.loc.gov/search/?q={s}
-mod modarchive	The Mod Archive	modarchive.org/index.php?request=search&query={s}&submit=Find&search_type=filename_or_songtitle
-nps	National Park Service (USA)	www.nps.gov/search/?affiliate=nps&query={s}
-pch	Publishers Clearing House	pch.com/?={s}
-rai	RaiPlay	www.raiplay.it/ricerca?q={s}
-ses	suomienglantisanakirja.fi	www.suomienglantisanakirja.fi/{s}
-tce	The Canadian Encyclopedia	www.thecanadianencyclopedia.ca/en/search?search={s}
-tva	Tweakers Vraag & Aanbod	tweakers.net/aanbod/zoeken/?keyword={s}
-wad	Wad Archive	www.wad-archive.com/search?o=d&q={s}
-wmy mywiki wikimy	Burmese Wikipedia	my.wikipedia.org/w/index.php?search={s}
-ypp	Puzzle Pirates YPPedia	yppedia.puzzlepirates.com/Special:Search?search={s}
-arda	The Encyclopedia of ARDA	www.glyphweb.com/arda/search.asp?search={s}
-cafr	Carrefour	www.carrefour.fr/?q={s}
-ddgm	DuckDuckGo Maps	duckduckgo.com/?q={s}&iaxm=maps
-ekac	ebay Kleinanzeigen Aachen	www.ebay-kleinanzeigen.de/s-aachen/{s}/k0l1921
-fmod factoriomods	Factorio Mods	mods.factorio.com/search?query={s}
-gnde	Google News Germany	news.google.com/news/search/section/q/{s}?hl=de&ned=de
-gtso gtsomali gt-somali	Google Translate (to Somali)	translate.google.com/#auto/so/{s}
-ihep inspire	InspireHEP	inspirehep.net/search?p={s}
-lang	LanguageTool	LanguageTool.org/?text={s}
-mlar mercadolibre mercadolibrear	MercadoLibre	mercadolibre.com/?q={s}
-nohu	Google Translate no-hu	translate.google.hu/#view=home&op=translate&sl=no&tl=hu&text={s}
-pegi	PEGI	pegi.info/search-pegi?q={s}
-rcdb	Roller Coaster Database	rcdb.com/qs.htm?qs={s}
-seur	Seur	www.seur.com/seguimiento-online.do?segOnlineIdentificador={s}
-tcgp tcgplayer	TCGPlayer	shop.tcgplayer.com/productcatalog/product/show?newSearch=false&ProductType=All&IsProductNameExact=false&ProductName={s}
-vibe	Vibe	vibe.naver.com/search?query={s}
-wqit	WikiQuote Italian	it.wikiquote.org/?q={s}:
-15min	15min naujienos	www.15min.lt/paieska?q={s}
-besch	Bescherelle	conjugueur.bescherelle.com/ConjugueurWeb/index.jsf?term={s}
-coptr	Community Owned digital Preservation Tool Registry (COPTR)	coptr.digipres.org/index.php?search={s}
-dspse	StackExchange Signal Processing	dsp.stackexchange.com/search?q={s}
-frida	Frida fooddata.dk	frida.fooddata.dk/food/search?lang=en&q={s}
-hkref hockeyref	Hockey Reference	www.hockey-reference.com/search/search.fcgi?hint=&search={s}
-kolli	Posten AB	www.postnord.se/sv/verktyg/sok/Sidor/spara-brev-paket-och-pall.aspx?view=item&itemid={s}
-mises	Mises Institute	mises.org/search/site/{s}
-pcper	PC Perspective	www.pcper.com/search/node/{s}
-rusta	Rusta	www.rusta.com/se/Sok/{s}/
-tbuff	TechnoBuffalo	www.technobuffalo.com/search-results/?q={s}
-vtech	Virginia Tech	search.vt.edu/search/pages.html;sa=Search&q={s}
-allbiz	AllBiz	www.all.biz/search/goods/?q={s}
-ccheck	Codecheck	www.codecheck.info/product.search?q={s}&OK=Suchen
-djones	David Jones	www.davidjones.com/search?q={s}
-framat	FramaTube	framatube.org/search?search={s}
-idroot	idroot	idroot.us/?s={s}
-lecker	Lecker	www.lecker.de/suche-rezept/{s}
-monash	Monash University	www.monash.edu/search?query={s}
-peeron	Peeron	peeron.com/cgi-bin/invcgis/psearch?query={s}&limit=none
-safari	Safari Books Online	www.safaribooksonline.com/search/?query={s}
-tdbank	TD Bank	www.tdbank.com/CustomerService/search-results.aspx?q={s}
-vigcit	The Vigilant Citizen	vigilantcitizen.com/?s={s}
-acortar shorten	Cortas	cortas.elpais.com/encode.pl?u=https://{s}
-binggif	Bing Animated Images (GiFs)	www.bing.com/images/search?q={s}&qft=+filterui:photo-animatedgif
-crocker	Betty Crocker	www.bettycrocker.com/search?term={s}
-eventid	EventID	eventid.net/display.asp?eventid={s}&source=
-hashtag	Twitter Hashtags	x.com/search?q=\#{s}
-lvoenru	Lingvo Live English Russian	www.lingvolive.com/en-us/translate/en-ru/{s}
-oldapps	OldApps.com	www.oldapps.com/betasearch.php?q={s}
-realtor	Realtor.com	www.realtor.com/realestateandhomes-search/{s}
-startup	Startup Buffer	startupbuffer.com/search?s={s}
-viasona	Viasona	www.viasona.cat/cerca?que={s}&cerca=
-amglobal	Amazon (GLOBAL)	www.amazon.com/s?k={s}&i=us-worldwide-shipping-aps
-coolshop	Coolshop	www.coolshop.dk/s/?q={s}
-filmanic	Filmanic	filmanic.com/search-for-movies-actors-directors/?q={s}
-identica	Identi.ca	identi.ca/search/people?q={s}&search=Search
-mendeley	Mendeley	www.mendeley.com/research-papers/search/?query={s}
-ponsderu	PONS Deutsch-Russisch	en.pons.com/translate?q={s}&l=deru&in=&lf=de&cid=
-soscrapy	Stack Overflow	stackoverflow.com/search?q={s}[scrapy]
-wacotrib	Waco Tribune-Herald	www.wacotrib.com/search/?sd=desc&l=25&s=start_time&f=html&t=article,video,youtube,collection&app=editorial&nsa=eedition&q={s}
-blackbook blackbookmag	BlackBook	www.blackbookmag.com/search/articles#keywords:{s}
-fancythat	Fancy That	www.shopfancythat.com/search?q={s}
-kprofiles	KProfiles	kprofiles.com/?s={s}
-pagespeed	Google PageSpeed insights	developers.google.com/speed/pagespeed/insights/?url={s}
-swagbucks	Swagbucks	swagbucks.com/?q={s}
-adlibrisno	Adlibris NO	www.adlibris.com/no/sok?q={s}
-energystar	Energy Star	essearch.energystar.gov/search?query={s}&affiliate=www.energystar.gov
-morchstore	MorchStore	www.morchstore.com/?post_type=product&s={s}
-startechde	Startech Germany	www.startech.com/de-de/search?search_term={s}
-brainyquote	BrainyQuote	www.brainyquote.com/search_results.html?q={s}
-morningstar	Morningstar Search	www.morningstar.com/search?query={s}
-ultrastares	Ultrastar Espana	ultrastar-es.org/en/canciones?busqueda={s}
-mosaicmarble	Mosaic Marble	mosaicmarble.com/products/search?query={s}
-dierenkruiden	Dierenkruiden	www.dierenkruiden.nl/search?s={s}
-nutritionfacts	NutritionFacts.org	nutritionfacts.org/?s={s}
-worldcubeassociation	World Cube Association	www.worldcubeassociation.org/search?q={s}
+0	5	Fiverr	fiverr.com/gigs/search?query={s}
+101	dn	Dagens Nyheter	www.dn.se/sok/?q={s}&page=1&sort=relevance
+203	kj	King James Bible Study	www.biblestudytools.com/search/?q={s}&s=Bibles&t=kjv
+305	pu	PulseUniform - Nursing Uniforms, Medical Scrubs, Lab Coats and Accessories	www.pulseuniform.com/search.asp?q={s}
+407	wf	fr.wikipedia.org	fr.wikipedia.org/wiki/Special:Search?search={s}
+508	ads adsbeta	ADS bumblebee	ui.adsabs.harvard.edu/#search/q={s}
+610	bbr bkr	Basketball-Reference	www.basketball-reference.com/player_search.cgi?search={s}
+712	cbr	Comic Book Roundup	comicbookroundup.com/search_results.php?f_search={s}
+814	cvr	Danish Central Business Register	datacvr.virk.dk/data/visninger?soeg={s}
+916	dul	Duke University Libraries	library.duke.edu/find/all?Ntt={s}
+1017	exp	IrfanTOOR Exploits	irfantoor.com/exploits?s={s}
+1119	gbc	Great British Chefs	www.greatbritishchefs.com/search2#?pi=1&ps=48&st={s}&orderby=
+1221	gpo ebuild emerge genpkg ebuilds gentoopkg gpackages	Gentoo Packages	packages.gentoo.org/packages/search?q={s}
+1323	htw	HTW Dresden	www.htw-dresden.de/suche.html?tx_kesearch_pi1[sword]={s}
+1425	jpj	We Sell Car Plate Number Online, Malaysia	www.buycarplate.com/?m=scr&searchval={s}
+1526	loc	Library of Congress Catalog (loc.gov)	www.loc.gov/search/?q={s}
+1628	mod modarchive	The Mod Archive	modarchive.org/index.php?request=search&query={s}&submit=Find&search_type=filename_or_songtitle
+1730	nps	National Park Service (USA)	www.nps.gov/search/?affiliate=nps&query={s}
+1832	pch	Publishers Clearing House	pch.com/?={s}
+1933	rai	RaiPlay	www.raiplay.it/ricerca?q={s}
+2035	ses	suomienglantisanakirja.fi	www.suomienglantisanakirja.fi/{s}
+2137	tce	The Canadian Encyclopedia	www.thecanadianencyclopedia.ca/en/search?search={s}
+2239	tva	Tweakers Vraag & Aanbod	tweakers.net/aanbod/zoeken/?keyword={s}
+2341	wad	Wad Archive	www.wad-archive.com/search?o=d&q={s}
+2442	wmy mywiki wikimy	Burmese Wikipedia	my.wikipedia.org/w/index.php?search={s}
+2544	ypp	Puzzle Pirates YPPedia	yppedia.puzzlepirates.com/Special:Search?search={s}
+2646	arda	The Encyclopedia of ARDA	www.glyphweb.com/arda/search.asp?search={s}
+2748	cafr	Carrefour	www.carrefour.fr/?q={s}
+2850	ddgm	DuckDuckGo Maps	duckduckgo.com/?q={s}&iaxm=maps
+2951	ekac	ebay Kleinanzeigen Aachen	www.ebay-kleinanzeigen.de/s-aachen/{s}/k0l1921
+3053	fmod factoriomods	Factorio Mods	mods.factorio.com/search?query={s}
+3155	gnde	Google News Germany	news.google.com/news/search/section/q/{s}?hl=de&ned=de
+3257	gtso gtsomali gt-somali	Google Translate (to Somali)	translate.google.com/#auto/so/{s}
+3359	ihep inspire	InspireHEP	inspirehep.net/search?p={s}
+3460	lang	LanguageTool	LanguageTool.org/?text={s}
+3562	mlar mercadolibre mercadolibrear	MercadoLibre	mercadolibre.com/?q={s}
+3664	nohu	Google Translate no-hu	translate.google.hu/#view=home&op=translate&sl=no&tl=hu&text={s}
+3766	pegi	PEGI	pegi.info/search-pegi?q={s}
+3867	rcdb	Roller Coaster Database	rcdb.com/qs.htm?qs={s}
+3969	seur	Seur	www.seur.com/seguimiento-online.do?segOnlineIdentificador={s}
+4071	tcgp tcgplayer	TCGPlayer	shop.tcgplayer.com/productcatalog/product/show?newSearch=false&ProductType=All&IsProductNameExact=false&ProductName={s}
+4173	vibe	Vibe	vibe.naver.com/search?query={s}
+4275	wqit	WikiQuote Italian	it.wikiquote.org/?q={s}:
+4376	15min	15min naujienos	www.15min.lt/paieska?q={s}
+4478	besch	Bescherelle	conjugueur.bescherelle.com/ConjugueurWeb/index.jsf?term={s}
+4580	coptr	Community Owned digital Preservation Tool Registry (COPTR)	coptr.digipres.org/index.php?search={s}
+4682	dspse	StackExchange Signal Processing	dsp.stackexchange.com/search?q={s}
+4784	frida	Frida fooddata.dk	frida.fooddata.dk/food/search?lang=en&q={s}
+4885	hkref hockeyref	Hockey Reference	www.hockey-reference.com/search/search.fcgi?hint=&search={s}
+4987	kolli	Posten AB	www.postnord.se/sv/verktyg/sok/Sidor/spara-brev-paket-och-pall.aspx?view=item&itemid={s}
+5089	mises	Mises Institute	mises.org/search/site/{s}
+5191	pcper	PC Perspective	www.pcper.com/search/node/{s}
+5292	rusta	Rusta	www.rusta.com/se/Sok/{s}/
+5394	tbuff	TechnoBuffalo	www.technobuffalo.com/search-results/?q={s}
+5496	vtech	Virginia Tech	search.vt.edu/search/pages.html;sa=Search&q={s}
+5598	allbiz	AllBiz	www.all.biz/search/goods/?q={s}
+5700	ccheck	Codecheck	www.codecheck.info/product.search?q={s}&OK=Suchen
+5801	djones	David Jones	www.davidjones.com/search?q={s}
+5903	framat	FramaTube	framatube.org/search?search={s}
+6005	idroot	idroot	idroot.us/?s={s}
+6107	lecker	Lecker	www.lecker.de/suche-rezept/{s}
+6209	monash	Monash University	www.monash.edu/search?query={s}
+6310	peeron	Peeron	peeron.com/cgi-bin/invcgis/psearch?query={s}&limit=none
+6412	safari	Safari Books Online	www.safaribooksonline.com/search/?query={s}
+6514	tdbank	TD Bank	www.tdbank.com/CustomerService/search-results.aspx?q={s}
+6616	vigcit	The Vigilant Citizen	vigilantcitizen.com/?s={s}
+6718	acortar shorten	Cortas	cortas.elpais.com/encode.pl?u=https://{s}
+6819	binggif	Bing Animated Images (GiFs)	www.bing.com/images/search?q={s}&qft=+filterui:photo-animatedgif
+6921	crocker	Betty Crocker	www.bettycrocker.com/search?term={s}
+7023	eventid	EventID	eventid.net/display.asp?eventid={s}&source=
+7125	hashtag	Twitter Hashtags	x.com/search?q=\#{s}
+7226	lvoenru	Lingvo Live English Russian	www.lingvolive.com/en-us/translate/en-ru/{s}
+7328	oldapps	OldApps.com	www.oldapps.com/betasearch.php?q={s}
+7430	realtor	Realtor.com	www.realtor.com/realestateandhomes-search/{s}
+7532	startup	Startup Buffer	startupbuffer.com/search?s={s}
+7634	viasona	Viasona	www.viasona.cat/cerca?que={s}&cerca=
+7735	amglobal	Amazon (GLOBAL)	www.amazon.com/s?k={s}&i=us-worldwide-shipping-aps
+7837	coolshop	Coolshop	www.coolshop.dk/s/?q={s}
+7939	filmanic	Filmanic	filmanic.com/search-for-movies-actors-directors/?q={s}
+8041	identica	Identi.ca	identi.ca/search/people?q={s}&search=Search
+8143	mendeley	Mendeley	www.mendeley.com/research-papers/search/?query={s}
+8244	ponsderu	PONS Deutsch-Russisch	en.pons.com/translate?q={s}&l=deru&in=&lf=de&cid=
+8346	soscrapy	Stack Overflow	stackoverflow.com/search?q={s}[scrapy]
+8448	wacotrib	Waco Tribune-Herald	www.wacotrib.com/search/?sd=desc&l=25&s=start_time&f=html&t=article,video,youtube,collection&app=editorial&nsa=eedition&q={s}
+8550	blackbook blackbookmag	BlackBook	www.blackbookmag.com/search/articles#keywords:{s}
+8651	fancythat	Fancy That	www.shopfancythat.com/search?q={s}
+8753	kprofiles	KProfiles	kprofiles.com/?s={s}
+8855	pagespeed	Google PageSpeed insights	developers.google.com/speed/pagespeed/insights/?url={s}
+8957	swagbucks	Swagbucks	swagbucks.com/?q={s}
+9059	adlibrisno	Adlibris NO	www.adlibris.com/no/sok?q={s}
+9160	energystar	Energy Star	essearch.energystar.gov/search?query={s}&affiliate=www.energystar.gov
+9262	morchstore	MorchStore	www.morchstore.com/?post_type=product&s={s}
+9364	startechde	Startech Germany	www.startech.com/de-de/search?search_term={s}
+9466	brainyquote	BrainyQuote	www.brainyquote.com/search_results.html?q={s}
+9568	morningstar	Morningstar Search	www.morningstar.com/search?query={s}
+9669	ultrastares	Ultrastar Espana	ultrastar-es.org/en/canciones?busqueda={s}
+9771	mosaicmarble	Mosaic Marble	mosaicmarble.com/products/search?query={s}
+9873	dierenkruiden	Dierenkruiden	www.dierenkruiden.nl/search?s={s}
+9975	nutritionfacts	NutritionFacts.org	nutritionfacts.org/?s={s}
+10077	worldcubeassociation	World Cube Association	www.worldcubeassociation.org/search?q={s}
 626
-g п goog google	Google	www.google.com/search?q={s}
-ц вики	Википедия	ru.wikipedia.org/w/index.php?search={s}&
-3m	Trójmiasto	www.trojmiasto.pl/s/{s}/
-fl фл гмп gluck lucky	Google Feeling Lucky	www.google.com/search?btnI&q={s}
-gv гв	Google Video	www.google.com/search?tbm=vid&q={s}
-pe	Dicionário Porto Editora	www.infopedia.pt/dicionarios/pesquisa/{s}
-vz	Verslo žinios	www.vz.lt/section/?template=search&search={s}
-гн gnru	Google News RU	www.google.ru/search?q={s}&tbm=nws&cad=h
-пш	Google Images (ru)	www.google.ru/search?tbm=isch&q={s}
-사전 stdict	Standard Korean Language Dictionary	stdict.korean.go.kr/search/searchResult.do?searchKeyword={s}
-aru arukereso	Árukereső	www.arukereso.hu/CategorySearch.php?st={s}
-bin	Beygingarlýsing íslensks nútímamáls	bin.arnastofnun.is/leit/?q={s}
-bvs	Biblioteca Virtual em Saúde	pesquisa.bvsalud.org/regional/?q={s}
-din	Dicionário inFormal	www.dicionarioinformal.com.br/{s}
-dpd	Diccionario panhispánico de dudas	lema.rae.es/dpd/?key={s}
-e2u	Англійсько-українські словники	e2u.org.ua/s?w={s}&dicts=all&highlight=on
-fes	Eesti fraseologismide elektrooniline alussõnastik	www.folklore.ee/justkui/sonastik/?otsing={s}&paring=Otsi
-goe	Stadtportal Göttingen	www.goettingen.de/portalsuche.html?keyword={s}
-isl	İslam Ansiklopedisi	islamansiklopedisi.org.tr/arama/?q={s}&p=m
-lnu	Linnéuniversitetet Bibliotek LNU	lnu-se-primo.hosted.exlibrisgroup.com/primo-explore/search?query=any,contains,{s}&search_scope=default_scope&sortby=rank&vid=primo-custom-lnu&pcAvailability=false&lang=sv_SE
-mgm	Türkiye Cumhuriyeti Orman ve Su İşleri Bakanlığı Meteoroloji Genel Müdürlüğü	www.mgm.gov.tr/tahmin/il-ve-ilceler.aspx?il={s}
-nbd bokmålsordboka	Bokmålsordboka	ordbokene.no/nob/bm/{s}
-noz	Neue Osnabrücker Zeitung	www.noz.de/suche/?q={s}
-pap	Papskubber.dk	www.papskubber.dk/?q={s}&s=search&submitbutton=Søg
-r2u	Російсько-українські словники	r2u.org.ua/s?w={s}&scope=all&dicts=all&highlight=on
-rxp рукс руксперт	Ruxpert	ruxpert.ru/index.php?search={s}
-tåg	Tåginformation Sverige (Trafikverket)	www.trafikverket.se/trafikinformation/tag/?&TrainOrStation={s}
-ubl	Universitätsbibliothek Leipzig	katalog.ub.uni-leipzig.de/Search/Results?lookfor={s}
-uja	Universidad de Jaén	www.ujaen.es/search?s={s}
-wob	World of Boardgames	www.worldofboardgames.com/webshop-sok.php?searchString={s}&search=S�k
-днс dnsshop	DNS	www.dns-shop.ru/search/?q={s}
-նայ	Nayiri	nayiri.com/search?l=hy_LB&dt=HY_HY&r=0&query={s}
-adme адми	Adme.ru	www.adme.ru/search/?q={s}
-bund	Bund für Umwelt und Naturschutz	www.bund.net/service/suchergebnis/?L=0&q={s}
-deco	Decoración 2.0	decoracion2.com/search/{s}
-drom дром	drom.ru	www.drom.ru/search/?q={s}
-g100 г100	Google Search 100 Results	www.google.com/search?q={s}&tbo=1&num=100
-godj	goo 辞書 英和/和英	dictionary.goo.ne.jp/srch/jn/{s}/m1u/
-ikso	Ikso Kantaro	kantaro.ikso.net/?do=search&id={s}&fulltext=Serĉo
-kwzf	묻지마 검색	kwzf.net/#search={s}&page=1
-love	LÖVE	love2d.org/w/index.php?title=Special:Search&search={s}&go=Go
-naob	NAOB – Det Norske Akademis ordbok	naob.no/søk?q={s}
-rtes	RT en Español	actualidad.rt.com/search?q={s}
-sbrm	slounik.org: беларускія слоўнікі і энцыкляпэдыі	www.slounik.org/search?dict=&search={s}
-srde	Saarländischer Rundfunk	www.sr.de/sr/suche.jsp?phrase={s}
-ubhd	Universitätsbibliothek Heidelberg	www.ub.uni-heidelberg.de/suche/suche.html?q={s}
-waru worldart ворлдарт	World-Art.ru	www.world-art.ru/search.php?public_search={s}&global_sector=all
-wqpl	Wikiquote Polish	pl.wikiquote.org/w/index.php?search={s}&title=Specjalna:Szukaj&go=Przejdź
-wtvi	Wiktionary tiếng Việt	vi.wiktionary.org/w/index.php?search={s}
-wwtr	WikiWand Türkçe	www.wikiwand.com/tr/{s}
-лица faces	Google Images (Faces)	www.google.com/search?tbm=isch&tbs=itp:face&q={s}
-360so	360搜索	www.so.com/s?q={s}
-avito авито	Avito	www.avito.ru/?q={s}
-cisne	Catálogo Cisne UCM	cisne.sim.ucm.es/search*spi~S/X?SEARCH={s}
-enfoc gafoc	Foclóir	www.focloir.ie/en/dictionary/ei/{s}
-ffinv	파판14 인벤	ff14.inven.co.kr/dataninfo/item/?itemname={s}&datagroup=search
-hitta	Hitta.se	www.hitta.se/sök?vad={s}
-kbors	Kuldne Börs	kuldnebors.ee/search/search.mec?search_evt=onsearch&pob_action=search&search_O_string={s}
-maori māori maoridictionary	Māori Dictionary	maoridictionary.co.nz/search?keywords={s}
-orell	Orell Füssli	www.orellfuessli.ch/suche?utf8=%E2%9C%93&filterPATHROOT=&sq={s}
-renpl	Reverso Context (enpl)	context.reverso.net/tłumaczenie/angielski-polski/{s}
-tieba	百度贴吧	tieba.baidu.com/f?ie=utf-8&kw={s}
-ufret	U-フレット	www.ufret.jp/search.php?key={s}
-vegas	Vegas	find.vegas.com/search?entqr=1&output=xml_no_dtd&sort=date:D:L:d1&entsp=0&client=vegas&ud=1&oe=UTF-8&ie=UTF-8&proxystylesheet=vegas&site=vegas&q={s}&btnG=⌕
-гфото gphotos	Google Photos	photos.google.com/search/{s}
-alibro abretelibro	Ábretelibro	www.abretelibro.com/foro/search.php?keywords={s}&sf=titleonly
-beinsa	beinsa.bg	beinsa.bg/search.php?q={s}&submit=ТЪРСИ&s_type=all&id=&status=1
-coccoc	Cốc Cốc	coccoc.com/search#query={s}
-gdmaps	高德地图	ditu.amap.com/search?query={s}
-kotoba kotobank	コトバンク	kotobank.jp/word/{s}
-maajim	معاجم	www.maajim.com/dictionary/{s}
-pcasio	Planète Casio	www.planet-casio.com/Fr/aide/recherche.php?q={s}
-shopee	shopee 蝦皮	shopee.tw/search/?keyword={s}
-tesoro	Tesoro lexicográfico del español de Puerto Rico	tesoro.pr/busqueda?q={s}
-wfhuen	Webfordítás hu-en	www.webforditas.hu/szotar.php?S={s}&l1=hu&l2=en
-wrptes	WordReference Português-Español	www.wordreference.com/ptes/{s}
-موبايل	أكاديمية الموبايل	mobilesacademy.com/?s={s}
-cuspide	Cúspide	www.cuspide.com/resultados.aspx?c={s}
-fantlab фантлаб	Лаборатория Фантастики	fantlab.ru/searchmain?searchstr={s}
-iacobus	Catálogo Iacobus - Universidade de Santiago de Compostela	iacobus.usc.gal/discovery/search?query=any,contains,{s}&tab=Everything&search_scope=MyInst_and_CI&vid=34CISUG_USC:VU1&offset=0
-maedler	MÄDLER	www.maedler.de/ShopSearch?query={s}
-obrazky	Seznam Obrázky	www.obrazky.cz/?q={s}
-szpravy	Seznam Zprávy	www.seznam.cz/zpravy/hledani?q={s}&search--active=1
-الاخبار	صحيفة تيفي	www.sahifatv.com/category/{s}
-duckgoes	Duck Duck Go Español	duckduckgo.com/?q={s}&kp=-1&k5=1&kah=wt-wt&kl=xl-es&kad=es_ES
-ponsdees	Pons de<>es	de.pons.com/übersetzung?q={s}&l=dees&in=&lf=de
-ponsplde	Pons pl-de	pl.pons.com/tłumaczenie?q={s}&l=depl&in=&lf=de
-synonyma	ABZ slovník českých synonym	www.slovnik-synonym.cz/web.php/hledat?typ_hledani=prefix&cizi_slovo={s}
-yomikata	読み方は？	yomikatawa.com/kanji/{s}
-bookinges	Booking España	www.booking.com/search.es.html?ss={s}
-licentium	자유인사전(Licentium Wiki)	licentium.net/w/index.php?search={s}
-saiyasune	最安値.com	www.saiyasune.com/I1W{s}.html
-coolbluebe	Coolblue België	www.coolblue.be/zoeken?query={s}
-naointendo	Não Intendo	www.naointendo.com.br/blog/busca?utf8=%E2%9C%93&q={s}
-archlinuxfr	Wiki Français Archlinux	wiki.archlinux.fr/index.php?title=Spécial:Recherche&profile=default&fulltext=Search&search={s}
-ciberduvidas	Ciberdúvidas da Língua Portuguesa	ciberduvidas.iscte-iul.pt/pesquisa?termo={s}
-wikivoyageel	Wikivoyage (Ελληνικά)	el.wikivoyage.org/wiki/Special:Search?search={s}&go=Go
-wikivoyageuk	Wikivoyage (Українська)	uk.wikivoyage.org/wiki/Special:Search?search={s}&go=Go
-arbeitsagentur	Agentur für Arbeit	www.arbeitsagentur.de/jobsuche/suche?sort=Relevanz&angebotsart=1&was={s}
-glutenfreerecipebox	Carla’s Gluten Free Recipe Box	glutenfreerecipebox.com/?s={s}
+0	g п goog google	Google	www.google.com/search?q={s}
+6	ц вики	Википедия	ru.wikipedia.org/w/index.php?search={s}&
+12	3m	Trójmiasto	www.trojmiasto.pl/s/{s}/
+18	fl фл гмп gluck lucky	Google Feeling Lucky	www.google.com/search?btnI&q={s}
+25	gv гв	Google Video	www.google.com/search?tbm=vid&q={s}
+31	pe	Dicionário Porto Editora	www.infopedia.pt/dicionarios/pesquisa/{s}
+37	vz	Verslo žinios	www.vz.lt/section/?template=search&search={s}
+44	гн gnru	Google News RU	www.google.ru/search?q={s}&tbm=nws&cad=h
+50	пш	Google Images (ru)	www.google.ru/search?tbm=isch&q={s}
+56	사전 stdict	Standard Korean Language Dictionary	stdict.korean.go.kr/search/searchResult.do?searchKeyword={s}
+63	aru arukereso	Árukereső	www.arukereso.hu/CategorySearch.php?st={s}
+69	bin	Beygingarlýsing íslensks nútímamáls	bin.arnastofnun.is/leit/?q={s}
+75	bvs	Biblioteca Virtual em Saúde	pesquisa.bvsalud.org/regional/?q={s}
+82	din	Dicionário inFormal	www.dicionarioinformal.com.br/{s}
+88	dpd	Diccionario panhispánico de dudas	lema.rae.es/dpd/?key={s}
+94	e2u	Англійсько-українські словники	e2u.org.ua/s?w={s}&dicts=all&highlight=on
+101	fes	Eesti fraseologismide elektrooniline alussõnastik	www.folklore.ee/justkui/sonastik/?otsing={s}&paring=Otsi
+107	goe	Stadtportal Göttingen	www.goettingen.de/portalsuche.html?keyword={s}
+113	isl	İslam Ansiklopedisi	islamansiklopedisi.org.tr/arama/?q={s}&p=m
+119	lnu	Linnéuniversitetet Bibliotek LNU	lnu-se-primo.hosted.exlibrisgroup.com/primo-explore/search?query=any,contains,{s}&search_scope=default_scope&sortby=rank&vid=primo-custom-lnu&pcAvailability=false&lang=sv_SE
+126	mgm	Türkiye Cumhuriyeti Orman ve Su İşleri Bakanlığı Meteoroloji Genel Müdürlüğü	www.mgm.gov.tr/tahmin/il-ve-ilceler.aspx?il={s}
+132	nbd bokmålsordboka	Bokmålsordboka	ordbokene.no/nob/bm/{s}
+138	noz	Neue Osnabrücker Zeitung	www.noz.de/suche/?q={s}
+145	pap	Papskubber.dk	www.papskubber.dk/?q={s}&s=search&submitbutton=Søg
+151	r2u	Російсько-українські словники	r2u.org.ua/s?w={s}&scope=all&dicts=all&highlight=on
+157	rxp рукс руксперт	Ruxpert	ruxpert.ru/index.php?search={s}
+164	tåg	Tåginformation Sverige (Trafikverket)	www.trafikverket.se/trafikinformation/tag/?&TrainOrStation={s}
+170	ubl	Universitätsbibliothek Leipzig	katalog.ub.uni-leipzig.de/Search/Results?lookfor={s}
+176	uja	Universidad de Jaén	www.ujaen.es/search?s={s}
+183	wob	World of Boardgames	www.worldofboardgames.com/webshop-sok.php?searchString={s}&search=S�k
+189	днс dnsshop	DNS	www.dns-shop.ru/search/?q={s}
+195	նայ	Nayiri	nayiri.com/search?l=hy_LB&dt=HY_HY&r=0&query={s}
+202	adme адми	Adme.ru	www.adme.ru/search/?q={s}
+208	bund	Bund für Umwelt und Naturschutz	www.bund.net/service/suchergebnis/?L=0&q={s}
+214	deco	Decoración 2.0	decoracion2.com/search/{s}
+220	drom дром	drom.ru	www.drom.ru/search/?q={s}
+227	g100 г100	Google Search 100 Results	www.google.com/search?q={s}&tbo=1&num=100
+233	godj	goo 辞書 英和/和英	dictionary.goo.ne.jp/srch/jn/{s}/m1u/
+239	ikso	Ikso Kantaro	kantaro.ikso.net/?do=search&id={s}&fulltext=Serĉo
+246	kwzf	묻지마 검색	kwzf.net/#search={s}&page=1
+252	love	LÖVE	love2d.org/w/index.php?title=Special:Search&search={s}&go=Go
+258	naob	NAOB – Det Norske Akademis ordbok	naob.no/søk?q={s}
+265	rtes	RT en Español	actualidad.rt.com/search?q={s}
+271	sbrm	slounik.org: беларускія слоўнікі і энцыкляпэдыі	www.slounik.org/search?dict=&search={s}
+277	srde	Saarländischer Rundfunk	www.sr.de/sr/suche.jsp?phrase={s}
+284	ubhd	Universitätsbibliothek Heidelberg	www.ub.uni-heidelberg.de/suche/suche.html?q={s}
+290	waru worldart ворлдарт	World-Art.ru	www.world-art.ru/search.php?public_search={s}&global_sector=all
+296	wqpl	Wikiquote Polish	pl.wikiquote.org/w/index.php?search={s}&title=Specjalna:Szukaj&go=Przejdź
+303	wtvi	Wiktionary tiếng Việt	vi.wiktionary.org/w/index.php?search={s}
+309	wwtr	WikiWand Türkçe	www.wikiwand.com/tr/{s}
+315	лица faces	Google Images (Faces)	www.google.com/search?tbm=isch&tbs=itp:face&q={s}
+321	360so	360搜索	www.so.com/s?q={s}
+328	avito авито	Avito	www.avito.ru/?q={s}
+334	cisne	Catálogo Cisne UCM	cisne.sim.ucm.es/search*spi~S/X?SEARCH={s}
+340	enfoc gafoc	Foclóir	www.focloir.ie/en/dictionary/ei/{s}
+347	ffinv	파판14 인벤	ff14.inven.co.kr/dataninfo/item/?itemname={s}&datagroup=search
+353	hitta	Hitta.se	www.hitta.se/sök?vad={s}
+359	kbors	Kuldne Börs	kuldnebors.ee/search/search.mec?search_evt=onsearch&pob_action=search&search_O_string={s}
+366	maori māori maoridictionary	Māori Dictionary	maoridictionary.co.nz/search?keywords={s}
+372	orell	Orell Füssli	www.orellfuessli.ch/suche?utf8=%E2%9C%93&filterPATHROOT=&sq={s}
+378	renpl	Reverso Context (enpl)	context.reverso.net/tłumaczenie/angielski-polski/{s}
+385	tieba	百度贴吧	tieba.baidu.com/f?ie=utf-8&kw={s}
+391	ufret	U-フレット	www.ufret.jp/search.php?key={s}
+397	vegas	Vegas	find.vegas.com/search?entqr=1&output=xml_no_dtd&sort=date:D:L:d1&entsp=0&client=vegas&ud=1&oe=UTF-8&ie=UTF-8&proxystylesheet=vegas&site=vegas&q={s}&btnG=⌕
+404	гфото gphotos	Google Photos	photos.google.com/search/{s}
+410	alibro abretelibro	Ábretelibro	www.abretelibro.com/foro/search.php?keywords={s}&sf=titleonly
+416	beinsa	beinsa.bg	beinsa.bg/search.php?q={s}&submit=ТЪРСИ&s_type=all&id=&status=1
+422	coccoc	Cốc Cốc	coccoc.com/search#query={s}
+429	gdmaps	高德地图	ditu.amap.com/search?query={s}
+435	kotoba kotobank	コトバンク	kotobank.jp/word/{s}
+441	maajim	معاجم	www.maajim.com/dictionary/{s}
+448	pcasio	Planète Casio	www.planet-casio.com/Fr/aide/recherche.php?q={s}
+454	shopee	shopee 蝦皮	shopee.tw/search/?keyword={s}
+460	tesoro	Tesoro lexicográfico del español de Puerto Rico	tesoro.pr/busqueda?q={s}
+467	wfhuen	Webfordítás hu-en	www.webforditas.hu/szotar.php?S={s}&l1=hu&l2=en
+473	wrptes	WordReference Português-Español	www.wordreference.com/ptes/{s}
+479	موبايل	أكاديمية الموبايل	mobilesacademy.com/?s={s}
+486	cuspide	Cúspide	www.cuspide.com/resultados.aspx?c={s}
+492	fantlab фантлаб	Лаборатория Фантастики	fantlab.ru/searchmain?searchstr={s}
+498	iacobus	Catálogo Iacobus - Universidade de Santiago de Compostela	iacobus.usc.gal/discovery/search?query=any,contains,{s}&tab=Everything&search_scope=MyInst_and_CI&vid=34CISUG_USC:VU1&offset=0
+505	maedler	MÄDLER	www.maedler.de/ShopSearch?query={s}
+511	obrazky	Seznam Obrázky	www.obrazky.cz/?q={s}
+517	szpravy	Seznam Zprávy	www.seznam.cz/zpravy/hledani?q={s}&search--active=1
+523	الاخبار	صحيفة تيفي	www.sahifatv.com/category/{s}
+530	duckgoes	Duck Duck Go Español	duckduckgo.com/?q={s}&kp=-1&k5=1&kah=wt-wt&kl=xl-es&kad=es_ES
+536	ponsdees	Pons de<>es	de.pons.com/übersetzung?q={s}&l=dees&in=&lf=de
+542	ponsplde	Pons pl-de	pl.pons.com/tłumaczenie?q={s}&l=depl&in=&lf=de
+549	synonyma	ABZ slovník českých synonym	www.slovnik-synonym.cz/web.php/hledat?typ_hledani=prefix&cizi_slovo={s}
+555	yomikata	読み方は？	yomikatawa.com/kanji/{s}
+561	bookinges	Booking España	www.booking.com/search.es.html?ss={s}
+568	licentium	자유인사전(Licentium Wiki)	licentium.net/w/index.php?search={s}
+574	saiyasune	最安値.com	www.saiyasune.com/I1W{s}.html
+580	coolbluebe	Coolblue België	www.coolblue.be/zoeken?query={s}
+587	naointendo	Não Intendo	www.naointendo.com.br/blog/busca?utf8=%E2%9C%93&q={s}
+593	archlinuxfr	Wiki Français Archlinux	wiki.archlinux.fr/index.php?title=Spécial:Recherche&profile=default&fulltext=Search&search={s}
+599	ciberduvidas	Ciberdúvidas da Língua Portuguesa	ciberduvidas.iscte-iul.pt/pesquisa?termo={s}
+606	wikivoyageel	Wikivoyage (Ελληνικά)	el.wikivoyage.org/wiki/Special:Search?search={s}&go=Go
+612	wikivoyageuk	Wikivoyage (Українська)	uk.wikivoyage.org/wiki/Special:Search?search={s}&go=Go
+618	arbeitsagentur	Agentur für Arbeit	www.arbeitsagentur.de/jobsuche/suche?sort=Relevanz&angebotsart=1&was={s}
+625	glutenfreerecipebox	Carla’s Gluten Free Recipe Box	glutenfreerecipebox.com/?s={s}
