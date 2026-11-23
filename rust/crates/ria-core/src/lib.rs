@@ -5,6 +5,7 @@
 //! Ria core logic. One `pub mod` line for each module of `packages/core/src/index.ts`;
 //! a later slice adds the line of its own module.
 
+pub mod endpoints;
 pub mod errors;
 pub mod fuzzy;
 
