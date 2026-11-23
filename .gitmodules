@@ -1,0 +1,3 @@
+[submodule "ardia"]
+	path = ardia
+	url = https://github.com/ardia-browser/ardia
