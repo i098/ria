@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Measures one framegrab recording of any app (Halyard included) into the same JSON compare.mjs reads for Ardia.
+// Measures one framegrab recording of any app (Ria included) into the same JSON compare.mjs reads for Ardia.
 //   node measure-frames.mjs <frames dir written by framegrab> <animation name> <out.json>
 // The window's end state is taken from the last frame; the window geometry of the end state is not known here, so it is left out.
 import { createHash } from "node:crypto";

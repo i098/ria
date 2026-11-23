@@ -37,7 +37,7 @@ async function main() {
   const only = flags.only ? new Set(flags.only.split(",")) : null;
   const states = STATES.filter((s) => !only || only.has(s.name));
   if (!states.length) throw new Error(`no such state: ${flags.only}`);
-  const data = resolve(flags.data ?? "/tmp/halyard-parity-data"); // a fixed path: it is inside the page URLs
+  const data = resolve(flags.data ?? "/tmp/ria-parity-data"); // a fixed path: it is inside the page URLs
   rmSync(data, { recursive: true, force: true });
   mkdirSync(out, { recursive: true });
   const { inst, run } = await start(app, data);

@@ -1,8 +1,8 @@
 # Parity rig
 
-Measures Ardia (the reference) and later Halyard with the same tools, then compares the numbers.
+Measures Ardia (the reference) and later Ria with the same tools, then compares the numbers.
 Frozen reference: Ardia commit `551d3c13c1c9ede130724ea9f1056d4b586fbe55` (Debug build, ad hoc signed, prebuilt engine `9673f9e9b5e9`).
-Phase 0 does no Halyard UI work. The Halyard side of every command below is for later phases.
+Phase 0 does no Ria UI work. The Ria side of every command below is for later phases.
 
 ## What is here
 
@@ -10,7 +10,7 @@ Phase 0 does no Halyard UI work. The Halyard side of every command below is for 
 |---|---|
 | `capture-states.mjs` | Drives Ardia to each reference state and writes `window.png`, `geometry.json`, `socket.jsonl` |
 | `record-animation.mjs` | Triggers one animation, records frames with times, writes `<name>.json` |
-| `measure-frames.mjs` | Turns a `framegrab` recording of any app into the same JSON (for Halyard) |
+| `measure-frames.mjs` | Turns a `framegrab` recording of any app into the same JSON (for Ria) |
 | `compare.mjs` | Compares a candidate with the reference. No Ardia needed. Exit code 1 means a number is out of tolerance |
 | `analyze.mjs`, `lib.mjs` | Shared measurement and launch code |
 | `tools/framegrab.swift` | ScreenCaptureKit frame recorder with host-clock times |
@@ -21,13 +21,13 @@ Phase 0 does no Halyard UI work. The Halyard side of every command below is for 
 ## Where the reference lives
 
 - States and animation JSON: this directory, `captures/`. `captures/states/SHA256SUMS` lists every state file.
-- Animation frames (3513 PNG files, 132 MB): `/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/halyard-p0-parity-rig/animation-frames/`.
+- Animation frames (3513 PNG files, 132 MB): the firstmate data folder `…/p0-parity-rig/animation-frames/` (the reference host keeps them; they are not in git).
   Their checksums are in `captures/animations/frames.SHA256SUMS` (paths relative to that directory).
 - Verify: `(cd captures/states && sha256sum -c SHA256SUMS)`.
 
 ## Run Ardia (macOS only)
 
-The rig needs a Mac with Xcode, Node, pnpm and CocoaPods. The working copy used here is on the Mac `mac` in `/tmp/halyard-parity`.
+The rig needs a Mac with Xcode, Node, pnpm and CocoaPods. The working copy used here is on the Mac `mac` in `/tmp/ria-parity`.
 
 ```sh
 git clone --filter=blob:none https://github.com/ardia-browser/ardia.git ardia
@@ -35,7 +35,7 @@ git -C ardia checkout 551d3c13c1c9ede130724ea9f1056d4b586fbe55
 cd ardia && pnpm install --frozen-lockfile
 packages/ardiacore/scripts/fetch-engine.sh --nearest   # prebuilt engine, no Chromium build
 (cd apps/browser/macos && pod install)
-git apply /path/to/halyard/rust/parity/patches/field-glow-geometry-swift-6.3.patch   # only with Swift 6.3
+git apply /path/to/ria/rust/parity/patches/field-glow-geometry-swift-6.3.patch   # only with Swift 6.3
 # Debug build with ad hoc signing (no team needed). Metro must run: (cd apps/browser && pnpm dev --port 8399)
 ARDIACORE_FRAMEWORK=$PWD/apps/browser/build-ardiacore/prebuilt/9673f9e9b5e9/Chromium\ Framework.framework \
   xcodebuild -workspace apps/browser/macos/Ardia.xcworkspace -scheme Ardia-macOS -configuration Debug \
@@ -94,23 +94,23 @@ Measured on the frozen build (3 runs each, median):
 
 Spread between runs is one to two frames (for example `sidebar-open` 188 to 209 ms), so use the tolerances below, not exact equality.
 
-## Compare a Halyard capture with numbers
+## Compare a Ria capture with numbers
 
-States: capture Halyard into the same layout (`<state>/window.png` and `<state>/geometry.json`), then
+States: capture Ria into the same layout (`<state>/window.png` and `<state>/geometry.json`), then
 
 ```sh
-node compare.mjs states captures/states <halyard states dir>
+node compare.mjs states captures/states <ria states dir>
 ```
 
 It prints one line per state: mean absolute pixel delta (0 to 255), share of differing pixels, and the largest geometry difference in points.
 A state passes when mean delta <= 2.0, differing pixels <= 2 percent, and every geometry value is within 1 pt. A missing state fails.
 
-Animations: record Halyard's window with `framegrab` (send `mark` on stdin at the trigger, then `stop`), then
+Animations: record Ria's window with `framegrab` (send `mark` on stdin at the trigger, then `stop`), then
 
 ```sh
-./framegrab <windowID> <dir> < marks        # or drive stdin from the Halyard test harness
-node measure-frames.mjs <dir> sidebar-open halyard-sidebar-open.json
-node compare.mjs animation captures/animations/sidebar-open.json halyard-sidebar-open.json
+./framegrab <windowID> <dir> < marks        # or drive stdin from the Ria test harness
+node measure-frames.mjs <dir> sidebar-open ria-sidebar-open.json
+node compare.mjs animation captures/animations/sidebar-open.json ria-sidebar-open.json
 ```
 
 It prints the duration, t50, curve RMSE and end-state difference, each with its tolerance.
@@ -118,7 +118,18 @@ An animation passes when duration and t50 are within 33.4 ms (two frames), curve
 Change tolerances with `--pixel-tolerance`, `--geometry-tolerance`, `--duration-tolerance`, `--curve-tolerance`.
 Both commands exit 1 on failure, so CI can gate on them.
 
-Checks of the comparer itself: a reference compared with itself passes with all deltas 0; `tab-light` copied over `tab-dark` fails (mean delta 11.8, 17.9 percent differing); `sidebar-open` against `find-bar-open` fails on duration, t50 and curve.
+Self-test of the comparer (no Ardia, no Mac): `node rust/parity/compare.selftest.mjs`. An equal pair passes; a pair above each threshold of check P fails (mean pixel delta, differing pixels, geometry, duration, t50, curve RMSE, end signature). It also checks the socket compare below.
+
+## Socket transcript (check K)
+
+`socket/requests.jsonl` has one request for each of the 157 methods of `rust/research/control-socket.md`, and 7 read-only requests with real results. A method with a required parameter gets `{}` (a `bad_request` reply). A changing method with no required parameter gets an unknown key (also `bad_request`). No request changes the app.
+
+```sh
+node rust/parity/socket/compare.mjs live --ardia <Ardia data dir> --ria <Ria data dir> [--write <dir>]
+node rust/parity/socket/compare.mjs files <ardia transcript.jsonl> <ria transcript.jsonl>
+```
+
+Ids, times and data-folder paths are removed before the compare. Exit 1 when the transcripts differ. The `live` mode was not run against a live Ardia in slice 0.5; slice 6.2 runs it.
 
 ## Known limits
 

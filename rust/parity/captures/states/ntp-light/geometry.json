@@ -33,7 +33,7 @@
       "tabs": [
         {
           "id": "p1",
-          "url": "file:///tmp/halyard-parity-data/pages/mail.html",
+          "url": "file:///tmp/ria-parity-data/pages/mail.html",
           "title": "Inbox",
           "profile": "default",
           "active": false,
@@ -44,7 +44,7 @@
         },
         {
           "id": "p2",
-          "url": "file:///tmp/halyard-parity-data/pages/calendar.html",
+          "url": "file:///tmp/ria-parity-data/pages/calendar.html",
           "title": "Calendar",
           "profile": "default",
           "active": false,
@@ -55,7 +55,7 @@
         },
         {
           "id": "p3",
-          "url": "file:///tmp/halyard-parity-data/pages/docs.html",
+          "url": "file:///tmp/ria-parity-data/pages/docs.html",
           "title": "Design doc",
           "profile": "default",
           "active": false,
@@ -66,7 +66,7 @@
         },
         {
           "id": "r1",
-          "url": "file:///tmp/halyard-parity-data/pages/research1.html",
+          "url": "file:///tmp/ria-parity-data/pages/research1.html",
           "title": "Swift concurrency",
           "profile": "default",
           "active": false,
@@ -77,7 +77,7 @@
         },
         {
           "id": "r2",
-          "url": "file:///tmp/halyard-parity-data/pages/research2.html",
+          "url": "file:///tmp/ria-parity-data/pages/research2.html",
           "title": "Metal shaders",
           "profile": "default",
           "active": false,
@@ -88,7 +88,7 @@
         },
         {
           "id": "t1",
-          "url": "file:///tmp/halyard-parity-data/pages/notes.html",
+          "url": "file:///tmp/ria-parity-data/pages/notes.html",
           "title": "Meeting notes",
           "profile": "default",
           "active": false,
@@ -99,7 +99,7 @@
         },
         {
           "id": "t2",
-          "url": "file:///tmp/halyard-parity-data/pages/reading.html",
+          "url": "file:///tmp/ria-parity-data/pages/reading.html",
           "title": "Reading list",
           "profile": "default",
           "active": false,
@@ -121,7 +121,7 @@
         },
         {
           "id": "k1",
-          "url": "file:///tmp/halyard-parity-data/pages/work1.html",
+          "url": "file:///tmp/ria-parity-data/pages/work1.html",
           "title": "Roadmap",
           "profile": "work",
           "active": false,
@@ -132,7 +132,7 @@
         },
         {
           "id": "k2",
-          "url": "file:///tmp/halyard-parity-data/pages/work2.html",
+          "url": "file:///tmp/ria-parity-data/pages/work2.html",
           "title": "Quarterly plan",
           "profile": "work",
           "active": false,

@@ -31,7 +31,7 @@ async function main() {
   const animations = ANIMATIONS.filter((a) => !only || only.has(a.name));
   if (!animations.length) throw new Error(`no such animation: ${flags.only}`);
   mkdirSync(out, { recursive: true });
-  const data = "/tmp/halyard-parity-data";
+  const data = "/tmp/ria-parity-data";
   rmSync(data, { recursive: true, force: true });
   const { inst, run } = await start(app, data);
   try {
