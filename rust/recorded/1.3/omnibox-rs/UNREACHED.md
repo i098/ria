@@ -7,5 +7,5 @@ Lines of a file that belongs to another unit count as covered by that unit, name
 | --- | --- | --- |
 | `appUrls.ts` | 28-30, 53-62 | Covered by unit `appurls-rs` (slice 1.2); its coverage reaches these lines. |
 | `cleanUrl.ts` | 77-78 | Covered by unit `cleanurl-rs` (slice 1.2); its coverage reaches these lines. |
-| `idn.ts` | 99-100 | No input of any crate reaches these lines. The `catch` of `scx` (`idn.ts:96-100`) runs only when the JavaScript engine rejects `\p{Script_Extensions=<name>}`. Node v26.12.1 accepts all 45 names in `SCRIPTS` (`idn.ts:88-92`), so no input reaches lines 99-100. |
+| `idn.ts` | 99-100 | See the [IDN coverage explanation](../../1.2/idn-rs/UNREACHED.md). |
 | `idn.ts` | 340-350 | Covered by unit `idn-rs` (slice 1.2); its coverage reaches these lines. |

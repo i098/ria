@@ -566,20 +566,26 @@ let t
 t = rStr()
 return t
 }
+const hasLoneSurrogate = (value, seen) => {
+  if (typeof value === 'string') return !value.isWellFormed()
+  if (value === null || typeof value !== 'object' || seen.has(value)) return false
+  seen.add(value)
+  return Object.keys(value).some(key => !key.isWellFormed() || hasLoneSurrogate(value[key], seen))
+}
 module.exports.logsRequest = function logsRequest (a0, a1, a2) {
   if (illFormed(a1)) throw new TypeError('argument 2 of logsRequest has a lone surrogate, which a Rust String cannot hold')
   try {
     const text = needsCodeUnits(a0) ? a0 : null
     const resource = text === null ? a0 : {}
-    const array = Array.isArray(a2)
-    const records = array ? a2 : []
+    const useRustRecords = Array.isArray(a2) && !hasLoneSurrogate(a2, new WeakSet())
+    const records = useRustRecords ? a2 : []
     const output = arguments.length <= 3 && encode(resource, a1, records) && wireCall(call)
       ? decode() : json(resource, a1, records)
-    if (text === null && array) return output
+    if (text === null && useRustRecords) return output
     const request = JSON.parse(output)
     const resourceLogs = request.resourceLogs[0]
     if (text !== null) resourceLogs.resource.attributes = stringAttributes(text)
-    if (!array) resourceLogs.scopeLogs[0].logRecords = a2
+    if (!useRustRecords) resourceLogs.scopeLogs[0].logRecords = a2
     return JSON.stringify(request)
   } catch (e) {
     throw jsError(e)

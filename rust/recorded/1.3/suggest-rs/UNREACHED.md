@@ -13,7 +13,7 @@ Lines of a file that belongs to another unit count as covered by that unit, name
 | `cleanUrl.ts` | 31-34, 36-42, 44-48, 53-70, 73-74, 77-78 | Covered by unit `cleanurl-rs` (slice 1.2); its coverage reaches these lines. |
 | `engines.ts` | 92-96, 102-117, 122-123, 126-127, 145-159, 166-176, 179-180 | Covered by unit `engines-rs` (slice 1.4); its coverage reaches these lines. |
 | `fuzzy.ts` | 22-36 | Covered by unit `fuzzy-rs` (slice 1.1); its coverage reaches these lines. |
-| `idn.ts` | 99-100 | No input of any crate reaches these lines. The `catch` of `scx` (`idn.ts:96-100`) runs only when the JavaScript engine rejects `\p{Script_Extensions=<name>}`. Node v26.12.1 accepts all 45 names in `SCRIPTS` (`idn.ts:88-92`), so no input reaches lines 99-100. |
+| `idn.ts` | 99-100 | See the [IDN coverage explanation](../../1.2/idn-rs/UNREACHED.md). |
 | `idn.ts` | 26-29, 153, 155, 157, 164-165, 167-168, 248, 254-255, 340-350 | Covered by unit `idn-rs` (slice 1.2); its coverage reaches these lines. |
 | `omnibox.ts` | 68-71, 167-171, 176-181, 184-189, 194-209 | Covered by unit `omnibox-rs` (slice 1.3); its coverage reaches these lines. |
 | `providerRows.ts` | 33, 80-83, 86-102, 105-117 | Covered by unit `provider-rows-rs` (slice 1.4); its coverage reaches these lines. |

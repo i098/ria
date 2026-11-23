@@ -15,7 +15,7 @@ Lines of a file that belongs to another unit count as covered by that unit, name
 | `engines.ts` | 105-115, 122-123, 166-176, 179-180 | Covered by unit `engines-rs` (slice 1.4); its coverage reaches these lines. |
 | `extensionRows.ts` | 20-27 | Covered by unit `extension-rows-rs` (slice 1.4); its coverage reaches these lines. |
 | `fuzzy.ts` | 11-19, 22-36, 40-43, 52-57, 62-76, 85-95 | Covered by unit `fuzzy-rs` (slice 1.1); its coverage reaches these lines. |
-| `idn.ts` | 99-100 | No input of any crate reaches these lines. The `catch` of `scx` (`idn.ts:96-100`) runs only when the JavaScript engine rejects `\p{Script_Extensions=<name>}`. Node v26.12.1 accepts all 45 names in `SCRIPTS` (`idn.ts:88-92`), so no input reaches lines 99-100. |
+| `idn.ts` | 99-100 | See the [IDN coverage explanation](../../1.2/idn-rs/UNREACHED.md). |
 | `idn.ts` | 11-17, 22-52, 55-86, 123-128, 130-134, 136-143, 147-158, 160-170, 229-256, 258-265, 300-302, 306-315, 321-323, 327-330, 334-336, 340-350 | Covered by unit `idn-rs` (slice 1.2); its coverage reaches these lines. |
 | `ingestKeys.ts` | 16-18 | Covered by unit `ingest-keys-rs` (slice 1.6); its coverage reaches these lines. |
 | `mobile.ts` | 13, 15-21 | No input of any crate reaches these lines. `HostURL` (`mobile.ts:11-22`) is a polyfill that line 25 installs only when `typeof scope.URL === "undefined"` (`mobile.ts:24-25`). Node defines `URL`, so the class is never built or called. |
