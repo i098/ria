@@ -1,0 +1,7 @@
+{
+  "name": "engine-api-gen",
+  "private": true,
+  "type": "module",
+  "description": "Makes the typed engine API of ria-engine from api.ts of Ardia.",
+  "devDependencies": { "typescript": "5.9.3" }
+}
