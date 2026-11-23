@@ -378,6 +378,35 @@ fn download_mover() {
         assert!(!exists(&env.at("Downloads/Bills/before-claim.txt")));
         assert_eq!(env.staging_dirs(), 0);
     }
+    for blocked in [false, true] {
+        let path = env.finished(&mover, "removed-destination.txt", "genuine", none.clone());
+        let id = env.last_id();
+        let destination = env.at("Downloads/Removed");
+        fs::create_dir(&destination).unwrap();
+        let source = path.clone();
+        hook(&mover, move |step, _| {
+            if step == "verified" {
+                fs::remove_dir(&destination).unwrap();
+                if blocked {
+                    fs::write(&source, "replacement").unwrap();
+                }
+            }
+        });
+        let result = mover.move_download(&path, "~/Downloads/Removed");
+        unhook(&mover);
+        assert_eq!(reason(&result), "failed");
+        if blocked {
+            assert_eq!(text(&path), "replacement");
+            let staged = result["stagedPath"].as_str().unwrap();
+            assert_eq!(text(staged), "genuine");
+            let replay = mover.note_download_event(&json!({"id": id, "path": path}));
+            assert_eq!(replay["path"], staged);
+            fs::remove_dir_all(std::path::Path::new(staged).parent().unwrap()).unwrap();
+        } else {
+            assert_eq!(text(&path), "genuine");
+            assert_eq!(env.staging_dirs(), 0);
+        }
+    }
     {
         let path = env.finished(&mover, "after-check.txt", "genuine bytes", none.clone());
         hook(&mover, |step, staging| {

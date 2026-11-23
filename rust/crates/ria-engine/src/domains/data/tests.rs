@@ -486,10 +486,14 @@ fn regular_profile_registration_notifies_hooks_once_before_lookup_returns() {
     for (name, expected) in [("", &[""][..]), ("work", &["", "work"][..])] {
         for _ in 0..2 {
             let hooks = hooks.clone();
+            let completed = Rc::new(Cell::new(false));
+            let callback_completed = completed.clone();
             registry.with_profile(name, move |profile| {
                 assert!(profile.is_some());
                 assert_eq!(hooks.0.borrow().as_slice(), expected);
+                callback_completed.set(true);
             });
+            assert!(completed.get(), "lookup did not complete for {name:?}");
         }
     }
     assert_eq!(hooks.0.borrow().as_slice(), ["", "work"]);

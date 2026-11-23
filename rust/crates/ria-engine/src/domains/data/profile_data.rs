@@ -35,11 +35,10 @@ fn listed(value: Value) -> Map<String, Value> {
     }
 }
 
-fn for_each<T: 'static>(mut items: Vec<T>, body: Body<T>, then: Then) {
-    if items.is_empty() {
+fn for_each<T: 'static>(mut items: impl Iterator<Item = T> + 'static, body: Body<T>, then: Then) {
+    let Some(first) = items.next() else {
         return then();
-    }
-    let first = items.remove(0);
+    };
     let rest_body = body.clone();
     body(first, Box::new(move || for_each(items, rest_body, then)));
 }
@@ -57,12 +56,12 @@ fn clear_each(list: Lister, key: &'static str, done: Ok, clear: Body<Map<String,
         let Some(Value::Array(items)) = result.get(key) else {
             return done(false);
         };
-        let items = items
+        let items: Vec<_> = items
             .iter()
             .filter_map(|i| i.as_object().cloned())
             .collect();
         for_each(
-            items,
+            items.into_iter(),
             clear,
             Box::new(move || {
                 again(Box::new(move |after| {
@@ -114,7 +113,7 @@ fn delete_passwords(ctx: DataCtx, ok: Ok) {
                     .unwrap_or_default();
                 let allow = again.clone();
                 for_each(
-                    origins,
+                    origins.into_iter(),
                     Rc::new(move |origin, next| {
                         service(
                             &allow,
@@ -195,7 +194,7 @@ fn reset_site_settings(ctx: DataCtx, ok: Ok) {
             })
             .unwrap_or_default();
         for_each(
-            origins,
+            origins.into_iter(),
             Rc::new(move |origin, next| {
                 reset.engine_call(
                     "ac_site_settings_reset",

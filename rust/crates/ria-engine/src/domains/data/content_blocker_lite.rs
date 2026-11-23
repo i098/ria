@@ -127,22 +127,19 @@ impl ContentBlocker {
         }
         let key = format!("lite:{profile}");
         let page = self.hidden_page(&key, profile, p, LITE_ID, "read.html");
-        let answered = Rc::new(Cell::new(false));
-        let done = Rc::new(Cell::new(Some(done)));
+        let done = Cell::new(Some(done));
         let finish = {
             let (blocker, page, p) = (self.clone(), page.clone(), p.clone());
             Rc::new(move |lite: Option<Value>, error: Option<String>| {
-                if answered.replace(true) {
+                let Some(done) = done.take() else {
                     return;
-                }
+                };
                 if let Some(page) = &page {
                     page.fail("read");
                 }
                 blocker.0.state.borrow_mut().pages.remove(&key);
                 blocker.0.host.unload_component_extension(&p, LITE_ID);
-                if let Some(done) = done.take() {
-                    done(lite, error);
-                }
+                done(lite, error);
             })
         };
         let Some(page) = page else {

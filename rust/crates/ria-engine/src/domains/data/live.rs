@@ -65,6 +65,14 @@ mod mac {
 <key>NSPrincipalClass</key><string>BrowserCrApplication</string>
 </dict></plist>"#;
 
+    struct TestRoot<'a>(&'a Path);
+
+    impl Drop for TestRoot<'_> {
+        fn drop(&mut self) {
+            let _ = std::fs::remove_dir_all(self.0);
+        }
+    }
+
     /// The process that cargo starts: builds the bundle, runs the child in it, forwards the exit code.
     pub fn parent() {
         let engine_dir = PathBuf::from(
@@ -82,6 +90,7 @@ mod mac {
             std::io::Error::last_os_error()
         );
         let root = Path::new(OsStr::from_bytes(&template[..template.len() - 1]));
+        let cleanup = TestRoot(root);
         let macos = root.join("Live.app/Contents/MacOS");
         std::fs::create_dir_all(&macos).unwrap();
         std::fs::create_dir_all(root.join("Live.app/Contents/Frameworks")).unwrap();
@@ -102,7 +111,7 @@ mod mac {
             .env("RIA_LIVE_DATA", &data)
             .status()
             .expect("start the child");
-        let _ = std::fs::remove_dir_all(root);
+        drop(cleanup);
         std::process::exit(status.code().unwrap_or(1));
     }
 

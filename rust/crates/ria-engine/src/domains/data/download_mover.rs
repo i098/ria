@@ -702,7 +702,14 @@ impl DownloadMover {
                 }
                 Err(error) => match errno(&error) {
                     libc::EEXIST => continue,
-                    libc::ENOENT => return keep_staged("changed", ""),
+                    libc::ENOENT => {
+                        if lstat_at(stg, source_name).is_ok_and(|file| {
+                            file.dev == verified.dev() && file.ino == verified.ino()
+                        }) {
+                            return give_back("failed");
+                        }
+                        return keep_staged("changed", "");
+                    }
                     libc::EXDEV => return give_back("crossesVolumes"),
                     _ => return give_back("failed"),
                 },
