@@ -1,0 +1,623 @@
+{"fn":"fuzzyScore","args":["HELLO","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["étrailing.","  padded  "],"ok":0}
+{"fn":"fuzzyScore","args":["tab\tseparated","ΣΊΣΥΦΟΣ"],"ok":0}
+{"fn":"fuzzyScore","args":["key_name-1","😀"],"ok":0}
+{"fn":"fuzzyScore","args":["a.b.c","src/a/b.ts﻿bom"],"ok":0}
+{"fn":"fuzzyScore","args":["emoji 👍🏽 mix","a:b:c"],"ok":0}
+{"fn":"fuzzyScore","args":["İstanbul",":"],"ok":0}
+{"fn":"fuzzyScore","args":["Hello World","﻿bom"],"ok":0}
+{"fn":"fuzzyScore","args":["a","a😀b😀c"],"ok":261}
+{"fn":"fuzzyScore","args":["abc","hello worldns:key.path"],"ok":0}
+{"fn":"fuzzyScore","args":["ト","日本語のテキスト"],"ok":0}
+{"fn":"fuzzyScore","args":["a.b.c","ünïcödé"],"ok":0}
+{"fn":"fuzzyScore","args":["abc","a:b:cns:key.path"],"ok":3}
+{"fn":"fuzzyScore","args":[".LE",".leading"],"ok":267}
+{"fn":"fuzzyScore","args":["Hello World","ékey_name-1"],"ok":0}
+{"fn":"fuzzyScore","args":["./x/**/*.json","straße"],"ok":0}
+{"fn":"fuzzyScore","args":["日本語のテキスト","ns:key.patha:b:c"],"ok":-5}
+{"fn":"fuzzyScore","args":["a😀b😀c","a"],"ok":0}
+{"fn":"fuzzyScore","args":["","a"],"ok":0}
+{"fn":"fuzzyScore","args":["trailing.","ra"],"ok":0}
+{"fn":"fuzzyScore","args":["src/a/b.tskey_name-1","b."],"ok":0}
+{"fn":"fuzzyScore","args":["İstanbul","an"],"ok":0}
+{"fn":"fuzzyScore","args":["İstanbulstraße","straße"],"ok":0}
+{"fn":"fuzzyScore","args":["İstanbul","日本語のテキスト"],"ok":0}
+{"fn":"fuzzyScore","args":["a","a"],"ok":1000}
+{"fn":"fuzzyScore","args":["İstanbul","straße"],"ok":0}
+{"fn":"fuzzyScore","args":["é","  padded  "],"ok":0}
+{"fn":"fuzzyScore","args":["hello world","key_name-1"],"ok":0}
+{"fn":"fuzzyScore","args":[".leading","﻿bom"],"ok":0}
+{"fn":"fuzzyScore","args":["ns:key.path","a😀b😀cab"],"ok":0}
+{"fn":"fuzzyScore","args":["line1\nline2","trailing."],"ok":0}
+{"fn":"fuzzyScore","args":[".leading","ΣΊΣΥΦΟΣtrailing."],"ok":0}
+{"fn":"fuzzyScore","args":["a:b:c","a:"],"ok":0}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣ","ΣΊΣΥΦΟΣ﻿bom"],"ok":-1}
+{"fn":"fuzzyScore","args":["b.c","a.b.c"],"ok":119}
+{"fn":"fuzzyScore","args":["😀","é"],"ok":-1}
+{"fn":"fuzzyScore","args":["日本語のテキスト",":"],"ok":0}
+{"fn":"fuzzyScore","args":["hel","hello"],"ok":271}
+{"fn":"fuzzyScore","args":["a:b:c","ns:key.path"],"ok":0}
+{"fn":"fuzzyScore","args":["Hello World","hello"],"ok":0}
+{"fn":"fuzzyScore","args":["{name} has {count} items","a:b:c"],"ok":0}
+{"fn":"fuzzyScore","args":["ahello world","straße"],"ok":0}
+{"fn":"fuzzyScore","args":["hello","tab\tseparated"],"ok":0}
+{"fn":"fuzzyScore","args":["a","aa:b:c"],"ok":261}
+{"fn":"fuzzyScore","args":["hello","ünïcödé"],"ok":0}
+{"fn":"fuzzyScore","args":["./x/**/*.json","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["  padded  ","😀"],"ok":0}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣ","src/a/b.ts日本語のテキスト"],"ok":-4}
+{"fn":"fuzzyScore","args":["😀","./x/**/*.json"],"ok":-2}
+{"fn":"fuzzyScore","args":["ab./x/**/*.json","ΣΊΣΥΦΟΣ"],"ok":0}
+{"fn":"fuzzyScore","args":["のテキス","key_name-1日本語のテキスト"],"ok":-3}
+{"fn":"fuzzyScore","args":["a.b.c","c"],"ok":0}
+{"fn":"fuzzyScore","args":["a:b:cHELLO","{name} has {count} items"],"ok":0}
+{"fn":"fuzzyScore","args":["ab","{name} has {count} items"],"ok":0}
+{"fn":"fuzzyScore","args":[":","trailing."],"ok":-1}
+{"fn":"fuzzyScore","args":["ünïcödé","Ö"],"ok":0}
+{"fn":"fuzzyScore","args":["a","ünïcödé"],"ok":0}
+{"fn":"fuzzyScore","args":["./x/**/*.json","ab"],"ok":0}
+{"fn":"fuzzyScore","args":["hello world",":a😀b😀c"],"ok":0}
+{"fn":"fuzzyScore","args":["ns:key.path","  padded    padded  "],"ok":0}
+{"fn":"fuzzyScore","args":["abc","key_name-1"],"ok":0}
+{"fn":"fuzzyScore","args":["hello  padded  ","hello"],"ok":0}
+{"fn":"fuzzyScore","args":["name-","key_name-1"],"ok":71}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣ","tab\tseparatedΣΊΣΥΦΟΣ"],"ok":-2}
+{"fn":"fuzzyScore","args":["İstanbul日本語のテキスト","Hello World"],"ok":0}
+{"fn":"fuzzyScore","args":["  padded  ","key_name-1"],"ok":0}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣsrc/a/b.ts","İstanbul"],"ok":0}
+{"fn":"fuzzyScore","args":["hello","İstanbul"],"ok":0}
+{"fn":"fuzzyScore","args":[".leading","abcsrc/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["LLO","HELLO"],"ok":27}
+{"fn":"fuzzyScore","args":["﻿bom:","Hello World"],"ok":0}
+{"fn":"fuzzyScore","args":["","straße"],"ok":0}
+{"fn":"fuzzyScore","args":["{name} has {count} items","ΣΊΣΥΦΟΣ"],"ok":0}
+{"fn":"fuzzyScore","args":["a.b.c","hello"],"ok":0}
+{"fn":"fuzzyScore","args":["日本語のテキスト","テ"],"ok":0}
+{"fn":"fuzzyScore","args":["ab",".leading"],"ok":0}
+{"fn":"fuzzyScore","args":[":","  padded  "],"ok":-1}
+{"fn":"fuzzyScore","args":["hello world","D"],"ok":0}
+{"fn":"fuzzyScore","args":["hello","hello"],"ok":1000}
+{"fn":"fuzzyScore","args":["a:b:c","﻿bom"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","İstanbul"],"ok":0}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣ","hello world"],"ok":-2}
+{"fn":"fuzzyScore","args":["İstanbul","ab"],"ok":0}
+{"fn":"fuzzyScore","args":["key_name-1","a😀b😀c./x/**/*.json"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","straße"],"ok":0}
+{"fn":"fuzzyScore","args":["trailing.","ab﻿bom"],"ok":0}
+{"fn":"fuzzyScore","args":["line1\nline2","key_name-1"],"ok":0}
+{"fn":"fuzzyScore","args":["ab","src/a/b.tshello"],"ok":4}
+{"fn":"fuzzyScore","args":["ns:key.path","Hello Worldé"],"ok":0}
+{"fn":"fuzzyScore","args":["e","é"],"ok":263}
+{"fn":"fuzzyScore","args":["  padded  ","straße"],"ok":0}
+{"fn":"fuzzyScore","args":["é","ns:key.patha.b.c"],"ok":0}
+{"fn":"fuzzyScore","args":["line1\nline2HELLO","tab\tseparatedemoji 👍🏽 mix"],"ok":0}
+{"fn":"fuzzyScore","args":["o","hello"],"ok":0}
+{"fn":"fuzzyScore","args":[":tab\tseparated","﻿bom"],"ok":0}
+{"fn":"fuzzyScore","args":["😀",".leadinghello world"],"ok":-2}
+{"fn":"fuzzyScore","args":["a.b.cstraße","straße"],"ok":0}
+{"fn":"fuzzyScore","args":["ns:key.path","emoji 👍🏽 mix"],"ok":0}
+{"fn":"fuzzyScore","args":["","a😀b😀c"],"ok":0}
+{"fn":"fuzzyScore","args":["trailing.","a.b.c﻿bom"],"ok":0}
+{"fn":"fuzzyScore","args":["line1\nline2","ünïcödéa:b:c"],"ok":0}
+{"fn":"fuzzyScore","args":["abc","tab\tseparated"],"ok":0}
+{"fn":"fuzzyScore","args":[".leading","tab\tseparatedHello World"],"ok":0}
+{"fn":"fuzzyScore","args":["{name} has {count} items",":"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","H"],"ok":0}
+{"fn":"fuzzyScore","args":["{name} has {count} items","t}"],"ok":0}
+{"fn":"fuzzyScore","args":[".leading","abc"],"ok":0}
+{"fn":"fuzzyScore","args":["eparate","tab\tseparated"],"ok":30}
+{"fn":"fuzzyScore","args":["emoji 👍🏽 mix","src/a/b.ts./x/**/*.json"],"ok":0}
+{"fn":"fuzzyScore","args":["a.b.ctrailing.","  padded  "],"ok":0}
+{"fn":"fuzzyScore","args":["tab\tseparated","İstanbul"],"ok":0}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣtab\tseparated","b\tseparat"],"ok":0}
+{"fn":"fuzzyScore","args":["﻿bom","./x/**/*.json"],"ok":0}
+{"fn":"fuzzyScore","args":["c","a.b.c"],"ok":57}
+{"fn":"fuzzyScore","args":["日本語のテキスト","ünïcödé"],"ok":-3}
+{"fn":"fuzzyScore","args":["HELLO","﻿bom"],"ok":0}
+{"fn":"fuzzyScore","args":["ab","a😀b😀c"],"ok":5}
+{"fn":"fuzzyScore","args":["é","e"],"ok":63}
+{"fn":"fuzzyScore","args":["a","日本語のテキスト"],"ok":0}
+{"fn":"fuzzyScore","args":["🏽 m","emoji 👍🏽 mix"],"ok":60}
+{"fn":"fuzzyScore","args":["hello worldns:key.path","src/a/b.tsa..b"],"ok":0}
+{"fn":"fuzzyScore","args":["İstanbul","nb"],"ok":0}
+{"fn":"fuzzyScore","args":["İstanbul",".leadingİstanbul"],"ok":0}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣ",".leading"],"ok":-1}
+{"fn":"fuzzyScore","args":["é","tab\tseparated"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO{name} has {count} items","a"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","L"],"ok":0}
+{"fn":"fuzzyScore","args":["tems{name} has {coun","{name} has {count} items{name} has {count} items"],"ok":239}
+{"fn":"fuzzyScore","args":["key_name-1","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["key_name-1","ab"],"ok":0}
+{"fn":"fuzzyScore","args":["{name} has {count} items","  padded  "],"ok":0}
+{"fn":"fuzzyScore","args":["key_name-1",".leading"],"ok":0}
+{"fn":"fuzzyScore","args":["emoji 👍🏽 mixtab\tseparated","a:b:cHello World"],"ok":0}
+{"fn":"fuzzyScore","args":[":",":"],"ok":1000}
+{"fn":"fuzzyScore","args":["src/a/b.ts","hello"],"ok":0}
+{"fn":"fuzzyScore","args":["a..b",".."],"ok":0}
+{"fn":"fuzzyScore","args":["ünïcödé","ΣΊΣΥΦΟΣ"],"ok":0}
+{"fn":"fuzzyScore","args":["key_name-1😀","İstanbul"],"ok":0}
+{"fn":"fuzzyScore","args":["{name} has {count} items.leading","line1\nline2"],"ok":0}
+{"fn":"fuzzyScore","args":["nt} items  pa","{name} has {count} items  padded  "],"ok":137}
+{"fn":"fuzzyScore","args":["日本語のテキスト","ns:key.path"],"ok":-3}
+{"fn":"fuzzyScore","args":["straße","{name} has {count} items"],"ok":0}
+{"fn":"fuzzyScore","args":[":","a😀b😀cünïcödé"],"ok":-6}
+{"fn":"fuzzyScore","args":["﻿bom","hello world"],"ok":0}
+{"fn":"fuzzyScore","args":[".leading","ns:key.path"],"ok":0}
+{"fn":"fuzzyScore","args":["hello","Hello World"],"ok":278}
+{"fn":"fuzzyScore","args":["ns:key.path","straße"],"ok":0}
+{"fn":"fuzzyScore","args":["a.b.c","😀"],"ok":0}
+{"fn":"fuzzyScore","args":["😀","key_name-1a"],"ok":-3}
+{"fn":"fuzzyScore","args":["key_name-1","-"],"ok":0}
+{"fn":"fuzzyScore","args":["straße","abc"],"ok":0}
+{"fn":"fuzzyScore","args":["st","İstanbul"],"ok":64}
+{"fn":"fuzzyScore","args":["a.b.c","emoji 👍🏽 mix"],"ok":0}
+{"fn":"fuzzyScore","args":[".leading","日本語のテキストa:b:c"],"ok":0}
+{"fn":"fuzzyScore","args":["﻿bom","日本語のテキスト"],"ok":0}
+{"fn":"fuzzyScore","args":["trailing.😀","trailing.trailing."],"ok":90}
+{"fn":"fuzzyScore","args":["ns:key.path",""],"ok":0}
+{"fn":"fuzzyScore","args":[" m","emoji 👍🏽 mix"],"ok":60}
+{"fn":"fuzzyScore","args":["日本語のテキストline1\nline2","語"],"ok":0}
+{"fn":"fuzzyScore","args":[" 👍🏽 ","emoji 👍🏽 mix"],"ok":-2}
+{"fn":"fuzzyScore","args":["日本語のテキスト","{name} has {count} items"],"ok":-4}
+{"fn":"fuzzyScore","args":["./x/**/*.json","hello"],"ok":0}
+{"fn":"fuzzyScore","args":["{name} has {count} itemsHello World","temsH"],"ok":0}
+{"fn":"fuzzyScore","args":["a.b.c","é"],"ok":0}
+{"fn":"fuzzyScore","args":[".leading",""],"ok":0}
+{"fn":"fuzzyScore","args":["straße  padded  ","日本語のテキスト"],"ok":0}
+{"fn":"fuzzyScore","args":["loline1\nlin","helloline1\nline2"],"ok":100}
+{"fn":"fuzzyScore","args":["Hello World./x/**/*.json","ns:key.path"],"ok":0}
+{"fn":"fuzzyScore","args":["  padded  ns:key.path","ünïcödé"],"ok":0}
+{"fn":"fuzzyScore","args":["trailing.","﻿bom"],"ok":0}
+{"fn":"fuzzyScore","args":["tab\tseparatedHello World","😀emoji 👍🏽 mix"],"ok":0}
+{"fn":"fuzzyScore","args":["a..b","é"],"ok":0}
+{"fn":"fuzzyScore","args":["./x/**/*.json","*."],"ok":0}
+{"fn":"fuzzyScore","args":["日本語のテキスト","key_name-1"],"ok":-3}
+{"fn":"fuzzyScore","args":["日","日本語のテキスト"],"ok":200}
+{"fn":"fuzzyScore","args":["./x/**/*.jsonline1\nline2","emoji 👍🏽 mix"],"ok":0}
+{"fn":"fuzzyScore","args":["é","a😀b😀c"],"ok":0}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣ","ΥΦ"],"ok":0}
+{"fn":"fuzzyScore","args":["{name} has {count} items","日本語のテキストabc"],"ok":0}
+{"fn":"fuzzyScore","args":["straße","İstanbul"],"ok":0}
+{"fn":"fuzzyScore","args":["./x/**/*.json",""],"ok":0}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣ","ab"],"ok":-1}
+{"fn":"fuzzyScore","args":["a..b","key_name-1key_name-1"],"ok":0}
+{"fn":"fuzzyScore","args":["hello","hell"],"ok":0}
+{"fn":"fuzzyScore","args":["a..b","a:b:c"],"ok":123}
+{"fn":"fuzzyScore","args":["HELLO","  padded  "],"ok":0}
+{"fn":"fuzzyScore","args":["","😀"],"ok":0}
+{"fn":"fuzzyScore","args":["abc","a:b:ctab\tseparated"],"ok":4}
+{"fn":"fuzzyScore","args":["日本語のテキスト","ünïcödékey_name-1"],"ok":-6}
+{"fn":"fuzzyScore","args":["﻿bom","line1\nline2"],"ok":0}
+{"fn":"fuzzyScore","args":["A..B","a..b"],"ok":1000}
+{"fn":"fuzzyScore","args":["trailing.","il"],"ok":0}
+{"fn":"fuzzyScore","args":["İstanbul","emoji 👍🏽 mixkey_name-1"],"ok":0}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣ","a😀b😀c"],"ok":-3}
+{"fn":"fuzzyScore","args":["日本語のテキスト","é./x/**/*.json"],"ok":-3}
+{"fn":"fuzzyScore","args":[":","line1\nline2"],"ok":-2}
+{"fn":"fuzzyScore","args":["  padded  Hello World","  p"],"ok":0}
+{"fn":"fuzzyScore","args":["eading",".leading"],"ok":30}
+{"fn":"fuzzyScore","args":["é","﻿bomtrailing."],"ok":0}
+{"fn":"fuzzyScore","args":["  padded  ","d"],"ok":0}
+{"fn":"fuzzyScore","args":["héllo wörld","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["👍🏽 thumbs","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["日本語","src/a/b.ts"],"ok":-4}
+{"fn":"fuzzyScore","args":["","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["é","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["İstanbul","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["straße","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["ılık ırmak","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["👨‍👩‍👧 family","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["a b","src/a/b.ts"],"ok":118}
+{"fn":"fuzzyScore","args":["ΣΊΣΥΦΟΣ","src/a/b.ts"],"ok":-4}
+{"fn":"fuzzyScore","args":["a😀b","src/a/b.ts"],"ok":118}
+{"fn":"fuzzyScore","args":["﻿bom","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["a²b x½ y①","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["aⅠb Ⅻ","src/a/b.ts"],"ok":118}
+{"fn":"fuzzyScore","args":["a𐐀b 𝐀bc","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["कि ٣٤","src/a/b.ts"],"ok":-4}
+{"fn":"fuzzyScore","args":["Iı İi","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["K K k","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["ſ s S","src/a/b.ts"],"ok":124}
+{"fn":"fuzzyScore","args":["x‍y 👨‍👩‍👧","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["a b c　d","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["١٢٣ ٤٥","src/a/b.ts"],"ok":-4}
+{"fn":"fuzzyScore","args":["𝟘𝟙 ²³","src/a/b.ts"],"ok":-4}
+{"fn":"fuzzyScore","args":["snake_case foo-bar o'neil","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["ǅungla Ǆ","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["one\r\ntwo threefour","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["café café","src/a/b.ts"],"ok":0}
+{"fn":"fuzzyScore","args":["ΣΑΣ σας ς","src/a/b.ts"],"ok":-4}
+{"fn":"fuzzyScore","args":["HELLO","héllo wörld"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","👍🏽 thumbs"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","日本語"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO",""],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","é"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","ılık ırmak"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","👨‍👩‍👧 family"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","a b"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","ΣΊΣΥΦΟΣ"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","a😀b"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","a²b x½ y①"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","aⅠb Ⅻ"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","a𐐀b 𝐀bc"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","कि ٣٤"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","Iı İi"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","K K k"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","ſ s S"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","x‍y 👨‍👩‍👧"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","a b c　d"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","١٢٣ ٤٥"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","𝟘𝟙 ²³"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","snake_case foo-bar o'neil"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","ǅungla Ǆ"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","one\r\ntwo threefour"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","café café"],"ok":0}
+{"fn":"fuzzyScore","args":["HELLO","ΣΑΣ σας ς"],"ok":0}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["ΣΊΣΥΦΟΣ",true,{"$undefined":true}],"error":"Invalid value used as weak map key"}
+{"fn":"matchActions","args":["key_name-1tab\tseparated",[{"id":"line1\nline2","title":"HELLO","keywords":["😀a","ünïcödé"]},{"id":"tab\tseparated","title":"./x/**/*.json","keywords":["  padded  "]},{"id":"a😀b😀cline1\nline2","title":"İstanbul","keywords":["HELLO"]}],-2.5],"ok":[]}
+{"fn":"matchActions","args":["src/a/b.ts",{},-1],"error":"Invalid array length"}
+{"fn":"matchActions","args":["日本語のテキスト",[{"id":"emoji 👍🏽 mix","title":"﻿bomkey_name-1","keywords":[]},{"id":"😀","title":"line1\nline2"},{"id":".leading","title":"﻿bom","keywords":["İstanbul",":","abc"]}],0.5],"ok":[]}
+{"fn":"matchActions","args":[":",[{"id":"a😀b😀ca😀b😀c","title":"İstanbula..b","keywords":["a","﻿bom"]},{"id":"İstanbul","title":"hello world","keywords":[]},{"id":"","title":"日本語のテキスト.leading","keywords":["😀","tab\tseparated","./x/**/*.jsonhello world"]}]],"ok":[]}
+{"fn":"matchActions","args":["  padded  ",[{"id":"tab\tseparated","title":"hello world","keywords":["a..b","a:b:c"]}],2147483648],"ok":[]}
+{"fn":"matchActions","args":["key_name-1",[{"id":"a","title":"tab\tseparated"},{"id":"{name} has {count} items","title":"emoji 👍🏽 mix","keywords":[]}],1000000],"ok":[]}
+{"fn":"matchActions","args":["straße",[{"id":"Hello World","title":"{name} has {count} itemssrc/a/b.ts","keywords":["emoji 👍🏽 mix","key_name-1  padded  ",""]},{"id":"ΣΊΣΥΦΟΣ","title":"a😀b😀c"}],42],"ok":[]}
+{"fn":"matchActions","args":["hello",[{"id":"😀","title":"HELLO","keywords":["emoji 👍🏽 mix","Hello Worldhello",""]}],1000],"ok":[{"action":{"id":"😀","title":"HELLO","keywords":["emoji 👍🏽 mix","Hello Worldhello",""]},"score":1000,"exact":true}]}
+{"fn":"matchActions","args":["hello",[{"id":"abc","title":"Hello World","keywords":["hello","😀","tab\tseparated"]},{"id":"a😀b😀c","title":"abc","keywords":["Hello World"]},{"id":"key_name-1","title":"straße","keywords":["a:b:c","a..b","İstanbul"]}],{"$undefined":true}],"ok":[{"action":{"id":"abc","title":"Hello World","keywords":["hello","😀","tab\tseparated"]},"score":995,"exact":true},{"action":{"id":"a😀b😀c","title":"abc","keywords":["Hello World"]},"score":273,"exact":false}]}
+{"fn":"matchActions","args":["Hello World",[{"id":"{name} has {count} items","title":"İstanbul"}]],"ok":[]}
+{"fn":"matchActions","args":["﻿bomsrc/a/b.ts",[]],"ok":[]}
+{"fn":"matchActions","args":["tab\tseparated",[{"id":"a.b.c","title":"trailing.","keywords":["emoji 👍🏽 mix","straße"]},{"id":"straßehello","title":"trailing.","keywords":["a"]},{"id":"Hello World","title":"a..bé","keywords":["hello","a"]}],10],"ok":[]}
+{"fn":"matchActions","args":["straße",[{"id":"ünïcödéé","title":"./x/**/*.json","keywords":[".leading","ab","Hello World"]},{"id":"a..b","title":"line1\nline2","keywords":["hello world","line1\nline2"]}],2],"ok":[]}
+{"fn":"matchActions","args":["a.b.c",[],2],"ok":[]}
+{"fn":"matchActions","args":["ns:key.path",[{"id":"é","title":"line1\nline2","keywords":[]},{"id":"a😀b😀c","title":"","keywords":["a😀b😀c","  padded  ","日本語のテキスト"]},{"id":"","title":"emoji 👍🏽 mix"}],0.5],"ok":[]}
+{"fn":"matchActions","args":["a.b.c",[{"id":"HELLO","title":"a:b:c","keywords":["a😀b😀c"]}],{"$undefined":true}],"ok":[{"action":{"id":"HELLO","title":"a:b:c","keywords":["a😀b😀c"]},"score":183,"exact":false}]}
+{"fn":"matchActions","args":["ns:key.path",[{"id":"a:b:c","title":"ns:key.path","keywords":["😀","日本語のテキストé","./x/**/*.json"]}]],"ok":[{"action":{"id":"a:b:c","title":"ns:key.path","keywords":["😀","日本語のテキストé","./x/**/*.json"]},"score":1000,"exact":true}]}
+{"fn":"matchActions","args":["ab",[{"id":"ns:key.path","title":".leading:"}],{"$num":"-Infinity"}],"ok":[]}
+{"fn":"matchActions","args":[":",[{"id":"ababc","title":"src/a/b.tsa..b","keywords":["HELLO","straße","日本語のテキスト"]},{"id":"ΣΊΣΥΦΟΣ","title":"hello world","keywords":["a😀b😀ca😀b😀c",".leading"]}],-1],"ok":[]}
+{"fn":"matchActions","args":["😀",[],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["ns:key.path",[{"id":"a..ba..b","title":"{name} has {count} itemsline1\nline2","keywords":[".leading","straße","hello world"]}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["é",[{"id":"HELLO","title":"emoji 👍🏽 mix","keywords":["a:b:c"]}],2],"ok":[{"action":{"id":"HELLO","title":"emoji 👍🏽 mix","keywords":["a:b:c"]},"score":62,"exact":false}]}
+{"fn":"matchActions","args":["straßeünïcödé",[],0],"ok":[]}
+{"fn":"matchActions","args":["ab",[{"id":"hello world","title":"İstanbul","keywords":["hello{name} has {count} items","trailing."]},{"id":"line1\nline2","title":"tab\tseparated","keywords":[]},{"id":"emoji 👍🏽 mix","title":"😀","keywords":[".leading","ns:key.path"]}],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["﻿bom",[{"id":"tab\tseparated","title":"key_name-1","keywords":["a😀b😀c"]},{"id":"a😀b😀c","title":"a.b.c","keywords":["{name} has {count} items"]},{"id":"{name} has {count} items","title":"ΣΊΣΥΦΟΣ","keywords":["trailing.","src/a/b.tsa"]}],3],"ok":[]}
+{"fn":"matchActions","args":["日本語のテキスト",[{"id":"trailing.","title":"abcHELLO","keywords":["HELLO","a","İstanbul"]},{"id":"","title":"a..b","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c日本語のテキスト","title":"a😀b😀cünïcödé","keywords":["src/a/b.ts","  padded  a"]}],1000],"ok":[]}
+{"fn":"matchActions","args":["日本語のテキスト",[{"id":"./x/**/*.json","title":"HELLO","keywords":["ΣΊΣΥΦΟΣhello"]}]],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":"hello","title":"a😀b😀c","keywords":["日本語のテキストΣΊΣΥΦΟΣ","é","hello world"]},{"id":"﻿bomline1\nline2","title":"a😀b😀c","keywords":[]},{"id":"éé","title":"tab\tseparated","keywords":[".leading","hello world","tab\tseparatedHELLO"]}],0.5],"ok":[]}
+{"fn":"matchActions","args":["  padded  ",[{"id":"./x/**/*.json","title":"src/a/b.tstab\tseparated","keywords":["ns:key.path","hello world","ab:"]},{"id":"straße","title":"a:b:c","keywords":["a:b:c","./x/**/*.json"]}],2147483648],"ok":[]}
+{"fn":"matchActions","args":["hello",[{"id":"abİstanbul","title":"hello worldHELLO","keywords":["aΣΊΣΥΦΟΣ","a"]},{"id":"./x/**/*.json","title":"ns:key.patha.b.c","keywords":["tab\tseparated"]}]],"ok":[{"action":{"id":"abİstanbul","title":"hello worldHELLO","keywords":["aΣΊΣΥΦΟΣ","a"]},"score":278,"exact":false}]}
+{"fn":"matchActions","args":["  padded  ",true],"error":"Invalid value used as weak map key"}
+{"fn":"matchActions","args":["HELLO",[{"id":"HELLO","title":"trailing.","keywords":["﻿bom","hello﻿bom"]},{"id":"{name} has {count} items","title":"straßea..b","keywords":["./x/**/*.json","line1\nline2trailing."]},{"id":"trailing.","title":":","keywords":["helloa:b:c","tab\tseparated"]}],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":[".leading",[{"id":"src/a/b.ts","title":"a","keywords":["a:b:c","hello world","HELLO"]},{"id":"emoji 👍🏽 mix","title":"hello﻿bom","keywords":["hello world","😀"]}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2a",[{"id":"﻿bom","title":"HELLO  padded  ","keywords":["./x/**/*.json",":"]},{"id":"a.b.c","title":"a","keywords":["Hello World"]}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["abc",[{"id":":emoji 👍🏽 mix","title":"a😀b😀c","keywords":["{name} has {count} items","HELLO"]}],10],"ok":[{"action":{"id":":emoji 👍🏽 mix","title":"a😀b😀c","keywords":["{name} has {count} items","HELLO"]},"score":5,"exact":false}]}
+{"fn":"matchActions","args":["key_name-1",[{"id":":","title":"a..b","keywords":[".leadingkey_name-1"]},{"id":"a.b.cHello World","title":"HELLO","keywords":["./x/**/*.json","Hello World"]},{"id":"./x/**/*.json","title":"a:b:c"}],0],"ok":[]}
+{"fn":"matchActions","args":["{name} has {count} items日本語のテキスト",[{"id":"straße","title":"ΣΊΣΥΦΟΣkey_name-1","keywords":[".leading"]},{"id":"{name} has {count} items","title":"a😀b😀c","keywords":["a:b:cabc","hello world",""]}],2],"ok":[]}
+{"fn":"matchActions","args":["a:b:c",["a",1],10],"error":"Cannot read properties of undefined (reading 'toLowerCase')"}
+{"fn":"matchActions","args":["",[{"id":"é","title":"ns:key.path","keywords":[".leading","é","src/a/b.ts"]},{"id":"a😀b😀c","title":"﻿bom","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["日本語のテキスト","x",{"$num":"-0"}],"error":"Invalid value used as weak map key"}
+{"fn":"matchActions","args":["ünïcödé",[],42],"ok":[]}
+{"fn":"matchActions","args":["ns:key.path",[]],"ok":[]}
+{"fn":"matchActions","args":["ΣΊΣΥΦΟΣ",[]],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"abc","title":"Hello World","keywords":["straße./x/**/*.json","İstanbul"]}],{"$num":"-Infinity"}],"ok":[]}
+{"fn":"matchActions","args":["a",true,{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["trailing.a",true,100],"error":"Invalid value used as weak map key"}
+{"fn":"matchActions","args":["{name} has {count} items",[{"id":"line1\nline2","title":"﻿bom"},{"id":"Hello World","title":"a..b","keywords":[]},{"id":".leading","title":"{name} has {count} items","keywords":["abc"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":[":İstanbul",[{"id":"src/a/b.ts","title":"emoji 👍🏽 mix","keywords":["﻿bom"]},{"id":"trailing.","title":"İstanbul","keywords":[]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["key_name-1",[]],"ok":[]}
+{"fn":"matchActions","args":["ΣΊΣΥΦΟΣ",[{"id":"line1\nline2","title":"trailing."},{"id":"trailing.","title":"helloabc","keywords":["","é"]}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["abc",[],1000000],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":"{name} has {count} itemsünïcödé","title":"./x/**/*.json","keywords":["  padded  ","a😀b😀c日本語のテキスト"]}],1000],"ok":[]}
+{"fn":"matchActions","args":["  padded  ",[],0],"ok":[]}
+{"fn":"matchActions","args":["{name} has {count} items",[{"id":"ab","title":"emoji 👍🏽 mix"}],9007199254740992],"ok":[]}
+{"fn":"matchActions","args":["./x/**/*.json",[],2147483648],"ok":[]}
+{"fn":"matchActions","args":[".leading",[{"id":"abc","title":"ünïcödé","keywords":[":","a😀b😀c"]},{"id":"./x/**/*.json😀","title":"src/a/b.ts","keywords":["ns:key.path","abc"]}],1000000],"ok":[]}
+{"fn":"matchActions","args":["abc",[],9007199254740992],"ok":[]}
+{"fn":"matchActions","args":["emoji 👍🏽 mix",[{"id":"  padded  ","title":"hello"},{"id":"straßens:key.path","title":"HELLO","keywords":["a:","./x/**/*.json","line1\nline2"]}],3],"ok":[]}
+{"fn":"matchActions","args":["a",[{"id":"﻿bom","title":"./x/**/*.json","keywords":["﻿boma.b.c"]},{"id":"  padded  ","title":"a.b.c","keywords":["ünïcödé","a:b:c"]}],1000000],"ok":[]}
+{"fn":"matchActions","args":["{name} has {count} items",[]],"ok":[]}
+{"fn":"matchActions","args":["a:b:c",[],-2.5],"ok":[]}
+{"fn":"matchActions","args":["a.b.c",[],0],"ok":[]}
+{"fn":"matchActions","args":["é",[{"id":"日本語のテキスト","title":"ns:key.path"},{"id":"abc","title":"日本語のテキスト","keywords":["trailing."]},{"id":"İstanbulemoji 👍🏽 mix","title":"ünïcödé","keywords":["a😀b😀c"]}],2147483648],"ok":[]}
+{"fn":"matchActions","args":["a",[{"id":"ΣΊΣΥΦΟΣa:b:c","title":"﻿bom","keywords":["a..b"]},{"id":"line1\nline2","title":"a","keywords":["ΣΊΣΥΦΟΣ"]},{"id":"aΣΊΣΥΦΟΣ","title":"  padded  ","keywords":["é","  padded  "]}],0.5],"ok":[]}
+{"fn":"matchActions","args":["straße",[{"id":"./x/**/*.json","title":"a"},{"id":"İstanbul","title":"hello"},{"id":"tab\tseparatedhello","title":"abc"}],0],"ok":[]}
+{"fn":"matchActions","args":["﻿bom",[],1],"ok":[]}
+{"fn":"matchActions","args":["{name} has {count} items",[{"id":"line1\nline2","title":"  padded  "},{"id":"./x/**/*.json","title":"a😀b😀c","keywords":[]},{"id":"hello world","title":"日本語のテキスト"}],0],"ok":[]}
+{"fn":"matchActions","args":["straße",[{"id":"./x/**/*.jsonstraße","title":"","keywords":["日本語のテキスト","{name} has {count} itemshello","😀"]},{"id":"straße","title":"tab\tseparatedtab\tseparated"},{"id":".leading","title":"hello","keywords":["key_name-1","hello world","HELLO"]}],1000],"ok":[]}
+{"fn":"matchActions","args":["key_name-1abc",[],100],"ok":[]}
+{"fn":"matchActions","args":["  padded  ",[{"id":"","title":"  padded  ","keywords":["Hello World","a.b.ca..b","trailing."]},{"id":"{name} has {count} itemstrailing.","title":"a😀b😀c","keywords":[]}],2147483648],"ok":[{"action":{"id":"","title":"  padded  ","keywords":["Hello World","a.b.ca..b","trailing."]},"score":83,"exact":false}]}
+{"fn":"matchActions","args":["line1\nline2ns:key.path",[{"id":"hello","title":"hello world日本語のテキスト","keywords":["😀ΣΊΣΥΦΟΣ","line1\nline2","hello world:"]},{"id":"tab\tseparatedünïcödé","title":"line1\nline2","keywords":[]},{"id":"src/a/b.ts","title":"ünïcödé","keywords":[":","日本語のテキスト","日本語のテキスト"]}]],"ok":[]}
+{"fn":"matchActions","args":["HELLO",[{"id":"","title":"tab\tseparated","keywords":["ab"]},{"id":"./x/**/*.json","title":"abc","keywords":["src/a/b.tsHello World"]}],1000000],"ok":[{"action":{"id":"./x/**/*.json","title":"abc","keywords":["src/a/b.tsHello World"]},"score":20,"exact":false}]}
+{"fn":"matchActions","args":["a..b",[]],"ok":[]}
+{"fn":"matchActions","args":["straße",[{"id":"line1\nline2","title":"","keywords":["﻿bom","a😀b😀c"]},{"id":"{name} has {count} items","title":"trailing.emoji 👍🏽 mix","keywords":[]},{"id":"./x/**/*.json","title":"Hello World","keywords":["HELLO","./x/**/*.json"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["﻿bom",[],10],"ok":[]}
+{"fn":"matchActions","args":["a😀b😀c",[],10],"ok":[]}
+{"fn":"matchActions","args":["a",{"a":{"b":"c"}},{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["﻿bom",[],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["ns:key.path",[{"id":"key_name-1emoji 👍🏽 mix","title":"","keywords":["a..b","ΣΊΣΥΦΟΣ"]},{"id":"﻿bom","title":"src/a/b.ts","keywords":["ünïcödé"]},{"id":"key_name-1","title":"a..b","keywords":["ΣΊΣΥΦΟΣ","Hello World","key_name-1"]}],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["ns:key.path",[{"id":"./x/**/*.json","title":"hello world","keywords":["emoji 👍🏽 mixé",":"]},{"id":".leading","title":"ünïcödé","keywords":["é","hello","line1\nline2"]}],0],"ok":[]}
+{"fn":"matchActions","args":["a:b:c",[{"id":"a😀b😀c","title":"abchello world"}],0.5],"ok":[]}
+{"fn":"matchActions","args":["  padded  line1\nline2",[{"id":"HELLO","title":"﻿bom","keywords":["abc","line1\nline2"]}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":"trailing.","title":"ünïcödé﻿bom","keywords":["a:b:c","./x/**/*.json"]},{"id":"hello:","title":"  padded  {name} has {count} items"},{"id":"Hello World","title":"HELLO","keywords":["  padded  "]}],-1],"ok":[]}
+{"fn":"matchActions","args":["İstanbul",[{"id":"é","title":":"}]],"ok":[]}
+{"fn":"matchActions","args":["straße",{},100],"error":"Invalid array length"}
+{"fn":"matchActions","args":["İstanbul",[{"id":"a😀b😀c{name} has {count} items","title":"  padded  ","keywords":["emoji 👍🏽 mix","ab😀","ns:key.path"]},{"id":"ünïcödé","title":"src/a/b.ts","keywords":[]}],0],"ok":[]}
+{"fn":"matchActions","args":[".leading",null,100],"error":"Invalid value used as weak map key"}
+{"fn":"matchActions","args":["İstanbul",[{"id":"abc","title":"straße","keywords":[]},{"id":"src/a/b.tsline1\nline2","title":"a..b","keywords":["Hello World"]},{"id":"trailing.","title":"straße","keywords":["日本語のテキストns:key.path","a:b:c","  padded  key_name-1"]}],10],"ok":[]}
+{"fn":"matchActions","args":["straße",{},{"$num":"-Infinity"}],"error":"Invalid array length"}
+{"fn":"matchActions","args":[":.leading",[]],"ok":[]}
+{"fn":"matchActions","args":["日本語のテキスト",[{"id":"trailing.","title":"abcline1\nline2","keywords":[]},{"id":"hello world","title":"ab"},{"id":"./x/**/*.json","title":"","keywords":["HELLO﻿bom"]}],3],"ok":[]}
+{"fn":"matchActions","args":["a..b",[{"id":"ns:key.path","title":"straße","keywords":["key_name-1","a..ba:b:c"]},{"id":"  padded  straße","title":"ns:key.path"}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["abemoji 👍🏽 mix",{"a":"b"},{"$num":"-Infinity"}],"error":"Invalid array length"}
+{"fn":"matchActions","args":["abca😀b😀c",[{"id":"a:b:c","title":"HELLO","keywords":["abc","./x/**/*.json"]},{"id":"line1\nline2","title":"﻿bom"}],-1],"ok":[]}
+{"fn":"matchActions","args":["ab",[],3],"ok":[]}
+{"fn":"matchActions","args":["hello world",[{"id":"ΣΊΣΥΦΟΣ","title":"./x/**/*.json","keywords":[]}],{"$num":"-Infinity"}],"ok":[]}
+{"fn":"matchActions","args":[".leading",[]],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":".leading","title":"tab\tseparated","keywords":[".leading","ab"]}]],"ok":[]}
+{"fn":"matchActions","args":["HELLOemoji 👍🏽 mix",[{"id":"{name} has {count} items","title":"日本語のテキスト","keywords":["line1\nline2","﻿bom😀"]},{"id":"key_name-1😀","title":".leading"}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["  padded  ",[{"id":"trailing.","title":"{name} has {count} items","keywords":[]},{"id":"HELLO","title":"src/a/b.ts"}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":[":",[{"id":"emoji 👍🏽 mix","title":"日本語のテキスト"}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["abc",[{"id":"a:b:c","title":"{name} has {count} items"},{"id":"日本語のテキスト","title":"İstanbul","keywords":["ΣΊΣΥΦΟΣHELLO",":"]}],42],"ok":[]}
+{"fn":"matchActions","args":["a..b",[{"id":"ünïcödéünïcödé","title":"./x/**/*.json","keywords":[".leadingünïcödé"]},{"id":"a..b","title":"  padded  ","keywords":["ab","tab\tseparated"]},{"id":"﻿boma:b:c","title":"a😀b😀c","keywords":["./x/**/*.json"]}],0],"ok":[]}
+{"fn":"matchActions","args":["{name} has {count} items",[{"id":"tab\tseparated","title":"key_name-1"}],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["日本語のテキストabc",[{"id":"a.b.c","title":"﻿bom"}],100],"ok":[]}
+{"fn":"matchActions","args":["trailing.hello",[{"id":"hello","title":"src/a/b.ts","keywords":["HELLO","src/a/b.ts","é"]},{"id":"﻿bom","title":"a..b","keywords":[]}],9007199254740992],"ok":[]}
+{"fn":"matchActions","args":["HELLO",["a",1],{"$num":"-Infinity"}],"error":"Cannot read properties of undefined (reading 'toLowerCase')"}
+{"fn":"matchActions","args":["trailing.","x",1],"error":"Invalid value used as weak map key"}
+{"fn":"matchActions","args":["HELLO",[{"id":"a","title":"trailing."},{"id":"a..b","title":"a😀b😀c"},{"id":"﻿bom","title":"HELLOab"}],10],"ok":[{"action":{"id":"﻿bom","title":"HELLOab"},"score":279,"exact":false}]}
+{"fn":"matchActions","args":["{name} has {count} itemsabc",[{"id":"a😀b😀c","title":"ab","keywords":["a😀b😀c","hello world"]}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["İstanbultab\tseparated",[{"id":"é","title":"HELLO","keywords":["a😀b😀c"]},{"id":"a😀b😀c","title":""},{"id":"key_name-1","title":"src/a/b.ts","keywords":[]}],0],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"HELLO","title":"./x/**/*.json","keywords":["ns:key.pathtab\tseparated","{name} has {count} items","😀"]}],3],"ok":[]}
+{"fn":"matchActions","args":["a😀b😀cabc",[{"id":"ΣΊΣΥΦΟΣ","title":"line1\nline2"},{"id":"ns:key.pathns:key.path","title":"./x/**/*.json","keywords":["  padded  "]}],1],"ok":[]}
+{"fn":"matchActions","args":["HELLOa",[],1],"ok":[]}
+{"fn":"matchActions","args":["trailing.",[{"id":"a.b.c","title":"a","keywords":[]},{"id":"a.b.c","title":"İstanbul","keywords":[".leading"]}],0],"ok":[]}
+{"fn":"matchActions","args":["a.b.c",[],0.5],"ok":[]}
+{"fn":"matchActions","args":["hello",{"a":"b"},{"$undefined":true}],"error":"Invalid array length"}
+{"fn":"matchActions","args":[":",[{"id":"İstanbul","title":"emoji 👍🏽 mixa.b.c","keywords":[]},{"id":"  padded  ","title":"a:b:c"},{"id":"line1\nline2","title":"é","keywords":["a..b","tab\tseparated"]}],{"$num":"-Infinity"}],"ok":[]}
+{"fn":"matchActions","args":["Hello World",[{"id":"trailing.","title":"tab\tseparated","keywords":["hello world"]},{"id":"trailing.","title":"😀","keywords":["a..b","hello world"]}]],"ok":[{"action":{"id":"trailing.","title":"tab\tseparated","keywords":["hello world"]},"score":995,"exact":true},{"action":{"id":"trailing.","title":"😀","keywords":["a..b","hello world"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["a..b",[],0.5],"ok":[]}
+{"fn":"matchActions","args":["emoji 👍🏽 mix",[{"id":"ns:key.path","title":"","keywords":["line1\nline2"]},{"id":"a.b.cabc","title":"a.b.c","keywords":["straßehello world","a😀b😀c"]},{"id":"a","title":"a..b","keywords":["line1\nline2","hello worldhello world","a😀b😀c"]}],1000],"ok":[]}
+{"fn":"matchActions","args":["",["a",1]],"ok":[]}
+{"fn":"matchActions","args":["./x/**/*.json",[],1],"ok":[]}
+{"fn":"matchActions","args":["  padded  ",[{"id":"﻿bom","title":"Hello World"},{"id":"Hello Worldİstanbul","title":"emoji 👍🏽 mix","keywords":[]},{"id":"HELLO日本語のテキスト","title":"src/a/b.ts","keywords":["é"]}],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["tab\tseparated",[],100],"ok":[]}
+{"fn":"matchActions","args":["abc",[{"id":"a.b.c","title":"","keywords":["tab\tseparated"]}],2],"ok":[]}
+{"fn":"matchActions","args":["hello world",[],{"$num":"Infinity"}],"ok":[]}
+{"fn":"matchActions","args":["a",[],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["  padded  a😀b😀c",[{"id":"Hello Worldline1\nline2","title":"{name} has {count} items"},{"id":"trailing.","title":"a😀b😀c"},{"id":"straße","title":"é","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":"a😀b😀ckey_name-1","title":"./x/**/*.json"},{"id":"é","title":"emoji 👍🏽 mix","keywords":["hello world"]}],1000000],"ok":[]}
+{"fn":"matchActions","args":["key_name-1a😀b😀c",{"a":{"b":"c"}},42],"error":"Invalid array length"}
+{"fn":"matchActions","args":["{name} has {count} itemshello world",[{"id":"Hello World","title":"ns:key.path","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["abc",[{"id":"a😀b😀c","title":"ab","keywords":[]},{"id":"ab","title":"{name} has {count} items","keywords":["hello world","Hello World","é"]},{"id":"./x/**/*.json","title":"Hello World","keywords":["{name} has {count} items","line1\nline2"]}],-2.5],"ok":[]}
+{"fn":"matchActions","args":["😀",[{"id":"a..b","title":"﻿bomline1\nline2","keywords":["😀","ab"]}],2],"ok":[{"action":{"id":"a..b","title":"﻿bomline1\nline2","keywords":["😀","ab"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["trailing.",[],{"$num":"-Infinity"}],"ok":[]}
+{"fn":"matchActions","args":["é",[],42],"ok":[]}
+{"fn":"matchActions","args":["HELLO",[{"id":"","title":"a:b:c"},{"id":"日本語のテキスト","title":"ΣΊΣΥΦΟΣ"}],0.5],"ok":[]}
+{"fn":"matchActions","args":["HELLO",[],3],"ok":[]}
+{"fn":"matchActions","args":["straße",[{"id":"./x/**/*.jsonHELLO","title":"ΣΊΣΥΦΟΣ","keywords":["abc","a"]},{"id":"Hello World","title":"","keywords":["line1\nline2",":"]},{"id":"straße","title":"hello.leading"}],1000000],"ok":[]}
+{"fn":"matchActions","args":["abc",0,9007199254740992],"error":"Invalid value used as weak map key"}
+{"fn":"matchActions","args":["é",[{"id":"ünïcödéa","title":"a.b.c","keywords":[]},{"id":"{name} has {count} items","title":"atab\tseparated","keywords":["HELLO","ns:key.patha.b.c","é"]}],{"$num":"Infinity"}],"ok":[{"action":{"id":"{name} has {count} items","title":"atab\tseparated","keywords":["HELLO","ns:key.patha.b.c","é"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["  padded  ",[{"id":".leading","title":"emoji 👍🏽 mix","keywords":["key_name-1",".leading"]}]],"ok":[]}
+{"fn":"matchActions","args":["hello world:",[],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":".leading","title":"abc","keywords":[]},{"id":"ns:key.path","title":"tab\tseparatedΣΊΣΥΦΟΣ","keywords":[]}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["tab\tseparatedİstanbul",[{"id":"","title":"hello world","keywords":[]},{"id":"hello","title":"a😀b😀c","keywords":[]}],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["hello",[{"id":"HELLO","title":"Hello World","keywords":[]},{"id":"abc","title":"ab","keywords":[]},{"id":"tab\tseparated","title":"hello","keywords":["ünïcödé"]}]],"ok":[{"action":{"id":"tab\tseparated","title":"hello","keywords":["ünïcödé"]},"score":1000,"exact":true},{"action":{"id":"HELLO","title":"Hello World","keywords":[]},"score":278,"exact":false}]}
+{"fn":"matchActions","args":["key_name-1",[{"id":"😀","title":"﻿bom","keywords":["a😀b😀c","{name} has {count} items","astraße"]},{"id":"ΣΊΣΥΦΟΣ./x/**/*.json","title":"a:b:c","keywords":["  padded  ","a.b.c"]}],1000000],"ok":[]}
+{"fn":"matchActions","args":["Hello World",[{"id":"ünïcödé","title":"﻿bom"}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["  padded  ",[{"id":"HELLO","title":"ΣΊΣΥΦΟΣ","keywords":[]},{"id":"a:b:c","title":"straße"},{"id":"line1\nline2a:b:c","title":"line1\nline2"}],{"$num":"-Infinity"}],"ok":[]}
+{"fn":"matchActions","args":["src/a/b.ts:",[{"id":"hello world","title":"é","keywords":["ünïcödé","é"]},{"id":"abc","title":"ünïcödé","keywords":["İstanbul"]}],100],"ok":[]}
+{"fn":"matchActions","args":["ΣΊΣΥΦΟΣ",null,100],"error":"Invalid value used as weak map key"}
+{"fn":"matchActions","args":["ΣΊΣΥΦΟΣ",[{"id":"src/a/b.ts","title":"helloab","keywords":["trailing.İstanbul","İstanbultab\tseparated"]},{"id":"İstanbultab\tseparated","title":"ünïcödé","keywords":["ns:key.path"]}],-1],"ok":[]}
+{"fn":"matchActions","args":["",[],1],"ok":[]}
+{"fn":"matchActions","args":["a..b",[{"id":"a:b:c","title":".leading","keywords":[]},{"id":"src/a/b.ts","title":"hello worldΣΊΣΥΦΟΣ","keywords":[]},{"id":"straßeline1\nline2","title":"日本語のテキスト","keywords":["src/a/b.ts"]}],{"$num":"-Infinity"}],"ok":[]}
+{"fn":"matchActions","args":["tab\tseparated",[{"id":":ab","title":"ΣΊΣΥΦΟΣ","keywords":["key_name-1"]}],1000000],"ok":[]}
+{"fn":"matchActions","args":["hello",[{"id":"emoji 👍🏽 mix","title":"😀"},{"id":"ünïcödé","title":"a.b.c","keywords":["aΣΊΣΥΦΟΣ","hello","hello world"]}],{"$num":"Infinity"}],"ok":[{"action":{"id":"ünïcödé","title":"a.b.c","keywords":["aΣΊΣΥΦΟΣ","hello","hello world"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["ΣΊΣΥΦΟΣ",["a",1],2147483648],"error":"Cannot read properties of undefined (reading 'toLowerCase')"}
+{"fn":"matchActions","args":["a.b.c",[{"id":"日本語のテキスト","title":"a😀b😀c","keywords":["a..b"]}]],"ok":[{"action":{"id":"日本語のテキスト","title":"a😀b😀c","keywords":["a..b"]},"score":183,"exact":false}]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"ünïcödé","title":"key_name-1trailing.","keywords":["﻿bom﻿bom","line1\nline2",""]},{"id":"é","title":":{name} has {count} items","keywords":["{name} has {count} items","straße","ns:key.path"]}],0],"ok":[]}
+{"fn":"matchActions","args":["a.b.cemoji 👍🏽 mix",[{"id":"ans:key.path","title":"a😀b😀c","keywords":["hello world","key_name-1a😀b😀c"]},{"id":"İstanbul","title":"a😀b😀c","keywords":["ab"]},{"id":"a😀b😀c","title":"﻿bom","keywords":[]}],100],"ok":[]}
+{"fn":"matchActions","args":["src/a/b.ts",[{"id":"{name} has {count} items","title":"hello world","keywords":["ab","line1\nline2","ab"]}]],"ok":[]}
+{"fn":"matchActions","args":["é",[],-2.5],"ok":[]}
+{"fn":"matchActions","args":["key_name-1",[{"id":"hello world","title":"😀","keywords":["ünïcödé"]}],-2.5],"ok":[]}
+{"fn":"matchActions","args":["ünïcödé",[],3],"ok":[]}
+{"fn":"matchActions","args":["İstanbul",{"a":{"b":"c"}},1],"error":"Invalid array length"}
+{"fn":"matchActions","args":["tab\tseparated",[{"id":"{name} has {count} items","title":"","keywords":["HELLOİstanbul"]},{"id":"Hello World","title":"trailing.","keywords":["line1\nline2","abc","abc"]},{"id":"İstanbul","title":"a.b.c","keywords":["ünïcödé","HELLO"]}],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["a..b",[{"id":"{name} has {count} items","title":"😀","keywords":["Hello World"]},{"id":"a:b:c","title":"{name} has {count} items"}],1000],"ok":[]}
+{"fn":"matchActions","args":["İstanbul",[{"id":"ΣΊΣΥΦΟΣa.b.c","title":"a:b:c","keywords":["日本語のテキスト"]},{"id":"HELLO","title":"hello world"}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["{name} has {count} items",[{"id":"a😀b😀c","title":"a.b.c","keywords":[]}],1000000],"ok":[]}
+{"fn":"matchActions","args":["ünïcödé",true,42],"error":"Invalid value used as weak map key"}
+{"fn":"matchActions","args":["tab\tseparated",[],2147483648],"ok":[]}
+{"fn":"matchActions","args":["é",[{"id":"tab\tseparated","title":"line1\nline2","keywords":["Hello World","a.b.c","﻿bomhello"]}],0.5],"ok":[]}
+{"fn":"matchActions","args":["src/a/b.ts",[{"id":"straße","title":"ns:key.path"},{"id":"ΣΊΣΥΦΟΣ","title":"hello world","keywords":["{name} has {count} items","hello"]},{"id":"ünïcödé","title":"trailing.","keywords":["hello","hello"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["ΣΊΣΥΦΟΣstraße",[{"id":"ΣΊΣΥΦΟΣsrc/a/b.ts","title":"key_name-1a:b:c","keywords":["ΣΊΣΥΦΟΣ","a","😀"]},{"id":"😀./x/**/*.json","title":"./x/**/*.json﻿bom"},{"id":"ns:key.path﻿bom","title":"ünïcödé","keywords":["İstanbul😀"]}],100],"ok":[]}
+{"fn":"matchActions","args":["😀",[{"id":":","title":":","keywords":["a.b.ca:b:c"]}]],"ok":[]}
+{"fn":"matchActions","args":["hello",[{"id":"a😀b😀c","title":"ünïcödé","keywords":[]},{"id":"ns:key.pathns:key.path","title":"  padded  ","keywords":[""]}],0.5],"ok":[]}
+{"fn":"matchActions","args":["x","x",10],"ok":[]}
+{"fn":"matchActions","args":[".leading",[{"id":"İstanbul","title":"line1\nline2"},{"id":"İstanbul","title":"ns:key.path","keywords":["é"]},{"id":"hellohello world","title":"","keywords":["a"]}],1],"ok":[]}
+{"fn":"matchActions","args":["helloabc",[],42],"ok":[]}
+{"fn":"matchActions","args":["a.b.c",[],100],"ok":[]}
+{"fn":"matchActions","args":["  padded  ",[{"id":"ns:key.pathns:key.path","title":"é","keywords":["","trailing."]},{"id":"trailing.","title":"src/a/b.ts"},{"id":"tab\tseparated","title":":","keywords":["line1\nline2","tab\tseparated",":tab\tseparated"]}],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["a.b.c",[{"id":"a.b.c","title":"﻿bom","keywords":["a:b:c"]},{"id":"emoji 👍🏽 mixab","title":"ab","keywords":[]}],{"$num":"NaN"}],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"{name} has {count} items","title":"Hello World","keywords":["a..b","hello"]},{"id":".leading","title":"😀","keywords":["hello"]},{"id":"abhello world","title":"trailing.emoji 👍🏽 mix","keywords":["key_name-1"]}],-1],"ok":[]}
+{"fn":"matchActions","args":["a..b",[],10],"ok":[]}
+{"fn":"matchActions","args":["trailing.",[{"id":"abc","title":"Hello World"}],42],"ok":[]}
+{"fn":"matchActions","args":["é",[{"id":"ünïcödé","title":"trailing..leading","keywords":["abchello world"]},{"id":"abc","title":".leading","keywords":["  padded  ","src/a/b.ts"]},{"id":"  padded  ","title":"","keywords":["  padded  "]}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["abcns:key.path",[{"id":"a","title":"ünïcödé"},{"id":"é","title":"ΣΊΣΥΦΟΣ","keywords":["trailing."]}],0],"ok":[]}
+{"fn":"matchActions","args":["{name} has {count} items",["a",1]],"error":"Cannot read properties of undefined (reading 'toLowerCase')"}
+{"fn":"matchActions","args":[".leading",[{"id":"ns:key.path","title":"Hello World","keywords":[".leading"]}],{"$undefined":true}],"ok":[{"action":{"id":"ns:key.path","title":"Hello World","keywords":[".leading"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":[".leading",[],1],"ok":[]}
+{"fn":"matchActions","args":[":",[],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":[":","x",42],"ok":[]}
+{"fn":"matchActions","args":["ab  padded  ",[{"id":"./x/**/*.json","title":"emoji 👍🏽 mix","keywords":["straße:","emoji 👍🏽 mix","a😀b😀ckey_name-1"]},{"id":"abc","title":"line1\nline2","keywords":["emoji 👍🏽 mix","line1\nline2"]},{"id":".leading","title":"ΣΊΣΥΦΟΣ","keywords":[]}],2],"ok":[]}
+{"fn":"matchActions","args":["😀",[],{"$num":"-Infinity"}],"ok":[]}
+{"fn":"matchActions","args":["hello",[{"id":"ünïcödé","title":"a.b.c﻿bom","keywords":["  padded  "]},{"id":"é  padded  ","title":"ΣΊΣΥΦΟΣstraße","keywords":[]}],3],"ok":[]}
+{"fn":"matchActions","args":["İstanbulemoji 👍🏽 mix",[{"id":"trailing.","title":"ΣΊΣΥΦΟΣ","keywords":[]},{"id":"line1\nline2","title":".leading","keywords":["a:b:c","a:b:c"]},{"id":"a..b","title":"ΣΊΣΥΦΟΣ","keywords":["ns:key.path","key_name-1"]}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":[":a.b.c",[]],"ok":[]}
+{"fn":"matchActions","args":["héllo wörld",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["👍🏽 thumbs",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["日本語",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["é",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["İstanbul",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["straße",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["ılık ırmak",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["👨‍👩‍👧 family",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["a b",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["ΣΊΣΥΦΟΣ",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["a😀b",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["﻿bom",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["a²b x½ y①",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["aⅠb Ⅻ",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["a𐐀b 𝐀bc",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["कि ٣٤",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["Iı İi",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["K K k",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["ſ s S",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["x‍y 👨‍👩‍👧",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["a b c　d",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["١٢٣ ٤٥",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["𝟘𝟙 ²³",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["snake_case foo-bar o'neil",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["ǅungla Ǆ",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["one\r\ntwo threefour",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["café café",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["ΣΑΣ σας ς",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$num":"-0"}],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],{"$undefined":true}],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],-7.5],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],0.1],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],0.30000000000000004],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],1e+21],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],1e-7],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],5e-324],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],1.7976931348623157e+308],"ok":[]}
+{"fn":"matchActions","args":["line1\nline2",[{"id":"a.b.c","title":"a😀b😀c","keywords":["a:b:csrc/a/b.ts"]},{"id":"ünïcödé﻿bom","title":"a","keywords":["abc","hello world","😀"]},{"id":":","title":"日本語のテキストünïcödé","keywords":["./x/**/*.json","trailing.a:b:c"]}],9007199254740992],"ok":[]}
+{"fn":"fuzzyScore","args":["new tab","New Tab"],"ok":1000}
+{"fn":"fuzzyScore","args":["nt","New Tab"],"ok":6}
+{"fn":"fuzzyScore","args":["  new  ","new tab"],"ok":270}
+{"fn":"fuzzyScore","args":["café","Café Menu"],"ok":270}
+{"fn":"fuzzyScore","args":["cafe","Café Menu"],"ok":6}
+{"fn":"fuzzyScore","args":["ΑΒΓ","αβγ δ"],"ok":200}
+{"fn":"fuzzyScore","args":["İstanbul","istanbul"],"ok":95}
+{"fn":"fuzzyScore","args":["ǅ","ǆ"],"ok":1000}
+{"fn":"fuzzyScore","args":["K","k"],"ok":1000}
+{"fn":"fuzzyScore","args":["K","k"],"ok":1000}
+{"fn":"fuzzyScore","args":["日本","日本語 ページ"],"ok":200}
+{"fn":"fuzzyScore","args":["😀","😀 tab"],"ok":199}
+{"fn":"fuzzyScore","args":["a😀b","a😀b"],"ok":1000}
+{"fn":"fuzzyScore","args":["ß","SS"],"ok":-1}
+{"fn":"fuzzyScore","args":["ſ","s"],"ok":-1}
+{"fn":"fuzzyScore","args":[{"$utf16":[55296]},"x"],"ok":-1}
+{"fn":"fuzzyScore","args":["x",{"$utf16":[56320,120]}],"ok":63}
+{"fn":"fuzzyScore","args":["ab","a-b c"],"ok":5}
+{"fn":"fuzzyScore","args":["tab","Close Tab"],"ok":68}
+{"fn":"fuzzyScore","args":["clt","Close Tab"],"ok":6}
+{"fn":"fuzzyScore","args":["zz","Close Tab"],"ok":0}
+{"fn":"fuzzyScore","args":["","x"],"ok":0}
+{"fn":"fuzzyScore","args":["é","é"],"ok":0}
+{"fn":"fuzzyScore","args":["ÀÉ","àé"],"ok":1000}
+{"fn":"fuzzyScore","args":["İ","i̇"],"ok":1000}
+{"fn":"fuzzyScore","args":["zürich","Zürich Tab"],"ok":335}
+{"fn":"fuzzyScore","args":["ñandú","Ñandú"],"ok":1000}
+{"fn":"fuzzyScore","args":["tаb","tab"],"ok":0}
+{"fn":"fuzzyScore","args":["1٣","1٣ x"],"ok":262}
+{"fn":"fuzzyScore","args":["a b","a b"],"ok":124}
+{"fn":"fuzzyScore","args":["devtools","Open DevTools"],"ok":88}
+{"fn":"fuzzyScore","args":["dev tools","Open DevTools"],"ok":98}
+{"fn":"fuzzyScore","args":["od","Open DevTools"],"ok":6}
+{"fn":"fuzzyScore","args":["open","Open DevTools"],"ok":274}
+{"fn":"matchActions","args":["ne",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":266,"exact":false},{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":6,"exact":false},{"action":{"id":"5","title":"日本語 ページ","keywords":["japanese"]},"score":2,"exact":false}]}
+{"fn":"matchActions","args":["ne",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":266,"exact":false}]}
+{"fn":"matchActions","args":["ne",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":266,"exact":false},{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":6,"exact":false},{"action":{"id":"5","title":"日本語 ページ","keywords":["japanese"]},"score":2,"exact":false}]}
+{"fn":"matchActions","args":["ne",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":266,"exact":false},{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":6,"exact":false},{"action":{"id":"5","title":"日本語 ページ","keywords":["japanese"]},"score":2,"exact":false},{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":1,"exact":false}]}
+{"fn":"matchActions","args":["new tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":1000,"exact":true}]}
+{"fn":"matchActions","args":["new tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":1000,"exact":true}]}
+{"fn":"matchActions","args":["new tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":1000,"exact":true}]}
+{"fn":"matchActions","args":["new tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":1000,"exact":true}]}
+{"fn":"matchActions","args":["new  tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":1000,"exact":true}]}
+{"fn":"matchActions","args":["new  tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":1000,"exact":true}]}
+{"fn":"matchActions","args":["new  tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":1000,"exact":true}]}
+{"fn":"matchActions","args":["new  tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":1000,"exact":true}]}
+{"fn":"matchActions","args":["NEW",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["NEW",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["NEW",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["NEW",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["ta",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":64,"exact":false},{"action":{"id":"3","title":"Close Tab"},"score":64,"exact":false},{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["ta",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":64,"exact":false}]}
+{"fn":"matchActions","args":["ta",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":64,"exact":false},{"action":{"id":"3","title":"Close Tab"},"score":64,"exact":false},{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["ta",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":64,"exact":false},{"action":{"id":"3","title":"Close Tab"},"score":64,"exact":false},{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["ct",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"3","title":"Close Tab"},"score":6,"exact":false},{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":2,"exact":false},{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":2,"exact":false}]}
+{"fn":"matchActions","args":["ct",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"3","title":"Close Tab"},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["ct",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"3","title":"Close Tab"},"score":6,"exact":false},{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":2,"exact":false},{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":2,"exact":false}]}
+{"fn":"matchActions","args":["ct",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"3","title":"Close Tab"},"score":6,"exact":false},{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":2,"exact":false},{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":2,"exact":false}]}
+{"fn":"matchActions","args":["cafe",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["cafe",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["cafe",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["cafe",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["café",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["café",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["café",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["café",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["咖啡",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["咖啡",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["咖啡",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["咖啡",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},"score":995,"exact":true}]}
+{"fn":"matchActions","args":["日本",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"5","title":"日本語 ページ","keywords":["japanese"]},"score":200,"exact":false}]}
+{"fn":"matchActions","args":["日本",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"5","title":"日本語 ページ","keywords":["japanese"]},"score":200,"exact":false}]}
+{"fn":"matchActions","args":["日本",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"5","title":"日本語 ページ","keywords":["japanese"]},"score":200,"exact":false}]}
+{"fn":"matchActions","args":["日本",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"5","title":"日本語 ページ","keywords":["japanese"]},"score":200,"exact":false}]}
+{"fn":"matchActions","args":["😀",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["😀",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[]}
+{"fn":"matchActions","args":["😀",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[]}
+{"fn":"matchActions","args":["😀",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[]}
+{"fn":"matchActions","args":["istanbul",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["istanbul",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["istanbul",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["istanbul",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["İstanbul",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":348,"exact":false}]}
+{"fn":"matchActions","args":["İstanbul",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":348,"exact":false}]}
+{"fn":"matchActions","args":["İstanbul",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":348,"exact":false}]}
+{"fn":"matchActions","args":["İstanbul",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":348,"exact":false}]}
+{"fn":"matchActions","args":["unicode",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["unicode",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[]}
+{"fn":"matchActions","args":["unicode",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[]}
+{"fn":"matchActions","args":["unicode",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[]}
+{"fn":"matchActions","args":["ünï",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":257,"exact":false},{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":62,"exact":false}]}
+{"fn":"matchActions","args":["ünï",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":257,"exact":false}]}
+{"fn":"matchActions","args":["ünï",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":257,"exact":false},{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":62,"exact":false}]}
+{"fn":"matchActions","args":["ünï",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":257,"exact":false},{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":62,"exact":false}]}
+{"fn":"matchActions","args":["insp",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["insp",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["insp",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["insp",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":270,"exact":false}]}
+{"fn":"matchActions","args":["zu",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["zu",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[]}
+{"fn":"matchActions","args":["zu",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[]}
+{"fn":"matchActions","args":["zu",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[]}
+{"fn":"matchActions","args":["zü",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"7","title":"Zürich","keywords":[]},"score":262,"exact":false}]}
+{"fn":"matchActions","args":["zü",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"7","title":"Zürich","keywords":[]},"score":262,"exact":false}]}
+{"fn":"matchActions","args":["zü",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"7","title":"Zürich","keywords":[]},"score":262,"exact":false}]}
+{"fn":"matchActions","args":["zü",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"7","title":"Zürich","keywords":[]},"score":262,"exact":false}]}
+{"fn":"matchActions","args":["x",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["x",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[]}
+{"fn":"matchActions","args":["x",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[]}
+{"fn":"matchActions","args":["x",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[]}
+{"fn":"matchActions","args":["",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[]}
+{"fn":"matchActions","args":["a",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["a",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[]}
+{"fn":"matchActions","args":["a",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[]}
+{"fn":"matchActions","args":["a",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[]}
+{"fn":"matchActions","args":["  op  ",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":266,"exact":false},{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":262,"exact":false}]}
+{"fn":"matchActions","args":["  op  ",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":266,"exact":false}]}
+{"fn":"matchActions","args":["  op  ",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":266,"exact":false},{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":262,"exact":false}]}
+{"fn":"matchActions","args":["  op  ",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},"score":266,"exact":false},{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":262,"exact":false}]}
+{"fn":"matchActions","args":["tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":68,"exact":false},{"action":{"id":"3","title":"Close Tab"},"score":68,"exact":false},{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":68,"exact":false}]}
+{"fn":"matchActions","args":["tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":68,"exact":false},{"action":{"id":"3","title":"Close Tab"},"score":68,"exact":false},{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["tab",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[{"action":{"id":"1","title":"New Tab","keywords":["create","open"]},"score":68,"exact":false},{"action":{"id":"3","title":"Close Tab"},"score":68,"exact":false},{"action":{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},"score":6,"exact":false}]}
+{"fn":"matchActions","args":["debug tools",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}]],"ok":[]}
+{"fn":"matchActions","args":["debug tools",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],1],"ok":[]}
+{"fn":"matchActions","args":["debug tools",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],3],"ok":[]}
+{"fn":"matchActions","args":["debug tools",[{"id":"1","title":"New Tab","keywords":["create","open"]},{"id":"2","title":"Café Menu","keywords":["cafe","咖啡"]},{"id":"3","title":"Close Tab"},{"id":"4","title":"Open DevTools","keywords":["inspect","debug"]},{"id":"5","title":"日本語 ページ","keywords":["japanese"]},{"id":"6","title":"İstanbul 😀","keywords":["Ünïcode"]},{"id":"7","title":"Zürich","keywords":[]}],10],"ok":[]}

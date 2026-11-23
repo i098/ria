@@ -1,0 +1,66 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/halyard-p0-proof-d/repo",
+  "unit": "packages/core/src/fuzzy.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "fuzzy-rs",
+  "exports": [
+    {
+      "name": "fuzzyScore",
+      "file": "packages/core/src/fuzzy.ts",
+      "line": 21,
+      "params": [
+        {
+          "name": "query",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "matchActions",
+      "file": "packages/core/src/fuzzy.ts",
+      "line": 78,
+      "params": [
+        {
+          "name": "query",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "actions",
+          "ts_type": "readonly ({ id: string; title: string; keywords?: readonly string[] })[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "limit",
+          "ts_type": "number",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "ActionMatch<({ id: string; title: string; keywords?: readonly string[] })>[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}
