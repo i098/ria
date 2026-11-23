@@ -1,10 +1,10 @@
-Halyard
+Ria
 Copyright 2026 i098
 
-Halyard's own source files are licensed under the Apache License, Version 2.0 (see LICENSE).
+Ria's own source files are licensed under the Apache License, Version 2.0 (see LICENSE).
 
-Halyard is a port of Ardia (https://github.com/ardia-browser/ardia), copyright 2026 Mantra Patel, to Rust and the Rune UI
-framework. Ardia is pinned as a git submodule at ardia/. Halyard is its own product: it does not use the Ardia name or icon.
+Ria is a port of Ardia (https://github.com/ardia-browser/ardia), copyright 2026 Mantra Patel, to Rust and the Rune UI
+framework. Ardia is pinned as a git submodule at ardia/. Ria is its own product: it does not use the Ardia name or icon.
 
 The text below is the NOTICE file of Ardia at the pinned commit 551d3c13c. It applies to Ardia and to the third-party
 software that Ardia builds on and ships.

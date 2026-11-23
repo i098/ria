@@ -8,7 +8,7 @@ Scope: each class and protocol in `ArdiaCore.h`, the ownership rules, and the th
   - `H:` = `engine/ardiacore/src/ardia/core/public/ArdiaCore.h` (417 lines; the last line, 417, is `NS_ASSUME_NONNULL_END`).
   - `C:` = `engine/ardiacore/src/ardia/core/` (the `.mm` implementation).
   - `HOST:` = `packages/ardiacore/ios/` (today's Swift/ObjC++ host).
-- `objc2` 0.6.5, `block2` 0.6.2 (`~/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/`). Rune's `Cargo.lock` also pulls `objc2` 0.5.3 and 0.6.5 (`Cargo.lock:2627-2638` in the Rune clone at `ada31dc`). Halyard picks 0.6.x. Cites for `objc2` use `objc2/` for that registry directory.
+- `objc2` 0.6.5, `block2` 0.6.2 (`~/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/`). Rune's `Cargo.lock` also pulls `objc2` 0.5.3 and 0.6.5 (`Cargo.lock:2627-2638` in the Rune clone at `ada31dc`). Ria picks 0.6.x. Cites for `objc2` use `objc2/` for that registry directory.
 - Anything without a line cite is `[INFERENCE]`.
 
 ## 1. How the header is built

@@ -41,7 +41,7 @@ The rules in `DOC:330-340` (my words):
 
 - On macOS, `ac_engine_call` does **not** exist. `DISP:` is in the Linux source list only (`GN:90-92`), as is the generated registry (`GN:104-107`, `GN:211-212`). The Mac build exports every symbol that starts with `_ac_` through an exports list (`GN:226-230`; the list is one line, `_ac_*`, in `engine/chromium/src/chrome/browser/ardia/ac_engine.exports:1`).
 - Today's Mac host therefore finds each call by name: `dlsym(RTLD_DEFAULT, name)` cast to `ac_engine_call_t` (`BR:50`; used at `BR:134, 155`). Rust does the same, or declares each `extern "C"` function. [INFERENCE] The dynamic way costs one lookup per call; cache the pointer.
-- Size of the surface: 109 distinct names match `AC_(ENGINE|PROFILE|ARGS)_CALL(ac_...)` in `ac_*.cc` (`grep -rhoE` and `sort -u`, run in the `ardia` tree). The TypeScript type `EngineCalls` lists 138 calls and `EngineEvents` lists 27 events (`packages/ardiacore/src/engine/api.ts:30-232` and `:234-269`; counted with `awk`). The two numbers differ because the TS list includes calls that other Swift modules provide. [INFERENCE] Not verified call by call.
+- Size of the surface: 106 distinct names match `AC_(ENGINE|PROFILE|ARGS)_CALL(ac_...)` in `ac_*.cc` (`grep -rhoE ... --include='ac_*.cc' | sort -u | wc -l`, run in the `ardia` tree). The Mac host code (Swift, Objective-C and Objective-C++) uses 79 of them as `"ac_..."` strings; 39 of the 79 are in Swift files. The TypeScript type `EngineCalls` lists 184 calls and `EngineEvents` lists 34 events (`packages/ardiacore/src/engine/api.ts:30-233` and `:234-269`). The C event sink sends 13 topics (`Emit("...")`). The numbers differ because other host modules provide some of the TypeScript calls, and the other events come from `ArdiaCore.h` delegate callbacks. One name differs between the two sides: `tabs.strip` (`ac_tabs.cc:113`) and `tabs.strips` (`ArdiaTabStrip.mm:40`).
 - `ac_engine_set_event_sink` is in `IMPL:` and exists on both platforms (`IMPL:291-299`).
 
 ## 2. Threads
@@ -90,7 +90,7 @@ The rules in `DOC:330-340` (my words):
 | Object | Who owns it | Valid until | Rust action |
 | --- | --- | --- | --- |
 | `profile_dir` (`const char*`) | Caller | The call returns. The engine reads it in the `Call` constructor and copies nothing: `ProfileAt(profile_dir ? profile_dir : "")` (`IMPL:219`) is a lookup. | A `CString` on the stack or in the call frame is enough. |
-| `args_json` | Caller | The call returns. `ArgsCall` parses it into its own `DictValue` in the constructor (`IMPL:126-135`). Later work uses the parsed copy. [INFERENCE] I did not read all 109 handlers; a handler that stores the `const char*` itself would break this. | Same. Do not free before the call returns. |
+| `args_json` | Caller | The call returns. `ArgsCall` parses it into its own `DictValue` in the constructor (`IMPL:126-135`). Later work uses the parsed copy. [INFERENCE] I did not read all 106 handlers; a handler that stores the `const char*` itself would break this. | Same. Do not free before the call returns. |
 | `context` | Caller | Until the reply fires. | A `Box` turned into a raw pointer with `into_raw`. The trampoline reclaims it with `from_raw`. Ardia uses `__bridge_retained` to send and `__bridge_transfer` to take it back (`BR:148, 54`). Because a reply always comes (section 2.2), the box is freed. |
 | `reply` function pointer | Caller | Always valid. | A plain `extern "C" fn`. It has no captured state; the state is in `context`. |
 | `json` in the reply | Engine | The reply returns (section 2.2). | Copy it. |

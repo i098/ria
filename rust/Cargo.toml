@@ -6,3 +6,9 @@ members = ["crates/*"]
 edition = "2024"
 license = "Apache-2.0"
 publish = false
+
+[profile.dev]
+panic = "unwind"
+
+[profile.release]
+panic = "unwind"

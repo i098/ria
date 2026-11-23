@@ -447,7 +447,7 @@ Plugin helper processes use the native module `ArdiaPlugins` (`apps/browser/src/
 
 Channel total: 32 methods (`subscribe` + 14 in the switch + 4 storage + 3 secrets + 9 UI).
 
-## 5. Notes for Halyard (Rust port)
+## 5. Notes for Ria (Rust port)
 
 - Keep byte limits exactly: 1 MiB per line, 32 in flight, 30 s stall, 16 live + 16 retiring, 34 MiB / 4 MiB / 1,000 queue, 64 B marker room. Shipped clients (`control.py`, `control.rs` per `docs/cli.md:80-82`) drop the connection on longer lines.
 - The method catalogue is data (`MethodSpec`). A Rust port can keep one static table and generate `methods` from it. The `hidden` flag must exist for `menus.choose`.
