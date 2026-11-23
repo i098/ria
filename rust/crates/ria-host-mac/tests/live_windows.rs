@@ -31,7 +31,7 @@ mod mac {
     use objc2::{MainThreadMarker, msg_send, rc::Retained};
     use objc2_app_kit::{
         NSApplication, NSColor, NSEvent, NSEventModifierFlags, NSEventType, NSMenu, NSMenuItem,
-        NSScreen, NSUserInterfaceItemIdentification, NSWindow, NSWindowButton,
+        NSScreen, NSUserInterfaceItemIdentification, NSView, NSWindow, NSWindowButton,
         NSWindowDidEnterFullScreenNotification, NSWindowDidExitFullScreenNotification,
         NSWindowWillEnterFullScreenNotification, NSWindowWillExitFullScreenNotification,
     };
@@ -43,6 +43,11 @@ mod mac {
     use ria_host_mac::core::bindings::{Engine, Profile, Tab, Window};
     use ria_host_mac::core::delegate::{EngineDelegate, Hooks};
     use ria_host_mac::core::host::State;
+    use ria_host_mac::windows::ardia_chrome_window_host::ChromeWindowHost;
+    use ria_host_mac::windows::ardia_chrome_window_host_little_fit::little_frame_for_size;
+    use ria_host_mac::windows::ardia_interface_scale;
+    use ria_host_mac::windows::ardia_popup_origin_strip::popup_origin_text;
+    use ria_host_mac::windows::ardia_popup_window::Popups;
     use ria_host_mac::windows::ardia_reserved_keys::{
         KeyContext, is_reserved_binding, is_reserved_key_event,
     };
@@ -424,9 +429,6 @@ mod mac {
         for observer in observers.into_iter().chain([sight_observer]) {
             unsafe { center.removeObserver(&observer) };
         }
-        for controller in [&normal, &chrome, &stray, &standalone] {
-            controller.core.close();
-        }
         check_native_close(mtm);
         println!(
             "live_windows: reserved key replies, controller claims, titlebar hit testing, visibility, acted fullscreen, and native close checked"
@@ -437,6 +439,111 @@ mod mac {
         println!("live_windows: foreground AppKit fullscreen entry and exit not checked");
         println!(
             "live_windows: native sharing after trailing placement without resize not checked (indicator and child pill)"
+        );
+        let state = State::new();
+        state.started.set(true);
+        let host = ChromeWindowHost::new(mtm, state, controllers.clone());
+        let made = host
+            .make_window(profile, None, Some(ns_string!("ria:live")))
+            .unwrap();
+        assert_eq!(
+            host.dev_action(&made, "fakeFullScreen:1", false).as_deref(),
+            Some("test instances only")
+        );
+        assert!(!host.is_fullscreen(&made));
+        for (command, expected) in [("fakeFullScreen:1:0", true), ("fakeFullScreen:0:0", false)] {
+            let reply = host.dev_action(&made, command, true).unwrap();
+            let reply: Value = serde_json::from_str(&reply).unwrap();
+            assert_eq!(reply["fullScreen"], expected);
+            assert_eq!(host.is_fullscreen(&made), expected);
+        }
+        let delayed = host.dev_action(&made, "fakeFullScreen:1:50", true).unwrap();
+        let delayed: Value = serde_json::from_str(&delayed).unwrap();
+        assert_eq!(delayed["transitioning"], true);
+        wait_for("developer fullscreen completion", || {
+            let reply = host.dev_action(&made, "fullScreen", true).unwrap();
+            !serde_json::from_str::<Value>(&reply).unwrap()["transitioning"]
+                .as_bool()
+                .unwrap()
+        });
+        assert!(host.is_fullscreen(&made));
+        let root = NSView::initWithFrame(mtm.alloc(), NSRect::ZERO);
+        host.embed_root(&made, &root);
+        assert!(
+            host.root_view(&made)
+                .is_some_and(|view| std::ptr::eq(&*view, &*root))
+        );
+        let point = NSPoint::new(17., 49.);
+        let in_window = ardia_interface_scale::window_point_from_root(point, &made);
+        assert_eq!(
+            ardia_interface_scale::root_point_from_window(in_window, &made),
+            point
+        );
+        let minimum = NSSize::new(410., 230.);
+        host.set_interface_min_size(minimum, &made);
+        let previous = ardia_interface_scale::scale();
+        let updated = if previous == 1.2 { 1.0 } else { 1.2 };
+        ardia_interface_scale::set_scale(updated);
+        let minimum_at_updated_scale = made.minSize();
+        ardia_interface_scale::set_scale(previous);
+        assert_eq!(
+            minimum_at_updated_scale,
+            NSSize::new((410. * updated).round(), (230. * updated).round())
+        );
+        host.remove_root(&made);
+        assert!(host.root_view(&made).is_none());
+        host.close_window(&made);
+        let fitted = little_frame_for_size(
+            NSSize::new(900., 700.),
+            NSSize::new(100., 100.),
+            NSRect::new(NSPoint::ZERO, NSSize::new(1000., 800.)),
+        );
+        assert_eq!(
+            fitted,
+            NSRect::new(NSPoint::new(100., 80.), NSSize::new(800., 640.))
+        );
+        assert_eq!(
+            popup_origin_text("https://example.test:8443/private?q=secret"),
+            "example.test:8443"
+        );
+        let popups = Popups::new(mtm, true);
+        let browser_popup = popups.for_chrome(Some(&window), false);
+        assert_eq!(popups.count(), 1);
+        assert!(
+            browser_popup
+                .window()
+                .styleMask()
+                .contains(objc2_app_kit::NSWindowStyleMask::Resizable)
+        );
+        let tab = browser_popup.open_tab(ns_string!("about:blank"), profile, false);
+        main_queue::post(Box::new(move || {
+            let window = browser_popup.window();
+            let page = tab.view();
+            assert!(
+                page.window()
+                    .is_some_and(|owner| std::ptr::eq(&*owner, &*window))
+            );
+            assert!(page.frame().size.height < browser_popup.host_view().bounds().size.height);
+            browser_popup.close();
+            check_popup_closed(popups, Instant::now() + Duration::from_secs(5));
+        }));
+        for controller in [&normal, &chrome, &stray, &standalone] {
+            controller.core.close();
+        }
+    }
+
+    fn check_popup_closed(popups: Rc<Popups>, deadline: Instant) {
+        if popups.count() == 0 {
+            println!(
+                "live_windows: window claims, shortcuts, fullscreen, root scaling, display fit, and popup tab placement checked"
+            );
+            let _: () = Engine::shared().unwrap().quit();
+            return;
+        }
+        assert!(Instant::now() < deadline, "engine did not close the popup");
+        main_queue::after(
+            Duration::from_millis(25),
+            Box::new(move || check_popup_closed(popups, deadline)),
         );
     }
 
@@ -452,9 +559,6 @@ mod mac {
                 engine.load_profile(ns_string!("Default"), move |profile| {
                     main_queue::post(Box::new(move || {
                         check_windows(&profile.expect("Default profile"));
-                        main_queue::post(Box::new(|| {
-                            let _: () = Engine::shared().unwrap().quit();
-                        }));
                     }));
                 });
             }));

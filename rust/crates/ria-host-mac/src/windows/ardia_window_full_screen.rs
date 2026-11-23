@@ -4,6 +4,7 @@
 
 use std::cell::RefCell;
 use std::rc::Rc;
+use std::time::Duration;
 
 use block2::RcBlock;
 use objc2::MainThreadMarker;
@@ -21,6 +22,7 @@ use objc2_foundation::{
     NSArray, NSDictionary, NSNotification, NSNotificationCenter, NSNumber, NSRect, NSString,
     ns_string,
 };
+use ria_engine::call::main_queue;
 
 use super::ardia_window_sight_math::{Rect, counts_as_cover, partly_visible};
 use crate::core::bindings::Window;
@@ -51,6 +53,22 @@ fn sight_rect(rect: NSRect) -> Rect {
         rect.size.width,
         rect.size.height,
     )
+}
+
+pub(super) fn on_screen_window_bounds(window: &NSWindow) -> Option<NSRect> {
+    let id = u32::try_from(window.windowNumber())
+        .ok()
+        .filter(|&id| id != 0)?;
+    // SAFETY: Option 8 selects exactly this window. The Copy result is +1.
+    let rows = unsafe { Retained::from_raw(CGWindowListCopyWindowInfo(8, id)) }?;
+    let row = rows.firstObject()?;
+    if !number(&row, ns_string!("kCGWindowIsOnscreen")).is_some_and(|value| value.boolValue()) {
+        return None;
+    }
+    let bounds = row.objectForKey(ns_string!("kCGWindowBounds"))?;
+    let mut rect = NSRect::ZERO;
+    // SAFETY: kCGWindowBounds contains a CFDictionary; rect is writable.
+    unsafe { CGRectMakeWithDictionaryRepresentation(&*bounds, &mut rect) }.then_some(rect)
 }
 
 fn window_server_shows(window: &NSWindow) -> bool {
@@ -128,6 +146,9 @@ struct Transition {
     settling: bool,
     acting: bool,
     restore_frame: Option<NSRect>,
+    acted_occlusion: Option<bool>,
+    acted_server: bool,
+    occlusion_turn: u64,
     overruled: bool,
     seen: bool,
     closed: bool,
@@ -263,7 +284,20 @@ impl FullScreen {
         };
         let app = NSApplication::sharedApplication(self.mtm);
         let active = app.isActive();
-        let (visible, overruled) = if self.background && !self.allow_occlusion {
+        let (acted_occlusion, acted_server) = {
+            let state = self.state.borrow();
+            (state.acted_occlusion, state.acted_server)
+        };
+        let (visible, overruled) = if let Some(app_kit) = acted_occlusion {
+            let server = (!active || !app_kit)
+                && window.isVisible()
+                && !window.isMiniaturized()
+                && acted_server;
+            (
+                if active { app_kit || server } else { server },
+                !app_kit && server,
+            )
+        } else if self.background && !self.allow_occlusion {
             (true, false)
         } else {
             if screen_locked() {
@@ -313,7 +347,25 @@ impl FullScreen {
         self.update_seen(false);
     }
 
-    pub fn toggle(&self) {
+    pub(super) fn act_occlusion(&self, visible: Option<bool>) {
+        let Some((_, window)) = self.live_window() else {
+            return;
+        };
+        self.state.borrow_mut().acted_occlusion = visible;
+        // SAFETY: AppKit receives its occlusion notification with the live window.
+        unsafe {
+            NSNotificationCenter::defaultCenter().postNotificationName_object(
+                NSWindowDidChangeOcclusionStateNotification,
+                Some(&window),
+            );
+        }
+    }
+
+    pub(super) fn act_window_server(&self, shows: bool) {
+        self.state.borrow_mut().acted_server = shows;
+    }
+
+    pub fn toggle(self: &Rc<Self>) {
         if !self.background {
             if let Some((_, window)) = self.live_window() {
                 window.toggleFullScreen(None);
@@ -323,7 +375,16 @@ impl FullScreen {
         self.act_window_full_screen(!self.is_full_screen());
     }
 
-    pub fn act_window_full_screen(&self, entering: bool) {
+    pub fn act_window_full_screen(self: &Rc<Self>, entering: bool) {
+        self.act_window_full_screen_with_timing(entering, Duration::ZERO, None);
+    }
+
+    pub(super) fn act_window_full_screen_with_timing(
+        self: &Rc<Self>,
+        entering: bool,
+        transition: Duration,
+        occlusion_gap: Option<f64>,
+    ) {
         let Some((core, window)) = self.live_window() else {
             return;
         };
@@ -361,6 +422,47 @@ impl FullScreen {
                 window.setFrame_display(frame, true);
             }
         }
+        if let Some(wait) = occlusion_gap.and_then(|gap| {
+            Duration::try_from_secs_f64((transition.as_secs_f64() + gap).max(0.)).ok()
+        }) {
+            let turn = {
+                let mut state = self.state.borrow_mut();
+                state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
+                state.occlusion_turn
+            };
+            self.act_occlusion(Some(false));
+            let weak = Rc::downgrade(self);
+            main_queue::after(
+                wait,
+                Box::new(move || {
+                    if let Some(fullscreen) = weak.upgrade() {
+                        let current = fullscreen.state.borrow().occlusion_turn == turn;
+                        if current {
+                            fullscreen.act_occlusion(Some(true));
+                        }
+                    }
+                }),
+            );
+        }
+        if transition.is_zero() {
+            self.finish_acted_transition(entering);
+        } else {
+            let weak = Rc::downgrade(self);
+            main_queue::after(
+                transition,
+                Box::new(move || {
+                    if let Some(fullscreen) = weak.upgrade() {
+                        fullscreen.finish_acted_transition(entering);
+                    }
+                }),
+            );
+        }
+    }
+
+    fn finish_acted_transition(&self, entering: bool) {
+        let Some((core, window)) = self.live_window() else {
+            return;
+        };
         {
             let mut state = self.state.borrow_mut();
             if state.closed {
