@@ -532,7 +532,7 @@ impl DevActions {
         match name {
             "fakeFullScreenMs" => {
                 let transition = set_acted_transition(value);
-                Some(format!("{:.0}", transition.as_secs_f64() * 1000.))
+                Some(format!("{:.0}", transition * 1000.))
             }
             "fakeFullScreenOcclusionMs" => {
                 let gap = NSString::from_str(value).doubleValue();
@@ -549,9 +549,7 @@ impl DevActions {
                 {
                     let mut fields = argument.split(':');
                     let entering = fields.next() == Some("1");
-                    let transition = fields
-                        .next()
-                        .map_or(Duration::ZERO, transition_duration);
+                    let transition = fields.next().map_or(0., transition_duration);
                     if entering != fullscreen.is_full_screen() {
                         fullscreen.act_window_full_screen_with_timing(entering, transition);
                     }

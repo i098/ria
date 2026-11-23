@@ -33,23 +33,24 @@ use crate::tabs::ardia_page_draw_wait::after_page_draw;
 type WindowInfo = NSDictionary<NSString, AnyObject>;
 
 thread_local! {
-    static ACTED_TRANSITION: Cell<Duration> = const { Cell::new(Duration::ZERO) };
+    static ACTED_TRANSITION: Cell<f64> = const { Cell::new(0.) };
     pub(super) static ACTED_OCCLUSION_GAP: Cell<Option<f64>> = const { Cell::new(None) };
 }
 
 pub(crate) fn configure_acted_transition(config: &LaunchConfig) {
-    set_acted_transition(config.test_value("fakeFullScreenMs").unwrap_or_default());
+    ACTED_TRANSITION.set(transition_duration(
+        config.test_value("fakeFullScreenMs").unwrap_or_default(),
+    ));
 }
 
-pub(super) fn set_acted_transition(value: &str) -> Duration {
-    let transition = transition_duration(value);
+pub(super) fn set_acted_transition(value: &str) -> f64 {
+    let transition = transition_duration(value).max(0.);
     ACTED_TRANSITION.set(transition);
     transition
 }
 
-pub(super) fn transition_duration(value: &str) -> Duration {
-    let ms = NSString::from_str(value).doubleValue();
-    Duration::try_from_secs_f64(ms / 1000.).unwrap_or_default()
+pub(super) fn transition_duration(value: &str) -> f64 {
+    NSString::from_str(value).doubleValue() / 1000.
 }
 
 const CG_WINDOW_LIST_OPTION_ON_SCREEN_ABOVE_WINDOW: u32 = 1 << 1;
@@ -382,7 +383,7 @@ impl FullScreen {
                 }
             };
             if let Some(tab) = tab.load() {
-                after_page_draw(&tab, move |drawn, _| drawn == entering, done);
+                after_page_draw(&tab, move |drawn, _| !entering || drawn, done);
             } else {
                 done();
             }
@@ -736,13 +737,13 @@ impl FullScreen {
     }
 
     pub fn act_window_full_screen(self: &Rc<Self>, entering: bool) {
-        self.act_window_full_screen_with_timing(entering, Duration::ZERO);
+        self.act_window_full_screen_with_timing(entering, 0.);
     }
 
     pub(super) fn act_window_full_screen_with_timing(
         self: &Rc<Self>,
         entering: bool,
-        transition: Duration,
+        transition: f64,
     ) {
         let Some((core, window)) = self.live_window() else {
             return;
@@ -785,7 +786,7 @@ impl FullScreen {
         let current = self.state.borrow().occlusion_turn == turn;
         if current
             && let Some(wait) = ACTED_OCCLUSION_GAP.get().and_then(|gap| {
-                Duration::try_from_secs_f64((transition.as_secs_f64() + gap).max(0.)).ok()
+                Duration::try_from_secs_f64((transition + gap).max(0.)).ok()
             })
         {
             let turn = turn.wrapping_add(1);
@@ -804,6 +805,7 @@ impl FullScreen {
                 }),
             );
         }
+        let transition = Duration::try_from_secs_f64(transition).unwrap_or_default();
         if transition.is_zero() {
             self.finish_acted_transition(entering);
         } else {

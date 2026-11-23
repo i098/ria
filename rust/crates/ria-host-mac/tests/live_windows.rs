@@ -551,12 +551,13 @@ mod mac {
                     let reply = RcBlock::new(move |image: CGImageRef| {
                         assert!(!image.0.is_null(), "The fullscreen snapshot must contain an image");
                         completion.call((image,));
+                        let delivered_after = started.elapsed();
                         let attached = attached.clone();
                         let verify = verify.take().unwrap();
                         main_queue::post(Box::new(move || {
                             assert!(
-                                started.elapsed() < Duration::from_millis(400),
-                                "The fullscreen snapshot must reach the attachment check before timeout"
+                                delivered_after < Duration::from_millis(400),
+                                "The fullscreen snapshot must arrive before timeout"
                             );
                             assert!(!attached.get(), "The stale cover must never attach");
                             verify();
@@ -1054,7 +1055,10 @@ mod mac {
                     Some("500")
                 );
                 for window in [&restored, &overridden] {
-                    assert_eq!(probe(&host, window, "fakeFullScreen:1")["fullScreen"], true);
+                    assert_eq!(
+                        probe(&host, window, "fakeFullScreen:1:-500")["fullScreen"],
+                        true
+                    );
                     assert!(controllers.user_sees_only_through_window_server(window));
                 }
                 assert_eq!(
@@ -1069,6 +1073,17 @@ mod mac {
                 assert_eq!(
                     host.dev_action(&overridden, "fakeOcclusion:hidden", true).as_deref(),
                     Some("0")
+                );
+                let restored_before_gap = restored.clone();
+                let controllers_before_gap = controllers.clone();
+                main_queue::after(
+                    Duration::from_millis(100),
+                    Box::new(move || {
+                        assert!(
+                            !controllers_before_gap
+                                .user_sees_only_through_window_server(&restored_before_gap)
+                        );
+                    }),
                 );
                 main_queue::after(
                     Duration::from_millis(1700),
