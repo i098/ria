@@ -1,5 +1,6 @@
 #!/bin/bash
-# Build blaze at a named commit with this directory's patches and install it as ~/.cargo/bin/blaze.
+# Build blaze at a named commit with this directory's patches (all *.patch, in name order)
+# and install it as ~/.cargo/bin/blaze.
 # usage: install.sh [WORK_DIR]   (default /tmp/ria-blaze; the build output stays in it)
 # Needs git, curl, python3 and a blaze toolchain in ~/.blaze/toolchains (any `blaze` run fetches it).
 set -euo pipefail

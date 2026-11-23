@@ -1,0 +1,454 @@
+diff --git a/crates/hir-ty-codegen/backend.rs b/crates/hir-ty-codegen/backend.rs
+index 8a855c678..87cbb6914 100644
+--- a/crates/hir-ty-codegen/backend.rs
++++ b/crates/hir-ty-codegen/backend.rs
+@@ -297,7 +297,7 @@ impl Backend {
+             optimization,
+             func,
+             named.iter().copied(),
+-            recorder.constants(),
++            recorder.readonly(),
+             recorder.asm_texts(),
+             &recorder.pointees,
+         )) else {
+diff --git a/crates/hir-ty-codegen/cached.rs b/crates/hir-ty-codegen/cached.rs
+index 0459bb1c0..f8ffc56d9 100644
+--- a/crates/hir-ty-codegen/cached.rs
++++ b/crates/hir-ty-codegen/cached.rs
+@@ -242,14 +242,14 @@ impl StoredCode {
+         optimization: super::backend::Optimization,
+         func: &cranelift_codegen::ir::Function,
+         named: impl Iterator<Item = cranelift_codegen::ir::StackSlot>,
+-        constants: impl Iterator<Item = (u32, &'a [u8])>,
++        readonly: impl Iterator<Item = (u32, &'a super::ConstBlob)>,
+         asm: impl Iterator<Item = (u32, &'a str)>,
+         pointees: &[(u32, super::fragment::Pointee)],
+     ) -> Option<[u8; KEY]> {
+         let isa = super::target().ok()?;
+         let ir = cranelift_codegen::incremental_cache::compute_cache_key(&**isa, func);
+         let mut hasher = Sha256::new();
+-        hasher.update(b"blaze llvm 9");
++        hasher.update(b"blaze llvm 10");
+         // Nor what the types of the parameters say of the memory they point to.
+         for (at, pointee) in pointees {
+             let super::fragment::Pointee { unique, frozen, size, align } = *pointee;
+@@ -280,11 +280,25 @@ impl StoredCode {
+         }
+         hasher.update(u32::MAX.to_le_bytes());
+         // Nor what the data a name stands for holds, which the code has in place of a load
+-        // where that is known.
+-        for (index, bytes) in constants {
++        // where that is known: the bytes, and the data and functions they hold addresses of
++        // (`told_constants` gives LLVM those too, so a slice's length is folded from a
++        // constant that points at its elements).
++        for (index, blob) in readonly {
+             hasher.update(index.to_le_bytes());
+-            hasher.update((bytes.len() as u64).to_le_bytes());
+-            hasher.update(bytes);
++            hasher.update((blob.bytes.len() as u64).to_le_bytes());
++            hasher.update(&blob.bytes);
++            hasher.update(blob.align.to_le_bytes());
++            hasher.update((blob.relocs.len() as u64).to_le_bytes());
++            for &(offset, target, addend) in &blob.relocs {
++                hasher.update(offset.to_le_bytes());
++                hasher.update(target.as_u32().to_le_bytes());
++                hasher.update(addend.to_le_bytes());
++            }
++            hasher.update((blob.fn_relocs.len() as u64).to_le_bytes());
++            for &(offset, target) in &blob.fn_relocs {
++                hasher.update(offset.to_le_bytes());
++                hasher.update(target.as_u32().to_le_bytes());
++            }
+         }
+         hasher.update(u32::MAX.to_le_bytes());
+         // Nor which `asm!` block a call of a wrapper runs, which LLVM's code has in place of
+diff --git a/harness/wholeprogram.py b/harness/wholeprogram.py
+index 72b05d522..6e8a7be38 100644
+--- a/harness/wholeprogram.py
++++ b/harness/wholeprogram.py
+@@ -21,6 +21,11 @@ finished them (#200).
+   c_main         `#![no_main]` and a `main` of C's, as bun's, with a body of 16 384 statements
+   std_threads    `thread::spawn` and `thread_local!` `.with`: statics of std with state
+   c_abi_projection  C ABI arguments and results written as projections (objc2's `define_class!`)
++  assoc_const_slice_lib, assoc_const_slice
++                 the length of an associated const slice read through a generic function
++                 (objc2's `add_method`), the same program with the method table in a library
++                 and in the crate of `main`. Both are built with the store of the run and in
++                 this order: the code the first leaves in the store is not the second's.
+ 
+ The backend is `BLAZE_BACKEND`'s; `--release` builds both with the release profile. With
+ LLVM, a build of a whole program, whichever `main` it has, leaves no function to Cranelift
+@@ -32,7 +37,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
+ sys.path.insert(0, HERE)
+ import apps
+ 
+-CASES = ["default_alloc", "custom_alloc", "lib_alloc", "cfg_alloc", "trait_block", "c_main", "std_threads", "c_abi_projection"]
++CASES = ["default_alloc", "custom_alloc", "lib_alloc", "cfg_alloc", "trait_block", "c_main", "std_threads", "c_abi_projection",
++         "assoc_const_slice_lib", "assoc_const_slice"]
+ # What `backend::Backend::emit` leaves to Cranelift only in a build that is not of a whole program.
+ NOT_WHOLE = ("a body larger than LLVM is given in a build", "a handler LLVM lowers only for a tier")
+ 
+@@ -77,6 +83,9 @@ def main():
+     parser.add_argument("--keep", action="store_true", help="keep the copy of the workspace")
+     args = parser.parse_args()
+     work = tempfile.mkdtemp(prefix="blaze-wholeprogram-")
++    # One store for the cases of the run, and not the user's, so that what a case leaves in it
++    # is all a later case can find there.
++    os.environ["BLAZE_CACHE"] = os.path.join(work, "store")
+     ws = os.path.join(work, "ws")
+     shutil.copytree(os.path.join(HERE, "wholeprogram"), ws, ignore=shutil.ignore_patterns("target*"))
+     failed = 0
+diff --git a/harness/wholeprogram/Cargo.toml b/harness/wholeprogram/Cargo.toml
+index 3325d0223..dcdcd768b 100644
+--- a/harness/wholeprogram/Cargo.toml
++++ b/harness/wholeprogram/Cargo.toml
+@@ -1,3 +1,3 @@
+ [workspace]
+-members = ["default_alloc", "custom_alloc", "counter", "lib_alloc", "cfg_alloc", "trait_block", "c_main", "std_threads", "c_abi_projection"]
++members = ["default_alloc", "custom_alloc", "counter", "lib_alloc", "cfg_alloc", "trait_block", "c_main", "std_threads", "c_abi_projection", "assoc_const_lib", "assoc_const_slice_lib", "assoc_const_slice"]
+ resolver = "2"
+diff --git a/harness/wholeprogram/assoc_const_lib/Cargo.toml b/harness/wholeprogram/assoc_const_lib/Cargo.toml
+new file mode 100644
+index 000000000..34c2c515f
+--- /dev/null
++++ b/harness/wholeprogram/assoc_const_lib/Cargo.toml
+@@ -0,0 +1,4 @@
++[package]
++name = "assoc_const_lib"
++version = "0.1.0"
++edition = "2024"
+diff --git a/harness/wholeprogram/assoc_const_lib/src/lib.rs b/harness/wholeprogram/assoc_const_lib/src/lib.rs
+new file mode 100644
+index 000000000..60b44948a
+--- /dev/null
++++ b/harness/wholeprogram/assoc_const_lib/src/lib.rs
+@@ -0,0 +1,110 @@
++// What objc2 builds a method table from: a trait whose associated const is a slice, implemented
++// for tuples of every arity, and a trait of `extern "C"` function pointer types that names the
++// tuple of its arguments. `add_method` reads the length of the slice through the pointer type.
++use std::marker::PhantomData;
++
++#[derive(Clone, Copy, Debug, PartialEq)]
++pub enum Encoding {
++    Char,
++    Int,
++    ULongLong,
++    LongLong,
++    Double,
++    Object,
++    Pointer(&'static Encoding),
++    Struct(&'static str, &'static [Encoding]),
++}
++
++pub unsafe trait Encode {
++    const ENCODING: Encoding;
++}
++unsafe impl Encode for usize {
++    const ENCODING: Encoding = Encoding::ULongLong;
++}
++unsafe impl Encode for isize {
++    const ENCODING: Encoding = Encoding::LongLong;
++}
++unsafe impl Encode for f64 {
++    const ENCODING: Encoding = Encoding::Double;
++}
++unsafe impl<T> Encode for *const T {
++    const ENCODING: Encoding = Encoding::Object;
++}
++unsafe impl<T: ?Sized> Encode for &T {
++    const ENCODING: Encoding = Encoding::Object;
++}
++
++pub unsafe trait EncodeArgument {
++    const ENCODING_ARGUMENT: Encoding;
++}
++unsafe impl<T: Encode> EncodeArgument for T {
++    const ENCODING_ARGUMENT: Encoding = T::ENCODING;
++}
++
++pub trait ConvertArgument {
++    type Inner: EncodeArgument;
++}
++impl<T: EncodeArgument> ConvertArgument for T {
++    type Inner = T;
++}
++
++pub trait EncodeArguments {
++    const ENCODINGS: &'static [Encoding];
++}
++macro_rules! encode_args {
++    ($($t:ident),*) => {
++        impl<$($t: EncodeArgument),*> EncodeArguments for ($($t,)*) {
++            const ENCODINGS: &'static [Encoding] = &[$($t::ENCODING_ARGUMENT),*];
++        }
++    };
++}
++encode_args!();
++encode_args!(A);
++encode_args!(A, B);
++encode_args!(A, B, C);
++
++#[derive(Clone, Copy)]
++pub struct Sel(*const u8);
++pub struct Object;
++pub trait Receiver {
++    type Inner: ?Sized;
++}
++impl Receiver for &Object {
++    type Inner = Object;
++}
++pub struct Allocated<T>(PhantomData<T>);
++
++pub trait Method: Sized {
++    type Callee: ?Sized;
++    type Arguments: EncodeArguments;
++}
++macro_rules! method {
++    ($($t:ident),*) => {
++        impl<T: ?Sized + Receiver, R, $($t: EncodeArgument),*> Method for extern "C" fn(T, Sel $(, $t)*) -> R {
++            type Callee = T::Inner;
++            type Arguments = ($($t,)*);
++        }
++        impl<T: ?Sized + Receiver, R, $($t: EncodeArgument),*> Method for unsafe extern "C" fn(T, Sel $(, $t)*) -> R {
++            type Callee = T::Inner;
++            type Arguments = ($($t,)*);
++        }
++    };
++}
++method!();
++method!(A);
++method!(A, B);
++method!(A, B, C);
++
++pub struct Builder {
++    pub log: Vec<String>,
++}
++impl Builder {
++    pub fn add_method<F: Method<Callee = Object>>(&mut self, sel: &str, _f: F) {
++        self.add_inner(sel, F::Arguments::ENCODINGS);
++    }
++    fn add_inner(&mut self, sel: &str, enc: &[Encoding]) {
++        let want = sel.matches(':').count();
++        let verdict = if want == enc.len() { "ok" } else { "MISMATCH" };
++        self.log.push(format!("{sel}: selector {want} function {} {verdict}", enc.len()));
++    }
++}
+diff --git a/harness/wholeprogram/assoc_const_slice/Cargo.toml b/harness/wholeprogram/assoc_const_slice/Cargo.toml
+new file mode 100644
+index 000000000..59e823334
+--- /dev/null
++++ b/harness/wholeprogram/assoc_const_slice/Cargo.toml
+@@ -0,0 +1,4 @@
++[package]
++name = "assoc_const_slice"
++version = "0.1.0"
++edition = "2024"
+diff --git a/harness/wholeprogram/assoc_const_slice/src/main.rs b/harness/wholeprogram/assoc_const_slice/src/main.rs
+new file mode 100644
+index 000000000..cce7f8948
+--- /dev/null
++++ b/harness/wholeprogram/assoc_const_slice/src/main.rs
+@@ -0,0 +1,147 @@
++// The same program with the library's code in the crate of `main`.
++// What objc2 builds a method table from: a trait whose associated const is a slice, implemented
++// for tuples of every arity, and a trait of `extern "C"` function pointer types that names the
++// tuple of its arguments. `add_method` reads the length of the slice through the pointer type.
++use std::marker::PhantomData;
++
++#[derive(Clone, Copy, Debug, PartialEq)]
++enum Encoding {
++    Char,
++    Int,
++    ULongLong,
++    LongLong,
++    Double,
++    Object,
++    Pointer(&'static Encoding),
++    Struct(&'static str, &'static [Encoding]),
++}
++
++unsafe trait Encode {
++    const ENCODING: Encoding;
++}
++unsafe impl Encode for usize {
++    const ENCODING: Encoding = Encoding::ULongLong;
++}
++unsafe impl Encode for isize {
++    const ENCODING: Encoding = Encoding::LongLong;
++}
++unsafe impl Encode for f64 {
++    const ENCODING: Encoding = Encoding::Double;
++}
++unsafe impl<T> Encode for *const T {
++    const ENCODING: Encoding = Encoding::Object;
++}
++unsafe impl<T: ?Sized> Encode for &T {
++    const ENCODING: Encoding = Encoding::Object;
++}
++
++unsafe trait EncodeArgument {
++    const ENCODING_ARGUMENT: Encoding;
++}
++unsafe impl<T: Encode> EncodeArgument for T {
++    const ENCODING_ARGUMENT: Encoding = T::ENCODING;
++}
++
++trait ConvertArgument {
++    type Inner: EncodeArgument;
++}
++impl<T: EncodeArgument> ConvertArgument for T {
++    type Inner = T;
++}
++
++trait EncodeArguments {
++    const ENCODINGS: &'static [Encoding];
++}
++macro_rules! encode_args {
++    ($($t:ident),*) => {
++        impl<$($t: EncodeArgument),*> EncodeArguments for ($($t,)*) {
++            const ENCODINGS: &'static [Encoding] = &[$($t::ENCODING_ARGUMENT),*];
++        }
++    };
++}
++encode_args!();
++encode_args!(A);
++encode_args!(A, B);
++encode_args!(A, B, C);
++
++#[derive(Clone, Copy)]
++struct Sel(*const u8);
++struct Object;
++trait Receiver {
++    type Inner: ?Sized;
++}
++impl Receiver for &Object {
++    type Inner = Object;
++}
++struct Allocated<T>(PhantomData<T>);
++
++trait Method: Sized {
++    type Callee: ?Sized;
++    type Arguments: EncodeArguments;
++}
++macro_rules! method {
++    ($($t:ident),*) => {
++        impl<T: ?Sized + Receiver, R, $($t: EncodeArgument),*> Method for extern "C" fn(T, Sel $(, $t)*) -> R {
++            type Callee = T::Inner;
++            type Arguments = ($($t,)*);
++        }
++        impl<T: ?Sized + Receiver, R, $($t: EncodeArgument),*> Method for unsafe extern "C" fn(T, Sel $(, $t)*) -> R {
++            type Callee = T::Inner;
++            type Arguments = ($($t,)*);
++        }
++    };
++}
++method!();
++method!(A);
++method!(A, B);
++method!(A, B, C);
++
++struct Builder {
++    log: Vec<String>,
++}
++impl Builder {
++    fn add_method<F: Method<Callee = Object>>(&mut self, sel: &str, _f: F) {
++        self.add_inner(sel, F::Arguments::ENCODINGS);
++    }
++    fn add_inner(&mut self, sel: &str, enc: &[Encoding]) {
++        let want = sel.matches(':').count();
++        let verdict = if want == enc.len() { "ok" } else { "MISMATCH" };
++        self.log.push(format!("{sel}: selector {want} function {} {verdict}", enc.len()));
++    }
++}
++
++
++#[derive(Clone, Copy)]
++#[repr(C)]
++struct Range {
++    location: usize,
++    length: usize,
++}
++unsafe impl Encode for Range {
++    const ENCODING: Encoding = Encoding::Struct("_Range", &[usize::ENCODING, usize::ENCODING]);
++}
++
++extern "C" fn plain(_: &Object, _: Sel) {}
++extern "C" fn set_range(_: &Object, _: Sel, _: <Range as ConvertArgument>::Inner) {}
++extern "C" fn set_marked(
++    _: &Object,
++    _: Sel,
++    _: <*const Object as ConvertArgument>::Inner,
++    _: <Range as ConvertArgument>::Inner,
++    _: <Range as ConvertArgument>::Inner,
++) {
++}
++extern "C" fn point(_: &Object, _: Sel, _: <f64 as ConvertArgument>::Inner, _: <f64 as ConvertArgument>::Inner) -> f64 {
++    0.0
++}
++
++fn main() {
++    let mut b = Builder { log: vec![] };
++    b.add_method("plain", plain as extern "C" fn(_, _));
++    b.add_method("setRange:", set_range as extern "C" fn(_, _, _));
++    b.add_method("setMarked:selectedRange:replacementRange:", set_marked as extern "C" fn(_, _, _, _, _));
++    b.add_method("point:y:", point as extern "C" fn(_, _, _, _) -> _);
++    for line in b.log {
++        println!("{line}");
++    }
++}
+diff --git a/harness/wholeprogram/assoc_const_slice_lib/Cargo.toml b/harness/wholeprogram/assoc_const_slice_lib/Cargo.toml
+new file mode 100644
+index 000000000..35adee17e
+--- /dev/null
++++ b/harness/wholeprogram/assoc_const_slice_lib/Cargo.toml
+@@ -0,0 +1,7 @@
++[package]
++name = "assoc_const_slice_lib"
++version = "0.1.0"
++edition = "2024"
++
++[dependencies]
++assoc_const_lib = { path = "../assoc_const_lib" }
+diff --git a/harness/wholeprogram/assoc_const_slice_lib/src/main.rs b/harness/wholeprogram/assoc_const_slice_lib/src/main.rs
+new file mode 100644
+index 000000000..1ca55803c
+--- /dev/null
++++ b/harness/wholeprogram/assoc_const_slice_lib/src/main.rs
+@@ -0,0 +1,37 @@
++// The method table of `assoc_const_lib`, filled with the signatures of an Objective-C class.
++use assoc_const_lib::*;
++
++#[derive(Clone, Copy)]
++#[repr(C)]
++struct Range {
++    location: usize,
++    length: usize,
++}
++unsafe impl Encode for Range {
++    const ENCODING: Encoding = Encoding::Struct("_Range", &[usize::ENCODING, usize::ENCODING]);
++}
++
++extern "C" fn plain(_: &Object, _: Sel) {}
++extern "C" fn set_range(_: &Object, _: Sel, _: <Range as ConvertArgument>::Inner) {}
++extern "C" fn set_marked(
++    _: &Object,
++    _: Sel,
++    _: <*const Object as ConvertArgument>::Inner,
++    _: <Range as ConvertArgument>::Inner,
++    _: <Range as ConvertArgument>::Inner,
++) {
++}
++extern "C" fn point(_: &Object, _: Sel, _: <f64 as ConvertArgument>::Inner, _: <f64 as ConvertArgument>::Inner) -> f64 {
++    0.0
++}
++
++fn main() {
++    let mut b = Builder { log: vec![] };
++    b.add_method("plain", plain as extern "C" fn(_, _));
++    b.add_method("setRange:", set_range as extern "C" fn(_, _, _));
++    b.add_method("setMarked:selectedRange:replacementRange:", set_marked as extern "C" fn(_, _, _, _, _));
++    b.add_method("point:y:", point as extern "C" fn(_, _, _, _) -> _);
++    for line in b.log {
++        println!("{line}");
++    }
++}
