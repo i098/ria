@@ -14,11 +14,12 @@ use block2::RcBlock;
 use objc2::rc::{Retained, Weak};
 use objc2::runtime::{AnyObject, NSObject};
 use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, define_class, msg_send};
-use objc2_app_kit::{NSEvent, NSEventMask, NSEventType, NSView};
-use objc2_foundation::{NSData, NSPoint, NSRange, NSString, NSURL, NSUUID};
+use objc2_app_kit::{NSEvent, NSEventMask, NSEventType, NSView, NSWindow};
+use objc2_foundation::{NSArray, NSData, NSPoint, NSRange, NSString, NSURL, NSUUID};
 use ria_engine::call::main_queue;
 use serde_json::{Value, json};
 
+use super::ardia_tab_registry::TabRegistry;
 use crate::core::bindings::{Payload, Tab};
 use crate::core::convert::{from_json, to_json};
 
@@ -332,11 +333,18 @@ pub fn take_frame_click(
 pub enum MenuEvent {
     Command(Value),
     Share(ShareData),
+    Captured {
+        tab: String,
+        window: Retained<NSWindow>,
+        link: String,
+        items: Vec<Value>,
+    },
 }
 
 pub struct MenuIvars {
     engine_name: RefCell<String>,
     pick: Cell<Option<String>>,
+    background: RefCell<Option<Rc<RefCell<TabRegistry>>>>,
     emit: Rc<dyn Fn(MenuEvent)>,
 }
 
@@ -357,10 +365,14 @@ define_class!(
         }
 
         #[unsafe(method_id(tab:runContextMenu:))]
-        fn run_menu(&self, _tab: &Tab, menu: &Payload) -> Option<Retained<AnyObject>> {
-            let pick = self.ivars().pick.take()?;
-            let menu = to_json(menu);
-            find_pick(items(&menu["items"]), &pick).as_ref().map(from_json)
+        fn run_menu(&self, tab: &Tab, menu: &Payload) -> Option<Retained<AnyObject>> {
+            let rows = menu.objectForKey(&NSString::from_str("items"));
+            self.handle_menu(tab, Some(menu), rows.as_deref())
+        }
+
+        #[unsafe(method(tab:didShowContextMenu:))]
+        fn did_show_menu(&self, tab: &Tab, rows: &NSArray<AnyObject>) {
+            let _ = self.handle_menu(tab, None, Some(rows));
         }
 
         #[unsafe(method(tab:contextMenuCommand:text:modifiers:))]
@@ -382,6 +394,7 @@ impl ContextMenuDelegate {
         let this = Self::alloc(mtm).set_ivars(MenuIvars {
             engine_name: RefCell::new("Google".into()),
             pick: Cell::default(),
+            background: RefCell::default(),
             emit: Rc::new(emit),
         });
         // SAFETY: The allocated class has NSObject as its superclass.
@@ -398,6 +411,48 @@ impl ContextMenuDelegate {
 
     pub fn set_test_pick(&self, pick: String) {
         self.ivars().pick.set(Some(pick));
+    }
+
+    pub fn enable_background_capture(&self, registry: Rc<RefCell<TabRegistry>>) {
+        *self.ivars().background.borrow_mut() = Some(registry);
+    }
+
+    fn handle_menu(
+        &self,
+        tab: &Tab,
+        menu: Option<&Payload>,
+        rows: Option<&AnyObject>,
+    ) -> Option<Retained<AnyObject>> {
+        if let Some(pick) = self.ivars().pick.take() {
+            let rows = to_json(rows?);
+            return find_pick(items(&rows), &pick).as_ref().map(from_json);
+        }
+        self.capture(tab, menu, rows);
+        None
+    }
+
+    fn capture(&self, tab: &Tab, menu: Option<&Payload>, rows: Option<&AnyObject>) {
+        let background = self.ivars().background.borrow();
+        let Some(registry) = background.as_ref() else {
+            return;
+        };
+        let registry = registry.borrow();
+        let Some((tab, window)) = registry
+            .app_tab_id(tab)
+            .zip(registry.view_for_tab(tab).and_then(|view| view.window()))
+        else {
+            return;
+        };
+        let link = menu
+            .and_then(|menu| menu.objectForKey(&NSString::from_str("link")))
+            .and_then(|link| link.downcast::<NSString>().ok())
+            .map_or_else(String::new, |link| link.to_string());
+        self.queue(MenuEvent::Captured {
+            tab: tab.to_owned(),
+            window,
+            link,
+            items: rows.map_or_else(Vec::new, |rows| describe_menu(items(&to_json(rows)), true)),
+        });
     }
 
     fn queue(&self, event: MenuEvent) {
@@ -478,7 +533,7 @@ pub struct SharedImages {
 }
 
 impl SharedImages {
-    /// Remove legacy shares and shares whose owning process released its lock.
+    /// Remove shares whose owning process released its lock.
     pub fn remove_stale(base: &Path) {
         let root = base.join("Ria Shared Images");
         if !is_private_dir(&root) {
@@ -488,15 +543,12 @@ impl SharedImages {
             return;
         };
         for entry in entries.flatten() {
-            let path = entry.path();
-            if valid_share_dir(&path) {
-                let _ = remove_share_folder(&path);
-            } else if entry.file_name().to_str().is_some_and(|name| {
+            if entry.file_name().to_str().is_some_and(|name| {
                 name.split_once('-').is_some_and(|(pid, id)| {
                     !pid.is_empty() && pid.bytes().all(|c| c.is_ascii_digit()) && is_uuid(id)
                 })
             }) {
-                let _ = remove_inactive_owner(&path);
+                let _ = remove_inactive_owner(&entry.path());
             }
         }
     }
@@ -543,23 +595,17 @@ impl SharedImages {
             "image/webp" => "webp",
             _ => "jpg",
         };
-        let base = source
-            .split(['?', '#'])
-            .next()
-            .unwrap_or_default()
-            .rsplit('/')
-            .next()
-            .unwrap_or_default();
-        let base = Path::new(base)
-            .file_stem()
-            .and_then(|name| name.to_str())
-            .unwrap_or_default()
-            .trim();
+        let base = NSURL::URLWithString(&NSString::from_str(source))
+            .and_then(|url| url.lastPathComponent())
+            .map_or_else(String::new, |name| {
+                name.stringByDeletingPathExtension().to_string()
+            });
+        let base = if base == "/" { "" } else { base.trim() };
         let safe: String = base
             .chars()
             .filter(|c| !c.is_control())
             .take(80)
-            .map(|c| if c == ':' { '-' } else { c })
+            .map(|c| if matches!(c, ':' | '/') { '-' } else { c })
             .collect();
         let name = if safe.is_empty() { "Image" } else { &safe };
         let path = folder.join(format!("{name}.{ext}"));
@@ -698,6 +744,12 @@ mod tests {
         let abandoned = SharedImages::new(&base).unwrap();
         let live_path = live.own.clone();
         let abandoned_path = abandoned.own.clone();
+        let flat = live_path.parent().unwrap().join(unique_id());
+        DirBuilder::new().mode(0o700).create(&flat).unwrap();
+        let shared = live
+            .share(b"cat", "image/png", "https://example.com/cat%20photo.png")
+            .unwrap();
+        let filename = shared.file_name().unwrap().to_owned();
         for owner in [&live_path, &abandoned_path] {
             let share = owner.join(unique_id());
             DirBuilder::new().mode(0o700).create(&share).unwrap();
@@ -707,9 +759,12 @@ mod tests {
         SharedImages::remove_stale(&base);
         let preserved_live = live_path.exists();
         let removed_abandoned = !abandoned_path.exists();
+        let preserved_flat = flat.is_dir();
         drop(live);
         fs::remove_dir_all(&base).unwrap();
         assert!(preserved_live);
         assert!(removed_abandoned);
+        assert!(preserved_flat);
+        assert_eq!(filename, "cat photo.png");
     }
 }

@@ -12,7 +12,7 @@ use objc2::rc::{Retained, Weak};
 use objc2::runtime::AnyObject;
 use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, Message, define_class, msg_send};
 use objc2_app_kit::{NSAnimationContext, NSAutoresizingMaskOptions, NSView};
-use objc2_foundation::{NSPoint, NSSize};
+use objc2_foundation::{NSPoint, NSSize, NSString};
 use ria_engine::call::main_queue;
 
 use super::ardia_page_draw_wait::after_page_draw;
@@ -46,6 +46,7 @@ impl Drop for Picture {
 pub struct Ivars {
     tab: Weak<Tab>,
     pictured: Cell<NSSize>,
+    picture: RefCell<Picture>,
 }
 
 define_class!(
@@ -56,6 +57,12 @@ define_class!(
     pub struct PageCover;
 
     impl PageCover {
+        #[unsafe(method(wantsUpdateLayer))]
+        fn wants_update_layer(&self) -> bool { true }
+
+        #[unsafe(method(updateLayer))]
+        fn update_layer(&self) { self.display_picture(); }
+
         #[unsafe(method_id(hitTest:))]
         fn hit_test(&self, _point: NSPoint) -> Option<Retained<NSView>> { None }
 
@@ -120,6 +127,7 @@ impl PageCover {
                         let this = <Self as MainThreadOnly>::alloc(mtm).set_ivars(Ivars {
                             tab: Weak::new(&*tab),
                             pictured: Cell::new(pictured),
+                            picture: RefCell::new(picture),
                         });
                         // SAFETY: NSView initializes the allocated subclass for this rectangle.
                         let cover: Retained<Self> =
@@ -131,7 +139,6 @@ impl PageCover {
                         );
                         page.addSubview(&cover);
                         cover.displayIfNeeded();
-                        cover.set_picture(&picture);
                         let weak = Weak::new(&*cover);
                         main_queue::after(
                             Duration::from_secs(4),
@@ -180,13 +187,14 @@ impl PageCover {
         }
     }
 
-    fn set_picture(&self, picture: &Picture) {
+    fn display_picture(&self) {
         // SAFETY: A layer-backed NSView returns a CALayer; `contents` accepts a CGImage.
         unsafe {
             let layer: Option<Retained<AnyObject>> = msg_send![self, layer];
             if let Some(layer) = layer {
-                let image: *const AnyObject = picture.0.cast();
+                let image: *const AnyObject = self.ivars().picture.borrow().0.cast();
                 let _: () = msg_send![&*layer, setContents: image];
+                let _: () = msg_send![&*layer, setContentsGravity: &*NSString::from_str("resize")];
             }
         }
     }
@@ -232,8 +240,9 @@ impl PageCover {
                                 .load()
                                 .filter(|cover| super::superview(cover).is_some())
                             {
-                                cover.set_picture(&image);
+                                *cover.ivars().picture.borrow_mut() = image;
                                 cover.ivars().pictured.set(now);
+                                cover.display_picture();
                             }
                         }));
                     }),

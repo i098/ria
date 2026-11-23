@@ -73,12 +73,12 @@ define_class!(
         #[unsafe(method(pageView:ackedScroll:consumed:))]
         fn acked(&self, view: &NSView, ack: isize, consumed: bool) {
             let ack = if ack == PageScrollAck::Begin as isize { PageScrollAck::Begin } else { PageScrollAck::Update };
-            self.enqueue(view, ScrollEvent::Ack(ack, consumed));
+            self.receive(view, ScrollEvent::Ack(ack, consumed));
         }
 
         #[unsafe(method(pageView:overscrolledAllowingHorizontal:))]
         fn overscrolled(&self, view: &NSView, allowed: bool) {
-            self.enqueue(view, ScrollEvent::Overscroll(allowed));
+            self.receive(view, ScrollEvent::Overscroll(allowed));
         }
     }
 );
@@ -112,24 +112,22 @@ impl RendererScrollObserver {
         )
     }
 
-    fn enqueue(&self, view: &NSView, event: ScrollEvent) {
+    fn receive(&self, view: &NSView, event: ScrollEvent) {
+        if let Some((_, scroll)) = self
+            .ivars()
+            .scrolls
+            .borrow()
+            .get(&std::ptr::from_ref(view))
+            .filter(|(page, _)| page.load().is_some())
+        {
+            let mut next = scroll.get();
+            next.apply(event);
+            scroll.set(next);
+        }
         let observer = Weak::new(self);
-        let view = Weak::new(view);
         main_queue::post(Box::new(move || {
-            let Some(observer) = observer.load() else {
-                return;
-            };
-            (observer.ivars().trace)(event);
-            let Some(view) = view.load() else { return };
-            if let Some((_, scroll)) = observer
-                .ivars()
-                .scrolls
-                .borrow()
-                .get(&std::ptr::from_ref(&*view))
-            {
-                let mut next = scroll.get();
-                next.apply(event);
-                scroll.set(next);
+            if let Some(observer) = observer.load() {
+                (observer.ivars().trace)(event);
             }
         }));
     }

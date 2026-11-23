@@ -27,11 +27,10 @@ mod mac {
     use objc2_foundation::{NSPoint, NSRect, NSSize, NSString};
     use ria_engine::call::{ActionQueue, Engine as CallEngine, main_queue};
     use ria_engine::types::{Number, TabStripCommand, TabStripTransaction};
-    use ria_host_mac::core::bindings::{Engine, Profile, Tab, Window};
+    use ria_host_mac::core::bindings::{Adoption, Engine, Profile, Tab, Window};
     use ria_host_mac::tabs::ardia_tab_parking::TabParking;
     use ria_host_mac::tabs::ardia_tab_registry::TabRegistry;
     use ria_host_mac::tabs::ardia_tab_strip::{StripCommandResult, StripWindow, TabStrips};
-    use ria_host_mac::tabs::ardia_web_view_context_menu::ElementPick;
     use serde_json::{Value, json};
 
     struct Checks {
@@ -59,6 +58,20 @@ mod mac {
             #[unsafe(method(engineWillShutDown))]
             fn shutdown(&self) {
                 self.ivars().shutdown.set(true);
+            }
+        }
+    );
+
+    define_class!(
+        #[unsafe(super(NSObject))]
+        #[name = "RiaTabsLiveRemovalObserver"]
+        #[ivars = Cell<*const Tab>]
+        struct RemovalObserver;
+
+        impl RemovalObserver {
+            #[unsafe(method(window:didRemoveTab:))]
+            fn removed(&self, _window: &Window, tab: &Tab) {
+                self.ivars().set(std::ptr::from_ref(tab));
             }
         }
     );
@@ -204,7 +217,7 @@ mod mac {
         }
     }
 
-    fn open_fixture(profile: &Profile) {
+    fn fixture_window(profile: &Profile) -> Retained<Window> {
         let rect = NSRect::new(NSPoint::new(-3000.0, -3000.0), NSSize::new(420.0, 300.0));
         // SAFETY: The engine registered this class and this call is on the main thread.
         let window = unsafe {
@@ -212,6 +225,11 @@ mod mac {
         };
         window.set_internal(true);
         window.prepare_profile(profile);
+        window
+    }
+
+    fn open_fixture(profile: &Profile) {
+        let window = fixture_window(profile);
         let tab = window.open_tab(
             &NSString::from_str("data:text/html,<title>Ria%20tab%20fixture</title>"),
             profile,
@@ -292,16 +310,6 @@ mod mac {
             pass = false;
         }
 
-        let mut pick = ElementPick::default();
-        let armed = pick.arm(&tab, 1);
-        pass &= !pick.take(&tab, 1, armed);
-        let armed = pick.arm(&tab, 1);
-        pick.note_input(&tab);
-        pass &= !pick.take(&tab, 2, armed);
-        let armed = pick.arm(&tab, 2);
-        pick.note_input(&tab);
-        pass &= pick.take(&tab, 2, armed) && !pick.take(&tab, 2, armed);
-
         check_strip_events(window, tab, profile, registry, pass);
     }
 
@@ -310,7 +318,7 @@ mod mac {
         tab: Retained<Tab>,
         profile: Retained<Profile>,
         mut registry: TabRegistry,
-        mut pass: bool,
+        pass: bool,
     ) {
         let scopes = [StripWindow {
             window: &window,
@@ -323,31 +331,10 @@ mod mac {
         let mut strips = TabStrips::default();
         let strip_id = window.chrome_window_id_for_profile(&profile);
         let strip = Number::from(strip_id);
-        let StripCommandResult::Done(arranged) = strips.command(
-            Number(7.0),
-            TabStripCommand::Arrange {
-                strip,
-                keys: vec!["fixture".into()],
-                pinned: Number(1.0),
-            },
-            &scopes,
-            &mut registry,
-        ) else {
-            return shutdown(&window, &tab, false);
-        };
-        pass &= arranged.cmd == Some(Number(7.0)) && arranged.rejected.is_none();
-        strips.activated(strip_id, &tab);
-        strips.removed(strip_id, &tab);
-        pass &= strips.active(strip_id).is_none();
-        pass &= strips.all(&scopes, &mut registry).strips[0]
-            .tabs
-            .iter()
-            .any(|row| row.key.as_deref() == Some("fixture") && row.pinned);
-        window.place_tab(&tab, 0, false);
-        strips.set_pinned(&tab, false);
+        let command = Number(8.0);
 
         let StripCommandResult::Group { args, .. } = strips.command(
-            Number(8.0),
+            command,
             TabStripCommand::Group {
                 strip,
                 keys: vec!["fixture".into()],
@@ -371,10 +358,12 @@ mod mac {
         call.did_start();
         let emitted = Rc::new(RefCell::new(Vec::new()));
         let profile_path = profile.path().to_string();
+        let state = Rc::new(RefCell::new((strips, registry)));
         call.on_event("tabs.strip", {
             let emitted = emitted.clone();
             let window = window.clone();
-            let state = RefCell::new((strips, registry));
+            let state = state.clone();
+            let profile = profile.clone();
             move |event| {
                 if event["window"].as_i64() != Some(i64::from(strip_id)) {
                     return;
@@ -406,15 +395,28 @@ mod mac {
                 call.call("ac_tabs_group", &profile_path, false, args, {
                     let call = call.clone();
                     move |reply| {
+                        let scope = StripWindow {
+                            window: &window,
+                            profile: &profile,
+                            profile_name: "Default",
+                            app_window: Some("fixture"),
+                            host_changes: false,
+                            standalone: false,
+                        };
+                        let (strips, registry) = &mut *state.borrow_mut();
                         let pass = pass
                             && reply.is_ok_and(|reply| {
                                 reply["group"].as_str().is_some_and(|group| {
+                                    let tx = strips.group_finished(command, &scope, registry, false);
                                     !group.is_empty()
+                                        && matches_group(&tx, Some(command), strip, group)
                                         && emitted.take().into_iter().any(|payload| {
-                                            matches_group_event(payload, strip, group)
+                                            serde_json::from_value::<TabStripTransaction>(payload)
+                                                .is_ok_and(|tx| matches_group(&tx, None, strip, group))
                                         })
                                 })
                             });
+                        let pass = pass && check_adoption(&scope, &tab, strips, registry);
                         call.shutdown();
                         shutdown(&window, &tab, pass);
                     }
@@ -423,14 +425,74 @@ mod mac {
         });
     }
 
-    fn matches_group_event(payload: Value, strip: Number, group: &str) -> bool {
-        let Ok(tx) = serde_json::from_value::<TabStripTransaction>(payload) else {
+    fn check_adoption(
+        source: &StripWindow<'_>,
+        tab: &Tab,
+        strips: &mut TabStrips,
+        registry: &mut TabRegistry,
+    ) -> bool {
+        let strip_id = source.window.chrome_window_id_for_profile(source.profile);
+        let destination = fixture_window(source.profile);
+        source
+            .window
+            .open_tab(&NSString::from_str("about:blank"), source.profile, false);
+        let command = Number(9.0);
+        let StripCommandResult::Done(arranged) = strips.command(
+            command,
+            TabStripCommand::Arrange {
+                strip: Number::from(strip_id),
+                keys: vec!["fixture".into()],
+                pinned: Number(1.0),
+            },
+            std::slice::from_ref(source),
+            registry,
+        ) else {
+            destination.close();
             return false;
         };
+        strips.activated(strip_id, tab);
+        let observer = RemovalObserver::alloc().set_ivars(Cell::new(std::ptr::null()));
+        let observer: Retained<RemovalObserver> = unsafe { msg_send![super(observer), init] };
+        unsafe { source.window.set_delegate(Some(&observer)) };
+        let adopted = destination.adopt_tab(tab);
+        unsafe { source.window.set_delegate(None) };
+        let removed = observer.ivars().get() == std::ptr::from_ref(tab);
+        if removed {
+            strips.removed(strip_id, tab);
+        }
+        let target = StripWindow {
+            window: &destination,
+            profile: source.profile,
+            profile_name: source.profile_name,
+            app_window: Some("destination"),
+            host_changes: false,
+            standalone: false,
+        };
+        let pass = arranged.cmd == Some(command)
+            && arranged.rejected.is_none()
+            && adopted == Adoption::Adopted
+            && removed
+            && strips.active(strip_id).is_none()
+            && strips.changed(&target, registry, None).is_some_and(|tx| {
+                tx.strips[0]
+                    .tabs
+                    .iter()
+                    .any(|row| row.key.as_deref() == Some("fixture") && row.pinned)
+            });
+        destination.close();
+        pass
+    }
+
+    fn matches_group(
+        tx: &TabStripTransaction,
+        command: Option<Number>,
+        strip: Number,
+        group: &str,
+    ) -> bool {
         let [state] = tx.strips.as_slice() else {
             return false;
         };
-        tx.cmd.is_none()
+        tx.cmd == command
             && tx.rejected.is_none()
             && state.strip == strip
             && state.app_window.as_deref() == Some("fixture")
