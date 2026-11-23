@@ -137,7 +137,7 @@ fn export_html(ctx: &DataCtx, args: CallArgs, reply: CallReply) -> Done {
     ctx.services.clone().run(
         "savePanel",
         &args.profile,
-        json!({ "name": "Ardia Bookmarks.html", "type": "html" }),
+        json!({ "name": "Ria Bookmarks.html", "type": "html" }),
         Box::new(move |chosen| {
             let Ok(Value::String(path)) = chosen else {
                 return reply.ok(None);

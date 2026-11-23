@@ -84,10 +84,6 @@ impl CallArgs {
         self.required(key, "a string", |v| v.as_str().map(str::to_owned))
     }
 
-    pub fn optional_text(&self, key: &str) -> Result<Option<String>, BadCallArgs> {
-        self.optional(key, "a string", |v| v.as_str().map(str::to_owned))
-    }
-
     pub fn bool(&self, key: &str) -> Result<bool, BadCallArgs> {
         self.required(key, "a boolean", Value::as_bool)
     }
@@ -102,10 +98,6 @@ impl CallArgs {
 
     pub fn optional_double(&self, key: &str) -> Result<Option<f64>, BadCallArgs> {
         self.optional(key, "a number", Value::as_f64)
-    }
-
-    pub fn int(&self, key: &str) -> Result<i64, BadCallArgs> {
-        self.required(key, "an integer", Value::as_i64)
     }
 
     pub fn dict(&self, key: &str) -> Result<Map<String, Value>, BadCallArgs> {

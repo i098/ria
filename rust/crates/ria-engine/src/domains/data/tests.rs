@@ -281,6 +281,21 @@ fn run_table(
 }
 
 #[test]
+fn bookmark_export_suggests_a_ria_html_filename() {
+    let rig = rig();
+    let reply = run_table(&rig, "bookmarks", "exportHtml", "work", json!({}));
+    assert_eq!(
+        rig.services.log.borrow().as_slice(),
+        &[(
+            "savePanel".into(),
+            "work".into(),
+            json!({"name": "Ria Bookmarks.html", "type": "html"}),
+        )]
+    );
+    assert_eq!(reply.take(), Some(Ok("null".into())));
+}
+
+#[test]
 fn the_service_accepts_only_boolean_true_and_keeps_engine_errors() {
     let answers = [
         (json!({"ok": true}), None),

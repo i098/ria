@@ -4,55 +4,22 @@
 
 //! Safe file names for the download mover: clean name, collision suffix, byte limit.
 
+use unicode_segmentation::UnicodeSegmentation;
+
+const DEFAULT_NAME: &str = "download";
 const MAX_NAME_BYTES: usize = 255;
 const MAX_KEPT_EXTENSION: usize = 24;
 
-/// True when `c` extends the composed character sequence before it.
-// shortcut: covers combining marks, variation selectors, emoji modifiers and ZWJ only, not full UAX #29; upgrade with a segmentation crate if names need it.
-fn extends(c: char) -> bool {
-    matches!(c as u32,
-        0x0300..=0x036F | 0x0483..=0x0489 | 0x0591..=0x05BD | 0x0610..=0x061A | 0x064B..=0x065F
-        | 0x0900..=0x0903 | 0x093A..=0x094F | 0x1AB0..=0x1AFF | 0x1DC0..=0x1DFF | 0x200C | 0x200D
-        | 0x20D0..=0x20FF | 0x302A..=0x302F | 0x3099 | 0x309A | 0xFE00..=0xFE0F | 0xFE20..=0xFE2F
-        | 0x1F3FB..=0x1F3FF | 0xE0020..=0xE007F | 0xE0100..=0xE01EF)
-}
-
-/// Splits `text` into composed character sequences, as `NSStringEnumerationByComposedCharacterSequences`.
-fn clusters(text: &str) -> Vec<&str> {
-    let mut out = Vec::new();
-    let mut start = 0;
-    let mut previous: Option<char> = None;
-    for (index, c) in text.char_indices() {
-        let joins = match previous {
-            None => false,
-            Some('\r') => c == '\n',
-            Some('\u{200D}') => true,
-            Some(p) => (p as u32) >= 0x20 && p != '\u{7F}' && extends(c),
-        };
-        if !joins && index > 0 {
-            out.push(&text[start..index]);
-            start = index;
-        }
-        previous = Some(c);
-    }
-    if start < text.len() {
-        out.push(&text[start..]);
-    }
-    out
-}
-
-fn truncated(text: &str, max_bytes: usize) -> String {
+fn truncated(text: &str, max_bytes: usize) -> &str {
     if text.len() <= max_bytes {
-        return text.to_owned();
+        return text;
     }
-    let mut kept = String::new();
-    for piece in clusters(text) {
-        if kept.len() + piece.len() > max_bytes {
-            break;
-        }
-        kept.push_str(piece);
-    }
-    kept
+    let end = text
+        .grapheme_indices(true)
+        .take_while(|(start, grapheme)| start + grapheme.len() <= max_bytes)
+        .last()
+        .map_or(0, |(start, grapheme)| start + grapheme.len());
+    &text[..end]
 }
 
 /// `pathExtension` and `stringByDeletingPathExtension` of a single name.
@@ -88,7 +55,9 @@ pub fn name_with_suffix(name: &str, suffix: &str) -> String {
         format!("{suffix}.{ext}")
     };
     let room = MAX_NAME_BYTES - tail.len().min(MAX_NAME_BYTES - 1);
-    truncated(&stem, room) + &tail
+    let stem = truncated(&stem, room);
+    let stem = if stem.is_empty() { DEFAULT_NAME } else { stem };
+    format!("{stem}{tail}")
 }
 
 /// A file name with no control, bidi or path characters, no leading dots and at most 255 bytes.
@@ -111,7 +80,7 @@ pub fn safe_file_name(name: &str) -> String {
         trimmed = rest.trim_matches(char::is_whitespace);
     }
     let trimmed = if trimmed.is_empty() {
-        "download"
+        DEFAULT_NAME
     } else {
         trimmed
     };
@@ -149,5 +118,21 @@ mod tests {
         assert_eq!(name_with_suffix("README", " (2)"), "README (2)");
         assert_eq!(name_with_suffix("e\u{301}.txt", ""), "e\u{301}.txt");
         assert_eq!(truncated("ae\u{301}", 2), "a");
+    }
+
+    #[test]
+    fn truncation_keeps_flags_whole_before_and_after_collisions() {
+        let stem = "a".repeat(244);
+        let name = format!("{stem}🇨🇦.x");
+        assert_eq!(safe_file_name(&name), name);
+        assert_eq!(name_with_suffix(&name, " (1)"), format!("{stem} (1).x"));
+
+        let stem = "a".repeat(247);
+        let name = format!("{stem}🇨🇦.x");
+        assert_eq!(safe_file_name(&name), format!("{stem}.x"));
+        assert_eq!(
+            safe_file_name(&format!("e{}.x", "\u{301}".repeat(128))),
+            "download.x"
+        );
     }
 }
