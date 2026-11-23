@@ -28,8 +28,9 @@ fn main() {
 #[cfg(target_os = "macos")]
 mod mac {
     use std::cell::{Cell, RefCell};
-    use std::ffi::{CString, c_char, c_int};
+    use std::ffi::{CString, OsStr, c_char, c_int};
     use std::io::Write;
+    use std::os::unix::ffi::OsStrExt;
     use std::panic::{AssertUnwindSafe, catch_unwind};
     use std::path::{Path, PathBuf};
     use std::process::Command;
@@ -70,7 +71,17 @@ mod mac {
             std::env::var_os("ENGINE_DIR")
                 .expect("set ENGINE_DIR to the folder that holds Chromium Framework.framework"),
         );
-        let root = std::env::temp_dir().join(format!("ria-data-live-{}", std::process::id()));
+        let template = std::env::temp_dir().join("ria-data-live-XXXXXX");
+        let mut template = CString::new(template.as_os_str().as_bytes())
+            .unwrap()
+            .into_bytes_with_nul();
+        let created = unsafe { libc::mkdtemp(template.as_mut_ptr().cast()) };
+        assert!(
+            !created.is_null(),
+            "cannot create the live test root: {}",
+            std::io::Error::last_os_error()
+        );
+        let root = Path::new(OsStr::from_bytes(&template[..template.len() - 1]));
         let macos = root.join("Live.app/Contents/MacOS");
         std::fs::create_dir_all(&macos).unwrap();
         std::fs::create_dir_all(root.join("Live.app/Contents/Frameworks")).unwrap();
@@ -91,7 +102,7 @@ mod mac {
             .env("RIA_LIVE_DATA", &data)
             .status()
             .expect("start the child");
-        let _ = std::fs::remove_dir_all(&root);
+        let _ = std::fs::remove_dir_all(root);
         std::process::exit(status.code().unwrap_or(1));
     }
 
@@ -195,9 +206,20 @@ mod mac {
         let code: c_int = unsafe {
             msg_send![class, runWithArgc: (ptrs.len() - 1) as c_int, argv: ptrs.as_ptr(), delegate: &*delegate]
         };
-        let live = LIVE
-            .with(|l| l.borrow().clone())
-            .expect("the engine started");
+        let Some(live) = LIVE.with(|l| l.borrow().clone()) else {
+            println!(
+                "{}",
+                json!({
+                    "live": "result",
+                    "exit_code": code,
+                    "checks": 0,
+                    "failed": 0,
+                    "pass": false,
+                    "detail": "the engine returned before the profile was ready"
+                })
+            );
+            std::process::exit(if code == 0 { 1 } else { code });
+        };
         let checks = live.checks.borrow();
         let failed = checks.iter().filter(|c| !c.1).count();
         let pass = code == 0 && failed == 0 && *live.finished.borrow();
