@@ -1,0 +1,167 @@
+{
+  "state": "sidebar-closed-dark",
+  "cgWindow": {
+    "id": 190102,
+    "bounds": {
+      "X": 80,
+      "Height": 800,
+      "Y": 1280,
+      "Width": 1280
+    }
+  },
+  "socketGeometry": {
+    "display": "048AECE5-5B4D-43E4-9665-48A46883E8C3",
+    "pageFullScreen": false,
+    "zoomed": false,
+    "frame": [
+      80,
+      80,
+      1280,
+      800
+    ],
+    "miniaturized": false,
+    "fullScreen": false,
+    "visible": true
+  },
+  "socketWindows": [
+    {
+      "id": "w1",
+      "kind": "normal",
+      "focused": true,
+      "profile": "default",
+      "profileName": "Personal",
+      "tabs": [
+        {
+          "id": "p1",
+          "url": "file:///tmp/halyard-parity-data/pages/mail.html",
+          "title": "Inbox",
+          "profile": "default",
+          "active": false,
+          "pinned": true,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "p2",
+          "url": "file:///tmp/halyard-parity-data/pages/calendar.html",
+          "title": "Calendar",
+          "profile": "default",
+          "active": false,
+          "pinned": true,
+          "group": null,
+          "targetId": "67E71B92B64E24E413EAAD0A00C3EA1A",
+          "pageGeneration": 1
+        },
+        {
+          "id": "p3",
+          "url": "file:///tmp/halyard-parity-data/pages/docs.html",
+          "title": "Design doc",
+          "profile": "default",
+          "active": false,
+          "pinned": true,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "r1",
+          "url": "file:///tmp/halyard-parity-data/pages/research1.html",
+          "title": "Swift concurrency",
+          "profile": "default",
+          "active": false,
+          "pinned": false,
+          "group": "g1",
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "r2",
+          "url": "file:///tmp/halyard-parity-data/pages/research2.html",
+          "title": "Metal shaders",
+          "profile": "default",
+          "active": false,
+          "pinned": false,
+          "group": "g1",
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "t1",
+          "url": "file:///tmp/halyard-parity-data/pages/notes.html",
+          "title": "Meeting notes",
+          "profile": "default",
+          "active": true,
+          "pinned": false,
+          "group": null,
+          "targetId": "01E11B6D1111960C7FB1E2B8E13D7AD6",
+          "pageGeneration": 1
+        },
+        {
+          "id": "t2",
+          "url": "file:///tmp/halyard-parity-data/pages/reading.html",
+          "title": "Reading list",
+          "profile": "default",
+          "active": false,
+          "pinned": false,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "t3",
+          "url": "",
+          "title": "",
+          "profile": "default",
+          "active": false,
+          "pinned": false,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 1
+        },
+        {
+          "id": "k1",
+          "url": "file:///tmp/halyard-parity-data/pages/work1.html",
+          "title": "Roadmap",
+          "profile": "work",
+          "active": false,
+          "pinned": false,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        },
+        {
+          "id": "k2",
+          "url": "file:///tmp/halyard-parity-data/pages/work2.html",
+          "title": "Quarterly plan",
+          "profile": "work",
+          "active": false,
+          "pinned": false,
+          "group": null,
+          "targetId": null,
+          "pageGeneration": 0
+        }
+      ]
+    }
+  ],
+  "regionsInWindowPoints": {
+    "tiles": [
+      -9991,
+      54,
+      172,
+      41
+    ],
+    "pinnedGroups": [
+      -9991,
+      101,
+      172,
+      0
+    ],
+    "list": [
+      -9991,
+      116,
+      172,
+      257
+    ]
+  }
+}

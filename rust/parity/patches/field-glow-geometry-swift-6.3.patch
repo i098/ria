@@ -1,0 +1,19 @@
+diff --git a/packages/shell/ios/FieldGlowCore/FieldGlowGeometry.swift b/packages/shell/ios/FieldGlowCore/FieldGlowGeometry.swift
+index b5bcebf87..e9d53292d 100644
+--- a/packages/shell/ios/FieldGlowCore/FieldGlowGeometry.swift
++++ b/packages/shell/ios/FieldGlowCore/FieldGlowGeometry.swift
+@@ -85,7 +85,13 @@ public enum FieldGlowGeometry {
+   static func fadingPast(body: Double, front: Double, falloff: [Double]) -> [(Double, Double)] {
+     let span = body + front
+     guard span > 0, falloff.count > 1 else { return [(0, 1)] }
+-    return [(0, 1)] + falloff.enumerated().map { i, alpha in ((body + front * Double(i) / Double(falloff.count - 1)) / span, alpha) }
++    let steps = Double(falloff.count - 1)
++    var stops: [(Double, Double)] = [(0, 1)]
++    for (i, alpha) in falloff.enumerated() {
++      let at: Double = (body + front * Double(i) / steps) / span
++      stops.append((at, alpha))
++    }
++    return stops
+   }
+ 
+   static func plate(_ look: FieldGlowLook, _ stops: [(Double, Double)], _ fade: [(Double, Double)], extra: Double) -> FieldGlowPlateStops {
