@@ -388,18 +388,23 @@ mod mac {
         call.did_start();
         let emitted = Rc::new(RefCell::new(Vec::new()));
         let engine_pinned = Rc::new(Cell::new(None));
+        let event_deadline = Rc::new(Cell::new(None::<Instant>));
         let tab_id = i64::from(tab.tab_id());
         let profile_path = profile.path().to_string();
         let state = Rc::new(RefCell::new((strips, registry)));
         call.on_event("tabs.strip", {
             let emitted = emitted.clone();
             let engine_pinned = engine_pinned.clone();
+            let event_deadline = event_deadline.clone();
             let window = window.clone();
             let state = state.clone();
             let profile = profile.clone();
             let profile_path = profile_path.clone();
             move |event| {
-                if event["window"].as_i64() != Some(i64::from(strip_id))
+                if event_deadline
+                    .get()
+                    .is_some_and(|deadline| Instant::now() >= deadline)
+                    || event["window"].as_i64() != Some(i64::from(strip_id))
                     || event["profile"].as_str() != Some(profile_path.as_str())
                     || event["offTheRecord"].as_bool() == Some(true)
                 {
@@ -441,6 +446,7 @@ mod mac {
                             return shutdown(&window, &tab, false);
                         };
                         let deadline = Instant::now() + Duration::from_secs(10);
+                        event_deadline.set(Some(deadline));
                         wait_for_strip(
                             deadline,
                             {
@@ -557,10 +563,10 @@ mod mac {
         matches: impl Fn() -> bool + 'static,
         finish: impl FnOnce(bool) + 'static,
     ) {
-        if Instant::now() >= deadline {
-            finish(false);
-        } else if matches() {
+        if matches() {
             finish(true);
+        } else if Instant::now() >= deadline {
+            finish(false);
         } else {
             main_queue::after(
                 Duration::from_millis(20),
