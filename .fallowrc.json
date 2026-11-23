@@ -1,3 +1,8 @@
 {
-  "entry": ["rust/tools/bang-tsv/extract.mjs"]
+  "entry": [
+    "rust/tools/bang-tsv/extract.mjs",
+    "rust/recorded/1.6/mobile.harness.ts",
+    "rust/recorded/1.6/telemetry-wire-rs/clock-freeze.mjs"
+  ],
+  "ignorePatterns": ["rust/recorded/1.6/mobile-rs/index.cjs"]
 }

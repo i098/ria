@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": ".review-ardia",
+  "unit": "packages/core/src/mobile.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "mobile-rs",
+  "exports": [
+    {
+      "name": "replayMobile",
+      "file": "packages/core/src/mobile.harness.ts",
+      "line": 19,
+      "params": [
+        {
+          "name": "input",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

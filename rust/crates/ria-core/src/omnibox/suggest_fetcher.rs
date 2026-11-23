@@ -133,7 +133,7 @@ pub fn reply_suggestions(text: &str) -> RemoteSuggestions {
 }
 
 /// The parts of a parsed reply `parseRemoteSuggestions` reads (`engines.ts:145`).
-fn suggest_reply(body: &Json) -> Option<SuggestReply<'_>> {
+pub(crate) fn suggest_reply(body: &Json) -> Option<SuggestReply<'_>> {
     let Json::Array(body) = body else {
         return None;
     };

@@ -1,0 +1,29 @@
+import * as mobile from "./mobile.ts";
+
+const calls = {
+  mobileLoadBangDocument: mobile.mobileLoadBangDocument,
+  mobileBangDocument: mobile.mobileBangDocument,
+  mobileSetSources: mobile.mobileSetSources,
+  mobileSetSearch: mobile.mobileSetSearch,
+  mobileEngines: mobile.mobileEngines,
+  mobileWarmBangs: mobile.mobileWarmBangs,
+  mobileSuggest: mobile.mobileSuggest,
+  mobileResolve: mobile.mobileResolve,
+  mobileSuggestRequest: mobile.mobileSuggestRequest,
+  mobileParseRemote: mobile.mobileParseRemote,
+  mobileFindScope: mobile.mobileFindScope,
+  mobileClean: mobile.mobileClean,
+  mobileDisplay: mobile.mobileDisplay,
+};
+
+export function replayMobile(input: string): unknown[] {
+  const steps: [keyof typeof calls, ...never[]][] = JSON.parse(input);
+  return steps.map(([name, ...args]) => {
+    try {
+      return (calls[name] as (...args: never[]) => unknown)(...args);
+    } catch (error) {
+      if ((error as Error).name !== "TypeError") throw error;
+      return { error: (error as Error).message };
+    }
+  });
+}

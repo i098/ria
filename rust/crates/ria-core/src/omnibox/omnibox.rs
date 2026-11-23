@@ -102,7 +102,7 @@ fn known_tld(tld: &str) -> bool {
 }
 
 /// `/^([a-z][a-z0-9+.-]*):/i`: the scheme and the text after its colon.
-fn split_scheme(text: &str) -> Option<(&str, &str)> {
+pub(crate) fn split_scheme(text: &str) -> Option<(&str, &str)> {
     let colon = text.find(':')?;
     let scheme = &text[..colon];
     let mut bytes = scheme.bytes();

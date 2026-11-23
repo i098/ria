@@ -7,6 +7,7 @@
 
 use std::f64::consts::PI;
 
+use super::fdlibm;
 use super::js::{js_max, js_min, js_round};
 
 /// The grain textures a theme can have.
@@ -316,7 +317,7 @@ fn unit_hex(c: &[f64]) -> String {
 /// The color of the color pad at `x`, `y`: hue by angle, saturation by distance from the center.
 pub fn pad_color(x: f64, y: f64, lightness: f64) -> ThemeColor {
     let (dx, dy) = (clamp01(x) - 0.5, clamp01(y) - 0.5);
-    let mut hue = dy.atan2(dx) / (2.0 * PI);
+    let mut hue = fdlibm::atan2(dy, dx) / (2.0 * PI);
     if hue < 0.0 {
         hue += 1.0;
     }
@@ -329,7 +330,10 @@ pub fn pad_color(x: f64, y: f64, lightness: f64) -> ThemeColor {
 pub fn pad_position(color: &ThemeColor) -> (f64, f64) {
     let [h, s, _] = rgb_to_hsl(clamp01(color.r), clamp01(color.g), clamp01(color.b));
     let angle = h * 2.0 * PI;
-    (0.5 + 0.5 * s * angle.cos(), 0.5 + 0.5 * s * angle.sin())
+    (
+        0.5 + 0.5 * s * fdlibm::cos(angle),
+        0.5 + 0.5 * s * fdlibm::sin(angle),
+    )
 }
 
 fn decode(v: f64) -> f64 {
@@ -470,7 +474,7 @@ pub fn look_angle(angle: Option<f64>) -> f64 {
 /// The gradient position of a point along `degrees`, scaled by `half` of the box's reach.
 fn along(degrees: f64, x: f64, y: f64, width: f64, height: f64, overlay: bool) -> f64 {
     let r = (degrees * PI) / 180.0;
-    let (dx, dy) = (r.sin(), -r.cos());
+    let (dx, dy) = (fdlibm::sin(r), -fdlibm::cos(r));
     let half = if overlay {
         (width * dx.abs() + height * dy.abs()) / 2.0
     } else {
@@ -745,9 +749,12 @@ pub fn with_added_stop<T: AsRef<ThemeLook> + AsMut<ThemeLook> + Clone>(theme: &T
         return out;
     }
     let (lx, ly) = stops.last().map_or((0.8, 0.5), |s| (s.x, s.y));
-    let angle = (ly - 0.5).atan2(lx - 0.5) + (2.0 * PI) / 5.0;
+    let angle = fdlibm::atan2(ly - 0.5, lx - 0.5) + (2.0 * PI) / 5.0;
     let radius = js_max(0.3, js_hypot(lx - 0.5, ly - 0.5));
-    let (x, y) = (0.5 + radius * angle.cos(), 0.5 + radius * angle.sin());
+    let (x, y) = (
+        0.5 + radius * fdlibm::cos(angle),
+        0.5 + radius * fdlibm::sin(angle),
+    );
     stops.push(ThemeStop {
         x,
         y,
@@ -793,12 +800,12 @@ pub fn with_texture<T: AsRef<ThemeLook> + AsMut<ThemeLook> + Clone>(
 /// A two-stop theme around the color of `swatch`.
 pub fn starting_theme(swatch: &str) -> ProfileTheme {
     let (bx, by) = pad_position(&hex_color(swatch));
-    let angle = (by - 0.5).atan2(bx - 0.5);
+    let angle = fdlibm::atan2(by - 0.5, bx - 0.5);
     let radius = js_max(0.3, js_hypot(bx - 0.5, by - 0.5));
     let stop = |offset: f64| {
         let (x, y) = (
-            0.5 + radius * (angle + offset).cos(),
-            0.5 + radius * (angle + offset).sin(),
+            0.5 + radius * fdlibm::cos(angle + offset),
+            0.5 + radius * fdlibm::sin(angle + offset),
         );
         ThemeStop {
             x,

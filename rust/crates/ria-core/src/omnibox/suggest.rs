@@ -155,6 +155,15 @@ pub fn build_suggestions(
     pool: &mut Pool,
     narrowing: &mut Narrowing,
 ) -> Result<SuggestionResult, &'static str> {
+    build_suggestions_lazy(raw, source, options, || Ok((pool, narrowing)))
+}
+
+pub(crate) fn build_suggestions_lazy<'a>(
+    raw: &str,
+    source: &SuggestionSource,
+    options: &SuggestOptions,
+    pool: impl FnOnce() -> Result<(&'a mut Pool, &'a mut Narrowing), &'static str>,
+) -> Result<SuggestionResult, &'static str> {
     let limit = options.limit;
     let now = options.now.unwrap_or_else(now_ms);
     let (engine_name, engine_url) = options.engine.as_ref().map_or(
@@ -183,7 +192,7 @@ pub fn build_suggestions(
 
     if scope.is_none() {
         if let Some(bang) = find_bang(query, options.bangs) {
-            return bang_suggestions(bang, source, options, pool, narrowing);
+            return bang_suggestions(bang, source, options, pool);
         }
         if let Some(text) = query.strip_prefix('?') {
             let text = js_trim(text);
@@ -210,6 +219,7 @@ pub fn build_suggestions(
         }
     }
 
+    let (pool, narrowing) = pool()?;
     let TabsOver {
         tab_ids,
         mut extra,
@@ -703,12 +713,11 @@ fn inline_target(q: &str, c: &mut Candidate) -> InlineTarget {
 }
 
 /// Port of `bangSuggestions` (`suggest.ts:192`): the bang search, then the site's pages.
-fn bang_suggestions(
+fn bang_suggestions<'a>(
     found: BangMatch,
     source: &SuggestionSource,
     options: &SuggestOptions,
-    pool: &mut Pool,
-    narrowing: &mut Narrowing,
+    pool: impl FnOnce() -> Result<(&'a mut Pool, &'a mut Narrowing), &'static str>,
 ) -> Result<SuggestionResult, &'static str> {
     let BangMatch { bang, query, url } = found;
     let mut out = Output::new(options.limit);
@@ -740,7 +749,7 @@ fn bang_suggestions(
         bangs: None,
         ..options.clone()
     };
-    let rows = build_suggestions(&query, source, &inner, pool, narrowing)?.items;
+    let rows = build_suggestions_lazy(&query, source, &inner, pool)?.items;
     out.extend(rows.into_iter().skip(1));
     Ok(SuggestionResult {
         items: out.into_items(),
