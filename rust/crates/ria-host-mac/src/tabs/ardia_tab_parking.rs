@@ -376,7 +376,13 @@ impl TabParking {
 }
 
 fn mark_index(mark: &str) -> Option<usize> {
-    mark.strip_prefix("link:")?.parse().ok()
+    let digits = mark.strip_prefix("link:")?;
+    if (digits.len() > 1 && digits.starts_with('0'))
+        || !digits.bytes().all(|digit| digit.is_ascii_digit())
+    {
+        return None;
+    }
+    digits.parse().ok()
 }
 
 fn close_open_tab(tab: &Tab) {

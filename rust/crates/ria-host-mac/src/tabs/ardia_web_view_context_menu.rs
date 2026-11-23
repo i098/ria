@@ -330,9 +330,7 @@ pub fn take_frame_click(
 }
 
 pub enum MenuEvent {
-    Menu(Value),
     Command(Value),
-    Autofill(Value),
     Share(ShareData),
 }
 
@@ -360,10 +358,9 @@ define_class!(
 
         #[unsafe(method_id(tab:runContextMenu:))]
         fn run_menu(&self, _tab: &Tab, menu: &Payload) -> Option<Retained<AnyObject>> {
+            let pick = self.ivars().pick.take()?;
             let menu = to_json(menu);
-            let picked = self.ivars().pick.take().and_then(|pick| find_pick(items(&menu["items"]), &pick));
-            self.queue(MenuEvent::Menu(menu));
-            picked.as_ref().map(from_json)
+            find_pick(items(&menu["items"]), &pick).as_ref().map(from_json)
         }
 
         #[unsafe(method(tab:contextMenuCommand:text:modifiers:))]
@@ -371,11 +368,6 @@ define_class!(
             if item.to_string() == "search" {
                 self.queue(MenuEvent::Command(json!({"command": "search", "text": text.map(ToString::to_string).unwrap_or_default(), "modifiers": modifiers.map(|value| to_json(value)).unwrap_or_else(|| json!({}))})));
             }
-        }
-
-        #[unsafe(method(tab:didShowAutofillSuggestions:))]
-        fn autofill(&self, _tab: &Tab, items: &AnyObject) {
-            self.queue(MenuEvent::Autofill(json!({"items": to_json(items)})));
         }
 
         #[unsafe(method(tab:shareFromContextMenu:))]

@@ -106,7 +106,120 @@ impl TransferLedger {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::TransferLedger;
+    use std::sync::Mutex;
+
+    #[test]
+    fn prepare_supersedes_reload_hold() {
+        let mut ledger = TransferLedger::default();
+        let held = ledger.hold_for_reload("t");
+        let moved = ledger.prepare("t");
+        assert_ne!(moved, held);
+        assert!(!ledger.expire_reload_hold("t", held));
+        assert!(ledger.is_prepared("t"));
+    }
+
+    #[test]
+    fn expired_reload_hold_can_still_retire_its_parked_tab() {
+        let mut ledger = TransferLedger::default();
+        let held = ledger.hold_for_reload("t");
+        assert_eq!(ledger.park("t"), Some(held));
+        assert!(ledger.expire_reload_hold("t", held));
+        assert!(!ledger.is_prepared("t"));
+        assert!(ledger.retire_parked("t", held));
+        assert!(!ledger.expire_reload_hold("t", held));
+    }
+
+    #[test]
+    fn stale_retirement_does_not_remove_a_newly_parked_tab() {
+        let mut ledger = TransferLedger::default();
+        let held = ledger.hold_for_reload("t");
+        assert!(ledger.expire_reload_hold("t", held));
+        let moved = ledger.prepare("t");
+        assert_eq!(ledger.park("t"), Some(moved));
+        assert!(!ledger.retire_parked("t", held));
+        assert_eq!(ledger.parked_generation("t"), Some(moved));
+    }
+
+    #[test]
+    fn dropped_preparation_cannot_park_a_tab() {
+        let mut ledger = TransferLedger::default();
+        let first = ledger.prepare("t");
+        assert!(ledger.is_prepared("t"));
+        assert_eq!(ledger.drop_preparation("t"), Some(first));
+        assert_eq!(ledger.park("t"), None);
+        assert_eq!(ledger.parked_generation("t"), None);
+        assert!(!ledger.retire_parked("t", first));
+    }
+
+    #[test]
+    fn replacing_a_parked_preparation_advances_its_generation() {
+        let mut ledger = TransferLedger::default();
+        let first = ledger.prepare("t");
+        assert_eq!(ledger.park("t"), Some(first));
+        let second = ledger.prepare("t");
+        assert_eq!(ledger.parked_generation("t"), Some(second));
+        let dropped = ledger.drop_preparation("t").unwrap();
+        assert_eq!(dropped, second);
+        assert!(!ledger.retire_parked("t", first));
+        assert!(ledger.retire_parked("t", dropped));
+        assert_eq!(ledger.parked_generation("t"), None);
+    }
+
+    #[test]
+    fn new_preparation_changes_the_old_parked_generation_only_when_parked() {
+        let mut ledger = TransferLedger::default();
+        let first = ledger.prepare("t");
+        assert_eq!(ledger.park("t"), Some(first));
+        assert_eq!(ledger.drop_preparation("t"), Some(first));
+        let second = ledger.prepare("t");
+        assert_eq!(ledger.parked_generation("t"), Some(first));
+        assert_eq!(ledger.park("t"), Some(second));
+        assert!(!ledger.retire_parked("t", first));
+        assert_eq!(ledger.parked_generation("t"), Some(second));
+    }
+
+    #[test]
+    fn claim_clears_prepared_and_parked_generations() {
+        let mut ledger = TransferLedger::default();
+        ledger.prepare("t");
+        ledger.park("t");
+        ledger.claim("t");
+        assert!(!ledger.is_prepared("t"));
+        assert_eq!(ledger.parked_generation("t"), None);
+    }
+
+    #[test]
+    fn reload_holds_can_expire_with_concurrent_prepare_and_retire() {
+        let ledger = Mutex::new(TransferLedger::default());
+        let mut expired = 0;
+        std::thread::scope(|scope| {
+            scope.spawn(|| {
+                for i in 0..20_000 {
+                    let key = if i % 2 == 0 { "b" } else { "a" };
+                    let generation = ledger.lock().unwrap().prepare(key);
+                    let retirement = match i % 3 {
+                        0 => ledger.lock().unwrap().drop_preparation(key),
+                        1 => Some(generation),
+                        _ => None,
+                    };
+                    if let Some(retirement) = retirement {
+                        ledger.lock().unwrap().retire_parked(key, retirement);
+                    }
+                }
+            });
+            for i in 0..20_000 {
+                let key = if i % 2 == 0 { "a" } else { "b" };
+                let held = ledger.lock().unwrap().hold_for_reload(key);
+                ledger.lock().unwrap().park(key);
+                if ledger.lock().unwrap().expire_reload_hold(key, held) {
+                    expired += 1;
+                }
+                ledger.lock().unwrap().retire_parked(key, held);
+            }
+        });
+        assert!(expired > 0);
+    }
 
     #[test]
     fn stale_reload_and_retirement_leave_the_new_generation_intact() {

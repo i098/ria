@@ -96,7 +96,6 @@ impl TabStrips {
         {
             self.active.remove(&strip);
         }
-        self.pinned.remove(&std::ptr::from_ref(tab));
     }
 
     pub fn set_pinned(&mut self, tab: &Tab, pinned: bool) {

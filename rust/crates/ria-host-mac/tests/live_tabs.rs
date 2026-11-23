@@ -16,26 +16,22 @@ mod mac {
     use std::ffi::CString;
     use std::path::{Path, PathBuf};
     use std::process::Command;
+    use std::rc::Rc;
     use std::time::{Duration, Instant};
 
     use objc2::rc::Retained;
-    use objc2::runtime::{AnyObject, NSObject};
+    use objc2::runtime::NSObject;
     use objc2::{
         AllocAnyThread, DefinedClass, MainThreadMarker, Message, class, define_class, msg_send,
     };
     use objc2_foundation::{NSPoint, NSRect, NSSize, NSString};
-    use ria_engine::call::main_queue;
+    use ria_engine::call::{ActionQueue, Engine as CallEngine, main_queue};
     use ria_engine::types::{Number, TabStripCommand, TabStripTransaction};
     use ria_host_mac::core::bindings::{Engine, Profile, Tab, Window};
-    use ria_host_mac::core::convert::{from_json, to_json};
-    use ria_host_mac::tabs::ardia_page_draw_wait::after_page_draw;
-    use ria_host_mac::tabs::ardia_renderer_scroll_observer::RendererScrollObserver;
     use ria_host_mac::tabs::ardia_tab_parking::TabParking;
     use ria_host_mac::tabs::ardia_tab_registry::TabRegistry;
     use ria_host_mac::tabs::ardia_tab_strip::{StripCommandResult, StripWindow, TabStrips};
-    use ria_host_mac::tabs::ardia_web_view_context_menu::{
-        ContextMenuDelegate, ElementPick, MenuEvent,
-    };
+    use ria_host_mac::tabs::ardia_web_view_context_menu::ElementPick;
     use serde_json::{Value, json};
 
     struct Checks {
@@ -272,51 +268,21 @@ mod mac {
         pass &= parking.unpark("fixture").is_some();
         window.host_view().addSubview(&view);
 
-        let scopes = [StripWindow {
-            window: &window,
-            profile: &profile,
-            profile_name: "Default",
-            app_window: Some("fixture"),
-            host_changes: false,
-            standalone: false,
-        }];
-        let mut strips = TabStrips::default();
-        let strip = Number::from(window.chrome_window_id_for_profile(&profile));
-        let result = strips.command(
-            Number(7.0),
-            TabStripCommand::Arrange {
-                strip,
-                keys: vec!["fixture".into()],
-                pinned: Number(1.0),
-            },
-            &scopes,
-            &mut registry,
-        );
-        pass &= match result {
-            StripCommandResult::Done(tx) => serde_json::to_value(&tx)
-                .ok()
-                .and_then(|value| serde_json::from_value::<TabStripTransaction>(value).ok())
-                .is_some_and(|parsed| {
-                    parsed.cmd == Some(Number(7.0))
-                        && parsed
-                            .strips
-                            .first()
-                            .and_then(|strip| strip.tabs.first())
-                            .is_some_and(|tab| tab.pinned && tab.key.as_deref() == Some("fixture"))
-                }),
-            StripCommandResult::Group { .. } => false,
-        };
-
         let urls = ["about:blank#dismissed".into(), "about:blank#adopt".into()];
         parking.hold_link_tabs(&urls, "Default", Instant::now(), |url| {
             Some(window.open_tab(&NSString::from_str(url), &profile, false))
         });
         if let Some(dismissed) = parking.first_link_tab().map(Message::retain) {
             parking.dismiss_link_tab(&dismissed, |_| {});
+            pass &= !parking.take_dismissed_link_mark("link:+0");
+            pass &= !parking.take_dismissed_link_mark("link:00");
+            pass &= parking.take_dismissed_link_mark("link:0");
             let route = parking.route_link_tabs(&urls);
             pass &= route.profile == Some("Default")
                 && route.dismissed == [0]
                 && route.adopt_ids == [None, Some("link:1".into())];
+            pass &= parking.park_link_tab("link:+1", "alias").is_none();
+            pass &= parking.park_link_tab("link:01", "alias").is_none();
             if let Some(adopted) = parking.park_link_tab("link:1", "adopted") {
                 parking.discard_tab(&adopted, "adopted", |_| {});
             } else {
@@ -336,53 +302,157 @@ mod mac {
         pick.note_input(&tab);
         pass &= pick.take(&tab, 2, armed) && !pick.take(&tab, 2, armed);
 
-        let observer = RendererScrollObserver::install(mtm, |_| {});
-        let _ = observer.renderer_scroll_for(&view);
-        let events = std::rc::Rc::new(RefCell::new(Vec::new()));
-        let delegate = ContextMenuDelegate::new(mtm, {
-            let events = events.clone();
+        check_strip_events(window, tab, profile, registry, pass);
+    }
+
+    fn check_strip_events(
+        window: Retained<Window>,
+        tab: Retained<Tab>,
+        profile: Retained<Profile>,
+        mut registry: TabRegistry,
+        mut pass: bool,
+    ) {
+        let scopes = [StripWindow {
+            window: &window,
+            profile: &profile,
+            profile_name: "Default",
+            app_window: Some("fixture"),
+            host_changes: false,
+            standalone: false,
+        }];
+        let mut strips = TabStrips::default();
+        let strip_id = window.chrome_window_id_for_profile(&profile);
+        let strip = Number::from(strip_id);
+        let StripCommandResult::Done(arranged) = strips.command(
+            Number(7.0),
+            TabStripCommand::Arrange {
+                strip,
+                keys: vec!["fixture".into()],
+                pinned: Number(1.0),
+            },
+            &scopes,
+            &mut registry,
+        ) else {
+            return shutdown(&window, &tab, false);
+        };
+        pass &= arranged.cmd == Some(Number(7.0)) && arranged.rejected.is_none();
+        strips.activated(strip_id, &tab);
+        strips.removed(strip_id, &tab);
+        pass &= strips.active(strip_id).is_none();
+        pass &= strips.all(&scopes, &mut registry).strips[0]
+            .tabs
+            .iter()
+            .any(|row| row.key.as_deref() == Some("fixture") && row.pinned);
+        window.place_tab(&tab, 0, false);
+        strips.set_pinned(&tab, false);
+
+        let StripCommandResult::Group { args, .. } = strips.command(
+            Number(8.0),
+            TabStripCommand::Group {
+                strip,
+                keys: vec!["fixture".into()],
+                group: Some("new".into()),
+                title: Some("Ria fixture group".into()),
+                color: Some(json!("blue")),
+                collapsed: Some(false),
+            },
+            &scopes,
+            &mut registry,
+        ) else {
+            return shutdown(&window, &tab, false);
+        };
+        let queue = ActionQueue::new();
+        let weak = Rc::downgrade(&queue);
+        queue.set_waker(move || {
+            let weak = weak.clone();
+            main_queue::post(Box::new(move || _ = weak.upgrade().map(|q| q.drain())));
+        });
+        let call = CallEngine::new(queue);
+        call.did_start();
+        let emitted = Rc::new(RefCell::new(Vec::new()));
+        let profile_path = profile.path().to_string();
+        call.on_event("tabs.strip", {
+            let emitted = emitted.clone();
+            let window = window.clone();
+            let state = RefCell::new((strips, registry));
             move |event| {
-                if let MenuEvent::Command(value) = event {
-                    events.borrow_mut().push(value);
+                if event["window"].as_i64() != Some(i64::from(strip_id)) {
+                    return;
+                }
+                let (strips, registry) = &mut *state.borrow_mut();
+                let scope = StripWindow {
+                    window: &window,
+                    profile: &profile,
+                    profile_name: "Default",
+                    app_window: Some("fixture"),
+                    host_changes: false,
+                    standalone: false,
+                };
+                if strips.observe_engine_strip(event) == Some(strip_id)
+                    && let Some(tx) = strips.changed(&scope, registry, None)
+                {
+                    emitted.borrow_mut().push(serde_json::to_value(tx).unwrap());
                 }
             }
         });
-        delegate.set_test_pick("Copy\t8".into());
-        let menu = from_json(&json!({"items": [{"label": "Copy", "id": 42}]}));
-        // SAFETY: The delegate implements these exact selectors and all arguments are live Foundation objects.
-        let (selection, picked) = unsafe {
-            let text = NSString::from_str(" fixture   text ");
-            let items: Retained<AnyObject> =
-                msg_send![&*delegate, tab: &*tab, contextMenuItemsForSelection: &*text];
-            let search = NSString::from_str("search");
-            let _: () = msg_send![&*delegate, tab: &*tab, contextMenuCommand: &*search, text: &*text, modifiers: Option::<&AnyObject>::None];
-            let picked: Option<Retained<AnyObject>> =
-                msg_send![&*delegate, tab: &*tab, runContextMenu: &*menu];
-            let second: Option<Retained<AnyObject>> =
-                msg_send![&*delegate, tab: &*tab, runContextMenu: &*menu];
-            pass &= second.is_none() && events.borrow().is_empty();
-            (to_json(&items), picked.map(|picked| to_json(&picked)))
+        call.call("ac_tabs_watch", &profile_path, false, json!({}), {
+            let call = call.clone();
+            let profile_path = profile_path.clone();
+            move |watch| {
+                if !watch.is_ok_and(|reply| reply["ok"] == true) {
+                    call.shutdown();
+                    return shutdown(&window, &tab, false);
+                }
+                call.call("ac_tabs_group", &profile_path, false, args, {
+                    let call = call.clone();
+                    move |reply| {
+                        let pass = pass
+                            && reply.is_ok_and(|reply| {
+                                reply["group"].as_str().is_some_and(|group| {
+                                    !group.is_empty()
+                                        && emitted.take().into_iter().any(|payload| {
+                                            matches_group_event(payload, strip, group)
+                                        })
+                                })
+                            });
+                        call.shutdown();
+                        shutdown(&window, &tab, pass);
+                    }
+                });
+            }
+        });
+    }
+
+    fn matches_group_event(payload: Value, strip: Number, group: &str) -> bool {
+        let Ok(tx) = serde_json::from_value::<TabStripTransaction>(payload) else {
+            return false;
         };
-        pass &= selection[0]["title"].as_str() == Some("Search Google for “fixture text”");
-        pass &= picked == Some(json!({"command": 42, "path": [0], "flags": 8}));
-        after_page_draw(
-            &tab.clone(),
-            |_, _| true,
-            move || {
-                let pass = pass
-                    && events
-                        .borrow()
-                        .first()
-                        .and_then(|v: &Value| v["command"].as_str())
-                        == Some("search");
-                drop(observer);
-                shutdown(&window, &tab, pass);
-            },
-        );
+        let [state] = tx.strips.as_slice() else {
+            return false;
+        };
+        tx.cmd.is_none()
+            && tx.rejected.is_none()
+            && state.strip == strip
+            && state.app_window.as_deref() == Some("fixture")
+            && state.tabs.iter().any(|row| {
+                row.key.as_deref() == Some("fixture")
+                    && row.group.as_deref() == Some(group)
+                    && !row.pinned
+            })
+            && state.groups.as_deref().is_some_and(|groups| {
+                groups.iter().any(|row| {
+                    row.id == group
+                        && row.title == "Ria fixture group"
+                        && row.color == "blue"
+                        && !row.collapsed
+                })
+            })
     }
 
     fn shutdown(window: &Window, tab: &Tab, pass: bool) {
-        println!("live_tabs: title, registry, parking, typed strip and context menu: {pass}");
+        println!(
+            "live_tabs: title, registry, parking, typed strip and Chromium strip events: {pass}"
+        );
         RESULT.with(|result| result.set(pass));
         tab.close();
         window.close();
