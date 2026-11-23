@@ -7,7 +7,6 @@
 //! symbol (`ac_*`), with the change of the argument shape and of the reply, or a call that the host answers with AppKit
 //! code (`ria-host-mac`). [`call_engine`] runs the first kind.
 
-use std::path::Path;
 use std::rc::Rc;
 
 use serde_json::Value;
@@ -130,10 +129,6 @@ pub(crate) fn string_arg(args: &Value, key: &str) -> Result<String, CallError> {
         .and_then(Value::as_str)
         .map(str::to_owned)
         .ok_or(CallError::BadArguments)
-}
-
-pub(crate) fn dir_of(ctx: &CallContext) -> &Path {
-    Path::new(&ctx.profile_dir)
 }
 
 #[cfg(test)]

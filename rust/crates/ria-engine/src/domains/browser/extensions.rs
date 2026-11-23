@@ -11,7 +11,7 @@ use std::path::{Component, Path, PathBuf};
 use serde_json::{Map, Value, json};
 
 use super::extension_package::{is_extension_id, read_manifest};
-use super::{CallContext, EngineRoute, Route, dir_of, passing, string_arg};
+use super::{CallContext, EngineRoute, Route, passing, string_arg};
 use crate::api::extensions::InspectUnpackedArgs;
 use crate::call::CallError;
 
@@ -193,7 +193,7 @@ fn list_reply(reply: Value, ctx: &CallContext) -> Result<Value, CallError> {
     let infos = reply["extensions"]
         .as_array()
         .ok_or_else(|| CallError::Engine("Unexpected extension list".into()))?;
-    let registrations = LazyCell::new(|| store_registrations(dir_of(ctx)));
+    let registrations = LazyCell::new(|| store_registrations(Path::new(&ctx.profile_dir)));
     let list: Vec<Value> = infos
         .iter()
         .filter_map(Value::as_object)
@@ -216,10 +216,10 @@ fn list_item<'a>(
     let folder = path.map(PathBuf::from).or_else(|| {
         let id = info.get("id")?.as_str()?;
         let version = info.get("version")?.as_str()?;
-        store_folder(dir_of(ctx), registrations()?.get(id)?, id, version)
+        store_folder(Path::new(&ctx.profile_dir), registrations()?.get(id)?, id, version)
     });
     let manifest = folder
-        .and_then(|f| read_manifest(&f, &ctx.ui_locale).ok())
+        .and_then(|folder| read_manifest(&folder, &ctx.ui_locale).ok())
         .unwrap_or(Value::Null);
     for key in [
         "popup",
@@ -232,17 +232,19 @@ fn list_item<'a>(
             item.insert(key.into(), value.clone());
         }
     }
-    item.insert(
-        "incognitoSplit".into(),
-        json!(manifest["incognitoSplit"] == true),
-    );
-    item.insert(
-        "incognitoAllowed".into(),
-        manifest
-            .get("incognitoAllowed")
-            .cloned()
-            .unwrap_or(Value::Null),
-    );
+    if manifest.is_object() {
+        item.insert(
+            "incognitoSplit".into(),
+            json!(manifest["incognitoSplit"] == true),
+        );
+        item.insert(
+            "incognitoAllowed".into(),
+            manifest["incognitoAllowed"].clone(),
+        );
+    } else {
+        item.entry("incognitoSplit").or_insert(json!(false));
+        item.entry("incognitoAllowed").or_insert(Value::Null);
+    }
     for key in ["siteAccess", "optionsUrl", "path", "homepageUrl"] {
         item.entry(key).or_insert(Value::Null);
     }
@@ -366,26 +368,28 @@ mod tests {
     fn list_uses_the_registered_store_directory() {
         let dir = tempfile::tempdir().unwrap();
         let id = "abcdefghijklmnopabcdefghijklmnop";
-        let reply = json!({"extensions": [{"id": id, "version": "1.2", "location": "FROM_STORE"}]});
-        for suffix in ["0", "1", "2"] {
-            let folder = dir
-                .path()
-                .join("Extensions")
-                .join(id)
-                .join(format!("1.2_{suffix}"));
-            std::fs::create_dir_all(&folder).unwrap();
-            let manifest = json!({"action": {"default_popup": format!("{suffix}.html")}});
-            std::fs::write(folder.join("manifest.json"), manifest.to_string()).unwrap();
-        }
-        let prefs = dir.path().join("Secure Preferences");
-        let settings = json!({"extensions": {"settings": {(id): {"path": format!("{id}/1.2_1")}}}});
-        std::fs::write(&prefs, settings.to_string()).unwrap();
-        let ctx = ctx(dir.path());
-        let out = list_reply(reply.clone(), &ctx).unwrap();
-        assert_eq!(out["extensions"][0]["popup"], "1.html");
+        let old = dir.path().join("Extensions").join(id).join("1.2_0");
+        std::fs::create_dir_all(&old).unwrap();
+        std::fs::write(
+            old.join("manifest.json"),
+            r#"{"incognito":"split","action":{"default_popup":"old.html"}}"#,
+        )
+        .unwrap();
+        let settings = json!({"extensions": {"settings": {(id): {"path": format!("{id}/1.2_0")}}}});
+        std::fs::write(
+            dir.path().join("Secure Preferences"),
+            settings.to_string(),
+        )
+        .unwrap();
+        let reply = json!({"extensions": [{
+            "id": id, "version": "1.2", "location": "FROM_STORE",
+            "path": null, "actionTitle": "Current"
+        }]});
 
-        std::fs::remove_file(prefs).unwrap();
-        let out = list_reply(reply, &ctx).unwrap();
-        assert!(out["extensions"][0].get("popup").is_none());
+        let out = list_reply(reply, &ctx(dir.path())).unwrap();
+        let item = &out["extensions"][0];
+        assert_eq!(item["popup"], "old.html");
+        assert_eq!(item["incognitoSplit"], true);
+        assert_eq!(item["actionTitle"], "Current");
     }
 }
