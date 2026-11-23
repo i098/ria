@@ -34,22 +34,25 @@ mod mac {
 
     use block2::RcBlock;
     use objc2::runtime::{AnyObject, Bool};
-    use objc2::{MainThreadMarker, MainThreadOnly, Message, msg_send, rc::Retained};
+    use objc2::{
+        DefinedClass, MainThreadMarker, MainThreadOnly, Message, define_class, msg_send, rc::Retained,
+    };
     use objc2_app_kit::{
-        NSApplication, NSColor, NSEvent, NSEventModifierFlags, NSEventType, NSMenu, NSMenuItem,
-        NSScreen, NSTextField, NSTextView, NSUserInterfaceItemIdentification, NSView, NSWindow,
-        NSWindowButton, NSWindowDidEnterFullScreenNotification,
-        NSWindowDidExitFullScreenNotification, NSWindowWillEnterFullScreenNotification,
-        NSWindowWillExitFullScreenNotification,
+        NSApplication, NSBackingStoreType, NSColor, NSEvent, NSEventModifierFlags, NSEventType,
+        NSMenu, NSMenuItem, NSScreen, NSTextField, NSTextView, NSUserInterfaceItemIdentification,
+        NSView, NSWindow, NSWindowButton, NSWindowDidEnterFullScreenNotification,
+        NSWindowDidExitFullScreenNotification, NSWindowStyleMask,
+        NSWindowWillEnterFullScreenNotification, NSWindowWillExitFullScreenNotification,
     };
     use objc2_foundation::{
-        NSBundle, NSDate, NSNotification, NSNotificationCenter, NSPoint, NSRect, NSRunLoop, NSSize,
-        NSString, NSUserDefaults, ns_string,
+        NSBundle, NSDate, NSIntersectionRect, NSNotification, NSNotificationCenter, NSPoint, NSRect,
+        NSRunLoop, NSSize, NSString, NSUserDefaults, ns_string,
     };
     use ria_engine::call::main_queue;
     use ria_host_mac::core::bindings::{Engine, Profile, Tab, Window};
     use ria_host_mac::core::delegate::{EngineDelegate, Hooks};
     use ria_host_mac::core::host::State;
+    use ria_host_mac::launch::launch_config::LaunchConfig;
     use ria_host_mac::windows::ardia_chrome_window_host::ChromeWindowHost;
     use ria_host_mac::windows::ardia_chrome_window_host_little_fit::little_frame_for_size;
     use ria_host_mac::windows::ardia_display_identity::frame_on_screen;
@@ -61,6 +64,7 @@ mod mac {
     };
     use ria_host_mac::windows::ardia_traffic_lights::Placement;
     use ria_host_mac::windows::ardia_window_controller::{Controllers, WindowKind};
+    use ria_host_mac::windows::ardia_window_full_screen::configure_acted_transition;
     use serde_json::Value;
 
     const FRAMEWORK: &str = "Chromium Framework.framework";
@@ -111,7 +115,10 @@ mod mac {
                 .unwrap()
                 .success()
         );
-        let status = Command::new(&exe).env("RIA_WINDOWS_DATA", data).status();
+        let status = Command::new(&exe)
+            .env("RIA_WINDOWS_DATA", &data)
+            .env("RIA_TEST", "fakeFullScreenMs=500")
+            .status();
         NSUserDefaults::standardUserDefaults()
             .removePersistentDomainForName(&NSString::from_str(&bundle_id));
         std::fs::remove_dir_all(root).unwrap();
@@ -136,6 +143,17 @@ mod mac {
         NSUserDefaults::standardUserDefaults().setDouble_forKey(1., ns_string!("interfaceScale"));
         assert_eq!(ardia_interface_scale::scale(), 1.);
         let data = std::env::var("RIA_WINDOWS_DATA").unwrap();
+        let test = std::env::var("RIA_TEST").unwrap();
+        let config = LaunchConfig::from_environment(
+            [("RIA_DATA_DIR", data.as_str()), ("RIA_TEST", test.as_str())],
+            &std::env::home_dir().unwrap(),
+            Path::new(&data),
+            false,
+        )
+        .unwrap();
+        assert!(config.test_instance);
+        configure_acted_transition(&config);
+        drop(config);
         let argv: Vec<_> = [
             std::env::args().next().unwrap(),
             format!("--user-data-dir={data}/Chromium"),
@@ -291,6 +309,7 @@ mod mac {
                 Some("test instances only")
             );
         }
+        check_native_mouse_delivery(host, app);
         window.setTitle(ns_string!("Native probe fixture"));
         let text = NSTextView::initWithFrame(
             window.mtm().alloc(),
@@ -298,7 +317,6 @@ mod mac {
         );
         window.contentView().unwrap().addSubview(&text);
         assert!(window.makeFirstResponder(Some(&text)));
-        assert_eq!(run("fakeActiveClicks"), "1");
         assert!(run("type:Native probe").starts_with("NSTextView"));
         assert_eq!(text.string().to_string(), "Native probe");
         window.orderFrontRegardless();
@@ -339,8 +357,6 @@ mod mac {
         window.orderOut(None);
         text.removeFromSuperview();
 
-        assert_eq!(run("click:-20,-20"), "");
-        assert_eq!(run("drag:-20,-20;-30,-30"), " (14 events)");
         assert_eq!(run("mouse:otherdown:-20,-20,2,1048576,7"), "");
         let mouse = app
             .nextEventMatchingMask_untilDate_inMode_dequeue(
@@ -361,6 +377,100 @@ mod mac {
         assert!(!app.isActive());
         println!(
             "live_windows: guarded developer actions, native text and mouse input, accessibility, and notifications checked"
+        );
+    }
+
+    #[derive(Default)]
+    struct MouseFixture {
+        key: Cell<bool>,
+        events: RefCell<Vec<NSEventType>>,
+    }
+
+    define_class!(
+        #[unsafe(super(NSWindow))]
+        #[name = "RiaLiveMouseWindow"]
+        #[ivars = MouseFixture]
+        struct MouseWindow;
+
+        impl MouseWindow {
+            #[unsafe(method(isKeyWindow))]
+            fn is_key(&self) -> Bool {
+                Bool::new(self.ivars().key.get())
+            }
+
+            #[unsafe(method(sendEvent:))]
+            fn receive(&self, event: &NSEvent) {
+                use NSEventType as Event;
+                match event.r#type() {
+                    Event::LeftMouseDown
+                    | Event::LeftMouseUp
+                    | Event::LeftMouseDragged
+                    | Event::RightMouseDown
+                    | Event::RightMouseUp => {
+                        self.ivars().events.borrow_mut().push(event.r#type());
+                    }
+                    _ => unsafe { msg_send![super(self), sendEvent: event] },
+                }
+            }
+        }
+    );
+
+    fn check_native_mouse_delivery(host: &ChromeWindowHost, app: &NSApplication) {
+        use NSEventType as Event;
+        let frame = NSRect::new(NSPoint::ZERO, NSSize::new(240., 160.));
+        let fixture = app
+            .mtm()
+            .alloc::<MouseWindow>()
+            .set_ivars(MouseFixture::default());
+        let window: Retained<MouseWindow> = unsafe {
+            msg_send![super(fixture), initWithContentRect: frame,
+                styleMask: NSWindowStyleMask::Titled, backing: NSBackingStoreType::Buffered, defer: false]
+        };
+        unsafe { window.setReleasedWhenClosed(false) };
+        window.center();
+        let text = NSTextView::initWithFrame(app.mtm().alloc(), frame);
+        text.setEditable(false);
+        text.setSelectable(false);
+        window.setContentView(Some(&text));
+        let run = |action| host.dev_action(&window, action, true).unwrap();
+        let first = NSEvent::mouseEventWithType_location_modifierFlags_timestamp_windowNumber_context_eventNumber_clickCount_pressure(
+            Event::LeftMouseDown, NSPoint::new(20., 20.), NSEventModifierFlags::empty(),
+            0., window.windowNumber(), None, 0, 1, 1.,
+        )
+        .unwrap();
+        let accepts = || text.acceptsFirstMouse(Some(&first));
+        let baseline = accepts();
+        window.ivars().key.set(true);
+        assert!(
+            !accepts(),
+            "The unpatched text view already accepts first mouse"
+        );
+        assert_eq!(run("fakeActiveClicks"), "1");
+        assert!(accepts());
+        window.ivars().key.set(false);
+        assert_eq!(accepts(), baseline);
+
+        window.orderFrontRegardless();
+        run("click:20,60");
+        run("click:20,60,right");
+        run("drag:20,60;80,90");
+        let app = app.retain();
+        main_queue::after(
+            Duration::from_millis(500),
+            Box::new(move || {
+                let mut expected = [Event::LeftMouseDragged; 18];
+                expected[..5].copy_from_slice(&[
+                    Event::LeftMouseDown,
+                    Event::LeftMouseUp,
+                    Event::RightMouseDown,
+                    Event::RightMouseUp,
+                    Event::LeftMouseDown,
+                ]);
+                expected[17] = Event::LeftMouseUp;
+                assert_eq!(window.ivars().events.borrow().as_slice(), &expected);
+                assert!(!app.isActive());
+                window.close();
+            }),
         );
     }
 
@@ -514,8 +624,6 @@ mod mac {
                 events.borrow_mut().push((name, observed_window.frame()));
             })
         });
-        normal.fullscreen.toggle();
-        assert_eq!(window.frame(), screen_frame);
         normal.fullscreen.act_window_full_screen(true);
         assert_eq!(
             events.borrow().as_slice(),
@@ -524,7 +632,6 @@ mod mac {
         assert_eq!(window.frame(), screen_frame);
         assert!(normal.core.acted_full_screen() && normal.fullscreen.is_full_screen());
         assert!(!normal.fullscreen.transitioning());
-        normal.fullscreen.toggle();
         normal.fullscreen.act_window_full_screen(false);
         assert_eq!(
             events.borrow().as_slice(),
@@ -556,6 +663,7 @@ mod mac {
         );
         let state = State::new();
         state.started.set(true);
+        let controllers = Controllers::new(mtm, true, false, |_| true);
         let host = ChromeWindowHost::new(mtm, state, controllers.clone());
         let made = host.make_window(profile, None).unwrap();
         assert_eq!(
@@ -564,43 +672,75 @@ mod mac {
         );
         assert!(!host.is_fullscreen(&made));
         check_dev_actions(&host, &made, &app);
-        let probe = |action| {
-            let reply = host.dev_action(&made, action, true).unwrap();
+        let probe = |host: &ChromeWindowHost, window: &NSWindow, action| {
+            let reply = host.dev_action(window, action, true).unwrap();
             serde_json::from_str::<Value>(&reply).unwrap()
         };
+        let idle = serde_json::json!({
+            "fullScreen": false,
+            "styleMask": false,
+            "acted": false,
+            "chromeCounts": false,
+        });
+        assert_eq!(probe(&host, &made, "fullScreen"), idle);
+        assert_eq!(probe(&host, &made, "fakeFullScreen"), idle);
+        assert!(controllers.user_sees(&made));
         made.orderOut(None);
-        for (action, expected) in [
-            ("fakeOcclusion:visible", "1"),
-            ("fakeOcclusion:hidden", "0"),
-            ("fakeOcclusion:off", "0"),
+        for (action, expected, seen) in [
+            ("fakeOcclusion:visible", "1", false),
+            ("fakeOcclusion:hidden", "0", false),
+            ("fakeOcclusion:off", "0", true),
         ] {
             assert_eq!(
                 host.dev_action(&made, action, true).as_deref(),
                 Some(expected)
             );
+            assert_eq!(probe(&host, &made, "fullScreen")["pageFullScreen"]["seen"], seen);
         }
         let notes = Rc::new(RefCell::new(Vec::new()));
         let tokens = names.map(|name| {
             let notes = notes.clone();
             observe(&made, name, move || notes.borrow_mut().push(name))
         });
-        let fullscreen_state = |full_screen| {
+        let fullscreen_state = |full_screen, transitioning| {
             serde_json::json!({
                 "fullScreen": full_screen,
                 "styleMask": false,
                 "acted": full_screen,
                 "chromeCounts": full_screen,
+                "pageFullScreen": {
+                    "page": null,
+                    "entered": false,
+                    "asked": 0,
+                    "waitingForPage": 0,
+                    "telling": 0,
+                    "picturing": false,
+                    "covered": false,
+                    "transitioning": transitioning,
+                    "ours": false,
+                    "settling": transitioning,
+                    "seen": true,
+                    "fullScreen": full_screen,
+                },
             })
         };
         assert_eq!(
-            host.dev_action(&made, "fakeFullScreenMs:500", true)
-                .as_deref(),
-            Some("500")
+            probe(&host, &made, "fullScreen"),
+            fullscreen_state(false, false)
         );
-        assert_eq!(probe("fullScreen"), fullscreen_state(false));
-        assert_eq!(probe("fakeFullScreen:1"), fullscreen_state(true));
+        assert_eq!(
+            probe(&host, &made, "fakeFullScreen"),
+            fullscreen_state(false, false)
+        );
+        assert_eq!(
+            probe(&host, &made, "fakeFullScreen:1"),
+            fullscreen_state(true, false)
+        );
         assert_eq!(notes.borrow().as_slice(), &names[..2]);
-        assert_eq!(probe("fakeFullScreen:0"), fullscreen_state(false));
+        assert_eq!(
+            probe(&host, &made, "fakeFullScreen:0"),
+            fullscreen_state(false, false)
+        );
         assert_eq!(notes.borrow().as_slice(), &names);
 
         let root = NSView::initWithFrame(mtm.alloc(), NSRect::ZERO);
@@ -658,12 +798,19 @@ mod mac {
         );
         let profile = profile.retain();
         notes.borrow_mut().clear();
-        assert_eq!(probe("fakeFullScreen:1:50"), fullscreen_state(true));
+        assert_eq!(
+            probe(&host, &made, "fakeFullScreen:1:50"),
+            fullscreen_state(true, true)
+        );
         assert_eq!(notes.borrow().as_slice(), &names[..1]);
         main_queue::after(
             Duration::from_millis(100),
             Box::new(move || {
                 assert_eq!(notes.borrow().as_slice(), &names[..2]);
+                assert_eq!(
+                    probe(&host, &made, "fullScreen"),
+                    fullscreen_state(true, false)
+                );
                 let start = Instant::now();
                 let exit_at = Rc::new(Cell::new(None));
                 let exit_time = exit_at.clone();
@@ -672,21 +819,32 @@ mod mac {
                 });
                 controllers.for_window(&made).unwrap().fullscreen.toggle();
                 assert_eq!(notes.borrow().as_slice(), &names[..3]);
+                assert_eq!(
+                    probe(&host, &made, "fakeFullScreen"),
+                    fullscreen_state(true, true)
+                );
                 main_queue::after(
                     Duration::from_millis(550),
                     Box::new(move || {
                         assert!(exit_at.get().unwrap() >= Duration::from_millis(500));
                         assert_eq!(notes.borrow().as_slice(), &names);
-                        let reply = host.dev_action(&made, "fullScreen", true).unwrap();
                         assert_eq!(
-                            serde_json::from_str::<Value>(&reply).unwrap(),
-                            fullscreen_state(false)
+                            probe(&host, &made, "fullScreen"),
+                            fullscreen_state(false, false)
                         );
-                        host.dev_action(&made, "fakeFullScreenMs:0", true);
+                        assert_eq!(
+                            host.dev_action(&made, "fakeFullScreenMs:0", true).as_deref(),
+                            Some("0")
+                        );
                         for token in tokens.into_iter().chain([exit_token]) {
                             // SAFETY: Each token belongs to this notification center.
                             unsafe { center.removeObserver(&token) };
                         }
+                        let controller = controllers.for_window(&made).unwrap();
+                        controller.fullscreen.toggle();
+                        assert!(host.is_fullscreen(&made));
+                        assert!(!controller.fullscreen.transitioning());
+                        controller.fullscreen.toggle();
                         assert!(!host.is_fullscreen(&made));
                         host.close_window(&made);
                         println!(
@@ -758,6 +916,8 @@ mod mac {
             return;
         }
         let window = popup.window();
+        assert!(window.isVisible(), "The popup must be ordered in");
+        assert!(!NSApplication::sharedApplication(window.mtm()).isActive());
         let host = popup.host_view();
         let page = tab.view();
         assert!(
@@ -777,6 +937,11 @@ mod mac {
         assert_eq!(strip.frame().size.height, 28.);
         assert_eq!(page.frame().size.height, host.bounds().size.height - 28.);
         assert!(!label.isHiddenOrHasHiddenAncestor());
+        let visible_label = NSIntersectionRect(
+            strip.visibleRect(),
+            label.convertRect_toView(label.visibleRect(), Some(&strip)),
+        );
+        assert!(visible_label.size.width > 0. && visible_label.size.height > 0.);
         assert_eq!(label.stringValue().to_string(), origin);
         println!("live_windows: popup rendered its 28-point origin strip with {origin}");
         popup.close();

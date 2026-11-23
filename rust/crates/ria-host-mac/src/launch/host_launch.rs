@@ -16,6 +16,7 @@ use serde_json::Value;
 use crate::core::bindings::{Engine, Profile, Tab, Window};
 use crate::core::delegate::{EngineDelegate, Hooks};
 use crate::core::host::State;
+use crate::windows::ardia_window_full_screen::configure_acted_transition;
 
 use super::activation::{self, Observers};
 use super::early_window::BrowserWindow;
@@ -76,6 +77,7 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
     }
     let session = SavedSession::read(&config);
     platform::load_engine(&executable)?;
+    configure_acted_transition(&config);
     let sequence = Rc::new(LaunchSequence::default());
     let runtime = Rc::new_cyclic(|this| Runtime {
         this: this.clone(),

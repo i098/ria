@@ -26,12 +26,28 @@ use ria_engine::call::main_queue;
 
 use super::ardia_window_sight_math::{Rect, counts_as_cover, partly_visible};
 use crate::core::bindings::Window;
+use crate::launch::launch_config::LaunchConfig;
 
 type WindowInfo = NSDictionary<NSString, AnyObject>;
 
 thread_local! {
-    pub(super) static ACTED_TRANSITION: Cell<Duration> = const { Cell::new(Duration::ZERO) };
+    static ACTED_TRANSITION: Cell<Duration> = const { Cell::new(Duration::ZERO) };
     pub(super) static ACTED_OCCLUSION_GAP: Cell<Option<f64>> = const { Cell::new(None) };
+}
+
+pub fn configure_acted_transition(config: &LaunchConfig) {
+    set_acted_transition(config.test_value("fakeFullScreenMs").unwrap_or_default());
+}
+
+pub(super) fn set_acted_transition(value: &str) -> Duration {
+    let transition = transition_duration(value);
+    ACTED_TRANSITION.set(transition);
+    transition
+}
+
+pub(super) fn transition_duration(value: &str) -> Duration {
+    let ms = value.parse::<f64>().unwrap_or_default();
+    Duration::try_from_secs_f64(ms / 1000.).unwrap_or_default()
 }
 
 const CG_WINDOW_LIST_OPTION_ON_SCREEN_ABOVE_WINDOW: u32 = 1 << 1;
@@ -165,6 +181,7 @@ pub struct FullScreen {
     background: bool,
     allow_occlusion: bool,
     state: RefCell<Transition>,
+    sight_requested: Cell<bool>,
     observers: Vec<Retained<AnyObject>>,
 }
 
@@ -221,6 +238,7 @@ impl FullScreen {
                     seen: true,
                     ..Transition::default()
                 }),
+                sight_requested: Cell::new(false),
                 observers,
             }
         })
@@ -241,14 +259,37 @@ impl FullScreen {
     }
 
     pub fn seen(&self) -> bool {
+        self.sight_requested.set(true);
         self.state.borrow().seen
     }
     pub fn seen_only_by_window_server(&self) -> bool {
+        self.sight_requested.set(true);
         let state = self.state.borrow();
         state.seen && state.overruled
     }
     pub fn transitioning(&self) -> bool {
         self.state.borrow().transitioning
+    }
+
+    pub(super) fn page_state(&self, full_screen: bool) -> Option<serde_json::Value> {
+        if !self.sight_requested.get() {
+            return None;
+        }
+        let state = self.state.borrow();
+        Some(serde_json::json!({
+            "page": null,
+            "entered": false,
+            "asked": 0,
+            "waitingForPage": 0,
+            "telling": 0,
+            "picturing": false,
+            "covered": false,
+            "transitioning": state.transitioning,
+            "ours": false,
+            "settling": state.settling,
+            "seen": state.seen,
+            "fullScreen": full_screen,
+        }))
     }
 
     fn notified(&self, name: &NSString) {
@@ -349,6 +390,7 @@ impl FullScreen {
     }
 
     pub fn reconsider_sight(&self) {
+        self.sight_requested.set(true);
         self.update_seen(false);
     }
 

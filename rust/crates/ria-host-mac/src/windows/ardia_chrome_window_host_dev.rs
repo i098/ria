@@ -29,7 +29,9 @@ use super::ardia_interface_scale::root_of_window;
 use super::ardia_reserved_keys::reserved_menu_item;
 use super::ardia_traffic_lights::frame_view;
 use super::ardia_window_controller::Controllers;
-use super::ardia_window_full_screen::{ACTED_OCCLUSION_GAP, ACTED_TRANSITION};
+use super::ardia_window_full_screen::{
+    ACTED_OCCLUSION_GAP, set_acted_transition, transition_duration,
+};
 
 #[link(name = "CoreGraphics", kind = "framework")]
 unsafe extern "C" {
@@ -47,10 +49,6 @@ fn milliseconds(text: &str) -> f64 {
         .ok()
         .filter(|value| value.is_finite())
         .unwrap_or(0.)
-}
-
-fn duration(ms: f64) -> Duration {
-    Duration::try_from_secs_f64(ms.max(0.) / 1000.).unwrap_or_default()
 }
 
 fn flag(value: bool) -> String {
@@ -536,8 +534,7 @@ impl DevActions {
         let value = argument.unwrap_or_default();
         match name {
             "fakeFullScreenMs" => {
-                let transition = duration(milliseconds(value));
-                ACTED_TRANSITION.set(transition);
+                let transition = set_acted_transition(value);
                 Some(format!("{:.0}", transition.as_secs_f64() * 1000.))
             }
             "fakeFullScreenOcclusionMs" => {
@@ -557,20 +554,22 @@ impl DevActions {
                     let entering = fields.next() == Some("1");
                     let transition = fields
                         .next()
-                        .map_or(Duration::ZERO, |ms| duration(milliseconds(ms)));
+                        .map_or(Duration::ZERO, transition_duration);
                     if entering != fullscreen.is_full_screen() {
                         fullscreen.act_window_full_screen_with_timing(entering, transition);
                     }
                 }
-                Some(
-                    json!({
-                        "fullScreen": fullscreen.is_full_screen(),
-                        "styleMask": window.styleMask().contains(NSWindowStyleMask::FullScreen),
-                        "acted": controller.core.acted_full_screen(),
-                        "chromeCounts": controller.core.acted_full_screen(),
-                    })
-                    .to_string(),
-                )
+                let full_screen = fullscreen.is_full_screen();
+                let mut reply = json!({
+                    "fullScreen": full_screen,
+                    "styleMask": window.styleMask().contains(NSWindowStyleMask::FullScreen),
+                    "acted": controller.core.acted_full_screen(),
+                    "chromeCounts": controller.core.acted_full_screen(),
+                });
+                if let Some(page_state) = fullscreen.page_state(full_screen) {
+                    reply["pageFullScreen"] = page_state;
+                }
+                Some(reply.to_string())
             }
             "fakeOcclusion" => {
                 let controller = controllers.for_window(window)?;
