@@ -93,7 +93,11 @@ pub const DEFAULT_LIMIT: usize = 3;
 pub fn normalize_query(query: &str) -> Option<String> {
     let q = query.trim_matches(is_js_space).to_lowercase();
     // `replace(/\s+/g, " ")`: a trimmed query has no edge runs, so split and join is equal.
-    let q = q.split(is_js_space).filter(|s| !s.is_empty()).collect::<Vec<_>>().join(" ");
+    let q = q
+        .split(is_js_space)
+        .filter(|s| !s.is_empty())
+        .collect::<Vec<_>>()
+        .join(" ");
     (q.encode_utf16().count() >= 2).then_some(q)
 }
 

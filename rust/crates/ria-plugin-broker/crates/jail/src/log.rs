@@ -1,6 +1,6 @@
-// Source: packages/plugin-broker/crates/jail/src/log.rs in Ardia at commit 551d3c13c.
+// Ported from ardia packages/plugin-broker/crates/jail/src/log.rs at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
-// Rust port with changes: header added and moved into the Ria workspace.
+// This file is a Rust port of that file, with changes.
 use std::io;
 use std::os::fd::{AsRawFd, OwnedFd, RawFd};
 use std::path::Path;
@@ -135,7 +135,16 @@ mod tests {
             while let Drained::Bytes(_) = pump.drain(read.as_raw_fd()).unwrap() {}
         }
         drop(write);
-        assert_eq!(pump.drain(read.as_raw_fd()).unwrap(), Drained::Closed);
+        // A child that another test forks can hold the write end until it execs; wait for the close.
+        let mut state = pump.drain(read.as_raw_fd()).unwrap();
+        for _ in 0..500 {
+            if state == Drained::Closed {
+                break;
+            }
+            std::thread::sleep(std::time::Duration::from_millis(10));
+            state = pump.drain(read.as_raw_fd()).unwrap();
+        }
+        assert_eq!(state, Drained::Closed);
         let current = fs::metadata(dir.join(LOG_NAME)).unwrap().len();
         let rotated = fs::metadata(dir.join(ROTATED_NAME)).unwrap().len();
         assert!(current <= ROTATE_AT, "{current}");

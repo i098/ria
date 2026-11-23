@@ -13,6 +13,31 @@ cargo clippy --manifest-path rust/Cargo.toml
 node rust/parity/compare.selftest.mjs
 ```
 
+## CI and quality gates
+
+Each PR runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The checks are `fmt`, `clippy`, `test`, `parity` and `headers`. They use cargo, not blaze, because blaze is not on GitHub runners. Run the same checks locally:
+
+```sh
+cargo fmt --manifest-path rust/Cargo.toml --check
+cargo clippy --manifest-path rust/Cargo.toml --workspace --all-targets -- -D warnings
+cargo test --manifest-path rust/Cargo.toml --workspace --exclude ardia-plugin-jail
+cargo test --manifest-path rust/Cargo.toml -p ardia-plugin-jail --lib
+node rust/parity/compare.selftest.mjs
+(cd rust/parity/captures/states && sha256sum -c SHA256SUMS)
+rust/tools/check-headers.sh
+```
+
+The `test` job leaves out two things, on purpose. The jail escape tests (`rust/crates/ria-plugin-broker/crates/jail/tests/escape.rs`) need a `bwrap` that `scripts/build-bwrap.sh` builds (`ARDIA_BWRAP`). Check L of `ria-engine-sys` (`tests/live.rs`) needs macOS and the prebuilt engine; on Linux it prints "skipped".
+
+Two more gates run locally, not in CI:
+
+```sh
+sentrux gate .      # compares with the baseline in .sentrux/; a DEGRADED verdict blocks
+fallow audit        # advisory; fallow reads TypeScript/JavaScript only, so it covers little of this repository
+```
+
+Save a new baseline with `sentrux gate --save .` only when the owner agrees.
+
 Build and test Rust code with blaze. Use cargo only for `fmt` and `clippy`. Follow Google's Rust Style Guide. Add tests only for algorithmic logic, boundary IO and integration flows.
 
 ## Flow

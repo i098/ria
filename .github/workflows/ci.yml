@@ -1,0 +1,70 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  fmt:
+    name: fmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - run: cargo fmt --manifest-path rust/Cargo.toml --check
+
+  clippy:
+    name: clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      - run: cargo clippy --manifest-path rust/Cargo.toml --workspace --all-targets -- -D warnings
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      # The jail escape tests (crates/ria-plugin-broker/crates/jail/tests/escape.rs) need a bwrap
+      # built by scripts/build-bwrap.sh (ARDIA_BWRAP) and a sandbox-capable host; only the jail unit tests run here.
+      - run: cargo test --manifest-path rust/Cargo.toml --workspace --exclude ardia-plugin-jail
+      - run: cargo test --manifest-path rust/Cargo.toml -p ardia-plugin-jail --lib
+      # Check L of ria-engine-sys (tests/live.rs) needs macOS and the prebuilt engine; on Linux it prints "skipped".
+
+  parity:
+    name: parity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node rust/parity/compare.selftest.mjs
+      - run: sha256sum -c SHA256SUMS
+        working-directory: rust/parity/captures/states
+
+  headers:
+    name: headers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rust/tools/check-headers.sh
