@@ -38,8 +38,8 @@ Gate slices are Linux work, except G4 (slice 4.32), which is Mac work. Mac work 
 | Slice | Work | State |
 | --- | --- | --- |
 | 0.1–0.4 | base, data notes, engine notes, proof D | merged (PRs 3, 6, 7, 8) |
-| 0.5 | parity rig | open, stopped ([PR 9](https://github.com/i098/ria/pull/9)) |
-| 0.6–0.8 | proofs A to C | stopped (branch `fm/halyard-p0-mac-proofs`) |
+| 0.5 | parity rig | in work |
+| 0.6–0.8 | proofs A to C | in work |
 | 0.9 | apply plan v5 review | merged ([PR 11](https://github.com/i098/ria/pull/11)) |
 | 0.10 | gate G0 | todo |
 
