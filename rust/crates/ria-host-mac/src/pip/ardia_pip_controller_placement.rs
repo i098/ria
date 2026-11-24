@@ -24,6 +24,11 @@ fn where_the_throw_maths_may_put_it(mtm: MainThreadMarker, rect: NSRect) -> bool
 
 /// `+[ArdiaPiPController(Placement) load]`.
 pub fn install() {
+    static ONCE: std::sync::Once = std::sync::Once::new();
+    ONCE.call_once(install_once);
+}
+
+fn install_once() {
     let constrain = sel!(constrainFrameRect:toScreen:);
     let Some(class) = AnyClass::get(c"NativeWidgetMacFramelessNSWindow") else {
         return;

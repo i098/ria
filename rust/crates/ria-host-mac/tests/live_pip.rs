@@ -89,10 +89,38 @@ mod mac {
         unsafe { msg_send![&*layer, cornerRadius] }
     }
 
+    fn install_all_wraps_once() {
+        use objc2::runtime::{AnyClass, ClassBuilder, Sel};
+        use objc2::{ClassType, sel};
+
+        let class: &AnyClass = ClassBuilder::new(c"NativeWidgetMacFramelessNSWindow", NSWindow::class())
+            .expect("class name is free")
+            .register();
+        let imps = |class: &AnyClass| -> Vec<usize> {
+            [sel!(constrainFrameRect:toScreen:), sel!(setLevel:), sel!(setCollectionBehavior:)]
+                .into_iter()
+                .map(|selector: Sel| {
+                    class.instance_method(selector).expect("inherited").implementation() as usize
+                })
+                .collect()
+        };
+        let before = imps(class);
+        ria_host_mac::pip::install_all();
+        let once = imps(class);
+        ria_host_mac::pip::install_all();
+        let twice = imps(class);
+        assert!(
+            before.iter().zip(&once).all(|(a, b)| a != b),
+            "the first install wraps every hooked method"
+        );
+        assert_eq!(once, twice, "a second install wraps nothing again");
+    }
+
     pub fn run() {
         let mtm = MainThreadMarker::new().expect("main thread");
         let app = NSApplication::sharedApplication(mtm);
         app.setActivationPolicy(NSApplicationActivationPolicy::Accessory);
+        install_all_wraps_once();
 
         let root = std::env::temp_dir().join(format!("ria-pip-live-{}", std::process::id()));
         std::fs::create_dir_all(&root).unwrap();
@@ -230,16 +258,18 @@ mod mac {
 
         // A window dragged out of reach comes back.
         window.setFrameOrigin(NSPoint::new(
-            visible.origin.x - 6000.0,
-            visible.origin.y + 100.0,
+            visible.origin.x + 100.0,
+            visible.origin.y + visible.size.height + 6000.0,
         ));
         assert!(
             pump_until(5.0, || {
                 let f = window.frame();
-                f.origin.x > visible.origin.x - 6000.0 + 1.0
+                f.origin.y + f.size.height <= visible.origin.y + visible.size.height + 1.0
+                    && f.origin.y >= visible.origin.y - 1.0
             }),
-            "settle moves a lost window"
+            "settle brings a lost window back inside the visible frame"
         );
+        assert_eq!(controller.stashed_edge(), Edge::None);
         pump(1.0);
 
         // The skip button and Back to Tab reach the page.

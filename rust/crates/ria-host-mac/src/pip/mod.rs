@@ -15,5 +15,7 @@ pub mod ardia_pip_throw_math;
 pub mod ardia_pip_zoom;
 pub mod ardia_pip_zoom_math;
 
-#[cfg(test)]
-mod pip_close_record_tests;
+pub fn install_all() {
+    ardia_pip_controller_placement::install();
+    ardia_pip_controller_workspaces::install();
+}

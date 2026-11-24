@@ -27,6 +27,19 @@ use super::ardia_picture_in_picture_internal::{
 };
 use super::ardia_pip_controller::Controller;
 
+#[repr(C)]
+struct CGContextRef {
+    _private: [u8; 0],
+}
+
+// SAFETY: matches the runtime encoding `^{CGContext=}` of a CGContextRef.
+unsafe impl objc2::Encode for CGContextRef {
+    const ENCODING: objc2::Encoding = objc2::Encoding::Struct("CGContext", &[]);
+}
+unsafe impl objc2::RefEncode for CGContextRef {
+    const ENCODING_REF: objc2::Encoding = objc2::Encoding::Pointer(&<Self as objc2::Encode>::ENCODING);
+}
+
 unsafe extern "C" {
     fn CGContextSetRGBFillColor(c: *mut c_void, r: f64, g: f64, b: f64, a: f64);
     fn CGContextFillRect(c: *mut c_void, rect: objc2_foundation::NSRect);
@@ -142,15 +155,16 @@ impl Controller {
         if let Some(rep) = rep {
             if let Some(context) = NSGraphicsContext::graphicsContextWithBitmapImageRep(&rep) {
                 // SAFETY: `CGContext` returns the live CGContextRef of the graphics context.
-                let cg: *mut c_void = unsafe { msg_send![&context, CGContext] };
+                let cg: *mut CGContextRef = unsafe { msg_send![&context, CGContext] };
+                let cg_raw = cg.cast::<c_void>();
                 // SAFETY: `cg` stays alive while `context` does; `renderInContext:` takes a CGContextRef.
                 unsafe {
-                    CGContextSetRGBFillColor(cg, 0.36, 0.42, 0.5, 1.0);
-                    CGContextFillRect(cg, rect(0.0, 0.0, size.width * 2.0, size.height * 2.0));
-                    CGContextScaleCTM(cg, 2.0, 2.0);
+                    CGContextSetRGBFillColor(cg_raw, 0.36, 0.42, 0.5, 1.0);
+                    CGContextFillRect(cg_raw, rect(0.0, 0.0, size.width * 2.0, size.height * 2.0));
+                    CGContextScaleCTM(cg_raw, 2.0, 2.0);
                     if content.isFlipped() {
-                        CGContextTranslateCTM(cg, 0.0, size.height);
-                        CGContextScaleCTM(cg, 1.0, -1.0);
+                        CGContextTranslateCTM(cg_raw, 0.0, size.height);
+                        CGContextScaleCTM(cg_raw, 1.0, -1.0);
                     }
                     let layer: Option<Retained<AnyObject>> = msg_send![&content, layer];
                     if let Some(layer) = layer {

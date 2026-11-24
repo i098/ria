@@ -188,6 +188,11 @@ pub fn float_over_active_space(window: &NSWindow) {
 
 /// `+[ArdiaPiPController(Workspaces) load]`.
 pub fn install() {
+    static ONCE: Once = Once::new();
+    ONCE.call_once(install_once);
+}
+
+fn install_once() {
     let Some(frameless) = AnyClass::get(c"NativeWidgetMacFramelessNSWindow") else {
         return;
     };

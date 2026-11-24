@@ -404,7 +404,7 @@ impl Delay {
         self.0.set(generation);
         let current = Rc::clone(&self.0);
         ria_engine::call::main_queue::after(
-            std::time::Duration::from_secs_f64(seconds),
+            std::time::Duration::try_from_secs_f64(seconds).unwrap_or_default(),
             Box::new(move || {
                 if current.get() == generation {
                     current.set(generation.wrapping_add(1));
@@ -421,7 +421,7 @@ impl Delay {
 
 pub fn after(seconds: f64, work: impl FnOnce() + 'static) {
     ria_engine::call::main_queue::after(
-        std::time::Duration::from_secs_f64(seconds),
+        std::time::Duration::try_from_secs_f64(seconds).unwrap_or_default(),
         Box::new(work),
     );
 }
