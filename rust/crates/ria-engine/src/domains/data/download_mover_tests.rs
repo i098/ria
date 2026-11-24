@@ -684,7 +684,7 @@ fn parity_deviations(env: &Env, mover: &DownloadMover) {
     let none = json!({});
     {
         // Issue 62: the shortest approved root decides where folders may be created.
-        let path = env.finished(&mover, "tax.pdf", "tax", none.clone());
+        let path = env.finished(mover, "tax.pdf", "tax", none.clone());
         mover.set_approved_folders(&["~/Downloads/Tax/2026".into()]);
         assert_eq!(
             reason(&mover.move_download(&path, "~/Downloads/Tax/2026")),
