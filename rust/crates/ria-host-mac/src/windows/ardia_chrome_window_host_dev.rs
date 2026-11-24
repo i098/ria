@@ -559,7 +559,9 @@ impl DevActions {
                     "acted": controller.core.acted_full_screen(),
                     "chromeCounts": controller.core.acted_full_screen(),
                 });
-                if let Some(page_state) = fullscreen.page_state(full_screen) {
+                if let Some(page_state) =
+                    fullscreen.page_state(full_screen, &mut host.tab_registry().borrow_mut())
+                {
                     reply["pageFullScreen"] = page_state;
                 }
                 Some(reply.to_string())

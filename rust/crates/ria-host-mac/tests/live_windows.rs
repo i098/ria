@@ -56,6 +56,7 @@ mod mac {
     use ria_host_mac::core::host::State;
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
     use ria_host_mac::tabs::ardia_page_cover::PageCover;
+    use ria_host_mac::tabs::ardia_tab_strip::{StripWindow, TabStrips};
     use ria_host_mac::windows::ardia_chrome_window_host::ChromeWindowHost;
     use ria_host_mac::windows::ardia_chrome_window_host_little_fit::little_frame_for_size;
     use ria_host_mac::windows::ardia_display_identity::frame_on_screen;
@@ -651,6 +652,81 @@ mod mac {
         serde_json::from_str(&reply).unwrap()
     }
 
+    fn published_browser_id(
+        host: &ChromeWindowHost,
+        window: &Window,
+        profile: &Profile,
+        tab: &Tab,
+    ) -> i32 {
+        let rows = window.tabs_for_profile(profile);
+        let index = rows
+            .iter()
+            .position(|row| std::ptr::eq(&*row, tab))
+            .unwrap();
+        let transaction = TabStrips::default().all(
+            &[StripWindow {
+                window,
+                profile,
+                profile_name: "Default",
+                app_window: None,
+                host_changes: false,
+                standalone: false,
+            }],
+            &mut host.tab_registry().borrow_mut(),
+        );
+        transaction.strips[0].tabs[index].browser.0 as i32
+    }
+
+    fn check_closed_fullscreen_draw(
+        host: Rc<ChromeWindowHost>,
+        window: Retained<NSWindow>,
+        tab: Retained<Tab>,
+        done: Rc<Cell<bool>>,
+    ) {
+        let selector = sel!(evaluate:completion:);
+        let method = tab.class().instance_method(selector).unwrap();
+        let implementation = method.implementation();
+        type Completion = DynBlock<dyn Fn(*mut AnyObject)>;
+        let original: unsafe extern "C-unwind" fn(*const Tab, Sel, &NSString, &Completion) =
+            unsafe { std::mem::transmute(implementation) };
+        let target = std::ptr::from_ref(&*tab);
+        let calls = Rc::new(Cell::new(0));
+        let received = calls.clone();
+        let evaluate = RcBlock::new(move |tab: *const Tab, code: &NSString, completion: &Completion| {
+            if tab == target {
+                received.set(received.get() + 1);
+            }
+            unsafe { original(tab, selector, code, completion) };
+        });
+        let imp = unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&evaluate).cast()) };
+        unsafe { ffi::method_setImplementation(method, imp) };
+        assert!(host.is_fullscreen(&window));
+        probe(&host, &window, "fakeFullScreen:0:50");
+        assert_eq!(
+            probe(&host, &window, "fullScreen")["pageFullScreen"]["transitioning"],
+            true
+        );
+        tab.close_now();
+        let view: Option<Retained<NSView>> = unsafe { msg_send![&*tab, view] };
+        assert!(view.is_none());
+        main_queue::after(
+            Duration::from_millis(100),
+            Box::new(move || {
+                unsafe {
+                    ffi::method_setImplementation(method, implementation);
+                    ffi::imp_removeBlock(imp);
+                }
+                assert_eq!(calls.get(), 0);
+                assert!(tab.closed());
+                let reply = probe(&host, &window, "fullScreen");
+                assert_eq!(reply["fullScreen"], false);
+                assert_eq!(reply["pageFullScreen"]["transitioning"], false);
+                host.close_window(&window);
+                done.set(true);
+            }),
+        );
+    }
+
     fn check_exit_settlement(
         host: Rc<ChromeWindowHost>,
         controllers: &Controllers,
@@ -659,8 +735,12 @@ mod mac {
         let window = host.make_window(profile, None).unwrap();
         let controller = controllers.for_window(&window).unwrap();
         let core = controller.core.clone();
-        let replacement = core.open_tab(ns_string!("about:blank"), profile, false);
         let tab = core.open_tab(ns_string!("about:blank"), profile, true);
+        let replacement = core.open_tab(ns_string!("about:blank"), profile, false);
+        host.tab_registry().borrow_mut().browser_id(&replacement);
+        let replacement_id = published_browser_id(&host, &core, profile, &replacement);
+        let tab_id = published_browser_id(&host, &core, profile, &tab);
+        assert!(replacement_id < tab_id);
         let delegate: Retained<AnyObject> = unsafe { msg_send![&*core, delegate] };
         let change = move |tab: &Tab, entering| {
             let _: () = unsafe {
@@ -675,6 +755,12 @@ mod mac {
         let observed_window = window.clone();
         let notification = unsafe { NSWindowDidEnterFullScreenNotification };
         let entered = Cell::new(Some(move || {
+            for action in ["fullScreen", "fakeFullScreen"] {
+                assert_eq!(
+                    probe(&host, &window, action)["pageFullScreen"]["page"],
+                    tab_id
+                );
+            }
             let selector = sel!(exitFullscreen);
             let method = tab.class().instance_method(selector).unwrap();
             let implementation = method.implementation();
@@ -715,12 +801,14 @@ mod mac {
                         ffi::imp_removeBlock(imp);
                     }
                     assert!(calls.borrow().is_empty());
-                    assert_eq!(
-                        probe(&host, &window, "fullScreen")["pageFullScreen"]["page"],
-                        replacement.browser_id()
-                    );
-                    host.close_window(&window);
-                    done.set(true);
+                    for action in ["fullScreen", "fakeFullScreen"] {
+                        assert_eq!(
+                            probe(&host, &window, action)["pageFullScreen"]["page"],
+                            replacement_id
+                        );
+                    }
+                    change(&replacement, false);
+                    check_closed_fullscreen_draw(host, window, replacement, done);
                 }));
             }));
         }));
@@ -965,6 +1053,7 @@ mod mac {
         let tab = controller
             .core
             .open_tab(ns_string!("about:blank"), profile, true);
+        let page_id = published_browser_id(&host, &controller.core, profile, &tab);
         let delegate: Retained<AnyObject> = unsafe { msg_send![&*controller.core, delegate] };
         let change_page = {
             let core = controller.core.clone();
@@ -983,7 +1072,7 @@ mod mac {
         );
         change_page(true);
         let page = &probe(&host, &page_window, "fakeFullScreen")["pageFullScreen"];
-        assert_eq!(page["page"], tab.browser_id());
+        assert_eq!(page["page"], page_id);
         assert_eq!(page["telling"], 1);
         for action in ["fullScreen", "fakeFullScreen"] {
             assert_eq!(

@@ -8,7 +8,7 @@ use std::sync::Once;
 use std::time::Duration;
 
 use block2::RcBlock;
-use objc2::{ClassType, MainThreadMarker, ffi, sel};
+use objc2::{ClassType, MainThreadMarker, ffi, msg_send, sel};
 use objc2::rc::{Retained, Weak};
 use objc2::runtime::{AnyObject, Sel};
 use objc2_app_kit::{
@@ -29,7 +29,7 @@ use super::ardia_window_sight_math::{Rect, counts_as_cover, partly_visible};
 use crate::core::bindings::{Tab, Window};
 use crate::launch::launch_config::LaunchConfig;
 use crate::tabs::ardia_page_cover::PageCover;
-use crate::tabs::ardia_page_draw_wait::after_page_draw;
+use crate::tabs::ardia_tab_registry::TabRegistry;
 
 type WindowInfo = NSDictionary<NSString, AnyObject>;
 
@@ -286,9 +286,88 @@ impl PageState {
     }
 }
 
+fn tab_view(tab: &Tab) -> Option<Retained<NSView>> {
+    unsafe { msg_send![tab, view] }
+}
+
+fn after_page_draw(
+    tab: &Tab,
+    test: impl Fn(bool, bool) -> bool + 'static,
+    done: impl FnOnce() + 'static,
+) {
+    if tab_view(tab).is_none_or(|view| view.window().is_none() || view.isHiddenOrHasHiddenAncestor())
+    {
+        done();
+        return;
+    }
+    let done = Rc::new(Cell::new(Some(done)));
+    let deadline = done.clone();
+    main_queue::after(
+        Duration::from_millis(400),
+        Box::new(move || {
+            if let Some(done) = deadline.take() {
+                done();
+            }
+        }),
+    );
+    wait_for_draw(&Weak::new(tab), Rc::new(test), done);
+}
+
+fn wait_for_draw(
+    weak: &Weak<Tab>,
+    test: Rc<impl Fn(bool, bool) -> bool + 'static>,
+    done: Rc<Cell<Option<impl FnOnce() + 'static>>>,
+) {
+    let Some((tab, view)) = weak.load().and_then(|tab| {
+        let view = tab_view(&tab)?;
+        view.window()?;
+        Some((tab, view))
+    })
+    else {
+        if let Some(done) = done.take() {
+            done();
+        }
+        return;
+    };
+    let asked = view.convertRect_toView(view.bounds(), None).size;
+    let weak = weak.clone();
+    const SCRIPT: &str = "requestAnimationFrame(() => requestAnimationFrame(() => post('result', JSON.stringify([innerWidth * devicePixelRatio, innerHeight * devicePixelRatio, !!document.fullscreenElement]))))";
+    tab.evaluate(&NSString::from_str(SCRIPT), move |reply| {
+        let weak = weak.clone();
+        let test = test.clone();
+        let done = done.clone();
+        main_queue::post(Box::new(move || {
+            let Some(finish) = done.take() else { return };
+            let frame = weak.load().and_then(|tab| tab_view(&tab)).and_then(|view| {
+                let content = view.window()?.contentView()?.bounds().size;
+                let pixels = view.convertSizeToBacking(view.bounds().size);
+                let now = view.convertRect_toView(view.bounds(), None).size;
+                Some((content, pixels, now))
+            });
+            let drawn = reply
+                .as_deref()
+                .and_then(|reply| serde_json::from_str::<(f64, f64, bool)>(reply).ok());
+            if let (Some((content, pixels, now)), Some((width, height, fullscreen))) = (frame, drawn)
+            {
+                let fills = (now.width - content.width).abs() < 1.0
+                    && (now.height - content.height).abs() < 1.0;
+                let sized = asked == now
+                    && (width - pixels.width).abs() <= 2.0
+                    && (height - pixels.height).abs() <= 2.0;
+                if !sized || !test(fullscreen, fills) {
+                    done.set(Some(finish));
+                    wait_for_draw(&weak, test, done);
+                    return;
+                }
+            }
+            finish();
+        }));
+    });
+}
+
 fn uncover(covers: Vec<Retained<PageCover>>, after_draw: bool) {
     for cover in covers {
-        if after_draw && let Some(tab) = cover.owner() {
+        if after_draw && let Some(tab) = cover.owner().filter(|tab| tab_view(tab).is_some()) {
             after_page_draw(&tab, |_, _| true, move || {
                 main_queue::after(
                     Duration::from_millis(34),
@@ -406,14 +485,18 @@ impl FullScreen {
         self.state.borrow().page.transitioning
     }
 
-    pub(super) fn page_state(&self, full_screen: bool) -> Option<serde_json::Value> {
+    pub(super) fn page_state(
+        &self,
+        full_screen: bool,
+        registry: &mut TabRegistry,
+    ) -> Option<serde_json::Value> {
         let state = self.state.borrow();
         if !state.expose_page {
             return None;
         }
         let page = &state.page;
         Some(serde_json::json!({
-            "page": page.tab.as_ref().and_then(Weak::load).map(|tab| tab.browser_id()),
+            "page": page.tab.as_ref().and_then(Weak::load).map(|tab| registry.browser_id(&tab)),
             "entered": page.entered,
             "asked": page.asked,
             "waitingForPage": page.waiting_for,
@@ -487,7 +570,11 @@ impl FullScreen {
             if page.transitioning {
                 return;
             }
-            let tab = page.tab.as_ref().and_then(Weak::load);
+            let tab = page
+                .tab
+                .as_ref()
+                .and_then(Weak::load)
+                .filter(|tab| tab_view(tab).is_some());
             let entering = tab.is_some() && !full && !page.entered;
             let exiting = tab.is_none() && full && page.entered;
             if !entering && !exiting {
@@ -543,10 +630,16 @@ impl FullScreen {
             page.waiting_for_draw = false;
             page.picturing = true;
         }
-        let mut tabs: Vec<_> = tab.and_then(|tab| tab.load()).into_iter().collect();
+        let mut tabs: Vec<_> = tab
+            .and_then(|tab| tab.load())
+            .filter(|tab| tab_view(tab).is_some())
+            .into_iter()
+            .collect();
         if !entering && let Some(profile) = core.active_profile() {
             for other in core.tabs_for_profile(&profile).iter() {
-                let view = other.view();
+                let Some(view) = tab_view(&other) else {
+                    continue;
+                };
                 if !tabs.iter().any(|tab| std::ptr::eq(&**tab, &*other))
                     && view
                         .window()
@@ -613,7 +706,12 @@ impl FullScreen {
             let toggle = !acting
                 && !page.transitioning
                 && window_is_full_screen(&core, &window) != entering
-                && page.tab.as_ref().and_then(Weak::load).is_some() == entering;
+                && page
+                    .tab
+                    .as_ref()
+                    .and_then(Weak::load)
+                    .is_some_and(|tab| tab_view(&tab).is_some())
+                    == entering;
             if toggle {
                 page.entered = entering;
                 page.asked = if entering { 1 } else { -1 };
@@ -665,7 +763,9 @@ impl FullScreen {
                 page.ours = page.asked == if entering { 1 } else { -1 };
                 page.asked = 0;
                 for cover in &page.covers {
-                    cover.repicture();
+                    if cover.owner().is_some_and(|tab| tab_view(&tab).is_some()) {
+                        cover.repicture();
+                    }
                 }
             }
             if did {
@@ -699,7 +799,7 @@ impl FullScreen {
                     } else {
                         None
                     };
-                    if let Some(tab) = exit_page {
+                    if let Some(tab) = exit_page.filter(|tab| tab_view(tab).is_some()) {
                         tab.exit_fullscreen();
                     } else {
                         fullscreen.sync_page();
