@@ -700,7 +700,8 @@ mod mac {
                                         }
                                         Err(rejection) => (
                                             false,
-                                            "bookmarks.exportHtml settled ok with the file on disk".to_owned(),
+                                            "bookmarks.exportHtml settled ok with the file on disk"
+                                                .to_owned(),
                                             format!("{}: {}", rejection.code, rejection.message),
                                         ),
                                     };
