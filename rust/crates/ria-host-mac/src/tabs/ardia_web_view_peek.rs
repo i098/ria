@@ -236,7 +236,9 @@ impl Peek {
         self.mouse_up
             .as_ref()
             .filter(|up| up.over(host) && now.saturating_duration_since(up.at) <= GESTURE_LIFETIME)
-            .map(|up| crate::windows::ardia_interface_scale::root_point_from_window(up.point, &window))
+            .map(|up| {
+                crate::windows::ardia_interface_scale::root_point_from_window(up.point, &window)
+            })
     }
 
     pub fn take_shift_click(&mut self, host: &NSView, now: Instant) -> bool {
