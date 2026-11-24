@@ -197,6 +197,13 @@ impl Favicons {
         name: Option<&str>,
         done: impl FnOnce(Option<Value>) + 'static,
     ) {
+        // Deviation from Ardia (`ArdiaFavicons.mm:90-98` serves `Seen()` first): a released private session
+        // has no live profile, so its cached icon is no longer readable (see `rust/DECISIONS.md`, ADR-V2).
+        if self.registry.is_private_profile(profile)
+            && self.registry.loaded_profile(profile).is_none()
+        {
+            return done(None);
+        }
         let seen = self
             .seen
             .borrow()
