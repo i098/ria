@@ -5,6 +5,9 @@
 //! The call layer (plan section 6.4): every reply and every event is a deferred entry.
 //! The engine pointers are copied inside the callback, and the work goes into the [`ActionQueue`].
 //! A reply and a timeout share one settled cell; the first one wins, and only the reply frees the call context.
+//!
+//! Changes from Ardia: [`Engine::on_event_at`] gives a handler the time at which the event sink received the event,
+//! because a handler runs on a later drain. Ardia's bridge hands the event to its handler with no receipt time.
 
 #![allow(unsafe_code)]
 
@@ -12,7 +15,7 @@ use std::cell::{Cell, RefCell};
 use std::collections::{HashMap, VecDeque};
 use std::ffi::{CStr, CString, c_char, c_void};
 use std::rc::{Rc, Weak};
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
 use ria_engine_sys::{CallFn, ReplyFn};
 use serde_json::Value;
@@ -142,7 +145,7 @@ fn parse_reply(bytes: &[u8]) -> CallResult {
     }
 }
 
-type Handler = Rc<dyn Fn(&Value)>;
+type Handler = Rc<dyn Fn(&Value, Instant)>;
 
 struct State {
     queue: Rc<ActionQueue>,
@@ -215,6 +218,12 @@ impl Engine {
 
     /// Runs `handler` for each event of `topic`, on the drain after the event arrives.
     pub fn on_event(&self, topic: &str, handler: impl Fn(&Value) + 'static) {
+        self.on_event_at(topic, move |payload, _| handler(payload));
+    }
+
+    /// Like [`Engine::on_event`], and the handler also gets the time at which the event sink received the event.
+    /// A handler that checks a deadline must use this time, not the time at which it runs.
+    pub fn on_event_at(&self, topic: &str, handler: impl Fn(&Value, Instant) + 'static) {
         self.0
             .handlers
             .borrow_mut()
@@ -363,6 +372,7 @@ unsafe extern "C" fn event_sink(context: *mut c_void, topic: *const c_char, json
     }
     // SAFETY: `context` is the `Rc<State>` pointer of `install_sink`, alive until `shutdown`; the sink runs on the main thread.
     let state = unsafe { &*context.cast::<State>() };
+    let received = Instant::now();
     // The sink can run inside an engine call, so it only copies and queues.
     let topic = unsafe { CStr::from_ptr(topic) }
         .to_string_lossy()
@@ -381,9 +391,9 @@ unsafe extern "C" fn event_sink(context: *mut c_void, topic: *const c_char, json
     if handlers.is_empty() {
         return;
     }
-    state
-        .queue
-        .push(Box::new(move || handlers.iter().for_each(|h| h(&payload))));
+    state.queue.push(Box::new(move || {
+        handlers.iter().for_each(|h| h(&payload, received))
+    }));
 }
 
 #[cfg(target_os = "macos")]
@@ -625,6 +635,27 @@ mod tests {
                 Ok(serde_json::json!({"p": 1}))
             ]
         );
+    }
+
+    #[test]
+    fn an_event_handler_gets_the_time_of_receipt_not_of_the_drain() {
+        let (engine, queue) = engine();
+        let seen = Rc::new(RefCell::new(Vec::new()));
+        let sink = seen.clone();
+        engine.on_event_at("tabs.strip", move |_, received| {
+            sink.borrow_mut().push(received)
+        });
+        let before = Instant::now();
+        let context = Rc::as_ptr(&engine.0).cast_mut().cast();
+        unsafe { event_sink(context, c"tabs.strip".as_ptr(), c"{}".as_ptr()) };
+        let after = Instant::now();
+        std::thread::sleep(Duration::from_millis(50));
+        assert_eq!(queue.drain(), 1);
+        let [received] = seen.borrow()[..] else {
+            panic!("one event expected");
+        };
+        assert!(before <= received && received <= after);
+        assert!(Instant::now() - received >= Duration::from_millis(50));
     }
 
     #[test]

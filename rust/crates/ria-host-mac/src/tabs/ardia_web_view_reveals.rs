@@ -456,22 +456,28 @@ impl Reveal {
         devtools: bool,
         registered: bool,
     ) -> bool {
+        // `revealOffered:` marks the offer (`ArdiaWebView+Reveals.mm:309`) before `frontPage:profile:` refuses
+        // (`ArdiaWebView+Reveals.mm:336`), so a refusal from DevTools or the shown tab leaves the mark.
+        let Some(page) = offered.view() else {
+            return false;
+        };
+        if host.window().is_none() || offered.closed() || superview(&page).is_some() || registered {
+            return false;
+        }
+        offered.note_in_shown_slot();
         if state.borrow().front.is_some()
             || !only_shown
             || devtools
-            || registered
-            || offered.closed()
             || !same_profile(shown, offered)
         {
             return false;
         }
-        let (Some(mine), Some(page)) = (shown.view(), offered.view()) else {
+        let Some(mine) = shown.view() else {
             return false;
         };
-        if !mounted(&mine, host) || mine.isHidden() || superview(&page).is_some() {
+        if !mounted(&mine, host) || mine.isHidden() {
             return false;
         }
-        offered.note_in_shown_slot();
         page.setFrame(host.bounds());
         page.setHidden(false);
         host.addSubview_positioned_relativeTo(&page, NSWindowOrderingMode::Above, Some(&mine));
