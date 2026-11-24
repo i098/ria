@@ -2,7 +2,7 @@
 
 A native Rust and [Rune](https://github.com/anomalyco/rune) port of the [Ardia](https://github.com/ardia-browser/ardia) browser for macOS.
 
-**State: early.** Phase 0 (proofs) passed. Phase 1 (core logic) is in work. There is no app to download yet.
+**State: early.** Phase 0 (proofs) and Phase 1 (core logic) passed their gates. There is no app to download yet.
 
 ## What works today
 
@@ -38,7 +38,7 @@ Ria builds with [blaze](https://github.com/indexable-inc/blaze) at one pinned co
 | Phase | Work | State |
 | --- | --- | --- |
 | 0 | Decide and prove | done |
-| 1 | Core logic | in work |
+| 1 | Core logic | done |
 | 2 | State and data | todo |
 | 3 | Rust host on the engine | [in work](rust/MAP.md) |
 | 4 | UI in Rune | todo |

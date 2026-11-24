@@ -9,7 +9,7 @@ Gate G1 also has the planned and the real hours of phase 1 and the corrected hou
 | --- | --- | --- | --- | --- | --- |
 | Plan | owner approval on the board | approved | 2026-11-23 | Owner, on the board: "I approve this implementation plan. Implement it as written." Plan version 5. | |
 | G0 | slices 0.5 to 0.9 are done; proofs A, B, C and D pass; owner go on the gate issue | passed | 2026-11-23 | [G0 record](#g0-record) | |
-| G1 | all Phase 1 checks pass in one run | open | | | |
+| G1 | all Phase 1 checks pass in one run | passed | 2026-11-24 | [G1 record](#g1-record) | 183 of 814 units, 72,857 lines |
 | G2 | all Phase 2 checks pass in one run, with all store diffs | open | | | |
 | G3 | all Phase 3 checks pass in one run | open | | | |
 | G4 | all Phase 4 checks pass in one run; resource numbers in the limit | open | | | |
@@ -90,3 +90,208 @@ Alternative 11 (plan section 7) was not needed: no proof check failed.
 - The blaze-built binary passes A (3 checks), B (22 checks) and C (11 checks), 0 fail each. It needs `ulimit -n 10240`.
 - blaze needs the 2 patches of `rust/tools/blaze/` (`0001-blaze-abc-host.patch`, `0002-blaze-store-key-readonly-data.patch`) on commit `f5852696e`. The patches live only in this repository. Without them, `blaze 0.20261027.0` refused 3 groups of functions in `abc-host`.
 - Proof D: 2 recorded cases are in `known-diffs.jsonl` (lone surrogates; the napi bridge cannot pass them to a Rust `String`). `record` does not capture a store natively; each Ardia store folder needs a small `replay(actions[])` driver in a scratch copy (tested in `rust/proofs/d-fuzzy/store-demo/`: 201 cases).
+
+## G1 record
+
+Slice 1.8. Plan v5 sections 8.3, 8.4 (check G), 8.6 and risk R15.
+The first run (2026-11-23) failed 3 checks. Issue https://github.com/i098/ria/issues/82 tracked the fixes, and https://github.com/i098/ria/pull/98 (merge commit `d7be1ad`) merged them. The second run (2026-11-24) passed all checks, so gate G1 passed.
+Machine: Linux x64, node v26.12.1, rust-anything 3.3.0, blaze not used (the unit loop uses `cargo`). Both runs: shared host with a load average of 120 to 200, so all times are long.
+
+### Merged pull requests (check M)
+
+| Slice | Pull request | Merged (UTC) |
+| --- | --- | --- |
+| 1.1 | https://github.com/i098/ria/pull/28 | 2026-11-23 06:52 |
+| 1.2 | https://github.com/i098/ria/pull/38 | 2026-11-23 08:17 |
+| 1.3 | https://github.com/i098/ria/pull/70 | 2026-11-23 13:32 |
+| 1.4 | https://github.com/i098/ria/pull/39 | 2026-11-23 08:21 |
+| 1.5 | https://github.com/i098/ria/pull/55 | 2026-11-23 10:03 |
+| 1.6 | https://github.com/i098/ria/pull/36 | 2026-11-23 07:22 |
+| 1.7 | https://github.com/i098/ria/pull/31 | 2026-11-23 07:04 |
+| issue 37 (follow-up of 1.6) | https://github.com/i098/ria/pull/81 | 2026-11-23 18:15 |
+
+### Second run (passed)
+
+Base: `d7be1ad` (PR 98). `origin/main` was at `7c1acad` when the run ended; `git diff d7be1ad origin/main -- rust/recorded rust/crates/ria-core` is empty, so the Phase 1 files are the same.
+Setup as in "Phase 1: Check U" above, with one change: the host was too loaded for `git submodule update --init` (the clone did not finish in 25 min). The `ardia` folder is a local clone of Ardia, checked out at the pinned commit `551d3c13c1c9ede130724ea9f1056d4b586fbe55` (`git -C ardia rev-parse HEAD`), then `rust/recorded/1.4/review-root.sh` built `rust/recorded/.review-ardia` from the gitlink commit.
+For each of the 29 crates of `rust/recorded/1.1`, `1.2`, `1.3`, `1.4` and `1.6`, in one run of 4 parallel streams, then `cargo test -p ria-core`:
+
+```sh
+rust-anything gate rust/recorded/<slice>/<crate>
+rust-anything diff rust/recorded/<slice>/<crate>
+rust-anything fuzz rust/recorded/<slice>/<crate> --seed 9271
+```
+
+After the loop, run once:
+
+```sh
+( cd rust && cargo test -p ria-core )
+```
+
+`telemetry-wire-rs` ran with `TZ=UTC RIA_NOW_MS=1795417631295 NODE_OPTIONS=--import=<crate>/clock-freeze.mjs`. All 87 steps (29 crates, 3 each) exited 0. `cargo test -p ria-core`: 77 passed, 0 failed (includes `endpoints::tests::every_endpoint_is_off` and `search::bang_list::tests::bundled_lists_match_frozen_ardia_samples`). Check M: the 8 pull requests above, plus PR 98, are merged.
+
+| Slice | Crate | diff | fresh fuzz (seed 9271) | Coverage printed by `gate` | Unreached lines |
+| --- | --- | --- | --- | --- | --- |
+| 1.1 | `fuzzy-rs` | 623/623 (2 known) | 387/387 | 87 of 87 | none |
+| 1.2 | `appurls-rs` | 1104/1104 | 557/557 | 52 of 52 | none |
+| 1.2 | `cleanurl-rs` | 2837/2837 | 452/452 | 68 of 68 | none |
+| 1.2 | `idn-rs` | 1662/1662 | 426/426 | 321 of 323 | `UNREACHED.md` |
+| 1.2 | `pagematch-rs` | 310/310 | 177/177 | 356 of 862 | `UNREACHED.md` |
+| 1.2 | `pagetext-rs` | 763/763 | 408/408 | 323 of 753 | `UNREACHED.md` |
+| 1.2 | `textfragment-rs` | 591/591 | 389/389 | 72 of 73 | `UNREACHED.md` |
+| 1.2 | `webstore-rs` | 1018/1018 | 463/463 | 71 of 71 | none |
+| 1.3 | `calculator-rs` | 6694/6694 (49 known) | 277/277 | 293 of 293 | none |
+| 1.3 | `candidate-pool-rs` | 2614/2614 | 952/952 | 747 of 957 | `UNREACHED.md` |
+| 1.3 | `omnibox-rs` | 19326/19326 (3 known) | 1835/1835 | 670 of 698 | `UNREACHED.md` |
+| 1.3 | `open-tabs-rs` | 1800/1800 | 194/194 | 10 of 10 | none |
+| 1.3 | `quick-create-rs` | 2777/2777 | 153/153 | 38 of 38 | none |
+| 1.3 | `suggest-fetcher-rs` | 1709/1709 | 155/155 | 550 of 992 | `UNREACHED.md` |
+| 1.3 | `suggest-rs` | 3401/3401 | 199/199 | 1963 of 2383 | `UNREACHED.md` |
+| 1.3 | `suggestion-rows-rs` | 2749/2749 | 853/853 | 412 of 842 | `UNREACHED.md` |
+| 1.4 | `bangs-harness-rs` | 1114/1114 | 929/929 | 150 of 230 | `UNREACHED.md` |
+| 1.4 | `bangs-rs` | 261/261 (7 known) | 1394/1394 | 123 of 210 | `UNREACHED.md` |
+| 1.4 | `engines-rs` | 2184/2184 | 1555/1555 | 459 of 856 | `UNREACHED.md` |
+| 1.4 | `extension-rows-rs` | 387/387 | 195/195 | 97 of 112 | `UNREACHED.md` |
+| 1.4 | `provider-config-rs` | 715/715 | 458/458 | 492 of 997 | `UNREACHED.md` |
+| 1.4 | `provider-network-rs` | 905/905 (2 known) | 384/384 | 449 of 965 | `UNREACHED.md` |
+| 1.4 | `provider-rows-rs` | 1726/1726 | 875/875 | 445 of 875 | `UNREACHED.md` |
+| 1.4 | `site-search-rs` | 1913/1913 | 1352/1352 | 529 of 979 | `UNREACHED.md` |
+| 1.6 | `anonymous-identity-rs` | 891/891 | 330/330 | 86 of 86 | none |
+| 1.6 | `ingest-keys-rs` | 219/219 | 141/141 | 14 of 14 | none |
+| 1.6 | `mobile-rs` | 3/3 | 190/190 | 12822 of 14100 | `UNREACHED.md` |
+| 1.6 | `telemetry-wire-rs` | 1463/1463 (8 known) | 659/659 | 67 of 67 | none |
+| 1.6 | `theme-rs` | 8226/8226 | 5843/5843 | 291 of 291 | none |
+
+Coverage under 100 %: the plan accepts it when each unreached line is listed with its reason. Each of the 18 crates below 100 % has an `UNREACHED.md` in its folder (PR 98). `[INFERENCE]` I checked that the files exist, not each line range. `mobile-rs` fuzz sends strings, not call sequences (see PR 81); the call sequences are covered by the recorded inputs.
+Diff of the first-run failures: the 7 crates of 1.2 now build and pass; `telemetry-wire-rs` fuzz is 659/659 (was 573/659) with 8 cases in `known-diffs.jsonl` (was 113).
+
+### First run (2026-11-23, failed)
+
+Details of the first run follow. They stay as the record of what PR 98 fixed.
+
+#### Commands and results of the first run
+
+Run from the repository root. `<crate>` is each of the 29 crates in `rust/recorded/1.1`, `1.2`, `1.3`, `1.4` and `1.6`. Seed 8128 is new for each crate. Logs: `/sdb-disk/host-data/administrator/.treehouse/firstmate-8bf1b0/21/firstmate/data/ria-1-8-gate-g1/logs/` (outside the repository).
+
+```sh
+rust-anything gate rust/recorded/<slice>/<crate>
+rust-anything diff rust/recorded/<slice>/<crate>
+rust-anything fuzz rust/recorded/<slice>/<crate> --seed 8128
+```
+
+After the loop, run once:
+
+```sh
+( cd rust && cargo test -p ria-core )     # checks T of slices 1.5 and 1.7
+```
+
+`telemetry-wire-rs` ran with `TZ=UTC RIA_NOW_MS=1795417631295 NODE_OPTIONS=--import=<crate>/clock-freeze.mjs` (see `rust/recorded/1.6/README.md`).
+
+| Slice | Crate | gate | diff | fresh fuzz (seed 8128) | Coverage printed by `gate` |
+| --- | --- | --- | --- | --- | --- |
+| 1.1 | `fuzzy-rs` | pass | 623/623 (2 known) | 385/385 | 87 of 87 (100 %) |
+| 1.2 | `appurls-rs` | **fail** | not run: no `.node` module | not run | 52 of 52 |
+| 1.2 | `cleanurl-rs` | **fail** | not run | not run | 68 of 68 |
+| 1.2 | `idn-rs` | **fail** | not run | not run | 321 of 323 (99 %) |
+| 1.2 | `pagematch-rs` | **fail** | not run | not run | 356 of 862 (41 %) |
+| 1.2 | `pagetext-rs` | **fail** | not run | not run | 323 of 753 (43 %) |
+| 1.2 | `textfragment-rs` | **fail** | not run | not run | 72 of 73 (99 %) |
+| 1.2 | `webstore-rs` | **fail** | not run | not run | 71 of 71 |
+| 1.3 | `calculator-rs` | pass | 6694/6694 (49 known) | 270/270 | 293 of 293 |
+| 1.3 | `candidate-pool-rs` | pass | 2614/2614 | 960/960 | 747 of 957 (78 %) |
+| 1.3 | `omnibox-rs` | pass | 19326/19326 (3 known) | 1858/1858 | 670 of 698 (96 %) |
+| 1.3 | `open-tabs-rs` | pass | 1800/1800 | 190/190 | 10 of 10 |
+| 1.3 | `quick-create-rs` | pass | 2777/2777 | 153/153 | 38 of 38 |
+| 1.3 | `suggest-fetcher-rs` | pass | 1709/1709 | 162/162 | 550 of 992 (55 %) |
+| 1.3 | `suggest-rs` | pass | 3401/3401 | 200/200 | 1963 of 2383 (82 %) |
+| 1.3 | `suggestion-rows-rs` | pass | 2749/2749 | 855/855 | 412 of 842 (49 %) |
+| 1.4 | `bangs-harness-rs` | pass | 1114/1114 | 918/918 (a) | 150 of 230 (65 %) |
+| 1.4 | `bangs-rs` | pass | 261/261 (7 known) | 1394/1394 (a) | 123 of 210 (59 %) |
+| 1.4 | `engines-rs` | pass | 2184/2184 | 1541/1541 (a) | 459 of 856 (54 %) |
+| 1.4 | `extension-rows-rs` | pass | 387/387 | 196/196 (a) | 97 of 112 (87 %) |
+| 1.4 | `provider-config-rs` | pass | 715/715 | 433/433 (a) | 492 of 997 (49 %) |
+| 1.4 | `provider-network-rs` | pass | 905/905 (2 known) | 365/365 (a) | 449 of 965 (47 %) |
+| 1.4 | `provider-rows-rs` | pass | 1726/1726 | 884/884 (a) | 445 of 875 (51 %) |
+| 1.4 | `site-search-rs` | pass | 1913/1913 | 1344/1344 (a) | 529 of 979 (54 %) |
+| 1.6 | `anonymous-identity-rs` | pass | 891/891 | 332/332 | 86 of 86 |
+| 1.6 | `ingest-keys-rs` | pass | 219/219 | 139/139 | 14 of 14 |
+| 1.6 | `mobile-rs` | pass | 1/1 | 200/200 (b) | 12805 of 14093 (91 %) |
+| 1.6 | `telemetry-wire-rs` | pass | 1463/1463 (113 known) | **573/659** | 67 of 67 |
+| 1.6 | `theme-rs` | pass | 8226/8226 | 5868/5868 | 291 of 291 |
+| 1.5 | `cargo test -p ria-core` | | | 77 tests passed, 0 failed (includes `search::bang_list::tests::bundled_lists_match_frozen_ardia_samples`) | |
+| 1.7 | `cargo test -p ria-core` | | | `endpoints::tests::every_endpoint_is_off` passed | |
+
+(a) The crate has `"root": "."`, and `fuzz` looks for the TypeScript original under the crate folder. The first fuzz run failed with `ERR_MODULE_NOT_FOUND`. The second run linked `packages` from a scratch Ardia checkout at `551d3c13c` into the crate folder and removed the link afterwards. For `bangs-harness-rs`, the scratch copy also held `bangs.harness.ts` from the crate folder.
+(b) Same cause: the root `.review-ardia` is relative to the crate folder. The run linked a scratch copy of `ardia/packages` with `mobile.harness.ts`. The fuzz inputs are strings, not call sequences (PR 81 review note), so this number does not test the 13 mobile calls.
+
+#### Failed checks of the first run
+
+| Check | Slice | Fact | Before and after |
+| --- | --- | --- | --- |
+| U (`gate`, `diff`, `fuzz`) | 1.2 | The 7 crates of `rust/recorded/1.2/` have no `[workspace]` table in `Cargo.toml` (the crates of 1.1, 1.3, 1.4 and 1.6 have it). `gate` stops with "current package believes it's in a workspace when it's not" because `rust/Cargo.toml` has `members = ["crates/*"]`. The gate steps fmt, clippy, cargo test and build fail; the `.node` module is not built, so `diff` and `fuzz` stop with `MODULE_NOT_FOUND`. | Fix, outside this slice: add an empty `[workspace]` table to each of the 7 files, like `rust/recorded/1.1/fuzzy-rs/Cargo.toml`. After it, run the gate, `diff` and `fuzz` of the 7 crates again. |
+| U (`fuzz`) | 1.6 | `telemetry-wire-rs`: 573 of 659 fresh cases match. All 20 listed mismatches are `logRecord` calls. The original gives `NaN000000` or `0000000` for the time; the port gives the frozen time, or the error "`at` is a string or a list, which `Math.round` coerces". Plan check U needs a 100 % match. PR https://github.com/i098/ria/pull/36 reported the same family (20 `eventRecord` mismatches). Not in `known-diffs.jsonl`. | Open: add the cases to `known-diffs.jsonl` with a reason, or change the port. |
+| U (coverage) | 1.2, 1.3, 1.4, 1.6 | `gate` prints a coverage under 100 % for 18 of 29 crates (table above). The tool counts imported files (for example `idn.ts`) with the unit. The plan needs 100 % of the original lines, or a list in the PR body of each line that no input can reach. This run did not check the PR bodies for those lists. | Open: each slice owner lists the lines, or adds inputs. |
+
+The first run therefore did not pass gate G1. The count of passed checks: M 8 of 8, T 2 of 2, U `gate` 22 of 29, `diff` 22 of 29, `fuzz` 21 of 29 (counting (a) as pass and (b) as pass).
+
+### Drift report (plan section 8.3)
+
+Ardia `origin/main` is `14db917fd`, 120 commits ahead of `551d3c13c` (fetched 2026-11-23; `gh api repos/ardia-browser/ardia/compare/551d3c13c...main`). The `ardia` submodule of this repository is not checked out, so the run used a scratch clone with `origin` set to `https://github.com/ardia-browser/ardia`.
+
+| Number | Value | How |
+| --- | ---: | --- |
+| Changed files in `apps/browser packages engine` | 1,664 | `git diff --numstat 551d3c13c origin/main -- apps/browser packages engine` |
+| Changed lines in those files (added + deleted) | 72,857 (64,360 + 8,497) | the same output |
+| **Changed units** (rows of `rust/MAP.md` with scope `mac`) | **183 of 814 (22.5 %)** | each file goes to the longest matching unit row (file, folder, or `Name.*` stem) |
+| Changed lines inside those 183 units | 37,857 | the same grouping |
+| Files with no `mac` unit | 474 files, 35,000 lines | they are in scope `out`, or are tests and non-`mac` folders (`packages/expo-windows`, `packages/phone`, `packages/core-rs`, ...) |
+
+Of the 183 changed units, 139 have the disposition `port`, 26 `absorb`, 16 `stay`, 1 `done`, 1 `later`.
+The limit of section 8.3 is 407 of 814 units (50 %). The drift is under it, so the gate does not go to the owner for this reason.
+Step 4 (`rust-anything map --check ardia --crates rust/recorded`) exited 0 and printed "0 of 683 units have a Rust port": the map tool reads only the scratch Ardia repository, and it does not read the `recorded-from.json` fingerprints of this repository. It gives no signal about outdated recordings.
+The numstat shows 24 changed files in `packages/core/src` (the source of phase 1), for example `appUrls.ts`, `calculator.ts`, `candidatePool.ts`, `cleanUrl.ts`, `pageMatch.ts`, `suggest.ts`, `suggest.reference.ts`, `suggestFetcher.ts`, `siteSearch.ts`, `mobile.ts`. The recordings of these units are older than the upstream source. Section 8.3 has no rule for this case besides the drift limit.
+
+### Planned and real hours of phase 1
+
+Method. The real hours come from i098/ria only: the merge time of each pull request (`gh pr view <n> --json mergedAt`) and the author dates of its commits (`git log --format=%ad`). Two measures, because the start of a worker is not recorded:
+
+- Low: from the first visible work (the earlier of the slice issue creation and the first commit author date) to the merge. This leaves out work before the first commit.
+- High: from the time all slices in the `Needs` column were merged (for 1.1, the owner go of G0 at 06:42) to the merge. This counts the wait for dispatch and the review pipeline.
+
+Hours are wall-clock hours of one slice. Slices ran in parallel, so the sum is lane hours, not elapsed time. Slice 1.3 has no issue: its first commit is 07:22, and its review rounds ran until 13:32 (6 commits, 3 of them `no-mistakes`).
+
+| Slice | Planned (h) | Real low (h) | Real high (h) | Source lines |
+| --- | ---: | ---: | ---: | ---: |
+| 1.1 crate, fuzzy | 1.0 | 0.03 | 0.16 | 165 |
+| 1.2 URL units | 2.1 | 0.52 | 1.42 | 824 |
+| 1.3 omnibox, suggest | 2.8 | 6.16 | 6.67 | 1,569 |
+| 1.4 search, bangs | 1.8 | 0.77 | 1.48 | 850 |
+| 1.5 bang list data | 0.5 | 1.29 | 1.71 | 10,706 (moved by script) |
+| 1.6 identity, theme | 1.5 | 0.02 | 0.50 | 581 |
+| 1.7 endpoints | 0.5 | 0.11 | 0.21 | - |
+| issue 37 (parity fixes of 1.6, pull request 81) | 0.0 | 1.78 | 10.88 | - |
+| issue 82 (gate fixes, pull request 98) | 0.0 | 5.07 | 6.93 | - |
+| 1.8 this slice (task start to commit) | 1.5 | 1.5 | 1.5 | - |
+| Total | 11.7 | 17.25 | 31.46 | |
+
+Issue 37 starts at the first commit (2026-11-23 16:28), not at the issue creation (07:22): the issue waited 9 h before work began. Its low value starts at the first commit (1.78 h). Its high value follows the high method with no exception: from the merge of slice 1.6 (07:22), 10.88 h.
+
+### Corrected rates for the later phases (R15)
+
+The unit loop (check U) slices are 1.1, 1.2, 1.3, 1.4 and 1.6, with 3,989 source lines (bang list not counted). Their planned hours are 9.2, which is 434 lines for each hour. Issues 37 and 82 are rework of this loop, so they count to it. Issue 82 is measured from its first commit (author date 2026-11-23 21:37) to the merge (2026-11-24 02:41) for low, and from the creation of the issue (19:45) for high. The 1.8 row is my estimate; the real time of this slice is longer, because the second run alone took about 4 h on the loaded host.
+
+| Number | Low | High |
+| --- | ---: | ---: |
+| Real hours of the unit loop (with issues 37 and 82) | 14.35 | 28.04 |
+| Real lines for each hour | 278 | 142 |
+| Factor, real hours / planned hours (9.2) | 1.56 | 3.05 |
+
+Decision rule: use the high factor 3.05 (earlier record: 2.06, which counted issue 37 from its first commit), because plan risk R15 is about too few hours and the low measure leaves out the work before the first commit. Both factors are above the first-run numbers (1.01 and 1.31), because the rework of the gate (PR 98) cost 5.1 to 6.9 h. The plan rates (600 and 1,000 lines for each hour) are not met by either measure.
+
+| Item | Plan v5 (h) | Corrected (h) | Basis |
+| --- | ---: | ---: | --- |
+| Unit slices of all phases (U checks) | 358.0 | 1,091.1 | 358.0 x 3.048 (28.04 / 9.2) |
+| All other hours (Mac, native code, UI, tests, gates) | 247.6 | 247.6 | not measured by phase 1; keep the plan hours until a later gate gives a number |
+| Plan total | 605.6 | 1,338.7 | 247.6 + 1,091.1 |
+
+The corrected total, 1,338.7 h (earlier record: 985.1 h), is above the R15 worst case (827.1 h, at 400 lines for each hour; the plan v5 text for R15 is not in this repository, so this figure is quoted from the plan and cannot be rederived here). The measured rate of the unit loop is 142 to 278 lines for each hour, below the 400 of R15. `[INFERENCE]` The rework share (issues 37 and 82) is a one-time cost of the first loop, and later phases with the same oracle setup may need less; gate G2 measures it again. The owner should see this number before phase 2 starts.
