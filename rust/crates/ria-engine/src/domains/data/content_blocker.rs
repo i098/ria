@@ -1,6 +1,10 @@
 // Ported from ardia packages/ardiacore/ios/ArdiaContentBlocker.mm at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
+//
+// Deviation from Ardia (issue 69, approved by the order to resolve every open issue): `ADD_LIST` finds an existing list
+// by an address that equals the added one without its scheme, where Ardia matches any address that ends with it
+// (`ArdiaContentBlocker.mm:463`), so a list at another origin whose path holds the text is no longer taken as the same.
 
 //! The content blocker: the bundled uBlock Origin as a component extension of each data profile. The default profile
 //! holds the settings; every other profile follows it. Also ports `ArdiaContentBlocker.h` and
@@ -302,7 +306,7 @@ const ADD_LIST: &str = concat!(
     "  if (!/^https?:\\/\\/[^\\s\\/]+\\S*$/i.test(url) || url.length > 2048) throw new Error('not a list address');",
     "  const needle = url.replace(/^https?:/i, '');",
     "  const findId = (l) => l.available[url] ? url : Object.keys(l.available).find((k) =>",
-    "    [].concat(l.available[k] && l.available[k].contentURL || []).some((u) => typeof u === 'string' && u.endsWith(needle)));",
+    "    [].concat(l.available[k] && l.available[k].contentURL || []).some((u) => typeof u === 'string' && u.replace(/^https?:/i, '') === needle));",
     "  const had = findId(before);",
     "  return applySelection({toImport: url}, Infinity).then(lists).then((l) => {",
     "    const id = findId(l);",
