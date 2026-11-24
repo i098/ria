@@ -269,12 +269,12 @@ Hours are wall-clock hours of one slice. Slices ran in parallel, so the sum is l
 | 1.5 bang list data | 0.5 | 1.29 | 1.71 | 10,706 (moved by script) |
 | 1.6 identity, theme | 1.5 | 0.02 | 0.50 | 581 |
 | 1.7 endpoints | 0.5 | 0.11 | 0.21 | - |
-| issue 37 (parity fixes of 1.6, pull request 81) | 0.0 | 1.78 | 1.78 | - |
+| issue 37 (parity fixes of 1.6, pull request 81) | 0.0 | 1.78 | 10.88 | - |
 | issue 82 (gate fixes, pull request 98) | 0.0 | 5.07 | 6.93 | - |
 | 1.8 this slice (task start to commit) | 1.5 | 1.5 | 1.5 | - |
-| Total | 11.7 | 17.25 | 22.36 | |
+| Total | 11.7 | 17.25 | 31.46 | |
 
-Issue 37 starts at the first commit (2026-11-23 16:28), not at the issue creation (07:22): the issue waited 9 h before work began. Its high value (1.78 h) is an exception to the high method: it is also measured from the first commit, because the 9 h wait was not work time; with the method as stated it would be 10.88 h.
+Issue 37 starts at the first commit (2026-11-23 16:28), not at the issue creation (07:22): the issue waited 9 h before work began. Its low value starts at the first commit (1.78 h). Its high value follows the high method with no exception: from the merge of slice 1.6 (07:22), 10.88 h.
 
 ### Corrected rates for the later phases (R15)
 
@@ -282,16 +282,16 @@ The unit loop (check U) slices are 1.1, 1.2, 1.3, 1.4 and 1.6, with 3,989 source
 
 | Number | Low | High |
 | --- | ---: | ---: |
-| Real hours of the unit loop (with issues 37 and 82) | 14.35 | 18.94 |
-| Real lines for each hour | 278 | 211 |
-| Factor, real hours / planned hours (9.2) | 1.56 | 2.06 |
+| Real hours of the unit loop (with issues 37 and 82) | 14.35 | 28.04 |
+| Real lines for each hour | 278 | 142 |
+| Factor, real hours / planned hours (9.2) | 1.56 | 3.05 |
 
-Decision rule: use the high factor 2.06, because plan risk R15 is about too few hours and the low measure leaves out the work before the first commit. Both factors are above the first-run numbers (1.01 and 1.31), because the rework of the gate (PR 98) cost 5.1 to 6.9 h. The plan rates (600 and 1,000 lines for each hour) are not met by either measure.
+Decision rule: use the high factor 3.05 (earlier record: 2.06, which counted issue 37 from its first commit), because plan risk R15 is about too few hours and the low measure leaves out the work before the first commit. Both factors are above the first-run numbers (1.01 and 1.31), because the rework of the gate (PR 98) cost 5.1 to 6.9 h. The plan rates (600 and 1,000 lines for each hour) are not met by either measure.
 
 | Item | Plan v5 (h) | Corrected (h) | Basis |
 | --- | ---: | ---: | --- |
-| Unit slices of all phases (U checks) | 358.0 | 737.5 | 358.0 x 2.06 |
+| Unit slices of all phases (U checks) | 358.0 | 1,091.1 | 358.0 x 3.048 (28.04 / 9.2) |
 | All other hours (Mac, native code, UI, tests, gates) | 247.6 | 247.6 | not measured by phase 1; keep the plan hours until a later gate gives a number |
-| Plan total | 605.6 | 985.1 | 247.6 + 737.5 |
+| Plan total | 605.6 | 1,338.7 | 247.6 + 1,091.1 |
 
-The corrected total, 985.1 h, is above the R15 worst case (827.1 h, at 400 lines for each hour; the plan v5 text for R15 is not in this repository, so this figure is quoted from the plan and cannot be rederived here). The measured rate of the unit loop is 211 to 278 lines for each hour, below the 400 of R15. `[INFERENCE]` The rework share (issues 37 and 82) is a one-time cost of the first loop, and later phases with the same oracle setup may need less; gate G2 measures it again. The owner should see this number before phase 2 starts.
+The corrected total, 1,338.7 h (earlier record: 985.1 h), is above the R15 worst case (827.1 h, at 400 lines for each hour; the plan v5 text for R15 is not in this repository, so this figure is quoted from the plan and cannot be rederived here). The measured rate of the unit loop is 142 to 278 lines for each hour, below the 400 of R15. `[INFERENCE]` The rework share (issues 37 and 82) is a one-time cost of the first loop, and later phases with the same oracle setup may need less; gate G2 measures it again. The owner should see this number before phase 2 starts.
