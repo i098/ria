@@ -15,14 +15,13 @@ recorded cases of the TypeScript original (`cases.jsonl`), its inputs (`<name>.i
 functions"), so it has no crate. `identity::tab_groups` carries it.
 
 The mobile harness calls all 13 mobile exports in order in one session.
-The [input sequence](mobile.inputs.jsonl) replaces saved pages, search engines, and bang tables.
-The sequence checks the state after each replacement.
+The [recorded inputs](mobile.inputs.jsonl) check the state after each replacement of saved pages, search engines, and bang tables.
+They also check `?` searches with a query, an empty query, and whitespace.
 The harness also records construction of `ArdiaError` and both branches of `ardiaError`.
 
 ## Run
 
 Set up the [shared Ardia oracle](../../GATES.md#phase-1-check-u) before you run `record`, `gate`, or `fuzz`.
-The setup exports the pinned commit, so local Ardia edits do not change the oracle.
 
 ```sh
 rust-anything diff   rust/recorded/1.6/<crate>

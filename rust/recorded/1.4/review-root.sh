@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eu
-recorded=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+recorded=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)
 ardia="$recorded/../../ardia"
 root="$recorded/.review-ardia"
 pin=$(git -C "$recorded" rev-parse HEAD:ardia)

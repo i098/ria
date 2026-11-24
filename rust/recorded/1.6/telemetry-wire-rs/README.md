@@ -15,6 +15,6 @@ See [the slice instructions](../README.md#run) for recording and replay with the
 Build the napi-rs module with `rust-anything build .` from this directory.
 Run `node --test parity.test.cjs` to compare both bridge transports with the TypeScript oracle.
 
-The JavaScript bridge serializes non-array replay inputs and records that contain lone surrogates.
-Other record arrays use Rust serialization.
-The Rust API accepts only arrays.
+The Rust `logs_request` API accepts only arrays.
+The replay bridge passes only record arrays without lone surrogates to Rust.
+It serializes other values in JavaScript to preserve the original `logsRequest` behavior.

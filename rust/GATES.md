@@ -25,8 +25,9 @@ git submodule update --init --checkout ardia
 rust/recorded/1.4/review-root.sh
 ```
 
-The setup exports `packages/core` from the commit in the Ardia gitlink, not from the submodule worktree.
-It adds the replay harnesses to `rust/recorded/.review-ardia`.
+The setup replaces `rust/recorded/.review-ardia` with `packages/core` from the commit in the Ardia gitlink.
+It adds the replay harnesses to that directory and ignores local edits in the submodule.
+Phase 1 recordings use this directory as their TypeScript source.
 
 | Slice | Unit | Evidence | Gate command |
 | --- | --- | --- | --- |

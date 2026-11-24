@@ -58,15 +58,19 @@ fn entries_of(
     let mut entries = Vec::new();
     for (key, value) in object {
         if !omit_undefined || !is_undefined(value) {
-            let key = if key.starts_with("$$") { &key[1..] } else { key };
+            let key = if key.starts_with("$$") {
+                &key[1..]
+            } else {
+                key
+            };
             wire::set_entry(&mut entries, key, json_of(value)?);
         }
     }
     Ok(entries)
 }
 
-/// `Object.entries(value)` of an `attributes` argument. A string gives one entry for each UTF-16
-/// unit, an array one for each index, and a number or a boolean none; `null` and `undefined` throw.
+/// JavaScript `Object.entries` indexes strings by UTF-16 code unit.
+/// `projectAttributes` in `index.cjs` handles strings that Rust cannot split into valid characters.
 fn object_entries(value: &Value) -> Result<Vec<(String, Json)>, String> {
     const NOT_OBJECT: &str = "TypeError: Cannot convert undefined or null to object";
     const SURROGATE: &str = "a lone surrogate, which a Rust String cannot hold";
