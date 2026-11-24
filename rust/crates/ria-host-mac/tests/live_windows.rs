@@ -56,6 +56,7 @@ mod mac {
     use ria_host_mac::core::host::State;
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
     use ria_host_mac::tabs::ardia_page_cover::PageCover;
+    use ria_host_mac::tabs::ardia_page_draw_wait::after_page_draw;
     use ria_host_mac::tabs::ardia_tab_strip::{StripWindow, TabStrips};
     use ria_host_mac::windows::ardia_chrome_window_host::ChromeWindowHost;
     use ria_host_mac::windows::ardia_chrome_window_host_little_fit::little_frame_for_size;
@@ -727,6 +728,145 @@ mod mac {
         );
     }
 
+    fn check_closed_tab_callbacks(
+        host: Rc<ChromeWindowHost>,
+        controllers: &Controllers,
+        profile: &Profile,
+    ) -> Rc<Cell<bool>> {
+        let completed = Rc::new(Cell::new(false));
+        let mut windows = Vec::new();
+        let mut tabs = Vec::new();
+        for _ in 0..2 {
+            let window = host.make_window(profile, None).unwrap();
+            let controller = controllers.for_window(&window).unwrap();
+            controller
+                .core
+                .open_tab(ns_string!("about:blank"), profile, false);
+            tabs.push(controller.core.open_tab(ns_string!("about:blank"), profile, true));
+            controller.core.show_inactive();
+            windows.push(window);
+        }
+
+        type Completion = DynBlock<dyn Fn(*mut AnyObject)>;
+        let closed = [Rc::new(Cell::new(false)), Rc::new(Cell::new(false))];
+        let replied = [Rc::new(Cell::new(false)), Rc::new(Cell::new(false))];
+        let targets = [
+            std::ptr::from_ref(&*tabs[0]),
+            std::ptr::from_ref(&*tabs[1]),
+        ];
+        let selector = sel!(evaluate:completion:);
+        let method = tabs[0].class().instance_method(selector).unwrap();
+        let implementation = method.implementation();
+        let original: unsafe extern "C-unwind" fn(*const Tab, Sel, &NSString, &Completion) =
+            unsafe { std::mem::transmute(implementation) };
+        let evaluate_closed = closed.clone();
+        let evaluate_replied = replied.clone();
+        let evaluate = RcBlock::new(
+            move |tab: *const Tab, code: &NSString, completion: &Completion| {
+                let index = if tab == targets[0] {
+                    0
+                } else if tab == targets[1] {
+                    1
+                } else {
+                    unsafe { original(tab, selector, code, completion) };
+                    return;
+                };
+                let closed = evaluate_closed[index].clone();
+                let replied = evaluate_replied[index].clone();
+                let pass = completion.copy();
+                let counted = RcBlock::new(move |reply: *mut AnyObject| {
+                    if closed.get() {
+                        replied.set(true);
+                    }
+                    pass.call((reply,));
+                });
+                unsafe { original(tab, selector, code, &counted) };
+            },
+        );
+        let imp = unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&evaluate).cast()) };
+        unsafe { ffi::method_setImplementation(method, imp) };
+
+        let selector = sel!(copyPicture:completion:);
+        let picture_method = tabs[0].class().instance_method(selector).unwrap();
+        let picture_implementation = picture_method.implementation();
+        let original_picture: unsafe extern "C-unwind" fn(
+            *const Tab,
+            Sel,
+            f64,
+            &DynBlock<dyn Fn(CGImageRef)>,
+        ) = unsafe { std::mem::transmute(picture_implementation) };
+        let picture_closed = closed[1].clone();
+        let copied = Rc::new(Cell::new(0));
+        let picture_count = copied.clone();
+        let picture = RcBlock::new(
+            move |tab: *const Tab, timeout: f64, completion: &DynBlock<dyn Fn(CGImageRef)>| {
+                if picture_closed.get() {
+                    picture_count.set(picture_count.get() + 1);
+                }
+                unsafe { original_picture(tab, selector, timeout, completion) };
+            },
+        );
+        let picture_imp =
+            unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&picture).cast()) };
+        unsafe { ffi::method_setImplementation(picture_method, picture_imp) };
+
+        let drawn = Rc::new(Cell::new(false));
+        let draw_finished = drawn.clone();
+        after_page_draw(&tabs[0], |_, _| true, move || draw_finished.set(true));
+
+        let attached = Rc::new(Cell::new(false));
+        let covered = Rc::new(Cell::new(false));
+        let repictured = Rc::new(Cell::new(false));
+        let cover_attached = attached.clone();
+        let cover_finished = covered.clone();
+        let repicture_started = repictured.clone();
+        let close_tab = tabs[1].clone();
+        let repicture_closed = closed[1].clone();
+        PageCover::cover(&tabs[1], false, || true, move |cover| {
+            cover_finished.set(true);
+            let Some(cover) = cover else { return };
+            cover_attached.set(true);
+            cover.repicture();
+            repicture_started.set(true);
+            close_tab.close_now();
+            repicture_closed.set(true);
+        });
+
+        tabs[0].close_now();
+        closed[0].set(true);
+
+        let done = completed.clone();
+        main_queue::after(
+            Duration::from_millis(700),
+            Box::new(move || {
+                unsafe {
+                    ffi::method_setImplementation(method, implementation);
+                    ffi::imp_removeBlock(imp);
+                    ffi::method_setImplementation(picture_method, picture_implementation);
+                    ffi::imp_removeBlock(picture_imp);
+                }
+                assert!(drawn.get(), "the draw wait must finish after the tab closes");
+                assert!(
+                    replied[0].get(),
+                    "the draw wait must receive its reply after the tab closes"
+                );
+                assert!(covered.get(), "the cover wait must finish after the tab closes");
+                assert!(attached.get(), "the cover must attach before the repicture");
+                assert!(repictured.get(), "the repicture must start before the close");
+                assert!(
+                    replied[1].get(),
+                    "the repicture draw wait must receive its reply after the tab closes"
+                );
+                assert_eq!(copied.get(), 0, "no picture may be taken after the close");
+                for window in windows {
+                    host.close_window(&window);
+                }
+                done.set(true);
+            }),
+        );
+        completed
+    }
+
     fn check_exit_settlement(
         host: Rc<ChromeWindowHost>,
         controllers: &Controllers,
@@ -1046,6 +1186,7 @@ mod mac {
             false
         );
         host.close_window(&occluded);
+        let callbacks_checked = check_closed_tab_callbacks(host.clone(), &controllers, profile);
         let exit_checked = check_exit_settlement(host.clone(), &controllers, profile);
 
         let page_window = host.make_window(profile, None).unwrap();
@@ -1369,6 +1510,7 @@ mod mac {
                         native.setStyleMask(style);
                         host.close_window(&native);
                         assert!(stale_checked.get());
+                        assert!(callbacks_checked.get());
                         assert!(exit_checked.get());
                         assert!(!controllers.user_sees_only_through_window_server(&restored));
                         assert!(controllers.user_sees_only_through_window_server(&overridden));

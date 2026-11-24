@@ -25,8 +25,9 @@ pub fn after_page_draw(
     test: impl Fn(bool, bool) -> bool + 'static,
     done: impl FnOnce() + 'static,
 ) {
-    let page = tab.view();
-    if page.window().is_none() || page.isHiddenOrHasHiddenAncestor() {
+    if super::tab_view(tab).is_none_or(|page| {
+        page.window().is_none() || page.isHiddenOrHasHiddenAncestor()
+    }) {
         done();
         return;
     }
@@ -54,7 +55,9 @@ impl<T: Fn(bool, bool) -> bool + 'static, D: FnOnce() + 'static> Wait<T, D> {
         let Some(tab) = self.tab.load() else {
             return self.finish();
         };
-        let page = tab.view();
+        let Some(page) = super::tab_view(&tab) else {
+            return self.finish();
+        };
         if page.window().is_none() {
             return self.finish();
         }
@@ -76,7 +79,9 @@ impl<T: Fn(bool, bool) -> bool + 'static, D: FnOnce() + 'static> Wait<T, D> {
         let Some(tab) = self.tab.load() else {
             return self.finish();
         };
-        let page = tab.view();
+        let Some(page) = super::tab_view(&tab) else {
+            return self.finish();
+        };
         let Some(content) = page.window().and_then(|window| window.contentView()) else {
             return self.finish();
         };

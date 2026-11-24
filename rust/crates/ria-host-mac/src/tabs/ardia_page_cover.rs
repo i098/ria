@@ -82,7 +82,10 @@ impl PageCover {
         may_attach: impl Fn() -> bool + 'static,
         done: impl FnOnce(Option<Retained<Self>>) + 'static,
     ) {
-        let page = tab.view();
+        let Some(page) = super::tab_view(tab) else {
+            done(None);
+            return;
+        };
         let Some(window) = page
             .window()
             .filter(|_| !disabled && !page.isHiddenOrHasHiddenAncestor())
@@ -117,8 +120,11 @@ impl PageCover {
                 main_queue::post(Box::new(move || {
                     let Some(done) = done.take() else { return };
                     let cover = (|| {
+                        if !may_attach() {
+                            return None;
+                        }
                         let (picture, tab, window) = (image?, tab.load()?, window.load()?);
-                        let page = tab.view();
+                        let page = super::tab_view(&tab)?;
                         if !page
                             .window()
                             .is_some_and(|current| std::ptr::eq(&*current, &*window))
@@ -133,9 +139,6 @@ impl PageCover {
                             (Some(a), Some(b)) if std::ptr::eq(&*a, &*b) => {}
                             (None, None) => {}
                             _ => return None,
-                        }
-                        if !may_attach() {
-                            return None;
                         }
                         let mtm = MainThreadMarker::new()?;
                         let this = <Self as MainThreadOnly>::alloc(mtm).set_ivars(Ivars {
@@ -222,12 +225,20 @@ impl PageCover {
         else {
             return;
         };
-        let page = tab.view();
+        if super::tab_view(&tab).is_none() {
+            return;
+        }
         let weak = Weak::new(self);
         let before = self.ivars().pictured.get();
+        let test_tab = Weak::new(&*tab);
         after_page_draw(
             &tab,
-            move |_, _| page.bounds().size != before,
+            move |_, _| {
+                test_tab
+                    .load()
+                    .and_then(|tab| super::tab_view(&tab))
+                    .is_some_and(|view| view.bounds().size != before)
+            },
             move || {
                 let Some(cover) = weak
                     .load()
@@ -238,7 +249,9 @@ impl PageCover {
                 let Some(tab) = cover.ivars().tab.load() else {
                     return;
                 };
-                let now = tab.view().bounds().size;
+                let Some(now) = super::tab_view(&tab).map(|view| view.bounds().size) else {
+                    return;
+                };
                 if now == before {
                     return;
                 }
