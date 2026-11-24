@@ -20,9 +20,9 @@ mod mac {
     use objc2::runtime::AnyObject;
     use objc2::{MainThreadMarker, class, msg_send};
     use objc2_app_kit::{
-        NSAppearance, NSAppearanceCustomization, NSApplication, NSBackingStoreType, NSEvent,
-        NSEventModifierFlags, NSEventType, NSScreen, NSView, NSWindow, NSWindowOcclusionState,
-        NSWindowStyleMask,
+        NSAppearance, NSAppearanceCustomization, NSApplication, NSApplicationActivationPolicy,
+        NSBackingStoreType, NSEvent, NSEventModifierFlags, NSEventType, NSScreen, NSView, NSWindow,
+        NSWindowOcclusionState, NSWindowStyleMask,
     };
     use objc2_foundation::{
         NSArray, NSDate, NSNotFound, NSPoint, NSRange, NSRect, NSRunLoop, NSSize, NSString,
