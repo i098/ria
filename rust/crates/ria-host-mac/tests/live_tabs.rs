@@ -583,7 +583,6 @@ mod mac {
                 if event_deadline
                     .get()
                     .is_some_and(|deadline| received >= deadline)
-                    || event["window"].as_i64() != Some(i64::from(strip_id))
                     || event["profile"].as_str() != Some(profile_path.as_str())
                     || event["offTheRecord"].as_bool() == Some(true)
                 {
@@ -596,6 +595,9 @@ mod mac {
                     return;
                 };
                 engine_pinned.set(row["pinned"].as_bool());
+                if event["window"].as_i64() != Some(i64::from(strip_id)) {
+                    return;
+                }
                 let (strips, registry) = &mut *state.borrow_mut();
                 let scope = fixture_strip(&window, &profile);
                 if strips.observe_engine_strip(event) == Some(strip_id)
@@ -655,6 +657,8 @@ mod mac {
                                     &profile,
                                     false,
                                 );
+                                let adoption_pinned = engine_pinned.clone();
+                                let adoption_deadline = event_deadline.clone();
                                 check_engine_pins(
                                     deadline,
                                     engine_pinned,
@@ -687,18 +691,26 @@ mod mac {
                                             profile.clone(),
                                             tab.clone(),
                                             move |pass| {
-                                                let pass = pass && {
-                                                    let (strips, registry) =
-                                                        &mut *state.borrow_mut();
-                                                    check_adoption(
-                                                        &fixture_strip(&window, &profile),
-                                                        &tab,
-                                                        strips,
-                                                        registry,
-                                                    )
-                                                };
-                                                call.shutdown();
-                                                shutdown(&window, &tab, pass);
+                                                if !pass {
+                                                    call.shutdown();
+                                                    return shutdown(&window, &tab, false);
+                                                }
+                                                let scope = fixture_strip(&window, &profile);
+                                                let (strips, registry) = &mut *state.borrow_mut();
+                                                let (window, tab, call) =
+                                                    (window.clone(), tab.clone(), call.clone());
+                                                check_adoption(
+                                                    &scope,
+                                                    &tab.clone(),
+                                                    strips,
+                                                    registry,
+                                                    adoption_pinned,
+                                                    &adoption_deadline,
+                                                    move |pass| {
+                                                        call.shutdown();
+                                                        shutdown(&window, &tab, pass);
+                                                    },
+                                                );
                                             },
                                         );
                                     },
@@ -874,13 +886,19 @@ mod mac {
         tab: &Tab,
         strips: &mut TabStrips,
         registry: &mut TabRegistry,
-    ) -> bool {
+        engine_pinned: Rc<Cell<Option<bool>>>,
+        event_deadline: &Cell<Option<Instant>>,
+        finish: impl FnOnce(bool) + 'static,
+    ) {
         let strip_id = source.window.chrome_window_id_for_profile(source.profile);
         let destination = fixture_window(source.profile);
         strips.activated(strip_id, tab);
         let observer = RemovalObserver::alloc().set_ivars(Cell::new(std::ptr::null()));
         let observer: Retained<RemovalObserver> = unsafe { msg_send![super(observer), init] };
         unsafe { source.window.set_delegate(Some(&observer)) };
+        engine_pinned.set(None);
+        let deadline = Instant::now() + Duration::from_secs(10);
+        event_deadline.set(Some(deadline));
         let adopted = destination.adopt_tab(tab);
         unsafe { source.window.set_delegate(None) };
         let removed = observer.ivars().get() == std::ptr::from_ref(tab);
@@ -902,10 +920,16 @@ mod mac {
                 tx.strips[0]
                     .tabs
                     .iter()
-                    .any(|row| row.key.as_deref() == Some("fixture") && row.pinned)
+                    .any(|row| row.key.as_deref() == Some("fixture") && !row.pinned)
             });
-        destination.close();
-        pass
+        wait_for_event(
+            deadline,
+            move || pass && engine_pinned.get() == Some(false),
+            move |observed| {
+                destination.close();
+                finish(observed);
+            },
+        );
     }
 
     fn matches_group(
