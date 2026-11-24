@@ -156,3 +156,9 @@ Ardia means the original at `ardia/`, frozen at commit `551d3c13c`.
 - Context: `ArdiaFavicons.mm:97-101` (at `551d3c13c`) reads a `data:image/` URL with `dataWithContentsOfURL:` and no byte limit. Only the HTTP path (`Download`, line 80) passes `kMaxBytes`. Issue 58.
 - Decision: `favicons.rs` refuses a `data:` body longer than the largest encoding of `MAX_BYTES` before it allocates, and refuses a decoded result over `MAX_BYTES` (2 MiB), the budget of the HTTP path. The owner's order to resolve every open issue approves this deviation.
 - Consequences: an oversized inline icon gives `None`, as an oversized download does. Ardia keeps the fault.
+
+## ADR-V2: Content blocker start keeps a `Built-in Extensions` folder (deviation from Ardia)
+
+- Context: `ArdiaContentBlocker.mm:46-48` (at `551d3c13c`) makes `StartPreparing` delete `Built-in Extensions` next to the data directory on a utility queue, even when the bundle lookup fails. No tracked Ria code creates that folder. Issue 68.
+- Decision: `content_blocker.rs` `extension_path` only finds the bundled extension and deletes nothing. The owner's order to resolve every open issue approves this deviation.
+- Consequences: an old `Built-in Extensions` folder stays on disk. Ardia keeps the fault.

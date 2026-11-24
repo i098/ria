@@ -362,7 +362,7 @@ impl ContentBlocker {
         !self.0.state.borrow().default_settled
     }
 
-    /// `StartPreparing`: finds the bundled extension once and deletes the copies of old builds.
+    /// `StartPreparing`: finds the bundled extension once. Ardia also deletes `Built-in Extensions` next to the data directory; Ria does not (ADR-V2).
     fn extension_path(&self) -> Option<PathBuf> {
         if let Some(path) = &self.0.state.borrow().extension_path {
             return path.clone();
@@ -374,14 +374,6 @@ impl ContentBlocker {
             .map(|r| r.join("Extensions").join(BUNDLED_NAME));
         let path = bundled.filter(|b| b.join("manifest.json").exists());
         self.0.state.borrow_mut().extension_path = Some(path.clone());
-        if let Some(parent) = self.0.host.data_directory().parent() {
-            let old_copies = parent.join("Built-in Extensions");
-            std::thread::spawn(move || {
-                if old_copies.exists() {
-                    let _ = std::fs::remove_dir_all(old_copies);
-                }
-            });
-        }
         path
     }
 
