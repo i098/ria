@@ -166,13 +166,6 @@ pub struct CallTable<C: 'static> {
 }
 
 impl<C: 'static> CallTable<C> {
-    /// The name that the module has on the JavaScript side: `Ardia` and the domain with a capital first letter.
-    pub fn module_name(&self) -> String {
-        let mut letters = self.domain.chars();
-        let first = letters.next().map(|c| c.to_uppercase().to_string());
-        format!("Ardia{}{}", first.unwrap_or_default(), letters.as_str())
-    }
-
     /// Runs the call `name`. `reply` settles exactly once, also when the arguments are wrong.
     pub fn run(&self, ctx: &C, name: &str, profile: &str, args: &str, reply: CallReply) {
         let Some((_, handler)) = self.handlers.iter().find(|(n, _)| *n == name) else {
@@ -262,18 +255,6 @@ mod tests {
         assert_eq!(
             run(HANDLERS, "nope", "{}"),
             Err(Rejection::new("ERR_UNKNOWN_CALL", "demo.nope isn't a call"))
-        );
-    }
-
-    #[test]
-    fn module_names_use_the_ardia_prefix() {
-        assert_eq!(
-            CallTable::<()> {
-                domain: "contentBlocker",
-                handlers: &[]
-            }
-            .module_name(),
-            "ArdiaContentBlocker"
         );
     }
 }

@@ -154,7 +154,6 @@ mod tests {
     #[test]
     fn calls_map_to_the_blocker() {
         let (b, _, _, _resources) = setup();
-        assert_eq!(CALLS.module_name(), "ArdiaContentBlocker");
         assert_eq!(
             run(&b, "devFailNextMessage", "", "{}"),
             Some(Ok("null".into()))
