@@ -201,6 +201,10 @@ mod mac {
             "--profile-directory=Default".into(),
             "--no-first-run".into(),
             "--disable-stack-profiler".into(),
+            // The engine runs BEST_EFFORT tasks (the bookmark HTML writer posts one) only after startup completes. Without a
+            // visible tab that needs this feature: it ends the wait after 5 s. Same value as `ArdiaHost+Launch.mm:474` and
+            // `ria-host-mac` `launch/startup.rs`.
+            "--enable-features=ImprovedStartupBestEffortDelay:StartupDelayStopOnLoadingTimedOut/true".into(),
         ];
         let c_args: Vec<CString> = argv
             .iter()
