@@ -34,8 +34,8 @@ mod mac {
     use block2::{DynBlock, RcBlock};
     use objc2::runtime::{AnyObject, Bool, Sel};
     use objc2::{
-        ClassType, DefinedClass, MainThreadMarker, MainThreadOnly, Message, define_class, ffi,
-        msg_send, rc::Retained, sel,
+        ClassType, DefinedClass, MainThreadMarker, MainThreadOnly, Message, class, define_class,
+        ffi, msg_send, rc::Retained, sel,
     };
     use objc2_app_kit::{
         NSApplication, NSBackingStoreType, NSColor, NSEvent, NSEventModifierFlags, NSEventType,
@@ -1885,7 +1885,25 @@ mod mac {
             "The origin text must change the rendered pixels"
         );
         println!("live_windows: popup rendered its 28-point origin strip with {origin}");
+        // Adopting the tab out of the popup fires `window:didRemoveTab:`, which must clear the host pin record.
+        let profile = tab.profile().expect("popup tab has a profile");
+        popups.strips().borrow_mut().set_pinned(&tab, true);
+        // SAFETY: The engine registered this class and this call is on the main thread.
+        let destination = unsafe {
+            Window::init_with_content_rect(
+                msg_send![class!(ArdiaCoreWindow), alloc],
+                NSRect::new(NSPoint::new(-3000.0, -3000.0), NSSize::new(420.0, 300.0)),
+            )
+        };
+        destination.set_internal(true);
+        destination.prepare_profile(&profile);
+        destination.adopt_tab(&tab);
+        assert!(
+            !popups.strips().borrow().is_pinned(&tab),
+            "The popup removal handler must clear the host pin record"
+        );
         popup.close();
+        destination.close();
         check_popup_closed(popups, Instant::now() + Duration::from_secs(5));
     }
 
