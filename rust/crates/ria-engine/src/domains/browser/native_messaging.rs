@@ -152,6 +152,14 @@ fn mark_owned(file: &File) -> std::io::Result<()> {
     Ok(fsetxattr(file, MANAGED_ATTR, &[], XattrFlags::empty())?)
 }
 
+fn is_unsupported(error: &std::io::Error) -> bool {
+    error.kind() == ErrorKind::Unsupported
+        || matches!(
+            rustix::io::Errno::from_io_error(error),
+            Some(rustix::io::Errno::NOTSUP | rustix::io::Errno::NOSYS)
+        )
+}
+
 fn is_owned(file: &File) -> bool {
     fgetxattr_query(file, MANAGED_ATTR) == Ok(0)
 }
@@ -170,7 +178,8 @@ fn write_manifest(
         file.write_all(data)?;
         match mark(&file) {
             Ok(()) => {}
-            Err(error) if !replace && error.kind() == ErrorKind::Unsupported => {}
+            // std maps ENOTSUP to `Uncategorized` on macOS, so test the errno, not `ErrorKind`.
+            Err(error) if !replace && is_unsupported(&error) => {}
             Err(error) => return Err(error),
         }
         if replace {
