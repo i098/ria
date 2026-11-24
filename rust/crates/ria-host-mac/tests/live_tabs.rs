@@ -292,7 +292,9 @@ mod mac {
         let observer: Retained<NavigationObserver> = unsafe { msg_send![super(observer), init] };
         unsafe { tab.set_delegate(Some(&observer)) };
         window.activate_tab(&tab);
-        window.host_view().addSubview(&tab.view());
+        window
+            .host_view()
+            .addSubview(&tab.view().expect("open tab has a view"));
         let deadline = Instant::now() + Duration::from_secs(30);
         tab.load_url(&NSString::from_str(FIXTURE_URL), true);
         let profile = profile.retain();
@@ -382,7 +384,7 @@ mod mac {
             |step| ready |= matches!(step, AttachStep::Ready),
         );
         let was_registered = registry.borrow().app_tab_id(&tab) == Some("tab-services");
-        let page = tab.view();
+        let page = tab.view().expect("open tab has a view");
         page.setHidden(false);
         page.setAlphaValue(1.0);
         let records_visible = recording_shows_page(&host, Some(&tab));
@@ -439,7 +441,7 @@ mod mac {
         profile: Retained<Profile>,
     ) {
         let mtm = MainThreadMarker::new().unwrap();
-        let view = tab.view();
+        let view = tab.view().expect("open tab has a view");
         let mut registry = TabRegistry::default();
         registry.set_view(&tab, Some((&view, "fixture".into())));
         let mut pass = registry
@@ -469,7 +471,7 @@ mod mac {
             return shutdown(&window, &tab, false);
         };
         pass &= parking.parked_tab("fixture").is_none();
-        let restored_view = restored.view();
+        let restored_view = restored.view().expect("restored tab has a view");
         pass &= std::ptr::eq(&*restored, &*tab) && std::ptr::eq(&*restored_view, &*view);
         host.addSubview(&restored_view);
         pass &= restored_view

@@ -121,7 +121,7 @@ pub fn take_discarded_offer(
     let tab = registry.offered(id).filter(|tab| {
         !tab.closed() && registry.view_for_tab(tab).is_none() && parking.link_mark(tab).is_none()
     })?;
-    let page = tab.view();
+    let page = tab.view()?;
     for host in hosts {
         let mut reveal = host.reveal.borrow_mut();
         if reveal
@@ -283,7 +283,7 @@ pub fn revealable_over<'a>(
     }
     let tab = page.tab?;
     let window = page.host.window()?;
-    if !mounted(&tab.view(), page.host) {
+    if !tab.view().is_some_and(|view| mounted(&view, page.host)) {
         return None;
     }
     let mut shown = None;
@@ -465,8 +465,9 @@ impl Reveal {
         {
             return false;
         }
-        let mine = shown.view();
-        let page = offered.view();
+        let (Some(mine), Some(page)) = (shown.view(), offered.view()) else {
+            return false;
+        };
         if !mounted(&mine, host) || mine.isHidden() || superview(&page).is_some() {
             return false;
         }

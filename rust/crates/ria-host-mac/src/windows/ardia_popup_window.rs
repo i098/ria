@@ -545,7 +545,10 @@ impl Popup {
         // SAFETY: The popup owns the delegate, which implements the used tab selectors.
         unsafe { tab.set_delegate(Some(&self.delegate)) };
         let host = self.core.host_view();
-        let page = tab.view();
+        let Some(page) = tab.view() else {
+            self.core.close();
+            return;
+        };
         page.removeFromSuperview();
         let size = host.bounds().size;
         let height = (size.height - STRIP_HEIGHT).max(0.);

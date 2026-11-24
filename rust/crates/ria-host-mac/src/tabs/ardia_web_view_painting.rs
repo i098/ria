@@ -87,7 +87,7 @@ pub fn layout_page(
         view.setFrame(bounds);
     }
     let Some(tab) = tab else { return };
-    let page = tab.view();
+    let Some(page) = tab.view() else { return };
     let empty = |rect: NSRect| rect.size.width <= 0.0 || rect.size.height <= 0.0;
     if !attached(&page) || (empty(bounds) && !empty(page.frame()) && !paints) {
         return;
@@ -163,7 +163,9 @@ impl FrameHold {
 
     pub fn frame_changed(&self, tab: &Tab) -> bool {
         self.awaiting.as_ref().is_some_and(|(_, mark)| {
-            render_widget_in(&tab.view()).is_none_or(|widget| frame_mark(&widget) != *mark)
+            tab.view()
+                .and_then(|view| render_widget_in(&view))
+                .is_none_or(|widget| frame_mark(&widget) != *mark)
         })
     }
 

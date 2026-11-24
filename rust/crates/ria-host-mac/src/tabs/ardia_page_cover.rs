@@ -82,7 +82,7 @@ impl PageCover {
         may_attach: impl Fn() -> bool + 'static,
         done: impl FnOnce(Option<Retained<Self>>) + 'static,
     ) {
-        let Some(page) = super::tab_view(tab) else {
+        let Some(page) = tab.view() else {
             done(None);
             return;
         };
@@ -124,7 +124,7 @@ impl PageCover {
                             return None;
                         }
                         let (picture, tab, window) = (image?, tab.load()?, window.load()?);
-                        let page = super::tab_view(&tab)?;
+                        let page = tab.view()?;
                         if !page
                             .window()
                             .is_some_and(|current| std::ptr::eq(&*current, &*window))
@@ -194,7 +194,7 @@ impl PageCover {
         else {
             return;
         };
-        if super::tab_view(&tab).is_none() {
+        if tab.view().is_none() {
             return;
         }
         let weak = Weak::new(self);
@@ -205,7 +205,7 @@ impl PageCover {
             move |_, _| {
                 test_tab
                     .load()
-                    .and_then(|tab| super::tab_view(&tab))
+                    .and_then(|tab| tab.view())
                     .is_some_and(|view| view.bounds().size != before)
             },
             move || {
@@ -218,12 +218,13 @@ impl PageCover {
                 let Some(tab) = cover.ivars().tab.load() else {
                     return;
                 };
-                let Some(now) = super::tab_view(&tab).map(|view| view.bounds().size) else {
+                let Some(now) = tab.view().map(|view| view.bounds().size) else {
                     return;
                 };
                 if now == before {
                     return;
                 }
+                let owner = Weak::new(&*tab);
                 tab.copy_picture(
                     0.25,
                     &RcBlock::new(move |image| {
@@ -231,10 +232,12 @@ impl PageCover {
                             return;
                         };
                         let weak = weak.clone();
+                        let owner = owner.clone();
                         main_queue::post(Box::new(move || {
                             if let Some(cover) = weak
                                 .load()
                                 .filter(|cover| super::superview(cover).is_some())
+                                .filter(|_| owner.load().is_some_and(|tab| tab.view().is_some()))
                             {
                                 *cover.ivars().picture.borrow_mut() = image;
                                 cover.ivars().pictured.set(now);

@@ -74,7 +74,7 @@ impl StandIn {
         successor: Successor<'_>,
         now: Instant,
     ) -> Option<bool> {
-        let page = tab.view();
+        let page = tab.view()?;
         if self.loan.is_some()
             || standalone_or_devtools
             || !mounted(&page, lender)
@@ -155,7 +155,9 @@ impl StandIn {
     }
 
     pub fn reclaim(&mut self, lender: &NSView, tab: &Tab) -> bool {
-        let page = tab.view();
+        let Some(page) = tab.view() else {
+            return false;
+        };
         let Some(window) = lender.window() else {
             return false;
         };

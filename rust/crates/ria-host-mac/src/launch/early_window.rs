@@ -75,7 +75,9 @@ impl BrowserWindow {
         unsafe { tab.set_delegate(Some(&delegate)) };
         core.activate_tab(&tab);
         let page = tab.view();
-        page.removeFromSuperview();
+        if let Some(page) = &page {
+            page.removeFromSuperview();
+        }
         let bounds = host.bounds();
         let (parent, page_bounds) = layout
             .as_ref()
@@ -109,11 +111,13 @@ impl BrowserWindow {
                 ))
             })
             .unwrap_or((host.clone(), bounds));
-        page.setFrame(page_bounds);
-        page.setAutoresizingMask(RESIZE);
-        page.setHidden(false);
-        tab.note_in_shown_slot();
-        parent.addSubview(&page);
+        if let Some(page) = &page {
+            page.setFrame(page_bounds);
+            page.setAutoresizingMask(RESIZE);
+            page.setHidden(false);
+            tab.note_in_shown_slot();
+            parent.addSubview(page);
+        }
         if tab.loading()
             && let Some(layout) = &layout
             && let Some([width, height]) = layout.picture_size

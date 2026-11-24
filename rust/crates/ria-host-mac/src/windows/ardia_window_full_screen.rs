@@ -31,7 +31,6 @@ use crate::launch::launch_config::LaunchConfig;
 use crate::tabs::ardia_page_cover::PageCover;
 use crate::tabs::ardia_page_draw_wait::after_page_draw;
 use crate::tabs::ardia_tab_registry::TabRegistry;
-use crate::tabs::tab_view;
 
 type WindowInfo = NSDictionary<NSString, AnyObject>;
 
@@ -288,7 +287,7 @@ impl PageState {
 
 fn uncover(covers: Vec<Retained<PageCover>>, after_draw: bool) {
     for cover in covers {
-        if after_draw && let Some(tab) = cover.owner().filter(|tab| tab_view(tab).is_some()) {
+        if after_draw && let Some(tab) = cover.owner().filter(|tab| tab.view().is_some()) {
             after_page_draw(
                 &tab,
                 |_, _| true,
@@ -507,7 +506,7 @@ impl FullScreen {
                 .tab
                 .as_ref()
                 .and_then(Weak::load)
-                .filter(|tab| tab_view(tab).is_some());
+                .filter(|tab| tab.view().is_some());
             let entering = tab.is_some() && !full && !page.entered;
             let exiting = tab.is_none() && full && page.entered;
             if !entering && !exiting {
@@ -565,12 +564,12 @@ impl FullScreen {
         }
         let mut tabs: Vec<_> = tab
             .and_then(|tab| tab.load())
-            .filter(|tab| tab_view(tab).is_some())
+            .filter(|tab| tab.view().is_some())
             .into_iter()
             .collect();
         if !entering && let Some(profile) = core.active_profile() {
             for other in core.tabs_for_profile(&profile).iter() {
-                let Some(view) = tab_view(&other) else {
+                let Some(view) = other.view() else {
                     continue;
                 };
                 if !tabs.iter().any(|tab| std::ptr::eq(&**tab, &*other))
@@ -648,7 +647,7 @@ impl FullScreen {
                     .tab
                     .as_ref()
                     .and_then(Weak::load)
-                    .is_some_and(|tab| tab_view(&tab).is_some())
+                    .is_some_and(|tab| tab.view().is_some())
                     == entering;
             if toggle {
                 page.entered = entering;
@@ -720,7 +719,7 @@ impl FullScreen {
                 page.ours = page.asked == if entering { 1 } else { -1 };
                 page.asked = 0;
                 for cover in &page.covers {
-                    if cover.owner().is_some_and(|tab| tab_view(&tab).is_some()) {
+                    if cover.owner().is_some_and(|tab| tab.view().is_some()) {
                         cover.repicture();
                     }
                 }
@@ -756,7 +755,7 @@ impl FullScreen {
                     } else {
                         None
                     };
-                    if let Some(tab) = exit_page.filter(|tab| tab_view(tab).is_some()) {
+                    if let Some(tab) = exit_page.filter(|tab| tab.view().is_some()) {
                         tab.exit_fullscreen();
                     } else {
                         fullscreen.sync_page();
