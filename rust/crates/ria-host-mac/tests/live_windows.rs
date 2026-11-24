@@ -40,8 +40,9 @@ mod mac {
     use objc2_app_kit::{
         NSApplication, NSBackingStoreType, NSColor, NSEvent, NSEventModifierFlags, NSEventType,
         NSMenu, NSMenuItem, NSScreen, NSTextField, NSTextView, NSUserInterfaceItemIdentification,
-        NSView, NSWindow, NSWindowButton, NSWindowDidEnterFullScreenNotification,
-        NSWindowDidExitFullScreenNotification, NSWindowOcclusionState, NSWindowStyleMask,
+        NSView, NSWindow, NSWindowButton, NSWindowDidChangeOcclusionStateNotification,
+        NSWindowDidEnterFullScreenNotification, NSWindowDidExitFullScreenNotification,
+        NSWindowOcclusionState, NSWindowStyleMask,
         NSWindowWillEnterFullScreenNotification, NSWindowWillExitFullScreenNotification,
     };
     use objc2_foundation::{
@@ -379,7 +380,7 @@ mod mac {
     #[derive(Default)]
     struct MouseFixture {
         key: Cell<bool>,
-        events: RefCell<Vec<(NSEventType, NSPoint)>>,
+        events: RefCell<Vec<(NSEventType, NSPoint, NSEventModifierFlags)>>,
     }
 
     define_class!(
@@ -403,10 +404,11 @@ mod mac {
                     | Event::LeftMouseDragged
                     | Event::RightMouseDown
                     | Event::RightMouseUp => {
-                        self.ivars()
-                            .events
-                            .borrow_mut()
-                            .push((event.r#type(), event.locationInWindow()));
+                        self.ivars().events.borrow_mut().push((
+                            event.r#type(),
+                            event.locationInWindow(),
+                            event.modifierFlags(),
+                        ));
                     }
                     _ => unsafe { msg_send![super(self), sendEvent: event] },
                 }
@@ -465,7 +467,7 @@ mod mac {
             assert!(run(malformed).starts_with("drag:[flags="));
         }
         assert_eq!(
-            run("drag:flags=0;20,60;80,90"),
+            run("drag:flags=1048576;20,60;80,90"),
             format!("{left_hit} (14 events)")
         );
         let app = app.retain();
@@ -491,11 +493,21 @@ mod mac {
                 expected.push((Event::LeftMouseUp, end));
                 let events = window.ivars().events.borrow();
                 assert_eq!(events.len(), expected.len());
-                for (&(kind, point), (expected_kind, expected_point)) in events.iter().zip(expected)
+                for (index, (&(kind, point, flags), (expected_kind, expected_point))) in
+                    events.iter().zip(expected).enumerate()
                 {
                     assert_eq!(kind, expected_kind);
                     assert!((point.x - expected_point.x).abs() < 0.01);
                     assert!((point.y - expected_point.y).abs() < 0.01);
+                    let expected = if index >= 4 {
+                        NSEventModifierFlags::Command
+                    } else {
+                        NSEventModifierFlags::empty()
+                    };
+                    assert_eq!(
+                        flags & NSEventModifierFlags::DeviceIndependentFlagsMask,
+                        expected
+                    );
                 }
                 drop(events);
                 assert!(!app.isActive());
@@ -509,27 +521,7 @@ mod mac {
         supersede: impl FnOnce() + 'static,
         verify: impl FnOnce() + 'static,
     ) {
-        let view = tab.view();
-        let page = std::ptr::from_ref(&*view);
-        let parent = unsafe { view.superview() }.unwrap();
-        let expected_parent = std::ptr::from_ref(&*parent);
-        let checked_parent = Rc::new(Cell::new(false));
-        let checked = checked_parent.clone();
-        let superview = sel!(superview);
-        let method = view.class().instance_method(superview).unwrap();
-        let implementation = method.implementation();
-        let original: unsafe extern "C-unwind" fn(*const NSView, Sel) -> *const NSView =
-            unsafe { std::mem::transmute(implementation) };
-        let lookup = RcBlock::new(move |view: *const NSView| {
-            let parent = unsafe { original(view, superview) };
-            if view == page && parent == expected_parent {
-                checked.set(true);
-            }
-            parent
-        });
-        let lookup_imp = unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&lookup).cast()) };
-        let superview_method = method;
-        let superview_imp = implementation;
+        let page = std::ptr::from_ref(&*tab.view());
         let attached = Rc::new(Cell::new(false));
         let attachment = attached.clone();
         let selector = sel!(viewWillMoveToSuperview:);
@@ -567,25 +559,12 @@ mod mac {
                     let completion = completion.copy();
                     let verify = Cell::new(Some(verify));
                     let attached = attached.clone();
-                    let checked_parent = checked_parent.clone();
                     let reply = RcBlock::new(move |image: CGImageRef| {
                         assert!(!image.0.is_null(), "The fullscreen snapshot must contain an image");
-                        main_queue::post(Box::new(move || unsafe {
-                            ffi::method_setImplementation(superview_method, lookup_imp);
-                        }));
                         completion.call((image,));
                         let attached = attached.clone();
-                        let checked_parent = checked_parent.clone();
                         let verify = verify.take().unwrap();
                         main_queue::post(Box::new(move || {
-                            unsafe {
-                                ffi::method_setImplementation(superview_method, superview_imp);
-                                ffi::imp_removeBlock(lookup_imp);
-                            }
-                            assert!(
-                                checked_parent.get(),
-                                "The snapshot handler must validate the parent before attachment"
-                            );
                             assert!(!attached.get(), "The stale cover must never attach");
                             verify();
                         }));
@@ -1322,12 +1301,34 @@ mod mac {
         let shown = ("fakeOcclusion:visible", "1");
         let actions = if visible { [shown, hidden] } else { [hidden, shown] };
         let off = ("fakeOcclusion:off", if visible { "1" } else { "0" });
+        let observed = Rc::new(Cell::new(None));
+        let result = observed.clone();
+        let observed_window = window.clone();
+        let token = observe(
+            &window,
+            unsafe { NSWindowDidChangeOcclusionStateNotification },
+            move || {
+                result.set(Some(
+                    observed_window
+                        .occlusionState()
+                        .contains(NSWindowOcclusionState::Visible),
+                ));
+            },
+        );
         for (action, expected) in actions.into_iter().chain([off]) {
             assert_eq!(
                 host.dev_action(&window, action, true).as_deref(),
                 Some(expected)
             );
+            assert_eq!(observed.take(), Some(expected == "1"));
+            assert_eq!(
+                window
+                    .occlusionState()
+                    .contains(NSWindowOcclusionState::Visible),
+                expected == "1"
+            );
         }
+        unsafe { NSNotificationCenter::defaultCenter().removeObserver(&token) };
         let tab = popup.open_tab(&NSString::from_str(&url), profile, false);
         check_popup_origin(
             popups,

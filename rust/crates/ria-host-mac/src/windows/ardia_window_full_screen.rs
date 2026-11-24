@@ -2,14 +2,15 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-use std::cell::{Cell, LazyCell, RefCell};
+use std::cell::{Cell, OnceCell, RefCell};
 use std::rc::Rc;
+use std::sync::Once;
 use std::time::Duration;
 
 use block2::RcBlock;
-use objc2::MainThreadMarker;
+use objc2::{ClassType, MainThreadMarker, ffi, sel};
 use objc2::rc::{Retained, Weak};
-use objc2::runtime::AnyObject;
+use objc2::runtime::{AnyObject, Sel};
 use objc2_app_kit::{
     NSApplication, NSApplicationDidBecomeActiveNotification,
     NSApplicationDidResignActiveNotification, NSScreen, NSView, NSWindow,
@@ -35,8 +36,8 @@ type WindowInfo = NSDictionary<NSString, AnyObject>;
 thread_local! {
     static ACTED_TRANSITION: Cell<f64> = const { Cell::new(0.) };
     pub(super) static ACTED_OCCLUSION_GAP: Cell<Option<f64>> = const { Cell::new(None) };
-    static ACTED_OCCLUSION: LazyCell<Retained<NSMapTable<NSWindow, NSNumber>>> =
-        LazyCell::new(NSMapTable::weakToStrongObjectsMapTable);
+    static ACTED_OCCLUSION: OnceCell<Retained<NSMapTable<NSWindow, NSNumber>>> =
+        const { OnceCell::new() };
 }
 
 pub(crate) fn configure_acted_transition(config: &LaunchConfig) {
@@ -167,19 +168,52 @@ fn window_is_full_screen(core: &Window, window: &NSWindow) -> bool {
 }
 
 fn acted_occlusion(window: &NSWindow) -> Option<bool> {
-    ACTED_OCCLUSION.with(|overrides| {
-        overrides
-            .objectForKey(Some(window))
-            .map(|value| value.boolValue())
-    })
+    ACTED_OCCLUSION
+        .try_with(|overrides| {
+            overrides
+                .get()?
+                .objectForKey(Some(window))
+                .map(|value| value.boolValue())
+        })
+        .ok()
+        .flatten()
 }
 
 fn set_acted_occlusion(window: &NSWindow, visible: Option<bool>) {
-    ACTED_OCCLUSION.with(|overrides| match visible {
-        Some(visible) => {
-            overrides.setObject_forKey(Some(&NSNumber::numberWithBool(visible)), Some(window));
+    static INSTALL: Once = Once::new();
+    INSTALL.call_once(|| {
+        let selector = sel!(occlusionState);
+        let method = NSWindow::class().instance_method(selector).unwrap();
+        let original: unsafe extern "C-unwind" fn(*const NSWindow, Sel) -> NSWindowOcclusionState =
+            unsafe { std::mem::transmute(method.implementation()) };
+        let getter = RcBlock::new(move |window: *const NSWindow| {
+            if MainThreadMarker::new().is_some()
+                && let Some(visible) = acted_occlusion(unsafe { &*window })
+            {
+                return if visible {
+                    NSWindowOcclusionState::Visible
+                } else {
+                    NSWindowOcclusionState::empty()
+                };
+            }
+            unsafe { original(window, selector) }
+        });
+        unsafe {
+            ffi::method_setImplementation(
+                method,
+                ffi::imp_implementationWithBlock(RcBlock::as_ptr(&getter).cast()),
+            );
         }
-        None => overrides.removeObjectForKey(Some(window)),
+    });
+    ACTED_OCCLUSION.with(|overrides| match visible {
+        Some(visible) => overrides
+            .get_or_init(NSMapTable::weakToStrongObjectsMapTable)
+            .setObject_forKey(Some(&NSNumber::numberWithBool(visible)), Some(window)),
+        None => {
+            if let Some(overrides) = overrides.get() {
+                overrides.removeObjectForKey(Some(window));
+            }
+        }
     });
     unsafe {
         NSNotificationCenter::defaultCenter().postNotificationName_object(
@@ -199,8 +233,9 @@ pub(super) fn act_occlusion(
         state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
     }
     set_acted_occlusion(window, visible);
-    acted_occlusion(window)
-        .unwrap_or_else(|| window.occlusionState().contains(NSWindowOcclusionState::Visible))
+    window
+        .occlusionState()
+        .contains(NSWindowOcclusionState::Visible)
 }
 
 #[derive(Default)]
