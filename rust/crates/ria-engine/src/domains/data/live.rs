@@ -520,7 +520,8 @@ mod mac {
                 let outstanding = *watch.outstanding.borrow();
                 let seen = history_seen.get();
                 let quiet = quiet_window.get();
-                if (outstanding != 0 || !seen || quiet.is_none()) && waited < Duration::from_secs(150)
+                if (outstanding != 0 || !seen || quiet.is_none())
+                    && waited < Duration::from_secs(150)
                 {
                     return false;
                 }
@@ -671,14 +672,19 @@ mod mac {
                                             let reply = serde_json::from_str::<Value>(&text)
                                                 .map_err(|error| error.to_string())
                                                 .and_then(|value| {
-                                                    decode_reply::<api::bookmarks::ExportHtml>(Ok(value))
-                                                        .map_err(|error| format!("{error:?}"))
+                                                    decode_reply::<api::bookmarks::ExportHtml>(Ok(
+                                                        value,
+                                                    ))
+                                                    .map_err(|error| format!("{error:?}"))
                                                 });
                                             let proven = reply.as_ref().is_ok_and(|path| {
-                                                path.as_deref().map(Path::new) == Some(exported.as_path())
-                                            }) && std::fs::read_to_string(&exported).is_ok_and(|html| {
-                                                html.contains(url) && html.contains("Ria live bookmark")
-                                            });
+                                                path.as_deref().map(Path::new)
+                                                    == Some(exported.as_path())
+                                            }) && std::fs::read_to_string(&exported)
+                                                .is_ok_and(|html| {
+                                                    html.contains(url)
+                                                        && html.contains("Ria live bookmark")
+                                                });
                                             (
                                                 proven,
                                                 "bookmarks.exportHtml settled ok with the file on disk".to_owned(),
