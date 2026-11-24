@@ -308,6 +308,22 @@ fn open_regular(dir: RawFd, name: &str) -> Option<(File, std::fs::Metadata)> {
     Some((file, info))
 }
 
+/// Checks a file that stays in its folder against the identity of the download.
+fn verify_in_place(dir: RawFd, name: &str, identity: &Identity, path: &str) -> Value {
+    let Some((mut file, info)) = open_regular(dir, name) else {
+        return failure("changed");
+    };
+    if info.nlink() != 1 {
+        return failure("linked");
+    }
+    if info.size() as i64 != identity.size
+        || sha256_of(&mut file).as_deref() != Some(identity.sha256.as_str())
+    {
+        return failure("changed");
+    }
+    json!({"ok": true, "path": path})
+}
+
 fn make_staging(source: RawFd) -> Option<String> {
     for _ in 0..MAX_STAGING_TRIES {
         let random = std::collections::hash_map::RandomState::new()
@@ -624,18 +640,7 @@ impl DownloadMover {
         if source_info.dev() == destination_info.dev()
             && source_info.ino() == destination_info.ino()
         {
-            let Some((mut file, info)) = open_regular(source.as_raw_fd(), source_name) else {
-                return failure("changed");
-            };
-            if info.nlink() != 1 {
-                return failure("linked");
-            }
-            if info.size() as i64 != identity.size
-                || sha256_of(&mut file).as_deref() != Some(identity.sha256.as_str())
-            {
-                return failure("changed");
-            }
-            return json!({"ok": true, "path": path});
+            return verify_in_place(source.as_raw_fd(), source_name, identity, path);
         }
         if source_info.dev() != destination_info.dev() {
             return failure("crossesVolumes");
