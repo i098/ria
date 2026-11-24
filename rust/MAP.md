@@ -279,7 +279,7 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/AutofillModule.*` | Swift | 36 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/BookmarksModule.*` | Swift | 37 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/ChromeTabCyclingPref.*` | Swift | 12 | native | `rust/crates/ria-engine/src/domains/browser/tab_cycling.rs` | hand | partial | 3.4 | port |
-| mac | `packages/ardiacore/ios/ChromiumTabView.*` | Swift | 19 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
+| mac | `packages/ardiacore/ios/ChromiumTabView.*` | Swift | 19 | native | [`chromium_tab_view.rs`](crates/ria-host-mac/src/tabs/chromium_tab_view.rs) (`new` line 20, `Deref` line 31); `makePage` needs `ArdiaWebView`, which is not ported | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ContentBlockerModule.*` | Swift | 57 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/DownloadsModule.*` | Swift | 32 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
 | mac | `packages/ardiacore/ios/EngineCall.*` | Swift | 137 | native | `rust/crates/ria-engine-sys/`, `rust/crates/ria-engine/Cargo.toml`, `rust/crates/ria-engine/src/lib.rs`, `rust/crates/ria-engine/src/call.rs` | hand | todo | 3.1 | port |
@@ -291,11 +291,11 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/MediaModule.*` | Swift | 63 | native | `rust/crates/ria-engine/src/domains/browser/media.rs` | hand | partial | 3.4 | port |
 | mac | `packages/ardiacore/ios/NSImage.*` | Swift | 27 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/Origins.*` | Swift | 23 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
-| mac | `packages/ardiacore/ios/PageEngine.*` | Swift | 168 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
-| mac | `packages/ardiacore/ios/PageEvents.*` | Swift | 10 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
-| mac | `packages/ardiacore/ios/PageTab.*` | Swift | 72 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
-| mac | `packages/ardiacore/ios/PageTabHost.*` | Swift | 43 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
-| mac | `packages/ardiacore/ios/PageViewDefinition.*` | Swift | 129 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
+| mac | `packages/ardiacore/ios/PageEngine.*` | Swift | 168 | native | [`page_engine.rs`](crates/ria-host-mac/src/tabs/page_engine.rs) (`PageEngine` line 22, `LiveViews` line 28, `ChromiumPageEngine` lines 44-143, `owner_of` line 146); `WebKitPageEngine` is slice 5.1; the data calls are in `ria-engine/src/domains/data/page_engines.rs` | hand | partial | 3.8 | port |
+| mac | `packages/ardiacore/ios/PageEvents.*` | Swift | 10 | native | [`page_events.rs`](crates/ria-host-mac/src/tabs/page_events.rs) (`CHANNEL` line 13, `send` line 16) | hand | implemented | 3.8 | port |
+| mac | `packages/ardiacore/ios/PageTab.*` | Swift | 72 | native | [`page_tab.rs`](crates/ria-host-mac/src/tabs/page_tab.rs) (trait `PageTab` lines 20-94) | hand | implemented | 3.8 | port |
+| mac | `packages/ardiacore/ios/PageTabHost.*` | Swift | 43 | native | [`page_tab_host.rs`](crates/ria-host-mac/src/tabs/page_tab_host.rs) (`new` 33, `set_page_events` 50, `set_frame_size` 55, `props_did_update` 61, `send` 72, `Drop` 86) | hand | implemented | 3.8 | port |
+| mac | `packages/ardiacore/ios/PageViewDefinition.*` | Swift | 129 | native | [`page_view_definition.rs`](crates/ria-host-mac/src/tabs/page_view_definition.rs) (`set_prop` 164, `view_did_update_props` 201, `call` 206) | hand | implemented | 3.8 | port |
 | mac | `packages/ardiacore/ios/Pager.*` | Swift | 427 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/PagerConfig.*` | Swift | 10 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/PasswordsModule.*` | Swift | 79 | native | `rust/crates/ria-engine/src/domains/data/` | hand | implemented | 3.3 | port |
