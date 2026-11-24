@@ -319,6 +319,7 @@ mod mac {
         services.watch_download_events();
         services_calls(&live, &services);
         window_and_tab(&live, &profile);
+        download_move(&live, &services, &hooks, &profile);
 
         let watch = live.clone();
         poll(
@@ -726,6 +727,95 @@ mod mac {
                 live.outstanding.set(live.outstanding.get() - 1);
             }
         });
+    }
+
+    /// A real download: the engine downloads a `.bin` file from a `file:` URL, `Services` records the finished
+    /// download, and `move_completed_download` moves it into an approved folder under the home directory.
+    fn download_move(
+        live: &Rc<Live>,
+        services: &Services,
+        hooks: &Rc<TestHooks>,
+        profile: &Profile,
+    ) {
+        let pid = std::process::id();
+        let source = std::env::temp_dir().join(format!("ria-live-dl-{pid}/payload-{pid}.bin"));
+        std::fs::create_dir_all(source.parent().unwrap()).unwrap();
+        let content = format!("ria live download {pid}\n");
+        std::fs::write(&source, &content).unwrap();
+        let home = PathBuf::from(std::env::var_os("HOME").expect("HOME"));
+        let folder = format!("~/Downloads/ria-live-{pid}");
+        let target = home.join(format!("Downloads/ria-live-{pid}"));
+        services.set_approved_download_folders(std::slice::from_ref(&folder));
+
+        let rect = NSRect::new(
+            objc2_foundation::NSPoint::new(-3000.0, -3000.0),
+            objc2_foundation::NSSize::new(400.0, 300.0),
+        );
+        let window: Retained<Window> = unsafe {
+            Window::init_with_content_rect(msg_send![class!(ArdiaCoreWindow), alloc], rect)
+        };
+        window.set_internal(true);
+        window.prepare_profile(profile);
+        let url = format!("file://{}", source.display());
+        let tab = window.open_tab(&NSString::from_str(&url), profile, false);
+
+        live.outstanding.set(live.outstanding.get() + 1);
+        let (live, services, hooks) = (live.clone(), services.clone(), hooks.clone());
+        let moved: Rc<RefCell<Option<Result<Value, String>>>> = Rc::default();
+        let started = Cell::new(false);
+        poll(
+            Rc::new(move |waited| {
+                let emitted = hooks.emitted.borrow().clone();
+                let finished = emitted.iter().find(|(topic, d)| {
+                    topic == "downloads.changed"
+                        && d["state"] == "finished"
+                        && d["path"]
+                            .as_str()
+                            .is_some_and(|p| p.contains(&format!("payload-{pid}")))
+                });
+                if let Some((_, d)) = finished
+                    && !started.replace(true)
+                {
+                    let (path, moved) = (d["path"].as_str().unwrap().to_owned(), moved.clone());
+                    services.move_completed_download(
+                        &path,
+                        &folder,
+                        Box::new(move |result| *moved.borrow_mut() = Some(result)),
+                    );
+                }
+                let answer = moved.borrow().clone();
+                let timed_out = waited >= Duration::from_secs(40);
+                let Some(answer) = answer.or_else(|| timed_out.then(|| Err("timed out".into())))
+                else {
+                    return false;
+                };
+                let moved_path = answer
+                    .as_ref()
+                    .ok()
+                    .and_then(|r| r["path"].as_str())
+                    .unwrap_or("");
+                let placed = std::fs::read_to_string(moved_path).ok();
+                let announced = hooks.emitted.borrow().iter().any(|(topic, d)| {
+                    topic == "downloads.changed" && d["path"].as_str() == Some(moved_path)
+                });
+                record(
+                    &live,
+                    "a finished download moves into an approved folder and its event shows the new path",
+                    started.get()
+                        && moved_path.starts_with(&target.to_string_lossy().into_owned())
+                        && placed.as_deref() == Some(content.as_str())
+                        && announced,
+                    format!("{answer:?} started={}", started.get()),
+                );
+                tab.close();
+                window.close();
+                let _ = std::fs::remove_dir_all(&target);
+                let _ = std::fs::remove_dir_all(source.parent().unwrap());
+                live.outstanding.set(live.outstanding.get() - 1);
+                true
+            }),
+            Duration::ZERO,
+        );
     }
 
     /// Opens a window that is never shown, loads `about:blank` in a tab, and reads the tab.
