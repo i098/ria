@@ -198,6 +198,10 @@ impl BrowserWindow {
         &self._core
     }
 
+    pub fn tab(&self) -> &Retained<Tab> {
+        &self._tab
+    }
+
     /// Open `url` in a new foreground tab of this window.
     pub fn open_url(&self, url: &str) {
         if let Some(profile) = self._core.active_profile() {

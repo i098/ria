@@ -37,6 +37,7 @@ mod mac {
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
     use ria_host_mac::launch::launch_config::LaunchConfig;
     use ria_host_mac::launch::system_signals;
+    use ria_host_mac::launch::window_host::WindowHost;
     use serde_json::{Value, json};
 
     const TITLE: &str = "Ria proof page";
@@ -142,12 +143,16 @@ mod mac {
         assert!(out.contains("tabTitle Ria proof page"));
         assert!(out.contains("engineWillShutDown"));
         assert!(
+            out.contains("stripPinned"),
+            "a click on the Rune pin button did not pin the tab"
+        );
+        assert!(
             out.contains("downloadMoved ok"),
             "the app's system-signals host did not move the download"
         );
         assert!(!has_crash_report(root), "a crash report exists");
         println!(
-            "launch live: engine exit 0; one window; one tab; fixture title; download moved by the app's system-signals host; shutdown; no crash report"
+            "launch live: engine exit 0; one window; one tab; fixture title; Rune pin click pins the tab; download moved by the app's system-signals host; shutdown; no crash report"
         );
     }
 
@@ -298,20 +303,45 @@ mod mac {
         }
     }
 
+    /// Click the Rune pin button through the window until the strip pins the launch tab, then run `done`.
+    /// The button is at x 202, y 62: the strip starts 40 below the top, its row pads 12, the tab is 140 wide, the gap is 8, the pin is 84 wide and 28 high.
+    fn click_pin(host: Rc<WindowHost>, pinned: Rc<Cell<bool>>, done: Rc<dyn Fn()>, tries: u32) {
+        let Some(window) = host.main() else { return };
+        let profile = window.active_profile().expect("window profile");
+        let tab = window.tabs_for_profile(&profile).objectAtIndex(0);
+        if host.strips().borrow().is_pinned(&tab) {
+            println!("stripPinned");
+            pinned.set(true);
+            return done();
+        }
+        if tries == 160 {
+            return println!("pin click never pinned the tab");
+        }
+        if tries % 4 == 0 {
+            host.chrome()
+                .dev_action(&window.window(), "click:202,62", true);
+        }
+        host_launch::after(Duration::from_millis(250), move || {
+            click_pin(host, pinned, done, tries + 1)
+        });
+    }
+
     pub fn child() -> ExitCode {
         let matched = Rc::new(Cell::new(false));
         let shutdown = Rc::new(Cell::new(false));
         let moving = Move::new();
+        let pinned = Rc::new(Cell::new(false));
         // Quit when both the fixture title and the download move are done.
         let quit_when_done: Rc<dyn Fn()> = {
-            let (matched, moving) = (matched.clone(), moving.clone());
+            let (matched, moving, pinned) = (matched.clone(), moving.clone(), pinned.clone());
             Rc::new(move || {
-                if matched.get() && moving.done.get() {
+                if matched.get() && moving.done.get() && pinned.get() {
                     host_launch::later(host_launch::quit);
                 }
             })
         };
         let check_title = matched.clone();
+        let check_pin = pinned.clone();
         let check_shutdown = shutdown.clone();
         let check_moving = moving.clone();
         let status = super::app_launch::start(Rc::new(move |event| match event {
@@ -324,6 +354,9 @@ mod mac {
                 println!("windowOpened windows={windows} tabs={tabs}");
                 let moving = check_moving.clone();
                 host_launch::later(move || moving.download());
+            }
+            LaunchEvent::WindowHostReady(host) => {
+                click_pin(host, pinned.clone(), quit_when_done.clone(), 0);
             }
             LaunchEvent::Emit { topic, data } => {
                 check_moving.emitted(&topic, &data, quit_when_done.clone());
@@ -339,7 +372,7 @@ mod mac {
             LaunchEvent::Error(error) => eprintln!("{error}"),
             _ => {}
         }));
-        if matched.get() && shutdown.get() && moving.done.get() {
+        if matched.get() && shutdown.get() && moving.done.get() && check_pin.get() {
             status
         } else {
             ExitCode::FAILURE
