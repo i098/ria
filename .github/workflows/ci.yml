@@ -71,3 +71,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: rust/tools/check-headers.sh
+
+  sentrux:
+    name: sentrux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install sentrux 0.5.7
+        run: |
+          curl -fsSL -o sentrux https://github.com/sentrux/sentrux/releases/download/v0.5.7/sentrux-linux-x86_64
+          echo "3237f80fe20d54aad4deefa8a143f0d60543bb5d2d6ad891eb42432f155725a6  sentrux" | sha256sum -c -
+          mkdir -p "$HOME/.local/bin"
+          install -m 0755 sentrux "$HOME/.local/bin/sentrux"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      # Compares with .sentrux/baseline.json; a DEGRADED verdict exits nonzero.
+      - run: sentrux gate .

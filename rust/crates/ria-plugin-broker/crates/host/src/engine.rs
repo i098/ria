@@ -237,7 +237,7 @@ pub fn random_fill(bytes: &mut [u8]) {
         if got > 0 {
             filled += got as usize;
         } else if got < 0 && std::io::Error::last_os_error().raw_os_error() != Some(libc::EINTR) {
-            crate::host::hard_exit(crate::exit::Exit::SandboxSetup, "getrandom failed, so the plugin host can't make random values");
+            crate::stderr::hard_exit(crate::exit::Exit::SandboxSetup, "getrandom failed, so the plugin host can't make random values");
         }
     }
 }

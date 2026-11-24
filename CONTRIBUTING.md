@@ -15,7 +15,7 @@ node rust/parity/compare.selftest.mjs
 
 ## CI and quality gates
 
-Each PR runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The checks are `fmt`, `clippy`, `test`, `parity` and `headers`. They use cargo, not blaze, because blaze is not on GitHub runners. Run the same checks locally:
+Each PR runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The checks are `fmt`, `clippy`, `test`, `parity`, `headers` and `sentrux`. All but `sentrux` use cargo, not blaze, because blaze is not on GitHub runners. Run them locally (for `sentrux`, see Local quality gates below):
 
 ```sh
 cargo fmt --manifest-path rust/Cargo.toml --check
@@ -55,14 +55,14 @@ It does not run the Mac checks or the jail escape tests.
 
 ### Local quality gates
 
-Two more gates run locally, not in CI:
+The `sentrux` check runs in CI (version 0.5.7, pinned). Run it and one more gate locally:
 
 ```sh
-sentrux gate .      # compares with the baseline in .sentrux/; a DEGRADED verdict blocks
+sentrux gate .      # compares with the baseline in .sentrux/; a DEGRADED verdict fails the CI job
 fallow audit        # advisory; fallow reads TypeScript/JavaScript only, so it covers little of this repository
 ```
 
-Save a new baseline with `sentrux gate --save .` only when the owner agrees.
+Save a new baseline with `sentrux gate --save .` only when the owner agrees, and record the reason and the before and after numbers in `rust/DECISIONS.md` (see ADR-Q1).
 
 Build and test Rust code with Blaze.
 Use Cargo for `fmt`, `clippy`, and [tests that Blaze cannot run](rust/tools/bang-tsv/README.md).

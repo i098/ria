@@ -1,10 +1,10 @@
 // Ported from ardia packages/plugin-broker/crates/host/src/governor.rs at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
-use crate::exit::Exit;
+use crate::exit::{Exit, TERMINATE};
 use std::cell::{Cell, RefCell};
 use std::collections::VecDeque;
-use std::sync::atomic::{AtomicBool, AtomicI32, AtomicU64, Ordering};
+use std::sync::atomic::{AtomicI32, AtomicU64, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 
@@ -31,7 +31,6 @@ impl Default for Limits {
     }
 }
 
-pub static TERMINATE: AtomicBool = AtomicBool::new(false);
 pub static WAKE_FD: AtomicI32 = AtomicI32::new(-1);
 
 pub fn thread_cpu_ns() -> u64 {
@@ -173,11 +172,11 @@ fn watchdog(watch: &Watch, turn_wall: Duration) -> ! {
         let now = watch.now_ms();
         let started = watch.turn_started_ms.load(Ordering::Relaxed);
         if started != 0 && now.saturating_sub(started) > turn_wall.as_millis() as u64 {
-            crate::host::hard_exit(Exit::TurnWatchdog, "a turn ran past its wall-clock limit, so the plugin stopped");
+            crate::stderr::hard_exit(Exit::TurnWatchdog, "a turn ran past its wall-clock limit, so the plugin stopped");
         }
         let stop = watch.stop_deadline_ms.load(Ordering::Relaxed);
         if stop != 0 && now > stop {
-            crate::host::hard_exit(Exit::ShutdownDeadline, "the plugin overstayed its stop grace, so it was ended");
+            crate::stderr::hard_exit(Exit::ShutdownDeadline, "the plugin overstayed its stop grace, so it was ended");
         }
     }
 }

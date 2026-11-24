@@ -70,5 +70,5 @@ fn main() {
             Exit::Usage
         }
     };
-    ardia_plugin_host::host::hard_exit(exit, "")
+    ardia_plugin_host::stderr::hard_exit(exit, "")
 }
