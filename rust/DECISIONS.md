@@ -162,3 +162,9 @@ Ardia means the original at `ardia/`, frozen at commit `551d3c13c`.
 - Context: `ArdiaContentBlocker.mm:46-48` (at `551d3c13c`) makes `StartPreparing` delete `Built-in Extensions` next to the data directory on a utility queue, even when the bundle lookup fails. No tracked Ria code creates that folder. Issue 68.
 - Decision: `content_blocker.rs` `extension_path` only finds the bundled extension and deletes nothing. The owner's order to resolve every open issue approves this deviation.
 - Consequences: an old `Built-in Extensions` folder stays on disk. Ardia keeps the fault.
+
+## ADR-V3: A released private session no longer serves its cached favicon (deviation from Ardia)
+
+- Context: `ArdiaFavicons.mm:90` (at `551d3c13c`) stores the image in the process-wide `Seen()` cache under `SeenKey(profile, url)`, and line 98 returns it before any live-profile check. `ArdiaHost.mm:143-155` (`releaseProfile:`) does not clear that cache. Issue 57.
+- Decision: `Favicons::fetch` in `favicons.rs` skips the `Seen()` cache read for a private session the app released (`released_private` in the profile registry). `data:` and download paths are unchanged. The owner's order to resolve every open issue approves this deviation.
+- Consequences: after release, a cached `favicons.fetch` for that session misses the cache. The cached image stays in memory until evicted, but nothing reads it. Ardia keeps the fault.

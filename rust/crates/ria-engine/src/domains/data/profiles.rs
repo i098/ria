@@ -224,6 +224,10 @@ impl ProfileRegistry {
         }
     }
 
+    pub fn is_private_released(&self, name: &str) -> bool {
+        self.0.state.borrow().released_private.contains(name)
+    }
+
     /// Runs `deletion` when the load of `name` finishes, before the load waiters (`DeletionsAfterLoad`).
     pub fn delete_after_load(&self, name: &str, deletion: impl FnOnce(Option<Profile>) + 'static) {
         self.0

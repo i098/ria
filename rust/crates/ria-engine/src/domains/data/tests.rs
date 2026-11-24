@@ -854,3 +854,45 @@ fn an_unknown_call_and_a_missing_argument_use_the_ardia_codes() {
     );
     let _ = Cell::new(0);
 }
+
+#[test]
+fn released_private_session_no_longer_serves_its_cached_favicon() {
+    let core = Rc::new(FakeCore::default());
+    let registry = ProfileRegistry::new(core.clone(), Rc::new(NoEvents));
+    let favicons = Rc::new(Favicons::new(registry.clone(), std::env::temp_dir()));
+    let session = "incognito1@work";
+    registry.with_profile(session, |_| {});
+    core.pending_private.take().unwrap()(
+        Some(Rc::new(FakeProfile {
+            directory: "Profile work".into(),
+            private: true,
+        })),
+        None,
+    );
+    let url = "https://private.example/favicon.ico";
+    let image = image::DynamicImage::ImageRgba8(image::RgbaImage::new(2, 2));
+    favicons.note_image(image, url, Some(session));
+    let answer = |favicons: &Rc<Favicons>| {
+        let out = Rc::new(RefCell::new(None));
+        let sink = out.clone();
+        favicons.fetch(url, session, None, move |v| *sink.borrow_mut() = Some(v));
+        out.take().expect("fetch answered")
+    };
+    assert!(answer(&favicons).is_some());
+    registry.mark_private_released(session);
+    assert!(answer(&favicons).is_none());
+}
+
+#[test]
+fn unloaded_private_session_still_serves_a_data_url_favicon() {
+    let core = Rc::new(FakeCore::default());
+    let registry = ProfileRegistry::new(core, Rc::new(NoEvents));
+    let favicons = Rc::new(Favicons::new(registry, std::env::temp_dir()));
+    let url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/iZk9HQAAAABJRU5ErkJggg==";
+    let out = Rc::new(RefCell::new(None));
+    let sink = out.clone();
+    favicons.fetch(url, "incognito1@work", None, move |v| {
+        *sink.borrow_mut() = Some(v)
+    });
+    assert!(out.take().expect("fetch answered").is_some());
+}
