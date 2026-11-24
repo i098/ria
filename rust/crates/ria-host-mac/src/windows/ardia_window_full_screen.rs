@@ -8,9 +8,9 @@ use std::sync::Once;
 use std::time::Duration;
 
 use block2::RcBlock;
-use objc2::{ClassType, MainThreadMarker, ffi, sel};
+use objc2::{ClassType, MainThreadMarker, ffi, msg_send, sel};
 use objc2::rc::{Retained, Weak};
-use objc2::runtime::{AnyObject, Sel};
+use objc2::runtime::{AnyClass, AnyObject, Sel};
 use objc2_app_kit::{
     NSApplication, NSApplicationDidBecomeActiveNotification,
     NSApplicationDidResignActiveNotification, NSScreen, NSView, NSWindow,
@@ -301,6 +301,14 @@ fn uncover(covers: Vec<Retained<PageCover>>, after_draw: bool) {
             cover.uncover(false);
         }
     }
+}
+
+fn flush_transactions() {
+    let Some(transaction) = AnyClass::get(c"CATransaction") else {
+        return;
+    };
+    // SAFETY: CATransaction responds to +flush on the main thread.
+    let _: () = unsafe { msg_send![transaction, flush] };
 }
 
 fn has_page_cover(view: Retained<NSView>) -> bool {
@@ -648,7 +656,26 @@ impl FullScreen {
         };
         uncover(old, false);
         if toggle {
+            flush_transactions();
             self.toggle();
+            let weak = Rc::downgrade(self);
+            main_queue::after(
+                Duration::from_millis(500),
+                Box::new(move || {
+                    let Some(fullscreen) = weak.upgrade() else {
+                        return;
+                    };
+                    let covers = {
+                        let mut state = fullscreen.state.borrow_mut();
+                        let page = &mut state.page;
+                        if page.transitioning || page.turn != turn {
+                            return;
+                        }
+                        std::mem::take(&mut page.covers)
+                    };
+                    uncover(covers, true);
+                }),
+            );
         } else {
             self.sync_page();
         }

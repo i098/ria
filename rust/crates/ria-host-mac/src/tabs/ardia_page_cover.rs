@@ -173,37 +173,6 @@ impl PageCover {
         );
     }
 
-    pub fn cover_tabs(
-        tabs: &[Retained<Tab>],
-        disabled: bool,
-        done: impl FnOnce(Vec<Retained<Self>>) + 'static,
-    ) {
-        if tabs.is_empty() {
-            done(Vec::new());
-            return;
-        }
-        let shared = Rc::new((
-            Cell::new(tabs.len()),
-            RefCell::new(Vec::new()),
-            Cell::new(Some(done)),
-        ));
-        for tab in tabs {
-            let shared = shared.clone();
-            Self::cover(tab, disabled, || true, move |cover| {
-                if let Some(cover) = cover {
-                    shared.1.borrow_mut().push(cover);
-                }
-                shared.0.set(shared.0.get() - 1);
-                if shared.0.get() == 0
-                    && let Some(done) = shared.2.take()
-                {
-                    let covers = std::mem::take(&mut *shared.1.borrow_mut());
-                    done(covers);
-                }
-            });
-        }
-    }
-
     fn display_picture(&self) {
         // SAFETY: A layer-backed NSView returns a CALayer; `contents` accepts a CGImage.
         unsafe {

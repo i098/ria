@@ -171,8 +171,9 @@ fn click(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
                 target.mouseUp(&up);
             }
         } else {
-            window.sendEvent(&down);
-            window.sendEvent(&up);
+            let app = NSApplication::sharedApplication(window.mtm());
+            app.postEvent_atStart(&down, false);
+            app.postEvent_atStart(&up, false);
         }
     }));
     reply
@@ -256,7 +257,7 @@ fn drag(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
             let app = app.clone();
             main_queue::after(
                 Duration::from_millis(delay),
-                Box::new(move || app.sendEvent(&event)),
+                Box::new(move || app.postEvent_atStart(&event, false)),
             );
         }
     };
