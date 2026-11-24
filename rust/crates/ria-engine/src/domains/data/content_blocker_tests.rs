@@ -114,7 +114,7 @@ impl BlockerHost for FakeHost {
         false
     }
     fn is_private_profile(&self, name: &str) -> bool {
-        name.starts_with("private")
+        crate::domains::data::profiles::is_private_session_id(name)
     }
     fn with_profile(&self, name: &str, done: Box<dyn FnOnce(Option<Profile>)>) {
         done(self.loaded_profile(name))
@@ -388,7 +388,7 @@ fn private_profiles_keep_hidden_elements_to_themselves() {
     let sink = got.clone();
     blocker.hide_elements(
         &["a.com##.x".into()],
-        "private-1",
+        "incognito1@",
         Box::new(move |e| *sink.borrow_mut() = Some(e)),
     );
     assert_eq!(
@@ -397,4 +397,24 @@ fn private_profiles_keep_hidden_elements_to_themselves() {
             "a private window keeps its hidden elements for the session".into()
         ))
     );
+}
+
+#[test]
+fn private_profiles_cannot_restore_regular_profile_elements() {
+    let (blocker, host, scripts, _resources) = setup();
+    let got = Rc::new(RefCell::new(None));
+    let sink = got.clone();
+    blocker.restore_elements(
+        &["a.com##.x".into()],
+        "incognito1@",
+        Box::new(move |e| *sink.borrow_mut() = Some(e)),
+    );
+    assert_eq!(
+        got.take(),
+        Some(Some(
+            "a private window keeps its hidden elements for the session".into()
+        ))
+    );
+    assert!(scripts.tabs.borrow().is_empty());
+    assert!(host.changes.borrow().is_empty());
 }
