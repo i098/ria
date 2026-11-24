@@ -44,7 +44,7 @@ pub struct Popups {
     mtm: MainThreadMarker,
     background: bool,
     windows: RefCell<Vec<Rc<Popup>>>,
-    strips: RefCell<TabStrips>,
+    strips: Rc<RefCell<TabStrips>>,
 }
 
 struct Permission {
@@ -197,17 +197,17 @@ struct Popup {
 }
 
 impl Popups {
-    pub fn new(mtm: MainThreadMarker, background: bool) -> Rc<Self> {
+    pub fn new(
+        mtm: MainThreadMarker,
+        background: bool,
+        strips: Rc<RefCell<TabStrips>>,
+    ) -> Rc<Self> {
         Rc::new(Self {
             mtm,
             background,
             windows: RefCell::new(Vec::new()),
-            strips: RefCell::default(),
+            strips,
         })
-    }
-
-    pub fn strips(&self) -> &RefCell<TabStrips> {
-        &self.strips
     }
 
     pub fn count(&self) -> usize {

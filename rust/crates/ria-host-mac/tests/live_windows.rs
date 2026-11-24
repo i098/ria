@@ -50,13 +50,15 @@ mod mac {
         NSRect, NSRunLoop, NSSize, NSString, NSUserDefaults, ns_string,
     };
     use ria_engine::call::main_queue;
+    use ria_engine::types::{Number, TabStripCommand};
     use ria_host_mac::core::bindings::{CGImageRef, Engine, Profile, Tab, Window};
     use ria_host_mac::core::delegate::{EngineDelegate, Hooks};
     use ria_host_mac::core::host::State;
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
     use ria_host_mac::tabs::ardia_page_cover::PageCover;
     use ria_host_mac::tabs::ardia_page_draw_wait::after_page_draw;
-    use ria_host_mac::tabs::ardia_tab_strip::{StripWindow, TabStrips};
+    use ria_host_mac::tabs::ardia_tab_registry::TabRegistry;
+    use ria_host_mac::tabs::ardia_tab_strip::{StripCommandResult, StripWindow, TabStrips};
     use ria_host_mac::windows::ardia_chrome_window_host::ChromeWindowHost;
     use ria_host_mac::windows::ardia_chrome_window_host_little_fit::little_frame_for_size;
     use ria_host_mac::windows::ardia_display_identity::frame_on_screen;
@@ -1749,7 +1751,8 @@ mod mac {
             }
             stream.write_all(b"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 20\r\nConnection: close\r\n\r\n<title>Probe</title>").unwrap();
         });
-        let popups = Popups::new(mtm, true);
+        let strips = host.strips().clone();
+        let popups = Popups::new(mtm, true, strips.clone());
         let popup = popups.for_chrome(Some(window), false);
         assert_eq!(popups.count(), 1);
         assert!(
@@ -1801,6 +1804,7 @@ mod mac {
         let tab = popup.open_tab(&NSString::from_str(&url), profile, false);
         check_popup_origin(
             popups,
+            strips,
             popup,
             tab,
             url,
@@ -1811,6 +1815,7 @@ mod mac {
 
     fn check_popup_origin(
         popups: Rc<Popups>,
+        strips: Rc<RefCell<TabStrips>>,
         popup: Retained<Window>,
         tab: Retained<Tab>,
         url: String,
@@ -1822,7 +1827,7 @@ mod mac {
             main_queue::after(
                 Duration::from_millis(25),
                 Box::new(move || {
-                    check_popup_origin(popups, popup, tab, url, origin, deadline);
+                    check_popup_origin(popups, strips, popup, tab, url, origin, deadline);
                 }),
             );
             return;
@@ -1887,7 +1892,33 @@ mod mac {
         println!("live_windows: popup rendered its 28-point origin strip with {origin}");
         // Adopting the tab out of the popup fires `window:didRemoveTab:`, which must clear the host pin record.
         let profile = tab.profile().expect("popup tab has a profile");
-        popups.strips().borrow_mut().set_pinned(&tab, true);
+        let mut registry = TabRegistry::default();
+        registry.set_view(&tab, Some((&page, "popup".into())));
+        let scope = StripWindow {
+            window: &popup,
+            profile: &profile,
+            profile_name: "Default",
+            app_window: None,
+            host_changes: false,
+            standalone: false,
+        };
+        let strip = Number::from(popup.chrome_window_id_for_profile(&profile));
+        let StripCommandResult::Done(_) = strips.borrow_mut().command(
+            Number(1.0),
+            TabStripCommand::Arrange {
+                strip,
+                keys: vec!["popup".into()],
+                pinned: Number(1.0),
+            },
+            std::slice::from_ref(&scope),
+            &mut registry,
+        ) else {
+            panic!("Arrange must finish without a group result");
+        };
+        assert!(
+            strips.borrow().is_pinned(&tab),
+            "The strip command must pin the popup tab"
+        );
         // SAFETY: The engine registered this class and this call is on the main thread.
         let destination = unsafe {
             Window::init_with_content_rect(
@@ -1899,7 +1930,7 @@ mod mac {
         destination.prepare_profile(&profile);
         destination.adopt_tab(&tab);
         assert!(
-            !popups.strips().borrow().is_pinned(&tab),
+            !strips.borrow().is_pinned(&tab),
             "The popup removal handler must clear the host pin record"
         );
         popup.close();

@@ -144,11 +144,7 @@ impl TabStrips {
                 active: active
                     .as_ref()
                     .map_or(index == 0, |active| std::ptr::eq(&**active, &*tab)),
-                pinned: self
-                    .pinned
-                    .get(&std::ptr::from_ref(&*tab))
-                    .and_then(Weak::load)
-                    .is_some(),
+                pinned: self.is_pinned(&tab),
                 group: groups.and_then(|group| group.tabs.get(&tab.tab_id()).cloned()),
             })
             .collect();
