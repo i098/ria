@@ -94,10 +94,11 @@ impl DataCtx {
 
     /// `PageEngines.owner(of:)`: WebKit owns the ids with the prefix `wk-`, Chromium owns the rest.
     pub fn owner(&self, id: &str) -> &Rc<dyn PageEngine> {
-        [&self.webkit, &self.chromium]
-            .into_iter()
-            .find(|engine| engine.owns(id))
-            .unwrap_or(&self.chromium)
+        if self.webkit.owns(id) {
+            &self.webkit
+        } else {
+            &self.chromium
+        }
     }
 }
 

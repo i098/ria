@@ -881,6 +881,13 @@ fn released_private_session_no_longer_serves_its_cached_favicon() {
     assert!(answer(&favicons).is_some());
     registry.mark_private_released(session);
     assert!(answer(&favicons).is_none());
+    let before = favicons.cached();
+    favicons.note_image(
+        image::DynamicImage::ImageRgba8(image::RgbaImage::new(2, 2)),
+        "https://private.example/late.ico",
+        Some(session),
+    );
+    assert_eq!(favicons.cached(), before);
 }
 
 #[test]

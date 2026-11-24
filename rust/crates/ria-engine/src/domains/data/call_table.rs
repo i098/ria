@@ -50,9 +50,9 @@ impl CallArgs {
         }
     }
 
-    /// The whole object of the call, as the engine takes it (`json`).
-    pub fn object(&self) -> Value {
-        Value::Object(self.values.clone())
+    /// The whole object of the call, as the engine takes it (`json`). Moves the arguments: no copy of the payload.
+    pub fn into_object(self) -> Value {
+        Value::Object(self.values)
     }
 
     /// The value of `key`, `None` when it is missing or null. `kind` names the type in the message.
