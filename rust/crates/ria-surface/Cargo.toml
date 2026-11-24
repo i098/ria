@@ -1,0 +1,20 @@
+[package]
+name = "ria-surface"
+version = "0.0.0"
+description = "AppKit window host for Rune chrome, engine pages, and Rune overlays."
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[target.'cfg(target_os = "macos")'.dependencies]
+accesskit_macos = "0.27.2"
+objc2 = "0.6"
+objc2-app-kit = "0.3"
+objc2-foundation = "0.3"
+objc2-quartz-core = "0.3"
+ria-engine = { path = "../ria-engine" }
+rune = { git = "https://github.com/anomalyco/rune", rev = "5b27303b0f5e7e100747d83f4eb7bf4925cd05f7" }
+
+[[test]]
+name = "direct_entries"
+harness = false
