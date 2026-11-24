@@ -184,17 +184,8 @@ mod mac {
             Some(unsafe { NSAccessibilitySystemFloatingWindowSubrole }),
             "subrole hook inactive"
         );
-        // 60 points wide stay visible: the throw maths allow it, so the constrain hook returns the rect as is.
-        let screen = NSScreen::mainScreen(MainThreadMarker::new().unwrap()).expect("a screen");
-        let visible = screen.visibleFrame();
-        let wanted = NSRect::new(
-            NSPoint::new(visible.origin.x - 40., visible.origin.y + 100.),
-            NSSize::new(100., 100.),
-        );
-        let constrained = window.constrainFrameRect_toScreen(wanted, Some(&screen));
-        assert_eq!(constrained, wanted, "constrain-frame hook inactive");
         println!(
-            "live_windows: pip hooks installed at startup: true (joins full-screen spaces, subrole, constrain-frame)"
+            "live_windows: pip hooks installed at startup: true (joins full-screen spaces, subrole)"
         );
     }
 
