@@ -2,7 +2,7 @@
 
 `blaze` (https://github.com/indexable-inc/blaze) at commit `f5852696ea0a3c2c865ed2cdb4379e41900f279b`
 (2026-10-30, the last commit of the v1 line that has `blaze build` and `blaze run`), plus the patches
-`0001-blaze-abc-host.patch` and `0002-blaze-store-key-readonly-data.patch` (`install.sh` applies every `*.patch` in name order).
+`0001-blaze-abc-host.patch`, `0002-blaze-store-key-readonly-data.patch` and `0003-blaze-neon-narrowing-shifts.patch` (`install.sh` applies every `*.patch` in name order).
 With them, `blaze build --release` builds the Rune host crate `rust/proofs/abc-host` on the Mac and the
 result runs proofs A, B and C. The patches live only in this repository.
 
@@ -87,3 +87,14 @@ The Mac, after, with `~/.cargo/bin/blaze` installed by `install.sh` (`0.0.0-dev 
 failed. The branch `fm/ria-0-6-8-mac-proofs` (https://github.com/i098/ria/pull/17), `blaze build --release` in `rust/proofs/abc-host`: `Finished release profile [blaze] target(s) in 159.47s`.
 `run.sh c`: `{"proof":"C","event":"result","pass":true,"checks":11,"fails":0}`, with no objc2 abort. `run.sh b`: `pass: true, checks: 22`. `run.sh a`: `pass: true, checks: 3`.
 With patch 0002 the `class_addMethod` workaround of proof B is not needed.
+
+## Patch 0003: NEON narrowing shifts (`zune_jpeg`)
+
+Symptom, before (Mac, `blaze test -p ria-engine`, exit 101): `zune_jpeg::color_convert::neon64::ycbcr_to_rgb_baseline_no_clamp: unsupported: callee vqshrun_n_s32: unsupported: LLVM intrinsic aarch64.neon.sqshrun.v4i16`.
+`zune_jpeg` comes in through `image` (`jpeg` feature) for `ria-engine` favicons, so the crate needs it.
+
+Cause: `crates/hir-ty-codegen/neon.rs` lowered only `rshrn` among the shift-right-and-narrow intrinsics.
+
+Fix: the same arm now lowers `sqshrn`, `uqshrn`, `sqshrun`, `sqrshrn`, `uqrshrn`, `sqrshrun` (same operand shape, immediate `1..=lane bits`); the test table has `aarch64.neon.sqshrun.v4i16`.
+
+After, on the Mac with the rebuilt blaze: `blaze test -p ria-engine` builds and runs (`95 passed; 0 failed`).

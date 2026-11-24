@@ -1,0 +1,26 @@
+diff --git a/crates/hir-ty-codegen/neon.rs b/crates/hir-ty-codegen/neon.rs
+index 1087a6f33..14bf5418d 100644
+--- a/crates/hir-ty-codegen/neon.rs
++++ b/crates/hir-ty-codegen/neon.rs
+@@ -449,9 +449,11 @@ fn neon(op: &str, types: &[Lanes]) -> Option<Lowered> {
+             instruction(&[], format!("{op} {}, {}", r.reg(0), a.reg(1)), [a], [r])
+         }
+         // Shifted right by `#imm`, rounded, into lanes of half the width.
+-        ("rshrn", &[r]) if r.is_int() && r.bytes() == 8 => {
++        ("rshrn" | "sqshrn" | "uqshrn" | "sqshrun" | "sqrshrn" | "uqrshrn" | "sqrshrun", &[r])
++            if r.is_int() && r.bytes() == 8 =>
++        {
+             let a = r.with_bits(2 * r.bits);
+-            let text = format!("rshrn {}, {}, #{{imm}}", r.reg(0), a.reg(1));
++            let text = format!("{op} {}, {}, #{{imm}}", r.reg(0), a.reg(1));
+             taking(instruction(&[], text, [a], [r]), Immediate::of(1, 1..=r.bits))
+         }
+         ("raddhn" | "rsubhn", &[r]) if r.is_int() && r.bytes() == 8 => {
+@@ -995,6 +997,7 @@ aarch64.neon.facgt.i32.f16: facgt h0, h1, h2 [\"neon\", \"fp16\"]
+             ("aarch64.neon.vcvtfp2fxs.v8i16.v8f16", "fcvtzs v0.8h, v1.8h, #{imm}", 1, 1..=16),
+             ("aarch64.neon.vsli.v1i64", "mov v0.16b, v1.16b; sli d0, d2, #{imm}", 2, 0..=63),
+             ("aarch64.neon.rshrn.v8i8", "rshrn v0.8b, v1.8h, #{imm}", 1, 1..=8),
++            ("aarch64.neon.sqshrun.v4i16", "sqshrun v0.4h, v1.4s, #{imm}", 1, 1..=16),
+             ("aarch64.neon.sqshlu.v4i32", "sqshlu v0.4s, v1.4s, #{imm}", 1, 0..=31),
+             ("aarch64.crypto.xar", "xar v0.2d, v1.2d, v2.2d, #{imm}", 2, 0..=63),
+             (
