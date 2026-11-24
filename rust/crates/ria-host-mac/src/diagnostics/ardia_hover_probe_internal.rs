@@ -121,7 +121,7 @@ impl Activation {
     }
 
     pub fn half(&self) -> bool {
-        !self.app_active && (self.running_active || self.frontmost)
+        self.app_active != self.running_active || self.running_active != self.frontmost
     }
 }
 

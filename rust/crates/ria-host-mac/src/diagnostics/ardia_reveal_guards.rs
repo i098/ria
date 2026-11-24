@@ -66,7 +66,9 @@ fn holder_view(target: *mut AnyObject) -> Option<Retained<NSView>> {
         if !responds {
             return None;
         }
-        holder = unsafe { msg_send![&*holder, accessibilityParent] };
+        let parent: Option<Retained<AnyObject>> =
+            unsafe { msg_send![&*holder, accessibilityParent] };
+        holder = parent?;
     }
     None
 }

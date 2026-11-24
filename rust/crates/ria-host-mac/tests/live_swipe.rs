@@ -306,9 +306,11 @@ mod mac {
     }
 
     fn settled(check: Rc<Check>, page: i64, then: Box<dyn FnOnce(Rc<Check>)>) {
+        let check_seen = check.clone();
         let ready = Rc::new(move || {
             Pager::snapshot(PAGER)
                 .is_some_and(|state| state["phase"] == "idle" && state["selected"] == page)
+                && phases(&check_seen.seen, "onPagerState").contains(&"settled".to_owned())
         });
         poll(
             "the pager did not settle",
@@ -325,11 +327,13 @@ mod mac {
             "the pager wakes the neighbour pages of its window"
         );
         let pager = Pager::existing(PAGER).unwrap();
+        check.seen.borrow_mut().clear();
         assert!(pager.borrow_mut().switch_to(2, None));
         settled(
             check,
             2,
             Box::new(|check| {
+                check.seen.borrow_mut().clear();
                 assert!(
                     Pager::existing(PAGER)
                         .unwrap()

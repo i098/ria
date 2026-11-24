@@ -399,7 +399,7 @@ fn page_reason(
 ) -> HoverReason {
     let active = check.window_key || check.window_main;
     let a = check.activation;
-    if (a.frontmost || a.running_active) && !a.app_active {
+    if a.half() {
         return HoverReason::HalfActive;
     }
     if click && page.is_some() && check.menu_active && !menu_shown(window) {
