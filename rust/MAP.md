@@ -271,7 +271,7 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/ArdiaTabStrip.*` | Objective-C++ | 279 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaTrafficLights.*` | Objective-C++ | 543 | native | `rust/crates/ria-host-mac/src/windows/ardia_traffic_lights.rs` | hand | done | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaTransferLedger.*` | Objective-C++ | 136 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
-| mac | `packages/ardiacore/ios/ArdiaWebView.*` | Objective-C++/Swift | 6535 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
+| mac | `packages/ardiacore/ios/ArdiaWebView.*` | Objective-C++/Swift | 6535 | native | `rust/crates/ria-host-mac/src/tabs/`; transfer parts without the view object are in [`ardia_web_view_transfer.rs`](crates/ria-host-mac/src/tabs/ardia_web_view_transfer.rs); `ensureTab`, `cloneTab`, `takeTransferredTab`, `closeBrowser`, `StartParkedPage` stay open | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaWebViewInternal.*` | Objective-C++ | 431 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaWindowController.*` | Objective-C++ | 428 | native | `rust/crates/ria-host-mac/src/windows/ardia_window_controller.rs` | hand | partial | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaWindowFullScreen.*` | Objective-C++ | 575 | native | `rust/crates/ria-host-mac/src/windows/ardia_window_full_screen.rs` | hand | done | 3.7 | port |
