@@ -99,4 +99,6 @@ Fix: the same arm now lowers `sqshrn`, `uqshrn`, `sqshrun`, `sqrshrn`, `uqrshrn`
 
 After, on the Mac with the rebuilt blaze: `blaze test -p ria-engine` builds and runs (`95 passed; 0 failed`).
 
-Live run, on the Mac: `blaze test -p ria-engine` exits 0 (`95 passed; 0 failed`). `blaze test -p ria-engine --test live` exited 101 before the fix (25 checks). Its `all calls settled` check fails because the engine never replies to `ac_bookmarks_export_html`. This is a known finding, filed separately.
+Live run, on the Mac (measured before the live.rs check changes below): `blaze test -p ria-engine` exits 0 (`95 passed; 0 failed`). `blaze test -p ria-engine --test live` exited 101 before patch 0003 because blaze could not compile `zune_jpeg`, and it still exits 101 after patch 0003 (25 checks). Only the compile failure is fixed. The `all calls settled` check still fails because the engine never replies to `ac_bookmarks_export_html`. This is a known finding, filed separately.
+
+Not yet run on the Mac: this change also adds a 500 ms quiet window after `bookmarks.apply` and the check `bookmarks.changed arrives for a bookmark change outside bookmarks.apply`. That check fails by design: no engine call of the harness edits bookmarks except `bookmarks.apply`, so the watcher stays unproven. The next live run should show 26 checks and exit 101. Nobody has measured this count.

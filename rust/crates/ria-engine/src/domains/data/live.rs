@@ -539,6 +539,12 @@ mod mac {
                     quiet == Some(true),
                     String::new(),
                 );
+                record(
+                    &watch,
+                    "bookmarks.changed arrives for a bookmark change outside bookmarks.apply",
+                    false,
+                    "unproven: no engine call of this harness edits bookmarks except bookmarks.apply".into(),
+                );
                 if outstanding != 0 {
                     record(
                         &watch,
