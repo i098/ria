@@ -8,9 +8,9 @@
 //!
 //! Changes from Ardia:
 //! - Ardia has an Expo module that JS calls. Ria has no page layer yet, so [`SystemSignals::call`] takes the
-//!   function name and its positional arguments as JSON, as the module bridge would pass them. A page layer calls it.
-//! - `ArdiaEvents.emit` has no consumer in the app yet. [`ProductHost::emit`] hands each event to the launch
-//!   observer as [`LaunchEvent::Emit`].
+//!   function name and its positional arguments as JSON, as the module bridge would pass them. No page layer calls it until issue 101.
+//! - `ArdiaEvents.emit` has no consumer in the app yet. [`ProductHost::emit`] hands each event to the emit
+//!   callback that the launch gives to [`SystemSignals::start`].
 //! - The other module functions (`watchIdle`, `holdsIncomingLinks`, ...) are not here; each answers `Err`.
 
 use std::cell::RefCell;
@@ -24,8 +24,6 @@ use serde_json::Value;
 use crate::core::bindings::{Engine, Profile};
 use crate::core::services::{Reply, ServiceHost, Services};
 
-use super::host_launch::{LaunchEvent, Observer};
-
 thread_local! {
     static CURRENT: RefCell<Option<Rc<SystemSignals>>> = const { RefCell::new(None) };
 }
@@ -35,10 +33,12 @@ pub fn current() -> Option<Rc<SystemSignals>> {
     CURRENT.with_borrow(Clone::clone)
 }
 
+type Emit = Rc<dyn Fn(&str, Value)>;
+
 /// What `ArdiaServices` reads from the rest of the host, for the app: one profile per directory name, no private
 /// profiles and no app tabs yet.
 struct ProductHost {
-    observer: Observer,
+    emit: Emit,
 }
 
 impl ServiceHost for ProductHost {
@@ -64,10 +64,7 @@ impl ServiceHost for ProductHost {
         });
     }
     fn emit(&self, topic: &str, data: Value) {
-        (self.observer)(LaunchEvent::Emit {
-            topic: topic.to_owned(),
-            data,
-        });
+        (self.emit)(topic, data);
     }
     fn app_tab_ids(&self, _chrome_tab_id: i64) -> Vec<Value> {
         Vec::new()
@@ -82,7 +79,7 @@ pub struct SystemSignals {
 impl SystemSignals {
     /// Call on `engineDidStart`, on the main thread. Makes the call engine and the services, and starts the
     /// `downloads.changed` feed that the mover reads.
-    pub(super) fn start(observer: Observer) {
+    pub(super) fn start(emit: Emit) {
         let queue = ActionQueue::new();
         let weak = Rc::downgrade(&queue);
         queue.set_waker(move || {
@@ -91,7 +88,7 @@ impl SystemSignals {
         });
         let engine = CallEngine::new(queue);
         engine.did_start();
-        let services = Services::new(engine, Rc::new(ProductHost { observer }));
+        let services = Services::new(engine, Rc::new(ProductHost { emit }));
         services.watch_download_events();
         CURRENT.set(Some(Rc::new(Self { services })));
     }

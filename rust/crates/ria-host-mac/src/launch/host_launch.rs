@@ -292,7 +292,13 @@ impl Runtime {
 
 impl Hooks for Runtime {
     fn engine_started(&self) {
-        SystemSignals::start(self.observer.clone());
+        let observer = self.observer.clone();
+        SystemSignals::start(Rc::new(move |topic, data| {
+            observer(LaunchEvent::Emit {
+                topic: topic.to_owned(),
+                data,
+            });
+        }));
         self.sequence.reach(ENGINE_STARTED);
         (self.observer)(LaunchEvent::EngineStarted);
     }
