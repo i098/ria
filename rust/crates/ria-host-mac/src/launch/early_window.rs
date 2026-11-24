@@ -3,7 +3,9 @@
 // This file is a Rust port of that file, with changes.
 // The tab delegate also uses ArdiaLaunchTabHolder.mm.
 
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
+use std::ptr::NonNull;
+use std::rc::Rc;
 
 use block2::RcBlock;
 use objc2::rc::{Retained, Weak};
@@ -13,7 +15,7 @@ use objc2::{
 };
 use objc2_app_kit::{
     NSApplication, NSAutoresizingMaskOptions, NSColor, NSImage, NSImageView, NSScreen, NSView,
-    NSWindow, NSWindowDidResizeNotification,
+    NSWindow, NSWindowDidResizeNotification, NSWindowWillCloseNotification,
 };
 use objc2_foundation::{
     NSData, NSNotification, NSNotificationCenter, NSObjectProtocol, NSPoint, NSRect, NSSize,
@@ -32,6 +34,8 @@ pub(super) struct BrowserWindow {
     _core: Retained<Window>,
     _tab: Retained<Tab>,
     _delegate: Retained<TabDelegate>,
+    closed: Rc<Cell<bool>>,
+    close_observer: Retained<ProtocolObject<dyn NSObjectProtocol>>,
 }
 
 impl BrowserWindow {
@@ -167,11 +171,60 @@ impl BrowserWindow {
         if title.length() != 0 {
             delegate.report_title(&title);
         }
+        let closed = Rc::new(Cell::new(false));
+        let flag = closed.clone();
+        let on_close = RcBlock::new(move |_: NonNull<NSNotification>| flag.set(true));
+        // SAFETY: the block captures only a flag and runs on the main thread.
+        let close_observer = unsafe {
+            NSNotificationCenter::defaultCenter().addObserverForName_object_queue_usingBlock(
+                Some(NSWindowWillCloseNotification),
+                Some(&window),
+                None,
+                &on_close,
+            )
+        };
         Self {
             _core: core,
             _tab: tab,
             _delegate: delegate,
+            closed,
+            close_observer,
         }
+    }
+}
+
+impl BrowserWindow {
+    /// Open `url` in a new foreground tab of this window.
+    pub fn open_url(&self, url: &str) {
+        if let Some(profile) = self._core.active_profile() {
+            let tab = self
+                ._core
+                .open_tab(&NSString::from_str(url), &profile, true);
+            self._core.activate_tab(&tab);
+        }
+    }
+
+    /// True after the user closed the window.
+    pub fn closed(&self) -> bool {
+        self.closed.get()
+    }
+
+    /// Bring a minimized or hidden window to the front.
+    pub fn reveal(&self) {
+        let window = self._core.window();
+        if window.isMiniaturized() {
+            window.deminiaturize(None);
+        }
+        window.makeKeyAndOrderFront(None);
+    }
+}
+
+impl Drop for BrowserWindow {
+    fn drop(&mut self) {
+        // SAFETY: the token came from the default notification center.
+        unsafe {
+            NSNotificationCenter::defaultCenter().removeObserver((*self.close_observer).as_ref())
+        };
     }
 }
 

@@ -21,6 +21,7 @@ use objc2_foundation::{
 };
 
 use super::launch_sequence::{LaunchReason, LaunchSequence};
+use super::open_urls;
 
 thread_local! {
     static LAUNCH: RefCell<Weak<LaunchSequence>> = const { RefCell::new(Weak::new()) };
@@ -34,6 +35,9 @@ impl Observers {
         LAUNCH.with(|slot| slot.replace(Rc::downgrade(launch)));
         BACKGROUND.set(background);
         let will = RcBlock::new(|_: NonNull<NSNotification>| {
+            if let Some(mtm) = MainThreadMarker::new() {
+                open_urls::install(mtm);
+            }
             if BACKGROUND.get()
                 && let Some(mtm) = MainThreadMarker::new()
             {
@@ -42,6 +46,9 @@ impl Observers {
             }
         });
         let did = RcBlock::new(|_: NonNull<NSNotification>| {
+            if let Some(mtm) = MainThreadMarker::new() {
+                open_urls::install(mtm);
+            }
             with_launch(|launch, mtm| {
                 launch.app_kit_finished(launch_reason(mtm));
             })

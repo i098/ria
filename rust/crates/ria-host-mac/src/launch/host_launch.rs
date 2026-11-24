@@ -25,6 +25,7 @@ use super::launch_config::LaunchConfig;
 use super::launch_sequence::{
     APP_KIT_FINISHED, APP_READY, ENGINE_STARTED, LaunchReason, LaunchSequence,
 };
+use super::open_urls::{self, Entry, Inbox};
 use super::platform;
 use super::saved_session::SavedSession;
 use super::startup;
@@ -90,8 +91,24 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
         observer,
         mtm,
         window: RefCell::default(),
+        inbox: Inbox::default(),
+        reopening: Cell::new(false),
         failed: Cell::new(false),
     });
+    let weak = Rc::downgrade(&runtime);
+    let urls_weak = weak.clone();
+    open_urls::set_entry(Some(Rc::new(Entry {
+        urls: Box::new(move |urls| {
+            if let Some(runtime) = urls_weak.upgrade() {
+                runtime.receive_urls(urls);
+            }
+        }),
+        reopen: Box::new(move |visible| {
+            if let Some(runtime) = weak.upgrade() {
+                runtime.reopen(visible);
+            }
+        }),
+    })));
     let _observers = Observers::new(&sequence, runtime.config.background);
     let weak = Rc::downgrade(&runtime);
     sequence.after(ENGINE_STARTED | APP_KIT_FINISHED, move |_| {
@@ -106,6 +123,7 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
     runtime.config.check_profile_directory()?;
     // SAFETY: the engine is loaded, mtm proves the thread, and the delegate and argv live until return.
     let code = unsafe { delegate.run(&argv) };
+    open_urls::set_entry(None);
     if code == 0 && runtime.failed.get() {
         Ok(1)
     } else {
@@ -121,6 +139,9 @@ struct Runtime {
     observer: Observer,
     mtm: MainThreadMarker,
     window: RefCell<Option<BrowserWindow>>,
+    inbox: Inbox,
+    /// A window that a reopen asked for is not open yet.
+    reopening: Cell<bool>,
     failed: Cell<bool>,
 }
 
@@ -169,8 +190,10 @@ impl Runtime {
 
     fn profile_ready(&self, profile: &Profile, restore_hint: bool) {
         let reason = self.sequence.reason();
-        let show = reason != LaunchReason::Hidden
-            && !NSApplication::sharedApplication(self.mtm).isHidden();
+        let reopened = self.reopening.replace(false);
+        let show = reopened
+            || reason != LaunchReason::Hidden
+                && !NSApplication::sharedApplication(self.mtm).isHidden();
         let session = self.session.as_ref().filter(|_| restore_hint);
         let layout = session
             .filter(|_| show && reason == LaunchReason::Normal)
@@ -190,9 +213,54 @@ impl Runtime {
             &self.observer,
         );
         *self.window.borrow_mut() = Some(window);
+        self.inbox.flush(|urls| self.deliver(urls));
+    }
+
+    /// `OpenURLInbox.receive`. Queue the URLs until the window is ready. If every window is closed, open one.
+    fn receive_urls(&self, urls: Vec<String>) {
+        self.inbox.receive(urls, |urls| self.deliver(urls));
+        if !self.inbox.is_empty() && self.sequence.reached(APP_READY) {
+            self.reopen(false);
+        }
+    }
+
+    /// Open the URLs in the browser window. Return false when there is none.
+    fn deliver(&self, urls: &[String]) -> bool {
+        let window = self.window.borrow();
+        let Some(window) = window.as_ref().filter(|window| !window.closed()) else {
+            return false;
+        };
+        urls.iter().for_each(|url| window.open_url(url));
+        eprintln!("[ria] opened {} URL(s) from other apps", urls.len());
+        true
+    }
+
+    /// `ShellApp.reopen`. With no visible window, show the browser window again.
+    fn reopen(&self, has_visible_windows: bool) {
+        eprintln!("[ria] reopen event, visible windows: {has_visible_windows}");
+        if has_visible_windows
+            || !self.sequence.reached(APP_READY)
+            || !self.sequence.engine_running()
+        {
+            return;
+        }
+        if let Some(window) = self
+            .window
+            .borrow()
+            .as_ref()
+            .filter(|window| !window.closed())
+        {
+            window.reveal();
+            return;
+        }
+        self.window.take();
+        if !self.reopening.replace(true) {
+            self.open_initial_window();
+        }
     }
 
     fn fail(&self, message: &str) {
+        self.reopening.set(false);
         self.failed.set(true);
         (self.observer)(LaunchEvent::Error(message.to_owned()));
         quit();
