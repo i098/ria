@@ -54,7 +54,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: ardia-browser/ardia
-          ref: 551d3c13c
+          ref: 551d3c13c1c9ede130724ea9f1056d4b586fbe55
           path: ardia
       - uses: actions/setup-node@v4
         with:
