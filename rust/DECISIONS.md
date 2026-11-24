@@ -166,5 +166,5 @@ Ardia means the original at `ardia/`, frozen at commit `551d3c13c`.
 ## ADR-V3: A released private session no longer serves its cached favicon (deviation from Ardia)
 
 - Context: `ArdiaFavicons.mm:90` (at `551d3c13c`) stores the image in the process-wide `Seen()` cache under `SeenKey(profile, url)`, and line 98 returns it before any live-profile check. `ArdiaHost.mm:143-155` (`releaseProfile:`) does not clear that cache. Issue 57.
-- Decision: `Favicons::fetch` in `favicons.rs` answers `None` for a private session that has no live profile, before it reads the cache. The owner's order to resolve every open issue approves this deviation.
-- Consequences: after release, `favicons.fetch` for that session gives `None`. The cached image stays in memory until evicted, but nothing reads it. Ardia keeps the fault.
+- Decision: `Favicons::fetch` in `favicons.rs` skips the `Seen()` cache read for a private session the app released (`released_private` in the profile registry). `data:` and download paths are unchanged. The owner's order to resolve every open issue approves this deviation.
+- Consequences: after release, a cached `favicons.fetch` for that session misses the cache. The cached image stays in memory until evicted, but nothing reads it. Ardia keeps the fault.

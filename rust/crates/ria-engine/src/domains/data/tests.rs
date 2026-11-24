@@ -882,3 +882,17 @@ fn released_private_session_no_longer_serves_its_cached_favicon() {
     registry.mark_private_released(session);
     assert!(answer(&favicons).is_none());
 }
+
+#[test]
+fn unloaded_private_session_still_serves_a_data_url_favicon() {
+    let core = Rc::new(FakeCore::default());
+    let registry = ProfileRegistry::new(core, Rc::new(NoEvents));
+    let favicons = Rc::new(Favicons::new(registry, std::env::temp_dir()));
+    let url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/iZk9HQAAAABJRU5ErkJggg==";
+    let out = Rc::new(RefCell::new(None));
+    let sink = out.clone();
+    favicons.fetch(url, "incognito1@work", None, move |v| {
+        *sink.borrow_mut() = Some(v)
+    });
+    assert!(out.take().expect("fetch answered").is_some());
+}
