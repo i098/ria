@@ -71,7 +71,9 @@ impl TabParking {
     }
 
     pub fn park(&mut self, key: String, tab: Retained<Tab>) {
-        self.parking_view.addSubview(&tab.view());
+        if let Some(page) = tab.view() {
+            self.parking_view.addSubview(&page);
+        }
         let current = std::ptr::from_ref(&*tab);
         if let Some(previous) = self.parked.insert(key, tab)
             && std::ptr::from_ref(&*previous) != current
@@ -144,7 +146,9 @@ impl TabParking {
     ///
     /// The holder must implement `ArdiaCoreTabDelegate`.
     pub unsafe fn keep_offscreen(&mut self, tab: &Tab, holder: Box<dyn ParkedPageHolder>) {
-        self.parking_view.addSubview(&tab.view());
+        if let Some(page) = tab.view() {
+            self.parking_view.addSubview(&page);
+        }
         // SAFETY: The caller provides a delegate implementing the engine protocol.
         unsafe { tab.set_delegate(Some(holder.delegate())) };
         self.holders.retain(|_, (tab, _)| tab.load().is_some());

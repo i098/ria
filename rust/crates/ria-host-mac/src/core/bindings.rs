@@ -362,7 +362,7 @@ extern_class!(
 impl Tab {
     extern_methods!(
         #[unsafe(method(view))]
-        pub fn view(&self) -> Retained<NSView>;
+        pub fn view(&self) -> Option<Retained<NSView>>;
         #[unsafe(method(profile))]
         pub fn profile(&self) -> Option<Retained<Profile>>;
         #[unsafe(method(tabId))]

@@ -113,7 +113,7 @@ impl TabRegistry {
                 return None;
             }
             entry.view.as_ref()?.load()?;
-            let page = entry.tab.load()?.view();
+            let page = entry.tab.load()?.view()?;
             view.isDescendantOf(&page).then_some(entry.app_id.as_str())
         })
     }

@@ -61,7 +61,7 @@ impl PagePaintHold {
         created: bool,
         mut surface: PaintSurface,
     ) {
-        let page = tab.view();
+        let Some(page) = tab.view() else { return };
         if !crate::tabs::superview(&page).is_some_and(|parent| std::ptr::eq(&*parent, host)) {
             return;
         }

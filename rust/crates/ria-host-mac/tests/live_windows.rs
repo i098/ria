@@ -556,7 +556,7 @@ mod mac {
         supersede: impl FnOnce() + 'static,
         verify: impl FnOnce() + 'static,
     ) {
-        let page = std::ptr::from_ref(&*tab.view());
+        let page = std::ptr::from_ref(&*tab.view().expect("open tab has a view"));
         let attached = Rc::new(Cell::new(false));
         let attachment = attached.clone();
         let selector = sel!(viewWillMoveToSuperview:);
@@ -776,7 +776,7 @@ mod mac {
         let completed = Rc::new(Cell::new(false));
         let mut windows = Vec::new();
         let mut tabs = Vec::new();
-        for _ in 0..2 {
+        for _ in 0..3 {
             let window = host.make_window(profile, None).unwrap();
             let controller = controllers.for_window(&window).unwrap();
             controller
@@ -791,8 +791,11 @@ mod mac {
             controller.core.show_inactive();
             // No tab strip here, so mount the page as the strip does; the draw wait only asks a mounted page.
             let content = window.contentView().unwrap();
-            tabs[tabs.len() - 1].view().setFrame(content.bounds());
-            content.addSubview(&tabs[tabs.len() - 1].view());
+            tabs[tabs.len() - 1]
+                .view()
+                .expect("open tab has a view")
+                .setFrame(content.bounds());
+            content.addSubview(&tabs[tabs.len() - 1].view().expect("open tab has a view"));
             windows.push(window);
         }
         let painted_at = Instant::now() + Duration::from_millis(1500);
@@ -887,6 +890,21 @@ mod mac {
             },
         );
 
+        // Close a third tab while its snapshot is pending: the reply must find no view and cover nothing.
+        let orphan = Rc::new(Cell::new(false));
+        let orphan_cover = Rc::new(Cell::new(None));
+        let (orphan_done, orphan_result) = (orphan.clone(), orphan_cover.clone());
+        PageCover::cover(
+            &tabs[2],
+            false,
+            || true,
+            move |cover| {
+                orphan_result.set(Some(cover.is_some()));
+                orphan_done.set(true);
+            },
+        );
+        tabs[2].close_now();
+
         tabs[0].close_now();
         closed[0].set(true);
 
@@ -898,6 +916,7 @@ mod mac {
             ("attached", attached),
             ("repictured", repictured),
             ("repicture reply", replied[1].clone()),
+            ("closed-tab cover", orphan),
         ];
         poll_until(
             "every closed-tab callback must run",
@@ -921,6 +940,11 @@ mod mac {
                     ffi::imp_removeBlock(picture_imp);
                 }
                 assert_eq!(copied.get(), 0, "no picture may be taken after the close");
+                assert_eq!(
+                    orphan_cover.get(),
+                    Some(false),
+                    "a tab closed before its snapshot replies must get no cover"
+                );
                 for window in windows {
                     host.close_window(&window);
                 }
@@ -1297,10 +1321,16 @@ mod mac {
         controller.core.show_inactive();
         // This window has no tab strip, so mount the page view in the content view as the strip does; the draw wait only waits for a mounted page.
         let content = page_window.contentView().unwrap();
-        tab.view().setFrame(content.bounds());
-        content.addSubview(&tab.view());
-        assert!(tab.view().window().is_some());
-        assert!(!tab.view().isHiddenOrHasHiddenAncestor());
+        tab.view()
+            .expect("open tab has a view")
+            .setFrame(content.bounds());
+        content.addSubview(&tab.view().expect("open tab has a view"));
+        assert!(tab.view().expect("open tab has a view").window().is_some());
+        assert!(
+            !tab.view()
+                .expect("open tab has a view")
+                .isHiddenOrHasHiddenAncestor()
+        );
         change_page(true);
         let page_host = host.clone();
         let stale_checked = Rc::new(Cell::new(false));
@@ -1763,7 +1793,7 @@ mod mac {
         assert!(window.isVisible(), "The popup must be ordered in");
         assert!(!NSApplication::sharedApplication(window.mtm()).isActive());
         let host = popup.host_view();
-        let page = tab.view();
+        let page = tab.view().expect("open tab has a view");
         assert!(
             page.window()
                 .is_some_and(|owner| std::ptr::eq(&*owner, &*window))

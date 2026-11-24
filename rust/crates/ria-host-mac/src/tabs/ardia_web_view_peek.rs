@@ -410,7 +410,7 @@ fn open(url: &str, disposition: &str) -> PeekReply {
 fn point_for_link(link: &Link<'_>, window: &NSWindow, message: &Value) -> NSPoint {
     let area = link
         .tab
-        .map(Tab::view)
+        .and_then(Tab::view)
         .filter(|page| superview(page).is_some_and(|host| ptr::eq(&*host, link.host)))
         .map_or_else(|| link.host.bounds(), |page| page.frame());
     let NSRect { origin, size } = area;
@@ -434,7 +434,7 @@ fn point_for_link(link: &Link<'_>, window: &NSWindow, message: &Value) -> NSPoin
 }
 
 pub fn shows_painted_frame(host: &NSView, tab: Option<&Tab>) -> bool {
-    let Some(page) = tab.map(Tab::view).filter(|page| {
+    let Some(page) = tab.and_then(Tab::view).filter(|page| {
         !page.isHidden() && superview(page).is_some_and(|parent| ptr::eq(&*parent, host))
     }) else {
         return false;

@@ -160,8 +160,9 @@ impl<Report: Default> AttachedTab<Report> {
         }
         tab.deliver_held_page_messages();
         let adoption = adopt_into_window(attach.window, &tab, attach.placement);
-        let page = tab.view();
-        if !mounted(&page, attach.host) {
+        if let Some(page) = tab.view()
+            && !mounted(&page, attach.host)
+        {
             if !same_window(&page, attach.host) {
                 page.removeFromSuperview();
             }
@@ -219,10 +220,11 @@ impl<Report: Default> AttachedTab<Report> {
         let tab = self.tab.take()?;
         registry.borrow_mut().set_view(&tab, None);
         stashed.stash(&tab, std::mem::take(&mut self.reports));
-        let page = tab.view();
-        accept_drops(&page, true);
-        if mounted(&page, host) && !self.life.keeps_page_on_detach {
-            page.removeFromSuperview();
+        if let Some(page) = tab.view() {
+            accept_drops(&page, true);
+            if mounted(&page, host) && !self.life.keeps_page_on_detach {
+                page.removeFromSuperview();
+            }
         }
         self.life.keeps_page_on_detach = false;
         self.set_devtools(host, None, accept_drops);
@@ -252,7 +254,7 @@ impl<Report: Default> AttachedTab<Report> {
             let page = self
                 .tab
                 .as_deref()
-                .map(Tab::view)
+                .and_then(Tab::view)
                 .filter(|page| mounted(page, host));
             view.removeFromSuperview();
             if let Some(page) = page {

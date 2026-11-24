@@ -16,8 +16,7 @@ use crate::windows::ardia_window_controller::Controllers;
 use super::superview;
 
 pub fn recording_shows_page(host: &NSView, tab: Option<&Tab>) -> bool {
-    tab.is_some_and(|tab| {
-        let page = tab.view();
+    tab.and_then(Tab::view).is_some_and(|page| {
         superview(&page).is_some_and(|parent| ptr::eq(&*parent, host))
             && !page.isHidden()
             && page.alphaValue() > 0.01
