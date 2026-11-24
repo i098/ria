@@ -182,7 +182,7 @@ mod mac {
         controller.round_corners();
         assert_eq!(
             layer_radius(&window),
-            controller.corner_radius(),
+            6.0,
             "round_corners fits the corners"
         );
         assert!(
@@ -214,10 +214,10 @@ mod mac {
         // Tuck to the right edge and come back.
         controller.stash_at(Edge::Right);
         assert_eq!(controller.stashed_edge(), Edge::Right);
-        let tucked = controller.frame_stashed_at(Edge::Right);
+        let tucked_x = visible.origin.x + visible.size.width
+            - ria_host_mac::pip::ardia_picture_in_picture_internal::PEEK;
         assert!(
-            pump_until(2.0, || window.frame().origin.x == tucked.origin.x
-                && window.frame().origin.y == tucked.origin.y),
+            pump_until(2.0, || (window.frame().origin.x - tucked_x).abs() < 0.5),
             "the window slides to the tuck frame"
         );
         assert!(

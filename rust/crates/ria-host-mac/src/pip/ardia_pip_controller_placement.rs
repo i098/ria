@@ -24,17 +24,22 @@ fn where_the_throw_maths_may_put_it(mtm: MainThreadMarker, rect: NSRect) -> bool
 
 /// `+[ArdiaPiPController(Placement) load]`.
 pub fn install() {
-    static ONCE: std::sync::Once = std::sync::Once::new();
-    ONCE.call_once(install_once);
+    static INSTALLED: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+    if INSTALLED.load(std::sync::atomic::Ordering::Acquire) {
+        return;
+    }
+    if install_once() {
+        INSTALLED.store(true, std::sync::atomic::Ordering::Release);
+    }
 }
 
-fn install_once() {
+fn install_once() -> bool {
     let constrain = sel!(constrainFrameRect:toScreen:);
     let Some(class) = AnyClass::get(c"NativeWidgetMacFramelessNSWindow") else {
-        return;
+        return false;
     };
     let Some(method) = class.instance_method(constrain) else {
-        return;
+        return false;
     };
     // SAFETY: `constrainFrameRect:toScreen:` takes a rect and a screen or nil, and returns a rect.
     let original: unsafe extern "C-unwind" fn(
@@ -58,5 +63,5 @@ fn install_once() {
     );
     // SAFETY: the runtime copies the block; its arguments are `self` and the method arguments.
     let imp = unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&block).cast()) };
-    replace_method(class, constrain, imp);
+    replace_method(class, constrain, imp)
 }

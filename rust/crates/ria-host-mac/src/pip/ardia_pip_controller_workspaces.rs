@@ -188,15 +188,21 @@ pub fn float_over_active_space(window: &NSWindow) {
 
 /// `+[ArdiaPiPController(Workspaces) load]`.
 pub fn install() {
-    static ONCE: Once = Once::new();
-    ONCE.call_once(install_once);
+    static INSTALLED: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+    if INSTALLED.load(std::sync::atomic::Ordering::Acquire) {
+        return;
+    }
+    if install_once() {
+        INSTALLED.store(true, std::sync::atomic::Ordering::Release);
+    }
 }
 
-fn install_once() {
+fn install_once() -> bool {
     let Some(frameless) = AnyClass::get(c"NativeWidgetMacFramelessNSWindow") else {
-        return;
+        return false;
     };
     answer_system_floating_subrole(frameless);
     answer_nonactivating_panel_for_marked_windows();
     join_when_chrome_makes_it_float(frameless);
+    true
 }
