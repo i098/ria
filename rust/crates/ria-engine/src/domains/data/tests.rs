@@ -784,10 +784,18 @@ fn a_list_with_a_non_string_item_is_a_failed_step_not_an_empty_list() {
 #[test]
 fn a_failed_or_wrong_shaped_recheck_after_a_good_read_is_a_failed_step() {
     let rechecks = [
-        ("neverSaveOrigins", json!({"origins": ["a.com"]}), "passwords"),
+        (
+            "neverSaveOrigins",
+            json!({"origins": ["a.com"]}),
+            "passwords",
+        ),
         ("siteSettingsOrigins", json!(["a.com"]), "site settings"),
     ];
-    let bad = [Err("service failed".to_owned()), Ok(json!([null])), Ok(json!({"origins": [null]}))];
+    let bad = [
+        Err("service failed".to_owned()),
+        Ok(json!([null])),
+        Ok(json!({"origins": [null]})),
+    ];
     for (op, first, label) in rechecks {
         for second in &bad {
             let rig = rig();
@@ -816,7 +824,11 @@ fn a_failed_or_wrong_shaped_recheck_after_a_good_read_is_a_failed_step() {
                 fire_timers();
                 rig.queue.drain();
             }
-            assert_eq!(remaining.take(), Some(vec![label.to_owned()]), "{op} {second:?}");
+            assert_eq!(
+                remaining.take(),
+                Some(vec![label.to_owned()]),
+                "{op} {second:?}"
+            );
         }
     }
 }
