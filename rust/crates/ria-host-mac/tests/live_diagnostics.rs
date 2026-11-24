@@ -35,8 +35,11 @@ mod mac {
     use std::time::{Duration, Instant};
 
     use objc2::rc::Retained;
-    use objc2::{MainThreadMarker, MainThreadOnly};
-    use objc2_app_kit::{NSBackingStoreType, NSEvent, NSView, NSWindow, NSWindowStyleMask};
+    use objc2::runtime::AnyObject;
+    use objc2::{MainThreadMarker, MainThreadOnly, sel};
+    use objc2_app_kit::{
+        NSApplication, NSBackingStoreType, NSEvent, NSView, NSWindow, NSWindowStyleMask,
+    };
     use objc2_foundation::{NSPoint, NSRect, NSSize};
     use ria_engine::call::main_queue;
     use ria_host_mac::core::bindings::{Engine, Profile, Tab, Window};
@@ -233,6 +236,17 @@ mod mac {
             guards::guarded_accessibility_calls() > 0,
             "the engine's accessibility classes get guards"
         );
+        // Menu validation resolves these actions to the application, whose accessibility parent is nil.
+        let application = NSApplication::sharedApplication(mtm);
+        for action in [sel!(terminate:), sel!(hide:)] {
+            // SAFETY: These are actions the application resolves, and no target or sender is allowed.
+            let found = unsafe { application.targetForAction_to_from(action, None, None) };
+            assert_eq!(
+                found.map(|found| Retained::as_ptr(&found).cast::<AnyObject>()),
+                Some(Retained::as_ptr(&application).cast::<AnyObject>()),
+                "the guarded application resolves the action to itself"
+            );
+        }
         watch_hover(Rc::new(Hover));
         assert!(hover_probe_line().starts_with("activation app "));
         // SAFETY: The window is never shown and is released when this function returns.
