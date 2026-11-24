@@ -1,6 +1,11 @@
 // Ported from ardia packages/ardiacore/ios/ArdiaTabStrip.mm at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
+//
+// Changes from Ardia:
+// - Ardia keeps no host pin record. `ardiacore_window.mm:259-265` adopts a tab with `ADD_NONE`, so the destination
+//   Chromium tab is unpinned. The Ria host pin record would stay set, so `removed` clears it: the snapshot of the
+//   destination strip then matches Chromium (issue #71).
 
 use std::collections::{BTreeMap, HashMap};
 
@@ -91,6 +96,7 @@ impl TabStrips {
     }
 
     pub fn removed(&mut self, strip: i32, tab: &Tab) {
+        self.set_pinned(tab, false);
         if self
             .active(strip)
             .is_some_and(|active| std::ptr::eq(&*active, tab))

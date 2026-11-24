@@ -902,7 +902,7 @@ mod mac {
                 tx.strips[0]
                     .tabs
                     .iter()
-                    .any(|row| row.key.as_deref() == Some("fixture") && row.pinned)
+                    .any(|row| row.key.as_deref() == Some("fixture") && !row.pinned)
             });
         destination.close();
         pass
