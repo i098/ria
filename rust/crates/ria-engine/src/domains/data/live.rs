@@ -411,7 +411,16 @@ mod mac {
         let site = "https://example.com";
         let url = "https://example.com/";
         let bookmark_seen = Rc::new(Cell::new(false));
-        check_bookmarks(&live, &ctx, exported, url, dir, bookmark_seen.clone());
+        let quiet_window = Rc::new(Cell::new(None));
+        check_bookmarks(
+            &live,
+            &ctx,
+            exported,
+            url,
+            dir,
+            bookmark_seen,
+            quiet_window.clone(),
+        );
         check_download_settings(&live, &ctx);
 
         let icon = "https://example.com/icon.png";
@@ -510,8 +519,9 @@ mod mac {
             Rc::new(move |waited: Duration| {
                 let outstanding = *watch.outstanding.borrow();
                 let seen = history_seen.get();
-                let bookmark_changed = bookmark_seen.get();
-                if (outstanding != 0 || !seen) && waited < Duration::from_secs(60) {
+                let quiet = quiet_window.get();
+                if (outstanding != 0 || !seen || quiet.is_none()) && waited < Duration::from_secs(60)
+                {
                     return false;
                 }
                 record(
@@ -521,12 +531,12 @@ mod mac {
                     url.into(),
                 );
                 // Ardia's engine mutes the event while `bookmarks.apply` edits: `ac_bookmarks.cc:152` returns when
-                // `applying_` is set, and `:438` and `:456` set and clear it around the edits. So the call's own
-                // edits raise no `bookmarks.changed`, and no other call edits bookmarks.
+                // `applying_` is set, and `:438` and `:456` set and clear it around the edits. The event must not
+                // arrive in the 500 ms after the reply either.
                 record(
                     &watch,
-                    "bookmarks.apply raises no bookmarks.changed (Ardia ac_bookmarks.cc:152)",
-                    !bookmark_changed,
+                    "bookmarks.apply raises no bookmarks.changed within 500 ms (Ardia ac_bookmarks.cc:152)",
+                    quiet == Some(true),
                     String::new(),
                 );
                 if outstanding != 0 {
@@ -607,7 +617,9 @@ mod mac {
         url: &'static str,
         profile_path: String,
         seen: Rc<Cell<bool>>,
+        window: Rc<Cell<Option<bool>>>,
     ) {
+        let seen_after = seen.clone();
         let armed = Rc::new(Cell::new(false));
         let watch_armed = armed.clone();
         api::subscribe::<api::events::BookmarksChanged>(
@@ -643,6 +655,11 @@ mod mac {
                                 "k": "u", "t": "Ria live bookmark", "u": url, "a": 1_700_000_000_000_i64,
                                 "parent": tree.bar.id}]}),
                             move |live, ctx, r| {
+                                let (seen, window) = (seen_after, window);
+                                main_queue::after(
+                                    Duration::from_millis(500),
+                                    Box::new(move || window.set(Some(!seen.get()))),
+                                );
                                 expect::<api::bookmarks::ExportHtml>(
                                     live,
                                     ctx,

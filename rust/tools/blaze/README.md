@@ -98,3 +98,5 @@ Cause: `crates/hir-ty-codegen/neon.rs` lowered only `rshrn` among the shift-righ
 Fix: the same arm now lowers `sqshrn`, `uqshrn`, `sqshrun`, `sqrshrn`, `uqrshrn`, `sqrshrun` (same operand shape, immediate `1..=lane bits`); the test table has `aarch64.neon.sqshrun.v4i16`.
 
 After, on the Mac with the rebuilt blaze: `blaze test -p ria-engine` builds and runs (`95 passed; 0 failed`).
+
+Live run, on the Mac: `blaze test -p ria-engine` exits 0 (`95 passed; 0 failed`). `blaze test -p ria-engine --test live` exited 101 before the fix (25 checks). Its `all calls settled` check fails because the engine never replies to `ac_bookmarks_export_html`. This is a known finding, filed separately.
