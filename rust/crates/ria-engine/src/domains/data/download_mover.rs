@@ -450,9 +450,9 @@ impl DownloadMover {
             // A rename leaves the file at one path only, so a staged file means the rename to `placed` did not happen.
             if regular(&staged) {
                 let source_free = matches!(lstat_at(libc::AT_FDCWD, source), Err(error) if errno(&error) == libc::ENOENT);
-                if !matches(&staged)
-                    || !source_free
-                    || rename_excl(libc::AT_FDCWD, &staged, libc::AT_FDCWD, source).is_err()
+                if matches(&staged)
+                    && (!source_free
+                        || rename_excl(libc::AT_FDCWD, &staged, libc::AT_FDCWD, source).is_err())
                 {
                     self.defaults
                         .set(MOVED_DEFAULT, Self::remember(state, id, source, &staged));

@@ -785,7 +785,7 @@ fn recovery_and_revocation(env: &Env, mover: &DownloadMover) {
         assert_eq!(env.staging_dirs(), 0);
     }
     {
-        // Issue 52: a staged file that no longer matches the download is not put back at its source.
+        // Issue 52: a staged file that no longer matches the download stays in staging, unrecorded and unreported.
         let path = crash_at(mover, "tampered.txt", "original", "claimed");
         let id = env.last_id();
         let staged = fs::read_dir(&env.source)
@@ -805,7 +805,11 @@ fn recovery_and_revocation(env: &Env, mover: &DownloadMover) {
             .as_str()
             .unwrap()
             .to_owned();
-        assert_eq!(text(&reported), "tampered");
+        assert_eq!(reported, path);
+        assert_eq!(
+            text(staged.join("tampered.txt").to_str().unwrap()),
+            "tampered"
+        );
         fs::remove_dir_all(staged).unwrap();
     }
     {
