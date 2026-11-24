@@ -26,6 +26,7 @@ mod mac {
     use objc2::{
         AllocAnyThread, DefinedClass, MainThreadMarker, Message, class, define_class, msg_send,
     };
+    use objc2_app_kit::NSView;
     use objc2_foundation::{NSPoint, NSRect, NSSize, NSString};
     use ria_engine::call::{ActionQueue, Engine as CallEngine, main_queue};
     use ria_engine::types::{Number, TabStripCommand, TabStripTransaction};
@@ -36,6 +37,7 @@ mod mac {
     use ria_host_mac::tabs::ardia_web_view_navigation::NavigationReports;
     use ria_host_mac::tabs::ardia_web_view_page_commands as page_commands;
     use ria_host_mac::tabs::ardia_web_view_recording::recording_shows_page;
+    use ria_host_mac::tabs::ardia_web_view_reveals::Reveal;
     use ria_host_mac::tabs::ardia_web_view_site_data::site_data;
     use ria_host_mac::tabs::ardia_web_view_tab::{Attach, AttachStep, AttachedTab, StashedReports};
     use serde_json::json;
@@ -568,7 +570,7 @@ mod mac {
         let tab_id = i64::from(tab.tab_id());
         let profile_path = profile.path().to_string();
         let state = Rc::new(RefCell::new((strips, registry)));
-        call.on_event("tabs.strip", {
+        call.on_event_at("tabs.strip", {
             let emitted = emitted.clone();
             let engine_pinned = engine_pinned.clone();
             let event_deadline = event_deadline.clone();
@@ -576,10 +578,11 @@ mod mac {
             let state = state.clone();
             let profile = profile.clone();
             let profile_path = profile_path.clone();
-            move |event| {
+            move |event, received| {
+                // The time of receipt, not the time at which this handler runs: a late drain must not reject an on-time event.
                 if event_deadline
                     .get()
-                    .is_some_and(|deadline| Instant::now() >= deadline)
+                    .is_some_and(|deadline| received >= deadline)
                     || event["window"].as_i64() != Some(i64::from(strip_id))
                     || event["profile"].as_str() != Some(profile_path.as_str())
                     || event["offTheRecord"].as_bool() == Some(true)
@@ -610,6 +613,7 @@ mod mac {
                     call.shutdown();
                     return shutdown(&window, &tab, false);
                 }
+                let oracle_path = profile_path.clone();
                 call.call("ac_tabs_group", &profile_path, false, args, {
                     let call = call.clone();
                     move |reply| {
@@ -672,23 +676,104 @@ mod mac {
                                         }
                                     },
                                     move |pass| {
-                                        let pass = pass && {
-                                            let (strips, registry) = &mut *state.borrow_mut();
-                                            check_adoption(
-                                                &fixture_strip(&window, &profile),
-                                                &tab,
-                                                strips,
-                                                registry,
-                                            )
-                                        };
-                                        call.shutdown();
-                                        shutdown(&window, &tab, pass);
+                                        if !pass {
+                                            call.shutdown();
+                                            return shutdown(&window, &tab, false);
+                                        }
+                                        check_shown_marks(
+                                            call.clone(),
+                                            oracle_path,
+                                            window.clone(),
+                                            profile.clone(),
+                                            tab.clone(),
+                                            move |pass| {
+                                                let pass = pass && {
+                                                    let (strips, registry) =
+                                                        &mut *state.borrow_mut();
+                                                    check_adoption(
+                                                        &fixture_strip(&window, &profile),
+                                                        &tab,
+                                                        strips,
+                                                        registry,
+                                                    )
+                                                };
+                                                call.shutdown();
+                                                shutdown(&window, &tab, pass);
+                                            },
+                                        );
                                     },
                                 );
                             },
                         );
                     }
                 });
+            }
+        });
+    }
+
+    /// Check L: the native `noteInShownSlot` mark of an offered tab, read through the engine's `ac_cli_owns_tab` call
+    /// (`ac_cli_control.cc` `AC_ARGS_CALL(ac_cli_owns_tab)`, key `shown` from `TabWasInShownSlot`). The call only reads,
+    /// so nothing replaces the native dispatch. A host with no window leaves no mark; a host with a window marks the
+    /// offer even when DevTools refuses the preview (`ArdiaWebView+Reveals.mm:309` before `:336`).
+    fn check_shown_marks(
+        call: CallEngine,
+        profile_path: String,
+        window: Retained<Window>,
+        profile: Retained<Profile>,
+        shown: Retained<Tab>,
+        finish: impl FnOnce(bool) + 'static,
+    ) {
+        let offers: Vec<Retained<Tab>> = (0..3)
+            .map(|_| {
+                let offer = window.open_tab(&NSString::from_str("about:blank"), &profile, false);
+                if let Some(view) = offer.view() {
+                    view.removeFromSuperview();
+                }
+                offer
+            })
+            .collect();
+        let host = window.host_view();
+        let detached = NSView::new(MainThreadMarker::new().unwrap());
+        let reveal = Rc::new(RefCell::new(Reveal::default()));
+        let blocked = Reveal::front(&reveal, &host, &shown, &offers[1], true, true, false);
+        let refused = Reveal::front(&reveal, &detached, &shown, &offers[0], true, false, false);
+        let fronted = Reveal::front(&reveal, &host, &shown, &offers[2], true, false, false);
+        reveal.borrow_mut().drop_front(&host);
+        let steps = vec![
+            (offers[0].clone(), false),
+            (offers[1].clone(), true),
+            (offers[2].clone(), true),
+        ];
+        let pass = !blocked && !refused && fronted;
+        read_marks(call, profile_path, steps, move |marks| {
+            for offer in &offers {
+                offer.close();
+            }
+            finish(pass && marks);
+        });
+    }
+
+    fn read_marks(
+        call: CallEngine,
+        profile_path: String,
+        mut steps: Vec<(Retained<Tab>, bool)>,
+        finish: impl FnOnce(bool) + 'static,
+    ) {
+        let Some((offer, expected)) = steps.pop() else {
+            return finish(true);
+        };
+        let args = json!({"tab": i64::from(offer.tab_id())});
+        let path = profile_path.clone();
+        call.call("ac_cli_owns_tab", &path, false, args, {
+            let call = call.clone();
+            move |reply| {
+                let mark = reply.ok().and_then(|reply| reply["shown"].as_bool());
+                println!("live_tabs: shown-slot mark {mark:?}, expected {expected}");
+                if mark == Some(expected) {
+                    read_marks(call, profile_path, steps, finish);
+                } else {
+                    finish(false);
+                }
             }
         });
     }
