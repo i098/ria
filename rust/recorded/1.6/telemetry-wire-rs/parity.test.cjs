@@ -78,3 +78,15 @@ test('telemetry preserves structured attribute keys and values on both transport
     }
   }
 })
+
+test('undefined event properties suppress default attributes on both transports', () => {
+  for (const label of ['plain', '\uD800']) {
+    const event = {
+      uuid: 'u', event: 'test', distinct_id: 'd', timestamp: '2025-01-01',
+      properties: { event: undefined, uuid: undefined, distinct_id: undefined, label, nested: { omitted: undefined } },
+    }
+    const expected = original.eventRecord(event)
+    assert.deepEqual(port.eventRecord(event), expected)
+    assert.deepEqual(port.eventRecord(event, null), expected)
+  }
+})

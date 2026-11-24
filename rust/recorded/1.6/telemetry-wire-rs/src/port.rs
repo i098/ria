@@ -45,16 +45,19 @@ fn json_of(value: &Value) -> Result<Json, String> {
             } else if o.contains_key("$utf16") {
                 return Err("a lone surrogate, which a Rust String cannot hold".into());
             } else {
-                Json::Object(entries_of(o)?)
+                Json::Object(entries_of(o, true)?)
             }
         }
     })
 }
 
-fn entries_of(object: &Map<String, Value>) -> Result<Vec<(String, Json)>, String> {
+fn entries_of(
+    object: &Map<String, Value>,
+    omit_undefined: bool,
+) -> Result<Vec<(String, Json)>, String> {
     let mut entries = Vec::new();
     for (key, value) in object {
-        if !is_undefined(value) {
+        if !omit_undefined || !is_undefined(value) {
             let key = if key.starts_with("$$") { &key[1..] } else { key };
             wire::set_entry(&mut entries, key, json_of(value)?);
         }
@@ -71,7 +74,7 @@ fn object_entries(value: &Value) -> Result<Vec<(String, Json)>, String> {
         Value::Object(_) if is_undefined(value) => Err(NOT_OBJECT.into()),
         Value::Object(_) if as_number(value).is_some() => Ok(vec![]),
         Value::Object(o) if o.contains_key("$utf16") => Err(SURROGATE.into()),
-        Value::Object(o) => entries_of(o),
+        Value::Object(o) => entries_of(o, false),
         Value::Null => Err(NOT_OBJECT.into()),
         Value::Bool(_) | Value::Number(_) => Ok(vec![]),
         Value::String(s) => {
