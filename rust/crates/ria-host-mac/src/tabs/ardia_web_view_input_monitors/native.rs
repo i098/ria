@@ -21,7 +21,7 @@ use super::ScrollZoom;
 pub struct EventMonitor(Retained<AnyObject>);
 
 impl EventMonitor {
-    fn install(
+    pub(in crate::tabs) fn install(
         _mtm: MainThreadMarker,
         mask: NSEventMask,
         swallow: impl Fn(&NSEvent) -> bool + 'static,

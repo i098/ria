@@ -35,6 +35,9 @@ mod mac {
     use ria_host_mac::tabs::ardia_tab_strip::{StripCommandResult, StripWindow, TabStrips};
     use ria_host_mac::tabs::ardia_web_view_navigation::NavigationReports;
     use ria_host_mac::tabs::ardia_web_view_page_commands as page_commands;
+    use ria_host_mac::tabs::ardia_web_view_recording::recording_shows_page;
+    use ria_host_mac::tabs::ardia_web_view_site_data::site_data;
+    use ria_host_mac::tabs::ardia_web_view_tab::{Attach, AttachStep, AttachedTab, StashedReports};
     use serde_json::json;
 
     const FIXTURE_URL: &str = "data:text/html,%3Ctitle%3ERia%20tab%20fixture%3C/title%3E";
@@ -342,6 +345,89 @@ mod mac {
                     eprintln!("live_tabs: evaluation did not return JSON number 42");
                     return shutdown(&window, &tab, false);
                 }
+                check_tab_services(window, tab, profile, deadline);
+            },
+        );
+    }
+
+    fn check_tab_services(
+        window: Retained<Window>,
+        tab: Retained<Tab>,
+        profile: Retained<Profile>,
+        deadline: Instant,
+    ) {
+        let host = window.host_view();
+        let registry = RefCell::new(TabRegistry::default());
+        let mut stashed = StashedReports::default();
+        let mut attached = AttachedTab::<()>::default();
+        let mut ready = false;
+        let adoption = attached.attach(
+            tab.clone(),
+            Attach {
+                host: &host,
+                app_id: "tab-services".into(),
+                window: Some(&window),
+                placement: None,
+                shown_early: true,
+                created: false,
+                temporary: false,
+                muted: false,
+                page_background: None,
+                contents_background: None,
+                page_color: None,
+            },
+            &registry,
+            &mut stashed,
+            |_, _| {},
+            |step| ready |= matches!(step, AttachStep::Ready),
+        );
+        let was_registered = registry.borrow().app_tab_id(&tab) == Some("tab-services");
+        let page = tab.view();
+        page.setHidden(false);
+        page.setAlphaValue(1.0);
+        let records_visible = recording_shows_page(&host, Some(&tab));
+        page.setHidden(true);
+        let skips_hidden = !recording_shows_page(&host, Some(&tab));
+        page.setHidden(false);
+        attached.life.keeps_page_on_detach = true;
+        let detached = attached
+            .detach(&host, &registry, &mut stashed, |_, _| {}, |_| {})
+            .is_some_and(|detached| std::ptr::eq(&*detached, &*tab));
+        if !(adoption == Adoption::Adopted
+            && ready
+            && was_registered
+            && records_visible
+            && skips_hidden
+            && detached
+            && attached.tab.is_none()
+            && registry.borrow().app_tab_id(&tab).is_none()
+            && recording_shows_page(&host, Some(&tab)))
+        {
+            eprintln!("live_tabs: attach, recording, or retained-view detach check failed");
+            return shutdown(&window, &tab, false);
+        }
+        let reply = Rc::new(Cell::new(None));
+        site_data(
+            Some(&tab),
+            Some(&profile),
+            &json!({"op": "read", "domains": [], "origins": []}),
+            Box::new({
+                let reply = reply.clone();
+                move |value| reply.set(Some(value == Some(json!({"cookies": [], "storage": {}}))))
+            }),
+        );
+        wait_for_event(
+            deadline,
+            {
+                let reply = reply.clone();
+                move || reply.get().is_some()
+            },
+            move |answered| {
+                if !answered || reply.get() != Some(true) {
+                    eprintln!("live_tabs: no typed site data reply from Chromium");
+                    return shutdown(&window, &tab, false);
+                }
+                println!("live_tabs: attach, recording visibility, and site data reply: true");
                 check_registry_and_parking(window, tab, profile);
             },
         );

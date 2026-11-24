@@ -272,7 +272,7 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/ArdiaTrafficLights.*` | Objective-C++ | 543 | native | `rust/crates/ria-host-mac/src/windows/ardia_traffic_lights.rs` | hand | done | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaTransferLedger.*` | Objective-C++ | 136 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaWebView.*` | Objective-C++/Swift | 6535 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
-| mac | `packages/ardiacore/ios/ArdiaWebViewInternal.*` | Objective-C++ | 431 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | todo | 3.8 | port |
+| mac | `packages/ardiacore/ios/ArdiaWebViewInternal.*` | Objective-C++ | 431 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaWindowController.*` | Objective-C++ | 428 | native | `rust/crates/ria-host-mac/src/windows/ardia_window_controller.rs` | hand | partial | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaWindowFullScreen.*` | Objective-C++ | 575 | native | `rust/crates/ria-host-mac/src/windows/ardia_window_full_screen.rs` | hand | done | 3.7 | port |
 | mac | `packages/ardiacore/ios/ArdiaWindowSightMath.*` | Objective-C++ | 55 | native | `rust/crates/ria-host-mac/src/windows/ardia_window_sight_math.rs` | hand | done | 3.7 | port |
