@@ -155,6 +155,25 @@ fn export_html(ctx: &DataCtx, args: CallArgs, reply: CallReply) -> Done {
     Ok(())
 }
 
+/// `passwords.export`: the save panel picks the file, and a cancelled panel is `cancelled` (the Mac service answers a
+/// missing path with `cancelled`, `services.rs:221`).
+fn export_passwords(ctx: &DataCtx, args: CallArgs, reply: CallReply) -> Done {
+    let ctx = ctx.clone();
+    let profile = args.profile.clone();
+    ctx.services.clone().run(
+        "savePanel",
+        &args.profile,
+        json!({ "name": "Ria Passwords.csv", "type": "csv" }),
+        Box::new(move |chosen| match chosen {
+            Ok(Value::String(path)) => {
+                ctx.service("exportPasswords", &profile, json!({ "path": path }), reply)
+            }
+            _ => reply.ok(Some(json!({ "status": "cancelled" }))),
+        }),
+    );
+    Ok(())
+}
+
 const fn bookmarks_table() -> &'static [(&'static str, Handler<DataCtx>)] {
     &[
         ("tree", passing!("ac_bookmarks_tree")),
@@ -272,7 +291,7 @@ const fn passwords_table() -> &'static [(&'static str, Handler<DataCtx>)] {
         ),
         ("neverSaveOrigins", service!("neverSaveOrigins")),
         ("allowSaving", service!("allowSaving", "origin": text)),
-        ("export", service!("exportPasswords")),
+        ("export", export_passwords),
         ("autofillEnabled", password_toggle),
         ("setAutofillEnabled", |ctx, args, reply| {
             let enabled = args.bool("enabled")?;

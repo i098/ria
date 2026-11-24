@@ -307,6 +307,35 @@ fn bookmark_export_suggests_a_ria_html_filename() {
 }
 
 #[test]
+fn password_export_sends_the_chosen_path_and_a_cancelled_panel_never_exports() {
+    let rig = rig();
+    rig.services
+        .answers
+        .borrow_mut()
+        .insert("savePanel".into(), Ok(json!("/tmp/Ria Passwords.csv")));
+    rig.services
+        .answers
+        .borrow_mut()
+        .insert("exportPasswords".into(), Ok(json!({"status": "succeeded"})));
+    let reply = run_table(&rig, "passwords", "export", "work", json!({}));
+    assert_eq!(
+        rig.services.log.borrow()[1],
+        (
+            "exportPasswords".into(),
+            "work".into(),
+            json!({"path": "/tmp/Ria Passwords.csv"})
+        )
+    );
+    assert_eq!(reply.take(), Some(Ok(r#"{"status":"succeeded"}"#.into())));
+
+    rig.services.answers.borrow_mut().remove("savePanel");
+    rig.services.log.borrow_mut().clear();
+    let reply = run_table(&rig, "passwords", "export", "work", json!({}));
+    assert_eq!(rig.services.log.borrow().len(), 1);
+    assert_eq!(reply.take(), Some(Ok(r#"{"status":"cancelled"}"#.into())));
+}
+
+#[test]
 fn the_service_accepts_only_boolean_true_and_keeps_engine_errors() {
     let answers = [
         (json!({"ok": true}), None),
