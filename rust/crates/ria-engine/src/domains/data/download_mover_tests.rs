@@ -598,6 +598,77 @@ fn download_mover() {
         mover = restarted;
     }
     {
+        // Issue 62: the shortest approved root decides where folders may be created.
+        let path = env.finished(&mover, "tax.pdf", "tax", none.clone());
+        mover.set_approved_folders(&["~/Downloads/Tax/2026".into()]);
+        assert_eq!(
+            reason(&mover.move_download(&path, "~/Downloads/Tax/2026")),
+            "ok"
+        );
+        assert_eq!(text(&env.at("Downloads/Tax/2026/tax.pdf")), "tax");
+        mover.set_approved_folders(&[]);
+    }
+    {
+        // Issue 63: a FIFO put in place of the claimed file must not block the mover.
+        let mover = Arc::new(env.mover());
+        let path = env.finished(&mover, "pipe.txt", "pipe", none.clone());
+        hook(&mover, |step, staging| {
+            if step == "claimed" {
+                let staged = format!("{staging}/pipe.txt");
+                fs::remove_file(&staged).unwrap();
+                let fifo = std::ffi::CString::new(staged).unwrap();
+                // SAFETY: `fifo` is a valid C string.
+                assert_eq!(unsafe { libc::mkfifo(fifo.as_ptr(), 0o600) }, 0);
+            }
+        });
+        let work = mover
+            .start_move(path.clone(), "~/Downloads/Pipes".into())
+            .unwrap();
+        let deadline = std::time::Instant::now() + Duration::from_secs(10);
+        while !work.is_finished() && std::time::Instant::now() < deadline {
+            std::thread::sleep(Duration::from_millis(20));
+        }
+        assert!(work.is_finished(), "the mover blocked on a FIFO");
+        assert_eq!(reason(&work.join().unwrap()), "changed");
+        unhook(&mover);
+        fs::remove_file(&path).unwrap();
+    }
+    {
+        // Issue 65: a move into the folder that holds the file verifies it first, and does not rename it.
+        let path = env.make("Downloads/same.txt", "as downloaded");
+        mover.note_download_event(&env.finished_event(&path, "as downloaded"));
+        let before = fs::metadata(&path).unwrap().ino();
+        assert_eq!(reason(&mover.move_download(&path, "~/Downloads")), "ok");
+        assert_eq!(fs::metadata(&path).unwrap().ino(), before);
+        fs::write(&path, "edited later!!").unwrap();
+        assert_eq!(
+            reason(&mover.move_download(&path, "~/Downloads")),
+            "changed"
+        );
+        assert_eq!(text(&path), "edited later!!");
+        assert_eq!(env.staging_dirs(), 0);
+    }
+    #[cfg(target_os = "linux")]
+    {
+        // Issue 64: a staging path with no UTF-8 form refuses the move and leaves the file and no journal entry.
+        use std::os::unix::ffi::OsStrExt;
+        let real = std::path::PathBuf::from(std::ffi::OsStr::from_bytes(
+            &[env.home.as_bytes(), b"/odd-\xff"].concat(),
+        ));
+        fs::create_dir_all(&real).unwrap();
+        fs::write(real.join("odd.txt"), "odd").unwrap();
+        let link = env.at("odd-link");
+        std::os::unix::fs::symlink(&real, &link).unwrap();
+        let path = format!("{link}/odd.txt");
+        mover.note_download_event(&env.finished_event(&path, "odd"));
+        assert_eq!(reason(&mover.move_download(&path, "~/Downloads")), "failed");
+        assert_eq!(text(&path), "odd");
+        assert!(env.defaults.get("ArdiaDownloadMoveJournal").is_none());
+        assert_eq!(fs::read_dir(&real).unwrap().count(), 1);
+        fs::remove_dir_all(&real).unwrap();
+        fs::remove_file(&link).unwrap();
+    }
+    {
         let mover = Arc::new(mover);
         let size = 8u64 << 20;
         let path = format!("{}/large.bin", env.source);
