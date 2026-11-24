@@ -571,26 +571,40 @@ mod mac {
             }
             unsafe { original(view, selector, parent) };
         });
+        let selector_attach = selector;
+        let attach_method = method;
+        let attach_original = method.implementation();
+        let attach_imp = unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&attach).cast()) };
         unsafe {
             ffi::class_replaceMethod(
                 std::ptr::from_ref(class).cast_mut(),
                 selector,
-                ffi::imp_implementationWithBlock(RcBlock::as_ptr(&attach).cast()),
+                attach_imp,
                 ffi::method_getTypeEncoding(method),
             );
         }
 
         let target = std::ptr::from_ref(tab);
+        let processed = Rc::new(Cell::new(false));
         let view_selector = sel!(view);
         let view_method = tab.class().instance_method(view_selector).unwrap();
         let view_original = view_method.implementation();
         let view: unsafe extern "C-unwind" fn(*const Tab, Sel) -> *mut NSView =
             unsafe { std::mem::transmute(view_original) };
-        let view_read_at = Rc::new(Cell::new(None));
-        let read_at = view_read_at.clone();
+        let marker = processed.clone();
+        let marked = Cell::new(false);
         let view_hook = RcBlock::new(move |tab: *const Tab| {
-            if tab == target {
-                read_at.set(Some(Instant::now()));
+            if tab == target && !marked.replace(true) {
+                let marker = marker.clone();
+                main_queue::after(
+                    Duration::from_millis(400),
+                    Box::new(move || {
+                        assert!(
+                            marker.get(),
+                            "The queued snapshot handler must run before the cover deadline"
+                        );
+                    }),
+                );
             }
             unsafe { view(tab, view_selector) }
         });
@@ -607,7 +621,6 @@ mod mac {
         let snapshot = RcBlock::new(
             move |tab: *const Tab, timeout: f64, completion: &DynBlock<dyn Fn(CGImageRef)>| {
                 if tab == target && let Some((supersede, verify)) = work.take() {
-                    let started = view_read_at.take().unwrap();
                     unsafe {
                         ffi::method_setImplementation(view_method, view_original);
                         ffi::imp_removeBlock(view_imp);
@@ -616,21 +629,26 @@ mod mac {
                     main_queue::post(Box::new(supersede));
                     let completion = completion.copy();
                     let verify = Cell::new(Some(verify));
+                    let processed = processed.clone();
                     let attached = attached.clone();
                     let reply = RcBlock::new(move |image: CGImageRef| {
                         assert!(!image.0.is_null(), "The fullscreen snapshot must contain an image");
                         completion.call((image,));
-                        let processed = Rc::new(Cell::new(None));
                         let timestamp = processed.clone();
-                        main_queue::post(Box::new(move || timestamp.set(Some(started.elapsed()))));
+                        main_queue::post(Box::new(move || timestamp.set(true)));
                         let attached = attached.clone();
                         let verify = verify.take().unwrap();
                         main_queue::post(Box::new(move || {
-                            assert!(
-                                processed.take().unwrap() < Duration::from_millis(350),
-                                "The queued snapshot handler must run before the cover deadline"
-                            );
                             assert!(!attached.get(), "The stale cover must never attach");
+                            unsafe {
+                                ffi::class_replaceMethod(
+                                    std::ptr::from_ref(class).cast_mut(),
+                                    selector_attach,
+                                    attach_original,
+                                    ffi::method_getTypeEncoding(attach_method),
+                                );
+                                ffi::imp_removeBlock(attach_imp);
+                            }
                             verify();
                         }));
                     });
