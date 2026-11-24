@@ -35,7 +35,8 @@ pub struct SuggestArgs {
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct SuggestReply {
-    pub status: Number,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status: Option<Number>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub body: Option<String>,
     #[serde(rename = "netError", default, skip_serializing_if = "Option::is_none")]

@@ -175,12 +175,16 @@ function literalEnum(types, hint, file, from) {
   return ref(name, file, from);
 }
 
+// Fields that `api.ts` declares required but the engine omits on some replies. `search.suggest` sends only
+// `{ stopped: true }` on stop (ac_search_suggest.cc:85).
+const ENGINE_OPTIONAL = new Set(["SuggestReply.status"]);
+
 function fieldsOf(type, hint, file, from, indent) {
   const out = [];
   for (const prop of checker.getPropertiesOfType(type)) {
     const decl = prop.valueDeclaration ?? prop.declarations?.[0];
     const pt = checker.getTypeOfSymbol(prop);
-    const optional = !!(prop.flags & ts.SymbolFlags.Optional);
+    const optional = !!(prop.flags & ts.SymbolFlags.Optional) || ENGINE_OPTIONAL.has(`${hint}.${prop.name}`);
     let rt = rust(pt, hint + pascal(prop.name), file);
     if (optional && !rt.startsWith("Option<")) rt = `Option<${rt}>`;
     const ident = fieldIdent(prop.name);
