@@ -7,8 +7,8 @@
 //!
 //! # Changes from Ardia
 //!
-//! - `store_folder` sorts the version folders by name before it takes the first match. Ardia takes the first entry of
-//!   `contentsOfDirectory`, whose order is not defined. The sorted order makes the choice the same on every run.
+//! - `store_folder` takes the folder with the highest numeric suffix (`1.2_10` is newer than `1.2_2`) and ignores
+//!   non-numeric suffixes. Ardia takes the first entry of `contentsOfDirectory`, whose order is not defined.
 
 use std::path::{Path, PathBuf};
 
@@ -157,7 +157,7 @@ fn configure_args(args: &Value) -> Result<Value, CallError> {
     Ok(Value::Object(out))
 }
 
-/// Port of `StoreFolder` (`ArdiaServices.mm` line 114): the first folder `<profile>/Extensions/<id>/<version>_*`.
+/// Port of `StoreFolder` (`ArdiaServices.mm` line 114): the newest folder `<profile>/Extensions/<id>/<version>_<N>`.
 fn store_folder(profile_dir: &str, id: Option<&str>, version: Option<&str>) -> Option<PathBuf> {
     let (id, version) = (
         id.filter(|id| is_extension_id(id))?,
@@ -165,15 +165,19 @@ fn store_folder(profile_dir: &str, id: Option<&str>, version: Option<&str>) -> O
     );
     let dir = Path::new(profile_dir).join("Extensions").join(id);
     let prefix = format!("{version}_");
-    let mut names: Vec<_> = std::fs::read_dir(&dir)
+    std::fs::read_dir(&dir)
         .ok()?
         .filter_map(|e| e.ok()?.file_name().into_string().ok())
-        .filter(|n| n.starts_with(&prefix))
-        .collect();
-    names.sort();
-    names.first().map(|n| dir.join(n))
+        .filter_map(|n| {
+            let suffix = n.strip_prefix(&prefix)?.parse::<u64>().ok()?;
+            Some((suffix, n))
+        })
+        .max()
+        .map(|(_, n)| dir.join(n))
 }
 
+/// Reads manifest fields only from a path in the engine reply, or else from the newest store install of the listed
+/// version. A path from profile preferences can refer to a different installation of the same extension version.
 /// Port of `listExtensions:profile:reply:` (`ArdiaServices.mm` lines 280-300).
 fn list_reply(reply: Value, ctx: &CallContext) -> Result<Value, CallError> {
     let infos = reply["extensions"]
@@ -381,5 +385,29 @@ mod tests {
         assert_eq!(out["extensions"][0]["popup"], "live.html");
         assert_eq!(out["extensions"][0]["incognitoSplit"], false);
         assert_eq!(out["extensions"][0]["incognitoAllowed"], Value::Null);
+    }
+
+    #[test]
+    fn pathless_list_preserves_live_metadata_after_same_version_reinstall() {
+        let dir = tempfile::tempdir().unwrap();
+        let id = "abcdefghijklmnopabcdefghijklmnop";
+        let store = |sub: &str, popup: &str| {
+            let d = dir.path().join("Extensions").join(id).join(sub);
+            std::fs::create_dir_all(&d).unwrap();
+            let m = format!(r#"{{"action":{{"default_popup":"{popup}"}}}}"#);
+            std::fs::write(d.join("manifest.json"), m).unwrap();
+        };
+        let popup_of = || {
+            let live = json!({"id": id, "version": "1.2", "path": null, "popup": "live.html"});
+            let out = list_reply(json!({"extensions": [live]}), &ctx(dir.path())).unwrap();
+            out["extensions"][0]["popup"].clone()
+        };
+        store("1.2_0", "old.html");
+        store("1.2_1", "new.html");
+        assert_eq!(popup_of(), "new.html");
+        store("1.2_2", "two.html");
+        store("1.2_10", "ten.html");
+        store("1.2_x", "junk.html");
+        assert_eq!(popup_of(), "ten.html");
     }
 }
