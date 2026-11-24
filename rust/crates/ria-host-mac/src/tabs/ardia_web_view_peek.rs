@@ -232,11 +232,11 @@ impl Peek {
     }
 
     pub fn recent_click(&self, host: &NSView, now: Instant) -> Option<NSPoint> {
-        host.window()?;
+        let window = host.window()?;
         self.mouse_up
             .as_ref()
             .filter(|up| up.over(host) && now.saturating_duration_since(up.at) <= GESTURE_LIFETIME)
-            .map(|up| up.point)
+            .map(|up| crate::windows::ardia_interface_scale::root_point_from_window(up.point, &window))
     }
 
     pub fn take_shift_click(&mut self, host: &NSView, now: Instant) -> bool {

@@ -185,6 +185,7 @@ impl StandIn {
     pub fn drop_stand_in(
         state: &Rc<RefCell<Self>>,
         host: &NSView,
+        current: impl FnOnce(&NSView) -> Option<Retained<NSView>> + 'static,
         restore: impl FnOnce(&NSView, &Tab) + 'static,
     ) {
         let generation = {
@@ -198,7 +199,7 @@ impl StandIn {
             };
             if !mounted(&loan.page, host) {
                 drop(inner);
-                return finish(state, Some(host), restore);
+                return finish(state, Some(host), current, restore);
             }
             without_actions(|| {
                 loan.leaving_opacity = Some(loan.page.layer().map_or(0.0, |layer| {
@@ -219,7 +220,7 @@ impl StandIn {
                     .upgrade()
                     .filter(|state| state.borrow().still_holds(generation))
                 {
-                    finish(&state, host.load().as_deref(), restore);
+                    finish(&state, host.load().as_deref(), current, restore);
                 }
             }),
         );
@@ -263,7 +264,12 @@ fn restore_opacity(loan: &Loan) {
     }
 }
 
-fn finish(state: &RefCell<StandIn>, host: Option<&NSView>, restore: impl FnOnce(&NSView, &Tab)) {
+fn finish(
+    state: &RefCell<StandIn>,
+    host: Option<&NSView>,
+    current: impl FnOnce(&NSView) -> Option<Retained<NSView>>,
+    restore: impl FnOnce(&NSView, &Tab),
+) {
     let loan = state.borrow_mut().clear();
     let Some(loan) = loan else { return };
     without_actions(|| {
@@ -274,11 +280,12 @@ fn finish(state: &RefCell<StandIn>, host: Option<&NSView>, restore: impl FnOnce(
     });
     if loan.close && !loan.tab.closed() {
         loan.tab.close_now();
-    } else if let Some(lender) = loan
-        .lender
-        .load()
-        .filter(|lender| lender.window().is_some())
-        && superview(&loan.page).is_none()
+    } else if let Some(lender) = loan.lender.load().filter(|lender| {
+        lender.window().is_some()
+            && current(lender)
+                .as_deref()
+                .is_some_and(|shown| ptr::eq(shown, &*loan.page))
+    }) && superview(&loan.page).is_none()
     {
         restore(&lender, &loan.tab);
     }
