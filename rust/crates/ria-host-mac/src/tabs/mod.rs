@@ -28,6 +28,7 @@ pub mod ardia_web_view_site;
 pub mod ardia_web_view_site_data;
 pub mod ardia_web_view_stand_in;
 pub mod ardia_web_view_tab;
+pub mod ardia_web_view_transfer;
 pub mod chromium_tab_view;
 pub mod page_engine;
 pub mod page_events;
