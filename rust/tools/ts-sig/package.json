@@ -1,0 +1,7 @@
+{
+  "name": "ts-sig",
+  "private": true,
+  "type": "module",
+  "description": "Makes the ria-state skeleton (State, Action, apply for each of the 41 state folders) from the TypeScript stores of Ardia.",
+  "devDependencies": { "typescript": "5.9.3" }
+}
