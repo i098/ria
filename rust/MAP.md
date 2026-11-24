@@ -236,16 +236,16 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/ardiacore/ios/ArdiaPageDrawWait.*` | Objective-C++ | 67 | native | `rust/crates/ria-host-mac/src/tabs/` | hand | partial | 3.8 | port |
 | mac | `packages/ardiacore/ios/ArdiaPaintProbe.*` | Objective-C++ | 141 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaPaintProbeMath.*` | Objective-C++ | 69 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
-| mac | `packages/ardiacore/ios/ArdiaPiPController.*` | Objective-C++ | 1402 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
-| mac | `packages/ardiacore/ios/ArdiaPiPHandle.*` | Objective-C++ | 63 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
-| mac | `packages/ardiacore/ios/ArdiaPiPOverlay.*` | Objective-C++ | 39 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
-| mac | `packages/ardiacore/ios/ArdiaPiPResizeCursor.*` | Objective-C++ | 243 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
-| mac | `packages/ardiacore/ios/ArdiaPiPSeekMath.*` | Objective-C++ | 22 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
-| mac | `packages/ardiacore/ios/ArdiaPiPThrowMath.*` | Objective-C++ | 310 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
-| mac | `packages/ardiacore/ios/ArdiaPiPZoom.*` | Objective-C++ | 519 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
-| mac | `packages/ardiacore/ios/ArdiaPiPZoomMath.*` | Objective-C++ | 83 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
-| mac | `packages/ardiacore/ios/ArdiaPictureInPicture.*` | Objective-C++ | 503 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
-| mac | `packages/ardiacore/ios/ArdiaPictureInPictureInternal.*` | Objective-C++ | 218 | native | `rust/crates/ria-host-mac/src/pip/` | hand | todo | 3.10 | port |
+| mac | `packages/ardiacore/ios/ArdiaPiPController.*` | Objective-C++ | 1402 | native | [`ardia_pip_controller.rs`](crates/ria-host-mac/src/pip/ardia_pip_controller.rs) | hand | partial | 3.10 | port |
+| mac | `packages/ardiacore/ios/ArdiaPiPHandle.*` | Objective-C++ | 63 | native | [`ardia_pip_handle.rs`](crates/ria-host-mac/src/pip/ardia_pip_handle.rs) | hand | partial | 3.10 | port |
+| mac | `packages/ardiacore/ios/ArdiaPiPOverlay.*` | Objective-C++ | 39 | native | [`ardia_pip_overlay.rs`](crates/ria-host-mac/src/pip/ardia_pip_overlay.rs) | hand | partial | 3.10 | port |
+| mac | `packages/ardiacore/ios/ArdiaPiPResizeCursor.*` | Objective-C++ | 243 | native | [`ardia_pip_resize_cursor.rs`](crates/ria-host-mac/src/pip/ardia_pip_resize_cursor.rs) | hand | partial | 3.10 | port |
+| mac | `packages/ardiacore/ios/ArdiaPiPSeekMath.*` | Objective-C++ | 22 | native | [`ardia_pip_seek_math.rs`](crates/ria-host-mac/src/pip/ardia_pip_seek_math.rs) | hand | partial | 3.10 | port |
+| mac | `packages/ardiacore/ios/ArdiaPiPThrowMath.*` | Objective-C++ | 310 | native | [`ardia_pip_throw_math.rs`](crates/ria-host-mac/src/pip/ardia_pip_throw_math.rs) | hand | partial | 3.10 | port |
+| mac | `packages/ardiacore/ios/ArdiaPiPZoom.*` | Objective-C++ | 519 | native | [`ardia_pip_zoom.rs`](crates/ria-host-mac/src/pip/ardia_pip_zoom.rs) | hand | partial | 3.10 | port |
+| mac | `packages/ardiacore/ios/ArdiaPiPZoomMath.*` | Objective-C++ | 83 | native | [`ardia_pip_zoom_math.rs`](crates/ria-host-mac/src/pip/ardia_pip_zoom_math.rs) | hand | partial | 3.10 | port |
+| mac | `packages/ardiacore/ios/ArdiaPictureInPicture.*` | Objective-C++ | 503 | native | [`ardia_picture_in_picture.rs`](crates/ria-host-mac/src/pip/ardia_picture_in_picture.rs) | hand | partial | 3.10 | port |
+| mac | `packages/ardiacore/ios/ArdiaPictureInPictureInternal.*` | Objective-C++ | 218 | native | [`ardia_picture_in_picture_internal.rs`](crates/ria-host-mac/src/pip/ardia_picture_in_picture_internal.rs) | hand | partial | 3.10 | port |
 | mac | `packages/ardiacore/ios/ArdiaPixelGridModule.*` | Objective-C++ | 134 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaPointerTrace.*` | Objective-C++ | 123 | native | `rust/crates/ria-host-mac/src/diagnostics/`, `rust/crates/ria-host-mac/src/swipe/` | hand | todo | 3.11 | port |
 | mac | `packages/ardiacore/ios/ArdiaPopupOriginStrip.*` | Objective-C++ | 106 | native | `rust/crates/ria-host-mac/src/windows/` | hand | partial | 3.7 | port |

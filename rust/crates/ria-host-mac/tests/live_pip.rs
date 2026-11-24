@@ -93,16 +93,24 @@ mod mac {
         use objc2::runtime::{AnyClass, ClassBuilder, Sel};
         use objc2::{ClassType, sel};
 
-        let class: &AnyClass = ClassBuilder::new(c"NativeWidgetMacFramelessNSWindow", NSWindow::class())
-            .expect("class name is free")
-            .register();
+        let class: &AnyClass =
+            ClassBuilder::new(c"NativeWidgetMacFramelessNSWindow", NSWindow::class())
+                .expect("class name is free")
+                .register();
         let imps = |class: &AnyClass| -> Vec<usize> {
-            [sel!(constrainFrameRect:toScreen:), sel!(setLevel:), sel!(setCollectionBehavior:)]
-                .into_iter()
-                .map(|selector: Sel| {
-                    class.instance_method(selector).expect("inherited").implementation() as usize
-                })
-                .collect()
+            [
+                sel!(constrainFrameRect:toScreen:),
+                sel!(setLevel:),
+                sel!(setCollectionBehavior:),
+            ]
+            .into_iter()
+            .map(|selector: Sel| {
+                class
+                    .instance_method(selector)
+                    .expect("inherited")
+                    .implementation() as usize
+            })
+            .collect()
         };
         let before = imps(class);
         ria_host_mac::pip::install_all();
@@ -121,7 +129,9 @@ mod mac {
         for delay in [-1.0, f64::NAN] {
             let ran = Rc::new(Cell::new(false));
             let flag = ran.clone();
-            ria_host_mac::pip::ardia_picture_in_picture_internal::after(delay, move || flag.set(true));
+            ria_host_mac::pip::ardia_picture_in_picture_internal::after(delay, move || {
+                flag.set(true)
+            });
             assert!(pump_until(2.0, || ran.get()), "delay {delay} runs at once");
         }
     }
@@ -191,11 +201,7 @@ mod mac {
         );
 
         controller.round_corners();
-        assert_eq!(
-            layer_radius(&window),
-            6.0,
-            "round_corners fits the corners"
-        );
+        assert_eq!(layer_radius(&window), 6.0, "round_corners fits the corners");
         assert!(
             !window.isOpaque(),
             "the window is not opaque after rounding"

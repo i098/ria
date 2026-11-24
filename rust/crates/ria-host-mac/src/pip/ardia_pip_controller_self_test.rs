@@ -37,7 +37,8 @@ unsafe impl objc2::Encode for CGContextRef {
     const ENCODING: objc2::Encoding = objc2::Encoding::Struct("CGContext", &[]);
 }
 unsafe impl objc2::RefEncode for CGContextRef {
-    const ENCODING_REF: objc2::Encoding = objc2::Encoding::Pointer(&<Self as objc2::Encode>::ENCODING);
+    const ENCODING_REF: objc2::Encoding =
+        objc2::Encoding::Pointer(&<Self as objc2::Encode>::ENCODING);
 }
 
 unsafe extern "C" {
