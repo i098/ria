@@ -55,7 +55,7 @@ The goal is equality with Ardia at commit `551d3c13c` in behaviour, data formats
 | `rust/` | Cargo workspace, proofs, parity rig, blaze patches |
 | `rust/MAP.md` | Unit map: each Ardia unit with its target |
 | `rust/DECISIONS.md` | Decision records |
-| `rust/GATES.md` | Gate results |
+| `rust/GATES.md` | Gate results and [Phase 1 replay setup](rust/GATES.md#phase-1-check-u) |
 | `rust/ANIMATIONS.md` | Animation inventory |
 
 ## Contribute

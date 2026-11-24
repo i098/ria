@@ -7,6 +7,7 @@
 
 #![forbid(unsafe_code)]
 
+use crate::js::{as_number, is_undefined};
 use ria_core::identity::telemetry_wire::{
     self as wire, Json, LogLevel, OtlpLogRecord, QueuedEvent,
 };
@@ -35,58 +36,68 @@ fn json_of(value: &Value) -> Result<Json, String> {
         Value::Bool(b) => Json::Bool(*b),
         Value::Number(n) => Json::Number(n.as_f64().ok_or("TypeError: number out of range")?),
         Value::String(s) => Json::String(s.clone()),
-        Value::Array(items) => Json::Array(
-            items
-                .iter()
-                .map(|v| {
-                    if is_undefined(v) {
-                        Ok(Json::Null)
-                    } else {
-                        json_of(v)
-                    }
-                })
-                .collect::<Result<_, _>>()?,
-        ),
-        Value::Object(_) if is_undefined(value) => Json::Null,
-        Value::Object(_) if special_number(value).is_some() => {
-            Json::Number(special_number(value).unwrap_or(f64::NAN))
+        Value::Array(items) => Json::Array(items.iter().map(json_of).collect::<Result<_, _>>()?),
+        Value::Object(o) => {
+            if is_undefined(value) {
+                Json::Null
+            } else if let Some(n) = as_number(value) {
+                Json::Number(n)
+            } else if o.contains_key("$utf16") {
+                return Err("a lone surrogate, which a Rust String cannot hold".into());
+            } else {
+                Json::Object(entries_of(o, true)?)
+            }
         }
-        Value::Object(o) if o.contains_key("$utf16") => {
-            return Err("a lone surrogate, which a Rust String cannot hold".into());
-        }
-        Value::Object(o) => Json::Object(entries_of(o)?),
     })
 }
 
-/// `NaN`, the infinities and `-0` cross as `{"$num": "..."}`.
-fn special_number(value: &Value) -> Option<f64> {
-    match value.get("$num")?.as_str()? {
-        "NaN" => Some(f64::NAN),
-        "Infinity" => Some(f64::INFINITY),
-        "-Infinity" => Some(f64::NEG_INFINITY),
-        "-0" => Some(-0.0),
-        _ => None,
-    }
-}
-
-fn is_undefined(value: &Value) -> bool {
-    value.get("$undefined") == Some(&Value::Bool(true))
-}
-
-fn entries_of(object: &Map<String, Value>) -> Result<Vec<(String, Json)>, String> {
+fn entries_of(
+    object: &Map<String, Value>,
+    omit_undefined: bool,
+) -> Result<Vec<(String, Json)>, String> {
     let mut entries = Vec::new();
     for (key, value) in object {
-        if !is_undefined(value) {
+        if !omit_undefined || !is_undefined(value) {
+            let key = if key.starts_with("$$") {
+                &key[1..]
+            } else {
+                key
+            };
             wire::set_entry(&mut entries, key, json_of(value)?);
         }
     }
     Ok(entries)
 }
 
+/// JavaScript `Object.entries` indexes strings by UTF-16 code unit.
+/// `projectAttributes` in `index.cjs` handles strings that Rust cannot split into valid characters.
 fn object_entries(value: &Value) -> Result<Vec<(String, Json)>, String> {
+    const NOT_OBJECT: &str = "TypeError: Cannot convert undefined or null to object";
+    const SURROGATE: &str = "a lone surrogate, which a Rust String cannot hold";
     match value {
-        Value::Object(o) => entries_of(o),
-        _ => Err("TypeError: expected an object of attributes".into()),
+        Value::Object(_) if is_undefined(value) => Err(NOT_OBJECT.into()),
+        Value::Object(_) if as_number(value).is_some() => Ok(vec![]),
+        Value::Object(o) if o.contains_key("$utf16") => Err(SURROGATE.into()),
+        Value::Object(o) => entries_of(o, false),
+        Value::Null => Err(NOT_OBJECT.into()),
+        Value::Bool(_) | Value::Number(_) => Ok(vec![]),
+        Value::String(s) => {
+            let mut entries = Vec::new();
+            for (i, c) in s.chars().enumerate() {
+                if c.len_utf16() != 1 {
+                    return Err(SURROGATE.into());
+                }
+                entries.push((i.to_string(), Json::String(c.to_string())));
+            }
+            Ok(entries)
+        }
+        Value::Array(items) => {
+            let mut entries = Vec::new();
+            for (i, v) in items.iter().enumerate() {
+                entries.push((i.to_string(), json_of(v)?));
+            }
+            Ok(entries)
+        }
     }
 }
 
@@ -111,6 +122,7 @@ pub fn event_record(e: Value) -> Result<Value, String> {
         timestamp: string_field(object, "timestamp")?,
         properties: object
             .get("properties")
+            .filter(|v| !v.is_null() && !is_undefined(v)) // `...null` spreads nothing
             .map_or(Ok(vec![]), object_entries)?,
     };
     record_value(&wire::event_record(&event, now_ms()))
@@ -121,19 +133,8 @@ pub fn log_record(
     level: String,
     message: String,
     attributes: Value,
-    at: Option<Value>,
+    at: Option<f64>,
 ) -> Result<Value, String> {
-    let at_ms = match at {
-        None => now_ms(),
-        Some(Value::Null) => 0.0,
-        Some(ref v) if is_undefined(v) => now_ms(),
-        Some(Value::Bool(b)) => f64::from(u8::from(b)),
-        Some(Value::Number(n)) => n.as_f64().ok_or("TypeError: number out of range")?,
-        Some(ref v) if special_number(v).is_some() => special_number(v).unwrap_or(f64::NAN),
-        Some(Value::Object(_)) => f64::NAN,
-        Some(Value::Array(a)) if a.is_empty() => 0.0,
-        Some(_) => return Err("`at` is a string or a list, which `Math.round` coerces".into()),
-    };
     let level = if level == "error" {
         LogLevel::Error
     } else {
@@ -143,7 +144,7 @@ pub fn log_record(
         level,
         &message,
         &object_entries(&attributes)?,
-        at_ms,
+        at.unwrap_or_else(now_ms),
     ))
 }
 

@@ -18,9 +18,20 @@ Gate G1 also has the planned and the real hours of phase 1 and the corrected hou
 
 ## Phase 1: Check U
 
+Prepare the TypeScript oracle for all Phase 1 recordings from the repository root:
+
+```sh
+git submodule update --init --checkout ardia
+rust/recorded/1.4/review-root.sh
+```
+
+The setup replaces `rust/recorded/.review-ardia` with `packages/core` from the commit in the Ardia gitlink.
+It adds the replay harnesses to that directory and ignores local edits in the submodule.
+Phase 1 recordings use this directory as their TypeScript source.
+
 | Slice | Unit | Evidence | Gate command |
 | --- | --- | --- | --- |
-| 1.6 | `mobile.ts` | [Stateful mobile recording](recorded/1.6/mobile-rs/) | `rust-anything gate rust/recorded/1.6/mobile-rs` |
+| 1.6 | `mobile.ts`, `errors.ts` | [Stateful mobile and error recordings](recorded/1.6/mobile-rs/) | `rust-anything gate rust/recorded/1.6/mobile-rs` |
 
 ## G0 record
 

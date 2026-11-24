@@ -7,7 +7,7 @@ recorded cases of the TypeScript original (`cases.jsonl`), its inputs (`<name>.i
 | --- | --- | --- |
 | `anonymous-identity-rs` | `anonymousIdentity.ts` | `identity::anonymous_identity` |
 | `ingest-keys-rs` | `ingestKeys.ts` | `identity::ingest_keys` |
-| `mobile-rs` | `mobile.ts` via `mobile.harness.ts` | `identity::mobile` |
+| `mobile-rs` | `mobile.ts` and `errors.ts` via `mobile.harness.ts` | `identity::mobile` and `errors` |
 | `telemetry-wire-rs` | `telemetryWire.ts` | `identity::telemetry_wire` |
 | `theme-rs` | `theme.ts` | `identity::theme` |
 
@@ -15,13 +15,13 @@ recorded cases of the TypeScript original (`cases.jsonl`), its inputs (`<name>.i
 functions"), so it has no crate. `identity::tab_groups` carries it.
 
 The mobile harness calls all 13 mobile exports in order in one session.
-The [input sequence](mobile.inputs.jsonl) replaces saved pages, search engines, and bang tables.
-The sequence checks the state after each replacement.
+The [recorded inputs](mobile.inputs.jsonl) check the state after each replacement of saved pages, search engines, and bang tables.
+They also check `?` searches with a query, an empty query, and whitespace.
+The harness also records construction of `ArdiaError` and both branches of `ardiaError`.
 
 ## Run
 
-The TypeScript source is in the `ardia` submodule (`packages/core/src`). `record` needs a repository
-root that holds it; the `root` field of each `rust-anything.json` is the scratch checkout of the run.
+Set up the [shared Ardia oracle](../../GATES.md#phase-1-check-u) before you run `record`, `gate`, or `fuzz`.
 
 ```sh
 rust-anything diff   rust/recorded/1.6/<crate>
@@ -29,13 +29,9 @@ rust-anything gate   rust/recorded/1.6/<crate>
 rust-anything fuzz   rust/recorded/1.6/<crate> --seed <new seed>
 ```
 
-Initialize the pinned Ardia submodule before recording the mobile sequence.
-Run these commands from the repository root:
+To record the mobile sequences again, run these commands from the repository root:
 
 ```sh
-mkdir -p .review-ardia
-cp -R ardia/packages .review-ardia/
-cp rust/recorded/1.6/mobile.harness.ts .review-ardia/packages/core/src/
 TZ=UTC rust-anything record rust/recorded/1.6/mobile-rs --count 0 --inputs rust/recorded/1.6/mobile.inputs.jsonl
 rust-anything build rust/recorded/1.6/mobile-rs
 ```

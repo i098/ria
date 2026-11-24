@@ -30,3 +30,6 @@ useless_conversion = "allow"
 [lints.rust]
 unused_lifetimes = "warn"
 trivial_numeric_casts = "warn"
+
+# Own workspace: `rust/Cargo.toml` holds only `crates/*`.
+[workspace]

@@ -1,3 +1,4 @@
+import { ArdiaError, ardiaError } from "./errors.ts";
 import * as mobile from "./mobile.ts";
 
 const calls = {
@@ -14,6 +15,12 @@ const calls = {
   mobileFindScope: mobile.mobileFindScope,
   mobileClean: mobile.mobileClean,
   mobileDisplay: mobile.mobileDisplay,
+  ardiaError: (message: string, code?: string) => {
+    const { name, code: resultCode, message: resultMessage } = ardiaError(
+      code === undefined ? new Error(message) : new ArdiaError(code, message)
+    );
+    return { name, code: resultCode, message: resultMessage };
+  },
 };
 
 export function replayMobile(input: string): unknown[] {

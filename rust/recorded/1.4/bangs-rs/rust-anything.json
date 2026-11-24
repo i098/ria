@@ -1,6 +1,6 @@
 {
   "schema": "rust-anything/bridge@1",
-  "root": ".",
+  "root": "../../.review-ardia",
   "unit": "packages/core/src/bangs.ts",
   "language": "ts",
   "kind": "napi",

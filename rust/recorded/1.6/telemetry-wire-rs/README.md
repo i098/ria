@@ -13,3 +13,8 @@ Rust port of `packages/core/src/telemetryWire.ts`, bridged with napi-rs. Generat
 
 See [the slice instructions](../README.md#run) for recording and replay with the required clock hook.
 Build the napi-rs module with `rust-anything build .` from this directory.
+Run `node --test parity.test.cjs` to compare both bridge transports with the TypeScript oracle.
+
+The Rust `logs_request` API accepts only arrays.
+The replay bridge passes only record arrays without lone surrogates to Rust.
+It serializes other values in JavaScript to preserve the original `logsRequest` behavior.

@@ -45,11 +45,10 @@ pub fn log_record(
     level: String,
     message: String,
     attributes: String,
-    at: String,
+    at: Option<f64>,
 ) -> napi::Result<String> {
     run(move || {
         let attributes = crate::js::from_json(&attributes)?;
-        let at = crate::js::from_json(&at)?;
         let out = port::log_record(level, message, attributes, at)?;
         crate::js::to_json(&out)
     })
@@ -60,7 +59,7 @@ pub fn log_record(
 pub fn logs_request(resource: String, scope: String, records: String) -> napi::Result<String> {
     run(move || {
         let resource = crate::js::from_json(&resource)?;
-        let records = crate::js::from_json(&records)?;
+        let records: Vec<Value> = crate::js::from_json(&records)?;
         let out = port::logs_request(resource, scope, records)?;
         Ok(out)
     })
@@ -220,7 +219,7 @@ pub fn log_record_wire() -> napi::Result<f64> {
         let level: String = r.string16()?;
         let message: String = r.string16()?;
         let attributes: serde_json::Value = wire::read_value(r, &S_LOG_RECORD_2)?;
-        let at: Option<serde_json::Value> = wire::read_dyn_opt(r)?;
+        let at = r.opt(|r| r.f64())?;
         let out = &port::log_record(level, message, attributes, at)?;
         wire::write_value(w, out, &S_LOG_RECORD_OUT)?;
         Ok(())
@@ -251,8 +250,7 @@ pub fn logs_request_wire() -> napi::Result<f64> {
     wire_io(|r, w| {
         let resource: serde_json::Value = wire::read_value(r, &S_LOGS_REQUEST_0)?;
         let scope: String = r.string16()?;
-        let records: Vec<serde_json::Value> =
-            r.list(|r| wire::read_value(r, S_LOGS_REQUEST_2.inner()))?;
+        let records = r.list(|r| wire::read_value(r, S_LOGS_REQUEST_2.inner()))?;
         let out = &port::logs_request(resource, scope, records)?;
         w.string16(out);
         Ok(())

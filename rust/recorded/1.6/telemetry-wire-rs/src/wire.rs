@@ -271,17 +271,14 @@ fn float_value(x: f64) -> Value {
 }
 
 fn value_float(v: &Value) -> Option<f64> {
-    match v {
-        Value::Number(n) => n.as_f64(),
-        Value::Object(o) => match o.get("$num")?.as_str()? {
-            "NaN" => Some(f64::NAN),
-            "Infinity" => Some(f64::INFINITY),
-            "-Infinity" => Some(f64::NEG_INFINITY),
-            "-0" => Some(-0.0),
-            _ => None,
-        },
-        _ => None,
+    crate::js::as_number(v)
+}
+
+fn input_key(mut key: String) -> String {
+    if key.starts_with('$') {
+        key.insert(0, '$');
     }
+    key
 }
 
 /// Reads a value of `schema` as JSON: null for nil, `{"$num": ...}` for NaN and infinities.
@@ -398,15 +395,6 @@ fn js_string(units: Vec<u16>) -> Value {
 
 /// Any JS value, tagged: 0 undefined, 1 null, 2 false, 3 true, 4 number, 5 string, 6 array,
 /// 7 object.
-/// An optional JS value: `undefined` and `null` are `None`, as JSON gives for an `Option`.
-pub fn read_dyn_opt(r: &mut Reader) -> Result<Option<Value>, String> {
-    if matches!(r.bytes.get(r.at), Some(0 | 1)) {
-        r.at += 1;
-        return Ok(None);
-    }
-    read_dyn(r).map(Some)
-}
-
 pub fn read_dyn(r: &mut Reader) -> Result<Value, String> {
     let units = |r: &mut Reader| -> Result<Vec<u16>, String> {
         let n = r.count()?;
@@ -438,7 +426,7 @@ pub fn read_dyn(r: &mut Reader) -> Result<Value, String> {
             let mut out = Map::new();
             for _ in 0..n {
                 let key = String::from_utf16_lossy(&units(r)?);
-                out.insert(key, read_dyn(r)?);
+                out.insert(input_key(key), read_dyn(r)?);
             }
             Value::Object(out)
         }
