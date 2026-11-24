@@ -34,6 +34,7 @@ Those tests need a `bwrap` that `scripts/build-bwrap.sh` builds (`ARDIA_BWRAP`).
 The live engine checks report a skip on Linux.
 See the check sources for [`ria-engine-sys`](rust/crates/ria-engine-sys/tests/live.rs) and [`ria-engine`](rust/crates/ria-engine/src/domains/data/live.rs) for the macOS requirements.
 See the [app launch check](rust/crates/ria-app/src/launch/README.md#launch-checks) for the macOS app test.
+See the [surface host checks](rust/crates/ria-surface/README.md#checks) for the macOS-only `ria-surface` tests.
 
 Follow the [macOS instructions for window-host Check L](rust/crates/ria-host-mac/tests/live_windows.rs#L3-L10).
 
