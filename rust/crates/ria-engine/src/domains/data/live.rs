@@ -671,6 +671,11 @@ mod mac {
         );
     }
 
+    fn holds_extension_node(node: &ria_engine::types::EngineBookmark) -> bool {
+        node.u.as_deref() == Some("https://example.net/extension")
+            || node.c.iter().flatten().any(holds_extension_node)
+    }
+
     #[allow(clippy::too_many_arguments)]
     fn check_bookmarks(
         live: &Rc<Live>,
@@ -686,6 +691,8 @@ mod mac {
         let armed = Rc::new(Cell::new(false));
         let watch_armed = armed.clone();
         let window_state = window.clone();
+        let checking = Rc::new(Cell::new(false));
+        let (event_live, event_ctx) = (live.clone(), ctx.clone());
         api::subscribe::<api::events::BookmarksChanged>(
             &ctx.engine,
             "bookmarks.changed",
@@ -694,8 +701,25 @@ mod mac {
                     // Before the quiet window ends the event belongs to `bookmarks.apply`; after it, to the extension.
                     if window_state.get().is_none() {
                         seen.set(true);
-                    } else {
-                        delivered.set(true);
+                    } else if !checking.replace(true) {
+                        let (delivered, checking) = (delivered.clone(), checking.clone());
+                        expect_then::<api::bookmarks::Tree>(
+                            &event_live,
+                            &event_ctx,
+                            "bookmarks",
+                            "tree",
+                            json!({}),
+                            move |_, _, tree| {
+                                let found = holds_extension_node(&tree.bar)
+                                    || holds_extension_node(&tree.other);
+                                if found {
+                                    delivered.set(true);
+                                } else {
+                                    checking.set(false);
+                                }
+                                true
+                            },
+                        );
                     }
                 }
             },
