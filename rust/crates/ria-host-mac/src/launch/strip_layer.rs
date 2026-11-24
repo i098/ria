@@ -82,8 +82,7 @@ fn chrome(state: &Shared, cx: &mut Cx<Shared>) -> El {
 
 fn pin_button(pinned: bool, dark: bool) -> El {
     let theme = tok::theme(dark);
-    el()
-        .key("pin")
+    el().key("pin")
         .role("button")
         .label(if pinned { "Unpin tab" } else { "Pin tab" })
         .focusable(true)
