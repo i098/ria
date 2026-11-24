@@ -5,6 +5,17 @@
 //! Moves a finished download into an approved folder under the home directory.
 //! Moves between folders stage the file, verify its size and SHA-256, and rename it without replacing an existing file.
 //! After an interruption, the journal lets a new mover recover a file it finds at a recorded path.
+//!
+//! Changes from Ardia (`ArdiaDownloadMover.mm` at 551d3c13c), each approved by the owner as a parity deviation
+//! (issues 62 to 65 of `i098/ria`):
+//! - A move uses the shortest approved root that matches, where Ardia uses the longest (`:347-348`, `:354`),
+//!   so a nested approved folder never stops the move from creating the folders above it (issue 62).
+//! - The claimed entry opens with `O_NONBLOCK`, where Ardia has none (`:414`), so a FIFO put in its place cannot
+//!   block the mover before the type check (issue 63).
+//! - A move is refused with `failed` when the staging path has no UTF-8 form, where Ardia journals an empty
+//!   path (`:380`, `:388`) that recovery then joins with the file name (issue 64).
+//! - A move into the folder that holds the file checks size and SHA-256, where Ardia returns `ok` at `:373`
+//!   before any check (those run at `:416-420`); the file is not renamed (issue 65).
 
 use std::collections::{HashMap, HashSet};
 use std::ffi::CString;
@@ -285,6 +296,34 @@ fn truthy(value: &Value) -> bool {
         .unwrap_or_else(|| value.as_f64().is_some_and(|n| n != 0.0))
 }
 
+/// Opens `name` in `dir` without blocking and returns it with its metadata, if it is a regular file.
+fn open_regular(dir: RawFd, name: &str) -> Option<(File, std::fs::Metadata)> {
+    let file = open_at(
+        dir,
+        name,
+        libc::O_RDONLY | libc::O_NOFOLLOW | libc::O_NONBLOCK | libc::O_CLOEXEC,
+    )
+    .ok()?;
+    let info = file.metadata().ok().filter(|info| info.is_file())?;
+    Some((file, info))
+}
+
+/// Checks a file that stays in its folder against the identity of the download.
+fn verify_in_place(dir: RawFd, name: &str, identity: &Identity, path: &str) -> Value {
+    let Some((mut file, info)) = open_regular(dir, name) else {
+        return failure("changed");
+    };
+    if info.nlink() != 1 {
+        return failure("linked");
+    }
+    if info.size() as i64 != identity.size
+        || sha256_of(&mut file).as_deref() != Some(identity.sha256.as_str())
+    {
+        return failure("changed");
+    }
+    json!({"ok": true, "path": path})
+}
+
 fn make_staging(source: RawFd) -> Option<String> {
     for _ in 0..MAX_STAGING_TRIES {
         let random = std::collections::hash_map::RandomState::new()
@@ -542,7 +581,7 @@ impl DownloadMover {
             .chain([&downloads])
             .filter(|root| components.starts_with(root))
             .map(Vec::len)
-            .max()
+            .min()
             .unwrap_or(0);
         if root_length == 0 {
             return failure("folderNotAllowed");
@@ -601,7 +640,7 @@ impl DownloadMover {
         if source_info.dev() == destination_info.dev()
             && source_info.ino() == destination_info.ino()
         {
-            return json!({"ok": true, "path": path});
+            return verify_in_place(source.as_raw_fd(), source_name, identity, path);
         }
         if source_info.dev() != destination_info.dev() {
             return failure("crossesVolumes");
@@ -615,12 +654,13 @@ impl DownloadMover {
             return failure("failed");
         };
         let stg = staging.as_raw_fd();
+        let Some(staging_path) = directory_path(&staging) else {
+            remove_dir_at(src, &staging_name);
+            return failure("failed");
+        };
         let mut journal = Map::new();
         journal.insert("source".into(), json!(path));
-        journal.insert(
-            "staging".into(),
-            json!(directory_path(&staging).unwrap_or_default()),
-        );
+        journal.insert("staging".into(), json!(staging_path));
         journal.insert("name".into(), json!(source_name));
         journal.insert("sha256".into(), json!(identity.sha256));
         journal.insert("size".into(), json!(identity.size));
@@ -666,18 +706,7 @@ impl DownloadMover {
         #[cfg(test)]
         self.step("claimed", &staging);
 
-        let Ok(mut claimed) = open_at(
-            stg,
-            source_name,
-            libc::O_RDONLY | libc::O_NOFOLLOW | libc::O_CLOEXEC,
-        ) else {
-            return give_back("changed");
-        };
-        let Ok(verified) = claimed
-            .metadata()
-            .map_err(drop)
-            .and_then(|info| if info.is_file() { Ok(info) } else { Err(()) })
-        else {
+        let Some((mut claimed, verified)) = open_regular(stg, source_name) else {
             return give_back("changed");
         };
         if verified.nlink() != 1 {
