@@ -139,6 +139,7 @@ mod mac {
         let exited = shutdown.clone();
         let exit = host_launch::run(Rc::new(move |event| match event {
             LaunchEvent::WindowOpened { .. } => main_queue::post(Box::new(|| {
+                check_pip_hooks_installed();
                 check_windows(&Engine::shared().unwrap().default_profile());
             })),
             LaunchEvent::EngineWillShutDown => exited.set(true),
@@ -149,6 +150,43 @@ mod mac {
         assert_eq!(exit, 0);
         assert!(shutdown.get());
         println!("live_windows: engine shut down cleanly");
+    }
+
+    /// Host startup must have called `pip::install_all`: a Chromium frameless window then answers
+    /// as a non-activating panel once marked to join full-screen Spaces.
+    fn check_pip_hooks_installed() {
+        use objc2::rc::Allocated;
+        use objc2::runtime::AnyClass;
+        use objc2_app_kit::NSAccessibilitySystemFloatingWindowSubrole;
+        use ria_host_mac::pip::ardia_pip_controller::Controller;
+        use ria_host_mac::pip::ardia_pip_controller_workspaces::{
+            join_full_screen_spaces, joins_full_screen_spaces,
+        };
+        let class = AnyClass::get(c"NativeWidgetMacFramelessNSWindow").expect("engine class");
+        let alloc: Allocated<NSWindow> = unsafe { msg_send![class, alloc] };
+        let window: Retained<NSWindow> = unsafe {
+            msg_send![alloc, initWithContentRect: NSRect::new(NSPoint::ZERO, NSSize::new(100., 100.)),
+                styleMask: NSWindowStyleMask::Borderless,
+                backing: NSBackingStoreType::Buffered,
+                defer: true]
+        };
+        join_full_screen_spaces(&window);
+        assert!(
+            joins_full_screen_spaces(&window),
+            "host startup did not call pip::install_all"
+        );
+        // A controller marks the window as Picture in Picture: the subrole hook answers for it.
+        let _controller = Controller::new(&window);
+        let subrole: Option<Retained<NSString>> =
+            unsafe { msg_send![&*window, accessibilitySubrole] };
+        assert_eq!(
+            subrole.as_deref(),
+            Some(unsafe { NSAccessibilitySystemFloatingWindowSubrole }),
+            "subrole hook inactive"
+        );
+        println!(
+            "live_windows: pip hooks installed at startup: true (joins full-screen spaces, subrole)"
+        );
     }
 
     fn wait_for(message: &str, mut ready: impl FnMut() -> bool) {

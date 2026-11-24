@@ -77,6 +77,9 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
     }
     let session = SavedSession::read(&config);
     platform::load_engine(&executable)?;
+    // Ardia ran these swizzles from `+load` when the engine image loaded, before the first window:
+    // ArdiaPiPController+Workspaces.mm:96 and ArdiaPiPController+Placement.mm:16 at 551d3c13c.
+    crate::pip::install_all();
     configure_acted_transition(&config);
     let sequence = Rc::new(LaunchSequence::default());
     let runtime = Rc::new_cyclic(|this| Runtime {
