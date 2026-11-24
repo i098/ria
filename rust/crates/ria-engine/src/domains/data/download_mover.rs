@@ -529,7 +529,7 @@ impl DownloadMover {
             .spawn(move || mover.move_download(&path, &folder))
     }
 
-    pub(super) fn move_download(&self, path: &str, folder: &str) -> Value {
+    pub fn move_download(&self, path: &str, folder: &str) -> Value {
         if path.is_empty() {
             return failure("notADownload");
         }

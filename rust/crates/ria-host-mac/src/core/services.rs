@@ -9,19 +9,36 @@
 //! - A reply is `Result<Value, String>` (`Err` is the `error` text) instead of the `(value, error)` block pair.
 //! - `exportPasswords` has no save panel: a missing `path` answers `{"status": "cancelled"}`, as a cancelled panel does.
 //!   The window slice owns the panel.
+//! - The download mover sits in [`Services`]. `ArdiaEvents.mm:34` rewrites each `downloads.changed` in `+emit:data:`,
+//!   which every event of the app passes; here `Services` is the only source of that event, so it calls the mover
+//!   itself. `setApprovedDownloadFolders` and `moveCompletedDownload` (`SystemSignalsModule.swift:100-108`) are the
+//!   methods `set_approved_download_folders` and `move_completed_download`.
 
 use std::cell::{Cell, RefCell};
 use std::collections::HashMap;
 use std::rc::Rc;
+use std::sync::Arc;
 
 use objc2::rc::Retained;
 use objc2_foundation::{NSBundle, NSString};
+use ria_engine::call::main_queue;
 use ria_engine::call::{CallError, CallResult, Engine};
 use ria_engine::domains::browser::{self, CallContext, Route, extensions};
+use ria_engine::domains::data::download_mover::DownloadMover;
 use serde_json::{Map, Value, json};
 use zeroize::Zeroize;
 
 use super::bindings::{Profile, Tab};
+use super::user_defaults::StandardDefaults;
+
+type MoveDone = Box<dyn FnOnce(Value)>;
+
+thread_local! {
+    /// The completions of running moves, by number. A move runs on its own thread and must not carry the
+    /// main-thread `Rc` values, so it posts its number and result back and the main thread finds the completion here.
+    static MOVES: RefCell<HashMap<u64, MoveDone>> = RefCell::default();
+    static NEXT_MOVE: Cell<u64> = const { Cell::new(0) };
+}
 
 pub type Reply = Box<dyn FnOnce(Result<Value, String>)>;
 
@@ -41,6 +58,12 @@ pub trait ServiceHost {
     fn forget_early_window_pictures(&self);
 }
 
+/// `+[ArdiaEvents emit:data:]` for `downloads.changed` (`ArdiaEvents.mm:34`): the mover records the download and
+/// rewrites its path when it moved the file, then the host gets the event.
+fn emit_download(host: &Rc<dyn ServiceHost>, mover: &DownloadMover, download: Value) {
+    host.emit("downloads.changed", mover.note_download_event(&download));
+}
+
 /// The services. Cloning is cheap; each clone shares the same state.
 #[derive(Clone)]
 pub struct Services {
@@ -48,6 +71,7 @@ pub struct Services {
     host: Rc<dyn ServiceHost>,
     download_profiles: Rc<RefCell<HashMap<String, String>>>,
     observing: Rc<Cell<bool>>,
+    mover: Arc<DownloadMover>,
 }
 
 impl Services {
@@ -57,6 +81,10 @@ impl Services {
             host,
             download_profiles: Rc::default(),
             observing: Rc::default(),
+            mover: Arc::new(DownloadMover::new(
+                &std::env::home_dir().unwrap_or_default().to_string_lossy(),
+                Arc::new(StandardDefaults),
+            )),
         }
     }
 
@@ -498,7 +526,11 @@ impl Services {
         if self.observing.replace(true) {
             return;
         }
-        let (host, profiles) = (self.host.clone(), self.download_profiles.clone());
+        let (host, profiles, mover) = (
+            self.host.clone(),
+            self.download_profiles.clone(),
+            self.mover.clone(),
+        );
         self.engine.on_event("downloads.changed", move |payload| {
             let Some(mut download) = payload["download"].as_object().cloned() else {
                 return;
@@ -508,15 +540,16 @@ impl Services {
             if let Some(id) = download.get("id").and_then(Value::as_str) {
                 profiles.borrow_mut().insert(id.to_owned(), text(&profile));
             }
-            host.emit("downloads.changed", Value::Object(download));
+            emit_download(&host, &mover, Value::Object(download));
         });
     }
 
     /// `+watchDownloads:`: emits one `downloads.changed` for each download that the profile lists now.
     pub fn watch_downloads(&self, profile: &str) {
-        let (host, profiles, profile) = (
+        let (host, profiles, mover, profile) = (
             self.host.clone(),
             self.download_profiles.clone(),
+            self.mover.clone(),
             profile.to_owned(),
         );
         self.call_base("ac_downloads_list", &profile.clone(), None, move |result| {
@@ -528,9 +561,44 @@ impl Services {
                 if let Some(id) = d.get("id").and_then(Value::as_str) {
                     profiles.borrow_mut().insert(id.to_owned(), profile.clone());
                 }
-                host.emit("downloads.changed", Value::Object(d));
+                emit_download(&host, &mover, Value::Object(d));
             }
         });
+    }
+
+    /// `setApprovedDownloadFolders`.
+    pub fn set_approved_download_folders(&self, folders: &[String]) {
+        self.mover.set_approved_folders(folders);
+    }
+
+    /// `moveCompletedDownload`: moves on a thread of its own, then emits the moved download on the main thread and
+    /// answers with the result without its `event`.
+    pub fn move_completed_download(&self, path: &str, folder: &str, reply: Reply) {
+        let id = NEXT_MOVE.replace(NEXT_MOVE.get() + 1);
+        let (host, mover) = (self.host.clone(), self.mover.clone());
+        let done: MoveDone = Box::new(move |mut result| {
+            if let Some(event) = result.as_object_mut().and_then(|r| r.remove("event")) {
+                emit_download(&host, &mover, event);
+            }
+            reply(Ok(result));
+        });
+        MOVES.with_borrow_mut(|moves| moves.insert(id, done));
+        let (mover, path, folder) = (self.mover.clone(), path.to_owned(), folder.to_owned());
+        let spawned = std::thread::Builder::new()
+            .name("ria-download-move".into())
+            .spawn(move || {
+                let result = mover.move_download(&path, &folder);
+                main_queue::post(Box::new(move || {
+                    if let Some(done) = MOVES.with_borrow_mut(|moves| moves.remove(&id)) {
+                        done(result);
+                    }
+                }));
+            });
+        if let Err(error) = spawned
+            && let Some(done) = MOVES.with_borrow_mut(|moves| moves.remove(&id))
+        {
+            done(json!({"ok": false, "reason": "failed", "error": error.to_string()}));
+        }
     }
 
     /// `+downloadCommand:id:`.
