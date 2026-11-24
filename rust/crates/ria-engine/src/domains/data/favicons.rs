@@ -61,8 +61,19 @@ fn png(image: &DynamicImage, pixels: u32) -> Option<(Vec<u8>, u32)> {
 }
 
 /// The bytes of a `data:` URL: base64 when the header says so, otherwise percent-encoded.
+/// Deviation from Ardia (`ArdiaFavicons.mm:97-101` has no limit): the body is bounded before decoding and the
+/// result is held to `MAX_BYTES`, like the HTTP path (see `rust/DECISIONS.md`, ADR-V1).
 fn data_url_bytes(url: &str) -> Option<Vec<u8>> {
     let (header, body) = url.strip_prefix("data:")?.split_once(',')?;
+    // Longest legal body for `MAX_BYTES` decoded: base64 is 4/3, and each byte can be a `%XX` escape (x3).
+    if body.len() > MAX_BYTES.div_ceil(3) * 4 * 3 {
+        return None;
+    }
+    let bytes = decode_body(header, body)?;
+    (bytes.len() <= MAX_BYTES).then_some(bytes)
+}
+
+fn decode_body(header: &str, body: &str) -> Option<Vec<u8>> {
     if !header.ends_with(";base64") {
         return Some(percent_decode(body));
     }
@@ -248,6 +259,24 @@ mod tests {
             data_url_bytes("data:text/plain,a%20b"),
             Some(b"a b".to_vec())
         );
+    }
+
+    #[test]
+    fn data_url_is_bounded_like_http() {
+        let ok = format!(
+            "data:image/png;base64,{}",
+            STANDARD.encode(vec![0; MAX_BYTES])
+        );
+        assert_eq!(data_url_bytes(&ok).map(|b| b.len()), Some(MAX_BYTES));
+        let over = format!(
+            "data:image/png;base64,{}",
+            STANDARD.encode(vec![0; MAX_BYTES + 1])
+        );
+        assert_eq!(data_url_bytes(&over), None);
+        let plain = format!("data:image/png,{}", "a".repeat(MAX_BYTES + 1));
+        assert_eq!(data_url_bytes(&plain), None);
+        let huge = format!("data:image/png,{}", "a".repeat(MAX_BYTES * 12 + 1));
+        assert_eq!(data_url_bytes(&huge), None);
     }
 
     #[test]
