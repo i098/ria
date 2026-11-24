@@ -98,8 +98,69 @@ mod mac {
             ),
         )
         .unwrap();
-        let stdout = root.join("stdout");
-        let stderr = root.join("stderr");
+        let out = launch(&bin, &home, &data, root, &listener, 1, "");
+        assert!(out.contains("engineDidStart"));
+        assert!(
+            out.lines()
+                .filter(|line| line.starts_with("windowOpened "))
+                .eq(["windowOpened windows=1 tabs=1"])
+        );
+        assert!(out.contains("tabTitle Ria proof page"));
+        assert!(out.contains("engineWillShutDown"));
+        assert!(
+            out.contains("stripPinned"),
+            "a click on the Rune pin button did not pin the tab"
+        );
+        assert!(
+            out.contains("downloadMoved ok"),
+            "the app's system-signals host did not move the download"
+        );
+        // The saved layout only restores under the appearance it was saved in.
+        let dark = Command::new("defaults")
+            .args(["read", "-g", "AppleInterfaceStyle"])
+            .output()
+            .is_ok_and(|out| out.stdout.starts_with(b"Dark"));
+        // Second launch on the same profile with a saved window layout: the strip layer must still be installed.
+        fs::write(
+            data.join("session.json"),
+            format!(
+                r#"{{"version":11,"focusedWindowId":"w","windows":[{{"id":"w","profile":"","tabIds":["fixture"],"frame":[100,100,1000,700]}}],"launchTab":{{"id":"fixture","profile":"","url":"{url}"}},"launchBackdrop":{{"dark":{dark}}}}}"#
+            ),
+        )
+        .unwrap();
+        fs::write(
+            data.join("launch-layout.json"),
+            r#"{"version":5,"windows":{"w":{"state":"{}","page":[8,44,8,8],"card":[8,44,8,8],"radius":10}}}"#,
+        )
+        .unwrap();
+        let again = launch(&bin, &home, &data, root, &listener, 2, "launchTab=on");
+        assert!(
+            again.contains("windowFrame 1000x700"),
+            "the saved layout was not restored"
+        );
+        assert!(
+            again.contains("stripPinned"),
+            "the strip layer is missing on a restored layout"
+        );
+        assert!(again.contains("engineWillShutDown"));
+        assert!(!has_crash_report(root), "a crash report exists");
+        println!(
+            "launch live: engine exit 0; one window; one tab; fixture title; Rune pin click pins the tab; restored-layout relaunch on the same profile keeps the strip; download moved by the app's system-signals host; shutdown; no crash report"
+        );
+    }
+
+    /// Run the app once on `data` and return what it printed.
+    fn launch(
+        bin: &Path,
+        home: &Path,
+        data: &Path,
+        root: &Path,
+        listener: &TcpListener,
+        launch: u32,
+        switches: &str,
+    ) -> String {
+        let stdout = root.join(format!("stdout-{launch}"));
+        let stderr = root.join(format!("stderr-{launch}"));
         let mut child = Command::new(&bin)
             .arg("--live-child")
             .env("HOME", &home)
@@ -107,7 +168,7 @@ mod mac {
             .env("RIA_DATA_DIR", &data)
             .env("RIA_BACKGROUND", "1")
             .env_remove("RIA_INSTANCE")
-            .env_remove("RIA_SWITCHES")
+            .env("RIA_SWITCHES", switches)
             .env_remove("RIA_TEST")
             .env_remove("RIA_TRACE")
             .env_remove("RIA_REMOTE_DEBUGGING_PORT")
@@ -129,31 +190,12 @@ mod mac {
             std::thread::sleep(Duration::from_millis(50));
         };
         let out = fs::read(&stdout).unwrap();
-        let out = String::from_utf8_lossy(&out);
+        let out = String::from_utf8_lossy(&out).into_owned();
         eprint!("{}", String::from_utf8_lossy(&fs::read(&stderr).unwrap()));
         print!("{out}");
         let status = status.expect("Ria did not exit within 60 seconds");
         assert!(status.success(), "engine exit: {status}");
-        assert!(out.contains("engineDidStart"));
-        assert!(
-            out.lines()
-                .filter(|line| line.starts_with("windowOpened "))
-                .eq(["windowOpened windows=1 tabs=1"])
-        );
-        assert!(out.contains("tabTitle Ria proof page"));
-        assert!(out.contains("engineWillShutDown"));
-        assert!(
-            out.contains("stripPinned"),
-            "a click on the Rune pin button did not pin the tab"
-        );
-        assert!(
-            out.contains("downloadMoved ok"),
-            "the app's system-signals host did not move the download"
-        );
-        assert!(!has_crash_report(root), "a crash report exists");
-        println!(
-            "launch live: engine exit 0; one window; one tab; fixture title; Rune pin click pins the tab; download moved by the app's system-signals host; shutdown; no crash report"
-        );
+        out
     }
 
     fn serve_fixture(listener: &TcpListener) {
@@ -360,6 +402,10 @@ mod mac {
                 host_launch::later(move || moving.download());
             }
             LaunchEvent::WindowHostReady(host) => {
+                if let Some(window) = host.main() {
+                    let size = window.window().frame().size;
+                    println!("windowFrame {}x{}", size.width, size.height);
+                }
                 click_pin(host, pinned.clone(), quit_when_done.clone(), 0);
             }
             LaunchEvent::Emit { topic, data } => {
