@@ -15,7 +15,7 @@ node rust/parity/compare.selftest.mjs
 
 ## CI and quality gates
 
-Each PR runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The checks are `fmt`, `clippy`, `test`, `parity`, `headers` and `sentrux`. They use cargo, not blaze, because blaze is not on GitHub runners. Run the same checks locally:
+Each PR runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The checks are `fmt`, `clippy`, `test`, `parity`, `headers` and `sentrux`. All but `sentrux` use cargo, not blaze, because blaze is not on GitHub runners. Run them locally (for `sentrux`, see Local quality gates below):
 
 ```sh
 cargo fmt --manifest-path rust/Cargo.toml --check
