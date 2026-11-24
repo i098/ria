@@ -28,6 +28,13 @@ pub mod ardia_web_view_site;
 pub mod ardia_web_view_site_data;
 pub mod ardia_web_view_stand_in;
 pub mod ardia_web_view_tab;
+pub mod ardia_web_view_transfer;
+pub mod chromium_tab_view;
+pub mod page_engine;
+pub mod page_events;
+pub mod page_tab;
+pub mod page_tab_host;
+pub mod page_view_definition;
 
 fn superview(view: &objc2_app_kit::NSView) -> Option<objc2::rc::Retained<objc2_app_kit::NSView>> {
     // SAFETY: The live AppKit hierarchy is confined to the main thread.
