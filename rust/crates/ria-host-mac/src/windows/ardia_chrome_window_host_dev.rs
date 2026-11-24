@@ -171,9 +171,9 @@ fn click(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
                 target.mouseUp(&up);
             }
         } else {
-            let app = NSApplication::sharedApplication(window.mtm());
-            app.postEvent_atStart(&down, false);
-            app.postEvent_atStart(&up, false);
+            // Ardia sends plain clicks through the window: ArdiaChromeWindowHost+Dev.mm:195-196.
+            window.sendEvent(&down);
+            window.sendEvent(&up);
         }
     }));
     reply
@@ -255,9 +255,10 @@ fn drag(host: &ChromeWindowHost, window: &NSWindow, spec: &str) -> String {
             .and_then(|event| with_mouse_fields(event, (flags != 0).then_some(flags), false))
         {
             let app = app.clone();
+            // Ardia drags through NSApp.sendEvent: ArdiaChromeWindowHost+Dev.mm:262.
             main_queue::after(
                 Duration::from_millis(delay),
-                Box::new(move || app.postEvent_atStart(&event, false)),
+                Box::new(move || app.sendEvent(&event)),
             );
         }
     };
