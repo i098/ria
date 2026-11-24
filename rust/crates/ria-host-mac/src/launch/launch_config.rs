@@ -231,8 +231,8 @@ impl LaunchConfig {
 
     /// The data directory as the engine opens it: named by device and inode of the admitted directory,
     /// so a swap of the path after admission cannot redirect the engine.
-    fn handoff_directory(&self) -> PathBuf {
-        profile::identity_path(&self.data_handle).unwrap_or_else(|_| self.data_directory.clone())
+    fn handoff_directory(&self) -> io::Result<PathBuf> {
+        profile::identity_path(&self.data_handle)
     }
 
     pub(super) fn check_profile_directory(&self) -> io::Result<()> {
@@ -301,7 +301,7 @@ impl LaunchConfig {
         truthy(self.test_value(key))
     }
 
-    pub fn engine_switches(&self) -> Vec<String> {
+    pub fn engine_switches(&self) -> io::Result<Vec<String>> {
         // The prebuilt engine still uses the Ardia switch names.
         let mut args = Vec::new();
         if self.background {
@@ -310,7 +310,7 @@ impl LaunchConfig {
         if self.isolated {
             args.push(format!(
                 "--ardia-data-dir={}",
-                self.handoff_directory().display()
+                self.handoff_directory()?.display()
             ));
         }
         if let Some(downloads) = self.instance("downloadsDir") {
@@ -345,7 +345,7 @@ impl LaunchConfig {
             let areas = self.trace.iter().map(String::as_str).collect::<Vec<_>>();
             args.push(format!("--ardia-trace={}", areas.join(",")));
         }
-        args
+        Ok(args)
     }
 }
 
@@ -592,7 +592,7 @@ mod tests {
         assert!(!config.test_instance);
         assert!(!config.test_flag("pipHover"));
         assert!(!config.traced("pip"));
-        assert!(config.engine_switches().is_empty());
+        assert!(config.engine_switches().unwrap().is_empty());
     }
 
     #[test]
@@ -920,6 +920,11 @@ mod tests {
         )
         .unwrap();
         let expected = root.canonicalize().unwrap().join("other/profile");
+        let expected_identity = {
+            use std::os::unix::fs::MetadataExt;
+            let meta = fs::metadata(&expected).unwrap();
+            format!("/.vol/{}/{}", meta.dev(), meta.ino())
+        };
         symlink("removed/../profile", root.join("other/dangling")).unwrap();
         assert!(
             LaunchConfig::from_environment(
@@ -935,13 +940,8 @@ mod tests {
         assert_eq!(config.data_directory, expected);
         assert_eq!(config.config_directory, expected.join("config"));
         assert_eq!(
-            config.engine_switches(),
-            [format!(
-                "--ardia-data-dir={}",
-                super::profile::identity_path(&config.data_handle)
-                    .unwrap()
-                    .display()
-            )]
+            config.engine_switches().unwrap(),
+            [format!("--ardia-data-dir={expected_identity}")]
         );
     }
 
@@ -973,21 +973,21 @@ mod tests {
             false,
         )
         .unwrap();
+        let expected_identity = {
+            use std::os::unix::fs::MetadataExt;
+            let meta = fs::metadata(&expected).unwrap();
+            format!("/.vol/{}/{}", meta.dev(), meta.ino())
+        };
         fs::remove_dir_all(&home).unwrap();
         assert_eq!(config.config_directory, expected.join("config"));
         assert!(!config.instance_flag("allowAudio"));
         assert!(config.test_flag("pipHover"));
         assert_eq!(config.test_value("cliInstallScript"), None);
         assert_eq!(
-            config.engine_switches(),
+            config.engine_switches().unwrap(),
             [
                 "--ardia-background".to_owned(),
-                format!(
-                    "--ardia-data-dir={}",
-                    super::profile::identity_path(&config.data_handle)
-                        .unwrap()
-                        .display()
-                ),
+                format!("--ardia-data-dir={expected_identity}"),
                 "--ardia-downloads-dir=/tmp/a,b".to_owned(),
                 "--ardia-switches=one=on,two=off".to_owned(),
                 "--ardia-test=loginsDelay=25,nativeDragRefused".to_owned(),
@@ -1063,7 +1063,7 @@ mod tests {
             assert!(!config.traced("pip"));
             assert_eq!(config.test_value("loginsDelay"), None);
             assert!(
-                !config.engine_switches().iter().any(
+                !config.engine_switches().unwrap().iter().any(
                     |arg| arg.starts_with("--ardia-test=") || arg.starts_with("--ardia-trace=")
                 )
             );

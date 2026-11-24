@@ -38,7 +38,7 @@ pub(super) fn engine_arguments(
         switches.push("--use-fake-device-for-media-stream".into());
         switches.push("--disable-modal-animations".into());
     }
-    switches.extend(config.engine_switches());
+    switches.extend(config.engine_switches()?);
     if config.test_instance
         && let Some(port) = config.remote_debugging_port
     {
