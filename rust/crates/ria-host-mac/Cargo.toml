@@ -15,8 +15,6 @@ objc2-app-kit = "0.3"
 objc2-foundation = "0.3"
 ria-engine = { path = "../ria-engine" }
 libc = "0.2"
-# rune pulls blake3; pure avoids its C build, which the Linux CI cross-check cannot compile for darwin.
-blake3 = { version = "1", default-features = false, features = ["pure"] }
 ria-surface = { path = "../ria-surface" }
 rune = { git = "https://github.com/anomalyco/rune", rev = "5b27303b0f5e7e100747d83f4eb7bf4925cd05f7" }
 

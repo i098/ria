@@ -36,6 +36,8 @@ jobs:
           workspaces: rust
       - run: cargo clippy --manifest-path rust/Cargo.toml --workspace --all-targets -- -D warnings
       - name: Check Mac host bindings
+        env:
+          CC_aarch64_apple_darwin: clang
         run: cargo clippy --locked --manifest-path rust/Cargo.toml --target aarch64-apple-darwin -p ria-host-mac --all-targets -- -D warnings
 
   test:
