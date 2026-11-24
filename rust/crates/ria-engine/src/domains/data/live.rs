@@ -7,6 +7,9 @@
 //! It copies the framework into a temporary app bundle so the engine can start its helper processes.
 //! The check uses a temporary profile to verify selected replies and events.
 //! The harness supplies the bookmark export path instead of opening a native save panel.
+//! Changes from Ardia: Ardia has no test of `bookmarks.changed` delivery. This check installs an unpacked extension
+//! whose service worker calls `chrome.bookmarks.create`, a change outside `bookmarks.apply` (`ac_bookmarks.cc:130`,
+//! `:152`), and requires the event. The captain ordered every open issue resolved (issue 128).
 //! It does not exercise WebKit, private profile lifecycle, or the content blocker.
 
 #![allow(unsafe_code)]
@@ -416,6 +419,7 @@ mod mac {
         let url = "https://example.com/";
         let bookmark_seen = Rc::new(Cell::new(false));
         let quiet_window = Rc::new(Cell::new(None));
+        let extension_seen = Rc::new(Cell::new(false));
         check_bookmarks(
             &live,
             &ctx,
@@ -424,6 +428,7 @@ mod mac {
             dir,
             bookmark_seen,
             quiet_window.clone(),
+            extension_seen.clone(),
         );
         check_download_settings(&live, &ctx);
 
@@ -524,7 +529,7 @@ mod mac {
                 let outstanding = *watch.outstanding.borrow();
                 let seen = history_seen.get();
                 let quiet = quiet_window.get();
-                if (outstanding != 0 || !seen || quiet.is_none())
+                if (outstanding != 0 || !seen || quiet.is_none() || !extension_seen.get())
                     && waited < Duration::from_secs(150)
                 {
                     return false;
@@ -537,12 +542,19 @@ mod mac {
                 );
                 // Ardia's engine mutes the event while `bookmarks.apply` edits: `ac_bookmarks.cc:152` returns when
                 // `applying_` is set, and `:438` and `:456` set and clear it around the edits. The event must not
-                // arrive in the 500 ms after the reply either. The harness has no engine call that edits bookmarks
-                // outside `bookmarks.apply`, so a positive watcher check is not possible here.
+                // arrive in the 500 ms after the reply either.
                 record(
                     &watch,
                     "bookmarks.apply raises no bookmarks.changed within 500 ms (Ardia ac_bookmarks.cc:152)",
                     quiet == Some(true),
+                    String::new(),
+                );
+                // No engine call edits bookmarks outside `bookmarks.apply`. An installed extension does: its
+                // `chrome.bookmarks.create` reaches `BookmarkNodeAdded` (`ac_bookmarks.cc:130`) with `applying_` clear.
+                record(
+                    &watch,
+                    "bookmarks.changed arrives for a bookmark that an extension creates (Ardia ac_bookmarks.cc:130)",
+                    extension_seen.get(),
                     String::new(),
                 );
                 if outstanding != 0 {
@@ -554,13 +566,6 @@ mod mac {
                     );
                 }
                 *watch.finished.borrow_mut() = true;
-                // Not a check and not counted: no engine call edits bookmarks outside `bookmarks.apply`, so the
-                // watcher delivery is never exercised (issue 128).
-                println!(
-                    "{}",
-                    json!({"live": "untested", "name": "bookmarks.changed delivery to the watcher",
-                        "detail": "no engine call changes a bookmark outside bookmarks.apply (ac_bookmarks.cc)"})
-                );
                 for (name, ok, detail) in watch.checks.borrow().iter() {
                     println!(
                         "{}",
@@ -623,6 +628,50 @@ mod mac {
         );
     }
 
+    /// Installs an unpacked extension whose service worker calls `chrome.bookmarks.create`. That is a bookmark change
+    /// outside `bookmarks.apply`, so Ardia's watcher is not muted (`ac_bookmarks.cc:130`, `:152`).
+    fn install_bookmark_extension(live: &Rc<Live>, ctx: &DataCtx, dir: &Path) {
+        let written = std::fs::create_dir_all(dir)
+            .and_then(|()| {
+                std::fs::write(
+                    dir.join("manifest.json"),
+                    r#"{"manifest_version":3,"name":"Ria live bookmarks","version":"1","permissions":["bookmarks"],"background":{"service_worker":"sw.js"}}"#,
+                )
+            })
+            .and_then(|()| {
+                std::fs::write(
+                    dir.join("sw.js"),
+                    "chrome.bookmarks.create({title: 'Ria live extension bookmark', url: 'https://example.net/extension'});",
+                )
+            });
+        if let Err(error) = written {
+            return record(
+                live,
+                "the bookmark extension is written",
+                false,
+                error.to_string(),
+            );
+        }
+        *live.outstanding.borrow_mut() += 1;
+        let live = live.clone();
+        ctx.engine_call(
+            "ac_extensions_install",
+            "",
+            json!({"path": dir.to_string_lossy()}),
+            move |reply| {
+                let ok = reply.get("id").is_some_and(Value::is_string);
+                record(
+                    &live,
+                    "ac_extensions_install loads the bookmark extension",
+                    ok,
+                    reply.to_string(),
+                );
+                *live.outstanding.borrow_mut() -= 1;
+            },
+        );
+    }
+
+    #[allow(clippy::too_many_arguments)]
     fn check_bookmarks(
         live: &Rc<Live>,
         ctx: &DataCtx,
@@ -631,16 +680,23 @@ mod mac {
         profile_path: String,
         seen: Rc<Cell<bool>>,
         window: Rc<Cell<Option<bool>>>,
+        delivered: Rc<Cell<bool>>,
     ) {
         let seen_after = seen.clone();
         let armed = Rc::new(Cell::new(false));
         let watch_armed = armed.clone();
+        let window_state = window.clone();
         api::subscribe::<api::events::BookmarksChanged>(
             &ctx.engine,
             "bookmarks.changed",
             move |event| {
                 if watch_armed.get() && event.is_ok_and(|event| event.profile == profile_path) {
-                    seen.set(true);
+                    // Before the quiet window ends the event belongs to `bookmarks.apply`; after it, to the extension.
+                    if window_state.get().is_none() {
+                        seen.set(true);
+                    } else {
+                        delivered.set(true);
+                    }
                 }
             },
         );
@@ -669,9 +725,19 @@ mod mac {
                                 "parent": tree.bar.id}]}),
                             move |live, ctx, r| {
                                 let (seen, window) = (seen_after, window);
+                                let extension_dir = exported.with_file_name("bookmark-extension");
+                                let (after_live, after_ctx) = (live.clone(), ctx.clone());
                                 main_queue::after(
                                     Duration::from_millis(500),
-                                    Box::new(move || window.set(Some(!seen.get()))),
+                                    Box::new(move || {
+                                        window.set(Some(!seen.get()));
+                                        // Only after the quiet window: from here every event counts as delivered.
+                                        install_bookmark_extension(
+                                            &after_live,
+                                            &after_ctx,
+                                            &extension_dir,
+                                        );
+                                    }),
                                 );
                                 // Ardia's caller waits `EXPORT_ANSWER_MS` = 120 s, then throws ERR_ENGINE.
                                 // Only a settled call counts: the file with the bookmark, or an ERR_ENGINE rejection.
