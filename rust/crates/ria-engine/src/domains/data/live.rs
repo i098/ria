@@ -755,7 +755,7 @@ mod mac {
                                     Duration::from_millis(500),
                                     Box::new(move || {
                                         window.set(Some(!seen.get()));
-                                        // Only after the quiet window: from here every event counts as delivered.
+                                        // Only after the quiet window: an event counts as delivered once the tree holds the extension node.
                                         install_bookmark_extension(
                                             &after_live,
                                             &after_ctx,
