@@ -170,7 +170,7 @@ mod tests {
             run(
                 &b,
                 "hideElements",
-                "private-1",
+                "incognito1@",
                 r#"{"filters":["a.com##.x"]}"#
             ),
             Some(Err(Rejection::new(

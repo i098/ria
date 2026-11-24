@@ -168,3 +168,9 @@ Ardia means the original at `ardia/`, frozen at commit `551d3c13c`.
 - Context: `ArdiaFavicons.mm:90` (at `551d3c13c`) stores the image in the process-wide `Seen()` cache under `SeenKey(profile, url)`, and line 98 returns it before any live-profile check. `ArdiaHost.mm:143-155` (`releaseProfile:`) does not clear that cache. Issue 57.
 - Decision: `Favicons::fetch` in `favicons.rs` skips the `Seen()` cache read for a private session the app released (`released_private` in the profile registry). `data:` and download paths are unchanged. The owner's order to resolve every open issue approves this deviation.
 - Consequences: after release, a cached `favicons.fetch` for that session misses the cache. The cached image stays in memory until evicted, but nothing reads it. Ardia keeps the fault.
+
+## ADR-V4: A private window cannot restore a hidden element (deviation from Ardia)
+
+- Context: `ArdiaContentBlocker.mm:534-539` (at `551d3c13c`) makes `restoreElements:inProfile:` call `OriginalProfileName(profile)`, so a private session removes a filter from its regular profile and saves the filter file. The add path refuses private writes. Issue 56.
+- Decision: `restore_elements` in `content_blocker.rs` refuses a private profile with the same error as `hide_elements`. The owner's order to resolve every open issue approves this deviation.
+- Consequences: a private window cannot remove a saved hidden element; reading regular-profile filters is unchanged. Ardia keeps the fault.

@@ -869,6 +869,12 @@ impl ContentBlocker {
     }
 
     pub fn restore_elements(&self, filters: &[String], profile: &str, completion: ErrorDone) {
+        // Deviation from Ardia (ADR-V4): a private window never edits the regular filter file.
+        if self.0.host.is_private_profile(profile) {
+            return completion(Some(
+                "a private window keeps its hidden elements for the session".into(),
+            ));
+        }
         if filters.is_empty() {
             return completion(None);
         }
