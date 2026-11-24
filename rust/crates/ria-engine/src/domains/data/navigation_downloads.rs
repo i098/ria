@@ -73,6 +73,7 @@ impl NavigationDownloads {
             return;
         }
         let json = self.with_saved(now, |entries| {
+            entries.retain(|_, when| now - *when <= TTL);
             entries.insert(url.to_owned(), now);
             if entries.len() > MAX_SAVED {
                 let mut by_age: Vec<_> = entries.iter().map(|(u, w)| (u.clone(), *w)).collect();
@@ -125,9 +126,9 @@ mod tests {
 
     #[test]
     fn urls_expire_after_7_days_and_private_ones_stay_in_memory() {
-        let dir = std::env::temp_dir().join(format!("ria-navdl-{}", std::process::id()));
-        std::fs::create_dir_all(&dir).unwrap();
-        let store = NavigationDownloads::new(&dir);
+        let dir = tempfile::tempdir().unwrap();
+        let dir = dir.path();
+        let store = NavigationDownloads::new(dir);
         store.note_at("https://a/f.zip", "", false, 1000.0);
         assert!(store.was_at("https://a/f.zip", "", false, 1000.0 + TTL - 1.0));
         assert!(!store.was_at("https://a/f.zip", "", false, 1000.0 + TTL));
@@ -143,18 +144,28 @@ mod tests {
         assert!(!store.was_at("https://p/f.zip", "incognito1@x", true, 1001.0));
         assert!(
             !dir.join("NavigationDownloads.json").exists() || {
-                let again = NavigationDownloads::new(&dir);
+                let again = NavigationDownloads::new(dir);
                 !again.was_at("https://p/f.zip", "x", false, 1001.0)
             }
         );
-        let again = NavigationDownloads::new(&dir);
+        let again = NavigationDownloads::new(dir);
         assert!(again.was_at("https://a/f.zip", "", false, 1001.0));
         for i in 0..205 {
             store.note_at(&format!("https://b/{i}"), "", false, 2000.0 + f64::from(i));
         }
-        let kept = NavigationDownloads::new(&dir);
+        let kept = NavigationDownloads::new(dir);
         assert!(!kept.was_at("https://b/0", "", false, 2300.0));
         assert!(kept.was_at("https://b/204", "", false, 2300.0));
-        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn a_write_drops_expired_entries_from_the_file() {
+        let dir = tempfile::tempdir().unwrap();
+        let store = NavigationDownloads::new(dir.path());
+        store.note_at("https://old/f.zip", "", false, 1000.0);
+        store.note_at("https://new/f.zip", "", false, 1000.0 + TTL + 10.0);
+        let saved = std::fs::read_to_string(dir.path().join("NavigationDownloads.json")).unwrap();
+        assert!(!saved.contains("https://old/f.zip"));
+        assert!(saved.contains("https://new/f.zip"));
     }
 }
