@@ -550,6 +550,13 @@ mod mac {
                     );
                 }
                 *watch.finished.borrow_mut() = true;
+                // Not a check and not counted: no engine call edits bookmarks outside `bookmarks.apply`, so the
+                // watcher delivery is never exercised (issue 128).
+                println!(
+                    "{}",
+                    json!({"live": "untested", "name": "bookmarks.changed delivery to the watcher",
+                        "detail": "no engine call changes a bookmark outside bookmarks.apply (ac_bookmarks.cc)"})
+                );
                 for (name, ok, detail) in watch.checks.borrow().iter() {
                     println!(
                         "{}",
@@ -692,11 +699,9 @@ mod mac {
                                             )
                                         }
                                         Err(rejection) => (
-                                            rejection.code == "ERR_ENGINE",
-                                            format!(
-                                                "bookmarks.exportHtml settled with {} (export not proven)",
-                                                rejection.code
-                                            ),
+                                            false,
+                                            "bookmarks.exportHtml settled ok with the file on disk"
+                                                .to_owned(),
                                             format!("{}: {}", rejection.code, rejection.message),
                                         ),
                                     };
