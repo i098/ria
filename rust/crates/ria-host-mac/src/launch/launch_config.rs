@@ -279,7 +279,7 @@ impl LaunchConfig {
                 Some(
                     cache
                         .as_ref()
-                        .map_or(false, |cache| cache.get(key).copied().unwrap_or(true)),
+                        .is_some_and(|cache| cache.get(key).copied().unwrap_or(true)),
                 )
             })
             .unwrap_or(true)
@@ -1063,9 +1063,9 @@ mod tests {
             assert!(!config.traced("pip"));
             assert_eq!(config.test_value("loginsDelay"), None);
             assert!(
-                !config.engine_switches().unwrap().iter().any(
-                    |arg| arg.starts_with("--ardia-test=") || arg.starts_with("--ardia-trace=")
-                )
+                !config.engine_switches().unwrap().iter().any(|arg| arg
+                    .starts_with("--ardia-test=")
+                    || arg.starts_with("--ardia-trace="))
             );
             if data_dir.is_empty() {
                 assert_eq!(
