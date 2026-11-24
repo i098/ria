@@ -157,6 +157,8 @@ mod mac {
     fn check_pip_hooks_installed() {
         use objc2::rc::Allocated;
         use objc2::runtime::AnyClass;
+        use objc2_app_kit::NSAccessibilitySystemFloatingWindowSubrole;
+        use ria_host_mac::pip::ardia_pip_controller::Controller;
         use ria_host_mac::pip::ardia_pip_controller_workspaces::{
             join_full_screen_spaces, joins_full_screen_spaces,
         };
@@ -173,7 +175,27 @@ mod mac {
             joins_full_screen_spaces(&window),
             "host startup did not call pip::install_all"
         );
-        println!("live_windows: pip hooks installed at startup: true");
+        // A controller marks the window as Picture in Picture: the subrole hook answers for it.
+        let _controller = Controller::new(&window);
+        let subrole: Option<Retained<NSString>> =
+            unsafe { msg_send![&*window, accessibilitySubrole] };
+        assert_eq!(
+            subrole.as_deref(),
+            Some(unsafe { NSAccessibilitySystemFloatingWindowSubrole }),
+            "subrole hook inactive"
+        );
+        // 60 points wide stay visible: the throw maths allow it, so the constrain hook returns the rect as is.
+        let screen = NSScreen::mainScreen(MainThreadMarker::new().unwrap()).expect("a screen");
+        let visible = screen.visibleFrame();
+        let wanted = NSRect::new(
+            NSPoint::new(visible.origin.x - 40., visible.origin.y + 100.),
+            NSSize::new(100., 100.),
+        );
+        let constrained = window.constrainFrameRect_toScreen(wanted, Some(&screen));
+        assert_eq!(constrained, wanted, "constrain-frame hook inactive");
+        println!(
+            "live_windows: pip hooks installed at startup: true (joins full-screen spaces, subrole, constrain-frame)"
+        );
     }
 
     fn wait_for(message: &str, mut ready: impl FnMut() -> bool) {
