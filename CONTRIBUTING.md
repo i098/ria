@@ -37,6 +37,23 @@ See the [app launch check](rust/crates/ria-app/src/launch/README.md#launch-check
 
 Follow the [macOS instructions for window-host Check L](rust/crates/ria-host-mac/tests/live_windows.rs#L3-L10).
 
+### Run Linux checks on Cloudflare
+
+After the [remote workflow](.github/workflows/remote-check.yml) is on `main`, push your branch with that workflow file.
+Run these commands from your checkout. Replace `<branch>` with your branch name.
+
+```sh
+gh workflow run remote-check.yml --ref <branch>
+gh run list --workflow remote-check.yml --branch <branch> --limit 5
+gh run watch <run-id> --exit-status
+```
+
+Use the run ID from the list. If a job fails, run `gh run view <run-id> --log-failed`.
+The workflow runs the Linux CI checks and builds all workspace test binaries.
+It does not run the Mac checks or the jail escape tests.
+
+### Local quality gates
+
 Two more gates run locally, not in CI:
 
 ```sh
