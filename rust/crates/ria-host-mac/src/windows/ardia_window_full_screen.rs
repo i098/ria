@@ -179,7 +179,7 @@ fn acted_occlusion(window: &NSWindow) -> Option<bool> {
         .flatten()
 }
 
-fn set_acted_occlusion(window: &NSWindow, visible: Option<bool>) {
+fn install_occlusion_getter() {
     static INSTALL: Once = Once::new();
     INSTALL.call_once(|| {
         let selector = sel!(occlusionState);
@@ -205,6 +205,12 @@ fn set_acted_occlusion(window: &NSWindow, visible: Option<bool>) {
             );
         }
     });
+}
+
+fn set_acted_occlusion(window: &NSWindow, visible: Option<bool>) {
+    if visible.is_some() {
+        install_occlusion_getter();
+    }
     ACTED_OCCLUSION.with(|overrides| match visible {
         Some(visible) => overrides
             .get_or_init(NSMapTable::weakToStrongObjectsMapTable)
@@ -246,6 +252,7 @@ struct Transition {
     restore_frame: Option<NSRect>,
     acted_server: bool,
     occlusion_turn: u64,
+    window_turn: u64,
     closed: bool,
 }
 
@@ -638,12 +645,16 @@ impl FullScreen {
                 name.isEqualToString(NSApplicationDidResignActiveNotification),
             )
         };
-        let covers = {
+        let (covers, settlement) = {
             let mut state = self.state.borrow_mut();
             if state.closed {
                 return;
             }
             state.closed = close;
+            if will {
+                state.window_turn = state.window_turn.wrapping_add(1);
+            }
+            let turn = state.window_turn;
             let page = &mut state.page;
             if close || will {
                 page.cancel_draw();
@@ -660,22 +671,26 @@ impl FullScreen {
             if did {
                 page.transitioning = false;
             }
-            if close || did {
+            let settlement = did.then(|| (turn, std::mem::take(&mut page.ours)));
+            let covers = if close || did {
                 std::mem::take(&mut page.covers)
             } else {
                 Vec::new()
-            }
+            };
+            (covers, settlement)
         };
         uncover(covers, did);
         if close {
             return;
         }
         self.update_seen(left_app);
-        if did {
-            let ours = std::mem::take(&mut self.state.borrow_mut().page.ours);
+        if let Some((turn, ours)) = settlement {
             let weak = Rc::downgrade(self);
             main_queue::post(Box::new(move || {
-                if let Some(fullscreen) = weak.upgrade().filter(|item| item.live_window().is_some())
+                if let Some(fullscreen) = weak
+                    .upgrade()
+                    .filter(|item| item.state.borrow().window_turn == turn)
+                    .filter(|item| item.live_window().is_some())
                 {
                     let exit_page = if !entering && !ours {
                         let page = &mut fullscreen.state.borrow_mut().page;

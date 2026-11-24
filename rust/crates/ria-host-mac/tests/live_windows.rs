@@ -554,6 +554,7 @@ mod mac {
         let snapshot = RcBlock::new(
             move |tab: *const Tab, timeout: f64, completion: &DynBlock<dyn Fn(CGImageRef)>| {
                 if tab == target && let Some((supersede, verify)) = work.take() {
+                    let started = Instant::now();
                     unsafe { ffi::method_setImplementation(method, implementation) };
                     main_queue::post(Box::new(supersede));
                     let completion = completion.copy();
@@ -562,9 +563,16 @@ mod mac {
                     let reply = RcBlock::new(move |image: CGImageRef| {
                         assert!(!image.0.is_null(), "The fullscreen snapshot must contain an image");
                         completion.call((image,));
+                        let processed = Rc::new(Cell::new(None));
+                        let timestamp = processed.clone();
+                        main_queue::post(Box::new(move || timestamp.set(Some(started.elapsed()))));
                         let attached = attached.clone();
                         let verify = verify.take().unwrap();
                         main_queue::post(Box::new(move || {
+                            assert!(
+                                processed.take().unwrap() < Duration::from_millis(350),
+                                "The queued snapshot handler must run before the cover deadline"
+                            );
                             assert!(!attached.get(), "The stale cover must never attach");
                             verify();
                         }));
@@ -581,6 +589,11 @@ mod mac {
                 ffi::imp_implementationWithBlock(RcBlock::as_ptr(&snapshot).cast()),
             );
         }
+    }
+
+    fn probe(host: &ChromeWindowHost, window: &NSWindow, action: &str) -> Value {
+        let reply = host.dev_action(window, action, true).unwrap();
+        serde_json::from_str(&reply).unwrap()
     }
 
     fn check_exit_settlement(
@@ -622,25 +635,38 @@ mod mac {
             unsafe { ffi::method_setImplementation(method, imp) };
             change(&tab, false);
             for action in ["fullScreen", "fakeFullScreen"] {
-                let state = host.dev_action(&window, action, true).unwrap();
-                let state: Value = serde_json::from_str(&state).unwrap();
-                assert_eq!(state["pageFullScreen"]["waitingForPage"], -1);
+                assert_eq!(
+                    probe(&host, &window, action)["pageFullScreen"]["waitingForPage"],
+                    -1
+                );
             }
             change(&tab, true);
             host.dev_action(&window, "fakeFullScreen:0", true).unwrap();
             assert!(calls.borrow().is_empty());
             change(&replacement, true);
             main_queue::post(Box::new(move || {
-                unsafe {
-                    ffi::method_setImplementation(method, implementation);
-                    ffi::imp_removeBlock(imp);
-                }
                 assert_eq!(
                     calls.borrow().as_slice(),
                     &[std::ptr::from_ref(&*replacement)]
                 );
-                host.close_window(&window);
-                done.set(true);
+                calls.borrow_mut().clear();
+                probe(&host, &window, "fakeFullScreen:1");
+                probe(&host, &window, "fakeFullScreen:0");
+                assert_eq!(probe(&host, &window, "fakeFullScreen:1")["fullScreen"], true);
+                change(&replacement, true);
+                main_queue::post(Box::new(move || {
+                    unsafe {
+                        ffi::method_setImplementation(method, implementation);
+                        ffi::imp_removeBlock(imp);
+                    }
+                    assert!(calls.borrow().is_empty());
+                    assert_eq!(
+                        probe(&host, &window, "fullScreen")["pageFullScreen"]["page"],
+                        replacement.browser_id()
+                    );
+                    host.close_window(&window);
+                    done.set(true);
+                }));
             }));
         }));
         let token = Rc::new(Cell::<Option<Retained<AnyObject>>>::new(None));
@@ -852,10 +878,6 @@ mod mac {
         assert!(!host.is_fullscreen(&made));
         let fresh = host.make_window(profile, None).unwrap();
         check_dev_actions(&host, &made, &fresh, &app);
-        let probe = |host: &ChromeWindowHost, window: &NSWindow, action| {
-            let reply = host.dev_action(window, action, true).unwrap();
-            serde_json::from_str::<Value>(&reply).unwrap()
-        };
         let before_sight = probe(&host, &fresh, "fakeFullScreen:1:50");
         assert_eq!(before_sight["fullScreen"], true);
         assert!(before_sight.get("pageFullScreen").is_none());
