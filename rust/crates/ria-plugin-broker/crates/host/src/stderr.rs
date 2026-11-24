@@ -1,7 +1,7 @@
 // Ported from ardia packages/plugin-broker/crates/host/src/stderr.rs at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
-use crate::governor::TERMINATE;
+use crate::exit::{Exit, TERMINATE};
 use std::sync::atomic::Ordering;
 
 const STDERR: i32 = 2;
@@ -84,4 +84,11 @@ pub fn last_words(message: &'static str) {
     line[prefix.len()..prefix.len() + room].copy_from_slice(&body[..room]);
     line[length - 1] = b'\n';
     unsafe { libc::write(STDERR, line.as_ptr().cast(), length) };
+}
+
+pub fn hard_exit(exit: Exit, message: &'static str) -> ! {
+    if !message.is_empty() {
+        last_words(message);
+    }
+    unsafe { libc::_exit(exit.code()) }
 }

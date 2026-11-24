@@ -3,10 +3,10 @@
 // This file is a Rust port of that file, with changes.
 use crate::channel::{Channel, ReadOutcome};
 use crate::engine::{Engine, Thrown};
-use crate::stderr;
+use crate::stderr::{self, hard_exit};
 use crate::entry;
-use crate::exit::Exit;
-use crate::governor::{spawn_watchdog, Governor, Limits, TERMINATE, WAKE_FD};
+use crate::exit::{Exit, TERMINATE};
+use crate::governor::{spawn_watchdog, Governor, Limits, WAKE_FD};
 use crate::sandbox::{ConfinePoint, Sandbox};
 use std::os::fd::{IntoRawFd, OwnedFd, RawFd};
 use std::sync::atomic::Ordering;
@@ -45,13 +45,6 @@ pub fn parse_options(args: &[String]) -> Result<Options, String> {
         at += 2;
     }
     Ok(Options { entry: entry.ok_or("--entry is required")?, entry_fd: None, limits })
-}
-
-pub fn hard_exit(exit: Exit, message: &'static str) -> ! {
-    if !message.is_empty() {
-        stderr::last_words(message);
-    }
-    unsafe { libc::_exit(exit.code()) }
 }
 
 extern "C" fn on_terminate(_signal: i32) {
