@@ -44,6 +44,7 @@ mod mac {
         NSWindowDidEnterFullScreenNotification, NSWindowDidExitFullScreenNotification,
         NSWindowOcclusionState, NSWindowStyleMask,
         NSWindowWillEnterFullScreenNotification, NSWindowWillExitFullScreenNotification,
+        NSWorkspace,
     };
     use objc2_foundation::{
         NSBundle, NSDate, NSIntersectionRect, NSNotification, NSNotificationCenter, NSPoint,
@@ -335,6 +336,39 @@ mod mac {
             center.removeObserver(&second_token);
         }
         second.orderOut(None);
+        let workspace = NSWorkspace::sharedWorkspace();
+        let app_sender: &AnyObject = app;
+        let workspace_sender: &AnyObject = &workspace;
+        for (action, center, sender) in [
+            (
+                "postNotification:app:RiaProbeNotification",
+                NSNotificationCenter::defaultCenter(),
+                app_sender,
+            ),
+            (
+                "postNotification:workspace:RiaProbeNotification",
+                workspace.notificationCenter(),
+                workspace_sender,
+            ),
+        ] {
+            let received = Rc::new(Cell::new(0));
+            let count = received.clone();
+            let block = RcBlock::new(move |_: std::ptr::NonNull<NSNotification>| {
+                count.set(count.get() + 1);
+            });
+            let token = unsafe {
+                center.addObserverForName_object_queue_usingBlock(
+                    Some(ns_string!("RiaProbeNotification")),
+                    Some(sender),
+                    None,
+                    &block,
+                )
+            };
+            let token: Retained<AnyObject> = token.into();
+            assert_eq!(run(action), "posted");
+            unsafe { center.removeObserver(&token) };
+            assert_eq!(received.get(), 1, "{action}");
+        }
 
         let windows: Vec<Value> = serde_json::from_str(&run("subroles")).unwrap();
         assert!(
@@ -545,6 +579,23 @@ mod mac {
         }
 
         let target = std::ptr::from_ref(tab);
+        let view_selector = sel!(view);
+        let view_method = tab.class().instance_method(view_selector).unwrap();
+        let view_original = view_method.implementation();
+        let view: unsafe extern "C-unwind" fn(*const Tab, Sel) -> *mut NSView =
+            unsafe { std::mem::transmute(view_original) };
+        let view_read_at = Rc::new(Cell::new(None));
+        let read_at = view_read_at.clone();
+        let view_hook = RcBlock::new(move |tab: *const Tab| {
+            if tab == target {
+                read_at.set(Some(Instant::now()));
+            }
+            unsafe { view(tab, view_selector) }
+        });
+        let view_imp =
+            unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&view_hook).cast()) };
+        unsafe { ffi::method_setImplementation(view_method, view_imp) };
+
         let selector = sel!(copyPicture:completion:);
         let method = tab.class().instance_method(selector).unwrap();
         let implementation = method.implementation();
@@ -554,8 +605,12 @@ mod mac {
         let snapshot = RcBlock::new(
             move |tab: *const Tab, timeout: f64, completion: &DynBlock<dyn Fn(CGImageRef)>| {
                 if tab == target && let Some((supersede, verify)) = work.take() {
-                    let started = Instant::now();
-                    unsafe { ffi::method_setImplementation(method, implementation) };
+                    let started = view_read_at.take().unwrap();
+                    unsafe {
+                        ffi::method_setImplementation(view_method, view_original);
+                        ffi::imp_removeBlock(view_imp);
+                        ffi::method_setImplementation(method, implementation);
+                    }
                     main_queue::post(Box::new(supersede));
                     let completion = completion.copy();
                     let verify = Cell::new(Some(verify));
