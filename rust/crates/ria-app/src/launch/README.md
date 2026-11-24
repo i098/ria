@@ -65,3 +65,9 @@ cp -cR "$ENGINE_DIR/Chromium Framework.framework" "$app/Frameworks/"
 codesign --force --sign - "$app/MacOS/ria-app"
 RIA_DATA_DIR="$scratch/profile" "$app/MacOS/ria-app"
 ```
+
+## Window host
+
+`host_launch::run` builds one `WindowHost` (`ria-host-mac/src/launch/window_host.rs`): the `ChromeWindowHost`, its shared `TabStrips`, and the `Popups` built on them.
+The engine hooks for popup permissions and for popup windows that Chromium makes go to it, and `WindowHost::strip_command` routes `tabs.stripCommand` into the shared `TabStrips`.
+`blaze test -p ria-host-mac --test live_windows` checks, through this host, that an Arrange command pins a popup tab and that moving the tab out of the popup clears the pin.

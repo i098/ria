@@ -31,10 +31,12 @@ use super::saved_session::SavedSession;
 use super::startup;
 use super::window_host::WindowHost;
 
-#[derive(Debug)]
 pub enum LaunchEvent {
     EngineStarted,
-    WindowOpened { windows: usize, tabs: usize },
+    WindowOpened {
+        windows: usize,
+        tabs: usize,
+    },
     TabTitle(String),
     /// The window host exists and knows the browser window.
     WindowHostReady(Rc<WindowHost>),

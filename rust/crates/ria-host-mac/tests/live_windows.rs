@@ -55,7 +55,7 @@ mod mac {
     use ria_host_mac::core::delegate::{EngineDelegate, Hooks};
     use ria_host_mac::core::host::State;
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
-use ria_host_mac::launch::window_host::WindowHost;
+    use ria_host_mac::launch::window_host::WindowHost;
     use ria_host_mac::tabs::ardia_page_cover::PageCover;
     use ria_host_mac::tabs::ardia_page_draw_wait::after_page_draw;
     use ria_host_mac::tabs::ardia_tab_registry::TabRegistry;
@@ -202,7 +202,9 @@ use ria_host_mac::launch::window_host::WindowHost;
         );
         popup.close();
         destination.close();
-        println!("live_windows: app window host routed Arrange to its TabStrips and cleared the popup pin");
+        println!(
+            "live_windows: app window host routed Arrange to its TabStrips and cleared the popup pin"
+        );
     }
 
     /// Host startup must have called `pip::install_all`: a Chromium frameless window then answers
