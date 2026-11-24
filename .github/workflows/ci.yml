@@ -53,6 +53,23 @@ jobs:
       - run: cargo test --manifest-path rust/Cargo.toml -p ardia-plugin-jail --lib
       # Check L of ria-engine-sys (tests/live.rs) needs macOS and the prebuilt engine; on Linux it prints "skipped".
 
+  broker:
+    name: broker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: ardia-browser/ardia
+          ref: 551d3c13c1c9ede130724ea9f1056d4b586fbe55
+          path: ardia
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: dtolnay/rust-toolchain@stable
+      # The host and integration crates are not workspace members; the script builds them in a temp layout.
+      - run: rust/crates/ria-plugin-broker/scripts/ci-check.sh ardia
+
   parity:
     name: parity
     runs-on: ubuntu-latest

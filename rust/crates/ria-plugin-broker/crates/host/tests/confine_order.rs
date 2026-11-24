@@ -163,6 +163,12 @@ fn main() {
     if std::env::var(CHILD).is_ok() {
         child();
     }
+    let dist = crate_dir().join("tests/fixtures/sdk-bench/dist/index.js");
+    assert!(
+        dist.is_file(),
+        "missing {}; build it with: rust/crates/ria-plugin-broker/scripts/ci-check.sh <ardia-checkout>",
+        dist.display()
+    );
     let tests: [(&str, fn()); 5] = [
         ("hello_reaches_fd_3_only_after_the_sandbox_returns_ok", hello_reaches_fd_3_only_after_the_sandbox_returns_ok),
         ("a_failed_sandbox_leaves_fd_3_silent", a_failed_sandbox_leaves_fd_3_silent),
