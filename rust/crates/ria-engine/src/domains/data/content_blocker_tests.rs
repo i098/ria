@@ -305,6 +305,16 @@ fn the_fixture_releases_its_directory_even_when_the_host_is_retained() {
 }
 
 #[test]
+fn start_keeps_a_built_in_extensions_folder_next_to_the_data_directory() {
+    let (blocker, host, _scripts, _dir) = setup();
+    let folder = host.resources.join("Built-in Extensions");
+    std::fs::create_dir(&folder).unwrap();
+    blocker.prepare();
+    std::thread::sleep(Duration::from_millis(300));
+    assert!(folder.is_dir());
+}
+
+#[test]
 fn lists_map_to_categories() {
     assert_eq!(category("x", "custom"), "custom");
     assert_eq!(category("x", "regions"), "regional");
