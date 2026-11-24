@@ -116,11 +116,22 @@ mod mac {
         assert_eq!(once, twice, "a second install wraps nothing again");
     }
 
+    fn after_clamps_bad_delays() {
+        use std::{cell::Cell, rc::Rc};
+        for delay in [-1.0, f64::NAN] {
+            let ran = Rc::new(Cell::new(false));
+            let flag = ran.clone();
+            ria_host_mac::pip::ardia_picture_in_picture_internal::after(delay, move || flag.set(true));
+            assert!(pump_until(2.0, || ran.get()), "delay {delay} runs at once");
+        }
+    }
+
     pub fn run() {
         let mtm = MainThreadMarker::new().expect("main thread");
         let app = NSApplication::sharedApplication(mtm);
         app.setActivationPolicy(NSApplicationActivationPolicy::Accessory);
         install_all_wraps_once();
+        after_clamps_bad_delays();
 
         let root = std::env::temp_dir().join(format!("ria-pip-live-{}", std::process::id()));
         std::fs::create_dir_all(&root).unwrap();
