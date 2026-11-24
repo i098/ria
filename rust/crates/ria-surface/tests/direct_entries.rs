@@ -21,7 +21,8 @@ mod mac {
     use objc2::{MainThreadMarker, class, msg_send};
     use objc2_app_kit::{
         NSAppearance, NSAppearanceCustomization, NSApplication, NSBackingStoreType, NSEvent,
-        NSEventModifierFlags, NSEventType, NSScreen, NSView, NSWindow, NSWindowStyleMask,
+        NSEventModifierFlags, NSEventType, NSScreen, NSView, NSWindow, NSWindowOcclusionState,
+        NSWindowStyleMask,
     };
     use objc2_foundation::{
         NSArray, NSDate, NSNotFound, NSPoint, NSRange, NSRect, NSRunLoop, NSSize, NSString,
@@ -68,7 +69,7 @@ mod mac {
                 state.borrow_mut().wheels.push((event.x, event.y));
                 true
             });
-        col().w(60.0).h(60.0).child(button)
+        col().w_full().h_full().child(button)
     }
 
     fn key(state: &mut State, event: &KeyEvent, _: &mut Tx) -> bool {
@@ -115,7 +116,7 @@ mod mac {
         let page = NSView::initWithFrame(mtm.alloc(), NSRect::ZERO);
         host.set_page(Some(&page));
         host.set_overlay_visible(true);
-        window.orderBack(None);
+        window.orderFrontRegardless();
         window.display();
         assert!(!app.isActive(), "the native test must not activate the app");
 
@@ -151,8 +152,33 @@ mod mac {
         queue.drain();
         assert_eq!(host.reentry_miss(), 0);
 
+        let parent_point = views
+            .objectAtIndex(3)
+            .convertPoint_toView(NSPoint::new(20.0, 20.0), Some(&root));
+        let overlay_hit = |views: &NSArray<NSView>| -> *mut NSView {
+            // SAFETY: The overlay answers hitTest: for a point in the surface container's space.
+            unsafe { msg_send![&*views.objectAtIndex(3), hitTest: parent_point] }
+        };
         let deadline = Instant::now() + Duration::from_secs(10);
-        while (host.presentation_time().is_none() || page_size(&views) == NSSize::ZERO)
+        let visible = |window: &NSWindow| {
+            window
+                .occlusionState()
+                .contains(NSWindowOcclusionState::Visible)
+        };
+        while !visible(&window) && Instant::now() < deadline {
+            NSRunLoop::mainRunLoop().runUntilDate(&NSDate::dateWithTimeIntervalSinceNow(0.02));
+            queue.drain();
+        }
+        // wgpu refuses a drawable while the window is not visible, and Rune lays out only on a
+        // presented frame, so the checks below need a real desktop session.
+        assert!(
+            visible(&window),
+            "the window must be visible: run this test in the console session, not over ssh"
+        );
+        let deadline = Instant::now() + Duration::from_secs(10);
+        while (host.presentation_time().is_none()
+            || page_size(&views) == NSSize::ZERO
+            || overlay_hit(&views).is_null())
             && Instant::now() < deadline
         {
             NSRunLoop::mainRunLoop().runUntilDate(&NSDate::dateWithTimeIntervalSinceNow(0.02));
@@ -164,13 +190,12 @@ mod mac {
         );
         assert_eq!(page_size(&views), NSSize::new(200.0, 120.0));
         let at = overlay.convertPoint_toView(NSPoint::new(20.0, 20.0), None);
-        let parent_point = overlay.convertPoint_toView(NSPoint::new(20.0, 20.0), Some(&root));
         // SAFETY: Query the laid-out native hierarchy before injecting input.
         let hit: *mut NSView = unsafe { msg_send![&*overlay, hitTest: parent_point] };
         assert_eq!(
             hit.cast_const(),
             Retained::as_ptr(&overlay),
-            "overlay hit test at {at:?}"
+            "the overlay must answer the hit test at {at:?}"
         );
         for kind in [NSEventType::LeftMouseDown, NSEventType::LeftMouseUp] {
             let event = NSEvent::mouseEventWithType_location_modifierFlags_timestamp_windowNumber_context_eventNumber_clickCount_pressure(
