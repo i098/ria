@@ -36,3 +36,13 @@ harness = false
 name = "live_pip"
 path = "tests/live_pip.rs"
 harness = false
+
+[[test]]
+name = "live_swipe"
+path = "tests/live_swipe.rs"
+harness = false
+
+[[test]]
+name = "live_diagnostics"
+path = "tests/live_diagnostics.rs"
+harness = false
