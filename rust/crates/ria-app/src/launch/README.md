@@ -38,7 +38,8 @@ The cached picture must match the content signature.
 Ria removes the picture when the window changes size.
 This startup path does not restore all saved windows and tabs.
 
-Ria opens an `http` or `https` URL that another macOS app sends in a new tab of the browser window.
+Ria opens an `http` or `https` URL that another macOS app sends in a new tab of the browser window, and drops every other scheme.
+`Info.plist` declares `CFBundleURLTypes` for `http` and `https`, so LaunchServices sends those URLs to Ria; Ria does not set itself as the default browser.
 It queues URLs that arrive before the window is ready, and opens them in order when it is.
 A click on the Dock icon, with no visible window, shows the browser window again, or opens a new one if the user closed it.
 A URL that arrives while every window is closed also opens a new window.

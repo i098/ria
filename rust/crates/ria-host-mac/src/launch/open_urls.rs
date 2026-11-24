@@ -88,7 +88,12 @@ define_class!(
             if let Some(url) = url.and_then(|url| url.stringValue())
                 && let Some(entry) = entry()
             {
-                (entry.urls)(vec![url.to_string()]);
+                let url = url.to_string();
+                if is_web_url(&url) {
+                    (entry.urls)(vec![url]);
+                } else {
+                    eprintln!("[ria] dropped URL with scheme {:?}", scheme(&url));
+                }
             }
         }
 
@@ -101,6 +106,15 @@ define_class!(
         }
     }
 );
+
+fn scheme(url: &str) -> &str {
+    url.split_once(':').map_or("", |(scheme, _)| scheme)
+}
+
+fn is_web_url(url: &str) -> bool {
+    let scheme = scheme(url);
+    scheme.eq_ignore_ascii_case("http") || scheme.eq_ignore_ascii_case("https")
+}
 
 const DIRECT_OBJECT: u32 = u32::from_be_bytes(*b"----");
 
@@ -203,18 +217,24 @@ mod tests {
                 ]
             }
         };
-        let get_url = event(b"GURL", b"GURL");
-        let text = NSAppleEventDescriptor::descriptorWithString(&NSString::from_str(
-            "https://example.test/a",
-        ));
-        let _: () =
-            unsafe { msg_send![&*get_url, setParamDescriptor: &*text, forKeyword: DIRECT_OBJECT] };
+        let send_url = |url: &str| {
+            let get_url = event(b"GURL", b"GURL");
+            let text = NSAppleEventDescriptor::descriptorWithString(&NSString::from_str(url));
+            let _: () = unsafe {
+                msg_send![&*get_url, setParamDescriptor: &*text, forKeyword: DIRECT_OBJECT]
+            };
+            let reply = NSAppleEventDescriptor::nullDescriptor();
+            let _: () =
+                unsafe { msg_send![&*handler, handleURL: &*get_url, withReplyEvent: &*reply] };
+        };
+        send_url("file:///etc/passwd");
+        send_url("javascript:alert(1)");
+        send_url("HTTPS://example.test/a");
         let reply = NSAppleEventDescriptor::nullDescriptor();
         let rapp = event(b"aevt", b"rapp");
-        let _: () = unsafe { msg_send![&*handler, handleURL: &*get_url, withReplyEvent: &*reply] };
         let _: () = unsafe { msg_send![&*handler, handleReopen: &*rapp, withReplyEvent: &*reply] };
         set_entry(None);
-        assert_eq!(*urls.borrow(), ["https://example.test/a"]);
+        assert_eq!(*urls.borrow(), ["HTTPS://example.test/a"]);
         assert_eq!(*reopens.borrow(), [false]);
     }
 }
