@@ -183,6 +183,8 @@ mod tests {
         let saved = Rect::new(-150., 300., 300., 250.);
         let fitted = on_screen(saved, [LEFT, MAIN], 0, LEFT_VISIBLE);
         assert_eq!(fitted, Rect::new(-300., 300., 300., 250.));
+        let fitted = on_screen(saved, [MAIN, LEFT], 1, LEFT_VISIBLE);
+        assert_eq!(fitted, Rect::new(-300., 300., 300., 250.));
     }
 
     #[test]

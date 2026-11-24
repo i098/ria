@@ -2,7 +2,7 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-use std::cell::{Cell, RefCell};
+use std::cell::{Cell, LazyCell, RefCell};
 use std::rc::Rc;
 use std::time::Duration;
 
@@ -19,8 +19,8 @@ use objc2_app_kit::{
     NSWindowWillExitFullScreenNotification,
 };
 use objc2_foundation::{
-    NSArray, NSDictionary, NSNotification, NSNotificationCenter, NSNumber, NSRect, NSString,
-    ns_string,
+    NSArray, NSDictionary, NSMapTable, NSNotification, NSNotificationCenter, NSNumber, NSRect,
+    NSString, ns_string,
 };
 use ria_engine::call::main_queue;
 
@@ -35,6 +35,8 @@ type WindowInfo = NSDictionary<NSString, AnyObject>;
 thread_local! {
     static ACTED_TRANSITION: Cell<f64> = const { Cell::new(0.) };
     pub(super) static ACTED_OCCLUSION_GAP: Cell<Option<f64>> = const { Cell::new(None) };
+    static ACTED_OCCLUSION: LazyCell<Retained<NSMapTable<NSWindow, NSNumber>>> =
+        LazyCell::new(NSMapTable::weakToStrongObjectsMapTable);
 }
 
 pub(crate) fn configure_acted_transition(config: &LaunchConfig) {
@@ -164,13 +166,49 @@ fn window_is_full_screen(core: &Window, window: &NSWindow) -> bool {
     core.acted_full_screen() || window.styleMask().contains(NSWindowStyleMask::FullScreen)
 }
 
+fn acted_occlusion(window: &NSWindow) -> Option<bool> {
+    ACTED_OCCLUSION.with(|overrides| {
+        overrides
+            .objectForKey(Some(window))
+            .map(|value| value.boolValue())
+    })
+}
+
+fn set_acted_occlusion(window: &NSWindow, visible: Option<bool>) {
+    ACTED_OCCLUSION.with(|overrides| match visible {
+        Some(visible) => {
+            overrides.setObject_forKey(Some(&NSNumber::numberWithBool(visible)), Some(window));
+        }
+        None => overrides.removeObjectForKey(Some(window)),
+    });
+    unsafe {
+        NSNotificationCenter::defaultCenter().postNotificationName_object(
+            NSWindowDidChangeOcclusionStateNotification,
+            Some(window),
+        );
+    }
+}
+
+pub(super) fn act_occlusion(
+    window: &NSWindow,
+    fullscreen: Option<&FullScreen>,
+    visible: Option<bool>,
+) -> bool {
+    if let Some(fullscreen) = fullscreen {
+        let mut state = fullscreen.state.borrow_mut();
+        state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
+    }
+    set_acted_occlusion(window, visible);
+    acted_occlusion(window)
+        .unwrap_or_else(|| window.occlusionState().contains(NSWindowOcclusionState::Visible))
+}
+
 #[derive(Default)]
 struct Transition {
     page: PageState,
     expose_page: bool,
     acting: bool,
     restore_frame: Option<NSRect>,
-    acted_occlusion: Option<bool>,
     acted_server: bool,
     occlusion_turn: u64,
     closed: bool,
@@ -627,11 +665,8 @@ impl FullScreen {
         };
         let app = NSApplication::sharedApplication(self.mtm);
         let active = app.isActive();
-        let (acted_occlusion, acted_server) = {
-            let state = self.state.borrow();
-            (state.acted_occlusion, state.acted_server)
-        };
-        let (visible, overruled) = if let Some(app_kit) = acted_occlusion {
+        let acted_server = self.state.borrow().acted_server;
+        let (visible, overruled) = if let Some(app_kit) = acted_occlusion(&window) {
             let server = (!active || !app_kit)
                 && window.isVisible()
                 && !window.isMiniaturized()
@@ -691,36 +726,6 @@ impl FullScreen {
         self.update_seen(false);
     }
 
-    pub(super) fn act_occlusion(&self, visible: Option<bool>) {
-        let mut state = self.state.borrow_mut();
-        state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
-        drop(state);
-        self.set_acted_occlusion(visible);
-    }
-
-    fn set_acted_occlusion(&self, visible: Option<bool>) {
-        let Some((_, window)) = self.live_window() else {
-            return;
-        };
-        self.state.borrow_mut().acted_occlusion = visible;
-        // SAFETY: AppKit receives its occlusion notification with the live window.
-        unsafe {
-            NSNotificationCenter::defaultCenter().postNotificationName_object(
-                NSWindowDidChangeOcclusionStateNotification,
-                Some(&window),
-            );
-        }
-    }
-
-    pub(super) fn occlusion_visible(&self, window: &NSWindow) -> bool {
-        let acted = self.state.borrow().acted_occlusion;
-        acted.unwrap_or_else(|| {
-            window
-                .occlusionState()
-                .contains(NSWindowOcclusionState::Visible)
-        })
-    }
-
     pub(super) fn act_window_server(&self, shows: bool) {
         self.state.borrow_mut().acted_server = shows;
     }
@@ -749,7 +754,7 @@ impl FullScreen {
         };
         let turn = {
             let mut state = self.state.borrow_mut();
-            if state.acting || core.acted_full_screen() == entering {
+            if state.acting || window_is_full_screen(&core, &window) == entering {
                 return;
             }
             state.acting = true;
@@ -790,15 +795,15 @@ impl FullScreen {
         {
             let turn = turn.wrapping_add(1);
             self.state.borrow_mut().occlusion_turn = turn;
-            self.set_acted_occlusion(Some(false));
+            set_acted_occlusion(&window, Some(false));
             let weak = Rc::downgrade(self);
             main_queue::after(
                 wait,
                 Box::new(move || {
                     if let Some(fullscreen) = weak.upgrade() {
                         let current = fullscreen.state.borrow().occlusion_turn == turn;
-                        if current {
-                            fullscreen.set_acted_occlusion(Some(true));
+                        if current && let Some((_, window)) = fullscreen.live_window() {
+                            set_acted_occlusion(&window, Some(true));
                         }
                     }
                 }),

@@ -30,7 +30,7 @@ use super::ardia_reserved_keys::reserved_menu_item;
 use super::ardia_traffic_lights::frame_view;
 use super::ardia_window_controller::Controllers;
 use super::ardia_window_full_screen::{
-    ACTED_OCCLUSION_GAP, set_acted_transition, transition_duration,
+    ACTED_OCCLUSION_GAP, act_occlusion, set_acted_transition, transition_duration,
 };
 
 #[link(name = "CoreGraphics", kind = "framework")]
@@ -550,9 +550,7 @@ impl DevActions {
                     let mut fields = argument.split(':');
                     let entering = fields.next() == Some("1");
                     let transition = fields.next().map_or(0., transition_duration);
-                    if entering != fullscreen.is_full_screen() {
-                        fullscreen.act_window_full_screen_with_timing(entering, transition);
-                    }
+                    fullscreen.act_window_full_screen_with_timing(entering, transition);
                 }
                 let full_screen = fullscreen.is_full_screen();
                 let mut reply = json!({
@@ -567,11 +565,12 @@ impl DevActions {
                 Some(reply.to_string())
             }
             "fakeOcclusion" => {
-                let controller = controllers.for_window(window)?;
-                controller
-                    .fullscreen
-                    .act_occlusion((value != "off").then_some(value == "visible"));
-                Some(flag(controller.fullscreen.occlusion_visible(window)))
+                let controller = controllers.for_window(window);
+                Some(flag(act_occlusion(
+                    window,
+                    controller.as_deref().map(|controller| &*controller.fullscreen),
+                    (value != "off").then_some(value == "visible"),
+                )))
             }
             "fakeWindowServer" => {
                 controllers

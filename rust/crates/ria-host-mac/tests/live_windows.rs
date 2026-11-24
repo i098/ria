@@ -41,7 +41,7 @@ mod mac {
         NSApplication, NSBackingStoreType, NSColor, NSEvent, NSEventModifierFlags, NSEventType,
         NSMenu, NSMenuItem, NSScreen, NSTextField, NSTextView, NSUserInterfaceItemIdentification,
         NSView, NSWindow, NSWindowButton, NSWindowDidEnterFullScreenNotification,
-        NSWindowDidExitFullScreenNotification, NSWindowStyleMask,
+        NSWindowDidExitFullScreenNotification, NSWindowOcclusionState, NSWindowStyleMask,
         NSWindowWillEnterFullScreenNotification, NSWindowWillExitFullScreenNotification,
     };
     use objc2_foundation::{
@@ -1189,9 +1189,40 @@ mod mac {
                         );
                     }),
                 );
+                let native = host.make_window(&profile, None).unwrap();
+                let style = native.styleMask();
+                native.setStyleMask(style | NSWindowStyleMask::FullScreen);
+                let native_notes = Rc::new(RefCell::new(Vec::new()));
+                let native_tokens = [names[2], names[3]].map(|name| {
+                    let notes = native_notes.clone();
+                    observe(&native, name, move || {
+                        notes.borrow_mut().push((name, Instant::now()));
+                    })
+                });
+                let reply = probe(&host, &native, "fakeFullScreen:0:50");
+                assert_eq!(reply["fullScreen"], true);
+                assert_eq!(reply["styleMask"], true);
+                assert_eq!(reply["acted"], false);
+                assert_eq!(native_notes.borrow().len(), 1);
+                assert_eq!(native_notes.borrow()[0].0, names[2]);
                 main_queue::after(
                     Duration::from_millis(1700),
                     Box::new(move || {
+                        {
+                            let notes = native_notes.borrow();
+                            assert_eq!(notes.len(), 2);
+                            assert_eq!(notes[1].0, names[3]);
+                            assert!(notes[1].1 - notes[0].1 >= Duration::from_millis(50));
+                        }
+                        let reply = probe(&host, &native, "fullScreen");
+                        assert_eq!(reply["fullScreen"], true);
+                        assert_eq!(reply["styleMask"], true);
+                        assert_eq!(reply["acted"], false);
+                        for token in native_tokens {
+                            unsafe { center.removeObserver(&token) };
+                        }
+                        native.setStyleMask(style);
+                        host.close_window(&native);
                         assert!(stale_checked.get());
                         assert!(exit_checked.get());
                         assert!(!controllers.user_sees_only_through_window_server(&restored));
@@ -1208,40 +1239,60 @@ mod mac {
                             host.dev_action(&made, "fakeFullScreenMs: 50", true).as_deref(),
                             Some("50")
                         );
-                        assert_eq!(
-                            host.dev_action(&made, "fakeFullScreenMs:0", true)
-                                .as_deref(),
-                            Some("0")
-                        );
-                        for token in tokens.into_iter().chain([exit_token]) {
-                            // SAFETY: Each token belongs to this notification center.
-                            unsafe { center.removeObserver(&token) };
-                        }
+                        notes.borrow_mut().clear();
+                        let start = Instant::now();
+                        let runtime_at = Rc::new(Cell::new(None));
+                        let time = runtime_at.clone();
+                        let runtime_token = observe(&made, names[1], move || {
+                            time.set(Some(start.elapsed()));
+                        });
                         let controller = controllers.for_window(&made).unwrap();
                         controller.fullscreen.toggle();
-                        assert!(host.is_fullscreen(&made));
-                        assert!(!controller.fullscreen.transitioning());
-                        controller.fullscreen.toggle();
-                        assert!(!host.is_fullscreen(&made));
-                        host.close_window(&made);
-                        println!(
-                            "live_windows: fullscreen reply fields, explicit and background timing, and occlusion override checked"
-                        );
-                        let rect = close.convertRect_toView(close.bounds(), Some(&frame));
-                        let expected = window.frame().size.width - 160.;
-                        assert!((rect.origin.x + rect.size.width / 2. - expected).abs() < 1.);
+                        assert_eq!(notes.borrow().as_slice(), &names[..1]);
+                        let finish = move || {
+                            assert!(runtime_at.get().unwrap() >= Duration::from_millis(50));
+                            assert_eq!(notes.borrow().as_slice(), &names[..2]);
+                            assert_eq!(
+                                host.dev_action(&made, "fakeFullScreenMs:0", true).as_deref(),
+                                Some("0")
+                            );
+                            for token in tokens.into_iter().chain([exit_token, runtime_token]) {
+                                unsafe { center.removeObserver(&token) };
+                            }
+                            controller.fullscreen.toggle();
+                            assert!(!host.is_fullscreen(&made));
+                            assert!(!controller.fullscreen.transitioning());
+                            controller.fullscreen.toggle();
+                            assert!(host.is_fullscreen(&made));
+                            assert!(!controller.fullscreen.transitioning());
+                            controller.fullscreen.toggle();
+                            assert!(!host.is_fullscreen(&made));
+                            host.close_window(&made);
+                            println!(
+                                "live_windows: fullscreen reply fields, explicit and background timing, and occlusion override checked"
+                            );
+                            let rect = close.convertRect_toView(close.bounds(), Some(&frame));
+                            let expected = window.frame().size.width - 160.;
+                            assert!((rect.origin.x + rect.size.width / 2. - expected).abs() < 1.);
 
-                        check_popup(&window, mtm, &profile);
-                        for controller in [&normal, &chrome, &stray, &standalone] {
-                            controller.core.close();
-                        }
+                            check_popup(&host, &window, mtm, &profile);
+                            for controller in [&normal, &chrome, &stray, &standalone] {
+                                controller.core.close();
+                            }
+                        };
+                        main_queue::after(Duration::from_millis(100), Box::new(finish));
                     }),
                 );
             }),
         );
     }
 
-    fn check_popup(window: &NSWindow, mtm: MainThreadMarker, profile: &Profile) {
+    fn check_popup(
+        host: &ChromeWindowHost,
+        window: &NSWindow,
+        mtm: MainThreadMarker,
+        profile: &Profile,
+    ) {
         let listener = TcpListener::bind(("127.0.0.1", 0)).unwrap();
         let origin = format!("http://{}", listener.local_addr().unwrap());
         let url = format!("{origin}/private?q=secret");
@@ -1263,6 +1314,20 @@ mod mac {
                 .styleMask()
                 .contains(objc2_app_kit::NSWindowStyleMask::Resizable)
         );
+        let window = popup.window();
+        let visible = window
+            .occlusionState()
+            .contains(NSWindowOcclusionState::Visible);
+        let hidden = ("fakeOcclusion:hidden", "0");
+        let shown = ("fakeOcclusion:visible", "1");
+        let actions = if visible { [shown, hidden] } else { [hidden, shown] };
+        let off = ("fakeOcclusion:off", if visible { "1" } else { "0" });
+        for (action, expected) in actions.into_iter().chain([off]) {
+            assert_eq!(
+                host.dev_action(&window, action, true).as_deref(),
+                Some(expected)
+            );
+        }
         let tab = popup.open_tab(&NSString::from_str(&url), profile, false);
         check_popup_origin(
             popups,
