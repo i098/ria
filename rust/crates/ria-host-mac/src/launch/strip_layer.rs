@@ -11,7 +11,9 @@
 //! - The strip shows the launch tab only: one tab button and one pin button. Ardia projects every tab of the strip.
 //!   Showing the other tabs needs the `tabs.strip` transaction in this layer (issue #101 stays open for it).
 //! - A press on the pin button sends `arrange` with `pinned` 1 or 0 for the launch tab, and the reply sets the button.
-//! - The layer is not installed when the launch restores a saved window layout, because that layout owns the page frame.
+//! - A restored window layout keeps its cover and cached picture. `ria-surface` `Surface::set_page` always moves the page
+//!   from the cover into the `page` slot below the strip, so the restored page rect is not kept. The cover stays behind
+//!   the page as a placeholder. Keeping the page in its cover needs a `ria-surface` call that leaves the page's parent.
 
 use std::cell::RefCell;
 use std::rc::{Rc, Weak};
@@ -58,7 +60,27 @@ fn chrome(state: &Shared, cx: &mut Cx<Shared>) -> El {
         .px(12.0)
         .center_y()
         .child(text("Tab").font(type_::LABEL).color(theme.text));
-    let pin = el()
+    let pin = pin_button(pinned, cx.system_dark());
+    col()
+        .w_full()
+        .h_full()
+        .fill(Color::TRANSPARENT)
+        .child(
+            row()
+                .w_full()
+                .h(HEIGHT)
+                .px(12.0)
+                .gap(8.0)
+                .center_y()
+                .child(tab)
+                .child(pin),
+        )
+        .child(el().key("page").w_full().grow(1.0))
+}
+
+fn pin_button(pinned: bool, dark: bool) -> El {
+    let theme = tok::theme(dark);
+    el()
         .key("pin")
         .role("button")
         .label(if pinned { "Unpin tab" } else { "Pin tab" })
@@ -67,7 +89,7 @@ fn chrome(state: &Shared, cx: &mut Cx<Shared>) -> El {
         .w(84.0)
         .radius(8.0)
         .fill(if pinned {
-            tok::accent(0, cx.system_dark())
+            tok::accent(0, dark)
         } else {
             theme.control_off
         })
@@ -86,22 +108,7 @@ fn chrome(state: &Shared, cx: &mut Cx<Shared>) -> El {
                     pinned: Number(if state.pinned { 0.0 } else { 1.0 }),
                 });
             }
-        });
-    col()
-        .w_full()
-        .h_full()
-        .fill(Color::TRANSPARENT)
-        .child(
-            row()
-                .w_full()
-                .h(HEIGHT)
-                .px(12.0)
-                .gap(8.0)
-                .center_y()
-                .child(tab)
-                .child(pin),
-        )
-        .child(el().key("page").w_full().grow(1.0))
+        })
 }
 
 fn overlay(_: &Shared, _: &mut Cx<Shared>) -> El {

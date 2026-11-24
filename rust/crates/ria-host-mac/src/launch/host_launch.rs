@@ -228,7 +228,6 @@ impl Runtime {
         let url = session
             .and_then(|session| session.launch_tab.as_ref())
             .map_or("about:blank", |tab| tab.url.as_str());
-        let restored = layout.is_some();
         let window = BrowserWindow::open(
             profile,
             url,
@@ -239,11 +238,9 @@ impl Runtime {
         );
         self.host.set_main(Some(window.core().clone()));
         self.strip.borrow_mut().take();
-        if !restored {
-            match StripLayer::install(&self.host, window.core(), window.tab()) {
-                Ok(strip) => *self.strip.borrow_mut() = Some(strip),
-                Err(error) => eprintln!("[ria] tab strip layer: {error}"),
-            }
+        match StripLayer::install(&self.host, window.core(), window.tab()) {
+            Ok(strip) => *self.strip.borrow_mut() = Some(strip),
+            Err(error) => eprintln!("[ria] tab strip layer: {error}"),
         }
         *self.window.borrow_mut() = Some(window);
         (self.observer)(LaunchEvent::WindowHostReady(self.host.clone()));

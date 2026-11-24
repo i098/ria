@@ -303,6 +303,10 @@ mod mac {
         }
     }
 
+    fn all_set(flags: &[&Cell<bool>]) -> bool {
+        flags.iter().all(|flag| flag.get())
+    }
+
     /// Click the Rune pin button through the window until the strip pins the launch tab, then run `done`.
     /// The button is at x 202, y 62: the strip starts 40 below the top, its row pads 12, the tab is 140 wide, the gap is 8, the pin is 84 wide and 28 high.
     fn click_pin(host: Rc<WindowHost>, pinned: Rc<Cell<bool>>, done: Rc<dyn Fn()>, tries: u32) {
@@ -335,7 +339,7 @@ mod mac {
         let quit_when_done: Rc<dyn Fn()> = {
             let (matched, moving, pinned) = (matched.clone(), moving.clone(), pinned.clone());
             Rc::new(move || {
-                if matched.get() && moving.done.get() && pinned.get() {
+                if all_set(&[&matched, &moving.done, &pinned]) {
                     host_launch::later(host_launch::quit);
                 }
             })
@@ -372,7 +376,7 @@ mod mac {
             LaunchEvent::Error(error) => eprintln!("{error}"),
             _ => {}
         }));
-        if matched.get() && shutdown.get() && moving.done.get() && check_pin.get() {
+        if all_set(&[&matched, &shutdown, &moving.done, &check_pin]) {
             status
         } else {
             ExitCode::FAILURE
