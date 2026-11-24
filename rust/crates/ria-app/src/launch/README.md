@@ -16,6 +16,7 @@ Check N runs the native launch unit tests.
 Check L makes a temporary app bundle with a new profile and a saved launch tab.
 It serves the fixture page over loopback HTTP.
 It checks engine start, one native window, one engine tab, the fixture page title, and engine shutdown.
+It also downloads a `file:` payload and moves it into an approved folder through `system_signals::current()`, the app's host of `setApprovedDownloadFolders` and `moveCompletedDownload`.
 It requires a successful exit within 60 seconds and checks the temporary directory for crash reports.
 It calls the shared launch entry point from the test executable, not from the `ria-app` binary.
 

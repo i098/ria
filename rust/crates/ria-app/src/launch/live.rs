@@ -21,7 +21,7 @@ fn main() -> std::process::ExitCode {
 
 #[cfg(target_os = "macos")]
 mod mac {
-    use std::cell::Cell;
+    use std::cell::{Cell, RefCell};
     use std::fs;
     use std::io::{BufRead, BufReader, ErrorKind, Read, Write};
     use std::net::TcpListener;
@@ -30,8 +30,14 @@ mod mac {
     use std::rc::Rc;
     use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
+    use objc2::rc::Retained;
+    use objc2::{class, msg_send};
+    use objc2_foundation::{NSPoint, NSRect, NSSize, NSString};
+    use ria_host_mac::core::bindings::{Engine, Tab, Window};
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
     use ria_host_mac::launch::launch_config::LaunchConfig;
+    use ria_host_mac::launch::system_signals;
+    use serde_json::{Value, json};
 
     const TITLE: &str = "Ria proof page";
     const PAGE: &str = include_str!("../../../../proofs/abc-host/src/page.html");
@@ -135,9 +141,13 @@ mod mac {
         );
         assert!(out.contains("tabTitle Ria proof page"));
         assert!(out.contains("engineWillShutDown"));
+        assert!(
+            out.contains("downloadMoved ok"),
+            "the app's system-signals host did not move the download"
+        );
         assert!(!has_crash_report(root), "a crash report exists");
         println!(
-            "launch live: engine exit 0; one window; one tab; fixture title; shutdown; no crash report"
+            "launch live: engine exit 0; one window; one tab; fixture title; download moved by the app's system-signals host; shutdown; no crash report"
         );
     }
 
@@ -190,22 +200,137 @@ mod mac {
             })
     }
 
+    /// The app's own system-signals host moves a real finished download into an approved folder.
+    struct Move {
+        pid: u32,
+        content: String,
+        folder: String,
+        target: PathBuf,
+        source: PathBuf,
+        window: RefCell<Option<(Retained<Window>, Retained<Tab>)>>,
+        started: Cell<bool>,
+        done: Cell<bool>,
+    }
+
+    impl Move {
+        fn new() -> Rc<Self> {
+            let pid = std::process::id();
+            let source = std::env::temp_dir().join(format!("ria-app-dl-{pid}/payload-{pid}.bin"));
+            let home = PathBuf::from(std::env::var_os("HOME").expect("HOME"));
+            Rc::new(Self {
+                pid,
+                content: format!("ria app download {pid}\n"),
+                folder: format!("~/Downloads/ria-app-{pid}"),
+                target: home.join(format!("Downloads/ria-app-{pid}")),
+                source,
+                window: RefCell::default(),
+                started: Cell::new(false),
+                done: Cell::new(false),
+            })
+        }
+
+        /// After `engineDidStart`: approve the folder through the app's host.
+        fn approve(&self) {
+            let signals = system_signals::current().expect("the app has a system-signals host");
+            fs::create_dir_all(self.source.parent().unwrap()).unwrap();
+            fs::write(&self.source, &self.content).unwrap();
+            signals.call(
+                "setApprovedDownloadFolders",
+                &json!([[self.folder]]),
+                Box::new(|reply| assert_eq!(reply, Ok(Value::Null))),
+            );
+        }
+
+        /// After the first window: download the file in a hidden window.
+        fn download(&self) {
+            let engine = Engine::shared().expect("engine");
+            let profile = engine.default_profile();
+            let rect = NSRect::new(NSPoint::new(-3000.0, -3000.0), NSSize::new(400.0, 300.0));
+            let window: Retained<Window> = unsafe {
+                Window::init_with_content_rect(msg_send![class!(ArdiaCoreWindow), alloc], rect)
+            };
+            window.set_internal(true);
+            window.prepare_profile(&profile);
+            let url = format!("file://{}", self.source.display());
+            let tab = window.open_tab(&NSString::from_str(&url), &profile, false);
+            *self.window.borrow_mut() = Some((window, tab));
+        }
+
+        /// On each event: when the download has finished, move it through the app's host.
+        fn emitted(self: &Rc<Self>, topic: &str, data: &Value, finished: Rc<dyn Fn()>) {
+            let finished_here = topic == "downloads.changed"
+                && data["state"] == "finished"
+                && data["path"]
+                    .as_str()
+                    .is_some_and(|p| p.contains(&format!("payload-{}", self.pid)));
+            if !finished_here || self.started.replace(true) {
+                return;
+            }
+            let path = data["path"].as_str().unwrap().to_owned();
+            let this = self.clone();
+            let signals = system_signals::current().expect("the app has a system-signals host");
+            signals.call(
+                "moveCompletedDownload",
+                &json!([path, self.folder]),
+                Box::new(move |reply| {
+                    let moved = reply.as_ref().ok().and_then(|r| r["path"].as_str());
+                    let placed = moved.and_then(|p| fs::read_to_string(p).ok());
+                    let target = fs::canonicalize(&this.target).ok();
+                    let ok = moved
+                        .and_then(|p| fs::canonicalize(p).ok())
+                        .zip(target)
+                        .is_some_and(|(moved, target)| moved.starts_with(target))
+                        && placed.as_deref() == Some(this.content.as_str());
+                    println!(
+                        "downloadMoved {} {reply:?}",
+                        if ok { "ok" } else { "FAILED" }
+                    );
+                    if let Some((window, tab)) = this.window.take() {
+                        tab.close();
+                        window.close();
+                    }
+                    let _ = fs::remove_dir_all(&this.target);
+                    let _ = fs::remove_dir_all(this.source.parent().unwrap());
+                    this.done.set(ok);
+                    finished();
+                }),
+            );
+        }
+    }
+
     pub fn child() -> ExitCode {
         let matched = Rc::new(Cell::new(false));
         let shutdown = Rc::new(Cell::new(false));
+        let moving = Move::new();
+        // Quit when both the fixture title and the download move are done.
+        let quit_when_done: Rc<dyn Fn()> = {
+            let (matched, moving) = (matched.clone(), moving.clone());
+            Rc::new(move || {
+                if matched.get() && moving.done.get() {
+                    host_launch::later(host_launch::quit);
+                }
+            })
+        };
         let check_title = matched.clone();
         let check_shutdown = shutdown.clone();
+        let check_moving = moving.clone();
         let status = super::app_launch::start(Rc::new(move |event| match event {
             LaunchEvent::EngineStarted => {
                 println!("engineDidStart");
+                check_moving.approve();
                 host_launch::after(Duration::from_secs(45), host_launch::quit);
             }
             LaunchEvent::WindowOpened { windows, tabs } => {
                 println!("windowOpened windows={windows} tabs={tabs}");
+                let moving = check_moving.clone();
+                host_launch::later(move || moving.download());
+            }
+            LaunchEvent::Emit { topic, data } => {
+                check_moving.emitted(&topic, &data, quit_when_done.clone());
             }
             LaunchEvent::TabTitle(title) if title == TITLE && !check_title.replace(true) => {
                 println!("tabTitle {title}");
-                host_launch::later(host_launch::quit);
+                quit_when_done();
             }
             LaunchEvent::EngineWillShutDown => {
                 check_shutdown.set(true);
@@ -214,7 +339,7 @@ mod mac {
             LaunchEvent::Error(error) => eprintln!("{error}"),
             _ => {}
         }));
-        if matched.get() && shutdown.get() {
+        if matched.get() && shutdown.get() && moving.done.get() {
             status
         } else {
             ExitCode::FAILURE
