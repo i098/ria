@@ -73,7 +73,7 @@ How Rust reaches the classes:
 
 ### `ArdiaCoreTab` (`H:274-325`, categories to `H:394`)
 
-- Read-only state: `view` (non-null `NSView`, `H:276`), `profile` (`weak`, `H:277`), `tabId`, `url`, `title`, `loading`, `progress`, `favicon`, `canGoBack`, `canGoForward`, `closed` (`H:278-286`).
+- Read-only state: `view` (`NSView`, `H:276`; the header says non-null, but the Rust binding returns `Option<Retained<NSView>>` because a tab can have no view), `profile` (`weak`, `H:277`), `tabId`, `url`, `title`, `loading`, `progress`, `favicon`, `canGoBack`, `canGoForward`, `closed` (`H:278-286`).
 - `delegate` is `weak, nullable` (`H:287`).
 - Navigation: `loadURL:userInitiated:` (`H:332`), `goBack`, `goForward`, `reload`, `stop`, `goToOffset:` (`H:328-333`).
 - Page scripting: `evaluate:completion:` gives JSON in a block (`H:343`); `callPage:json:` (`H:345`).
