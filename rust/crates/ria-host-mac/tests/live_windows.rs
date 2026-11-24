@@ -55,6 +55,7 @@ mod mac {
     use ria_host_mac::core::delegate::{EngineDelegate, Hooks};
     use ria_host_mac::core::host::State;
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
+use ria_host_mac::launch::window_host::WindowHost;
     use ria_host_mac::tabs::ardia_page_cover::PageCover;
     use ria_host_mac::tabs::ardia_page_draw_wait::after_page_draw;
     use ria_host_mac::tabs::ardia_tab_registry::TabRegistry;
@@ -144,6 +145,9 @@ mod mac {
                 check_pip_hooks_installed();
                 check_windows(&Engine::shared().unwrap().default_profile());
             })),
+            LaunchEvent::WindowHostReady(host) => {
+                main_queue::post(Box::new(move || check_app_host_pin(&host)));
+            }
             LaunchEvent::EngineWillShutDown => exited.set(true),
             LaunchEvent::Error(error) => panic!("{error}"),
             _ => {}
@@ -152,6 +156,53 @@ mod mac {
         assert_eq!(exit, 0);
         assert!(shutdown.get());
         println!("live_windows: engine shut down cleanly");
+    }
+
+    /// Issue #153: the host that `host_launch::run` builds, not a hand-built `Popups`, must reach the shared
+    /// `TabStrips`. A strip command pins a popup tab and moving the tab out of the popup must clear the pin.
+    fn check_app_host_pin(host: &WindowHost) {
+        let popup = host.popup_for_chrome();
+        assert_eq!(host.popups().count(), 1, "the app host must own the popup");
+        let profile = Engine::shared().unwrap().default_profile();
+        popup.set_active_profile(Some(&profile));
+        let tab = popup.open_tab(ns_string!("about:blank"), &profile, false);
+        let page = tab.view().expect("open tab has a view");
+        host.chrome()
+            .tab_registry()
+            .borrow_mut()
+            .set_view(&tab, Some((&page, "popup".into())));
+        let strip = Number::from(popup.chrome_window_id_for_profile(&profile));
+        let StripCommandResult::Done(_) = host.strip_command(
+            Number(1.0),
+            TabStripCommand::Arrange {
+                strip,
+                keys: vec!["popup".into()],
+                pinned: Number(1.0),
+            },
+        ) else {
+            panic!("Arrange must finish without a group result");
+        };
+        assert!(
+            host.strips().borrow().is_pinned(&tab),
+            "the app host must route the strip command into its TabStrips"
+        );
+        // SAFETY: The engine registered this class and this call is on the main thread.
+        let destination = unsafe {
+            Window::init_with_content_rect(
+                msg_send![class!(ArdiaCoreWindow), alloc],
+                NSRect::new(NSPoint::new(-3000.0, -3000.0), NSSize::new(420.0, 300.0)),
+            )
+        };
+        destination.set_internal(true);
+        destination.prepare_profile(&profile);
+        destination.adopt_tab(&tab);
+        assert!(
+            !host.strips().borrow().is_pinned(&tab),
+            "the app host popup must clear the pin when the tab moves out"
+        );
+        popup.close();
+        destination.close();
+        println!("live_windows: app window host routed Arrange to its TabStrips and cleared the popup pin");
     }
 
     /// Host startup must have called `pip::install_all`: a Chromium frameless window then answers

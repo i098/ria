@@ -214,6 +214,15 @@ impl Popups {
         self.windows.borrow().len()
     }
 
+    /// The core windows of the open popups.
+    pub fn windows(&self) -> Vec<Retained<Window>> {
+        self.windows
+            .borrow()
+            .iter()
+            .map(|popup| popup.core.clone())
+            .collect()
+    }
+
     pub fn ask_permission(&self, tab: &Tab, request: &Value) -> bool {
         let Some(id) = request["id"].as_str() else {
             return false;

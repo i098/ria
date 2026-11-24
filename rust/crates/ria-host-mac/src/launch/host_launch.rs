@@ -29,12 +29,15 @@ use super::open_urls::{self, Entry, Inbox};
 use super::platform;
 use super::saved_session::SavedSession;
 use super::startup;
+use super::window_host::WindowHost;
 
 #[derive(Debug)]
 pub enum LaunchEvent {
     EngineStarted,
     WindowOpened { windows: usize, tabs: usize },
     TabTitle(String),
+    /// The window host exists and knows the browser window.
+    WindowHostReady(Rc<WindowHost>),
     EngineWillShutDown,
     Error(String),
 }
@@ -83,6 +86,8 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
     crate::pip::install_all();
     configure_acted_transition(&config);
     let sequence = Rc::new(LaunchSequence::default());
+    let state = State::new();
+    let host = WindowHost::new(mtm, state.clone(), config.background);
     let runtime = Rc::new_cyclic(|this| Runtime {
         this: this.clone(),
         sequence: sequence.clone(),
@@ -90,6 +95,7 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
         session,
         observer,
         mtm,
+        host,
         window: RefCell::default(),
         inbox: Inbox::default(),
         reopening: Cell::new(false),
@@ -119,7 +125,7 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
             }
         }));
     });
-    let delegate = EngineDelegate::new(runtime.clone(), State::new(), None);
+    let delegate = EngineDelegate::new(runtime.clone(), state, None);
     runtime.config.check_profile_directory()?;
     // SAFETY: the engine is loaded, mtm proves the thread, and the delegate and argv live until return.
     let code = unsafe { delegate.run(&argv) };
@@ -138,6 +144,7 @@ struct Runtime {
     session: Option<SavedSession>,
     observer: Observer,
     mtm: MainThreadMarker,
+    host: Rc<WindowHost>,
     window: RefCell<Option<BrowserWindow>>,
     inbox: Inbox,
     /// A window that a reopen asked for is not open yet.
@@ -212,7 +219,9 @@ impl Runtime {
             self.config.background,
             &self.observer,
         );
+        self.host.set_main(Some(window.core().clone()));
         *self.window.borrow_mut() = Some(window);
+        (self.observer)(LaunchEvent::WindowHostReady(self.host.clone()));
         self.inbox.flush(|urls| self.deliver(urls));
     }
 
@@ -254,6 +263,7 @@ impl Runtime {
             return;
         }
         self.window.take();
+        self.host.set_main(None);
         if !self.reopening.replace(true) {
             self.open_initial_window();
         }
@@ -291,11 +301,13 @@ impl Hooks for Runtime {
     fn names_of_loaded_profile(&self, _profile: &Profile) -> Vec<String> {
         Vec::new()
     }
-    fn ask_permission_in_popup_window(&self, _tab: &Tab, _request: &Value) -> bool {
-        false
+    fn ask_permission_in_popup_window(&self, tab: &Tab, request: &Value) -> bool {
+        self.host.ask_permission(tab, request)
     }
     fn hold_until_hosted(&self, _tab: &Tab, _topic: &str, _payload: Value) {}
-    fn drop_popup_window_permission(&self, _request_id: &str) {}
+    fn drop_popup_window_permission(&self, request_id: &str) {
+        self.host.drop_permission(request_id);
+    }
     fn drop_held_event(&self, _topic: &str, _request_id: &str) {}
     fn is_reserved_binding(&self, _key: &str, _unshifted_key: &str, _modifiers: usize) -> bool {
         false
@@ -303,8 +315,8 @@ impl Hooks for Runtime {
     fn is_reserved_key_event(&self, _event: &NSEvent) -> bool {
         false
     }
-    fn window_for_new_browser(&self, _profile: &Profile, _kind: &str) -> Option<Retained<Window>> {
-        None
+    fn window_for_new_browser(&self, _profile: &Profile, kind: &str) -> Option<Retained<Window>> {
+        (kind == "popup").then(|| self.host.popup_for_chrome())
     }
 }
 

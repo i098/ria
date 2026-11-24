@@ -13,3 +13,4 @@ mod profile;
 pub mod saved_document;
 pub mod saved_session;
 mod startup;
+pub mod window_host;
