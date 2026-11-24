@@ -2,6 +2,8 @@ name: remote-check
 
 on:
   workflow_dispatch:
+  push:
+    branches: [fm/ria-cf-remote-check]
 
 permissions:
   contents: read
