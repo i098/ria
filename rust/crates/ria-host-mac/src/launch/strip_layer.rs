@@ -35,8 +35,6 @@ use super::window_host::WindowHost;
 pub const LAUNCH_KEY: &str = "launch";
 
 const HEIGHT: f32 = 44.0;
-/// The window's title bar covers the top of the content view, so the strip starts below it.
-const TITLE_BAR: f32 = 40.0;
 
 /// What the chrome layer draws and sends.
 #[derive(Default)]
@@ -118,7 +116,8 @@ fn overlay(_: &Shared, _: &mut Cx<Shared>) -> El {
 
 /// The strip layer and the surface it owns. Drop it before the engine shuts down.
 pub struct StripLayer {
-    surface: Rc<Surface<StripState>>,
+    /// Keeps the surface alive until drop.
+    _surface: Rc<Surface<StripState>>,
 }
 
 impl StripLayer {
@@ -159,11 +158,7 @@ impl StripLayer {
             Rc::downgrade(&state),
         );
         state.borrow_mut().send = Some(send);
-        Ok(Self { surface })
-    }
-
-    pub fn presentation_time(&self) -> Option<f64> {
-        self.surface.presentation_time()
+        Ok(Self { _surface: surface })
     }
 }
 
