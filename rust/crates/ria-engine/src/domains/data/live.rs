@@ -494,7 +494,7 @@ mod mac {
         );
         let listener = std::net::TcpListener::bind(("127.0.0.1", 0)).unwrap();
         let suggest_url = format!("http://{}/suggest", listener.local_addr().unwrap());
-        expect::<api::search::StopSuggest>(
+        expect::<api::search::Suggest>(
             &live,
             &ctx,
             "search",
@@ -502,7 +502,7 @@ mod mac {
             json!({"url": suggest_url, "id": 1}),
             move |r| {
                 drop(listener);
-                r.as_ref().and_then(|m| m.get("stopped")) == Some(&Value::Bool(true))
+                r.stopped == Some(true)
             },
         );
         expect::<api::search::StopSuggest>(
@@ -615,7 +615,7 @@ mod mac {
                                     "sites",
                                     "readStorage",
                                     json!({"origin": origin}),
-                                    |cleared| cleared.items.as_ref().is_none_or(Vec::is_empty),
+                                    |cleared| cleared.items.as_ref().is_some_and(Vec::is_empty),
                                 );
                                 true
                             },
