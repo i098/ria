@@ -146,6 +146,7 @@ impl EventSink for NoEvents {
 struct FakeServices {
     log: RefCell<Vec<(String, String, Value)>>,
     answers: RefCell<HashMap<String, Result<Value, String>>>,
+    once: RefCell<HashMap<String, std::collections::VecDeque<Result<Value, String>>>>,
 }
 
 impl Services for FakeServices {
@@ -153,13 +154,18 @@ impl Services for FakeServices {
         self.log
             .borrow_mut()
             .push((op.into(), profile.into(), args));
-        done(
+        let first = self
+            .once
+            .borrow_mut()
+            .get_mut(op)
+            .and_then(|queue| queue.pop_front());
+        done(first.unwrap_or_else(|| {
             self.answers
                 .borrow()
                 .get(op)
                 .cloned()
-                .unwrap_or(Ok(Value::Null)),
-        );
+                .unwrap_or(Ok(Value::Null))
+        }));
     }
 }
 
@@ -738,6 +744,80 @@ fn a_failed_service_read_is_a_failed_step_not_empty_work() {
             rig.queue.drain();
         }
         assert_eq!(remaining.take(), Some(vec![label.to_owned()]), "{op}");
+    }
+}
+
+#[test]
+fn a_list_with_a_non_string_item_is_a_failed_step_not_an_empty_list() {
+    let cases = [
+        ("neverSaveOrigins", json!({"origins": [null]}), "passwords"),
+        ("siteSettingsOrigins", json!([123]), "site settings"),
+    ];
+    for (op, wrong, label) in cases {
+        let rig = rig();
+        ANSWERS.with(|a| a.borrow_mut().insert("*".into(), json!({"ok": true})));
+        let mut answers = rig.services.answers.borrow_mut();
+        answers.insert("listPasswords".into(), Ok(json!({"passwords": []})));
+        answers.insert("addresses".into(), Ok(json!({"addresses": []})));
+        answers.insert("cards".into(), Ok(json!({"cards": []})));
+        answers.insert("neverSaveOrigins".into(), Ok(json!({"origins": []})));
+        answers.insert("listExtensions".into(), Ok(json!({"extensions": []})));
+        answers.insert("siteSettingsOrigins".into(), Ok(json!([])));
+        answers.insert("zoomLevels".into(), Ok(json!({})));
+        answers.insert(op.into(), Ok(wrong));
+        drop(answers);
+        let remaining = Rc::new(RefCell::new(None));
+        let sink = remaining.clone();
+        delete_default(
+            rig.ctx.clone(),
+            Box::new(move |r| *sink.borrow_mut() = Some(r)),
+        );
+        rig.queue.drain();
+        for _ in 0..30 {
+            fire_timers();
+            rig.queue.drain();
+        }
+        assert_eq!(remaining.take(), Some(vec![label.to_owned()]), "{op}");
+    }
+}
+
+#[test]
+fn a_failed_or_wrong_shaped_recheck_after_a_good_read_is_a_failed_step() {
+    let rechecks = [
+        ("neverSaveOrigins", json!({"origins": ["a.com"]}), "passwords"),
+        ("siteSettingsOrigins", json!(["a.com"]), "site settings"),
+    ];
+    let bad = [Err("service failed".to_owned()), Ok(json!([null])), Ok(json!({"origins": [null]}))];
+    for (op, first, label) in rechecks {
+        for second in &bad {
+            let rig = rig();
+            ANSWERS.with(|a| a.borrow_mut().insert("*".into(), json!({"ok": true})));
+            let mut answers = rig.services.answers.borrow_mut();
+            answers.insert("listPasswords".into(), Ok(json!({"passwords": []})));
+            answers.insert("addresses".into(), Ok(json!({"addresses": []})));
+            answers.insert("cards".into(), Ok(json!({"cards": []})));
+            answers.insert("neverSaveOrigins".into(), Ok(json!({"origins": []})));
+            answers.insert("listExtensions".into(), Ok(json!({"extensions": []})));
+            answers.insert("siteSettingsOrigins".into(), Ok(json!([])));
+            answers.insert("zoomLevels".into(), Ok(json!({})));
+            drop(answers);
+            rig.services
+                .once
+                .borrow_mut()
+                .insert(op.into(), [Ok(first.clone()), second.clone()].into());
+            let remaining = Rc::new(RefCell::new(None));
+            let sink = remaining.clone();
+            delete_default(
+                rig.ctx.clone(),
+                Box::new(move |r| *sink.borrow_mut() = Some(r)),
+            );
+            rig.queue.drain();
+            for _ in 0..30 {
+                fire_timers();
+                rig.queue.drain();
+            }
+            assert_eq!(remaining.take(), Some(vec![label.to_owned()]), "{op} {second:?}");
+        }
     }
 }
 

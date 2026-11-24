@@ -40,11 +40,7 @@ fn listed(value: Option<Value>) -> Option<Map<String, Value>> {
 
 fn strings(value: Option<Value>) -> Option<Vec<String>> {
     match value {
-        Some(Value::Array(a)) => Some(
-            a.iter()
-                .filter_map(|o| o.as_str().map(str::to_owned))
-                .collect(),
-        ),
+        Some(Value::Array(a)) => a.iter().map(|o| o.as_str().map(str::to_owned)).collect(),
         _ => None,
     }
 }
