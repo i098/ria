@@ -21,10 +21,40 @@ const replacer = function (k, v) {
       : v
 }
 const encode = v => JSON.stringify(v, replacer)
-const needsCodeUnits = value => typeof value === 'string' && /[\uD800-\uDFFF]/.test(value)
-const stringAttributes = text => text.split('').map((stringValue, index) => ({
-  key: String(index), value: { stringValue }
-}))
+const hasLoneSurrogate = (value, seen) => {
+  if (typeof value === 'string') return !value.isWellFormed()
+  if (value === null || typeof value !== 'object' || seen.has(value)) return false
+  seen.add(value)
+  return Object.keys(value).some(key => !key.isWellFormed() || hasLoneSurrogate(value[key], seen))
+}
+const projectAttributes = input => {
+  const text = typeof input === 'string' && /[\uD800-\uDFFF]/.test(input)
+  if (!text && !hasLoneSurrogate(input, new WeakSet())) return null
+  const entries = Object.entries(input)
+  const replacements = new Map()
+  let next = 0
+  for (const entry of entries) {
+    const [key, value] = entry
+    if (!key.isWellFormed()) {
+      do { entry[0] = `utf16:${next++}` } while (Object.hasOwn(input, entry[0]))
+    }
+    const replaceValue = hasLoneSurrogate(value, new WeakSet())
+    if (replaceValue) entry[1] = ''
+    if (entry[0] !== key || replaceValue) replacements.set(entry[0], { key, value, replaceValue })
+  }
+  return { input: Object.fromEntries(entries), replacements }
+}
+const restoreAttributes = (attributes, { replacements }) => {
+  for (const attribute of attributes) {
+    const replacement = replacements.get(attribute.key)
+    if (!replacement) continue
+    attribute.key = replacement.key
+    if (replacement.replaceValue) {
+      const value = replacement.value
+      attribute.value.stringValue = typeof value === 'string' ? value : JSON.stringify(value)
+    }
+  }
+}
 const single = (v, key) => Object.keys(v).length === 1 && key in v
 const revive = v => Array.isArray(v) ? v.map(revive)
   : v !== null && typeof v === 'object'
@@ -295,11 +325,11 @@ const readEventRecord = (event, useWire) =>
   useWire && encode(event) && wireCall(call) ? decode() : json(event)
 module.exports.eventRecord = function eventRecord (a0) {
   try {
-    const properties = a0?.properties
-    if (!needsCodeUnits(properties)) return readEventRecord(a0, arguments.length <= 1)
+    const projection = projectAttributes(a0?.properties)
+    if (!projection) return readEventRecord(a0, arguments.length <= 1)
     const { uuid, event, distinct_id, timestamp } = a0
-    const record = readEventRecord({ uuid, event, distinct_id, timestamp }, arguments.length <= 1)
-    record.attributes = stringAttributes(properties).concat(record.attributes)
+    const record = readEventRecord({ uuid, event, distinct_id, timestamp, properties: projection.input }, arguments.length <= 1)
+    restoreAttributes(record.attributes, projection)
     return record
   } catch (e) {
     throw jsError(e)
@@ -426,11 +456,11 @@ module.exports.logRecord = function logRecord (a0, a1, a2, a3) {
   if (illFormed(a1)) throw new TypeError('argument 2 of logRecord has a lone surrogate, which a Rust String cannot hold')
   try {
     const at = a3 === undefined ? undefined : +a3
-    const text = needsCodeUnits(a2) ? a2 : null
-    const attributes = text === null ? a2 : {}
+    const projection = projectAttributes(a2)
+    const attributes = projection ? projection.input : a2
     const record = arguments.length <= 4 && encode(a0, a1, attributes, at) && wireCall(call)
       ? decode() : json(a0, a1, attributes, at)
-    if (text !== null) record.attributes = stringAttributes(text)
+    if (projection) restoreAttributes(record.attributes, projection)
     return record
   } catch (e) {
     throw jsError(e)
@@ -566,25 +596,19 @@ let t
 t = rStr()
 return t
 }
-const hasLoneSurrogate = (value, seen) => {
-  if (typeof value === 'string') return !value.isWellFormed()
-  if (value === null || typeof value !== 'object' || seen.has(value)) return false
-  seen.add(value)
-  return Object.keys(value).some(key => !key.isWellFormed() || hasLoneSurrogate(value[key], seen))
-}
 module.exports.logsRequest = function logsRequest (a0, a1, a2) {
   if (illFormed(a1)) throw new TypeError('argument 2 of logsRequest has a lone surrogate, which a Rust String cannot hold')
   try {
-    const text = needsCodeUnits(a0) ? a0 : null
-    const resource = text === null ? a0 : {}
+    const projection = projectAttributes(a0)
+    const resource = projection ? projection.input : a0
     const useRustRecords = Array.isArray(a2) && !hasLoneSurrogate(a2, new WeakSet())
     const records = useRustRecords ? a2 : []
     const output = arguments.length <= 3 && encode(resource, a1, records) && wireCall(call)
       ? decode() : json(resource, a1, records)
-    if (text === null && useRustRecords) return output
+    if (!projection && useRustRecords) return output
     const request = JSON.parse(output)
     const resourceLogs = request.resourceLogs[0]
-    if (text !== null) resourceLogs.resource.attributes = stringAttributes(text)
+    if (projection) restoreAttributes(resourceLogs.resource.attributes, projection)
     if (!useRustRecords) resourceLogs.scopeLogs[0].logRecords = a2
     return JSON.stringify(request)
   } catch (e) {

@@ -60,3 +60,21 @@ test('telemetry indexes string attributes by UTF-16 code units', () => {
     assert.equal(port.logsRequest(text, 'test'), original.logsRequest(text, 'test'))
   }
 })
+
+test('telemetry preserves structured attribute keys and values on both transports', () => {
+  const attributes = {
+    2: '\uD800', '\uD800': 'high', '\uDC00': 'low', '\uFFFD': 'replacement',
+    'utf16:0': 'ordinary', event: '\uDC00', nested: { '\uDC00': ['\uD800'] },
+  }
+  const event = { uuid: 'u', event: 'test', distinct_id: 'd', timestamp: '2025-01-01', properties: attributes }
+  const log = ['warn', 'test', attributes, 42]
+  for (const extra of [[], [null]]) {
+    const records = [port.eventRecord(event, ...extra), port.logRecord(...log, ...extra)]
+    const expected = [original.eventRecord(event), original.logRecord(...log)]
+    assert.deepEqual(records, expected)
+    for (const batch of [[], records]) {
+      assert.equal(port.logsRequest(attributes, 'test', batch, ...extra),
+        original.logsRequest(attributes, 'test', batch.length ? expected : []))
+    }
+  }
+})
