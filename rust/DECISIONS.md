@@ -154,7 +154,7 @@ Ardia means the original at `ardia/`, frozen at commit `551d3c13c`.
 ## ADR-V1: An inline `data:` favicon is limited to 2 MiB (deviation from Ardia)
 
 - Context: `ArdiaFavicons.mm:97-101` (at `551d3c13c`) reads a `data:image/` URL with `dataWithContentsOfURL:` and no byte limit. Only the HTTP path (`Download`, line 80) passes `kMaxBytes`. Issue 58.
-- Decision: `favicons.rs` refuses a `data:` body longer than the largest encoding of `MAX_BYTES` before it allocates, and refuses a decoded result over `MAX_BYTES` (2 MiB), the budget of the HTTP path. The owner's order to resolve every open issue approves this deviation.
+- Decision: `favicons.rs` refuses a `data:` body longer than the largest encoding of `MAX_BYTES` before it allocates, and refuses a decoded result over `MAX_BYTES` (2 MiB), the budget of the HTTP path. The decoder also refuses an image wider or taller than `MAX_SIDE` (4096 px): exactly 4096 decodes, 4097 is refused. The owner's order to resolve every open issue approves this deviation.
 - Consequences: an oversized inline icon gives `None`, as an oversized download does. Ardia keeps the fault.
 
 ## ADR-V2: Content blocker start keeps a `Built-in Extensions` folder (deviation from Ardia)
@@ -166,8 +166,8 @@ Ardia means the original at `ardia/`, frozen at commit `551d3c13c`.
 ## ADR-V3: A released private session no longer serves its cached favicon (deviation from Ardia)
 
 - Context: `ArdiaFavicons.mm:90` (at `551d3c13c`) stores the image in the process-wide `Seen()` cache under `SeenKey(profile, url)`, and line 98 returns it before any live-profile check. `ArdiaHost.mm:143-155` (`releaseProfile:`) does not clear that cache. Issue 57.
-- Decision: `Favicons::fetch` in `favicons.rs` skips the `Seen()` cache read for a private session the app released (`released_private` in the profile registry). `data:` and download paths are unchanged. The owner's order to resolve every open issue approves this deviation.
-- Consequences: after release, a cached `favicons.fetch` for that session misses the cache. The cached image stays in memory until evicted, but nothing reads it. Ardia keeps the fault.
+- Decision: `Favicons::fetch` in `favicons.rs` skips the `Seen()` cache read for a private session the app released (`released_private` in the profile registry), and `note_image` does not store an icon that arrives late for such a session. `data:` and download paths are unchanged. The owner's order to resolve every open issue approves this deviation.
+- Consequences: after release, a cached `favicons.fetch` for that session misses the cache. An image cached before the release stays in memory until evicted, but nothing reads it; a late icon is not stored. Ardia keeps the fault.
 
 ## ADR-V4: A private window cannot restore a hidden element (deviation from Ardia)
 
