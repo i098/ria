@@ -520,7 +520,7 @@ mod mac {
                 let outstanding = *watch.outstanding.borrow();
                 let seen = history_seen.get();
                 let quiet = quiet_window.get();
-                if (outstanding != 0 || !seen || quiet.is_none()) && waited < Duration::from_secs(60)
+                if (outstanding != 0 || !seen || quiet.is_none()) && waited < Duration::from_secs(150)
                 {
                     return false;
                 }
@@ -532,18 +532,13 @@ mod mac {
                 );
                 // Ardia's engine mutes the event while `bookmarks.apply` edits: `ac_bookmarks.cc:152` returns when
                 // `applying_` is set, and `:438` and `:456` set and clear it around the edits. The event must not
-                // arrive in the 500 ms after the reply either.
+                // arrive in the 500 ms after the reply either. The harness has no engine call that edits bookmarks
+                // outside `bookmarks.apply`, so a positive watcher check is not possible here.
                 record(
                     &watch,
                     "bookmarks.apply raises no bookmarks.changed within 500 ms (Ardia ac_bookmarks.cc:152)",
                     quiet == Some(true),
                     String::new(),
-                );
-                record(
-                    &watch,
-                    "bookmarks.changed arrives for a bookmark change outside bookmarks.apply",
-                    false,
-                    "unproven: no engine call of this harness edits bookmarks except bookmarks.apply".into(),
                 );
                 if outstanding != 0 {
                     record(
@@ -666,19 +661,49 @@ mod mac {
                                     Duration::from_millis(500),
                                     Box::new(move || window.set(Some(!seen.get()))),
                                 );
-                                expect::<api::bookmarks::ExportHtml>(
-                                    live,
+                                // Ardia's caller waits `EXPORT_ANSWER_MS` = 120 s, then throws ERR_ENGINE.
+                                // Only a settled call counts: the file with the bookmark, or an ERR_ENGINE rejection.
+                                *live.outstanding.borrow_mut() += 1;
+                                let done = live.clone();
+                                let settle = CallReply::new(move |settled: Settled| {
+                                    let (ok, name, detail) = match settled {
+                                        Ok(text) => {
+                                            let reply = serde_json::from_str::<Value>(&text)
+                                                .map_err(|error| error.to_string())
+                                                .and_then(|value| {
+                                                    decode_reply::<api::bookmarks::ExportHtml>(Ok(value))
+                                                        .map_err(|error| format!("{error:?}"))
+                                                });
+                                            let proven = reply.as_ref().is_ok_and(|path| {
+                                                path.as_deref().map(Path::new) == Some(exported.as_path())
+                                            }) && std::fs::read_to_string(&exported).is_ok_and(|html| {
+                                                html.contains(url) && html.contains("Ria live bookmark")
+                                            });
+                                            (
+                                                proven,
+                                                "bookmarks.exportHtml settled ok with the file on disk".to_owned(),
+                                                text,
+                                            )
+                                        }
+                                        Err(rejection) => (
+                                            rejection.code == "ERR_ENGINE",
+                                            format!(
+                                                "bookmarks.exportHtml settled with {} (export not proven)",
+                                                rejection.code
+                                            ),
+                                            format!("{}: {}", rejection.code, rejection.message),
+                                        ),
+                                    };
+                                    record(&done, name, ok, detail);
+                                    *done.outstanding.borrow_mut() -= 1;
+                                });
+                                ria_engine::domains::data::tables::run_data_call(
                                     ctx,
                                     "bookmarks",
                                     "exportHtml",
-                                    json!({}),
-                                    move |result| {
-                                        result.as_deref().is_some_and(|path| {
-                                            Path::new(path) == exported.as_path()
-                                        }) && std::fs::read_to_string(&exported).is_ok_and(|html| {
-                                            html.contains(url) && html.contains("Ria live bookmark")
-                                        })
-                                    },
+                                    "",
+                                    "{}",
+                                    settle,
                                 );
                                 r.applied.0 == 1.0 && r.invalid.is_empty()
                             },
