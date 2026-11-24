@@ -1314,32 +1314,58 @@ mod mac {
                     assert_eq!(after["fullScreen"], true);
                     assert_eq!(after["pageFullScreen"]["waitingForPage"], 0);
                     assert_eq!(after["pageFullScreen"]["picturing"], false);
-                    change_page(false);
-                    probe(&page_host, &page_window, "fakeFullScreen:0");
-                    let snapshot_host = page_host.clone();
-                    let snapshot_window = page_window.clone();
-                    let superseded = Rc::new(Cell::new(None));
-                    let result = superseded.clone();
-                    check_pending_fullscreen_snapshot(
-                        &tab,
+                    // The page's own enter may still be running its fake transition, and a fake exit during a transition does nothing; wait until it settles so the exit below is the one this check supersedes.
+                    let (settled_host, settled_window) = (page_host.clone(), page_window.clone());
+                    poll_until(
+                        "the page fullscreen enter must settle",
+                        Instant::now() + Duration::from_secs(5),
                         move || {
-                            let before = probe(&snapshot_host, &snapshot_window, "fullScreen");
-                            assert_eq!(before["pageFullScreen"]["picturing"], true);
-                            let after = probe(&snapshot_host, &snapshot_window, "fakeFullScreen:1");
-                            assert_eq!(after["fullScreen"], true);
-                            assert_eq!(after["pageFullScreen"]["picturing"], false);
-                            assert_eq!(after["pageFullScreen"]["covered"], false);
-                            result.set(Some(after));
+                            let reply = probe(&settled_host, &settled_window, "fullScreen");
+                            if reply["pageFullScreen"]["transitioning"] == false
+                                && reply["pageFullScreen"]["picturing"] == false
+                            {
+                                Ok(())
+                            } else {
+                                Err(reply.to_string())
+                            }
                         },
                         move || {
-                            let after = superseded.take().unwrap();
-                            assert_eq!(probe(&page_host, &page_window, "fullScreen"), after);
-                            assert_eq!(probe(&page_host, &page_window, "fakeFullScreen"), after);
-                            page_host.close_window(&page_window);
-                            completed.set(true);
+                            change_page(false);
+                            probe(&page_host, &page_window, "fakeFullScreen:0");
+                            let snapshot_host = page_host.clone();
+                            let snapshot_window = page_window.clone();
+                            let superseded = Rc::new(Cell::new(None));
+                            let result = superseded.clone();
+                            check_pending_fullscreen_snapshot(
+                                &tab,
+                                move || {
+                                    let before =
+                                        probe(&snapshot_host, &snapshot_window, "fullScreen");
+                                    assert_eq!(before["pageFullScreen"]["picturing"], true);
+                                    let after =
+                                        probe(&snapshot_host, &snapshot_window, "fakeFullScreen:1");
+                                    assert_eq!(after["fullScreen"], true);
+                                    assert_eq!(after["pageFullScreen"]["picturing"], false);
+                                    assert_eq!(after["pageFullScreen"]["covered"], false);
+                                    result.set(Some(after));
+                                },
+                                move || {
+                                    let after = superseded.take().unwrap();
+                                    assert_eq!(
+                                        probe(&page_host, &page_window, "fullScreen"),
+                                        after
+                                    );
+                                    assert_eq!(
+                                        probe(&page_host, &page_window, "fakeFullScreen"),
+                                        after
+                                    );
+                                    page_host.close_window(&page_window);
+                                    completed.set(true);
+                                },
+                            );
+                            change_page(true);
                         },
                     );
-                    change_page(true);
                 }),
             );
         }));
