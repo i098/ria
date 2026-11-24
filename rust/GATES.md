@@ -120,6 +120,11 @@ For each of the 29 crates of `rust/recorded/1.1`, `1.2`, `1.3`, `1.4` and `1.6`,
 rust-anything gate rust/recorded/<slice>/<crate>
 rust-anything diff rust/recorded/<slice>/<crate>
 rust-anything fuzz rust/recorded/<slice>/<crate> --seed 9271
+```
+
+After the loop, run once:
+
+```sh
 ( cd rust && cargo test -p ria-core )
 ```
 
@@ -172,6 +177,11 @@ Run from the repository root. `<crate>` is each of the 29 crates in `rust/record
 rust-anything gate rust/recorded/<slice>/<crate>
 rust-anything diff rust/recorded/<slice>/<crate>
 rust-anything fuzz rust/recorded/<slice>/<crate> --seed 8128
+```
+
+After the loop, run once:
+
+```sh
 ( cd rust && cargo test -p ria-core )     # checks T of slices 1.5 and 1.7
 ```
 
