@@ -506,7 +506,6 @@ mod mac {
         let frame_height = unsafe { text.superview().unwrap() }.bounds().size.height;
         let left = NSPoint::new(20., frame_height - 60.);
         let right = NSPoint::new(35., frame_height - 75.);
-        let end = NSPoint::new(80., frame_height - 90.);
         let left_hit = run("click:20,60");
         assert_eq!(left_hit.split(" < ").next(), Some("NSTextView"));
         assert_eq!(run("click:35,75,right"), left_hit);

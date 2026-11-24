@@ -35,8 +35,8 @@ use super::ardia_window_full_screen::{
 
 #[link(name = "CoreGraphics", kind = "framework")]
 unsafe extern "C" {
-    fn CGEventSetFlags(event: *const c_void, flags: u64);
-    fn CGEventSetIntegerValueField(event: *const c_void, field: u32, value: i64);
+    fn CGEventSetFlags(event: *mut c_void, flags: u64);
+    fn CGEventSetIntegerValueField(event: *mut c_void, field: u32, value: i64);
 }
 
 #[derive(Default)]
@@ -126,7 +126,7 @@ fn with_mouse_fields(
         return Some(event);
     }
     let cg = event.CGEvent()?;
-    let pointer = std::ptr::from_ref(&*cg).cast();
+    let pointer = std::ptr::from_ref(&*cg).cast_mut().cast();
     // SAFETY: `cg` holds the event alive while Core Graphics updates its fields.
     unsafe {
         if let Some(flags) = flags.filter(|flags| *flags != 0) {
