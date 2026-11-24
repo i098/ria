@@ -511,9 +511,7 @@ mod mac {
                 let outstanding = *watch.outstanding.borrow();
                 let seen = history_seen.get();
                 let bookmark_changed = bookmark_seen.get();
-                if (outstanding != 0 || !seen || !bookmark_changed)
-                    && waited < Duration::from_secs(60)
-                {
+                if (outstanding != 0 || !seen) && waited < Duration::from_secs(60) {
                     return false;
                 }
                 record(
@@ -522,10 +520,13 @@ mod mac {
                     seen,
                     url.into(),
                 );
+                // Ardia's engine mutes the event while `bookmarks.apply` edits: `ac_bookmarks.cc:152` returns when
+                // `applying_` is set, and `:438` and `:456` set and clear it around the edits. So the call's own
+                // edits raise no `bookmarks.changed`, and no other call edits bookmarks.
                 record(
                     &watch,
-                    "bookmarks.changed follows bookmark insertion",
-                    bookmark_changed,
+                    "bookmarks.apply raises no bookmarks.changed (Ardia ac_bookmarks.cc:152)",
+                    !bookmark_changed,
                     String::new(),
                 );
                 if outstanding != 0 {
