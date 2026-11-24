@@ -103,10 +103,9 @@ fn unhook(mover: &DownloadMover) {
 
 #[test]
 fn download_mover() {
-    let base = std::env::temp_dir().join(format!("ria-download-mover-{}", std::process::id()));
-    let _ = fs::remove_dir_all(&base);
-    fs::create_dir_all(&base).unwrap();
-    let home = fs::canonicalize(&base)
+    // The folder goes away when the test ends, also when an assertion fails.
+    let base = tempfile::tempdir().unwrap();
+    let home = fs::canonicalize(base.path())
         .unwrap()
         .to_str()
         .unwrap()
@@ -463,6 +462,40 @@ fn download_mover() {
             0o700
         );
         fs::remove_dir_all(staging_dir).unwrap();
+    }
+    for step in ["verified", "renamed"] {
+        let name = format!("drift-{step}.txt");
+        let path = env.finished(&mover, &name, "genuine", none.clone());
+        let folder = format!("Downloads/Drift-{step}");
+        fs::create_dir(env.at(&folder)).unwrap();
+        let (from, to) = (env.at(&folder), env.at(&format!("outside-{step}")));
+        hook(&mover, move |at, _| {
+            if at == step {
+                fs::rename(&from, &to).unwrap();
+            }
+        });
+        let result = mover.move_download(&path, &format!("~/{folder}"));
+        unhook(&mover);
+        assert_eq!(reason(&result), "folderNotAllowed");
+        assert_eq!(text(&path), "genuine");
+        assert!(!exists(&env.at(&format!("outside-{step}/{name}"))));
+        assert_eq!(env.staging_dirs(), 0);
+    }
+    {
+        let path = env.finished(&mover, "edited.txt", "genuine", none.clone());
+        let placed = env.at("Downloads/Bills/edited.txt");
+        hook(&mover, move |step, _| {
+            if step == "renamed" {
+                let mut file = fs::OpenOptions::new().append(true).open(&placed).unwrap();
+                file.write_all(b" plus").unwrap();
+            }
+        });
+        let result = mover.move_download(&path, "~/Downloads/Bills");
+        unhook(&mover);
+        assert_eq!(reason(&result), "changed");
+        assert_eq!(text(&path), "genuine plus");
+        assert!(!exists(&env.at("Downloads/Bills/edited.txt")));
+        assert_eq!(env.staging_dirs(), 0);
     }
     {
         let path = env.finished(&mover, "clean.txt", "clean", none.clone());

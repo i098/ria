@@ -21,6 +21,10 @@
 //!   check (`:383-393`); a file that does not match is never put back or reported as the move (issue 52).
 //! - A move reads the approved folders when it creates folders and before it places the file, where Ardia
 //!   passes a copy taken at acceptance (`:305-325`), so revoking an approval stops a running move (issue 61).
+//! - After the rename into the destination, a move checks again that the folder is still at the approved path and
+//!   hashes the placed file again; a folder that left the approved root (checked before the rename too) or an edit
+//!   through a descriptor that stayed open after the first hash puts the file back, where Ardia places it
+//!   at `:426-427` and publishes it with no further check (issue 69).
 
 use std::collections::{HashMap, HashSet};
 use std::ffi::CString;
@@ -618,6 +622,7 @@ impl DownloadMover {
         ) else {
             return failure("folderUnreadable");
         };
+        let expected = directory_path(&destination).map(|home| join(&home, &components.join("/")));
         for (i, name) in components.iter().enumerate() {
             let parent = destination.as_raw_fd();
             let mut next = open_at(parent, name, DIR_FLAGS);
@@ -748,7 +753,15 @@ impl DownloadMover {
         }
         #[cfg(test)]
         self.step("verified", &staging);
-        if self.root_length(&components) == 0 {
+        // The folder is held by descriptor, so a rename of it keeps the descriptor but leaves the approved root.
+        // A removed folder is not a moved one: the rename then fails with ENOENT and the file goes back.
+        let outside_root = || {
+            expected.as_ref().is_some_and(|path| {
+                destination.metadata().is_ok_and(|info| info.nlink() > 0)
+                    && directory_path(&destination).is_some_and(|now| now != *path)
+            })
+        };
+        if self.root_length(&components) == 0 || outside_root() {
             return give_back("folderNotAllowed");
         }
 
@@ -812,6 +825,23 @@ impl DownloadMover {
             }
             self.journal(id, None);
             return staged_failure("linked", Some(final_path));
+        }
+        // A writer that kept the file open can still edit it after the hash; a final hash decides.
+        let edited = claimed
+            .metadata()
+            .map_or(true, |info| info.size() as i64 != identity.size)
+            || sha256_of(&mut claimed).as_deref() != Some(identity.sha256.as_str());
+        if edited || outside_root() {
+            let reason = if edited {
+                "changed"
+            } else {
+                "folderNotAllowed"
+            };
+            if rename_excl(dst, &placed, stg, source_name).is_ok() {
+                return give_back(reason);
+            }
+            self.journal(id, None);
+            return staged_failure(reason, Some(final_path));
         }
 
         let event = {
