@@ -25,11 +25,11 @@ to see what a new Ardia commit would change (use `--check` and read the diff); a
 | Item | Rule |
 | --- | --- |
 | store | A top-level variable of a state file that has `getState` and `setState`. Its state type is the return type of `getState`. Ardia has no `node_modules` in the frozen checkout, so `stubs/zustand.d.ts` gives the types of `create`. |
-| `State` | The data properties (no function) of the store state types. A property belongs to the folder of the file that declares it, so each slice of `useBrowser` goes to the folder that declares it. Names are `serde`-renamed to the TypeScript names. |
-| `Action` | The function properties of the store state types, and each exported function of a state file that writes a store: it calls `setState`, a store method, or an exported function that does. React hooks (`use*`) and store creators (`(set, get)`) are not actions. |
+| `State` | The data properties (no function) of the store state types. A property belongs to the folder of the file that declares it, so each slice of `useBrowser` goes to the folder that declares it. A property that is `?` or whose type admits `undefined` is an `Option` with `skip_serializing_if`. Names are `serde`-renamed to the TypeScript names. |
+| `Action` | The function properties of the store state types, and each exported function of a state file that writes a store: it calls `setState`, a store method, a `const x = storeAction("…")` wrapper, or an exported function that does. React hooks (`use*`) and store creators (`(set, get)`) are not actions. |
 | Duplicate names | A store method and an exported function with one name give one variant (the function); see the crate README. |
 | Action parameters | One field for each parameter. A parameter of a function type is not in the JSON, so it has no field; the doc comment of the variant names it. |
-| Types | `number` is `kernel::Number`, a `Set` is a `Vec`, a `Map` and a `Record` are a `HashMap` with `String` keys, a `Date` is a `String`, a string-literal union is an enum, a union of objects with one tag property is an enum with `#[serde(tag)]`. A function property is not in the JSON. A type that refers to itself goes through a `Box`. |
+| Types | `number` is `kernel::Number`, a `Set`, `ReadonlySet` or `Iterable` is a `Vec`, a `Map`, `ReadonlyMap` and a `Record` are a `HashMap` with `String` keys, a `Date` is a `String`, a string-literal union is an enum, a union of objects with one tag property is an enum with `#[serde(tag)]`. A function property is not in the JSON. A type that refers to itself goes through a `Box`. |
 | Unknown | A type that the script cannot map becomes `serde_json::Value` and the script prints a warning. |
 | Platform files | Files of the form `name.windows.ts`, `.linux.ts`, `.android.ts` and `.web.ts` are not read: the first scope is the Mac. |
 
