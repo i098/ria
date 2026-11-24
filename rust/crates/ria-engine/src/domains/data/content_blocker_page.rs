@@ -106,7 +106,6 @@ pub struct Page {
     inflight: RefCell<Option<Done>>,
     started: Cell<bool>,
     loaded: Cell<bool>,
-    busy: Cell<bool>,
 }
 
 impl Page {
@@ -120,7 +119,6 @@ impl Page {
             calls: RefCell::default(),
             inflight: RefCell::default(),
             loaded: Cell::new(false),
-            busy: Cell::new(false),
         });
         page.tab.set_delegate(PageDelegate(Rc::downgrade(&page)));
         page
@@ -157,7 +155,7 @@ impl Page {
     pub fn next(self: &Rc<Self>) {
         if self.dead.get()
             || !self.loaded.get()
-            || self.busy.get()
+            || self.inflight.borrow().is_some()
             || self.calls.borrow().is_empty()
         {
             return;
@@ -174,7 +172,6 @@ impl Page {
             return;
         };
         *self.inflight.borrow_mut() = Some(done);
-        self.busy.set(true);
         let page = self.clone();
         self.tab.evaluate(
             &script,
@@ -186,7 +183,6 @@ impl Page {
                     return page.left_own_page();
                 }
                 let done = page.inflight.borrow_mut().take();
-                page.busy.set(false);
                 let (value, error) = answer_of(&json);
                 if let Some(done) = done {
                     done(value, error);
