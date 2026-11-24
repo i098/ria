@@ -463,40 +463,7 @@ fn download_mover() {
         );
         fs::remove_dir_all(staging_dir).unwrap();
     }
-    for step in ["verified", "renamed"] {
-        let name = format!("drift-{step}.txt");
-        let path = env.finished(&mover, &name, "genuine", none.clone());
-        let folder = format!("Downloads/Drift-{step}");
-        fs::create_dir(env.at(&folder)).unwrap();
-        let (from, to) = (env.at(&folder), env.at(&format!("outside-{step}")));
-        hook(&mover, move |at, _| {
-            if at == step {
-                fs::rename(&from, &to).unwrap();
-            }
-        });
-        let result = mover.move_download(&path, &format!("~/{folder}"));
-        unhook(&mover);
-        assert_eq!(reason(&result), "folderNotAllowed");
-        assert_eq!(text(&path), "genuine");
-        assert!(!exists(&env.at(&format!("outside-{step}/{name}"))));
-        assert_eq!(env.staging_dirs(), 0);
-    }
-    {
-        let path = env.finished(&mover, "edited.txt", "genuine", none.clone());
-        let placed = env.at("Downloads/Bills/edited.txt");
-        hook(&mover, move |step, _| {
-            if step == "renamed" {
-                let mut file = fs::OpenOptions::new().append(true).open(&placed).unwrap();
-                file.write_all(b" plus").unwrap();
-            }
-        });
-        let result = mover.move_download(&path, "~/Downloads/Bills");
-        unhook(&mover);
-        assert_eq!(reason(&result), "changed");
-        assert_eq!(text(&path), "genuine plus");
-        assert!(!exists(&env.at("Downloads/Bills/edited.txt")));
-        assert_eq!(env.staging_dirs(), 0);
-    }
+    drift_and_edit(&env, &mover);
     {
         let path = env.finished(&mover, "clean.txt", "clean", none.clone());
         assert_eq!(
@@ -711,6 +678,43 @@ fn download_mover() {
         );
     }
     fs::remove_dir_all(&env.home).unwrap();
+}
+
+fn drift_and_edit(env: &Env, mover: &DownloadMover) {
+    for step in ["verified", "renamed"] {
+        let name = format!("drift-{step}.txt");
+        let path = env.finished(mover, &name, "genuine", json!({}));
+        let folder = format!("Downloads/Drift-{step}");
+        fs::create_dir(env.at(&folder)).unwrap();
+        let (from, to) = (env.at(&folder), env.at(&format!("outside-{step}")));
+        hook(mover, move |at, _| {
+            if at == step {
+                fs::rename(&from, &to).unwrap();
+            }
+        });
+        let result = mover.move_download(&path, &format!("~/{folder}"));
+        unhook(mover);
+        assert_eq!(reason(&result), "folderNotAllowed");
+        assert_eq!(text(&path), "genuine");
+        assert!(!exists(&env.at(&format!("outside-{step}/{name}"))));
+        assert_eq!(env.staging_dirs(), 0);
+    }
+    {
+        let path = env.finished(mover, "edited.txt", "genuine", json!({}));
+        let placed = env.at("Downloads/Bills/edited.txt");
+        hook(mover, move |step, _| {
+            if step == "renamed" {
+                let mut file = fs::OpenOptions::new().append(true).open(&placed).unwrap();
+                file.write_all(b" plus").unwrap();
+            }
+        });
+        let result = mover.move_download(&path, "~/Downloads/Bills");
+        unhook(mover);
+        assert_eq!(reason(&result), "changed");
+        assert_eq!(text(&path), "genuine plus");
+        assert!(!exists(&env.at("Downloads/Bills/edited.txt")));
+        assert_eq!(env.staging_dirs(), 0);
+    }
 }
 
 /// The checks for the four approved deviations from Ardia (issues 62 to 65).
