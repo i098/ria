@@ -2,6 +2,17 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
+//! Changes from Ardia:
+//! - Ria admits the data directory once and opens it by handle. Admission, the `Chromium` link scan and the data
+//!   file reads use that handle and never reopen the path; a swapped path is refused (`profile.rs`).
+//! - A path that differs from a reserved Ardia path only by case is refused, because an absent path cannot say
+//!   whether the volume ignores case.
+//! - A switch cache that cannot be read from the admitted directory turns every switch without an override off.
+//!   A missing cache still leaves the defaults.
+//! - A scratch data directory goes to the engine as `/.vol/<device>/<inode>` of the admitted directory, so the
+//!   engine opens that directory even if the path is swapped later. A normal launch passes no data directory, so
+//!   the engine opens the default path itself; that gap stays open.
+
 use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs::File;
@@ -117,7 +128,7 @@ pub struct LaunchConfig {
     pub child_environment: BTreeMap<String, String>,
     instance: BTreeMap<String, String>,
     switches: BTreeMap<String, bool>,
-    cached_switches: OnceLock<BTreeMap<String, bool>>,
+    cached_switches: OnceLock<Option<BTreeMap<String, bool>>>,
     trace: BTreeSet<String>,
     test: BTreeMap<String, String>,
 }
@@ -176,7 +187,7 @@ impl LaunchConfig {
             .transpose()?;
         let data_handle = profile::claim(&data_directory)?;
         profile::check_tree(
-            &data_directory.join("Chromium"),
+            &data_handle,
             &[
                 "SingletonLock",
                 "SingletonSocket",
@@ -184,6 +195,7 @@ impl LaunchConfig {
                 "RunningChromeVersion",
             ],
         )?;
+        profile::ensure_identity(&data_directory, &data_handle)?;
         let test_instance = isolated && !signed_for_distribution;
         if !test_instance && (!trace.is_empty() || !test.is_empty()) {
             let reason = if isolated {
@@ -217,6 +229,12 @@ impl LaunchConfig {
         &self.data_directory
     }
 
+    /// The data directory as the engine opens it: named by device and inode of the admitted directory,
+    /// so a swap of the path after admission cannot redirect the engine.
+    fn handoff_directory(&self) -> PathBuf {
+        profile::identity_path(&self.data_handle).unwrap_or_else(|_| self.data_directory.clone())
+    }
+
     pub(super) fn check_profile_directory(&self) -> io::Result<()> {
         profile::ensure_identity(&self.data_directory, &self.data_handle)?;
         profile::directory_exists(&self.data_directory.join("Chromium"))?;
@@ -224,11 +242,16 @@ impl LaunchConfig {
     }
 
     pub(super) fn read_data_file(&self, name: &Path) -> Option<Vec<u8>> {
+        self.read_admitted_file(name).ok()
+    }
+
+    /// Reads a file of the admitted data directory.
+    fn read_admitted_file(&self, name: &Path) -> io::Result<Vec<u8>> {
         if name.file_name().map(Path::new) != Some(name) || !profile::has_marker(&self.data_handle)
         {
-            return None;
+            return Err(ErrorKind::InvalidInput.into());
         }
-        profile::read(&self.data_directory, &self.data_handle, name).ok()
+        profile::read(&self.data_directory, &self.data_handle, name)
     }
 
     pub fn read_config_file(&self, name: &Path) -> io::Result<Vec<u8>> {
@@ -249,12 +272,15 @@ impl LaunchConfig {
     }
 
     pub fn switch_on(&self, key: &str) -> bool {
+        // A cache that cannot be read from the admitted directory turns every switch off.
         self.switch_override(key)
             .or_else(|| {
-                self.cached_switches
-                    .get_or_init(|| cached_switches(self))
-                    .get(key)
-                    .copied()
+                let cache = self.cached_switches.get_or_init(|| cached_switches(self));
+                Some(
+                    cache
+                        .as_ref()
+                        .map_or(false, |cache| cache.get(key).copied().unwrap_or(true)),
+                )
             })
             .unwrap_or(true)
     }
@@ -284,7 +310,7 @@ impl LaunchConfig {
         if self.isolated {
             args.push(format!(
                 "--ardia-data-dir={}",
-                self.data_directory().display()
+                self.handoff_directory().display()
             ));
         }
         if let Some(downloads) = self.instance("downloadsDir") {
@@ -439,13 +465,18 @@ fn same_directory(a: &Path, b: &Path) -> bool {
         (Err(a_err), Err(b_err))
             if a_err.kind() == ErrorKind::NotFound && b_err.kind() == ErrorKind::NotFound =>
         {
-            a.file_name() == b.file_name()
+            // The volume may ignore case, and an absent path cannot say so.
+            a.file_name().map(fold) == b.file_name().map(fold)
                 && a.parent()
                     .zip(b.parent())
                     .is_some_and(|(a, b)| same_directory(a, b))
         }
         _ => false,
     }
+}
+
+fn fold(name: &std::ffi::OsStr) -> String {
+    name.to_string_lossy().to_lowercase()
 }
 
 fn present(value: &str) -> Option<&str> {
@@ -512,18 +543,23 @@ fn switch_entry(piece: &str) -> Option<(String, bool)> {
     Some((name.to_owned(), on))
 }
 
-fn cached_switches(config: &LaunchConfig) -> BTreeMap<String, bool> {
-    let cache = config
-        .read_data_file(Path::new("switches-cache.json"))
+fn cached_switches(config: &LaunchConfig) -> Option<BTreeMap<String, bool>> {
+    let read = config.read_admitted_file(Path::new("switches-cache.json"));
+    // A swapped directory is not a missing cache: an unchecked default could enable a disabled switch.
+    config.check_profile_directory().ok()?;
+    let cache = read
+        .ok()
         .and_then(|data| serde_json::from_slice::<Value>(&data).ok());
-    cache
-        .as_ref()
-        .and_then(|value| value.get("switches"))
-        .and_then(Value::as_object)
-        .into_iter()
-        .flatten()
-        .filter_map(|(name, value)| Some((name.clone(), value.as_bool()?)))
-        .collect()
+    Some(
+        cache
+            .as_ref()
+            .and_then(|value| value.get("switches"))
+            .and_then(Value::as_object)
+            .into_iter()
+            .flatten()
+            .filter_map(|(name, value)| Some((name.clone(), value.as_bool()?)))
+            .collect(),
+    )
 }
 
 #[cfg(test)]
@@ -663,7 +699,45 @@ mod tests {
         fs::rename(&other.data_directory, &original.data_directory).unwrap();
         assert!(original.check_profile_directory().is_err());
         assert!(SavedSession::read(&original).is_none());
-        assert!(original.switch_on("foreign"));
+        assert!(!original.switch_on("foreign"));
+        fs::remove_dir_all(home).unwrap();
+    }
+
+    #[test]
+    fn case_alias_of_the_absent_ardia_root_is_rejected() {
+        let home = std::env::temp_dir().join(format!("ria-case-alias-{}", std::process::id()));
+        let support = home.join("Library/Application Support");
+        fs::create_dir_all(&support).unwrap();
+        let alias = support.join("com.ARDIA.browser");
+        let result = LaunchConfig::from_environment(
+            [("RIA_DATA_DIR", alias.to_str().unwrap())],
+            &home,
+            &home,
+            false,
+        );
+        let created = alias.exists() || support.join("com.ardia.browser").exists();
+        fs::remove_dir_all(home).unwrap();
+        assert!(result.is_err());
+        assert!(!created);
+    }
+
+    #[test]
+    fn unreadable_switch_cache_turns_switches_off_but_a_missing_one_does_not() {
+        let home = std::env::temp_dir().join(format!("ria-cache-closed-{}", std::process::id()));
+        let launch = || {
+            LaunchConfig::from_environment([("RIA_DATA_DIR", "p")], &home, &home, false).unwrap()
+        };
+        let config = launch();
+        assert!(config.switch_on("x"));
+        let swapped = launch();
+        fs::write(
+            swapped.data_directory.join("switches-cache.json"),
+            br#"{"switches":{"x":false}}"#,
+        )
+        .unwrap();
+        fs::rename(&swapped.data_directory, home.join("old")).unwrap();
+        fs::create_dir(&swapped.data_directory).unwrap();
+        assert!(!swapped.switch_on("x"));
         fs::remove_dir_all(home).unwrap();
     }
 
@@ -862,7 +936,12 @@ mod tests {
         assert_eq!(config.config_directory, expected.join("config"));
         assert_eq!(
             config.engine_switches(),
-            [format!("--ardia-data-dir={}", expected.display())]
+            [format!(
+                "--ardia-data-dir={}",
+                super::profile::identity_path(&config.data_handle)
+                    .unwrap()
+                    .display()
+            )]
         );
     }
 
@@ -903,7 +982,12 @@ mod tests {
             config.engine_switches(),
             [
                 "--ardia-background".to_owned(),
-                format!("--ardia-data-dir={}", expected.display()),
+                format!(
+                    "--ardia-data-dir={}",
+                    super::profile::identity_path(&config.data_handle)
+                        .unwrap()
+                        .display()
+                ),
                 "--ardia-downloads-dir=/tmp/a,b".to_owned(),
                 "--ardia-switches=one=on,two=off".to_owned(),
                 "--ardia-test=loginsDelay=25,nativeDragRefused".to_owned(),
