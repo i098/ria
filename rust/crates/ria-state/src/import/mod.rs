@@ -13,11 +13,6 @@ use serde::{Deserialize, Serialize};
 use crate::kernel::Number;
 use crate::kernel::{AppState, Effects};
 
-#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct StateKinds {
-    pub size: Number,
-}
-
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "name")]
 pub enum ImportStep {
@@ -192,7 +187,7 @@ pub struct ImportResults {
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
 pub struct ArcHomes {
-    pub spaces: crate::config::ThemeLookIcons,
+    pub spaces: std::collections::HashMap<String, String>,
     pub fallback: String,
 }
 
@@ -257,7 +252,7 @@ pub struct PatchImportPatch {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spaces: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub kinds: Option<StateKinds>,
+    pub kinds: Option<Vec<serde_json::Value>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub target: Option<String>,
     #[serde(
@@ -333,9 +328,6 @@ pub enum PatchImportPatchStepProgressStatusValue {
     Active,
 }
 
-#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct SetImportKindsKinds {}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
 pub enum StartProgressStatusValue {
     #[default]
@@ -355,7 +347,7 @@ pub struct State {
     pub browsers: Vec<serde_json::Value>,
     #[serde(rename = "fullDiskAccess")]
     pub full_disk_access: bool,
-    pub kinds: StateKinds,
+    pub kinds: Vec<serde_json::Value>,
     #[serde(rename = "safariCookies")]
     pub safari_cookies: bool,
     pub source: serde_json::Value,
@@ -571,13 +563,13 @@ pub enum Action {
     /// `runImport` (an exported function that writes a store).
     #[serde(rename = "runImport")]
     RunImport {
-        wanted: StateKinds,
+        wanted: Vec<serde_json::Value>,
         #[serde(rename = "withoutKey", default)]
         without_key: Option<bool>,
     },
     /// `setImportKinds` (an exported function that writes a store).
     #[serde(rename = "setImportKinds")]
-    SetImportKinds { kinds: SetImportKindsKinds },
+    SetImportKinds { kinds: Vec<serde_json::Value> },
     /// `setImportTarget` (an exported function that writes a store).
     #[serde(rename = "setImportTarget")]
     SetImportTarget { target: String },

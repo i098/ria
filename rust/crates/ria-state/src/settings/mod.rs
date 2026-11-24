@@ -758,7 +758,7 @@ pub struct LoadR {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct LoadV2 {
+pub struct LoadArg2 {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fresh: Option<bool>,
 }
@@ -917,7 +917,7 @@ pub struct State {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "type")]
 pub enum Action {
-    /// `addCustomEngine` (a store method).
+    /// `addCustomEngine` (an exported function that writes a store).
     #[serde(rename = "addCustomEngine")]
     AddCustomEngine { input: serde_json::Value },
     /// `appliedInterfaceScale` (an exported function that writes a store).
@@ -986,14 +986,14 @@ pub enum Action {
     },
     /// `jumpToSetting` (an exported function that writes a store).
     #[serde(rename = "jumpToSetting")]
-    JumpToSetting { __0: Target },
+    JumpToSetting { arg0: Target },
     /// `load` (an exported function that writes a store).
     #[serde(rename = "load")]
     Load {
         r: LoadR,
         args: serde_json::Value,
         #[serde(default)]
-        __2: Option<LoadV2>,
+        arg2: Option<LoadArg2>,
     },
     /// `loadAll` (an exported function that writes a store).
     #[serde(rename = "loadAll")]
@@ -1051,8 +1051,8 @@ pub enum Action {
     PreviewCommandKeys { keys: String },
     /// `previewSetting` (an exported function that writes a store).
     #[serde(rename = "previewSetting")]
-    PreviewSetting { __0: Target },
-    /// `removeCustomEngine` (a store method).
+    PreviewSetting { arg0: Target },
+    /// `removeCustomEngine` (an exported function that writes a store).
     #[serde(rename = "removeCustomEngine")]
     RemoveCustomEngine { id: String },
     /// `replaceSettingsPlace` (an exported function that writes a store).
@@ -1107,7 +1107,7 @@ pub enum Action {
     /// `setPreloadPagesFor` (an exported function that writes a store).
     #[serde(rename = "setPreloadPagesFor")]
     SetPreloadPagesFor { profile: String, on: bool },
-    /// `setSearchEngine` (a store method).
+    /// `setSearchEngine` (an exported function that writes a store).
     #[serde(rename = "setSearchEngine")]
     SetSearchEngine { id: String },
     /// `setSettingsQuery` (an exported function that writes a store).
@@ -1167,13 +1167,19 @@ pub enum Action {
     /// `toggleSidebarSide` (an exported function that writes a store).
     #[serde(rename = "toggleSidebarSide")]
     ToggleSidebarSide,
-    /// `updateCustomEngine` (a store method).
+    /// `toggleTabLayout` (an exported function that writes a store).
+    #[serde(rename = "toggleTabLayout")]
+    ToggleTabLayout {
+        #[serde(rename = "windowId")]
+        window_id: String,
+    },
+    /// `updateCustomEngine` (an exported function that writes a store).
     #[serde(rename = "updateCustomEngine")]
     UpdateCustomEngine {
         id: String,
         input: serde_json::Value,
     },
-    /// `updateSettings` (a store method).
+    /// `updateSettings` (an exported function that writes a store).
     #[serde(rename = "updateSettings")]
     UpdateSettings {
         patch: crate::onboarding::StateDraft,

@@ -1101,8 +1101,12 @@ pub enum LiveBaselineColor {
 pub struct ProfileLookBaseline {
     pub color: ProfileLookBaselineColor,
     pub theme: serde_json::Value,
-    #[serde(rename = "presetThemes")]
-    pub preset_themes: crate::browser::ProfilePresetThemes,
+    #[serde(
+        rename = "presetThemes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub preset_themes: Option<crate::browser::ProfilePresetThemes>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]

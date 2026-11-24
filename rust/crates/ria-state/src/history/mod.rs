@@ -47,7 +47,7 @@ pub struct State {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "type")]
 pub enum Action {
-    /// `clearHistory` (a store method).
+    /// `clearHistory` (an exported function that writes a store).
     #[serde(rename = "clearHistory")]
     ClearHistory {
         #[serde(rename = "profileId")]
@@ -79,7 +79,7 @@ pub enum Action {
     /// `reloadEngineHistory` (an exported function that writes a store).
     #[serde(rename = "reloadEngineHistory")]
     ReloadEngineHistory { engine: String },
-    /// `removeHistory` (a store method).
+    /// `removeHistory` (an exported function that writes a store).
     #[serde(rename = "removeHistory")]
     RemoveHistory {
         #[serde(rename = "profileId")]

@@ -393,7 +393,7 @@ pub struct AskPlacement {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct StartTelemetryV0 {
+pub struct StartTelemetryArg0 {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub continuing: Option<bool>,
 }
@@ -515,7 +515,7 @@ pub enum Action {
     #[serde(rename = "startTelemetry")]
     StartTelemetry {
         #[serde(default)]
-        __0: Option<StartTelemetryV0>,
+        arg0: Option<StartTelemetryArg0>,
     },
     /// `startUsage` (an exported function that writes a store).
     #[serde(rename = "startUsage")]

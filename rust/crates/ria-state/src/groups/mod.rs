@@ -118,7 +118,7 @@ pub enum Action {
         #[serde(default)]
         options: Option<CreateGroupOptions>,
     },
-    /// `deleteGroup` (a store method).
+    /// `deleteGroup` (an exported function that writes a store).
     #[serde(rename = "deleteGroup")]
     DeleteGroup {
         #[serde(rename = "groupId")]
@@ -157,7 +157,7 @@ pub enum Action {
         #[serde(rename = "groupId")]
         group_id: String,
     },
-    /// `newNestedGroup` (a store method).
+    /// `newNestedGroup` (an exported function that writes a store).
     #[serde(rename = "newNestedGroup")]
     NewNestedGroup {
         #[serde(rename = "parentId")]
@@ -169,19 +169,19 @@ pub enum Action {
         #[serde(rename = "groupId")]
         group_id: String,
     },
-    /// `removeTabsFromGroup` (a store method).
+    /// `removeTabsFromGroup` (an exported function that writes a store).
     #[serde(rename = "removeTabsFromGroup")]
     RemoveTabsFromGroup {
         #[serde(rename = "tabIds")]
         tab_ids: Vec<String>,
     },
-    /// `ungroup` (a store method).
+    /// `ungroup` (an exported function that writes a store).
     #[serde(rename = "ungroup")]
     Ungroup {
         #[serde(rename = "groupId")]
         group_id: String,
     },
-    /// `updateGroup` (a store method).
+    /// `updateGroup` (an exported function that writes a store).
     #[serde(rename = "updateGroup")]
     UpdateGroup { id: String, patch: UpdateGroupPatch },
 }

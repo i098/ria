@@ -422,9 +422,18 @@ pub enum SetPopoverPopover {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct SleepTabV1 {
+pub struct SleepTabArg1 {
     #[serde(rename = "mayWrite", default, skip_serializing_if = "Option::is_none")]
     pub may_write: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
+pub enum TabSwipeSurface {
+    #[default]
+    #[serde(rename = "toolbar")]
+    Toolbar,
+    #[serde(rename = "sidebarField")]
+    SidebarField,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
@@ -689,7 +698,7 @@ pub struct State {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "type")]
 pub enum Action {
-    /// `activate` (a store method).
+    /// `activate` (an exported function that writes a store).
     #[serde(rename = "activate")]
     Activate { id: String },
     /// `activateIndex` (a store method).
@@ -724,7 +733,10 @@ pub enum Action {
     /// `closeTab` (a store method).
     #[serde(rename = "closeTab")]
     CloseTab { id: String },
-    /// `closeTabs` (a store method).
+    /// `closeTabNow` (an exported function that writes a store).
+    #[serde(rename = "closeTabNow")]
+    CloseTabNow { id: String },
+    /// `closeTabs` (an exported function that writes a store).
     #[serde(rename = "closeTabs")]
     CloseTabs {
         ids: Vec<String>,
@@ -769,7 +781,7 @@ pub enum Action {
         to: Number,
         lane: crate::drag::Lane,
     },
-    /// `duplicateTab` (a store method).
+    /// `duplicateTab` (an exported function that writes a store).
     #[serde(rename = "duplicateTab")]
     DuplicateTab { id: String },
     /// `goBack` (an exported function that writes a store). The callback parameters `mayAct` are not in the JSON.
@@ -860,7 +872,7 @@ pub enum Action {
     /// `moveTabBy` (a store method).
     #[serde(rename = "moveTabBy")]
     MoveTabBy { id: String, delta: Number },
-    /// `navigate` (a store method).
+    /// `navigate` (an exported function that writes a store).
     #[serde(rename = "navigate")]
     Navigate {
         id: String,
@@ -868,7 +880,7 @@ pub enum Action {
         #[serde(default)]
         options: Option<NavigateOptions>,
     },
-    /// `newTab` (a store method).
+    /// `newTab` (an exported function that writes a store).
     #[serde(rename = "newTab")]
     NewTab {
         #[serde(rename = "windowId")]
@@ -952,6 +964,12 @@ pub enum Action {
         #[serde(rename = "folderId")]
         folder_id: String,
     },
+    /// `pageAskedToClose` (an exported function that writes a store).
+    #[serde(rename = "pageAskedToClose")]
+    PageAskedToClose {
+        #[serde(rename = "tabId")]
+        tab_id: String,
+    },
     /// `pageEnded` (an exported function that writes a store).
     #[serde(rename = "pageEnded")]
     PageEnded {
@@ -996,7 +1014,7 @@ pub enum Action {
     SleepTab {
         id: String,
         #[serde(default)]
-        __1: Option<SleepTabV1>,
+        arg1: Option<SleepTabArg1>,
     },
     /// `startChromeTabs` (an exported function that writes a store).
     #[serde(rename = "startChromeTabs")]
@@ -1046,6 +1064,14 @@ pub enum Action {
         #[serde(rename = "profileId")]
         profile_id: String,
     },
+    /// `swipeToNeighbourTab` (an exported function that writes a store).
+    #[serde(rename = "swipeToNeighbourTab")]
+    SwipeToNeighbourTab {
+        #[serde(rename = "windowId")]
+        window_id: String,
+        delta: Number,
+        surface: TabSwipeSurface,
+    },
     /// `toggleHistoryMenu` (an exported function that writes a store).
     #[serde(rename = "toggleHistoryMenu")]
     ToggleHistoryMenu {
@@ -1053,7 +1079,7 @@ pub enum Action {
         tab_id: String,
         direction: Number,
     },
-    /// `togglePin` (a store method).
+    /// `togglePin` (an exported function that writes a store).
     #[serde(rename = "togglePin")]
     TogglePin { id: String },
     /// `togglePopover` (an exported function that writes a store).
@@ -1079,10 +1105,10 @@ pub enum Action {
         #[serde(rename = "groupId")]
         group_id: String,
     },
-    /// `updateLive` (a store method).
+    /// `updateLive` (an exported function that writes a store).
     #[serde(rename = "updateLive")]
     UpdateLive { id: String, patch: UpdateLivePatch },
-    /// `updateTab` (a store method).
+    /// `updateTab` (an exported function that writes a store).
     #[serde(rename = "updateTab")]
     UpdateTab {
         id: String,

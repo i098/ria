@@ -35,7 +35,7 @@ pub struct HiddenElement {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct RevertPageV1 {
+pub struct RevertPageArg1 {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub quiet: Option<bool>,
 }
@@ -57,6 +57,23 @@ pub struct SetSiteBlockingTab {
     pub id: String,
     #[serde(rename = "windowId")]
     pub window_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
+pub struct SetSitePermissionPage {
+    #[serde(rename = "tabId")]
+    pub tab_id: String,
+    pub profile: String,
+    pub origin: String,
+    pub engine: serde_json::Value,
+}
+
+#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
+pub struct SiteSound {
+    #[serde(rename = "siteMuted")]
+    pub site_muted: bool,
+    #[serde(rename = "soundBlocked")]
+    pub sound_blocked: bool,
 }
 
 /// The data fields of the TypeScript store.
@@ -189,7 +206,7 @@ pub enum Action {
     },
     /// `handleWebNotificationResponse` (an exported function that writes a store).
     #[serde(rename = "handleWebNotificationResponse")]
-    HandleWebNotificationResponse { __0: serde_json::Value },
+    HandleWebNotificationResponse { arg0: serde_json::Value },
     /// `hoverZoomPopover` (an exported function that writes a store).
     #[serde(rename = "hoverZoomPopover")]
     HoverZoomPopover {
@@ -251,7 +268,7 @@ pub enum Action {
         #[serde(rename = "tabId")]
         tab_id: String,
         #[serde(default)]
-        __1: Option<RevertPageV1>,
+        arg1: Option<RevertPageArg1>,
     },
     /// `runHidingCommand` (an exported function that writes a store).
     #[serde(rename = "runHidingCommand")]
@@ -292,6 +309,15 @@ pub enum Action {
         tab: SetSiteBlockingTab,
         host: String,
         on: bool,
+    },
+    /// `setSitePermission` (an exported function that writes a store).
+    #[serde(rename = "setSitePermission")]
+    SetSitePermission {
+        page: SetSitePermissionPage,
+        #[serde(rename = "typeArg")]
+        type_arg: serde_json::Value,
+        value: serde_json::Value,
+        sound: SiteSound,
     },
     /// `showAutofillPrompt` (an exported function that writes a store).
     #[serde(rename = "showAutofillPrompt")]

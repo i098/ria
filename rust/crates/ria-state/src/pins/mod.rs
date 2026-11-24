@@ -143,7 +143,7 @@ pub struct State {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "type")]
 pub enum Action {
-    /// `cleanUpTabs` (a store method).
+    /// `cleanUpTabs` (an exported function that writes a store).
     #[serde(rename = "cleanUpTabs")]
     CleanUpTabs {
         #[serde(rename = "windowId")]
@@ -167,10 +167,10 @@ pub enum Action {
         #[serde(default)]
         mods: Option<crate::drag::ClickMods>,
     },
-    /// `closeAbandonedNewTabs` (a store method).
+    /// `closeAbandonedNewTabs` (an exported function that writes a store).
     #[serde(rename = "closeAbandonedNewTabs")]
     CloseAbandonedNewTabs,
-    /// `dropTabs` (a store method).
+    /// `dropTabs` (an exported function that writes a store).
     #[serde(rename = "dropTabs")]
     DropTabs {
         ids: Vec<String>,
@@ -188,7 +188,7 @@ pub enum Action {
         s: crate::browser::BrowserState,
         prev: crate::browser::BrowserState,
     },
-    /// `pinTabs` (a store method).
+    /// `pinTabs` (an exported function that writes a store).
     #[serde(rename = "pinTabs")]
     PinTabs {
         ids: Vec<String>,
@@ -196,7 +196,7 @@ pub enum Action {
         #[serde(default)]
         row: Option<bool>,
     },
-    /// `placeTabs` (a store method).
+    /// `placeTabs` (an exported function that writes a store).
     #[serde(rename = "placeTabs")]
     PlaceTabs {
         ids: Vec<String>,
@@ -211,7 +211,7 @@ pub enum Action {
         #[serde(rename = "copyId")]
         copy_id: String,
     },
-    /// `restoreCleaned` (a store method).
+    /// `restoreCleaned` (an exported function that writes a store).
     #[serde(rename = "restoreCleaned")]
     RestoreCleaned {
         #[serde(rename = "entryIds", default)]
@@ -219,13 +219,13 @@ pub enum Action {
         #[serde(rename = "windowId", default)]
         window_id: Option<String>,
     },
-    /// `returnToPinnedUrl` (a store method).
+    /// `returnToPinnedUrl` (an exported function that writes a store).
     #[serde(rename = "returnToPinnedUrl")]
     ReturnToPinnedUrl {
         #[serde(rename = "tabId")]
         tab_id: String,
     },
-    /// `setPinnedUrl` (a store method).
+    /// `setPinnedUrl` (an exported function that writes a store).
     #[serde(rename = "setPinnedUrl")]
     SetPinnedUrl {
         #[serde(rename = "tabId")]
@@ -233,7 +233,7 @@ pub enum Action {
         #[serde(default)]
         url: Option<String>,
     },
-    /// `setSelection` (a store method).
+    /// `setSelection` (an exported function that writes a store).
     #[serde(rename = "setSelection")]
     SetSelection {
         #[serde(rename = "windowId")]

@@ -1412,6 +1412,19 @@ pub enum Action {
         #[serde(rename = "windowId", default)]
         window_id: Option<String>,
     },
+    /// `openWindow` (an exported function that writes a store).
+    #[serde(rename = "openWindow")]
+    OpenWindow {
+        #[serde(default)]
+        options: Option<crate::windows::CreateWindowOptions>,
+    },
+    /// `setSiteMuted` (an exported function that writes a store).
+    #[serde(rename = "setSiteMuted")]
+    SetSiteMuted {
+        #[serde(rename = "tabId")]
+        tab_id: String,
+        muted: bool,
+    },
     /// `switchProfile` (an exported function that writes a store). The callback parameters `mayWrite` are not in the JSON.
     #[serde(rename = "switchProfile")]
     SwitchProfile {

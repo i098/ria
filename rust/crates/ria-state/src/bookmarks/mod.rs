@@ -183,7 +183,7 @@ pub struct BeginBookmarkDragOptions {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct CloseFolderMenusV0 {
+pub struct CloseFolderMenusArg0 {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outside: Option<bool>,
 }
@@ -252,7 +252,7 @@ impl Default for OpenBarMenuNode {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct OpenBookmarkRowMenuV1 {
+pub struct OpenBookmarkRowMenuArg1 {
     #[serde(rename = "windowId")]
     pub window_id: String,
     #[serde(rename = "profileId")]
@@ -286,7 +286,7 @@ pub struct OpenFolderMenuPanel {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct OpenFolderMenuV2 {
+pub struct OpenFolderMenuArg2 {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sprung: Option<bool>,
 }
@@ -387,13 +387,13 @@ pub struct State {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "type")]
 pub enum Action {
-    /// `addBookmark` (a store method).
+    /// `addBookmark` (an exported function that writes a store).
     #[serde(rename = "addBookmark")]
     AddBookmark { options: AddBookmarkOptions },
-    /// `addBookmarkFolder` (a store method).
+    /// `addBookmarkFolder` (an exported function that writes a store).
     #[serde(rename = "addBookmarkFolder")]
     AddBookmarkFolder { options: AddBookmarkFolderOptions },
-    /// `addBookmarkTree` (a store method).
+    /// `addBookmarkTree` (an exported function that writes a store).
     #[serde(rename = "addBookmarkTree")]
     AddBookmarkTree {
         #[serde(rename = "profileId")]
@@ -450,7 +450,7 @@ pub enum Action {
     #[serde(rename = "closeFolderMenus")]
     CloseFolderMenus {
         #[serde(default)]
-        __0: Option<CloseFolderMenusV0>,
+        arg0: Option<CloseFolderMenusArg0>,
     },
     /// `closeMenusAbove` (an exported function that writes a store).
     #[serde(rename = "closeMenusAbove")]
@@ -516,7 +516,7 @@ pub enum Action {
     /// `linkDragLeft` (an exported function that writes a store).
     #[serde(rename = "linkDragLeft")]
     LinkDragLeft,
-    /// `moveBookmark` (a store method).
+    /// `moveBookmark` (an exported function that writes a store).
     #[serde(rename = "moveBookmark")]
     MoveBookmark {
         id: String,
@@ -528,7 +528,7 @@ pub enum Action {
     /// `moveBookmarkDrag` (an exported function that writes a store).
     #[serde(rename = "moveBookmarkDrag")]
     MoveBookmarkDrag { x: Number, y: Number },
-    /// `moveBookmarks` (a store method).
+    /// `moveBookmarks` (an exported function that writes a store).
     #[serde(rename = "moveBookmarks")]
     MoveBookmarks {
         ids: Vec<String>,
@@ -550,7 +550,7 @@ pub enum Action {
     #[serde(rename = "openBookmarkRowMenu")]
     OpenBookmarkRowMenu {
         node: crate::browser::BookmarkNode,
-        __1: OpenBookmarkRowMenuV1,
+        arg1: OpenBookmarkRowMenuArg1,
     },
     /// `openFolder` (an exported function that writes a store).
     #[serde(rename = "openFolder")]
@@ -569,8 +569,11 @@ pub enum Action {
         window_id: String,
         panel: OpenFolderMenuPanel,
         #[serde(default)]
-        __2: Option<OpenFolderMenuV2>,
+        arg2: Option<OpenFolderMenuArg2>,
     },
+    /// `openImportButtonMenu` (an exported function that writes a store).
+    #[serde(rename = "openImportButtonMenu")]
+    OpenImportButtonMenu,
     /// `openLinks` (an exported function that writes a store).
     #[serde(rename = "openLinks")]
     OpenLinks {
@@ -603,10 +606,10 @@ pub enum Action {
     /// `reloadBookmarks` (an exported function that writes a store).
     #[serde(rename = "reloadBookmarks")]
     ReloadBookmarks,
-    /// `removeBookmark` (a store method).
+    /// `removeBookmark` (an exported function that writes a store).
     #[serde(rename = "removeBookmark")]
     RemoveBookmark { id: String },
-    /// `removeBookmarks` (a store method).
+    /// `removeBookmarks` (an exported function that writes a store).
     #[serde(rename = "removeBookmarks")]
     RemoveBookmarks { ids: Vec<String> },
     /// `restoreArcFolders` (an exported function that writes a store).
@@ -617,7 +620,7 @@ pub enum Action {
         #[serde(rename = "windowId")]
         window_id: Option<String>,
     },
-    /// `restoreBookmarks` (a store method).
+    /// `restoreBookmarks` (an exported function that writes a store).
     #[serde(rename = "restoreBookmarks")]
     RestoreBookmarks { removed: RemovedBookmarks },
     /// `runLinkChoice` (an exported function that writes a store).
@@ -633,7 +636,7 @@ pub enum Action {
     /// `startBookmarks` (an exported function that writes a store).
     #[serde(rename = "startBookmarks")]
     StartBookmarks,
-    /// `toggleBookmark` (a store method).
+    /// `toggleBookmark` (an exported function that writes a store).
     #[serde(rename = "toggleBookmark")]
     ToggleBookmark {
         #[serde(rename = "profileId")]
@@ -655,7 +658,7 @@ pub enum Action {
         window_id: String,
         panel: ToggleFolderMenuPanel,
     },
-    /// `updateBookmark` (a store method).
+    /// `updateBookmark` (an exported function that writes a store).
     #[serde(rename = "updateBookmark")]
     UpdateBookmark {
         id: String,

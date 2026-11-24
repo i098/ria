@@ -96,6 +96,8 @@ const methods = []; // { folder, name, sig, decl }
 const data = new Map(); // folder -> Map(name -> { type, optional, decl })
 for (const f of folders) data.set(f, new Map());
 
+/** A property is optional when it has `?` or its type admits `undefined`: `JSON.stringify` omits both. */
+const isOptionalProp = (prop, type) => !!(prop.flags & ts.SymbolFlags.Optional) || (type.isUnion() && type.types.some((t) => t.flags & ts.TypeFlags.Undefined));
 const callSig = (type) => checker.getSignaturesOfType(type, ts.SignatureKind.Call);
 const isFunctionType = (type) => callSig(type).length > 0 && checker.getPropertiesOfType(type).length === 0;
 
@@ -133,7 +135,7 @@ for (const store of stores) {
         if (bucket.get(prop.name).store !== store.name) warn(`${declFolder}: field ${prop.name} is in the stores ${bucket.get(prop.name).store} and ${store.name}`);
         continue;
       }
-      bucket.set(prop.name, { type, optional: !!(prop.flags & ts.SymbolFlags.Optional), store: store.name });
+      bucket.set(prop.name, { type, optional: isOptionalProp(prop, type), store: store.name });
     }
   }
 }
@@ -167,8 +169,13 @@ for (const file of stateFiles) {
     } else if (ts.isVariableStatement(st)) {
       for (const d of st.declarationList.declarations) {
         if (!ts.isIdentifier(d.name) || !d.initializer) continue;
-        if (!(ts.isArrowFunction(d.initializer) || ts.isFunctionExpression(d.initializer))) continue;
         const sym = resolve(d.name);
+        // `const x = storeAction("name")` forwards to a store method, so it writes
+        if (ts.isCallExpression(d.initializer) && ts.isIdentifier(d.initializer.expression) && d.initializer.expression.text === "storeAction") {
+          if (sym) fnDecls.set(sym, { node: d, wrapper: true, folder, name: d.name.text, exported: isExported(st, d.name.text), file });
+          continue;
+        }
+        if (!(ts.isArrowFunction(d.initializer) || ts.isFunctionExpression(d.initializer))) continue;
         if (sym) fnDecls.set(sym, { node: d.initializer, folder, name: d.name.text, exported: isExported(st, d.name.text), file });
       }
     }
@@ -180,6 +187,10 @@ function writes(sym) {
   if (memo.has(sym)) return memo.get(sym);
   memo.set(sym, false); // a cycle adds nothing
   const info = fnDecls.get(sym);
+  if (info?.wrapper) {
+    memo.set(sym, true);
+    return true;
+  }
   let result = false;
   const visit = (node) => {
     if (result) return;
@@ -212,10 +223,10 @@ const functionActions = [];
 for (const [sym, info] of fnDecls) {
   if (!info.exported) continue;
   if (/^use[A-Z]/.test(info.name)) continue; // a React hook reads
-  const params = info.node.parameters.map((p) => p.name.getText());
+  const params = info.wrapper ? [] : info.node.parameters.map((p) => p.name.getText());
   if (params[0] === "set" && params[1] === "get") continue; // a store creator
   if (!writes(sym)) continue;
-  const sig = checker.getSignatureFromDeclaration(info.node);
+  const sig = info.wrapper ? callSig(checker.getTypeAtLocation(info.node.name))[0] : checker.getSignatureFromDeclaration(info.node);
   functionActions.push({ folder: info.folder, name: info.name, sig, decl: info.node, file: info.file });
 }
 
@@ -348,8 +359,8 @@ function single(t, named, hint, from) {
   const sym = t.symbol?.name;
   if (sym === "Date") return "String";
   const targs = t.objectFlags & ts.ObjectFlags.Reference ? checker.getTypeArguments(t) : [];
-  if (sym === "Set" && targs.length === 1) return `Vec<${rust(targs[0], hint + "Item", from)}>`;
-  if (sym === "Map" && targs.length === 2) return `std::collections::HashMap<String, ${rust(targs[1], hint + "Value", from)}>`;
+  if ((sym === "Set" || sym === "ReadonlySet" || sym === "Iterable") && targs.length >= 1) return `Vec<${rust(targs[0], hint + "Item", from)}>`;
+  if ((sym === "Map" || sym === "ReadonlyMap") && targs.length === 2) return `std::collections::HashMap<String, ${rust(targs[1], hint + "Value", from)}>`;
   if (sym === "Promise" || sym === "Function") return "serde_json::Value";
   if (checker.isArrayType(t)) return `Vec<${rust(checker.getTypeArguments(t)[0], hint + "Item", from)}>`;
   if (checker.isTupleType(t)) {
@@ -387,7 +398,7 @@ function fieldsOf(type, owner, folder, indent, ownerEntry) {
   const out = [];
   for (const prop of propList(type)) {
     const pt = checker.getTypeOfSymbol(prop);
-    const optional = !!(prop.flags & ts.SymbolFlags.Optional);
+    const optional = isOptionalProp(prop, pt);
     let rt = rust(pt, owner + pascal(prop.name), folder);
     if (optional && !rt.startsWith("Option<")) rt = `Option<${rt}>`;
     rt = boxIfBuilding(rt, folder);
@@ -428,12 +439,16 @@ const tagValues = (t) => {
 
 function taggedEnum(types, key, name, folder, from) {
   const props = checker.getPropertiesOfType(types[0]);
-  const tag = props.find((p) =>
-    types.every((t) => {
+  const tag = props.find((p) => {
+    const seen = new Set();
+    return types.every((t) => {
       const q = checker.getPropertyOfType(t, p.name);
-      return q && tagValues(checker.getTypeOfSymbol(q));
-    }),
-  );
+      const values = q && tagValues(checker.getTypeOfSymbol(q));
+      if (!values || values.some((v) => seen.has(v))) return false; // the values must be disjoint across the members
+      values.forEach((v) => seen.add(v));
+      return true;
+    });
+  });
   if (!tag) return untaggedEnum(types, key, name, folder, from);
   const entry = declare(key, name, folder, (n) => {
     const entries = types.flatMap((t) => tagValues(checker.getTypeOfSymbol(checker.getPropertyOfType(t, tag.name))).map((value) => ({ t, value })));
@@ -445,7 +460,7 @@ function taggedEnum(types, key, name, folder, from) {
       const members = propList(t).filter((p) => p.name !== tag.name);
       const body = members.map((prop) => {
         const pt = checker.getTypeOfSymbol(prop);
-        const optional = !!(prop.flags & ts.SymbolFlags.Optional);
+        const optional = isOptionalProp(prop, pt);
         let rt = rust(pt, n + variantName + pascal(prop.name), folder);
         if (optional && !rt.startsWith("Option<")) rt = `Option<${rt}>`;
         rt = boxIfBuilding(rt, folder);
@@ -456,9 +471,9 @@ function taggedEnum(types, key, name, folder, from) {
         if (optional) attrs.push(`default`, `skip_serializing_if = "Option::is_none"`);
         return `        ${attrs.length ? `#[serde(${attrs.join(", ")})] ` : ""}${ident}: ${rt},`;
       });
-      return { variantName, value, body, dup: variantName !== pascal(value) };
+      return { variantName, value, body };
     });
-    const text = variants.map((v) => `    ${v.dup ? "/// Same tag value as an earlier variant; serde cannot tell them apart.\n    #[serde(skip)]" : `#[serde(rename = ${JSON.stringify(v.value)})]`}\n    ${v.variantName}${v.body.length ? ` {\n${v.body.join("\n")}\n    }` : ""},`);
+    const text = variants.map((v) => `    #[serde(rename = ${JSON.stringify(v.value)})]\n    ${v.variantName}${v.body.length ? ` {\n${v.body.join("\n")}\n    }` : ""},`);
     const first = variants[0];
     const dflt = first.body.length
       ? `Self::${first.variantName} {\n${first.body.map((l) => `            ${l.trim().replace(/^#\[serde\([^)]*\)\] /, "").split(":")[0]}: Default::default(),`).join("\n")}\n        }`
@@ -486,7 +501,7 @@ function actionVariants(folder) {
     ...functionsBy.get(folder).map((m) => ({ ...m, kind: "function" })),
   ].sort((a, b) => a.name.localeCompare(b.name) || a.kind.localeCompare(b.kind));
   for (const a of all) {
-    const dupName = names.has(a.name);
+    if (names.has(a.name)) continue; // a store method and an exported function with one name: only the first is an action (README lists them)
     names.add(a.name);
     let id = pascal(a.name);
     if (used.has(id)) {
@@ -507,7 +522,7 @@ function actionVariants(folder) {
       }
       const optional = !!(pdecl && (ts.isParameter(pdecl) && (pdecl.questionToken || pdecl.initializer)));
       const rest = !!(pdecl && ts.isParameter(pdecl) && pdecl.dotDotDotToken);
-      const pname = p.name === "type" ? "typeArg" : /^[A-Za-z_$][\w$]*$/.test(p.name) ? p.name : `arg${i}`; // "type" is the Action tag
+      const pname = p.name === "type" ? "typeArg" : /^[A-Za-z_$][\w$]*$/.test(p.name) && !/^__\d+$/.test(p.name) ? p.name : `arg${i}`; // "type" is the Action tag
       let rt = rest ? rust(ptype, id + pascal(pname), folder) : rust(ptype, id + pascal(pname), folder);
       if (optional && !rt.startsWith("Option<")) rt = `Option<${rt}>`;
       const ident = fieldIdent(pname);
@@ -518,7 +533,7 @@ function actionVariants(folder) {
       fields.push(`        ${attrs.length ? `#[serde(${attrs.join(", ")})] ` : ""}${ident}: ${rt},`);
     });
     const doc = `    /// \`${a.name}\`${a.kind === "method" ? " (a store method)" : " (an exported function that writes a store)"}.${skipped.length ? ` The callback parameters ${skipped.map((s) => `\`${s}\``).join(", ")} are not in the JSON.` : ""}`;
-    variants.push(`${doc}\n    ${dupName ? "#[serde(skip)] // same name as an earlier action" : `#[serde(rename = ${JSON.stringify(a.name)})]`}\n    ${id}${fields.length ? ` {\n${fields.join("\n")}\n    }` : ""},`);
+    variants.push(`${doc}\n    #[serde(rename = ${JSON.stringify(a.name)})]\n    ${id}${fields.length ? ` {\n${fields.join("\n")}\n    }` : ""},`);
   }
   return variants;
 }

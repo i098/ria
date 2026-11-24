@@ -14,96 +14,92 @@ use crate::kernel::Number;
 use crate::kernel::{AppState, Effects};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "source")]
+#[serde(tag = "status")]
 pub enum StateInstall {
-    #[serde(rename = "webStore")]
-    WebStore {
+    #[serde(rename = "error")]
+    Error {
         key: Number,
         #[serde(rename = "windowId")]
         window_id: String,
         profile: String,
-        status: String,
+        source: StateInstallErrorSource,
         error: String,
     },
-    #[serde(rename = "unpacked")]
-    Unpacked {
+    #[serde(rename = "ready")]
+    Ready {
         key: Number,
         #[serde(rename = "windowId")]
         window_id: String,
         profile: String,
-        status: String,
-        error: String,
-    },
-    /// Same tag value as an earlier variant; serde cannot tell them apart.
-    #[serde(skip)]
-    WebStoreAgain {
-        key: Number,
-        #[serde(rename = "windowId")]
-        window_id: String,
-        profile: String,
-        status: StateInstallWebStoreAgainStatus,
+        source: StateInstallReadySource,
         pkg: serde_json::Value,
     },
-    /// Same tag value as an earlier variant; serde cannot tell them apart.
-    #[serde(skip)]
-    UnpackedAgain {
+    #[serde(rename = "installing")]
+    Installing {
         key: Number,
         #[serde(rename = "windowId")]
         window_id: String,
         profile: String,
-        status: StateInstallUnpackedAgainStatus,
+        source: StateInstallInstallingSource,
         pkg: serde_json::Value,
     },
-    /// Same tag value as an earlier variant; serde cannot tell them apart.
-    #[serde(skip)]
-    WebStoreAgain2 {
+    #[serde(rename = "prompt")]
+    Prompt {
         key: Number,
         #[serde(rename = "windowId")]
         window_id: String,
         profile: String,
-        status: String,
-        prompt: serde_json::Value,
-    },
-    /// Same tag value as an earlier variant; serde cannot tell them apart.
-    #[serde(skip)]
-    UnpackedAgain2 {
-        key: Number,
-        #[serde(rename = "windowId")]
-        window_id: String,
-        profile: String,
-        status: String,
+        source: StateInstallPromptSource,
         prompt: serde_json::Value,
     },
 }
 
 impl Default for StateInstall {
     fn default() -> Self {
-        Self::WebStore {
+        Self::Error {
             key: Default::default(),
             window_id: Default::default(),
             profile: Default::default(),
-            status: Default::default(),
+            source: Default::default(),
             error: Default::default(),
         }
     }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
-pub enum StateInstallWebStoreAgainStatus {
+pub enum StateInstallErrorSource {
     #[default]
-    #[serde(rename = "ready")]
-    Ready,
-    #[serde(rename = "installing")]
-    Installing,
+    #[serde(rename = "webStore")]
+    WebStore,
+    #[serde(rename = "unpacked")]
+    Unpacked,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
-pub enum StateInstallUnpackedAgainStatus {
+pub enum StateInstallReadySource {
     #[default]
-    #[serde(rename = "ready")]
-    Ready,
-    #[serde(rename = "installing")]
-    Installing,
+    #[serde(rename = "webStore")]
+    WebStore,
+    #[serde(rename = "unpacked")]
+    Unpacked,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
+pub enum StateInstallInstallingSource {
+    #[default]
+    #[serde(rename = "webStore")]
+    WebStore,
+    #[serde(rename = "unpacked")]
+    Unpacked,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
+pub enum StateInstallPromptSource {
+    #[default]
+    #[serde(rename = "webStore")]
+    WebStore,
+    #[serde(rename = "unpacked")]
+    Unpacked,
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
@@ -227,7 +223,7 @@ pub enum MoveToolbarExtensionVia {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct OpenInExtensionProfileV2 {
+pub struct OpenInExtensionProfileArg2 {
     #[serde(rename = "windowId", default, skip_serializing_if = "Option::is_none")]
     pub window_id: Option<String>,
     #[serde(rename = "profileId", default, skip_serializing_if = "Option::is_none")]
@@ -253,96 +249,92 @@ pub struct ToolbarDrag {
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "source")]
+#[serde(tag = "status")]
 pub enum InstallRequest {
-    #[serde(rename = "webStore")]
-    WebStore {
+    #[serde(rename = "error")]
+    Error {
         key: Number,
         #[serde(rename = "windowId")]
         window_id: String,
         profile: String,
-        status: String,
+        source: InstallRequestErrorSource,
         error: String,
     },
-    #[serde(rename = "unpacked")]
-    Unpacked {
+    #[serde(rename = "ready")]
+    Ready {
         key: Number,
         #[serde(rename = "windowId")]
         window_id: String,
         profile: String,
-        status: String,
-        error: String,
-    },
-    /// Same tag value as an earlier variant; serde cannot tell them apart.
-    #[serde(skip)]
-    WebStoreAgain {
-        key: Number,
-        #[serde(rename = "windowId")]
-        window_id: String,
-        profile: String,
-        status: InstallRequestWebStoreAgainStatus,
+        source: InstallRequestReadySource,
         pkg: serde_json::Value,
     },
-    /// Same tag value as an earlier variant; serde cannot tell them apart.
-    #[serde(skip)]
-    UnpackedAgain {
+    #[serde(rename = "installing")]
+    Installing {
         key: Number,
         #[serde(rename = "windowId")]
         window_id: String,
         profile: String,
-        status: InstallRequestUnpackedAgainStatus,
+        source: InstallRequestInstallingSource,
         pkg: serde_json::Value,
     },
-    /// Same tag value as an earlier variant; serde cannot tell them apart.
-    #[serde(skip)]
-    WebStoreAgain2 {
+    #[serde(rename = "prompt")]
+    Prompt {
         key: Number,
         #[serde(rename = "windowId")]
         window_id: String,
         profile: String,
-        status: String,
-        prompt: serde_json::Value,
-    },
-    /// Same tag value as an earlier variant; serde cannot tell them apart.
-    #[serde(skip)]
-    UnpackedAgain2 {
-        key: Number,
-        #[serde(rename = "windowId")]
-        window_id: String,
-        profile: String,
-        status: String,
+        source: InstallRequestPromptSource,
         prompt: serde_json::Value,
     },
 }
 
 impl Default for InstallRequest {
     fn default() -> Self {
-        Self::WebStore {
+        Self::Error {
             key: Default::default(),
             window_id: Default::default(),
             profile: Default::default(),
-            status: Default::default(),
+            source: Default::default(),
             error: Default::default(),
         }
     }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
-pub enum InstallRequestWebStoreAgainStatus {
+pub enum InstallRequestErrorSource {
     #[default]
-    #[serde(rename = "ready")]
-    Ready,
-    #[serde(rename = "installing")]
-    Installing,
+    #[serde(rename = "webStore")]
+    WebStore,
+    #[serde(rename = "unpacked")]
+    Unpacked,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
-pub enum InstallRequestUnpackedAgainStatus {
+pub enum InstallRequestReadySource {
     #[default]
-    #[serde(rename = "ready")]
-    Ready,
-    #[serde(rename = "installing")]
-    Installing,
+    #[serde(rename = "webStore")]
+    WebStore,
+    #[serde(rename = "unpacked")]
+    Unpacked,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
+pub enum InstallRequestInstallingSource {
+    #[default]
+    #[serde(rename = "webStore")]
+    WebStore,
+    #[serde(rename = "unpacked")]
+    Unpacked,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
+pub enum InstallRequestPromptSource {
+    #[default]
+    #[serde(rename = "webStore")]
+    WebStore,
+    #[serde(rename = "unpacked")]
+    Unpacked,
 }
 
 /// The data fields of the TypeScript store.
@@ -527,7 +519,7 @@ pub enum Action {
         url: String,
         profile: String,
         #[serde(default)]
-        __2: Option<OpenInExtensionProfileV2>,
+        arg2: Option<OpenInExtensionProfileArg2>,
     },
     /// `openManageExtensions` (an exported function that writes a store).
     #[serde(rename = "openManageExtensions")]

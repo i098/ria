@@ -237,21 +237,13 @@ pub enum Action {
         #[serde(default)]
         options: Option<OpenPaneOptions>,
     },
-    /// `openSplitPane` (a store method).
-    #[serde(skip)] // same name as an earlier action
-    MethodOpenSplitPane {
-        #[serde(rename = "windowId")]
-        window_id: String,
-        #[serde(default)]
-        options: Option<OpenPaneOptions>,
-    },
-    /// `removeTabFromSplit` (a store method).
+    /// `removeTabFromSplit` (an exported function that writes a store).
     #[serde(rename = "removeTabFromSplit")]
     RemoveTabFromSplit {
         #[serde(rename = "tabId")]
         tab_id: String,
     },
-    /// `replaceSplitPane` (a store method).
+    /// `replaceSplitPane` (an exported function that writes a store).
     #[serde(rename = "replaceSplitPane")]
     ReplaceSplitPane {
         #[serde(rename = "paneTabId")]
@@ -283,7 +275,7 @@ pub enum Action {
         #[serde(rename = "windowId")]
         window_id: String,
     },
-    /// `updateSplit` (a store method).
+    /// `updateSplit` (an exported function that writes a store).
     #[serde(rename = "updateSplit")]
     UpdateSplit { id: String, patch: UpdateSplitPatch },
 }

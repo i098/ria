@@ -157,8 +157,8 @@ pub struct StateSwitcher {
 pub enum BookmarkFolderChoice {
     #[serde(rename = "folder")]
     Folder {
-        #[serde(rename = "parentId")]
-        parent_id: String,
+        #[serde(rename = "parentId", default, skip_serializing_if = "Option::is_none")]
+        parent_id: Option<String>,
     },
     #[serde(rename = "newFolder")]
     NewFolder,
@@ -178,8 +178,8 @@ pub struct TabPress {
     pub window_id: String,
     #[serde(rename = "tabId")]
     pub tab_id: String,
-    #[serde(rename = "startedAt")]
-    pub started_at: Number,
+    #[serde(rename = "startedAt", default, skip_serializing_if = "Option::is_none")]
+    pub started_at: Option<Number>,
     pub switched: bool,
     #[serde(rename = "nativePress")]
     pub native_press: Number,
@@ -538,6 +538,12 @@ pub enum Action {
     /// `endRename` (an exported function that writes a store).
     #[serde(rename = "endRename")]
     EndRename { target: Target },
+    /// `expandOnPin` (an exported function that writes a store).
+    #[serde(rename = "expandOnPin")]
+    ExpandOnPin {
+        s: crate::browser::BrowserState,
+        prev: crate::browser::BrowserState,
+    },
     /// `focusSwitcherRow` (an exported function that writes a store).
     #[serde(rename = "focusSwitcherRow")]
     FocusSwitcherRow { index: Number },
@@ -783,6 +789,13 @@ pub enum Action {
         window_id: String,
         choice: String,
     },
+    /// `runPinnedFold` (an exported function that writes a store).
+    #[serde(rename = "runPinnedFold")]
+    RunPinnedFold {
+        #[serde(rename = "windowId")]
+        window_id: String,
+        choice: String,
+    },
     /// `runSidebarCommand` (an exported function that writes a store).
     #[serde(rename = "runSidebarCommand")]
     RunSidebarCommand {
@@ -804,6 +817,13 @@ pub enum Action {
         window_id: String,
         width: Option<Number>,
     },
+    /// `setPinnedCollapsed` (an exported function that writes a store).
+    #[serde(rename = "setPinnedCollapsed")]
+    SetPinnedCollapsed {
+        #[serde(rename = "profileId")]
+        profile_id: String,
+        collapsed: bool,
+    },
     /// `setSidebarUi` (an exported function that writes a store).
     #[serde(rename = "setSidebarUi")]
     SetSidebarUi { patch: SetSidebarUiPatch },
@@ -814,7 +834,7 @@ pub enum Action {
         window_id: String,
         title: String,
         icon: String,
-        __3: Undoable,
+        arg3: Undoable,
     },
     /// `startRename` (an exported function that writes a store).
     #[serde(rename = "startRename")]
@@ -865,6 +885,12 @@ pub enum Action {
         window_id: String,
         #[serde(rename = "folderId")]
         folder_id: String,
+    },
+    /// `togglePinnedFold` (an exported function that writes a store).
+    #[serde(rename = "togglePinnedFold")]
+    TogglePinnedFold {
+        #[serde(rename = "profileId")]
+        profile_id: String,
     },
     /// `togglePinnedRows` (an exported function that writes a store).
     #[serde(rename = "togglePinnedRows")]

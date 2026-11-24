@@ -1366,12 +1366,6 @@ pub enum Action {
     /// `disablePlugin` (an exported function that writes a store).
     #[serde(rename = "disablePlugin")]
     DisablePlugin { name: String },
-    /// `disablePlugin` (an exported function that writes a store).
-    #[serde(skip)] // same name as an earlier action
-    LifecycleDisablePlugin {
-        name: String,
-        consent: Option<crate::telemetry::ConsentToken>,
-    },
     /// `dismissConsentAs` (an exported function that writes a store).
     #[serde(rename = "dismissConsentAs")]
     DismissConsentAs { owner: ConsentOwner, id: Number },
@@ -1437,7 +1431,7 @@ pub enum Action {
     },
     /// `handlePluginLine` (an exported function that writes a store).
     #[serde(rename = "handlePluginLine")]
-    HandlePluginLine { __0: serde_json::Value },
+    HandlePluginLine { arg0: serde_json::Value },
     /// `installOfficialPlugin` (an exported function that writes a store).
     #[serde(rename = "installOfficialPlugin")]
     InstallOfficialPlugin {

@@ -37,12 +37,12 @@ pub struct ThemeLook {
     #[serde(rename = "sidebarScale")]
     pub sidebar_scale: Number,
     pub radii: ThemeLookRadii,
-    pub hidden: ThemeLookHidden,
+    pub hidden: Vec<ThemeLookHiddenItem>,
     #[serde(rename = "addressField")]
     pub address_field: ThemeLookAddressField,
     #[serde(rename = "newTab")]
     pub new_tab: Option<ThemeLookNewTab>,
-    pub icons: ThemeLookIcons,
+    pub icons: std::collections::HashMap<String, String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
@@ -111,9 +111,23 @@ pub struct ThemeLookRadii {
     pub hero: Number,
 }
 
-#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct ThemeLookHidden {
-    pub size: Number,
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
+pub enum ThemeLookHiddenItem {
+    #[default]
+    #[serde(rename = "newTab")]
+    NewTab,
+    #[serde(rename = "downloads")]
+    Downloads,
+    #[serde(rename = "profile")]
+    Profile,
+    #[serde(rename = "pinned")]
+    Pinned,
+    #[serde(rename = "addressField")]
+    AddressField,
+    #[serde(rename = "navButtons")]
+    NavButtons,
+    #[serde(rename = "sidebarButton")]
+    SidebarButton,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
@@ -132,11 +146,6 @@ pub enum ThemeLookNewTab {
     Top,
     #[serde(rename = "bottom")]
     Bottom,
-}
-
-#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct ThemeLookIcons {
-    pub size: Number,
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]

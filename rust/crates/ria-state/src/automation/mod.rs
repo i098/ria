@@ -312,11 +312,6 @@ pub struct DecidePermissionRequest {
     pub permissions: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct DiffMoreWants {
-    pub size: Number,
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
 pub enum ApprovalSource {
     #[default]
@@ -356,7 +351,7 @@ pub struct DownloadMover {}
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
 pub struct StartStoreEventsNeeds {
-    pub events: DiffMoreWants,
+    pub events: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
@@ -567,7 +562,7 @@ pub enum Action {
     DiffMore {
         s: crate::browser::BrowserState,
         prev: crate::browser::BrowserState,
-        wants: DiffMoreWants,
+        wants: Vec<String>,
     },
     /// `diffStates` (an exported function that writes a store). The callback parameters `send` are not in the JSON.
     #[serde(rename = "diffStates")]
@@ -580,7 +575,7 @@ pub enum Action {
     GuardedBySocketOrigin { mutates: bool },
     /// `handleControlRequest` (an exported function that writes a store).
     #[serde(rename = "handleControlRequest")]
-    HandleControlRequest { __0: serde_json::Value },
+    HandleControlRequest { arg0: serde_json::Value },
     /// `isApproved` (an exported function that writes a store).
     #[serde(rename = "isApproved")]
     IsApproved { key: String },

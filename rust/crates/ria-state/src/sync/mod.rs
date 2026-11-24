@@ -1028,7 +1028,7 @@ pub enum SetTypeSyncedTypeArg {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct StopSyncV0 {
+pub struct StopSyncArg0 {
     #[serde(
         rename = "deleteData",
         default,
@@ -1323,7 +1323,7 @@ pub enum Action {
     #[serde(rename = "stopSync")]
     StopSync {
         #[serde(default)]
-        __0: Option<StopSyncV0>,
+        arg0: Option<StopSyncArg0>,
     },
     /// `syncNow` (an exported function that writes a store). The callback parameters `stillWanted` are not in the JSON.
     #[serde(rename = "syncNow")]

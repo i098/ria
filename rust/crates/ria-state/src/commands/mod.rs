@@ -15,7 +15,7 @@ use crate::kernel::{AppState, Effects};
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
 pub struct MenuBar {
-    pub listed: crate::automation::DiffMoreWants,
+    pub listed: Vec<String>,
     pub fixed: Vec<ShortcutSource>,
 }
 
@@ -52,7 +52,7 @@ pub enum ReportProblemSource {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct RunCommandV1 {
+pub struct RunCommandArg1 {
     #[serde(
         rename = "strictWindow",
         default,
@@ -68,7 +68,8 @@ pub struct RunCommandV1 {
 /// The data fields of the TypeScript store.
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
 pub struct State {
-    pub bar: MenuBar,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub bar: Option<MenuBar>,
     pub revision: Number,
 }
 
@@ -102,9 +103,9 @@ pub enum Action {
     /// `runCommand` (an exported function that writes a store).
     #[serde(rename = "runCommand")]
     RunCommand {
-        __0: serde_json::Value,
+        arg0: serde_json::Value,
         #[serde(default)]
-        __1: Option<RunCommandV1>,
+        arg1: Option<RunCommandArg1>,
     },
     /// `runLittleArdiaCommand` (an exported function that writes a store).
     #[serde(rename = "runLittleArdiaCommand")]

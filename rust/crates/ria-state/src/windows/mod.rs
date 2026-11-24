@@ -14,42 +14,6 @@ use crate::kernel::Number;
 use crate::kernel::{AppState, Effects};
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct CloseGuard {
-    #[serde(rename = "mayClose", default, skip_serializing_if = "Option::is_none")]
-    pub may_close: Option<serde_json::Value>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub ask: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct CloseWindowOptions {
-    #[serde(
-        rename = "keepsLastWindow",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub keeps_last_window: Option<bool>,
-}
-
-#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct AnimatedCloseOptions {
-    #[serde(
-        rename = "keepsLastWindow",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub keeps_last_window: Option<bool>,
-    #[serde(
-        rename = "replacedBy",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub replaced_by: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub then: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
 pub struct CreateWindowOptions {
     #[serde(rename = "profileId", default, skip_serializing_if = "Option::is_none")]
     pub profile_id: Option<String>,
@@ -113,6 +77,42 @@ impl Default for CreateWindowOptionsAdoptId {
     fn default() -> Self {
         Self::Other0(Default::default())
     }
+}
+
+#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
+pub struct CloseGuard {
+    #[serde(rename = "mayClose", default, skip_serializing_if = "Option::is_none")]
+    pub may_close: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ask: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
+pub struct CloseWindowOptions {
+    #[serde(
+        rename = "keepsLastWindow",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub keeps_last_window: Option<bool>,
+}
+
+#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
+pub struct AnimatedCloseOptions {
+    #[serde(
+        rename = "keepsLastWindow",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub keeps_last_window: Option<bool>,
+    #[serde(
+        rename = "replacedBy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub replaced_by: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub then: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
@@ -256,6 +256,12 @@ pub enum Action {
         #[serde(rename = "windowId")]
         window_id: String,
     },
+    /// `clearDownloads` (an exported function that writes a store).
+    #[serde(rename = "clearDownloads")]
+    ClearDownloads {
+        #[serde(rename = "windowId", default)]
+        window_id: Option<String>,
+    },
     /// `clearRecentlyClosed` (a store method).
     #[serde(rename = "clearRecentlyClosed")]
     ClearRecentlyClosed {
@@ -268,7 +274,7 @@ pub enum Action {
         #[serde(rename = "windowId")]
         window_id: String,
         #[serde(default)]
-        __1: Option<CloseGuard>,
+        arg1: Option<CloseGuard>,
     },
     /// `closeCheckPage` (an exported function that writes a store).
     #[serde(rename = "closeCheckPage")]
@@ -282,7 +288,7 @@ pub enum Action {
         #[serde(rename = "windowId")]
         window_id: String,
     },
-    /// `closePanel` (a store method).
+    /// `closePanel` (an exported function that writes a store).
     #[serde(rename = "closePanel")]
     ClosePanel {
         #[serde(rename = "windowId")]
@@ -301,7 +307,7 @@ pub enum Action {
         #[serde(rename = "windowId")]
         window_id: String,
         #[serde(default)]
-        __1: Option<AnimatedCloseOptions>,
+        arg1: Option<AnimatedCloseOptions>,
     },
     /// `closeWindowAsked` (an exported function that writes a store).
     #[serde(rename = "closeWindowAsked")]
@@ -318,7 +324,7 @@ pub enum Action {
     },
     /// `createWindowSync` (an exported function that writes a store).
     #[serde(rename = "createWindowSync")]
-    CreateWindowSync { __0: WindowSyncSetup },
+    CreateWindowSync { arg0: WindowSyncSetup },
     /// `decideLastTabClose` (an exported function that writes a store). The callback parameters `ask` are not in the JSON.
     #[serde(rename = "decideLastTabClose")]
     DecideLastTabClose {
@@ -330,6 +336,13 @@ pub enum Action {
     DecideWindowClose {
         #[serde(rename = "windowId")]
         window_id: String,
+    },
+    /// `dismissDownloadsByPress` (an exported function that writes a store).
+    #[serde(rename = "dismissDownloadsByPress")]
+    DismissDownloadsByPress {
+        #[serde(rename = "windowId")]
+        window_id: String,
+        press: serde_json::Value,
     },
     /// `downloadNavigated` (an exported function that writes a store).
     #[serde(rename = "downloadNavigated")]
@@ -467,7 +480,7 @@ pub enum Action {
     /// `openLastWindowOrNew` (an exported function that writes a store).
     #[serde(rename = "openLastWindowOrNew")]
     OpenLastWindowOrNew { source: LastWindowSource },
-    /// `openPanel` (a store method).
+    /// `openPanel` (an exported function that writes a store).
     #[serde(rename = "openPanel")]
     OpenPanel {
         #[serde(rename = "windowId")]
@@ -479,6 +492,9 @@ pub enum Action {
         #[serde(default)]
         placement: Option<OpenPanelPlacement>,
     },
+    /// `removeDownload` (an exported function that writes a store).
+    #[serde(rename = "removeDownload")]
+    RemoveDownload { id: String },
     /// `reopenClosed` (a store method).
     #[serde(rename = "reopenClosed")]
     ReopenClosed {
@@ -500,7 +516,7 @@ pub enum Action {
         #[serde(rename = "windowId")]
         window_id: String,
     },
-    /// `restoreClosed` (a store method).
+    /// `restoreClosed` (an exported function that writes a store).
     #[serde(rename = "restoreClosed")]
     RestoreClosed {
         #[serde(rename = "entryId")]
@@ -511,7 +527,7 @@ pub enum Action {
     /// `restoreLaunchLook` (an exported function that writes a store).
     #[serde(rename = "restoreLaunchLook")]
     RestoreLaunchLook,
-    /// `returnRefusedMove` (a store method).
+    /// `returnRefusedMove` (an exported function that writes a store).
     #[serde(rename = "returnRefusedMove")]
     ReturnRefusedMove {
         #[serde(rename = "tabId")]
@@ -549,14 +565,14 @@ pub enum Action {
         window_id: String,
         moving: bool,
     },
-    /// `setDownloadsOpen` (a store method).
+    /// `setDownloadsOpen` (an exported function that writes a store).
     #[serde(rename = "setDownloadsOpen")]
     SetDownloadsOpen {
         #[serde(rename = "windowId")]
         window_id: String,
         open: bool,
     },
-    /// `setFind` (a store method).
+    /// `setFind` (an exported function that writes a store).
     #[serde(rename = "setFind")]
     SetFind {
         #[serde(rename = "tabId")]
@@ -655,7 +671,15 @@ pub enum Action {
         #[serde(rename = "profileId")]
         profile_id: String,
     },
-    /// `toggleSidebar` (a store method).
+    /// `toggleDownloadsOpen` (an exported function that writes a store).
+    #[serde(rename = "toggleDownloadsOpen")]
+    ToggleDownloadsOpen {
+        #[serde(rename = "windowId")]
+        window_id: String,
+        #[serde(rename = "pressedAt", default)]
+        pressed_at: Option<Number>,
+    },
+    /// `toggleSidebar` (an exported function that writes a store).
     #[serde(rename = "toggleSidebar")]
     ToggleSidebar {
         #[serde(rename = "windowId")]

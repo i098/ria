@@ -156,7 +156,7 @@ pub enum SetProfileLookLookColor {
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
-pub struct ShowProfileMenuV1 {
+pub struct ShowProfileMenuArg1 {
     pub place: ProfileMenuPlace,
     #[serde(rename = "windowId")]
     pub window_id: String,
@@ -262,6 +262,13 @@ pub enum Action {
         #[serde(default)]
         now: Option<Number>,
     },
+    /// `chooseIcon` (an exported function that writes a store).
+    #[serde(rename = "chooseIcon")]
+    ChooseIcon {
+        #[serde(rename = "profileId")]
+        profile_id: String,
+        icon: Option<String>,
+    },
     /// `choosePresetColor` (an exported function that writes a store). The callback parameters `adopt` are not in the JSON.
     #[serde(rename = "choosePresetColor")]
     ChoosePresetColor {
@@ -272,7 +279,7 @@ pub enum Action {
     /// `chooseProfileIcon` (an exported function that writes a store).
     #[serde(rename = "chooseProfileIcon")]
     ChooseProfileIcon {
-        __0: ProfileIconPicker,
+        arg0: ProfileIconPicker,
         icon: Option<String>,
     },
     /// `closeProfileIconPicker` (an exported function that writes a store).
@@ -287,7 +294,14 @@ pub enum Action {
         #[serde(rename = "windowId")]
         window_id: String,
     },
-    /// `createProfile` (a store method).
+    /// `commitProfileName` (an exported function that writes a store).
+    #[serde(rename = "commitProfileName")]
+    CommitProfileName {
+        #[serde(rename = "profileId")]
+        profile_id: String,
+        text: String,
+    },
+    /// `createProfile` (an exported function that writes a store).
     #[serde(rename = "createProfile")]
     CreateProfile { options: CreateProfileOptions },
     /// `deleteProfile` (a store method).
@@ -328,7 +342,15 @@ pub enum Action {
         #[serde(rename = "engineId")]
         engine_id: String,
     },
-    /// `reorderProfiles` (a store method).
+    /// `renameProfile` (an exported function that writes a store).
+    #[serde(rename = "renameProfile")]
+    RenameProfile {
+        #[serde(rename = "profileId")]
+        profile_id: String,
+        #[serde(rename = "windowId", default)]
+        window_id: Option<String>,
+    },
+    /// `reorderProfiles` (an exported function that writes a store).
     #[serde(rename = "reorderProfiles")]
     ReorderProfiles { ids: Vec<String> },
     /// `requestClearData` (an exported function that writes a store).
@@ -351,7 +373,7 @@ pub enum Action {
         #[serde(rename = "profileId")]
         profile_id: String,
     },
-    /// `setDefaultProfile` (a store method).
+    /// `setDefaultProfile` (an exported function that writes a store).
     #[serde(rename = "setDefaultProfile")]
     SetDefaultProfile { id: String },
     /// `setProfileLook` (a store method).
@@ -367,12 +389,19 @@ pub enum Action {
         profile_id: String,
         theme: serde_json::Value,
     },
+    /// `setShareTopApps` (an exported function that writes a store).
+    #[serde(rename = "setShareTopApps")]
+    SetShareTopApps {
+        #[serde(rename = "profileId")]
+        profile_id: String,
+        share: bool,
+    },
     /// `showProfileMenu` (an exported function that writes a store).
     #[serde(rename = "showProfileMenu")]
     ShowProfileMenu {
         #[serde(rename = "profileId")]
         profile_id: String,
-        __1: ShowProfileMenuV1,
+        arg1: ShowProfileMenuArg1,
     },
     /// `startProfileDataCleanup` (an exported function that writes a store).
     #[serde(rename = "startProfileDataCleanup")]
@@ -386,7 +415,7 @@ pub enum Action {
     /// `takeCreateProfileSheet` (an exported function that writes a store).
     #[serde(rename = "takeCreateProfileSheet")]
     TakeCreateProfileSheet,
-    /// `updateProfile` (a store method).
+    /// `updateProfile` (an exported function that writes a store).
     #[serde(rename = "updateProfile")]
     UpdateProfile {
         id: String,

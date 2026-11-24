@@ -142,7 +142,7 @@ pub enum Action {
     OfferWebKit {
         #[serde(rename = "tabId")]
         tab_id: String,
-        __1: serde_json::Value,
+        arg1: serde_json::Value,
     },
     /// `openPageIn` (an exported function that writes a store).
     #[serde(rename = "openPageIn")]

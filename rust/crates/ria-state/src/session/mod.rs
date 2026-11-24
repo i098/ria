@@ -35,7 +35,7 @@ pub enum Action {
     #[serde(rename = "loadSession")]
     LoadSession {
         #[serde(default)]
-        __0: Option<LaunchOverrides>,
+        arg0: Option<LaunchOverrides>,
     },
     /// `startPersistence` (an exported function that writes a store).
     #[serde(rename = "startPersistence")]

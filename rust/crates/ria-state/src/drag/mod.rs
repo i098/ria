@@ -17,8 +17,12 @@ use crate::kernel::{AppState, Effects};
 pub struct SelectionAnchor {
     #[serde(rename = "tabId")]
     pub tab_id: String,
-    #[serde(rename = "shownTabId")]
-    pub shown_tab_id: String,
+    #[serde(
+        rename = "shownTabId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub shown_tab_id: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reset: Option<bool>,
 }

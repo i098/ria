@@ -58,7 +58,7 @@ pub enum Action {
         #[serde(rename = "windowId")]
         window_id: String,
         #[serde(default)]
-        __1: Option<crate::windows::CloseGuard>,
+        arg1: Option<crate::windows::CloseGuard>,
     },
     /// `closeLittleArdiaForAppLink` (an exported function that writes a store).
     #[serde(rename = "closeLittleArdiaForAppLink")]
