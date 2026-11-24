@@ -24,7 +24,9 @@ cargo fmt --manifest-path rust/Cargo.toml --check
 cargo clippy --manifest-path rust/Cargo.toml -p ria-surface --all-targets -- -D warnings
 ```
 
-Run the native tests on macOS.
+Run the native tests from the macOS console session.
+wgpu refuses a Metal drawable while the window is not visible, and Rune lays out only on a presented frame.
+A window that an ssh session creates never reports `NSWindowOcclusionStateVisible`, so the draw checks fail there.
 The direct-entry test creates an inactive AppKit window and checks the native replies while the action queue drains.
 It also checks that the display link posts a presentation time and the Rune rectangle sizes the native page view.
 The text-range tests check UTF-16 AppKit offsets against Rust UTF-8 offsets.

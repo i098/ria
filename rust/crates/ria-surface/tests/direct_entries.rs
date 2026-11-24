@@ -82,9 +82,15 @@ mod mac {
     pub fn run() {
         let mtm = MainThreadMarker::new().expect("test runs on the AppKit thread");
         let app = NSApplication::sharedApplication(mtm);
+        app.setActivationPolicy(NSApplicationActivationPolicy::Regular);
         app.finishLaunching();
         let size = NSSize::new(360.0, 240.0);
-        let frame = NSRect::new(NSPoint::ZERO, size);
+        // Top left of the screen, clear of the Dock, so the Window Server can report it visible.
+        let screen = NSScreen::mainScreen(mtm).expect("the test needs a screen");
+        let frame = NSRect::new(
+            NSPoint::new(0.0, screen.frame().size.height - size.height),
+            size,
+        );
         // SAFETY: The test owns its AppKit window and never activates the app.
         let window = unsafe {
             NSWindow::initWithContentRect_styleMask_backing_defer(
@@ -166,6 +172,7 @@ mod mac {
                 .contains(NSWindowOcclusionState::Visible)
         };
         while !visible(&window) && Instant::now() < deadline {
+            window.orderFrontRegardless();
             NSRunLoop::mainRunLoop().runUntilDate(&NSDate::dateWithTimeIntervalSinceNow(0.02));
             queue.drain();
         }
@@ -173,7 +180,11 @@ mod mac {
         // presented frame, so the checks below need a real desktop session.
         assert!(
             visible(&window),
-            "the window must be visible: run this test in the console session, not over ssh"
+            "the window must be visible: run this test in the console session, not over ssh (ordered in {}, on active space {}, occlusion {:?}, frame {:?})",
+            window.isVisible(),
+            window.isOnActiveSpace(),
+            window.occlusionState(),
+            window.frame()
         );
         let deadline = Instant::now() + Duration::from_secs(10);
         while (host.presentation_time().is_none()
