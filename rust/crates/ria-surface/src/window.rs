@@ -553,12 +553,14 @@ impl<S: 'static> ActionHandler for AxAction<S> {
                     && let Some(host) = layer.rune.borrow_mut().as_mut()
                 {
                     let rt = host.runtime_mut();
-                    // Pinned Rune packs its element id in the upper bits of each AccessKit id.
-                    if let Some((path, _)) =
+                    // Pinned Rune packs its element id in the upper bits of each AccessKit id;
+                    // `accessibility_action` finds the node by the element's key (its author id),
+                    // not by its path.
+                    if let Some((_, Some(key))) =
                         rt.element_path(rune::NodeId(request.target_node.0 >> 16))
                     {
-                        let path = path.to_owned();
-                        if rt.accessibility_action(&path, request.action, request.data) {
+                        let key = key.to_owned();
+                        if rt.accessibility_action(&key, request.action, request.data) {
                             layer.dirty.set(true);
                         }
                     }

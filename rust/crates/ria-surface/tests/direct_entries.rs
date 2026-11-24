@@ -18,7 +18,7 @@ mod mac {
 
     use objc2::rc::Retained;
     use objc2::runtime::AnyObject;
-    use objc2::{MainThreadMarker, class, msg_send};
+    use objc2::{MainThreadMarker, MainThreadOnly, class, define_class, msg_send};
     use objc2_app_kit::{
         NSAppearance, NSAppearanceCustomization, NSApplication, NSApplicationActivationPolicy,
         NSBackingStoreType, NSEvent, NSEventModifierFlags, NSEventType, NSScreen, NSView, NSWindow,
@@ -79,6 +79,26 @@ mod mac {
         true
     }
 
+    define_class!(
+        /// A test window that answers visible without activation.
+        ///
+        /// The Window Server grants `NSWindowOcclusionStateVisible` only to an app the user
+        /// activated, and this test must not activate. It still composites the window and serves
+        /// drawables, so the window answers visible itself, as Rune's `PresumeShown` does for its
+        /// own windows.
+        #[unsafe(super(NSWindow))]
+        #[thread_kind = MainThreadOnly]
+        #[name = "RiaSurfaceTestWindow"]
+        struct TestWindow;
+
+        impl TestWindow {
+            #[unsafe(method(occlusionState))]
+            fn occlusion_state(&self) -> NSWindowOcclusionState {
+                NSWindowOcclusionState::Visible
+            }
+        }
+    );
+
     pub fn run() {
         let mtm = MainThreadMarker::new().expect("test runs on the AppKit thread");
         let app = NSApplication::sharedApplication(mtm);
@@ -91,15 +111,16 @@ mod mac {
             NSPoint::new(0.0, screen.frame().size.height - size.height),
             size,
         );
-        // SAFETY: The test owns its AppKit window and never activates the app.
-        let window = unsafe {
-            NSWindow::initWithContentRect_styleMask_backing_defer(
-                mtm.alloc(),
-                frame,
-                NSWindowStyleMask::Titled,
-                NSBackingStoreType::Buffered,
-                false,
-            )
+        // SAFETY: The test owns its AppKit window and never activates the app. `TestWindow` has
+        // no ivars, and the `NSWindow` initializer fills the superclass.
+        let window: Retained<TestWindow> = unsafe {
+            msg_send![
+                mtm.alloc::<TestWindow>(),
+                initWithContentRect: frame,
+                styleMask: NSWindowStyleMask::Titled,
+                backing: NSBackingStoreType::Buffered,
+                defer: false
+            ]
         };
         // SAFETY: Retained owns the NSWindow; close must not release it again.
         unsafe { window.setReleasedWhenClosed(false) };
@@ -165,26 +186,11 @@ mod mac {
             // SAFETY: The overlay answers hitTest: for a point in the surface container's space.
             unsafe { msg_send![&*views.objectAtIndex(3), hitTest: parent_point] }
         };
-        let deadline = Instant::now() + Duration::from_secs(10);
-        let visible = |window: &NSWindow| {
-            window
-                .occlusionState()
-                .contains(NSWindowOcclusionState::Visible)
-        };
-        while !visible(&window) && Instant::now() < deadline {
-            window.orderFrontRegardless();
-            NSRunLoop::mainRunLoop().runUntilDate(&NSDate::dateWithTimeIntervalSinceNow(0.02));
-            queue.drain();
-        }
-        // wgpu refuses a drawable while the window is not visible, and Rune lays out only on a
-        // presented frame, so the checks below need a real desktop session.
+        // The test needs a real desktop: Rune lays out only on a presented frame, and wgpu asks
+        // the Window Server for a drawable (the window answers visible itself, see `TestWindow`).
         assert!(
-            visible(&window),
-            "the window must be visible: run this test in the console session, not over ssh (ordered in {}, on active space {}, occlusion {:?}, frame {:?})",
             window.isVisible(),
-            window.isOnActiveSpace(),
-            window.occlusionState(),
-            window.frame()
+            "the window must be ordered in: run this test in the console session, not over ssh"
         );
         let deadline = Instant::now() + Duration::from_secs(10);
         while (host.presentation_time().is_none()
@@ -277,33 +283,21 @@ mod mac {
     fn check_accessibility(overlay: &NSView, queue: &ActionQueue, state: &State) {
         let deadline = Instant::now() + Duration::from_secs(10);
         let button = loop {
-            // SAFETY: AccessKit adds these selectors to the view and its elements.
-            let button = unsafe {
-                let children: Option<Retained<NSArray<AnyObject>>> =
-                    msg_send![overlay, accessibilityChildren];
-                children.and_then(|children| {
-                    (0..children.count()).find_map(|i| {
-                        let child = children.objectAtIndex(i);
-                        let role: Option<Retained<NSString>> =
-                            msg_send![&*child, accessibilityRole];
-                        (role.as_deref() == Some(ns_string!("AXButton"))).then_some(child)
-                    })
-                })
-            };
-            if let Some(button) = button {
-                break button;
+            // SAFETY: AccessKit's subclass answers these selectors on the view and its nodes.
+            match unsafe { find_role(overlay, ns_string!("AXButton")) } {
+                Ok(button) => break button,
+                Err(roles) => assert!(
+                    Instant::now() < deadline,
+                    "AccessKit did not expose the Rune button; roles: {roles:?}"
+                ),
             }
-            assert!(
-                Instant::now() < deadline,
-                "AccessKit did not expose the Rune button"
-            );
             NSRunLoop::mainRunLoop().runUntilDate(&NSDate::dateWithTimeIntervalSinceNow(0.02));
             queue.drain();
         };
         // SAFETY: The queried object is an accessible button from the adapter.
         unsafe {
-            let label: Option<Retained<NSString>> = msg_send![&*button, accessibilityLabel];
-            assert_eq!(label.as_deref(), Some(ns_string!("Change page width")));
+            let title: Option<Retained<NSString>> = msg_send![&*button, accessibilityTitle];
+            assert_eq!(title.as_deref(), Some(ns_string!("Change page width")));
             let accepted: bool = msg_send![&*button, accessibilityPerformPress];
             assert!(accepted);
         }
@@ -318,6 +312,51 @@ mod mac {
             queue.drain();
         }
         assert_eq!(state.borrow().presses, 2);
+    }
+
+    /// Finds the first accessibility descendant of `view` whose role is `role`, or lists the roles
+    /// it saw. AppKit answers `accessibilityChildren` on the view and on every node AccessKit
+    /// exposes, so this walks the tree the way an assistive client does.
+    ///
+    /// # Safety
+    /// `view` is an AccessKit adaptor view and the nodes are its own accessible objects.
+    unsafe fn find_role(
+        view: &NSView,
+        role: &NSString,
+    ) -> Result<Retained<AnyObject>, Vec<String>> {
+        let mut roles = Vec::new();
+        // SAFETY: The view is an accessible object; the same pointer reads as `AnyObject`.
+        let root: &AnyObject = unsafe { &*(view as *const NSView).cast::<AnyObject>() };
+        let mut pending = unsafe { ax_children(root) };
+        while let Some(node) = pending.pop() {
+            // SAFETY: An accessible node answers both properties.
+            let node_role: Option<Retained<NSString>> =
+                unsafe { msg_send![&*node, accessibilityRole] };
+            if node_role.as_deref() == Some(role) {
+                return Ok(node);
+            }
+            roles.push(
+                node_role
+                    .as_deref()
+                    .map_or_else(String::new, |role| role.to_string()),
+            );
+            assert!(roles.len() <= 300, "the accessibility tree is too large");
+            pending.extend(unsafe { ax_children(&node) });
+        }
+        Err(roles)
+    }
+
+    /// # Safety
+    /// As `find_role`.
+    unsafe fn ax_children(node: &AnyObject) -> Vec<Retained<AnyObject>> {
+        // SAFETY: An accessible object answers `accessibilityChildren`.
+        let children: Option<Retained<NSArray<AnyObject>>> =
+            unsafe { msg_send![node, accessibilityChildren] };
+        children.map_or_else(Vec::new, |children| {
+            (0..children.count())
+                .map(|i| children.objectAtIndex(i))
+                .collect()
+        })
     }
 
     fn check_frames(
@@ -388,7 +427,7 @@ mod mac {
                     CGEventSetLocation(cg, NSPoint::new(screen.x, screen_height - screen.y));
                     let scroll: Option<Retained<NSEvent>> =
                         msg_send![class!(NSEvent), eventWithCGEvent: cg];
-                    CFRelease(cg);
+                    CFRelease(cg as *const c_void);
                     let _: () = msg_send![view, scrollWheel: &*scroll.expect("wheel event")];
                 }
                 if i < 50 {
@@ -416,6 +455,18 @@ mod mac {
         }
     }
 
+    /// Opaque `CGEventRef`; the encoding must match what AppKit expects, not `*mut c_void`.
+    #[repr(C)]
+    struct CGEvent {
+        _private: [u8; 0],
+    }
+
+    // SAFETY: The encoding matches the C header's `__CGEvent`, so AppKit accepts the pointer.
+    unsafe impl objc2::RefEncode for CGEvent {
+        const ENCODING_REF: objc2::Encoding =
+            objc2::Encoding::Pointer(&objc2::Encoding::Struct("__CGEvent", &[]));
+    }
+
     unsafe extern "C" {
         fn CGEventCreateScrollWheelEvent2(
             source: *const c_void,
@@ -424,8 +475,8 @@ mod mac {
             x: i32,
             y: i32,
             z: i32,
-        ) -> *mut c_void;
-        fn CGEventSetLocation(event: *mut c_void, location: NSPoint);
+        ) -> *mut CGEvent;
+        fn CGEventSetLocation(event: *mut CGEvent, location: NSPoint);
         fn CFRelease(value: *const c_void);
     }
 
