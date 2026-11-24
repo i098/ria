@@ -31,3 +31,8 @@ harness = false
 name = "live_windows"
 path = "tests/live_windows.rs"
 harness = false
+
+[[test]]
+name = "live_pip"
+path = "tests/live_pip.rs"
+harness = false
