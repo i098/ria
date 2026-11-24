@@ -16,6 +16,11 @@
 //!   path (`:380`, `:388`) that recovery then joins with the file name (issue 64).
 //! - A move into the folder that holds the file checks size and SHA-256, where Ardia returns `ok` at `:373`
 //!   before any check (those run at `:416-420`); the file is not renamed (issue 65).
+//! - The journal records each destination candidate before the rename to it, and recovery checks size and SHA-256
+//!   of a staged or placed file, where Ardia records the path after the rename (`:694`) and recovers without a
+//!   check (`:383-393`); a file that does not match is never put back or reported as the move (issue 52).
+//! - A move reads the approved folders when it creates folders and before it places the file, where Ardia
+//!   passes a copy taken at acceptance (`:305-325`), so revoking an approval stops a running move (issue 61).
 
 use std::collections::{HashMap, HashSet};
 use std::ffi::CString;
@@ -427,20 +432,34 @@ impl DownloadMover {
                 continue;
             };
             let staged = join(staging, name);
+            let identity = match (entry["sha256"].as_str(), entry["size"].as_i64()) {
+                (Some(sha256), Some(size)) => Some(Identity {
+                    sha256: sha256.to_owned(),
+                    size,
+                }),
+                _ => None,
+            };
+            let matches = |path: &str| {
+                identity.as_ref().is_some_and(|identity| {
+                    verify_in_place(libc::AT_FDCWD, path, identity, path)["ok"] == true
+                })
+            };
             let regular = |path: &str| {
                 lstat_at(libc::AT_FDCWD, path).is_ok_and(|info| is_kind(info.mode, libc::S_IFREG))
             };
-            if let Some(placed) = entry["placed"].as_str().filter(|placed| regular(placed)) {
-                self.defaults
-                    .set(MOVED_DEFAULT, Self::remember(state, id, source, placed));
-            } else if regular(&staged) {
+            // A rename leaves the file at one path only, so a staged file means the rename to `placed` did not happen.
+            if regular(&staged) {
                 let source_free = matches!(lstat_at(libc::AT_FDCWD, source), Err(error) if errno(&error) == libc::ENOENT);
-                if !source_free
+                if !matches(&staged)
+                    || !source_free
                     || rename_excl(libc::AT_FDCWD, &staged, libc::AT_FDCWD, source).is_err()
                 {
                     self.defaults
                         .set(MOVED_DEFAULT, Self::remember(state, id, source, &staged));
                 }
+            } else if let Some(placed) = entry["placed"].as_str().filter(|placed| matches(placed)) {
+                self.defaults
+                    .set(MOVED_DEFAULT, Self::remember(state, id, source, placed));
             }
             remove_dir_at(libc::AT_FDCWD, staging);
         }
@@ -510,7 +529,7 @@ impl DownloadMover {
         if path.is_empty() {
             return failure("notADownload");
         }
-        let (id, record, identity, approved) = {
+        let (id, record, identity) = {
             let state = &mut *self.state.lock().unwrap();
             let id = state
                 .record_order
@@ -547,12 +566,25 @@ impl DownloadMover {
                     sha256: identity.sha256.clone(),
                     size: identity.size,
                 },
-                state.approved.clone(),
             )
         };
-        let result = self.run_move(&id, record, &identity, &approved, path, folder);
+        let result = self.run_move(&id, record, &identity, path, folder);
         self.state.lock().unwrap().in_flight.remove(&id);
         result
+    }
+
+    /// The length of the shortest approved root that holds `components`, or 0; reads the approvals now.
+    fn root_length(&self, components: &[String]) -> usize {
+        let state = self.state.lock().unwrap();
+        let downloads = vec!["Downloads".to_owned()];
+        state
+            .approved
+            .iter()
+            .chain([&downloads])
+            .filter(|root| components.starts_with(root))
+            .map(Vec::len)
+            .min()
+            .unwrap_or(0)
     }
 
     #[cfg(test)]
@@ -568,21 +600,13 @@ impl DownloadMover {
         id: &str,
         mut record: Value,
         identity: &Identity,
-        approved: &[Vec<String>],
         path: &str,
         folder: &str,
     ) -> Value {
         let Some(components) = folder_components(folder) else {
             return failure("folderNotAllowed");
         };
-        let downloads = vec!["Downloads".to_owned()];
-        let root_length = approved
-            .iter()
-            .chain([&downloads])
-            .filter(|root| components.starts_with(root))
-            .map(Vec::len)
-            .min()
-            .unwrap_or(0);
+        let root_length = self.root_length(&components);
         if root_length == 0 {
             return failure("folderNotAllowed");
         }
@@ -598,6 +622,9 @@ impl DownloadMover {
             let parent = destination.as_raw_fd();
             let mut next = open_at(parent, name, DIR_FLAGS);
             if matches!(&next, Err(error) if errno(error) == libc::ENOENT) && i + 1 >= root_length {
+                if self.root_length(&components) == 0 {
+                    return failure("folderNotAllowed");
+                }
                 if let Err(error) = mkdir_at(parent, name, 0o755)
                     && errno(&error) != libc::EEXIST
                 {
@@ -721,8 +748,13 @@ impl DownloadMover {
         }
         #[cfg(test)]
         self.step("verified", &staging);
+        if self.root_length(&components) == 0 {
+            return give_back("folderNotAllowed");
+        }
 
         let safe = safe_file_name(source_name);
+        let directory =
+            directory_path(&destination).unwrap_or_else(|| join(&self.home, &components.join("/")));
         let mut placed = None;
         for n in 0..=MAX_COLLISIONS {
             let candidate = if n == 0 {
@@ -730,6 +762,8 @@ impl DownloadMover {
             } else {
                 name_with_suffix(&safe, &format!(" ({n})"))
             };
+            journal.insert("placed".into(), json!(join(&directory, &candidate)));
+            self.journal(id, Some(&journal));
             match rename_excl(stg, source_name, dst, &candidate) {
                 Ok(()) => {
                     placed = Some(candidate);
@@ -753,11 +787,9 @@ impl DownloadMover {
         let Some(placed) = placed else {
             return give_back("tooManyCollisions");
         };
-        let directory =
-            directory_path(&destination).unwrap_or_else(|| join(&self.home, &components.join("/")));
+        #[cfg(test)]
+        self.step("renamed", &staging);
         let final_path = join(&directory, &placed);
-        journal.insert("placed".into(), json!(final_path));
-        self.journal(id, Some(&journal));
         #[cfg(test)]
         self.step("placed", &staging);
 

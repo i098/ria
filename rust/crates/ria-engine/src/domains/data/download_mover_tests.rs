@@ -598,6 +598,7 @@ fn download_mover() {
         mover = restarted;
     }
     parity_deviations(&env, &mover);
+    recovery_and_revocation(&env, &mover);
     {
         let mover = Arc::new(mover);
         let size = 8u64 << 20;
@@ -752,5 +753,88 @@ fn parity_deviations(env: &Env, mover: &DownloadMover) {
         assert_eq!(fs::read_dir(&real).unwrap().count(), 1);
         fs::remove_dir_all(&real).unwrap();
         fs::remove_file(&link).unwrap();
+    }
+}
+
+/// Issues 52 and 61: crash recovery after the destination rename, identity checks in recovery, and live approval.
+fn recovery_and_revocation(env: &Env, mover: &DownloadMover) {
+    let crash_at = |mover: &DownloadMover, name: &str, content: &str, at: &'static str| {
+        let path = env.finished(mover, name, content, json!({}));
+        hook(mover, move |step, _| {
+            assert_ne!(step, at, "simulated crash")
+        });
+        assert!(
+            catch_unwind(AssertUnwindSafe(
+                || mover.move_download(&path, "~/Downloads/Crash52")
+            ))
+            .is_err()
+        );
+        path
+    };
+    {
+        // Issue 52: a crash after the rename and before the path is recorded still reports the moved file.
+        let path = crash_at(mover, "renamed.txt", "moved", "renamed");
+        let id = env.last_id();
+        let restarted = env.mover();
+        let landed = env.at("Downloads/Crash52/renamed.txt");
+        assert_eq!(
+            restarted.note_download_event(&json!({"id": id, "path": path}))["path"],
+            json!(landed)
+        );
+        assert_eq!(text(&landed), "moved");
+        assert_eq!(env.staging_dirs(), 0);
+    }
+    {
+        // Issue 52: a staged file that no longer matches the download is not put back at its source.
+        let path = crash_at(mover, "tampered.txt", "original", "claimed");
+        let id = env.last_id();
+        let staged = fs::read_dir(&env.source)
+            .unwrap()
+            .map(|e| e.unwrap().path())
+            .find(|p| {
+                p.file_name()
+                    .unwrap()
+                    .to_string_lossy()
+                    .starts_with(".ardia-moving-")
+            })
+            .unwrap();
+        fs::write(staged.join("tampered.txt"), "tampered").unwrap();
+        let restarted = env.mover();
+        assert!(!exists(&path));
+        let reported = restarted.note_download_event(&json!({"id": id, "path": path}))["path"]
+            .as_str()
+            .unwrap()
+            .to_owned();
+        assert_eq!(text(&reported), "tampered");
+        fs::remove_dir_all(staged).unwrap();
+    }
+    {
+        // Issue 52: a placed file that no longer matches the download is not recorded as the move.
+        let path = crash_at(mover, "swapped.txt", "genuine", "renamed");
+        let id = env.last_id();
+        fs::write(env.at("Downloads/Crash52/swapped.txt"), "swapped").unwrap();
+        let restarted = env.mover();
+        assert_eq!(
+            restarted.note_download_event(&json!({"id": id, "path": path}))["path"],
+            json!(path)
+        );
+    }
+    {
+        // Issue 61: revoking the approval while the file is hashed stops the move before placement.
+        let path = env.finished(mover, "revoked.txt", "revoke me", json!({}));
+        mover.set_approved_folders(&["~/Revoke61".into()]);
+        let revoker = mover as *const DownloadMover as usize;
+        hook(mover, move |step, _| {
+            if step == "hashing" {
+                // SAFETY: the mover outlives the synchronous move that runs this hook.
+                unsafe { &*(revoker as *const DownloadMover) }.set_approved_folders(&[]);
+            }
+        });
+        let result = mover.move_download(&path, "~/Revoke61/Sub");
+        unhook(mover);
+        assert_eq!(reason(&result), "folderNotAllowed");
+        assert_eq!(text(&path), "revoke me");
+        assert!(!exists(&env.at("Revoke61/Sub/revoked.txt")));
+        assert_eq!(env.staging_dirs(), 0);
     }
 }
