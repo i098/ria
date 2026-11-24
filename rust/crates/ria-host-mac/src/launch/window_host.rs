@@ -60,6 +60,11 @@ impl WindowHost {
         *self.main.borrow_mut() = window;
     }
 
+    /// The browser window, once the launch recorded it.
+    pub fn main(&self) -> Option<Retained<Window>> {
+        self.main.borrow().clone()
+    }
+
     /// `ardia_host::PopupWindowForChromeBrowser`.
     pub fn popup_for_chrome(&self) -> Retained<Window> {
         let main = self.main.borrow();

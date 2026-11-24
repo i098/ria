@@ -29,6 +29,7 @@ use super::open_urls::{self, Entry, Inbox};
 use super::platform;
 use super::saved_session::SavedSession;
 use super::startup;
+use super::strip_layer::StripLayer;
 use super::system_signals::{self, SystemSignals};
 use super::window_host::WindowHost;
 
@@ -105,6 +106,7 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
         mtm,
         host,
         window: RefCell::default(),
+        strip: RefCell::default(),
         inbox: Inbox::default(),
         reopening: Cell::new(false),
         failed: Cell::new(false),
@@ -154,6 +156,8 @@ struct Runtime {
     mtm: MainThreadMarker,
     host: Rc<WindowHost>,
     window: RefCell<Option<BrowserWindow>>,
+    /// The Rune tab strip around the browser window's page. Drop it before the engine shuts down.
+    strip: RefCell<Option<StripLayer>>,
     inbox: Inbox,
     /// A window that a reopen asked for is not open yet.
     reopening: Cell<bool>,
@@ -233,6 +237,11 @@ impl Runtime {
             &self.observer,
         );
         self.host.set_main(Some(window.core().clone()));
+        self.strip.borrow_mut().take();
+        match StripLayer::install(&self.host, window.core(), window.tab()) {
+            Ok(strip) => *self.strip.borrow_mut() = Some(strip),
+            Err(error) => eprintln!("[ria] tab strip layer: {error}"),
+        }
         *self.window.borrow_mut() = Some(window);
         (self.observer)(LaunchEvent::WindowHostReady(self.host.clone()));
         self.inbox.flush(|urls| self.deliver(urls));
@@ -306,6 +315,7 @@ impl Hooks for Runtime {
     fn engine_shut_down(&self) {
         SystemSignals::stop();
         self.sequence.engine_shutdown();
+        self.strip.borrow_mut().take();
         (self.observer)(LaunchEvent::EngineWillShutDown);
     }
 
