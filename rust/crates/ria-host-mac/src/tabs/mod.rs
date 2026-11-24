@@ -36,6 +36,14 @@ pub mod page_tab;
 pub mod page_tab_host;
 pub mod page_view_definition;
 
+/// The page view of a tab, or `None` once the tab is closed and `-view` returns nil.
+pub(crate) fn tab_view(
+    tab: &crate::core::bindings::Tab,
+) -> Option<objc2::rc::Retained<objc2_app_kit::NSView>> {
+    // SAFETY: The live AppKit hierarchy is confined to the main thread.
+    unsafe { objc2::msg_send![tab, view] }
+}
+
 fn superview(view: &objc2_app_kit::NSView) -> Option<objc2::rc::Retained<objc2_app_kit::NSView>> {
     // SAFETY: The live AppKit hierarchy is confined to the main thread.
     unsafe { view.superview() }

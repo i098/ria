@@ -2,32 +2,61 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 
-use std::cell::RefCell;
+use std::cell::{Cell, OnceCell, RefCell};
 use std::rc::Rc;
+use std::sync::Once;
 use std::time::Duration;
 
 use block2::RcBlock;
-use objc2::MainThreadMarker;
 use objc2::rc::{Retained, Weak};
-use objc2::runtime::AnyObject;
+use objc2::runtime::{AnyClass, AnyObject, Sel};
+use objc2::{ClassType, MainThreadMarker, ffi, msg_send, sel};
 use objc2_app_kit::{
     NSApplication, NSApplicationDidBecomeActiveNotification,
-    NSApplicationDidResignActiveNotification, NSScreen, NSWindow,
+    NSApplicationDidResignActiveNotification, NSScreen, NSView, NSWindow,
     NSWindowDidChangeOcclusionStateNotification, NSWindowDidEnterFullScreenNotification,
     NSWindowDidExitFullScreenNotification, NSWindowOcclusionState, NSWindowStyleMask,
     NSWindowWillCloseNotification, NSWindowWillEnterFullScreenNotification,
     NSWindowWillExitFullScreenNotification,
 };
 use objc2_foundation::{
-    NSArray, NSDictionary, NSNotification, NSNotificationCenter, NSNumber, NSRect, NSString,
-    ns_string,
+    NSArray, NSDictionary, NSMapTable, NSNotification, NSNotificationCenter, NSNumber, NSRect,
+    NSString, ns_string,
 };
 use ria_engine::call::main_queue;
 
 use super::ardia_window_sight_math::{Rect, counts_as_cover, partly_visible};
-use crate::core::bindings::Window;
+use crate::core::bindings::{Tab, Window};
+use crate::launch::launch_config::LaunchConfig;
+use crate::tabs::ardia_page_cover::PageCover;
+use crate::tabs::ardia_page_draw_wait::after_page_draw;
+use crate::tabs::ardia_tab_registry::TabRegistry;
+use crate::tabs::tab_view;
 
 type WindowInfo = NSDictionary<NSString, AnyObject>;
+
+thread_local! {
+    static ACTED_TRANSITION: Cell<f64> = const { Cell::new(0.) };
+    pub(super) static ACTED_OCCLUSION_GAP: Cell<Option<f64>> = const { Cell::new(None) };
+    static ACTED_OCCLUSION: OnceCell<Retained<NSMapTable<NSWindow, NSNumber>>> =
+        const { OnceCell::new() };
+}
+
+pub(crate) fn configure_acted_transition(config: &LaunchConfig) {
+    ACTED_TRANSITION.set(transition_duration(
+        config.test_value("fakeFullScreenMs").unwrap_or_default(),
+    ));
+}
+
+pub(super) fn set_acted_transition(value: &str) -> f64 {
+    let transition = transition_duration(value).max(0.);
+    ACTED_TRANSITION.set(transition);
+    transition
+}
+
+pub(super) fn transition_duration(value: &str) -> f64 {
+    NSString::from_str(value).doubleValue() / 1000.
+}
 
 const CG_WINDOW_LIST_OPTION_ON_SCREEN_ABOVE_WINDOW: u32 = 1 << 1;
 const CG_WINDOW_LIST_OPTION_INCLUDING_WINDOW: u32 = 1 << 3;
@@ -140,18 +169,155 @@ fn window_is_full_screen(core: &Window, window: &NSWindow) -> bool {
     core.acted_full_screen() || window.styleMask().contains(NSWindowStyleMask::FullScreen)
 }
 
+fn acted_occlusion(window: &NSWindow) -> Option<bool> {
+    ACTED_OCCLUSION
+        .try_with(|overrides| {
+            overrides
+                .get()?
+                .objectForKey(Some(window))
+                .map(|value| value.boolValue())
+        })
+        .ok()
+        .flatten()
+}
+
+fn install_occlusion_getter() {
+    static INSTALL: Once = Once::new();
+    INSTALL.call_once(|| {
+        let selector = sel!(occlusionState);
+        let method = NSWindow::class().instance_method(selector).unwrap();
+        let original: unsafe extern "C-unwind" fn(*const NSWindow, Sel) -> NSWindowOcclusionState =
+            unsafe { std::mem::transmute(method.implementation()) };
+        let getter = RcBlock::new(move |window: *const NSWindow| {
+            if MainThreadMarker::new().is_some()
+                && let Some(visible) = acted_occlusion(unsafe { &*window })
+            {
+                return if visible {
+                    NSWindowOcclusionState::Visible
+                } else {
+                    NSWindowOcclusionState::empty()
+                };
+            }
+            unsafe { original(window, selector) }
+        });
+        unsafe {
+            ffi::method_setImplementation(
+                method,
+                ffi::imp_implementationWithBlock(RcBlock::as_ptr(&getter).cast()),
+            );
+        }
+    });
+}
+
+fn set_acted_occlusion(window: &NSWindow, visible: Option<bool>) {
+    if visible.is_some() {
+        install_occlusion_getter();
+    }
+    ACTED_OCCLUSION.with(|overrides| match visible {
+        Some(visible) => overrides
+            .get_or_init(NSMapTable::weakToStrongObjectsMapTable)
+            .setObject_forKey(Some(&NSNumber::numberWithBool(visible)), Some(window)),
+        None => {
+            if let Some(overrides) = overrides.get() {
+                overrides.removeObjectForKey(Some(window));
+            }
+        }
+    });
+    unsafe {
+        NSNotificationCenter::defaultCenter()
+            .postNotificationName_object(NSWindowDidChangeOcclusionStateNotification, Some(window));
+    }
+}
+
+pub(super) fn act_occlusion(
+    window: &NSWindow,
+    fullscreen: Option<&FullScreen>,
+    visible: Option<bool>,
+) -> bool {
+    if let Some(fullscreen) = fullscreen {
+        let mut state = fullscreen.state.borrow_mut();
+        state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
+    }
+    set_acted_occlusion(window, visible);
+    window
+        .occlusionState()
+        .contains(NSWindowOcclusionState::Visible)
+}
+
 #[derive(Default)]
 struct Transition {
-    transitioning: bool,
-    settling: bool,
+    page: PageState,
+    expose_page: bool,
     acting: bool,
     restore_frame: Option<NSRect>,
-    acted_occlusion: Option<bool>,
     acted_server: bool,
     occlusion_turn: u64,
-    overruled: bool,
-    seen: bool,
+    window_turn: u64,
     closed: bool,
+}
+
+#[derive(Default)]
+struct PageState {
+    tab: Option<Weak<Tab>>,
+    left_tab: Option<Weak<Tab>>,
+    entered: bool,
+    asked: i8,
+    waiting_for: i8,
+    waiting_for_draw: bool,
+    telling: usize,
+    picturing: bool,
+    covers: Vec<Retained<PageCover>>,
+    pending_covers: Vec<Retained<PageCover>>,
+    turn: u64,
+    transitioning: bool,
+    ours: bool,
+    settling: bool,
+    seen: bool,
+    overruled: bool,
+}
+
+impl PageState {
+    fn cancel_draw(&mut self) {
+        self.turn = self.turn.wrapping_add(1);
+        self.waiting_for = 0;
+        self.waiting_for_draw = false;
+        self.picturing = false;
+        uncover(std::mem::take(&mut self.pending_covers), false);
+    }
+}
+
+fn uncover(covers: Vec<Retained<PageCover>>, after_draw: bool) {
+    for cover in covers {
+        if after_draw && let Some(tab) = cover.owner().filter(|tab| tab_view(tab).is_some()) {
+            after_page_draw(
+                &tab,
+                |_, _| true,
+                move || {
+                    main_queue::after(
+                        Duration::from_millis(34),
+                        Box::new(move || cover.uncover(true)),
+                    );
+                },
+            );
+        } else {
+            cover.uncover(false);
+        }
+    }
+}
+
+fn flush_transactions() {
+    let Some(transaction) = AnyClass::get(c"CATransaction") else {
+        return;
+    };
+    // SAFETY: CATransaction responds to +flush on the main thread.
+    let _: () = unsafe { msg_send![transaction, flush] };
+}
+
+fn has_page_cover(view: Retained<NSView>) -> bool {
+    match view.downcast::<PageCover>() {
+        Ok(_) => true,
+        Err(view) => view.subviews().iter().any(has_page_cover),
+    }
 }
 
 pub struct FullScreen {
@@ -213,7 +379,10 @@ impl FullScreen {
                 background,
                 allow_occlusion,
                 state: RefCell::new(Transition {
-                    seen: true,
+                    page: PageState {
+                        seen: true,
+                        ..PageState::default()
+                    },
                     ..Transition::default()
                 }),
                 observers,
@@ -236,46 +405,365 @@ impl FullScreen {
     }
 
     pub fn seen(&self) -> bool {
-        self.state.borrow().seen
+        let mut state = self.state.borrow_mut();
+        state.expose_page = true;
+        state.page.seen
     }
     pub fn seen_only_by_window_server(&self) -> bool {
-        let state = self.state.borrow();
-        state.seen && state.overruled
+        let mut state = self.state.borrow_mut();
+        state.expose_page = true;
+        state.page.seen && state.page.overruled
     }
     pub fn transitioning(&self) -> bool {
-        self.state.borrow().transitioning
+        self.state.borrow().page.transitioning
     }
 
-    fn notified(&self, name: &NSString) {
-        // SAFETY: These names are AppKit static notification constants.
-        let (close, will, did, left_app) = unsafe {
+    pub(super) fn page_state(
+        &self,
+        full_screen: bool,
+        registry: &mut TabRegistry,
+    ) -> Option<serde_json::Value> {
+        let state = self.state.borrow();
+        if !state.expose_page {
+            return None;
+        }
+        let page = &state.page;
+        Some(serde_json::json!({
+            "page": page.tab.as_ref().and_then(Weak::load).map(|tab| registry.browser_id(&tab)),
+            "entered": page.entered,
+            "asked": page.asked,
+            "waitingForPage": page.waiting_for,
+            "telling": page.telling,
+            "picturing": page.picturing,
+            "covered": self.core.load().and_then(|core| core.window().contentView())
+                .is_some_and(has_page_cover),
+            "transitioning": page.transitioning,
+            "ours": page.ours,
+            "settling": page.settling,
+            "seen": page.seen,
+            "fullScreen": full_screen,
+        }))
+    }
+
+    pub(super) fn page_changed(self: &Rc<Self>, tab: &Tab, entering: bool) {
+        let mut state = self.state.borrow_mut();
+        if state.closed {
+            return;
+        }
+        state.expose_page = true;
+        let page = &mut state.page;
+        page.cancel_draw();
+        if entering {
+            page.tab = Some(Weak::new(tab));
+        } else if page
+            .tab
+            .as_ref()
+            .and_then(Weak::load)
+            .is_none_or(|current| std::ptr::eq(&*current, tab))
+        {
+            page.left_tab = page.tab.take();
+        }
+        page.telling += 1;
+        drop(state);
+        self.sync_page();
+        let weak = Rc::downgrade(self);
+        let tab = Weak::new(tab);
+        main_queue::post(Box::new(move || {
+            if weak
+                .upgrade()
+                .is_none_or(|item| item.live_window().is_none())
+            {
+                return;
+            }
+            let done = move || {
+                if let Some(fullscreen) = weak.upgrade() {
+                    fullscreen.state.borrow_mut().page.telling -= 1;
+                    fullscreen.sync_page();
+                }
+            };
+            if let Some(tab) = tab.load() {
+                after_page_draw(&tab, move |drawn, _| !entering || drawn, done);
+            } else {
+                done();
+            }
+        }));
+    }
+
+    fn sync_page(self: &Rc<Self>) {
+        let Some((core, window)) = self.live_window() else {
+            return;
+        };
+        let full = window_is_full_screen(&core, &window);
+        let (tab, entering, turn) = {
+            let mut state = self.state.borrow_mut();
+            if state.acting {
+                return;
+            }
+            let page = &mut state.page;
+            if page.transitioning {
+                return;
+            }
+            let tab = page
+                .tab
+                .as_ref()
+                .and_then(Weak::load)
+                .filter(|tab| tab_view(tab).is_some());
+            let entering = tab.is_some() && !full && !page.entered;
+            let exiting = tab.is_none() && full && page.entered;
+            if !entering && !exiting {
+                if page.waiting_for != 0 || page.picturing {
+                    page.cancel_draw();
+                }
+                if tab.is_none() && page.telling == 0 {
+                    page.entered = false;
+                }
+                return;
+            }
+            let target = if entering { 1 } else { -1 };
+            if page.waiting_for != 0 && page.waiting_for != target {
+                page.cancel_draw();
+            }
+            page.waiting_for = target;
+            if page.telling != 0 || page.picturing || page.waiting_for_draw {
+                return;
+            }
+            page.waiting_for_draw = true;
+            let tab = tab.or_else(|| page.left_tab.as_ref().and_then(Weak::load));
+            (tab, entering, page.turn)
+        };
+        let weak = Rc::downgrade(self);
+        let tab_for_cover = tab.as_deref().map(Weak::new);
+        let drawn = move || {
+            if let Some(fullscreen) = weak.upgrade() {
+                fullscreen.picture_page(tab_for_cover, entering, turn);
+            }
+        };
+        if let Some(tab) = tab {
+            after_page_draw(
+                &tab,
+                move |drawn, fills| drawn == entering && fills == entering,
+                drawn,
+            );
+        } else {
+            drawn();
+        }
+    }
+
+    fn picture_page(self: &Rc<Self>, tab: Option<Weak<Tab>>, entering: bool, turn: u64) {
+        let Some((core, window)) = self.live_window() else {
+            return;
+        };
+        {
+            let mut state = self.state.borrow_mut();
+            let page = &mut state.page;
+            if page.turn != turn {
+                return;
+            }
+            page.waiting_for = 0;
+            page.waiting_for_draw = false;
+            page.picturing = true;
+        }
+        let mut tabs: Vec<_> = tab
+            .and_then(|tab| tab.load())
+            .filter(|tab| tab_view(tab).is_some())
+            .into_iter()
+            .collect();
+        if !entering && let Some(profile) = core.active_profile() {
+            for other in core.tabs_for_profile(&profile).iter() {
+                let Some(view) = tab_view(&other) else {
+                    continue;
+                };
+                if !tabs.iter().any(|tab| std::ptr::eq(&**tab, &*other))
+                    && view
+                        .window()
+                        .is_some_and(|owner| std::ptr::eq(&*owner, &*window))
+                    && !view.isHiddenOrHasHiddenAncestor()
+                    && view.alphaValue() >= 0.5
+                {
+                    tabs.push(other);
+                }
+            }
+        }
+        if tabs.is_empty() {
+            self.finish_picture(entering, turn);
+            return;
+        }
+        let remaining = Rc::new(Cell::new(tabs.len()));
+        let weak = Rc::downgrade(self);
+        for tab in tabs {
+            let weak = weak.clone();
+            let remaining = remaining.clone();
+            let current = move || {
+                weak.upgrade().filter(|fullscreen| {
+                    let state = fullscreen.state.borrow();
+                    !state.closed && state.page.turn == turn
+                })
+            };
+            let attach = current.clone();
+            PageCover::cover(
+                &tab,
+                false,
+                move || attach().is_some(),
+                move |cover| {
+                    let Some(fullscreen) = current() else {
+                        if let Some(cover) = cover {
+                            cover.uncover(false);
+                        }
+                        return;
+                    };
+                    if let Some(cover) = cover {
+                        fullscreen
+                            .state
+                            .borrow_mut()
+                            .page
+                            .pending_covers
+                            .push(cover);
+                    }
+                    remaining.set(remaining.get() - 1);
+                    if remaining.get() == 0 {
+                        fullscreen.finish_picture(entering, turn);
+                    }
+                },
+            );
+        }
+    }
+
+    fn finish_picture(self: &Rc<Self>, entering: bool, turn: u64) {
+        let Some((core, window)) = self.live_window() else {
+            return;
+        };
+        let (toggle, old) = {
+            let mut state = self.state.borrow_mut();
+            let acting = state.acting;
+            let page = &mut state.page;
+            if page.turn != turn {
+                return;
+            }
+            page.picturing = false;
+            let covers = std::mem::take(&mut page.pending_covers);
+            let toggle = !acting
+                && !page.transitioning
+                && window_is_full_screen(&core, &window) != entering
+                && page
+                    .tab
+                    .as_ref()
+                    .and_then(Weak::load)
+                    .is_some_and(|tab| tab_view(&tab).is_some())
+                    == entering;
+            if toggle {
+                page.entered = entering;
+                page.asked = if entering { 1 } else { -1 };
+                if !entering {
+                    page.left_tab = None;
+                }
+                (true, std::mem::replace(&mut page.covers, covers))
+            } else {
+                (false, covers)
+            }
+        };
+        uncover(old, false);
+        if toggle {
+            flush_transactions();
+            self.toggle();
+            let weak = Rc::downgrade(self);
+            main_queue::after(
+                Duration::from_millis(500),
+                Box::new(move || {
+                    let Some(fullscreen) = weak.upgrade() else {
+                        return;
+                    };
+                    let covers = {
+                        let mut state = fullscreen.state.borrow_mut();
+                        let page = &mut state.page;
+                        if page.transitioning || page.turn != turn {
+                            return;
+                        }
+                        std::mem::take(&mut page.covers)
+                    };
+                    uncover(covers, true);
+                }),
+            );
+        } else {
+            self.sync_page();
+        }
+    }
+
+    fn notified(self: &Rc<Self>, name: &NSString) {
+        let (close, will, did, entering, left_app) = unsafe {
+            let will_enter = name.isEqualToString(NSWindowWillEnterFullScreenNotification);
+            let did_enter = name.isEqualToString(NSWindowDidEnterFullScreenNotification);
             (
                 name.isEqualToString(NSWindowWillCloseNotification),
-                name.isEqualToString(NSWindowWillEnterFullScreenNotification)
-                    || name.isEqualToString(NSWindowWillExitFullScreenNotification),
-                name.isEqualToString(NSWindowDidEnterFullScreenNotification)
-                    || name.isEqualToString(NSWindowDidExitFullScreenNotification),
+                will_enter || name.isEqualToString(NSWindowWillExitFullScreenNotification),
+                did_enter || name.isEqualToString(NSWindowDidExitFullScreenNotification),
+                will_enter || did_enter,
                 name.isEqualToString(NSApplicationDidResignActiveNotification),
             )
         };
-        {
+        let (covers, settlement) = {
             let mut state = self.state.borrow_mut();
             if state.closed {
                 return;
             }
-            if close {
-                state.closed = true;
-                return;
+            state.closed = close;
+            if will {
+                state.window_turn = state.window_turn.wrapping_add(1);
+            }
+            let turn = state.window_turn;
+            let page = &mut state.page;
+            if close || will {
+                page.cancel_draw();
             }
             if will {
-                state.transitioning = true;
-                state.settling = true;
+                page.transitioning = true;
+                page.settling = true;
+                page.ours = page.asked == if entering { 1 } else { -1 };
+                page.asked = 0;
+                for cover in &page.covers {
+                    if cover.owner().is_some_and(|tab| tab_view(&tab).is_some()) {
+                        cover.repicture();
+                    }
+                }
             }
             if did {
-                state.transitioning = false;
+                page.transitioning = false;
             }
+            let settlement = did.then(|| (turn, std::mem::take(&mut page.ours)));
+            let covers = if close || did {
+                std::mem::take(&mut page.covers)
+            } else {
+                Vec::new()
+            };
+            (covers, settlement)
+        };
+        uncover(covers, did);
+        if close {
+            return;
         }
         self.update_seen(left_app);
+        if let Some((turn, ours)) = settlement {
+            let weak = Rc::downgrade(self);
+            main_queue::post(Box::new(move || {
+                if let Some(fullscreen) = weak
+                    .upgrade()
+                    .filter(|item| item.state.borrow().window_turn == turn)
+                    .filter(|item| item.live_window().is_some())
+                {
+                    let exit_page = if !entering && !ours {
+                        let page = &mut fullscreen.state.borrow_mut().page;
+                        page.entered = false;
+                        page.tab.as_ref().and_then(Weak::load)
+                    } else {
+                        None
+                    };
+                    if let Some(tab) = exit_page.filter(|tab| tab_view(tab).is_some()) {
+                        tab.exit_fullscreen();
+                    } else {
+                        fullscreen.sync_page();
+                    }
+                }
+            }));
+        }
     }
 
     fn update_seen(&self, left_app: bool) {
@@ -284,11 +772,8 @@ impl FullScreen {
         };
         let app = NSApplication::sharedApplication(self.mtm);
         let active = app.isActive();
-        let (acted_occlusion, acted_server) = {
-            let state = self.state.borrow();
-            (state.acted_occlusion, state.acted_server)
-        };
-        let (visible, overruled) = if let Some(app_kit) = acted_occlusion {
+        let acted_server = self.state.borrow().acted_server;
+        let (visible, overruled) = if let Some(app_kit) = acted_occlusion(&window) {
             let server = (!active || !app_kit)
                 && window.isVisible()
                 && !window.isMiniaturized()
@@ -314,7 +799,7 @@ impl FullScreen {
         };
         let active_fullscreen = active && window_is_full_screen(&core, &window);
         let changed = {
-            let mut state = self.state.borrow_mut();
+            let state = &mut self.state.borrow_mut().page;
             if state.settling && !state.transitioning && visible {
                 state.settling = false;
             }
@@ -344,21 +829,8 @@ impl FullScreen {
     }
 
     pub fn reconsider_sight(&self) {
+        self.state.borrow_mut().expose_page = true;
         self.update_seen(false);
-    }
-
-    pub(super) fn act_occlusion(&self, visible: Option<bool>) {
-        let Some((_, window)) = self.live_window() else {
-            return;
-        };
-        self.state.borrow_mut().acted_occlusion = visible;
-        // SAFETY: AppKit receives its occlusion notification with the live window.
-        unsafe {
-            NSNotificationCenter::defaultCenter().postNotificationName_object(
-                NSWindowDidChangeOcclusionStateNotification,
-                Some(&window),
-            );
-        }
     }
 
     pub(super) fn act_window_server(&self, shows: bool) {
@@ -372,29 +844,29 @@ impl FullScreen {
             }
             return;
         }
-        self.act_window_full_screen(!self.is_full_screen());
+        self.act_window_full_screen_with_timing(!self.is_full_screen(), ACTED_TRANSITION.get());
     }
 
     pub fn act_window_full_screen(self: &Rc<Self>, entering: bool) {
-        self.act_window_full_screen_with_timing(entering, Duration::ZERO, None);
+        self.act_window_full_screen_with_timing(entering, 0.);
     }
 
     pub(super) fn act_window_full_screen_with_timing(
         self: &Rc<Self>,
         entering: bool,
-        transition: Duration,
-        occlusion_gap: Option<f64>,
+        transition: f64,
     ) {
         let Some((core, window)) = self.live_window() else {
             return;
         };
-        {
+        let turn = {
             let mut state = self.state.borrow_mut();
-            if state.acting || core.acted_full_screen() == entering {
+            if state.acting || window_is_full_screen(&core, &window) == entering {
                 return;
             }
             state.acting = true;
-        }
+            state.occlusion_turn
+        };
         let center = NSNotificationCenter::defaultCenter();
         // SAFETY: These AppKit notification names and the window are valid for this call.
         unsafe {
@@ -422,28 +894,29 @@ impl FullScreen {
                 window.setFrame_display(frame, true);
             }
         }
-        if let Some(wait) = occlusion_gap.and_then(|gap| {
-            Duration::try_from_secs_f64((transition.as_secs_f64() + gap).max(0.)).ok()
-        }) {
-            let turn = {
-                let mut state = self.state.borrow_mut();
-                state.occlusion_turn = state.occlusion_turn.wrapping_add(1);
-                state.occlusion_turn
-            };
-            self.act_occlusion(Some(false));
+        let current = self.state.borrow().occlusion_turn == turn;
+        if current
+            && let Some(wait) = ACTED_OCCLUSION_GAP
+                .get()
+                .and_then(|gap| Duration::try_from_secs_f64((transition + gap).max(0.)).ok())
+        {
+            let turn = turn.wrapping_add(1);
+            self.state.borrow_mut().occlusion_turn = turn;
+            set_acted_occlusion(&window, Some(false));
             let weak = Rc::downgrade(self);
             main_queue::after(
                 wait,
                 Box::new(move || {
                     if let Some(fullscreen) = weak.upgrade() {
                         let current = fullscreen.state.borrow().occlusion_turn == turn;
-                        if current {
-                            fullscreen.act_occlusion(Some(true));
+                        if current && let Some((_, window)) = fullscreen.live_window() {
+                            set_acted_occlusion(&window, Some(true));
                         }
                     }
                 }),
             );
         }
+        let transition = Duration::try_from_secs_f64(transition).unwrap_or_default();
         if transition.is_zero() {
             self.finish_acted_transition(entering);
         } else {

@@ -26,10 +26,12 @@ use super::ardia_traffic_lights::{Placement, frame_corner_radius};
 use super::ardia_window_controller::{Controller, Controllers};
 use crate::core::bindings::{Profile, Window};
 use crate::core::host::State;
+use crate::tabs::ardia_tab_registry::TabRegistry;
 
 pub struct ChromeWindowHost {
     state: Rc<State>,
     controllers: Rc<Controllers>,
+    tab_registry: RefCell<TabRegistry>,
     focus: Rc<FocusState>,
     dev: DevActions,
     sizing: Rc<RefCell<Vec<WindowSizing>>>,
@@ -99,11 +101,16 @@ impl ChromeWindowHost {
         Self {
             state,
             controllers,
+            tab_registry: RefCell::default(),
             focus,
             dev: DevActions::default(),
             sizing,
             observers,
         }
+    }
+
+    pub fn tab_registry(&self) -> &RefCell<TabRegistry> {
+        &self.tab_registry
     }
 
     pub fn set_interface_min_size(&self, size: NSSize, window: &NSWindow) {

@@ -10,26 +10,33 @@ pub fn overlap_area(a: Rect, b: Rect) -> f64 {
     if w > 0. && h > 0. { w * h } else { 0. }
 }
 
-pub fn holds_most(frame: Rect, screens: &[Rect], target: usize) -> bool {
-    let Some(screen) = screens.get(target) else {
-        return false;
-    };
-    has_most(frame, *screen, screens.iter().copied())
+fn target_holds_most(
+    frame: Rect,
+    screens: impl IntoIterator<Item = Rect>,
+    target: usize,
+) -> Option<bool> {
+    let mut target_overlap = None;
+    let mut largest: f64 = 0.;
+    for (index, screen) in screens.into_iter().enumerate() {
+        let overlap = overlap_area(frame, screen);
+        largest = largest.max(overlap);
+        if index == target {
+            target_overlap = Some(overlap);
+        }
+    }
+    target_overlap.map(|overlap| overlap > 0. && overlap == largest)
 }
 
-pub(super) fn has_most(frame: Rect, target: Rect, screens: impl IntoIterator<Item = Rect>) -> bool {
-    let overlap = overlap_area(frame, target);
-    overlap > 0.
-        && screens
-            .into_iter()
-            .all(|screen| overlap_area(frame, screen) <= overlap)
+pub fn on_screen(
+    frame: Rect,
+    screens: impl IntoIterator<Item = Rect>,
+    target: usize,
+    visible: Rect,
+) -> Rect {
+    target_holds_most(frame, screens, target).map_or(frame, |holds| place(frame, visible, holds))
 }
 
-pub fn on_screen(frame: Rect, screens: &[Rect], target: usize, visible: Rect) -> Rect {
-    place(frame, visible, holds_most(frame, screens, target))
-}
-
-pub(super) fn place(frame: Rect, visible: Rect, holds_most: bool) -> Rect {
+fn place(frame: Rect, visible: Rect, holds_most: bool) -> Rect {
     let w = frame.width.min(visible.width);
     let h = frame.height.min(visible.height);
     if holds_most {
@@ -60,6 +67,10 @@ mod tests {
     const LEFT: Rect = Rect::new(-1920., 200., 1920., 1080.);
     const LEFT_VISIBLE: Rect = Rect::new(-1920., 200., 1920., 1055.);
 
+    fn holds_most(frame: Rect, screens: &[Rect], target: usize) -> bool {
+        target_holds_most(frame, screens.iter().copied(), target) == Some(true)
+    }
+
     fn inside(inner: Rect, outer: Rect) -> bool {
         inner.x >= outer.x
             && inner.y >= outer.y
@@ -71,7 +82,7 @@ mod tests {
     fn window_saved_on_main_moves_to_external() {
         let screens = [MAIN, RIGHT];
         let saved = Rect::new(100., 80., 1200., 760.);
-        let placed = on_screen(saved, &screens, 1, RIGHT_VISIBLE);
+        let placed = on_screen(saved, screens, 1, RIGHT_VISIBLE);
         assert!(inside(placed, RIGHT_VISIBLE));
         assert_eq!((placed.width, placed.height), (saved.width, saved.height));
         assert!(holds_most(placed, &screens, 1));
@@ -82,9 +93,9 @@ mod tests {
     fn window_already_on_target_is_untouched() {
         let screens = [MAIN, RIGHT];
         let saved = Rect::new(1700., 100., 1000., 700.);
-        assert_eq!(on_screen(saved, &screens, 1, RIGHT_VISIBLE), saved);
+        assert_eq!(on_screen(saved, screens, 1, RIGHT_VISIBLE), saved);
         let saved = Rect::new(40., 30., 900., 600.);
-        assert_eq!(on_screen(saved, &screens, 0, MAIN_VISIBLE), saved);
+        assert_eq!(on_screen(saved, screens, 0, MAIN_VISIBLE), saved);
     }
 
     #[test]
@@ -94,11 +105,11 @@ mod tests {
         assert!(holds_most(saved, &screens, 1));
         assert!(!holds_most(saved, &screens, 0));
         assert_eq!(
-            on_screen(saved, &screens, 1, RIGHT_VISIBLE),
+            on_screen(saved, screens, 1, RIGHT_VISIBLE),
             Rect::new(1512., 100., 1000., 700.)
         );
         assert!(inside(
-            on_screen(saved, &screens, 0, MAIN_VISIBLE),
+            on_screen(saved, screens, 0, MAIN_VISIBLE),
             MAIN_VISIBLE
         ));
     }
@@ -108,20 +119,15 @@ mod tests {
         let screens = [MAIN, RIGHT];
         let saved = Rect::new(600., 700., 800., 600.);
         assert!(holds_most(saved, &screens, 0));
-        let placed = on_screen(saved, &screens, 0, MAIN_VISIBLE);
+        let placed = on_screen(saved, screens, 0, MAIN_VISIBLE);
         assert!(inside(placed, MAIN_VISIBLE));
         assert_eq!(placed, Rect::new(600., 344., 800., 600.));
         assert_eq!(
-            on_screen(
-                Rect::new(1000., 100., 900., 600.),
-                &screens,
-                0,
-                MAIN_VISIBLE
-            ),
+            on_screen(Rect::new(1000., 100., 900., 600.), screens, 0, MAIN_VISIBLE),
             Rect::new(612., 100., 900., 600.)
         );
         assert_eq!(
-            on_screen(Rect::new(100., 0., 700., 960.), &screens, 0, MAIN_VISIBLE),
+            on_screen(Rect::new(100., 0., 700., 960.), screens, 0, MAIN_VISIBLE),
             Rect::new(100., 0., 700., 944.)
         );
     }
@@ -131,7 +137,7 @@ mod tests {
         assert_eq!(
             on_screen(
                 Rect::new(50., 50., 3000., 2000.),
-                &[MAIN, LEFT],
+                [MAIN, LEFT],
                 1,
                 LEFT_VISIBLE
             ),
@@ -144,7 +150,7 @@ mod tests {
         let screens = [MAIN, RIGHT];
         let saved = Rect::new(9000., 9000., 800., 600.);
         assert!(!holds_most(saved, &screens, 1));
-        let placed = on_screen(saved, &screens, 1, RIGHT_VISIBLE);
+        let placed = on_screen(saved, screens, 1, RIGHT_VISIBLE);
         assert!(inside(placed, RIGHT_VISIBLE));
         assert_eq!(placed, Rect::new(2392., 288., 800., 600.));
     }
@@ -152,23 +158,33 @@ mod tests {
     #[test]
     fn negative_coordinate_layouts() {
         let screens = [LEFT, MAIN, RIGHT];
-        let placed = on_screen(
-            Rect::new(200., 100., 1000., 700.),
-            &screens,
-            0,
-            LEFT_VISIBLE,
-        );
+        let placed = on_screen(Rect::new(200., 100., 1000., 700.), screens, 0, LEFT_VISIBLE);
         assert!(inside(placed, LEFT_VISIBLE));
         assert!(holds_most(placed, &screens, 0));
         let saved = Rect::new(-1500., 300., 1000., 700.);
-        assert_eq!(on_screen(saved, &screens, 0, LEFT_VISIBLE), saved);
+        assert_eq!(on_screen(saved, screens, 0, LEFT_VISIBLE), saved);
         let placed = on_screen(
             Rect::new(300., -500., 800., 600.),
-            &screens,
+            screens,
             2,
             RIGHT_VISIBLE,
         );
         assert!(inside(placed, RIGHT_VISIBLE));
+    }
+
+    #[test]
+    fn missing_target_leaves_frame_unchanged() {
+        let saved = Rect::new(-50., 100., 300., 250.);
+        assert_eq!(on_screen(saved, [MAIN], 1, MAIN_VISIBLE), saved);
+    }
+
+    #[test]
+    fn equal_overlap_preserves_target_placement() {
+        let saved = Rect::new(-150., 300., 300., 250.);
+        let fitted = on_screen(saved, [LEFT, MAIN], 0, LEFT_VISIBLE);
+        assert_eq!(fitted, Rect::new(-300., 300., 300., 250.));
+        let fitted = on_screen(saved, [MAIN, LEFT], 1, LEFT_VISIBLE);
+        assert_eq!(fitted, Rect::new(-300., 300., 300., 250.));
     }
 
     #[test]

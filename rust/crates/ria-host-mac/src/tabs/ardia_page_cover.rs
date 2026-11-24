@@ -72,8 +72,20 @@ define_class!(
 );
 
 impl PageCover {
-    pub fn cover(tab: &Tab, disabled: bool, done: impl FnOnce(Option<Retained<Self>>) + 'static) {
-        let page = tab.view();
+    pub(crate) fn owner(&self) -> Option<Retained<Tab>> {
+        self.ivars().tab.load()
+    }
+
+    pub fn cover(
+        tab: &Tab,
+        disabled: bool,
+        may_attach: impl Fn() -> bool + 'static,
+        done: impl FnOnce(Option<Retained<Self>>) + 'static,
+    ) {
+        let Some(page) = super::tab_view(tab) else {
+            done(None);
+            return;
+        };
         let Some(window) = page
             .window()
             .filter(|_| !disabled && !page.isHiddenOrHasHiddenAncestor())
@@ -87,6 +99,7 @@ impl PageCover {
         let pictured = page.bounds().size;
         let done = Rc::new(Cell::new(Some(done)));
         let deadline = done.clone();
+        let may_attach = Rc::new(may_attach);
         main_queue::after(
             Duration::from_millis(400),
             Box::new(move || {
@@ -103,11 +116,15 @@ impl PageCover {
                 let tab = weak_tab.clone();
                 let window = weak_window.clone();
                 let host = host.clone();
+                let may_attach = may_attach.clone();
                 main_queue::post(Box::new(move || {
                     let Some(done) = done.take() else { return };
                     let cover = (|| {
+                        if !may_attach() {
+                            return None;
+                        }
                         let (picture, tab, window) = (image?, tab.load()?, window.load()?);
-                        let page = tab.view();
+                        let page = super::tab_view(&tab)?;
                         if !page
                             .window()
                             .is_some_and(|current| std::ptr::eq(&*current, &*window))
@@ -156,37 +173,6 @@ impl PageCover {
         );
     }
 
-    pub fn cover_tabs(
-        tabs: &[Retained<Tab>],
-        disabled: bool,
-        done: impl FnOnce(Vec<Retained<Self>>) + 'static,
-    ) {
-        if tabs.is_empty() {
-            done(Vec::new());
-            return;
-        }
-        let shared = Rc::new((
-            Cell::new(tabs.len()),
-            RefCell::new(Vec::new()),
-            Cell::new(Some(done)),
-        ));
-        for tab in tabs {
-            let shared = shared.clone();
-            Self::cover(tab, disabled, move |cover| {
-                if let Some(cover) = cover {
-                    shared.1.borrow_mut().push(cover);
-                }
-                shared.0.set(shared.0.get() - 1);
-                if shared.0.get() == 0
-                    && let Some(done) = shared.2.take()
-                {
-                    let covers = std::mem::take(&mut *shared.1.borrow_mut());
-                    done(covers);
-                }
-            });
-        }
-    }
-
     fn display_picture(&self) {
         // SAFETY: A layer-backed NSView returns a CALayer; `contents` accepts a CGImage.
         unsafe {
@@ -208,12 +194,20 @@ impl PageCover {
         else {
             return;
         };
-        let page = tab.view();
+        if super::tab_view(&tab).is_none() {
+            return;
+        }
         let weak = Weak::new(self);
         let before = self.ivars().pictured.get();
+        let test_tab = Weak::new(&*tab);
         after_page_draw(
             &tab,
-            move |_, _| page.bounds().size != before,
+            move |_, _| {
+                test_tab
+                    .load()
+                    .and_then(|tab| super::tab_view(&tab))
+                    .is_some_and(|view| view.bounds().size != before)
+            },
             move || {
                 let Some(cover) = weak
                     .load()
@@ -224,7 +218,9 @@ impl PageCover {
                 let Some(tab) = cover.ivars().tab.load() else {
                     return;
                 };
-                let now = tab.view().bounds().size;
+                let Some(now) = super::tab_view(&tab).map(|view| view.bounds().size) else {
+                    return;
+                };
                 if now == before {
                     return;
                 }
