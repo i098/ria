@@ -694,7 +694,7 @@ mod mac {
                                             format!("{}: {}", rejection.code, rejection.message),
                                         ),
                                     };
-                                    record(&done, name, ok, detail);
+                                    record(&done, &name, ok, detail);
                                     *done.outstanding.borrow_mut() -= 1;
                                 });
                                 ria_engine::domains::data::tables::run_data_call(
