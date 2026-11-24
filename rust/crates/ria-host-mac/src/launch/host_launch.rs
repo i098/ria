@@ -29,6 +29,7 @@ use super::open_urls::{self, Entry, Inbox};
 use super::platform;
 use super::saved_session::SavedSession;
 use super::startup;
+use super::system_signals::{self, SystemSignals};
 use super::window_host::WindowHost;
 
 pub enum LaunchEvent {
@@ -40,6 +41,11 @@ pub enum LaunchEvent {
     TabTitle(String),
     /// The window host exists and knows the browser window.
     WindowHostReady(Rc<WindowHost>),
+    /// `ArdiaEvents emit:data:` from the system-signals host, such as `downloads.changed`.
+    Emit {
+        topic: String,
+        data: Value,
+    },
     EngineWillShutDown,
     Error(String),
 }
@@ -171,9 +177,11 @@ impl Runtime {
             .and_then(|session| session.launch_profile_directory(self.config.data_directory()));
         let restore_hint = directory.is_some();
         let weak = self.this.clone();
-        let name = NSString::from_str(directory.as_deref().unwrap_or("Default"));
+        let directory_name = directory.clone().unwrap_or_else(|| "Default".to_owned());
+        let name = NSString::from_str(&directory_name);
         engine.load_profile(&name, move |profile| {
             let weak = weak.clone();
+            let directory_name = directory_name.clone();
             later(move || {
                 if let Some(runtime) = weak.upgrade()
                     && runtime.sequence.engine_running()
@@ -182,13 +190,13 @@ impl Runtime {
                         !profile.off_the_record() && !profile.destroyed()
                     };
                     if let Some(profile) = profile.filter(usable) {
-                        runtime.profile_ready(&profile, restore_hint);
+                        runtime.profile_ready(&profile, &directory_name, restore_hint);
                     } else if restore_hint
                         && let Some(profile) =
                             Engine::shared().map(|engine| engine.default_profile())
                         && usable(&profile)
                     {
-                        runtime.profile_ready(&profile, false);
+                        runtime.profile_ready(&profile, "Default", false);
                     } else {
                         runtime.fail("could not load launch profile");
                     }
@@ -197,7 +205,10 @@ impl Runtime {
         });
     }
 
-    fn profile_ready(&self, profile: &Profile, restore_hint: bool) {
+    fn profile_ready(&self, profile: &Profile, directory_name: &str, restore_hint: bool) {
+        if let Some(signals) = system_signals::current() {
+            signals.watch_downloads(directory_name);
+        }
         let reason = self.sequence.reason();
         let reopened = self.reopening.replace(false);
         let show = reopened
@@ -281,11 +292,13 @@ impl Runtime {
 
 impl Hooks for Runtime {
     fn engine_started(&self) {
+        SystemSignals::start(self.observer.clone());
         self.sequence.reach(ENGINE_STARTED);
         (self.observer)(LaunchEvent::EngineStarted);
     }
 
     fn engine_shut_down(&self) {
+        SystemSignals::stop();
         self.sequence.engine_shutdown();
         (self.observer)(LaunchEvent::EngineWillShutDown);
     }
