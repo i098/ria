@@ -31,7 +31,7 @@ Lines of a file that belongs to another unit count as covered by that unit, name
 | `suggest.ts` | 51-53, 63, 108-111, 120-122, 136-141, 200-207, 209-211 | Covered by unit `suggest-rs` (slice 1.3); its coverage reaches these lines. |
 | `suggestFetcher.ts` | 12-24, 26-32, 34-38, 40-79 | Covered by unit `suggest-fetcher-rs` (slice 1.3); its coverage reaches these lines. |
 | `suggestionRows.ts` | 25-32, 56-60 | Covered by unit `suggestion-rows-rs` (slice 1.3); its coverage reaches these lines. |
-| `textFragment.ts` | 59 | No input of any crate reaches these lines. Line 59 is the `}` that closes the `if` after `for (let n = 1; ; n++)` (`textFragment.ts:52-58`). The loop has no condition and always `return`s, so control never leaves it. |
+| `textFragment.ts` | 59 | See the [text fragment coverage explanation](../../1.2/textfragment-rs/UNREACHED.md). |
 | `textFragment.ts` | 18-23, 28-37, 40-47, 49-58, 60-69, 73-76, 79-85 | Covered by unit `textfragment-rs` (slice 1.2); its coverage reaches these lines. |
 | `theme.ts` | 58-67, 69-75, 81-87, 90-93, 99-108, 111-119, 122-123, 126-130, 133-135, 138-139, 142-143, 151-154, 157-164, 167-168, 171-175, 178-179, 182-183, 186-192, 195-196, 199-200, 203-205, 208-209, 212-213, 216-217, 220-221, 223-227, 229-231, 234-236, 239-240, 242-246, 249-250, 253-254, 258-261, 264-268, 271-272, 275-277, 280-282, 285-286, 289-295, 298-300, 303-304, 307-315, 317-323, 325-345, 348-353 | Covered by unit `theme-rs` (slice 1.6); its coverage reaches these lines. |
 | `webStore.ts` | 6-19, 22-47, 49-53 | Covered by unit `webstore-rs` (slice 1.2); its coverage reaches these lines. |
