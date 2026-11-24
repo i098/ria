@@ -703,6 +703,45 @@ fn deleting_the_default_profile_lists_the_steps_that_did_not_finish() {
 }
 
 #[test]
+fn a_failed_service_read_is_a_failed_step_not_empty_work() {
+    let cases = [
+        ("listPasswords", "passwords"),
+        ("neverSaveOrigins", "passwords"),
+        ("addresses", "addresses"),
+        ("cards", "cards"),
+        ("listExtensions", "extensions"),
+        ("siteSettingsOrigins", "site settings"),
+        ("zoomLevels", "zoom levels"),
+    ];
+    for (op, label) in cases {
+        let rig = rig();
+        ANSWERS.with(|a| a.borrow_mut().insert("*".into(), json!({"ok": true})));
+        let mut answers = rig.services.answers.borrow_mut();
+        answers.insert("listPasswords".into(), Ok(json!({"passwords": []})));
+        answers.insert("addresses".into(), Ok(json!({"addresses": []})));
+        answers.insert("cards".into(), Ok(json!({"cards": []})));
+        answers.insert("neverSaveOrigins".into(), Ok(json!({"origins": []})));
+        answers.insert("listExtensions".into(), Ok(json!({"extensions": []})));
+        answers.insert("siteSettingsOrigins".into(), Ok(json!([])));
+        answers.insert("zoomLevels".into(), Ok(json!({})));
+        answers.insert(op.into(), Err("service failed".into()));
+        drop(answers);
+        let remaining = Rc::new(RefCell::new(None));
+        let sink = remaining.clone();
+        delete_default(
+            rig.ctx.clone(),
+            Box::new(move |r| *sink.borrow_mut() = Some(r)),
+        );
+        rig.queue.drain();
+        for _ in 0..30 {
+            fire_timers();
+            rig.queue.drain();
+        }
+        assert_eq!(remaining.take(), Some(vec![label.to_owned()]), "{op}");
+    }
+}
+
+#[test]
 fn an_unknown_call_and_a_missing_argument_use_the_ardia_codes() {
     let rig = rig();
     let out = run_table(&rig, "sites", "nope", "", json!({}));
