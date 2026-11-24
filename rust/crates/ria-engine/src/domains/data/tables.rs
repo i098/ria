@@ -22,8 +22,9 @@ type Done = Result<(), BadCallArgs>;
 /// `EngineCall.passing(symbol)`.
 macro_rules! passing {
     ($symbol:literal) => {
-        |ctx: &DataCtx, args: CallArgs, reply: CallReply| -> Done {
-            ctx.pass($symbol, &args.profile, args.object(), reply);
+        |ctx: &DataCtx, mut args: CallArgs, reply: CallReply| -> Done {
+            let profile = std::mem::take(&mut args.profile);
+            ctx.pass($symbol, &profile, args.into_object(), reply);
             Ok(())
         }
     };
