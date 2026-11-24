@@ -9,6 +9,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Ria has no rel
 - [Native macOS launch](rust/crates/ria-app/src/launch/README.md).
 - [Surface host](rust/crates/ria-surface/README.md): AppKit window host for Rune chrome and engine pages, with AX press and text input.
 - Browser domain routing in the Rust engine, including unpacked extension inspection and shared extension management calls for the Mac host.
+- Mac host ports of Ardia swipe (back swipe, native pager) and diagnostics (reveal guards, hover probe, freeze capture, paint probe).
 - Phase 0 proofs: Rust host on the Ardia engine with Rune layers, port loop on `fuzzy.ts`, parity rig, unit and animation maps, decision records.
 - [State replay kit](rust/replay/kit/README.md) with a find sample.
 - Phase 1 core logic: Rust ports of the Phase 1 units, checked against Ardia. All checks passed for [gate G1](rust/GATES.md#g1-record).
