@@ -248,7 +248,7 @@ Method. The real hours come from i098/ria only: the merge time of each pull requ
 - Low: from the first visible work (the earlier of the slice issue creation and the first commit author date) to the merge. This leaves out work before the first commit.
 - High: from the time all slices in the `Needs` column were merged (for 1.1, the owner go of G0 at 06:42) to the merge. This counts the wait for dispatch and the review pipeline.
 
-Hours are wall-clock hours of one slice. Slices ran in parallel, so the sum is lane hours, not elapsed time. Slice 1.3 has no issue: its first commit is 07:22, and its review rounds ran until 13:32 (6 commits of `no-mistakes`).
+Hours are wall-clock hours of one slice. Slices ran in parallel, so the sum is lane hours, not elapsed time. Slice 1.3 has no issue: its first commit is 07:22, and its review rounds ran until 13:32 (6 commits, 3 of them `no-mistakes`).
 
 | Slice | Planned (h) | Real low (h) | Real high (h) | Source lines |
 | --- | ---: | ---: | ---: | ---: |
@@ -260,28 +260,28 @@ Hours are wall-clock hours of one slice. Slices ran in parallel, so the sum is l
 | 1.6 identity, theme | 1.5 | 0.02 | 0.50 | 581 |
 | 1.7 endpoints | 0.5 | 0.11 | 0.21 | - |
 | issue 37 (parity fixes of 1.6, pull request 81) | 0.0 | 1.78 | 1.78 | - |
-| issue 82 (gate fixes, pull request 98) | 0.0 | 4.78 | 6.93 | - |
+| issue 82 (gate fixes, pull request 98) | 0.0 | 5.07 | 6.93 | - |
 | 1.8 this slice (task start to commit) | 1.5 | 1.5 | 1.5 | - |
-| Total | 11.7 | 16.98 | 22.33 | |
+| Total | 11.7 | 17.25 | 22.36 | |
 
 Issue 37 starts at the first commit (2026-11-23 16:28), not at the issue creation (07:22): the issue waited 9 h before work began.
 
 ### Corrected rates for the later phases (R15)
 
-The unit loop (check U) slices are 1.1, 1.2, 1.3, 1.4 and 1.6, with 3,989 source lines (bang list not counted). Their planned hours are 9.2, which is 434 lines for each hour. Issues 37 and 82 are rework of this loop, so they count to it. Issue 82 is measured from its first commit (2026-11-23 21:54) to the merge (2026-11-24 02:41) for low, and from the creation of the issue (19:45) for high. The 1.8 row is my estimate; the real time of this slice is longer, because the second run alone took about 4 h on the loaded host.
+The unit loop (check U) slices are 1.1, 1.2, 1.3, 1.4 and 1.6, with 3,989 source lines (bang list not counted). Their planned hours are 9.2, which is 434 lines for each hour. Issues 37 and 82 are rework of this loop, so they count to it. Issue 82 is measured from its first commit (author date 2026-11-23 21:37) to the merge (2026-11-24 02:41) for low, and from the creation of the issue (19:45) for high. The 1.8 row is my estimate; the real time of this slice is longer, because the second run alone took about 4 h on the loaded host.
 
 | Number | Low | High |
 | --- | ---: | ---: |
-| Real hours of the unit loop (with issues 37 and 82) | 14.06 | 18.94 |
-| Real lines for each hour | 284 | 211 |
-| Factor, real hours / planned hours (9.2) | 1.53 | 2.06 |
+| Real hours of the unit loop (with issues 37 and 82) | 14.35 | 18.94 |
+| Real lines for each hour | 278 | 211 |
+| Factor, real hours / planned hours (9.2) | 1.56 | 2.06 |
 
-Decision rule: use the high factor 2.06, because plan risk R15 is about too few hours and the low measure leaves out the work before the first commit. Both factors are above the first-run numbers (1.01 and 1.31), because the rework of the gate (PR 98) cost 4.8 to 6.9 h. The plan rates (600 and 1,000 lines for each hour) are not met by either measure.
+Decision rule: use the high factor 2.06, because plan risk R15 is about too few hours and the low measure leaves out the work before the first commit. Both factors are above the first-run numbers (1.01 and 1.31), because the rework of the gate (PR 98) cost 5.1 to 6.9 h. The plan rates (600 and 1,000 lines for each hour) are not met by either measure.
 
 | Item | Plan v5 (h) | Corrected (h) | Basis |
 | --- | ---: | ---: | --- |
-| Unit slices of all phases (U checks) | 358.0 | 737.0 | 358.0 x 2.06 |
+| Unit slices of all phases (U checks) | 358.0 | 737.5 | 358.0 x 2.06 |
 | All other hours (Mac, native code, UI, tests, gates) | 247.6 | 247.6 | not measured by phase 1; keep the plan hours until a later gate gives a number |
-| Plan total | 605.6 | 984.6 | 605.6 + 358.0 x 1.06 |
+| Plan total | 605.6 | 985.1 | 247.6 + 737.5 |
 
-The corrected total, 984.6 h, is above the R15 worst case (827.1 h, at 400 lines for each hour). The measured rate of the unit loop is 211 to 284 lines for each hour, below the 400 of R15. `[INFERENCE]` The rework share (issues 37 and 82) is a one-time cost of the first loop, and later phases with the same oracle setup may need less; gate G2 measures it again. The owner should see this number before phase 2 starts.
+The corrected total, 985.1 h, is above the R15 worst case (827.1 h, at 400 lines for each hour; the plan v5 text for R15 is not in this repository, so this figure is quoted from the plan and cannot be rederived here). The measured rate of the unit loop is 211 to 278 lines for each hour, below the 400 of R15. `[INFERENCE]` The rework share (issues 37 and 82) is a one-time cost of the first loop, and later phases with the same oracle setup may need less; gate G2 measures it again. The owner should see this number before phase 2 starts.
