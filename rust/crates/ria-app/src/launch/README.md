@@ -38,6 +38,13 @@ The cached picture must match the content signature.
 Ria removes the picture when the window changes size.
 This startup path does not restore all saved windows and tabs.
 
+Ria opens an `http` or `https` URL that another macOS app sends in a new tab of the browser window.
+It queues URLs that arrive before the window is ready, and opens them in order when it is.
+A click on the Dock icon, with no visible window, shows the browser window again, or opens a new one if the user closed it.
+A URL that arrives while every window is closed also opens a new window.
+Ria registers Apple Event handlers for both events, because the engine gives the application no delegate.
+The sender of a URL is not recorded.
+
 Ria accepts raw switches from `chromiumSwitches` in `RIA_INSTANCE` and from the command line for [Ardia parity](https://github.com/ardia-browser/ardia/blob/551d3c13c1c9ede130724ea9f1056d4b586fbe55/packages/ardiacore/ios/ArdiaHost%2BLaunch.mm#L506-L526).
 Ria filters reserved engine switches from both inputs, including the profile, process type, and remote debugging switches.
 Ria accepts `RIA_REMOTE_DEBUGGING_PORT` only with an isolated profile and a build without a distribution signature.
