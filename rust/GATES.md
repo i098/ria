@@ -274,7 +274,7 @@ Hours are wall-clock hours of one slice. Slices ran in parallel, so the sum is l
 | 1.8 this slice (task start to commit) | 1.5 | 1.5 | 1.5 | - |
 | Total | 11.7 | 17.25 | 22.36 | |
 
-Issue 37 starts at the first commit (2026-11-23 16:28), not at the issue creation (07:22): the issue waited 9 h before work began.
+Issue 37 starts at the first commit (2026-11-23 16:28), not at the issue creation (07:22): the issue waited 9 h before work began. Its high value (1.78 h) is an exception to the high method: it is also measured from the first commit, because the 9 h wait was not work time; with the method as stated it would be 10.88 h.
 
 ### Corrected rates for the later phases (R15)
 
