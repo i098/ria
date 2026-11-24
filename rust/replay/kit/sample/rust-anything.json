@@ -1,0 +1,11 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "..",
+  "unit": "find.mjs",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "ria-replay-find",
+  "exports": [],
+  "classes": [],
+  "js_only": []
+}
