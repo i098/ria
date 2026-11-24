@@ -8,9 +8,9 @@ use std::sync::Once;
 use std::time::Duration;
 
 use block2::RcBlock;
-use objc2::{ClassType, MainThreadMarker, ffi, msg_send, sel};
 use objc2::rc::{Retained, Weak};
 use objc2::runtime::{AnyClass, AnyObject, Sel};
+use objc2::{ClassType, MainThreadMarker, ffi, msg_send, sel};
 use objc2_app_kit::{
     NSApplication, NSApplicationDidBecomeActiveNotification,
     NSApplicationDidResignActiveNotification, NSScreen, NSView, NSWindow,
@@ -224,10 +224,8 @@ fn set_acted_occlusion(window: &NSWindow, visible: Option<bool>) {
         }
     });
     unsafe {
-        NSNotificationCenter::defaultCenter().postNotificationName_object(
-            NSWindowDidChangeOcclusionStateNotification,
-            Some(window),
-        );
+        NSNotificationCenter::defaultCenter()
+            .postNotificationName_object(NSWindowDidChangeOcclusionStateNotification, Some(window));
     }
 }
 
@@ -291,12 +289,16 @@ impl PageState {
 fn uncover(covers: Vec<Retained<PageCover>>, after_draw: bool) {
     for cover in covers {
         if after_draw && let Some(tab) = cover.owner().filter(|tab| tab_view(tab).is_some()) {
-            after_page_draw(&tab, |_, _| true, move || {
-                main_queue::after(
-                    Duration::from_millis(34),
-                    Box::new(move || cover.uncover(true)),
-                );
-            });
+            after_page_draw(
+                &tab,
+                |_, _| true,
+                move || {
+                    main_queue::after(
+                        Duration::from_millis(34),
+                        Box::new(move || cover.uncover(true)),
+                    );
+                },
+            );
         } else {
             cover.uncover(false);
         }
@@ -610,7 +612,12 @@ impl FullScreen {
                         return;
                     };
                     if let Some(cover) = cover {
-                        fullscreen.state.borrow_mut().page.pending_covers.push(cover);
+                        fullscreen
+                            .state
+                            .borrow_mut()
+                            .page
+                            .pending_covers
+                            .push(cover);
                     }
                     remaining.set(remaining.get() - 1);
                     if remaining.get() == 0 {
@@ -889,9 +896,9 @@ impl FullScreen {
         }
         let current = self.state.borrow().occlusion_turn == turn;
         if current
-            && let Some(wait) = ACTED_OCCLUSION_GAP.get().and_then(|gap| {
-                Duration::try_from_secs_f64((transition + gap).max(0.)).ok()
-            })
+            && let Some(wait) = ACTED_OCCLUSION_GAP
+                .get()
+                .and_then(|gap| Duration::try_from_secs_f64((transition + gap).max(0.)).ok())
         {
             let turn = turn.wrapping_add(1);
             self.state.borrow_mut().occlusion_turn = turn;

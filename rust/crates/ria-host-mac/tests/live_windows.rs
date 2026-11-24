@@ -42,9 +42,8 @@ mod mac {
         NSMenu, NSMenuItem, NSScreen, NSTextField, NSTextView, NSUserInterfaceItemIdentification,
         NSView, NSWindow, NSWindowButton, NSWindowDidChangeOcclusionStateNotification,
         NSWindowDidEnterFullScreenNotification, NSWindowDidExitFullScreenNotification,
-        NSWindowOcclusionState, NSWindowStyleMask,
-        NSWindowWillEnterFullScreenNotification, NSWindowWillExitFullScreenNotification,
-        NSWorkspace,
+        NSWindowOcclusionState, NSWindowStyleMask, NSWindowWillEnterFullScreenNotification,
+        NSWindowWillExitFullScreenNotification, NSWorkspace,
     };
     use objc2_foundation::{
         NSBundle, NSDate, NSIntersectionRect, NSNotification, NSNotificationCenter, NSPoint,
@@ -575,7 +574,8 @@ mod mac {
         let selector_attach = selector;
         let attach_method = method;
         let attach_original = method.implementation();
-        let attach_imp = unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&attach).cast()) };
+        let attach_imp =
+            unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&attach).cast()) };
         unsafe {
             ffi::class_replaceMethod(
                 std::ptr::from_ref(class).cast_mut(),
@@ -619,12 +619,18 @@ mod mac {
         let selector = sel!(copyPicture:completion:);
         let method = tab.class().instance_method(selector).unwrap();
         let implementation = method.implementation();
-        let original: unsafe extern "C-unwind" fn(*const Tab, Sel, f64, &DynBlock<dyn Fn(CGImageRef)>) =
-            unsafe { std::mem::transmute(implementation) };
+        let original: unsafe extern "C-unwind" fn(
+            *const Tab,
+            Sel,
+            f64,
+            &DynBlock<dyn Fn(CGImageRef)>,
+        ) = unsafe { std::mem::transmute(implementation) };
         let work = Cell::new(Some((supersede, verify)));
         let snapshot = RcBlock::new(
             move |tab: *const Tab, timeout: f64, completion: &DynBlock<dyn Fn(CGImageRef)>| {
-                if tab == target && let Some((supersede, verify)) = work.take() {
+                if tab == target
+                    && let Some((supersede, verify)) = work.take()
+                {
                     unsafe {
                         ffi::method_setImplementation(view_method, view_original);
                         ffi::imp_removeBlock(view_imp);
@@ -636,7 +642,10 @@ mod mac {
                     let processed = processed.clone();
                     let attached = attached.clone();
                     let reply = RcBlock::new(move |image: CGImageRef| {
-                        assert!(!image.0.is_null(), "The fullscreen snapshot must contain an image");
+                        assert!(
+                            !image.0.is_null(),
+                            "The fullscreen snapshot must contain an image"
+                        );
                         completion.call((image,));
                         let timestamp = processed.clone();
                         main_queue::post(Box::new(move || timestamp.set(true)));
@@ -715,12 +724,14 @@ mod mac {
         let target = std::ptr::from_ref(&*tab);
         let calls = Rc::new(Cell::new(0));
         let received = calls.clone();
-        let evaluate = RcBlock::new(move |tab: *const Tab, code: &NSString, completion: &Completion| {
-            if tab == target {
-                received.set(received.get() + 1);
-            }
-            unsafe { original(tab, selector, code, completion) };
-        });
+        let evaluate = RcBlock::new(
+            move |tab: *const Tab, code: &NSString, completion: &Completion| {
+                if tab == target {
+                    received.set(received.get() + 1);
+                }
+                unsafe { original(tab, selector, code, completion) };
+            },
+        );
         let imp = unsafe { ffi::imp_implementationWithBlock(RcBlock::as_ptr(&evaluate).cast()) };
         unsafe { ffi::method_setImplementation(method, imp) };
         assert!(host.is_fullscreen(&window));
@@ -793,10 +804,7 @@ mod mac {
         type Completion = DynBlock<dyn Fn(*mut AnyObject)>;
         let closed = [Rc::new(Cell::new(false)), Rc::new(Cell::new(false))];
         let replied = [Rc::new(Cell::new(false)), Rc::new(Cell::new(false))];
-        let targets = [
-            std::ptr::from_ref(&*tabs[0]),
-            std::ptr::from_ref(&*tabs[1]),
-        ];
+        let targets = [std::ptr::from_ref(&*tabs[0]), std::ptr::from_ref(&*tabs[1])];
         let selector = sel!(evaluate:completion:);
         let method = tabs[0].class().instance_method(selector).unwrap();
         let implementation = method.implementation();
@@ -865,15 +873,20 @@ mod mac {
         let repicture_started = repictured.clone();
         let close_tab = tabs[1].clone();
         let repicture_closed = closed[1].clone();
-        PageCover::cover(&tabs[1], false, || true, move |cover| {
-            cover_finished.set(true);
-            let Some(cover) = cover else { return };
-            cover_attached.set(true);
-            cover.repicture();
-            repicture_started.set(true);
-            close_tab.close_now();
-            repicture_closed.set(true);
-        });
+        PageCover::cover(
+            &tabs[1],
+            false,
+            || true,
+            move |cover| {
+                cover_finished.set(true);
+                let Some(cover) = cover else { return };
+                cover_attached.set(true);
+                cover.repicture();
+                repicture_started.set(true);
+                close_tab.close_now();
+                repicture_closed.set(true);
+            },
+        );
 
         tabs[0].close_now();
         closed[0].set(true);
@@ -984,7 +997,10 @@ mod mac {
                 calls.borrow_mut().clear();
                 probe(&host, &window, "fakeFullScreen:1");
                 probe(&host, &window, "fakeFullScreen:0");
-                assert_eq!(probe(&host, &window, "fakeFullScreen:1")["fullScreen"], true);
+                assert_eq!(
+                    probe(&host, &window, "fakeFullScreen:1")["fullScreen"],
+                    true
+                );
                 change(&replacement, true);
                 main_queue::post(Box::new(move || {
                     unsafe {
@@ -1225,7 +1241,8 @@ mod mac {
         let occluded = host.make_window(profile, None).unwrap();
         occluded.orderOut(None);
         assert_eq!(
-            host.dev_action(&occluded, "fakeOcclusion:hidden", true).as_deref(),
+            host.dev_action(&occluded, "fakeOcclusion:hidden", true)
+                .as_deref(),
             Some("0")
         );
         assert!(
@@ -1491,7 +1508,8 @@ mod mac {
                     controllers.for_window(window).unwrap().core.show_inactive();
                     assert!(window.isVisible());
                     assert_eq!(
-                        host.dev_action(window, "fakeWindowServer:shows", true).as_deref(),
+                        host.dev_action(window, "fakeWindowServer:shows", true)
+                            .as_deref(),
                         Some("ok")
                     );
                 }
@@ -1513,11 +1531,15 @@ mod mac {
                     Some("-1")
                 );
                 for window in [&restored, &overridden] {
-                    assert_eq!(probe(&host, window, "fakeFullScreen:0")["fullScreen"], false);
+                    assert_eq!(
+                        probe(&host, window, "fakeFullScreen:0")["fullScreen"],
+                        false
+                    );
                     assert!(controllers.user_sees_only_through_window_server(window));
                 }
                 assert_eq!(
-                    host.dev_action(&overridden, "fakeOcclusion:hidden", true).as_deref(),
+                    host.dev_action(&overridden, "fakeOcclusion:hidden", true)
+                        .as_deref(),
                     Some("0")
                 );
                 let restored_before_gap = restored.clone();
@@ -1563,7 +1585,8 @@ mod mac {
                             fullscreen_state(false, false)
                         );
                         assert_eq!(
-                            host.dev_action(&made, "fakeFullScreenMs: 50", true).as_deref(),
+                            host.dev_action(&made, "fakeFullScreenMs: 50", true)
+                                .as_deref(),
                             Some("50")
                         );
                         notes.borrow_mut().clear();
@@ -1580,7 +1603,8 @@ mod mac {
                             assert!(runtime_at.get().unwrap() >= Duration::from_millis(50));
                             assert_eq!(notes.borrow().as_slice(), &names[..2]);
                             assert_eq!(
-                                host.dev_action(&made, "fakeFullScreenMs:0", true).as_deref(),
+                                host.dev_action(&made, "fakeFullScreenMs:0", true)
+                                    .as_deref(),
                                 Some("0")
                             );
                             for token in tokens.into_iter().chain([exit_token, runtime_token]) {
@@ -1647,7 +1671,11 @@ mod mac {
             .contains(NSWindowOcclusionState::Visible);
         let hidden = ("fakeOcclusion:hidden", "0");
         let shown = ("fakeOcclusion:visible", "1");
-        let actions = if visible { [shown, hidden] } else { [hidden, shown] };
+        let actions = if visible {
+            [shown, hidden]
+        } else {
+            [hidden, shown]
+        };
         let off = ("fakeOcclusion:off", if visible { "1" } else { "0" });
         let observed = Rc::new(Cell::new(None));
         let result = observed.clone();

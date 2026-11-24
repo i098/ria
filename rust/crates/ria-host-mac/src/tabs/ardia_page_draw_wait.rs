@@ -25,9 +25,9 @@ pub fn after_page_draw(
     test: impl Fn(bool, bool) -> bool + 'static,
     done: impl FnOnce() + 'static,
 ) {
-    if super::tab_view(tab).is_none_or(|page| {
-        page.window().is_none() || page.isHiddenOrHasHiddenAncestor()
-    }) {
+    if super::tab_view(tab)
+        .is_none_or(|page| page.window().is_none() || page.isHiddenOrHasHiddenAncestor())
+    {
         done();
         return;
     }

@@ -572,7 +572,9 @@ impl DevActions {
                 let controller = controllers.for_window(window);
                 Some(flag(act_occlusion(
                     window,
-                    controller.as_deref().map(|controller| &*controller.fullscreen),
+                    controller
+                        .as_deref()
+                        .map(|controller| &*controller.fullscreen),
                     (value != "off").then_some(value == "visible"),
                 )))
             }
