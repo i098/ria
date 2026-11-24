@@ -1,6 +1,11 @@
 // Ported from ardia packages/ardiacore/ios/ArdiaPopupWindow.mm at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
+//
+// Changes from Ardia:
+// - `window:didRemoveTab:` also tells the Ria `TabStrips` record that the tab left the window, so the host pin
+//   record is cleared (issue #71, wired by issue #49). Ardia keeps no host pin record. The call sits in the
+//   production delegate, so a tab adopted out of a popup window reaches `TabStrips::removed`.
 
 use std::cell::{Cell, RefCell};
 use std::collections::VecDeque;
@@ -31,6 +36,7 @@ use super::ardia_reserved_keys::{KeyContext, reserved_menu_item};
 use crate::core::bindings::{Adoption, Tab, Window};
 use crate::core::convert::to_json;
 use crate::core::host::resolve_permission;
+use crate::tabs::ardia_tab_strip::TabStrips;
 
 const STRIP_HEIGHT: f64 = 28.;
 
@@ -38,6 +44,7 @@ pub struct Popups {
     mtm: MainThreadMarker,
     background: bool,
     windows: RefCell<Vec<Rc<Popup>>>,
+    strips: Rc<RefCell<TabStrips>>,
 }
 
 struct Permission {
@@ -190,11 +197,16 @@ struct Popup {
 }
 
 impl Popups {
-    pub fn new(mtm: MainThreadMarker, background: bool) -> Rc<Self> {
+    pub fn new(
+        mtm: MainThreadMarker,
+        background: bool,
+        strips: Rc<RefCell<TabStrips>>,
+    ) -> Rc<Self> {
         Rc::new(Self {
             mtm,
             background,
             windows: RefCell::new(Vec::new()),
+            strips,
         })
     }
 
@@ -693,10 +705,13 @@ define_class!(
         }
 
         #[unsafe(method(window:didRemoveTab:))]
-        fn removed(&self, _window: &Window, tab: &Tab) {
-            if let Some(popup) = self.ivars().0.upgrade()
-                && popup.tab.borrow().as_ref().is_some_and(|item| std::ptr::eq(&**item, tab))
-            {
+        fn removed(&self, window: &Window, tab: &Tab) {
+            let Some(popup) = self.ivars().0.upgrade() else { return };
+            if let Some(owner) = popup.owner.upgrade() {
+                let strip = tab.profile().map_or(-1, |profile| window.chrome_window_id_for_profile(&profile));
+                owner.strips.borrow_mut().removed(strip, tab);
+            }
+            if popup.tab.borrow().as_ref().is_some_and(|item| std::ptr::eq(&**item, tab)) {
                 let weak = Rc::downgrade(&popup);
                 main_queue::post(Box::new(move || {
                     if let Some(popup) = weak.upgrade() { popup.core.close(); }

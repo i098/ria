@@ -27,11 +27,13 @@ use super::ardia_window_controller::{Controller, Controllers};
 use crate::core::bindings::{Profile, Window};
 use crate::core::host::State;
 use crate::tabs::ardia_tab_registry::TabRegistry;
+use crate::tabs::ardia_tab_strip::TabStrips;
 
 pub struct ChromeWindowHost {
     state: Rc<State>,
     controllers: Rc<Controllers>,
     tab_registry: RefCell<TabRegistry>,
+    strips: Rc<RefCell<TabStrips>>,
     focus: Rc<FocusState>,
     dev: DevActions,
     sizing: Rc<RefCell<Vec<WindowSizing>>>,
@@ -102,11 +104,16 @@ impl ChromeWindowHost {
             state,
             controllers,
             tab_registry: RefCell::default(),
+            strips: Rc::default(),
             focus,
             dev: DevActions::default(),
             sizing,
             observers,
         }
+    }
+
+    pub fn strips(&self) -> &Rc<RefCell<TabStrips>> {
+        &self.strips
     }
 
     pub fn tab_registry(&self) -> &RefCell<TabRegistry> {

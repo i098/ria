@@ -105,6 +105,12 @@ impl TabStrips {
         }
     }
 
+    pub fn is_pinned(&self, tab: &Tab) -> bool {
+        self.pinned
+            .get(&std::ptr::from_ref(tab))
+            .is_some_and(|tab| tab.load().is_some())
+    }
+
     pub fn set_pinned(&mut self, tab: &Tab, pinned: bool) {
         let key = std::ptr::from_ref(tab);
         if pinned {
@@ -138,11 +144,7 @@ impl TabStrips {
                 active: active
                     .as_ref()
                     .map_or(index == 0, |active| std::ptr::eq(&**active, &*tab)),
-                pinned: self
-                    .pinned
-                    .get(&std::ptr::from_ref(&*tab))
-                    .and_then(Weak::load)
-                    .is_some(),
+                pinned: self.is_pinned(&tab),
                 group: groups.and_then(|group| group.tabs.get(&tab.tab_id()).cloned()),
             })
             .collect();
