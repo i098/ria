@@ -4,12 +4,17 @@
 
 //! The `extensions` domain. The shapes of the calls that `ArdiaServices.mm` makes (`listExtensions`, `installExtension`,
 //! `setExtension`, `configureExtension` and the others) are here too.
+//!
+//! # Changes from Ardia
+//!
+//! - `store_folder` sorts the version folders by name before it takes the first match. Ardia takes the first entry of
+//!   `contentsOfDirectory`, whose order is not defined. The sorted order makes the choice the same on every run.
 
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use serde_json::{Map, Value, json};
 
-use super::extension_package::{read_list_manifest, read_manifest};
+use super::extension_package::{is_extension_id, read_list_manifest, read_manifest};
 use super::{CallContext, EngineRoute, Route, passing, string_arg};
 use crate::api::extensions::InspectUnpackedArgs;
 use crate::call::CallError;
@@ -152,8 +157,24 @@ fn configure_args(args: &Value) -> Result<Value, CallError> {
     Ok(Value::Object(out))
 }
 
-/// Reads manifest fields only from a path in the engine reply.
-/// A path from profile preferences can refer to a different installation of the same extension version.
+/// Port of `StoreFolder` (`ArdiaServices.mm` line 114): the first folder `<profile>/Extensions/<id>/<version>_*`.
+fn store_folder(profile_dir: &str, id: Option<&str>, version: Option<&str>) -> Option<PathBuf> {
+    let (id, version) = (
+        id.filter(|id| is_extension_id(id))?,
+        version.filter(|v| !v.is_empty())?,
+    );
+    let dir = Path::new(profile_dir).join("Extensions").join(id);
+    let prefix = format!("{version}_");
+    let mut names: Vec<_> = std::fs::read_dir(&dir)
+        .ok()?
+        .filter_map(|e| e.ok()?.file_name().into_string().ok())
+        .filter(|n| n.starts_with(&prefix))
+        .collect();
+    names.sort();
+    names.first().map(|n| dir.join(n))
+}
+
+/// Port of `listExtensions:profile:reply:` (`ArdiaServices.mm` lines 280-300).
 fn list_reply(reply: Value, ctx: &CallContext) -> Result<Value, CallError> {
     let infos = reply["extensions"]
         .as_array()
@@ -172,10 +193,12 @@ fn list_item(info: &Map<String, Value>, ctx: &CallContext) -> Value {
         .filter(|(_, v)| !v.is_null())
         .map(|(k, v)| (k.clone(), v.clone()))
         .collect();
-    let manifest = info
-        .get("path")
-        .and_then(Value::as_str)
-        .and_then(|path| read_list_manifest(Path::new(path), &ctx.ui_locale).ok())
+    let str_of = |key| info.get(key).and_then(Value::as_str);
+    let folder = str_of("path")
+        .map(PathBuf::from)
+        .or_else(|| store_folder(&ctx.profile_dir, str_of("id"), str_of("version")));
+    let manifest = folder
+        .and_then(|folder| read_list_manifest(&folder, &ctx.ui_locale).ok())
         .unwrap_or(Value::Null);
     for key in [
         "popup",
@@ -188,19 +211,14 @@ fn list_item(info: &Map<String, Value>, ctx: &CallContext) -> Value {
             item.insert(key.into(), value.clone());
         }
     }
-    if manifest.is_object() {
-        item.insert(
-            "incognitoSplit".into(),
-            json!(manifest["incognitoSplit"] == true),
-        );
-        item.insert(
-            "incognitoAllowed".into(),
-            manifest["incognitoAllowed"].clone(),
-        );
-    } else {
-        item.entry("incognitoSplit").or_insert(json!(false));
-        item.entry("incognitoAllowed").or_insert(Value::Null);
-    }
+    item.insert(
+        "incognitoSplit".into(),
+        json!(manifest["incognitoSplit"] == true),
+    );
+    item.insert(
+        "incognitoAllowed".into(),
+        manifest["incognitoAllowed"].clone(),
+    );
     for key in ["siteAccess", "optionsUrl", "path", "homepageUrl"] {
         item.entry(key).or_insert(Value::Null);
     }
@@ -331,41 +349,37 @@ mod tests {
     }
 
     #[test]
-    fn pathless_list_preserves_live_metadata_after_same_version_reinstall() {
+    fn pathless_list_reads_the_store_folder_of_the_version() {
         let dir = tempfile::tempdir().unwrap();
         let id = "abcdefghijklmnopabcdefghijklmnop";
-        let old = dir.path().join("Extensions").join(id).join("1.2_0");
-        std::fs::create_dir_all(&old).unwrap();
-        std::fs::write(
-            old.join("manifest.json"),
-            r#"{
-                "incognito":"split",
-                "action":{"default_popup":"old.html","default_title":"Old"},
-                "icons":{"32":"old.png"}, "side_panel":{"default_path":"old-panel.html"}
-            }"#,
-        )
-        .unwrap();
-        std::fs::write(old.join("old.png"), [1, 2, 3]).unwrap();
-        let settings = json!({"extensions": {"settings": {(id): {"path": format!("{id}/1.2_0")}}}});
-        std::fs::write(dir.path().join("Secure Preferences"), settings.to_string()).unwrap();
-        let live = json!({
-            "id": id, "version": "1.2", "location": "FROM_STORE", "path": null,
-            "popup": "current.html", "actionTitle": "Current",
-            "actionIcon": "data:image/png;base64,BAUG", "sidePanel": "current-panel.html",
-            "hasAction": false, "incognitoSplit": false, "incognitoAllowed": false
-        });
+        let store = |sub: &str, popup: &str, incognito: &str| {
+            let d = dir.path().join("Extensions").join(id).join(sub);
+            std::fs::create_dir_all(&d).unwrap();
+            let m = format!(
+                r#"{{"action":{{"default_popup":"{popup}","default_title":"T"}},"incognito":"{incognito}",
+                "side_panel":{{"default_path":"panel.html"}},"icons":{{"32":"i.png"}}}}"#
+            );
+            std::fs::write(d.join("manifest.json"), m).unwrap();
+            std::fs::write(d.join("i.png"), [1, 2, 3]).unwrap();
+        };
+        store("1.2_0", "a.html", "split");
+        store("1.20_0", "wrong.html", "not_allowed");
+        let live = json!({"id": id, "version": "1.2", "location": "FROM_STORE", "path": null,
+            "popup": "live.html", "incognitoAllowed": false});
         let out = list_reply(json!({"extensions": [live]}), &ctx(dir.path())).unwrap();
         let item = &out["extensions"][0];
-        for key in [
-            "popup",
-            "actionTitle",
-            "actionIcon",
-            "sidePanel",
-            "hasAction",
-            "incognitoSplit",
-            "incognitoAllowed",
-        ] {
-            assert_eq!(item[key], live[key], "{key}");
-        }
+        assert_eq!(item["popup"], "a.html");
+        assert_eq!(item["actionTitle"], "T");
+        assert_eq!(item["actionIcon"], "data:image/png;base64,AQID");
+        assert_eq!(item["sidePanel"], "panel.html");
+        assert_eq!(item["hasAction"], true);
+        assert_eq!(item["incognitoSplit"], true);
+        assert_eq!(item["incognitoAllowed"], true);
+        // No folder for the version: the live fields stay, the incognito fields follow Ardia.
+        let live = json!({"id": id, "version": "9", "path": null, "popup": "live.html"});
+        let out = list_reply(json!({"extensions": [live]}), &ctx(dir.path())).unwrap();
+        assert_eq!(out["extensions"][0]["popup"], "live.html");
+        assert_eq!(out["extensions"][0]["incognitoSplit"], false);
+        assert_eq!(out["extensions"][0]["incognitoAllowed"], Value::Null);
     }
 }
