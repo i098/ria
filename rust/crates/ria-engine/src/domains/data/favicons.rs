@@ -23,6 +23,8 @@ use super::profiles::{ProfileRegistry, profile_directory_name};
 
 const FAVICON_SIZE: u32 = 32;
 const MAX_BYTES: usize = 2 * 1024 * 1024;
+const MAX_SIDE: u32 = 4096;
+const MAX_DECODE_BYTES: u64 = 64 * 1024 * 1024;
 const CACHE_LIMIT: usize = 512;
 
 fn safe_name(name: Option<&str>) -> Option<&str> {
@@ -58,6 +60,20 @@ fn png(image: &DynamicImage, pixels: u32) -> Option<(Vec<u8>, u32)> {
         .write_to(&mut Cursor::new(&mut out), ImageFormat::Png)
         .ok()?;
     Some((out, side))
+}
+
+/// Decodes within a budget: the byte limit bounds the input, this bounds the pixels (a small file can declare a
+/// huge image). Deviation from Ardia (`ArdiaFavicons.mm` decodes with `NSImage`, no limit); see ADR-V1.
+fn decode(bytes: &[u8]) -> Option<DynamicImage> {
+    let mut reader = image::ImageReader::new(Cursor::new(bytes))
+        .with_guessed_format()
+        .ok()?;
+    let mut limits = image::Limits::default();
+    limits.max_image_width = Some(MAX_SIDE);
+    limits.max_image_height = Some(MAX_SIDE);
+    limits.max_alloc = Some(MAX_DECODE_BYTES);
+    reader.limits(limits);
+    reader.decode().ok()
 }
 
 /// The bytes of a `data:` URL: base64 when the header says so, otherwise percent-encoded.
@@ -134,7 +150,8 @@ impl Favicons {
 
     /// `noteImage:forURL:profile:`: the host gives an image that it already has for the URL.
     pub fn note_image(&self, image: DynamicImage, url: &str, profile: Option<&str>) {
-        if url.is_empty() {
+        // A released private session keeps no icons (ADR-V3), also not ones that arrive late.
+        if url.is_empty() || profile.is_some_and(|p| self.registry.is_private_released(p)) {
             return;
         }
         let mut seen = self.seen.borrow_mut();
@@ -144,6 +161,11 @@ impl Favicons {
             seen.remove(&old);
         }
         seen.insert(cache_key(profile, url), Rc::new(image));
+    }
+
+    #[cfg(test)]
+    pub(super) fn cached(&self) -> usize {
+        self.seen.borrow().len()
     }
 
     fn store(
@@ -211,7 +233,7 @@ impl Favicons {
             return done(self.store(Some(&seen), Some(profile), name));
         }
         if url.starts_with("data:image/") {
-            let image = data_url_bytes(url).and_then(|d| image::load_from_memory(&d).ok());
+            let image = data_url_bytes(url).and_then(|d| decode(&d));
             return done(self.store(image.as_ref(), Some(profile), name));
         }
         let scheme = url::Url::parse(url).map(|u| u.scheme().to_lowercase());
@@ -224,7 +246,7 @@ impl Favicons {
             url,
             profile,
             Box::new(move |body| {
-                let image = body.and_then(|b| image::load_from_memory(&b).ok());
+                let image = body.and_then(|b| decode(&b));
                 done(match image {
                     Some(image) => this.store(Some(&image), Some(&profile_owned), name.as_deref()),
                     None => None,
@@ -282,6 +304,12 @@ mod tests {
         assert_eq!(data_url_bytes(&plain), None);
         let huge = format!("data:image/png,{}", "a".repeat(MAX_BYTES * 12 + 1));
         assert_eq!(data_url_bytes(&huge), None);
+    }
+
+    #[test]
+    fn decode_refuses_an_image_over_the_pixel_budget() {
+        assert!(decode(&tiny_png(MAX_SIDE, 1)).is_some());
+        assert!(decode(&tiny_png(MAX_SIDE + 1, 1)).is_none());
     }
 
     #[test]
