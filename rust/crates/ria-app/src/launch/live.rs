@@ -31,6 +31,7 @@ mod mac {
     use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
     use objc2::rc::Retained;
+    use objc2::{MainThreadMarker, Message};
     use objc2::{class, msg_send};
     use objc2_foundation::{NSPoint, NSRect, NSSize, NSString};
     use ria_host_mac::core::bindings::{Engine, Tab, Window};
@@ -41,6 +42,7 @@ mod mac {
     use ria_host_mac::launch::system_signals;
     use ria_host_mac::launch::window_host::WindowHost;
     use ria_host_mac::tabs::ardia_web_view::ArdiaWebView;
+    use ria_host_mac::tabs::chromium_tab_view::ChromiumTabView;
     use serde_json::{Value, json};
 
     const TITLE: &str = "Ria proof page";
@@ -183,6 +185,20 @@ mod mac {
             2,
             "launchTab=on",
             Duration::ZERO,
+        );
+        assert!(
+            again.lines().any(|line| line == "attachLoading fast false"),
+            "the fast-case tab was still loading when it was attached"
+        );
+        assert!(
+            again.lines().any(|line| line == "firstPaintHeldFast false"),
+            "a tab that finished loading was held for first paint"
+        );
+        assert!(
+            again
+                .lines()
+                .any(|line| line == "firstPaintOpacityAtAttachFast 1"),
+            "the page was not opaque at attach"
         );
         let reveal_ms = revealed_after_ms(&again, "fast");
         assert!(
@@ -420,7 +436,9 @@ mod mac {
         done: Rc<dyn Fn()>,
     ) {
         if view.page_opacity() == Some(1.0) {
-            println!("firstPaintRevealMs {case} {}", held.elapsed().as_millis());
+            if case == "slow" {
+                println!("firstPaintRevealMs {case} {}", held.elapsed().as_millis());
+            }
             println!("firstPaintOpacity 1");
             revealed.set(true);
             done();
@@ -429,6 +447,33 @@ mod mac {
                 reveal_poll(view, held, case, revealed, done)
             });
         }
+    }
+
+    /// The launch page is revealed, so its tab finished loading: attach the tab to a new view the way `page_for` does.
+    fn attach_after_load(host: &WindowHost) {
+        let core = host.main().expect("browser window");
+        let profile = core.active_profile().expect("active profile");
+        let tab = core
+            .tabs_for_profile(&profile)
+            .firstObject()
+            .expect("launch tab");
+        assert!(!tab.loading(), "the launch tab is still loading");
+        let mtm = MainThreadMarker::new().expect("main thread");
+        let page = ChromiumTabView::make_page(mtm, host.hooks());
+        let attached = Instant::now();
+        let _ = page.attach_tab(
+            tab.retain(),
+            "fastproof".into(),
+            host.chrome().tab_registry(),
+            true,
+        );
+        println!("attachLoading fast {}", tab.loading());
+        println!("firstPaintHeldFast {}", page.page_opacity() == Some(0.0));
+        println!(
+            "firstPaintOpacityAtAttachFast {}",
+            page.page_opacity().unwrap_or(-1.0)
+        );
+        println!("firstPaintRevealMs fast {}", attached.elapsed().as_millis());
     }
 
     fn all_set(flags: &[&Cell<bool>]) -> bool {
@@ -549,6 +594,7 @@ mod mac {
         let revealed = Rc::new(Cell::new(false));
         let fast = std::env::var_os("RIA_LIVE_FAST").is_some();
         let case = if fast { "fast" } else { "slow" };
+        let ready_host: Rc<RefCell<Option<Rc<WindowHost>>>> = Rc::default();
         // Quit when the fixture title, the download move, the pin and the first-paint reveal are done.
         let quit_when_done: Rc<dyn Fn()> = {
             let (matched, moving, pinned, revealed) = (
@@ -557,8 +603,14 @@ mod mac {
                 pinned.clone(),
                 revealed.clone(),
             );
+            let ready_host = ready_host.clone();
+            let proven = Cell::new(false);
             Rc::new(move || {
                 if all_set(&[&matched, &moving.done, &pinned, &revealed]) {
+                    if fast && !proven.replace(true) {
+                        let host = ready_host.borrow().clone();
+                        attach_after_load(&host.expect("the window host was ready"));
+                    }
                     host_launch::later(host_launch::quit);
                 }
             })
@@ -568,6 +620,7 @@ mod mac {
         let check_title = matched.clone();
         let check_pin = pinned.clone();
         let check_revealed = revealed.clone();
+        let check_ready = ready_host.clone();
         let check_shutdown = shutdown.clone();
         let check_moving = moving.clone();
         let status = super::app_launch::start(Rc::new(move |event| match event {
@@ -594,6 +647,7 @@ mod mac {
                     facts.len(),
                     facts.iter().any(|view| view.page_detached)
                 );
+                *check_ready.borrow_mut() = Some(host.clone());
                 let view = host.hooks().live().all().remove(0);
                 println!(
                     "attachLoading {case} {}",
