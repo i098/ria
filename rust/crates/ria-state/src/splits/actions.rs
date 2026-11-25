@@ -324,8 +324,7 @@ pub fn drop_tab_on_row(
             .unwrap_or_default(),
         None => row_tab_id.to_string(),
     };
-    let stacked =
-        split.is_some_and(|s| s.orientation == crate::browser::SplitViewOrientation::Vertical);
+    let stacked = split.is_some_and(|s| s.orientation == crate::browser::Orientation::Vertical);
     let drop_side = match (stacked, left, side) {
         (true, true, _) => SplitSide::Top,
         (true, false, _) => SplitSide::Bottom,
