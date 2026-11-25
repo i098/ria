@@ -1,8 +1,9 @@
-// Ported from ardia packages/ardiacore/ios/ArdiaWebView.mm and ArdiaWebViewInternal.h at 551d3c13c.
+// Ported from ardia packages/ardiacore/ios/ArdiaWebView.mm at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
-// This file is a Rust port of those files, with changes.
+// This file is a Rust port of that file, with changes.
 
 //! Native page view and the state of its ported modules.
+//! Also ports state declarations from `ArdiaWebViewInternal.h`.
 //!
 //! Changes from Ardia:
 //! - The host supplies the weak registry instead of using a process-wide set.

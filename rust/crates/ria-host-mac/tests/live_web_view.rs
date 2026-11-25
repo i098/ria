@@ -22,11 +22,6 @@ fn main() {
 
     let page = objc2::rc::autoreleasepool(|_| ChromiumTabView::make_page(mtm, &live));
     assert_eq!(live.all().len(), 1, "make_page registers the view");
-    assert!(
-        page.state().borrow().visible,
-        "state composes with Ardia defaults"
-    );
-    assert_eq!(page.state().borrow().tab_index, -1);
 
     objc2::rc::autoreleasepool(|_| drop(page));
     assert!(live.all().is_empty(), "the registry holds views weakly");

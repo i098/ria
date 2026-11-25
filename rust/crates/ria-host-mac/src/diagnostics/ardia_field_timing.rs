@@ -6,8 +6,7 @@
 //! functions. `set_enabled` takes the web-view switch that Ardia calls as `ArdiaWebViewsSetFieldTiming`, and
 //! `mark_frame` marks at the next Core Animation commit where Ardia waits for the React Native UI block. No
 //! module owner is kept, because no bridge invalidates it.
-// Part 4 of slice 3.8 is not merged: `ArdiaWebView` has no Ria type, so no caller of the marks or of the
-// `set_enabled` switch exists yet.
+// `ArdiaWebView` exists, but it does not call the marks or connect to the `set_enabled` switch.
 
 use std::cell::RefCell;
 use std::collections::VecDeque;
