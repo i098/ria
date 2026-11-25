@@ -295,3 +295,18 @@ Decision rule: use the high factor 3.05 (earlier record: 2.06, which counted iss
 | Plan total | 605.6 | 1,338.7 | 247.6 + 1,091.1 |
 
 The corrected total, 1,338.7 h (earlier record: 985.1 h), is above the R15 worst case (827.1 h, at 400 lines for each hour; the plan v5 text for R15 is not in this repository, so this figure is quoted from the plan and cannot be rederived here). The measured rate of the unit loop is 142 to 278 lines for each hour, below the 400 of R15. `[INFERENCE]` The rework share (issues 37 and 82) is a one-time cost of the first loop, and later phases with the same oracle setup may need less; gate G2 measures it again. The owner should see this number before phase 2 starts.
+
+## Slice 3.11 record
+
+`done` in `MAP.md` means the port gate passed (`MAP.md` line 10, ADR-C6). This record is the evidence for the 21 slice 3.11 rows. It does not close issue 109.
+
+Gate: `sentrux gate .` on `origin/main` `76ea8a17109908121e3ac5601242fb1700537286` exited 0. Output: "Quality: 5521 -> 5534; Coupling: 0.00 -> 0.01; Cycles: 2 -> 2; God files: 1 -> 1; Distance from Main Sequence: 0.25; No degradation detected".
+
+Mac tests ran on an arm64 Mac with the prebuilt Chromium 158.0.8127.36 engine (`ENGINE_DIR=/private/tmp/halyard-p0-abc/engine`). The source was a `git archive` of `origin/main` `76ea8a17`, which contains `da1b675`. They used cargo 1.99.1 and `ulimit -n 10240`, because the blaze daemon on the Mac has a 256 file limit and failed with "Too many open files". Commands ran from `/tmp/ria-109`, with manifest `rust/Cargo.toml`.
+
+| Command | Result |
+| --- | --- |
+| `cargo test -p ria-host-mac --lib swipe` | exit 0; 9 passed, 0 failed (6 in `swipe::`, 3 pip swipe-math tests matched by the filter) |
+| `cargo test -p ria-host-mac --lib diagnostics` | exit 0; 24 passed, 0 failed |
+| `cargo test -p ria-host-mac --test live_swipe` | exit 0; "live_swipe: swipe, pager settle, switch, step, wheel and helpers checked"; "engine shut down cleanly" |
+| `cargo test -p ria-host-mac --test live_diagnostics` | exit 0; "live_diagnostics: freeze record, stack sample, field timing, pointer trace, hover, paint, pixel grid and reveal guards checked"; "engine shut down cleanly" |
