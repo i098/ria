@@ -233,8 +233,7 @@ impl LaunchConfig {
         &self.data_directory
     }
 
-    /// The data directory as the engine opens it: named by device and inode of the admitted directory,
-    /// so a swap of the path after admission cannot redirect the engine.
+    /// The identity path for the isolated launch's `--ardia-data-dir`, not Chromium's `--user-data-dir`.
     pub(super) fn handoff_directory(&self) -> io::Result<PathBuf> {
         profile::identity_path(&self.data_handle)
     }

@@ -30,7 +30,8 @@ An isolated profile reads configuration from its own `config/` subdirectory.
 Do not point `RIA_DATA_DIR` at an Ardia profile. Ria also rejects a case-alias of the Ardia data path.
 Ria checks the profile directory identity before engine startup.
 For the normal profile only, Ria also checks the directory identity before it registers native messaging hosts.
-An isolated launch passes Chromium the admitted directory identity path (`--ardia-data-dir=/.vol/<dev>/<ino>`). A normal launch passes no data directory, so [issue 67](https://github.com/i098/ria/issues/67) stays open for the race between the check and Chromium opening the default path.
+Ria reports `launch profile directory changed` and does not open the first window if the final profile check fails.
+See the [launch configuration module](../../../ria-host-mac/src/launch/launch_config.rs) for the Chromium handoff and its limits.
 See [ADR-D1](../../../../DECISIONS.md#adr-d1-own-identity-and-own-data-ad-hoc-signature) for the keychain policy.
 
 Ria reopens a saved launch tab only for an HTTP or HTTPS URL, a nonempty tab ID, and a usable profile.
