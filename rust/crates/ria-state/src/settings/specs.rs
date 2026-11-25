@@ -1,6 +1,8 @@
-// Ported from ardia apps/browser/src/state/settings/settings.ts and settingsPatch.ts at 551d3c13c.
+// Ported from ardia apps/browser/src/state/settings/settings.ts at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
-// This file is a Rust port of those files, with changes.
+// This file is a Rust port of that file, with changes.
+//
+// Also ports settingsPatch.ts.
 
 //! The setting table (`SETTING_SPECS`), the checks of a settings patch, and the rules that `updateSettings` applies.
 //!

@@ -1,7 +1,9 @@
-// Ported from ardia apps/browser/src/state/settings/ at 551d3c13c: actions.ts, settingsWindows.ts, searchState.ts,
-// interfaceScale.ts, interfaceScaleSync.ts, nativeSettings.ts, growingRows.ts, paneData.ts and the store actions of settings.ts.
+// Ported from ardia apps/browser/src/state/settings/ at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
-// This file is a Rust port of those files, with changes.
+// This file is a Rust port of that file, with changes.
+//
+// Sources: actions.ts, settingsWindows.ts, searchState.ts, interfaceScale.ts, interfaceScaleSync.ts, nativeSettings.ts,
+// growingRows.ts, paneData.ts and the store actions of settings.ts.
 
 //! The reducer of the `settings` module: `apply` for every `Action`.
 //!
