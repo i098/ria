@@ -120,10 +120,10 @@ fn poll(s: &mut State, t: f64, _tx: &mut Tx) -> bool {
     true
 }
 
-fn spec(mode: Mode) -> AppSpec<State> {
+fn spec() -> AppSpec<State> {
     AppSpec {
         poll: Some(poll),
-        ..AppSpec::new("Ria layer", (320.0, 560.0), move || State { presses: 0, shown: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new(""), overlay: mode == Mode::Overlay, transparent: mode != Mode::Beside }, view)
+        ..AppSpec::new("Ria layer", (320.0, 560.0), || State { presses: 0, shown: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new(""), overlay: false, transparent: false }, view)
     }
 }
 
@@ -687,11 +687,13 @@ impl RuneView {
         let scale = self.scale();
         let _: () = unsafe { msg_send![layer, setContentsScale: scale as f64] };
         let transparent = self.ivars().mode != Mode::Beside;
-        let spec = spec(self.ivars().mode);
+        let spec = spec();
+        // The view's mode, not creation order, picks the tree (`init` is a plain fn pointer and cannot capture it).
+        let state = State { overlay: self.ivars().mode == Mode::Overlay, transparent, ..(spec.init)() };
         // SAFETY: `layer` is this view's CAMetalLayer; it lives as long as the view, which owns
         // the host, and this runs on the main thread.
         let made = unsafe {
-            LayerHost::from_core_animation_layer(layer.cast::<c_void>(), &spec, (spec.init)(), (size.width as f32, size.height as f32), scale, true, Arc::new(|| {}))
+            LayerHost::from_core_animation_layer(layer.cast::<c_void>(), &spec, state, (size.width as f32, size.height as f32), scale, true, Arc::new(|| {}))
         };
         match made {
             Ok(mut host) => {
