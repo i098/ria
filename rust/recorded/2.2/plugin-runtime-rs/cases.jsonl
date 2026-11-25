@@ -1,0 +1,683 @@
+{"fn":"sidecarOfCase","args":["ab",{"a":"b"}],"ok":{"result":null,"problems":["ab.a isn't a key of ab","ab.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["abhello world",{}],"ok":{"result":null,"problems":["abhello world.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["﻿bom",0],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"sidecarOfCase","args":["trailing.",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["trailing..a isn't a key of trailing.","trailing..run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ünïcödé",[]],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"sidecarOfCase","args":["ns:key.path",true],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"sidecarOfCase","args":["key_name-1",null],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"sidecarOfCase","args":["İstanbul",{"a":"b"}],"ok":{"result":null,"problems":["İstanbul.a isn't a key of İstanbul","İstanbul.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["é",["a",1]],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"sidecarOfCase","args":["trailing.",["a",1]],"ok":{"result":null,"problems":["trailing. must be an object"]}}
+{"fn":"sidecarOfCase","args":["tab\tseparated",[]],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"sidecarOfCase","args":["emoji 👍🏽 mix","x"],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"sidecarOfCase","args":["a:",0],"ok":{"result":null,"problems":["a: must be an object"]}}
+{"fn":"sidecarOfCase","args":["a:b:c日本語のテキスト",["a",1]],"ok":{"result":null,"problems":["a:b:c日本語のテキスト must be an object"]}}
+{"fn":"sidecarOfCase","args":["a😀b😀c",{"a":"b"}],"ok":{"result":null,"problems":["a😀b😀c.a isn't a key of a😀b😀c","a😀b😀c.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["./x/**/*.json",0],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"sidecarOfCase","args":["日本語のテキストa..b","x"],"ok":{"result":null,"problems":["日本語のテキストa..b must be an object"]}}
+{"fn":"sidecarOfCase","args":["hello world",["a",1]],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"sidecarOfCase","args":["tab\tseparated",{}],"ok":{"result":null,"problems":["tab\tseparated.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ababc","x"],"ok":{"result":null,"problems":["ababc must be an object"]}}
+{"fn":"sidecarOfCase","args":["x","x"],"ok":{"result":null,"problems":["x must be an object"]}}
+{"fn":"sidecarOfCase","args":["src/a/b.ts",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["src/a/b.ts.a isn't a key of src/a/b.ts","src/a/b.ts.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["abc",0],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"sidecarOfCase","args":["key_name-1HELLO",true],"ok":{"result":null,"problems":["key_name-1HELLO must be an object"]}}
+{"fn":"sidecarOfCase","args":["trailing.😀","x"],"ok":{"result":null,"problems":["trailing.😀 must be an object"]}}
+{"fn":"sidecarOfCase","args":["ünïcödé",{}],"ok":{"result":null,"problems":["ünïcödé.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["﻿bom","x"],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"sidecarOfCase","args":["line1\nline2",{}],"ok":{"result":null,"problems":["line1\nline2.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["abc",{"a":"b"}],"ok":{"result":null,"problems":["abc.a isn't a key of abc","abc.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["abns:key.path","x"],"ok":{"result":null,"problems":["abns:key.path must be an object"]}}
+{"fn":"sidecarOfCase","args":["tab\tseparated",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["tab\tseparated.a isn't a key of tab\tseparated","tab\tseparated.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["😀",[]],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"sidecarOfCase","args":["😀",null],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"sidecarOfCase","args":["a😀b😀chello",[]],"ok":{"result":null,"problems":["a😀b😀chello must be an object"]}}
+{"fn":"sidecarOfCase","args":["line1\nline2",["a",1]],"ok":{"result":null,"problems":["line1\nline2 must be an object"]}}
+{"fn":"sidecarOfCase","args":["line1\nline2key_name-1",0],"ok":{"result":null,"problems":["line1\nline2key_name-1 must be an object"]}}
+{"fn":"sidecarOfCase","args":["Hello World",{}],"ok":{"result":null,"problems":["Hello World.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["  padded  ",[]],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"sidecarOfCase","args":["😀",true],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"sidecarOfCase","args":["a😀b😀c",{}],"ok":{"result":null,"problems":["a😀b😀c.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["HELLO","x"],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"sidecarOfCase","args":["ns:key.path",null],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"sidecarOfCase","args":["key_name-1",[]],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"sidecarOfCase","args":["a.b.c",["a",1]],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"sidecarOfCase","args":["trailing.",null],"ok":{"result":null,"problems":["trailing. must be an object"]}}
+{"fn":"sidecarOfCase","args":["Hello Worlda",null],"ok":{"result":null,"problems":["Hello Worlda must be an object"]}}
+{"fn":"sidecarOfCase","args":["abc",[]],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"sidecarOfCase","args":["é",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["é.a isn't a key of é","é.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["Hello Worldabc",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["Hello Worldabc.a isn't a key of Hello Worldabc","Hello Worldabc.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["abc",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["abc.a isn't a key of abc","abc.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["tab\tseparated",true],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"sidecarOfCase","args":[":",true],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"sidecarOfCase","args":["a:b:c",null],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"sidecarOfCase","args":["a.b.c","x"],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"sidecarOfCase","args":["a..b",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a..b.a isn't a key of a..b","a..b.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":[":hello world",{"a":{"b":"c"}}],"ok":{"result":null,"problems":[":hello world.a isn't a key of :hello world",":hello world.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["trailing.",{}],"ok":{"result":null,"problems":["trailing..run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["",true],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"sidecarOfCase","args":["  padded  ","x"],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"sidecarOfCase","args":["hello",null],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"sidecarOfCase","args":["emoji 👍🏽 mix",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["emoji 👍🏽 mix.a isn't a key of emoji 👍🏽 mix","emoji 👍🏽 mix.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["src/a/b.ts",["a",1]],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"sidecarOfCase","args":["src/a/b.ts",true],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"sidecarOfCase","args":["ünïcödé﻿bom",{}],"ok":{"result":null,"problems":["ünïcödé﻿bom.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ünïcödéa..b",{}],"ok":{"result":null,"problems":["ünïcödéa..b.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a",{}],"ok":{"result":null,"problems":["a.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a.a isn't a key of a","a.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ünïcödéé",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ünïcödéé.a isn't a key of ünïcödéé","ünïcödéé.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ab",[]],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"sidecarOfCase","args":["./x/**/*.json",["a",1]],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"sidecarOfCase","args":["HELLOhello",null],"ok":{"result":null,"problems":["HELLOhello must be an object"]}}
+{"fn":"sidecarOfCase","args":["😀",{}],"ok":{"result":null,"problems":["😀.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ab",null],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"sidecarOfCase","args":["﻿bom",true],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"sidecarOfCase","args":["ünïcödé",{"a":"b"}],"ok":{"result":null,"problems":["ünïcödé.a isn't a key of ünïcödé","ünïcödé.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a",null],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"sidecarOfCase","args":["ns:key.patha😀b😀c",[]],"ok":{"result":null,"problems":["ns:key.patha😀b😀c must be an object"]}}
+{"fn":"sidecarOfCase","args":["a.b.ca😀b😀c",null],"ok":{"result":null,"problems":["a.b.ca😀b😀c must be an object"]}}
+{"fn":"sidecarOfCase","args":["a..b",".b"],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"sidecarOfCase","args":["{name} has {count} items",{"a":"b"}],"ok":{"result":null,"problems":["{name} has {count} items.a isn't a key of {name} has {count} items","{name} has {count} items.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a😀b😀cns:key.path",{"a":"b"}],"ok":{"result":null,"problems":["a😀b😀cns:key.path.a isn't a key of a😀b😀cns:key.path","a😀b😀cns:key.path.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ns:key.path",["a",1]],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"sidecarOfCase","args":["hello world",true],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"sidecarOfCase","args":["./x/**/*.jsona.b.c",null],"ok":{"result":null,"problems":["./x/**/*.jsona.b.c must be an object"]}}
+{"fn":"sidecarOfCase","args":["İstanbul",[]],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"sidecarOfCase","args":[".leading",{"a":"b"}],"ok":{"result":null,"problems":[".leading.a isn't a key of .leading",".leading.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["{name} has {count} items",0],"ok":{"result":null,"problems":["{name} has {count} items must be an object"]}}
+{"fn":"sidecarOfCase","args":["trailing.😀",{"a":"b"}],"ok":{"result":null,"problems":["trailing.😀.a isn't a key of trailing.😀","trailing.😀.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ΣΊΣΥΦΟΣ",true],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"sidecarOfCase","args":["emoji 👍🏽 mix",{}],"ok":{"result":null,"problems":["emoji 👍🏽 mix.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["  padded  ",{}],"ok":{"result":null,"problems":["  padded  .run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["HELLO",null],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"sidecarOfCase","args":["é",0],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"sidecarOfCase","args":["hello",{}],"ok":{"result":null,"problems":["hello.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["  padded  ",true],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"sidecarOfCase","args":["a:b:c",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a:b:c.a isn't a key of a:b:c","a:b:c.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["line1\nline2",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["line1\nline2.a isn't a key of line1\nline2","line1\nline2.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":[":",null],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"sidecarOfCase","args":["trailing.",[]],"ok":{"result":null,"problems":["trailing. must be an object"]}}
+{"fn":"sidecarOfCase","args":["ünïcödé",null],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"sidecarOfCase","args":["a😀b😀c",true],"ok":{"result":null,"problems":["a😀b😀c must be an object"]}}
+{"fn":"sidecarOfCase","args":["hello world","x"],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"sidecarOfCase","args":["tab\tseparateda:b:c",["a",1]],"ok":{"result":null,"problems":["tab\tseparateda:b:c must be an object"]}}
+{"fn":"sidecarOfCase","args":["日本語のテキスト",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["日本語のテキスト.a isn't a key of 日本語のテキスト","日本語のテキスト.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["tab\tseparated","x"],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"sidecarOfCase","args":["src/a/b.ts",null],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"sidecarOfCase","args":["key_name-1",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["key_name-1.a isn't a key of key_name-1","key_name-1.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["line1\nline2ns:key.path",0],"ok":{"result":null,"problems":["line1\nline2ns:key.path must be an object"]}}
+{"fn":"sidecarOfCase","args":["İstanbul",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["İstanbul.a isn't a key of İstanbul","İstanbul.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["tab\tseparated",["a",1]],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"sidecarOfCase","args":["abns:key.path",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["abns:key.path.a isn't a key of abns:key.path","abns:key.path.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["key_name-1",{}],"ok":{"result":null,"problems":["key_name-1.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ünïcödé",true],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"sidecarOfCase","args":["日本語のテキスト",null],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"sidecarOfCase","args":["{name} has {count} itemshello",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["{name} has {count} itemshello.a isn't a key of {name} has {count} itemshello","{name} has {count} itemshello.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["straße",true],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"sidecarOfCase","args":["HELLO",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["HELLO.a isn't a key of HELLO","HELLO.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["tab\tseparated",null],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"sidecarOfCase","args":["ΣΊΣΥΦΟΣ","x"],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"sidecarOfCase","args":["a.b.c",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a.b.c.a isn't a key of a.b.c","a.b.c.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["straße",{"a":"b"}],"ok":{"result":null,"problems":["straße.a isn't a key of straße","straße.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["",{"a":"b"}],"ok":{"result":null,"problems":["a isn't a key of a plugin",".run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ΣΊΣΥΦΟΣtab\tseparated",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣtab\tseparated.a isn't a key of ΣΊΣΥΦΟΣtab\tseparated","ΣΊΣΥΦΟΣtab\tseparated.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["İstanbul",["a",1]],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"sidecarOfCase","args":["Hello World",[]],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"sidecarOfCase","args":["aa",true],"ok":{"result":null,"problems":["aa must be an object"]}}
+{"fn":"sidecarOfCase","args":["straße",0],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"sidecarOfCase","args":["{name} has {count} items",null],"ok":{"result":null,"problems":["{name} has {count} items must be an object"]}}
+{"fn":"sidecarOfCase","args":["emoji 👍🏽 mix",["a",1]],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"sidecarOfCase","args":["line1\nline2",true],"ok":{"result":null,"problems":["line1\nline2 must be an object"]}}
+{"fn":"sidecarOfCase","args":["a:b:c",["a",1]],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"sidecarOfCase","args":["HELLO",[]],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"sidecarOfCase","args":["hello world",{"a":"b"}],"ok":{"result":null,"problems":["hello world.a isn't a key of hello world","hello world.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["key_name-1",true],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"sidecarOfCase","args":["HELLOİstanbul",[]],"ok":{"result":null,"problems":["HELLOİstanbul must be an object"]}}
+{"fn":"sidecarOfCase","args":["a.b.c",0],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"sidecarOfCase","args":["key_name-1","x"],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"sidecarOfCase","args":["key_name-1emoji 👍🏽 mix",["a",1]],"ok":{"result":null,"problems":["key_name-1emoji 👍🏽 mix must be an object"]}}
+{"fn":"sidecarOfCase","args":["Hello World",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["Hello World.a isn't a key of Hello World","Hello World.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["hello",["a",1]],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"sidecarOfCase","args":["hello",0],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"sidecarOfCase","args":["straße","x"],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"sidecarOfCase","args":["HELLO",["a",1]],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"sidecarOfCase","args":["./x/**/*.json","J"],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"sidecarOfCase","args":["Hello World",{"a":"b"}],"ok":{"result":null,"problems":["Hello World.a isn't a key of Hello World","Hello World.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":[".leading",{}],"ok":{"result":null,"problems":[".leading.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["﻿bom",{}],"ok":{"result":null,"problems":["﻿bom.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["日本語のテキスト",{}],"ok":{"result":null,"problems":["日本語のテキスト.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a.b.c",{"a":"b"}],"ok":{"result":null,"problems":["a.b.c.a isn't a key of a.b.c","a.b.c.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["日本語のテキスト",0],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"sidecarOfCase","args":["ns:key.path",0],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"sidecarOfCase","args":["src/a/b.ts",[]],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"sidecarOfCase","args":["a😀b😀c.leading",["a",1]],"ok":{"result":null,"problems":["a😀b😀c.leading must be an object"]}}
+{"fn":"sidecarOfCase","args":["﻿bom",[]],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"sidecarOfCase","args":["HELLOa:b:c",0],"ok":{"result":null,"problems":["HELLOa:b:c must be an object"]}}
+{"fn":"sidecarOfCase","args":["a.b.c",{}],"ok":{"result":null,"problems":["a.b.c.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a..bhello world",0],"ok":{"result":null,"problems":["a..bhello world must be an object"]}}
+{"fn":"sidecarOfCase","args":["a.b.c",null],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"sidecarOfCase","args":["hello",{"a":"b"}],"ok":{"result":null,"problems":["hello.a isn't a key of hello","hello.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["trailing.src/a/b.ts",null],"ok":{"result":null,"problems":["trailing.src/a/b.ts must be an object"]}}
+{"fn":"sidecarOfCase","args":["a..bhello",[]],"ok":{"result":null,"problems":["a..bhello must be an object"]}}
+{"fn":"sidecarOfCase","args":["",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a isn't a key of a plugin",".run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a",0],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"sidecarOfCase","args":["a😀b😀c",[]],"ok":{"result":null,"problems":["a😀b😀c must be an object"]}}
+{"fn":"sidecarOfCase","args":["line1\nline2",[]],"ok":{"result":null,"problems":["line1\nline2 must be an object"]}}
+{"fn":"sidecarOfCase","args":["ünïcödé",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ünïcödé.a isn't a key of ünïcödé","ünïcödé.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["hello",true],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"sidecarOfCase","args":["a",true],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"sidecarOfCase","args":["İstanbul:",null],"ok":{"result":null,"problems":["İstanbul: must be an object"]}}
+{"fn":"sidecarOfCase","args":["tab\tseparated",0],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"sidecarOfCase","args":["line1\nline2a😀b😀c","x"],"ok":{"result":null,"problems":["line1\nline2a😀b😀c must be an object"]}}
+{"fn":"sidecarOfCase","args":["Hello Worldhello",true],"ok":{"result":null,"problems":["Hello Worldhello must be an object"]}}
+{"fn":"sidecarOfCase","args":["a..btab\tseparated",null],"ok":{"result":null,"problems":["a..btab\tseparated must be an object"]}}
+{"fn":"sidecarOfCase","args":["Hello World",["a",1]],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"sidecarOfCase","args":["  padded  ",null],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"sidecarOfCase","args":["  padded  ",0],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"sidecarOfCase","args":["  padded  trailing.",[]],"ok":{"result":null,"problems":["  padded  trailing. must be an object"]}}
+{"fn":"sidecarOfCase","args":["HELLOline1\nline2",{}],"ok":{"result":null,"problems":["HELLOline1\nline2.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["é",null],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"sidecarOfCase","args":["",{}],"ok":{"result":null,"problems":[".run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["./x/**/*.jsona😀b😀c",{}],"ok":{"result":null,"problems":["./x/**/*.jsona😀b😀c.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["abckey_name-1",["a",1]],"ok":{"result":null,"problems":["abckey_name-1 must be an object"]}}
+{"fn":"sidecarOfCase","args":["﻿bom😀",["a",1]],"ok":{"result":null,"problems":["﻿bom😀 must be an object"]}}
+{"fn":"sidecarOfCase","args":["a..b",null],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"sidecarOfCase","args":["Hello Worlda",[]],"ok":{"result":null,"problems":["Hello Worlda must be an object"]}}
+{"fn":"sidecarOfCase","args":["﻿bom",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["﻿bom.a isn't a key of ﻿bom","﻿bom.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["  padded  😀",0],"ok":{"result":null,"problems":["  padded  😀 must be an object"]}}
+{"fn":"sidecarOfCase","args":["😀","x"],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"sidecarOfCase","args":["src/a/b.tsΣΊΣΥΦΟΣ",{"a":"b"}],"ok":{"result":null,"problems":["src/a/b.tsΣΊΣΥΦΟΣ.a isn't a key of src/a/b.tsΣΊΣΥΦΟΣ","src/a/b.tsΣΊΣΥΦΟΣ.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["straßeHello World",0],"ok":{"result":null,"problems":["straßeHello World must be an object"]}}
+{"fn":"sidecarOfCase","args":["Hello World","x"],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"sidecarOfCase","args":["{name} has {count} items","x"],"ok":{"result":null,"problems":["{name} has {count} items must be an object"]}}
+{"fn":"sidecarOfCase","args":["hello worldkey_name-1",["a",1]],"ok":{"result":null,"problems":["hello worldkey_name-1 must be an object"]}}
+{"fn":"sidecarOfCase","args":["abca.b.c",["a",1]],"ok":{"result":null,"problems":["abca.b.c must be an object"]}}
+{"fn":"sidecarOfCase","args":["日本語のテキスト","x"],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"sidecarOfCase","args":[":src/a/b.ts",{}],"ok":{"result":null,"problems":[":src/a/b.ts.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["{name} has {count} items",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["{name} has {count} items.a isn't a key of {name} has {count} items","{name} has {count} items.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a..b",0],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"sidecarOfCase","args":["a😀b😀c","x"],"ok":{"result":null,"problems":["a😀b😀c must be an object"]}}
+{"fn":"sidecarOfCase","args":["a.b.c",[]],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"sidecarOfCase","args":["héllo wörld",{"a":"b"}],"ok":{"result":null,"problems":["héllo wörld.a isn't a key of héllo wörld","héllo wörld.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["👍🏽 thumbs",{"a":"b"}],"ok":{"result":null,"problems":["👍🏽 thumbs.a isn't a key of 👍🏽 thumbs","👍🏽 thumbs.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["日本語",{"a":"b"}],"ok":{"result":null,"problems":["日本語.a isn't a key of 日本語","日本語.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["é",{"a":"b"}],"ok":{"result":null,"problems":["é.a isn't a key of é","é.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ılık ırmak",{"a":"b"}],"ok":{"result":null,"problems":["ılık ırmak.a isn't a key of ılık ırmak","ılık ırmak.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["👨‍👩‍👧 family",{"a":"b"}],"ok":{"result":null,"problems":["👨‍👩‍👧 family.a isn't a key of 👨‍👩‍👧 family","👨‍👩‍👧 family.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a b",{"a":"b"}],"ok":{"result":null,"problems":["a b.a isn't a key of a b","a b.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ.a isn't a key of ΣΊΣΥΦΟΣ","ΣΊΣΥΦΟΣ.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a😀b",{"a":"b"}],"ok":{"result":null,"problems":["a😀b.a isn't a key of a😀b","a😀b.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["﻿bom",{"a":"b"}],"ok":{"result":null,"problems":["﻿bom.a isn't a key of ﻿bom","﻿bom.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a²b x½ y①",{"a":"b"}],"ok":{"result":null,"problems":["a²b x½ y①.a isn't a key of a²b x½ y①","a²b x½ y①.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["aⅠb Ⅻ",{"a":"b"}],"ok":{"result":null,"problems":["aⅠb Ⅻ.a isn't a key of aⅠb Ⅻ","aⅠb Ⅻ.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["a𐐀b 𝐀bc",{"a":"b"}],"ok":{"result":null,"problems":["a𐐀b 𝐀bc.a isn't a key of a𐐀b 𝐀bc","a𐐀b 𝐀bc.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["कि ٣٤",{"a":"b"}],"ok":{"result":null,"problems":["कि ٣٤.a isn't a key of कि ٣٤","कि ٣٤.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ab",{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"result":null,"problems":["ab.2 isn't a key of ab","ab.10 isn't a key of ab","ab.zebra isn't a key of ab","ab.apple isn't a key of ab","ab.é isn't a key of ab","ab.Apple isn't a key of ab","ab.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ab",{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"result":null,"problems":["ab.n isn't a key of ab","ab.f isn't a key of ab","ab.t isn't a key of ab","ab.neg isn't a key of ab","ab.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["ab",[3,1,2]],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"sidecarOfCase","args":["ab",{}],"ok":{"result":null,"problems":["ab.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"mainOfCase","args":["x",true],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x",null],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[["a",1],[]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":"b"},0],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x",{"a":{"b":"c"}}],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,{"a":"b"}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[["a",1],null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":"b"},"x"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,"x"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[true,[]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[["a",1],{}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":{"b":"c"}},["a",1]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[[],{"a":{"b":"c"}}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[true,["a",1]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[true,{}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[true,true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{},["a",1]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[[],"x"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{},{"a":"b"}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{},[]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[[],true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[0,{"a":{"b":"c"}}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[true,null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":"b"},true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[0,null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[[],0],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":"b"},null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[0,["a",1]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{},{"a":{"b":"c"}}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":"b"},{"a":"b"}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x",[]],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[[],null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[true,{"a":"b"}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x",0],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":{"b":"c"}},null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[["a",1],{"a":"b"}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[true,0],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":{"b":"c"}},"x"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[["a",1],true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":{"b":"c"}},0],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,{}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":"b"},["a",1]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x",{"a":"b"}],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[0,[]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[[],[]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x",["a",1]],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x","x"],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{},"x"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{},0],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[0,0],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[[],{}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{},true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":{"b":"c"}},{}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[["a",1],"x"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":"b"},[]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":{"b":"c"}},{"a":"b"}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{},null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[0,"x"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[["a",1],0],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,{"a":{"b":"c"}}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x",{}],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[0,{"a":"b"}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[0,true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":{"b":"c"}},[]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[[],["a",1]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[true,{"a":{"b":"c"}}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[["a",1],["a",1]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":"b"},{}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,["a",1]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,0],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,[]],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{},{}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":{"b":"c"}},{"a":{"b":"c"}}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"a":"b"},{"a":{"b":"c"}}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[true,"x"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[["a",1],{"a":{"b":"c"}}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[[],{"a":"b"}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[0,{}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x","X"],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["X","x"],"ok":{"result":{"entry":"X","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6},true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7},true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[[3,1,2],true],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x",{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x",{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["x",[3,1,2]],"ok":{"result":{"entry":"x","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"programCase","args":[":",{"a":"b"}],"ok":{"result":null,"problems":[":.a isn't a key of :",":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a:b:c",[]],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"programCase","args":["HELLOΣΊΣΥΦΟΣ",true],"ok":{"result":null,"problems":["HELLOΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"programCase","args":["ΣΊΣΥΦΟΣé",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣé.a isn't a key of ΣΊΣΥΦΟΣé","ΣΊΣΥΦΟΣé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ΣΊΣΥΦΟΣé.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["日本語のテキスト",[]],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"programCase","args":["X","x"],"ok":{"result":null,"problems":["X must be an object"]}}
+{"fn":"programCase","args":["line1\nline2ab",{"a":"b"}],"ok":{"result":null,"problems":["line1\nline2ab.a isn't a key of line1\nline2ab","line1\nline2ab.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","line1\nline2ab.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a:b:c",null],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"programCase","args":[".leading",{"a":"b"}],"ok":{"result":null,"problems":[".leading.a isn't a key of .leading",".leading.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".leading.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["日本語のテキスト😀",["a",1]],"ok":{"result":null,"problems":["日本語のテキスト😀 must be an object"]}}
+{"fn":"programCase","args":["a.b.c",null],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"programCase","args":["tab\tseparated",["a",1]],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"programCase","args":["tab\tseparated",null],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"programCase","args":["trailing.",null],"ok":{"result":null,"problems":["trailing. must be an object"]}}
+{"fn":"programCase","args":["trailing.:",0],"ok":{"result":null,"problems":["trailing.: must be an object"]}}
+{"fn":"programCase","args":["./x/**/*.json",null],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"programCase","args":["emoji 👍🏽 mix",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["emoji 👍🏽 mix.a isn't a key of emoji 👍🏽 mix","emoji 👍🏽 mix.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","emoji 👍🏽 mix.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["tab\tseparatedab",0],"ok":{"result":null,"problems":["tab\tseparatedab must be an object"]}}
+{"fn":"programCase","args":["  padded  ","x"],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"programCase","args":["src/a/b.ts","x"],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"programCase","args":["abc",{"a":"b"}],"ok":{"result":null,"problems":["abc.a isn't a key of abc","abc.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","abc.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["line1\nline2",null],"ok":{"result":null,"problems":["line1\nline2 must be an object"]}}
+{"fn":"programCase","args":["😀",0],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"programCase","args":["straße",{}],"ok":{"result":null,"problems":["straße.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","straße.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["﻿bom",{"a":"b"}],"ok":{"result":null,"problems":["﻿bom.a isn't a key of ﻿bom","﻿bom.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","﻿bom.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["Hello World",{"a":"b"}],"ok":{"result":null,"problems":["Hello World.a isn't a key of Hello World","Hello World.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","Hello World.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["ΣΊΣΥΦΟΣ",["a",1]],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"programCase","args":["a😀b😀c",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a😀b😀c.a isn't a key of a😀b😀c","a😀b😀c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a😀b😀c.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["ΣΊΣΥΦΟΣ",{}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ΣΊΣΥΦΟΣ.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["",true],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"programCase","args":["a..b",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a..b.a isn't a key of a..b","a..b.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a..b.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["😀﻿bom",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["😀﻿bom.a isn't a key of 😀﻿bom","😀﻿bom.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","😀﻿bom.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["abc",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["abc.a isn't a key of abc","abc.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","abc.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["HELLO",0],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"programCase","args":["Hello Worldline1\nline2",true],"ok":{"result":null,"problems":["Hello Worldline1\nline2 must be an object"]}}
+{"fn":"programCase","args":["abc",{}],"ok":{"result":null,"problems":["abc.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","abc.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["abc","x"],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"programCase","args":["HELLO",["a",1]],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"programCase","args":["Hello World",null],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"programCase","args":["İstanbula:b:c",true],"ok":{"result":null,"problems":["İstanbula:b:c must be an object"]}}
+{"fn":"programCase","args":["a:b:c",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a:b:c.a isn't a key of a:b:c","a:b:c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a:b:c.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["ns:key.path",true],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"programCase","args":["ünïcödé",true],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"programCase","args":["ab",0],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"programCase","args":["src/a/b.ts",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["src/a/b.ts.a isn't a key of src/a/b.ts","src/a/b.ts.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","src/a/b.ts.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["😀",[]],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"programCase","args":["a.b.c",{}],"ok":{"result":null,"problems":["a.b.c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a.b.c.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["tab\tseparated",{"a":"b"}],"ok":{"result":null,"problems":["tab\tseparated.a isn't a key of tab\tseparated","tab\tseparated.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","tab\tseparated.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["","x"],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"programCase","args":["a😀b😀c",["a",1]],"ok":{"result":null,"problems":["a😀b😀c must be an object"]}}
+{"fn":"programCase","args":["Hello World","x"],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"programCase","args":["ünïcödé",[]],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"programCase","args":["ab",{"a":"b"}],"ok":{"result":null,"problems":["ab.a isn't a key of ab","ab.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ab.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a..b日本語のテキスト","x"],"ok":{"result":null,"problems":["a..b日本語のテキスト must be an object"]}}
+{"fn":"programCase","args":["İstanbultrailing.",0],"ok":{"result":null,"problems":["İstanbultrailing. must be an object"]}}
+{"fn":"programCase","args":["ünïcödé日本語のテキスト",null],"ok":{"result":null,"problems":["ünïcödé日本語のテキスト must be an object"]}}
+{"fn":"programCase","args":["{name} has {count} items",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["{name} has {count} items.a isn't a key of {name} has {count} items","{name} has {count} items.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","{name} has {count} items.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a.b.c",0],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"programCase","args":["ünïcödé","x"],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"programCase","args":["src/a/b.ts",{}],"ok":{"result":null,"problems":["src/a/b.ts.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","src/a/b.ts.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a..bemoji 👍🏽 mix",0],"ok":{"result":null,"problems":["a..bemoji 👍🏽 mix must be an object"]}}
+{"fn":"programCase","args":["{name} has {count} items",null],"ok":{"result":null,"problems":["{name} has {count} items must be an object"]}}
+{"fn":"programCase","args":["Hello World.leading",[]],"ok":{"result":null,"problems":["Hello World.leading must be an object"]}}
+{"fn":"programCase","args":["İstanbul",{}],"ok":{"result":null,"problems":["İstanbul.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","İstanbul.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["absrc/a/b.ts",["a",1]],"ok":{"result":null,"problems":["absrc/a/b.ts must be an object"]}}
+{"fn":"programCase","args":["{name} has {count} itemsemoji 👍🏽 mix",["a",1]],"ok":{"result":null,"problems":["{name} has {count} itemsemoji 👍🏽 mix must be an object"]}}
+{"fn":"programCase","args":["Hello World./x/**/*.json",true],"ok":{"result":null,"problems":["Hello World./x/**/*.json must be an object"]}}
+{"fn":"programCase","args":["a..b",{}],"ok":{"result":null,"problems":["a..b.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a..b.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a.b.c",["a",1]],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"programCase","args":["HELLO",{"a":"b"}],"ok":{"result":null,"problems":["HELLO.a isn't a key of HELLO","HELLO.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","HELLO.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["helloabc",[]],"ok":{"result":null,"problems":["helloabc must be an object"]}}
+{"fn":"programCase","args":["é",{}],"ok":{"result":null,"problems":["é.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","é.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["key_name-1hello world",["a",1]],"ok":{"result":null,"problems":["key_name-1hello world must be an object"]}}
+{"fn":"programCase","args":["ab",true],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"programCase","args":["./x/**/*.jsonünïcödé",0],"ok":{"result":null,"problems":["./x/**/*.jsonünïcödé must be an object"]}}
+{"fn":"programCase","args":["é",null],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"programCase","args":["line1\nline2",[]],"ok":{"result":null,"problems":["line1\nline2 must be an object"]}}
+{"fn":"programCase","args":["hello world",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["hello world.a isn't a key of hello world","hello world.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","hello world.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["HELLOa",["a",1]],"ok":{"result":null,"problems":["HELLOa must be an object"]}}
+{"fn":"programCase","args":["hello",[]],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"programCase","args":["abc",["a",1]],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"programCase","args":["a..b","x"],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"programCase","args":["straße","x"],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"programCase","args":[":",null],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"programCase","args":["straße",["a",1]],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"programCase","args":[":",["a",1]],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"programCase","args":["abcHello World",[]],"ok":{"result":null,"problems":["abcHello World must be an object"]}}
+{"fn":"programCase","args":["HELLO.leading",0],"ok":{"result":null,"problems":["HELLO.leading must be an object"]}}
+{"fn":"programCase","args":["İstanbul","x"],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"programCase","args":[":",[]],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"programCase","args":["日本語のテキスト",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["日本語のテキスト.a isn't a key of 日本語のテキスト","日本語のテキスト.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","日本語のテキスト.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":[".leading",["a",1]],"ok":{"result":null,"problems":[".leading must be an object"]}}
+{"fn":"programCase","args":["a😀b😀c./x/**/*.json","x"],"ok":{"result":null,"problems":["a😀b😀c./x/**/*.json must be an object"]}}
+{"fn":"programCase","args":["tab\tseparated",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["tab\tseparated.a isn't a key of tab\tseparated","tab\tseparated.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","tab\tseparated.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["emoji 👍🏽 mix",{"a":"b"}],"ok":{"result":null,"problems":["emoji 👍🏽 mix.a isn't a key of emoji 👍🏽 mix","emoji 👍🏽 mix.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","emoji 👍🏽 mix.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a😀b😀c",{"a":"b"}],"ok":{"result":null,"problems":["a😀b😀c.a isn't a key of a😀b😀c","a😀b😀c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a😀b😀c.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a.b.c",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a.b.c.a isn't a key of a.b.c","a.b.c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a.b.c.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["trailing.",[]],"ok":{"result":null,"problems":["trailing. must be an object"]}}
+{"fn":"programCase","args":["emoji 👍🏽 mix",["a",1]],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"programCase","args":["./x/**/*.json",{}],"ok":{"result":null,"problems":["./x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","./x/**/*.json.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["ünïcödé",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ünïcödé.a isn't a key of ünïcödé","ünïcödé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ünïcödé.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["😀trailing.",0],"ok":{"result":null,"problems":["😀trailing. must be an object"]}}
+{"fn":"programCase","args":["tab\tseparatedhello world",{"a":"b"}],"ok":{"result":null,"problems":["tab\tseparatedhello world.a isn't a key of tab\tseparatedhello world","tab\tseparatedhello world.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","tab\tseparatedhello world.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["trailing.",0],"ok":{"result":null,"problems":["trailing. must be an object"]}}
+{"fn":"programCase","args":["Hello World",0],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"programCase","args":["😀",{}],"ok":{"result":null,"problems":["😀.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","😀.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["src/a/b.ts",[]],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"programCase","args":["straße",true],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"programCase","args":["﻿bom",null],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"programCase","args":["{name} has {count} items",[]],"ok":{"result":null,"problems":["{name} has {count} items must be an object"]}}
+{"fn":"programCase","args":["abc",null],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"programCase","args":["key_name-1a",0],"ok":{"result":null,"problems":["key_name-1a must be an object"]}}
+{"fn":"programCase","args":["",["a",1]],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"programCase","args":["  padded  ",0],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"programCase","args":["a",["a",1]],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"programCase","args":[":hello world",[]],"ok":{"result":null,"problems":[":hello world must be an object"]}}
+{"fn":"programCase","args":["line1\nline2",{}],"ok":{"result":null,"problems":["line1\nline2.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","line1\nline2.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["ns:key.path",{"a":"b"}],"ok":{"result":null,"problems":["ns:key.path.a isn't a key of ns:key.path","ns:key.path.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ns:key.path.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["line1\nline2ΣΊΣΥΦΟΣ","x"],"ok":{"result":null,"problems":["line1\nline2ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"programCase","args":["tab\tseparated",[]],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"programCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ.a isn't a key of ΣΊΣΥΦΟΣ","ΣΊΣΥΦΟΣ.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ΣΊΣΥΦΟΣ.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["",{"a":"b"}],"ok":{"result":null,"problems":["a isn't a key of a plugin",".name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["emoji 👍🏽 mix",true],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"programCase","args":["tab\tseparatedab",{}],"ok":{"result":null,"problems":["tab\tseparatedab.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","tab\tseparatedab.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["emoji 👍🏽 mixHello World",null],"ok":{"result":null,"problems":["emoji 👍🏽 mixHello World must be an object"]}}
+{"fn":"programCase","args":["hello",0],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"programCase","args":["HELLO",null],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"programCase","args":["İstanbul",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["İstanbul.a isn't a key of İstanbul","İstanbul.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","İstanbul.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["src/a/b.ts",{"a":"b"}],"ok":{"result":null,"problems":["src/a/b.ts.a isn't a key of src/a/b.ts","src/a/b.ts.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","src/a/b.ts.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["ns:key.patha:b:c",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ns:key.patha:b:c.a isn't a key of ns:key.patha:b:c","ns:key.patha:b:c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ns:key.patha:b:c.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a..b",0],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"programCase","args":["a.b.c.leading",["a",1]],"ok":{"result":null,"problems":["a.b.c.leading must be an object"]}}
+{"fn":"programCase","args":["key_name-1",["a",1]],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"programCase","args":["key_name-1",true],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"programCase","args":["éa:b:c",true],"ok":{"result":null,"problems":["éa:b:c must be an object"]}}
+{"fn":"programCase","args":["😀",{"a":"b"}],"ok":{"result":null,"problems":["😀.a isn't a key of 😀","😀.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","😀.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["line1\nline2","x"],"ok":{"result":null,"problems":["line1\nline2 must be an object"]}}
+{"fn":"programCase","args":["ünïcödé{name} has {count} items",null],"ok":{"result":null,"problems":["ünïcödé{name} has {count} items must be an object"]}}
+{"fn":"programCase","args":["İstanbula:b:c",["a",1]],"ok":{"result":null,"problems":["İstanbula:b:c must be an object"]}}
+{"fn":"programCase","args":["a.b.c",true],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"programCase","args":["ns:key.path",[]],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"programCase","args":[":",{"a":{"b":"c"}}],"ok":{"result":null,"problems":[":.a isn't a key of :",":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["İstanbul",[]],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"programCase","args":["{name} has {count} items",{}],"ok":{"result":null,"problems":["{name} has {count} items.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","{name} has {count} items.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["é",true],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"programCase","args":["ab",null],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"programCase","args":["line1\nline2",["a",1]],"ok":{"result":null,"problems":["line1\nline2 must be an object"]}}
+{"fn":"programCase","args":["trailing.",true],"ok":{"result":null,"problems":["trailing. must be an object"]}}
+{"fn":"programCase","args":["line1\nline2./x/**/*.json",{"a":"b"}],"ok":{"result":null,"problems":["line1\nline2./x/**/*.json.a isn't a key of line1\nline2./x/**/*.json","line1\nline2./x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","line1\nline2./x/**/*.json.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["trailing.trailing.",null],"ok":{"result":null,"problems":["trailing.trailing. must be an object"]}}
+{"fn":"programCase","args":["x","x"],"ok":{"result":null,"problems":["x must be an object"]}}
+{"fn":"programCase","args":["key_name-1  padded  ",true],"ok":{"result":null,"problems":["key_name-1  padded   must be an object"]}}
+{"fn":"programCase","args":["ünïcödé",{}],"ok":{"result":null,"problems":["ünïcödé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ünïcödé.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["  padded  Hello World",[]],"ok":{"result":null,"problems":["  padded  Hello World must be an object"]}}
+{"fn":"programCase","args":["a",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a.a isn't a key of a","a.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["hello world",null],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"programCase","args":["İstanbul",{"a":"b"}],"ok":{"result":null,"problems":["İstanbul.a isn't a key of İstanbul","İstanbul.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","İstanbul.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["hello world",0],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"programCase","args":["",0],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"programCase","args":["{name} has {count} items.leading",true],"ok":{"result":null,"problems":["{name} has {count} items.leading must be an object"]}}
+{"fn":"programCase","args":["a..b","A"],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"programCase","args":["﻿bomstraße",{}],"ok":{"result":null,"problems":["﻿bomstraße.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","﻿bomstraße.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["./x/**/*.json",true],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"programCase","args":["日本語のテキストtab\tseparated","x"],"ok":{"result":null,"problems":["日本語のテキストtab\tseparated must be an object"]}}
+{"fn":"programCase","args":["a..bhello",0],"ok":{"result":null,"problems":["a..bhello must be an object"]}}
+{"fn":"programCase","args":["tab\tseparatedab",[]],"ok":{"result":null,"problems":["tab\tseparatedab must be an object"]}}
+{"fn":"programCase","args":["ns:key.path","x"],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"programCase","args":["éline1\nline2",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["éline1\nline2.a isn't a key of éline1\nline2","éline1\nline2.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","éline1\nline2.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["emoji 👍🏽 mixhello world",true],"ok":{"result":null,"problems":["emoji 👍🏽 mixhello world must be an object"]}}
+{"fn":"programCase","args":["straße",[]],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"programCase","args":["é",[]],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"programCase","args":["İstanbul",true],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"programCase","args":["a:b:c",true],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"programCase","args":["ab","x"],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"programCase","args":["a😀b😀c","x"],"ok":{"result":null,"problems":["a😀b😀c must be an object"]}}
+{"fn":"programCase","args":["a",0],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"programCase","args":["ns:key.path",0],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"programCase","args":["trailing.",{}],"ok":{"result":null,"problems":["trailing..name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","trailing..path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["line1\nline2",{"a":"b"}],"ok":{"result":null,"problems":["line1\nline2.a isn't a key of line1\nline2","line1\nline2.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","line1\nline2.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["hello worlda😀b😀c","d"],"ok":{"result":null,"problems":["hello worlda😀b😀c must be an object"]}}
+{"fn":"programCase","args":["日本語のテキスト",["a",1]],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"programCase","args":["﻿bom","x"],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"programCase","args":["src/a/b.ts",null],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"programCase","args":["ns:key.path",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ns:key.path.a isn't a key of ns:key.path","ns:key.path.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ns:key.path.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":[".leading",true],"ok":{"result":null,"problems":[".leading must be an object"]}}
+{"fn":"programCase","args":["﻿bom",true],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"programCase","args":["key_name-1Hello World",null],"ok":{"result":null,"problems":["key_name-1Hello World must be an object"]}}
+{"fn":"programCase","args":["key_name-1",{}],"ok":{"result":null,"problems":["key_name-1.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","key_name-1.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["hello",["a",1]],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"programCase","args":["aba.b.c",null],"ok":{"result":null,"problems":["aba.b.c must be an object"]}}
+{"fn":"programCase","args":["  padded  ",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["  padded  .a isn't a key of   padded  ","  padded  .name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","  padded  .path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["emoji 👍🏽 mix",null],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"programCase","args":["  padded  ",["a",1]],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"programCase","args":["{name} has {count} items",["a",1]],"ok":{"result":null,"problems":["{name} has {count} items must be an object"]}}
+{"fn":"programCase","args":["./x/**/*.jsonab",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["./x/**/*.jsonab.a isn't a key of ./x/**/*.jsonab","./x/**/*.jsonab.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","./x/**/*.jsonab.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["line1\nline2",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["line1\nline2.a isn't a key of line1\nline2","line1\nline2.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","line1\nline2.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":[".leading",{}],"ok":{"result":null,"problems":[".leading.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".leading.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["hello world",true],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"programCase","args":["Hello World","RL"],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"programCase","args":["HELLOé",0],"ok":{"result":null,"problems":["HELLOé must be an object"]}}
+{"fn":"programCase","args":["héllo wörld",{"a":"b"}],"ok":{"result":null,"problems":["héllo wörld.a isn't a key of héllo wörld","héllo wörld.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","héllo wörld.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["👍🏽 thumbs",{"a":"b"}],"ok":{"result":null,"problems":["👍🏽 thumbs.a isn't a key of 👍🏽 thumbs","👍🏽 thumbs.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","👍🏽 thumbs.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["日本語",{"a":"b"}],"ok":{"result":null,"problems":["日本語.a isn't a key of 日本語","日本語.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","日本語.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["é",{"a":"b"}],"ok":{"result":null,"problems":["é.a isn't a key of é","é.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","é.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["straße",{"a":"b"}],"ok":{"result":null,"problems":["straße.a isn't a key of straße","straße.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","straße.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["ılık ırmak",{"a":"b"}],"ok":{"result":null,"problems":["ılık ırmak.a isn't a key of ılık ırmak","ılık ırmak.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ılık ırmak.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["👨‍👩‍👧 family",{"a":"b"}],"ok":{"result":null,"problems":["👨‍👩‍👧 family.a isn't a key of 👨‍👩‍👧 family","👨‍👩‍👧 family.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","👨‍👩‍👧 family.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a b",{"a":"b"}],"ok":{"result":null,"problems":["a b.a isn't a key of a b","a b.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a b.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a😀b",{"a":"b"}],"ok":{"result":null,"problems":["a😀b.a isn't a key of a😀b","a😀b.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a😀b.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a²b x½ y①",{"a":"b"}],"ok":{"result":null,"problems":["a²b x½ y①.a isn't a key of a²b x½ y①","a²b x½ y①.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a²b x½ y①.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["aⅠb Ⅻ",{"a":"b"}],"ok":{"result":null,"problems":["aⅠb Ⅻ.a isn't a key of aⅠb Ⅻ","aⅠb Ⅻ.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","aⅠb Ⅻ.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["a𐐀b 𝐀bc",{"a":"b"}],"ok":{"result":null,"problems":["a𐐀b 𝐀bc.a isn't a key of a𐐀b 𝐀bc","a𐐀b 𝐀bc.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a𐐀b 𝐀bc.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["कि ٣٤",{"a":"b"}],"ok":{"result":null,"problems":["कि ٣٤.a isn't a key of कि ٣٤","कि ٣٤.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","कि ٣٤.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":[":",{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"result":null,"problems":[":.2 isn't a key of :",":.10 isn't a key of :",":.zebra isn't a key of :",":.apple isn't a key of :",":.é isn't a key of :",":.Apple isn't a key of :",":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":[":",{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"result":null,"problems":[":.n isn't a key of :",":.f isn't a key of :",":.t isn't a key of :",":.neg isn't a key of :",":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":[":",[3,1,2]],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"programCase","args":[":",{}],"ok":{"result":null,"problems":[":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"$undefined":true}],"ok":{"result":null,"problems":[]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",null],"ok":{"result":null,"problems":["plugin.sidecar must be an object"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",1],"ok":{"result":null,"problems":["plugin.sidecar must be an object"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar","x"],"ok":{"result":null,"problems":["plugin.sidecar must be an object"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",[]],"ok":{"result":null,"problems":["plugin.sidecar must be an object"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{}],"ok":{"result":null,"problems":["plugin.sidecar.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node","main.js"]}],"ok":{"result":{"run":["node","main.js"],"memoryMB":1024},"problems":[]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node","main.js"],"memoryMB":512}],"ok":{"result":{"run":["node","main.js"],"memoryMB":512},"problems":[]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":[],"memoryMB":512}],"ok":{"result":null,"problems":["plugin.sidecar.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":"node"}],"ok":{"result":null,"problems":["plugin.sidecar.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node",1]}],"ok":{"result":null,"problems":["plugin.sidecar.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node","a\u0000"]}],"ok":{"result":null,"problems":["plugin.sidecar.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a"]}],"ok":{"result":null,"problems":["plugin.sidecar.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node"],"memoryMB":1.5}],"ok":{"result":{"run":["node"],"memoryMB":1024},"problems":["plugin.sidecar.memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node"],"memoryMB":99999}],"ok":{"result":{"run":["node"],"memoryMB":1024},"problems":["plugin.sidecar.memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node"],"memoryMB":64}],"ok":{"result":{"run":["node"],"memoryMB":64},"problems":[]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node"],"memoryMB":"512"}],"ok":{"result":{"run":["node"],"memoryMB":1024},"problems":["plugin.sidecar.memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node"],"extra":1}],"ok":{"result":{"run":["node"],"memoryMB":1024},"problems":["plugin.sidecar.extra isn't a key of plugin.sidecar"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["../x"]}],"ok":{"result":{"run":["../x"],"memoryMB":1024},"problems":["plugin.sidecar.run[0] must be a file in the plugin's folder, an absolute path or a program name"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["dist/main.js"]}],"ok":{"result":{"run":["dist/main.js"],"memoryMB":1024},"problems":[]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]}],"ok":{"result":null,"problems":["plugin.sidecar.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"mainOfCase","args":[{"$undefined":true},{"$undefined":true}],"ok":{"result":null,"problems":[]}}
+{"fn":"mainOfCase","args":[{"$undefined":true},null],"ok":{"result":null,"problems":["memoryMB only goes with main"]}}
+{"fn":"mainOfCase","args":[{"$undefined":true},256],"ok":{"result":null,"problems":["memoryMB only goes with main"]}}
+{"fn":"mainOfCase","args":[{"$undefined":true},64],"ok":{"result":null,"problems":["memoryMB only goes with main"]}}
+{"fn":"mainOfCase","args":[{"$undefined":true},1.5],"ok":{"result":null,"problems":["memoryMB only goes with main"]}}
+{"fn":"mainOfCase","args":[{"$undefined":true},99999],"ok":{"result":null,"problems":["memoryMB only goes with main"]}}
+{"fn":"mainOfCase","args":[{"$undefined":true},"256"],"ok":{"result":null,"problems":["memoryMB only goes with main"]}}
+{"fn":"mainOfCase","args":[{"$undefined":true},32],"ok":{"result":null,"problems":["memoryMB only goes with main"]}}
+{"fn":"mainOfCase","args":[{"$undefined":true},4096],"ok":{"result":null,"problems":["memoryMB only goes with main"]}}
+{"fn":"mainOfCase","args":[null,{"$undefined":true}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":[null,null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,256],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":[null,64],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":[null,1.5],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,99999],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,"256"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,32],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[null,4096],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":[1,{"$undefined":true}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":[1,null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[1,256],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":[1,64],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":[1,1.5],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[1,99999],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[1,"256"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[1,32],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":[1,4096],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["",{"$undefined":true}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["",null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["",256],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["",64],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["",1.5],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["",99999],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["","256"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["",32],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["",4096],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["main.js",{"$undefined":true}],"ok":{"result":{"entry":"main.js","memoryMB":256},"problems":[]}}
+{"fn":"mainOfCase","args":["main.js",null],"ok":{"result":{"entry":"main.js","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main.js",256],"ok":{"result":{"entry":"main.js","memoryMB":256},"problems":[]}}
+{"fn":"mainOfCase","args":["main.js",64],"ok":{"result":{"entry":"main.js","memoryMB":64},"problems":[]}}
+{"fn":"mainOfCase","args":["main.js",1.5],"ok":{"result":{"entry":"main.js","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main.js",99999],"ok":{"result":{"entry":"main.js","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main.js","256"],"ok":{"result":{"entry":"main.js","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main.js",32],"ok":{"result":{"entry":"main.js","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main.js",4096],"ok":{"result":{"entry":"main.js","memoryMB":4096},"problems":[]}}
+{"fn":"mainOfCase","args":["dist/main.mjs",{"$undefined":true}],"ok":{"result":{"entry":"dist/main.mjs","memoryMB":256},"problems":[]}}
+{"fn":"mainOfCase","args":["dist/main.mjs",null],"ok":{"result":{"entry":"dist/main.mjs","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["dist/main.mjs",256],"ok":{"result":{"entry":"dist/main.mjs","memoryMB":256},"problems":[]}}
+{"fn":"mainOfCase","args":["dist/main.mjs",64],"ok":{"result":{"entry":"dist/main.mjs","memoryMB":64},"problems":[]}}
+{"fn":"mainOfCase","args":["dist/main.mjs",1.5],"ok":{"result":{"entry":"dist/main.mjs","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["dist/main.mjs",99999],"ok":{"result":{"entry":"dist/main.mjs","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["dist/main.mjs","256"],"ok":{"result":{"entry":"dist/main.mjs","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["dist/main.mjs",32],"ok":{"result":{"entry":"dist/main.mjs","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["dist/main.mjs",4096],"ok":{"result":{"entry":"dist/main.mjs","memoryMB":4096},"problems":[]}}
+{"fn":"mainOfCase","args":["main.ts",{"$undefined":true}],"ok":{"result":{"entry":"main.ts","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file"]}}
+{"fn":"mainOfCase","args":["main.ts",null],"ok":{"result":{"entry":"main.ts","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main.ts",256],"ok":{"result":{"entry":"main.ts","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file"]}}
+{"fn":"mainOfCase","args":["main.ts",64],"ok":{"result":{"entry":"main.ts","memoryMB":64},"problems":["main must be a .js, .mjs or .cjs file"]}}
+{"fn":"mainOfCase","args":["main.ts",1.5],"ok":{"result":{"entry":"main.ts","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main.ts",99999],"ok":{"result":{"entry":"main.ts","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main.ts","256"],"ok":{"result":{"entry":"main.ts","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main.ts",32],"ok":{"result":{"entry":"main.ts","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main.ts",4096],"ok":{"result":{"entry":"main.ts","memoryMB":4096},"problems":["main must be a .js, .mjs or .cjs file"]}}
+{"fn":"mainOfCase","args":["../main.js",{"$undefined":true}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["../main.js",null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["../main.js",256],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["../main.js",64],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["../main.js",1.5],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["../main.js",99999],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["../main.js","256"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["../main.js",32],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["../main.js",4096],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["/main.js",{"$undefined":true}],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["/main.js",null],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["/main.js",256],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["/main.js",64],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["/main.js",1.5],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["/main.js",99999],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["/main.js","256"],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["/main.js",32],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["/main.js",4096],"ok":{"result":null,"problems":["main must be a JavaScript file inside the plugin's folder, like dist/index.js"]}}
+{"fn":"mainOfCase","args":["MAIN.JS",{"$undefined":true}],"ok":{"result":{"entry":"MAIN.JS","memoryMB":256},"problems":[]}}
+{"fn":"mainOfCase","args":["MAIN.JS",null],"ok":{"result":{"entry":"MAIN.JS","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["MAIN.JS",256],"ok":{"result":{"entry":"MAIN.JS","memoryMB":256},"problems":[]}}
+{"fn":"mainOfCase","args":["MAIN.JS",64],"ok":{"result":{"entry":"MAIN.JS","memoryMB":64},"problems":[]}}
+{"fn":"mainOfCase","args":["MAIN.JS",1.5],"ok":{"result":{"entry":"MAIN.JS","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["MAIN.JS",99999],"ok":{"result":{"entry":"MAIN.JS","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["MAIN.JS","256"],"ok":{"result":{"entry":"MAIN.JS","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["MAIN.JS",32],"ok":{"result":{"entry":"MAIN.JS","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["MAIN.JS",4096],"ok":{"result":{"entry":"MAIN.JS","memoryMB":4096},"problems":[]}}
+{"fn":"mainOfCase","args":["a b.js",{"$undefined":true}],"ok":{"result":{"entry":"a b.js","memoryMB":256},"problems":[]}}
+{"fn":"mainOfCase","args":["a b.js",null],"ok":{"result":{"entry":"a b.js","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["a b.js",256],"ok":{"result":{"entry":"a b.js","memoryMB":256},"problems":[]}}
+{"fn":"mainOfCase","args":["a b.js",64],"ok":{"result":{"entry":"a b.js","memoryMB":64},"problems":[]}}
+{"fn":"mainOfCase","args":["a b.js",1.5],"ok":{"result":{"entry":"a b.js","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["a b.js",99999],"ok":{"result":{"entry":"a b.js","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["a b.js","256"],"ok":{"result":{"entry":"a b.js","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["a b.js",32],"ok":{"result":{"entry":"a b.js","memoryMB":256},"problems":["memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["a b.js",4096],"ok":{"result":{"entry":"a b.js","memoryMB":4096},"problems":[]}}
+{"fn":"mainOfCase","args":["main",{"$undefined":true}],"ok":{"result":{"entry":"main","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file"]}}
+{"fn":"mainOfCase","args":["main",null],"ok":{"result":{"entry":"main","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main",256],"ok":{"result":{"entry":"main","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file"]}}
+{"fn":"mainOfCase","args":["main",64],"ok":{"result":{"entry":"main","memoryMB":64},"problems":["main must be a .js, .mjs or .cjs file"]}}
+{"fn":"mainOfCase","args":["main",1.5],"ok":{"result":{"entry":"main","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main",99999],"ok":{"result":{"entry":"main","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main","256"],"ok":{"result":{"entry":"main","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main",32],"ok":{"result":{"entry":"main","memoryMB":256},"problems":["main must be a .js, .mjs or .cjs file","memoryMB must be a whole number from 64 to 4096"]}}
+{"fn":"mainOfCase","args":["main",4096],"ok":{"result":{"entry":"main","memoryMB":4096},"problems":["main must be a .js, .mjs or .cjs file"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"$undefined":true}],"ok":{"result":null,"problems":["plugin.programs[0] must be an object"]}}
+{"fn":"programCase","args":["plugin.programs[0]",null],"ok":{"result":null,"problems":["plugin.programs[0] must be an object"]}}
+{"fn":"programCase","args":["plugin.programs[0]",1],"ok":{"result":null,"problems":["plugin.programs[0] must be an object"]}}
+{"fn":"programCase","args":["plugin.programs[0]","x"],"ok":{"result":null,"problems":["plugin.programs[0] must be an object"]}}
+{"fn":"programCase","args":["plugin.programs[0]",[]],"ok":{"result":null,"problems":["plugin.programs[0] must be an object"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{}],"ok":{"result":null,"problems":["plugin.programs[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","plugin.programs[0].path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool"}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[],"example":null,"claim":false},"problems":[]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","afterUpdate":[["tool","--init"]],"example":"tool --help","claim":true}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[["tool","--init"]],"example":"tool --help","claim":true},"problems":[]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"Tool","path":"bin/tool"}],"ok":{"result":null,"problems":["plugin.programs[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"../tool"}],"ok":{"result":null,"problems":["plugin.programs[0].path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","afterUpdate":"x"}],"ok":{"result":null,"problems":["plugin.programs[0].afterUpdate must be a list of at most 4 argument lists of 1 to 8"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","afterUpdate":[[]]}],"ok":{"result":null,"problems":["plugin.programs[0].afterUpdate must be a list of at most 4 argument lists of 1 to 8"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","afterUpdate":[["a",1]]}],"ok":{"result":null,"problems":["plugin.programs[0].afterUpdate must be a list of at most 4 argument lists of 1 to 8"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","afterUpdate":[["a"],["a"],["a"],["a"],["a"],["a"],["a"],["a"],["a"],["a"]]}],"ok":{"result":null,"problems":["plugin.programs[0].afterUpdate must be a list of at most 4 argument lists of 1 to 8"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","example":1}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[],"example":null,"claim":false},"problems":["plugin.programs[0].example must be text of 1 to 120 characters"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","example":""}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[],"example":null,"claim":false},"problems":["plugin.programs[0].example must be text of 1 to 120 characters"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","example":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[],"example":null,"claim":false},"problems":["plugin.programs[0].example must be text of 1 to 120 characters"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","claim":"yes"}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[],"example":null,"claim":false},"problems":["plugin.programs[0].claim must be true or false"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","extra":1}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[],"example":null,"claim":false},"problems":["plugin.programs[0].extra isn't a key of plugin.programs[0]"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"path":"bin/tool"}],"ok":{"result":null,"problems":["plugin.programs[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool"}],"ok":{"result":null,"problems":["plugin.programs[0].path must be a file in the plugin's folder, like bin/tool"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","afterUpdate":[]}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[],"example":null,"claim":false},"problems":[]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","example":null}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[],"example":null,"claim":false},"problems":["plugin.programs[0].example must be text of 1 to 120 characters"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","example":"a\u0007b"}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[],"example":null,"claim":false},"problems":["plugin.programs[0].example has control or direction characters"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","example":"a‮b"}],"ok":{"result":{"name":"tool","path":"bin/tool","afterUpdate":[],"example":null,"claim":false},"problems":["plugin.programs[0].example has control or direction characters"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","afterUpdate":[[{"$utf16":[97,56320]}]]}],"ok":{"result":null,"problems":["plugin.programs[0].afterUpdate must be a list of at most 4 argument lists of 1 to 8"]}}
+{"fn":"programCase","args":["plugin.programs[0]",{"name":"tool","path":"bin/tool","afterUpdate":[[{"$utf16":[55296,120]}]]}],"ok":{"result":null,"problems":["plugin.programs[0].afterUpdate must be a list of at most 4 argument lists of 1 to 8"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["node",{"$utf16":[56320]}]}],"ok":{"result":null,"problems":["plugin.sidecar.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":[{"$utf16":[55296]}]}],"ok":{"result":null,"problems":["plugin.sidecar.run must be a list of 1 to 32 arguments, the program first"]}}
+{"fn":"sidecarOfCase","args":["plugin.sidecar",{"run":["a😀"]}],"ok":{"result":{"run":["a😀"],"memoryMB":1024},"problems":[]}}

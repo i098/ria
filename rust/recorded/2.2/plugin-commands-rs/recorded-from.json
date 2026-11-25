@@ -1,0 +1,47 @@
+{
+  "unit": "apps/browser/src/lib/pluginCommands.harness.ts",
+  "files": 1,
+  "fingerprint": "21cd94cfb78e9c48",
+  "coverage": {
+    "lines": 456,
+    "reached": 378,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginChecks.ts",
+        "lines": 117,
+        "reached": 95,
+        "missed": "73-75, 107-111, 114-120, 125-127, 132-135"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginCommands.harness.ts",
+        "lines": 19,
+        "reached": 19,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginCommands.ts",
+        "lines": 88,
+        "reached": 88,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginNames.ts",
+        "lines": 28,
+        "reached": 25,
+        "missed": "23-25"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginWhen.ts",
+        "lines": 196,
+        "reached": 143,
+        "missed": "138, 155-174, 179-182, 185-203, 208-216"
+      }
+    ]
+  }
+}

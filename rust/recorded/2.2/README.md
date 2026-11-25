@@ -67,3 +67,33 @@ rust-anything fuzz   rust/recorded/2.2/<crate> --seed <new seed>
 `time-rs` reads a clock: use `TZ=UTC RIA_NOW_MS=1795417631295 NODE_OPTIONS=--import=$PWD/rust/recorded/2.2/time-rs/clock-freeze.mjs` (see its README).
 Crates whose coverage is below 100 % have an `UNREACHED.md`; the lines belong to another unit that covers them.
 Crates with differences that the Rust `String` forces (lone surrogates and similar) have a `known-diffs.jsonl`.
+
+## Part 2 (issue 174)
+
+| Crate | Unit (`apps/browser/src/lib/`) |
+| --- | --- |
+| `plugin-activation-rs` | `pluginActivation.ts` |
+| `plugin-checks-rs` | `pluginChecks.ts` |
+| `plugin-commands-rs` | `pluginCommands.ts` |
+| `plugin-contributions-rs` | `pluginContributions.ts` |
+| `plugin-manifest-rs` | `pluginManifest.ts` |
+| `plugin-markdown-rs` | `pluginMarkdown.ts` |
+| `plugin-migrations-rs` | `pluginMigrations.ts` |
+| `plugin-names-rs` | `pluginNames.ts` |
+| `plugin-network-rs` | `pluginNetwork.ts` |
+| `plugin-nodes-rs` | `pluginNodes.ts` |
+| `plugin-page-bar-rs` | `pluginPageBar.ts` |
+| `plugin-password-manager-rs` | `pluginPasswordManager.ts` |
+| `plugin-permissions-rs` | `pluginPermissions.ts` |
+| `plugin-rows-rs` | `pluginRows.ts` |
+| `plugin-runtime-rs` | `pluginRuntime.ts` |
+| `plugin-schema-parts-rs` | `pluginSchemaParts.ts` |
+| `plugin-schema-rs` | `pluginSchema.ts` |
+| `plugin-schema-v1-rs` | `pluginSchemaV1.ts` |
+| `plugin-shortcuts-rs` | `pluginShortcuts.ts` |
+| `plugin-theme-css-rs` | `pluginThemeCss.ts` |
+| `plugin-web-url-rs` | `pluginWebUrl.ts` |
+| `plugin-when-rs` | `pluginWhen.ts` |
+
+`pluginProtocol.ts` holds only types: it has a Rust port (`shared/plugin_protocol.rs`) and no crate.
+Crates with known differences (lone surrogates and similar) have a `known-diffs.jsonl`; lines the cases do not reach are in `UNREACHED.md`.

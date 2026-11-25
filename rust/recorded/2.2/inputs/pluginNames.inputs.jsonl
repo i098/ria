@@ -1,0 +1,31 @@
+{"fn":"isWellFormed","args":[""]}
+{"fn":"isWellFormed","args":["abc"]}
+{"fn":"isWellFormed","args":["héllo"]}
+{"fn":"isWellFormed","args":["a😀b"]}
+{"fn":"isWellFormed","args":[{"$utf16":[55296]}]}
+{"fn":"isWellFormed","args":[{"$utf16":[56320]}]}
+{"fn":"isWellFormed","args":[{"$utf16":[97,55296]}]}
+{"fn":"isWellFormed","args":[{"$utf16":[56320,55296]}]}
+{"fn":"isWellFormed","args":["𐀀"]}
+{"fn":"isWellFormed","args":[{"$utf16":[97,55296,98]}]}
+{"fn":"isPagePath","args":[""]}
+{"fn":"isPagePath","args":["/"]}
+{"fn":"isPagePath","args":["/a/b"]}
+{"fn":"isPagePath","args":["/a?x=1"]}
+{"fn":"isPagePath","args":["/a?x=1#h"]}
+{"fn":"isPagePath","args":["a"]}
+{"fn":"isPagePath","args":["/a b"]}
+{"fn":"isPagePath","args":["/.."]}
+{"fn":"isPagePath","args":["/a/../b"]}
+{"fn":"isPagePath","args":["/a?.."]}
+{"fn":"isPagePath","args":["/a?x/.."]}
+{"fn":"isPagePath","args":["/a/..b"]}
+{"fn":"isPagePath","args":["/%2e%2e"]}
+{"fn":"isPagePath","args":["/é"]}
+{"fn":"isPagePath","args":["/a?b c"]}
+{"fn":"isPagePath","args":["/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"isPagePath","args":["/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"isPagePath","args":["//"]}
+{"fn":"isPagePath","args":["/a?"]}
+{"fn":"isPagePath","args":["/a??"]}
+{"fn":"isPagePath","args":["/~!$&'()*+,;=:@%-._"]}

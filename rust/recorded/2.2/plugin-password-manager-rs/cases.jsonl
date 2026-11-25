@@ -1,0 +1,37 @@
+{"fn":"passwordManagerOfCase","args":[{"a":{"b":"c"}}],"ok":{"result":null,"problems":["passwordManager.a isn't a key of passwordManager","passwordManager.fill must be system","passwordManager.fields must be a list of 1 to 2 of login, oneTimeCode"]}}
+{"fn":"passwordManagerOfCase","args":[null],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":[true],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":[[]],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":["x"],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":[["a",1]],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":[0],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"result":null,"problems":["passwordManager.2 isn't a key of passwordManager","passwordManager.10 isn't a key of passwordManager","passwordManager.zebra isn't a key of passwordManager","passwordManager.apple isn't a key of passwordManager","passwordManager.é isn't a key of passwordManager","passwordManager.Apple isn't a key of passwordManager","passwordManager.fill must be system","passwordManager.fields must be a list of 1 to 2 of login, oneTimeCode"]}}
+{"fn":"passwordManagerOfCase","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"result":null,"problems":["passwordManager.n isn't a key of passwordManager","passwordManager.f isn't a key of passwordManager","passwordManager.t isn't a key of passwordManager","passwordManager.neg isn't a key of passwordManager","passwordManager.fill must be system","passwordManager.fields must be a list of 1 to 2 of login, oneTimeCode"]}}
+{"fn":"passwordManagerOfCase","args":[[3,1,2]],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":[{"$undefined":true}],"ok":{"result":null,"problems":[]}}
+{"fn":"passwordManagerOfCase","args":[null],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":[1],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":["x"],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":[[]],"ok":{"result":null,"problems":["passwordManager must be an object"]}}
+{"fn":"passwordManagerOfCase","args":[{}],"ok":{"result":null,"problems":["passwordManager.fill must be system","passwordManager.fields must be a list of 1 to 2 of login, oneTimeCode"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login"]}],"ok":{"result":{"fill":"system","fields":["login"],"verificationCodeSetup":null,"passkeys":null},"problems":[]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login","oneTimeCode"]}],"ok":{"result":{"fill":"system","fields":["login","oneTimeCode"],"verificationCodeSetup":null,"passkeys":null},"problems":[]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login","login"]}],"ok":{"result":{"fill":"system","fields":["login"],"verificationCodeSetup":null,"passkeys":null},"problems":["passwordManager.fields has login twice"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":[]}],"ok":{"result":null,"problems":["passwordManager.fields must be a list of 1 to 2 of login, oneTimeCode"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login","oneTimeCode","login"]}],"ok":{"result":null,"problems":["passwordManager.fields must be a list of 1 to 2 of login, oneTimeCode"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["bogus"]}],"ok":{"result":null,"problems":["passwordManager.fields[0] must be login or oneTimeCode"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":"login"}],"ok":{"result":null,"problems":["passwordManager.fields must be a list of 1 to 2 of login, oneTimeCode"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"tool","fields":["login"]}],"ok":{"result":null,"problems":["passwordManager.fill: tool isn't available yet; use system"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"other","fields":["login"]}],"ok":{"result":null,"problems":["passwordManager.fill must be system"]}}
+{"fn":"passwordManagerOfCase","args":[{"fields":["login"]}],"ok":{"result":null,"problems":["passwordManager.fill must be system"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system"}],"ok":{"result":null,"problems":["passwordManager.fields must be a list of 1 to 2 of login, oneTimeCode"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login"],"verificationCodeSetup":"system"}],"ok":{"result":{"fill":"system","fields":["login"],"verificationCodeSetup":"system","passkeys":null},"problems":[]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login"],"verificationCodeSetup":"tool"}],"ok":{"result":{"fill":"system","fields":["login"],"verificationCodeSetup":null,"passkeys":null},"problems":["passwordManager.verificationCodeSetup must be system"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login"],"verificationCodeSetup":"x"}],"ok":{"result":{"fill":"system","fields":["login"],"verificationCodeSetup":null,"passkeys":null},"problems":["passwordManager.verificationCodeSetup must be system"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login"],"passkeys":"system"}],"ok":{"result":{"fill":"system","fields":["login"],"verificationCodeSetup":null,"passkeys":"system"},"problems":[]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login"],"passkeys":"tool"}],"ok":{"result":{"fill":"system","fields":["login"],"verificationCodeSetup":null,"passkeys":null},"problems":["passwordManager.passkeys must be system"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login"],"passkeys":1}],"ok":{"result":{"fill":"system","fields":["login"],"verificationCodeSetup":null,"passkeys":null},"problems":["passwordManager.passkeys must be system"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["login"],"extra":true}],"ok":{"result":{"fill":"system","fields":["login"],"verificationCodeSetup":null,"passkeys":null},"problems":["passwordManager.extra isn't a key of passwordManager"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":[1]}],"ok":{"result":null,"problems":["passwordManager.fields[0] must be login or oneTimeCode"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":"system","fields":["oneTimeCode"],"verificationCodeSetup":null}],"ok":{"result":{"fill":"system","fields":["oneTimeCode"],"verificationCodeSetup":null,"passkeys":null},"problems":["passwordManager.verificationCodeSetup must be system"]}}
+{"fn":"passwordManagerOfCase","args":[{"fill":1,"fields":["login"]}],"ok":{"result":null,"problems":["passwordManager.fill must be system"]}}

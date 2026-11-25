@@ -1,0 +1,72 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginMigrations.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "plugin-migrations-rs",
+  "exports": [
+    {
+      "name": "contributesFromV1Case",
+      "file": "apps/browser/src/lib/pluginMigrations.harness.ts",
+      "line": 4,
+      "params": [
+        {
+          "name": "doc",
+          "ts_type": "Record<string, unknown>",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "migrationCase",
+      "file": "apps/browser/src/lib/pluginMigrations.harness.ts",
+      "line": 5,
+      "params": [
+        {
+          "name": "version",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "doc",
+          "ts_type": "Record<string, unknown>",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "v1ProblemCase",
+      "file": "apps/browser/src/lib/pluginMigrations.harness.ts",
+      "line": 6,
+      "params": [
+        {
+          "name": "problem",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

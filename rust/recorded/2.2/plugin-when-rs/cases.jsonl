@@ -1,0 +1,1575 @@
+{"fn":"parseWhen","args":["  padded  "],"ok":{"ok":false,"problem":"names padded, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["{name} has {count} items"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 0"}}
+{"fn":"parseWhen","args":["tab\tseparateda..b"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 14"}}
+{"fn":"parseWhen","args":["ünïcödé"],"ok":{"ok":false,"problem":"has an unexpected \"ü\" at 0"}}
+{"fn":"parseWhen","args":["src/a/b.ts"],"ok":{"ok":false,"problem":"has an unexpected \"/\" at 3"}}
+{"fn":"parseWhen","args":["é"],"ok":{"ok":false,"problem":"has an unexpected \"́\" at 1"}}
+{"fn":"parseWhen","args":["a  padded  "],"ok":{"ok":false,"problem":"names a, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["😀"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 0"}}
+{"fn":"parseWhen","args":[":key_name-1"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 0"}}
+{"fn":"parseWhen","args":["hello日本語のテキスト"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 5"}}
+{"fn":"parseWhen","args":[":  padded  "],"ok":{"ok":false,"problem":"has an unexpected \":\" at 0"}}
+{"fn":"parseWhen","args":["a.b.c"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 1"}}
+{"fn":"parseWhen","args":["a..b"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 1"}}
+{"fn":"parseWhen","args":["ns:key.path"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 2"}}
+{"fn":"parseWhen","args":[":"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 0"}}
+{"fn":"parseWhen","args":["ΣΊΣΥΦΟΣ"],"ok":{"ok":false,"problem":"has an unexpected \"Σ\" at 0"}}
+{"fn":"parseWhen","args":["a:b:c日本語のテキスト"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 1"}}
+{"fn":"parseWhen","args":["key_name-1"],"ok":{"ok":false,"problem":"names key_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":[":a😀b😀c"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 0"}}
+{"fn":"parseWhen","args":[""],"ok":{"ok":false,"problem":"is empty"}}
+{"fn":"parseWhen","args":["İstanbul"],"ok":{"ok":false,"problem":"has an unexpected \"İ\" at 0"}}
+{"fn":"parseWhen","args":["HELLO"],"ok":{"ok":false,"problem":"names HELLO, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["emoji 👍🏽 mix"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 6"}}
+{"fn":"parseWhen","args":["a..bemoji 👍🏽 mix"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 1"}}
+{"fn":"parseWhen","args":["﻿bom"],"ok":{"ok":false,"problem":"has an unexpected \"﻿\" at 0"}}
+{"fn":"parseWhen","args":["ab"],"ok":{"ok":false,"problem":"names ab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["a😀b😀c"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 1"}}
+{"fn":"parseWhen","args":["﻿bom./x/**/*.json"],"ok":{"ok":false,"problem":"has an unexpected \"﻿\" at 0"}}
+{"fn":"parseWhen","args":["straße"],"ok":{"ok":false,"problem":"has an unexpected \"ß\" at 4"}}
+{"fn":"parseWhen","args":["./x/**/*.json"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["HELLO日本語のテキスト"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 5"}}
+{"fn":"parseWhen","args":["emoji 👍🏽 mixa"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 6"}}
+{"fn":"parseWhen","args":["./x/**/*.jsona:b:c"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["{name} has {count} itemsab"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 0"}}
+{"fn":"parseWhen","args":[".leading"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["trailing."],"ok":{"ok":false,"problem":"has an unexpected \".\" at 8"}}
+{"fn":"parseWhen","args":["line1\nline2"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 5"}}
+{"fn":"parseWhen","args":["straßeline1\nline2"],"ok":{"ok":false,"problem":"has an unexpected \"ß\" at 4"}}
+{"fn":"parseWhen","args":["hello"],"ok":{"ok":false,"problem":"names hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["Hello World"],"ok":{"ok":false,"problem":"names Hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["{name} has {count} itemsa..b"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 0"}}
+{"fn":"parseWhen","args":["HELLOa:b:c"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 6"}}
+{"fn":"parseWhen","args":["tab\tseparated"],"ok":{"ok":false,"problem":"names tab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["hello world"],"ok":{"ok":false,"problem":"names hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["hello worldhello"],"ok":{"ok":false,"problem":"names hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["{name} has {count} items  padded  "],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 0"}}
+{"fn":"parseWhen","args":["a😀b😀ca😀b😀c"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 1"}}
+{"fn":"parseWhen","args":["日本語のテキストsrc/a/b.ts"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 0"}}
+{"fn":"parseWhen","args":["tab\tseparated  padded  "],"ok":{"ok":false,"problem":"names tab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["a:b:c"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 1"}}
+{"fn":"parseWhen","args":["a"],"ok":{"ok":false,"problem":"names a, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["İstanbula.b.c"],"ok":{"ok":false,"problem":"has an unexpected \"İ\" at 0"}}
+{"fn":"parseWhen","args":["./x/**/*.jsona😀b😀c"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["ab:"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 2"}}
+{"fn":"parseWhen","args":["line1\nline2ΣΊΣΥΦΟΣ"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 5"}}
+{"fn":"parseWhen","args":["line1\nline2:"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 5"}}
+{"fn":"parseWhen","args":["abc"],"ok":{"ok":false,"problem":"names abc, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["trailing.HELLO"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 8"}}
+{"fn":"parseWhen","args":["aİstanbul"],"ok":{"ok":false,"problem":"has an unexpected \"İ\" at 1"}}
+{"fn":"parseWhen","args":["line1\nline2hello world"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 5"}}
+{"fn":"parseWhen","args":["Hello World{name} has {count} items"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 11"}}
+{"fn":"parseWhen","args":["日本語のテキストİstanbul"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 0"}}
+{"fn":"parseWhen","args":["日本語のテキスト"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 0"}}
+{"fn":"parseWhen","args":["İstanbulstraße"],"ok":{"ok":false,"problem":"has an unexpected \"İ\" at 0"}}
+{"fn":"parseWhen","args":["  padded  日本語のテキスト"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 10"}}
+{"fn":"parseWhen","args":["abcemoji 👍🏽 mix"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 9"}}
+{"fn":"parseWhen","args":["﻿bomns:key.path"],"ok":{"ok":false,"problem":"has an unexpected \"﻿\" at 0"}}
+{"fn":"parseWhen","args":["ünïcödéline1\nline2"],"ok":{"ok":false,"problem":"has an unexpected \"ü\" at 0"}}
+{"fn":"parseWhen","args":["a..ba"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 1"}}
+{"fn":"parseWhen","args":["abHello World"],"ok":{"ok":false,"problem":"names abHello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["éé"],"ok":{"ok":false,"problem":"has an unexpected \"́\" at 1"}}
+{"fn":"parseWhen","args":["src/a/b.tsabc"],"ok":{"ok":false,"problem":"has an unexpected \"/\" at 3"}}
+{"fn":"parseWhen","args":["😀hello"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 0"}}
+{"fn":"parseWhen","args":["a..ba:b:c"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 1"}}
+{"fn":"parseWhen","args":["Hello Worldsrc/a/b.ts"],"ok":{"ok":false,"problem":"has an unexpected \"/\" at 14"}}
+{"fn":"parseWhen","args":[".leadingemoji 👍🏽 mix"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["﻿bomline1\nline2"],"ok":{"ok":false,"problem":"has an unexpected \"﻿\" at 0"}}
+{"fn":"parseWhen","args":["hellohello world"],"ok":{"ok":false,"problem":"names hellohello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["{name} has {count} itemstab\tseparated"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 0"}}
+{"fn":"parseWhen","args":["﻿bomΣΊΣΥΦΟΣ"],"ok":{"ok":false,"problem":"has an unexpected \"﻿\" at 0"}}
+{"fn":"parseWhen","args":["straßekey_name-1"],"ok":{"ok":false,"problem":"has an unexpected \"ß\" at 4"}}
+{"fn":"parseWhen","args":["HELLOa..b"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 6"}}
+{"fn":"parseWhen","args":["Hello Worlda😀b😀c"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 12"}}
+{"fn":"parseWhen","args":["abckey_name-1"],"ok":{"ok":false,"problem":"names abckey_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":[":日本語のテキスト"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 0"}}
+{"fn":"parseWhen","args":["ünïcödéa"],"ok":{"ok":false,"problem":"has an unexpected \"ü\" at 0"}}
+{"fn":"parseWhen","args":["abchello world"],"ok":{"ok":false,"problem":"names abchello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["aabc"],"ok":{"ok":false,"problem":"names aabc, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["./x/**/*.jsonHELLO"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["key_name-1trailing."],"ok":{"ok":false,"problem":"has an unexpected \".\" at 18"}}
+{"fn":"parseWhen","args":["hello world﻿bom"],"ok":{"ok":false,"problem":"has an unexpected \"﻿\" at 11"}}
+{"fn":"parseWhen","args":["a..bİstanbul"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 1"}}
+{"fn":"parseWhen","args":["a😀b😀cline1\nline2"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 1"}}
+{"fn":"parseWhen","args":["line1\nline2emoji 👍🏽 mix"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 5"}}
+{"fn":"parseWhen","args":["日本語のテキストΣΊΣΥΦΟΣ"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 0"}}
+{"fn":"parseWhen","args":["emoji 👍🏽 mixns:key.path"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 6"}}
+{"fn":"parseWhen","args":["a:b:c{name} has {count} items"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 1"}}
+{"fn":"parseWhen","args":["a😀b😀c{name} has {count} items"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 1"}}
+{"fn":"parseWhen","args":["line1\nline2日本語のテキスト"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 5"}}
+{"fn":"parseWhen","args":["key_name-1a"],"ok":{"ok":false,"problem":"names key_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["ΣΊΣΥΦΟΣ./x/**/*.json"],"ok":{"ok":false,"problem":"has an unexpected \"Σ\" at 0"}}
+{"fn":"parseWhen","args":["src/a/b.tshello world"],"ok":{"ok":false,"problem":"has an unexpected \"/\" at 3"}}
+{"fn":"parseWhen","args":["İstanbulkey_name-1"],"ok":{"ok":false,"problem":"has an unexpected \"İ\" at 0"}}
+{"fn":"parseWhen","args":["line1\nline2a.b.c"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 5"}}
+{"fn":"parseWhen","args":[".leadingabc"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["a:b:c./x/**/*.json"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 1"}}
+{"fn":"parseWhen","args":["line1\nline2trailing."],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 5"}}
+{"fn":"parseWhen","args":["Hello Worldline1\nline2"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 16"}}
+{"fn":"parseWhen","args":["ünïcödétrailing."],"ok":{"ok":false,"problem":"has an unexpected \"ü\" at 0"}}
+{"fn":"parseWhen","args":["abünïcödé"],"ok":{"ok":false,"problem":"has an unexpected \"ü\" at 2"}}
+{"fn":"parseWhen","args":[".leading./x/**/*.json"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["helloİstanbul"],"ok":{"ok":false,"problem":"has an unexpected \"İ\" at 5"}}
+{"fn":"parseWhen","args":["{name} has {count} itemsΣΊΣΥΦΟΣ"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 0"}}
+{"fn":"parseWhen","args":["{name} has {count} itemsa"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 0"}}
+{"fn":"parseWhen","args":["ahello world"],"ok":{"ok":false,"problem":"names ahello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["src/a/b.tsΣΊΣΥΦΟΣ"],"ok":{"ok":false,"problem":"has an unexpected \"/\" at 3"}}
+{"fn":"parseWhen","args":["😀./x/**/*.json"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 0"}}
+{"fn":"parseWhen","args":["😀emoji 👍🏽 mix"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 0"}}
+{"fn":"parseWhen","args":["ns:key.pathhello world"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 2"}}
+{"fn":"parseWhen","args":["İstanbulab"],"ok":{"ok":false,"problem":"has an unexpected \"İ\" at 0"}}
+{"fn":"parseWhen","args":["a.b.cHELLO"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 1"}}
+{"fn":"parseWhen","args":["./x/**/*.jsontab\tseparated"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":[".leading😀"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["helloa😀b😀c"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 6"}}
+{"fn":"parseWhen","args":["ns:key.pathİstanbul"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 2"}}
+{"fn":"parseWhen","args":["src/a/b.tsa..b"],"ok":{"ok":false,"problem":"has an unexpected \"/\" at 3"}}
+{"fn":"parseWhen","args":["emoji 👍🏽 mixΣΊΣΥΦΟΣ"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 6"}}
+{"fn":"parseWhen","args":["😀src/a/b.ts"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 0"}}
+{"fn":"parseWhen","args":[":tab\tseparated"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 0"}}
+{"fn":"parseWhen","args":["  padded  line1\nline2"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 15"}}
+{"fn":"parseWhen","args":["emoji 👍🏽 mixHello World"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 6"}}
+{"fn":"parseWhen","args":["a:b:chello world"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 1"}}
+{"fn":"parseWhen","args":["key_name-1straße"],"ok":{"ok":false,"problem":"has an unexpected \"ß\" at 14"}}
+{"fn":"parseWhen","args":["ab日本語のテキスト"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 2"}}
+{"fn":"parseWhen","args":["line1\nline2.leading"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 5"}}
+{"fn":"parseWhen","args":["ns:key.pathünïcödé"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 2"}}
+{"fn":"parseWhen","args":["a..ba😀b😀c"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 1"}}
+{"fn":"parseWhen","args":[".leading.leading"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["a..bkey_name-1"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 1"}}
+{"fn":"parseWhen","args":["abé"],"ok":{"ok":false,"problem":"has an unexpected \"́\" at 3"}}
+{"fn":"parseWhen","args":["HELLOtab\tseparated"],"ok":{"ok":false,"problem":"names HELLOtab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["straßehello"],"ok":{"ok":false,"problem":"has an unexpected \"ß\" at 4"}}
+{"fn":"parseWhen","args":["日本語のテキストa😀b😀c"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 0"}}
+{"fn":"parseWhen","args":["ab  padded  "],"ok":{"ok":false,"problem":"names ab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["a😀b😀ckey_name-1"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 1"}}
+{"fn":"parseWhen","args":["./x/**/*.json日本語のテキスト"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["tab\tseparatedsrc/a/b.ts"],"ok":{"ok":false,"problem":"has an unexpected \"/\" at 16"}}
+{"fn":"parseWhen","args":["ΣΊΣΥΦΟΣa"],"ok":{"ok":false,"problem":"has an unexpected \"Σ\" at 0"}}
+{"fn":"parseWhen","args":["trailing.hello"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 8"}}
+{"fn":"parseWhen","args":["  padded  trailing."],"ok":{"ok":false,"problem":"has an unexpected \".\" at 18"}}
+{"fn":"parseWhen","args":["﻿boma.b.c"],"ok":{"ok":false,"problem":"has an unexpected \"﻿\" at 0"}}
+{"fn":"parseWhen","args":["ünïcödéemoji 👍🏽 mix"],"ok":{"ok":false,"problem":"has an unexpected \"ü\" at 0"}}
+{"fn":"parseWhen","args":["abc{name} has {count} items"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 3"}}
+{"fn":"parseWhen","args":["{name} has {count} items{name} has {count} items"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 0"}}
+{"fn":"parseWhen","args":["  padded  .leading"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 10"}}
+{"fn":"parseWhen","args":["a..bsrc/a/b.ts"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 1"}}
+{"fn":"parseWhen","args":["﻿bomtrailing."],"ok":{"ok":false,"problem":"has an unexpected \"﻿\" at 0"}}
+{"fn":"parseWhen","args":["ΣΊΣΥΦΟΣhello"],"ok":{"ok":false,"problem":"has an unexpected \"Σ\" at 0"}}
+{"fn":"parseWhen","args":["a😀b😀cİstanbul"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 1"}}
+{"fn":"parseWhen","args":["ΣΊΣΥΦΟΣ😀"],"ok":{"ok":false,"problem":"has an unexpected \"Σ\" at 0"}}
+{"fn":"parseWhen","args":[".leadingHello World"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["éİstanbul"],"ok":{"ok":false,"problem":"has an unexpected \"́\" at 1"}}
+{"fn":"parseWhen","args":["key_name-1HELLO"],"ok":{"ok":false,"problem":"names key_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["tab\tseparatedabc"],"ok":{"ok":false,"problem":"names tab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["helloa..b"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 6"}}
+{"fn":"parseWhen","args":["  padded  ./x/**/*.json"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 10"}}
+{"fn":"parseWhen","args":["trailing.日本語のテキスト"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 8"}}
+{"fn":"parseWhen","args":["日本語のテキストa..b"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 0"}}
+{"fn":"parseWhen","args":["abc.leading"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 3"}}
+{"fn":"parseWhen","args":[":Hello World"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 0"}}
+{"fn":"parseWhen","args":["ΣΊΣΥΦΟΣline1\nline2"],"ok":{"ok":false,"problem":"has an unexpected \"Σ\" at 0"}}
+{"fn":"parseWhen","args":["key_name-1  padded  "],"ok":{"ok":false,"problem":"names key_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["﻿bom.leading"],"ok":{"ok":false,"problem":"has an unexpected \"﻿\" at 0"}}
+{"fn":"parseWhen","args":["  padded  abc"],"ok":{"ok":false,"problem":"names padded, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["a😀b😀cé"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 1"}}
+{"fn":"parseWhen","args":["{name} has {count} itemskey_name-1"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 0"}}
+{"fn":"parseWhen","args":["a:b:ctrailing."],"ok":{"ok":false,"problem":"has an unexpected \":\" at 1"}}
+{"fn":"parseWhen","args":["é.leading"],"ok":{"ok":false,"problem":"has an unexpected \"́\" at 1"}}
+{"fn":"parseWhen","args":["HELLOemoji 👍🏽 mix"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 11"}}
+{"fn":"parseWhen","args":["./x/**/*.jsona.b.c"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"parseWhen","args":["emoji 👍🏽 mixHELLO"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 6"}}
+{"fn":"parseWhen","args":["é./x/**/*.json"],"ok":{"ok":false,"problem":"has an unexpected \"́\" at 1"}}
+{"fn":"parseWhen","args":["ünïcödéab"],"ok":{"ok":false,"problem":"has an unexpected \"ü\" at 0"}}
+{"fn":"parseWhen","args":["abca"],"ok":{"ok":false,"problem":"names abca, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["a:b:c😀"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 1"}}
+{"fn":"parseWhen","args":["abcΣΊΣΥΦΟΣ"],"ok":{"ok":false,"problem":"has an unexpected \"Σ\" at 3"}}
+{"fn":"parseWhen","args":["  padded  é"],"ok":{"ok":false,"problem":"has an unexpected \"́\" at 11"}}
+{"fn":"parseWhen","args":["aemoji 👍🏽 mix"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 7"}}
+{"fn":"parseWhen","args":["HELLO﻿bom"],"ok":{"ok":false,"problem":"has an unexpected \"﻿\" at 5"}}
+{"fn":"parseWhen","args":["emoji 👍🏽 mixline1\nline2"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 6"}}
+{"fn":"parseWhen","args":["trailing.hello world"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 8"}}
+{"fn":"parseWhen","args":["abchello"],"ok":{"ok":false,"problem":"names abchello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"parseWhen","args":["  padded  src/a/b.ts"],"ok":{"ok":false,"problem":"has an unexpected \"/\" at 13"}}
+{"fn":"parseWhen","args":["a😀b😀ctab\tseparated"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 1"}}
+{"fn":"parseWhen","args":["étab\tseparated"],"ok":{"ok":false,"problem":"has an unexpected \"́\" at 1"}}
+{"fn":"parseWhen","args":[":a.b.c"],"ok":{"ok":false,"problem":"has an unexpected \":\" at 0"}}
+{"fn":"parseWhen","args":["éa:b:c"],"ok":{"ok":false,"problem":"has an unexpected \"́\" at 1"}}
+{"fn":"parseWhen","args":["{name} has {count} itemsünïcödé"],"ok":{"ok":false,"problem":"has an unexpected \"{\" at 0"}}
+{"fn":"parseWhen","args":["hello world.leading"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 11"}}
+{"fn":"parseWhen","args":["İstanbul{name} has {count} items"],"ok":{"ok":false,"problem":"has an unexpected \"İ\" at 0"}}
+{"fn":"parseWhen","args":["héllo wörld"],"ok":{"ok":false,"problem":"has an unexpected \"é\" at 1"}}
+{"fn":"parseWhen","args":["👍🏽 thumbs"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 0"}}
+{"fn":"parseWhen","args":["日本語"],"ok":{"ok":false,"problem":"has an unexpected \"日\" at 0"}}
+{"fn":"parseWhen","args":["ılık ırmak"],"ok":{"ok":false,"problem":"has an unexpected \"ı\" at 0"}}
+{"fn":"parseWhen","args":["👨‍👩‍👧 family"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 0"}}
+{"fn":"parseWhen","args":["a b"],"ok":{"ok":false,"problem":"has an unexpected \" \" at 1"}}
+{"fn":"parseWhen","args":["a😀b"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud83d\" at 1"}}
+{"fn":"parseWhen","args":["a²b x½ y①"],"ok":{"ok":false,"problem":"has an unexpected \"²\" at 1"}}
+{"fn":"parseWhen","args":["aⅠb Ⅻ"],"ok":{"ok":false,"problem":"has an unexpected \"Ⅰ\" at 1"}}
+{"fn":"parseWhen","args":["a𐐀b 𝐀bc"],"ok":{"ok":false,"problem":"has an unexpected \"\\ud801\" at 1"}}
+{"fn":"parseWhen","args":["कि ٣٤"],"ok":{"ok":false,"problem":"has an unexpected \"क\" at 0"}}
+{"fn":"globMatches","args":["a.b.ca","ab"],"ok":false}
+{"fn":"globMatches","args":["😀","a😀b😀c"],"ok":false}
+{"fn":"globMatches","args":["İstanbul","ns:key.path"],"ok":false}
+{"fn":"globMatches","args":["src/a/b.ts","ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"globMatches","args":["key_name-1tab\tseparated","é"],"ok":false}
+{"fn":"globMatches","args":["﻿bom","ns:key.path"],"ok":false}
+{"fn":"globMatches","args":["o","Hello World"],"ok":false}
+{"fn":"globMatches","args":["a😀b😀c","😀"],"ok":false}
+{"fn":"globMatches","args":["İstanbul","﻿bomemoji 👍🏽 mix"],"ok":false}
+{"fn":"globMatches","args":["é","a😀b😀c"],"ok":false}
+{"fn":"globMatches","args":[":","é"],"ok":false}
+{"fn":"globMatches","args":["a😀b😀c","a😀b😀c"],"ok":true}
+{"fn":"globMatches","args":["src/a/b.ts","HELLO"],"ok":false}
+{"fn":"globMatches","args":["語","日本語のテキストé"],"ok":false}
+{"fn":"globMatches","args":["abc","  padded  "],"ok":false}
+{"fn":"globMatches","args":["ünïcödé","straße"],"ok":false}
+{"fn":"globMatches","args":["ab./x/**/*.json","emoji 👍🏽 mix"],"ok":false}
+{"fn":"globMatches","args":[":",":"],"ok":true}
+{"fn":"globMatches","args":["é","key_name-1"],"ok":false}
+{"fn":"globMatches","args":["llo ","hello world"],"ok":false}
+{"fn":"globMatches","args":["straße","a"],"ok":false}
+{"fn":"globMatches","args":["﻿bom","  padded  a..b"],"ok":false}
+{"fn":"globMatches","args":["ΣΊΣΥΦΟΣ","İstanbul"],"ok":false}
+{"fn":"globMatches","args":["ab","  padded  "],"ok":false}
+{"fn":"globMatches","args":["straße","a😀b😀c"],"ok":false}
+{"fn":"globMatches","args":["abc","﻿bomabc"],"ok":false}
+{"fn":"globMatches","args":["key_name-1","ame-1"],"ok":false}
+{"fn":"globMatches","args":["c","a.b.c"],"ok":false}
+{"fn":"globMatches","args":["B.C.LEA","a.b.c.leading"],"ok":false}
+{"fn":"globMatches","args":["line1\nline2","hello world"],"ok":false}
+{"fn":"globMatches","args":["ab","key_name-1"],"ok":false}
+{"fn":"globMatches","args":["src/a/b.tsns:key.path","abemoji 👍🏽 mix"],"ok":false}
+{"fn":"globMatches","args":["  padded  ","Hello World"],"ok":false}
+{"fn":"globMatches","args":["straße","ab"],"ok":false}
+{"fn":"globMatches","args":["a.b.c","a.b.cab"],"ok":false}
+{"fn":"globMatches","args":["ab",".leading"],"ok":false}
+{"fn":"globMatches","args":["Hello World","a"],"ok":false}
+{"fn":"globMatches","args":["HELLO{name} has {count} items",".leading"],"ok":false}
+{"fn":"globMatches","args":["key_name-1a😀b😀c","étab\tseparated"],"ok":false}
+{"fn":"globMatches","args":["Hello World","é"],"ok":false}
+{"fn":"globMatches","args":["D","Hello WorldHello World"],"ok":false}
+{"fn":"globMatches","args":["a..b","ab"],"ok":false}
+{"fn":"globMatches","args":["hello world","hello world"],"ok":true}
+{"fn":"globMatches","args":["trailing.","a"],"ok":false}
+{"fn":"globMatches","args":["straße  padded  ","straße.leading"],"ok":false}
+{"fn":"globMatches","args":[".leading","é"],"ok":false}
+{"fn":"globMatches","args":["a😀b😀cab","é"],"ok":false}
+{"fn":"globMatches","args":["hello world","line1\nline2"],"ok":false}
+{"fn":"globMatches","args":["hello","ns:key.path"],"ok":false}
+{"fn":"globMatches","args":[" ","  padded  "],"ok":false}
+{"fn":"globMatches","args":["emoji 👍🏽 mix","İstanbula"],"ok":false}
+{"fn":"globMatches","args":["ns:key.path","  padded  ünïcödé"],"ok":false}
+{"fn":"globMatches","args":["helloHello World","hello worldabc"],"ok":false}
+{"fn":"globMatches","args":["a..b","a."],"ok":false}
+{"fn":"globMatches","args":["..B","a..b"],"ok":false}
+{"fn":"globMatches","args":["a","a"],"ok":true}
+{"fn":"globMatches","args":["src/a/b.ts","emoji 👍🏽 mix"],"ok":false}
+{"fn":"globMatches","args":["I 👍🏽","emoji 👍🏽 mix"],"ok":false}
+{"fn":"globMatches","args":["emoji 👍🏽 mixa.b.c","a😀b😀c"],"ok":false}
+{"fn":"globMatches","args":["/**/*.JSO","./x/**/*.json"],"ok":false}
+{"fn":"globMatches","args":["İstanbul","./x/**/*.json"],"ok":false}
+{"fn":"globMatches","args":["hello world",":"],"ok":false}
+{"fn":"globMatches","args":["src/a/b.ts","a"],"ok":false}
+{"fn":"globMatches","args":["hello",".leadingabc"],"ok":false}
+{"fn":"globMatches","args":[":HELLO","  padded  日本語のテキスト"],"ok":false}
+{"fn":"globMatches","args":["hell","hello"],"ok":false}
+{"fn":"globMatches","args":["src/a/b.ts","ts"],"ok":false}
+{"fn":"globMatches","args":["straße","😀"],"ok":false}
+{"fn":"globMatches","args":["a  padded  ","a"],"ok":false}
+{"fn":"globMatches","args":["  padded  ","pad"],"ok":false}
+{"fn":"globMatches","args":["./x/**/*.json","a..b"],"ok":false}
+{"fn":"globMatches","args":["abcabc","line1\nline2"],"ok":false}
+{"fn":"globMatches","args":["{name} has {count} items","ab"],"ok":false}
+{"fn":"globMatches","args":["emoji 👍🏽 mixünïcödé","a.b.c"],"ok":false}
+{"fn":"globMatches","args":["trailing.","日本語のテキスト"],"ok":false}
+{"fn":"globMatches","args":["src/a/b.ts","日本語のテキスト"],"ok":false}
+{"fn":"globMatches","args":["ünïcödéemoji 👍🏽 mix","i 👍🏽 mi"],"ok":false}
+{"fn":"globMatches","args":["absrc/a/b.ts","ABSR"],"ok":false}
+{"fn":"globMatches","args":["","a"],"ok":false}
+{"fn":"globMatches","args":["hello world😀","a..b"],"ok":false}
+{"fn":"globMatches","args":["😀日本語のテキスト","ab"],"ok":false}
+{"fn":"globMatches","args":["trailing.","a:b:c"],"ok":false}
+{"fn":"globMatches","args":["lda:b","Hello Worlda:b:c"],"ok":false}
+{"fn":"globMatches","args":["ünïcödé","d"],"ok":false}
+{"fn":"globMatches","args":["ab","ns:key.path"],"ok":false}
+{"fn":"globMatches","args":["a..b","..B"],"ok":false}
+{"fn":"globMatches","args":[".leading","tab\tseparated"],"ok":false}
+{"fn":"globMatches","args":["é","İstanbulstraße"],"ok":false}
+{"fn":"globMatches","args":["a.b.c","src/a/b.ts"],"ok":false}
+{"fn":"globMatches","args":["日本語のテキスト","key_name-1"],"ok":false}
+{"fn":"globMatches","args":["hello","O"],"ok":false}
+{"fn":"globMatches","args":["Hello World","line1\nline2"],"ok":false}
+{"fn":"globMatches","args":["a:b:c",":"],"ok":false}
+{"fn":"globMatches","args":["  padded  ","ed "],"ok":false}
+{"fn":"globMatches","args":["line1\nline2","e2"],"ok":false}
+{"fn":"globMatches","args":[":","ünïcödé"],"ok":false}
+{"fn":"globMatches","args":["ΣΊΣΥΦΟΣ","atrailing."],"ok":false}
+{"fn":"globMatches","args":["i",".leading.leading"],"ok":false}
+{"fn":"globMatches","args":["日本語のテキスト","é"],"ok":false}
+{"fn":"globMatches","args":[".b","a..b"],"ok":false}
+{"fn":"globMatches","args":["key_name-1","src/a/b.tsa"],"ok":false}
+{"fn":"globMatches","args":["a","é"],"ok":false}
+{"fn":"globMatches","args":["a😀b😀c","ΣΊΣΥΦΟΣ﻿bom"],"ok":false}
+{"fn":"globMatches","args":["a:b:c","{name} has {count} items"],"ok":false}
+{"fn":"globMatches","args":["é","😀"],"ok":false}
+{"fn":"globMatches","args":["o","hello"],"ok":false}
+{"fn":"globMatches","args":["ünïcödé","öd"],"ok":false}
+{"fn":"globMatches","args":["ab","a:b:cemoji 👍🏽 mix"],"ok":false}
+{"fn":"globMatches","args":["AME-","key_name-1"],"ok":false}
+{"fn":"globMatches","args":["a..b","a..b"],"ok":true}
+{"fn":"globMatches","args":["﻿bom","line1\nline2"],"ok":false}
+{"fn":"globMatches","args":["L","HELLO"],"ok":false}
+{"fn":"globMatches","args":["emoji 👍🏽 mixsrc/a/b.ts",":"],"ok":false}
+{"fn":"globMatches","args":["😀b😀","a😀b😀c"],"ok":false}
+{"fn":"globMatches","args":["abc./x/**/*.json","a.b.c"],"ok":false}
+{"fn":"globMatches","args":[".leading😀","key_name-1"],"ok":false}
+{"fn":"globMatches","args":["","Hello World"],"ok":false}
+{"fn":"globMatches","args":["","a.b.c"],"ok":false}
+{"fn":"globMatches","args":["tab\tseparated","a:b:c"],"ok":false}
+{"fn":"globMatches","args":["key_name-1key_name-1","_name-1k"],"ok":false}
+{"fn":"globMatches","args":["😀","a..b"],"ok":false}
+{"fn":"globMatches","args":["ΣΊΣΥΦΟΣ","src/a/b.ts"],"ok":false}
+{"fn":"globMatches","args":["line1\nline2","tab\tseparated"],"ok":false}
+{"fn":"globMatches","args":["./x/**/*.json","ns:key.path"],"ok":false}
+{"fn":"globMatches","args":["é{name} has {count} items","key_name-1﻿bom"],"ok":false}
+{"fn":"globMatches","args":["a..b","hello"],"ok":false}
+{"fn":"globMatches","args":["","ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"globMatches","args":["atrailing.","  padded  "],"ok":false}
+{"fn":"globMatches","args":["","abns:key.path"],"ok":false}
+{"fn":"globMatches","args":["a😀b😀c","A"],"ok":false}
+{"fn":"globMatches","args":["  padded  ","a"],"ok":false}
+{"fn":"globMatches","args":["ded  ","  padded  "],"ok":false}
+{"fn":"globMatches","args":["日本語のテキスト","テキスト"],"ok":false}
+{"fn":"globMatches","args":["src/a/b.tshello","日本語のテキスト"],"ok":false}
+{"fn":"globMatches","args":["trailing.","é"],"ok":false}
+{"fn":"globMatches","args":["./x/**/*.json","/x"],"ok":false}
+{"fn":"globMatches","args":["﻿bom","ünïcödéΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"globMatches","args":["{name} has {count} items","has"],"ok":false}
+{"fn":"globMatches","args":["line1\nline2","in"],"ok":false}
+{"fn":"globMatches","args":["hello world","ab"],"ok":false}
+{"fn":"globMatches","args":["{name} has {count} items","é日本語のテキスト"],"ok":false}
+{"fn":"globMatches","args":["a.b.c","hello"],"ok":false}
+{"fn":"globMatches","args":["tab\tseparated","a:b:cab"],"ok":false}
+{"fn":"globMatches","args":["d","Hello World"],"ok":false}
+{"fn":"globMatches","args":["ab日本語のテキスト","キス"],"ok":false}
+{"fn":"globMatches","args":["Hello World","ns:key.path"],"ok":false}
+{"fn":"globMatches","args":["ΣΊΣΥΦΟΣ",":ns:key.path"],"ok":false}
+{"fn":"globMatches","args":["😀a..b",":a.b.c"],"ok":false}
+{"fn":"globMatches","args":["hello","line1\nline2"],"ok":false}
+{"fn":"globMatches","args":["d",".leading"],"ok":false}
+{"fn":"globMatches","args":["1","key_name-1"],"ok":false}
+{"fn":"globMatches","args":["ト","日本語のテキスト"],"ok":false}
+{"fn":"globMatches","args":["İstanbul﻿bom","ns:key.path"],"ok":false}
+{"fn":"globMatches","args":["{name} has {count} items",".leading"],"ok":false}
+{"fn":"globMatches","args":["trailing.line1\nline2","  padded  line1\nline2"],"ok":false}
+{"fn":"globMatches","args":["./x/**/*.json","😀  padded  "],"ok":false}
+{"fn":"globMatches","args":["hello",".leading"],"ok":false}
+{"fn":"globMatches","args":["é","é"],"ok":true}
+{"fn":"globMatches","args":["ünïcödé","ns:key.path"],"ok":false}
+{"fn":"globMatches","args":["key_name-1","astraße"],"ok":false}
+{"fn":"globMatches","args":["hello","{name} has {count} items"],"ok":false}
+{"fn":"globMatches","args":["emoji 👍🏽 mix","./x/**/*.jsoné"],"ok":false}
+{"fn":"globMatches","args":["İstanbul",".leadinga.b.c"],"ok":false}
+{"fn":"globMatches","args":["日本語のテキスト","hello world"],"ok":false}
+{"fn":"globMatches","args":["","line1\nline2"],"ok":false}
+{"fn":"globMatches","args":["é","aΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"globMatches","args":[".leading","straße{name} has {count} items"],"ok":false}
+{"fn":"globMatches","args":[".P","HELLOns:key.path"],"ok":false}
+{"fn":"globMatches","args":["trailing.","tab\tseparated"],"ok":false}
+{"fn":"globMatches","args":["a","ab"],"ok":false}
+{"fn":"globMatches","args":["helloabc","ab"],"ok":false}
+{"fn":"globMatches","args":["éstraße","éstr"],"ok":false}
+{"fn":"globMatches","args":["Σ","ΣΊΣΥΦΟΣ  padded  "],"ok":false}
+{"fn":"globMatches","args":["日本語のテキスト","İstanbul"],"ok":false}
+{"fn":"globMatches","args":["straße","./x/**/*.json  padded  "],"ok":false}
+{"fn":"globMatches","args":["{name} has {count} items","emoji 👍🏽 mix"],"ok":false}
+{"fn":"globMatches","args":["ΣΊΣΥΦΟΣa:b:c",":tab\tseparated"],"ok":false}
+{"fn":"globMatches","args":["./x/**/*.json","src/a/b.ts"],"ok":false}
+{"fn":"globMatches","args":["ab","😀"],"ok":false}
+{"fn":"globMatches","args":["abhello","a﻿bom"],"ok":false}
+{"fn":"globMatches","args":["hello world","日本語のテキスト😀"],"ok":false}
+{"fn":"globMatches","args":["","😀"],"ok":false}
+{"fn":"globMatches","args":["a..b","a..b😀"],"ok":false}
+{"fn":"globMatches","args":[".leading","ünïcödé"],"ok":false}
+{"fn":"globMatches","args":["src/a/b.tskey_name-1","a..b"],"ok":false}
+{"fn":"globMatches","args":["","a😀b😀c"],"ok":false}
+{"fn":"globMatches","args":[":","src/a/b.ts"],"ok":false}
+{"fn":"globMatches","args":["ünïcödéa","{name} has {count} items"],"ok":false}
+{"fn":"globMatches","args":["日本語のテキスト","a.b.c"],"ok":false}
+{"fn":"globMatches","args":["ΥΦΟ","ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"globMatches","args":["ΣΊΣΥΦΟΣ","ΟΣ"],"ok":false}
+{"fn":"globMatches","args":["a","ns:key.path"],"ok":false}
+{"fn":"globMatches","args":["a/b.","src/a/b.ts"],"ok":false}
+{"fn":"globMatches","args":[":","a"],"ok":false}
+{"fn":"globMatches","args":["a","Hello Worldhello"],"ok":false}
+{"fn":"globMatches","args":["","﻿bom"],"ok":false}
+{"fn":"globMatches","args":["key_name-1","helloİstanbul"],"ok":false}
+{"fn":"globMatches","args":["./x/**/*.json","line1\nline2"],"ok":false}
+{"fn":"globMatches","args":["src/a/b.ts","😀a.b.c"],"ok":false}
+{"fn":"globMatches","args":["line1\nline2","HELLO"],"ok":false}
+{"fn":"globMatches","args":["héllo wörld","ab"],"ok":false}
+{"fn":"globMatches","args":["👍🏽 thumbs","ab"],"ok":false}
+{"fn":"globMatches","args":["日本語","ab"],"ok":false}
+{"fn":"globMatches","args":["","ab"],"ok":false}
+{"fn":"globMatches","args":["é","ab"],"ok":false}
+{"fn":"globMatches","args":["İstanbul","ab"],"ok":false}
+{"fn":"globMatches","args":["ılık ırmak","ab"],"ok":false}
+{"fn":"globMatches","args":["👨‍👩‍👧 family","ab"],"ok":false}
+{"fn":"globMatches","args":["a b","ab"],"ok":false}
+{"fn":"globMatches","args":["ΣΊΣΥΦΟΣ","ab"],"ok":false}
+{"fn":"globMatches","args":["a😀b","ab"],"ok":false}
+{"fn":"globMatches","args":["﻿bom","ab"],"ok":false}
+{"fn":"globMatches","args":["a²b x½ y①","ab"],"ok":false}
+{"fn":"globMatches","args":["aⅠb Ⅻ","ab"],"ok":false}
+{"fn":"globMatches","args":["a𐐀b 𝐀bc","ab"],"ok":false}
+{"fn":"globMatches","args":["कि ٣٤","ab"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","héllo wörld"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","👍🏽 thumbs"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","日本語"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca",""],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","é"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","İstanbul"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","straße"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","ılık ırmak"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","👨‍👩‍👧 family"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","a b"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","a😀b"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","﻿bom"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","a²b x½ y①"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","aⅠb Ⅻ"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","a𐐀b 𝐀bc"],"ok":false}
+{"fn":"globMatches","args":["a.b.ca","कि ٣٤"],"ok":false}
+{"fn":"whenHolds","args":["é",[]],"ok":false}
+{"fn":"whenHolds","args":["é",{}],"ok":false}
+{"fn":"whenHolds","args":["a",null],"ok":false}
+{"fn":"whenHolds","args":["Hello World",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["key_name-1é",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["tab\tseparatedhello world",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["key_name-1",null],"ok":false}
+{"fn":"whenHolds","args":["日本語のテキスト",null],"ok":false}
+{"fn":"whenHolds","args":["ab",true],"ok":false}
+{"fn":"whenHolds","args":["straße",[]],"ok":false}
+{"fn":"whenHolds","args":["  padded  ",true],"ok":false}
+{"fn":"whenHolds","args":["ΣΊΣΥΦΟΣ",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["./x/**/*.json",{}],"ok":false}
+{"fn":"whenHolds","args":["trailing.日本語のテキスト",true],"ok":false}
+{"fn":"whenHolds","args":["hello",0],"ok":false}
+{"fn":"whenHolds","args":["ΣΊΣΥΦΟΣabc",null],"ok":false}
+{"fn":"whenHolds","args":["hello world",0],"ok":false}
+{"fn":"whenHolds","args":["ns:key.pathtrailing.",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["emoji 👍🏽 mix","x"],"ok":false}
+{"fn":"whenHolds","args":[{"$undefined":true},true],"ok":true}
+{"fn":"whenHolds","args":["trailing.",null],"ok":false}
+{"fn":"whenHolds","args":["tab\tseparated",true],"ok":false}
+{"fn":"whenHolds","args":[{"$undefined":true},"x"],"ok":true}
+{"fn":"whenHolds","args":[":",null],"ok":false}
+{"fn":"whenHolds","args":["日本語のテキスト",true],"ok":false}
+{"fn":"whenHolds","args":[{"$undefined":true},{}],"ok":true}
+{"fn":"whenHolds","args":[":",{}],"ok":false}
+{"fn":"whenHolds","args":["ns:key.path","x"],"ok":false}
+{"fn":"whenHolds","args":[{"$undefined":true},0],"ok":true}
+{"fn":"whenHolds","args":["hello world",{}],"ok":false}
+{"fn":"whenHolds","args":["  padded    padded  ","x"],"ok":false}
+{"fn":"whenHolds","args":["hello world",[]],"ok":false}
+{"fn":"whenHolds","args":["﻿bom",0],"ok":false}
+{"fn":"whenHolds","args":["ünïcödé",{}],"ok":false}
+{"fn":"whenHolds","args":["abckey_name-1",null],"ok":false}
+{"fn":"whenHolds","args":["key_name-1ΣΊΣΥΦΟΣ",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["a😀b😀c",null],"ok":false}
+{"fn":"whenHolds","args":["😀",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["a😀b😀c",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["ünïcödé",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["emoji 👍🏽 mix",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":[{"$undefined":true},null],"ok":true}
+{"fn":"whenHolds","args":[".leading",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["",0],"ok":true}
+{"fn":"whenHolds","args":["emoji 👍🏽 mix",[]],"ok":false}
+{"fn":"whenHolds","args":["  padded  ",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["ab",{}],"ok":false}
+{"fn":"whenHolds","args":["",null],"ok":true}
+{"fn":"whenHolds","args":[{"$undefined":true},{"a":"b"}],"ok":true}
+{"fn":"whenHolds","args":["日本語のテキスト","x"],"ok":false}
+{"fn":"whenHolds","args":["line1\nline2",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":[{"$undefined":true},[]],"ok":true}
+{"fn":"whenHolds","args":["key_name-1","x"],"ok":false}
+{"fn":"whenHolds","args":["😀",[]],"ok":false}
+{"fn":"whenHolds","args":["ünïcödé",[]],"ok":false}
+{"fn":"whenHolds","args":["é",0],"ok":false}
+{"fn":"whenHolds","args":["a:b:c",true],"ok":false}
+{"fn":"whenHolds","args":["src/a/b.ts",[]],"ok":false}
+{"fn":"whenHolds","args":["abc",0],"ok":false}
+{"fn":"whenHolds","args":["trailing.trailing.",[]],"ok":false}
+{"fn":"whenHolds","args":["a",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["hello",null],"ok":false}
+{"fn":"whenHolds","args":[{"$undefined":true},{"a":{"b":"c"}}],"ok":true}
+{"fn":"whenHolds","args":["ab",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["HELLO",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["key_name-1",{}],"ok":false}
+{"fn":"whenHolds","args":[":ΣΊΣΥΦΟΣ",[]],"ok":false}
+{"fn":"whenHolds","args":["HELLO",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["",{"a":{"b":"c"}}],"ok":true}
+{"fn":"whenHolds","args":["a:b:c",0],"ok":false}
+{"fn":"whenHolds","args":["  padded  ",{}],"ok":false}
+{"fn":"whenHolds","args":[{"$undefined":true},["a",1]],"ok":true}
+{"fn":"whenHolds","args":["emoji 👍🏽 mix",null],"ok":false}
+{"fn":"whenHolds","args":["ΣΊΣΥΦΟΣ","x"],"ok":false}
+{"fn":"whenHolds","args":["abcns:key.path",null],"ok":false}
+{"fn":"whenHolds","args":["hello world",null],"ok":false}
+{"fn":"whenHolds","args":["straßea..b","x"],"ok":false}
+{"fn":"whenHolds","args":["ns:key.path",[]],"ok":false}
+{"fn":"whenHolds","args":["HELLOns:key.path",0],"ok":false}
+{"fn":"whenHolds","args":["a..b",{}],"ok":false}
+{"fn":"whenHolds","args":["helloemoji 👍🏽 mix",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["😀src/a/b.ts",{}],"ok":false}
+{"fn":"whenHolds","args":["trailing.",[]],"ok":false}
+{"fn":"whenHolds","args":["a",["a",1]],"ok":false}
+{"fn":"whenHolds","args":[".leading","x"],"ok":false}
+{"fn":"whenHolds","args":["İstanbulhello",0],"ok":false}
+{"fn":"whenHolds","args":["ab",null],"ok":false}
+{"fn":"whenHolds","args":["",["a",1]],"ok":true}
+{"fn":"whenHolds","args":["a😀b😀c",{}],"ok":false}
+{"fn":"whenHolds","args":["  padded  ",null],"ok":false}
+{"fn":"whenHolds","args":["Hello World","x"],"ok":false}
+{"fn":"whenHolds","args":["İstanbul",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["hello world",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["{name} has {count} items",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["./x/**/*.json",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["😀ünïcödé",0],"ok":false}
+{"fn":"whenHolds","args":["x","x"],"ok":false}
+{"fn":"whenHolds","args":["日本語のテキスト",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["abcsrc/a/b.ts",[]],"ok":false}
+{"fn":"whenHolds","args":["a:b:c",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["hello",true],"ok":false}
+{"fn":"whenHolds","args":["line1\nline2","e2"],"ok":false}
+{"fn":"whenHolds","args":["straße",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["emoji 👍🏽 mixstraße",[]],"ok":false}
+{"fn":"whenHolds","args":["Hello World",{}],"ok":false}
+{"fn":"whenHolds","args":["é","x"],"ok":false}
+{"fn":"whenHolds","args":["Hello World",null],"ok":false}
+{"fn":"whenHolds","args":["{name} has {count} items",{}],"ok":false}
+{"fn":"whenHolds","args":["ab",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["src/a/b.ts",0],"ok":false}
+{"fn":"whenHolds","args":["日本語のテキスト日本語のテキスト",null],"ok":false}
+{"fn":"whenHolds","args":["key_name-1",[]],"ok":false}
+{"fn":"whenHolds","args":["trailing.",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["trailing.é",0],"ok":false}
+{"fn":"whenHolds","args":["straße","x"],"ok":false}
+{"fn":"whenHolds","args":["straße",0],"ok":false}
+{"fn":"whenHolds","args":["é",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["日本語のテキスト",[]],"ok":false}
+{"fn":"whenHolds","args":["line1\nline2a.b.c",[]],"ok":false}
+{"fn":"whenHolds","args":["é",true],"ok":false}
+{"fn":"whenHolds","args":["Hello World",true],"ok":false}
+{"fn":"whenHolds","args":["İstanbul",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["😀",0],"ok":false}
+{"fn":"whenHolds","args":["ünïcödé",true],"ok":false}
+{"fn":"whenHolds","args":["İstanbul","l"],"ok":false}
+{"fn":"whenHolds","args":["{name} has {count} items",[]],"ok":false}
+{"fn":"whenHolds","args":[":",true],"ok":false}
+{"fn":"whenHolds","args":["src/a/b.ts",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["line1\nline2",[]],"ok":false}
+{"fn":"whenHolds","args":["src/a/b.ts",{}],"ok":false}
+{"fn":"whenHolds","args":["","x"],"ok":true}
+{"fn":"whenHolds","args":["trailing.",{}],"ok":false}
+{"fn":"whenHolds","args":["ΣΊΣΥΦΟΣ",null],"ok":false}
+{"fn":"whenHolds","args":["  padded  ","x"],"ok":false}
+{"fn":"whenHolds","args":["HELLOns:key.path",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["  padded  emoji 👍🏽 mix",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["ΣΊΣΥΦΟΣ",{}],"ok":false}
+{"fn":"whenHolds","args":["trailing.",true],"ok":false}
+{"fn":"whenHolds","args":["HELLO.leading",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["﻿bom.leading",{}],"ok":false}
+{"fn":"whenHolds","args":["a:b:c",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["{name} has {count} items",null],"ok":false}
+{"fn":"whenHolds","args":[".leading",{}],"ok":false}
+{"fn":"whenHolds","args":["tab\tseparatedtab\tseparated",[]],"ok":false}
+{"fn":"whenHolds","args":[".leading  padded  ",0],"ok":false}
+{"fn":"whenHolds","args":["İstanbul",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["src/a/b.ts  padded  ",true],"ok":false}
+{"fn":"whenHolds","args":["a.b.cΣΊΣΥΦΟΣ",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["key_name-1",0],"ok":false}
+{"fn":"whenHolds","args":["HELLO",{}],"ok":false}
+{"fn":"whenHolds","args":["Hello Worldemoji 👍🏽 mix",null],"ok":false}
+{"fn":"whenHolds","args":["a..b",[]],"ok":false}
+{"fn":"whenHolds","args":["./x/**/*.json",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["hello world",true],"ok":false}
+{"fn":"whenHolds","args":["src/a/b.ts",true],"ok":false}
+{"fn":"whenHolds","args":["tab\tseparated",0],"ok":false}
+{"fn":"whenHolds","args":["abc",true],"ok":false}
+{"fn":"whenHolds","args":["straße",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["Hello World",0],"ok":false}
+{"fn":"whenHolds","args":[":",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["ns:key.path",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["😀Hello World",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":[":",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["{name} has {count} items",0],"ok":false}
+{"fn":"whenHolds","args":["😀",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["a..b",true],"ok":false}
+{"fn":"whenHolds","args":["ababc",{}],"ok":false}
+{"fn":"whenHolds","args":["hello",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["ünïcödé",0],"ok":false}
+{"fn":"whenHolds","args":[".leading",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["Hello World:",[]],"ok":false}
+{"fn":"whenHolds","args":["emoji 👍🏽 mixkey_name-1","x"],"ok":false}
+{"fn":"whenHolds","args":["a:b:ca","x"],"ok":false}
+{"fn":"whenHolds","args":["😀trailing.",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["ns:key.path",null],"ok":false}
+{"fn":"whenHolds","args":["İstanbul",0],"ok":false}
+{"fn":"whenHolds","args":["HELLO",[]],"ok":false}
+{"fn":"whenHolds","args":["a:b:c",{}],"ok":false}
+{"fn":"whenHolds","args":["tab\tseparatedns:key.path",[]],"ok":false}
+{"fn":"whenHolds","args":["emoji 👍🏽 mix",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["  padded  ",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["trailing.",0],"ok":false}
+{"fn":"whenHolds","args":["tab\tseparated",[]],"ok":false}
+{"fn":"whenHolds","args":["a..b","x"],"ok":false}
+{"fn":"whenHolds","args":[".leadingstraße",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["key_name-1",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["emoji 👍🏽 mix",{}],"ok":false}
+{"fn":"whenHolds","args":["tab\tseparated﻿bom",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["src/a/b.ts",["a",1]],"ok":false}
+{"fn":"whenHolds","args":["İstanbul","x"],"ok":false}
+{"fn":"whenHolds","args":["",[]],"ok":true}
+{"fn":"whenHolds","args":["ab",[]],"ok":false}
+{"fn":"whenHolds","args":[".leadingkey_name-1",[]],"ok":false}
+{"fn":"whenHolds","args":["Hello World",[]],"ok":false}
+{"fn":"whenHolds","args":["﻿bom",true],"ok":false}
+{"fn":"whenHolds","args":["日本語のテキストHELLO",{"a":{"b":"c"}}],"ok":false}
+{"fn":"whenHolds","args":["line1\nline2","x"],"ok":false}
+{"fn":"whenHolds","args":["{name} has {count} items",{"a":"b"}],"ok":false}
+{"fn":"whenHolds","args":["İstanbul",[]],"ok":false}
+{"fn":"whenHolds","args":["src/a/b.ts",null],"ok":false}
+{"fn":"whenHolds","args":["héllo wörld",[]],"ok":false}
+{"fn":"whenHolds","args":["👍🏽 thumbs",[]],"ok":false}
+{"fn":"whenHolds","args":["日本語",[]],"ok":false}
+{"fn":"whenHolds","args":["ılık ırmak",[]],"ok":false}
+{"fn":"whenHolds","args":["👨‍👩‍👧 family",[]],"ok":false}
+{"fn":"whenHolds","args":["a b",[]],"ok":false}
+{"fn":"whenHolds","args":["ΣΊΣΥΦΟΣ",[]],"ok":false}
+{"fn":"whenHolds","args":["a😀b",[]],"ok":false}
+{"fn":"whenHolds","args":["﻿bom",[]],"ok":false}
+{"fn":"whenHolds","args":["a²b x½ y①",[]],"ok":false}
+{"fn":"whenHolds","args":["aⅠb Ⅻ",[]],"ok":false}
+{"fn":"whenHolds","args":["a𐐀b 𝐀bc",[]],"ok":false}
+{"fn":"whenHolds","args":["कि ٣٤",[]],"ok":false}
+{"fn":"evaluateWhenCase","args":["İstanbul",{"a":"b"}],"ok":"has an unexpected \"İ\" at 0"}
+{"fn":"evaluateWhenCase","args":["{name} has {count} itemshello world",{}],"ok":"has an unexpected \"{\" at 0"}
+{"fn":"evaluateWhenCase","args":["😀",null],"ok":"has an unexpected \"\\ud83d\" at 0"}
+{"fn":"evaluateWhenCase","args":["ΣΊΣΥΦΟΣa",[]],"ok":"has an unexpected \"Σ\" at 0"}
+{"fn":"evaluateWhenCase","args":["straße",null],"ok":"has an unexpected \"ß\" at 4"}
+{"fn":"evaluateWhenCase","args":["straße﻿bom",["a",1]],"ok":"has an unexpected \"ß\" at 4"}
+{"fn":"evaluateWhenCase","args":["x","x"],"ok":"names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["日本語のテキスト",{}],"ok":"has an unexpected \"日\" at 0"}
+{"fn":"evaluateWhenCase","args":["ΣΊΣΥΦΟΣ",true],"ok":"has an unexpected \"Σ\" at 0"}
+{"fn":"evaluateWhenCase","args":["{name} has {count} items",{}],"ok":"has an unexpected \"{\" at 0"}
+{"fn":"evaluateWhenCase","args":["line1\nline2",{"a":"b"}],"ok":"has an unexpected \"\\n\" at 5"}
+{"fn":"evaluateWhenCase","args":["  padded  😀",0],"ok":"has an unexpected \"\\ud83d\" at 10"}
+{"fn":"evaluateWhenCase","args":["line1\nline2",{}],"ok":"has an unexpected \"\\n\" at 5"}
+{"fn":"evaluateWhenCase","args":["日本語のテキスト",{"a":{"b":"c"}}],"ok":"has an unexpected \"日\" at 0"}
+{"fn":"evaluateWhenCase","args":["hello world",{}],"ok":"names hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["é",{"a":"b"}],"ok":"has an unexpected \"́\" at 1"}
+{"fn":"evaluateWhenCase","args":["İstanbulünïcödé",null],"ok":"has an unexpected \"İ\" at 0"}
+{"fn":"evaluateWhenCase","args":["line1\nline2./x/**/*.json",true],"ok":"has an unexpected \"\\n\" at 5"}
+{"fn":"evaluateWhenCase","args":["straße",[]],"ok":"has an unexpected \"ß\" at 4"}
+{"fn":"evaluateWhenCase","args":["hello world",0],"ok":"names hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["a",{}],"ok":"names a, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["a😀b😀c",true],"ok":"has an unexpected \"\\ud83d\" at 1"}
+{"fn":"evaluateWhenCase","args":["trailing.",[]],"ok":"has an unexpected \".\" at 8"}
+{"fn":"evaluateWhenCase","args":["straße",{}],"ok":"has an unexpected \"ß\" at 4"}
+{"fn":"evaluateWhenCase","args":["trailing.",true],"ok":"has an unexpected \".\" at 8"}
+{"fn":"evaluateWhenCase","args":["trailing.",null],"ok":"has an unexpected \".\" at 8"}
+{"fn":"evaluateWhenCase","args":["İstanbul",null],"ok":"has an unexpected \"İ\" at 0"}
+{"fn":"evaluateWhenCase","args":["é",true],"ok":"has an unexpected \"́\" at 1"}
+{"fn":"evaluateWhenCase","args":["  padded  ",null],"ok":"names padded, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["tab\tseparated",0],"ok":"names tab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["﻿bom",true],"ok":"has an unexpected \"﻿\" at 0"}
+{"fn":"evaluateWhenCase","args":["hello",[]],"ok":"names hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["src/a/b.ts","x"],"ok":"has an unexpected \"/\" at 3"}
+{"fn":"evaluateWhenCase","args":["hello world",{"a":{"b":"c"}}],"ok":"names hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["a.b.c",{"a":{"b":"c"}}],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":[":",0],"ok":"has an unexpected \":\" at 0"}
+{"fn":"evaluateWhenCase","args":["a.b.c",{"a":"b"}],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":["﻿bom",{"a":"b"}],"ok":"has an unexpected \"﻿\" at 0"}
+{"fn":"evaluateWhenCase","args":["İstanbul",{}],"ok":"has an unexpected \"İ\" at 0"}
+{"fn":"evaluateWhenCase","args":["a..b",["a",1]],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":["a:b:c﻿bom",0],"ok":"has an unexpected \":\" at 1"}
+{"fn":"evaluateWhenCase","args":["a😀b😀c",{"a":{"b":"c"}}],"ok":"has an unexpected \"\\ud83d\" at 1"}
+{"fn":"evaluateWhenCase","args":["a.b.c",{}],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":["ns:key.path",["a",1]],"ok":"has an unexpected \":\" at 2"}
+{"fn":"evaluateWhenCase","args":["trailing.",{"a":{"b":"c"}}],"ok":"has an unexpected \".\" at 8"}
+{"fn":"evaluateWhenCase","args":["abc",{"a":{"b":"c"}}],"ok":"names abc, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["emoji 👍🏽 mixemoji 👍🏽 mix",0],"ok":"has an unexpected \"\\ud83d\" at 6"}
+{"fn":"evaluateWhenCase","args":["emoji 👍🏽 mix",0],"ok":"has an unexpected \"\\ud83d\" at 6"}
+{"fn":"evaluateWhenCase","args":["😀",{"a":"b"}],"ok":"has an unexpected \"\\ud83d\" at 0"}
+{"fn":"evaluateWhenCase","args":[".leading",null],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":["abc:",["a",1]],"ok":"has an unexpected \":\" at 3"}
+{"fn":"evaluateWhenCase","args":["日本語のテキスト",true],"ok":"has an unexpected \"日\" at 0"}
+{"fn":"evaluateWhenCase","args":["abc",{"a":"b"}],"ok":"names abc, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["ünïcödé",{}],"ok":"has an unexpected \"ü\" at 0"}
+{"fn":"evaluateWhenCase","args":["hellotrailing.",["a",1]],"ok":"has an unexpected \".\" at 13"}
+{"fn":"evaluateWhenCase","args":["{name} has {count} itemstrailing.",0],"ok":"has an unexpected \"{\" at 0"}
+{"fn":"evaluateWhenCase","args":["{name} has {count} itemsHELLO",["a",1]],"ok":"has an unexpected \"{\" at 0"}
+{"fn":"evaluateWhenCase","args":["{name} has {count} items",{"a":"b"}],"ok":"has an unexpected \"{\" at 0"}
+{"fn":"evaluateWhenCase","args":["tab\tseparatedsrc/a/b.ts",null],"ok":"has an unexpected \"/\" at 16"}
+{"fn":"evaluateWhenCase","args":["line1\nline2",["a",1]],"ok":"has an unexpected \"\\n\" at 5"}
+{"fn":"evaluateWhenCase","args":["İstanbul",0],"ok":"has an unexpected \"İ\" at 0"}
+{"fn":"evaluateWhenCase","args":["emoji 👍🏽 mix.leading",0],"ok":"has an unexpected \"\\ud83d\" at 6"}
+{"fn":"evaluateWhenCase","args":["a.b.c",0],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":["emoji 👍🏽 mix",[]],"ok":"has an unexpected \"\\ud83d\" at 6"}
+{"fn":"evaluateWhenCase","args":["emoji 👍🏽 mix﻿bom",null],"ok":"has an unexpected \"\\ud83d\" at 6"}
+{"fn":"evaluateWhenCase","args":["src/a/b.ts",null],"ok":"has an unexpected \"/\" at 3"}
+{"fn":"evaluateWhenCase","args":["﻿bom",[]],"ok":"has an unexpected \"﻿\" at 0"}
+{"fn":"evaluateWhenCase","args":["a..b",null],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":["ns:key.path",null],"ok":"has an unexpected \":\" at 2"}
+{"fn":"evaluateWhenCase","args":["日本語のテキスト",["a",1]],"ok":"has an unexpected \"日\" at 0"}
+{"fn":"evaluateWhenCase","args":["tab\tseparated",[]],"ok":"names tab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["HELLO",[]],"ok":"names HELLO, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["key_name-1a",null],"ok":"names key_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["étrailing.",{"a":"b"}],"ok":"has an unexpected \"́\" at 1"}
+{"fn":"evaluateWhenCase","args":[":",null],"ok":"has an unexpected \":\" at 0"}
+{"fn":"evaluateWhenCase","args":["Hello World",["a",1]],"ok":"names Hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["HELLO",{}],"ok":"names HELLO, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["key_name-1","x"],"ok":"names key_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["a😀b😀c",[]],"ok":"has an unexpected \"\\ud83d\" at 1"}
+{"fn":"evaluateWhenCase","args":["éHello World",true],"ok":"has an unexpected \"́\" at 1"}
+{"fn":"evaluateWhenCase","args":["abc",{}],"ok":"names abc, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["emoji 👍🏽 mix",null],"ok":"has an unexpected \"\\ud83d\" at 6"}
+{"fn":"evaluateWhenCase","args":["HELLO",["a",1]],"ok":"names HELLO, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["Hello World",null],"ok":"names Hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["  padded  HELLO",[]],"ok":"names padded, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["aabc",0],"ok":"names aabc, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["ab",{"a":"b"}],"ok":"names ab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":[".leading",{"a":{"b":"c"}}],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":["abc",["a",1]],"ok":"names abc, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["ünïcödé","x"],"ok":"has an unexpected \"ü\" at 0"}
+{"fn":"evaluateWhenCase","args":["a:b:c",null],"ok":"has an unexpected \":\" at 1"}
+{"fn":"evaluateWhenCase","args":["key_name-1",true],"ok":"names key_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["./x/**/*.json😀","x"],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":["abcstraße",0],"ok":"has an unexpected \"ß\" at 7"}
+{"fn":"evaluateWhenCase","args":[":ns:key.path",{}],"ok":"has an unexpected \":\" at 0"}
+{"fn":"evaluateWhenCase","args":["{name} has {count} items",{"a":{"b":"c"}}],"ok":"has an unexpected \"{\" at 0"}
+{"fn":"evaluateWhenCase","args":["straße",{"a":{"b":"c"}}],"ok":"has an unexpected \"ß\" at 4"}
+{"fn":"evaluateWhenCase","args":["./x/**/*.json",{}],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":["ünïcödé",{"a":{"b":"c"}}],"ok":"has an unexpected \"ü\" at 0"}
+{"fn":"evaluateWhenCase","args":["a..btab\tseparated",[]],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":[".leading",true],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":["  padded  HELLO",["a",1]],"ok":"names padded, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["  padded  ./x/**/*.json",{}],"ok":"has an unexpected \".\" at 10"}
+{"fn":"evaluateWhenCase","args":["a","x"],"ok":"names a, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["  padded  ",{}],"ok":"names padded, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["hello world",{"a":"b"}],"ok":"names hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["日本語のテキスト",{"a":"b"}],"ok":"has an unexpected \"日\" at 0"}
+{"fn":"evaluateWhenCase","args":["a😀b😀c",0],"ok":"has an unexpected \"\\ud83d\" at 1"}
+{"fn":"evaluateWhenCase","args":["hello.leading",null],"ok":"has an unexpected \".\" at 5"}
+{"fn":"evaluateWhenCase","args":["a",{"a":{"b":"c"}}],"ok":"names a, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["  padded  ","x"],"ok":"names padded, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["./x/**/*.json",{"a":{"b":"c"}}],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":["😀",[]],"ok":"has an unexpected \"\\ud83d\" at 0"}
+{"fn":"evaluateWhenCase","args":["./x/**/*.json",{"a":"b"}],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":[".leading",["a",1]],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":["straße",0],"ok":"has an unexpected \"ß\" at 4"}
+{"fn":"evaluateWhenCase","args":["ab.leading",true],"ok":"has an unexpected \".\" at 2"}
+{"fn":"evaluateWhenCase","args":["hello",null],"ok":"names hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["a😀b😀c","x"],"ok":"has an unexpected \"\\ud83d\" at 1"}
+{"fn":"evaluateWhenCase","args":[":",["a",1]],"ok":"has an unexpected \":\" at 0"}
+{"fn":"evaluateWhenCase","args":["a.b.c",true],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":[":",{"a":{"b":"c"}}],"ok":"has an unexpected \":\" at 0"}
+{"fn":"evaluateWhenCase","args":["{name} has {count} items","x"],"ok":"has an unexpected \"{\" at 0"}
+{"fn":"evaluateWhenCase","args":["İstanbul",["a",1]],"ok":"has an unexpected \"İ\" at 0"}
+{"fn":"evaluateWhenCase","args":["ΣΊΣΥΦΟΣ",0],"ok":"has an unexpected \"Σ\" at 0"}
+{"fn":"evaluateWhenCase","args":["ünïcödé",null],"ok":"has an unexpected \"ü\" at 0"}
+{"fn":"evaluateWhenCase","args":["ΣΊΣΥΦΟΣ😀",null],"ok":"has an unexpected \"Σ\" at 0"}
+{"fn":"evaluateWhenCase","args":["a..b",{"a":"b"}],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":["HELLO",{"a":{"b":"c"}}],"ok":"names HELLO, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["a",{"a":"b"}],"ok":"names a, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["﻿bom",{"a":{"b":"c"}}],"ok":"has an unexpected \"﻿\" at 0"}
+{"fn":"evaluateWhenCase","args":["straße",true],"ok":"has an unexpected \"ß\" at 4"}
+{"fn":"evaluateWhenCase","args":["ünïcödé",0],"ok":"has an unexpected \"ü\" at 0"}
+{"fn":"evaluateWhenCase","args":["abc","x"],"ok":"names abc, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["ünïcödé",[]],"ok":"has an unexpected \"ü\" at 0"}
+{"fn":"evaluateWhenCase","args":["HELLOkey_name-1",true],"ok":"names HELLOkey_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["ünïcödé",true],"ok":"has an unexpected \"ü\" at 0"}
+{"fn":"evaluateWhenCase","args":["{name} has {count} items",null],"ok":"has an unexpected \"{\" at 0"}
+{"fn":"evaluateWhenCase","args":["./x/**/*.json",null],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":["abc",[]],"ok":"names abc, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":[".leading",{"a":"b"}],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":["HELLOhello world",{}],"ok":"names HELLOhello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["",null],"ok":"is empty"}
+{"fn":"evaluateWhenCase","args":["hellons:key.path",null],"ok":"has an unexpected \":\" at 7"}
+{"fn":"evaluateWhenCase","args":["a:b:c",{}],"ok":"has an unexpected \":\" at 1"}
+{"fn":"evaluateWhenCase","args":["a..b",{}],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":["trailing.a😀b😀c",{"a":{"b":"c"}}],"ok":"has an unexpected \".\" at 8"}
+{"fn":"evaluateWhenCase","args":[".leadingΣΊΣΥΦΟΣ",["a",1]],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":["a😀b😀c日本語のテキスト",0],"ok":"has an unexpected \"\\ud83d\" at 1"}
+{"fn":"evaluateWhenCase","args":["﻿bomstraße",true],"ok":"has an unexpected \"﻿\" at 0"}
+{"fn":"evaluateWhenCase","args":["ns:key.path",{"a":{"b":"c"}}],"ok":"has an unexpected \":\" at 2"}
+{"fn":"evaluateWhenCase","args":["😀",0],"ok":"has an unexpected \"\\ud83d\" at 0"}
+{"fn":"evaluateWhenCase","args":["key_name-1",{}],"ok":"names key_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["  padded  ",0],"ok":"names padded, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["line1\nline2HELLO",[]],"ok":"has an unexpected \"\\n\" at 5"}
+{"fn":"evaluateWhenCase","args":["﻿bom",0],"ok":"has an unexpected \"﻿\" at 0"}
+{"fn":"evaluateWhenCase","args":[":",[]],"ok":"has an unexpected \":\" at 0"}
+{"fn":"evaluateWhenCase","args":["key_name-1",{"a":{"b":"c"}}],"ok":"names key_name, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["ns:key.path",true],"ok":"has an unexpected \":\" at 2"}
+{"fn":"evaluateWhenCase","args":["Hello World","x"],"ok":"names Hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["src/a/b.ts",[]],"ok":"has an unexpected \"/\" at 3"}
+{"fn":"evaluateWhenCase","args":["emoji 👍🏽 mix😀",{"a":{"b":"c"}}],"ok":"has an unexpected \"\\ud83d\" at 6"}
+{"fn":"evaluateWhenCase","args":["Hello World",{"a":"b"}],"ok":"names Hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["ΣΊΣΥΦΟΣ",{}],"ok":"has an unexpected \"Σ\" at 0"}
+{"fn":"evaluateWhenCase","args":["ns:key.path","x"],"ok":"has an unexpected \":\" at 2"}
+{"fn":"evaluateWhenCase","args":["a:b:c",true],"ok":"has an unexpected \":\" at 1"}
+{"fn":"evaluateWhenCase","args":["hello",true],"ok":"names hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["日本語のテキストHELLO","x"],"ok":"has an unexpected \"日\" at 0"}
+{"fn":"evaluateWhenCase","args":["abcünïcödé",true],"ok":"has an unexpected \"ü\" at 3"}
+{"fn":"evaluateWhenCase","args":["  padded  key_name-1",[]],"ok":"names padded, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["abc日本語のテキスト",[]],"ok":"has an unexpected \"日\" at 3"}
+{"fn":"evaluateWhenCase","args":["ab",["a",1]],"ok":"names ab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["😀",["a",1]],"ok":"has an unexpected \"\\ud83d\" at 0"}
+{"fn":"evaluateWhenCase","args":["ünïcödé",["a",1]],"ok":"has an unexpected \"ü\" at 0"}
+{"fn":"evaluateWhenCase","args":["a:b:c",{"a":{"b":"c"}}],"ok":"has an unexpected \":\" at 1"}
+{"fn":"evaluateWhenCase","args":["a.b.c",[]],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":["﻿bomİstanbul",null],"ok":"has an unexpected \"﻿\" at 0"}
+{"fn":"evaluateWhenCase","args":["trailing.😀",[]],"ok":"has an unexpected \".\" at 8"}
+{"fn":"evaluateWhenCase","args":["Hello World",[]],"ok":"names Hello, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["a",["a",1]],"ok":"names a, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["HELLO",0],"ok":"names HELLO, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["abc",null],"ok":"names abc, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["  padded  ",["a",1]],"ok":"names padded, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["İstanbul",true],"ok":"has an unexpected \"İ\" at 0"}
+{"fn":"evaluateWhenCase","args":["﻿bomİstanbul",{}],"ok":"has an unexpected \"﻿\" at 0"}
+{"fn":"evaluateWhenCase","args":["ΣΊΣΥΦΟΣline1\nline2",{"a":{"b":"c"}}],"ok":"has an unexpected \"Σ\" at 0"}
+{"fn":"evaluateWhenCase","args":["﻿bom",["a",1]],"ok":"has an unexpected \"﻿\" at 0"}
+{"fn":"evaluateWhenCase","args":["a:b:c",{"a":"b"}],"ok":"has an unexpected \":\" at 1"}
+{"fn":"evaluateWhenCase","args":["a..b",true],"ok":"has an unexpected \".\" at 1"}
+{"fn":"evaluateWhenCase","args":["ns:key.path",[]],"ok":"has an unexpected \":\" at 2"}
+{"fn":"evaluateWhenCase","args":["src/a/b.ts",true],"ok":"has an unexpected \"/\" at 3"}
+{"fn":"evaluateWhenCase","args":["line1\nline2",0],"ok":"has an unexpected \"\\n\" at 5"}
+{"fn":"evaluateWhenCase","args":["ab",null],"ok":"names ab, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["a:b:ca.b.c",true],"ok":"has an unexpected \":\" at 1"}
+{"fn":"evaluateWhenCase","args":["日本語のテキスト",null],"ok":"has an unexpected \"日\" at 0"}
+{"fn":"evaluateWhenCase","args":["﻿bomtab\tseparated",["a",1]],"ok":"has an unexpected \"﻿\" at 0"}
+{"fn":"evaluateWhenCase","args":["src/a/b.tskey_name-1",{}],"ok":"has an unexpected \"/\" at 3"}
+{"fn":"evaluateWhenCase","args":[":",{"a":"b"}],"ok":"has an unexpected \":\" at 0"}
+{"fn":"evaluateWhenCase","args":["trailing.{name} has {count} items",true],"ok":"has an unexpected \".\" at 8"}
+{"fn":"evaluateWhenCase","args":["ns:key.pathabc",[]],"ok":"has an unexpected \":\" at 2"}
+{"fn":"evaluateWhenCase","args":["héllo wörld",{"a":"b"}],"ok":"has an unexpected \"é\" at 1"}
+{"fn":"evaluateWhenCase","args":["👍🏽 thumbs",{"a":"b"}],"ok":"has an unexpected \"\\ud83d\" at 0"}
+{"fn":"evaluateWhenCase","args":["日本語",{"a":"b"}],"ok":"has an unexpected \"日\" at 0"}
+{"fn":"evaluateWhenCase","args":["",{"a":"b"}],"ok":"is empty"}
+{"fn":"evaluateWhenCase","args":["straße",{"a":"b"}],"ok":"has an unexpected \"ß\" at 4"}
+{"fn":"evaluateWhenCase","args":["ılık ırmak",{"a":"b"}],"ok":"has an unexpected \"ı\" at 0"}
+{"fn":"evaluateWhenCase","args":["👨‍👩‍👧 family",{"a":"b"}],"ok":"has an unexpected \"\\ud83d\" at 0"}
+{"fn":"evaluateWhenCase","args":["a b",{"a":"b"}],"ok":"has an unexpected \" \" at 1"}
+{"fn":"evaluateWhenCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"}],"ok":"has an unexpected \"Σ\" at 0"}
+{"fn":"evaluateWhenCase","args":["a😀b",{"a":"b"}],"ok":"has an unexpected \"\\ud83d\" at 1"}
+{"fn":"evaluateWhenCase","args":["a²b x½ y①",{"a":"b"}],"ok":"has an unexpected \"²\" at 1"}
+{"fn":"evaluateWhenCase","args":["aⅠb Ⅻ",{"a":"b"}],"ok":"has an unexpected \"Ⅰ\" at 1"}
+{"fn":"evaluateWhenCase","args":["a𐐀b 𝐀bc",{"a":"b"}],"ok":"has an unexpected \"\\ud801\" at 1"}
+{"fn":"evaluateWhenCase","args":["कि ٣٤",{"a":"b"}],"ok":"has an unexpected \"क\" at 0"}
+{"fn":"parseWhen","args":[""],"ok":{"ok":false,"problem":"is empty"}}
+{"fn":"whenHolds","args":["",{}],"ok":true}
+{"fn":"whenHolds","args":["",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["",{}],"ok":"is empty"}
+{"fn":"evaluateWhenCase","args":["",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"is empty"}
+{"fn":"evaluateWhenCase","args":["",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"is empty"}
+{"fn":"evaluateWhenCase","args":["",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"is empty"}
+{"fn":"evaluateWhenCase","args":["",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"is empty"}
+{"fn":"parseWhen","args":[" "],"ok":{"ok":false,"problem":"is empty"}}
+{"fn":"whenHolds","args":[" ",{}],"ok":false}
+{"fn":"whenHolds","args":[" ",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":[" ",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":[" ",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":[" ",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":[" ",{}],"ok":"is empty"}
+{"fn":"evaluateWhenCase","args":[" ",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"is empty"}
+{"fn":"evaluateWhenCase","args":[" ",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"is empty"}
+{"fn":"evaluateWhenCase","args":[" ",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"is empty"}
+{"fn":"evaluateWhenCase","args":[" ",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"is empty"}
+{"fn":"parseWhen","args":["isPinned"],"ok":{"ok":true,"expr":{"kind":"key","key":"isPinned"}}}
+{"fn":"whenHolds","args":["isPinned",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["!isPinned"],"ok":{"ok":true,"expr":{"kind":"not","of":{"kind":"key","key":"isPinned"}}}}
+{"fn":"whenHolds","args":["!isPinned",{}],"ok":true}
+{"fn":"whenHolds","args":["!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!isPinned",{}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"parseWhen","args":["!!isPinned"],"ok":{"ok":true,"expr":{"kind":"not","of":{"kind":"not","of":{"kind":"key","key":"isPinned"}}}}}
+{"fn":"whenHolds","args":["!!isPinned",{}],"ok":false}
+{"fn":"whenHolds","args":["!!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["!!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["!!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["!!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["!!isPinned",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["!!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["!!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["isPinned && isActive"],"ok":{"ok":true,"expr":{"kind":"and","left":{"kind":"key","key":"isPinned"},"right":{"kind":"key","key":"isActive"}}}}
+{"fn":"whenHolds","args":["isPinned && isActive",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned && isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned && isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned && isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned && isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["isPinned || isActive"],"ok":{"ok":true,"expr":{"kind":"or","left":{"kind":"key","key":"isPinned"},"right":{"kind":"key","key":"isActive"}}}}
+{"fn":"whenHolds","args":["isPinned || isActive",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned || isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["isPinned || isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["isPinned || isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["isPinned || isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["isPinned && isActive || isSplit"],"ok":{"ok":true,"expr":{"kind":"or","left":{"kind":"and","left":{"kind":"key","key":"isPinned"},"right":{"kind":"key","key":"isActive"}},"right":{"kind":"key","key":"isSplit"}}}}
+{"fn":"whenHolds","args":["isPinned && isActive || isSplit",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned && isActive || isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["isPinned && isActive || isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned && isActive || isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned && isActive || isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive || isSplit",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive || isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive || isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive || isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive || isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["isPinned || isActive && isSplit"],"ok":{"ok":true,"expr":{"kind":"or","left":{"kind":"key","key":"isPinned"},"right":{"kind":"and","left":{"kind":"key","key":"isActive"},"right":{"kind":"key","key":"isSplit"}}}}}
+{"fn":"whenHolds","args":["isPinned || isActive && isSplit",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned || isActive && isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["isPinned || isActive && isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned || isActive && isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["isPinned || isActive && isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive && isSplit",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive && isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive && isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive && isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive && isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["(isPinned || isActive) && isSplit"],"ok":{"ok":true,"expr":{"kind":"and","left":{"kind":"or","left":{"kind":"key","key":"isPinned"},"right":{"kind":"key","key":"isActive"}},"right":{"kind":"key","key":"isSplit"}}}}
+{"fn":"whenHolds","args":["(isPinned || isActive) && isSplit",{}],"ok":false}
+{"fn":"whenHolds","args":["(isPinned || isActive) && isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["(isPinned || isActive) && isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["(isPinned || isActive) && isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["(isPinned || isActive) && isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["(isPinned || isActive) && isSplit",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["(isPinned || isActive) && isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["(isPinned || isActive) && isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["(isPinned || isActive) && isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["(isPinned || isActive) && isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["urlHost == \"example.com\""],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"key","key":"urlHost"},"right":{"kind":"literal","value":"example.com"}}}}
+{"fn":"whenHolds","args":["urlHost == \"example.com\"",{}],"ok":false}
+{"fn":"whenHolds","args":["urlHost == \"example.com\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["urlHost == \"example.com\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["urlHost == \"example.com\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["urlHost == \"example.com\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == \"example.com\"",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == \"example.com\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["urlHost == \"example.com\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == \"example.com\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == \"example.com\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["urlHost != 'example.com'"],"ok":{"ok":true,"expr":{"kind":"compare","op":"!=","left":{"kind":"key","key":"urlHost"},"right":{"kind":"literal","value":"example.com"}}}}
+{"fn":"whenHolds","args":["urlHost != 'example.com'",{}],"ok":true}
+{"fn":"whenHolds","args":["urlHost != 'example.com'",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["urlHost != 'example.com'",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["urlHost != 'example.com'",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["urlHost != 'example.com'",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["urlHost != 'example.com'",{}],"ok":true}
+{"fn":"evaluateWhenCase","args":["urlHost != 'example.com'",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost != 'example.com'",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["urlHost != 'example.com'",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["urlHost != 'example.com'",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"parseWhen","args":["urlHost ~= \"*.example.com\""],"ok":{"ok":true,"expr":{"kind":"compare","op":"~=","left":{"kind":"key","key":"urlHost"},"right":{"kind":"literal","value":"*.example.com"}}}}
+{"fn":"whenHolds","args":["urlHost ~= \"*.example.com\"",{}],"ok":false}
+{"fn":"whenHolds","args":["urlHost ~= \"*.example.com\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["urlHost ~= \"*.example.com\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["urlHost ~= \"*.example.com\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["urlHost ~= \"*.example.com\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"*.example.com\"",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"*.example.com\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"*.example.com\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"*.example.com\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"*.example.com\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"parseWhen","args":["urlScheme == \"https\""],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"key","key":"urlScheme"},"right":{"kind":"literal","value":"https"}}}}
+{"fn":"whenHolds","args":["urlScheme == \"https\"",{}],"ok":false}
+{"fn":"whenHolds","args":["urlScheme == \"https\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["urlScheme == \"https\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["urlScheme == \"https\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["urlScheme == \"https\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlScheme == \"https\"",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlScheme == \"https\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["urlScheme == \"https\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlScheme == \"https\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlScheme == \"https\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["tabCount == 3"],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"key","key":"tabCount"},"right":{"kind":"literal","value":3}}}}
+{"fn":"whenHolds","args":["tabCount == 3",{}],"ok":false}
+{"fn":"whenHolds","args":["tabCount == 3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["tabCount == 3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["tabCount == 3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["tabCount == 3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["tabCount == 3",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["tabCount == 3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["tabCount == 3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["tabCount == 3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["tabCount == 3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["tabCount != 3.5"],"ok":{"ok":true,"expr":{"kind":"compare","op":"!=","left":{"kind":"key","key":"tabCount"},"right":{"kind":"literal","value":3.5}}}}
+{"fn":"whenHolds","args":["tabCount != 3.5",{}],"ok":true}
+{"fn":"whenHolds","args":["tabCount != 3.5",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["tabCount != 3.5",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["tabCount != 3.5",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["tabCount != 3.5",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["tabCount != 3.5",{}],"ok":true}
+{"fn":"evaluateWhenCase","args":["tabCount != 3.5",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["tabCount != 3.5",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["tabCount != 3.5",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["tabCount != 3.5",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"parseWhen","args":["tabCount == 03"],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"key","key":"tabCount"},"right":{"kind":"literal","value":3}}}}
+{"fn":"whenHolds","args":["tabCount == 03",{}],"ok":false}
+{"fn":"whenHolds","args":["tabCount == 03",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["tabCount == 03",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["tabCount == 03",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["tabCount == 03",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["tabCount == 03",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["tabCount == 03",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["tabCount == 03",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["tabCount == 03",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["tabCount == 03",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["3 == tabCount"],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"literal","value":3},"right":{"kind":"key","key":"tabCount"}}}}
+{"fn":"whenHolds","args":["3 == tabCount",{}],"ok":false}
+{"fn":"whenHolds","args":["3 == tabCount",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["3 == tabCount",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["3 == tabCount",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["3 == tabCount",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["3 == tabCount",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["3 == tabCount",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["3 == tabCount",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["3 == tabCount",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["3 == tabCount",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["true"],"ok":{"ok":true,"expr":{"kind":"literal","value":true}}}
+{"fn":"whenHolds","args":["true",{}],"ok":true}
+{"fn":"whenHolds","args":["true",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["true",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["true",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["true",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["true",{}],"ok":true}
+{"fn":"evaluateWhenCase","args":["true",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["true",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["true",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["true",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"parseWhen","args":["false"],"ok":{"ok":true,"expr":{"kind":"literal","value":false}}}
+{"fn":"whenHolds","args":["false",{}],"ok":false}
+{"fn":"whenHolds","args":["false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["false",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["true == isPinned"],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"literal","value":true},"right":{"kind":"key","key":"isPinned"}}}}
+{"fn":"whenHolds","args":["true == isPinned",{}],"ok":false}
+{"fn":"whenHolds","args":["true == isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["true == isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["true == isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["true == isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["true == isPinned",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["true == isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["true == isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["true == isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["true == isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["isPinned == false"],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"key","key":"isPinned"},"right":{"kind":"literal","value":false}}}}
+{"fn":"whenHolds","args":["isPinned == false",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned == false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned == false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["isPinned == false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned == false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned == false",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned == false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned == false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned == false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned == false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["unknownKey"],"ok":{"ok":false,"problem":"names unknownKey, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"whenHolds","args":["unknownKey",{}],"ok":false}
+{"fn":"whenHolds","args":["unknownKey",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["unknownKey",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["unknownKey",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["unknownKey",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["unknownKey",{}],"ok":"names unknownKey, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["unknownKey",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"names unknownKey, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["unknownKey",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"names unknownKey, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["unknownKey",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"names unknownKey, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["unknownKey",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"names unknownKey, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"parseWhen","args":["isPinned &&"],"ok":{"ok":false,"problem":"ends too soon"}}
+{"fn":"whenHolds","args":["isPinned &&",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned &&",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned &&",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned &&",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned &&",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned &&",{}],"ok":"ends too soon"}
+{"fn":"evaluateWhenCase","args":["isPinned &&",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"ends too soon"}
+{"fn":"evaluateWhenCase","args":["isPinned &&",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"ends too soon"}
+{"fn":"evaluateWhenCase","args":["isPinned &&",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"ends too soon"}
+{"fn":"evaluateWhenCase","args":["isPinned &&",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"ends too soon"}
+{"fn":"parseWhen","args":["&& isPinned"],"ok":{"ok":false,"problem":"has && where a key or value goes"}}
+{"fn":"whenHolds","args":["&& isPinned",{}],"ok":false}
+{"fn":"whenHolds","args":["&& isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["&& isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["&& isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["&& isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["&& isPinned",{}],"ok":"has && where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["&& isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has && where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["&& isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has && where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["&& isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has && where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["&& isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has && where a key or value goes"}
+{"fn":"parseWhen","args":["(isPinned"],"ok":{"ok":false,"problem":"has a ( without its )"}}
+{"fn":"whenHolds","args":["(isPinned",{}],"ok":false}
+{"fn":"whenHolds","args":["(isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["(isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["(isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["(isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["(isPinned",{}],"ok":"has a ( without its )"}
+{"fn":"evaluateWhenCase","args":["(isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has a ( without its )"}
+{"fn":"evaluateWhenCase","args":["(isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has a ( without its )"}
+{"fn":"evaluateWhenCase","args":["(isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has a ( without its )"}
+{"fn":"evaluateWhenCase","args":["(isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has a ( without its )"}
+{"fn":"parseWhen","args":["isPinned)"],"ok":{"ok":false,"problem":"has something unexpected after position 1"}}
+{"fn":"whenHolds","args":["isPinned)",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned)",{}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["isPinned)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["isPinned)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["isPinned)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["isPinned)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has something unexpected after position 1"}
+{"fn":"parseWhen","args":["()"],"ok":{"ok":false,"problem":"has ) where a key or value goes"}}
+{"fn":"whenHolds","args":["()",{}],"ok":false}
+{"fn":"whenHolds","args":["()",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["()",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["()",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["()",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["()",{}],"ok":"has ) where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["()",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has ) where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["()",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has ) where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["()",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has ) where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["()",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has ) where a key or value goes"}
+{"fn":"parseWhen","args":["\"unterminated"],"ok":{"ok":false,"problem":"has a string without its closing quote"}}
+{"fn":"whenHolds","args":["\"unterminated",{}],"ok":false}
+{"fn":"whenHolds","args":["\"unterminated",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["\"unterminated",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["\"unterminated",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["\"unterminated",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["\"unterminated",{}],"ok":"has a string without its closing quote"}
+{"fn":"evaluateWhenCase","args":["\"unterminated",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has a string without its closing quote"}
+{"fn":"evaluateWhenCase","args":["\"unterminated",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has a string without its closing quote"}
+{"fn":"evaluateWhenCase","args":["\"unterminated",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has a string without its closing quote"}
+{"fn":"evaluateWhenCase","args":["\"unterminated",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has a string without its closing quote"}
+{"fn":"parseWhen","args":["'x' == 'x'"],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"literal","value":"x"},"right":{"kind":"literal","value":"x"}}}}
+{"fn":"whenHolds","args":["'x' == 'x'",{}],"ok":true}
+{"fn":"whenHolds","args":["'x' == 'x'",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["'x' == 'x'",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["'x' == 'x'",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["'x' == 'x'",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["'x' == 'x'",{}],"ok":true}
+{"fn":"evaluateWhenCase","args":["'x' == 'x'",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["'x' == 'x'",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["'x' == 'x'",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["'x' == 'x'",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"parseWhen","args":["\"a\\\"b\" == urlHost"],"ok":{"ok":false,"problem":"has a string without its closing quote"}}
+{"fn":"whenHolds","args":["\"a\\\"b\" == urlHost",{}],"ok":false}
+{"fn":"whenHolds","args":["\"a\\\"b\" == urlHost",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["\"a\\\"b\" == urlHost",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["\"a\\\"b\" == urlHost",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["\"a\\\"b\" == urlHost",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["\"a\\\"b\" == urlHost",{}],"ok":"has a string without its closing quote"}
+{"fn":"evaluateWhenCase","args":["\"a\\\"b\" == urlHost",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has a string without its closing quote"}
+{"fn":"evaluateWhenCase","args":["\"a\\\"b\" == urlHost",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has a string without its closing quote"}
+{"fn":"evaluateWhenCase","args":["\"a\\\"b\" == urlHost",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has a string without its closing quote"}
+{"fn":"evaluateWhenCase","args":["\"a\\\"b\" == urlHost",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has a string without its closing quote"}
+{"fn":"parseWhen","args":["urlHost == \"é\""],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"key","key":"urlHost"},"right":{"kind":"literal","value":"é"}}}}
+{"fn":"whenHolds","args":["urlHost == \"é\"",{}],"ok":false}
+{"fn":"whenHolds","args":["urlHost == \"é\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["urlHost == \"é\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["urlHost == \"é\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["urlHost == \"é\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == \"é\"",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == \"é\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == \"é\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == \"é\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == \"é\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["isPinned & isActive"],"ok":{"ok":false,"problem":"has an unexpected \"&\" at 9"}}
+{"fn":"whenHolds","args":["isPinned & isActive",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned & isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned & isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned & isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned & isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned & isActive",{}],"ok":"has an unexpected \"&\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned & isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has an unexpected \"&\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned & isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has an unexpected \"&\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned & isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has an unexpected \"&\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned & isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has an unexpected \"&\" at 9"}
+{"fn":"parseWhen","args":["isPinned | isActive"],"ok":{"ok":false,"problem":"has an unexpected \"|\" at 9"}}
+{"fn":"whenHolds","args":["isPinned | isActive",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned | isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned | isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned | isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned | isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned | isActive",{}],"ok":"has an unexpected \"|\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned | isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has an unexpected \"|\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned | isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has an unexpected \"|\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned | isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has an unexpected \"|\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned | isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has an unexpected \"|\" at 9"}
+{"fn":"parseWhen","args":["isPinned = isActive"],"ok":{"ok":false,"problem":"has an unexpected \"=\" at 9"}}
+{"fn":"whenHolds","args":["isPinned = isActive",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned = isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned = isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned = isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned = isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned = isActive",{}],"ok":"has an unexpected \"=\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned = isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has an unexpected \"=\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned = isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has an unexpected \"=\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned = isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has an unexpected \"=\" at 9"}
+{"fn":"evaluateWhenCase","args":["isPinned = isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has an unexpected \"=\" at 9"}
+{"fn":"parseWhen","args":["@"],"ok":{"ok":false,"problem":"has an unexpected \"@\" at 0"}}
+{"fn":"whenHolds","args":["@",{}],"ok":false}
+{"fn":"whenHolds","args":["@",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["@",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["@",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["@",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["@",{}],"ok":"has an unexpected \"@\" at 0"}
+{"fn":"evaluateWhenCase","args":["@",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has an unexpected \"@\" at 0"}
+{"fn":"evaluateWhenCase","args":["@",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has an unexpected \"@\" at 0"}
+{"fn":"evaluateWhenCase","args":["@",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has an unexpected \"@\" at 0"}
+{"fn":"evaluateWhenCase","args":["@",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has an unexpected \"@\" at 0"}
+{"fn":"parseWhen","args":["1.2.3"],"ok":{"ok":false,"problem":"has a bad number at 0"}}
+{"fn":"whenHolds","args":["1.2.3",{}],"ok":false}
+{"fn":"whenHolds","args":["1.2.3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["1.2.3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["1.2.3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["1.2.3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["1.2.3",{}],"ok":"has a bad number at 0"}
+{"fn":"evaluateWhenCase","args":["1.2.3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has a bad number at 0"}
+{"fn":"evaluateWhenCase","args":["1.2.3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has a bad number at 0"}
+{"fn":"evaluateWhenCase","args":["1.2.3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has a bad number at 0"}
+{"fn":"evaluateWhenCase","args":["1.2.3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has a bad number at 0"}
+{"fn":"parseWhen","args":["1."],"ok":{"ok":true,"expr":{"kind":"literal","value":1}}}
+{"fn":"whenHolds","args":["1.",{}],"ok":true}
+{"fn":"whenHolds","args":["1.",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["1.",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["1.",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["1.",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["1.",{}],"ok":true}
+{"fn":"evaluateWhenCase","args":["1.",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["1.",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["1.",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["1.",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"parseWhen","args":[".5"],"ok":{"ok":false,"problem":"has an unexpected \".\" at 0"}}
+{"fn":"whenHolds","args":[".5",{}],"ok":false}
+{"fn":"whenHolds","args":[".5",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":[".5",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":[".5",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":[".5",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":[".5",{}],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":[".5",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":[".5",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":[".5",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has an unexpected \".\" at 0"}
+{"fn":"evaluateWhenCase","args":[".5",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has an unexpected \".\" at 0"}
+{"fn":"parseWhen","args":["-1 == tabCount"],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"literal","value":-1},"right":{"kind":"key","key":"tabCount"}}}}
+{"fn":"whenHolds","args":["-1 == tabCount",{}],"ok":false}
+{"fn":"whenHolds","args":["-1 == tabCount",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["-1 == tabCount",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["-1 == tabCount",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["-1 == tabCount",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["-1 == tabCount",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["-1 == tabCount",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["-1 == tabCount",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["-1 == tabCount",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["-1 == tabCount",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["isPinned isActive"],"ok":{"ok":false,"problem":"has something unexpected after position 1"}}
+{"fn":"whenHolds","args":["isPinned isActive",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned isActive",{}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["isPinned isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["isPinned isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["isPinned isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["isPinned isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has something unexpected after position 1"}
+{"fn":"parseWhen","args":["urlHost == urlScheme"],"ok":{"ok":true,"expr":{"kind":"compare","op":"==","left":{"kind":"key","key":"urlHost"},"right":{"kind":"key","key":"urlScheme"}}}}
+{"fn":"whenHolds","args":["urlHost == urlScheme",{}],"ok":true}
+{"fn":"whenHolds","args":["urlHost == urlScheme",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["urlHost == urlScheme",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["urlHost == urlScheme",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["urlHost == urlScheme",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == urlScheme",{}],"ok":true}
+{"fn":"evaluateWhenCase","args":["urlHost == urlScheme",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == urlScheme",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost == urlScheme",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["urlHost == urlScheme",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["\tisPinned\t"],"ok":{"ok":true,"expr":{"kind":"key","key":"isPinned"}}}
+{"fn":"whenHolds","args":["\tisPinned\t",{}],"ok":false}
+{"fn":"whenHolds","args":["\tisPinned\t",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["\tisPinned\t",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["\tisPinned\t",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["\tisPinned\t",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["\tisPinned\t",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["\tisPinned\t",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["\tisPinned\t",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["\tisPinned\t",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["\tisPinned\t",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["isPinned\n"],"ok":{"ok":false,"problem":"has an unexpected \"\\n\" at 8"}}
+{"fn":"whenHolds","args":["isPinned\n",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned\n",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned\n",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned\n",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned\n",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned\n",{}],"ok":"has an unexpected \"\\n\" at 8"}
+{"fn":"evaluateWhenCase","args":["isPinned\n",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has an unexpected \"\\n\" at 8"}
+{"fn":"evaluateWhenCase","args":["isPinned\n",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has an unexpected \"\\n\" at 8"}
+{"fn":"evaluateWhenCase","args":["isPinned\n",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has an unexpected \"\\n\" at 8"}
+{"fn":"evaluateWhenCase","args":["isPinned\n",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has an unexpected \"\\n\" at 8"}
+{"fn":"parseWhen","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":{"ok":false,"problem":"is over 200 characters"}}
+{"fn":"whenHolds","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{}],"ok":false}
+{"fn":"whenHolds","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{}],"ok":"is over 200 characters"}
+{"fn":"evaluateWhenCase","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"is over 200 characters"}
+{"fn":"evaluateWhenCase","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"is over 200 characters"}
+{"fn":"evaluateWhenCase","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"is over 200 characters"}
+{"fn":"evaluateWhenCase","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"is over 200 characters"}
+{"fn":"parseWhen","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":{"ok":false,"problem":"names xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"whenHolds","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{}],"ok":false}
+{"fn":"whenHolds","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{}],"ok":"names xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"names xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"names xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"names xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"names xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"parseWhen","args":["(((((((((((((((((isPinned)))))))))))))))))"],"ok":{"ok":false,"problem":"nests deeper than 16"}}
+{"fn":"whenHolds","args":["(((((((((((((((((isPinned)))))))))))))))))",{}],"ok":false}
+{"fn":"whenHolds","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["(((((((((((((((((isPinned)))))))))))))))))",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((((isPinned)))))))))))))))))",{}],"ok":"nests deeper than 16"}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"nests deeper than 16"}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"nests deeper than 16"}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"nests deeper than 16"}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((((isPinned)))))))))))))))))",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"nests deeper than 16"}
+{"fn":"parseWhen","args":["(((((((((((((((isPinned)))))))))))))))"],"ok":{"ok":true,"expr":{"kind":"key","key":"isPinned"}}}
+{"fn":"whenHolds","args":["(((((((((((((((isPinned)))))))))))))))",{}],"ok":false}
+{"fn":"whenHolds","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["(((((((((((((((isPinned)))))))))))))))",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((isPinned)))))))))))))))",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((isPinned)))))))))))))))",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["!!!!!!!!!!!!!!!!!!!!isPinned"],"ok":{"ok":false,"problem":"nests deeper than 16"}}
+{"fn":"whenHolds","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{}],"ok":false}
+{"fn":"whenHolds","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{}],"ok":"nests deeper than 16"}
+{"fn":"evaluateWhenCase","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"nests deeper than 16"}
+{"fn":"evaluateWhenCase","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"nests deeper than 16"}
+{"fn":"evaluateWhenCase","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"nests deeper than 16"}
+{"fn":"evaluateWhenCase","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"nests deeper than 16"}
+{"fn":"parseWhen","args":["isPinned == == isActive"],"ok":{"ok":false,"problem":"has == where a key or value goes"}}
+{"fn":"whenHolds","args":["isPinned == == isActive",{}],"ok":false}
+{"fn":"whenHolds","args":["isPinned == == isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned == == isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned == == isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned == == isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned == == isActive",{}],"ok":"has == where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["isPinned == == isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has == where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["isPinned == == isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has == where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["isPinned == == isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has == where a key or value goes"}
+{"fn":"evaluateWhenCase","args":["isPinned == == isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has == where a key or value goes"}
+{"fn":"parseWhen","args":["urlHost ~= \"**********************************************************************************************************************************\""],"ok":{"ok":true,"expr":{"kind":"compare","op":"~=","left":{"kind":"key","key":"urlHost"},"right":{"kind":"literal","value":"**********************************************************************************************************************************"}}}}
+{"fn":"whenHolds","args":["urlHost ~= \"**********************************************************************************************************************************\"",{}],"ok":false}
+{"fn":"whenHolds","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"**********************************************************************************************************************************\"",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["_x"],"ok":{"ok":false,"problem":"names _x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"whenHolds","args":["_x",{}],"ok":false}
+{"fn":"whenHolds","args":["_x",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["_x",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["_x",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["_x",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["_x",{}],"ok":"names _x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["_x",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"names _x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["_x",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"names _x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["_x",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"names _x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["_x",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"names _x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"parseWhen","args":["X1"],"ok":{"ok":false,"problem":"names X1, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}}
+{"fn":"whenHolds","args":["X1",{}],"ok":false}
+{"fn":"whenHolds","args":["X1",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["X1",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["X1",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["X1",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["X1",{}],"ok":"names X1, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["X1",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"names X1, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["X1",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"names X1, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["X1",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"names X1, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"evaluateWhenCase","args":["X1",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"names X1, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"}
+{"fn":"parseWhen","args":["tabCount == 1e3"],"ok":{"ok":false,"problem":"has something unexpected after position 3"}}
+{"fn":"whenHolds","args":["tabCount == 1e3",{}],"ok":false}
+{"fn":"whenHolds","args":["tabCount == 1e3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["tabCount == 1e3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["tabCount == 1e3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["tabCount == 1e3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["tabCount == 1e3",{}],"ok":"has something unexpected after position 3"}
+{"fn":"evaluateWhenCase","args":["tabCount == 1e3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has something unexpected after position 3"}
+{"fn":"evaluateWhenCase","args":["tabCount == 1e3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has something unexpected after position 3"}
+{"fn":"evaluateWhenCase","args":["tabCount == 1e3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has something unexpected after position 3"}
+{"fn":"evaluateWhenCase","args":["tabCount == 1e3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has something unexpected after position 3"}
+{"fn":"parseWhen","args":["123abc"],"ok":{"ok":false,"problem":"has something unexpected after position 1"}}
+{"fn":"whenHolds","args":["123abc",{}],"ok":false}
+{"fn":"whenHolds","args":["123abc",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["123abc",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["123abc",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["123abc",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["123abc",{}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["123abc",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["123abc",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["123abc",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":"has something unexpected after position 1"}
+{"fn":"evaluateWhenCase","args":["123abc",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":"has something unexpected after position 1"}
+{"fn":"parseWhen","args":["true && false"],"ok":{"ok":true,"expr":{"kind":"and","left":{"kind":"literal","value":true},"right":{"kind":"literal","value":false}}}}
+{"fn":"whenHolds","args":["true && false",{}],"ok":false}
+{"fn":"whenHolds","args":["true && false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["true && false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["true && false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["true && false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["true && false",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["true && false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["true && false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["true && false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["true && false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["\"\""],"ok":{"ok":true,"expr":{"kind":"literal","value":""}}}
+{"fn":"whenHolds","args":["\"\"",{}],"ok":false}
+{"fn":"whenHolds","args":["\"\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["\"\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["\"\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["\"\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["\"\"",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["\"\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["\"\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["\"\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["\"\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"parseWhen","args":["isPinned ~= isActive"],"ok":{"ok":true,"expr":{"kind":"compare","op":"~=","left":{"kind":"key","key":"isPinned"},"right":{"kind":"key","key":"isActive"}}}}
+{"fn":"whenHolds","args":["isPinned ~= isActive",{}],"ok":true}
+{"fn":"whenHolds","args":["isPinned ~= isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isPinned ~= isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isPinned ~= isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isPinned ~= isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned ~= isActive",{}],"ok":true}
+{"fn":"evaluateWhenCase","args":["isPinned ~= isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned ~= isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned ~= isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isPinned ~= isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"parseWhen","args":["!(isPinned)"],"ok":{"ok":true,"expr":{"kind":"not","of":{"kind":"key","key":"isPinned"}}}}
+{"fn":"whenHolds","args":["!(isPinned)",{}],"ok":true}
+{"fn":"whenHolds","args":["!(isPinned)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["!(isPinned)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["!(isPinned)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["!(isPinned)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!(isPinned)",{}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!(isPinned)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["!(isPinned)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!(isPinned)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["!(isPinned)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"parseWhen","args":["!(isPinned == true)"],"ok":{"ok":true,"expr":{"kind":"not","of":{"kind":"compare","op":"==","left":{"kind":"key","key":"isPinned"},"right":{"kind":"literal","value":true}}}}}
+{"fn":"whenHolds","args":["!(isPinned == true)",{}],"ok":true}
+{"fn":"whenHolds","args":["!(isPinned == true)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["!(isPinned == true)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":["!(isPinned == true)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":["!(isPinned == true)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!(isPinned == true)",{}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!(isPinned == true)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["!(isPinned == true)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!(isPinned == true)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"evaluateWhenCase","args":["!(isPinned == true)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"parseWhen","args":["isInGroup && !isSplit && tabCount != 0"],"ok":{"ok":true,"expr":{"kind":"and","left":{"kind":"and","left":{"kind":"key","key":"isInGroup"},"right":{"kind":"not","of":{"kind":"key","key":"isSplit"}}},"right":{"kind":"compare","op":"!=","left":{"kind":"key","key":"tabCount"},"right":{"kind":"literal","value":0}}}}}
+{"fn":"whenHolds","args":["isInGroup && !isSplit && tabCount != 0",{}],"ok":false}
+{"fn":"whenHolds","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"whenHolds","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"whenHolds","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"whenHolds","args":["isInGroup && !isSplit && tabCount != 0",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isInGroup && !isSplit && tabCount != 0",{}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":false}
+{"fn":"evaluateWhenCase","args":["isInGroup && !isSplit && tabCount != 0",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":false}
+{"fn":"whenHolds","args":[{"$undefined":true},{}],"ok":true}
+{"fn":"whenHolds","args":[null,{}],"ok":true}
+{"fn":"whenHolds","args":[{"$undefined":true},{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":[null,{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}],"ok":true}
+{"fn":"whenHolds","args":[{"$undefined":true},{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":[null,{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}],"ok":true}
+{"fn":"whenHolds","args":[{"$undefined":true},{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":[null,{"isPinned":"yes","tabCount":3.5,"urlHost":""}],"ok":true}
+{"fn":"whenHolds","args":[{"$undefined":true},{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"whenHolds","args":[null,{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}],"ok":true}
+{"fn":"globMatches","args":["*",""],"ok":true}
+{"fn":"globMatches","args":["*","abc"],"ok":true}
+{"fn":"globMatches","args":["a*","abc"],"ok":true}
+{"fn":"globMatches","args":["*c","abc"],"ok":true}
+{"fn":"globMatches","args":["a*c","abc"],"ok":true}
+{"fn":"globMatches","args":["a*c","ac"],"ok":true}
+{"fn":"globMatches","args":["a*b*c","aXbYc"],"ok":true}
+{"fn":"globMatches","args":["a*b*c","acb"],"ok":false}
+{"fn":"globMatches","args":["",""],"ok":true}
+{"fn":"globMatches","args":["","a"],"ok":false}
+{"fn":"globMatches","args":["abc","abc"],"ok":true}
+{"fn":"globMatches","args":["abc","ABC"],"ok":false}
+{"fn":"globMatches","args":["*.example.com","api.example.com"],"ok":true}
+{"fn":"globMatches","args":["*.example.com","example.com"],"ok":false}
+{"fn":"globMatches","args":["**","x"],"ok":true}
+{"fn":"globMatches","args":["a?c","abc"],"ok":false}
+{"fn":"globMatches","args":[".*","x"],"ok":false}
+{"fn":"globMatches","args":["[a]","a"],"ok":false}
+{"fn":"globMatches","args":["*a😀b","xa😀b"],"ok":true}
+{"fn":"globMatches","args":[{"$utf16":[55357,42]},"a😀b"],"ok":false}
+{"fn":"globMatches","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":false}
+{"fn":"globMatches","args":["********************************************************************************************************************************","abc"],"ok":true}
+{"fn":"globMatches","args":["a*a*a*a*a*b","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":false}

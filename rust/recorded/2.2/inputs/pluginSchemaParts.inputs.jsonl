@@ -1,0 +1,33 @@
+{"fn": "textOf", "args": [60]}
+{"fn": "textOf", "args": [60, ""]}
+{"fn": "textOf", "args": [60, "A title"]}
+{"fn": "textOf", "args": [0, "ünïcödé 😀"]}
+{"fn": "textOf", "args": [{"$num": "-0"}, "x"]}
+{"fn": "textOf", "args": [{"$num": "NaN"}]}
+{"fn": "textOf", "args": [{"$num": "Infinity"}, "∞"]}
+{"fn": "textOf", "args": [1.5, "half"]}
+{"fn": "textOf", "args": [1e21, "big"]}
+{"fn": "textOf", "args": [1e-7, "small"]}
+{"fn": "textOf", "args": [123456789012, "line1\nline2\t\"q\"\\"]}
+{"fn": "textOf", "args": [800, "\u0000\u001f\u202e"]}
+{"fn": "closed", "args": [{}]}
+{"fn": "closed", "args": [{}, []]}
+{"fn": "closed", "args": [{"a": {"type": "string"}}, ["a"]]}
+{"fn": "closed", "args": [{"b": {"type": "string"}, "2": {"type": "number"}, "1": {}, "a": {"enum": [1, "x", null, true]}}, ["b", "2", "1", "a"]]}
+{"fn": "closed", "args": [{"x": {"type": "number", "minimum": {"$num": "NaN"}, "maximum": {"$num": "-0"}}}, ["x", "x"]]}
+{"fn": "closed", "args": [{"ü": {"description": "😀"}, "u": {"$undefined": true}}, ["ü", ""]]}
+{"fn": "closed", "args": [null]}
+{"fn": "closed", "args": [[{"a": 1}], ["0"]]}
+{"fn": "closed", "args": ["props", []]}
+{"fn": "closed", "args": [5, ["a", "b", "c"]]}
+{"fn": "pluginPath", "args": []}
+{"fn": "pluginPath", "args": [""]}
+{"fn": "pluginPath", "args": ["An executable file in the plugin's folder, like bin/tool"]}
+{"fn": "pluginPath", "args": ["日本語 😀 \\ / \""]}
+{"fn": "rowSchema", "args": [[]]}
+{"fn": "rowSchema", "args": [["toggle", "text", "choice"]]}
+{"fn": "rowSchema", "args": [["toggle", "text", "number", "choice", "secret"]]}
+{"fn": "rowSchema", "args": [["number"]]}
+{"fn": "rowSchema", "args": [["Number", "numbers", " number"]]}
+{"fn": "rowSchema", "args": [["number", "number", "ü"]]}
+{"fn": "rowSchema", "args": [["", "😀"]]}

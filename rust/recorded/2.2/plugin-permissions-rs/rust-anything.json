@@ -1,0 +1,83 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginPermissions.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "plugin-permissions-rs",
+  "exports": [
+    {
+      "name": "constantsCase",
+      "file": "apps/browser/src/lib/pluginPermissions.harness.ts",
+      "line": 6,
+      "params": [],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "legacyPermissionsCase",
+      "file": "apps/browser/src/lib/pluginPermissions.harness.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "given",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "permissionsCase",
+      "file": "apps/browser/src/lib/pluginPermissions.harness.ts",
+      "line": 8,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "missingPermissionsCase",
+      "file": "apps/browser/src/lib/pluginPermissions.harness.ts",
+      "line": 13,
+      "params": [
+        {
+          "name": "caller",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "callee",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

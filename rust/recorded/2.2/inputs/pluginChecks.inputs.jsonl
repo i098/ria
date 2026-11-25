@@ -1,0 +1,1020 @@
+{"fn":"constantsCase","args":[]}
+{"fn":"patternCase","args":["NAME",""]}
+{"fn":"patternCase","args":["NAME","a"]}
+{"fn":"patternCase","args":["NAME","abc-1"]}
+{"fn":"patternCase","args":["NAME","-a"]}
+{"fn":"patternCase","args":["NAME","A"]}
+{"fn":"patternCase","args":["NAME","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["NAME","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["NAME","1.2.3"]}
+{"fn":"patternCase","args":["NAME","1.2.3-beta.1"]}
+{"fn":"patternCase","args":["NAME","1.2"]}
+{"fn":"patternCase","args":["NAME","1234567.1.1"]}
+{"fn":"patternCase","args":["NAME","star.fill"]}
+{"fn":"patternCase","args":["NAME","a_b"]}
+{"fn":"patternCase","args":["NAME","x\u0007"]}
+{"fn":"patternCase","args":["NAME","x‎"]}
+{"fn":"patternCase","args":["NAME","x‪"]}
+{"fn":"patternCase","args":["NAME","x⁦"]}
+{"fn":"patternCase","args":["NAME","x؜"]}
+{"fn":"patternCase","args":["NAME","x"]}
+{"fn":"patternCase","args":["NAME","plain text"]}
+{"fn":"patternCase","args":["NAME","ü"]}
+{"fn":"patternCase","args":["KEY",""]}
+{"fn":"patternCase","args":["KEY","a"]}
+{"fn":"patternCase","args":["KEY","abc-1"]}
+{"fn":"patternCase","args":["KEY","-a"]}
+{"fn":"patternCase","args":["KEY","A"]}
+{"fn":"patternCase","args":["KEY","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["KEY","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["KEY","1.2.3"]}
+{"fn":"patternCase","args":["KEY","1.2.3-beta.1"]}
+{"fn":"patternCase","args":["KEY","1.2"]}
+{"fn":"patternCase","args":["KEY","1234567.1.1"]}
+{"fn":"patternCase","args":["KEY","star.fill"]}
+{"fn":"patternCase","args":["KEY","a_b"]}
+{"fn":"patternCase","args":["KEY","x\u0007"]}
+{"fn":"patternCase","args":["KEY","x‎"]}
+{"fn":"patternCase","args":["KEY","x‪"]}
+{"fn":"patternCase","args":["KEY","x⁦"]}
+{"fn":"patternCase","args":["KEY","x؜"]}
+{"fn":"patternCase","args":["KEY","x"]}
+{"fn":"patternCase","args":["KEY","plain text"]}
+{"fn":"patternCase","args":["KEY","ü"]}
+{"fn":"patternCase","args":["VERSION",""]}
+{"fn":"patternCase","args":["VERSION","a"]}
+{"fn":"patternCase","args":["VERSION","abc-1"]}
+{"fn":"patternCase","args":["VERSION","-a"]}
+{"fn":"patternCase","args":["VERSION","A"]}
+{"fn":"patternCase","args":["VERSION","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["VERSION","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["VERSION","1.2.3"]}
+{"fn":"patternCase","args":["VERSION","1.2.3-beta.1"]}
+{"fn":"patternCase","args":["VERSION","1.2"]}
+{"fn":"patternCase","args":["VERSION","1234567.1.1"]}
+{"fn":"patternCase","args":["VERSION","star.fill"]}
+{"fn":"patternCase","args":["VERSION","a_b"]}
+{"fn":"patternCase","args":["VERSION","x\u0007"]}
+{"fn":"patternCase","args":["VERSION","x‎"]}
+{"fn":"patternCase","args":["VERSION","x‪"]}
+{"fn":"patternCase","args":["VERSION","x⁦"]}
+{"fn":"patternCase","args":["VERSION","x؜"]}
+{"fn":"patternCase","args":["VERSION","x"]}
+{"fn":"patternCase","args":["VERSION","plain text"]}
+{"fn":"patternCase","args":["VERSION","ü"]}
+{"fn":"patternCase","args":["SYMBOL",""]}
+{"fn":"patternCase","args":["SYMBOL","a"]}
+{"fn":"patternCase","args":["SYMBOL","abc-1"]}
+{"fn":"patternCase","args":["SYMBOL","-a"]}
+{"fn":"patternCase","args":["SYMBOL","A"]}
+{"fn":"patternCase","args":["SYMBOL","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["SYMBOL","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["SYMBOL","1.2.3"]}
+{"fn":"patternCase","args":["SYMBOL","1.2.3-beta.1"]}
+{"fn":"patternCase","args":["SYMBOL","1.2"]}
+{"fn":"patternCase","args":["SYMBOL","1234567.1.1"]}
+{"fn":"patternCase","args":["SYMBOL","star.fill"]}
+{"fn":"patternCase","args":["SYMBOL","a_b"]}
+{"fn":"patternCase","args":["SYMBOL","x\u0007"]}
+{"fn":"patternCase","args":["SYMBOL","x‎"]}
+{"fn":"patternCase","args":["SYMBOL","x‪"]}
+{"fn":"patternCase","args":["SYMBOL","x⁦"]}
+{"fn":"patternCase","args":["SYMBOL","x؜"]}
+{"fn":"patternCase","args":["SYMBOL","x"]}
+{"fn":"patternCase","args":["SYMBOL","plain text"]}
+{"fn":"patternCase","args":["SYMBOL","ü"]}
+{"fn":"patternCase","args":["KEYWORD",""]}
+{"fn":"patternCase","args":["KEYWORD","a"]}
+{"fn":"patternCase","args":["KEYWORD","abc-1"]}
+{"fn":"patternCase","args":["KEYWORD","-a"]}
+{"fn":"patternCase","args":["KEYWORD","A"]}
+{"fn":"patternCase","args":["KEYWORD","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["KEYWORD","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["KEYWORD","1.2.3"]}
+{"fn":"patternCase","args":["KEYWORD","1.2.3-beta.1"]}
+{"fn":"patternCase","args":["KEYWORD","1.2"]}
+{"fn":"patternCase","args":["KEYWORD","1234567.1.1"]}
+{"fn":"patternCase","args":["KEYWORD","star.fill"]}
+{"fn":"patternCase","args":["KEYWORD","a_b"]}
+{"fn":"patternCase","args":["KEYWORD","x\u0007"]}
+{"fn":"patternCase","args":["KEYWORD","x‎"]}
+{"fn":"patternCase","args":["KEYWORD","x‪"]}
+{"fn":"patternCase","args":["KEYWORD","x⁦"]}
+{"fn":"patternCase","args":["KEYWORD","x؜"]}
+{"fn":"patternCase","args":["KEYWORD","x"]}
+{"fn":"patternCase","args":["KEYWORD","plain text"]}
+{"fn":"patternCase","args":["KEYWORD","ü"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT",""]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","a"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","abc-1"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","-a"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","A"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","1.2.3"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","1.2.3-beta.1"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","1.2"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","1234567.1.1"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","star.fill"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","a_b"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","x\u0007"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","x‎"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","x‪"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","x⁦"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","x؜"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","x"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","plain text"]}
+{"fn":"patternCase","args":["UNSAFE_TEXT","ü"]}
+{"fn":"patternCase","args":["OTHER",""]}
+{"fn":"patternCase","args":["OTHER","a"]}
+{"fn":"patternCase","args":["OTHER","abc-1"]}
+{"fn":"patternCase","args":["OTHER","-a"]}
+{"fn":"patternCase","args":["OTHER","A"]}
+{"fn":"patternCase","args":["OTHER","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["OTHER","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"patternCase","args":["OTHER","1.2.3"]}
+{"fn":"patternCase","args":["OTHER","1.2.3-beta.1"]}
+{"fn":"patternCase","args":["OTHER","1.2"]}
+{"fn":"patternCase","args":["OTHER","1234567.1.1"]}
+{"fn":"patternCase","args":["OTHER","star.fill"]}
+{"fn":"patternCase","args":["OTHER","a_b"]}
+{"fn":"patternCase","args":["OTHER","x\u0007"]}
+{"fn":"patternCase","args":["OTHER","x‎"]}
+{"fn":"patternCase","args":["OTHER","x‪"]}
+{"fn":"patternCase","args":["OTHER","x⁦"]}
+{"fn":"patternCase","args":["OTHER","x؜"]}
+{"fn":"patternCase","args":["OTHER","x"]}
+{"fn":"patternCase","args":["OTHER","plain text"]}
+{"fn":"patternCase","args":["OTHER","ü"]}
+{"fn":"atCase","args":["a","b"]}
+{"fn":"atCase","args":["a",0]}
+{"fn":"atCase","args":["a",3]}
+{"fn":"atCase","args":["","x"]}
+{"fn":"atCase","args":["a","with space"]}
+{"fn":"atCase","args":["a","x.y"]}
+{"fn":"atCase","args":["a","1"]}
+{"fn":"atCase","args":["a",-1]}
+{"fn":"atCase","args":["a",1.5]}
+{"fn":"atCase","args":["a","é"]}
+{"fn":"atCase","args":["a","$x"]}
+{"fn":"atCase","args":["a","_x9"]}
+{"fn":"atCase","args":["a","9x"]}
+{"fn":"atCase","args":["a",""]}
+{"fn":"onlyCase","args":["plugin.x",{},[]]}
+{"fn":"onlyCase","args":["plugin.x",{"a":1,"b":2},["a"]]}
+{"fn":"onlyCase","args":["plugin.x",{"3":0,"a":1,"b c":2},[]]}
+{"fn":"onlyCase","args":["plugin.x",{"a":1},["a","b"]]}
+{"fn":"textCase","args":["plugin.x",{"$undefined":true},"name",true]}
+{"fn":"textCase","args":["plugin.x",{"$undefined":true},"name",false]}
+{"fn":"textCase","args":["plugin.x",{"$undefined":true},"example",true]}
+{"fn":"textCase","args":["plugin.x",{"$undefined":true},"choices",true]}
+{"fn":"textCase","args":["plugin.x",{"$undefined":true},"toString",true]}
+{"fn":"textCase","args":["plugin.x",{"$undefined":true},"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$undefined":true},"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",{"$undefined":true},"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$undefined":true},"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$undefined":true},"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",{"$undefined":true},"programs"]}
+{"fn":"listCase","args":["plugin.x",{"$undefined":true},"rows"]}
+{"fn":"listCase","args":["plugin.x",{"$undefined":true},"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",{"$undefined":true},"constructor"]}
+{"fn":"objectCase","args":["plugin.x",{"$undefined":true}]}
+{"fn":"integerCase","args":["plugin.x",{"$undefined":true},0,10,5]}
+{"fn":"integerCase","args":["plugin.x",{"$undefined":true},1,1,1]}
+{"fn":"integerCase","args":["plugin.x",{"$undefined":true},-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",{"$undefined":true},0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",{"$undefined":true},true]}
+{"fn":"flagCase","args":["plugin.x",{"$undefined":true},false]}
+{"fn":"symbolOfCase","args":["plugin.x",{"$undefined":true},"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$undefined":true},"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$undefined":true},"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$undefined":true},"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$undefined":true},"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",null,"name",true]}
+{"fn":"textCase","args":["plugin.x",null,"name",false]}
+{"fn":"textCase","args":["plugin.x",null,"example",true]}
+{"fn":"textCase","args":["plugin.x",null,"choices",true]}
+{"fn":"textCase","args":["plugin.x",null,"toString",true]}
+{"fn":"textCase","args":["plugin.x",null,"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",null,"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",null,"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",null,"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",null,"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",null,"programs"]}
+{"fn":"listCase","args":["plugin.x",null,"rows"]}
+{"fn":"listCase","args":["plugin.x",null,"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",null,"constructor"]}
+{"fn":"objectCase","args":["plugin.x",null]}
+{"fn":"integerCase","args":["plugin.x",null,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",null,1,1,1]}
+{"fn":"integerCase","args":["plugin.x",null,-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",null,0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",null,true]}
+{"fn":"flagCase","args":["plugin.x",null,false]}
+{"fn":"symbolOfCase","args":["plugin.x",null,"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[null]}
+{"fn":"pluginFileCase","args":["plugin.x",null,"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",null,"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",null,"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",null,"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",true,"name",true]}
+{"fn":"textCase","args":["plugin.x",true,"name",false]}
+{"fn":"textCase","args":["plugin.x",true,"example",true]}
+{"fn":"textCase","args":["plugin.x",true,"choices",true]}
+{"fn":"textCase","args":["plugin.x",true,"toString",true]}
+{"fn":"textCase","args":["plugin.x",true,"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",true,"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",true,"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",true,"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",true,"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",true,"programs"]}
+{"fn":"listCase","args":["plugin.x",true,"rows"]}
+{"fn":"listCase","args":["plugin.x",true,"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",true,"constructor"]}
+{"fn":"objectCase","args":["plugin.x",true]}
+{"fn":"integerCase","args":["plugin.x",true,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",true,1,1,1]}
+{"fn":"integerCase","args":["plugin.x",true,-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",true,0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",true,true]}
+{"fn":"flagCase","args":["plugin.x",true,false]}
+{"fn":"symbolOfCase","args":["plugin.x",true,"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[true]}
+{"fn":"pluginFileCase","args":["plugin.x",true,"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",true,"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",true,"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",true,"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",false,"name",true]}
+{"fn":"textCase","args":["plugin.x",false,"name",false]}
+{"fn":"textCase","args":["plugin.x",false,"example",true]}
+{"fn":"textCase","args":["plugin.x",false,"choices",true]}
+{"fn":"textCase","args":["plugin.x",false,"toString",true]}
+{"fn":"textCase","args":["plugin.x",false,"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",false,"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",false,"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",false,"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",false,"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",false,"programs"]}
+{"fn":"listCase","args":["plugin.x",false,"rows"]}
+{"fn":"listCase","args":["plugin.x",false,"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",false,"constructor"]}
+{"fn":"objectCase","args":["plugin.x",false]}
+{"fn":"integerCase","args":["plugin.x",false,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",false,1,1,1]}
+{"fn":"integerCase","args":["plugin.x",false,-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",false,0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",false,true]}
+{"fn":"flagCase","args":["plugin.x",false,false]}
+{"fn":"symbolOfCase","args":["plugin.x",false,"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[false]}
+{"fn":"pluginFileCase","args":["plugin.x",false,"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",false,"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",false,"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",false,"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",0,"name",true]}
+{"fn":"textCase","args":["plugin.x",0,"name",false]}
+{"fn":"textCase","args":["plugin.x",0,"example",true]}
+{"fn":"textCase","args":["plugin.x",0,"choices",true]}
+{"fn":"textCase","args":["plugin.x",0,"toString",true]}
+{"fn":"textCase","args":["plugin.x",0,"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",0,"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",0,"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",0,"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",0,"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",0,"programs"]}
+{"fn":"listCase","args":["plugin.x",0,"rows"]}
+{"fn":"listCase","args":["plugin.x",0,"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",0,"constructor"]}
+{"fn":"objectCase","args":["plugin.x",0]}
+{"fn":"integerCase","args":["plugin.x",0,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",0,1,1,1]}
+{"fn":"integerCase","args":["plugin.x",0,-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",0,0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",0,true]}
+{"fn":"flagCase","args":["plugin.x",0,false]}
+{"fn":"symbolOfCase","args":["plugin.x",0,"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[0]}
+{"fn":"pluginFileCase","args":["plugin.x",0,"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",0,"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",0,"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",0,"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",1,"name",true]}
+{"fn":"textCase","args":["plugin.x",1,"name",false]}
+{"fn":"textCase","args":["plugin.x",1,"example",true]}
+{"fn":"textCase","args":["plugin.x",1,"choices",true]}
+{"fn":"textCase","args":["plugin.x",1,"toString",true]}
+{"fn":"textCase","args":["plugin.x",1,"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",1,"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",1,"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",1,"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",1,"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",1,"programs"]}
+{"fn":"listCase","args":["plugin.x",1,"rows"]}
+{"fn":"listCase","args":["plugin.x",1,"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",1,"constructor"]}
+{"fn":"objectCase","args":["plugin.x",1]}
+{"fn":"integerCase","args":["plugin.x",1,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",1,1,1,1]}
+{"fn":"integerCase","args":["plugin.x",1,-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",1,0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",1,true]}
+{"fn":"flagCase","args":["plugin.x",1,false]}
+{"fn":"symbolOfCase","args":["plugin.x",1,"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[1]}
+{"fn":"pluginFileCase","args":["plugin.x",1,"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",1,"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",1,"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",1,"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",-1,"name",true]}
+{"fn":"textCase","args":["plugin.x",-1,"name",false]}
+{"fn":"textCase","args":["plugin.x",-1,"example",true]}
+{"fn":"textCase","args":["plugin.x",-1,"choices",true]}
+{"fn":"textCase","args":["plugin.x",-1,"toString",true]}
+{"fn":"textCase","args":["plugin.x",-1,"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",-1,"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",-1,"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",-1,"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",-1,"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",-1,"programs"]}
+{"fn":"listCase","args":["plugin.x",-1,"rows"]}
+{"fn":"listCase","args":["plugin.x",-1,"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",-1,"constructor"]}
+{"fn":"objectCase","args":["plugin.x",-1]}
+{"fn":"integerCase","args":["plugin.x",-1,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",-1,1,1,1]}
+{"fn":"integerCase","args":["plugin.x",-1,-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",-1,0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",-1,true]}
+{"fn":"flagCase","args":["plugin.x",-1,false]}
+{"fn":"symbolOfCase","args":["plugin.x",-1,"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[-1]}
+{"fn":"pluginFileCase","args":["plugin.x",-1,"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",-1,"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",-1,"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",-1,"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",1.5,"name",true]}
+{"fn":"textCase","args":["plugin.x",1.5,"name",false]}
+{"fn":"textCase","args":["plugin.x",1.5,"example",true]}
+{"fn":"textCase","args":["plugin.x",1.5,"choices",true]}
+{"fn":"textCase","args":["plugin.x",1.5,"toString",true]}
+{"fn":"textCase","args":["plugin.x",1.5,"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",1.5,"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",1.5,"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",1.5,"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",1.5,"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",1.5,"programs"]}
+{"fn":"listCase","args":["plugin.x",1.5,"rows"]}
+{"fn":"listCase","args":["plugin.x",1.5,"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",1.5,"constructor"]}
+{"fn":"objectCase","args":["plugin.x",1.5]}
+{"fn":"integerCase","args":["plugin.x",1.5,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",1.5,1,1,1]}
+{"fn":"integerCase","args":["plugin.x",1.5,-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",1.5,0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",1.5,true]}
+{"fn":"flagCase","args":["plugin.x",1.5,false]}
+{"fn":"symbolOfCase","args":["plugin.x",1.5,"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[1.5]}
+{"fn":"pluginFileCase","args":["plugin.x",1.5,"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",1.5,"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",1.5,"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",1.5,"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",{"$num":"NaN"},"name",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"NaN"},"name",false]}
+{"fn":"textCase","args":["plugin.x",{"$num":"NaN"},"example",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"NaN"},"choices",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"NaN"},"toString",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"NaN"},"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"NaN"},"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"NaN"},"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"NaN"},"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"NaN"},"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",{"$num":"NaN"},"programs"]}
+{"fn":"listCase","args":["plugin.x",{"$num":"NaN"},"rows"]}
+{"fn":"listCase","args":["plugin.x",{"$num":"NaN"},"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",{"$num":"NaN"},"constructor"]}
+{"fn":"objectCase","args":["plugin.x",{"$num":"NaN"}]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"NaN"},0,10,5]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"NaN"},1,1,1]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"NaN"},-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"NaN"},0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",{"$num":"NaN"},true]}
+{"fn":"flagCase","args":["plugin.x",{"$num":"NaN"},false]}
+{"fn":"symbolOfCase","args":["plugin.x",{"$num":"NaN"},"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[{"$num":"NaN"}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"NaN"},"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"NaN"},"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"NaN"},"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"NaN"},"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",{"$num":"Infinity"},"name",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"Infinity"},"name",false]}
+{"fn":"textCase","args":["plugin.x",{"$num":"Infinity"},"example",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"Infinity"},"choices",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"Infinity"},"toString",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"Infinity"},"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"Infinity"},"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"Infinity"},"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"Infinity"},"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"Infinity"},"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",{"$num":"Infinity"},"programs"]}
+{"fn":"listCase","args":["plugin.x",{"$num":"Infinity"},"rows"]}
+{"fn":"listCase","args":["plugin.x",{"$num":"Infinity"},"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",{"$num":"Infinity"},"constructor"]}
+{"fn":"objectCase","args":["plugin.x",{"$num":"Infinity"}]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"Infinity"},0,10,5]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"Infinity"},1,1,1]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"Infinity"},-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"Infinity"},0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",{"$num":"Infinity"},true]}
+{"fn":"flagCase","args":["plugin.x",{"$num":"Infinity"},false]}
+{"fn":"symbolOfCase","args":["plugin.x",{"$num":"Infinity"},"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[{"$num":"Infinity"}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"Infinity"},"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"Infinity"},"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"Infinity"},"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"Infinity"},"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",{"$num":"-0"},"name",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"-0"},"name",false]}
+{"fn":"textCase","args":["plugin.x",{"$num":"-0"},"example",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"-0"},"choices",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"-0"},"toString",true]}
+{"fn":"textCase","args":["plugin.x",{"$num":"-0"},"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"-0"},"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"-0"},"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"-0"},"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$num":"-0"},"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",{"$num":"-0"},"programs"]}
+{"fn":"listCase","args":["plugin.x",{"$num":"-0"},"rows"]}
+{"fn":"listCase","args":["plugin.x",{"$num":"-0"},"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",{"$num":"-0"},"constructor"]}
+{"fn":"objectCase","args":["plugin.x",{"$num":"-0"}]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"-0"},0,10,5]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"-0"},1,1,1]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"-0"},-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",{"$num":"-0"},0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",{"$num":"-0"},true]}
+{"fn":"flagCase","args":["plugin.x",{"$num":"-0"},false]}
+{"fn":"symbolOfCase","args":["plugin.x",{"$num":"-0"},"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[{"$num":"-0"}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"-0"},"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"-0"},"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"-0"},"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$num":"-0"},"a file",".png"]}
+{"fn":"textCase","args":["plugin.x","","name",true]}
+{"fn":"textCase","args":["plugin.x","","name",false]}
+{"fn":"textCase","args":["plugin.x","","example",true]}
+{"fn":"textCase","args":["plugin.x","","choices",true]}
+{"fn":"textCase","args":["plugin.x","","toString",true]}
+{"fn":"textCase","args":["plugin.x","","nope",false]}
+{"fn":"matchingCase","args":["plugin.x","","NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x","","NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","","SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","","VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x","","programs"]}
+{"fn":"listCase","args":["plugin.x","","rows"]}
+{"fn":"listCase","args":["plugin.x","","memoryMB"]}
+{"fn":"listCase","args":["plugin.x","","constructor"]}
+{"fn":"objectCase","args":["plugin.x",""]}
+{"fn":"integerCase","args":["plugin.x","",0,10,5]}
+{"fn":"integerCase","args":["plugin.x","",1,1,1]}
+{"fn":"integerCase","args":["plugin.x","",-5,5,0]}
+{"fn":"integerCase","args":["plugin.x","",0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x","",true]}
+{"fn":"flagCase","args":["plugin.x","",false]}
+{"fn":"symbolOfCase","args":["plugin.x","","puzzlepiece"]}
+{"fn":"isArgumentCase","args":[""]}
+{"fn":"pluginFileCase","args":["plugin.x","","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","","a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x","","a file",".png"]}
+{"fn":"textCase","args":["plugin.x"," ","name",true]}
+{"fn":"textCase","args":["plugin.x"," ","name",false]}
+{"fn":"textCase","args":["plugin.x"," ","example",true]}
+{"fn":"textCase","args":["plugin.x"," ","choices",true]}
+{"fn":"textCase","args":["plugin.x"," ","toString",true]}
+{"fn":"textCase","args":["plugin.x"," ","nope",false]}
+{"fn":"matchingCase","args":["plugin.x"," ","NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x"," ","NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x"," ","SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x"," ","VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x"," ","programs"]}
+{"fn":"listCase","args":["plugin.x"," ","rows"]}
+{"fn":"listCase","args":["plugin.x"," ","memoryMB"]}
+{"fn":"listCase","args":["plugin.x"," ","constructor"]}
+{"fn":"objectCase","args":["plugin.x"," "]}
+{"fn":"integerCase","args":["plugin.x"," ",0,10,5]}
+{"fn":"integerCase","args":["plugin.x"," ",1,1,1]}
+{"fn":"integerCase","args":["plugin.x"," ",-5,5,0]}
+{"fn":"integerCase","args":["plugin.x"," ",0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x"," ",true]}
+{"fn":"flagCase","args":["plugin.x"," ",false]}
+{"fn":"symbolOfCase","args":["plugin.x"," ","puzzlepiece"]}
+{"fn":"isArgumentCase","args":[" "]}
+{"fn":"pluginFileCase","args":["plugin.x"," ","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x"," ","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x"," ","a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x"," ","a file",".png"]}
+{"fn":"textCase","args":["plugin.x","a","name",true]}
+{"fn":"textCase","args":["plugin.x","a","name",false]}
+{"fn":"textCase","args":["plugin.x","a","example",true]}
+{"fn":"textCase","args":["plugin.x","a","choices",true]}
+{"fn":"textCase","args":["plugin.x","a","toString",true]}
+{"fn":"textCase","args":["plugin.x","a","nope",false]}
+{"fn":"matchingCase","args":["plugin.x","a","NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x","a","NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","a","SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","a","VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x","a","programs"]}
+{"fn":"listCase","args":["plugin.x","a","rows"]}
+{"fn":"listCase","args":["plugin.x","a","memoryMB"]}
+{"fn":"listCase","args":["plugin.x","a","constructor"]}
+{"fn":"objectCase","args":["plugin.x","a"]}
+{"fn":"integerCase","args":["plugin.x","a",0,10,5]}
+{"fn":"integerCase","args":["plugin.x","a",1,1,1]}
+{"fn":"integerCase","args":["plugin.x","a",-5,5,0]}
+{"fn":"integerCase","args":["plugin.x","a",0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x","a",true]}
+{"fn":"flagCase","args":["plugin.x","a",false]}
+{"fn":"symbolOfCase","args":["plugin.x","a","puzzlepiece"]}
+{"fn":"isArgumentCase","args":["a"]}
+{"fn":"pluginFileCase","args":["plugin.x","a","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a","a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x","a","a file",".png"]}
+{"fn":"textCase","args":["plugin.x","abc","name",true]}
+{"fn":"textCase","args":["plugin.x","abc","name",false]}
+{"fn":"textCase","args":["plugin.x","abc","example",true]}
+{"fn":"textCase","args":["plugin.x","abc","choices",true]}
+{"fn":"textCase","args":["plugin.x","abc","toString",true]}
+{"fn":"textCase","args":["plugin.x","abc","nope",false]}
+{"fn":"matchingCase","args":["plugin.x","abc","NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x","abc","NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","abc","SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","abc","VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x","abc","programs"]}
+{"fn":"listCase","args":["plugin.x","abc","rows"]}
+{"fn":"listCase","args":["plugin.x","abc","memoryMB"]}
+{"fn":"listCase","args":["plugin.x","abc","constructor"]}
+{"fn":"objectCase","args":["plugin.x","abc"]}
+{"fn":"integerCase","args":["plugin.x","abc",0,10,5]}
+{"fn":"integerCase","args":["plugin.x","abc",1,1,1]}
+{"fn":"integerCase","args":["plugin.x","abc",-5,5,0]}
+{"fn":"integerCase","args":["plugin.x","abc",0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x","abc",true]}
+{"fn":"flagCase","args":["plugin.x","abc",false]}
+{"fn":"symbolOfCase","args":["plugin.x","abc","puzzlepiece"]}
+{"fn":"isArgumentCase","args":["abc"]}
+{"fn":"pluginFileCase","args":["plugin.x","abc","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","abc","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","abc","a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x","abc","a file",".png"]}
+{"fn":"textCase","args":["plugin.x","a\u0000b","name",true]}
+{"fn":"textCase","args":["plugin.x","a\u0000b","name",false]}
+{"fn":"textCase","args":["plugin.x","a\u0000b","example",true]}
+{"fn":"textCase","args":["plugin.x","a\u0000b","choices",true]}
+{"fn":"textCase","args":["plugin.x","a\u0000b","toString",true]}
+{"fn":"textCase","args":["plugin.x","a\u0000b","nope",false]}
+{"fn":"matchingCase","args":["plugin.x","a\u0000b","NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x","a\u0000b","NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","a\u0000b","SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","a\u0000b","VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x","a\u0000b","programs"]}
+{"fn":"listCase","args":["plugin.x","a\u0000b","rows"]}
+{"fn":"listCase","args":["plugin.x","a\u0000b","memoryMB"]}
+{"fn":"listCase","args":["plugin.x","a\u0000b","constructor"]}
+{"fn":"objectCase","args":["plugin.x","a\u0000b"]}
+{"fn":"integerCase","args":["plugin.x","a\u0000b",0,10,5]}
+{"fn":"integerCase","args":["plugin.x","a\u0000b",1,1,1]}
+{"fn":"integerCase","args":["plugin.x","a\u0000b",-5,5,0]}
+{"fn":"integerCase","args":["plugin.x","a\u0000b",0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x","a\u0000b",true]}
+{"fn":"flagCase","args":["plugin.x","a\u0000b",false]}
+{"fn":"symbolOfCase","args":["plugin.x","a\u0000b","puzzlepiece"]}
+{"fn":"isArgumentCase","args":["a\u0000b"]}
+{"fn":"pluginFileCase","args":["plugin.x","a\u0000b","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a\u0000b","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a\u0000b","a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x","a\u0000b","a file",".png"]}
+{"fn":"textCase","args":["plugin.x","a‮b","name",true]}
+{"fn":"textCase","args":["plugin.x","a‮b","name",false]}
+{"fn":"textCase","args":["plugin.x","a‮b","example",true]}
+{"fn":"textCase","args":["plugin.x","a‮b","choices",true]}
+{"fn":"textCase","args":["plugin.x","a‮b","toString",true]}
+{"fn":"textCase","args":["plugin.x","a‮b","nope",false]}
+{"fn":"matchingCase","args":["plugin.x","a‮b","NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x","a‮b","NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","a‮b","SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","a‮b","VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x","a‮b","programs"]}
+{"fn":"listCase","args":["plugin.x","a‮b","rows"]}
+{"fn":"listCase","args":["plugin.x","a‮b","memoryMB"]}
+{"fn":"listCase","args":["plugin.x","a‮b","constructor"]}
+{"fn":"objectCase","args":["plugin.x","a‮b"]}
+{"fn":"integerCase","args":["plugin.x","a‮b",0,10,5]}
+{"fn":"integerCase","args":["plugin.x","a‮b",1,1,1]}
+{"fn":"integerCase","args":["plugin.x","a‮b",-5,5,0]}
+{"fn":"integerCase","args":["plugin.x","a‮b",0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x","a‮b",true]}
+{"fn":"flagCase","args":["plugin.x","a‮b",false]}
+{"fn":"symbolOfCase","args":["plugin.x","a‮b","puzzlepiece"]}
+{"fn":"isArgumentCase","args":["a‮b"]}
+{"fn":"pluginFileCase","args":["plugin.x","a‮b","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a‮b","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a‮b","a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x","a‮b","a file",".png"]}
+{"fn":"textCase","args":["plugin.x","é","name",true]}
+{"fn":"textCase","args":["plugin.x","é","name",false]}
+{"fn":"textCase","args":["plugin.x","é","example",true]}
+{"fn":"textCase","args":["plugin.x","é","choices",true]}
+{"fn":"textCase","args":["plugin.x","é","toString",true]}
+{"fn":"textCase","args":["plugin.x","é","nope",false]}
+{"fn":"matchingCase","args":["plugin.x","é","NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x","é","NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","é","SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","é","VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x","é","programs"]}
+{"fn":"listCase","args":["plugin.x","é","rows"]}
+{"fn":"listCase","args":["plugin.x","é","memoryMB"]}
+{"fn":"listCase","args":["plugin.x","é","constructor"]}
+{"fn":"objectCase","args":["plugin.x","é"]}
+{"fn":"integerCase","args":["plugin.x","é",0,10,5]}
+{"fn":"integerCase","args":["plugin.x","é",1,1,1]}
+{"fn":"integerCase","args":["plugin.x","é",-5,5,0]}
+{"fn":"integerCase","args":["plugin.x","é",0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x","é",true]}
+{"fn":"flagCase","args":["plugin.x","é",false]}
+{"fn":"symbolOfCase","args":["plugin.x","é","puzzlepiece"]}
+{"fn":"isArgumentCase","args":["é"]}
+{"fn":"pluginFileCase","args":["plugin.x","é","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","é","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","é","a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x","é","a file",".png"]}
+{"fn":"textCase","args":["plugin.x","a😀b","name",true]}
+{"fn":"textCase","args":["plugin.x","a😀b","name",false]}
+{"fn":"textCase","args":["plugin.x","a😀b","example",true]}
+{"fn":"textCase","args":["plugin.x","a😀b","choices",true]}
+{"fn":"textCase","args":["plugin.x","a😀b","toString",true]}
+{"fn":"textCase","args":["plugin.x","a😀b","nope",false]}
+{"fn":"matchingCase","args":["plugin.x","a😀b","NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x","a😀b","NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","a😀b","SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","a😀b","VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x","a😀b","programs"]}
+{"fn":"listCase","args":["plugin.x","a😀b","rows"]}
+{"fn":"listCase","args":["plugin.x","a😀b","memoryMB"]}
+{"fn":"listCase","args":["plugin.x","a😀b","constructor"]}
+{"fn":"objectCase","args":["plugin.x","a😀b"]}
+{"fn":"integerCase","args":["plugin.x","a😀b",0,10,5]}
+{"fn":"integerCase","args":["plugin.x","a😀b",1,1,1]}
+{"fn":"integerCase","args":["plugin.x","a😀b",-5,5,0]}
+{"fn":"integerCase","args":["plugin.x","a😀b",0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x","a😀b",true]}
+{"fn":"flagCase","args":["plugin.x","a😀b",false]}
+{"fn":"symbolOfCase","args":["plugin.x","a😀b","puzzlepiece"]}
+{"fn":"isArgumentCase","args":["a😀b"]}
+{"fn":"pluginFileCase","args":["plugin.x","a😀b","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a😀b","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a😀b","a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x","a😀b","a file",".png"]}
+{"fn":"textCase","args":["plugin.x",{"$utf16":[97,55296,98]},"name",true]}
+{"fn":"textCase","args":["plugin.x",{"$utf16":[97,55296,98]},"name",false]}
+{"fn":"textCase","args":["plugin.x",{"$utf16":[97,55296,98]},"example",true]}
+{"fn":"textCase","args":["plugin.x",{"$utf16":[97,55296,98]},"choices",true]}
+{"fn":"textCase","args":["plugin.x",{"$utf16":[97,55296,98]},"toString",true]}
+{"fn":"textCase","args":["plugin.x",{"$utf16":[97,55296,98]},"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$utf16":[97,55296,98]},"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",{"$utf16":[97,55296,98]},"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$utf16":[97,55296,98]},"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"$utf16":[97,55296,98]},"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",{"$utf16":[97,55296,98]},"programs"]}
+{"fn":"listCase","args":["plugin.x",{"$utf16":[97,55296,98]},"rows"]}
+{"fn":"listCase","args":["plugin.x",{"$utf16":[97,55296,98]},"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",{"$utf16":[97,55296,98]},"constructor"]}
+{"fn":"objectCase","args":["plugin.x",{"$utf16":[97,55296,98]}]}
+{"fn":"integerCase","args":["plugin.x",{"$utf16":[97,55296,98]},0,10,5]}
+{"fn":"integerCase","args":["plugin.x",{"$utf16":[97,55296,98]},1,1,1]}
+{"fn":"integerCase","args":["plugin.x",{"$utf16":[97,55296,98]},-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",{"$utf16":[97,55296,98]},0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",{"$utf16":[97,55296,98]},true]}
+{"fn":"flagCase","args":["plugin.x",{"$utf16":[97,55296,98]},false]}
+{"fn":"symbolOfCase","args":["plugin.x",{"$utf16":[97,55296,98]},"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[{"$utf16":[97,55296,98]}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$utf16":[97,55296,98]},"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$utf16":[97,55296,98]},"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$utf16":[97,55296,98]},"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"$utf16":[97,55296,98]},"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",[],"name",true]}
+{"fn":"textCase","args":["plugin.x",[],"name",false]}
+{"fn":"textCase","args":["plugin.x",[],"example",true]}
+{"fn":"textCase","args":["plugin.x",[],"choices",true]}
+{"fn":"textCase","args":["plugin.x",[],"toString",true]}
+{"fn":"textCase","args":["plugin.x",[],"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",[],"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",[],"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",[],"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",[],"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",[],"programs"]}
+{"fn":"listCase","args":["plugin.x",[],"rows"]}
+{"fn":"listCase","args":["plugin.x",[],"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",[],"constructor"]}
+{"fn":"objectCase","args":["plugin.x",[]]}
+{"fn":"integerCase","args":["plugin.x",[],0,10,5]}
+{"fn":"integerCase","args":["plugin.x",[],1,1,1]}
+{"fn":"integerCase","args":["plugin.x",[],-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",[],0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",[],true]}
+{"fn":"flagCase","args":["plugin.x",[],false]}
+{"fn":"symbolOfCase","args":["plugin.x",[],"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[[]]}
+{"fn":"pluginFileCase","args":["plugin.x",[],"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",[],"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",[],"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",[],"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",["a"],"name",true]}
+{"fn":"textCase","args":["plugin.x",["a"],"name",false]}
+{"fn":"textCase","args":["plugin.x",["a"],"example",true]}
+{"fn":"textCase","args":["plugin.x",["a"],"choices",true]}
+{"fn":"textCase","args":["plugin.x",["a"],"toString",true]}
+{"fn":"textCase","args":["plugin.x",["a"],"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",["a"],"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",["a"],"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",["a"],"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",["a"],"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",["a"],"programs"]}
+{"fn":"listCase","args":["plugin.x",["a"],"rows"]}
+{"fn":"listCase","args":["plugin.x",["a"],"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",["a"],"constructor"]}
+{"fn":"objectCase","args":["plugin.x",["a"]]}
+{"fn":"integerCase","args":["plugin.x",["a"],0,10,5]}
+{"fn":"integerCase","args":["plugin.x",["a"],1,1,1]}
+{"fn":"integerCase","args":["plugin.x",["a"],-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",["a"],0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",["a"],true]}
+{"fn":"flagCase","args":["plugin.x",["a"],false]}
+{"fn":"symbolOfCase","args":["plugin.x",["a"],"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[["a"]]}
+{"fn":"pluginFileCase","args":["plugin.x",["a"],"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",["a"],"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",["a"],"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",["a"],"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",[1,2,3],"name",true]}
+{"fn":"textCase","args":["plugin.x",[1,2,3],"name",false]}
+{"fn":"textCase","args":["plugin.x",[1,2,3],"example",true]}
+{"fn":"textCase","args":["plugin.x",[1,2,3],"choices",true]}
+{"fn":"textCase","args":["plugin.x",[1,2,3],"toString",true]}
+{"fn":"textCase","args":["plugin.x",[1,2,3],"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",[1,2,3],"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",[1,2,3],"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",[1,2,3],"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",[1,2,3],"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",[1,2,3],"programs"]}
+{"fn":"listCase","args":["plugin.x",[1,2,3],"rows"]}
+{"fn":"listCase","args":["plugin.x",[1,2,3],"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",[1,2,3],"constructor"]}
+{"fn":"objectCase","args":["plugin.x",[1,2,3]]}
+{"fn":"integerCase","args":["plugin.x",[1,2,3],0,10,5]}
+{"fn":"integerCase","args":["plugin.x",[1,2,3],1,1,1]}
+{"fn":"integerCase","args":["plugin.x",[1,2,3],-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",[1,2,3],0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",[1,2,3],true]}
+{"fn":"flagCase","args":["plugin.x",[1,2,3],false]}
+{"fn":"symbolOfCase","args":["plugin.x",[1,2,3],"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[[1,2,3]]}
+{"fn":"pluginFileCase","args":["plugin.x",[1,2,3],"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",[1,2,3],"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",[1,2,3],"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",[1,2,3],"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",{},"name",true]}
+{"fn":"textCase","args":["plugin.x",{},"name",false]}
+{"fn":"textCase","args":["plugin.x",{},"example",true]}
+{"fn":"textCase","args":["plugin.x",{},"choices",true]}
+{"fn":"textCase","args":["plugin.x",{},"toString",true]}
+{"fn":"textCase","args":["plugin.x",{},"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",{},"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",{},"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{},"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{},"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",{},"programs"]}
+{"fn":"listCase","args":["plugin.x",{},"rows"]}
+{"fn":"listCase","args":["plugin.x",{},"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",{},"constructor"]}
+{"fn":"objectCase","args":["plugin.x",{}]}
+{"fn":"integerCase","args":["plugin.x",{},0,10,5]}
+{"fn":"integerCase","args":["plugin.x",{},1,1,1]}
+{"fn":"integerCase","args":["plugin.x",{},-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",{},0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",{},true]}
+{"fn":"flagCase","args":["plugin.x",{},false]}
+{"fn":"symbolOfCase","args":["plugin.x",{},"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[{}]}
+{"fn":"pluginFileCase","args":["plugin.x",{},"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",{},"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",{},"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",{},"a file",".png"]}
+{"fn":"textCase","args":["plugin.x",{"a":1},"name",true]}
+{"fn":"textCase","args":["plugin.x",{"a":1},"name",false]}
+{"fn":"textCase","args":["plugin.x",{"a":1},"example",true]}
+{"fn":"textCase","args":["plugin.x",{"a":1},"choices",true]}
+{"fn":"textCase","args":["plugin.x",{"a":1},"toString",true]}
+{"fn":"textCase","args":["plugin.x",{"a":1},"nope",false]}
+{"fn":"matchingCase","args":["plugin.x",{"a":1},"NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x",{"a":1},"NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"a":1},"SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x",{"a":1},"VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x",{"a":1},"programs"]}
+{"fn":"listCase","args":["plugin.x",{"a":1},"rows"]}
+{"fn":"listCase","args":["plugin.x",{"a":1},"memoryMB"]}
+{"fn":"listCase","args":["plugin.x",{"a":1},"constructor"]}
+{"fn":"objectCase","args":["plugin.x",{"a":1}]}
+{"fn":"integerCase","args":["plugin.x",{"a":1},0,10,5]}
+{"fn":"integerCase","args":["plugin.x",{"a":1},1,1,1]}
+{"fn":"integerCase","args":["plugin.x",{"a":1},-5,5,0]}
+{"fn":"integerCase","args":["plugin.x",{"a":1},0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x",{"a":1},true]}
+{"fn":"flagCase","args":["plugin.x",{"a":1},false]}
+{"fn":"symbolOfCase","args":["plugin.x",{"a":1},"puzzlepiece"]}
+{"fn":"isArgumentCase","args":[{"a":1}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"a":1},"a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",{"a":1},"a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"a":1},"a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x",{"a":1},"a file",".png"]}
+{"fn":"textCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","name",true]}
+{"fn":"textCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","name",false]}
+{"fn":"textCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","example",true]}
+{"fn":"textCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","choices",true]}
+{"fn":"textCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","toString",true]}
+{"fn":"textCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","nope",false]}
+{"fn":"matchingCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","NAME","a rule",true]}
+{"fn":"matchingCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","NAME","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","SYMBOL","a rule",false]}
+{"fn":"matchingCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","VERSION","a rule",true]}
+{"fn":"listCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","programs"]}
+{"fn":"listCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","rows"]}
+{"fn":"listCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","memoryMB"]}
+{"fn":"listCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","constructor"]}
+{"fn":"objectCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]}
+{"fn":"integerCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",0,10,5]}
+{"fn":"integerCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",1,1,1]}
+{"fn":"integerCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",-5,5,0]}
+{"fn":"integerCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",0.5,2.5,1]}
+{"fn":"flagCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",true]}
+{"fn":"flagCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",false]}
+{"fn":"symbolOfCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","puzzlepiece"]}
+{"fn":"isArgumentCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]}
+{"fn":"pluginFileCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","a file",".JS"]}
+{"fn":"pluginFileCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","a file",".png"]}
+{"fn":"listCase","args":["plugin.x",[1,2,3,4],"programs"]}
+{"fn":"listCase","args":["plugin.x",[1,2,3,4,5],"programs"]}
+{"fn":"listCase","args":["plugin.x",["a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a"],"nope"]}
+{"fn":"textCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","example",true]}
+{"fn":"textCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","example",true]}
+{"fn":"integerCase","args":["plugin.x",2,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",10,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",11,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",3,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",0,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",-5,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",5,0,10,5]}
+{"fn":"integerCase","args":["plugin.x",1,0,10,5]}
+{"fn":"symbolOfCase","args":["plugin.x","star","puzzlepiece"]}
+{"fn":"symbolOfCase","args":["plugin.x","star.fill","puzzlepiece"]}
+{"fn":"symbolOfCase","args":["plugin.x","Star","puzzlepiece"]}
+{"fn":"symbolOfCase","args":["plugin.x","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","puzzlepiece"]}
+{"fn":"symbolOfCase","args":["plugin.x","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","puzzlepiece"]}
+{"fn":"symbolOfCase","args":["plugin.x","a b","puzzlepiece"]}
+{"fn":"uniqueCase","args":["plugin.x",[],"tools"]}
+{"fn":"uniqueCase","args":["plugin.x",["a","b"],"tools"]}
+{"fn":"uniqueCase","args":["plugin.x",["a","a","a"],"tools"]}
+{"fn":"uniqueCase","args":["plugin.x",[null,null,"x","x"],"commands"]}
+{"fn":"uniqueCase","args":["plugin.x",["é","é","é"],"views"]}
+{"fn":"isPluginPathCase","args":["main.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","main.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","main.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","main.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["dist/main.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","dist/main.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","dist/main.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","dist/main.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a/b/c.png"]}
+{"fn":"pluginFileCase","args":["plugin.x","a/b/c.png","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a/b/c.png","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a/b/c.png","a file",".png"]}
+{"fn":"isPluginPathCase","args":[""]}
+{"fn":"pluginFileCase","args":["plugin.x","","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","","a file",".png"]}
+{"fn":"isPluginPathCase","args":["."]}
+{"fn":"pluginFileCase","args":["plugin.x",".","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",".","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",".","a file",".png"]}
+{"fn":"isPluginPathCase","args":[".."]}
+{"fn":"pluginFileCase","args":["plugin.x","..","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","..","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","..","a file",".png"]}
+{"fn":"isPluginPathCase","args":["../x.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","../x.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","../x.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","../x.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a/../x.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a/../x.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a/../x.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a/../x.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a/./x.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a/./x.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a/./x.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a/./x.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["/abs.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","/abs.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","/abs.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","/abs.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a\\b.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a\\b.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a\\b.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a\\b.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a//b.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a//b.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a//b.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a//b.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["C:/x.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","C:/x.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","C:/x.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","C:/x.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a b.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a b.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a b.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a b.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["é.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","é.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","é.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","é.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["x.JS"]}
+{"fn":"pluginFileCase","args":["plugin.x","x.JS","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","x.JS","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","x.JS","a file",".png"]}
+{"fn":"isPluginPathCase","args":["x.Js"]}
+{"fn":"pluginFileCase","args":["plugin.x","x.Js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","x.Js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","x.Js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a/"]}
+{"fn":"pluginFileCase","args":["plugin.x","a/","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a/","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a/","a file",".png"]}
+{"fn":"isPluginPathCase","args":[".hidden.js"]}
+{"fn":"pluginFileCase","args":["plugin.x",".hidden.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x",".hidden.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x",".hidden.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a\u0000.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a\u0000.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a\u0000.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a\u0000.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["~/x.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","~/x.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","~/x.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","~/x.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a:b.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a:b.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a:b.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a:b.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a?.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a?.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a?.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a?.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a#.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a#.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a#.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a#.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a%20.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a%20.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a%20.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a%20.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["node_modules/x.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","node_modules/x.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","node_modules/x.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","node_modules/x.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a/.x/b.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a/.x/b.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a/.x/b.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a/.x/b.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["-x.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","-x.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","-x.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","-x.js","a file",".png"]}
+{"fn":"isPluginPathCase","args":["a..b.js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a..b.js","a file",{"$undefined":true}]}
+{"fn":"pluginFileCase","args":["plugin.x","a..b.js","a file",".js"]}
+{"fn":"pluginFileCase","args":["plugin.x","a..b.js","a file",".png"]}
+{"fn":"isArgumentCase","args":["--flag"]}
+{"fn":"isArgumentCase","args":["-x"]}
+{"fn":"isArgumentCase","args":["a"]}
+{"fn":"isArgumentCase","args":[""]}
+{"fn":"isArgumentCase","args":["a\u0000"]}
+{"fn":"isArgumentCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]}
+{"fn":"isArgumentCase","args":["é"]}
+{"fn":"isArgumentCase","args":["a\nb"]}

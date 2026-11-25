@@ -1,0 +1,84 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginThemeCss.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "pluginthemecss-rs",
+  "exports": [
+    {
+      "name": "cssRoleName",
+      "file": "apps/browser/src/lib/pluginThemeCss.ts",
+      "line": 8,
+      "params": [
+        {
+          "name": "role",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "cssRoleValue",
+      "file": "apps/browser/src/lib/pluginThemeCss.ts",
+      "line": 10,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pluginThemeVariables",
+      "file": "apps/browser/src/lib/pluginThemeCss.ts",
+      "line": 18,
+      "params": [
+        {
+          "name": "roles",
+          "ts_type": "Readonly<Record<string, unknown>>",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[string, string][]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "buildPluginThemeCss",
+      "file": "apps/browser/src/lib/pluginThemeCss.ts",
+      "line": 31,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "({ scheme: \"light\" | \"dark\"; roles: Readonly<Record<string, unknown>> })",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

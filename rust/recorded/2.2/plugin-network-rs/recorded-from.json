@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/pluginNetwork.ts",
+  "files": 1,
+  "fingerprint": "088d0eedb09a4b31",
+  "coverage": {
+    "lines": 52,
+    "reached": 52,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/pluginNetwork.ts",
+        "lines": 52,
+        "reached": 52,
+        "missed": ""
+      }
+    ]
+  }
+}

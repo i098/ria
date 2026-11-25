@@ -1,0 +1,409 @@
+{"fn":"constantsCase","args":[]}
+{"fn":"isHostActionCase","args":[{"$undefined":true}]}
+{"fn":"isHostActionCase","args":[null]}
+{"fn":"isHostActionCase","args":[0]}
+{"fn":"isHostActionCase","args":[3]}
+{"fn":"isHostActionCase","args":[-1]}
+{"fn":"isHostActionCase","args":[true]}
+{"fn":"isHostActionCase","args":[false]}
+{"fn":"isHostActionCase","args":[""]}
+{"fn":"isHostActionCase","args":["x"]}
+{"fn":"isHostActionCase","args":[[]]}
+{"fn":"isHostActionCase","args":[{}]}
+{"fn":"isHostActionCase","args":[[1]]}
+{"fn":"isHostActionCase","args":[{"a":1}]}
+{"fn":"isHostActionCase","args":["siteControls"]}
+{"fn":"isHostActionCase","args":["address"]}
+{"fn":"isHostActionCase","args":["|"]}
+{"fn":"isHostActionCase","args":["toString"]}
+{"fn":"isHostActionCase","args":["constructor"]}
+{"fn":"isHostActionCase","args":["__proto__"]}
+{"fn":"isHostActionCase","args":["split"]}
+{"fn":"isHostActionCase","args":["Split"]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"$undefined":true},[]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},null,[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},3,[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},[],[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{},[]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,{"$undefined":true},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,null,[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[null,3,[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,[],[]]}
+{"fn":"pageBarCase","args":[null,{},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":"dark","buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[null,{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[]]}
+{"fn":"pageBarCase","args":[[],{"$undefined":true},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[],null,[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[],3,[]]}
+{"fn":"pageBarCase","args":[[],[],[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[],{},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",{"$undefined":true},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",null,[]]}
+{"fn":"pageBarCase","args":["x",3,[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",[],[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":["x",{},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":["x",{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{},{"$undefined":true},[]]}
+{"fn":"pageBarCase","args":[{},null,[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{},3,[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{},[],[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{},{},[]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[{},{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[{},{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"$undefined":true},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],null,[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],3,[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],[],[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":"dark","buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"$undefined":true},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],null,[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],3,[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],[],[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"$undefined":true},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],null,[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],3,[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],[],[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode"},{"key":"dark","title":"Again"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"$undefined":true},[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],null,[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],3,[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],[],[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{},[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"},{"key":"d","title":"D"},{"key":"e","title":"E"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"$undefined":true},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],null,[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],3,[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],[],[]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":"dark","buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"bad key","title":"X"},{"key":"k","title":""},{"key":"k2","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"k3","title":"T","icon":"Bad Icon"},3,null,{"key":"z","title":"Z","extra":1}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"$undefined":true},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],null,[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],3,[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],[],[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"a","title":"A"},{"key":"b","title":"B"},{"key":"c","title":"C"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"$undefined":true},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"$undefined":true},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"$undefined":true},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"$undefined":true},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],null,[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],null,[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],null,[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],null,[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],3,[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],3,[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],3,[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],3,[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],[],[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],[],[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],[],[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],[],[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"local"},"buttons":["siteControls","|","address","copyLink"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":"other"},"buttons":["console","network","inspect","extensions","split"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","localAddresses":3},"buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"plain","when":{"siteSwitch":"nope"},"buttons":["|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":[]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["address","address","bogus",3,"|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":"siteControls"},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":"dark","buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":"dark","buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","buttons":["siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","buttons":["siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark","extra":1},"buttons":["siteControls"],"more":2},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"big"},"buttons":["toString","constructor","siteControls"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"text"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"look":"stripes","when":{"siteSwitch":"dark"},"buttons":["siteControls","address","copyLink","console","network","inspect","extensions","split","|","|","|","|","|","|","|","|"]},[{"key":"local","type":"toggle"},{"key":"other","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"Developer Mode","icon":"hammer"}],{"look":"stripes","when":{"siteSwitch":"on","localAddresses":"localAddresses"},"buttons":["siteControls","address","copyLink","|","console","network","inspect","|","extensions","split"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"Developer Mode","icon":"hammer"}],{"look":"stripes","when":{"siteSwitch":"off"},"buttons":["siteControls","address","copyLink","|","console","network","inspect","|","extensions","split"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"Developer Mode","icon":"hammer"}],{"look":"stripes","when":{"siteSwitch":"on","localAddresses":"missing"},"buttons":["siteControls","address","copyLink","|","console","network","inspect","|","extensions","split"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"Developer Mode","icon":"hammer"}],{"look":"stripes","when":{"siteSwitch":"on"},"buttons":["devtools.console"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"Developer Mode","icon":"hammer"}],{"look":"stripes","when":{"siteSwitch":"on"},"buttons":["copyLink","copyLink"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"Developer Mode","icon":"hammer"}],{"look":"stripes","when":{"siteSwitch":"on"},"buttons":["|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|","|"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"Developer Mode","icon":"hammer"}],{"look":"stripes","when":{"siteSwitch":"on"},"buttons":["|"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"Developer Mode","icon":"hammer"}],{"look":"plain","when":{"siteSwitch":"on"},"buttons":["siteControls","address","copyLink","|","console","network","inspect","|","extensions","split"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"Developer Mode","icon":"hammer"}],{"look":"stripes","when":{"siteSwitch":"on","localAddresses":"localAddresses"},"buttons":["siteControls","address","copyLink","|","console","network","inspect","|","extensions","split"]},[{"key":"localAddresses","type":"text"}]]}
+{"fn":"pageBarCase","args":[{"$undefined":true},{"look":"stripes","when":{"siteSwitch":"on","localAddresses":"localAddresses"},"buttons":["siteControls","address","copyLink","|","console","network","inspect","|","extensions","split"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"s0","title":"S"},{"key":"s1","title":"S"},{"key":"s2","title":"S"},{"key":"s3","title":"S"},{"key":"s4","title":"S"}],{"look":"stripes","when":{"siteSwitch":"on","localAddresses":"localAddresses"},"buttons":["siteControls","address","copyLink","|","console","network","inspect","|","extensions","split"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"A"},{"key":"on","title":"B"}],{"look":"stripes","when":{"siteSwitch":"on","localAddresses":"localAddresses"},"buttons":["siteControls","address","copyLink","|","console","network","inspect","|","extensions","split"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"on","title":"A","extra":1}],{"look":"stripes","when":{"siteSwitch":"on","localAddresses":"localAddresses"},"buttons":["siteControls","address","copyLink","|","console","network","inspect","|","extensions","split"]},[{"key":"localAddresses","type":"toggle"}]]}
+{"fn":"switchOriginCase","args":["http://LOCALHOST.:80/x?y#z"]}
+{"fn":"switchOriginCase","args":["https://example.com:443/"]}
+{"fn":"switchOriginCase","args":["http://localhost:5173/a"]}
+{"fn":"switchOriginCase","args":["http://[::1]:8318/"]}
+{"fn":"switchOriginCase","args":["http://user:pw@example.com/"]}
+{"fn":"switchOriginCase","args":["ardia://settings"]}
+{"fn":"switchOriginCase","args":["file:///tmp/x.html"]}
+{"fn":"switchOriginCase","args":["http://localhost:1"]}
+{"fn":"switchOriginCase","args":["http://app.localhost"]}
+{"fn":"switchOriginCase","args":["http://127.0.0.1:18318"]}
+{"fn":"switchOriginCase","args":["http://127.1.2.3"]}
+{"fn":"switchOriginCase","args":["http://0.0.0.0:3000"]}
+{"fn":"switchOriginCase","args":["http://[::1]:8080"]}
+{"fn":"switchOriginCase","args":["http://192.168.1.4:18318"]}
+{"fn":"switchOriginCase","args":["https://localhost.example.com"]}
+{"fn":"switchOriginCase","args":["http://10.0.0.1"]}
+{"fn":"isLocalOriginCase","args":["http://localhost:1"]}
+{"fn":"isLocalOriginCase","args":["http://app.localhost"]}
+{"fn":"isLocalOriginCase","args":["http://127.0.0.1:18318"]}
+{"fn":"isLocalOriginCase","args":["http://127.1.2.3"]}
+{"fn":"isLocalOriginCase","args":["http://0.0.0.0:3000"]}
+{"fn":"isLocalOriginCase","args":["http://[::1]:8080"]}
+{"fn":"isLocalOriginCase","args":["http://192.168.1.4:18318"]}
+{"fn":"isLocalOriginCase","args":["https://localhost.example.com"]}
+{"fn":"isLocalOriginCase","args":["http://10.0.0.1"]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"$undefined":true},null]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"$undefined":true},"x"]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"$undefined":true},[null]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"$undefined":true},[{"key":1,"type":"toggle"}]]}
+{"fn":"pageBarCase","args":[[{"key":"dark","title":"Dark Mode","icon":"moon.fill"},{"key":"big","title":"Big Text"}],{"$undefined":true},[{"key":"k"}]]}
+{"fn":"switchOriginCase","args":["https://example.com/a"]}
+{"fn":"switchOriginCase","args":["http://example.com:8080/x"]}
+{"fn":"switchOriginCase","args":["https://example.com./"]}
+{"fn":"switchOriginCase","args":["https://./"]}
+{"fn":"switchOriginCase","args":["ftp://example.com"]}
+{"fn":"switchOriginCase","args":["file:///etc"]}
+{"fn":"switchOriginCase","args":["about:blank"]}
+{"fn":"switchOriginCase","args":[""]}
+{"fn":"switchOriginCase","args":["not a url"]}
+{"fn":"switchOriginCase","args":["https://user:pw@Example.COM:443/x"]}
+{"fn":"switchOriginCase","args":["http://[::1]:3000/"]}
+{"fn":"switchOriginCase","args":["http://127.0.0.1/"]}
+{"fn":"switchOriginCase","args":["https://bücher.de/"]}
+{"fn":"switchOriginCase","args":["http://localhost:5173"]}
+{"fn":"switchOriginCase","args":["https://a.b.c.example.co.uk/?q#h"]}
+{"fn":"switchOriginCase","args":["HTTPS://EXAMPLE.COM"]}
+{"fn":"switchOriginCase","args":["http://example.com:80/"]}
+{"fn":"switchOriginCase","args":["javascript:alert(1)"]}
+{"fn":"switchOriginCase","args":["https:example.com"]}
+{"fn":"switchOriginCase","args":["http://"]}
+{"fn":"switchOriginCase","args":["http://.."]}
+{"fn":"switchOriginCase","args":["https://x.."]}
+{"fn":"switchOriginCase","args":["data:text/html,hi"]}
+{"fn":"isLocalOriginCase","args":["http://localhost"]}
+{"fn":"isLocalOriginCase","args":["http://localhost:3000"]}
+{"fn":"isLocalOriginCase","args":["https://app.localhost"]}
+{"fn":"isLocalOriginCase","args":["http://a.b.localhost:1"]}
+{"fn":"isLocalOriginCase","args":["http://127.0.0.1"]}
+{"fn":"isLocalOriginCase","args":["http://127.1.2.300:8"]}
+{"fn":"isLocalOriginCase","args":["http://0.0.0.0"]}
+{"fn":"isLocalOriginCase","args":["http://[::1]:5173"]}
+{"fn":"isLocalOriginCase","args":["http://[::2]"]}
+{"fn":"isLocalOriginCase","args":["https://example.com"]}
+{"fn":"isLocalOriginCase","args":["localhost"]}
+{"fn":"isLocalOriginCase","args":["http://LOCALHOST"]}
+{"fn":"isLocalOriginCase","args":["http://127.0.0"]}
+{"fn":"isLocalOriginCase","args":["http://localhost."]}
+{"fn":"isLocalOriginCase","args":["http://x_y.localhost"]}
+{"fn":"isLocalOriginCase","args":["http://127.0.0.1:"]}
+{"fn":"isLocalOriginCase","args":["ws://localhost"]}
+{"fn":"isLocalOriginCase","args":["http://localhost:3000:4000"]}
+{"fn":"isLocalOriginCase","args":["http://127.٠.0.1"]}
+{"fn":"isLocalOriginCase","args":["http://127.0.0.1:٣٠٠٠"]}
+{"fn":"isLocalOriginCase","args":[""]}

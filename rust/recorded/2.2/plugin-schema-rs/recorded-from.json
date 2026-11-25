@@ -1,0 +1,143 @@
+{
+  "unit": "apps/browser/src/lib/pluginSchema.ts",
+  "files": 1,
+  "fingerprint": "ecbc92d101cb8a81",
+  "coverage": {
+    "lines": 1789,
+    "reached": 718,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/jsonSchema.ts",
+        "lines": 24,
+        "reached": 24,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginActivation.ts",
+        "lines": 53,
+        "reached": 12,
+        "missed": "11-24, 27-34, 37-45, 48-57"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginChecks.ts",
+        "lines": 117,
+        "reached": 66,
+        "missed": "63-64, 67-77, 80-84, 87-91, 94-97, 100-104, 107-111, 114-120, 125-127, 132-135"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginCommands.ts",
+        "lines": 88,
+        "reached": 25,
+        "missed": "23-28, 30-39, 41-66, 69-80, 83-91"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginContributions.ts",
+        "lines": 166,
+        "reached": 42,
+        "missed": "46-55, 57-65, 67-69, 71-84, 86-94, 96-120, 122-133, 135-143, 145-149, 152-175, 178-180, 183"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginManifest.ts",
+        "lines": 203,
+        "reached": 65,
+        "missed": "66-82, 84-97, 99-102, 104-114, 116-123, 125-128, 131-167, 170-188, 194-215, 218-219"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginMigrations.ts",
+        "lines": 39,
+        "reached": 18,
+        "missed": "8-10, 13-28, 32-33"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginNames.ts",
+        "lines": 28,
+        "reached": 18,
+        "missed": "20-29"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginNetwork.ts",
+        "lines": 52,
+        "reached": 10,
+        "missed": "9-12, 14-19, 22-36, 41-52, 55-59"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginPageBar.ts",
+        "lines": 96,
+        "reached": 30,
+        "missed": "33-46, 48-63, 66-83, 86-90, 95-97, 100-109"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginPasswordManager.ts",
+        "lines": 48,
+        "reached": 10,
+        "missed": "13-18, 20-25, 27-40, 43-54"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginPermissions.ts",
+        "lines": 97,
+        "reached": 31,
+        "missed": "31-40, 42-57, 60-81, 84-90, 92-96, 99-104"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginRows.ts",
+        "lines": 106,
+        "reached": 21,
+        "missed": "23-28, 30-39, 41-59, 61-64, 67-97, 100-108, 115-120"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginRuntime.ts",
+        "lines": 43,
+        "reached": 7,
+        "missed": "8-22, 25-33, 36-47"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginSchema.ts",
+        "lines": 118,
+        "reached": 118,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginSchemaParts.ts",
+        "lines": 108,
+        "reached": 108,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginSchemaV1.ts",
+        "lines": 32,
+        "reached": 32,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginWhen.ts",
+        "lines": 196,
+        "reached": 37,
+        "missed": "28-69, 74-76, 78-82, 85-87, 90-96, 99-105, 108-127, 130-139, 143-152, 155-174, 179-182, 185-203, 208-216"
+      },
+      {
+        "file": "apps/browser/src/lib/savedDocument.ts",
+        "lines": 34,
+        "reached": 9,
+        "missed": "11-28, 31-37"
+      },
+      {
+        "file": "apps/browser/src/lib/urlParts.ts",
+        "lines": 112,
+        "reached": 26,
+        "missed": "20-44, 50-62, 64-77, 80-107, 118-120, 123-125"
+      },
+      {
+        "file": "apps/browser/src/lib/versions.ts",
+        "lines": 21,
+        "reached": 1,
+        "missed": "2-21"
+      }
+    ]
+  }
+}

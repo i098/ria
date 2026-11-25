@@ -1,0 +1,292 @@
+{"fn":"constantsCase","args":[],"ok":{"PLUGIN_PERMISSIONS":["tabs","fullUrls","commands","network","control"],"PERMISSION_KEYS":["tabs","fullUrls","activePage","workspace","commands","storage","secrets","network","control"],"TAB_ACCESS":["read","write"],"NO_PERMISSIONS":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false}}}
+{"fn":"legacyPermissionsCase","args":[[]],"ok":{}}
+{"fn":"legacyPermissionsCase","args":[0],"ok":0}
+{"fn":"legacyPermissionsCase","args":[["a",1]],"ok":{"1":true,"a":true}}
+{"fn":"legacyPermissionsCase","args":[{}],"ok":{}}
+{"fn":"legacyPermissionsCase","args":[{"a":"b"}],"ok":{"a":"b"}}
+{"fn":"legacyPermissionsCase","args":["x"],"ok":"x"}
+{"fn":"legacyPermissionsCase","args":[null],"ok":null}
+{"fn":"legacyPermissionsCase","args":[true],"ok":true}
+{"fn":"legacyPermissionsCase","args":[{"a":{"b":"c"}}],"ok":{"a":{"b":"c"}}}
+{"fn":"legacyPermissionsCase","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}}
+{"fn":"legacyPermissionsCase","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}}
+{"fn":"legacyPermissionsCase","args":[[3,1,2]],"ok":{"1":true,"2":true,"3":true}}
+{"fn":"permissionsCase","args":[{}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":[],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"a":{"b":"c"}}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.a isn't a key of permissions"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[[]],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"a":"b"}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.a isn't a key of permissions"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[0],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[true],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[["a",1]],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[null],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":["x"],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.2 isn't a key of permissions","permissions.10 isn't a key of permissions","permissions.zebra isn't a key of permissions","permissions.apple isn't a key of permissions","permissions.é isn't a key of permissions","permissions.Apple isn't a key of permissions"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.n isn't a key of permissions","permissions.f isn't a key of permissions","permissions.t isn't a key of permissions","permissions.neg isn't a key of permissions"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[[3,1,2]],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{},{"a":{"b":"c"}}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[0,{}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[true,{"a":"b"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[[],[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{},["a",1]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[[],null],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},"x"],"ok":[]}
+{"fn":"missingPermissionsCase","args":[true,{}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[["a",1],{}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},{"a":"b"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[null,{"a":{"b":"c"}}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[0,0],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":"b"},[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[null,{}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[null,["a",1]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},{"a":{"b":"c"}}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[true,{"a":{"b":"c"}}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":"b"},{"a":"b"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":"b"},["a",1]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[null,[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{},[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[["a",1],[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[0,"x"],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{},{}],"ok":[]}
+{"fn":"missingPermissionsCase","args":["x",{"a":"b"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[[],"x"],"ok":[]}
+{"fn":"missingPermissionsCase","args":[["a",1],["a",1]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[["a",1],"x"],"ok":[]}
+{"fn":"missingPermissionsCase","args":[["a",1],0],"ok":[]}
+{"fn":"missingPermissionsCase","args":[[],["a",1]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[0,{"a":{"b":"c"}}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},null],"ok":[]}
+{"fn":"missingPermissionsCase","args":[true,0],"ok":[]}
+{"fn":"missingPermissionsCase","args":[true,["a",1]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[null,true],"ok":[]}
+{"fn":"missingPermissionsCase","args":[null,{"a":"b"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[[],true],"ok":[]}
+{"fn":"missingPermissionsCase","args":["x",["a",1]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":"b"},true],"ok":[]}
+{"fn":"missingPermissionsCase","args":[null,"x"],"ok":[]}
+{"fn":"missingPermissionsCase","args":[0,["a",1]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[["a",1],{"a":{"b":"c"}}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[0,true],"ok":[]}
+{"fn":"missingPermissionsCase","args":["x",true],"ok":[]}
+{"fn":"missingPermissionsCase","args":["x","x"],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{},"x"],"ok":[]}
+{"fn":"missingPermissionsCase","args":[null,null],"ok":[]}
+{"fn":"missingPermissionsCase","args":[[],0],"ok":[]}
+{"fn":"missingPermissionsCase","args":[true,null],"ok":[]}
+{"fn":"missingPermissionsCase","args":["x",{}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[["a",1],{"a":"b"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[[],{"a":"b"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":"b"},null],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":"b"},"x"],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},true],"ok":[]}
+{"fn":"missingPermissionsCase","args":[null,0],"ok":[]}
+{"fn":"missingPermissionsCase","args":["x",{"a":{"b":"c"}}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},{}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{},null],"ok":[]}
+{"fn":"missingPermissionsCase","args":["x",null],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{},0],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":"b"},0],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},0],"ok":[]}
+{"fn":"missingPermissionsCase","args":[0,{"a":"b"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[[],{"a":{"b":"c"}}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[0,[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},["a",1]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[["a",1],null],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{},{"a":"b"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[[],{}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[["a",1],true],"ok":[]}
+{"fn":"missingPermissionsCase","args":[0,null],"ok":[]}
+{"fn":"missingPermissionsCase","args":[true,true],"ok":[]}
+{"fn":"missingPermissionsCase","args":["x",0],"ok":[]}
+{"fn":"missingPermissionsCase","args":["x",[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{},true],"ok":[]}
+{"fn":"missingPermissionsCase","args":[true,"x"],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":"b"},{"a":{"b":"c"}}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[true,[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":"b"},{}],"ok":[]}
+{"fn":"missingPermissionsCase","args":["x","X"],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6},[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7},[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[[3,1,2],[]],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"a":{"b":"c"}},[3,1,2]],"ok":[]}
+{"fn":"constantsCase","args":[],"ok":{"PLUGIN_PERMISSIONS":["tabs","fullUrls","commands","network","control"],"PERMISSION_KEYS":["tabs","fullUrls","activePage","workspace","commands","storage","secrets","network","control"],"TAB_ACCESS":["read","write"],"NO_PERMISSIONS":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false}}}
+{"fn":"legacyPermissionsCase","args":[{"$undefined":true}],"ok":{"$undefined":true}}
+{"fn":"legacyPermissionsCase","args":[null],"ok":null}
+{"fn":"legacyPermissionsCase","args":[3],"ok":3}
+{"fn":"legacyPermissionsCase","args":["tabs"],"ok":"tabs"}
+{"fn":"legacyPermissionsCase","args":[{}],"ok":{}}
+{"fn":"legacyPermissionsCase","args":[{"tabs":"read"}],"ok":{"tabs":"read"}}
+{"fn":"legacyPermissionsCase","args":[[]],"ok":{}}
+{"fn":"legacyPermissionsCase","args":[["tabs"]],"ok":{"tabs":"read"}}
+{"fn":"legacyPermissionsCase","args":[["network"]],"ok":{"network":"*"}}
+{"fn":"legacyPermissionsCase","args":[["tabs","network","storage","commands"]],"ok":{"tabs":"read","network":"*","storage":true,"commands":true}}
+{"fn":"legacyPermissionsCase","args":[["tabs","tabs"]],"ok":{"tabs":"read"}}
+{"fn":"legacyPermissionsCase","args":[[3,null,true,{"a":1},[1,"x"]]],"ok":{"3":true,"null":true,"true":true,"{\"a\":1}":true,"[1,\"x\"]":true}}
+{"fn":"legacyPermissionsCase","args":[["__proto__","constructor"]],"ok":{"constructor":true}}
+{"fn":"legacyPermissionsCase","args":[["1","0","z"]],"ok":{"0":true,"1":true,"z":true}}
+{"fn":"legacyPermissionsCase","args":[["fullUrls","secrets","control","x y"]],"ok":{"fullUrls":true,"secrets":true,"control":true,"x y":true}}
+{"fn":"permissionsCase","args":[{"$undefined":true}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":[],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[null],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[0],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[3],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[-1],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[true],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[false],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[""],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":["x"],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[[]],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":[],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[[1]],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions must be an object of tabs, fullUrls, activePage, workspace, commands, storage, secrets, network, control"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"a":1}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.a isn't a key of permissions"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"tabs":"read"}],"ok":{"result":{"tabs":"read","fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":[],"granted":["tabs"],"canReadTabs":true,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"tabs":"write"}],"ok":{"result":{"tabs":"write","fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":[],"granted":["tabs:write"],"canReadTabs":true,"canOpenTabs":true,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"tabs":false}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":[],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"tabs":true}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.tabs must be read, write or false"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"tabs":"all"}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.tabs must be read, write or false"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"tabs":null}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.tabs must be read, write or false"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"tabs":"read","fullUrls":true}],"ok":{"result":{"tabs":"read","fullUrls":true,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":[],"granted":["tabs","fullUrls"],"canReadTabs":true,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"fullUrls":true}],"ok":{"result":{"tabs":false,"fullUrls":true,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions: fullUrls needs tabs"],"granted":["fullUrls"],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true}],"ok":{"result":{"tabs":"write","fullUrls":true,"activePage":false,"workspace":true,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":[],"granted":["tabs:write","fullUrls","workspace"],"canReadTabs":true,"canOpenTabs":true,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"tabs":"read","fullUrls":true,"workspace":true}],"ok":{"result":{"tabs":"read","fullUrls":true,"activePage":false,"workspace":true,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions: workspace needs tabs: write and fullUrls, since it sees and moves every tab"],"granted":["tabs","fullUrls","workspace"],"canReadTabs":true,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"workspace":true}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":true,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions: workspace needs tabs: write and fullUrls, since it sees and moves every tab"],"granted":["workspace"],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"activePage":true,"commands":true,"storage":true,"secrets":true,"control":true}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":true,"workspace":false,"commands":true,"storage":true,"secrets":true,"network":false,"control":true},"problems":[],"granted":["activePage","commands","storage","secrets","control"],"canReadTabs":false,"canOpenTabs":true,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"activePage":"yes","commands":1,"storage":null}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.activePage must be true or false","permissions.commands must be true or false","permissions.storage must be true or false"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"network":true}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":"*","control":false},"problems":[],"granted":["network"],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":true,"allowedHosts":["*"]}}
+{"fn":"permissionsCase","args":[{"network":false}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":[],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"network":"*"}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":"*","control":false},"problems":[],"granted":["network"],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":true,"allowedHosts":["*"]}}
+{"fn":"permissionsCase","args":[{"network":[]}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.network must be false, \"*\" or a list of 1 to 32 hosts"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"network":["example.com"]}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":["example.com"],"control":false},"problems":[],"granted":["network:example.com"],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":true,"allowedHosts":["example.com"]}}
+{"fn":"permissionsCase","args":[{"network":["example.com","*.example.com","example.com"]}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":["example.com","*.example.com"],"control":false},"problems":[],"granted":["network:example.com","network:*.example.com"],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":true,"allowedHosts":["example.com","*.example.com"]}}
+{"fn":"permissionsCase","args":[{"network":["*"]}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.network[0]: use \"*\" on its own instead of in a list"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"network":["*","a.com"]}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":["a.com"],"control":false},"problems":["permissions.network[0]: use \"*\" on its own instead of in a list"],"granted":["network:a.com"],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":true,"allowedHosts":["a.com"]}}
+{"fn":"permissionsCase","args":[{"network":["bad host!",3,"","a.com"]}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":["a.com"],"control":false},"problems":["permissions.network[0] must be a bare host, like api.example.com or *.example.com, without a scheme, port or path","permissions.network[1] isn't text","permissions.network[2] isn't a valid host name"],"granted":["network:a.com"],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":true,"allowedHosts":["a.com"]}}
+{"fn":"permissionsCase","args":[{"network":"example.com"}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.network must be false, \"*\" or a list of 1 to 32 hosts"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"network":["h0.com","h1.com","h2.com","h3.com","h4.com","h5.com","h6.com","h7.com","h8.com","h9.com","h10.com","h11.com","h12.com","h13.com","h14.com","h15.com","h16.com","h17.com","h18.com","h19.com","h20.com","h21.com","h22.com","h23.com","h24.com","h25.com","h26.com","h27.com","h28.com","h29.com","h30.com","h31.com","h32.com"]}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.network must be false, \"*\" or a list of 1 to 32 hosts"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"network":["h0.com","h1.com","h2.com","h3.com","h4.com","h5.com","h6.com","h7.com","h8.com","h9.com","h10.com","h11.com","h12.com","h13.com","h14.com","h15.com","h16.com","h17.com","h18.com","h19.com","h20.com","h21.com","h22.com","h23.com","h24.com","h25.com","h26.com","h27.com","h28.com","h29.com","h30.com","h31.com"]}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":["h0.com","h1.com","h2.com","h3.com","h4.com","h5.com","h6.com","h7.com","h8.com","h9.com","h10.com","h11.com","h12.com","h13.com","h14.com","h15.com","h16.com","h17.com","h18.com","h19.com","h20.com","h21.com","h22.com","h23.com","h24.com","h25.com","h26.com","h27.com","h28.com","h29.com","h30.com","h31.com"],"control":false},"problems":[],"granted":["network:h0.com","network:h1.com","network:h2.com","network:h3.com","network:h4.com","network:h5.com","network:h6.com","network:h7.com","network:h8.com","network:h9.com","network:h10.com","network:h11.com","network:h12.com","network:h13.com","network:h14.com","network:h15.com","network:h16.com","network:h17.com","network:h18.com","network:h19.com","network:h20.com","network:h21.com","network:h22.com","network:h23.com","network:h24.com","network:h25.com","network:h26.com","network:h27.com","network:h28.com","network:h29.com","network:h30.com","network:h31.com"],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":true,"allowedHosts":["h0.com","h1.com","h2.com","h3.com","h4.com","h5.com","h6.com","h7.com","h8.com","h9.com","h10.com","h11.com","h12.com","h13.com","h14.com","h15.com","h16.com","h17.com","h18.com","h19.com","h20.com","h21.com","h22.com","h23.com","h24.com","h25.com","h26.com","h27.com","h28.com","h29.com","h30.com","h31.com"]}}
+{"fn":"permissionsCase","args":[{"network":["*.com","localhost","127.0.0.1","[::1]","a.b.c.d.e.f"]}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":["localhost","127.0.0.1","a.b.c.d.e.f"],"control":false},"problems":["permissions.network[0] must put * in front of a domain with at least two parts, like *.example.com","permissions.network[3] must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"],"granted":["network:localhost","network:127.0.0.1","network:a.b.c.d.e.f"],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":true,"allowedHosts":["localhost","127.0.0.1","a.b.c.d.e.f"]}}
+{"fn":"permissionsCase","args":[{"network":null}],"ok":{"result":{"tabs":false,"fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.network must be false, \"*\" or a list of 1 to 32 hosts"],"granted":[],"canReadTabs":false,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"tabs":"read","extra":1,"also":2}],"ok":{"result":{"tabs":"read","fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.extra isn't a key of permissions","permissions.also isn't a key of permissions"],"granted":["tabs"],"canReadTabs":true,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"permissionsCase","args":[{"1":true,"tabs":"read"}],"ok":{"result":{"tabs":"read","fullUrls":false,"activePage":false,"workspace":false,"commands":false,"storage":false,"secrets":false,"network":false,"control":false},"problems":["permissions.1 isn't a key of permissions"],"granted":["tabs"],"canReadTabs":true,"canOpenTabs":false,"hasNetwork":false,"allowedHosts":[]}}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"tabs":"read"}],"ok":["tabs"]}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"tabs":"write"}],"ok":["tabs:write"]}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":["tabs:write","fullUrls","workspace"]}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"commands":true,"storage":true}],"ok":["commands","storage"]}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"network":"*"}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"network":["a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"network":["*.a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"network":["b.a.com","a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"network":["c.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"$undefined":true},{"secrets":true,"control":true,"activePage":true}],"ok":["activePage","secrets","control"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"tabs":"read"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"tabs":"write"}],"ok":["tabs:write"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":["tabs:write","fullUrls","workspace"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"commands":true,"storage":true}],"ok":["commands","storage"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"network":"*"}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"network":["a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"network":["*.a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"network":["b.a.com","a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"network":["c.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"read"},{"secrets":true,"control":true,"activePage":true}],"ok":["activePage","secrets","control"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"tabs":"read"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"tabs":"write"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":["fullUrls","workspace"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"commands":true,"storage":true}],"ok":["commands","storage"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"network":"*"}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"network":["a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"network":["*.a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"network":["b.a.com","a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"network":["c.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write"},{"secrets":true,"control":true,"activePage":true}],"ok":["activePage","secrets","control"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"tabs":"read"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"tabs":"write"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"commands":true,"storage":true}],"ok":["commands","storage"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"network":"*"}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"network":["a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"network":["*.a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"network":["b.a.com","a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"network":["c.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"tabs":"write","fullUrls":true,"workspace":true},{"secrets":true,"control":true,"activePage":true}],"ok":["activePage","secrets","control"]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"tabs":"read"}],"ok":["tabs"]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"tabs":"write"}],"ok":["tabs:write"]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":["tabs:write","fullUrls","workspace"]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"commands":true,"storage":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"network":"*"}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"network":["a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"network":["*.a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"network":["b.a.com","a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"network":["c.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"commands":true,"storage":true},{"secrets":true,"control":true,"activePage":true}],"ok":["activePage","secrets","control"]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"tabs":"read"}],"ok":["tabs"]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"tabs":"write"}],"ok":["tabs:write"]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":["tabs:write","fullUrls","workspace"]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"commands":true,"storage":true}],"ok":["commands","storage"]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"network":"*"}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"network":["a.com"]}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"network":["*.a.com"]}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"network":["b.a.com","a.com"]}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"network":["c.com"]}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":"*"},{"secrets":true,"control":true,"activePage":true}],"ok":["activePage","secrets","control"]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"tabs":"read"}],"ok":["tabs"]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"tabs":"write"}],"ok":["tabs:write"]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":["tabs:write","fullUrls","workspace"]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"commands":true,"storage":true}],"ok":["commands","storage"]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"network":"*"}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"network":["a.com"]}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"network":["*.a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"network":["b.a.com","a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"network":["c.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["a.com"]},{"secrets":true,"control":true,"activePage":true}],"ok":["activePage","secrets","control"]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"tabs":"read"}],"ok":["tabs"]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"tabs":"write"}],"ok":["tabs:write"]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":["tabs:write","fullUrls","workspace"]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"commands":true,"storage":true}],"ok":["commands","storage"]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"network":"*"}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"network":["a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"network":["*.a.com"]}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"network":["b.a.com","a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"network":["c.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["*.a.com"]},{"secrets":true,"control":true,"activePage":true}],"ok":["activePage","secrets","control"]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"tabs":"read"}],"ok":["tabs"]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"tabs":"write"}],"ok":["tabs:write"]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":["tabs:write","fullUrls","workspace"]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"commands":true,"storage":true}],"ok":["commands","storage"]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"network":"*"}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"network":["a.com"]}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"network":["*.a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"network":["b.a.com","a.com"]}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"network":["c.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["b.a.com","a.com"]},{"secrets":true,"control":true,"activePage":true}],"ok":["activePage","secrets","control"]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"tabs":"read"}],"ok":["tabs"]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"tabs":"write"}],"ok":["tabs:write"]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":["tabs:write","fullUrls","workspace"]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"commands":true,"storage":true}],"ok":["commands","storage"]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"network":"*"}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"network":["a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"network":["*.a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"network":["b.a.com","a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"network":["c.com"]}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"network":["c.com"]},{"secrets":true,"control":true,"activePage":true}],"ok":["activePage","secrets","control"]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"$undefined":true}],"ok":[]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"tabs":"read"}],"ok":["tabs"]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"tabs":"write"}],"ok":["tabs:write"]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"tabs":"write","fullUrls":true,"workspace":true}],"ok":["tabs:write","fullUrls","workspace"]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"commands":true,"storage":true}],"ok":["commands","storage"]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"network":"*"}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"network":["a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"network":["*.a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"network":["b.a.com","a.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"network":["c.com"]}],"ok":["network"]}
+{"fn":"missingPermissionsCase","args":[{"secrets":true,"control":true,"activePage":true},{"secrets":true,"control":true,"activePage":true}],"ok":[]}

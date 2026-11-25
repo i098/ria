@@ -1,0 +1,1 @@
+{"fn": "markdownLink", "args": [{"$utf16": [104, 116, 116, 112, 115, 58, 47, 47, 101, 120, 97, 109, 112, 108, 101, 46, 99, 111, 109, 47, 55296]}], "actual": {"error": "argument 1 of markdownLink has a lone surrogate, which a Rust String cannot hold"}, "reason": "a Rust String cannot hold a lone surrogate, so the bridge refuses the argument"}

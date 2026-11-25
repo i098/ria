@@ -1,0 +1,60 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginSchema.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "pluginschema-rs",
+  "exports": [
+    {
+      "name": "pluginSchema",
+      "file": "apps/browser/src/lib/pluginSchema.ts",
+      "line": 113,
+      "params": [
+        {
+          "name": "eventNames",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "rules",
+          "ts_type": "{ untabbedEvents: readonly string[]; approvedSettings: readonly string[]; decideEvents?: readonly string[] }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "Record<string, unknown>",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pluginSchemaJson",
+      "file": "apps/browser/src/lib/pluginSchema.ts",
+      "line": 127,
+      "params": [
+        {
+          "name": "eventNames",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "rules",
+          "ts_type": "{ untabbedEvents: readonly string[]; approvedSettings: readonly string[]; decideEvents?: readonly string[] }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

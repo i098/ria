@@ -1,0 +1,1077 @@
+{"fn":"normalizedHost","args":["  padded  "],"ok":"padded"}
+{"fn":"normalizedHost","args":["hello worldns:key.path"],"ok":"hello worldns:key.path"}
+{"fn":"normalizedHost","args":["Hello World"],"ok":"hello world"}
+{"fn":"normalizedHost","args":["ab"],"ok":"ab"}
+{"fn":"normalizedHost","args":[".leadinghello"],"ok":".leadinghello"}
+{"fn":"normalizedHost","args":["line1\nline2"],"ok":"line1\nline2"}
+{"fn":"normalizedHost","args":[".leading"],"ok":".leading"}
+{"fn":"normalizedHost","args":[""],"ok":""}
+{"fn":"normalizedHost","args":["trailing."],"ok":"trailing"}
+{"fn":"normalizedHost","args":["ns:key.path"],"ok":"ns:key.path"}
+{"fn":"normalizedHost","args":["a:b:c"],"ok":"a:b:c"}
+{"fn":"normalizedHost","args":["日本語のテキスト"],"ok":"日本語のテキスト"}
+{"fn":"normalizedHost","args":["{name} has {count} items"],"ok":"{name} has {count} items"}
+{"fn":"normalizedHost","args":["é"],"ok":"é"}
+{"fn":"normalizedHost","args":["straße"],"ok":"straße"}
+{"fn":"normalizedHost","args":["a.b.c"],"ok":"a.b.c"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣ"],"ok":"σίσυφος"}
+{"fn":"normalizedHost","args":["a..b"],"ok":"a..b"}
+{"fn":"normalizedHost","args":["ünïcödé"],"ok":"ünïcödé"}
+{"fn":"normalizedHost","args":["abc"],"ok":"abc"}
+{"fn":"normalizedHost","args":["  padded  ΣΊΣΥΦΟΣ"],"ok":"padded  σίσυφος"}
+{"fn":"normalizedHost","args":["ünïcödétab\tseparated"],"ok":"ünïcödétab\tseparated"}
+{"fn":"normalizedHost","args":["src/a/b.tstab\tseparated"],"ok":"src/a/b.tstab\tseparated"}
+{"fn":"normalizedHost","args":["tab\tseparated"],"ok":"tab\tseparated"}
+{"fn":"normalizedHost","args":[":"],"ok":":"}
+{"fn":"normalizedHost","args":["a😀b😀c"],"ok":"a😀b😀c"}
+{"fn":"normalizedHost","args":["key_name-1"],"ok":"key_name-1"}
+{"fn":"normalizedHost","args":["straße😀"],"ok":"straße😀"}
+{"fn":"normalizedHost","args":["a..bstraße"],"ok":"a..bstraße"}
+{"fn":"normalizedHost","args":["﻿bom"],"ok":"bom"}
+{"fn":"normalizedHost","args":["hello"],"ok":"hello"}
+{"fn":"normalizedHost","args":["İstanbul"],"ok":"i̇stanbul"}
+{"fn":"normalizedHost","args":["emoji 👍🏽 mix"],"ok":"emoji 👍🏽 mix"}
+{"fn":"normalizedHost","args":["hello worlda:b:c"],"ok":"hello worlda:b:c"}
+{"fn":"normalizedHost","args":["hello world"],"ok":"hello world"}
+{"fn":"normalizedHost","args":["src/a/b.ts"],"ok":"src/a/b.ts"}
+{"fn":"normalizedHost","args":["./x/**/*.jsonline1\nline2"],"ok":"./x/**/*.jsonline1\nline2"}
+{"fn":"normalizedHost","args":["HELLO"],"ok":"hello"}
+{"fn":"normalizedHost","args":["a:b:cünïcödé"],"ok":"a:b:cünïcödé"}
+{"fn":"normalizedHost","args":["a"],"ok":"a"}
+{"fn":"normalizedHost","args":["😀"],"ok":"😀"}
+{"fn":"normalizedHost","args":["./x/**/*.json"],"ok":"./x/**/*.json"}
+{"fn":"normalizedHost","args":["ünïcödéİstanbul"],"ok":"ünïcödéi̇stanbul"}
+{"fn":"normalizedHost","args":["abca"],"ok":"abca"}
+{"fn":"normalizedHost","args":["a😀b😀cabc"],"ok":"a😀b😀cabc"}
+{"fn":"normalizedHost","args":["line1\nline2ünïcödé"],"ok":"line1\nline2ünïcödé"}
+{"fn":"normalizedHost","args":["ns:key.pathΣΊΣΥΦΟΣ"],"ok":"ns:key.pathσίσυφος"}
+{"fn":"normalizedHost","args":["abcstraße"],"ok":"abcstraße"}
+{"fn":"normalizedHost","args":["helloline1\nline2"],"ok":"helloline1\nline2"}
+{"fn":"normalizedHost","args":["tab\tseparated😀"],"ok":"tab\tseparated😀"}
+{"fn":"normalizedHost","args":["hello worldkey_name-1"],"ok":"hello worldkey_name-1"}
+{"fn":"normalizedHost","args":["abcΣΊΣΥΦΟΣ"],"ok":"abcσίσυφος"}
+{"fn":"normalizedHost","args":["ékey_name-1"],"ok":"ékey_name-1"}
+{"fn":"normalizedHost","args":["Hello Worldtrailing."],"ok":"hello worldtrailing"}
+{"fn":"normalizedHost","args":["line1\nline2a..b"],"ok":"line1\nline2a..b"}
+{"fn":"normalizedHost","args":["hellostraße"],"ok":"hellostraße"}
+{"fn":"normalizedHost","args":["hello{name} has {count} items"],"ok":"hello{name} has {count} items"}
+{"fn":"normalizedHost","args":["Hello Worldkey_name-1"],"ok":"hello worldkey_name-1"}
+{"fn":"normalizedHost","args":[".leading./x/**/*.json"],"ok":".leading./x/**/*.json"}
+{"fn":"normalizedHost","args":["😀﻿bom"],"ok":"😀﻿bom"}
+{"fn":"normalizedHost","args":["./x/**/*.jsonhello"],"ok":"./x/**/*.jsonhello"}
+{"fn":"normalizedHost","args":["a😀b😀cünïcödé"],"ok":"a😀b😀cünïcödé"}
+{"fn":"normalizedHost","args":["ünïcödéhello world"],"ok":"ünïcödéhello world"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣ./x/**/*.json"],"ok":"σίσυφος./x/**/*.json"}
+{"fn":"normalizedHost","args":["trailing../x/**/*.json"],"ok":"trailing../x/**/*.json"}
+{"fn":"normalizedHost","args":["src/a/b.tssrc/a/b.ts"],"ok":"src/a/b.tssrc/a/b.ts"}
+{"fn":"normalizedHost","args":["İstanbulns:key.path"],"ok":"i̇stanbulns:key.path"}
+{"fn":"normalizedHost","args":["tab\tseparatedhello"],"ok":"tab\tseparatedhello"}
+{"fn":"normalizedHost","args":["hello  padded  "],"ok":"hello  padded"}
+{"fn":"normalizedHost","args":["straßehello world"],"ok":"straßehello world"}
+{"fn":"normalizedHost","args":["straße.leading"],"ok":"straße.leading"}
+{"fn":"normalizedHost","args":["a.b.ctab\tseparated"],"ok":"a.b.ctab\tseparated"}
+{"fn":"normalizedHost","args":[":﻿bom"],"ok":":﻿bom"}
+{"fn":"normalizedHost","args":[".leadingünïcödé"],"ok":".leadingünïcödé"}
+{"fn":"normalizedHost","args":["aba:b:c"],"ok":"aba:b:c"}
+{"fn":"normalizedHost","args":["a😀b😀cé"],"ok":"a😀b😀cé"}
+{"fn":"normalizedHost","args":[".leadingé"],"ok":".leadingé"}
+{"fn":"normalizedHost","args":["hello worldünïcödé"],"ok":"hello worldünïcödé"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣHELLO"],"ok":"σίσυφοσhello"}
+{"fn":"normalizedHost","args":["./x/**/*.jsonİstanbul"],"ok":"./x/**/*.jsoni̇stanbul"}
+{"fn":"normalizedHost","args":["./x/**/*.jsona:b:c"],"ok":"./x/**/*.jsona:b:c"}
+{"fn":"normalizedHost","args":["a:b:c日本語のテキスト"],"ok":"a:b:c日本語のテキスト"}
+{"fn":"normalizedHost","args":["src/a/b.tsHello World"],"ok":"src/a/b.tshello world"}
+{"fn":"normalizedHost","args":["{name} has {count} itemskey_name-1"],"ok":"{name} has {count} itemskey_name-1"}
+{"fn":"normalizedHost","args":["tab\tseparatedtrailing."],"ok":"tab\tseparatedtrailing"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣ﻿bom"],"ok":"σίσυφοσ﻿bom"}
+{"fn":"normalizedHost","args":["a😀b😀c./x/**/*.json"],"ok":"a😀b😀c./x/**/*.json"}
+{"fn":"normalizedHost","args":["emoji 👍🏽 mixab"],"ok":"emoji 👍🏽 mixab"}
+{"fn":"normalizedHost","args":["abtrailing."],"ok":"abtrailing"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣİstanbul"],"ok":"σίσυφοσi̇stanbul"}
+{"fn":"normalizedHost","args":["Hello Worlda.b.c"],"ok":"hello worlda.b.c"}
+{"fn":"normalizedHost","args":["ünïcödé.leading"],"ok":"ünïcödé.leading"}
+{"fn":"normalizedHost","args":["😀{name} has {count} items"],"ok":"😀{name} has {count} items"}
+{"fn":"normalizedHost","args":["HELLOabc"],"ok":"helloabc"}
+{"fn":"normalizedHost","args":[":emoji 👍🏽 mix"],"ok":":emoji 👍🏽 mix"}
+{"fn":"normalizedHost","args":["trailing.ΣΊΣΥΦΟΣ"],"ok":"trailing.σίσυφος"}
+{"fn":"normalizedHost","args":["Hello Worldsrc/a/b.ts"],"ok":"hello worldsrc/a/b.ts"}
+{"fn":"normalizedHost","args":["😀tab\tseparated"],"ok":"😀tab\tseparated"}
+{"fn":"normalizedHost","args":["ab😀"],"ok":"ab😀"}
+{"fn":"normalizedHost","args":["Hello Worldns:key.path"],"ok":"hello worldns:key.path"}
+{"fn":"normalizedHost","args":["emoji 👍🏽 mixstraße"],"ok":"emoji 👍🏽 mixstraße"}
+{"fn":"normalizedHost","args":["src/a/b.ts  padded  "],"ok":"src/a/b.ts  padded"}
+{"fn":"normalizedHost","args":["İstanbulhello world"],"ok":"i̇stanbulhello world"}
+{"fn":"normalizedHost","args":["a😀"],"ok":"a😀"}
+{"fn":"normalizedHost","args":["tab\tseparateda"],"ok":"tab\tseparateda"}
+{"fn":"normalizedHost","args":["src/a/b.tstrailing."],"ok":"src/a/b.tstrailing"}
+{"fn":"normalizedHost","args":["a😀b😀c﻿bom"],"ok":"a😀b😀c﻿bom"}
+{"fn":"normalizedHost","args":["abİstanbul"],"ok":"abi̇stanbul"}
+{"fn":"normalizedHost","args":["a{name} has {count} items"],"ok":"a{name} has {count} items"}
+{"fn":"normalizedHost","args":["key_name-1  padded  "],"ok":"key_name-1  padded"}
+{"fn":"normalizedHost","args":["key_name-1a😀b😀c"],"ok":"key_name-1a😀b😀c"}
+{"fn":"normalizedHost","args":["src/a/b.ts﻿bom"],"ok":"src/a/b.ts﻿bom"}
+{"fn":"normalizedHost","args":["src/a/b.ts{name} has {count} items"],"ok":"src/a/b.ts{name} has {count} items"}
+{"fn":"normalizedHost","args":["hellosrc/a/b.ts"],"ok":"hellosrc/a/b.ts"}
+{"fn":"normalizedHost","args":["src/a/b.tsé"],"ok":"src/a/b.tsé"}
+{"fn":"normalizedHost","args":["a..btab\tseparated"],"ok":"a..btab\tseparated"}
+{"fn":"normalizedHost","args":["src/a/b.tshello"],"ok":"src/a/b.tshello"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣ.leading"],"ok":"σίσυφοσ.leading"}
+{"fn":"normalizedHost","args":["İstanbulΣΊΣΥΦΟΣ"],"ok":"i̇stanbulσίσυφος"}
+{"fn":"normalizedHost","args":["line1\nline2HELLO"],"ok":"line1\nline2hello"}
+{"fn":"normalizedHost","args":["ünïcödéabc"],"ok":"ünïcödéabc"}
+{"fn":"normalizedHost","args":["abline1\nline2"],"ok":"abline1\nline2"}
+{"fn":"normalizedHost","args":["a😀b😀cline1\nline2"],"ok":"a😀b😀cline1\nline2"}
+{"fn":"normalizedHost","args":["hello world:"],"ok":"hello world:"}
+{"fn":"normalizedHost","args":["ünïcödé﻿bom"],"ok":"ünïcödé﻿bom"}
+{"fn":"normalizedHost","args":["helloemoji 👍🏽 mix"],"ok":"helloemoji 👍🏽 mix"}
+{"fn":"normalizedHost","args":["src/a/b.tsa"],"ok":"src/a/b.tsa"}
+{"fn":"normalizedHost","args":["tab\tseparated  padded  "],"ok":"tab\tseparated  padded"}
+{"fn":"normalizedHost","args":["trailing.a😀b😀c"],"ok":"trailing.a😀b😀c"}
+{"fn":"normalizedHost","args":["astraße"],"ok":"astraße"}
+{"fn":"normalizedHost","args":["﻿bomé"],"ok":"bomé"}
+{"fn":"normalizedHost","args":["İstanbul日本語のテキスト"],"ok":"i̇stanbul日本語のテキスト"}
+{"fn":"normalizedHost","args":["ns:key.pathhello world"],"ok":"ns:key.pathhello world"}
+{"fn":"normalizedHost","args":["é{name} has {count} items"],"ok":"é{name} has {count} items"}
+{"fn":"normalizedHost","args":["./x/**/*.json😀"],"ok":"./x/**/*.json😀"}
+{"fn":"normalizedHost","args":["İstanbul{name} has {count} items"],"ok":"i̇stanbul{name} has {count} items"}
+{"fn":"normalizedHost","args":["{name} has {count} itemsa..b"],"ok":"{name} has {count} itemsa..b"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣé"],"ok":"σίσυφοσé"}
+{"fn":"normalizedHost","args":["abcİstanbul"],"ok":"abci̇stanbul"}
+{"fn":"normalizedHost","args":["éemoji 👍🏽 mix"],"ok":"éemoji 👍🏽 mix"}
+{"fn":"normalizedHost","args":["emoji 👍🏽 mixa😀b😀c"],"ok":"emoji 👍🏽 mixa😀b😀c"}
+{"fn":"normalizedHost","args":["﻿bomstraße"],"ok":"bomstraße"}
+{"fn":"normalizedHost","args":["key_name-1./x/**/*.json"],"ok":"key_name-1./x/**/*.json"}
+{"fn":"normalizedHost","args":["😀a:b:c"],"ok":"😀a:b:c"}
+{"fn":"normalizedHost","args":["key_name-1key_name-1"],"ok":"key_name-1key_name-1"}
+{"fn":"normalizedHost","args":["a.b.cab"],"ok":"a.b.cab"}
+{"fn":"normalizedHost","args":["aa.b.c"],"ok":"aa.b.c"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣ日本語のテキスト"],"ok":"σίσυφος日本語のテキスト"}
+{"fn":"normalizedHost","args":["😀a😀b😀c"],"ok":"😀a😀b😀c"}
+{"fn":"normalizedHost","args":["a😀b😀ca.b.c"],"ok":"a😀b😀ca.b.c"}
+{"fn":"normalizedHost","args":["a..b:"],"ok":"a..b:"}
+{"fn":"normalizedHost","args":["./x/**/*.jsonns:key.path"],"ok":"./x/**/*.jsonns:key.path"}
+{"fn":"normalizedHost","args":[":a..b"],"ok":":a..b"}
+{"fn":"normalizedHost","args":["abcline1\nline2"],"ok":"abcline1\nline2"}
+{"fn":"normalizedHost","args":["éİstanbul"],"ok":"éi̇stanbul"}
+{"fn":"normalizedHost","args":["./x/**/*.jsona😀b😀c"],"ok":"./x/**/*.jsona😀b😀c"}
+{"fn":"normalizedHost","args":["hello world.leading"],"ok":"hello world.leading"}
+{"fn":"normalizedHost","args":["a.b.cstraße"],"ok":"a.b.cstraße"}
+{"fn":"normalizedHost","args":["a.b.chello"],"ok":"a.b.chello"}
+{"fn":"normalizedHost","args":["./x/**/*.jsonabc"],"ok":"./x/**/*.jsonabc"}
+{"fn":"normalizedHost","args":["key_name-1ns:key.path"],"ok":"key_name-1ns:key.path"}
+{"fn":"normalizedHost","args":[".leadingtrailing."],"ok":".leadingtrailing"}
+{"fn":"normalizedHost","args":["emoji 👍🏽 mixemoji 👍🏽 mix"],"ok":"emoji 👍🏽 mixemoji 👍🏽 mix"}
+{"fn":"normalizedHost","args":["line1\nline2.leading"],"ok":"line1\nline2.leading"}
+{"fn":"normalizedHost","args":["straße日本語のテキスト"],"ok":"straße日本語のテキスト"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣline1\nline2"],"ok":"σίσυφοσline1\nline2"}
+{"fn":"normalizedHost","args":["﻿bomünïcödé"],"ok":"bomünïcödé"}
+{"fn":"normalizedHost","args":["straßea:b:c"],"ok":"straßea:b:c"}
+{"fn":"normalizedHost","args":["  padded  abc"],"ok":"padded  abc"}
+{"fn":"normalizedHost","args":["😀é"],"ok":"😀é"}
+{"fn":"normalizedHost","args":[":hello world"],"ok":":hello world"}
+{"fn":"normalizedHost","args":[":line1\nline2"],"ok":":line1\nline2"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣa"],"ok":"σίσυφοσa"}
+{"fn":"normalizedHost","args":["ns:key.pathHELLO"],"ok":"ns:key.pathhello"}
+{"fn":"normalizedHost","args":["Hello Worldünïcödé"],"ok":"hello worldünïcödé"}
+{"fn":"normalizedHost","args":["ns:key.pathabc"],"ok":"ns:key.pathabc"}
+{"fn":"normalizedHost","args":["straßehello"],"ok":"straßehello"}
+{"fn":"normalizedHost","args":["key_name-1.leading"],"ok":"key_name-1.leading"}
+{"fn":"normalizedHost","args":["Hello Worldtab\tseparated"],"ok":"hello worldtab\tseparated"}
+{"fn":"normalizedHost","args":["tab\tseparateda:b:c"],"ok":"tab\tseparateda:b:c"}
+{"fn":"normalizedHost","args":["😀ab"],"ok":"😀ab"}
+{"fn":"normalizedHost","args":["  padded  ab"],"ok":"padded  ab"}
+{"fn":"normalizedHost","args":["{name} has {count} items日本語のテキスト"],"ok":"{name} has {count} items日本語のテキスト"}
+{"fn":"normalizedHost","args":["abca😀b😀c"],"ok":"abca😀b😀c"}
+{"fn":"normalizedHost","args":["ns:key.pathİstanbul"],"ok":"ns:key.pathi̇stanbul"}
+{"fn":"normalizedHost","args":["ünïcödéünïcödé"],"ok":"ünïcödéünïcödé"}
+{"fn":"normalizedHost","args":["emoji 👍🏽 mix😀"],"ok":"emoji 👍🏽 mix😀"}
+{"fn":"normalizedHost","args":["key_name-1ab"],"ok":"key_name-1ab"}
+{"fn":"normalizedHost","args":["ΣΊΣΥΦΟΣabc"],"ok":"σίσυφοσabc"}
+{"fn":"normalizedHost","args":["HELLOtab\tseparated"],"ok":"hellotab\tseparated"}
+{"fn":"normalizedHost","args":["tab\tseparated./x/**/*.json"],"ok":"tab\tseparated./x/**/*.json"}
+{"fn":"normalizedHost","args":["a😀b😀cİstanbul"],"ok":"a😀b😀ci̇stanbul"}
+{"fn":"normalizedHost","args":["a:b:c{name} has {count} items"],"ok":"a:b:c{name} has {count} items"}
+{"fn":"normalizedHost","args":["é:"],"ok":"é:"}
+{"fn":"normalizedHost","args":["a:b:cstraße"],"ok":"a:b:cstraße"}
+{"fn":"normalizedHost","args":["emoji 👍🏽 mixtab\tseparated"],"ok":"emoji 👍🏽 mixtab\tseparated"}
+{"fn":"normalizedHost","args":["{name} has {count} itemsns:key.path"],"ok":"{name} has {count} itemsns:key.path"}
+{"fn":"normalizedHost","args":["ab:"],"ok":"ab:"}
+{"fn":"normalizedHost","args":["a..bΣΊΣΥΦΟΣ"],"ok":"a..bσίσυφος"}
+{"fn":"normalizedHost","args":["key_name-1abc"],"ok":"key_name-1abc"}
+{"fn":"normalizedHost","args":["héllo wörld"],"ok":"héllo wörld"}
+{"fn":"normalizedHost","args":["👍🏽 thumbs"],"ok":"👍🏽 thumbs"}
+{"fn":"normalizedHost","args":["日本語"],"ok":"日本語"}
+{"fn":"normalizedHost","args":["ılık ırmak"],"ok":"ılık ırmak"}
+{"fn":"normalizedHost","args":["👨‍👩‍👧 family"],"ok":"👨‍👩‍👧 family"}
+{"fn":"normalizedHost","args":["a b"],"ok":"a b"}
+{"fn":"normalizedHost","args":["a😀b"],"ok":"a😀b"}
+{"fn":"normalizedHost","args":["a²b x½ y①"],"ok":"a²b x½ y①"}
+{"fn":"normalizedHost","args":["aⅠb Ⅻ"],"ok":"aⅰb ⅻ"}
+{"fn":"normalizedHost","args":["a𐐀b 𝐀bc"],"ok":"a𐐨b 𝐀bc"}
+{"fn":"normalizedHost","args":["कि ٣٤"],"ok":"कि ٣٤"}
+{"fn":"normalizedHost","args":["Iı İi"],"ok":"iı i̇i"}
+{"fn":"normalizedHost","args":["K K k"],"ok":"k k k"}
+{"fn":"normalizedHost","args":["ſ s S"],"ok":"ſ s s"}
+{"fn":"normalizedHost","args":["x‍y 👨‍👩‍👧"],"ok":"x‍y 👨‍👩‍👧"}
+{"fn":"normalizedHost","args":["a b c　d"],"ok":"a b c　d"}
+{"fn":"normalizedHost","args":["١٢٣ ٤٥"],"ok":"١٢٣ ٤٥"}
+{"fn":"normalizedHost","args":["𝟘𝟙 ²³"],"ok":"𝟘𝟙 ²³"}
+{"fn":"normalizedHost","args":["snake_case foo-bar o'neil"],"ok":"snake_case foo-bar o'neil"}
+{"fn":"normalizedHost","args":["ǅungla Ǆ"],"ok":"ǆungla ǆ"}
+{"fn":"normalizedHost","args":["one\r\ntwo threefour"],"ok":"one\r\ntwo threefour"}
+{"fn":"normalizedHost","args":["café café"],"ok":"café café"}
+{"fn":"normalizedHost","args":["ΣΑΣ σας ς"],"ok":"σας σας ς"}
+{"fn":"hostPatternProblem","args":[null],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[[]],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[{}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[{"a":{"b":"c"}}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[{"a":"b"}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":["x"],"ok":null}
+{"fn":"hostPatternProblem","args":[true],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[["a",1]],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[0],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[[3,1,2]],"ok":"isn't text"}
+{"fn":"isHostPattern","args":[0],"ok":false}
+{"fn":"isHostPattern","args":[null],"ok":false}
+{"fn":"isHostPattern","args":[["a",1]],"ok":false}
+{"fn":"isHostPattern","args":[{}],"ok":false}
+{"fn":"isHostPattern","args":[[]],"ok":false}
+{"fn":"isHostPattern","args":[{"a":"b"}],"ok":false}
+{"fn":"isHostPattern","args":["x"],"ok":true}
+{"fn":"isHostPattern","args":[true],"ok":false}
+{"fn":"isHostPattern","args":[{"a":{"b":"c"}}],"ok":false}
+{"fn":"isHostPattern","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":false}
+{"fn":"isHostPattern","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":false}
+{"fn":"isHostPattern","args":[[3,1,2]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a😀b😀c",["a.b.c","a..b"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straße",["a","a"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a",["trailing.","a.b.c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["{name} has {count} items",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.jsonab",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["é",["ünïcödé","{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["tab\tseparated",["line1\nline2","emoji 👍🏽 mixa..b"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ΣΊΣΥΦΟΣ",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["  padded  ",["é",""]],"ok":false}
+{"fn":"matchesAllowedHost","args":["😀",["ünïcödé"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["hello world",["a..b","é"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["hello",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ab",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ΣΊΣΥΦΟΣ",["ab"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["line1\nline2",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":[":",["ns:key.path"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["trailing.",["trailing."]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ns:key.path",["﻿bom"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["src/a/b.ts",["a😀b😀c","a😀b😀c","a😀b😀c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["İstanbul",["a😀b😀cns:key.path","😀日本語のテキスト"]],"ok":false}
+{"fn":"matchesAllowedHost","args":[".leading",["ΣΊΣΥΦΟΣ","emoji 👍🏽 mix{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["abc",["a.b.cstraße","HELLOabc"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["tab\tseparated",[":"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["{name} has {count} items",["  padded  ","key_name-1","日本語のテキスト"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["straße","trailing.ab","Hello World"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["日本語のテキストa..b",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["hello world",["a😀b😀c","a:b:ca😀b😀c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["src/a/b.ts"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["é",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":[".leading",["key_name-1","src/a/b.tshello"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["  padded  ",["src/a/b.ts",".leading"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["straße"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ünïcödéünïcödé",[":","ünïcödé"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["éemoji 👍🏽 mix",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["emoji 👍🏽 mix  padded  ",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["  padded  ",["a:b:c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["ünïcödé","","hellotab\tseparated"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["﻿bom",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["é日本語のテキスト",["İstanbulabc"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["﻿bom",["abhello world"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.b.c",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["src/a/b.ts",["é","İstanbul"]],"ok":false}
+{"fn":"matchesAllowedHost","args":[":",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["trailing.Hello World",["trailing."]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ésrc/a/b.ts",["tab\tseparated","Hello World","hello worldstraße"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ünïcödéstraße",["a.b.c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a😀b😀c",["a😀b😀c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["﻿bom",["emoji 👍🏽 mix"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.b.c",["éHello World","abc","abc"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straße",["a:b:c😀","straße"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ns:key.path",["trailing."]],"ok":false}
+{"fn":"matchesAllowedHost","args":["tab\tseparatedhello world",[":"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ns:key.path",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["tab\tseparated",["﻿bom","ünïcödéé","key_name-1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a:b:c.leading",["a.b.c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["é",["﻿bom","ab","a"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ΣΊΣΥΦΟΣ",["İstanbul","line1\nline2","ns:key.path"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["İstanbul",["ΣΊΣΥΦΟΣ","ΣΊΣΥΦΟΣΣΊΣΥΦΟΣ","key_name-1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["abc",[":"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ahello world",["line1\nline2./x/**/*.json"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["hello","line1\nline2","hello"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a",["straße","hello world"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["aabc",["  padded  "]],"ok":false}
+{"fn":"matchesAllowedHost","args":["src/a/b.ts﻿bom",["a..ba..b"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a",[".leading","tab\tseparated"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["  padded  ",[":é"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a",["a:b:c","{name} has {count} items","😀"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["é",["trailing."]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ab",["a:b:c","{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a😀b😀ca.b.c",["tab\tseparatedİstanbul","HELLO","  padded  "]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ünïcödé",["ünïcödéa:b:c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.b.c",["","HELLO","trailing."]],"ok":false}
+{"fn":"matchesAllowedHost","args":["akey_name-1",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a:b:c",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["key_name-1ab",["","tab\tseparatedemoji 👍🏽 mix"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["src/a/b.ts",["é"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["abc",["emoji 👍🏽 mixsrc/a/b.ts"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ünïcödé",["a.b.cstraße","a.b.c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["İstanbul",["HELLO",":日本語のテキスト","日本語のテキスト"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["hello world"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.b.c",["ΣΊΣΥΦΟΣab"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["key_name-1",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ab",["straße","emoji 👍🏽 mix","ab"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["{name} has {count} items",["","  padded  "]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ns:key.path",["src/a/b.tsa.b.c","a😀b😀c","a.b.c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["é",["a😀b😀c","﻿bom","trailing."]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["src/a/b.ts","  padded  a:b:c","abc"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["line1\nline2","ΣΊΣΥΦΟΣline1\nline2","HELLO"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["abc",["src/a/b.ts","emoji 👍🏽 mix"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straße",["./x/**/*.json","trailing.","emoji 👍🏽 mix"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a😀b😀c",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":[".leading",["a.b.c","{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ünïcödé",["ünïcödé","日本語のテキスト"]],"ok":false}
+{"fn":"matchesAllowedHost","args":[":",["ünïcödé","  padded  ","İstanbul"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["日本語のテキスト",["tab\tseparateda","HELLOa😀b😀c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["tab\tseparated",["a","./x/**/*.jsontrailing.","İstanbul"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straße",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["  padded  ",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a..b",["hello  padded  ","abc"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["tab\tseparated","ünïcödé"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["é",["﻿bom","straßestraße"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ünïcödé",["Hello World"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["trailing.",["İstanbul",".leading","ünïcödé"]],"ok":false}
+{"fn":"matchesAllowedHost","args":[":",["trailing.","Hello World"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["src/a/b.ts",["Hello World","ab"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["﻿bom",["HELLOünïcödé"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["İstanbul",["﻿bomkey_name-1","straße"]],"ok":false}
+{"fn":"matchesAllowedHost","args":[":",["Hello World","line1\nline2"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straßea:b:c",["hello"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["Hello World",["a😀b😀c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["hello world",["key_name-1","{name} has {count} items😀"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["src/a/b.ts",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["İstanbul",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["src/a/b.ts",["日本語のテキスト"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["key_name-1",["straße","{name} has {count} items","emoji 👍🏽 mix"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["﻿bomtab\tseparated",["a:b:ca:b:c","HELLOline1\nline2"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a:b:c",["a..b","trailing."]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a..b",["日本語のテキスト","ns:key.path","key_name-1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a😀b😀c",["straße"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["HELLO",["﻿bom","./x/**/*.jsona:b:c","key_name-1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.b.cline1\nline2",["日本語のテキスト","abc","ns:key.path"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["tab\tseparated","tab\tseparated"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["emoji 👍🏽 mix",["tab\tseparated","straße"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["tab\tseparatedabc",["emoji 👍🏽 mix","a😀b😀ctab\tseparated","hello world"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["﻿bom",[":","a","asrc/a/b.ts"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a..b",["hello world","{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["tab\tseparated",["a..b","emoji 👍🏽 mix","  padded  "]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straßesrc/a/b.ts",["ab","  padded  "]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["a😀b😀c","emoji 👍🏽 mix","src/a/b.ts"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.b.c  padded  ",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["abc",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ünïcödé",[":","HELLO"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["src/a/b.ts",["emoji 👍🏽 mixünïcödé","İstanbultab\tseparated","./x/**/*.json"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a😀b😀c",["./x/**/*.json","src/a/b.tsa","src/a/b.tsHELLO"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["abc",["😀a","{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a:b:c",["ünïcödé"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straße",[""]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ab",["trailing.","key_name-1","a.b.c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a..bé",["İstanbul"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["tab\tseparated",["é","a😀b😀c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["{name} has {count} items",["trailing.","ab","a😀b😀c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straßeHello World",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ab",["line1\nline2","ΣΊΣΥΦΟΣİstanbul","ünïcödéa..b"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a",["a.b.c",""]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a..b",["a:b:c",".leading","Hello Worldemoji 👍🏽 mix"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a",["emoji 👍🏽 mix日本語のテキスト","src/a/b.ts","ΣΊΣΥΦΟΣa..b"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["{name} has {count} itemsemoji 👍🏽 mix",["a.b.c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["hello./x/**/*.json",["key_name-1","./x/**/*.json"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straße",["  padded  ","  padded  ns:key.path"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["Hello World",["src/a/b.tsa:b:c","HELLO  padded  ","ns:key.pathemoji 👍🏽 mix"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["hello world",[""]],"ok":false}
+{"fn":"matchesAllowedHost","args":["trailing.",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":[":",["./x/**/*.jsona.b.c","a..b","ab"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["😀",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["abc",["a.b.ckey_name-1","tab\tseparated",""]],"ok":false}
+{"fn":"matchesAllowedHost","args":["hello",["a😀b😀c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["key_name-1",["a.b.c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":[":",["a:b:cab","abc"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["﻿bom",["a:b:csrc/a/b.ts","{name} has {count} items","hello worldabc"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["﻿bom"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ab",["ΣΊΣΥΦΟΣ"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["key_name-1",["İstanbul","src/a/b.ts"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straße",["","é"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ab",["a..b"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ΣΊΣΥΦΟΣtrailing.",["straße  padded  ","a:b:c","a..b"]],"ok":false}
+{"fn":"matchesAllowedHost","args":[":İstanbul",[".leading","a..b"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["src/a/b.ts",["line1\nline2","./x/**/*.json","emoji 👍🏽 mix"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["{name} has {count} items",[".leading"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.b.c",["a:b:c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a",["line1\nline2","./x/**/*.jsonkey_name-1","a"]],"ok":true}
+{"fn":"matchesAllowedHost","args":[".leading日本語のテキスト",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["  padded  ",["😀","ΣΊΣΥΦΟΣ","trailing."]],"ok":false}
+{"fn":"matchesAllowedHost","args":[".leading",["a😀b😀c","key_name-1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["﻿bomhello world",[".leading","emoji 👍🏽 mixa:b:c"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["{name} has {count} items",["😀﻿bom","./x/**/*.json"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["hello",["line1\nline2","a:b:c","﻿bom"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["line1\nline2",["emoji 👍🏽 mixhello world","Hello Worldsrc/a/b.ts","HELLO"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["emoji 👍🏽 mix","abc","line1\nline2"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["😀",["İstanbul","ΣΊΣΥΦΟΣ","hello world"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["😀",["Hello World","ΣΊΣΥΦΟΣ"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["ΣΊΣΥΦΟΣ",".leading"]],"ok":false}
+{"fn":"matchesAllowedHost","args":[".leading",["İstanbul"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["emoji 👍🏽 mix",[".leading","straße"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a..b",["ns:key.path","./x/**/*.jsona","key_name-1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":[".leading",["é"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["src/a/b.ts",["emoji 👍🏽 mix","ab","tab\tseparated"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["{name} has {count} itemskey_name-1",["straße:","HELLO"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["tab\tseparated",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a..b",["İstanbul","abc"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["tab\tseparated",[":","./x/**/*.json","  padded  "]],"ok":false}
+{"fn":"matchesAllowedHost","args":["😀",["trailing."]],"ok":false}
+{"fn":"matchesAllowedHost","args":["é",["a..b","ΣΊΣΥΦΟΣ","😀"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ünïcödé",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a:b:csrc/a/b.ts",["","日本語のテキスト"]],"ok":false}
+{"fn":"matchesAllowedHost","args":[".leading",["日本語のテキスト","Hello Worldkey_name-1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["héllo wörld",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["👍🏽 thumbs",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["日本語",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["é",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["İstanbul",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["straße",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ılık ırmak",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["👨‍👩‍👧 family",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a b",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ΣΊΣΥΦΟΣ",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a😀b",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["﻿bom",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a²b x½ y①",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["aⅠb Ⅻ",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a𐐀b 𝐀bc",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["कि ٣٤",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["Iı İi",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["K K k",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ſ s S",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["x‍y 👨‍👩‍👧",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a b c　d",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["١٢٣ ٤٥",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["𝟘𝟙 ²³",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["snake_case foo-bar o'neil",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ǅungla Ǆ",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["one\r\ntwo threefour",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["café café",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["ΣΑΣ σας ς",["a:b:c","{name} has {count} items","ΣΊΣΥΦΟΣ{name} has {count} items"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["./x/**/*.json",["b","a","B","é","10","9","a"]],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["tab\tseparated","t"],"ok":false}
+{"fn":"hostPatternCovers","args":["","日本語のテキスト"],"ok":false}
+{"fn":"hostPatternCovers","args":["a😀b😀c",""],"ok":false}
+{"fn":"hostPatternCovers","args":["a😀b😀c","b😀"],"ok":false}
+{"fn":"hostPatternCovers","args":["ame-1","key_name-1"],"ok":false}
+{"fn":"hostPatternCovers","args":["key_name-1","{name} has {count} items"],"ok":false}
+{"fn":"hostPatternCovers","args":["abc","trailing."],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","é"],"ok":false}
+{"fn":"hostPatternCovers","args":["﻿bomİstanbul","ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"hostPatternCovers","args":["./x/**/*.json","﻿bom"],"ok":false}
+{"fn":"hostPatternCovers","args":["😀","key_name-1"],"ok":false}
+{"fn":"hostPatternCovers","args":["a:b:ctab\tseparated","日本語のテキスト"],"ok":false}
+{"fn":"hostPatternCovers","args":["İstanbul","  padded  "],"ok":false}
+{"fn":"hostPatternCovers","args":["İstanbultrailing.","hello world😀"],"ok":false}
+{"fn":"hostPatternCovers","args":["line2a😀b😀","line1\nline2a😀b😀c"],"ok":false}
+{"fn":"hostPatternCovers","args":["😀","a😀b😀c"],"ok":false}
+{"fn":"hostPatternCovers","args":["😀",""],"ok":false}
+{"fn":"hostPatternCovers","args":["  padded  ","é"],"ok":false}
+{"fn":"hostPatternCovers","args":["tab\tseparated",""],"ok":false}
+{"fn":"hostPatternCovers","args":["  padded  "," "],"ok":false}
+{"fn":"hostPatternCovers","args":["a.b.c","😀"],"ok":false}
+{"fn":"hostPatternCovers","args":["","tab\tseparated"],"ok":false}
+{"fn":"hostPatternCovers","args":["İstanbul","emoji 👍🏽 mix"],"ok":false}
+{"fn":"hostPatternCovers","args":["HELLO","İstanbulhello world"],"ok":false}
+{"fn":"hostPatternCovers","args":["ab","aHELLO"],"ok":false}
+{"fn":"hostPatternCovers","args":["ing",".leading"],"ok":false}
+{"fn":"hostPatternCovers","args":["HELLO","abc"],"ok":false}
+{"fn":"hostPatternCovers","args":["a.b.c","hello world"],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΊΣΥΦΟΣ","ns:key.path"],"ok":false}
+{"fn":"hostPatternCovers","args":["ELLO","HELLO"],"ok":false}
+{"fn":"hostPatternCovers","args":["./x/**/*.jsonHello World",".jsonHel"],"ok":false}
+{"fn":"hostPatternCovers","args":["Hello World","a:b:c"],"ok":false}
+{"fn":"hostPatternCovers","args":["Hello Worldtab\tseparated","a:b:cHELLO"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..b","😀"],"ok":false}
+{"fn":"hostPatternCovers","args":["a:b:c","aHELLO"],"ok":false}
+{"fn":"hostPatternCovers","args":["trailing.","straßeé"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello world","a"],"ok":false}
+{"fn":"hostPatternCovers","args":["./x/**/*.json","  padded  a😀b😀c"],"ok":false}
+{"fn":"hostPatternCovers","args":["a.b.c","./x/**/*.json"],"ok":false}
+{"fn":"hostPatternCovers","args":["src/a/b.ts","İstanbul"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello world","a.b.c:"],"ok":false}
+{"fn":"hostPatternCovers","args":["a😀b😀c","tab\tseparated"],"ok":false}
+{"fn":"hostPatternCovers","args":["e","straße"],"ok":false}
+{"fn":"hostPatternCovers","args":["a😀b😀c","a"],"ok":false}
+{"fn":"hostPatternCovers","args":["./x/**/*.json","{name} has {count} itemsa😀b😀c"],"ok":false}
+{"fn":"hostPatternCovers","args":["emoji 👍🏽 mix","HELLO日本語のテキスト"],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΊΣΥΦΟΣ","tab\tseparated"],"ok":false}
+{"fn":"hostPatternCovers","args":["emoji 👍🏽 mix","tab\tseparated./x/**/*.json"],"ok":false}
+{"fn":"hostPatternCovers","args":["a:b:c","  padded  "],"ok":false}
+{"fn":"hostPatternCovers","args":["./x/**/*.json","日本語のテキスト"],"ok":false}
+{"fn":"hostPatternCovers","args":[":",":"],"ok":false}
+{"fn":"hostPatternCovers","args":["abc","hello"],"ok":false}
+{"fn":"hostPatternCovers","args":["a","abc"],"ok":false}
+{"fn":"hostPatternCovers","args":["c","abc"],"ok":false}
+{"fn":"hostPatternCovers","args":["a.b.c","ab"],"ok":false}
+{"fn":"hostPatternCovers","args":["HELLO","a..b"],"ok":false}
+{"fn":"hostPatternCovers","args":["Hello World./x/**/*.json","abc"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..b","straße"],"ok":false}
+{"fn":"hostPatternCovers","args":["src/a/b.ts.leading","abc"],"ok":false}
+{"fn":"hostPatternCovers","args":["a:b:c","ns:key.path"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello","a😀b😀ca:b:c"],"ok":false}
+{"fn":"hostPatternCovers","args":["abc","b"],"ok":false}
+{"fn":"hostPatternCovers","args":["trailing.","HELLO"],"ok":false}
+{"fn":"hostPatternCovers","args":[":chel","a:b:chello"],"ok":false}
+{"fn":"hostPatternCovers","args":["ns:key.path","tab\tseparated"],"ok":false}
+{"fn":"hostPatternCovers","args":["İstanbul","ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..b","Hello World"],"ok":false}
+{"fn":"hostPatternCovers","args":[":straße","ns:key.path"],"ok":false}
+{"fn":"hostPatternCovers","args":["tab\tseparated","日本語のテキストa..b"],"ok":false}
+{"fn":"hostPatternCovers","args":["src/a/b.ts","a..b"],"ok":false}
+{"fn":"hostPatternCovers","args":["é:","a:b:c"],"ok":false}
+{"fn":"hostPatternCovers","args":["ab","a..bline1\nline2"],"ok":false}
+{"fn":"hostPatternCovers","args":["line1\nline2tab\tseparated","2tab\tseparat"],"ok":false}
+{"fn":"hostPatternCovers","args":["{name} has {count} items","key_name-1"],"ok":false}
+{"fn":"hostPatternCovers","args":[":","a.b.c"],"ok":false}
+{"fn":"hostPatternCovers","args":["a:b:c","İstanbul"],"ok":false}
+{"fn":"hostPatternCovers","args":["HELLO","ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"hostPatternCovers","args":["emoji 👍🏽 mix","a😀b😀ckey_name-1"],"ok":false}
+{"fn":"hostPatternCovers","args":["line1\nline2","ünïcödé"],"ok":false}
+{"fn":"hostPatternCovers","args":["line1\nline2","ab  padded  "],"ok":false}
+{"fn":"hostPatternCovers","args":[".leading","﻿bom"],"ok":false}
+{"fn":"hostPatternCovers","args":["😀","日本語のテキスト"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..bns:key.path","😀"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","key_name-1"],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΊΣΥΦΟΣ","HELLO"],"ok":false}
+{"fn":"hostPatternCovers","args":["HELLO",".leading"],"ok":false}
+{"fn":"hostPatternCovers","args":["a.b.c",".c"],"ok":false}
+{"fn":"hostPatternCovers","args":["HELLOHELLO","key_name-1:"],"ok":false}
+{"fn":"hostPatternCovers","args":["Hello World","﻿bom"],"ok":false}
+{"fn":"hostPatternCovers","args":["abc","abc"],"ok":true}
+{"fn":"hostPatternCovers","args":["emoji 👍🏽 mix","  padded  "],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΊΣΥΦΟΣ","Φ"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..ba:b:c","a"],"ok":false}
+{"fn":"hostPatternCovers","args":["{name} has {count} itemssrc/a/b.ts","abc"],"ok":false}
+{"fn":"hostPatternCovers","args":["﻿bom","trailing.abc"],"ok":false}
+{"fn":"hostPatternCovers","args":["a😀","a😀b😀c"],"ok":false}
+{"fn":"hostPatternCovers","args":["straßeHELLO","HELLO"],"ok":false}
+{"fn":"hostPatternCovers","args":["line1\nline2",".leading"],"ok":false}
+{"fn":"hostPatternCovers","args":["a:b:c","src/a/b.ts"],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΊΣΥΦΟΣ","a"],"ok":false}
+{"fn":"hostPatternCovers","args":[":B:","a:b:c"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","a"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","{name} has {count} items"],"ok":false}
+{"fn":"hostPatternCovers","args":["ell","Hello World"],"ok":false}
+{"fn":"hostPatternCovers","args":["a😀b😀c{name} has {count} items","straße"],"ok":false}
+{"fn":"hostPatternCovers","args":["Hello World","a..ba.b.c"],"ok":false}
+{"fn":"hostPatternCovers","args":["json","./x/**/*.json"],"ok":false}
+{"fn":"hostPatternCovers","args":["line1\nline2","é"],"ok":false}
+{"fn":"hostPatternCovers","args":["straßeemoji 👍🏽 mix",".leading"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello","straße"],"ok":false}
+{"fn":"hostPatternCovers","args":["a😀b😀c","a😀b😀c"],"ok":false}
+{"fn":"hostPatternCovers","args":["a","line1\nline2"],"ok":false}
+{"fn":"hostPatternCovers","args":["﻿bom","om"],"ok":false}
+{"fn":"hostPatternCovers","args":["İstanbul","İstanbul"],"ok":false}
+{"fn":"hostPatternCovers","args":["key_name-1","ab"],"ok":false}
+{"fn":"hostPatternCovers","args":["﻿bom","a😀b😀c"],"ok":false}
+{"fn":"hostPatternCovers","args":["straße","trailing.😀"],"ok":false}
+{"fn":"hostPatternCovers","args":["a","é"],"ok":false}
+{"fn":"hostPatternCovers","args":["a:b:c",""],"ok":false}
+{"fn":"hostPatternCovers","args":["trailing.","ns:key.path"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello world","é"],"ok":false}
+{"fn":"hostPatternCovers","args":["key_name-1","./x/**/*.json"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..b",".leading"],"ok":false}
+{"fn":"hostPatternCovers","args":["key_name-1","hello"],"ok":false}
+{"fn":"hostPatternCovers","args":["é","ns:key.path"],"ok":false}
+{"fn":"hostPatternCovers","args":["́","abcé"],"ok":false}
+{"fn":"hostPatternCovers","args":["Hello World","orld"],"ok":false}
+{"fn":"hostPatternCovers","args":["ns:key.path","étab\tseparated"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..b","ünïcödéa.b.c"],"ok":false}
+{"fn":"hostPatternCovers","args":["a.b.chello world","ns:key.pathΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"hostPatternCovers","args":["Hello World","ld"],"ok":false}
+{"fn":"hostPatternCovers","args":["tab\tseparated","﻿bom"],"ok":false}
+{"fn":"hostPatternCovers","args":["ca:b:","abca:b:c"],"ok":false}
+{"fn":"hostPatternCovers","args":["key_name-1","日本語のテキスト"],"ok":false}
+{"fn":"hostPatternCovers","args":[":",".leading"],"ok":false}
+{"fn":"hostPatternCovers","args":["ab","a😀b😀ckey_name-1"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello",":hello world"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello","trailing.abc"],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΊΣΥΦΟΣ","helloé"],"ok":false}
+{"fn":"hostPatternCovers","args":["  padded  a😀b😀c","😀"],"ok":false}
+{"fn":"hostPatternCovers","args":["a.b.c","ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello world﻿bom","hello world"],"ok":false}
+{"fn":"hostPatternCovers","args":["abcabc","CA"],"ok":false}
+{"fn":"hostPatternCovers","args":["İstanbulİstanbul","Hello Worlda"],"ok":false}
+{"fn":"hostPatternCovers","args":["a","ünïcödéhello"],"ok":false}
+{"fn":"hostPatternCovers","args":["İstanbul","abc"],"ok":false}
+{"fn":"hostPatternCovers","args":[":straße","abc"],"ok":false}
+{"fn":"hostPatternCovers","args":["ns:key.path","s"],"ok":false}
+{"fn":"hostPatternCovers","args":["a:b:c","./x/**/*.jsonsrc/a/b.ts"],"ok":false}
+{"fn":"hostPatternCovers","args":["straße","straß"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello worlda..b","a"],"ok":false}
+{"fn":"hostPatternCovers","args":["./x/**/*.json","hello"],"ok":false}
+{"fn":"hostPatternCovers","args":["src/a/b.ts","trailing."],"ok":false}
+{"fn":"hostPatternCovers","args":["ns:key.path","line1\nline2"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","hello"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..b","tab\tseparated"],"ok":false}
+{"fn":"hostPatternCovers","args":["key_name-1","src/a/b.ts"],"ok":false}
+{"fn":"hostPatternCovers","args":["straße","hello"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..b","emoji 👍🏽 mix"],"ok":false}
+{"fn":"hostPatternCovers","args":["ld","Hello World"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello world","ns:key.path"],"ok":false}
+{"fn":"hostPatternCovers","args":["ab","trailing."],"ok":false}
+{"fn":"hostPatternCovers","args":["a","a..bé"],"ok":false}
+{"fn":"hostPatternCovers","args":["Hello World","a😀b😀c"],"ok":false}
+{"fn":"hostPatternCovers","args":["😀","./x/**/*.json"],"ok":false}
+{"fn":"hostPatternCovers","args":["src/a/b.tsünïcödé",""],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","é"],"ok":false}
+{"fn":"hostPatternCovers","args":["a:b:c","key_name-1"],"ok":false}
+{"fn":"hostPatternCovers","args":["{name} has {count} items",".leading"],"ok":false}
+{"fn":"hostPatternCovers","args":["","ab"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..b","hello world"],"ok":false}
+{"fn":"hostPatternCovers","args":[".leadinghello world","line1\nline2"],"ok":false}
+{"fn":"hostPatternCovers","args":["é",""],"ok":false}
+{"fn":"hostPatternCovers","args":["{name} has {count} items","a:b:c"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello world","line1\nline2"],"ok":false}
+{"fn":"hostPatternCovers","args":["L","HELLO"],"ok":false}
+{"fn":"hostPatternCovers","args":["a..b","HELLO"],"ok":false}
+{"fn":"hostPatternCovers","args":["﻿bom","a"],"ok":false}
+{"fn":"hostPatternCovers","args":[":tab\tseparated","src/a/b.ts"],"ok":false}
+{"fn":"hostPatternCovers","args":["  padded  ","ünïcödé"],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΊΣΥΦΟΣ","emoji 👍🏽 mixline1\nline2"],"ok":false}
+{"fn":"hostPatternCovers","args":["emoji 👍🏽 mix","hello world./x/**/*.json"],"ok":false}
+{"fn":"hostPatternCovers","args":["b😀c","a😀b😀c"],"ok":false}
+{"fn":"hostPatternCovers","args":["trailing.",".leadingkey_name-1"],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΊΣΥΦΟΣ  padded  ","日本語のテキスト"],"ok":false}
+{"fn":"hostPatternCovers","args":["İstanbulé","Hello World"],"ok":false}
+{"fn":"hostPatternCovers","args":["line1\nline2","a😀b😀c"],"ok":false}
+{"fn":"hostPatternCovers","args":["HELLO","trailing."],"ok":false}
+{"fn":"hostPatternCovers","args":["abc",".leadinga:b:c"],"ok":false}
+{"fn":"hostPatternCovers","args":["hello","./x/**/*.json"],"ok":false}
+{"fn":"hostPatternCovers","args":["./x/**/*.json","{name} has {count} items"],"ok":false}
+{"fn":"hostPatternCovers","args":["trailing.",".leading"],"ok":false}
+{"fn":"hostPatternCovers","args":["日本語のテキスト😀","日本語のテキスト"],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΊΣΥΦΟΣtrailing.","a:b:c"],"ok":false}
+{"fn":"hostPatternCovers","args":["a:b:c","trailing."],"ok":false}
+{"fn":"hostPatternCovers","args":["a","emoji 👍🏽 mixsrc/a/b.ts"],"ok":false}
+{"fn":"hostPatternCovers","args":["﻿bom","key_name-1"],"ok":false}
+{"fn":"hostPatternCovers","args":["  padded  ","ans:key.path"],"ok":false}
+{"fn":"hostPatternCovers","args":["日本語のテキスト","İstanbul"],"ok":false}
+{"fn":"hostPatternCovers","args":["héllo wörld","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["👍🏽 thumbs","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["日本語","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["é","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["İstanbul","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["straße","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["ılık ırmak","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["👨‍👩‍👧 family","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["a b","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΊΣΥΦΟΣ","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["a😀b","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["﻿bom","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["a²b x½ y①","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["aⅠb Ⅻ","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["a𐐀b 𝐀bc","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["कि ٣٤","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["Iı İi","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["K K k","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["ſ s S","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["x‍y 👨‍👩‍👧","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["a b c　d","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["١٢٣ ٤٥","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["𝟘𝟙 ²³","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["snake_case foo-bar o'neil","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["ǅungla Ǆ","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["one\r\ntwo threefour","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["café café","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["ΣΑΣ σας ς","CÖD"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","héllo wörld"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","👍🏽 thumbs"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","日本語"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé",""],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","İstanbul"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","straße"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","ılık ırmak"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","👨‍👩‍👧 family"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","a b"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","a😀b"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","﻿bom"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","a²b x½ y①"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","aⅠb Ⅻ"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","a𐐀b 𝐀bc"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","कि ٣٤"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","Iı İi"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","K K k"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","ſ s S"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","x‍y 👨‍👩‍👧"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","a b c　d"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","١٢٣ ٤٥"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","𝟘𝟙 ²³"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","snake_case foo-bar o'neil"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","ǅungla Ǆ"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","one\r\ntwo threefour"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","café café"],"ok":false}
+{"fn":"hostPatternCovers","args":["ünïcödé","ΣΑΣ σας ς"],"ok":false}
+{"fn":"normalizedHost","args":["example.com"],"ok":"example.com"}
+{"fn":"hostPatternProblem","args":["example.com"],"ok":null}
+{"fn":"isHostPattern","args":["example.com"],"ok":true}
+{"fn":"normalizedHost","args":["EXAMPLE.com"],"ok":"example.com"}
+{"fn":"hostPatternProblem","args":["EXAMPLE.com"],"ok":"must be lowercase"}
+{"fn":"isHostPattern","args":["EXAMPLE.com"],"ok":false}
+{"fn":"normalizedHost","args":[" example.com "],"ok":"example.com"}
+{"fn":"hostPatternProblem","args":[" example.com "],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":[" example.com "],"ok":false}
+{"fn":"normalizedHost","args":["[::1]"],"ok":"::1"}
+{"fn":"hostPatternProblem","args":["[::1]"],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":["[::1]"],"ok":false}
+{"fn":"normalizedHost","args":["[::1"],"ok":"[::1"}
+{"fn":"hostPatternProblem","args":["[::1"],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":["[::1"],"ok":false}
+{"fn":"normalizedHost","args":["::1]"],"ok":"::1]"}
+{"fn":"hostPatternProblem","args":["::1]"],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":["::1]"],"ok":false}
+{"fn":"normalizedHost","args":["example.com."],"ok":"example.com"}
+{"fn":"hostPatternProblem","args":["example.com."],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":["example.com."],"ok":false}
+{"fn":"normalizedHost","args":["a..b"],"ok":"a..b"}
+{"fn":"hostPatternProblem","args":["a..b"],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":["a..b"],"ok":false}
+{"fn":"normalizedHost","args":[""],"ok":""}
+{"fn":"hostPatternProblem","args":[""],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":[""],"ok":false}
+{"fn":"normalizedHost","args":["localhost"],"ok":"localhost"}
+{"fn":"hostPatternProblem","args":["localhost"],"ok":null}
+{"fn":"isHostPattern","args":["localhost"],"ok":true}
+{"fn":"normalizedHost","args":["127.0.0.1"],"ok":"127.0.0.1"}
+{"fn":"hostPatternProblem","args":["127.0.0.1"],"ok":null}
+{"fn":"isHostPattern","args":["127.0.0.1"],"ok":true}
+{"fn":"normalizedHost","args":["256.1.1.1"],"ok":"256.1.1.1"}
+{"fn":"hostPatternProblem","args":["256.1.1.1"],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":["256.1.1.1"],"ok":false}
+{"fn":"normalizedHost","args":["1.2.3"],"ok":"1.2.3"}
+{"fn":"hostPatternProblem","args":["1.2.3"],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":["1.2.3"],"ok":false}
+{"fn":"normalizedHost","args":["123"],"ok":"123"}
+{"fn":"hostPatternProblem","args":["123"],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":["123"],"ok":false}
+{"fn":"normalizedHost","args":["1.2.3.4a"],"ok":"1.2.3.4a"}
+{"fn":"hostPatternProblem","args":["1.2.3.4a"],"ok":null}
+{"fn":"isHostPattern","args":["1.2.3.4a"],"ok":true}
+{"fn":"normalizedHost","args":["a-b.com"],"ok":"a-b.com"}
+{"fn":"hostPatternProblem","args":["a-b.com"],"ok":null}
+{"fn":"isHostPattern","args":["a-b.com"],"ok":true}
+{"fn":"normalizedHost","args":["-a.com"],"ok":"-a.com"}
+{"fn":"hostPatternProblem","args":["-a.com"],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":["-a.com"],"ok":false}
+{"fn":"normalizedHost","args":["a-.com"],"ok":"a-.com"}
+{"fn":"hostPatternProblem","args":["a-.com"],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":["a-.com"],"ok":false}
+{"fn":"normalizedHost","args":["xn--bcher-kva.example"],"ok":"xn--bcher-kva.example"}
+{"fn":"hostPatternProblem","args":["xn--bcher-kva.example"],"ok":null}
+{"fn":"isHostPattern","args":["xn--bcher-kva.example"],"ok":true}
+{"fn":"normalizedHost","args":["bücher.example"],"ok":"bücher.example"}
+{"fn":"hostPatternProblem","args":["bücher.example"],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":["bücher.example"],"ok":false}
+{"fn":"normalizedHost","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"}
+{"fn":"hostPatternProblem","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":null}
+{"fn":"isHostPattern","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":true}
+{"fn":"normalizedHost","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"}
+{"fn":"hostPatternProblem","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":false}
+{"fn":"normalizedHost","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"}
+{"fn":"hostPatternProblem","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":null}
+{"fn":"isHostPattern","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"],"ok":true}
+{"fn":"normalizedHost","args":["a_b.com"],"ok":"a_b.com"}
+{"fn":"hostPatternProblem","args":["a_b.com"],"ok":"isn't a valid host name"}
+{"fn":"isHostPattern","args":["a_b.com"],"ok":false}
+{"fn":"normalizedHost","args":["*.example.com"],"ok":"*.example.com"}
+{"fn":"hostPatternProblem","args":["*.example.com"],"ok":null}
+{"fn":"isHostPattern","args":["*.example.com"],"ok":true}
+{"fn":"normalizedHost","args":["*"],"ok":"*"}
+{"fn":"hostPatternProblem","args":["*"],"ok":null}
+{"fn":"isHostPattern","args":["*"],"ok":true}
+{"fn":"normalizedHost","args":["*."],"ok":"*"}
+{"fn":"hostPatternProblem","args":["*."],"ok":"must put * in front of a domain with at least two parts, like *.example.com"}
+{"fn":"isHostPattern","args":["*."],"ok":false}
+{"fn":"normalizedHost","args":["*.*.com"],"ok":"*.*.com"}
+{"fn":"hostPatternProblem","args":["*.*.com"],"ok":"can only have one * at its start"}
+{"fn":"isHostPattern","args":["*.*.com"],"ok":false}
+{"fn":"normalizedHost","args":["api.example.com:443"],"ok":"api.example.com:443"}
+{"fn":"hostPatternProblem","args":["api.example.com:443"],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":["api.example.com:443"],"ok":false}
+{"fn":"normalizedHost","args":["https://example.com"],"ok":"https://example.com"}
+{"fn":"hostPatternProblem","args":["https://example.com"],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":["https://example.com"],"ok":false}
+{"fn":"normalizedHost","args":["example.com/path"],"ok":"example.com/path"}
+{"fn":"hostPatternProblem","args":["example.com/path"],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":["example.com/path"],"ok":false}
+{"fn":"normalizedHost","args":["user@example.com"],"ok":"user@example.com"}
+{"fn":"hostPatternProblem","args":["user@example.com"],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":["user@example.com"],"ok":false}
+{"fn":"normalizedHost","args":["a b.com"],"ok":"a b.com"}
+{"fn":"hostPatternProblem","args":["a b.com"],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":["a b.com"],"ok":false}
+{"fn":"normalizedHost","args":["a\tb"],"ok":"a\tb"}
+{"fn":"hostPatternProblem","args":["a\tb"],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":["a\tb"],"ok":false}
+{"fn":"normalizedHost","args":["EXAMPLE.COM"],"ok":"example.com"}
+{"fn":"hostPatternProblem","args":["EXAMPLE.COM"],"ok":"must be lowercase"}
+{"fn":"isHostPattern","args":["EXAMPLE.COM"],"ok":false}
+{"fn":"normalizedHost","args":["*.com"],"ok":"*.com"}
+{"fn":"hostPatternProblem","args":["*.com"],"ok":"must put * in front of a domain with at least two parts, like *.example.com"}
+{"fn":"isHostPattern","args":["*.com"],"ok":false}
+{"fn":"normalizedHost","args":["*.example"],"ok":"*.example"}
+{"fn":"hostPatternProblem","args":["*.example"],"ok":"must put * in front of a domain with at least two parts, like *.example.com"}
+{"fn":"isHostPattern","args":["*.example"],"ok":false}
+{"fn":"normalizedHost","args":["1.1.1.1"],"ok":"1.1.1.1"}
+{"fn":"hostPatternProblem","args":["1.1.1.1"],"ok":null}
+{"fn":"isHostPattern","args":["1.1.1.1"],"ok":true}
+{"fn":"normalizedHost","args":["[2001:db8::1]"],"ok":"2001:db8::1"}
+{"fn":"hostPatternProblem","args":["[2001:db8::1]"],"ok":"must be a bare host, like api.example.com or *.example.com, without a scheme, port or path"}
+{"fn":"isHostPattern","args":["[2001:db8::1]"],"ok":false}
+{"fn":"hostPatternProblem","args":[{"$undefined":true}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[{"$undefined":true}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[null],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[null],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[1],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[1],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[true],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[true],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[[]],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[[]],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[{}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[{}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[["a"]],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[["a"]],"ok":"isn't text"}
+{"fn":"isHostPattern","args":[{"$undefined":true}],"ok":false}
+{"fn":"isHostPattern","args":[null],"ok":false}
+{"fn":"isHostPattern","args":[1],"ok":false}
+{"fn":"isHostPattern","args":[true],"ok":false}
+{"fn":"isHostPattern","args":[[]],"ok":false}
+{"fn":"isHostPattern","args":[{}],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["example.com",["example.com"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["example.com",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["api.example.com",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["api.example.com",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["api.example.com",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["api.example.com",["*.example.com"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["api.example.com",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["api.example.com",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["api.example.com",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["api.example.com",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.api.example.com",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.api.example.com",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["a.api.example.com",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.api.example.com",["*.example.com"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["a.api.example.com",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.api.example.com",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.api.example.com",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.api.example.com",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["EXAMPLE.COM",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["EXAMPLE.COM",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["EXAMPLE.COM",["example.com"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["EXAMPLE.COM",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["EXAMPLE.COM",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["EXAMPLE.COM",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["EXAMPLE.COM",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["EXAMPLE.COM",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com.",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com.",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["example.com.",["example.com"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["example.com.",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com.",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com.",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com.",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["example.com.",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["other.com",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["other.com",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["other.com",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["other.com",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["other.com",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["other.com",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["other.com",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["other.com",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["*"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["[::1]",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["[::1]",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["[::1]",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["[::1]",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["[::1]",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["[::1]",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["[::1]",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["[::1]",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["::1",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["::1",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["::1",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["::1",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["::1",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["::1",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["::1",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["::1",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["127.0.0.1",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["127.0.0.1",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["127.0.0.1",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["127.0.0.1",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["127.0.0.1",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["127.0.0.1",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["127.0.0.1",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["127.0.0.1",["127.0.0.1"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["x.b.com",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["x.b.com",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["x.b.com",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["x.b.com",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["x.b.com",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["x.b.com",["a.com","*.b.com"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["x.b.com",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["x.b.com",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["b.com",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["b.com",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["b.com",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["b.com",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["b.com",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["b.com",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["b.com",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["b.com",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.com",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.com",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["a.com",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.com",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.com",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.com",["a.com","*.b.com"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["a.com",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["a.com",["127.0.0.1"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["xexample.com",[]],"ok":false}
+{"fn":"matchesAllowedHost","args":["xexample.com",["*"]],"ok":true}
+{"fn":"matchesAllowedHost","args":["xexample.com",["example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["xexample.com",["*.example.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["xexample.com",["EXAMPLE.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["xexample.com",["a.com","*.b.com"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["xexample.com",["[::1]"]],"ok":false}
+{"fn":"matchesAllowedHost","args":["xexample.com",["127.0.0.1"]],"ok":false}
+{"fn":"hostPatternCovers","args":["*","*"],"ok":true}
+{"fn":"hostPatternCovers","args":["*","example.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["*","*.example.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["*","api.example.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["*","*.api.example.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["*","*.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*","other.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["*","EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*","*.EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["example.com","*"],"ok":false}
+{"fn":"hostPatternCovers","args":["example.com","example.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["example.com","*.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["example.com","api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["example.com","*.api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["example.com","*.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["example.com","other.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["example.com","EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["example.com","*.EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.example.com","*"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.example.com","example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.example.com","*.example.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["*.example.com","api.example.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["*.example.com","*.api.example.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["*.example.com","*.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.example.com","other.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.example.com","EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.example.com","*.EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["api.example.com","*"],"ok":false}
+{"fn":"hostPatternCovers","args":["api.example.com","example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["api.example.com","*.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["api.example.com","api.example.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["api.example.com","*.api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["api.example.com","*.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["api.example.com","other.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["api.example.com","EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["api.example.com","*.EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.api.example.com","*"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.api.example.com","example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.api.example.com","*.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.api.example.com","api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.api.example.com","*.api.example.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["*.api.example.com","*.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.api.example.com","other.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.api.example.com","EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.api.example.com","*.EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.com","*"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.com","example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.com","*.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.com","api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.com","*.api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.com","*.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.com","other.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.com","EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.com","*.EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["other.com","*"],"ok":false}
+{"fn":"hostPatternCovers","args":["other.com","example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["other.com","*.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["other.com","api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["other.com","*.api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["other.com","*.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["other.com","other.com"],"ok":true}
+{"fn":"hostPatternCovers","args":["other.com","EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["other.com","*.EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["EXAMPLE.com","*"],"ok":false}
+{"fn":"hostPatternCovers","args":["EXAMPLE.com","example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["EXAMPLE.com","*.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["EXAMPLE.com","api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["EXAMPLE.com","*.api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["EXAMPLE.com","*.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["EXAMPLE.com","other.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["EXAMPLE.com","EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["EXAMPLE.com","*.EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.EXAMPLE.com","*"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.EXAMPLE.com","example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.EXAMPLE.com","*.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.EXAMPLE.com","api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.EXAMPLE.com","*.api.example.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.EXAMPLE.com","*.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.EXAMPLE.com","other.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.EXAMPLE.com","EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternCovers","args":["*.EXAMPLE.com","*.EXAMPLE.com"],"ok":false}
+{"fn":"hostPatternProblem","args":[{"$undefined":true}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[null],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[1],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[true],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[[]],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[{}],"ok":"isn't text"}
+{"fn":"hostPatternProblem","args":[["a"]],"ok":"isn't text"}
+{"fn":"isHostPattern","args":[{"$undefined":true}],"ok":false}
+{"fn":"isHostPattern","args":[null],"ok":false}
+{"fn":"isHostPattern","args":[1],"ok":false}
+{"fn":"isHostPattern","args":[true],"ok":false}
+{"fn":"isHostPattern","args":[[]],"ok":false}
+{"fn":"isHostPattern","args":[{}],"ok":false}

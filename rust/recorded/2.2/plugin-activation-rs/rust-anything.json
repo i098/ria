@@ -1,0 +1,125 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginActivation.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "plugin-activation-rs",
+  "exports": [
+    {
+      "name": "constantsCase",
+      "file": "apps/browser/src/lib/pluginActivation.harness.ts",
+      "line": 6,
+      "params": [],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "activationEventProblemCase",
+      "file": "apps/browser/src/lib/pluginActivation.harness.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "event",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "activationEventsOfCase",
+      "file": "apps/browser/src/lib/pluginActivation.harness.ts",
+      "line": 8,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "derivedActivationEventsCase",
+      "file": "apps/browser/src/lib/pluginActivation.harness.ts",
+      "line": 12,
+      "params": [
+        {
+          "name": "contributes",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "main",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "sidecar",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "startsEagerlyCase",
+      "file": "apps/browser/src/lib/pluginActivation.harness.ts",
+      "line": 14,
+      "params": [
+        {
+          "name": "events",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "urlActivationHostsCase",
+      "file": "apps/browser/src/lib/pluginActivation.harness.ts",
+      "line": 15,
+      "params": [
+        {
+          "name": "events",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

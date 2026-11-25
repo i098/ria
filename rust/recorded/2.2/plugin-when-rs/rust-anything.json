@@ -1,0 +1,102 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginWhen.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "pluginwhen-rs",
+  "exports": [
+    {
+      "name": "parseWhen",
+      "file": "apps/browser/src/lib/pluginWhen.harness.ts",
+      "line": 3,
+      "params": [
+        {
+          "name": "source",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "globMatches",
+      "file": "apps/browser/src/lib/pluginWhen.harness.ts",
+      "line": 4,
+      "params": [
+        {
+          "name": "pattern",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "whenHolds",
+      "file": "apps/browser/src/lib/pluginWhen.harness.ts",
+      "line": 5,
+      "params": [
+        {
+          "name": "source",
+          "ts_type": "string | undefined | null",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "context",
+          "ts_type": "w.Partial<Record<(typeof WHEN_KEYS)[number], (string | number | boolean)>>",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "evaluateWhenCase",
+      "file": "apps/browser/src/lib/pluginWhen.harness.ts",
+      "line": 9,
+      "params": [
+        {
+          "name": "source",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "context",
+          "ts_type": "w.Partial<Record<(typeof WHEN_KEYS)[number], (string | number | boolean)>>",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean | string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

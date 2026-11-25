@@ -1,0 +1,41 @@
+{
+  "unit": "apps/browser/src/lib/pluginRuntime.harness.ts",
+  "files": 1,
+  "fingerprint": "682f42c31014827e",
+  "coverage": {
+    "lines": 206,
+    "reached": 194,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginChecks.ts",
+        "lines": 117,
+        "reached": 105,
+        "missed": "87-91, 114-120"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginNames.ts",
+        "lines": 28,
+        "reached": 28,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginRuntime.harness.ts",
+        "lines": 10,
+        "reached": 10,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginRuntime.ts",
+        "lines": 43,
+        "reached": 43,
+        "missed": ""
+      }
+    ]
+  }
+}

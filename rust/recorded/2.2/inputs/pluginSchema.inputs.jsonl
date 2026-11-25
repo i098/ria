@@ -1,0 +1,19 @@
+{"fn": "pluginSchema", "args": [["tab.opened"], {"untabbedEvents": [], "approvedSettings": [], "decideEvents": ["tab.opening"]}]}
+{"fn": "pluginSchema", "args": [[], {"untabbedEvents": [], "approvedSettings": []}]}
+{"fn": "pluginSchema", "args": [["window.opened","window.closed","window.focused","tab.opened","tab.closed","tab.activated","tab.navigated","settings.changed","app.launched","app.quitting","app.activated","app.deactivated","tab.idle","tab.resumed","media.started","media.stopped","tab.crashed","peek.opened","peek.closed","littleArdia.opened","split.created","split.closed","pin.added","pin.removed","tab.moved","profile.switched","system.sleep","system.wake","user.idle","user.active","page.error","bookmarks.changed","history.removed","download.changed","profile.changed"], {"untabbedEvents":["settings.changed","app.launched","app.quitting","app.activated","app.deactivated","system.sleep","system.wake","user.idle","user.active"],"approvedSettings":["omniboxProviders","launchActions"],"decideEvents":["tab.opening","link.opening","download.deciding","permission.requested"]}]}
+{"fn": "pluginSchemaJson", "args": [["window.opened","window.closed","window.focused","tab.opened","tab.closed","tab.activated","tab.navigated","settings.changed","app.launched","app.quitting","app.activated","app.deactivated","tab.idle","tab.resumed","media.started","media.stopped","tab.crashed","peek.opened","peek.closed","littleArdia.opened","split.created","split.closed","pin.added","pin.removed","tab.moved","profile.switched","system.sleep","system.wake","user.idle","user.active","page.error","bookmarks.changed","history.removed","download.changed","profile.changed"], {"untabbedEvents":["settings.changed","app.launched","app.quitting","app.activated","app.deactivated","system.sleep","system.wake","user.idle","user.active"],"approvedSettings":["omniboxProviders","launchActions"],"decideEvents":["tab.opening","link.opening","download.deciding","permission.requested"]}]}
+{"fn": "pluginSchemaJson", "args": [["tab.opened"], {"untabbedEvents": [], "approvedSettings": [], "decideEvents": ["tab.opening"]}]}
+{"fn": "pluginSchemaJson", "args": [[], {"untabbedEvents": [], "approvedSettings": []}]}
+{"fn": "pluginSchema", "args": [["a"], {"untabbedEvents": ["ü"], "approvedSettings": ["😀"], "decideEvents": null}]}
+{"fn": "pluginSchema", "args": [["a"], {"untabbedEvents": "a😀b", "approvedSettings": "", "decideEvents": "xy"}]}
+{"fn": "pluginSchema", "args": [["a"], {"untabbedEvents": [], "approvedSettings": [], "decideEvents": {"$undefined": true}}]}
+{"fn": "pluginSchema", "args": [["a"], {"untabbedEvents": [], "approvedSettings": [], "decideEvents": 5}]}
+{"fn": "pluginSchema", "args": [["a"], {"untabbedEvents": [], "approvedSettings": [], "decideEvents": {"a": 1}}]}
+{"fn": "pluginSchema", "args": [["a"], {"untabbedEvents": [], "approvedSettings": null}]}
+{"fn": "pluginSchema", "args": [["a"], {"untabbedEvents": 1, "approvedSettings": []}]}
+{"fn": "pluginSchema", "args": [["a"], {"approvedSettings": []}]}
+{"fn": "pluginSchema", "args": [["a"], null]}
+{"fn": "pluginSchema", "args": [["a"], {"$undefined": true}]}
+{"fn": "pluginSchema", "args": [["a"], "rules"]}
+{"fn": "pluginSchemaJson", "args": [["a"], null]}
+{"fn": "pluginSchemaJson", "args": [["ü", "😀"], {"untabbedEvents": ["x"], "approvedSettings": ["y"], "decideEvents": ["z", "ü"]}]}

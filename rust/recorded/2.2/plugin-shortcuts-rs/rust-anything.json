@@ -1,0 +1,270 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "plugin-shortcuts-rs",
+  "exports": [
+    {
+      "name": "parsePluginShortcutCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 8,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pluginShortcutTextCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 12,
+      "params": [
+        {
+          "name": "shortcut",
+          "ts_type": "{ key: string; control: boolean; option: boolean; shift: boolean }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isRefusedShortcutCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 16,
+      "params": [
+        {
+          "name": "shortcut",
+          "ts_type": "{ key: string; control: boolean; option: boolean; shift: boolean } & { command: boolean }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pluginShortcutOfCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 20,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pluginShortcutModifiersCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 24,
+      "params": [
+        {
+          "name": "shortcut",
+          "ts_type": "{ key: string; control: boolean; option: boolean; shift: boolean }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pluginShortcutKeyCharCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 28,
+      "params": [
+        {
+          "name": "shortcut",
+          "ts_type": "{ key: string; control: boolean; option: boolean; shift: boolean }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pluginShortcutHandledKeysCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 32,
+      "params": [
+        {
+          "name": "shortcut",
+          "ts_type": "{ key: string; control: boolean; option: boolean; shift: boolean }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "commandFlag",
+          "ts_type": "(\"metaKey\" | \"ctrlKey\")",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pluginShortcutMatchesCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 36,
+      "params": [
+        {
+          "name": "shortcut",
+          "ts_type": "{ key: string; control: boolean; option: boolean; shift: boolean }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "e",
+          "ts_type": "{ key?: string; metaKey?: boolean; ctrlKey?: boolean; altKey?: boolean; shiftKey?: boolean }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "commandFlag",
+          "ts_type": "(\"metaKey\" | \"ctrlKey\")",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "bindingsOfCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 40,
+      "params": [
+        {
+          "name": "actions",
+          "ts_type": "{ props: Record<string, unknown> }[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "mergeShortcutBindingsCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 44,
+      "params": [
+        {
+          "name": "registrations",
+          "ts_type": "ShortcutRegistration<{ props: Record<string, unknown> }>[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "held",
+          "ts_type": "string[]",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pressedBindingCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 48,
+      "params": [
+        {
+          "name": "bindings",
+          "ts_type": "ShortcutBinding<{ props: Record<string, unknown> }>[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "e",
+          "ts_type": "{ key?: string; metaKey?: boolean; ctrlKey?: boolean; altKey?: boolean; shiftKey?: boolean }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "commandFlag",
+          "ts_type": "(\"metaKey\" | \"ctrlKey\")",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "handledKeysOfCase",
+      "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+      "line": 52,
+      "params": [
+        {
+          "name": "bindings",
+          "ts_type": "ShortcutBinding<{ props: Record<string, unknown> }>[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "commandFlag",
+          "ts_type": "(\"metaKey\" | \"ctrlKey\")",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

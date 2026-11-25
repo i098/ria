@@ -1,0 +1,71 @@
+{"fn":"contributesFromV1Case","args":[{}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","version":"1.0.0"}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","contributes":{},"commands":[]}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","sidecar":{},"commands":[]}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","main":"main.js","commands":[]}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","commands":[{"name":"a"}],"tools":[],"hooks":["x"],"settings":{"defaults":{}},"programs":[],"passwordManager":{},"extra":1}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","permissions":["tabs","network"],"process":{"command":["bin/x"]}}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","permissions":{"tabs":"read"}}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","page":{"file":"index.html","title":"Page"}}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","page":{"id":"mine","mode":"split","file":"a.html"}}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","page":"index.html"}]}
+{"fn":"contributesFromV1Case","args":[{"name":"p","page":null,"permissions":null,"process":null,"commands":null}]}
+{"fn":"contributesFromV1Case","args":[{"0":"zero","1":"one","name":"p","commands":[]}]}
+{"fn":"contributesFromV1Case","args":[{"permissions":["tabs"],"page":{"file":"x.html"},"process":3,"tools":[{"name":"t"}],"name":"last"}]}
+{"fn":"migrationCase","args":[0,{}]}
+{"fn":"migrationCase","args":[1,{}]}
+{"fn":"migrationCase","args":[0,{"settings":{"a":1}}]}
+{"fn":"migrationCase","args":[1,{"settings":{"a":1}}]}
+{"fn":"migrationCase","args":[0,{"settings":{"a":1},"reset":true,"name":"p"}]}
+{"fn":"migrationCase","args":[1,{"settings":{"a":1},"reset":true,"name":"p"}]}
+{"fn":"migrationCase","args":[0,{"reset":1,"name":"p"}]}
+{"fn":"migrationCase","args":[1,{"reset":1,"name":"p"}]}
+{"fn":"migrationCase","args":[0,{"name":"p","settings":null}]}
+{"fn":"migrationCase","args":[1,{"name":"p","settings":null}]}
+{"fn":"migrationCase","args":[0,{"2":1,"settings":3,"b":2}]}
+{"fn":"migrationCase","args":[1,{"2":1,"settings":3,"b":2}]}
+{"fn":"migrationCase","args":[0,{}]}
+{"fn":"migrationCase","args":[1,{}]}
+{"fn":"migrationCase","args":[0,{"name":"p","version":"1.0.0"}]}
+{"fn":"migrationCase","args":[1,{"name":"p","version":"1.0.0"}]}
+{"fn":"migrationCase","args":[0,{"name":"p","contributes":{},"commands":[]}]}
+{"fn":"migrationCase","args":[1,{"name":"p","contributes":{},"commands":[]}]}
+{"fn":"migrationCase","args":[0,{"name":"p","sidecar":{},"commands":[]}]}
+{"fn":"migrationCase","args":[1,{"name":"p","sidecar":{},"commands":[]}]}
+{"fn":"migrationCase","args":[0,{"name":"p","main":"main.js","commands":[]}]}
+{"fn":"migrationCase","args":[1,{"name":"p","main":"main.js","commands":[]}]}
+{"fn":"migrationCase","args":[0,{"name":"p","commands":[{"name":"a"}],"tools":[],"hooks":["x"],"settings":{"defaults":{}},"programs":[],"passwordManager":{},"extra":1}]}
+{"fn":"migrationCase","args":[1,{"name":"p","commands":[{"name":"a"}],"tools":[],"hooks":["x"],"settings":{"defaults":{}},"programs":[],"passwordManager":{},"extra":1}]}
+{"fn":"migrationCase","args":[0,{"name":"p","permissions":["tabs","network"],"process":{"command":["bin/x"]}}]}
+{"fn":"migrationCase","args":[1,{"name":"p","permissions":["tabs","network"],"process":{"command":["bin/x"]}}]}
+{"fn":"migrationCase","args":[0,{"name":"p","permissions":{"tabs":"read"}}]}
+{"fn":"migrationCase","args":[1,{"name":"p","permissions":{"tabs":"read"}}]}
+{"fn":"migrationCase","args":[0,{"name":"p","page":{"file":"index.html","title":"Page"}}]}
+{"fn":"migrationCase","args":[1,{"name":"p","page":{"file":"index.html","title":"Page"}}]}
+{"fn":"migrationCase","args":[0,{"name":"p","page":{"id":"mine","mode":"split","file":"a.html"}}]}
+{"fn":"migrationCase","args":[1,{"name":"p","page":{"id":"mine","mode":"split","file":"a.html"}}]}
+{"fn":"migrationCase","args":[0,{"name":"p","page":"index.html"}]}
+{"fn":"migrationCase","args":[1,{"name":"p","page":"index.html"}]}
+{"fn":"migrationCase","args":[0,{"name":"p","page":null,"permissions":null,"process":null,"commands":null}]}
+{"fn":"migrationCase","args":[1,{"name":"p","page":null,"permissions":null,"process":null,"commands":null}]}
+{"fn":"migrationCase","args":[0,{"0":"zero","1":"one","name":"p","commands":[]}]}
+{"fn":"migrationCase","args":[1,{"0":"zero","1":"one","name":"p","commands":[]}]}
+{"fn":"migrationCase","args":[0,{"permissions":["tabs"],"page":{"file":"x.html"},"process":3,"tools":[{"name":"t"}],"name":"last"}]}
+{"fn":"migrationCase","args":[1,{"permissions":["tabs"],"page":{"file":"x.html"},"process":3,"tools":[{"name":"t"}],"name":"last"}]}
+{"fn":"v1ProblemCase","args":["contributes.panels[0].file must be a path"]}
+{"fn":"v1ProblemCase","args":["contributes.panels[1].file must be x"]}
+{"fn":"v1ProblemCase","args":["contributes.commands[0].name must be"]}
+{"fn":"v1ProblemCase","args":["sidecar.command must be"]}
+{"fn":"v1ProblemCase","args":["sidecars must"]}
+{"fn":"v1ProblemCase","args":["sidecar needs a main or a sidecar"]}
+{"fn":"v1ProblemCase","args":["contributes.tools[0] needs a main or a sidecar"]}
+{"fn":"v1ProblemCase","args":["x contributes.panels[0] and contributes.panels[0]"]}
+{"fn":"v1ProblemCase","args":["sidecar_x is"]}
+{"fn":"v1ProblemCase","args":["sidecar-x is"]}
+{"fn":"v1ProblemCase","args":["sidecaré"]}
+{"fn":"v1ProblemCase","args":["the plugin needs a main or a sidecar."]}
+{"fn":"v1ProblemCase","args":[""]}
+{"fn":"v1ProblemCase","args":["contributes."]}
+{"fn":"v1ProblemCase","args":[5]}
+{"fn":"v1ProblemCase","args":[null]}
+{"fn":"v1ProblemCase","args":[{"a":1}]}

@@ -1,0 +1,35 @@
+{
+  "unit": "apps/browser/src/lib/pluginNodes.ts",
+  "files": 1,
+  "fingerprint": "9da6a492ba4b0e94",
+  "coverage": {
+    "lines": 311,
+    "reached": 265,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginNodes.ts",
+        "lines": 144,
+        "reached": 144,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginProtocol.ts",
+        "lines": 18,
+        "reached": 18,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginShortcuts.ts",
+        "lines": 141,
+        "reached": 95,
+        "missed": "98-99, 104-107, 109-113, 115-118, 121-123, 126-131, 138-142, 145-157, 160-161, 164-165"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+{"fn": "globMatches", "args": [{"$utf16": [55357, 42]}, "a😀b"], "actual": {"error": "argument 1 of globMatches has a lone surrogate, which a Rust String cannot hold"}, "reason": "a Rust String cannot hold a lone surrogate, so the bridge refuses the argument"}

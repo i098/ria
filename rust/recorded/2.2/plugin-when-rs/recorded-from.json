@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/pluginWhen.harness.ts",
+  "files": 1,
+  "fingerprint": "991b8dc168b2c14d",
+  "coverage": {
+    "lines": 206,
+    "reached": 206,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/pluginWhen.harness.ts",
+        "lines": 10,
+        "reached": 10,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginWhen.ts",
+        "lines": 196,
+        "reached": 196,
+        "missed": ""
+      }
+    ]
+  }
+}
