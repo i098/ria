@@ -17,3 +17,7 @@ ria-core = { path = "../ria-core" }
 
 [lints.clippy]
 all = { level = "warn", priority = -1 }
+
+[dev-dependencies]
+# The replay test keeps the key order of the recorded JSON (`Object.keys` order is `settingsMeta.chosen` order).
+serde_json = { version = "1", features = ["preserve_order"] }

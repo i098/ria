@@ -9,11 +9,17 @@
 
 use serde::{Deserialize, Serialize};
 
-#[allow(unused_imports)]
+mod reducer;
+#[cfg(test)]
+mod replay_tests;
+pub mod specs;
+
+pub use reducer::{OrderedPatch, Run};
+
 use crate::kernel::Number;
 use crate::kernel::{AppState, Effects};
 
-#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Settings {
     #[serde(rename = "cliControl")]
     pub cli_control: bool,
@@ -631,7 +637,6 @@ pub struct StateFlash {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
 pub enum StatePane {
-    #[default]
     #[serde(rename = "tabs")]
     Tabs,
     #[serde(rename = "profiles")]
@@ -642,6 +647,7 @@ pub enum StatePane {
     Appearance,
     #[serde(rename = "shortcuts")]
     Shortcuts,
+    #[default]
     #[serde(rename = "general")]
     General,
     #[serde(rename = "automations")]
@@ -881,7 +887,7 @@ pub struct UpdateSettingsOptions {
 }
 
 /// The data fields of the TypeScript store.
-#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct State {
     pub back: Vec<SettingsPlace>,
     pub detail: Option<String>,
@@ -911,6 +917,51 @@ pub struct State {
     #[serde(rename = "shortcutsQuery")]
     pub shortcuts_query: String,
     pub source: Option<String>,
+    /// Runtime fields of the module-private variables of the TypeScript files. They are not part of the store state, so
+    /// they are not in its JSON.
+    #[serde(skip)]
+    pub run: Run,
+}
+
+/// The spec defaults (`settings.ts` `SETTING_SPECS`), not the zero value of each field.
+impl Default for Settings {
+    fn default() -> Self {
+        serde_json::from_value(serde_json::Value::Object(specs::default_settings_map()))
+            .expect("spec defaults fit Settings")
+    }
+}
+
+impl Default for State {
+    fn default() -> Self {
+        Self {
+            back: Vec::new(),
+            detail: None,
+            flash: None,
+            focus_request: Number(0.0),
+            forward: Vec::new(),
+            keyboard_move: Number(0.0),
+            pane: StatePane::default(),
+            previewing: false,
+            preview_section: None,
+            profile_id: None,
+            query: String::new(),
+            reached: Number(0.0),
+            reveal: None,
+            revealed_sections: Vec::new(),
+            scale: Number(1.0),
+            selected: Number(0.0),
+            settings: Settings::default(),
+            // `store.ts` runs `withToolbarKeptWhileScrolling` on a new store, which marks the old default as applied.
+            settings_meta: SettingsMeta {
+                chosen: Vec::new(),
+                inferred: vec!["hideToolbarWhileScrolling:offByDefault".to_owned()],
+            },
+            sheet: serde_json::Value::Null,
+            shortcuts_query: String::new(),
+            source: None,
+            run: Run::default(),
+        }
+    }
 }
 
 /// One variant for each exported store action.
@@ -919,7 +970,11 @@ pub struct State {
 pub enum Action {
     /// `addCustomEngine` (an exported function that writes a store).
     #[serde(rename = "addCustomEngine")]
-    AddCustomEngine { input: serde_json::Value },
+    AddCustomEngine {
+        input: serde_json::Value,
+        #[serde(default)]
+        now: Number,
+    },
     /// `appliedInterfaceScale` (an exported function that writes a store).
     #[serde(rename = "appliedInterfaceScale")]
     AppliedInterfaceScale { scale: Number },
@@ -968,10 +1023,17 @@ pub enum Action {
     },
     /// `flashSetting` (an exported function that writes a store).
     #[serde(rename = "flashSetting")]
-    FlashSetting { id: String },
+    FlashSetting {
+        id: String,
+        #[serde(default)]
+        now: Number,
+    },
     /// `focusSettingsSearch` (an exported function that writes a store).
     #[serde(rename = "focusSettingsSearch")]
-    FocusSettingsSearch,
+    FocusSettingsSearch {
+        #[serde(default)]
+        now: Number,
+    },
     /// `followUpdater` (an exported function that writes a store). The callback parameters `settled` are not in the JSON.
     #[serde(rename = "followUpdater")]
     FollowUpdater,
@@ -986,7 +1048,12 @@ pub enum Action {
     },
     /// `jumpToSetting` (an exported function that writes a store).
     #[serde(rename = "jumpToSetting")]
-    JumpToSetting { arg0: Target },
+    JumpToSetting {
+        #[serde(rename = "target")]
+        arg0: Target,
+        #[serde(default)]
+        now: Number,
+    },
     /// `load` (an exported function that writes a store).
     #[serde(rename = "load")]
     Load {
@@ -1048,10 +1115,19 @@ pub enum Action {
     },
     /// `previewCommandKeys` (an exported function that writes a store).
     #[serde(rename = "previewCommandKeys")]
-    PreviewCommandKeys { keys: String },
+    PreviewCommandKeys {
+        keys: String,
+        #[serde(default)]
+        now: Number,
+    },
     /// `previewSetting` (an exported function that writes a store).
     #[serde(rename = "previewSetting")]
-    PreviewSetting { arg0: Target },
+    PreviewSetting {
+        #[serde(rename = "target")]
+        arg0: Target,
+        #[serde(default)]
+        now: Number,
+    },
     /// `removeCustomEngine` (an exported function that writes a store).
     #[serde(rename = "removeCustomEngine")]
     RemoveCustomEngine { id: String },
@@ -1069,6 +1145,8 @@ pub enum Action {
         keys: String,
         via: RevealCommandKeysVia,
         rank: Number,
+        #[serde(default)]
+        now: Number,
     },
     /// `revealSetting` (an exported function that writes a store).
     #[serde(rename = "revealSetting")]
@@ -1078,6 +1156,8 @@ pub enum Action {
         rank: Number,
         #[serde(default)]
         unshown: Option<bool>,
+        #[serde(default)]
+        now: Number,
     },
     /// `selectSettingsResult` (an exported function that writes a store).
     #[serde(rename = "selectSettingsResult")]
@@ -1182,14 +1262,13 @@ pub enum Action {
     /// `updateSettings` (an exported function that writes a store).
     #[serde(rename = "updateSettings")]
     UpdateSettings {
-        patch: crate::onboarding::StateDraft,
+        patch: OrderedPatch,
         #[serde(default)]
         options: Option<UpdateSettingsOptions>,
     },
 }
 
-/// Applies `action` to `app`. Slice 2.7 writes the body.
+/// Applies `action` to `app`.
 pub fn apply(app: &mut AppState, action: Action, fx: &mut Effects) {
-    let _ = (app, action, fx);
-    todo!("slice 2.7")
+    reducer::apply(app, action, fx);
 }
