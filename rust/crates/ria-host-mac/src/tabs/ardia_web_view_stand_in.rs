@@ -132,6 +132,18 @@ impl StandIn {
         }
     }
 
+    /// `_standIn.tab || _standIn.page`: a page is on loan to this view.
+    pub fn lent(&self) -> bool {
+        self.loan.is_some()
+    }
+
+    /// `_standIn.leaving`.
+    pub fn leaving(&self) -> bool {
+        self.loan
+            .as_ref()
+            .is_some_and(|loan| loan.leaving_opacity.is_some())
+    }
+
     pub fn still_holds(&self, generation: u64) -> bool {
         self.generation == generation && self.loan.is_some()
     }

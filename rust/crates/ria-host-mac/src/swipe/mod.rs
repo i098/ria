@@ -7,3 +7,4 @@ pub mod pager;
 pub mod pager_config;
 pub mod rgba;
 pub mod swipe_area;
+pub mod swipe_module;

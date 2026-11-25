@@ -157,6 +157,11 @@ impl Default for RevealInput {
 }
 
 impl RevealInput {
+    /// `+[ArdiaWebView anyRevealGap]`.
+    pub fn any_gap(&self) -> bool {
+        self.gaps.iter().any(|gap| gap.host.load().is_some())
+    }
+
     pub fn gap_in(&self, window: &NSWindow) -> bool {
         self.gaps.iter().any(|gap| {
             gap.host.load().is_some()

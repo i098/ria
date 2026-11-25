@@ -6,7 +6,10 @@
 //! functions. `set_enabled` takes the web-view switch that Ardia calls as `ArdiaWebViewsSetFieldTiming`, and
 //! `mark_frame` marks at the next Core Animation commit where Ardia waits for the React Native UI block. No
 //! module owner is kept, because no bridge invalidates it.
-// `ArdiaWebView` exists, but it does not call the marks or connect to the `set_enabled` switch.
+//! `tabs::ardia_page_hooks::set_field_timing` connects `set_enabled` to the web views, and
+//! `ArdiaWebView::set_visible` makes the `view` mark. The marks of navigation, reveals and transfer
+//! (`ArdiaWebView+Navigation.mm:140,165,226`, `+Reveals.mm:213,424`, `+RevealInput.mm:134`, `+Transfer.mm:248,256`)
+//! have no caller yet, because those methods are not ported to `ArdiaWebView` (#110).
 
 use std::cell::RefCell;
 use std::collections::VecDeque;
