@@ -11,6 +11,7 @@
 //!   function name and its positional arguments as JSON, as the module bridge would pass them. No page layer calls it until issue 101.
 //! - `ArdiaEvents.emit` has no consumer in the app yet. [`ProductHost::emit`] hands each event to the emit
 //!   callback that the launch gives to [`SystemSignals::start`].
+//! - `ACFieldTiming.setEnabled` goes through the same entry and reaches `ardia_page_hooks::set_field_timing`.
 //! - The other module functions (`watchIdle`, `holdsIncomingLinks`, ...) are not here; each answers `Err`.
 
 use std::cell::RefCell;
@@ -23,6 +24,7 @@ use serde_json::Value;
 
 use crate::core::bindings::{Engine, Profile};
 use crate::core::services::{Reply, ServiceHost, Services};
+use crate::tabs::ardia_page_hooks::set_field_timing;
 
 thread_local! {
     static CURRENT: RefCell<Option<Rc<SystemSignals>>> = const { RefCell::new(None) };
@@ -117,7 +119,15 @@ impl SystemSignals {
             ("moveCompletedDownload", Some([Value::String(path), Value::String(folder)])) => {
                 self.services.move_completed_download(path, folder, reply);
             }
-            ("setApprovedDownloadFolders" | "moveCompletedDownload", _) => {
+            // `ACFieldTiming.setEnabled` (`ArdiaFieldTiming.mm:109`), a React Native module in Ardia.
+            ("ACFieldTiming.setEnabled", Some([Value::Bool(on)])) => {
+                set_field_timing(*on);
+                reply(Ok(Value::Null));
+            }
+            (
+                "setApprovedDownloadFolders" | "moveCompletedDownload" | "ACFieldTiming.setEnabled",
+                _,
+            ) => {
                 reply(Err(format!("{name}: bad arguments")));
             }
             _ => reply(Err(format!("{name}: not a system signal of this host"))),

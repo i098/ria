@@ -98,7 +98,13 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
     configure_acted_transition(&config);
     let sequence = Rc::new(LaunchSequence::default());
     let state = State::new();
-    let host = WindowHost::new(mtm, state.clone(), config.background);
+    let emit_observer = observer.clone();
+    let host = WindowHost::new(mtm, state.clone(), config.background, move |topic, data| {
+        emit_observer(LaunchEvent::Emit {
+            topic: topic.to_owned(),
+            data,
+        });
+    });
     let runtime = Rc::new_cyclic(|this| Runtime {
         this: this.clone(),
         sequence: sequence.clone(),
@@ -323,6 +329,7 @@ impl Hooks for Runtime {
         SystemSignals::stop();
         self.sequence.engine_shutdown();
         self.strip.borrow_mut().take();
+        self.host.drop_pages();
         (self.observer)(LaunchEvent::EngineWillShutDown);
     }
 

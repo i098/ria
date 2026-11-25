@@ -34,6 +34,7 @@ mod mac {
     use objc2::{class, msg_send};
     use objc2_foundation::{NSPoint, NSRect, NSSize, NSString};
     use ria_host_mac::core::bindings::{Engine, Tab, Window};
+    use ria_host_mac::diagnostics::ardia_field_timing;
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
     use ria_host_mac::launch::launch_config::LaunchConfig;
     use ria_host_mac::launch::strip_layer::{Button, Row, button_center};
@@ -113,6 +114,16 @@ mod mac {
                 .iter()
                 .all(|line| out.lines().any(|out| out == *line)),
             "the Rune strip did not show, select, pin and close tabs"
+        );
+        assert!(
+            out.lines()
+                .any(|line| line == "liveViews 1 paintViews 1 detached false"),
+            "the app did not build a live page view for the launch tab"
+        );
+        assert!(
+            out.lines().any(|line| line == "fieldTiming on")
+                && out.lines().any(|line| line == "fieldTiming off"),
+            "the app's field-timing switch did not reach set_enabled"
         );
         assert!(
             out.contains("downloadMoved ok"),
@@ -494,6 +505,41 @@ mod mac {
                     let size = window.window().frame().size;
                     println!("windowFrame {}x{}", size.width, size.height);
                 }
+                let window = host.main().expect("browser window").window();
+                let facts = host.hooks().paint_views(&window);
+                println!(
+                    "liveViews {} paintViews {} detached {}",
+                    host.hooks().live().all().len(),
+                    facts.len(),
+                    facts.iter().any(|view| view.page_detached)
+                );
+                let signals = system_signals::current().expect("the app has a system-signals host");
+                signals.call(
+                    "ACFieldTiming.setEnabled",
+                    &json!([true]),
+                    Box::new(|reply| assert_eq!(reply, Ok(Value::Null))),
+                );
+                println!(
+                    "fieldTiming {}",
+                    if ardia_field_timing::enabled() {
+                        "on"
+                    } else {
+                        "off"
+                    }
+                );
+                signals.call(
+                    "ACFieldTiming.setEnabled",
+                    &json!([false]),
+                    Box::new(|reply| assert_eq!(reply, Ok(Value::Null))),
+                );
+                println!(
+                    "fieldTiming {}",
+                    if ardia_field_timing::enabled() {
+                        "on"
+                    } else {
+                        "off"
+                    }
+                );
                 let drive = Rc::new(Drive {
                     host,
                     stage: Cell::new(0),

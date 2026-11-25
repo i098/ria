@@ -14,13 +14,19 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use objc2::MainThreadMarker;
+use objc2::Message;
 use objc2::rc::Retained;
+use objc2_app_kit::NSView;
 use ria_engine::types::{Number, TabStripCommand};
 use serde_json::Value;
 
 use crate::core::bindings::{Tab, Window};
 use crate::core::host::State;
+use crate::diagnostics::ardia_paint_probe::PaintProbe;
+use crate::tabs::ardia_page_hooks::PageHooks;
 use crate::tabs::ardia_tab_strip::{StripCommandResult, StripWindow, TabStrips};
+use crate::tabs::ardia_web_view::{ArdiaWebView, LiveViews};
+use crate::tabs::chromium_tab_view::ChromiumTabView;
 use crate::windows::ardia_chrome_window_host::ChromeWindowHost;
 use crate::windows::ardia_popup_window::Popups;
 use crate::windows::ardia_window_controller::Controllers;
@@ -29,18 +35,72 @@ pub struct WindowHost {
     chrome: ChromeWindowHost,
     popups: Rc<Popups>,
     main: RefCell<Option<Retained<Window>>>,
+    hooks: Rc<PageHooks>,
+    paint_probe: Rc<PaintProbe>,
+    /// The page views of the tabs; the registry and `LiveViews` hold them weakly.
+    pages: RefCell<Vec<Retained<ArdiaWebView>>>,
 }
 
 impl WindowHost {
-    pub fn new(mtm: MainThreadMarker, state: Rc<State>, background: bool) -> Rc<Self> {
+    /// `emit` takes the events of the paint probe.
+    pub fn new(
+        mtm: MainThreadMarker,
+        state: Rc<State>,
+        background: bool,
+        emit: impl Fn(&str, Value) + 'static,
+    ) -> Rc<Self> {
         let controllers = Controllers::new(mtm, background, false, |_| true);
-        let chrome = ChromeWindowHost::new(mtm, state, controllers);
+        let chrome = ChromeWindowHost::new(mtm, state, controllers.clone());
         let popups = Popups::new(mtm, background, chrome.strips().clone());
-        Rc::new(Self {
-            chrome,
-            popups,
-            main: RefCell::default(),
+        Rc::new_cyclic(|this: &std::rc::Weak<Self>| {
+            let weak = this.clone();
+            let hooks = PageHooks::new(
+                Rc::new(LiveViews::default()),
+                move |window| weak.upgrade()?.chrome.root_view(window),
+                |_| {},
+            );
+            // `make_page` installs the hooks: guarding `NSApplication` here would make the plain class before the engine's own.
+            // shortcut: no consent epoch exists in the app yet, so the probe reports with an empty one.
+            let paint_probe = hooks.paint_probe(controllers, emit, String::new);
+            paint_probe.watch();
+            Self {
+                chrome,
+                popups,
+                main: RefCell::default(),
+                hooks,
+                paint_probe,
+                pages: RefCell::default(),
+            }
         })
+    }
+
+    pub fn hooks(&self) -> &Rc<PageHooks> {
+        &self.hooks
+    }
+
+    /// The `PaintProbeLine` of the focus summary.
+    pub fn paint_line(&self) -> String {
+        self.paint_probe.line()
+    }
+
+    /// The page view of `tab`: the one the registry holds, or a new `ArdiaWebView` that keys the tab as `key`.
+    pub fn page_for(&self, tab: &Tab, key: &str) -> Option<Retained<NSView>> {
+        let known = self.chrome.tab_registry().borrow().view_for_tab(tab);
+        if let Some(view) = known {
+            return Some(view);
+        }
+        let mtm = MainThreadMarker::new()?;
+        let page = ChromiumTabView::make_page(mtm, &self.hooks);
+        page.attach_tab(tab.retain(), key.to_owned(), self.chrome.tab_registry());
+        let mut pages = self.pages.borrow_mut();
+        pages.retain(|page| !page.tab_closed());
+        pages.push(page.clone());
+        Some(Retained::into_super(page))
+    }
+
+    /// Release the page views, before the engine shuts down.
+    pub fn drop_pages(&self) {
+        self.pages.borrow_mut().clear();
     }
 
     pub fn chrome(&self) -> &ChromeWindowHost {

@@ -6,7 +6,8 @@
 //! functions. `set_enabled` takes the web-view switch that Ardia calls as `ArdiaWebViewsSetFieldTiming`, and
 //! `mark_frame` marks at the next Core Animation commit where Ardia waits for the React Native UI block. No
 //! module owner is kept, because no bridge invalidates it.
-//! `tabs::ardia_page_hooks::set_field_timing` connects `set_enabled` to the web views, and
+//! `tabs::ardia_page_hooks::set_field_timing` connects `set_enabled` to the web views; the app calls it through
+//! `launch::system_signals::SystemSignals::call("ACFieldTiming.setEnabled")`. And
 //! `ArdiaWebView::set_visible` makes the `view` mark. The marks of navigation, reveals and transfer
 //! (`ArdiaWebView+Navigation.mm:140,165,226`, `+Reveals.mm:213,424`, `+RevealInput.mm:134`, `+Transfer.mm:248,256`)
 //! have no caller yet, because those methods are not ported to `ArdiaWebView` (#110).
