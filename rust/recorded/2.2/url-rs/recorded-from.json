@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/url.ts",
+  "files": 1,
+  "fingerprint": "e91416e42481ae3d",
+  "coverage": {
+    "lines": 33,
+    "reached": 33,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/url.ts",
+        "lines": 33,
+        "reached": 33,
+        "missed": ""
+      }
+    ]
+  }
+}

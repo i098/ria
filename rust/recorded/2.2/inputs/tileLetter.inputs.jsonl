@@ -1,0 +1,34 @@
+{"fn": "tileLetterOf", "args": ["https://www.figma.com/files", "Figma"]}
+{"fn": "tileLetterOf", "args": ["https://news.ycombinator.com/", "Hacker News"]}
+{"fn": "tileLetterOf", "args": ["https://mail.google.com/mail/u/0/", "Inbox"]}
+{"fn": "tileLetterOf", "args": ["https://www.bbc.co.uk/news", "BBC"]}
+{"fn": "tileLetterOf", "args": ["https://en.wikipedia.org/wiki/Web_browser", "Web browser"]}
+{"fn": "tileLetterOf", "args": ["https://x.com/home", "Home / X"]}
+{"fn": "tileLetterOf", "args": ["http://127.0.0.1:8080/notes", "  — notes"]}
+{"fn": "tileLetterOf", "args": ["", "Écrire"]}
+{"fn": "tileLetterOf", "args": ["", ""]}
+{"fn": "tileLetterOf", "args": ["https://xn--bcher-kva.de/", "b"]}
+{"fn": "tileLetterOf", "args": ["https://ß.de/", ""]}
+{"fn": "tileLetterOf", "args": ["https://straße.de/x", "s"]}
+{"fn": "tileLetterOf", "args": ["https://a.b.co.uk/", "t"]}
+{"fn": "tileLetterOf", "args": ["https://co.uk/", "t"]}
+{"fn": "tileLetterOf", "args": ["https://www.co.uk/", "t"]}
+{"fn": "tileLetterOf", "args": ["https://a.com.au/", "t"]}
+{"fn": "tileLetterOf", "args": ["https://1password.com/", "One"]}
+{"fn": "tileLetterOf", "args": ["https://日本.jp/", ""]}
+{"fn": "tileLetterOf", "args": ["https://xn--wgv71a.jp/", ""]}
+{"fn": "tileLetterOf", "args": ["https://ǆ.com/", ""]}
+{"fn": "tileLetterOf", "args": ["https://localhost/", ""]}
+{"fn": "tileLetterOf", "args": ["https://a..b/", ""]}
+{"fn": "tileLetterOf", "args": ["https://.../", "🎉 party"]}
+{"fn": "tileLetterOf", "args": ["about:blank", "Blank"]}
+{"fn": "tileLetterOf", "args": ["not a url", "ﬁle"]}
+{"fn": "tileLetterOf", "args": ["", "ß"]}
+{"fn": "tileLetterOf", "args": ["", "123"]}
+{"fn": "tileLetterOf", "args": ["", "😀ǳ"]}
+{"fn": "tileLetterOf", "args": ["https://ﬀ.com/", ""]}
+{"fn": "tileLetterOf", "args": ["https://[::1]/", "ipv6"]}
+{"fn": "tileLetterOf", "args": ["ardia://settings", "Settings"]}
+{"fn": "tileLetterOf", "args": ["https://a.ne.jp/", "x"]}
+{"fn": "tileLetterOf", "args": ["https://go.go.go/", "x"]}
+{"fn": "tileLetterOf", "args": ["https://x.or.kr/", ""]}

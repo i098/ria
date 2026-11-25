@@ -1,0 +1,36 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/singleFlight.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "single-flight-rs",
+  "exports": [
+    {
+      "name": "replaySingleFlight",
+      "file": "apps/browser/src/lib/singleFlight.harness.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "passes",
+          "ts_type": "{ join: boolean; repeat: boolean; fail: boolean }[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "keep",
+          "ts_type": "boolean[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "Promise<unknown[]>",
+      "is_async": true,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

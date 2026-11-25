@@ -1,0 +1,467 @@
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":-1,"roomyPad":0,"tightPad":{"$num":"NaN"},"minScale":9007199254740992}],"ok":{"pad":{"$num":"NaN"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-Infinity"},"room":-2.5,"roomyPad":2,"tightPad":0,"minScale":100}],"ok":{"pad":2,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":9007199254740992,"roomyPad":-1,"tightPad":0.5,"minScale":{"$num":"-Infinity"}}],"ok":{"pad":-1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":100,"room":{"$num":"NaN"},"roomyPad":-1,"tightPad":10,"minScale":2147483648}],"ok":{"pad":10,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":2,"roomyPad":0,"tightPad":0.5,"minScale":2}],"ok":{"pad":0,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":-2.5,"room":42,"roomyPad":-1,"tightPad":2,"minScale":10}],"ok":{"pad":-1,"scale":1}}
+{"fn":"badgeFit","args":["x"],"ok":{"pad":{"$undefined":true},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[0],"ok":{"pad":{"$undefined":true},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":0,"roomyPad":0,"tightPad":42,"minScale":100}],"ok":{"pad":42,"scale":100}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":3,"roomyPad":1000,"tightPad":9007199254740992,"minScale":{"$num":"NaN"}}],"ok":{"pad":9007199254740992,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[["a",1]],"ok":{"pad":{"$undefined":true},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":-2.5,"roomyPad":3,"tightPad":{"$num":"NaN"},"minScale":0.5}],"ok":{"pad":{"$num":"NaN"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":1000,"roomyPad":1000000,"tightPad":1000000,"minScale":3}],"ok":{"pad":1000000,"scale":3}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":100,"roomyPad":3,"tightPad":{"$num":"-0"},"minScale":9007199254740992}],"ok":{"pad":3,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":1000,"roomyPad":{"$num":"NaN"},"tightPad":1000000,"minScale":{"$num":"NaN"}}],"ok":{"pad":1000000,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[null],"error":"Cannot destructure property 'textWidth' of 'object null' as it is null."}
+{"fn":"badgeFit","args":[{"textWidth":1,"room":-2.5,"roomyPad":{"$num":"NaN"},"tightPad":-1,"minScale":{"$num":"-Infinity"}}],"ok":{"pad":-1,"scale":-1.5}}
+{"fn":"badgeFit","args":[{"textWidth":1,"room":1,"roomyPad":9007199254740992,"tightPad":1,"minScale":3}],"ok":{"pad":1,"scale":3}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":2147483648,"roomyPad":3,"tightPad":0.5,"minScale":0}],"ok":{"pad":3,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":1000,"roomyPad":10,"tightPad":{"$num":"-Infinity"},"minScale":1000}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":{"$num":"NaN"},"roomyPad":9007199254740992,"tightPad":0.5,"minScale":0.5}],"ok":{"pad":0.5,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":100,"roomyPad":1000,"tightPad":2,"minScale":{"$num":"Infinity"}}],"ok":{"pad":2,"scale":{"$num":"Infinity"}}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":-1,"roomyPad":-2.5,"tightPad":9007199254740992,"minScale":42}],"ok":{"pad":-2.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":9007199254740992,"roomyPad":-1,"tightPad":{"$num":"NaN"},"minScale":3}],"ok":{"pad":-1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":0,"roomyPad":{"$num":"Infinity"},"tightPad":9007199254740992,"minScale":2147483648}],"ok":{"pad":9007199254740992,"scale":2147483648}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":1000000,"roomyPad":-1,"tightPad":2,"minScale":1}],"ok":{"pad":-1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":3,"roomyPad":1000,"tightPad":2,"minScale":2}],"ok":{"pad":2,"scale":2}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":2,"roomyPad":-1,"tightPad":100,"minScale":3}],"ok":{"pad":100,"scale":3}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":0,"roomyPad":{"$num":"NaN"},"tightPad":{"$num":"-Infinity"},"minScale":1000}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":1000,"roomyPad":{"$num":"-Infinity"},"tightPad":2147483648,"minScale":3}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":-1,"roomyPad":-2.5,"tightPad":0,"minScale":{"$num":"NaN"}}],"ok":{"pad":-2.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":1,"roomyPad":9007199254740992,"tightPad":1000000,"minScale":9007199254740992}],"ok":{"pad":1000000,"scale":9007199254740992}}
+{"fn":"badgeFit","args":[{"a":"b"}],"ok":{"pad":{"$undefined":true},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[[]],"ok":{"pad":{"$undefined":true},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[true],"ok":{"pad":{"$undefined":true},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":1,"room":2147483648,"roomyPad":2147483648,"tightPad":1000000,"minScale":2}],"ok":{"pad":1000000,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":{"$num":"Infinity"},"roomyPad":{"$num":"NaN"},"tightPad":{"$num":"-0"},"minScale":2147483648}],"ok":{"pad":{"$num":"-0"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":1,"roomyPad":42,"tightPad":42,"minScale":1}],"ok":{"pad":42,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-Infinity"},"room":0.5,"roomyPad":{"$num":"-0"},"tightPad":{"$num":"Infinity"},"minScale":{"$num":"NaN"}}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":9007199254740992,"roomyPad":{"$num":"NaN"},"tightPad":3,"minScale":-1}],"ok":{"pad":3,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":2147483648,"roomyPad":{"$num":"-0"},"tightPad":2147483648,"minScale":1000}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":100,"room":10,"roomyPad":9007199254740992,"tightPad":{"$num":"Infinity"},"minScale":9007199254740992}],"ok":{"pad":{"$num":"Infinity"},"scale":9007199254740992}}
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":0.5,"roomyPad":9007199254740992,"tightPad":100,"minScale":2}],"ok":{"pad":100,"scale":2}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":100,"roomyPad":0,"tightPad":42,"minScale":10}],"ok":{"pad":42,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":100,"roomyPad":100,"tightPad":3,"minScale":-2.5}],"ok":{"pad":3,"scale":0.000093}}
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":1,"roomyPad":{"$num":"-Infinity"},"tightPad":{"$num":"-Infinity"},"minScale":10}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-Infinity"},"room":1,"roomyPad":3,"tightPad":-2.5,"minScale":2147483648}],"ok":{"pad":3,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":10,"roomyPad":-2.5,"tightPad":1000,"minScale":{"$num":"-0"}}],"ok":{"pad":1000,"scale":{"$num":"-0"}}}
+{"fn":"badgeFit","args":[{"textWidth":1,"room":-1,"roomyPad":0.5,"tightPad":{"$num":"Infinity"},"minScale":3}],"ok":{"pad":{"$num":"Infinity"},"scale":3}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":2,"roomyPad":2,"tightPad":1,"minScale":-2.5}],"ok":{"pad":1,"scale":-0.1}}
+{"fn":"badgeFit","args":[{}],"ok":{"pad":{"$undefined":true},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":42,"roomyPad":1,"tightPad":1000,"minScale":42}],"ok":{"pad":1000,"scale":42}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":0,"roomyPad":0.5,"tightPad":0,"minScale":-1}],"ok":{"pad":0,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":{"$num":"Infinity"},"roomyPad":1,"tightPad":2147483648,"minScale":1}],"ok":{"pad":1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":0,"roomyPad":3,"tightPad":9007199254740992,"minScale":3}],"ok":{"pad":9007199254740992,"scale":3}}
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":100,"roomyPad":2147483648,"tightPad":9007199254740992,"minScale":1000}],"ok":{"pad":9007199254740992,"scale":1000}}
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":0.5,"roomyPad":9007199254740992,"tightPad":-1,"minScale":0}],"ok":{"pad":-1,"scale":0.0015}}
+{"fn":"badgeFit","args":[{"textWidth":42,"room":{"$num":"-Infinity"},"roomyPad":0.5,"tightPad":1000,"minScale":{"$num":"NaN"}}],"ok":{"pad":1000,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":-2.5,"room":{"$num":"Infinity"},"roomyPad":100,"tightPad":10,"minScale":1}],"ok":{"pad":100,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":{"$num":"-0"},"roomyPad":{"$num":"Infinity"},"tightPad":100,"minScale":1}],"ok":{"pad":100,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":42,"room":0,"roomyPad":0.5,"tightPad":{"$num":"NaN"},"minScale":{"$num":"-0"}}],"ok":{"pad":{"$num":"NaN"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":0.5,"roomyPad":2147483648,"tightPad":100,"minScale":{"$num":"-Infinity"}}],"ok":{"pad":100,"scale":-0.0002005}}
+{"fn":"badgeFit","args":[{"textWidth":100,"room":1,"roomyPad":2,"tightPad":1,"minScale":-1}],"ok":{"pad":1,"scale":-0.02}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":{"$num":"NaN"},"roomyPad":2,"tightPad":-2.5,"minScale":-1}],"ok":{"pad":-2.5,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":3,"room":42,"roomyPad":10,"tightPad":1,"minScale":{"$num":"NaN"}}],"ok":{"pad":10,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":0.5,"roomyPad":-2.5,"tightPad":10,"minScale":10}],"ok":{"pad":-2.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":0,"roomyPad":10,"tightPad":{"$num":"NaN"},"minScale":0}],"ok":{"pad":{"$num":"NaN"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":42,"roomyPad":{"$num":"-Infinity"},"tightPad":1000,"minScale":3}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":3,"roomyPad":1000,"tightPad":1000,"minScale":{"$num":"NaN"}}],"ok":{"pad":1000,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":2,"roomyPad":{"$num":"NaN"},"tightPad":3,"minScale":1000}],"ok":{"pad":3,"scale":1000}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":-1,"roomyPad":{"$num":"NaN"},"tightPad":2,"minScale":-1}],"ok":{"pad":2,"scale":{"$num":"Infinity"}}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":2,"roomyPad":1000,"tightPad":-2.5,"minScale":1000000}],"ok":{"pad":-2.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-Infinity"},"room":42,"roomyPad":-2.5,"tightPad":0,"minScale":9007199254740992}],"ok":{"pad":-2.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":-2.5,"roomyPad":-2.5,"tightPad":3,"minScale":{"$num":"NaN"}}],"ok":{"pad":-2.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":1,"room":{"$num":"-0"},"roomyPad":2,"tightPad":{"$num":"NaN"},"minScale":{"$num":"NaN"}}],"ok":{"pad":{"$num":"NaN"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":100,"room":0,"roomyPad":2147483648,"tightPad":100,"minScale":0.5}],"ok":{"pad":100,"scale":0.5}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":42,"roomyPad":0,"tightPad":10,"minScale":{"$num":"Infinity"}}],"ok":{"pad":0,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":3,"room":1000000,"roomyPad":1000000,"tightPad":1000000,"minScale":42}],"ok":{"pad":1000000,"scale":42}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-Infinity"},"room":2147483648,"roomyPad":1000000,"tightPad":-1,"minScale":{"$num":"-0"}}],"ok":{"pad":1000000,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":-2.5,"room":0,"roomyPad":{"$num":"-Infinity"},"tightPad":9007199254740992,"minScale":100}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":-1,"roomyPad":9007199254740992,"tightPad":9007199254740992,"minScale":1000}],"ok":{"pad":9007199254740992,"scale":{"$num":"Infinity"}}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":1000000,"roomyPad":{"$num":"-0"},"tightPad":1000,"minScale":{"$num":"NaN"}}],"ok":{"pad":1000,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":-1,"roomyPad":42,"tightPad":10,"minScale":0}],"ok":{"pad":10,"scale":0}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":2147483648,"roomyPad":{"$num":"-0"},"tightPad":42,"minScale":{"$num":"-0"}}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":1,"roomyPad":-1,"tightPad":10,"minScale":-1}],"ok":{"pad":10,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":{"$num":"NaN"},"roomyPad":1000000,"tightPad":1000,"minScale":2}],"ok":{"pad":1000,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":-2.5,"room":{"$num":"NaN"},"roomyPad":1000000,"tightPad":1,"minScale":0}],"ok":{"pad":1,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":0,"roomyPad":{"$num":"NaN"},"tightPad":0,"minScale":1000}],"ok":{"pad":0,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":-2.5,"roomyPad":42,"tightPad":0.5,"minScale":3}],"ok":{"pad":0.5,"scale":4.5}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":-1,"roomyPad":{"$num":"NaN"},"tightPad":1000000,"minScale":1000}],"ok":{"pad":1000000,"scale":2000002}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":1000000,"roomyPad":2147483648,"tightPad":{"$num":"-Infinity"},"minScale":-2.5}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":10,"roomyPad":100,"tightPad":{"$num":"-Infinity"},"minScale":0}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":1000,"roomyPad":0.5,"tightPad":100,"minScale":{"$num":"-Infinity"}}],"ok":{"pad":0.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"Infinity"},"room":{"$num":"-0"},"roomyPad":0.5,"tightPad":-2.5,"minScale":10}],"ok":{"pad":-2.5,"scale":10}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":9007199254740992,"roomyPad":{"$num":"Infinity"},"tightPad":0,"minScale":9007199254740992}],"ok":{"pad":0,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":1000000,"roomyPad":2147483648,"tightPad":100,"minScale":1000000}],"ok":{"pad":100,"scale":1000000}}
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":2147483648,"roomyPad":{"$num":"Infinity"},"tightPad":3,"minScale":9007199254740992}],"ok":{"pad":3,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":42,"roomyPad":2,"tightPad":{"$num":"-Infinity"},"minScale":100}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":10,"roomyPad":1000000,"tightPad":3,"minScale":{"$num":"-Infinity"}}],"ok":{"pad":3,"scale":1.3969838619232178e-9}}
+{"fn":"badgeFit","args":[{"textWidth":100,"room":100,"roomyPad":{"$num":"-0"},"tightPad":0.5,"minScale":0.5}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":{"$num":"Infinity"},"roomyPad":42,"tightPad":-1,"minScale":3}],"ok":{"pad":42,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":100,"room":2147483648,"roomyPad":3,"tightPad":1,"minScale":0}],"ok":{"pad":3,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-Infinity"},"room":3,"roomyPad":{"$num":"-0"},"tightPad":10,"minScale":0}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":{"$num":"NaN"},"roomyPad":{"$num":"NaN"},"tightPad":10,"minScale":9007199254740992}],"ok":{"pad":10,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":100,"roomyPad":{"$num":"NaN"},"tightPad":1,"minScale":10}],"ok":{"pad":1,"scale":10}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":0.5,"roomyPad":1000,"tightPad":10,"minScale":{"$num":"Infinity"}}],"ok":{"pad":10,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":-2.5,"room":1000,"roomyPad":1,"tightPad":{"$num":"-0"},"minScale":1000000}],"ok":{"pad":1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":3,"roomyPad":{"$num":"-Infinity"},"tightPad":2147483648,"minScale":{"$num":"Infinity"}}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"Infinity"},"room":100,"roomyPad":{"$num":"-0"},"tightPad":-2.5,"minScale":100}],"ok":{"pad":-2.5,"scale":100}}
+{"fn":"badgeFit","args":[{"textWidth":42,"room":-1,"roomyPad":0,"tightPad":2147483648,"minScale":0}],"ok":{"pad":2147483648,"scale":0}}
+{"fn":"badgeFit","args":[{"a":{"b":"c"}}],"ok":{"pad":{"$undefined":true},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":1000,"roomyPad":0,"tightPad":3,"minScale":1000000}],"ok":{"pad":0,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":-1,"roomyPad":{"$num":"Infinity"},"tightPad":1000000,"minScale":{"$num":"-Infinity"}}],"ok":{"pad":1000000,"scale":-200000.2}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-Infinity"},"room":9007199254740992,"roomyPad":1000,"tightPad":{"$num":"-0"},"minScale":1}],"ok":{"pad":1000,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":0.5,"roomyPad":0.5,"tightPad":{"$num":"-Infinity"},"minScale":1}],"ok":{"pad":0.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"Infinity"},"room":2,"roomyPad":1,"tightPad":42,"minScale":{"$num":"NaN"}}],"ok":{"pad":42,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":100,"roomyPad":42,"tightPad":{"$num":"-Infinity"},"minScale":100}],"ok":{"pad":42,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":10,"roomyPad":1000,"tightPad":1000000,"minScale":10}],"ok":{"pad":1000000,"scale":10}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":-1,"roomyPad":10,"tightPad":9007199254740992,"minScale":3}],"ok":{"pad":9007199254740992,"scale":3}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":-1,"roomyPad":0.5,"tightPad":10,"minScale":-1}],"ok":{"pad":10,"scale":-1.0244548320770264e-8}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":{"$num":"NaN"},"roomyPad":3,"tightPad":42,"minScale":{"$num":"-0"}}],"ok":{"pad":42,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":{"$num":"NaN"},"roomyPad":2147483648,"tightPad":1,"minScale":10}],"ok":{"pad":1,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":1000000,"roomyPad":{"$num":"-0"},"tightPad":9007199254740992,"minScale":-2.5}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"Infinity"},"room":10,"roomyPad":9007199254740992,"tightPad":{"$num":"-0"},"minScale":0.5}],"ok":{"pad":{"$num":"-0"},"scale":0.5}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":42,"roomyPad":{"$num":"NaN"},"tightPad":2147483648,"minScale":{"$num":"Infinity"}}],"ok":{"pad":2147483648,"scale":{"$num":"Infinity"}}}
+{"fn":"badgeFit","args":[{"textWidth":3,"room":3,"roomyPad":-2.5,"tightPad":0.5,"minScale":{"$num":"Infinity"}}],"ok":{"pad":-2.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":10,"roomyPad":{"$num":"-0"},"tightPad":9007199254740992,"minScale":1000000}],"ok":{"pad":9007199254740992,"scale":1000000}}
+{"fn":"badgeFit","args":[{"textWidth":3,"room":9007199254740992,"roomyPad":0,"tightPad":-1,"minScale":2}],"ok":{"pad":0,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"Infinity"},"room":{"$num":"-0"},"roomyPad":0.5,"tightPad":3,"minScale":42}],"ok":{"pad":3,"scale":42}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":{"$num":"-0"},"roomyPad":{"$num":"Infinity"},"tightPad":{"$num":"-0"},"minScale":1000}],"ok":{"pad":{"$num":"-0"},"scale":1000}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":100,"roomyPad":{"$num":"-0"},"tightPad":-1,"minScale":0}],"ok":{"pad":-1,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":3,"room":10,"roomyPad":1,"tightPad":{"$num":"-0"},"minScale":1000000}],"ok":{"pad":1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":-2.5,"room":0.5,"roomyPad":42,"tightPad":1,"minScale":1}],"ok":{"pad":1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":3,"roomyPad":42,"tightPad":100,"minScale":100}],"ok":{"pad":100,"scale":{"$num":"Infinity"}}}
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":-2.5,"roomyPad":-1,"tightPad":1,"minScale":10}],"ok":{"pad":1,"scale":10}}
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":1000000,"roomyPad":2,"tightPad":{"$num":"-Infinity"},"minScale":1000}],"ok":{"pad":2,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":{"$num":"Infinity"},"roomyPad":100,"tightPad":3,"minScale":1000}],"ok":{"pad":100,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":{"$num":"-0"},"roomyPad":{"$num":"-0"},"tightPad":1000,"minScale":-1}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":{"$num":"-0"},"roomyPad":3,"tightPad":{"$num":"-0"},"minScale":1000}],"ok":{"pad":{"$num":"-0"},"scale":1000}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":3,"roomyPad":9007199254740992,"tightPad":{"$num":"NaN"},"minScale":-2.5}],"ok":{"pad":{"$num":"NaN"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-Infinity"},"room":100,"roomyPad":1000,"tightPad":{"$num":"NaN"},"minScale":100}],"ok":{"pad":1000,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":{"$num":"Infinity"},"roomyPad":100,"tightPad":9007199254740992,"minScale":1000}],"ok":{"pad":100,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":1000000,"roomyPad":{"$num":"-0"},"tightPad":100,"minScale":2147483648}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-Infinity"},"room":0.5,"roomyPad":{"$num":"NaN"},"tightPad":1000000,"minScale":9007199254740992}],"ok":{"pad":1000000,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":1,"roomyPad":0.5,"tightPad":42,"minScale":0}],"ok":{"pad":42,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":1000000,"roomyPad":1000000,"tightPad":1000,"minScale":{"$num":"NaN"}}],"ok":{"pad":1000,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":{"$num":"-0"},"roomyPad":2147483648,"tightPad":2147483648,"minScale":1000}],"ok":{"pad":2147483648,"scale":1000}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":{"$num":"Infinity"},"roomyPad":100,"tightPad":1000,"minScale":9007199254740992}],"ok":{"pad":100,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":-2.5,"room":{"$num":"-Infinity"},"roomyPad":42,"tightPad":1000000,"minScale":{"$num":"-Infinity"}}],"ok":{"pad":1000000,"scale":{"$num":"Infinity"}}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":1,"roomyPad":3,"tightPad":100,"minScale":42}],"ok":{"pad":100,"scale":{"$num":"Infinity"}}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":2147483648,"roomyPad":1,"tightPad":2147483648,"minScale":1000000}],"ok":{"pad":1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"Infinity"},"room":42,"roomyPad":9007199254740992,"tightPad":0,"minScale":0.5}],"ok":{"pad":0,"scale":0.5}}
+{"fn":"badgeFit","args":[{"textWidth":-2.5,"room":1000,"roomyPad":100,"tightPad":1000000,"minScale":1000000}],"ok":{"pad":100,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":42,"roomyPad":-2.5,"tightPad":{"$num":"-0"},"minScale":0}],"ok":{"pad":-2.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":3,"room":0.5,"roomyPad":1000000,"tightPad":1,"minScale":0.5}],"ok":{"pad":1,"scale":0.5}}
+{"fn":"badgeFit","args":[{"textWidth":-2.5,"room":42,"roomyPad":2,"tightPad":{"$num":"-Infinity"},"minScale":1000}],"ok":{"pad":2,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":1000,"roomyPad":2,"tightPad":1,"minScale":0.5}],"ok":{"pad":1,"scale":0.5}}
+{"fn":"badgeFit","args":[{"textWidth":1000,"room":2,"roomyPad":10,"tightPad":42,"minScale":1}],"ok":{"pad":42,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":{"$num":"-Infinity"},"roomyPad":10,"tightPad":1000000,"minScale":1}],"ok":{"pad":1000000,"scale":{"$num":"Infinity"}}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":9007199254740992,"roomyPad":2147483648,"tightPad":{"$num":"Infinity"},"minScale":9007199254740992}],"ok":{"pad":{"$num":"Infinity"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":-2.5,"roomyPad":100,"tightPad":0,"minScale":1000}],"ok":{"pad":0,"scale":1000}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"Infinity"},"room":{"$num":"NaN"},"roomyPad":0.5,"tightPad":10,"minScale":2147483648}],"ok":{"pad":10,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":-2.5,"room":2147483648,"roomyPad":100,"tightPad":2147483648,"minScale":{"$num":"-Infinity"}}],"ok":{"pad":100,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":{"$num":"Infinity"},"roomyPad":10,"tightPad":{"$num":"Infinity"},"minScale":2}],"ok":{"pad":10,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":-2.5,"roomyPad":{"$num":"-0"},"tightPad":1000,"minScale":0}],"ok":{"pad":1000,"scale":{"$num":"Infinity"}}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":{"$num":"NaN"},"roomyPad":{"$num":"NaN"},"tightPad":1,"minScale":-2.5}],"ok":{"pad":1,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":1000000,"roomyPad":42,"tightPad":{"$num":"-0"},"minScale":{"$num":"-0"}}],"ok":{"pad":42,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":{"$num":"-0"},"roomyPad":1,"tightPad":42,"minScale":1000000}],"ok":{"pad":42,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":1,"room":1,"roomyPad":1000,"tightPad":{"$num":"NaN"},"minScale":-1}],"ok":{"pad":{"$num":"NaN"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":{"$num":"NaN"},"roomyPad":9007199254740992,"tightPad":1000000,"minScale":-2.5}],"ok":{"pad":1000000,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":1,"room":10,"roomyPad":1000000,"tightPad":3,"minScale":{"$num":"-Infinity"}}],"ok":{"pad":3,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":100,"roomyPad":{"$num":"Infinity"},"tightPad":{"$num":"Infinity"},"minScale":2147483648}],"ok":{"pad":{"$num":"Infinity"},"scale":{"$num":"Infinity"}}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":-1,"roomyPad":10,"tightPad":1,"minScale":0}],"ok":{"pad":1,"scale":4}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":{"$num":"-0"},"roomyPad":{"$num":"-Infinity"},"tightPad":1,"minScale":{"$num":"Infinity"}}],"ok":{"pad":{"$num":"-Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":42,"room":3,"roomyPad":2147483648,"tightPad":2,"minScale":-2.5}],"ok":{"pad":2,"scale":-0.047619047619047616}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":{"$num":"Infinity"},"roomyPad":1000,"tightPad":1,"minScale":2}],"ok":{"pad":1000,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":100,"room":-2.5,"roomyPad":{"$num":"NaN"},"tightPad":0,"minScale":2147483648}],"ok":{"pad":0,"scale":2147483648}}
+{"fn":"badgeFit","args":[{"textWidth":3,"room":1000000,"roomyPad":3,"tightPad":{"$num":"-Infinity"},"minScale":{"$num":"-0"}}],"ok":{"pad":3,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":42,"room":1000,"roomyPad":{"$num":"-0"},"tightPad":100,"minScale":-2.5}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":42,"roomyPad":2147483648,"tightPad":{"$num":"NaN"},"minScale":2147483648}],"ok":{"pad":{"$num":"NaN"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":{"$num":"NaN"},"roomyPad":3,"tightPad":0,"minScale":10}],"ok":{"pad":0,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":1,"roomyPad":1,"tightPad":100,"minScale":{"$num":"NaN"}}],"ok":{"pad":100,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":{"$num":"NaN"},"roomyPad":100,"tightPad":10,"minScale":{"$num":"-Infinity"}}],"ok":{"pad":10,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":2147483648,"room":10,"roomyPad":-1,"tightPad":{"$num":"Infinity"},"minScale":3}],"ok":{"pad":{"$num":"Infinity"},"scale":3}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":1000,"roomyPad":-1,"tightPad":9007199254740992,"minScale":42}],"ok":{"pad":-1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":3,"room":1000000,"roomyPad":9007199254740992,"tightPad":-2.5,"minScale":-2.5}],"ok":{"pad":-2.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":42,"roomyPad":-1,"tightPad":-2.5,"minScale":-1}],"ok":{"pad":-1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0.5,"room":0,"roomyPad":0.5,"tightPad":{"$num":"Infinity"},"minScale":42}],"ok":{"pad":{"$num":"Infinity"},"scale":42}}
+{"fn":"badgeFit","args":[{"textWidth":9007199254740992,"room":{"$num":"-0"},"roomyPad":2147483648,"tightPad":1,"minScale":-1}],"ok":{"pad":1,"scale":-3.3306690738754696e-16}}
+{"fn":"badgeFit","args":[{"textWidth":100,"room":{"$num":"Infinity"},"roomyPad":{"$num":"Infinity"},"tightPad":1000,"minScale":-1}],"ok":{"pad":{"$num":"Infinity"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":1000000,"room":2,"roomyPad":1000,"tightPad":3,"minScale":-2.5}],"ok":{"pad":3,"scale":-0.000005}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":{"$num":"NaN"},"roomyPad":{"$num":"-Infinity"},"tightPad":{"$num":"-Infinity"},"minScale":10}],"ok":{"pad":{"$num":"-Infinity"},"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":1,"roomyPad":{"$num":"Infinity"},"tightPad":-1,"minScale":2147483648}],"ok":{"pad":-1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":1000,"roomyPad":{"$num":"-0"},"tightPad":2,"minScale":-1}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":0.5,"roomyPad":-1,"tightPad":10,"minScale":9007199254740992}],"ok":{"pad":-1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":1,"room":{"$num":"-Infinity"},"roomyPad":0.5,"tightPad":1000,"minScale":42}],"ok":{"pad":1000,"scale":42}}
+{"fn":"badgeFit","args":[{"textWidth":-1,"room":{"$num":"-Infinity"},"roomyPad":{"$num":"-0"},"tightPad":1,"minScale":{"$num":"NaN"}}],"ok":{"pad":1,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":2,"room":1000,"roomyPad":{"$num":"NaN"},"tightPad":9007199254740992,"minScale":-1}],"ok":{"pad":9007199254740992,"scale":-1}}
+{"fn":"badgeFit","args":[{"textWidth":3,"room":0.5,"roomyPad":100,"tightPad":-2.5,"minScale":0}],"ok":{"pad":-2.5,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":3,"room":1000,"roomyPad":0,"tightPad":42,"minScale":1000000}],"ok":{"pad":0,"scale":1}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b😀c",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"ΣΊΣΥΦΟΣ","fontSize":{"$num":"Infinity"},"width":2},"ns:key.path",42],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ΣΊΣΥΦΟΣ","fontSize":{"$num":"NaN"},"width":3},"HELLO",10],"ok":0}
+{"fn":"badgeTextWidth","args":[null,"trailing.hello world",2],"error":"Cannot read properties of null (reading 'text')"}
+{"fn":"badgeTextWidth","args":[{"text":".leading","fontSize":0,"width":{"$num":"NaN"}},"line1\nline2src/a/b.ts",10],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"﻿bom","fontSize":42,"width":3},"İstanbul",-2.5],"ok":-0.3571428571428571}
+{"fn":"badgeTextWidth","args":[{"text":"a😀b😀c","fontSize":{"$num":"-0"},"width":1},"ΣΊΣΥΦΟΣtrailing.",1],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"a","fontSize":1000,"width":42},"😀",3],"ok":0.252}
+{"fn":"badgeTextWidth","args":[["a",1],"a",2147483648],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"İstanbul","fontSize":1000000,"width":3},"İstanbulHELLO",{"$num":"-Infinity"}],"ok":{"$num":"-Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":{"$num":"-Infinity"},"width":1},"ns:key.path",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"a:b:cns:key.path","fontSize":3,"width":42},"ab",42],"ok":73.5}
+{"fn":"badgeTextWidth","args":[{"text":"src/a/b.ts","fontSize":10,"width":{"$num":"-0"}},"line1\nline2",-2.5],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"a.b.c:","fontSize":0,"width":0.5},"tab\tseparated",1000],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"HELLO","fontSize":-2.5,"width":10},"ΣΊΣΥΦΟΣΣΊΣΥΦΟΣ",0.5],"ok":-5.6000000000000005}
+{"fn":"badgeTextWidth","args":[{"text":"HELLO","fontSize":{"$num":"-Infinity"},"width":0.5},"  padded  ﻿bom",1],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"emoji 👍🏽 mix","fontSize":{"$num":"Infinity"},"width":2147483648},"hello",{"$num":"Infinity"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"  padded  hello world","fontSize":{"$num":"NaN"},"width":{"$num":"Infinity"}},"ünïcödé",-2.5],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"😀","fontSize":{"$num":"-Infinity"},"width":1},":",0],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"a.b.c","fontSize":1000,"width":-2.5},"﻿bom",-2.5],"ok":0.005}
+{"fn":"badgeTextWidth","args":[{"text":"trailing.straße","fontSize":-1,"width":1},"﻿bom",42],"ok":-11.2}
+{"fn":"badgeTextWidth","args":[{"text":"{name} has {count} items","fontSize":{"$num":"Infinity"},"width":42},"a.b.c",{"$num":"NaN"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"ΣΊΣΥΦΟΣ","fontSize":0.5,"width":0},"emoji 👍🏽 mix",{"$num":"Infinity"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"line1\nline2﻿bom","fontSize":2,"width":1000},"src/a/b.ts",10],"ok":3333.333333333333}
+{"fn":"badgeTextWidth","args":[{"text":"a:b:cns:key.path","fontSize":1000,"width":-1},"a.b.c",1],"ok":-0.0003125}
+{"fn":"badgeTextWidth","args":["x","İstanbul",9007199254740992],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"﻿bom","fontSize":2,"width":9007199254740992},".leading",100],"ok":900719925474099200}
+{"fn":"badgeTextWidth","args":[{"text":"straße","fontSize":3,"width":100},"hello world",-2.5],"ok":-152.77777777777777}
+{"fn":"badgeTextWidth","args":[{"text":"a.b.c","fontSize":2,"width":42},"İstanbul",1000000],"ok":33600000}
+{"fn":"badgeTextWidth","args":[{"text":"straße","fontSize":42,"width":1000},"日本語のテキスト",{"$num":"Infinity"}],"ok":{"$num":"Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"abc","fontSize":42,"width":2},"tab\tseparated",{"$num":"-Infinity"}],"ok":{"$num":"-Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"a😀b😀c","fontSize":0,"width":2147483648},"a",-1],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"😀ΣΊΣΥΦΟΣ","fontSize":1000,"width":3},"emoji 👍🏽 mix",2147483648],"ok":10021590.357333334}
+{"fn":"badgeTextWidth","args":[{"text":"ΣΊΣΥΦΟΣ","fontSize":1,"width":100},"ΣΊΣΥΦΟΣ",{"$num":"Infinity"}],"ok":{"$num":"Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"key_name-1","fontSize":10,"width":0},".leading",0],"ok":0}
+{"fn":"badgeTextWidth","args":[0,"éline1\nline2",{"$num":"NaN"}],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":["a","a",{"$num":"-0"}],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"hello world","fontSize":2147483648,"width":2},"src/a/b.ts",-2.5],"ok":-2.1166422150351782e-9}
+{"fn":"badgeTextWidth","args":[{"text":"  padded  ","fontSize":-2.5,"width":{"$num":"NaN"}},"{name} has {count} items",0.5],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"İstanbul","fontSize":3,"width":-2.5},"ΣΊΣΥΦΟΣ",3],"ok":-2.1875}
+{"fn":"badgeTextWidth","args":[{"text":"trailing.","fontSize":1,"width":3},"line1\nline2",2],"ok":7.333333333333334}
+{"fn":"badgeTextWidth","args":[{"text":"a:b:c  padded  ","fontSize":42,"width":3},"{name} has {count} items",1000000],"ok":114285.7142857143}
+{"fn":"badgeTextWidth","args":[{"text":"hello","fontSize":1000,"width":2},"abc",10],"ok":0.012}
+{"fn":"badgeTextWidth","args":[{"text":"key_name-1","fontSize":{"$num":"-Infinity"},"width":0},"  padded  ",{"$num":"NaN"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"a":"b"},"abc",2147483648],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"İstanbulhello world","fontSize":1000000,"width":0},"ünïcödé",{"$num":"-0"}],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"line1\nline2.leading","fontSize":2,"width":-2.5},"a..b.leading",1000],"ok":-789.4736842105264}
+{"fn":"badgeTextWidth","args":[{"text":"HELLO","fontSize":1000000,"width":1000000},"trailing.",3],"ok":5.4}
+{"fn":"badgeTextWidth","args":[{"text":"é","fontSize":1,"width":3},"Hello World",42],"ok":693}
+{"fn":"badgeTextWidth","args":[{"text":"./x/**/*.json","fontSize":0,"width":3},"{name} has {count} items  padded  ",0],"ok":0}
+{"fn":"badgeTextWidth","args":[{"a":{"b":"c"}},"日本語のテキスト",{"$num":"-0"}],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[null,"tab\tseparated",1],"error":"Cannot read properties of null (reading 'text')"}
+{"fn":"badgeTextWidth","args":[{"text":"src/a/b.ts","fontSize":1000,"width":2147483648},"src/a/b.ts",1000],"ok":2147483648}
+{"fn":"badgeTextWidth","args":[{"a":"b"},"a..b",1000],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"a:b:ctab\tseparated","fontSize":2147483648,"width":42},"",9007199254740992],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"hello world","fontSize":100,"width":1000},"ns:key.path",{"$num":"-Infinity"}],"ok":{"$num":"-Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"é😀","fontSize":{"$num":"Infinity"},"width":{"$num":"-0"}},"  padded  ΣΊΣΥΦΟΣ",{"$num":"Infinity"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"Hello World","fontSize":10,"width":1000000},"abc",9007199254740992],"ok":245650888765663400000}
+{"fn":"badgeTextWidth","args":[{"text":".leading","fontSize":3,"width":1},"a..bhello world",0],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"a:b:c","fontSize":3,"width":0},"emoji 👍🏽 mix",10],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"a.b.c","fontSize":42,"width":10},"İstanbul",1],"ok":0.38095238095238093}
+{"fn":"badgeTextWidth","args":[{"text":"ΣΊΣΥΦΟΣ","fontSize":0.5,"width":3},"a:b:c",{"$num":"-0"}],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"a","fontSize":100,"width":1000000},"ünïcödé",0.5],"ok":35000}
+{"fn":"badgeTextWidth","args":[{"text":"İstanbul","fontSize":3,"width":0.5},"trailing.",0.5],"ok":0.09375}
+{"fn":"badgeTextWidth","args":[{"text":"İstanbulHello World","fontSize":-1,"width":2147483648},"  padded  ",2147483648],"ok":-2427203167593362000}
+{"fn":"badgeTextWidth","args":[{"a":{"b":"c"}},":﻿bom",1],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキストa😀b😀c","fontSize":{"$num":"-Infinity"},"width":0},"é",-2.5],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":".leading","fontSize":3,"width":0},"straße",{"$num":"-Infinity"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":["x","a",-1],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{},"Hello World",{"$num":"-0"}],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"tab\tseparated","fontSize":{"$num":"Infinity"},"width":9007199254740992},"日本語のテキスト",{"$num":"-Infinity"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"line1\nline2","fontSize":{"$num":"Infinity"},"width":{"$num":"-0"}},"emoji 👍🏽 mix",{"$num":"Infinity"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"a":"b"},"Hello World",10],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"a":{"b":"c"}},"line1\nline2Hello World",2147483648],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"﻿bom","fontSize":-2.5,"width":100},"line1\nline2",-2.5],"ok":275}
+{"fn":"badgeTextWidth","args":[{"a":{"b":"c"}},"trailing.",10],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"﻿bomtab\tseparated","fontSize":2147483648,"width":2},"emoji 👍🏽 mix",1],"ok":7.669715320362764e-10}
+{"fn":"badgeTextWidth","args":[{"text":"ns:key.pathHello World","fontSize":-2.5,"width":-2.5},"Hello World",{"$num":"-Infinity"}],"ok":{"$num":"-Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"ΣΊΣΥΦΟΣ","fontSize":{"$num":"-Infinity"},"width":0.5},"{name} has {count} items",0],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"a.b.c","fontSize":{"$num":"Infinity"},"width":1000},"hello",{"$num":"Infinity"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"é","fontSize":42,"width":1000000},"ns:key.path",100],"ok":13095238.095238095}
+{"fn":"badgeTextWidth","args":[{"text":"key_name-1","fontSize":2,"width":42},":",3],"ok":6.300000000000001}
+{"fn":"badgeTextWidth","args":[{"text":"a","fontSize":{"$num":"-0"},"width":-1},"./x/**/*.json",2147483648],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト😀","fontSize":3,"width":{"$num":"-0"}},"{name} has {count} items",2147483648],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"😀","fontSize":10,"width":0.5},"hello world",{"$num":"Infinity"}],"ok":{"$num":"Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"﻿bom","fontSize":-2.5,"width":1000000},"key_name-1",-2.5],"ok":2500000}
+{"fn":"badgeTextWidth","args":[[],"tab\tseparated",1],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"a..b","fontSize":{"$num":"Infinity"},"width":-2.5},"é",-2.5],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"emoji 👍🏽 mix","fontSize":42,"width":2147483648},"key_name-1",{"$num":"-0"}],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"HELLO","fontSize":10,"width":-2.5},"😀",42],"ok":-4.2}
+{"fn":"badgeTextWidth","args":[{"text":"﻿bom","fontSize":-2.5,"width":0.5},"key_name-1",{"$num":"Infinity"}],"ok":{"$num":"-Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":10,"width":{"$num":"-0"}},"line1\nline2",2],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"trailing.","fontSize":2147483648,"width":9007199254740992},"abc",{"$num":"Infinity"}],"ok":{"$num":"Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"trailing.","fontSize":-2.5,"width":3},"./x/**/*.json",2147483648],"ok":-3722304989.866667}
+{"fn":"badgeTextWidth","args":[{"a":"b"},"./x/**/*.json",-1],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"line1\nline2","fontSize":2147483648,"width":42},"a.b.c",{"$num":"NaN"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"a","fontSize":1000,"width":42},"a😀b😀c",0.5],"ok":0.147}
+{"fn":"badgeTextWidth","args":[{"text":"İstanbul","fontSize":{"$num":"Infinity"},"width":1},"😀hello",0],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"Hello World","fontSize":0.5,"width":2147483648},"{name} has {count} items",100],"ok":937083773672.7272}
+{"fn":"badgeTextWidth","args":[{"text":":","fontSize":2,"width":-1},"é",3],"ok":-3}
+{"fn":"badgeTextWidth","args":[{"text":"﻿bom","fontSize":2147483648,"width":1000000},"straße",0],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"./x/**/*.json","fontSize":9007199254740992,"width":42},"key_name-1",10],"ok":3.586874387250506e-14}
+{"fn":"badgeTextWidth","args":[{"text":"﻿bom","fontSize":0,"width":1000000},"ΣΊΣΥΦΟΣ",2],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"emoji 👍🏽 mix","fontSize":-1,"width":100},"abHELLO",3],"ok":-150}
+{"fn":"badgeTextWidth","args":[{"text":"é","fontSize":{"$num":"-Infinity"},"width":-2.5},"  padded  ",{"$num":"NaN"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"﻿bom﻿bom","fontSize":10,"width":0},"Hello WorldΣΊΣΥΦΟΣ",-1],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"a:b:c﻿bom","fontSize":3,"width":42},"éa.b.c",3],"ok":32.666666666666664}
+{"fn":"badgeTextWidth","args":[{"text":"  padded  ","fontSize":3,"width":9007199254740992},"HELLOa.b.c",-1],"ok":-3002399751580330.5}
+{"fn":"badgeTextWidth","args":[{"text":".leading","fontSize":0.5,"width":0.5},"﻿bom",0.5],"ok":0.25}
+{"fn":"badgeTextWidth","args":[{"text":"trailing.","fontSize":{"$num":"Infinity"},"width":1000000},"trailing.emoji 👍🏽 mix",10],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"{name} has {count} itemstab\tseparated","fontSize":-1,"width":0},"ab",{"$num":"-Infinity"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"straße","fontSize":{"$num":"Infinity"},"width":{"$num":"NaN"}},"tab\tseparated",2147483648],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"hello","fontSize":{"$num":"Infinity"},"width":{"$num":"-0"}},"日本語のテキスト",{"$num":"-Infinity"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[["a",1],"{name} has {count} items",-1],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"trailing.","fontSize":0,"width":1},"ΣΊΣΥΦΟΣ",{"$num":"NaN"}],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"trailing.","fontSize":10,"width":1000000},"emoji 👍🏽 mix",0.5],"ok":77777.77777777778}
+{"fn":"badgeTextWidth","args":[{"text":"HELLOa:b:c","fontSize":1000,"width":10},"hello world",-1],"ok":-0.011}
+{"fn":"badgeTextWidth","args":[{"text":"😀","fontSize":2147483648,"width":10},"ab",{"$num":"-0"}],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"ns:key.path","fontSize":10,"width":9007199254740992},"HELLO",0.5],"ok":204709073971386.2}
+{"fn":"badgeTextWidth","args":[{"text":"a:b:c","fontSize":0.5,"width":2147483648},"﻿bom",1000],"ok":3435973836800}
+{"fn":"badgeTextWidth","args":[{"text":"a","fontSize":{"$num":"-0"},"width":{"$num":"Infinity"}},"trailing.abc",1000000],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"a..b","fontSize":10,"width":9007199254740992},"straße",2],"ok":2702159776422298}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":1000000,"width":2},"HELLO",0.5],"ok":6.249999999999999e-7}
+{"fn":"badgeTextWidth","args":[[],":ns:key.path",{"$num":"Infinity"}],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":":tab\tseparated","fontSize":{"$num":"-0"},"width":-1},"straße",2147483648],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"hello","fontSize":3,"width":{"$num":"-0"}},"HELLO",2],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"ünïcödé","fontSize":1000000,"width":2147483648},"﻿bom",100],"ok":122713.35131428571}
+{"fn":"badgeTextWidth","args":[{"text":"","fontSize":10,"width":2147483648},"Hello World",100],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":{"$num":"-Infinity"},"width":42},"tab\tseparated",1000],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"trailing.","fontSize":{"$num":"NaN"},"width":9007199254740992},"a",10],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"a.b.c","fontSize":2,"width":9007199254740992},"emoji 👍🏽 mix",42],"ok":529623316178770300}
+{"fn":"badgeTextWidth","args":[{"text":"key_name-1","fontSize":{"$num":"-Infinity"},"width":1},"hello world",2147483648],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"hello world","fontSize":1,"width":-1},"tab\tseparated﻿bom",{"$num":"-Infinity"}],"ok":{"$num":"Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"  padded  ","fontSize":{"$num":"-Infinity"},"width":1000000},"é",-2.5],"ok":0}
+{"fn":"badgeTextWidth","args":[[],"src/a/b.ts",1000000],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"a..b","fontSize":2147483648,"width":100},"a:b:c",1],"ok":5.820766091346741e-8}
+{"fn":"badgeTextWidth","args":[{"text":"tab\tseparateda.b.c","fontSize":1000000,"width":1000},"hello{name} has {count} items",{"$num":"NaN"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"ünïcödé","fontSize":{"$num":"Infinity"},"width":-2.5},"İstanbul",{"$num":"-0"}],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ΣΊΣΥΦΟΣ","fontSize":1000,"width":{"$num":"-Infinity"}},"ésrc/a/b.ts",1],"ok":{"$num":"-Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"","fontSize":9007199254740992,"width":3},"﻿bom",1000],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":100,"width":1},".leading",1000],"ok":40}
+{"fn":"badgeTextWidth","args":[{"text":"ünïcödé","fontSize":9007199254740992,"width":10},"İstanbula😀b😀c",1000000],"ok":2.379049338482478e-9}
+{"fn":"badgeTextWidth","args":[{"text":"ünïcödé","fontSize":-2.5,"width":2147483648},"tab\tseparatedkey_name-1",{"$num":"Infinity"}],"ok":{"$num":"-Infinity"}}
+{"fn":"badgeTextWidth","args":[{"a":{"b":"c"}},"ünïcödé",-2.5],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"hello world","fontSize":-2.5,"width":2},"a",1],"ok":-0.07272727272727274}
+{"fn":"badgeTextWidth","args":[{"text":"é","fontSize":3,"width":-1},"emoji 👍🏽 mix",3],"ok":-7}
+{"fn":"badgeTextWidth","args":[{"text":"","fontSize":2,"width":0.5},"line1\nline2",9007199254740992],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"éemoji 👍🏽 mix","fontSize":42,"width":2147483648},".leadingkey_name-1",1000000],"ok":57521883428571.43}
+{"fn":"badgeTextWidth","args":[{"text":"Hello World","fontSize":0,"width":1000},"straße",-1],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"a😀b😀c","fontSize":{"$num":"-Infinity"},"width":3},"a..b./x/**/*.json",2147483648],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"straße","fontSize":3,"width":1000000},"İstanbul",2147483648],"ok":954437176888888.8}
+{"fn":"badgeTextWidth","args":["x","x",{"$num":"-0"}],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"hello","fontSize":{"$num":"Infinity"},"width":{"$num":"Infinity"}},"straße",3],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"a","fontSize":0,"width":0},"Hello World",2147483648],"ok":0}
+{"fn":"badgeTextWidth","args":[["a",1],"emoji 👍🏽 mix",-2.5],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"","fontSize":0,"width":-1},"tab\tseparated",2],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"a..b","fontSize":2147483648,"width":100},"ns:key.path",1000000],"ok":0.1280568540096283}
+{"fn":"badgeTextWidth","args":[{"text":"hello world","fontSize":10,"width":1000000},"tab\tseparated:",-1],"ok":-127272.72727272728}
+{"fn":"badgeTextWidth","args":[{"text":"hello world","fontSize":{"$num":"-0"},"width":{"$num":"-0"}},"ünïcödéé",-2.5],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"hello world","fontSize":1000,"width":1000},"straßea",0.5],"ok":0.3181818181818182}
+{"fn":"badgeTextWidth","args":[["a",1],"日本語のテキスト",42],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"a.b.c","fontSize":-1,"width":10},"İstanbul",1],"ok":-16}
+{"fn":"badgeTextWidth","args":[[],"﻿bom",100],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"hello world","fontSize":1000000,"width":1000000},"İstanbul",-1],"ok":-0.7272727272727273}
+{"fn":"badgeTextWidth","args":[{"text":"hello","fontSize":10,"width":10},"İstanbul",0.5],"ok":0.8}
+{"fn":"badgeTextWidth","args":[{"text":"tab\tseparated","fontSize":10,"width":{"$num":"-Infinity"}},"a😀b😀c",-1],"ok":{"$num":"Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"emoji 👍🏽 mix","fontSize":42,"width":0},":",42],"ok":0}
+{"fn":"badgeTextWidth","args":["x","a😀b😀c",-2.5],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"hello worlda😀b😀c","fontSize":1,"width":1000},"trailing.",1000],"ok":500000}
+{"fn":"badgeTextWidth","args":[{"text":"src/a/b.ts","fontSize":0,"width":2},"İstanbulünïcödé",{"$num":"-0"}],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ns:key.path","fontSize":{"$num":"NaN"},"width":2},"key_name-1",0.5],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"src/a/b.ts{name} has {count} items","fontSize":100,"width":1},"﻿bom{name} has {count} items",2147483648],"ok":17685159.45411765}
+{"fn":"badgeTextWidth","args":[{"text":"İstanbulstraße","fontSize":1,"width":2},"key_name-1emoji 👍🏽 mix",-2.5],"ok":-8.571428571428571}
+{"fn":"badgeTextWidth","args":[{"text":"./x/**/*.json","fontSize":1,"width":2},"",0.5],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"./x/**/*.json","fontSize":42,"width":0.5},"{name} has {count} items",1000000],"ok":21978.021978021978}
+{"fn":"badgeTextWidth","args":[{"text":"./x/**/*.json","fontSize":0.5,"width":1000},"a",100],"ok":15384.615384615387}
+{"fn":"badgeTextWidth","args":[{"a":{"b":"c"}},"a.b.c{name} has {count} items",3],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"ΣΊΣΥΦΟΣ","fontSize":{"$num":"-0"},"width":1},"emoji 👍🏽 mix",-2.5],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"trailing.","fontSize":{"$num":"NaN"},"width":2147483648},"hello world",-2.5],"ok":0}
+{"fn":"badgeTextWidth","args":["x","😀",{"$num":"-0"}],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"emoji 👍🏽 mix","fontSize":{"$num":"-Infinity"},"width":2147483648},"emoji 👍🏽 mix",{"$num":"-0"}],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"{name} has {count} items","fontSize":{"$num":"Infinity"},"width":10},"tab\tseparatedİstanbul",9007199254740992],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"{name} has {count} items","fontSize":0,"width":1000},"  padded  ",1],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"HELLO","fontSize":{"$num":"NaN"},"width":9007199254740992},"tab\tseparated",9007199254740992],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":2,"width":10},"Hello World",{"$num":"Infinity"}],"ok":{"$num":"Infinity"}}
+{"fn":"badgeTextWidth","args":[{},"a:b:c",2],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"ahello","fontSize":{"$num":"NaN"},"width":{"$num":"-Infinity"}},"HELLO",1000000],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"a..b","fontSize":1000,"width":9007199254740992},"tab\tseparated",9007199254740992],"ok":2.6367132484747174e+29}
+{"fn":"badgeTextWidth","args":[{"text":"HELLO","fontSize":9007199254740992,"width":-2.5},"Hello World",1000000],"ok":-6.106226635438361e-10}
+{"fn":"badgeTextWidth","args":[{"text":"trailing.src/a/b.ts","fontSize":{"$num":"-0"},"width":9007199254740992},"a",1000],"ok":0}
+{"fn":"badgeTextWidth","args":[{"a":{"b":"c"}},"tab\tseparated",{"$num":"Infinity"}],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"{name} has {count} items","fontSize":2147483648,"width":1000},"key_name-1",1000000],"ok":0.1940255363782247}
+{"fn":"badgeTextWidth","args":[{"text":"é","fontSize":{"$num":"Infinity"},"width":{"$num":"-0"}},"trailing.",0.5],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"./x/**/*.jsonHello World","fontSize":-1,"width":1},"ünïcödé",-2.5],"ok":0.7291666666666667}
+{"fn":"badgeTextWidth","args":[{"text":"","fontSize":10,"width":1000000},"ékey_name-1",10],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"line1\nline2","fontSize":2147483648,"width":9007199254740992},"a:b:c",2],"ok":3813003.6363636362}
+{"fn":"badgeTextWidth","args":[{"text":"hello","fontSize":{"$num":"-Infinity"},"width":{"$num":"Infinity"}},"ünïcödé",3],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"a":"b"},"hello world",1000000],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[0,"é",10],"error":"Cannot read properties of undefined (reading 'length')"}
+{"fn":"badgeTextWidth","args":[{"text":"ΣΊΣΥΦΟΣ{name} has {count} items","fontSize":{"$num":"-Infinity"},"width":42},"hello",42],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"héllo wörld",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"👍🏽 thumbs",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"日本語",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"é",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"İstanbul",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"straße",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"ılık ırmak",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"👨‍👩‍👧 family",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a b",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"ΣΊΣΥΦΟΣ",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"﻿bom",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a²b x½ y①",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"aⅠb Ⅻ",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a𐐀b 𝐀bc",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"कि ٣٤",3],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b😀c",-7.5],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b😀c",0.1],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b😀c",0.30000000000000004],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b😀c",1e+21],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b😀c",1e-7],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b😀c",5e-324],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b😀c",1.7976931348623157e+308],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b😀c",9007199254740992],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"日本語のテキスト","fontSize":-2.5,"width":0},"a😀b😀c",{"$num":"-0"}],"ok":0}
+{"fn":"badgeFit","args":[{"textWidth":5.5,"room":27,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":4,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":19,"room":27,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":4,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":19.5,"room":27,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":23,"room":27,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":20,"room":21,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":0.8}}
+{"fn":"badgeFit","args":[{"textWidth":40,"room":21,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":0.6}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":0,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":0.6}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":-10,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":0.6}}
+{"fn":"badgeFit","args":[{"textWidth":23.0001,"room":27,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":0.9565175803583463}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"NaN"},"room":27,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":5,"room":{"$num":"NaN"},"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"Infinity"},"room":27,"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":0.6}}
+{"fn":"badgeFit","args":[{"textWidth":5,"room":{"$num":"Infinity"},"roomyPad":4,"tightPad":2,"minScale":0.6}],"ok":{"pad":4,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":0,"roomyPad":0,"tightPad":2,"minScale":{"$num":"-0"}}],"ok":{"pad":2,"scale":{"$num":"-0"}}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":-10,"roomyPad":0,"tightPad":0,"minScale":0.5}],"ok":{"pad":0,"scale":0.5}}
+{"fn":"badgeFit","args":[{"textWidth":0,"room":-10,"roomyPad":0,"tightPad":0,"minScale":{"$num":"NaN"}}],"ok":{"pad":0,"scale":{"$num":"NaN"}}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":30,"roomyPad":{"$num":"NaN"},"tightPad":2,"minScale":0.6}],"ok":{"pad":2,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":30,"roomyPad":4,"tightPad":{"$num":"NaN"},"minScale":0.6}],"ok":{"pad":4,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":10,"room":12,"roomyPad":{"$num":"-0"},"tightPad":{"$num":"-0"},"minScale":0.6}],"ok":{"pad":{"$num":"-0"},"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":30,"room":21,"roomyPad":4,"tightPad":2,"minScale":1.5}],"ok":{"pad":2,"scale":1.5}}
+{"fn":"badgeFit","args":[{"textWidth":-5,"room":0,"roomyPad":1,"tightPad":1,"minScale":0.6}],"ok":{"pad":1,"scale":1}}
+{"fn":"badgeFit","args":[{"textWidth":{"$num":"-0"},"room":0,"roomyPad":0,"tightPad":0,"minScale":0.6}],"ok":{"pad":0,"scale":1}}
+{"fn":"badgeTextWidth","args":[{"text":"2.50","fontSize":9,"width":19.4},"2.50",9],"ok":19.4}
+{"fn":"badgeTextWidth","args":[{"text":"WWWW","fontSize":9,"width":36},"1",9],"ok":9}
+{"fn":"badgeTextWidth","args":[{"text":"9","fontSize":9,"width":6},"10",9],"ok":12}
+{"fn":"badgeTextWidth","args":[{"text":"12","fontSize":9,"width":12},"12",12],"ok":16}
+{"fn":"badgeTextWidth","args":[{"text":"","fontSize":9,"width":0},"12",9],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"😀","fontSize":9,"width":10},"😀😀",9],"ok":20}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":9,"width":10},"😀",9],"ok":10}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":0,"width":10},"x",9],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":{"$num":"-0"},"width":10},"x",9],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":{"$num":"NaN"},"width":10},"x",9],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":9,"width":{"$num":"NaN"}},"ab",9],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":{"$num":"NaN"},"width":7},"ab",{"$num":"NaN"}],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":9,"width":10},"",9],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":9,"width":10},"ab",0],"ok":0}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":9,"width":10},"abc",{"$num":"NaN"}],"ok":{"$num":"NaN"}}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":9,"width":{"$num":"-0"}},"ab",9],"ok":{"$num":"-0"}}
+{"fn":"badgeTextWidth","args":[{"text":"ab","fontSize":9,"width":10},"ab",{"$num":"Infinity"}],"ok":{"$num":"Infinity"}}
+{"fn":"badgeTextWidth","args":[{"text":"","fontSize":0,"width":5},"",0],"ok":5}
+{"fn":"badgeTextWidth","args":[{"text":"é","fontSize":9,"width":10},"éé",18],"ok":40}

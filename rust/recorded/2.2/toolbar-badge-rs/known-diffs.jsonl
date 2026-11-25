@@ -1,0 +1,2 @@
+{"fn": "toolbarBadgeText", "args": ["😀a😀b😀c"], "actual": {"ok": "😀a�"}, "reason": "value.slice(0, 4) at toolbarBadge.ts:8 cuts a surrogate pair and JavaScript keeps the lone high surrogate; a Rust String cannot hold it, so ria-state gives U+FFFD."}
+{"fn": "toolbarBadgeText", "args": ["😀a😀a"], "actual": {"ok": "😀a�"}, "reason": "value.slice(0, 4) at toolbarBadge.ts:8 cuts a surrogate pair and JavaScript keeps the lone high surrogate; a Rust String cannot hold it, so ria-state gives U+FFFD."}

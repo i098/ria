@@ -1,0 +1,132 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/toolbarRow.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "toolbarrow-rs",
+  "exports": [
+    {
+      "name": "toolbarRowOf",
+      "file": "apps/browser/src/lib/toolbarRow.ts",
+      "line": 18,
+      "params": [
+        {
+          "name": "compact",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  height: number;\n  center: number;\n  button: number;\n  buttonRadius: number;\n  field: number;\n  fieldRadius: number;\n  fieldButton: number;\n  fieldButtonRadius: number;\n  extensionButton: number;\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "urlFieldOf",
+      "file": "apps/browser/src/lib/toolbarRow.ts",
+      "line": 20,
+      "params": [
+        {
+          "name": "row",
+          "ts_type": "{\n  height: number;\n  center: number;\n  button: number;\n  buttonRadius: number;\n  field: number;\n  fieldRadius: number;\n  fieldButton: number;\n  fieldButtonRadius: number;\n  extensionButton: number;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "compactLift",
+      "file": "apps/browser/src/lib/toolbarRow.ts",
+      "line": 22,
+      "params": [
+        {
+          "name": "row",
+          "ts_type": "{\n  height: number;\n  center: number;\n  button: number;\n  buttonRadius: number;\n  field: number;\n  fieldRadius: number;\n  fieldButton: number;\n  fieldButtonRadius: number;\n  extensionButton: number;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "fieldInsetOf",
+      "file": "apps/browser/src/lib/toolbarRow.ts",
+      "line": 26,
+      "params": [
+        {
+          "name": "row",
+          "ts_type": "{\n  height: number;\n  center: number;\n  button: number;\n  buttonRadius: number;\n  field: number;\n  fieldRadius: number;\n  fieldButton: number;\n  fieldButtonRadius: number;\n  extensionButton: number;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "fieldAloneInsetOf",
+      "file": "apps/browser/src/lib/toolbarRow.ts",
+      "line": 28,
+      "params": [
+        {
+          "name": "row",
+          "ts_type": "{\n  height: number;\n  center: number;\n  button: number;\n  buttonRadius: number;\n  field: number;\n  fieldRadius: number;\n  fieldButton: number;\n  fieldButtonRadius: number;\n  extensionButton: number;\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "cardRadius",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "toolbarTrailing",
+      "file": "apps/browser/src/lib/toolbarRow.ts",
+      "line": 33,
+      "params": [
+        {
+          "name": "row",
+          "ts_type": "{\n  height: number;\n  center: number;\n  button: number;\n  buttonRadius: number;\n  field: number;\n  fieldRadius: number;\n  fieldButton: number;\n  fieldButtonRadius: number;\n  extensionButton: number;\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "o",
+          "ts_type": "{ pinnedWidth: number; split: boolean; cardRadius?: number }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

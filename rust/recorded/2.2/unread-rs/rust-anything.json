@@ -1,0 +1,180 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/unread.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "unread-rs",
+  "exports": [
+    {
+      "name": "unreadCount",
+      "file": "apps/browser/src/lib/unread.ts",
+      "line": 43,
+      "params": [
+        {
+          "name": "n",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "more",
+          "ts_type": "boolean",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "({ kind: \"count\"; label: string } | { kind: \"dot\" }) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "titleWithoutUnread",
+      "file": "apps/browser/src/lib/unread.ts",
+      "line": 51,
+      "params": [
+        {
+          "name": "title",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "unread",
+          "ts_type": "({ kind: \"count\"; label: string } | { kind: \"dot\" }) | null",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "hostOfOrigin",
+      "file": "apps/browser/src/lib/unread.ts",
+      "line": 60,
+      "params": [
+        {
+          "name": "origin",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "unreadInTitle",
+      "file": "apps/browser/src/lib/unread.ts",
+      "line": 78,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "host",
+          "ts_type": "string",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "({ kind: \"count\"; label: string } | { kind: \"dot\" }) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "originOf",
+      "file": "apps/browser/src/lib/unread.ts",
+      "line": 91,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "faviconIsBadgeNamed",
+      "file": "apps/browser/src/lib/unread.ts",
+      "line": 103,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "faviconIsOrdinary",
+      "file": "apps/browser/src/lib/unread.ts",
+      "line": 105,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "faviconLooksBadged",
+      "file": "apps/browser/src/lib/unread.ts",
+      "line": 107,
+      "params": [
+        {
+          "name": "home",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "now",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

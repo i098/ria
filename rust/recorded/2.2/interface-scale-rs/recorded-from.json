@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/interfaceScale.ts",
+  "files": 1,
+  "fingerprint": "508ffbaba28d57d6",
+  "coverage": {
+    "lines": 21,
+    "reached": 21,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/interfaceScale.ts",
+        "lines": 21,
+        "reached": 21,
+        "missed": ""
+      }
+    ]
+  }
+}

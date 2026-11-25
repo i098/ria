@@ -2810,8 +2810,13 @@ dependencies = [
 name = "ria-state"
 version = "0.0.0"
 dependencies = [
+ "regex",
+ "ria-core",
  "serde",
  "serde_json",
+ "sha2",
+ "unicode-normalization",
+ "url",
 ]
 
 [[package]]

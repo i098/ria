@@ -1,0 +1,208 @@
+{"fn":"replayPressMotion","args":[["HELLO","./x/**/*.jsonünïcödé","😀"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["a","key_name-1"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[[]],"ok":[]}
+{"fn":"replayPressMotion","args":[["😀a..b","😀"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a😀b😀c"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["hello world","İstanbul"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["abc","key_name-1"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["Hello World","😀./x/**/*.json","Hello World"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["key_name-1","a.b.c{name} has {count} items","a:b:c"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[[".leadingstraße","aΣΊΣΥΦΟΣ"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ns:key.path"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[[":"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["emoji 👍🏽 mix"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["src/a/b.tssrc/a/b.ts"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["hello worldHELLO"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["İstanbul😀","a..b"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["é","ab"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["src/a/b.ts",".leading"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ΣΊΣΥΦΟΣ","./x/**/*.json","trailing."]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["日本語のテキスト","{name} has {count} items","trailing."]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["é",":  padded  ","ΣΊΣΥΦΟΣ"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["{name} has {count} items","  padded  "]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["{name} has {count} items","ΣΊΣΥΦΟΣ","a😀b😀c"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["trailing.","ab","emoji 👍🏽 mix"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["﻿bom","a.b.c"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["emoji 👍🏽 mix","atab\tseparated","Hello World"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["emoji 👍🏽 mix",".leading"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["src/a/b.ts",""]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a😀b😀c","  padded  "]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["emoji 👍🏽 mixΣΊΣΥΦΟΣ"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["日本語のテキスト","emoji 👍🏽 mix"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[[".leading","﻿bomkey_name-1","key_name-1"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["src/a/b.ts","ΣΊΣΥΦΟΣ","./x/**/*.json"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["{name} has {count} items","tab\tseparated","Hello World"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["tab\tseparated"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["hello worldkey_name-1"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["key_name-1"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["emoji 👍🏽 mix","é","HELLO"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["Hello World"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["emoji 👍🏽 mixa..b"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["{name} has {count} items"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[[".leading","line1\nline2","abc"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["日本語のテキスト","ΣΊΣΥΦΟΣsrc/a/b.ts"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["﻿bom","a😀b😀c"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[[":","İstanbulstraße","tab\tseparated"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["HELLO","a..b"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a","a😀b😀c",":a.b.c"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[[".leading"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["  padded  "]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["ΣΊΣΥΦΟΣ","日本語のテキスト","abc"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["ns:key.pathhello world"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["ab"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["line1\nline2straße","hello worldns:key.path"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["Hello World","tab\tseparated"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a😀b😀cemoji 👍🏽 mix","{name} has {count} items"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["trailing."]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["straße"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["line1\nline2","./x/**/*.jsonns:key.path"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["  padded  ","./x/**/*.jsonkey_name-1"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a.b.cline1\nline2",".leading"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a.b.c😀"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["😀","key_name-1"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["line1\nline2"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["key_name-1","trailing."]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["key_name-1","line1\nline2"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ΣΊΣΥΦΟΣtab\tseparated"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["tab\tseparated","a.b.c","  padded  "]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["ésrc/a/b.ts","ΣΊΣΥΦΟΣ"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["hello","a.b.c"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["","abHELLO"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["abc","Hello World","İstanbul"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["ΣΊΣΥΦΟΣ﻿bom"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["straße","HELLO"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["key_name-1","﻿bom"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["HELLO","a.b.c"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[[".leadingtab\tseparated","{name} has {count} items","日本語のテキスト.leading"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["é","é"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[[":","ünïcödéa😀b😀c","a😀b😀c"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["ünïcödéa:b:c","aline1\nline2","ab"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["key_name-1","ab","Hello World"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["src/a/b.ts"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["ΣΊΣΥΦΟΣ",".leading"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["line1\nline2","ab"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a.b.c","key_name-1","straße"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["﻿bom"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["a.b.c","İstanbul",":"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["İstanbul",".leadingΣΊΣΥΦΟΣ"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[[":src/a/b.ts","./x/**/*.json","ns:key.path"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["日本語のテキスト","😀"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ans:key.path","日本語のテキスト"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["trailing.","src/a/b.ts"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["","./x/**/*.json","hello world"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["﻿bom","a:b:c:"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a:b:c"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["İstanbul"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["İstanbul","tab\tseparated","a.b.cstraße"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["a😀b😀c","ns:key.path"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ünïcödé"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["hello","key_name-1","a:b:c./x/**/*.json"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["emoji 👍🏽 mix","./x/**/*.json"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["src/a/b.ts","hello world"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ünïcödé","😀ünïcödé"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a😀b😀c","key_name-1.leading"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["  padded  ","line1\nline2"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["éa😀b😀c","straße","{name} has {count} items"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["HELLO","hello world","ab"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["a😀b😀c","hello world"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ünïcödéab","日本語のテキストa..b","hello"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["HELLO","tab\tseparated","./x/**/*.json"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["ΣΊΣΥΦΟΣ","hello world"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["./x/**/*.jsoné"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["{name} has {count} items","src/a/b.ts"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["trailing.","key_name-1"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["hello world"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["line1\nline2","a😀b😀c","trailing.İstanbul"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["é","Hello World","ns:key.pathΣΊΣΥΦΟΣ"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["HELLO","﻿bom","src/a/b.ts"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["a😀b😀cns:key.path",":"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ab","a.b.cab"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a.b.c"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["﻿bom","a:b:c"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["Hello World","﻿bom"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["emoji 👍🏽 mix","a"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a.b.c","key_name-1",".leading"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[[""]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["﻿bom","Hello World"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ünïcödé","é"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a:b:c","hello","a😀b😀c"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["﻿bomtrailing."]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["ns:key.path","hello world"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ünïcödé","ab","İstanbula..b"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["﻿bom","ΣΊΣΥΦΟΣ"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ésrc/a/b.ts"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["a..b","  padded  tab\tseparated","a"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["hello"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["src/a/b.tsemoji 👍🏽 mix","Hello World"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["emoji 👍🏽 mix","straße"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[[":",""]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[[".leadingΣΊΣΥΦΟΣ","{name} has {count} items"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["abc"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["ΣΊΣΥΦΟΣ"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["line1\nline2","ns:key.path"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a.b.c","","a.b.c"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[[".leading{name} has {count} items","a😀b😀c"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["é"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["a..b","İstanbul","﻿bom.leading"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["ΣΊΣΥΦΟΣ","ab","src/a/b.ts"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["a.b.c","İstanbul"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["src/a/b.ts","ésrc/a/b.ts"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["HELLO","HELLOns:key.path","trailing."]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["src/a/b.ts","src/a/b.ts"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["  padded  ","hellostraße","trailing.a:b:c"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["hello world","line1\nline2ns:key.path"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["src/a/b.tsHELLO"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["😀","ΣΊΣΥΦΟΣ"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ahello world","a","ünïcödé"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["abc","./x/**/*.json","ab"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["straßeİstanbul"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["Hello Worlda.b.c"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["é","İstanbultrailing."]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["tab\tseparated","./x/**/*.json","ns:key.path"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["key_name-1","Hello World","ΣΊΣΥΦΟΣ"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["😀","﻿bomns:key.path"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["helloİstanbul","é"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["日本語のテキストa..b","line1\nline2:"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["src/a/b.ts","a😀b😀c","src/a/b.ts"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["trailing.","ns:key.path"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["emoji 👍🏽 mix","ns:key.path"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["ns:key.path","ab"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["  padded  ",""]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["😀"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["  padded  ","src/a/b.ts"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["hello world","HELLO"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["./x/**/*.json","  padded  "]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["a:b:c","aba:b:c"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["İstanbul","é"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["./x/**/*.json"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["a","😀"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[[":a.b.c","tab\tseparated"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["étrailing."]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["ünïcödé","trailing."]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["abc","ab"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["😀","a..b","line1\nline2"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[[".leading","é","ns:key.path"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["日本語のテキスト","Hello World"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["aba😀b😀c"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["  padded  é"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["line1\nline2","hello"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["line1\nline2key_name-1"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["straße","ünïcödé","./x/**/*.json"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["日本語のテキストns:key.path"]],"ok":[null]}
+{"fn":"replayPressMotion","args":[["hello","a.b.c😀","日本語のテキスト"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["key_name-1","trailing.😀"]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["hello","  padded  "]],"ok":[null,null]}
+{"fn":"replayPressMotion","args":[["abc","﻿bom","İstanbul"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["{name} has {count} items","a..b","key_name-1"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["","Hello World","abc"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["line1\nline2ns:key.path","a.b.c","a.b.c"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["key_name-1","ns:key.pathns:key.path","ünïcödé"]],"ok":[null,null,null]}
+{"fn":"replayPressMotion","args":[["b","a","B","é","10","9","a"]],"ok":[null,null,null,null,null,null,null]}
+{"fn":"replayPressMotion","args":[["now","motions","bounce","now","still","now"]],"ok":["still",["still","bounce"],[],"bounce",[],"still"]}
+{"fn":"replayPressMotion","args":[["subscribe","subscribe","bounce","bounce","still","unsubscribe:0","bounce","unsubscribe:0","unsubscribe:1","still","now"]],"ok":[0,1,[0,1],[],[0,1],true,[1],false,true,[],"still"]}
+{"fn":"replayPressMotion","args":[["subscribe","subscribe:0","bounce","unsubscribe:1","unsubscribe:0","still","subscribe:5","unsubscribe:9","x","subscribe: 0","unsubscribe:-0","still"]],"ok":[0,1,[0],true,false,[],null,null,null,2,true,[]]}
+{"fn":"replayPressMotion","args":[[]],"ok":[]}
+{"fn":"replayPressMotion","args":[["bounce","now"]],"ok":[[],"bounce"]}
+{"fn":"replayPressMotion","args":[["now"]],"ok":["still"]}
+{"fn":"replayPressMotion","args":[["subscribe","subscribe","subscribe","unsubscribe:1","bounce","subscribe:1","still","unsubscribe:1.5","unsubscribe:2","bounce"]],"ok":[0,1,2,true,[0,2],3,[0,2,1],null,true,[0,1]]}

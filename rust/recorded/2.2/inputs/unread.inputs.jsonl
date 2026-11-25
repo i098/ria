@@ -1,0 +1,358 @@
+{"fn": "unreadInTitle", "args": ["(3) Home / X", ""]}
+{"fn": "unreadInTitle", "args": ["(1) Facebook", ""]}
+{"fn": "unreadInTitle", "args": ["(12) Feed | LinkedIn", ""]}
+{"fn": "unreadInTitle", "args": ["(2) WhatsApp", ""]}
+{"fn": "unreadInTitle", "args": ["(4) Discord | #general | Friends", ""]}
+{"fn": "unreadInTitle", "args": ["(5) Chat | Microsoft Teams", ""]}
+{"fn": "unreadInTitle", "args": ["(7) Inbox | me@proton.me | Proton Mail", ""]}
+{"fn": "unreadInTitle", "args": ["[3] Mattermost", ""]}
+{"fn": "unreadInTitle", "args": ["(99+) Facebook", ""]}
+{"fn": "unreadInTitle", "args": ["(20+) Messenger", ""]}
+{"fn": "unreadInTitle", "args": ["(250) YouTube", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (3) - someone@gmail.com - Gmail", "mail.google.com"]}
+{"fn": "unreadInTitle", "args": ["Inbox (1,234) - someone@gmail.com - Gmail", "mail.google.com"]}
+{"fn": "unreadInTitle", "args": ["Chat (2) - Google Chat", "chat.google.com"]}
+{"fn": "unreadInTitle", "args": ["Messenger (2)", "www.messenger.com"]}
+{"fn": "unreadInTitle", "args": ["Telegram (14)", "web.telegram.org"]}
+{"fn": "unreadInTitle", "args": ["Notifications (6) | GitHub", "github.com"]}
+{"fn": "unreadInTitle", "args": ["Mail - 4 unread - Outlook", ""]}
+{"fn": "unreadInTitle", "args": ["Fastmail (2 unread)", ""]}
+{"fn": "unreadInTitle", "args": ["Team Chat · 3 new messages", ""]}
+{"fn": "unreadInTitle", "args": ["• Discord | #general | Friends", "discord.com"]}
+{"fn": "unreadInTitle", "args": ["* general (Channel) - Acme - Slack", "app.slack.com"]}
+{"fn": "unreadInTitle", "args": ["* Untitled - Figma", "www.figma.com"]}
+{"fn": "unreadInTitle", "args": ["* notes.txt - Editor", ""]}
+{"fn": "unreadInTitle", "args": ["! general - Acme - Slack", "app.slack.com"]}
+{"fn": "unreadInTitle", "args": ["● main.ts - Visual Studio Code", "vscode.dev"]}
+{"fn": "unreadInTitle", "args": ["(0) Home / X", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (0) - someone@gmail.com - Gmail", "mail.google.com"]}
+{"fn": "unreadInTitle", "args": ["(120) Notifications / LinkedIn", ""]}
+{"fn": "unreadInTitle", "args": ["(1,204) Inbox", ""]}
+{"fn": "unreadInTitle", "args": ["• Discord | #general", ""]}
+{"fn": "unreadInTitle", "args": ["(3)", ""]}
+{"fn": "unreadInTitle", "args": ["(2021) Dune", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox - someone@gmail.com - Gmail", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["Dune (2021) - IMDb", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["Apollo (13) - News", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["Rocky (2) - Movies", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["(2024) Year in review", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["2024 unread messages from the archive", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["2,024 unread messages from the archive", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["Top 10 Movies of 2024 (Ranked) - Site", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["The Best Laptops of 2024 (Tested) | Example", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["iPhone 15 Pro (128GB) - Apple", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["Python (programming language) - Wikipedia", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["Episode 3: The Return (Part 2) - Show", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["Chapter 12 - The Book", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["100 days of code", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["React 19 is out", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["Section 4.2 (2) — Docs", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["*", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["• 3 things to know", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["", "news.example.com"]}
+{"fn": "unreadInTitle", "args": ["  (3) x  ", ""]}
+{"fn": "unreadInTitle", "args": ["﻿(3) x", ""]}
+{"fn": "unreadInTitle", "args": ["(3)x", ""]}
+{"fn": "unreadInTitle", "args": ["(3) x", ""]}
+{"fn": "unreadInTitle", "args": ["(3)", ""]}
+{"fn": "unreadInTitle", "args": ["(3)   ", ""]}
+{"fn": "unreadInTitle", "args": ["[3) x", ""]}
+{"fn": "unreadInTitle", "args": ["(3] x", ""]}
+{"fn": "unreadInTitle", "args": ["(1234567) x", ""]}
+{"fn": "unreadInTitle", "args": ["(123456) x", ""]}
+{"fn": "unreadInTitle", "args": ["(1,999) x", ""]}
+{"fn": "unreadInTitle", "args": ["(1,900) x", ""]}
+{"fn": "unreadInTitle", "args": ["(1899) x", ""]}
+{"fn": "unreadInTitle", "args": ["(2101) x", ""]}
+{"fn": "unreadInTitle", "args": ["(2100) x", ""]}
+{"fn": "unreadInTitle", "args": ["(000) x", ""]}
+{"fn": "unreadInTitle", "args": ["(0,000) x", ""]}
+{"fn": "unreadInTitle", "args": ["(1,234,567,890) x", ""]}
+{"fn": "unreadInTitle", "args": ["(1,23) x", ""]}
+{"fn": "unreadInTitle", "args": ["(5+) x", ""]}
+{"fn": "unreadInTitle", "args": ["(5++) x", ""]}
+{"fn": "unreadInTitle", "args": ["(1,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000) x", ""]}
+{"fn": "unreadInTitle", "args": ["3 unreaD", ""]}
+{"fn": "unreadInTitle", "args": ["3 NEW MESSAGES", ""]}
+{"fn": "unreadInTitle", "args": ["3 new meſſages", ""]}
+{"fn": "unreadInTitle", "args": ["3 new meſſage", ""]}
+{"fn": "unreadInTitle", "args": ["3 unread_x", ""]}
+{"fn": "unreadInTitle", "args": ["3 unreadx", ""]}
+{"fn": "unreadInTitle", "args": ["3 unread!", ""]}
+{"fn": "unreadInTitle", "args": ["3 new e-mail", ""]}
+{"fn": "unreadInTitle", "args": ["3 new email", ""]}
+{"fn": "unreadInTitle", "args": ["3 new mails", ""]}
+{"fn": "unreadInTitle", "args": ["3 new chat", ""]}
+{"fn": "unreadInTitle", "args": ["3 new notification", ""]}
+{"fn": "unreadInTitle", "args": ["3 new  messages", ""]}
+{"fn": "unreadInTitle", "args": ["x3 unread", ""]}
+{"fn": "unreadInTitle", "args": ["[3 unread]", ""]}
+{"fn": "unreadInTitle", "args": ["(3 unread", ""]}
+{"fn": "unreadInTitle", "args": ["a　3　unread", ""]}
+{"fn": "unreadInTitle", "args": ["a3 unread", ""]}
+{"fn": "unreadInTitle", "args": ["a﻿3﻿unread", ""]}
+{"fn": "unreadInTitle", "args": ["0 unread", ""]}
+{"fn": "unreadInTitle", "args": ["2,000 unread", ""]}
+{"fn": "unreadInTitle", "args": ["12,345 unread", ""]}
+{"fn": "unreadInTitle", "args": ["1234567 unread", ""]}
+{"fn": "unreadInTitle", "args": ["3+ unread", ""]}
+{"fn": "unreadInTitle", "args": ["1 unread and 2 new messages", ""]}
+{"fn": "unreadInTitle", "args": ["2024 unread then 3 unread", ""]}
+{"fn": "unreadInTitle", "args": ["Ｉnbox 3 unread", ""]}
+{"fn": "unreadInTitle", "args": ["3 unreadK", ""]}
+{"fn": "unreadInTitle", "args": ["5 new dms", ""]}
+{"fn": "unreadInTitle", "args": ["Gmail (2)", "gmail.com"]}
+{"fn": "unreadInTitle", "args": ["Gmail (2)", "mail.gmail.com"]}
+{"fn": "unreadInTitle", "args": ["Go (2)", "go.com"]}
+{"fn": "unreadInTitle", "args": ["Go (2)", ""]}
+{"fn": "unreadInTitle", "args": ["localhost (2)", "localhost"]}
+{"fn": "unreadInTitle", "args": ["x (2)", ".."]}
+{"fn": "unreadInTitle", "args": ["Foo (2)", "foo"]}
+{"fn": "unreadInTitle", "args": ["Inbox Bar Baz (2)", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox Bar Baz Qux (2)", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox  (3) - x", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox\t(3) – Gmail", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (3)/x", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (3)-x", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (3) : x", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (3) / x", ""]}
+{"fn": "unreadInTitle", "args": ["INBOX (3)", ""]}
+{"fn": "unreadInTitle", "args": ["ΣΑΣ inbox (3)", ""]}
+{"fn": "unreadInTitle", "args": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa (3)", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"]}
+{"fn": "unreadInTitle", "args": ["inbox aaaaaaaaaaaaaaaaaaaaaaaaaa (3)", ""]}
+{"fn": "unreadInTitle", "args": ["inbox aaaaaaaaaaaaaaaaaaaaaaaaa (3)", ""]}
+{"fn": "unreadInTitle", "args": ["😀😀😀😀😀😀😀😀😀😀😀😀😀 inbox (3)", ""]}
+{"fn": "unreadInTitle", "args": ["😀😀😀😀😀😀😀😀😀😀😀😀 inbox (3)", ""]}
+{"fn": "unreadInTitle", "args": ["inbox😀 (3)", ""]}
+{"fn": "unreadInTitle", "args": ["İnbox (3)", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (3)\n", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox\n(3)", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (12+)", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (1,234+)", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (2024)", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox (0)", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox [3]", ""]}
+{"fn": "unreadInTitle", "args": ["Inbox ((3))", ""]}
+{"fn": "unreadInTitle", "args": ["• x", ""]}
+{"fn": "unreadInTitle", "args": ["•3", ""]}
+{"fn": "unreadInTitle", "args": ["• ", ""]}
+{"fn": "unreadInTitle", "args": ["•  •", ""]}
+{"fn": "unreadInTitle", "args": ["• 3", ""]}
+{"fn": "unreadInTitle", "args": ["•　é", ""]}
+{"fn": "unreadInTitle", "args": ["* x", "slack.com"]}
+{"fn": "unreadInTitle", "args": ["* x", "slack.com"]}
+{"fn": "unreadInTitle", "args": ["* x", "notslack.com"]}
+{"fn": "unreadInTitle", "args": ["* x", "a.b.slack.com"]}
+{"fn": "unreadInTitle", "args": ["* x", "slack.com.evil"]}
+{"fn": "unreadInTitle", "args": ["* *", "slack.com"]}
+{"fn": "unreadInTitle", "args": ["* 3", "slack.com"]}
+{"fn": "unreadInTitle", "args": ["*x", "slack.com"]}
+{"fn": "unreadInTitle", "args": ["　• x", ""]}
+{"fn": "unreadInTitle", "args": [" * x", "slack.com"]}
+{"fn": "unreadInTitle", "args": ["(3) x"]}
+{"fn": "unreadInTitle", "args": ["* x"]}
+{"fn": "unreadInTitle", "args": ["Inbox (3)", {"$undefined": true}]}
+{"fn": "titleWithoutUnread", "args": ["(3) Home / X", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["[3] Mattermost", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["(120) Notifications / LinkedIn", {"kind": "count", "label": "99+"}]}
+{"fn": "titleWithoutUnread", "args": ["(99+) Facebook", {"kind": "count", "label": "99+"}]}
+{"fn": "titleWithoutUnread", "args": ["(20+) Messenger", {"kind": "count", "label": "20+"}]}
+{"fn": "titleWithoutUnread", "args": ["(1,204) Inbox", {"kind": "count", "label": "99+"}]}
+{"fn": "titleWithoutUnread", "args": ["• Discord | #general", {"kind": "dot"}]}
+{"fn": "titleWithoutUnread", "args": ["(3) Home / X", null]}
+{"fn": "titleWithoutUnread", "args": ["(3) Home / X", {"kind": "count", "label": "5"}]}
+{"fn": "titleWithoutUnread", "args": ["(3) Home / X", {"kind": "dot"}]}
+{"fn": "titleWithoutUnread", "args": ["• Discord", {"kind": "count", "label": "2"}]}
+{"fn": "titleWithoutUnread", "args": ["Inbox (3) - me@mail.example - Mail", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["(2021) Dune", {"kind": "count", "label": "99+"}]}
+{"fn": "titleWithoutUnread", "args": ["(3)", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["Home / X", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": [" (3) x", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["　(3)  x", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["(3) ", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["(3)x", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["•x", {"kind": "dot"}]}
+{"fn": "titleWithoutUnread", "args": ["• x", {"kind": "dot"}]}
+{"fn": "titleWithoutUnread", "args": ["•  ", {"kind": "dot"}]}
+{"fn": "titleWithoutUnread", "args": ["  •\tx", {"kind": "dot"}]}
+{"fn": "titleWithoutUnread", "args": ["[5+] x", {"kind": "count", "label": "5+"}]}
+{"fn": "titleWithoutUnread", "args": ["(5+) x", {"kind": "count", "label": "5"}]}
+{"fn": "titleWithoutUnread", "args": ["(0) x", {"kind": "count", "label": "0"}]}
+{"fn": "titleWithoutUnread", "args": ["(0) x", null]}
+{"fn": "titleWithoutUnread", "args": ["(2024) x", {"kind": "count", "label": "2024"}]}
+{"fn": "titleWithoutUnread", "args": ["(3) x", {"kind": "count"}]}
+{"fn": "titleWithoutUnread", "args": ["(3) x", {"kind": "count", "label": 3}]}
+{"fn": "titleWithoutUnread", "args": ["(3) x", "3"]}
+{"fn": "titleWithoutUnread", "args": ["(3) x", {"kind": "other"}]}
+{"fn": "titleWithoutUnread", "args": ["• x", {"kind": "dot", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["(3) x", 0]}
+{"fn": "titleWithoutUnread", "args": ["(3) x", []]}
+{"fn": "titleWithoutUnread", "args": ["(3) x", {"$undefined": true}]}
+{"fn": "titleWithoutUnread", "args": ["(3)﻿x", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["(3)x", {"kind": "count", "label": "3"}]}
+{"fn": "titleWithoutUnread", "args": ["(1,234,567) x", {"kind": "count", "label": "99+"}]}
+{"fn": "titleWithoutUnread", "args": ["(1234567) x", {"kind": "count", "label": "99+"}]}
+{"fn": "hostOfOrigin", "args": ["https://app.slack.com"]}
+{"fn": "hostOfOrigin", "args": ["http://127.0.0.1:8080"]}
+{"fn": "hostOfOrigin", "args": ["HTTPS://EXAMPLE.COM:443"]}
+{"fn": "hostOfOrigin", "args": ["example.com"]}
+{"fn": "hostOfOrigin", "args": ["example.com:80"]}
+{"fn": "hostOfOrigin", "args": ["a+b.c-d://x"]}
+{"fn": "hostOfOrigin", "args": ["1http://x:9"]}
+{"fn": "hostOfOrigin", "args": ["http://x:80/path"]}
+{"fn": "hostOfOrigin", "args": ["http://[::1]:8080"]}
+{"fn": "hostOfOrigin", "args": ["ftp://ΣΑΣ.com"]}
+{"fn": "hostOfOrigin", "args": ["http://x:"]}
+{"fn": "hostOfOrigin", "args": ["http://İ.com"]}
+{"fn": "hostOfOrigin", "args": [""]}
+{"fn": "hostOfOrigin", "args": ["://x"]}
+{"fn": "hostOfOrigin", "args": ["http:/x"]}
+{"fn": "hostOfOrigin", "args": ["HtTp://X.Y:1:2"]}
+{"fn": "hostOfOrigin", "args": ["ſ://x"]}
+{"fn": "originOf", "args": ["https://Mail.Google.com/mail/u/0/#inbox"]}
+{"fn": "originOf", "args": ["http://localhost:8080/x?y"]}
+{"fn": "originOf", "args": ["about:blank"]}
+{"fn": "originOf", "args": ["HTTP://X.COM?q"]}
+{"fn": "originOf", "args": ["mailto:x"]}
+{"fn": "originOf", "args": ["a://"]}
+{"fn": "originOf", "args": ["http://x#frag"]}
+{"fn": "originOf", "args": ["file:///etc"]}
+{"fn": "originOf", "args": ["  http://x"]}
+{"fn": "originOf", "args": ["http://ÄÖ.de/x"]}
+{"fn": "originOf", "args": ["x-y+z.w://Host"]}
+{"fn": "originOf", "args": ["ſ://x"]}
+{"fn": "originOf", "args": [""]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a.example/favicon-unread.ico"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a.example/favicon-unread.ico"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a.example/img/favicon_notification.png?v=2"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a.example/img/favicon_notification.png?v=2"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a.example/icons/dot-32.png"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a.example/icons/dot-32.png"]}
+{"fn": "faviconIsBadgeNamed", "args": ["data:image/png;base64,AAAA"]}
+{"fn": "faviconIsOrdinary", "args": ["data:image/png;base64,AAAA"]}
+{"fn": "faviconIsBadgeNamed", "args": ["data:image/gif;base64,R0lGOD"]}
+{"fn": "faviconIsOrdinary", "args": ["data:image/gif;base64,R0lGOD"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://account.example/favicon.ico"]}
+{"fn": "faviconIsOrdinary", "args": ["https://account.example/favicon.ico"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a.example/unread/favicon.ico"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a.example/unread/favicon.ico"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a.example/discount.png"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a.example/discount.png"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a.example/favicon.ico"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a.example/favicon.ico"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://github.githubassets.com/favicons/favicon-success.svg"]}
+{"fn": "faviconIsOrdinary", "args": ["https://github.githubassets.com/favicons/favicon-success.svg"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/notifications-3.png"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/notifications-3.png"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/BADGE.ico"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/BADGE.ico"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/x.dot"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/x.dot"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/countdown.png"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/countdown.png"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/icon?unread=1"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/icon?unread=1"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/favicon-unread.ico?x\ny"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/favicon-unread.ico?x\ny"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/x?a#b c-unread"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/x?a#b c-unread"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/unread#x y"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/unread#x y"]}
+{"fn": "faviconIsBadgeNamed", "args": ["DATA:x-unread.png"]}
+{"fn": "faviconIsOrdinary", "args": ["DATA:x-unread.png"]}
+{"fn": "faviconIsBadgeNamed", "args": [""]}
+{"fn": "faviconIsOrdinary", "args": [""]}
+{"fn": "faviconIsBadgeNamed", "args": ["unread"]}
+{"fn": "faviconIsOrdinary", "args": ["unread"]}
+{"fn": "faviconIsBadgeNamed", "args": ["-notif"]}
+{"fn": "faviconIsOrdinary", "args": ["-notif"]}
+{"fn": "faviconIsBadgeNamed", "args": ["notif5"]}
+{"fn": "faviconIsOrdinary", "args": ["notif5"]}
+{"fn": "faviconIsBadgeNamed", "args": ["dot-notif"]}
+{"fn": "faviconIsOrdinary", "args": ["dot-notif"]}
+{"fn": "faviconIsBadgeNamed", "args": ["a.mention_"]}
+{"fn": "faviconIsOrdinary", "args": ["a.mention_"]}
+{"fn": "faviconIsBadgeNamed", "args": ["x.mentions.y"]}
+{"fn": "faviconIsOrdinary", "args": ["x.mentions.y"]}
+{"fn": "faviconIsBadgeNamed", "args": ["badged"]}
+{"fn": "faviconIsOrdinary", "args": ["badged"]}
+{"fn": "faviconIsBadgeNamed", "args": ["badgedx"]}
+{"fn": "faviconIsOrdinary", "args": ["badgedx"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/b-ALERT"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/b-ALERT"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/b-alerts"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/b-alerts"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/b-ſunread"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/b-ſunread"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/b-notifications"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/b-notifications"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://a/b-notificationsx"]}
+{"fn": "faviconIsOrdinary", "args": ["https://a/b-notificationsx"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://unread.example"]}
+{"fn": "faviconIsOrdinary", "args": ["https://unread.example"]}
+{"fn": "faviconIsBadgeNamed", "args": ["https://unread.example/"]}
+{"fn": "faviconIsOrdinary", "args": ["https://unread.example/"]}
+{"fn": "faviconIsBadgeNamed", "args": ["x/y/z.count"]}
+{"fn": "faviconIsOrdinary", "args": ["x/y/z.count"]}
+{"fn": "faviconIsBadgeNamed", "args": ["x/y/z.count/"]}
+{"fn": "faviconIsOrdinary", "args": ["x/y/z.count/"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a.example/favicon-unread.ico"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a.example/img/favicon_notification.png?v=2"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a.example/icons/dot-32.png"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "data:image/png;base64,AAAA"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "data:image/gif;base64,R0lGOD"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://account.example/favicon.ico"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a.example/unread/favicon.ico"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a.example/discount.png"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a.example/favicon.ico"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://github.githubassets.com/favicons/favicon-success.svg"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/notifications-3.png"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/BADGE.ico"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/x.dot"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/countdown.png"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/icon?unread=1"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/favicon-unread.ico?x\ny"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/x?a#b c-unread"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/unread#x y"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "DATA:x-unread.png"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", ""]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "unread"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "-notif"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "notif5"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "dot-notif"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "a.mention_"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "x.mentions.y"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "badged"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "badgedx"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/b-ALERT"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/b-alerts"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/b-ſunread"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/b-notifications"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://a/b-notificationsx"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://unread.example"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "https://unread.example/"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "x/y/z.count"]}
+{"fn": "faviconLooksBadged", "args": ["https://a.example/favicon.ico", "x/y/z.count/"]}
+{"fn": "faviconLooksBadged", "args": ["", "https://a.example/favicon-unread.ico"]}
+{"fn": "faviconLooksBadged", "args": ["x-unread.ico", "x-unread.ico"]}
+{"fn": "faviconLooksBadged", "args": ["a", "x-unread.ico"]}
+{"fn": "unreadCount", "args": [5]}
+{"fn": "unreadCount", "args": [100]}
+{"fn": "unreadCount", "args": [0]}
+{"fn": "unreadCount", "args": [{"$num": "NaN"}]}
+{"fn": "unreadCount", "args": [99]}
+{"fn": "unreadCount", "args": [120]}
+{"fn": "unreadCount", "args": [20, true]}
+{"fn": "unreadCount", "args": [1]}
+{"fn": "unreadCount", "args": [0.999]}
+{"fn": "unreadCount", "args": [1.5]}
+{"fn": "unreadCount", "args": [99.9]}
+{"fn": "unreadCount", "args": [{"$num": "Infinity"}]}
+{"fn": "unreadCount", "args": [-1]}
+{"fn": "unreadCount", "args": [1e+21]}
+{"fn": "unreadCount", "args": [3, true]}
+{"fn": "unreadCount", "args": [150, true]}
+{"fn": "unreadCount", "args": [1.7, true]}
+{"fn": "unreadCount", "args": [1, false]}
+{"fn": "unreadCount", "args": [{"$num": "-Infinity"}]}
+{"fn": "unreadCount", "args": [{"$num": "-0"}]}

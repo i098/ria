@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/webloc.harness.ts",
+  "files": 1,
+  "fingerprint": "48be24336113afd6",
+  "coverage": {
+    "lines": 41,
+    "reached": 41,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/webloc.harness.ts",
+        "lines": 9,
+        "reached": 9,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/webloc.ts",
+        "lines": 32,
+        "reached": 32,
+        "missed": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{"fn":"emojiSections","args":[]}
+{"fn":"searchTerms","args":[""]}
+{"fn":"searchTerms","args":["  "]}
+{"fn":"searchTerms","args":["Réunion"]}
+{"fn":"searchTerms","args":["CAFÉ:latte,mocha.x"]}
+{"fn":"searchTerms","args":[" tab\tnew\nline x"]}
+{"fn":"searchTerms","args":["﻿x　y"]}
+{"fn":"searchTerms","args":["Ǆemal"]}
+{"fn":"searchTerms","args":["ΣΑΣ ΟΔΟΣ"]}
+{"fn":"searchTerms","args":["İstanbul"]}
+{"fn":"searchTerms","args":["ﬁne"]}
+{"fn":"searchTerms","args":["Å"]}
+{"fn":"searchTerms","args":["한국"]}
+{"fn":"searchTerms","args":["é"]}
+{"fn":"searchTerms","args":["😀 ⭐️"]}
+{"fn":"searchTerms","args":["..."]}
+{"fn":"searchTerms","args":["a..b,,c::d"]}
+{"fn":"searchTerms","args":["ß"]}
+{"fn":"searchTerms","args":["Ⓐ"]}
+{"fn":"searchTerms","args":["red heart"]}
+{"fn":"searchTerms","args":["heart"]}
+{"fn":"searchTerms","args":["japan"]}
+{"fn":"searchTerms","args":["rock"]}
+{"fn":"searchTerms","args":["curacao"]}
+{"fn":"searchTerms","args":["reunion"]}
+{"fn":"searchTerms","args":["Réunion"]}
+{"fn":"searchTerms","args":["happy"]}
+{"fn":"searchTerms","args":["zzzz"]}
+{"fn":"searchTerms","args":["rocket"]}
+{"fn":"searchTerms","args":["flag"]}
+{"fn":"searchTerms","args":["smiling face"]}
+{"fn":"searchTerms","args":["st. vincent"]}
+{"fn":"searchTerms","args":["ma’am"]}
+{"fn":"searchTerms","args":["face:with,tears.of"]}
+{"fn":"searchTerms","args":["cat"]}
+{"fn":"searchTerms","args":["1st"]}
+{"fn":"searchTerms","args":["a"]}
+{"fn":"matchesTerms","args":["cup.and.saucer.fill Café",["saucer"]]}
+{"fn":"matchesTerms","args":["cup.and.saucer.fill Café",["caf"]]}
+{"fn":"matchesTerms","args":["cup.and.saucer.fill Café",["up"]]}
+{"fn":"matchesTerms","args":["cup.and.saucer.fill Café",[]]}
+{"fn":"matchesTerms","args":["",[""]]}
+{"fn":"matchesTerms","args":["x",["X"]]}
+{"fn":"matchesTerms","args":["Crème Brûlée",["creme","brulee"]]}
+{"fn":"matchesTerms","args":["a:b,c.d",["d","a","c"]]}
+{"fn":"searchEmoji","args":[["red","heart"]]}
+{"fn":"searchEmoji","args":[["heart"]]}
+{"fn":"searchEmoji","args":[["japan"]]}
+{"fn":"searchEmoji","args":[["rock"]]}
+{"fn":"searchEmoji","args":[["curacao"]]}
+{"fn":"searchEmoji","args":[["reunion"]]}
+{"fn":"searchEmoji","args":[["reunion"]]}
+{"fn":"searchEmoji","args":[["happy"]]}
+{"fn":"searchEmoji","args":[["zzzz"]]}
+{"fn":"searchEmoji","args":[["rocket"]]}
+{"fn":"searchEmoji","args":[["flag"]]}
+{"fn":"searchEmoji","args":[["smiling","face"]]}
+{"fn":"searchEmoji","args":[["st","vincent"]]}
+{"fn":"searchEmoji","args":[["ma’am"]]}
+{"fn":"searchEmoji","args":[["face","with","tears","of"]]}
+{"fn":"searchEmoji","args":[["cat"]]}
+{"fn":"searchEmoji","args":[["1st"]]}
+{"fn":"searchEmoji","args":[["a"]]}
+{"fn":"searchEmoji","args":[[]]}
+{"fn":"searchEmoji","args":[[""]]}
+{"fn":"searchEmoji","args":[["Face"]]}
+{"fn":"searchEmoji","args":[["face","zzzz"]]}
+{"fn":"sameIcon","args":["⭐️","⭐"]}
+{"fn":"sameIcon","args":["⭐","🌟"]}
+{"fn":"sameIcon","args":[null,"⭐"]}
+{"fn":"sameIcon","args":["⭐",null]}
+{"fn":"sameIcon","args":[null,null]}
+{"fn":"sameIcon","args":["",""]}
+{"fn":"sameIcon","args":["",null]}
+{"fn":"sameIcon","args":["️","️️"]}
+{"fn":"sameIcon","args":["❤️","❤"]}

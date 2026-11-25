@@ -1,0 +1,1 @@
+{"fn": "globMatches", "args": [{"$utf16": [55357, 42]}, "😀"], "actual": {"error": "argument 1 of globMatches has a lone surrogate, which a Rust String cannot hold"}, "reason": "lone surrogate: the glob argument holds a lone high surrogate, which a Rust String cannot hold; the napi binding refuses it"}

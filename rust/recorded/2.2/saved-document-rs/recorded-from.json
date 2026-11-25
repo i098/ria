@@ -1,0 +1,29 @@
+{
+  "unit": "apps/browser/src/lib/savedDocument.harness.ts",
+  "files": 1,
+  "fingerprint": "73f7c42856c89fd5",
+  "coverage": {
+    "lines": 67,
+    "reached": 67,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/savedDocument.harness.ts",
+        "lines": 25,
+        "reached": 25,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/savedDocument.ts",
+        "lines": 34,
+        "reached": 34,
+        "missed": ""
+      }
+    ]
+  }
+}

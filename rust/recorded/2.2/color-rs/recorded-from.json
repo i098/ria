@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/color.ts",
+  "files": 1,
+  "fingerprint": "e662790024ef763b",
+  "coverage": {
+    "lines": 66,
+    "reached": 66,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/color.ts",
+        "lines": 66,
+        "reached": 66,
+        "missed": ""
+      }
+    ]
+  }
+}

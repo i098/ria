@@ -1,0 +1,93 @@
+{"fn": "upgradedCase", "args": [{"a": 1}, 1, {"0": {"merge": {"b": 2}}}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": 1, "n": 0}, 3, {"1": {"merge": {"n": 1}}, "2": {"merge": {"n": 10}}}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": 1, "n": 0}, 3, {"0": {"value": null}, "1": {"merge": {"n": 1}}, "2": {"merge": {"n": 10}}}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": 2, "x": 1}, 2, {}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": 3}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": 1}, 2, {"0": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 2, {}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": -1}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": 1.5}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": {"$num": "NaN"}}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": "2"}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": null}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": 9007199254740994}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": 9007199254740991}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": {"$num": "-0"}}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": {"$num": "Infinity"}}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": true}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": [1]}, 2, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [null, 1, {"0": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [[], 1, {"0": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": ["x", 1, {"0": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [3, 1, {"0": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"$undefined": true}, 1, {"0": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [true, 1, {"0": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [[{"a": 1}], 1, {"0": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {"0": {"value": []}}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {"0": {"value": null}}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {"0": {"value": {"z": 1, "2": 2, "1": 1}}}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {"0": null}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {"0": {"$undefined": true}}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {"0": 5}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {"0": [1]}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {"0": "other"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {"00": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {" 0": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 2, ["unchanged", "unchanged"], {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, "u", {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, null, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, {"$undefined": true}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, 1, 7, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"schemaVersion": 0, "a": 1}, 2, {"0": {"merge": {"schemaVersion": "x", "b": 1}}, "1": "unchanged"}, "schemaVersion"]}
+{"fn": "upgradedCase", "args": [{"a": 1}, 1, {"0": {"merge": [9, 8]}}, "v"]}
+{"fn": "upgradedCase", "args": [{"a": 1}, 1, {"0": {"merge": "hé"}}, "v"]}
+{"fn": "upgradedCase", "args": [{"a": 1}, 1, {"0": {"merge": null}}, "v"]}
+{"fn": "upgradedCase", "args": [{"a": 1}, 1, {"0": {"merge": 5}}, "2"]}
+{"fn": "upgradedCase", "args": [{"version": 0, "a": 1}, 0, {}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": 0}, 0.5, {"0": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, {"$num": "Infinity"}, {"0": "unchanged", "1": "unchanged"}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, {"$num": "NaN"}, {}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{}, -1, {}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"version": 1, "__proto__": {"p": 1}}, 2, {"1": {"merge": {"__proto__": {"q": 2}}}}, {"$undefined": true}]}
+{"fn": "upgradedCase", "args": [{"b": 1, "1": "x", "version": 0}, 1, {"0": "unchanged"}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": [null, 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": [{"$undefined": true}, 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["[]", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["null", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["3", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"a\":1}", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"__proto__\":{\"polluted\":true},\"a\":1}", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"version\":1}", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"version\":0,\"a\":[1,{\"b\":null}]}", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"a\":1,\"a\":2,\"b\":3}", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["  {\"x\":1e400} ", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"s\":\"\\ud83c\\udf89 \\u00e9\"}", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"version\":\"1\"}", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"a\":1,}", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["﻿{}", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"version\":2}", 1, {"0": "unchanged", "1": {"merge": {"m": 1}}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"a\":1}", 1, {"0": null}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"a\":1}", 1, {"0": {"value": 5}}, {"$undefined": true}]}
+{"fn": "parseSavedCase", "args": ["{\"v\":0}", 2, {"0": "unchanged", "1": "unchanged"}, "v"]}
+{"fn": "versionedJsonCase", "args": [{"version": 7, "a": 1}, 2, {"$undefined": true}, {"$undefined": true}]}
+{"fn": "versionedJsonCase", "args": [{"version": "0.3.1"}, 1, "schemaVersion", {"$undefined": true}]}
+{"fn": "versionedJsonCase", "args": [{}, 1, {"$undefined": true}, 2]}
+{"fn": "versionedJsonCase", "args": [{"a": [1, {"b": []}, {}], "c": {}}, 3, "v", 4]}
+{"fn": "versionedJsonCase", "args": [{"a": 1}, {"$num": "NaN"}, {"$undefined": true}, {"$undefined": true}]}
+{"fn": "versionedJsonCase", "args": [{"a": 1}, {"$num": "Infinity"}, {"$undefined": true}, 1.9]}
+{"fn": "versionedJsonCase", "args": [{"a": 1}, {"$num": "-0"}, {"$undefined": true}, -3]}
+{"fn": "versionedJsonCase", "args": [{"a": 1}, 1.5, {"$undefined": true}, 20]}
+{"fn": "versionedJsonCase", "args": [{"a": 1}, 1, {"$undefined": true}, {"$num": "NaN"}]}
+{"fn": "versionedJsonCase", "args": [{"a": 1}, 1, {"$undefined": true}, 0.5]}
+{"fn": "versionedJsonCase", "args": [[1, 2], 1, {"$undefined": true}, {"$undefined": true}]}
+{"fn": "versionedJsonCase", "args": [null, 1, {"$undefined": true}, {"$undefined": true}]}
+{"fn": "versionedJsonCase", "args": [{"b": 1, "10": 2, "2": 3}, 1, "1", {"$undefined": true}]}
+{"fn": "versionedJsonCase", "args": [{"x": {"$undefined": true}, "y": {"$num": "NaN"}, "z": [{"$undefined": true}]}, 1, {"$undefined": true}, {"$undefined": true}]}
+{"fn": "versionedJsonCase", "args": [{"s": "é🎉\n "}, 1e+21, {"$undefined": true}, 1]}
+{"fn": "versionedJsonCase", "args": [{"a": 1}, 1, "", {"$undefined": true}]}
+{"fn": "versionedJsonCase", "args": [{}, 1, "__proto__", {"$undefined": true}]}
+{"fn": "unchangedCase", "args": [{}]}
+{"fn": "unchangedCase", "args": [{"a": 1, "2": 3, "1": 0}]}
+{"fn": "unchangedCase", "args": [{"version": 1}]}

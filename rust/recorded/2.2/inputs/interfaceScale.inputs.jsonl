@@ -1,0 +1,148 @@
+{"fn": "interfaceScalePercent", "args": [0]}
+{"fn": "validInterfaceScale", "args": [0]}
+{"fn": "steppedInterfaceScale", "args": [0]}
+{"fn": "interfaceScaleLabel", "args": [0]}
+{"fn": "interfaceScalePercent", "args": [{"$num": "-0"}]}
+{"fn": "validInterfaceScale", "args": [{"$num": "-0"}]}
+{"fn": "steppedInterfaceScale", "args": [{"$num": "-0"}]}
+{"fn": "interfaceScaleLabel", "args": [{"$num": "-0"}]}
+{"fn": "interfaceScalePercent", "args": [1]}
+{"fn": "validInterfaceScale", "args": [1]}
+{"fn": "steppedInterfaceScale", "args": [1]}
+{"fn": "interfaceScaleLabel", "args": [1]}
+{"fn": "interfaceScalePercent", "args": [0.8]}
+{"fn": "validInterfaceScale", "args": [0.8]}
+{"fn": "steppedInterfaceScale", "args": [0.8]}
+{"fn": "interfaceScaleLabel", "args": [0.8]}
+{"fn": "interfaceScalePercent", "args": [0.85]}
+{"fn": "validInterfaceScale", "args": [0.85]}
+{"fn": "steppedInterfaceScale", "args": [0.85]}
+{"fn": "interfaceScaleLabel", "args": [0.85]}
+{"fn": "interfaceScalePercent", "args": [1.5]}
+{"fn": "validInterfaceScale", "args": [1.5]}
+{"fn": "steppedInterfaceScale", "args": [1.5]}
+{"fn": "interfaceScaleLabel", "args": [1.5]}
+{"fn": "interfaceScalePercent", "args": [1.55]}
+{"fn": "validInterfaceScale", "args": [1.55]}
+{"fn": "steppedInterfaceScale", "args": [1.55]}
+{"fn": "interfaceScaleLabel", "args": [1.55]}
+{"fn": "interfaceScalePercent", "args": [0.75]}
+{"fn": "validInterfaceScale", "args": [0.75]}
+{"fn": "steppedInterfaceScale", "args": [0.75]}
+{"fn": "interfaceScaleLabel", "args": [0.75]}
+{"fn": "interfaceScalePercent", "args": [0.79]}
+{"fn": "validInterfaceScale", "args": [0.79]}
+{"fn": "steppedInterfaceScale", "args": [0.79]}
+{"fn": "interfaceScaleLabel", "args": [0.79]}
+{"fn": "interfaceScalePercent", "args": [0.8000001]}
+{"fn": "validInterfaceScale", "args": [0.8000001]}
+{"fn": "steppedInterfaceScale", "args": [0.8000001]}
+{"fn": "interfaceScaleLabel", "args": [0.8000001]}
+{"fn": "interfaceScalePercent", "args": [1.234]}
+{"fn": "validInterfaceScale", "args": [1.234]}
+{"fn": "steppedInterfaceScale", "args": [1.234]}
+{"fn": "interfaceScaleLabel", "args": [1.234]}
+{"fn": "interfaceScalePercent", "args": [1.025]}
+{"fn": "validInterfaceScale", "args": [1.025]}
+{"fn": "steppedInterfaceScale", "args": [1.025]}
+{"fn": "interfaceScaleLabel", "args": [1.025]}
+{"fn": "interfaceScalePercent", "args": [1.075]}
+{"fn": "validInterfaceScale", "args": [1.075]}
+{"fn": "steppedInterfaceScale", "args": [1.075]}
+{"fn": "interfaceScaleLabel", "args": [1.075]}
+{"fn": "interfaceScalePercent", "args": [-1]}
+{"fn": "validInterfaceScale", "args": [-1]}
+{"fn": "steppedInterfaceScale", "args": [-1]}
+{"fn": "interfaceScaleLabel", "args": [-1]}
+{"fn": "interfaceScalePercent", "args": [{"$num": "NaN"}]}
+{"fn": "validInterfaceScale", "args": [{"$num": "NaN"}]}
+{"fn": "steppedInterfaceScale", "args": [{"$num": "NaN"}]}
+{"fn": "interfaceScaleLabel", "args": [{"$num": "NaN"}]}
+{"fn": "interfaceScalePercent", "args": [{"$num": "Infinity"}]}
+{"fn": "validInterfaceScale", "args": [{"$num": "Infinity"}]}
+{"fn": "steppedInterfaceScale", "args": [{"$num": "Infinity"}]}
+{"fn": "interfaceScaleLabel", "args": [{"$num": "Infinity"}]}
+{"fn": "interfaceScalePercent", "args": [{"$num": "-Infinity"}]}
+{"fn": "validInterfaceScale", "args": [{"$num": "-Infinity"}]}
+{"fn": "steppedInterfaceScale", "args": [{"$num": "-Infinity"}]}
+{"fn": "interfaceScaleLabel", "args": [{"$num": "-Infinity"}]}
+{"fn": "interfaceScalePercent", "args": [1e+300]}
+{"fn": "validInterfaceScale", "args": [1e+300]}
+{"fn": "steppedInterfaceScale", "args": [1e+300]}
+{"fn": "interfaceScaleLabel", "args": [1e+300]}
+{"fn": "interfaceScalePercent", "args": [-1e+300]}
+{"fn": "validInterfaceScale", "args": [-1e+300]}
+{"fn": "steppedInterfaceScale", "args": [-1e+300]}
+{"fn": "interfaceScaleLabel", "args": [-1e+300]}
+{"fn": "interfaceScalePercent", "args": [0.005]}
+{"fn": "validInterfaceScale", "args": [0.005]}
+{"fn": "steppedInterfaceScale", "args": [0.005]}
+{"fn": "interfaceScaleLabel", "args": [0.005]}
+{"fn": "interfaceScalePercent", "args": [0.995]}
+{"fn": "validInterfaceScale", "args": [0.995]}
+{"fn": "steppedInterfaceScale", "args": [0.995]}
+{"fn": "interfaceScaleLabel", "args": [0.995]}
+{"fn": "interfaceScalePercent", "args": [2]}
+{"fn": "validInterfaceScale", "args": [2]}
+{"fn": "steppedInterfaceScale", "args": [2]}
+{"fn": "interfaceScaleLabel", "args": [2]}
+{"fn": "interfaceScalePercent", "args": [1.12500001]}
+{"fn": "validInterfaceScale", "args": [1.12500001]}
+{"fn": "steppedInterfaceScale", "args": [1.12500001]}
+{"fn": "interfaceScaleLabel", "args": [1.12500001]}
+{"fn": "interfaceScalePercent", "args": [1e-07]}
+{"fn": "validInterfaceScale", "args": [1e-07]}
+{"fn": "steppedInterfaceScale", "args": [1e-07]}
+{"fn": "interfaceScaleLabel", "args": [1e-07]}
+{"fn": "interfaceScalePercent", "args": [0.80000001]}
+{"fn": "validInterfaceScale", "args": [0.80000001]}
+{"fn": "steppedInterfaceScale", "args": [0.80000001]}
+{"fn": "interfaceScaleLabel", "args": [0.80000001]}
+{"fn": "interfaceScalePercent", "args": [1.1]}
+{"fn": "validInterfaceScale", "args": [1.1]}
+{"fn": "steppedInterfaceScale", "args": [1.1]}
+{"fn": "interfaceScaleLabel", "args": [1.1]}
+{"fn": "validInterfaceScale", "args": [null]}
+{"fn": "validInterfaceScale", "args": [{"$undefined": true}]}
+{"fn": "validInterfaceScale", "args": ["1"]}
+{"fn": "validInterfaceScale", "args": ["1.1"]}
+{"fn": "validInterfaceScale", "args": [true]}
+{"fn": "validInterfaceScale", "args": [[1]]}
+{"fn": "validInterfaceScale", "args": [{}]}
+{"fn": "sameInterfaceScale", "args": [1, 1]}
+{"fn": "sameInterfaceScale", "args": [1, 1.004]}
+{"fn": "sameInterfaceScale", "args": [1, 1.005]}
+{"fn": "sameInterfaceScale", "args": [1.1, 1.1000001]}
+{"fn": "sameInterfaceScale", "args": [{"$num": "NaN"}, {"$num": "NaN"}]}
+{"fn": "sameInterfaceScale", "args": [0, {"$num": "-0"}]}
+{"fn": "sameInterfaceScale", "args": [{"$num": "Infinity"}, {"$num": "Infinity"}]}
+{"fn": "sameInterfaceScale", "args": [-0.004, 0]}
+{"fn": "rootLength", "args": [100, 1]}
+{"fn": "windowLength", "args": [100, 1]}
+{"fn": "rootLength", "args": [100, 1.1]}
+{"fn": "windowLength", "args": [100, 1.1]}
+{"fn": "rootLength", "args": [0, 0]}
+{"fn": "windowLength", "args": [0, 0]}
+{"fn": "rootLength", "args": [1, 0]}
+{"fn": "windowLength", "args": [1, 0]}
+{"fn": "rootLength", "args": [{"$num": "NaN"}, 1]}
+{"fn": "windowLength", "args": [{"$num": "NaN"}, 1]}
+{"fn": "rootLength", "args": [-5, 2]}
+{"fn": "windowLength", "args": [-5, 2]}
+{"fn": "rootLength", "args": [{"$num": "Infinity"}, 2]}
+{"fn": "windowLength", "args": [{"$num": "Infinity"}, 2]}
+{"fn": "rootLength", "args": [1e+21, 1.5]}
+{"fn": "windowLength", "args": [1e+21, 1.5]}
+{"fn": "snappedToGrid", "args": [10.3, 2]}
+{"fn": "snappedToGrid", "args": [10.25, 2]}
+{"fn": "snappedToGrid", "args": [-10.25, 2]}
+{"fn": "snappedToGrid", "args": [-0.2, 1]}
+{"fn": "snappedToGrid", "args": [0.3333333333333333, 3]}
+{"fn": "snappedToGrid", "args": [5.5, 1]}
+{"fn": "snappedToGrid", "args": [0.1, 0]}
+{"fn": "snappedToGrid", "args": [{"$num": "NaN"}, 2]}
+{"fn": "snappedToGrid", "args": [7, {"$num": "NaN"}]}
+{"fn": "snappedToGrid", "args": [{"$num": "Infinity"}, 2]}
+{"fn": "snappedToGrid", "args": [1.005, 100]}
+{"fn": "snappedToGrid", "args": [2.5, 1]}
+{"fn": "snappedToGrid", "args": [-2.5, 1]}

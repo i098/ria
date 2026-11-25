@@ -1,0 +1,72 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/fallback.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "fallback-rs",
+  "exports": [
+    {
+      "name": "passwordFailureCase",
+      "file": "apps/browser/src/lib/fallback.harness.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "asError",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "orWarnCase",
+      "file": "apps/browser/src/lib/fallback.harness.ts",
+      "line": 11,
+      "params": [
+        {
+          "name": "fallback",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "action",
+          "ts_type": "\"browser import\" | \"csv import\" | \"settings edit\" | \"settings delete\" | \"sync delete\" | undefined",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "asError",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; warned: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

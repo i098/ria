@@ -1,0 +1,107 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/emoji.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "emoji-rs",
+  "exports": [
+    {
+      "name": "emojiSections",
+      "file": "apps/browser/src/lib/emoji.ts",
+      "line": 12,
+      "params": [],
+      "returns": "{ title: string; emoji: { emoji: string; name: string; nameWords: string; words: string }[] }[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "searchTerms",
+      "file": "apps/browser/src/lib/emoji.ts",
+      "line": 23,
+      "params": [
+        {
+          "name": "query",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "matchesTerms",
+      "file": "apps/browser/src/lib/emoji.ts",
+      "line": 31,
+      "params": [
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "terms",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "searchEmoji",
+      "file": "apps/browser/src/lib/emoji.ts",
+      "line": 33,
+      "params": [
+        {
+          "name": "terms",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ emoji: string; name: string; nameWords: string; words: string }[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "sameIcon",
+      "file": "apps/browser/src/lib/emoji.ts",
+      "line": 48,
+      "params": [
+        {
+          "name": "a",
+          "ts_type": "string | null",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "b",
+          "ts_type": "string | null",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

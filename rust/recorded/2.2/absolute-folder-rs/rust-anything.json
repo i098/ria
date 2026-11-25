@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/absoluteFolder.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "absolutefolder-rs",
+  "exports": [
+    {
+      "name": "isAbsoluteFolder",
+      "file": "apps/browser/src/lib/absoluteFolder.ts",
+      "line": 1,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

@@ -1,0 +1,18 @@
+{"fn": "singleLine", "args": ["(3) Owen Williams ⚡ on X: \"also me\nseveral hours later:\n\nit works\" / X"]}
+{"fn": "singleLine", "args": ["a \r\n  b"]}
+{"fn": "singleLine", "args": ["a b"]}
+{"fn": "singleLine", "args": ["\nleading and trailing\n"]}
+{"fn": "singleLine", "args": ["  Inbox (3)  —  Gmail "]}
+{"fn": "singleLine", "args": [""]}
+{"fn": "singleLine", "args": ["ab"]}
+{"fn": "singleLine", "args": ["  "]}
+{"fn": "singleLine", "args": ["a  b"]}
+{"fn": "singleLine", "args": ["x\u000by\fz"]}
+{"fn": "singleLine", "args": [" "]}
+{"fn": "singleLine", "args": ["a \n b"]}
+{"fn": "singleLine", "args": ["a\t\r\n\tb　\n﻿c"]}
+{"fn": "singleLine", "args": ["no breaks\tat all "]}
+{"fn": "singleLine", "args": ["\n"]}
+{"fn": "singleLine", "args": ["\r\r\n\n"]}
+{"fn": "singleLine", "args": ["a  b"]}
+{"fn": "singleLine", "args": ["é\n🎉"]}

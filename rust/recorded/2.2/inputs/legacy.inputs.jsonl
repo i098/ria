@@ -1,0 +1,45 @@
+{"fn": "fromLegacyUrl", "args": ["netnyahoo://history"]}
+{"fn": "fromLegacyUrl", "args": ["view-source:netnyahoo://settings/sync"]}
+{"fn": "fromLegacyUrl", "args": ["netnyahoo://yahu?level=2"]}
+{"fn": "fromLegacyUrl", "args": ["chrome://yahu"]}
+{"fn": "fromLegacyUrl", "args": ["chrome://yahuu"]}
+{"fn": "fromLegacyUrl", "args": ["https://example.com/?next=netnyahoo://history"]}
+{"fn": "fromLegacyUrl", "args": ["NETNYAHOO://History?q=a"]}
+{"fn": "fromLegacyUrl", "args": ["View-Source:CHROME://YAHU/x"]}
+{"fn": "fromLegacyUrl", "args": ["netnyahoo://yahu#x"]}
+{"fn": "fromLegacyUrl", "args": ["netnyahoo://yahu/"]}
+{"fn": "fromLegacyUrl", "args": ["netnyahoo://"]}
+{"fn": "fromLegacyUrl", "args": ["netnyahoo:/"]}
+{"fn": "fromLegacyUrl", "args": ["view-source:"]}
+{"fn": "fromLegacyUrl", "args": ["chrome://yahué"]}
+{"fn": "fromLegacyUrl", "args": ["netnyahoo://é"]}
+{"fn": "fromLegacyUrl", "args": ["Kchrome://yahu"]}
+{"fn": "fromLegacyUrl", "args": ["view-source:view-source:netnyahoo://x"]}
+{"fn": "fromLegacyUrl", "args": [""]}
+{"fn": "fromLegacyValue", "args": [{"u": "https://example.com", "t": "Example"}]}
+{"fn": "fromLegacyValue", "args": [{"v": {"newSmallYahu": ["cmd+opt+n"], "newTab": ["cmd+t"]}}]}
+{"fn": "fromLegacyValue", "args": [{"u": "netnyahoo://downloads", "t": "Downloads"}]}
+{"fn": "fromLegacyValue", "args": [{"smallYahuSize": [1, 2], "littleArdiaSize": [3, 4]}]}
+{"fn": "fromLegacyValue", "args": [{"littleArdiaSize": [3, 4], "smallYahuSize": [1, 2]}]}
+{"fn": "fromLegacyValue", "args": ["netnyahoo://x"]}
+{"fn": "fromLegacyValue", "args": ["x"]}
+{"fn": "fromLegacyValue", "args": [["a", "netnyahoo://b"]]}
+{"fn": "fromLegacyValue", "args": [["a", "b"]]}
+{"fn": "fromLegacyValue", "args": [[[["netnyahoo://c"]]]]}
+{"fn": "fromLegacyValue", "args": [[]]}
+{"fn": "fromLegacyValue", "args": [{}]}
+{"fn": "fromLegacyValue", "args": [null]}
+{"fn": "fromLegacyValue", "args": [{"$undefined": true}]}
+{"fn": "fromLegacyValue", "args": [5]}
+{"fn": "fromLegacyValue", "args": [{"$num": "NaN"}]}
+{"fn": "fromLegacyValue", "args": [{"$num": "-0"}]}
+{"fn": "fromLegacyValue", "args": [true]}
+{"fn": "fromLegacyValue", "args": [{"openLinksInSmallYahu": true, "toggleOpenLinksInSmallYahu": ["k"]}]}
+{"fn": "fromLegacyValue", "args": [{"a": {"b": {"c": "chrome://yahu"}}}]}
+{"fn": "fromLegacyValue", "args": [{"a": [1, {"newSmallYahu": 1}]}]}
+{"fn": "fromLegacyValue", "args": [{"toString": "x"}]}
+{"fn": "fromLegacyValue", "args": [{"constructor": 1, "valueOf": 2}]}
+{"fn": "fromLegacyValue", "args": [{"__proto__": "netnyahoo://p"}]}
+{"fn": "fromLegacyValue", "args": [{"hasOwnProperty": {"a": 1}}]}
+{"fn": "fromLegacyValue", "args": [{"a": {"$undefined": true}, "b": null}]}
+{"fn": "fromLegacyValue", "args": [{"2": "netnyahoo://two", "1": "x", "b": "y"}]}

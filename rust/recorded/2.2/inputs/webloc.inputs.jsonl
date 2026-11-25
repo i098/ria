@@ -1,0 +1,69 @@
+{"fn": "weblocText", "args": ["https://example.com/"]}
+{"fn": "weblocText", "args": ["https://example.com/", "lk1"]}
+{"fn": "weblocText", "args": ["https://example.com/", null]}
+{"fn": "weblocText", "args": ["https://example.com/", ""]}
+{"fn": "weblocText", "args": ["https://example.com/", {"$undefined": true}]}
+{"fn": "weblocText", "args": ["https://example.com/?a=1&b=<2>"]}
+{"fn": "weblocText", "args": ["https://example.com/?a=1&b=<2>", "lk1"]}
+{"fn": "weblocText", "args": ["https://example.com/?a=1&b=<2>", null]}
+{"fn": "weblocText", "args": ["https://example.com/?a=1&b=<2>", ""]}
+{"fn": "weblocText", "args": ["https://example.com/?a=1&b=<2>", {"$undefined": true}]}
+{"fn": "weblocText", "args": ["https://例え.jp/パス"]}
+{"fn": "weblocText", "args": ["https://例え.jp/パス", "lk1"]}
+{"fn": "weblocText", "args": ["https://例え.jp/パス", null]}
+{"fn": "weblocText", "args": ["https://例え.jp/パス", ""]}
+{"fn": "weblocText", "args": ["https://例え.jp/パス", {"$undefined": true}]}
+{"fn": "weblocText", "args": ["https://a.com/?x=1&y=2"]}
+{"fn": "weblocText", "args": ["https://a.com/?x=1&y=2", "lk1"]}
+{"fn": "weblocText", "args": ["https://a.com/?x=1&y=2", null]}
+{"fn": "weblocText", "args": ["https://a.com/?x=1&y=2", ""]}
+{"fn": "weblocText", "args": ["https://a.com/?x=1&y=2", {"$undefined": true}]}
+{"fn": "weblocText", "args": ["https://a.example/"]}
+{"fn": "weblocText", "args": ["https://a.example/", "lk1"]}
+{"fn": "weblocText", "args": ["https://a.example/", null]}
+{"fn": "weblocText", "args": ["https://a.example/", ""]}
+{"fn": "weblocText", "args": ["https://a.example/", {"$undefined": true}]}
+{"fn": "parseWebloc", "args": ["<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<plist version=\"1.0\">\n<dict>\n  <key>URL</key>\n  <string>https://news.ycombinator.com/item?id=1&amp;p=2&#38;q=&#x33;</string>\n</dict>\n</plist>"]}
+{"fn": "weblocLinkId", "args": ["<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<plist version=\"1.0\">\n<dict>\n  <key>URL</key>\n  <string>https://news.ycombinator.com/item?id=1&amp;p=2&#38;q=&#x33;</string>\n</dict>\n</plist>"]}
+{"fn": "parseWebloc", "args": ["<plist><dict><key>Name</key><string>x</string></dict></plist>"]}
+{"fn": "weblocLinkId", "args": ["<plist><dict><key>Name</key><string>x</string></dict></plist>"]}
+{"fn": "parseWebloc", "args": ["<plist><dict><key>URL</key><string>  </string></dict></plist>"]}
+{"fn": "weblocLinkId", "args": ["<plist><dict><key>URL</key><string>  </string></dict></plist>"]}
+{"fn": "parseWebloc", "args": ["not a plist"]}
+{"fn": "weblocLinkId", "args": ["not a plist"]}
+{"fn": "parseWebloc", "args": ["<plist version=\"1.0\"><dict><!-- <key>URL</key><string>https://evil.example/</string> --><key>URL</key><string>https://real.example/</string></dict></plist>"]}
+{"fn": "weblocLinkId", "args": ["<plist version=\"1.0\"><dict><!-- <key>URL</key><string>https://evil.example/</string> --><key>URL</key><string>https://real.example/</string></dict></plist>"]}
+{"fn": "parseWebloc", "args": ["<KEY> url </Key>\n<STRING>&LT;a&Gt;&quot;&apos;&nbsp;&constructor;&Amp;</String>"]}
+{"fn": "weblocLinkId", "args": ["<KEY> url </Key>\n<STRING>&LT;a&Gt;&quot;&apos;&nbsp;&constructor;&Amp;</String>"]}
+{"fn": "parseWebloc", "args": ["<key>URL</key><string>&#0;&#x10FFFF;&#x110000;&#99999999999999999999;&#X41;&#x;&#;&#65</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>URL</key><string>&#0;&#x10FFFF;&#x110000;&#99999999999999999999;&#X41;&#x;&#;&#65</string>"]}
+{"fn": "parseWebloc", "args": ["<key>URL</key><string>&#xD800;x</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>URL</key><string>&#xD800;x</string>"]}
+{"fn": "parseWebloc", "args": ["<key>URL</key><string>&#128512;&#x1F600;</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>URL</key><string>&#128512;&#x1F600;</string>"]}
+{"fn": "parseWebloc", "args": ["<key>﻿URL </key> <string>a</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>﻿URL </key> <string>a</string>"]}
+{"fn": "parseWebloc", "args": ["<key>URL</key><string>a</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>URL</key><string>a</string>"]}
+{"fn": "parseWebloc", "args": ["<key>UR&#76;</key><string>a</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>UR&#76;</key><string>a</string>"]}
+{"fn": "parseWebloc", "args": ["<keſ>URL</key><string>a</string>"]}
+{"fn": "weblocLinkId", "args": ["<keſ>URL</key><string>a</string>"]}
+{"fn": "parseWebloc", "args": ["<key>URL</key><ſtring>a</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>URL</key><ſtring>a</string>"]}
+{"fn": "parseWebloc", "args": ["<key>ArdiaLink</key><string> id-1 </string><key>URL</key><string>u</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>ArdiaLink</key><string> id-1 </string><key>URL</key><string>u</string>"]}
+{"fn": "parseWebloc", "args": ["<key>ARDIALINK</key><string>x</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>ARDIALINK</key><string>x</string>"]}
+{"fn": "parseWebloc", "args": ["<key>ArdiaLinK</key><string>x</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>ArdiaLinK</key><string>x</string>"]}
+{"fn": "parseWebloc", "args": ["<!-- unterminated <key>URL</key><string>a</string>"]}
+{"fn": "weblocLinkId", "args": ["<!-- unterminated <key>URL</key><string>a</string>"]}
+{"fn": "parseWebloc", "args": ["<!----><key>URL</key><string>b</string><!-- -->"]}
+{"fn": "weblocLinkId", "args": ["<!----><key>URL</key><string>b</string><!-- -->"]}
+{"fn": "parseWebloc", "args": ["<key>URL</key><string>\n multi\nline \n</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>URL</key><string>\n multi\nline \n</string>"]}
+{"fn": "parseWebloc", "args": ["<key>URL</key><string></string><key>URL</key><string>x</string>"]}
+{"fn": "weblocLinkId", "args": ["<key>URL</key><string></string><key>URL</key><string>x</string>"]}
+{"fn": "parseWebloc", "args": [""]}
+{"fn": "weblocLinkId", "args": [""]}

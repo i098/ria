@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/badgeFit.ts",
+  "files": 1,
+  "fingerprint": "a51621e5a33966a8",
+  "coverage": {
+    "lines": 15,
+    "reached": 15,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/badgeFit.ts",
+        "lines": 15,
+        "reached": 15,
+        "missed": ""
+      }
+    ]
+  }
+}

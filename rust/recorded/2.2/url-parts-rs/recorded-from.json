@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/urlParts.ts",
+  "files": 1,
+  "fingerprint": "a78448f7ff09b046",
+  "coverage": {
+    "lines": 112,
+    "reached": 112,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/urlParts.ts",
+        "lines": 112,
+        "reached": 112,
+        "missed": ""
+      }
+    ]
+  }
+}

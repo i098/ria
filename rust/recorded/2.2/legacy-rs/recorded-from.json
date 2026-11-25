@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/legacy.harness.ts",
+  "files": 1,
+  "fingerprint": "6c3d9e60926e922a",
+  "coverage": {
+    "lines": 56,
+    "reached": 56,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/legacy.harness.ts",
+        "lines": 9,
+        "reached": 9,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/legacy.ts",
+        "lines": 47,
+        "reached": 47,
+        "missed": ""
+      }
+    ]
+  }
+}

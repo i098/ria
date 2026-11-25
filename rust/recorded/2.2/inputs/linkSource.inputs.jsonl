@@ -1,0 +1,48 @@
+{"fn": "sourceMatches", "args": [[], null]}
+{"fn": "sourceMatches", "args": [[], {"$undefined": true}]}
+{"fn": "sourceMatches", "args": [[], {"bundleId": "com.apple.Safari", "appName": "Safari"}]}
+{"fn": "sourceMatches", "args": [[], {"bundleId": null, "appName": "Slack"}]}
+{"fn": "sourceMatches", "args": [[], {"bundleId": "", "appName": null}]}
+{"fn": "sourceMatches", "args": [[], {"bundleId": null, "appName": null}]}
+{"fn": "sourceMatches", "args": [[], {"bundleId": "com.Ü.app", "appName": "Ü"}]}
+{"fn": "sourceMatches", "args": [[], {"bundleId": "x", "appName": "i̇"}]}
+{"fn": "sourceMatches", "args": [["Safari"], null]}
+{"fn": "sourceMatches", "args": [["Safari"], {"$undefined": true}]}
+{"fn": "sourceMatches", "args": [["Safari"], {"bundleId": "com.apple.Safari", "appName": "Safari"}]}
+{"fn": "sourceMatches", "args": [["Safari"], {"bundleId": null, "appName": "Slack"}]}
+{"fn": "sourceMatches", "args": [["Safari"], {"bundleId": "", "appName": null}]}
+{"fn": "sourceMatches", "args": [["Safari"], {"bundleId": null, "appName": null}]}
+{"fn": "sourceMatches", "args": [["Safari"], {"bundleId": "com.Ü.app", "appName": "Ü"}]}
+{"fn": "sourceMatches", "args": [["Safari"], {"bundleId": "x", "appName": "i̇"}]}
+{"fn": "sourceMatches", "args": [["com.apple.Safari"], null]}
+{"fn": "sourceMatches", "args": [["com.apple.Safari"], {"$undefined": true}]}
+{"fn": "sourceMatches", "args": [["com.apple.Safari"], {"bundleId": "com.apple.Safari", "appName": "Safari"}]}
+{"fn": "sourceMatches", "args": [["com.apple.Safari"], {"bundleId": null, "appName": "Slack"}]}
+{"fn": "sourceMatches", "args": [["com.apple.Safari"], {"bundleId": "", "appName": null}]}
+{"fn": "sourceMatches", "args": [["com.apple.Safari"], {"bundleId": null, "appName": null}]}
+{"fn": "sourceMatches", "args": [["com.apple.Safari"], {"bundleId": "com.Ü.app", "appName": "Ü"}]}
+{"fn": "sourceMatches", "args": [["com.apple.Safari"], {"bundleId": "x", "appName": "i̇"}]}
+{"fn": "sourceMatches", "args": [["SLACK", "mail"], null]}
+{"fn": "sourceMatches", "args": [["SLACK", "mail"], {"$undefined": true}]}
+{"fn": "sourceMatches", "args": [["SLACK", "mail"], {"bundleId": "com.apple.Safari", "appName": "Safari"}]}
+{"fn": "sourceMatches", "args": [["SLACK", "mail"], {"bundleId": null, "appName": "Slack"}]}
+{"fn": "sourceMatches", "args": [["SLACK", "mail"], {"bundleId": "", "appName": null}]}
+{"fn": "sourceMatches", "args": [["SLACK", "mail"], {"bundleId": null, "appName": null}]}
+{"fn": "sourceMatches", "args": [["SLACK", "mail"], {"bundleId": "com.Ü.app", "appName": "Ü"}]}
+{"fn": "sourceMatches", "args": [["SLACK", "mail"], {"bundleId": "x", "appName": "i̇"}]}
+{"fn": "sourceMatches", "args": [["ü", "İ"], null]}
+{"fn": "sourceMatches", "args": [["ü", "İ"], {"$undefined": true}]}
+{"fn": "sourceMatches", "args": [["ü", "İ"], {"bundleId": "com.apple.Safari", "appName": "Safari"}]}
+{"fn": "sourceMatches", "args": [["ü", "İ"], {"bundleId": null, "appName": "Slack"}]}
+{"fn": "sourceMatches", "args": [["ü", "İ"], {"bundleId": "", "appName": null}]}
+{"fn": "sourceMatches", "args": [["ü", "İ"], {"bundleId": null, "appName": null}]}
+{"fn": "sourceMatches", "args": [["ü", "İ"], {"bundleId": "com.Ü.app", "appName": "Ü"}]}
+{"fn": "sourceMatches", "args": [["ü", "İ"], {"bundleId": "x", "appName": "i̇"}]}
+{"fn": "sourceMatches", "args": [[""], null]}
+{"fn": "sourceMatches", "args": [[""], {"$undefined": true}]}
+{"fn": "sourceMatches", "args": [[""], {"bundleId": "com.apple.Safari", "appName": "Safari"}]}
+{"fn": "sourceMatches", "args": [[""], {"bundleId": null, "appName": "Slack"}]}
+{"fn": "sourceMatches", "args": [[""], {"bundleId": "", "appName": null}]}
+{"fn": "sourceMatches", "args": [[""], {"bundleId": null, "appName": null}]}
+{"fn": "sourceMatches", "args": [[""], {"bundleId": "com.Ü.app", "appName": "Ü"}]}
+{"fn": "sourceMatches", "args": [[""], {"bundleId": "x", "appName": "i̇"}]}

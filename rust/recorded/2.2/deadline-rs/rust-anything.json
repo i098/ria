@@ -1,0 +1,48 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/deadline.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "deadline-rs",
+  "exports": [
+    {
+      "name": "withDeadlineCase",
+      "file": "apps/browser/src/lib/deadline.harness.ts",
+      "line": 4,
+      "params": [
+        {
+          "name": "kind",
+          "ts_type": "\"resolve\" | \"reject\" | \"never\"",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "ms",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "fallback",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "Promise<unknown>",
+      "is_async": true,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

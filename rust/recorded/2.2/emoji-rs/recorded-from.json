@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/emoji.ts",
+  "files": 1,
+  "fingerprint": "ed487a041fe6a746",
+  "coverage": {
+    "lines": 1936,
+    "reached": 1936,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/emoji.ts",
+        "lines": 37,
+        "reached": 37,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/emojiData.ts",
+        "lines": 1899,
+        "reached": 1899,
+        "missed": ""
+      }
+    ]
+  }
+}

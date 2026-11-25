@@ -1,0 +1,85 @@
+{"fn":"errorTextCase","args":[{"a":{"b":"c"}},false],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[0,false],"ok":"0"}
+{"fn":"errorTextCase","args":[{"a":"b"},false],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[[],true],"ok":""}
+{"fn":"errorTextCase","args":[[],false],"ok":""}
+{"fn":"errorTextCase","args":["x",true],"ok":"x"}
+{"fn":"errorTextCase","args":[{},true],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[0,true],"ok":"0"}
+{"fn":"errorTextCase","args":[{},false],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[{"a":"b"},true],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[["a",1],true],"ok":"a,1"}
+{"fn":"errorTextCase","args":[true,true],"ok":"true"}
+{"fn":"errorTextCase","args":[["a",1],false],"ok":"a,1"}
+{"fn":"errorTextCase","args":[null,true],"ok":"null"}
+{"fn":"errorTextCase","args":[null,false],"ok":"null"}
+{"fn":"errorTextCase","args":["x",false],"ok":"x"}
+{"fn":"errorTextCase","args":[true,false],"ok":"true"}
+{"fn":"errorTextCase","args":[{"a":{"b":"c"}},true],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6},false],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7},false],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[[3,1,2],false],"ok":"3,1,2"}
+{"fn":"errorTextCase","args":[null,false],"ok":"null"}
+{"fn":"errorTextCase","args":[null,true],"ok":"null"}
+{"fn":"errorTextCase","args":[{"$undefined":true},false],"ok":"undefined"}
+{"fn":"errorTextCase","args":[{"$undefined":true},true],"ok":"undefined"}
+{"fn":"errorTextCase","args":[true,false],"ok":"true"}
+{"fn":"errorTextCase","args":[true,true],"ok":"true"}
+{"fn":"errorTextCase","args":[false,false],"ok":"false"}
+{"fn":"errorTextCase","args":[false,true],"ok":"false"}
+{"fn":"errorTextCase","args":[0,false],"ok":"0"}
+{"fn":"errorTextCase","args":[0,true],"ok":"0"}
+{"fn":"errorTextCase","args":[{"$num":"-0"},false],"ok":"0"}
+{"fn":"errorTextCase","args":[{"$num":"-0"},true],"ok":"0"}
+{"fn":"errorTextCase","args":[1.5,false],"ok":"1.5"}
+{"fn":"errorTextCase","args":[1.5,true],"ok":"1.5"}
+{"fn":"errorTextCase","args":[-3,false],"ok":"-3"}
+{"fn":"errorTextCase","args":[-3,true],"ok":"-3"}
+{"fn":"errorTextCase","args":[{"$num":"NaN"},false],"ok":"NaN"}
+{"fn":"errorTextCase","args":[{"$num":"NaN"},true],"ok":"NaN"}
+{"fn":"errorTextCase","args":[{"$num":"Infinity"},false],"ok":"Infinity"}
+{"fn":"errorTextCase","args":[{"$num":"Infinity"},true],"ok":"Infinity"}
+{"fn":"errorTextCase","args":[{"$num":"-Infinity"},false],"ok":"-Infinity"}
+{"fn":"errorTextCase","args":[{"$num":"-Infinity"},true],"ok":"-Infinity"}
+{"fn":"errorTextCase","args":["",false],"ok":""}
+{"fn":"errorTextCase","args":["",true],"ok":""}
+{"fn":"errorTextCase","args":["x",false],"ok":"x"}
+{"fn":"errorTextCase","args":["x",true],"ok":"x"}
+{"fn":"errorTextCase","args":["ünï 🎉",false],"ok":"ünï 🎉"}
+{"fn":"errorTextCase","args":["ünï 🎉",true],"ok":"ünï 🎉"}
+{"fn":"errorTextCase","args":[[],false],"ok":""}
+{"fn":"errorTextCase","args":[[],true],"ok":""}
+{"fn":"errorTextCase","args":[[1,"a"],false],"ok":"1,a"}
+{"fn":"errorTextCase","args":[[1,"a"],true],"ok":"1,a"}
+{"fn":"errorTextCase","args":[["a","b"],false],"ok":"a,b"}
+{"fn":"errorTextCase","args":[["a","b"],true],"ok":"a,b"}
+{"fn":"errorTextCase","args":[["a",null],false],"ok":"a,"}
+{"fn":"errorTextCase","args":[["a",null],true],"ok":"a,"}
+{"fn":"errorTextCase","args":[[{"$undefined":true}],false],"ok":""}
+{"fn":"errorTextCase","args":[[{"$undefined":true}],true],"ok":""}
+{"fn":"errorTextCase","args":[{},false],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[{},true],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[{"a":1},false],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[{"a":1},true],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[{"a":{"$undefined":true},"b":[{"$num":"NaN"}]},false],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[{"a":{"$undefined":true},"b":[{"$num":"NaN"}]},true],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[[[1,2],[3]],false],"ok":"1,2,3"}
+{"fn":"errorTextCase","args":[[[1,2],[3]],true],"ok":"1,2,3"}
+{"fn":"errorTextCase","args":[{"$x":1},false],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[{"$x":1},true],"ok":"[object Object]"}
+{"fn":"errorTextCase","args":[1e+21,false],"ok":"1e+21"}
+{"fn":"errorTextCase","args":[1e+21,true],"ok":"1e+21"}
+{"fn":"errorTextCase","args":[1e-7,false],"ok":"1e-7"}
+{"fn":"errorTextCase","args":[1e-7,true],"ok":"1e-7"}
+{"fn":"errorTextCase","args":[123.456,false],"ok":"123.456"}
+{"fn":"errorTextCase","args":[123.456,true],"ok":"123.456"}
+{"fn":"errorTextCase","args":[-1e-7,false],"ok":"-1e-7"}
+{"fn":"errorTextCase","args":[-1e-7,true],"ok":"-1e-7"}
+{"fn":"errorTextCase","args":[9007199254740992,false],"ok":"9007199254740992"}
+{"fn":"errorTextCase","args":[9007199254740992,true],"ok":"9007199254740992"}
+{"fn":"errorTextCase","args":[[null,{"$undefined":true},1],false],"ok":",,1"}
+{"fn":"errorTextCase","args":[[null,{"$undefined":true},1],true],"ok":",,1"}
+{"fn":"errorTextCase","args":[[{"a":1},[]],false],"ok":"[object Object],"}
+{"fn":"errorTextCase","args":[[{"a":1},[]],true],"ok":"[object Object],"}
+{"fn":"errorTextCase","args":["Could not save the password",false],"ok":"Could not save the password"}
+{"fn":"errorTextCase","args":["Could not save the password",true],"ok":"Could not save the password"}

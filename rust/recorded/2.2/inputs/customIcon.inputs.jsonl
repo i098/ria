@@ -1,0 +1,18 @@
+{"fn": "symbolIcon", "args": [""]}
+{"fn": "symbolIcon", "args": ["star"]}
+{"fn": "symbolIcon", "args": ["star.fill"]}
+{"fn": "symbolIcon", "args": ["symbol:x"]}
+{"fn": "symbolIcon", "args": ["ünï 🎉"]}
+{"fn": "symbolIcon", "args": [" "]}
+{"fn": "iconSymbol", "args": [null]}
+{"fn": "iconSymbol", "args": [{"$undefined": true}]}
+{"fn": "iconSymbol", "args": [""]}
+{"fn": "iconSymbol", "args": ["symbol:"]}
+{"fn": "iconSymbol", "args": ["symbol:star"]}
+{"fn": "iconSymbol", "args": ["symbol:star.fill"]}
+{"fn": "iconSymbol", "args": ["Symbol:star"]}
+{"fn": "iconSymbol", "args": ["symbolstar"]}
+{"fn": "iconSymbol", "args": ["xsymbol:star"]}
+{"fn": "iconSymbol", "args": ["symbol:🎉 ü"]}
+{"fn": "iconSymbol", "args": ["https://x/y.png"]}
+{"fn": "iconSymbol", "args": ["symbol:symbol:a"]}

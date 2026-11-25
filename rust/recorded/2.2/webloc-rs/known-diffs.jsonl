@@ -1,0 +1,1 @@
+{"fn": "parseWebloc", "args": ["<key>URL</key><string>&#xD800;x</string>"], "actual": {"ok": "�x"}, "reason": "lone surrogate: &#xD800; decodes to a lone surrogate, which a Rust String cannot hold, so the port gives U+FFFD"}

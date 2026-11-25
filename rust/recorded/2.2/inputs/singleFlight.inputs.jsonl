@@ -1,0 +1,12 @@
+{"fn":"replaySingleFlight","args":[[{"join":true,"repeat":false,"fail":false},{"join":false,"repeat":false,"fail":false}],[]]}
+{"fn":"replaySingleFlight","args":[[{"join":true,"repeat":false,"fail":false},{"join":false,"repeat":false,"fail":false},{"join":false,"repeat":false,"fail":false}],[]]}
+{"fn":"replaySingleFlight","args":[[{"join":false,"repeat":true,"fail":false},{"join":false,"repeat":true,"fail":false}],[true,false]]}
+{"fn":"replaySingleFlight","args":[[{"join":false,"repeat":false,"fail":true},{"join":false,"repeat":false,"fail":false}],[]]}
+{"fn":"replaySingleFlight","args":[[],[]]}
+{"fn":"replaySingleFlight","args":[[{"join":true,"repeat":true,"fail":false}],[false]]}
+{"fn":"replaySingleFlight","args":[[{"join":true,"repeat":false,"fail":false},{"join":true,"repeat":false,"fail":false},{"join":true,"repeat":false,"fail":false},{"join":false,"repeat":false,"fail":false}],[true,true,false]]}
+{"fn":"replaySingleFlight","args":[[{"join":true,"repeat":false,"fail":true},{"join":false,"repeat":false,"fail":false},{"join":false,"repeat":true,"fail":false},{"join":false,"repeat":false,"fail":false}],[true]]}
+{"fn":"replaySingleFlight","args":[[{"join":false,"repeat":true,"fail":true},{"join":false,"repeat":true,"fail":false}],[true,true]]}
+{"fn":"replaySingleFlight","args":[[{"join":true,"repeat":true,"fail":true},{"join":false,"repeat":false,"fail":true},{"join":false,"repeat":false,"fail":true}],[]]}
+{"fn":"replaySingleFlight","args":[[{"join":false,"repeat":false,"fail":false},{"join":false,"repeat":false,"fail":false},{"join":false,"repeat":false,"fail":false}],[false]]}
+{"fn":"replaySingleFlight","args":[[{"join":false,"repeat":true,"fail":false},{"join":true,"repeat":false,"fail":false},{"join":false,"repeat":true,"fail":false},{"join":true,"repeat":false,"fail":false},{"join":false,"repeat":false,"fail":false}],[true,false,true,true]]}

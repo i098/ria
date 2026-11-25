@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/decode.ts",
+  "files": 1,
+  "fingerprint": "8e515fb277ef76db",
+  "coverage": {
+    "lines": 8,
+    "reached": 8,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      }
+    ]
+  }
+}

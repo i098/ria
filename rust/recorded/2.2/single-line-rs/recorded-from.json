@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/singleLine.ts",
+  "files": 1,
+  "fingerprint": "5e65e69154ab7c94",
+  "coverage": {
+    "lines": 3,
+    "reached": 3,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/singleLine.ts",
+        "lines": 3,
+        "reached": 3,
+        "missed": ""
+      }
+    ]
+  }
+}
