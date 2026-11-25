@@ -10,6 +10,7 @@ pub mod ardia_tab_presses;
 pub mod ardia_tab_registry;
 pub mod ardia_tab_strip;
 pub mod ardia_transfer_ledger;
+pub mod ardia_web_view;
 pub mod ardia_web_view_context_menu;
 pub mod ardia_web_view_field_providers;
 pub mod ardia_web_view_first_paint;
