@@ -160,10 +160,8 @@ pub(super) fn user_turned_control_off(app: &AppState) -> bool {
 
 /// `setProgramControl`: `updateSettings({ cliControl })`, then the store subscription of `startProgramControl`.
 pub(super) fn set_program_control(app: &mut AppState, fx: &mut Effects, on: bool) {
-    let patch = crate::onboarding::StateDraft {
-        cli_control: Some(on),
-        ..Default::default()
-    };
+    let patch =
+        settings::OrderedPatch(vec![("cliControl".to_owned(), serde_json::Value::Bool(on))]);
     settings::apply(
         app,
         settings::Action::UpdateSettings {
