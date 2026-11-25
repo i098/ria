@@ -84,8 +84,8 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
     )?;
     let argv = startup::engine_arguments(&config, &executable, std::env::args().skip(1))?;
     if !config.isolated {
-        let chromium = config.data_directory().join("Chromium");
         config.check_profile_directory()?;
+        let chromium = config.handoff_directory()?.join("Chromium");
         ria_engine::domains::browser::native_messaging::sync_hosts(&chromium);
     }
     let session = SavedSession::read(&config);
@@ -175,10 +175,10 @@ impl Runtime {
         if self.config.check_profile_directory().is_err() {
             return self.fail("launch profile directory changed");
         }
-        let directory = self
-            .session
-            .as_ref()
-            .and_then(|session| session.launch_profile_directory(self.config.data_directory()));
+        let directory = self.session.as_ref().and_then(|session| {
+            let root = self.config.handoff_directory().ok()?;
+            session.launch_profile_directory(&root)
+        });
         let restore_hint = directory.is_some();
         let weak = self.this.clone();
         let directory_name = directory.clone().unwrap_or_else(|| "Default".to_owned());
