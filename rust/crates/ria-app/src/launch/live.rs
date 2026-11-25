@@ -128,6 +128,10 @@ mod mac {
             "the Rune strip did not show, select, pin and close tabs"
         );
         assert!(
+            out.lines().any(|line| line == "pageFocused true"),
+            "the launch page did not take focus after its load"
+        );
+        assert!(
             out.lines()
                 .any(|line| line == "liveViews 1 paintViews 1 detached false"),
             "the app did not build a live page view for the launch tab"
@@ -440,6 +444,9 @@ mod mac {
                 println!("firstPaintRevealMs {case} {}", held.elapsed().as_millis());
             }
             println!("firstPaintOpacity 1");
+            if case == "slow" {
+                println!("pageFocused {}", view.has_page_focus());
+            }
             revealed.set(true);
             done();
         } else if held.elapsed() < Duration::from_secs(10) {

@@ -11,22 +11,26 @@
 //! - `attach_tab` is the part of `-[ArdiaWebView ensureTab]` that mounts a tab that already exists. The caller says
 //!   whether the tab is `created`. Only a created tab runs the first-paint hold (`holdPageUntilPainted:`) in the attach
 //!   step, and the app passes `created` for the launch tab alone; every other tab skips the hold until its settle
-//!   caller is ported. The reveal and focus steps are skipped until those modules are ported (#110). Of the settle
+//!   caller is ported. The reveal step is skipped until that module is ported (#110). Of the settle
 //!   callers, only `showHeldPageAfterLoad` runs, from the load-finished callback of the launch tab
 //!   (`ArdiaWebView+Navigation.mm:138`); the 4 s timeout is the other end that runs by itself.
 //! - Painting: `schedule_painting` posts one paint per view to the main queue, where Ardia drains a set of views in one
 //!   run-loop observer in a fixed order (hidden views first). `apply_painting` leaves out `leaveScreen`, the holder
-//!   (`holdFor:`, `keepPaneBelow:`), drop acceptance, focus and the swap report. The frame hold begins only when a
+//!   (`holdFor:`, `keepPaneBelow:`), drop acceptance and the swap report. The frame hold begins only when a
 //!   live view's page is on screen in the same slot; the lingering New Tab pane is not ported. A hold polls the frame
 //!   once per frame (`FRAME_INTERVAL`) where Ardia checks before each run-loop wait.
 //! - `repaint` takes whether the window's neighbour pages are asleep from the caller
 //!   (`tabs::ardia_page_hooks`); `apply_painting` reads it from the hooks. The leave-screen and holder terms of
 //!   `-[ArdiaWebView paints]` are never set.
+//! - Focus: `focusPage` never asks a screen-ahead switch or the early-window veil, because neither exists in Ria.
+//!   `focusAfterLoad` runs from the load-finished callback of the launch tab (`tab_loaded`), where Ardia calls it from
+//!   `loadNow:`; Ria has no `loadNow:` yet. `settleFirstShowFocus` and the lingering-pane focus are not ported.
 //!
 //! See the ArdiaWebView entry in `rust/MAP.md` for pending integration.
 
 use std::cell::RefCell;
 use std::rc::{Rc, Weak as RcWeak};
+use std::time::Instant;
 
 use objc2::rc::{Retained, Weak};
 use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, define_class, msg_send};
@@ -41,11 +45,11 @@ use crate::diagnostics::ardia_paint_probe_math::View;
 use crate::windows::ardia_interface_scale::fit_page_host;
 use crate::windows::ardia_window_controller::Controller;
 
-use super::ardia_page_hooks::PageHooks;
+use super::ardia_page_hooks::{PageHooks, in_tab_page};
 use super::ardia_tab_registry::TabRegistry;
 use super::ardia_web_view_context_menu::ElementPick;
 use super::ardia_web_view_first_paint::{FRAME_INTERVAL, PagePaintHold, PaintSurface};
-use super::ardia_web_view_focus::PageFocus;
+use super::ardia_web_view_focus::{FocusSurface, PageFocus, RestoreFocus};
 use super::ardia_web_view_navigation::{NavigationReports, NavigationRequest};
 use super::ardia_web_view_page_commands::PageCommands;
 use super::ardia_web_view_page_messages::call_frame;
@@ -185,11 +189,14 @@ impl ArdiaWebView {
     /// The field-timing mark of `-[ArdiaWebView setVisible:]` (`ArdiaWebView.mm:283`); the other steps of that
     /// method are not ported yet. Returns whether the value changed.
     pub fn set_visible(&self, visible: bool) -> bool {
+        if self.state().visible == visible {
+            return false;
+        }
+        if !visible {
+            self.store_page_focus();
+        }
         let key = {
             let mut state = self.state();
-            if state.visible == visible {
-                return false;
-            }
             state.visible = visible;
             state.transfer_key.clone()
         };
@@ -198,6 +205,126 @@ impl ArdiaWebView {
         }
         self.schedule_painting();
         true
+    }
+
+    /// `-[ArdiaWebView setSelected:]` (`ArdiaWebView.mm:224`).
+    pub fn set_selected(&self, selected: bool) {
+        let wanted = {
+            let mut state = self.state();
+            if state.selected == selected {
+                return;
+            }
+            state.selected = selected;
+            selected && state.visible && !state.standalone
+        };
+        if wanted {
+            self.request_focus_restore();
+        }
+    }
+
+    /// Run `run` on the focus state and the surface of the attached page. The focus state is out of `State` while it
+    /// runs, so `run` must not reach back into the view.
+    fn with_focus<R>(&self, run: impl FnOnce(&mut PageFocus, &FocusSurface<'_>) -> R) -> Option<R> {
+        let (tab, devtools, visible, selected, standalone) = {
+            let state = self.state();
+            (
+                state.attached.tab.clone()?,
+                state.attached.devtools.clone(),
+                state.visible,
+                state.selected,
+                state.standalone,
+            )
+        };
+        let page = tab.view()?;
+        let surface = FocusSurface {
+            host: self,
+            page: &page,
+            dev_tools: devtools.as_deref(),
+            visible,
+            selected,
+            standalone,
+        };
+        let mut focus = std::mem::take(&mut self.state().focus);
+        let out = run(&mut focus, &surface);
+        self.state().focus = focus;
+        Some(out)
+    }
+
+    /// `-[ArdiaWebView storePageFocus]` (`ArdiaWebView+Focus.mm:52`).
+    fn store_page_focus(&self) {
+        self.with_focus(|focus, surface| focus.store(surface, in_tab_page));
+    }
+
+    /// Whether the first responder of the window is this view or inside it.
+    pub fn has_page_focus(&self) -> bool {
+        let Some(window) = self.window() else {
+            return false;
+        };
+        let Some(responder) = window.firstResponder() else {
+            return false;
+        };
+        let object: &objc2::runtime::AnyObject = &responder;
+        match object.downcast_ref::<NSView>() {
+            Some(view) => view.isDescendantOf(self),
+            None => false,
+        }
+    }
+
+    /// `-[ArdiaWebView focusPage]` (`ArdiaWebView+Focus.mm:155`).
+    pub fn focus_page(&self) {
+        let tab = self.state().attached.tab.clone();
+        if let Some(tab) = tab {
+            tab.focus();
+        }
+    }
+
+    /// `-[ArdiaWebView requestFocusRestore]` (`ArdiaWebView+Focus.mm:92`).
+    fn request_focus_restore(&self) {
+        let Some(window) = self.window() else { return };
+        if self.state().standalone {
+            return;
+        }
+        let requested = self.with_focus(|focus, _| focus.request(&window, Instant::now()));
+        if requested.is_some() && matches!(self.restore_focus_if_due(), Some(RestoreFocus::Waiting))
+        {
+            self.schedule_painting();
+        }
+    }
+
+    /// `-[ArdiaWebView restoreFocusIfDue]` (`ArdiaWebView+Focus.mm:108`).
+    fn restore_focus_if_due(&self) -> Option<RestoreFocus> {
+        let window = self.window();
+        let restore = self.with_focus(|focus, surface| {
+            focus.restore_if_due(surface, Instant::now(), false, || {}, in_tab_page)
+        })?;
+        match &restore {
+            RestoreFocus::Page => self.focus_page(),
+            RestoreFocus::DevTools(view) => {
+                if let Some(window) = window {
+                    window.makeFirstResponder(Some(view));
+                }
+            }
+            RestoreFocus::None | RestoreFocus::Waiting => {}
+        }
+        Some(restore)
+    }
+
+    /// `-[ArdiaWebView focusAfterLoad]` (`ArdiaWebView+Focus.mm:143`).
+    pub fn focus_after_load(&self) {
+        let Some(restore) =
+            self.with_focus(|focus, surface| focus.after_load(surface, Instant::now()))
+        else {
+            return;
+        };
+        match restore {
+            RestoreFocus::Page => self.focus_page(),
+            RestoreFocus::Waiting => {
+                if matches!(self.restore_focus_if_due(), Some(RestoreFocus::Waiting)) {
+                    self.schedule_painting();
+                }
+            }
+            RestoreFocus::None | RestoreFocus::DevTools(_) => {}
+        }
     }
 
     /// `-[ArdiaWebView paintProbeReasons]` before the reasons are folded (`ArdiaPaintProbe.mm:12`). The early
@@ -371,8 +498,8 @@ impl ArdiaWebView {
         }));
     }
 
-    /// `-[ArdiaWebView applyPainting]` (`ArdiaWebView+Painting.mm:233`), without the leave-screen, drop-acceptance,
-    /// focus and swap-report steps.
+    /// `-[ArdiaWebView applyPainting]` (`ArdiaWebView+Painting.mm:233`), without the leave-screen, drop-acceptance
+    /// and swap-report steps.
     fn apply_painting(&self) {
         let (visible, revealing, awaiting) = {
             let state = self.state();
@@ -397,6 +524,9 @@ impl ArdiaWebView {
             }
             visibility.apply(self);
         });
+        if visible {
+            self.restore_focus_if_due();
+        }
     }
 
     /// `-[ArdiaWebView exposePage]` (`ArdiaWebView+Painting.mm:304`).

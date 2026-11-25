@@ -367,6 +367,21 @@ impl StripLayer {
     }
 }
 
+/// The app has no React Native props to tell a page that it shows: the active row is the visible, selected page and
+/// every other row is neither. Known limit: Ardia sets these from the pane layout, which Ria does not have.
+fn mark_selected(host: &WindowHost, rows: &[Row]) {
+    for row in rows {
+        let tab = host
+            .chrome()
+            .tab_registry()
+            .borrow()
+            .tab_with_app_id(&row.key);
+        if let Some(tab) = tab {
+            host.set_page_active(&tab, row.active);
+        }
+    }
+}
+
 /// Read the tab list again and redraw when it changed. Stop when the layer is gone.
 fn refresh(host: &WindowHost, surface: &Surface<StripState>, state: &Shared) {
     let (previous, touched) = {
@@ -389,6 +404,7 @@ fn refresh(host: &WindowHost, surface: &Surface<StripState>, state: &Shared) {
     {
         surface.set_page(Some(&view));
     }
+    mark_selected(host, &rows);
     if touched || rows != previous {
         let changed = {
             let mut state = state.borrow_mut();

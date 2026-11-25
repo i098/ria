@@ -132,6 +132,21 @@ impl WindowHost {
             .cloned();
         if let Some(page) = page {
             page.show_held_page_after_load();
+            page.focus_after_load();
+        }
+    }
+
+    /// Tell the page view of `tab` whether it is the visible, selected page (`setVisible:` and `setSelected:`).
+    pub fn set_page_active(&self, tab: &Tab, active: bool) {
+        let page = self
+            .pages
+            .borrow()
+            .iter()
+            .find(|page| page.shows_tab(tab))
+            .cloned();
+        if let Some(page) = page {
+            page.set_visible(active);
+            page.set_selected(active);
         }
     }
 
