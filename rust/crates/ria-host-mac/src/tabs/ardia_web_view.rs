@@ -280,10 +280,8 @@ impl ArdiaWebView {
                         // The attached tab is out of `state` here, so lay the page out from `page_tab`.
                         layout_page(self, Some(&*page_tab), None, None, None, true);
                     }
-                    AttachStep::HoldForFirstPaint { created } => {
-                        if created && page_tab.loading() {
-                            self.hold_page_until_painted(&page_tab, created);
-                        }
+                    AttachStep::HoldForFirstPaint { created } if created && page_tab.loading() => {
+                        self.hold_page_until_painted(&page_tab, created);
                     }
                     _ => {}
                 }
