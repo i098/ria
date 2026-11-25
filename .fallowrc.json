@@ -3,7 +3,12 @@
     "rust/tools/bang-tsv/extract.mjs",
     "rust/recorded/1.6/mobile.harness.ts",
     "rust/recorded/1.6/telemetry-wire-rs/clock-freeze.mjs",
-    "rust/recorded/1.6/telemetry-wire-rs/parity.test.cjs"
+    "rust/recorded/1.6/telemetry-wire-rs/parity.test.cjs",
+    "rust/recorded/2.47/import.harness.ts",
+    "rust/recorded/2.47/expo-modules-core/index.js"
   ],
-  "ignorePatterns": ["rust/recorded/1.6/mobile-rs/index.cjs"]
+  "ignorePatterns": [
+    "rust/recorded/1.6/mobile-rs/index.cjs",
+    "rust/recorded/2.47/import-rs/index.cjs"
+  ]
 }

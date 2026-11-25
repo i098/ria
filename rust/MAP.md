@@ -450,7 +450,7 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `packages/import/ios/ImportRequestOptions.*` | Swift | 13 | native | `rust/crates/ria-import/src/native/` | hand | todo | 5.14 | port |
 | mac | `packages/import/ios/ImportWriter.*` | Swift | 104 | native | `rust/crates/ria-import/src/native/` | hand | todo | 5.14 | port |
 | mac | `packages/import/scripts/` | TypeScript/JavaScript | 183 | ready | ria-import | analyze | todo | stay-3 | stay |
-| mac | `packages/import/src/index.ts` | TypeScript/JavaScript | 282 | ready | `rust/crates/ria-import/Cargo.toml`, `rust/crates/ria-import/src/lib.rs`, `rust/crates/ria-import/src/logic/`, `rust/recorded/2.47/` | analyze | todo | 2.47 | port |
+| mac | `packages/import/src/index.ts` | TypeScript/JavaScript | 282 | ready | `rust/crates/ria-import/Cargo.toml`, `rust/crates/ria-import/src/lib.rs`, `rust/crates/ria-import/src/logic/`, `rust/recorded/2.47/` | analyze | partial | 2.47 | port |
 | mac | `packages/plugin-broker/` | Rust | 9945 | already Rust | moves into the workspace as it is | hand | done | 5.15 | done |
 | mac | `packages/plugin-sdk/src/api.ts` | TypeScript/JavaScript | 219 | caution | ria-plugins | analyze | todo | stay-5 | stay |
 | mac | `packages/plugin-sdk/src/componentProps.ts` | TypeScript/JavaScript | 151 | ready | ria-plugins | analyze | todo | stay-5 | stay |
