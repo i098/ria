@@ -16,7 +16,7 @@ use std::rc::Rc;
 use objc2::MainThreadMarker;
 use objc2::Message;
 use objc2::rc::Retained;
-use objc2_app_kit::NSView;
+use objc2_app_kit::{NSView, NSWindow};
 use ria_engine::types::{Number, TabStripCommand};
 use serde_json::Value;
 
@@ -58,7 +58,7 @@ impl WindowHost {
             let weak = this.clone();
             let hooks = PageHooks::new(
                 Rc::new(LiveViews::default()),
-                move |window| weak.upgrade()?.chrome.root_view(window),
+                move |window| weak.upgrade()?.root_view(window),
                 |_| {},
             );
             // `make_page` installs the hooks: guarding `NSApplication` here would make the plain class before the engine's own.
@@ -75,6 +75,19 @@ impl WindowHost {
                 launch_attach_loading: Cell::default(),
             }
         })
+    }
+
+    /// The chrome root of `window`. The app's Rune strip has no chrome root; its surface lives in the host view.
+    fn root_view(&self, window: &NSWindow) -> Option<Retained<NSView>> {
+        if let Some(root) = self.chrome.root_view(window) {
+            return Some(root);
+        }
+        let core = self.main()?;
+        if std::ptr::eq(&*core.window(), window) {
+            Some(core.host_view())
+        } else {
+            None
+        }
     }
 
     pub fn hooks(&self) -> &Rc<PageHooks> {

@@ -209,6 +209,13 @@ pub fn set_field_timing(enabled: bool) {
     });
 }
 
+impl PageHooks {
+    /// The root view of the window's chrome, which holds the Rune strip.
+    pub fn chrome_root(&self, window: &NSWindow) -> Option<Retained<NSView>> {
+        (self.root_view)(window)
+    }
+}
+
 impl SwipeHooks for PageHooks {
     fn root_view(&self, window: &NSWindow) -> Option<Retained<NSView>> {
         (self.root_view)(window)

@@ -250,9 +250,24 @@ impl ArdiaWebView {
         Some(out)
     }
 
+    /// `InTabPage` (`ArdiaWebView+Focus.mm:13`) plus the views of the window's chrome root.
+    ///
+    /// Changes from Ardia: Ardia's React Native views sit inside the web view, so a click on its strip leaves the
+    /// first responder in the tab page. The Rune strip is outside the web view, so its surface is the responder after a
+    /// click. Views under the chrome root count as the tab page, and a press that selects a tab restores focus to the page.
+    fn in_tab_page(&self, view: &NSView) -> bool {
+        let hooks = self.state().hooks.upgrade();
+        in_tab_page(view)
+            || self
+                .window()
+                .zip(hooks)
+                .and_then(|(window, hooks)| hooks.chrome_root(&window))
+                .is_some_and(|root| view.isDescendantOf(&root))
+    }
+
     /// `-[ArdiaWebView storePageFocus]` (`ArdiaWebView+Focus.mm:52`).
     fn store_page_focus(&self) {
-        self.with_focus(|focus, surface| focus.store(surface, in_tab_page));
+        self.with_focus(|focus, surface| focus.store(surface, |view| self.in_tab_page(view)));
     }
 
     /// Whether the first responder of the window is this view or inside it.
@@ -295,7 +310,13 @@ impl ArdiaWebView {
     fn restore_focus_if_due(&self) -> Option<RestoreFocus> {
         let window = self.window();
         let restore = self.with_focus(|focus, surface| {
-            focus.restore_if_due(surface, Instant::now(), false, || {}, in_tab_page)
+            focus.restore_if_due(
+                surface,
+                Instant::now(),
+                false,
+                || {},
+                |view| self.in_tab_page(view),
+            )
         })?;
         match &restore {
             RestoreFocus::Page => self.focus_page(),

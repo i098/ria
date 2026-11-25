@@ -119,6 +119,10 @@ mod mac {
             "the Rune strip did not show, select, pin and close tabs"
         );
         assert!(
+            out.lines().any(|line| line == "focusAfterSwitch true"),
+            "a press that selected a tab did not move focus to its page"
+        );
+        assert!(
             out.lines().any(|line| line == "pageFocused true"),
             "the launch page did not take focus after its load"
         );
@@ -501,6 +505,24 @@ mod mac {
             }
         }
 
+        /// Print whether a visible page holds the window's focus half a second after the press selected a tab, then
+        /// go on to `next`. The next press would give the focus to the strip again, so it waits for the check.
+        fn focus_after_switch(self: &Rc<Self>, next: u32, at: Option<(f64, f64)>) {
+            self.stage.set(9);
+            let this = self.clone();
+            host_launch::after(Duration::from_millis(500), move || {
+                let focused = this
+                    .host
+                    .hooks()
+                    .live()
+                    .all()
+                    .iter()
+                    .any(|view| view.visible() && view.has_page_focus());
+                println!("focusAfterSwitch {focused}");
+                this.advance(next, at);
+            });
+        }
+
         fn shot(&self, name: &str) {
             let (Some(dir), Some(window)) = (std::env::var_os("RIA_LIVE_SHOT"), self.host.main())
             else {
@@ -558,7 +580,7 @@ mod mac {
                 }
                 2 if rows.get(2).is_some_and(|row| row.active) => {
                     println!("stripSelected");
-                    self.advance(3, Some(button_center(1, Button::Pin)));
+                    self.focus_after_switch(3, Some(button_center(1, Button::Pin)));
                 }
                 3 if rows.first().is_some_and(|row| row.pinned) => {
                     println!("stripPinned");
