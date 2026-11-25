@@ -45,6 +45,8 @@ pub struct State {
     pub phase: f32,
     pub dark: bool,
     pub field: TextEdit,
+    /// Proof C: the second layer is the overlay (a list of suggestion rows); the first is the chrome (button and text field).
+    pub overlay: bool,
 }
 
 thread_local! {
@@ -56,6 +58,8 @@ thread_local! {
     /// The appearance the view reported on the last tick, and the theme the last built tree used.
     static SYSTEM_DARK: Cell<bool> = const { Cell::new(true) };
     pub static DRAWN_DARK: Cell<bool> = const { Cell::new(true) };
+    /// How many layers asked for a state so far; the second one is the overlay.
+    static LAYERS: Cell<u32> = const { Cell::new(0) };
 }
 
 fn view(s: &State, _: &mut Cx<State>) -> El {
@@ -87,8 +91,15 @@ fn view(s: &State, _: &mut Cx<State>) -> El {
     let root = col().w_full().h_full().padding(12.0).gap(10.0);
     let title = text("Ria layer").font(type_::TITLE).color(t.text);
     if transparent {
-        // Proof C: a title and one button over the glass, nothing else.
-        return root.child(title).child(button).child(text(format!("Shared {}", s.shown)).key("shared").font(type_::BODY).color(t.text)).child(bar);
+        // Proof C: the chrome layer has the title, the button and the text field; the overlay layer has the shared counter and a suggestion list.
+        let shared = text(format!("Shared {}", s.shown)).key("shared").font(type_::BODY).color(t.text);
+        if s.overlay {
+            let rows = (0..4).fold(col().key("suggestions").role("list").label("Suggestions").w_full().gap(4.0), |c, i| {
+                c.child(text(format!("Suggestion {i}")).key(format!("suggestion-{i}")).role("listitem").label(format!("Suggestion {i}")).focusable(true).font(type_::BODY).color(t.text).h(22.0))
+            });
+            return root.child(shared).child(rows);
+        }
+        return root.child(title).child(button).child(field).child(shared).child(bar);
     }
     root.fill(t.bg)
         .child(title)
@@ -112,7 +123,7 @@ fn poll(s: &mut State, t: f64, _tx: &mut Tx) -> bool {
 fn spec() -> AppSpec<State> {
     AppSpec {
         poll: Some(poll),
-        ..AppSpec::new("Ria layer", (320.0, 560.0), || State { presses: 0, shown: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new("") }, view)
+        ..AppSpec::new("Ria layer", (320.0, 560.0), || State { presses: 0, shown: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new(""), overlay: LAYERS.with(|n| n.replace(n.get() + 1)) == 1 }, view)
     }
 }
 

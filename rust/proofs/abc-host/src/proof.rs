@@ -600,7 +600,7 @@ impl Ctx {
                 if self.sub == 0 {
                     self.ev("ax_hold", &format!("\"pid\":{}", std::process::id()));
                     self.sub = 1;
-                    self.until = Instant::now() + Duration::from_secs(12);
+                    self.until = Instant::now() + Duration::from_secs(std::env::var("ABC_AX_HOLD_SECS").ok().and_then(|v| v.parse().ok()).unwrap_or(12));
                 } else if self.ready() {
                     self.sub = 0;
                     self.step = Step::Finish;
@@ -854,9 +854,12 @@ impl Ctx {
             self.sub = 1;
             self.until = Instant::now() + Duration::from_millis(300);
         } else if (1..=6).contains(&self.sub) && self.ready() {
-            let (c, code) = KEYS[self.sub as usize - 1];
-            self.nswindow.sendEvent(&key(&self.nswindow, true, c, code, none));
-            self.nswindow.sendEvent(&key(&self.nswindow, false, c, code, none));
+            // ABC_IME_EXTERNAL_KEYS: a separate process posts real HID key events, which reach the input method. Synthetic `sendEvent` keys do not.
+            if std::env::var_os("ABC_IME_EXTERNAL_KEYS").is_none() {
+                let (c, code) = KEYS[self.sub as usize - 1];
+                self.nswindow.sendEvent(&key(&self.nswindow, true, c, code, none));
+                self.nswindow.sendEvent(&key(&self.nswindow, false, c, code, none));
+            }
             self.sub += 1;
             self.until = Instant::now() + Duration::from_millis(250);
         } else if self.sub == 7 && self.ready() {
@@ -868,9 +871,11 @@ impl Ctx {
             self.sub = 8;
             self.until = Instant::now() + Duration::from_millis(2500);
         } else if self.sub == 8 && self.ready() {
-            let (c, code) = KEYS[6];
-            self.nswindow.sendEvent(&key(&self.nswindow, true, c, code, none));
-            self.nswindow.sendEvent(&key(&self.nswindow, false, c, code, none));
+            if std::env::var_os("ABC_IME_EXTERNAL_KEYS").is_none() {
+                let (c, code) = KEYS[6];
+                self.nswindow.sendEvent(&key(&self.nswindow, true, c, code, none));
+                self.nswindow.sendEvent(&key(&self.nswindow, false, c, code, none));
+            }
             self.sub = 9;
             self.until = Instant::now() + Duration::from_millis(500);
         } else if self.sub == 9 && self.ready() {
@@ -1096,6 +1101,8 @@ impl Ctx {
                     self.ev("ax_node", &format!("\"line\":{}", json(l)));
                 }
                 self.check("ax_button_with_label", button, &format!("{} nodes; AXButton labelled 'Increment counter' present={button}", lines.len()));
+                let field = lines.iter().any(|l| l.contains("AXTextField"));
+                self.check("ax_chrome_text_field", field, &format!("AXTextField present={field}"));
                 self.sub = 0;
                 self.step = Step::AxHold;
             }
