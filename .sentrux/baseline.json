@@ -5,7 +5,7 @@
   "cycle_count": 2,
   "god_file_count": 1,
   "hotspot_count": 0,
-  "complex_fn_count": 252,
+  "complex_fn_count": 254,
   "max_depth": 6,
   "total_import_edges": 343,
   "cross_module_edges": 58
