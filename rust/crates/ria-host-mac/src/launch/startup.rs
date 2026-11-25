@@ -14,7 +14,7 @@ pub(super) fn engine_arguments(
     executable: &Path,
     arguments: impl IntoIterator<Item = String>,
 ) -> io::Result<Vec<CString>> {
-    let data = config.handoff_directory()?.join("Chromium");
+    let data = config.data_directory().join("Chromium");
     let data = data
         .to_str()
         .ok_or_else(|| io::Error::other("Chromium data path is not UTF-8"))?;
@@ -256,7 +256,8 @@ mod tests {
                 .filter(|arg| arg.starts_with("--user-data-dir="))
                 .collect();
             assert_eq!(profile.len(), 1);
-            assert!(profile[0].starts_with("--user-data-dir=/.vol/"));
+            assert!(profile[0].starts_with("--user-data-dir="));
+            assert!(!profile[0].starts_with("--user-data-dir=/.vol/"));
             assert!(profile[0].ends_with("/Chromium"));
             assert!(!argv.iter().any(|arg| arg.contains("foreign")));
             assert!(argv.ends_with(&["--", "--disable-features=Positional"]));

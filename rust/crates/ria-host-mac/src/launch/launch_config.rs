@@ -9,9 +9,13 @@
 //!   whether the volume ignores case.
 //! - A switch cache that cannot be read from the admitted directory turns every switch without an override off.
 //!   A missing cache still leaves the defaults.
-//! - The engine gets the admitted directory as `/.vol/<device>/<inode>`: `--user-data-dir` is that path plus
-//!   `Chromium`, and a scratch launch also passes it as `--ardia-data-dir`. A swap of the path after admission
-//!   cannot redirect the engine, for a normal launch as well as a scratch one.
+//! - The engine gets the profile at the normal data path plus `Chromium`, and an isolated launch also passes
+//!   the admitted directory as `/.vol/<device>/<inode>` for `--ardia-data-dir`. A swap of the path after
+//!   admission cannot redirect the scratch data argument.
+//! - The gap left by the last identity check is closed by a recheck after the engine opened its profile: the
+//!   `SingletonLock` that Chromium writes into the opened directory must sit in the admitted `Chromium`
+//!   directory and name this process (`profile::check_singleton`). That proves the moment of the check only;
+//!   a swap after it is not covered.
 
 use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
@@ -233,6 +237,11 @@ impl LaunchConfig {
     /// so a swap of the path after admission cannot redirect the engine.
     pub(super) fn handoff_directory(&self) -> io::Result<PathBuf> {
         profile::identity_path(&self.data_handle)
+    }
+
+    /// Requires the engine's singleton lock in the admitted directory to name this process.
+    pub(super) fn check_singleton(&self) -> io::Result<()> {
+        profile::check_singleton(&self.data_handle)
     }
 
     pub(super) fn check_profile_directory(&self) -> io::Result<()> {
