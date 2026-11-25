@@ -36,6 +36,7 @@ mod mac {
     use ria_host_mac::core::bindings::{Engine, Tab, Window};
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
     use ria_host_mac::launch::launch_config::LaunchConfig;
+    use ria_host_mac::launch::strip_layer::{Button, Row, button_center};
     use ria_host_mac::launch::system_signals;
     use ria_host_mac::launch::window_host::WindowHost;
     use serde_json::{Value, json};
@@ -108,8 +109,10 @@ mod mac {
         assert!(out.contains("tabTitle Ria proof page"));
         assert!(out.contains("engineWillShutDown"));
         assert!(
-            out.contains("stripPinned"),
-            "a click on the Rune pin button did not pin the tab"
+            ["stripTabs 3", "stripSelected", "stripPinned", "stripClosed"]
+                .iter()
+                .all(|line| out.lines().any(|out| out == *line)),
+            "the Rune strip did not show, select, pin and close tabs"
         );
         assert!(
             out.contains("downloadMoved ok"),
@@ -139,13 +142,13 @@ mod mac {
             "the saved layout was not restored"
         );
         assert!(
-            again.contains("stripPinned"),
+            again.lines().any(|line| line == "stripClosed"),
             "the strip layer is missing on a restored layout"
         );
         assert!(again.contains("engineWillShutDown"));
         assert!(!has_crash_report(root), "a crash report exists");
         println!(
-            "launch live: engine exit 0; one window; one tab; fixture title; Rune pin click pins the tab; restored-layout relaunch on the same profile keeps the strip; download moved by the app's system-signals host; shutdown; no crash report"
+            "launch live: engine exit 0; one window; one tab; fixture title; Rune strip shows 3 tabs and real clicks select, pin and close them; restored-layout relaunch on the same profile keeps the strip; download moved by the app's system-signals host; shutdown; no crash report"
         );
     }
 
@@ -349,27 +352,110 @@ mod mac {
         flags.iter().all(|flag| flag.get())
     }
 
-    /// Click the Rune pin button through the window until the strip pins the launch tab, then run `done`.
-    /// The button is at x 202, y 62: the strip starts 40 below the top, its row pads 12, the tab is 140 wide, the gap is 8, the pin is 84 wide and 28 high.
-    fn click_pin(host: Rc<WindowHost>, pinned: Rc<Cell<bool>>, done: Rc<dyn Fn()>, tries: u32) {
-        let Some(window) = host.main() else { return };
-        let profile = window.active_profile().expect("window profile");
-        let tab = window.tabs_for_profile(&profile).objectAtIndex(0);
-        if host.strips().borrow().is_pinned(&tab) {
-            println!("stripPinned");
-            pinned.set(true);
-            return done();
+    /// Drives the Rune strip with real clicks: three tabs show, a press selects one, pins one and closes one.
+    struct Drive {
+        host: Rc<WindowHost>,
+        stage: Cell<u32>,
+        pinned: Rc<Cell<bool>>,
+        done: Rc<dyn Fn()>,
+    }
+
+    impl Drive {
+        /// Click `at` until the strip leaves `stage`. A press that the strip handled changes the rows at once.
+        fn press(self: &Rc<Self>, at: (f64, f64), stage: u32, tries: u32) {
+            if self.stage.get() != stage || tries == 8 {
+                return;
+            }
+            if let Some(window) = self.host.main() {
+                let action = format!("click:{},{}", at.0, at.1);
+                self.host
+                    .chrome()
+                    .dev_action(&window.window(), &action, true);
+            }
+            let this = self.clone();
+            host_launch::after(Duration::from_millis(1500), move || {
+                this.press(at, stage, tries + 1)
+            });
         }
-        if tries == 160 {
-            return println!("pin click never pinned the tab");
+
+        fn advance(self: &Rc<Self>, stage: u32, at: Option<(f64, f64)>) {
+            self.stage.set(stage);
+            if let Some(at) = at {
+                self.press(at, stage, 0);
+            }
         }
-        if tries % 4 == 0 {
-            host.chrome()
-                .dev_action(&window.window(), "click:202,62", true);
+
+        fn shot(&self, name: &str) {
+            let (Some(dir), Some(window)) = (std::env::var_os("RIA_LIVE_SHOT"), self.host.main())
+            else {
+                return;
+            };
+            let id = window.window().windowNumber().to_string();
+            let _ = Command::new("screencapture")
+                .args(["-x", "-o", "-l", &id])
+                .arg(Path::new(&dir).join(format!("{name}.png")))
+                .status();
         }
-        host_launch::after(Duration::from_millis(250), move || {
-            click_pin(host, pinned, done, tries + 1)
-        });
+
+        /// Let the strip draw the new rows, take the picture when `RIA_LIVE_SHOT` names a folder, then go to `next`.
+        fn shot_then(self: &Rc<Self>, name: &'static str, next: u32, at: Option<(f64, f64)>) {
+            self.stage.set(9);
+            let this = self.clone();
+            host_launch::after(Duration::from_millis(800), move || {
+                this.shot(&format!("{}-{name}", std::process::id()));
+                this.advance(next, at);
+                if next == 5 {
+                    (this.done)();
+                }
+            });
+        }
+
+        /// Open two more tabs after the strip installed.
+        fn start(&self) {
+            self.stage.set(1);
+            if let Some(window) = self.host.main() {
+                let profile = window.active_profile().expect("window profile");
+                for _ in 0..2 {
+                    let tab = window.open_tab(&NSString::from_str("about:blank"), &profile, true);
+                    window.activate_tab(&tab);
+                }
+            }
+        }
+
+        fn rows(self: &Rc<Self>, rows: &[Row]) {
+            let keys: Vec<_> = rows
+                .iter()
+                .map(|row| {
+                    format!(
+                        "{}{}{}",
+                        row.key,
+                        if row.active { "*" } else { "" },
+                        if row.pinned { "^" } else { "" }
+                    )
+                })
+                .collect();
+            println!("stripRows {keys:?}");
+            match self.stage.get() {
+                1 if rows.len() == 3 => {
+                    println!("stripTabs 3");
+                    self.shot_then("three-tabs", 2, Some(button_center(2, Button::Select)));
+                }
+                2 if rows.get(2).is_some_and(|row| row.active) => {
+                    println!("stripSelected");
+                    self.advance(3, Some(button_center(1, Button::Pin)));
+                }
+                3 if rows.first().is_some_and(|row| row.pinned) => {
+                    println!("stripPinned");
+                    self.pinned.set(true);
+                    self.shot_then("pinned", 4, Some(button_center(2, Button::Close)));
+                }
+                4 if rows.len() == 2 => {
+                    println!("stripClosed");
+                    self.shot_then("closed", 5, None);
+                }
+                _ => {}
+            }
+        }
     }
 
     pub fn child() -> ExitCode {
@@ -386,6 +472,8 @@ mod mac {
                 }
             })
         };
+        let drive: Rc<RefCell<Option<Rc<Drive>>>> = Rc::default();
+        let check_drive = drive.clone();
         let check_title = matched.clone();
         let check_pin = pinned.clone();
         let check_shutdown = shutdown.clone();
@@ -406,7 +494,20 @@ mod mac {
                     let size = window.window().frame().size;
                     println!("windowFrame {}x{}", size.width, size.height);
                 }
-                click_pin(host, pinned.clone(), quit_when_done.clone(), 0);
+                let drive = Rc::new(Drive {
+                    host,
+                    stage: Cell::new(0),
+                    pinned: pinned.clone(),
+                    done: quit_when_done.clone(),
+                });
+                *check_drive.borrow_mut() = Some(drive.clone());
+                host_launch::later(move || drive.start());
+            }
+            LaunchEvent::StripRows(rows) => {
+                let drive = check_drive.borrow().clone();
+                if let Some(drive) = drive {
+                    drive.rows(&rows);
+                }
             }
             LaunchEvent::Emit { topic, data } => {
                 check_moving.emitted(&topic, &data, quit_when_done.clone());
