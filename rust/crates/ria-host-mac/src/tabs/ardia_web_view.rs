@@ -33,9 +33,9 @@ use std::rc::{Rc, Weak as RcWeak};
 use std::time::Instant;
 
 use objc2::rc::{Retained, Weak};
-use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, define_class, msg_send};
-use objc2_app_kit::NSView;
-use objc2_foundation::{NSRect, NSSize};
+use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, Message, define_class, msg_send};
+use objc2_app_kit::{NSView, NSWindow};
+use objc2_foundation::{NSPoint, NSRect, NSSize};
 use ria_engine::call::main_queue;
 
 use crate::core::bindings::{Adoption, Tab};
@@ -46,6 +46,7 @@ use crate::windows::ardia_interface_scale::fit_page_host;
 use crate::windows::ardia_window_controller::Controller;
 
 use super::ardia_page_hooks::{PageHooks, in_tab_page};
+use super::ardia_tab_presses::PressId;
 use super::ardia_tab_registry::TabRegistry;
 use super::ardia_web_view_context_menu::ElementPick;
 use super::ardia_web_view_first_paint::{FRAME_INTERVAL, PagePaintHold, PaintSurface};
@@ -60,7 +61,9 @@ use super::ardia_web_view_painting::{
     FRAME_HOLD_TIMEOUT, FrameHold, PaintingVisibility, layout_page, render_widget_in,
 };
 use super::ardia_web_view_picture_in_picture::PictureInPicture;
-use super::ardia_web_view_reveals::Reveal;
+use super::ardia_web_view_reveals::{
+    DropReveals, EndedReveal, Page, Reveal, RevealHost, drop_reveals, older_press, revealable_over,
+};
 use super::ardia_web_view_stand_in::{StandIn, without_actions};
 use super::ardia_web_view_tab::{Attach, AttachStep, AttachedTab, StashedReports, small_window};
 use super::superview;
@@ -126,6 +129,17 @@ define_class!(
             fit_page_host(self);
             self.layout_page();
         }
+
+        /// A page view that is not the visible one takes no clicks, so the shown page beneath it gets them. Ardia
+        /// keeps each tab's pane in its own place instead, so the question does not arise there.
+        #[unsafe(method(hitTest:))]
+        fn hit_test(&self, point: NSPoint) -> *mut NSView {
+            if self.ivars().0.try_borrow().is_ok_and(|state| !state.visible) {
+                return std::ptr::null_mut();
+            }
+            // SAFETY: NSView's own `hitTest:` takes the point in the superview and returns a view or nil.
+            unsafe { msg_send![super(self), hitTest: point] }
+        }
     }
 );
 
@@ -150,6 +164,196 @@ impl ArdiaWebView {
 
     fn state(&self) -> std::cell::RefMut<'_, State> {
         self.ivars().0.borrow_mut()
+    }
+
+    pub fn transfer_key(&self) -> Option<String> {
+        self.state().transfer_key.clone()
+    }
+
+    /// Whether a reveal that a press began holds this view.
+    pub fn native_reveal(&self) -> Option<Option<PressId>> {
+        let reveal = self.state().reveal.clone();
+        let reveal = reveal.borrow();
+        (reveal.active() && reveal.native()).then(|| reveal.press())
+    }
+
+    /// Whether the view is revealed ahead of its selection.
+    pub fn revealing(&self) -> bool {
+        self.state().reveal.borrow().active()
+    }
+
+    fn in_window_of(&self, window: &NSWindow) -> bool {
+        self.window()
+            .is_some_and(|owner| std::ptr::eq(&*owner, window))
+    }
+
+    /// Run `run` over the page facts of `views` that the reveal rules read.
+    fn with_pages<R>(
+        views: &[Retained<ArdiaWebView>],
+        hooks: &PageHooks,
+        run: impl FnOnce(&[Page<'_>]) -> R,
+    ) -> R {
+        let snaps: Vec<_> = views
+            .iter()
+            .map(|view| {
+                let state = view.state();
+                let asleep = view.window().is_some_and(|window| hooks.asleep(&window));
+                (
+                    state.attached.tab.clone(),
+                    state.reveal.clone(),
+                    state.visible,
+                    state.warm,
+                    state.standalone,
+                    asleep,
+                )
+            })
+            .collect();
+        let guards: Vec<_> = snaps.iter().map(|snap| snap.1.borrow()).collect();
+        let pages: Vec<Page<'_>> = views
+            .iter()
+            .zip(&snaps)
+            .zip(&guards)
+            .map(|((view, snap), reveal)| Page {
+                host: view,
+                tab: snap.0.as_deref(),
+                visible: snap.2,
+                warm: snap.3,
+                asleep: snap.5,
+                standalone: snap.4,
+                closed: snap.0.as_ref().is_none_or(|tab| tab.closed()),
+                // shortcut: a crashed page still reveals; Ria keeps no crash flag on the view yet.
+                crashed: false,
+                devtools: false,
+                reveal,
+            })
+            .collect();
+        run(&pages)
+    }
+
+    /// `-[ArdiaWebView revealAhead]` (`ArdiaWebView+Reveals.mm:325`): show this page under the shown page's pane,
+    /// ahead of its selection.
+    pub fn reveal_ahead(&self) {
+        let Some(hooks) = self.state().hooks.upgrade() else {
+            return;
+        };
+        let views = hooks.live().all();
+        let shown = Self::with_pages(&views, &hooks, |pages| {
+            let me = pages.iter().find(|page| std::ptr::eq(page.host, &**self))?;
+            revealable_over(me, pages, false).map(|shown| shown.host.retain())
+        });
+        let Some(shown) = shown else { return };
+        let reveal = self.state().reveal.clone();
+        let weak = Weak::from(self);
+        let begun = Reveal::begin(
+            &reveal,
+            self,
+            &shown,
+            None,
+            || self.expose_page(),
+            move || {
+                if let Some(view) = weak.load() {
+                    view.drop_reveal();
+                }
+            },
+        );
+        if begun {
+            hooks.count_reveal(true);
+            self.apply_painting();
+        }
+    }
+
+    fn end_reveal(&self, hooks: Option<&PageHooks>) -> Option<EndedReveal> {
+        let reveal = self.state().reveal.clone();
+        let ended = reveal.borrow_mut().end();
+        if ended.is_some()
+            && let Some(hooks) = hooks
+        {
+            hooks.count_reveal(false);
+        }
+        ended
+    }
+
+    /// `-[ArdiaWebView dropReveal]` (`ArdiaWebView+Reveals.mm:408`). The leave-screen step of `paintAfterReveal:` is
+    /// not ported, so both ends paint on the next turn.
+    pub fn drop_reveal(&self) {
+        let hooks = self.state().hooks.upgrade();
+        if let Some(ended) = self.end_reveal(hooks.as_deref()) {
+            if let (Some(hooks), Some(press)) = (&hooks, ended.press) {
+                hooks.presses().borrow_mut().forget_switches(press);
+            }
+            self.schedule_painting();
+        }
+    }
+
+    /// `+[ArdiaWebView dropRevealsInWindow:except:]` (`ArdiaWebView+Reveals.mm:230`).
+    pub fn drop_reveals_in_window(
+        views: &[Retained<ArdiaWebView>],
+        hooks: &PageHooks,
+        window: &NSWindow,
+        keep: Option<&NSView>,
+    ) {
+        let reveals: Vec<_> = views
+            .iter()
+            .map(|view| view.state().reveal.clone())
+            .collect();
+        let hosts: Vec<_> = views
+            .iter()
+            .zip(&reveals)
+            .map(|(view, reveal)| RevealHost { host: view, reveal })
+            .collect();
+        let mut presses = hooks.presses().borrow_mut();
+        drop_reveals(
+            &hosts,
+            DropReveals::Window {
+                window,
+                keep,
+                press: None,
+            },
+            &mut presses,
+            |_, _| hooks.count_reveal(false),
+        );
+        drop(presses);
+        for view in views {
+            if view.in_window_of(window) && !keep.is_some_and(|keep| std::ptr::eq(keep, &***view)) {
+                view.schedule_painting();
+            }
+        }
+    }
+
+    /// `-[ArdiaWebView settleRevealsInWindow]` (`ArdiaWebView+Reveals.mm:439`): this view became visible, so every
+    /// reveal in its window ends.
+    fn settle_reveals_in_window(&self) {
+        let (hooks, key, revealing) = {
+            let state = self.state();
+            (
+                state.hooks.upgrade(),
+                state.transfer_key.clone(),
+                state.reveal.borrow().active(),
+            )
+        };
+        let Some(hooks) = hooks else { return };
+        let window = self.window();
+        let press = key.and_then(|key| hooks.presses().borrow_mut().take_switch(&key));
+        let views = hooks.live().all();
+        let later = window.as_deref().filter(|_| !revealing).and_then(|window| {
+            views.iter().find(|other| {
+                !std::ptr::eq(&***other, self)
+                    && other.in_window_of(window)
+                    && other.native_reveal().is_some()
+            })
+        });
+        if let Some(later) = later
+            && let Some(later_press) = later.native_reveal()
+            && older_press(press, later_press)
+            && later.state().reveal.borrow_mut().stay_over(later, self)
+        {
+            return;
+        }
+        self.end_reveal(Some(&hooks));
+        if let Some(window) = window {
+            let keep: &NSView = self;
+            Self::drop_reveals_in_window(&views, &hooks, &window, Some(keep));
+        }
     }
 
     pub fn visible(&self) -> bool {
@@ -200,6 +404,9 @@ impl ArdiaWebView {
             state.visible = visible;
             state.transfer_key.clone()
         };
+        if visible {
+            self.settle_reveals_in_window();
+        }
         if let Some(key) = key.filter(|_| visible) {
             ardia_field_timing::mark_at_commit(&key, "view");
         }
@@ -395,6 +602,7 @@ impl ArdiaWebView {
         registry: &RefCell<TabRegistry>,
         created: bool,
     ) -> Adoption {
+        self.state().transfer_key = Some(app_id.clone());
         // The steps repaint through `state`, so the attached tab is out of it while they run.
         let (mut attached, mut stashed) = {
             let mut state = self.state();

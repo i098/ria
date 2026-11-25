@@ -23,6 +23,7 @@
 //!   press or a close changes it. Known limit: the engine has no active-tab getter that Ria fills. `TabStrips::active`
 //!   is set only by `TabStrips::activated`, which no Ria code calls, and `Window::activate_tab` keeps no record. A tab that
 //!   becomes active outside the strip, such as a foreground open, does not move the active mark until it is pressed.
+//! - Changes from Ardia (#110): every tab's page stays mounted in the page slot, not hidden; a page view paints only while it is visible, and it takes no clicks then, as in Ardia's sibling panes (`Surface::mount_page`).
 //! - The page slot follows the active tab through `Surface::set_page`; Ardia shows each tab's page in its own page layer.
 //! - A restored window layout keeps its cover and cached picture. `ria-surface` `Surface::set_page` always moves the page
 //!   from the cover into the `page` slot below the strip, so the restored page rect is not kept. The cover stays behind
@@ -404,6 +405,22 @@ fn refresh(host: &WindowHost, surface: &Surface<StripState>, state: &Shared) {
     {
         surface.set_page(Some(&view));
     }
+    // Every other tab's page stays mounted in the same slot (Ardia: sibling panes).
+    let views: Vec<_> = rows
+        .iter()
+        .filter_map(|row| {
+            let tab = host
+                .chrome()
+                .tab_registry()
+                .borrow()
+                .tab_with_app_id(&row.key)?;
+            host.page_for(&tab, &row.key)
+        })
+        .collect();
+    for view in &views {
+        surface.mount_page(view);
+    }
+    surface.retain_pages(&views.iter().map(|view| &**view).collect::<Vec<_>>());
     mark_selected(host, &rows);
     if touched || rows != previous {
         let changed = {
@@ -461,6 +478,8 @@ fn run(host: &WindowHost, state: &Shared, action: Action) {
     };
     match action {
         Action::Select(key) => {
+            // `state/tabs/tabReveal.ts:106` calls `revealTab` when the selection changes, before the page switch settles.
+            host.hooks().reveal_tab(&key, None);
             if let StripCommandResult::Done(_) = host.strip_command(
                 Number(1.0),
                 TabStripCommand::Activate {

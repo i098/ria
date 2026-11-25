@@ -105,6 +105,7 @@ impl<S: 'static> WindowHost<S> {
             queue,
             page_slot: spec.page_slot,
             page: RefCell::new(None),
+            mounted: RefCell::new(Vec::new()),
             tick_pending: Cell::new(false),
             presentation_time: Cell::new(None),
             settings: Cell::new(settings),
@@ -130,27 +131,50 @@ impl<S: 'static> WindowHost<S> {
     }
 
     /// Shows the given engine page view. Pass `None` when no page is selected.
+    ///
+    /// Changes from Ardia: Ardia mounts every tab's page in a sibling pane. Here the page that was shown stays
+    /// mounted in the same slot, unhidden, until `retain_pages` drops it, so the next switch finds its page mounted.
     pub fn set_page(&self, view: Option<&NSView>) {
-        if self.core.page.borrow().as_deref().map(std::ptr::from_ref)
-            == view.map(std::ptr::from_ref)
-        {
+        let same = self.core.page.borrow().as_deref().map(std::ptr::from_ref)
+            == view.map(std::ptr::from_ref);
+        if same && view.is_none_or(|view| self.core.mounted(view)) {
             return;
         }
-        let old = self.core.page.take();
-        if let Some(old) = old {
-            old.removeFromSuperview();
-        }
+        self.core.page.take();
         if let Some(view) = view {
-            self.core.root.addSubview_positioned_relativeTo(
-                view,
-                NSWindowOrderingMode::Above,
-                Some(&self.core.chrome.view),
-            );
+            self.core.mount(view);
             *self.core.page.borrow_mut() = Some(view.retain());
+        }
+        self.core
+            .place_page(self.core.chrome.slot(self.core.page_slot));
+        self.core.update_ax_order();
+    }
+
+    /// Mounts `view` in the page slot beside the shown page. A mounted view stays where it is.
+    pub fn mount_page(&self, view: &NSView) {
+        if !self.core.mounted(view) {
+            self.core.mount(view);
             self.core
                 .place_page(self.core.chrome.slot(self.core.page_slot));
         }
-        self.core.update_ax_order();
+    }
+
+    /// Unmounts every mounted page that is not in `keep`. The shown page is kept too.
+    pub fn retain_pages(&self, keep: &[&NSView]) {
+        let shown = self.core.page.borrow().clone();
+        self.core.mounted.borrow_mut().retain(|view| {
+            let kept = keep.iter().any(|k| std::ptr::eq(*k, &**view))
+                || shown.as_deref().is_some_and(|s| std::ptr::eq(s, &**view));
+            if !kept {
+                view.removeFromSuperview();
+            }
+            kept
+        });
+    }
+
+    /// The number of pages mounted in the page slot, shown or hidden.
+    pub fn mounted_pages(&self) -> usize {
+        self.core.mounted.borrow().len()
     }
 
     /// Hides and stops drawing the overlay when there is no overlay content.
@@ -196,6 +220,7 @@ struct WindowCore<S: 'static> {
     overlay: Layer<S>,
     queue: Rc<ActionQueue>,
     page: RefCell<Option<Retained<NSView>>>,
+    mounted: RefCell<Vec<Retained<NSView>>>,
     page_slot: &'static str,
     tick_pending: Cell<bool>,
     presentation_time: Cell<Option<f64>>,
@@ -233,12 +258,30 @@ impl<S: 'static> WindowCore<S> {
         }
     }
 
+    fn mounted(&self, view: &NSView) -> bool {
+        self.mounted
+            .borrow()
+            .iter()
+            .any(|v| std::ptr::eq(&**v, view))
+    }
+
+    fn mount(&self, view: &NSView) {
+        if self.mounted(view) {
+            return;
+        }
+        self.root.addSubview_positioned_relativeTo(
+            view,
+            NSWindowOrderingMode::Above,
+            Some(&self.chrome.view),
+        );
+        self.mounted.borrow_mut().push(view.retain());
+    }
+
     fn place_page(&self, slot: Option<NSRect>) {
-        let page = self.page.borrow().clone();
-        if let Some(page) = page {
-            let frame = slot.map_or(NSRect::ZERO, |slot| {
-                self.chrome.view.convertRect_toView(slot, Some(&self.root))
-            });
+        let frame = slot.map_or(NSRect::ZERO, |slot| {
+            self.chrome.view.convertRect_toView(slot, Some(&self.root))
+        });
+        for page in self.mounted.borrow().iter() {
             if page.frame() != frame {
                 page.setFrame(frame);
             }
