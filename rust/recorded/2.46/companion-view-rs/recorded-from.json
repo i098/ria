@@ -1,0 +1,95 @@
+{
+  "unit": "packages/sync/src/companion-view.harness.ts",
+  "files": 1,
+  "fingerprint": "94fb6581bb781d52",
+  "coverage": {
+    "lines": 1457,
+    "reached": 743,
+    "files": [
+      {
+        "file": "packages/sync/src/applied.ts",
+        "lines": 40,
+        "reached": 6,
+        "missed": "5-14, 17-28, 31-33, 37-45"
+      },
+      {
+        "file": "packages/sync/src/canon.ts",
+        "lines": 15,
+        "reached": 1,
+        "missed": "2-3, 5-16"
+      },
+      {
+        "file": "packages/sync/src/companion/adapters.ts",
+        "lines": 255,
+        "reached": 55,
+        "missed": "37-47, 50-67, 71-75, 91-165, 175-205, 217-276"
+      },
+      {
+        "file": "packages/sync/src/companion/legacy.ts",
+        "lines": 27,
+        "reached": 27,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/companion/theme.ts",
+        "lines": 60,
+        "reached": 60,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/companion/view.ts",
+        "lines": 353,
+        "reached": 353,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/companion-view.harness.ts",
+        "lines": 25,
+        "reached": 25,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/fileHealth.ts",
+        "lines": 25,
+        "reached": 7,
+        "missed": "6-23"
+      },
+      {
+        "file": "packages/sync/src/folders.ts",
+        "lines": 26,
+        "reached": 26,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/hlc.ts",
+        "lines": 48,
+        "reached": 11,
+        "missed": "10-13, 19-20, 23-27, 29-41, 43-45, 47-53, 55-57"
+      },
+      {
+        "file": "packages/sync/src/order.ts",
+        "lines": 52,
+        "reached": 4,
+        "missed": "5-17, 20-35, 37-55"
+      },
+      {
+        "file": "packages/sync/src/scope.ts",
+        "lines": 343,
+        "reached": 41,
+        "missed": "30-42, 44-46, 48-54, 56-63, 66-79, 85-89, 91-96, 101-122, 124-127, 129-132, 134-153, 156-177, 180-194, 199-223, 225-254, 260-264, 266-275, 277-281, 284-298, 301-323, 328-338, 340-374"
+      },
+      {
+        "file": "packages/sync/src/scopeKeys.ts",
+        "lines": 84,
+        "reached": 23,
+        "missed": "15-19, 25-36, 38-41, 44-46, 49-52, 58-68, 71-81, 84-87, 90-96"
+      },
+      {
+        "file": "packages/sync/src/scopeState.ts",
+        "lines": 104,
+        "reached": 104,
+        "missed": ""
+      }
+    ]
+  }
+}

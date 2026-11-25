@@ -1,0 +1,37 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "packages/sync/src/companion/legacy.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "legacy-rs",
+  "exports": [
+    {
+      "name": "fromLegacyUrl",
+      "file": "packages/sync/src/companion/legacy.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": [
+    {
+      "name": "fromLegacy",
+      "file": "packages/sync/src/companion/legacy.ts",
+      "line": 20,
+      "reason": "generic over `T`: values of any shape, functions included"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "unit": "packages/sync/src/extensions.harness.ts",
+  "files": 1,
+  "fingerprint": "6f6848d488ba72de",
+  "coverage": {
+    "lines": 290,
+    "reached": 290,
+    "files": [
+      {
+        "file": "packages/sync/src/extensions.harness.ts",
+        "lines": 106,
+        "reached": 106,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/extensions.ts",
+        "lines": 184,
+        "reached": 184,
+        "missed": ""
+      }
+    ]
+  }
+}

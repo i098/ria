@@ -1,0 +1,21 @@
+{"fn": "assignPositions", "args": [[null]]}
+{"fn": "assignPositions", "args": [[]]}
+{"fn": "assignPositions", "args": [["1", null, "2"]]}
+{"fn": "assignPositions", "args": [["1", null, null, "1!"]]}
+{"fn": "assignPositions", "args": [["!", "", "~"]]}
+{"fn": "assignPositions", "args": [["a", "b", "c"]]}
+{"fn": "assignPositions", "args": [["c", "b", "a"]]}
+{"fn": "assignPositions", "args": [[null, null, null]]}
+{"fn": "assignPositions", "args": [["0", "10", null, "z"]]}
+{"fn": "assignPositions", "args": [["z", null]]}
+{"fn": "assignPositions", "args": [["zz", null, null]]}
+{"fn": "assignPositions", "args": [["1", "1", null, "1"]]}
+{"fn": "assignPositions", "args": [["A", "Az", null, "B"]]}
+{"fn": "assignPositions", "args": [["V0", "V1", null]]}
+{"fn": "assignPositions", "args": [["V", "V", null, "W"]]}
+{"fn": "assignPositions", "args": [["abc", null, "abd"]]}
+{"fn": "assignPositions", "args": [["ab", null, "ab1"]]}
+{"fn": "assignPositions", "args": [["10V", null, "1!"]]}
+{"fn": "assignPositions", "args": [["\u20ac", null, "\u20aca"]]}
+{"fn": "assignPositions", "args": [["\ud83d\ude00", null, "\ud83d\ude01"]]}
+{"fn": "assignPositions", "args": [["x", null, "y", null, "y1", null]]}

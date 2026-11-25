@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "packages/sync/src/applied.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "applied-rs",
+  "exports": [
+    {
+      "name": "replayApplied",
+      "file": "packages/sync/src/applied.harness.ts",
+      "line": 8,
+      "params": [
+        {
+          "name": "input",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

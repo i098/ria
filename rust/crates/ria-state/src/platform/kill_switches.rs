@@ -13,7 +13,7 @@
 
 use std::collections::BTreeMap;
 
-use serde_json::{Value, json};
+use serde_json::Value;
 
 /// The most switches that the table may have.
 pub const MAX_SWITCHES: usize = 9;
@@ -249,7 +249,18 @@ impl KillSwitches {
             return (RefreshResult::Failed, None);
         }
         let values = parse_switches(Some(&text));
-        let document = json!({ "version": 1, "switches": values }).to_string();
+        // Ardia writes `version` first (killSwitches.ts:163). A struct fixes that order for this crate,
+        // whatever `serde_json` features other crates of the workspace turn on.
+        #[derive(serde::Serialize)]
+        struct CacheDocument<'a> {
+            version: u8,
+            switches: &'a Values,
+        }
+        let document = serde_json::to_string(&CacheDocument {
+            version: 1,
+            switches: &values,
+        })
+        .unwrap_or_default();
         for switch in SWITCHES.iter().filter(|s| s.live) {
             match values.get(switch.name) {
                 Some(on) => self.cached.insert(switch.name, *on),
@@ -322,7 +333,7 @@ mod tests {
         assert_eq!(result, RefreshResult::Updated);
         assert_eq!(
             document.unwrap(),
-            r#"{"switches":{"launchTab":true,"newTabPrewarm":true},"version":1}"#
+            r#"{"version":1,"switches":{"launchTab":true,"newTabPrewarm":true}}"#
         );
         assert!(
             !k.switch_on("launchTab", None, || None),

@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "packages/sync/src/canon.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "canon-rs",
+  "exports": [
+    {
+      "name": "canonical",
+      "file": "packages/sync/src/canon.ts",
+      "line": 1,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

@@ -1,0 +1,17 @@
+{
+  "unit": "packages/sync/src/companion/legacy.ts",
+  "files": 1,
+  "fingerprint": "545ec77f89e089fc",
+  "coverage": {
+    "lines": 27,
+    "reached": 18,
+    "files": [
+      {
+        "file": "packages/sync/src/companion/legacy.ts",
+        "lines": 27,
+        "reached": 18,
+        "missed": "21-29"
+      }
+    ]
+  }
+}

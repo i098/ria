@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "packages/sync/src/companion-cycle.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "companion-cycle-rs",
+  "exports": [
+    {
+      "name": "replayCompanion",
+      "file": "packages/sync/src/companion-cycle.harness.ts",
+      "line": 194,
+      "params": [
+        {
+          "name": "input",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "Promise<unknown[]>",
+      "is_async": true,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

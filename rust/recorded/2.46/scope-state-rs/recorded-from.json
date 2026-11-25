@@ -1,0 +1,17 @@
+{
+  "unit": "packages/sync/src/scopeState.ts",
+  "files": 1,
+  "fingerprint": "003f2d1283ea69c0",
+  "coverage": {
+    "lines": 104,
+    "reached": 104,
+    "files": [
+      {
+        "file": "packages/sync/src/scopeState.ts",
+        "lines": 104,
+        "reached": 104,
+        "missed": ""
+      }
+    ]
+  }
+}

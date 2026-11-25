@@ -1,0 +1,29 @@
+{
+  "unit": "packages/sync/src/applied.harness.ts",
+  "files": 1,
+  "fingerprint": "d5daf6c39707426a",
+  "coverage": {
+    "lines": 162,
+    "reached": 162,
+    "files": [
+      {
+        "file": "packages/sync/src/applied.harness.ts",
+        "lines": 18,
+        "reached": 18,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/applied.ts",
+        "lines": 40,
+        "reached": 40,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/scopeState.ts",
+        "lines": 104,
+        "reached": 104,
+        "missed": ""
+      }
+    ]
+  }
+}

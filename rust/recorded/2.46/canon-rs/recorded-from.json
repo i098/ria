@@ -1,0 +1,17 @@
+{
+  "unit": "packages/sync/src/canon.ts",
+  "files": 1,
+  "fingerprint": "d6ee00838ca01dde",
+  "coverage": {
+    "lines": 15,
+    "reached": 15,
+    "files": [
+      {
+        "file": "packages/sync/src/canon.ts",
+        "lines": 15,
+        "reached": 15,
+        "missed": ""
+      }
+    ]
+  }
+}

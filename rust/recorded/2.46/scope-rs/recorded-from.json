@@ -1,0 +1,59 @@
+{
+  "unit": "packages/sync/src/scope.harness.ts",
+  "files": 1,
+  "fingerprint": "8d53e4c773ca72e4",
+  "coverage": {
+    "lines": 953,
+    "reached": 934,
+    "files": [
+      {
+        "file": "packages/sync/src/applied.ts",
+        "lines": 40,
+        "reached": 40,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/canon.ts",
+        "lines": 15,
+        "reached": 15,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/fileHealth.ts",
+        "lines": 25,
+        "reached": 25,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/hlc.ts",
+        "lines": 48,
+        "reached": 46,
+        "missed": "35-36"
+      },
+      {
+        "file": "packages/sync/src/scope.harness.ts",
+        "lines": 294,
+        "reached": 294,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/scope.ts",
+        "lines": 343,
+        "reached": 343,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/scopeKeys.ts",
+        "lines": 84,
+        "reached": 67,
+        "missed": "15-19, 25-36"
+      },
+      {
+        "file": "packages/sync/src/scopeState.ts",
+        "lines": 104,
+        "reached": 104,
+        "missed": ""
+      }
+    ]
+  }
+}

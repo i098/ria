@@ -1,0 +1,10 @@
+{"fn": "canonical", "args": [null]}
+{"fn": "canonical", "args": [1]}
+{"fn": "canonical", "args": ["s"]}
+{"fn": "canonical", "args": [true]}
+{"fn": "canonical", "args": [[3, {"b": 1, "a": 2}]]}
+{"fn": "canonical", "args": [{"b": {"d": 1, "c": [{"z": 0, "y": 1}]}, "a": null, "10": 1, "9": 2, "B": 3}]}
+{"fn": "canonical", "args": [{"\u00e9": 1, "e": 2, "\ud83d\ude00": 3, "\uffff": 4}]}
+{"fn": "canonical", "args": [{"x": 1.5, "y": -0.0, "z": 1e+21, "w": 1e-07}]}
+{"fn": "canonical", "args": [{}]}
+{"fn": "canonical", "args": [[]]}
