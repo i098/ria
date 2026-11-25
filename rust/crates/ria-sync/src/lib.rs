@@ -7,5 +7,4 @@
 //! types and traits here, and slice 5.13 implements them.
 #![allow(clippy::type_complexity)] // shortcut: callback fields stay inline, as in the TypeScript types.
 
-
 pub mod logic;

@@ -12,7 +12,11 @@ fn decode(value: serde_json::Value) -> serde_json::Value {
         return Value::Null;
     }
     if let Some(n) = crate::js::as_number(&value).filter(|_| value.is_object()) {
-        return if n == 0.0 { Value::from(0) } else { Value::Null };
+        return if n == 0.0 {
+            Value::from(0)
+        } else {
+            Value::Null
+        };
     }
     match value {
         Value::Array(items) => Value::Array(items.into_iter().map(decode).collect()),
