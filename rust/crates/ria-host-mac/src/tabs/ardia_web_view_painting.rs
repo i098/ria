@@ -161,6 +161,11 @@ impl FrameHold {
         self.awaiting.is_some()
     }
 
+    /// The generation of the frame the hold waits for, when it waits.
+    pub fn current(&self) -> Option<u64> {
+        self.awaiting.as_ref().map(|(generation, _)| *generation)
+    }
+
     pub fn frame_changed(&self, tab: &Tab) -> bool {
         self.awaiting.as_ref().is_some_and(|(_, mark)| {
             tab.view()

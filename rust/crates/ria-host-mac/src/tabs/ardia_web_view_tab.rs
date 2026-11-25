@@ -318,7 +318,7 @@ pub struct PopupPolicy {
     pub small_window_links_in_place: bool,
 }
 
-fn small_window(window: Option<&NSWindow>) -> bool {
+pub(super) fn small_window(window: Option<&NSWindow>) -> bool {
     window
         .and_then(NSWindow::identifier)
         .is_some_and(|id| id.to_string() == SMALL_WINDOW)
