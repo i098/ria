@@ -131,14 +131,14 @@ mod mac {
             "the app did not build a live page view for the launch tab"
         );
         assert!(
-            out.lines().any(|line| line == "attachLoading true"),
+            out.lines().any(|line| line == "attachLoading slow true"),
             "the slow-load launch tab was not loading at attach"
         );
         assert!(
             out.lines().any(|line| line == "firstPaintHeld true"),
             "the launch page was not held for first paint at attach"
         );
-        let reveal_ms = revealed_after_ms(&out);
+        let reveal_ms = revealed_after_ms(&out, "slow");
         assert!(
             reveal_ms < 1500,
             "the slow-load launch page waited {reveal_ms} ms: the load-finished reveal did not run before the 4 s timeout"
@@ -184,7 +184,7 @@ mod mac {
             "launchTab=on",
             Duration::ZERO,
         );
-        let reveal_ms = revealed_after_ms(&again);
+        let reveal_ms = revealed_after_ms(&again, "fast");
         assert!(
             reveal_ms < 1500,
             "the fast-load launch page waited {reveal_ms} ms for its reveal"
@@ -204,9 +204,10 @@ mod mac {
         );
     }
 
-    fn revealed_after_ms(out: &str) -> u64 {
+    fn revealed_after_ms(out: &str, case: &str) -> u64 {
+        let prefix = format!("firstPaintRevealMs {case} ");
         out.lines()
-            .find_map(|line| line.strip_prefix("firstPaintRevealMs "))
+            .find_map(|line| line.strip_prefix(prefix.as_str()))
             .and_then(|ms| ms.parse().ok())
             .expect("the launch page was never revealed")
     }
@@ -230,6 +231,7 @@ mod mac {
             .env("CFFIXED_USER_HOME", &home)
             .env("RIA_DATA_DIR", &data)
             .env("RIA_BACKGROUND", "1")
+            .envs(delay.is_zero().then_some(("RIA_LIVE_FAST", "1")))
             .env_remove("RIA_INSTANCE")
             .env("RIA_SWITCHES", switches)
             .env_remove("RIA_TEST")
@@ -413,20 +415,22 @@ mod mac {
     fn reveal_poll(
         view: Retained<ArdiaWebView>,
         held: Instant,
+        case: &'static str,
         revealed: Rc<Cell<bool>>,
         done: Rc<dyn Fn()>,
     ) {
         if view.page_opacity() == Some(1.0) {
-            println!("firstPaintRevealMs {}", held.elapsed().as_millis());
+            println!("firstPaintRevealMs {case} {}", held.elapsed().as_millis());
             println!("firstPaintOpacity 1");
             revealed.set(true);
             done();
         } else if held.elapsed() < Duration::from_secs(10) {
             host_launch::after(Duration::from_millis(10), move || {
-                reveal_poll(view, held, revealed, done)
+                reveal_poll(view, held, case, revealed, done)
             });
         }
     }
+
     fn all_set(flags: &[&Cell<bool>]) -> bool {
         flags.iter().all(|flag| flag.get())
     }
@@ -543,6 +547,8 @@ mod mac {
         let moving = Move::new();
         let pinned = Rc::new(Cell::new(false));
         let revealed = Rc::new(Cell::new(false));
+        let fast = std::env::var_os("RIA_LIVE_FAST").is_some();
+        let case = if fast { "fast" } else { "slow" };
         // Quit when the fixture title, the download move, the pin and the first-paint reveal are done.
         let quit_when_done: Rc<dyn Fn()> = {
             let (matched, moving, pinned, revealed) = (
@@ -589,17 +595,16 @@ mod mac {
                     facts.iter().any(|view| view.page_detached)
                 );
                 let view = host.hooks().live().all().remove(0);
-                let core = host.main().expect("browser window");
-                let profile = core.active_profile().expect("active profile");
-                let loading = core
-                    .tabs_for_profile(&profile)
-                    .firstObject()
-                    .is_some_and(|tab| tab.loading());
-                println!("attachLoading {loading}");
+                println!(
+                    "attachLoading {case} {}",
+                    host.launch_attach_loading()
+                        .expect("the launch tab attached")
+                );
                 println!("firstPaintHeld {}", view.page_opacity() == Some(0.0));
                 reveal_poll(
                     view,
                     Instant::now(),
+                    case,
                     check_revealed.clone(),
                     quit_when_done.clone(),
                 );

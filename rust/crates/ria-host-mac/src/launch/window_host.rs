@@ -10,7 +10,7 @@
 //!   [`WindowHost::strip_command`] is the entry that routes `tabs.stripCommand` into the shared `TabStrips` (issue #153).
 //! - The strip scopes are the browser window of the launch and the open popups, not every `ArdiaWindowController` (issue #153).
 
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 
 use objc2::MainThreadMarker;
@@ -40,6 +40,7 @@ pub struct WindowHost {
     paint_probe: Rc<PaintProbe>,
     /// The page views of the tabs; the registry and `LiveViews` hold them weakly.
     pages: RefCell<Vec<Retained<ArdiaWebView>>>,
+    launch_attach_loading: Cell<Option<bool>>,
 }
 
 impl WindowHost {
@@ -71,12 +72,18 @@ impl WindowHost {
                 hooks,
                 paint_probe,
                 pages: RefCell::default(),
+                launch_attach_loading: Cell::default(),
             }
         })
     }
 
     pub fn hooks(&self) -> &Rc<PageHooks> {
         &self.hooks
+    }
+
+    /// Whether the launch tab was still loading when `page_for` attached it; `None` before it attached.
+    pub fn launch_attach_loading(&self) -> Option<bool> {
+        self.launch_attach_loading.get()
     }
 
     /// The `PaintProbeLine` of the focus summary.
@@ -94,6 +101,9 @@ impl WindowHost {
         let page = ChromiumTabView::make_page(mtm, &self.hooks);
         let url = tab.url().to_string();
         let created = key == LAUNCH_KEY && !url.is_empty() && !url.starts_with("about:");
+        if key == LAUNCH_KEY {
+            self.launch_attach_loading.set(Some(tab.loading()));
+        }
         page.attach_tab(
             tab.retain(),
             key.to_owned(),
