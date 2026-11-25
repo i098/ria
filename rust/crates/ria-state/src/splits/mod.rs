@@ -288,7 +288,7 @@ pub enum Action {
 
 /// Applies `action` to `app` (`actions.ts` and the store methods of `splits.ts`).
 pub fn apply(app: &mut AppState, action: Action, fx: &mut Effects) {
-    use crate::browser::SplitViewOrientation as Orientation;
+    use crate::browser::Orientation;
     match action {
         Action::ClosePane { tab_id } => actions::close_pane(app, &tab_id, fx),
         Action::CloseSplitView { split_id } => actions::close_split_view(app, &split_id, fx),
@@ -364,13 +364,13 @@ pub fn apply(app: &mut AppState, action: Action, fx: &mut Effects) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::browser::{SplitSlot, SplitSlotVariant0, SplitView, SplitViewOrientation};
+    use crate::browser::{Orientation as SplitViewOrientation, SplitSlot, SplitView};
 
     fn slot(id: &str) -> SplitSlot {
-        SplitSlot::Other0(SplitSlotVariant0 {
+        SplitSlot::Single {
             size: Number(0.5),
             tab_id: id.into(),
-        })
+        }
     }
 
     #[test]

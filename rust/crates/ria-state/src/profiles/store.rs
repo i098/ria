@@ -242,43 +242,23 @@ fn profile_data_deleted(app: &mut AppState, engine: &str) {
 }
 
 fn window_id(w: &BrowserWindow) -> &str {
-    match w {
-        BrowserWindow::Main { id, .. }
-        | BrowserWindow::Private { id, .. }
-        | BrowserWindow::Small { id, .. } => id,
-    }
+    &w.id
 }
 
 fn window_profile_id(w: &BrowserWindow) -> &str {
-    match w {
-        BrowserWindow::Main { profile_id, .. }
-        | BrowserWindow::Private { profile_id, .. }
-        | BrowserWindow::Small { profile_id, .. } => profile_id,
-    }
+    &w.profile_id
 }
 
 fn window_tab_ids(w: &BrowserWindow) -> &[String] {
-    match w {
-        BrowserWindow::Main { tab_ids, .. }
-        | BrowserWindow::Private { tab_ids, .. }
-        | BrowserWindow::Small { tab_ids, .. } => tab_ids,
-    }
+    &w.tab_ids
 }
 
 fn window_active_tab_ids(w: &BrowserWindow) -> &HashMap<String, String> {
-    match w {
-        BrowserWindow::Main { active_tab_ids, .. }
-        | BrowserWindow::Private { active_tab_ids, .. }
-        | BrowserWindow::Small { active_tab_ids, .. } => active_tab_ids,
-    }
+    &w.active_tab_ids
 }
 
 fn window_active_tab_ids_mut(w: &mut BrowserWindow) -> &mut HashMap<String, String> {
-    match w {
-        BrowserWindow::Main { active_tab_ids, .. }
-        | BrowserWindow::Private { active_tab_ids, .. }
-        | BrowserWindow::Small { active_tab_ids, .. } => active_tab_ids,
-    }
+    &mut w.active_tab_ids
 }
 
 /// The windows in the order of `windowOrder`, then the rest by id: `Object.values(s.windows)`.
@@ -307,7 +287,7 @@ fn delete_profile(app: &mut AppState, id: &str) {
         }
     }
     for w in windows_in_order(app) {
-        if matches!(w, BrowserWindow::Private { .. })
+        if w.kind == crate::browser::WindowKind::Private
             && sib::incognito_original(window_profile_id(&w)) == id
         {
             sib::close_window(app, window_id(&w));
@@ -417,7 +397,7 @@ fn delete_profile(app: &mut AppState, id: &str) {
         .retain(|c| c.tab.profile_id != id);
     let w = app.get_mut::<windows::State>();
     for closed in &mut w.closed_windows {
-        closed.tabs.retain(|t| t.profile_id != id);
+        closed.tabs.retain(|t| t.tab.profile_id != id);
     }
     w.closed_windows.retain(|c| !c.tabs.is_empty());
     w.parked_pins.remove(id);
