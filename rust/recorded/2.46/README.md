@@ -55,3 +55,12 @@ To record the harness crates again: `TZ=UTC rust-anything record <crate> --count
 TZ=UTC RIA_NOW_MS=1790812800000 NODE_OPTIONS=--import=$PWD/rust/recorded/2.46/companion-cycle-rs/clock-freeze.mjs \
   rust-anything diff rust/recorded/2.46/companion-cycle-rs
 ```
+
+## Known differences
+
+- `serde_json` refuses JSON nested past 127 levels; `JSON.parse` accepts it. This is a library difference: `parse_sync_file` gives `None` (see `scope.rs`).
+
+Fuzz runs can also report these two harness-only differences. The library and the recorded cases are not affected.
+
+- `companion-view-rs`: `themeOf` with a null scope returns a result where TS throws.
+- `scope-rs`: a missing third `hide` argument clears the list where TS pushes `undefined`.

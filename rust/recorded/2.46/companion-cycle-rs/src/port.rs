@@ -187,15 +187,6 @@ fn now_ms() -> f64 {
         .map_or(0.0, |d| d.as_millis() as f64)
 }
 
-/// A JS number as JSON: integral numbers print without a fraction, as `JSON.stringify` does.
-fn number(n: f64) -> Value {
-    if n.fract() == 0.0 && n.abs() < 9_007_199_254_740_992.0 {
-        Value::from(n as i64)
-    } else {
-        Value::from(n)
-    }
-}
-
 fn text(v: &Value) -> &str {
     v.as_str().unwrap_or_default()
 }
@@ -324,7 +315,7 @@ async fn run(w: &Rc<World>, step: &[Value]) -> SyncResult<Value> {
         "save" => json!(save(*a == true)?),
         "viewIsNew" => json!(view_is_new(text(a))),
         "dayOf" => json!(day_of(a.as_f64().unwrap_or(f64::NAN))?),
-        "lastVisitOf" => number(last_visit_of(step.get(1))),
+        "lastVisitOf" => crate::js::number(last_visit_of(step.get(1))),
         "historyExpired" => json!(history_expired(text(a), b, c.as_f64().unwrap_or(f64::NAN))),
         "isWebUrl" => json!(is_web_url(text(a))),
         "show" => show(w),

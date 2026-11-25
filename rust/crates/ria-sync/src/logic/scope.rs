@@ -10,6 +10,8 @@
 //!   record in a snapshot with more fields loses them. Ria writes no such fields.
 //! - `JSON.parse` takes a lone surrogate escape and turns an overflowing number into `Infinity`;
 //!   `serde_json` refuses both, so `parseSyncFile` gives `null` for such a file. Ria writes neither.
+//! - `JSON.parse` accepts deeper values; `serde_json` refuses nesting past 127 levels, so
+//!   `parseSyncFile` gives `null` for such a file. Ria writes no such nesting.
 //! - `ScopeOptions` fields are `None` for "use the default"; JS can also pass `undefined`
 //!   explicitly, which the spread of Ardia turns into an `undefined` option.
 //! - Keys keep insertion order; a JS object puts integer-like keys first. Keys named like
@@ -1034,6 +1036,19 @@ mod tests {
         ] {
             assert_eq!(parse_sync_file(bad), None, "{bad}");
         }
+    }
+
+    #[test]
+    fn parse_refuses_values_nested_past_the_json_depth_limit() {
+        let file = |depth: usize| {
+            format!(
+                r#"{{"v":1,"kind":"log","device":"d","seq":1,"at":5,"ops":[{{"k":"x","h":"h","v":{}0{}}}]}}"#,
+                "[".repeat(depth),
+                "]".repeat(depth)
+            )
+        };
+        assert!(parse_sync_file(&file(100)).is_some());
+        assert_eq!(parse_sync_file(&file(200)), None);
     }
 
     #[test]
