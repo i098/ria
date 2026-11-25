@@ -43,19 +43,30 @@ pub struct SettleDidNotConverge {
 
 impl std::fmt::Display for SettleDidNotConverge {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "The store didn't settle in {SETTLE_ROUNDS} rounds; still changing: {}", self.steps.join(", "))
+        write!(
+            f,
+            "The store didn't settle in {SETTLE_ROUNDS} rounds; still changing: {}",
+            self.steps.join(", ")
+        )
     }
 }
 
 impl std::error::Error for SettleDidNotConverge {}
 
 /// `settle` (settle.ts:60).
-pub fn settle(next: BrowserState, prev: &BrowserState) -> Result<BrowserState, SettleDidNotConverge> {
+pub fn settle(
+    next: BrowserState,
+    prev: &BrowserState,
+) -> Result<BrowserState, SettleDidNotConverge> {
     settle_with(next, prev, &SETTLE_STEPS)
 }
 
 /// `settle` with the steps as an argument, as the `steps` parameter of Ardia.
-pub fn settle_with(next: BrowserState, prev: &BrowserState, steps: &[(&str, Step)]) -> Result<BrowserState, SettleDidNotConverge> {
+pub fn settle_with(
+    next: BrowserState,
+    prev: &BrowserState,
+    steps: &[(&str, Step)],
+) -> Result<BrowserState, SettleDidNotConverge> {
     let mut s = next;
     let mut base = prev.clone();
     for round in 0..SETTLE_ROUNDS {
@@ -71,7 +82,10 @@ pub fn settle_with(next: BrowserState, prev: &BrowserState, steps: &[(&str, Step
             return Ok(s);
         }
         if round == SETTLE_ROUNDS - 1 {
-            return Err(SettleDidNotConverge { steps: changed, settled: Box::new(s) });
+            return Err(SettleDidNotConverge {
+                steps: changed,
+                settled: Box::new(s),
+            });
         }
         base = input;
     }
@@ -104,13 +118,23 @@ mod tests {
 
     #[test]
     fn runs_rounds_until_no_step_changes() {
-        let out = settle_with(BrowserState::default(), &BrowserState::default(), &[("quiet", quiet), ("count", count_up)]).unwrap();
+        let out = settle_with(
+            BrowserState::default(),
+            &BrowserState::default(),
+            &[("quiet", quiet), ("count", count_up)],
+        )
+        .unwrap();
         assert_eq!(out.top_apps_merged, "3");
     }
 
     #[test]
     fn the_eighth_changing_round_is_an_error_that_names_the_steps() {
-        let err = settle_with(BrowserState::default(), &BrowserState::default(), &[("forever", forever)]).unwrap_err();
+        let err = settle_with(
+            BrowserState::default(),
+            &BrowserState::default(),
+            &[("forever", forever)],
+        )
+        .unwrap_err();
         assert_eq!(err.steps, vec!["forever"]);
         assert_eq!(err.settled.top_apps_merged.len(), SETTLE_ROUNDS);
         assert!(err.to_string().ends_with("still changing: forever"));

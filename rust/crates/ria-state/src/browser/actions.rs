@@ -22,12 +22,16 @@ use crate::platform::PlatformCall;
 /// `focus` (actions.ts:43).
 pub fn focus(s: &mut BrowserState, fx: &mut Effects, window_id: &str) {
     set_focused_window(s, window_id);
-    fx.push(PlatformCall::AppWindowsFocusWindow { id: window_id.to_string() });
+    fx.push(PlatformCall::AppWindowsFocusWindow {
+        id: window_id.to_string(),
+    });
 }
 
 /// `switchToTab` (actions.ts:48).
 pub fn switch_to_tab(s: &mut BrowserState, fx: &mut Effects, tab_id: &str) {
-    let Some(window_id) = s.tabs.get(tab_id).map(|t| t.window_id.clone()) else { return };
+    let Some(window_id) = s.tabs.get(tab_id).map(|t| t.window_id.clone()) else {
+        return;
+    };
     activate(s, tab_id);
     if Some(&window_id) != focused_window_of(s).as_ref() {
         focus(s, fx, &window_id);
@@ -36,7 +40,9 @@ pub fn switch_to_tab(s: &mut BrowserState, fx: &mut Effects, tab_id: &str) {
 
 /// `toggleMute` (actions.ts:97).
 pub fn toggle_mute(s: &mut BrowserState, tab_id: &str) {
-    let Some(tab) = s.tabs.get(tab_id).cloned() else { return };
+    let Some(tab) = s.tabs.get(tab_id).cloned() else {
+        return;
+    };
     if !is_site_muted(s, &tab) {
         return set_muted(s, &[tab_id.to_string()], !tab.muted);
     }
@@ -55,21 +61,36 @@ pub fn toggle_site_mute(s: &mut BrowserState, tab_id: &str) {
 }
 
 /// `moveGroupToWindow` (actions.ts:216).
-pub fn move_group_to_window_action(s: &mut BrowserState, fx: &mut Effects, group_id: &str, target: Option<&str>) {
+pub fn move_group_to_window_action(
+    s: &mut BrowserState,
+    fx: &mut Effects,
+    group_id: &str,
+    target: Option<&str>,
+) {
     if let Some(window_id) = move_group_to_window(s, group_id, target) {
         focus(s, fx, &window_id);
     }
 }
 
 /// `moveTabToWindow` (actions.ts:221).
-pub fn move_tab_to_window(s: &mut BrowserState, fx: &mut Effects, tab_id: &str, target: Option<&str>) {
+pub fn move_tab_to_window(
+    s: &mut BrowserState,
+    fx: &mut Effects,
+    tab_id: &str,
+    target: Option<&str>,
+) {
     if let Some(window_id) = move_tabs_to_window(s, &[tab_id.to_string()], target) {
         focus(s, fx, &window_id);
     }
 }
 
 /// `switchProfile` (actions.ts:226). The animated move runs the pager of the window (`pageToProfile`).
-pub fn switch_profile_action(s: &mut BrowserState, window_id: &str, profile_id: &str, animated: bool) {
+pub fn switch_profile_action(
+    s: &mut BrowserState,
+    window_id: &str,
+    profile_id: &str,
+    animated: bool,
+) {
     if animated {
         page_to_profile(s, window_id, profile_id);
     } else {
@@ -84,7 +105,11 @@ pub fn cycle_target(s: &BrowserState, window_id: &str, delta: i64) -> Option<Str
         return None;
     }
     let n = s.profile_order.len() as i64;
-    let i = s.profile_order.iter().position(|p| p == &w.profile_id).map_or(-1, |i| i as i64);
+    let i = s
+        .profile_order
+        .iter()
+        .position(|p| p == &w.profile_id)
+        .map_or(-1, |i| i as i64);
     Some(s.profile_order[(i + delta).rem_euclid(n) as usize].clone())
 }
 
@@ -105,11 +130,17 @@ pub fn cycle_profile(s: &mut BrowserState, window_id: &str, delta: i64) {
 pub fn open_urls(s: &mut BrowserState, urls: &[String], window_id: Option<&str>) {
     let mut target = resolve_window_id(s, window_id);
     for url in urls {
-        let private = target.as_ref().and_then(|t| s.windows.get(t)).is_some_and(|w| w.kind == WindowKind::Private);
+        let private = target
+            .as_ref()
+            .and_then(|t| s.windows.get(t))
+            .is_some_and(|w| w.kind == WindowKind::Private);
         match &target {
             Some(t) if !private => new_tab(s, t, url),
             _ => {
-                let options = crate::windows::CreateWindowOptions { url: Some(url.clone()), ..Default::default() };
+                let options = crate::windows::CreateWindowOptions {
+                    url: Some(url.clone()),
+                    ..Default::default()
+                };
                 target = Some(create_window(s, Some(&options)));
             }
         }

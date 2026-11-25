@@ -202,24 +202,42 @@ fn run(s: &mut State, action: Action, fx: &mut Effects) {
         Action::SwitchToTab { tab_id } => actions::switch_to_tab(s, fx, &tab_id),
         Action::ToggleMute { tab_id } => actions::toggle_mute(s, &tab_id),
         Action::ToggleSiteMute { tab_id } => actions::toggle_site_mute(s, &tab_id),
-        Action::SetSiteMuted { tab_id, muted } => pending_siblings::set_site_muted(s, &tab_id, muted),
+        Action::SetSiteMuted { tab_id, muted } => {
+            pending_siblings::set_site_muted(s, &tab_id, muted)
+        }
         Action::OpenWindow { options } => {
             pending_siblings::create_window(s, options.as_ref());
         }
         Action::OpenUrls { urls, window_id } => actions::open_urls(s, &urls, window_id.as_deref()),
-        Action::MoveGroupToWindow { group_id, target } => actions::move_group_to_window_action(s, fx, &group_id, target.as_deref()),
-        Action::MoveTabToWindow { tab_id, target } => actions::move_tab_to_window(s, fx, &tab_id, target.as_deref()),
-        Action::SwitchProfile { window_id, profile_id, animated } => actions::switch_profile_action(s, &window_id, &profile_id, animated.unwrap_or(false)),
-        Action::CycleProfile { window_id, delta } => actions::cycle_profile(s, &window_id, delta.0 as i64),
+        Action::MoveGroupToWindow { group_id, target } => {
+            actions::move_group_to_window_action(s, fx, &group_id, target.as_deref())
+        }
+        Action::MoveTabToWindow { tab_id, target } => {
+            actions::move_tab_to_window(s, fx, &tab_id, target.as_deref())
+        }
+        Action::SwitchProfile {
+            window_id,
+            profile_id,
+            animated,
+        } => actions::switch_profile_action(s, &window_id, &profile_id, animated.unwrap_or(false)),
+        Action::CycleProfile { window_id, delta } => {
+            actions::cycle_profile(s, &window_id, delta.0 as i64)
+        }
         Action::Hydrate { data } => *s = store::hydrate(s, data),
         // The actions that await a dialog: the guard of the first leg is written, the dialog and the second action are not.
         Action::CloseTab { tab_id } => {
-            if s.tabs.get(&tab_id).is_some_and(|t| s.windows.contains_key(&t.window_id)) {
+            if s.tabs
+                .get(&tab_id)
+                .is_some_and(|t| s.windows.contains_key(&t.window_id))
+            {
                 todo!("slice 2.5: closeTab awaits a dialog (second action not written)");
             }
         }
         Action::CloseGroup { group_id } => {
-            if s.groups.get(&group_id).is_some_and(|g| s.windows.contains_key(&g.window_id)) {
+            if s.groups
+                .get(&group_id)
+                .is_some_and(|g| s.windows.contains_key(&g.window_id))
+            {
                 todo!("slice 2.5: closeGroup awaits a dialog (second action not written)");
             }
         }
@@ -243,6 +261,8 @@ fn run(s: &mut State, action: Action, fx: &mut Effects) {
                 todo!("slice 2.5: moveGroupToProfile awaits a dialog (second action not written)");
             }
         }
-        Action::OpenProfileMenu { .. } => todo!("slice 2.5: openProfileMenu awaits a menu choice (second action not written)"),
+        Action::OpenProfileMenu { .. } => {
+            todo!("slice 2.5: openProfileMenu awaits a menu choice (second action not written)")
+        }
     }
 }

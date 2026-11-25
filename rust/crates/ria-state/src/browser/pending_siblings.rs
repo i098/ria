@@ -24,23 +24,91 @@ macro_rules! step {
     };
 }
 
-step!(splits_where_unavailable, "splits::splitsWhereUnavailable (Ardia splits/splits.ts)", "2.14");
-step!(forget_closed_window_mutes, "tabs::forgetClosedWindowMutes (Ardia tabs/mute.ts)", "2.8");
-step!(forget_closed_window_clean_ups, "pins::forgetClosedWindowCleanUps (Ardia pins/tabCleanup.ts)", "2.13");
-step!(forget_moved_anchors, "pins::forgetMovedAnchors (Ardia pins/organize.ts)", "2.13");
-step!(settle_nesting, "groups::settleNesting (Ardia groups/groups.ts:146)", "2.23");
-step!(settle_shown_tabs, "groups::settleShownTabs (Ardia groups/shownTabs.ts)", "2.23");
-step!(live_pin_tables, "pins::livePinTables (Ardia pins/pinChoices.ts)", "2.13");
-step!(settle_peeks, "peek::settlePeeks (Ardia peek/peek.ts)", "2.19");
-step!(settle_pin_homes, "pins::settlePinHomes (Ardia pins/pinHomes.ts)", "2.13");
-step!(unshare_tabs, "tabs::unshareTabs (Ardia tabs/tabShare.ts)", "2.8");
-step!(pages_into_splits, "tabs::pagesIntoSplits (Ardia tabs/tabShare.ts)", "2.8");
-step!(settle_shared_pins, "pins::settleSharedPins (Ardia pins/pinShare.ts)", "2.13");
-step!(settle_tile_folders, "pins::settleTileFolders (Ardia pins/tileFolders.ts)", "2.13");
-step!(mirror_pins, "pins::mirrorPins (Ardia pins/pinMirror.ts)", "2.13");
-step!(mirror_top_apps, "pins::mirrorTopApps (Ardia pins/topApps.ts)", "2.13");
-step!(mirror_tabs, "tabs::mirrorTabs (Ardia tabs/tabShare.ts)", "2.8");
-step!(pinned_tabs_leave_live, "pins::pinnedTabsLeaveLive (Ardia pins/pinHomes.ts)", "2.13");
+step!(
+    splits_where_unavailable,
+    "splits::splitsWhereUnavailable (Ardia splits/splits.ts)",
+    "2.14"
+);
+step!(
+    forget_closed_window_mutes,
+    "tabs::forgetClosedWindowMutes (Ardia tabs/mute.ts)",
+    "2.8"
+);
+step!(
+    forget_closed_window_clean_ups,
+    "pins::forgetClosedWindowCleanUps (Ardia pins/tabCleanup.ts)",
+    "2.13"
+);
+step!(
+    forget_moved_anchors,
+    "pins::forgetMovedAnchors (Ardia pins/organize.ts)",
+    "2.13"
+);
+step!(
+    settle_nesting,
+    "groups::settleNesting (Ardia groups/groups.ts:146)",
+    "2.23"
+);
+step!(
+    settle_shown_tabs,
+    "groups::settleShownTabs (Ardia groups/shownTabs.ts)",
+    "2.23"
+);
+step!(
+    live_pin_tables,
+    "pins::livePinTables (Ardia pins/pinChoices.ts)",
+    "2.13"
+);
+step!(
+    settle_peeks,
+    "peek::settlePeeks (Ardia peek/peek.ts)",
+    "2.19"
+);
+step!(
+    settle_pin_homes,
+    "pins::settlePinHomes (Ardia pins/pinHomes.ts)",
+    "2.13"
+);
+step!(
+    unshare_tabs,
+    "tabs::unshareTabs (Ardia tabs/tabShare.ts)",
+    "2.8"
+);
+step!(
+    pages_into_splits,
+    "tabs::pagesIntoSplits (Ardia tabs/tabShare.ts)",
+    "2.8"
+);
+step!(
+    settle_shared_pins,
+    "pins::settleSharedPins (Ardia pins/pinShare.ts)",
+    "2.13"
+);
+step!(
+    settle_tile_folders,
+    "pins::settleTileFolders (Ardia pins/tileFolders.ts)",
+    "2.13"
+);
+step!(
+    mirror_pins,
+    "pins::mirrorPins (Ardia pins/pinMirror.ts)",
+    "2.13"
+);
+step!(
+    mirror_top_apps,
+    "pins::mirrorTopApps (Ardia pins/topApps.ts)",
+    "2.13"
+);
+step!(
+    mirror_tabs,
+    "tabs::mirrorTabs (Ardia tabs/tabShare.ts)",
+    "2.8"
+);
+step!(
+    pinned_tabs_leave_live,
+    "pins::pinnedTabsLeaveLive (Ardia pins/pinHomes.ts)",
+    "2.13"
+);
 
 // shortcut: stub for splits::splitTabIds (Ardia splits/splits.ts:61), replace with the real call when slice 2.14 merges
 pub fn split_tab_ids(split: &SplitView) -> Vec<String> {
@@ -48,12 +116,20 @@ pub fn split_tab_ids(split: &SplitView) -> Vec<String> {
 }
 
 // shortcut: stub for settings::withToolbarKeptWhileScrolling (Ardia settings/toolbarScrollDefault.ts), replace with the real call when slice 2.7 merges
-pub fn with_toolbar_kept_while_scrolling(settings: Option<&crate::settings::Settings>, meta: &crate::settings::SettingsMeta) -> (Option<crate::settings::Settings>, crate::settings::SettingsMeta) {
+pub fn with_toolbar_kept_while_scrolling(
+    settings: Option<&crate::settings::Settings>,
+    meta: &crate::settings::SettingsMeta,
+) -> (
+    Option<crate::settings::Settings>,
+    crate::settings::SettingsMeta,
+) {
     todo!("slice 2.7: withToolbarKeptWhileScrolling")
 }
 
 // shortcut: stub for settings::parseSettingsMeta (Ardia settings/settings.ts), replace with the real call when slice 2.7 merges
-pub fn parse_settings_meta(meta: Option<&crate::settings::SettingsMeta>) -> crate::settings::SettingsMeta {
+pub fn parse_settings_meta(
+    meta: Option<&crate::settings::SettingsMeta>,
+) -> crate::settings::SettingsMeta {
     todo!("slice 2.7: parseSettingsMeta")
 }
 
@@ -73,12 +149,19 @@ pub fn pin_home(tab: &Tab, pinned: bool) -> Option<String> {
 }
 
 // shortcut: stub for groups::orderSections (Ardia groups/groups.ts:54), replace with the real call when slice 2.23 merges
-pub fn order_sections(ids: Vec<String>, tabs: &HashMap<String, Tab>, groups: &HashMap<String, TabGroup>) -> Vec<String> {
+pub fn order_sections(
+    ids: Vec<String>,
+    tabs: &HashMap<String, Tab>,
+    groups: &HashMap<String, TabGroup>,
+) -> Vec<String> {
     todo!("slice 2.23: orderSections")
 }
 
 // shortcut: stub for splits::sanitizeSplits (Ardia splits/splits.ts), replace with the real call when slice 2.14 merges
-pub fn sanitize_splits(splits: &HashMap<String, SplitView>, tabs: &HashMap<String, Tab>) -> HashMap<String, SplitView> {
+pub fn sanitize_splits(
+    splits: &HashMap<String, SplitView>,
+    tabs: &HashMap<String, Tab>,
+) -> HashMap<String, SplitView> {
     todo!("slice 2.14: sanitizeSplits")
 }
 
@@ -148,7 +231,10 @@ pub fn set_site_muted(s: &mut BrowserState, tab_id: &str, muted: bool) {
 }
 
 // shortcut: stub for windows::createWindow (Ardia windows/windows.ts), replace with the real call when slice 2.9 merges
-pub fn create_window(s: &mut BrowserState, options: Option<&crate::windows::CreateWindowOptions>) -> String {
+pub fn create_window(
+    s: &mut BrowserState,
+    options: Option<&crate::windows::CreateWindowOptions>,
+) -> String {
     todo!("slice 2.9: createWindow")
 }
 
@@ -163,12 +249,20 @@ pub fn switch_profile(s: &mut BrowserState, window_id: &str, profile_id: &str) {
 }
 
 // shortcut: stub for groups::moveGroupToWindow (Ardia groups/groups.ts), replace with the real call when slice 2.23 merges
-pub fn move_group_to_window(s: &mut BrowserState, group_id: &str, target: Option<&str>) -> Option<String> {
+pub fn move_group_to_window(
+    s: &mut BrowserState,
+    group_id: &str,
+    target: Option<&str>,
+) -> Option<String> {
     todo!("slice 2.23: moveGroupToWindow")
 }
 
 // shortcut: stub for tabs::moveTabsToWindow (Ardia tabs/tabsSlice.ts), replace with the real call when slice 2.8 merges
-pub fn move_tabs_to_window(s: &mut BrowserState, tab_ids: &[String], target: Option<&str>) -> Option<String> {
+pub fn move_tabs_to_window(
+    s: &mut BrowserState,
+    tab_ids: &[String],
+    target: Option<&str>,
+) -> Option<String> {
     todo!("slice 2.8: moveTabsToWindow")
 }
 

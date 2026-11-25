@@ -158,7 +158,11 @@ pub struct Navigation {
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "kind", rename_all = "lowercase", rename_all_fields = "camelCase")]
+#[serde(
+    tag = "kind",
+    rename_all = "lowercase",
+    rename_all_fields = "camelCase"
+)]
 pub enum TabPage {
     Idle {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -319,7 +323,11 @@ pub struct HistoryEntry {
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "kind", rename_all = "lowercase", rename_all_fields = "camelCase")]
+#[serde(
+    tag = "kind",
+    rename_all = "lowercase",
+    rename_all_fields = "camelCase"
+)]
 pub enum BookmarkNode {
     Url {
         id: String,
@@ -558,7 +566,11 @@ pub struct FindState {
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "kind", rename_all = "lowercase", rename_all_fields = "camelCase")]
+#[serde(
+    tag = "kind",
+    rename_all = "lowercase",
+    rename_all_fields = "camelCase"
+)]
 pub enum NewTabTarget {
     List,
     Group { group_id: String },

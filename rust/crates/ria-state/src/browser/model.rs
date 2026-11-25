@@ -1,6 +1,6 @@
-// Ported from ardia apps/browser/src/state/browser/{model,structure,changes}.ts at 551d3c13c.
+// Ported from ardia apps/browser/src/state/browser/model.ts at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
-// This file is a Rust port of those files, with changes.
+// This file is a Rust port of that file, with changes.
 
 //! Pure helpers of the browser store: ids, incognito profiles, tab and window lookups, labels (`model.ts`), the
 //! group and split indexes (`structure.ts`), and the changed-id list (`changes.ts`).
@@ -13,8 +13,8 @@
 //!   than Ardia when an action replaces an object with an equal one.
 
 use std::collections::{HashMap, HashSet};
-use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::LazyLock;
+use std::sync::atomic::{AtomicU64, Ordering};
 
 use super::pending_siblings::split_tab_ids;
 use super::types::*;
@@ -26,7 +26,9 @@ const DEFAULT_PROFILE_ID: &str = "default";
 static COUNTER: AtomicU64 = AtomicU64::new(0);
 static NAV_SEQ: AtomicU64 = AtomicU64::new(0);
 static LAUNCH: LazyLock<String> = LazyLock::new(|| {
-    let nanos = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0, |d| d.as_nanos());
+    let nanos = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_or(0, |d| d.as_nanos());
     base36(nanos / 1_000_000) + &base36(nanos % 1_679_616)
 });
 
@@ -47,7 +49,10 @@ fn base36(mut n: u128) -> String {
 /// `newId` (`model.ts:12`): `<prefix>-<launch>-<counter in base 36>`.
 pub fn new_id(prefix: &str) -> String {
     let launch = &*LAUNCH;
-    format!("{prefix}-{launch}-{}", base36(u128::from(COUNTER.fetch_add(1, Ordering::Relaxed) + 1)))
+    format!(
+        "{prefix}-{launch}-{}",
+        base36(u128::from(COUNTER.fetch_add(1, Ordering::Relaxed) + 1))
+    )
 }
 
 /// `pinKeyOf` (`model.ts:14`).
@@ -57,7 +62,11 @@ pub fn pin_key_of<'a>(id: &'a str, pin_key: Option<&'a str>) -> &'a str {
 
 /// `familyKeyOf` (`model.ts:15`).
 pub fn family_key_of(t: &Tab) -> String {
-    format!("{}\u{1}{}", t.profile_id, pin_key_of(&t.id, t.pin_key.as_deref()))
+    format!(
+        "{}\u{1}{}",
+        t.profile_id,
+        pin_key_of(&t.id, t.pin_key.as_deref())
+    )
 }
 
 /// `navigationTo` (`model.ts:18`).
@@ -82,26 +91,49 @@ pub fn is_incognito_profile(profile_id: &str) -> bool {
 /// `incognitoOriginal` (`model.ts:22`). `indexOf` counts UTF-16 units and `slice` counts from the match, so a byte
 /// index gives the same text.
 pub fn incognito_original(profile_id: &str) -> String {
-    profile_id.find('@').map_or_else(|| DEFAULT_PROFILE_ID.to_string(), |at| profile_id[at + 1..].to_string())
+    profile_id.find('@').map_or_else(
+        || DEFAULT_PROFILE_ID.to_string(),
+        |at| profile_id[at + 1..].to_string(),
+    )
 }
 
 /// `engineProfile` (`model.ts:27`).
 pub fn engine_profile(profiles: &HashMap<String, Profile>, profile_id: &str) -> String {
     if is_incognito_profile(profile_id) {
-        let head = profile_id.find('@').map_or(profile_id, |at| &profile_id[..at]);
-        return format!("{head}@{}", engine_profile(profiles, &incognito_original(profile_id)));
+        let head = profile_id
+            .find('@')
+            .map_or(profile_id, |at| &profile_id[..at]);
+        return format!(
+            "{head}@{}",
+            engine_profile(profiles, &incognito_original(profile_id))
+        );
     }
-    let id = profiles.get(profile_id).and_then(|p| p.data_id.as_deref()).unwrap_or(profile_id);
-    if id == DEFAULT_PROFILE_ID { String::new() } else { id.to_string() }
+    let id = profiles
+        .get(profile_id)
+        .and_then(|p| p.data_id.as_deref())
+        .unwrap_or(profile_id);
+    if id == DEFAULT_PROFILE_ID {
+        String::new()
+    } else {
+        id.to_string()
+    }
 }
 
 /// `privateSession` (`model.ts:36`).
 pub fn private_session(profiles: &HashMap<String, Profile>, profile_id: &str) -> Option<String> {
-    is_incognito_profile(profile_id).then(|| engine_profile(profiles, &incognito_original(profile_id)))
+    is_incognito_profile(profile_id)
+        .then(|| engine_profile(profiles, &incognito_original(profile_id)))
 }
 
 fn incognito_profile() -> Profile {
-    Profile { id: "incognito".into(), name: "Incognito".into(), color: "neutral".into(), icon: None, created_at: Number(0.0), ..Default::default() }
+    Profile {
+        id: "incognito".into(),
+        name: "Incognito".into(),
+        color: "neutral".into(),
+        icon: None,
+        created_at: Number(0.0),
+        ..Default::default()
+    }
 }
 
 /// `IDLE_LIVE` (`model.ts:41`).
@@ -110,7 +142,14 @@ pub fn idle_live() -> TabLive {
 }
 
 /// `makeTab` (`model.ts:49`). `id` is `newId("tab")` in Ardia; `now` is `Date.now()`.
-pub fn make_tab(id: String, window_id: &str, profile_id: &str, url: &str, snapshot: Option<&TabSnapshot>, now: f64) -> Tab {
+pub fn make_tab(
+    id: String,
+    window_id: &str,
+    profile_id: &str,
+    url: &str,
+    snapshot: Option<&TabSnapshot>,
+    now: f64,
+) -> Tab {
     let mut tab = Tab {
         id,
         window_id: window_id.into(),
@@ -142,11 +181,22 @@ pub fn make_tab(id: String, window_id: &str, profile_id: &str, url: &str, snapsh
         }
         tab.engine = snap.engine.clone();
     }
-    tab.page = if url.is_empty() { TabPage::Idle { wake: None } } else { TabPage::Loaded { nav: navigation_to(url, false) } };
+    tab.page = if url.is_empty() {
+        TabPage::Idle { wake: None }
+    } else {
+        TabPage::Loaded {
+            nav: navigation_to(url, false),
+        }
+    };
     tab.created_at = Number(now);
-    tab.last_active_at = snapshot.and_then(|s| s.last_active_at).unwrap_or(Number(now));
+    tab.last_active_at = snapshot
+        .and_then(|s| s.last_active_at)
+        .unwrap_or(Number(now));
     // `snapshot?.lastActiveAt` is falsy for 0.
-    if snapshot.and_then(|s| s.last_active_at).is_some_and(|n| n.0 != 0.0 && !n.0.is_nan()) {
+    if snapshot
+        .and_then(|s| s.last_active_at)
+        .is_some_and(|n| n.0 != 0.0 && !n.0.is_nan())
+    {
         tab.restored_at = Some(Number(now));
     }
     tab
@@ -158,7 +208,9 @@ pub fn by_recent_use(a: &Tab, b: &Tab) -> std::cmp::Ordering {
     if key != 0 {
         return key.cmp(&0);
     }
-    (b.last_active_at.0).partial_cmp(&a.last_active_at.0).unwrap_or(std::cmp::Ordering::Equal)
+    (b.last_active_at.0)
+        .partial_cmp(&a.last_active_at.0)
+        .unwrap_or(std::cmp::Ordering::Equal)
 }
 
 /// `snapshotTab` (`model.ts:76`).
@@ -195,7 +247,9 @@ pub fn same_pin(a: Option<&TabPin>, b: Option<&TabPin>) -> bool {
 
 /// `pinnedSectionTitle` (`model.ts:96`).
 pub fn pinned_section_title(profiles: &HashMap<String, Profile>, tab: Option<&Tab>) -> String {
-    let name = tab.and_then(|t| profiles.get(&t.profile_id)).map_or("Profile", |p| p.name.as_str());
+    let name = tab
+        .and_then(|t| profiles.get(&t.profile_id))
+        .map_or("Profile", |p| p.name.as_str());
     format!("Pinned in {name}")
 }
 
@@ -221,39 +275,68 @@ pub fn pin_section(t: Option<&Tab>) -> &'static str {
 
 /// `pinnedGroupMembers` (`structure.ts:7`).
 pub fn pinned_group_members(groups: &HashMap<String, TabGroup>) -> HashSet<&str> {
-    groups.values().filter(|g| g.pinned).flat_map(|g| g.tab_ids.iter().map(String::as_str)).collect()
+    groups
+        .values()
+        .filter(|g| g.pinned)
+        .flat_map(|g| g.tab_ids.iter().map(String::as_str))
+        .collect()
 }
 
 /// `inPinnedContainer` (`model.ts:103`).
-pub fn in_pinned_container(tabs: &HashMap<String, Tab>, groups: &HashMap<String, TabGroup>, id: &str) -> bool {
-    let Some(tab) = tabs.get(id) else { return false };
+pub fn in_pinned_container(
+    tabs: &HashMap<String, Tab>,
+    groups: &HashMap<String, TabGroup>,
+    id: &str,
+) -> bool {
+    let Some(tab) = tabs.get(id) else {
+        return false;
+    };
     tab.pin.is_some() || pinned_group_members(groups).contains(id)
 }
 
 /// `viewTabIds` (`model.ts:109`).
 pub fn view_tab_ids(s: &BrowserState, window_id: &str, profile_id: Option<&str>) -> Vec<String> {
-    let Some(w) = s.windows.get(window_id) else { return vec![] };
+    let Some(w) = s.windows.get(window_id) else {
+        return vec![];
+    };
     let profile = profile_id.unwrap_or(&w.profile_id);
-    w.tab_ids.iter().filter(|id| s.tabs.get(*id).is_some_and(|t| t.profile_id == profile)).cloned().collect()
+    w.tab_ids
+        .iter()
+        .filter(|id| s.tabs.get(*id).is_some_and(|t| t.profile_id == profile))
+        .cloned()
+        .collect()
 }
 
 /// `pinnedItemsRemain` (`model.ts:115`).
 pub fn pinned_items_remain(s: &BrowserState, id: &str) -> bool {
-    let Some(w) = s.tabs.get(id).and_then(|t| s.windows.get(&t.window_id)) else { return false };
-    if view_tab_ids(s, &w.id, None).iter().any(|t| t != id && in_pinned_container(&s.tabs, &s.groups, t)) {
+    let Some(w) = s.tabs.get(id).and_then(|t| s.windows.get(&t.window_id)) else {
+        return false;
+    };
+    if view_tab_ids(s, &w.id, None)
+        .iter()
+        .any(|t| t != id && in_pinned_container(&s.tabs, &s.groups, t))
+    {
         return true;
     }
-    s.groups.values().any(|g| g.pinned && g.window_id == w.id && g.profile_id == w.profile_id)
+    s.groups
+        .values()
+        .any(|g| g.pinned && g.window_id == w.id && g.profile_id == w.profile_id)
 }
 
 /// `closesWindow` (`model.ts:122`).
 pub fn closes_window(s: &BrowserState, id: &str) -> bool {
-    let Some(tab) = s.tabs.get(id) else { return false };
-    let Some(w) = s.windows.get(&tab.window_id) else { return false };
+    let Some(tab) = s.tabs.get(id) else {
+        return false;
+    };
+    let Some(w) = s.windows.get(&tab.window_id) else {
+        return false;
+    };
     if tab.profile_id != w.profile_id || in_pinned_container(&s.tabs, &s.groups, id) {
         return false;
     }
-    view_tab_ids(s, &w.id, None).iter().all(|t| t == id || s.tabs[t].page.kind() == "asleep")
+    view_tab_ids(s, &w.id, None)
+        .iter()
+        .all(|t| t == id || s.tabs[t].page.kind() == "asleep")
 }
 
 /// `showsEmptyWindow` (`model.ts:129`).
@@ -262,13 +345,19 @@ pub fn shows_empty_window(s: &BrowserState, window_id: &str) -> bool {
     if active.as_ref().is_some_and(|a| !s.tabs[a].url.is_empty()) {
         return false;
     }
-    view_tab_ids(s, window_id, None)
-        .iter()
-        .all(|id| Some(id) == active.as_ref() || s.tabs[id].url.is_empty() || s.tabs[id].page.kind() == "asleep")
+    view_tab_ids(s, window_id, None).iter().all(|id| {
+        Some(id) == active.as_ref()
+            || s.tabs[id].url.is_empty()
+            || s.tabs[id].page.kind() == "asleep"
+    })
 }
 
 /// `activeTabId` (`model.ts:135`).
-pub fn active_tab_id(s: &BrowserState, window_id: &str, profile_id: Option<&str>) -> Option<String> {
+pub fn active_tab_id(
+    s: &BrowserState,
+    window_id: &str,
+    profile_id: Option<&str>,
+) -> Option<String> {
     let w = s.windows.get(window_id)?;
     let id = w.active_tab_ids.get(profile_id.unwrap_or(&w.profile_id))?;
     (s.tabs.get(id)?.window_id == window_id).then(|| id.clone())
@@ -284,12 +373,22 @@ pub fn profile_for(s: &BrowserState, profile_id: &str) -> Profile {
     if is_incognito_profile(profile_id) {
         return incognito_profile();
     }
-    s.profiles.get(profile_id).or_else(|| s.profiles.get(&s.settings.default_profile_id)).cloned().unwrap_or_else(incognito_profile)
+    s.profiles
+        .get(profile_id)
+        .or_else(|| s.profiles.get(&s.settings.default_profile_id))
+        .cloned()
+        .unwrap_or_else(incognito_profile)
 }
 
 /// `bookmarkProfileId` (`model.ts:150`).
 pub fn bookmark_profile_id(s: &BrowserState, window: Option<&BrowserWindow>) -> String {
-    let id = window.map(|w| if w.kind == WindowKind::Private { incognito_original(&w.profile_id) } else { w.profile_id.clone() });
+    let id = window.map(|w| {
+        if w.kind == WindowKind::Private {
+            incognito_original(&w.profile_id)
+        } else {
+            w.profile_id.clone()
+        }
+    });
     match id {
         Some(id) if s.profiles.contains_key(&id) => id,
         _ => s.settings.default_profile_id.clone(),
@@ -301,8 +400,16 @@ pub fn resolve_window_id(s: &BrowserState, id: Option<&str>) -> Option<String> {
     if let Some(id) = id.filter(|id| s.windows.contains_key(*id)) {
         return Some(id.to_string());
     }
-    let main = |w: &&String| s.windows.get(*w).is_some_and(|w| w.kind != WindowKind::Small);
-    s.ui.focus_order.iter().find(main).or_else(|| s.window_order.iter().find(main)).cloned()
+    let main = |w: &&String| {
+        s.windows
+            .get(*w)
+            .is_some_and(|w| w.kind != WindowKind::Small)
+    };
+    s.ui.focus_order
+        .iter()
+        .find(main)
+        .or_else(|| s.window_order.iter().find(main))
+        .cloned()
 }
 
 fn layout_of(l: crate::settings::SettingsTabLayout) -> TabLayout {
@@ -315,17 +422,24 @@ fn layout_of(l: crate::settings::SettingsTabLayout) -> TabLayout {
 /// `tabLayoutOf` (`model.ts:161`).
 pub fn tab_layout_of(s: &BrowserState, window_id: Option<&str>) -> TabLayout {
     let id = resolve_window_id(s, window_id);
-    id.and_then(|id| s.windows[&id].tab_layout).unwrap_or_else(|| layout_of(s.settings.tab_layout))
+    id.and_then(|id| s.windows[&id].tab_layout)
+        .unwrap_or_else(|| layout_of(s.settings.tab_layout))
 }
 
 /// `autoHidesTabsIn` (`model.ts:166`).
 pub fn auto_hides_tabs_in(s: &BrowserState, window_id: Option<&str>) -> bool {
-    window_id.and_then(|w| s.windows.get(w)).and_then(|w| w.auto_hide_tabs).unwrap_or(s.settings.auto_hide_tabs)
+    window_id
+        .and_then(|w| s.windows.get(w))
+        .and_then(|w| w.auto_hide_tabs)
+        .unwrap_or(s.settings.auto_hide_tabs)
 }
 
 /// `tabsShownIn` (`model.ts:170`).
 pub fn tabs_shown_in(s: &BrowserState, window_id: Option<&str>) -> bool {
-    !auto_hides_tabs_in(s, window_id) && !window_id.and_then(|w| s.windows.get(w)).is_some_and(|w| w.kind == WindowKind::Small)
+    !auto_hides_tabs_in(s, window_id)
+        && !window_id
+            .and_then(|w| s.windows.get(w))
+            .is_some_and(|w| w.kind == WindowKind::Small)
 }
 
 /// `sidebarSideOf` (`model.ts:177`).
@@ -364,7 +478,9 @@ pub fn tab_label(url: &str, title: &str, custom_title: Option<&str>) -> String {
         return app;
     }
     let fallback = if title.is_empty() { url } else { title };
-    let Ok(u) = url::Url::parse(url) else { return fallback.to_string() };
+    let Ok(u) = url::Url::parse(url) else {
+        return fallback.to_string();
+    };
     if u.scheme() == "file" {
         if !title.is_empty() {
             return title.to_string();
@@ -374,7 +490,11 @@ pub fn tab_label(url: &str, title: &str, custom_title: Option<&str>) -> String {
     }
     let host = ria_core::url::idn::display_host(u.host_str().unwrap_or(""));
     let host = host.strip_prefix("www.").unwrap_or(&host);
-    if host.is_empty() { fallback.to_string() } else { host.to_string() }
+    if host.is_empty() {
+        fallback.to_string()
+    } else {
+        host.to_string()
+    }
 }
 
 fn percent_decode(text: &str) -> String {
@@ -382,7 +502,11 @@ fn percent_decode(text: &str) -> String {
     let mut out = Vec::with_capacity(bytes.len());
     let mut i = 0;
     while i < bytes.len() {
-        let hex = bytes.get(i + 1..i + 3).filter(|_| bytes[i] == b'%').and_then(|h| std::str::from_utf8(h).ok()).and_then(|h| u8::from_str_radix(h, 16).ok());
+        let hex = bytes
+            .get(i + 1..i + 3)
+            .filter(|_| bytes[i] == b'%')
+            .and_then(|h| std::str::from_utf8(h).ok())
+            .and_then(|h| u8::from_str_radix(h, 16).ok());
         if let Some(b) = hex {
             out.push(b);
             i += 3;
@@ -396,7 +520,18 @@ fn percent_decode(text: &str) -> String {
 
 fn url_label(url: &str) -> String {
     let rest = match url.find("://") {
-        Some(at) if at > 0 && url[..at].chars().next().is_some_and(|c| c.is_ascii_alphabetic()) && url[..at].chars().all(|c| c.is_ascii_alphanumeric() || "_+.-".contains(c)) => &url[at + 3..],
+        Some(at)
+            if at > 0
+                && url[..at]
+                    .chars()
+                    .next()
+                    .is_some_and(|c| c.is_ascii_alphabetic())
+                && url[..at]
+                    .chars()
+                    .all(|c| c.is_ascii_alphanumeric() || "_+.-".contains(c)) =>
+        {
+            &url[at + 3..]
+        }
         _ => url,
     };
     let rest = rest.strip_prefix("www.").unwrap_or(rest);
@@ -409,12 +544,20 @@ pub fn tab_title(url: &str, title: &str, custom_title: Option<&str>) -> String {
     if !own.is_empty() {
         return own;
     }
-    if url.is_empty() { "New Tab".into() } else { url_label(url) }
+    if url.is_empty() {
+        "New Tab".into()
+    } else {
+        url_label(url)
+    }
 }
 
 /// `tabTooltip` (`model.ts:218`).
 pub fn tab_tooltip(url: &str, title: &str, custom_title: Option<&str>) -> String {
-    if url.is_empty() { tab_title(url, title, custom_title) } else { format!("{}\n{url}", tab_title(url, title, custom_title)) }
+    if url.is_empty() {
+        tab_title(url, title, custom_title)
+    } else {
+        format!("{}\n{url}", tab_title(url, title, custom_title))
+    }
 }
 
 /// `plural` (`model.ts:227`).
@@ -424,10 +567,19 @@ pub fn plural(n: usize, word: &str) -> String {
 
 /// `windowTitle` (`model.ts:231`).
 pub fn window_title(s: &BrowserState, window_id: &str) -> String {
-    let Some(w) = s.windows.get(window_id) else { return String::new() };
-    let label = active_tab(s, window_id).map_or_else(|| "New Tab".into(), |t| tab_label(&t.url, &t.title, t.custom_title.as_deref()));
+    let Some(w) = s.windows.get(window_id) else {
+        return String::new();
+    };
+    let label = active_tab(s, window_id).map_or_else(
+        || "New Tab".into(),
+        |t| tab_label(&t.url, &t.title, t.custom_title.as_deref()),
+    );
     let others = view_tab_ids(s, window_id, None).len() as i64 - 1;
-    let more = if others > 0 { format!(" & {}", plural(others as usize, "Tab")) } else { String::new() };
+    let more = if others > 0 {
+        format!(" & {}", plural(others as usize, "Tab"))
+    } else {
+        String::new()
+    };
     format!("{} — {label}{more}", profile_for(s, &w.profile_id).name)
 }
 
@@ -462,8 +614,15 @@ pub fn stable_list(_previous: Option<Vec<String>>, next: Vec<String>) -> Vec<Str
 }
 
 /// `changedIds` (`changes.ts:17`): the ids whose value differs in `next` and `prev`, then the ids that `next` lacks.
-pub fn changed_ids<T: PartialEq>(next: &HashMap<String, T>, prev: &HashMap<String, T>) -> Vec<String> {
-    let mut ids: Vec<String> = next.iter().filter(|(id, v)| prev.get(*id) != Some(*v)).map(|(id, _)| id.clone()).collect();
+pub fn changed_ids<T: PartialEq>(
+    next: &HashMap<String, T>,
+    prev: &HashMap<String, T>,
+) -> Vec<String> {
+    let mut ids: Vec<String> = next
+        .iter()
+        .filter(|(id, v)| prev.get(*id) != Some(*v))
+        .map(|(id, _)| id.clone())
+        .collect();
     ids.extend(prev.keys().filter(|id| !next.contains_key(*id)).cloned());
     ids
 }
@@ -473,14 +632,25 @@ mod tests {
     use super::*;
 
     fn tab(id: &str, window: &str, profile: &str) -> Tab {
-        Tab { id: id.into(), window_id: window.into(), profile_id: profile.into(), ..Default::default() }
+        Tab {
+            id: id.into(),
+            window_id: window.into(),
+            profile_id: profile.into(),
+            ..Default::default()
+        }
     }
 
     fn state() -> BrowserState {
         let mut s = BrowserState::default();
         s.windows.insert(
             "w".into(),
-            BrowserWindow { id: "w".into(), profile_id: "p".into(), tab_ids: vec!["a".into(), "b".into()], active_tab_ids: [("p".to_string(), "a".to_string())].into(), ..Default::default() },
+            BrowserWindow {
+                id: "w".into(),
+                profile_id: "p".into(),
+                tab_ids: vec!["a".into(), "b".into()],
+                active_tab_ids: [("p".to_string(), "a".to_string())].into(),
+                ..Default::default()
+            },
         );
         s.tabs.insert("a".into(), tab("a", "w", "p"));
         s.tabs.insert("b".into(), tab("b", "w", "p"));
@@ -494,7 +664,14 @@ mod tests {
         assert_eq!(incognito_original(&id), "work");
         assert_eq!(incognito_original("incognito:w1"), "default");
         let mut profiles = HashMap::new();
-        profiles.insert("work".to_string(), Profile { id: "work".into(), data_id: Some("d1".into()), ..Default::default() });
+        profiles.insert(
+            "work".to_string(),
+            Profile {
+                id: "work".into(),
+                data_id: Some("d1".into()),
+                ..Default::default()
+            },
+        );
         assert_eq!(engine_profile(&profiles, &id), "incognito:w1@d1");
         assert_eq!(engine_profile(&profiles, "default"), "");
     }
@@ -502,10 +679,16 @@ mod tests {
     #[test]
     fn labels_follow_the_url_rules() {
         assert_eq!(tab_label("", "", None), "New Tab");
-        assert_eq!(tab_label("https://www.example.com/x", "T", None), "example.com");
+        assert_eq!(
+            tab_label("https://www.example.com/x", "T", None),
+            "example.com"
+        );
         assert_eq!(tab_label("not a url", "", None), "not a url");
         assert_eq!(tab_label("file:///a/b%20c.txt", "", None), "b c.txt");
-        assert_eq!(tab_title("https://www.example.com/", "", None), "example.com");
+        assert_eq!(
+            tab_title("https://www.example.com/", "", None),
+            "example.com"
+        );
         assert_eq!(tab_tooltip("https://a.b/", "Té", None), "Té\nhttps://a.b/");
         assert_eq!(plural(1, "Tab"), "1 Tab");
         assert_eq!(plural(2, "Tab"), "2 Tabs");
@@ -532,12 +715,21 @@ mod tests {
 
     #[test]
     fn make_tab_marks_restored_only_with_a_nonzero_last_active() {
-        let snap = TabSnapshot { last_active_at: Some(Number(5.0)), ..Default::default() };
+        let snap = TabSnapshot {
+            last_active_at: Some(Number(5.0)),
+            ..Default::default()
+        };
         let t = make_tab("t".into(), "w", "p", "https://a.b/", Some(&snap), 9.0);
         assert_eq!(t.restored_at, Some(Number(9.0)));
         assert_eq!(t.last_active_at, Number(5.0));
         assert!(matches!(t.page, TabPage::Loaded { .. }));
-        let zero = TabSnapshot { last_active_at: Some(Number(0.0)), ..Default::default() };
-        assert_eq!(make_tab("t".into(), "w", "p", "", Some(&zero), 9.0).restored_at, None);
+        let zero = TabSnapshot {
+            last_active_at: Some(Number(0.0)),
+            ..Default::default()
+        };
+        assert_eq!(
+            make_tab("t".into(), "w", "p", "", Some(&zero), 9.0).restored_at,
+            None
+        );
     }
 }
