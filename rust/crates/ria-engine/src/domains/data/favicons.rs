@@ -1,6 +1,10 @@
 // Ported from ardia packages/ardiacore/ios/ArdiaFavicons.mm at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
+//
+// Deviation from Ardia (issue #57, approved by the order to resolve every open issue): Ardia answers from the
+// process-wide `Seen()` cache before any live-profile check (`ArdiaFavicons.mm:90-98`) and `releaseProfile:` does not
+// clear it (`ArdiaHost.mm:143-155`). Here a released private session neither stores nor serves a cached icon (ADR-V3).
 
 //! Fetches the icon of a page and answers with a 64 px PNG as a `file:` URI (a normal profile with a safe name) or
 //! as a `data:` URI. Ardia reads an `NSImage` and draws it with AppKit; this port decodes with the `image` crate
