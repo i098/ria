@@ -262,7 +262,7 @@ pub fn begin(kind: Kind, page_url: &str, started: Instant, engine: Retained<AnyO
             host_view.addSubview_positioned_relativeTo(&view, NSWindowOrderingMode::Above, Some(&g));
             // The second layer: its own Rune runtime, bottom left, reading the same counter.
             let frame2 = NSRect::new(NSPoint::new(24.0, bounds.size.height - 160.0), NSSize::new(300.0, 120.0));
-            let view2 = RuneView::new(mtm, Mode::Above, frame2);
+            let view2 = RuneView::new(mtm, Mode::Overlay, frame2);
             view2.setAutoresizingMask(NSAutoresizingMaskOptions::ViewMaxXMargin | NSAutoresizingMaskOptions::ViewMinYMargin);
             host_view.addSubview_positioned_relativeTo(&view2, NSWindowOrderingMode::Above, Some(&view));
             glass = Some(g);
