@@ -11,20 +11,25 @@
 //! modules, and `matchActions` from `fuzzy.rs`, which `fuzzy_reference.rs` checks. The pool is
 //! rebuilt on each call; the caller passes the id of the pool the original would cache, which
 //! `lastMatches` compares.
+//!
+//! Changes from Ardia: `buildSuggestions` and `matchScore` are split into helpers for the
+//! complexity gate with unchanged behavior, as are the test helpers `profile`, `sequence` and
+//! `compareRun`.
 
 use std::collections::{HashMap, HashSet};
 
 use super::calculator::calculate;
 use super::candidate_pool::page_text;
 use super::omnibox::{fixup_url, host_of, same_address, spaced_address_guess};
-use super::quick_create::match_quick_create;
+use super::quick_create::{QuickCreate, match_quick_create};
 use super::suggestion::{
-    Preference, SourceTab, SuggestOptions, Suggestion, SuggestionResult, SuggestionSource,
+    CommandAction, Preference, SourceTab, SuggestOptions, Suggestion, SuggestionResult,
+    SuggestionSource,
 };
 use super::suggestion_rows::{
     Output, PageRow, action_row, create_row, dedupe_suggestions, page_suggestion,
 };
-use crate::fuzzy::match_actions;
+use crate::fuzzy::{ActionMatch, match_actions};
 use crate::search::bangs::{BangMatch, find_bang};
 use crate::search::engines::{BUILT_IN_ENGINES, search_url};
 use crate::search::js_text::{is_js_space, js_trim};
@@ -251,34 +256,53 @@ fn parse_query<'a>(q: &'a str, tokens: &[&'a str]) -> Query<'a> {
 fn match_score(t: &PageText, query: &Query) -> f64 {
     let shown = &t.shown_lower;
     let title = &t.title_lower;
-    let q = query.q;
     if !shown.contains(query.needle) && !title.contains(query.needle) {
         return 0.0;
     }
-    let mut s = 0.0;
+    let mut s = address_score(shown, query);
+    s += title_score(title, query);
+    if s > 0.0 || query.tokens.len() < 2 {
+        return s;
+    }
+    token_score(s, shown, title, query)
+}
+
+/// The part of `matchScore` for where the query sits in the shown address.
+fn address_score(shown: &str, query: &Query) -> f64 {
+    let q = query.q;
     if shown.starts_with(q) {
-        s = 100.0;
+        100.0
     } else if query
         .segment_starts
         .as_ref()
         .is_some_and(|(a, b)| shown.contains(a) || shown.contains(b))
     {
-        s = 60.0;
+        60.0
     } else if js_len(q) >= 2 && shown.contains(q) {
-        s = 30.0;
+        30.0
+    } else {
+        0.0
     }
+}
+
+/// The part of `matchScore` for where the query sits in the title.
+fn title_score(title: &str, query: &Query) -> f64 {
+    let q = query.q;
     if title.starts_with(q) {
-        s += 40.0;
+        40.0
     } else if if js_len(q) >= 2 {
         title.contains(q)
     } else {
         query.word && word_starts_with(title, q)
     } {
-        s += 20.0;
+        20.0
+    } else {
+        0.0
     }
-    if s > 0.0 || query.tokens.len() < 2 {
-        return s;
-    }
+}
+
+/// The part of `matchScore` that scores each token when the whole query matched nothing.
+fn token_score(mut s: f64, shown: &str, title: &str, query: &Query) -> f64 {
     for &(token, word) in &query.tokens {
         if word && word_starts_with(title, token) {
             s += 15.0;
@@ -356,6 +380,12 @@ fn origin(t: &PageText) -> Option<String> {
     t.origin_of_page().map(str::to_string)
 }
 
+/// Whether `url` is on the host of `scope` or one of its subdomains.
+fn on_scope_site(url: &str, scope: &SearchScope) -> bool {
+    let host = host_of(url);
+    host == scope.host || host.ends_with(&format!(".{}", scope.host))
+}
+
 fn page(url: &str, title: &str, favicon: Option<&str>) -> Suggestion {
     Suggestion::Page {
         url: url.into(),
@@ -375,6 +405,318 @@ fn search_row(query: &str, url: String, engine: &str, suggested: bool) -> Sugges
         suggested,
         bang: false,
     }
+}
+
+/// The query as `buildSuggestions` reads it.
+struct Typed<'a> {
+    raw: &'a str,
+    query: &'a str,
+    bare: &'a str,
+    q: &'a str,
+    engine_name: &'a str,
+    engine_url: &'a str,
+    website_first: bool,
+    no_inline: bool,
+}
+
+/// The candidates `buildSuggestions` ranks, and the source its `known` rows come from.
+struct Cands<'a> {
+    pool: &'a RefPool,
+    tabs: &'a Tabs,
+    source: &'a SuggestionSource,
+}
+
+impl<'a> Cands<'a> {
+    fn get(&self, a: At) -> &'a Cand {
+        match a {
+            At::Pool(i) => &self.pool.list[i],
+            At::Extra(i) => &self.tabs.extra[i],
+        }
+    }
+
+    /// `known`: the row of a page the pool or a tab already has.
+    fn known(&self, url: &str) -> Option<Suggestion> {
+        let key = page_key(url);
+        let c = self
+            .pool
+            .by_key
+            .get(&key)
+            .map(|&i| &self.pool.list[i])
+            .or_else(|| self.tabs.extra.iter().find(|x| x.text.key == key))?;
+        let shown_title = c.page_title.as_deref().unwrap_or(&c.title);
+        let opened = with_root_slash(url);
+        let is_opened = |u: &str| with_root_slash(u) == opened;
+        if is_opened(&c.url) {
+            return Some(page_suggestion(
+                PageRow {
+                    title: shown_title,
+                    ..c.row()
+                },
+                None,
+            ));
+        }
+        let visit = self.source.history.iter().find(|h| is_opened(&h.url));
+        let bookmark = self.source.bookmarks.iter().find(|b| is_opened(&b.url));
+        let (title, favicon) = match (visit, bookmark) {
+            (Some(v), _) => (v.title.as_str(), v.favicon.as_deref()),
+            (None, Some(b)) => (b.title.as_str(), b.favicon.as_deref()),
+            (None, None) => (shown_title, c.favicon.as_deref()),
+        };
+        let row = PageRow {
+            url: visit.map_or(opened.as_str(), |v| v.url.as_str()),
+            title,
+            favicon,
+            visits: visit.map_or(0.0, |v| v.visits),
+            bookmarked: bookmark.is_some(),
+        };
+        Some(page_suggestion(row, None))
+    }
+}
+
+/// The lists the ranking loop of `buildSuggestions` fills.
+struct Ranking {
+    top: TopList<At>,
+    on_site: Option<TopList<At>>,
+    inline: Option<Ranked<At>>,
+}
+
+/// What `buildSuggestions` derives from the query to pick its first row.
+struct Leads<'a> {
+    creates: Vec<&'static QuickCreate>,
+    action_matches: Vec<ActionMatch<'a, CommandAction>>,
+    target: Option<(String, String, Option<String>)>,
+    completion: String,
+    typed_url: Option<String>,
+    guessed_url: Option<String>,
+}
+
+/// The `remoteRows` closure: up to four remote suggestions as search rows.
+fn remote_rows(
+    options: &SuggestOptions,
+    query: &str,
+    url: &dyn Fn(&str) -> String,
+    name: &str,
+) -> Vec<Suggestion> {
+    dedupe_suggestions(&options.remote, query)
+        .into_iter()
+        .take(4)
+        .map(|t| search_row(t, url(t), name, true))
+        .collect()
+}
+
+/// The rows of an unscoped query that is not a bang or a `?` search.
+fn page_result(
+    typed: &Typed,
+    cands: &Cands,
+    options: &SuggestOptions,
+    ranked: &[Ranked<At>],
+    inline: Option<&Ranked<At>>,
+) -> SuggestionResult {
+    let query = typed.query;
+    let search = search_row(
+        query,
+        search_url(typed.engine_url, query),
+        typed.engine_name,
+        false,
+    );
+    let typed_url = fixup_url(query);
+    let guessed_url = if typed_url.is_some() {
+        None
+    } else {
+        spaced_address_guess(query)
+    };
+    let calc = calculate(query);
+    let creates = match_quick_create(typed.raw.trim_start_matches(is_js_space), 3);
+    let action_rows = if js_len(query) >= 4 { 4 } else { 2 };
+    let action_matches: Vec<_> = match_actions(query, &options.actions, action_rows)
+        .into_iter()
+        .filter(|m| m.exact || m.score >= 50)
+        .collect();
+
+    let best = ranked.first();
+    let target = inline.map(|r| {
+        let c = cands.get(r.c);
+        let host = host_part(&c.text.shown);
+        match origin(&c.text) {
+            Some(o) if host.to_lowercase().starts_with(typed.q) => {
+                (host.to_string(), format!("{o}/"), c.favicon.clone())
+            }
+            _ => (c.text.shown.clone(), c.text.url.clone(), c.favicon.clone()),
+        }
+    });
+    let completion = target.as_ref().map_or_else(String::new, |(text, ..)| {
+        let units: Vec<u16> = text.encode_utf16().skip(js_len(typed.bare)).collect();
+        String::from_utf16_lossy(&units)
+    });
+    let leads = Leads {
+        creates,
+        action_matches,
+        target,
+        completion,
+        typed_url,
+        guessed_url,
+    };
+
+    let first = first_row(typed, cands, &leads, best, &search);
+    let guessed_row = leads
+        .guessed_url
+        .as_deref()
+        .map(|g| guess_row(g, cands, ranked, options));
+    let mut out = Output::new(options.limit);
+    out.push(first);
+    out.push(search);
+    if let Some(row) = guessed_row {
+        out.push(row);
+    }
+    if let Some(calc) = calc {
+        let url = search_url(typed.engine_url, &calc.expression);
+        out.push(Suggestion::Calc {
+            expression: calc.expression,
+            value: calc.display,
+            url,
+        });
+    }
+    out.extend(leads.action_matches.iter().map(|m| action_row(m.action)));
+    out.extend(
+        leads
+            .creates
+            .iter()
+            .map(|c| create_row(c.id, c.title, c.url, c.site)),
+    );
+    let pages = page_rows(cands, ranked, leads.guessed_url.as_deref());
+    let split = pages.len().min(3);
+    out.extend(pages[..split].iter().cloned());
+    out.extend(remote_rows(
+        options,
+        query,
+        &|t: &str| search_url(typed.engine_url, t),
+        typed.engine_name,
+    ));
+    out.extend(pages[split..].iter().cloned());
+    SuggestionResult {
+        items: out.into_items(),
+        completion: leads.completion,
+        via: None,
+    }
+}
+
+/// The first row: a quick create, an exact action, else what `address_first_row` picks.
+fn first_row(
+    typed: &Typed,
+    cands: &Cands,
+    leads: &Leads,
+    best: Option<&Ranked<At>>,
+    search: &Suggestion,
+) -> Suggestion {
+    let query = typed.query;
+    let two_words = {
+        let rest = query.trim_start_matches(|c: char| !is_js_space(c));
+        let after = rest.trim_start_matches(is_js_space);
+        rest.len() < query.len() && after.len() < rest.len() && !after.is_empty()
+    };
+    if !leads.creates.is_empty() && two_words {
+        let c = leads.creates[0];
+        create_row(c.id, c.title, c.url, c.site)
+    } else if leads.action_matches.first().is_some_and(|m| m.exact) {
+        action_row(leads.action_matches[0].action)
+    } else {
+        address_first_row(typed, cands, leads, best, search)
+    }
+}
+
+/// The first row after quick creates and actions: the inline target, the typed URL, the best
+/// page, else the search.
+fn address_first_row(
+    typed: &Typed,
+    cands: &Cands,
+    leads: &Leads,
+    best: Option<&Ranked<At>>,
+    search: &Suggestion,
+) -> Suggestion {
+    let q = typed.q;
+    if let Some((_, url, favicon)) = leads
+        .target
+        .as_ref()
+        .filter(|_| !leads.completion.is_empty())
+    {
+        cands
+            .known(url)
+            .unwrap_or_else(|| page(url, "", favicon.as_deref()))
+    } else if let Some(url) = &leads.typed_url {
+        cands.known(url).unwrap_or_else(|| page(url, "", None))
+    } else if let Some(best) = best.filter(|b| {
+        let shown = &cands.get(b.c).text.shown_lower;
+        leads.guessed_url.is_none()
+            && typed.website_first
+            && b.m >= 40.0
+            && (!typed.no_inline || q == *shown || q == host_part(shown))
+    }) {
+        page_suggestion(cands.get(best.c).row(), best.tab_id.as_deref())
+    } else {
+        search.clone()
+    }
+}
+
+/// The row of the guessed address `g`: its open tab, its known page, else a new page row.
+fn guess_row(
+    g: &str,
+    cands: &Cands,
+    ranked: &[Ranked<At>],
+    options: &SuggestOptions,
+) -> Suggestion {
+    let saved = ranked.iter().find(|x| {
+        !x.tab_id.as_deref().is_some_and(|t| !t.is_empty()) && same_address(&cands.get(x.c).url, g)
+    });
+    let tab = cands.source.tabs.iter().find(|t| {
+        options.current_tab_id.as_deref() != Some(t.id.as_str()) && same_address(&t.url, g)
+    });
+    match tab {
+        Some(t) => page_suggestion(
+            PageRow {
+                url: &t.url,
+                title: custom(t).unwrap_or(&t.title),
+                favicon: t.favicon.as_deref(),
+                visits: 0.0,
+                bookmarked: false,
+            },
+            Some(&t.id),
+        ),
+        None => cands.known(g).unwrap_or_else(|| match saved {
+            Some(x) => page_suggestion(
+                PageRow {
+                    url: g,
+                    ..cands.get(x.c).row()
+                },
+                None,
+            ),
+            None => page(g, "", None),
+        }),
+    }
+}
+
+/// The ranked page rows, with tab URLs when an address is guessed, without the guessed one.
+fn page_rows(cands: &Cands, ranked: &[Ranked<At>], guessed_url: Option<&str>) -> Vec<Suggestion> {
+    ranked
+        .iter()
+        .map(|x| page_suggestion(cands.get(x.c).row(), x.tab_id.as_deref()))
+        .map(|mut row| {
+            if guessed_url.is_some()
+                && let Suggestion::Page {
+                    url,
+                    tab_id: Some(id),
+                    ..
+                } = &mut row
+                && let Some(t) = cands.source.tabs.iter().find(|t| t.id == *id)
+            {
+                *url = t.url.clone();
+            }
+            row
+        })
+        .filter(|row| match (guessed_url, row) {
+            (Some(g), Suggestion::Page { url, .. }) => !same_address(url, g),
+            _ => true,
+        })
+        .collect()
 }
 
 impl Reference {
@@ -446,61 +788,73 @@ impl Reference {
 
         let pool = pool_for(source);
         let tabs = tabs_over(&pool, &source.tabs, now, options.current_tab_id.as_deref());
-        let get = |a: At| match a {
-            At::Pool(i) => &pool.list[i],
-            At::Extra(i) => &tabs.extra[i],
+        let cands = Cands {
+            pool: &pool,
+            tabs: &tabs,
+            source,
         };
+        let one_word = tokens.len() == 1;
+        let no_inline = options.prevent_inline || (one_word && raw.ends_with(is_js_space));
+        let completes = scope.is_none() && one_word && !no_inline;
+        let Ranking {
+            top,
+            on_site,
+            inline,
+        } = self.rank(&cands, pool_id, &q, &tokens, options, completes);
+        let ranked = top.items;
+
+        if let (Some(scope), Some(on_site)) = (scope, on_site) {
+            let mut out = Output::new(limit);
+            let scoped = |t: &str| scoped_search_url(scope, t, engine_url);
+            out.push(search_row(query, scoped(query), &scope.name, false));
+            out.extend(remote_rows(options, query, &scoped, &scope.name));
+            out.extend(
+                on_site
+                    .items
+                    .iter()
+                    .map(|x| page_suggestion(cands.get(x.c).row(), x.tab_id.as_deref())),
+            );
+            return SuggestionResult {
+                items: out.into_items(),
+                ..SuggestionResult::default()
+            };
+        }
+        let typed = Typed {
+            raw,
+            query,
+            bare,
+            q: &q,
+            engine_name,
+            engine_url,
+            website_first: options.preference == Preference::Website,
+            no_inline,
+        };
+        page_result(&typed, &cands, options, &ranked, inline.as_ref())
+    }
+
+    /// The ranking loop of `buildSuggestions`; it records `lastMatches`.
+    fn rank(
+        &mut self,
+        cands: &Cands,
+        pool_id: u64,
+        q: &str,
+        tokens: &[&str],
+        options: &SuggestOptions,
+        completes: bool,
+    ) -> Ranking {
+        let now = options.now.unwrap_or(0.0);
+        let scope = options.scope.as_ref();
         let current_key = options
             .current_url
             .as_deref()
             .filter(|u| !u.is_empty())
             .map(page_key);
-        let known = |url: &str| -> Option<Suggestion> {
-            let key = page_key(url);
-            let c = pool
-                .by_key
-                .get(&key)
-                .map(|&i| &pool.list[i])
-                .or_else(|| tabs.extra.iter().find(|x| x.text.key == key))?;
-            let shown_title = c.page_title.as_deref().unwrap_or(&c.title);
-            let opened = with_root_slash(url);
-            let is_opened = |u: &str| with_root_slash(u) == opened;
-            if is_opened(&c.url) {
-                return Some(page_suggestion(
-                    PageRow {
-                        title: shown_title,
-                        ..c.row()
-                    },
-                    None,
-                ));
-            }
-            let visit = source.history.iter().find(|h| is_opened(&h.url));
-            let bookmark = source.bookmarks.iter().find(|b| is_opened(&b.url));
-            let (title, favicon) = match (visit, bookmark) {
-                (Some(v), _) => (v.title.as_str(), v.favicon.as_deref()),
-                (None, Some(b)) => (b.title.as_str(), b.favicon.as_deref()),
-                (None, None) => (shown_title, c.favicon.as_deref()),
-            };
-            let row = PageRow {
-                url: visit.map_or(opened.as_str(), |v| v.url.as_str()),
-                title,
-                favicon,
-                visits: visit.map_or(0.0, |v| v.visits),
-                bookmarked: bookmark.is_some(),
-            };
-            Some(page_suggestion(row, None))
-        };
-
-        let website_first = options.preference == Preference::Website;
-        let one_word = tokens.len() == 1;
-        let no_inline = options.prevent_inline || (one_word && raw.ends_with(is_js_space));
-        let completes = scope.is_none() && one_word && !no_inline;
         let pages: Vec<usize> = self
-            .narrowing(pool_id, &q, &tokens)
-            .unwrap_or_else(|| (0..pool.list.len()).collect());
-        let parsed = parse_query(&q, &tokens);
+            .narrowing(pool_id, q, tokens)
+            .unwrap_or_else(|| (0..cands.pool.list.len()).collect());
+        let parsed = parse_query(q, tokens);
         let mut matched = Vec::new();
-        let rank_limit = limit + 1.0;
+        let rank_limit = options.limit + 1.0;
         let mut top = TopList::new(if rank_limit.is_nan() {
             usize::MAX
         } else {
@@ -511,23 +865,23 @@ impl Reference {
         let all = pages
             .iter()
             .map(|&i| At::Pool(i))
-            .chain((0..tabs.extra.len()).map(At::Extra));
+            .chain((0..cands.tabs.extra.len()).map(At::Extra));
         for at in all {
-            let c = get(at);
+            let c = cands.get(at);
             let m = match_score(&c.text, &parsed);
             if m <= 0.0 {
                 continue;
             }
             if let At::Pool(i) = at {
                 matched.push(i);
-                if tabs.renamed.contains(&c.text.key) {
+                if cands.tabs.renamed.contains(&c.text.key) {
                     continue;
                 }
             }
             let tab_id = c
                 .tab_id
                 .clone()
-                .or_else(|| tabs.tab_ids.get(&c.text.key).cloned());
+                .or_else(|| cands.tabs.tab_ids.get(&c.text.key).cloned());
             let derank = if current_key.as_ref() == Some(&c.text.key) {
                 80.0
             } else {
@@ -541,192 +895,29 @@ impl Reference {
                 s,
             };
             top.offer(r.clone());
-            if let (Some(on_site), Some(scope)) = (on_site.as_mut(), scope) {
-                let host = host_of(&c.text.url);
-                if host == scope.host || host.ends_with(&format!(".{}", scope.host)) {
-                    on_site.offer(r.clone());
-                }
+            if let (Some(on_site), Some(scope)) = (on_site.as_mut(), scope)
+                && on_scope_site(&c.text.url, scope)
+            {
+                on_site.offer(r.clone());
             }
             if completes
                 && inline.as_ref().is_none_or(|i| r.s > i.s)
                 && c.visits > 0.0
-                && inline_match(&c.text, &q)
+                && inline_match(&c.text, q)
             {
                 inline = Some(r);
             }
         }
-        self.last = (js_len(&q) >= 2).then(|| Last {
+        self.last = (js_len(q) >= 2).then(|| Last {
             pool: pool_id,
-            q: q.clone(),
+            q: q.to_string(),
             tokens: tokens.iter().map(|t| (*t).to_string()).collect(),
             pages: matched,
         });
-        let ranked = top.items;
-
-        let mut out = Output::new(limit);
-        let remote_rows = |url: &dyn Fn(&str) -> String, name: &str| -> Vec<Suggestion> {
-            dedupe_suggestions(&options.remote, query)
-                .into_iter()
-                .take(4)
-                .map(|t| search_row(t, url(t), name, true))
-                .collect()
-        };
-
-        if let (Some(scope), Some(on_site)) = (scope, on_site) {
-            let scoped = |t: &str| scoped_search_url(scope, t, engine_url);
-            out.push(search_row(query, scoped(query), &scope.name, false));
-            out.extend(remote_rows(&scoped, &scope.name));
-            out.extend(
-                on_site
-                    .items
-                    .iter()
-                    .map(|x| page_suggestion(get(x.c).row(), x.tab_id.as_deref())),
-            );
-            return SuggestionResult {
-                items: out.into_items(),
-                ..SuggestionResult::default()
-            };
-        }
-
-        let search = search_row(query, search_url(engine_url, query), engine_name, false);
-        let typed_url = fixup_url(query);
-        let guessed_url = if typed_url.is_some() {
-            None
-        } else {
-            spaced_address_guess(query)
-        };
-        let calc = calculate(query);
-        let creates = match_quick_create(raw.trim_start_matches(is_js_space), 3);
-        let action_rows = if js_len(query) >= 4 { 4 } else { 2 };
-        let action_matches: Vec<_> = match_actions(query, &options.actions, action_rows)
-            .into_iter()
-            .filter(|m| m.exact || m.score >= 50)
-            .collect();
-
-        let best = ranked.first();
-        let target = inline.as_ref().map(|r| {
-            let c = get(r.c);
-            let host = host_part(&c.text.shown);
-            match origin(&c.text) {
-                Some(o) if host.to_lowercase().starts_with(&q) => {
-                    (host.to_string(), format!("{o}/"), c.favicon.clone())
-                }
-                _ => (c.text.shown.clone(), c.text.url.clone(), c.favicon.clone()),
-            }
-        });
-        let completion = target.as_ref().map_or_else(String::new, |(text, ..)| {
-            let units: Vec<u16> = text.encode_utf16().skip(js_len(bare)).collect();
-            String::from_utf16_lossy(&units)
-        });
-
-        let two_words = {
-            let rest = query.trim_start_matches(|c: char| !is_js_space(c));
-            let after = rest.trim_start_matches(is_js_space);
-            rest.len() < query.len() && after.len() < rest.len() && !after.is_empty()
-        };
-        let first = if !creates.is_empty() && two_words {
-            let c = creates[0];
-            create_row(c.id, c.title, c.url, c.site)
-        } else if action_matches.first().is_some_and(|m| m.exact) {
-            action_row(action_matches[0].action)
-        } else if let Some((_, url, favicon)) = target.as_ref().filter(|_| !completion.is_empty()) {
-            known(url).unwrap_or_else(|| page(url, "", favicon.as_deref()))
-        } else if let Some(url) = &typed_url {
-            known(url).unwrap_or_else(|| page(url, "", None))
-        } else if let Some(best) = best.filter(|b| {
-            let shown = &get(b.c).text.shown_lower;
-            guessed_url.is_none()
-                && website_first
-                && b.m >= 40.0
-                && (!no_inline || q == *shown || q == host_part(shown))
-        }) {
-            page_suggestion(get(best.c).row(), best.tab_id.as_deref())
-        } else {
-            search.clone()
-        };
-
-        let guess_row = guessed_url.as_deref().map(|g| {
-            let saved = ranked.iter().find(|x| {
-                !x.tab_id.as_deref().is_some_and(|t| !t.is_empty())
-                    && same_address(&get(x.c).url, g)
-            });
-            let tab = source.tabs.iter().find(|t| {
-                options.current_tab_id.as_deref() != Some(t.id.as_str()) && same_address(&t.url, g)
-            });
-            match tab {
-                Some(t) => page_suggestion(
-                    PageRow {
-                        url: &t.url,
-                        title: custom(t).unwrap_or(&t.title),
-                        favicon: t.favicon.as_deref(),
-                        visits: 0.0,
-                        bookmarked: false,
-                    },
-                    Some(&t.id),
-                ),
-                None => known(g).unwrap_or_else(|| match saved {
-                    Some(x) => page_suggestion(
-                        PageRow {
-                            url: g,
-                            ..get(x.c).row()
-                        },
-                        None,
-                    ),
-                    None => page(g, "", None),
-                }),
-            }
-        });
-        out.push(first);
-        out.push(search);
-        if let Some(row) = guess_row {
-            out.push(row);
-        }
-        if let Some(calc) = calc {
-            let url = search_url(engine_url, &calc.expression);
-            out.push(Suggestion::Calc {
-                expression: calc.expression,
-                value: calc.display,
-                url,
-            });
-        }
-        out.extend(action_matches.iter().map(|m| action_row(m.action)));
-        out.extend(
-            creates
-                .iter()
-                .map(|c| create_row(c.id, c.title, c.url, c.site)),
-        );
-        let page_rows: Vec<Suggestion> = ranked
-            .iter()
-            .map(|x| page_suggestion(get(x.c).row(), x.tab_id.as_deref()))
-            .map(|mut row| {
-                if guessed_url.is_some()
-                    && let Suggestion::Page {
-                        url,
-                        tab_id: Some(id),
-                        ..
-                    } = &mut row
-                    && let Some(t) = source.tabs.iter().find(|t| t.id == *id)
-                {
-                    *url = t.url.clone();
-                }
-                row
-            })
-            .filter(|row| match (guessed_url.as_deref(), row) {
-                (Some(g), Suggestion::Page { url, .. }) => !same_address(url, g),
-                _ => true,
-            })
-            .collect();
-        let split = page_rows.len().min(3);
-        out.extend(page_rows[..split].iter().cloned());
-        out.extend(remote_rows(
-            &|t: &str| search_url(engine_url, t),
-            engine_name,
-        ));
-        out.extend(page_rows[split..].iter().cloned());
-        SuggestionResult {
-            items: out.into_items(),
-            completion,
-            via: None,
+        Ranking {
+            top,
+            on_site,
+            inline,
         }
     }
 
@@ -883,71 +1074,76 @@ mod tests {
         words.join(if r.int(8) > 0 { " " } else { "-" })
     }
 
-    fn profile(r: &mut Rng, size: usize) -> SuggestionSource {
-        let ties = r.int(2) == 0;
-        let history: Vec<HistoryRow> = (0..size)
-            .map(|_| HistoryRow {
+    /// One history row; with `ties`, visits and visit days come from three values each.
+    fn history_row(r: &mut Rng, ties: bool) -> HistoryRow {
+        HistoryRow {
+            url: url(r),
+            title: title(r),
+            favicon: (r.int(3) > 0).then(|| format!("https://x/{}.ico", r.int(9))),
+            visits: if ties {
+                r.int(3) as f64
+            } else if r.int(5) > 0 {
+                (1 + r.int(40)) as f64
+            } else {
+                0.0
+            },
+            last_visit: if ties {
+                NOW - r.int(3) as f64 * DAY
+            } else if r.int(6) > 0 {
+                NOW - r.int(120 * 86_400_000) as f64
+            } else {
+                0.0
+            },
+        }
+    }
+
+    /// A bookmark of a history page or of a new page.
+    fn bookmark_row(r: &mut Rng, history: &[HistoryRow]) -> BookmarkRow {
+        let h = (r.int(2) > 0 && !history.is_empty()).then(|| r.pick(history).clone());
+        match h {
+            Some(h) => BookmarkRow {
+                url: h.url,
+                title: h.title,
+                favicon: None,
+            },
+            None => BookmarkRow {
                 url: url(r),
                 title: title(r),
-                favicon: (r.int(3) > 0).then(|| format!("https://x/{}.ico", r.int(9))),
-                visits: if ties {
-                    r.int(3) as f64
-                } else if r.int(5) > 0 {
-                    (1 + r.int(40)) as f64
-                } else {
-                    0.0
-                },
-                last_visit: if ties {
-                    NOW - r.int(3) as f64 * DAY
-                } else if r.int(6) > 0 {
-                    NOW - r.int(120 * 86_400_000) as f64
-                } else {
-                    0.0
-                },
-            })
-            .collect();
-        let bookmarks = (0..size / 4)
-            .map(|_| {
-                let h = (r.int(2) > 0 && !history.is_empty()).then(|| r.pick(&history).clone());
-                match h {
-                    Some(h) => BookmarkRow {
-                        url: h.url,
-                        title: h.title,
-                        favicon: None,
-                    },
-                    None => BookmarkRow {
-                        url: url(r),
-                        title: title(r),
-                        favicon: None,
-                    },
-                }
-            })
-            .collect();
-        let tabs = (0..size / 6)
-            .map(|i| {
-                let h = (r.int(2) > 0 && !history.is_empty()).then(|| r.pick(&history).clone());
-                let tab_url = if r.int(15) > 0 {
-                    match &h {
-                        Some(h) if r.int(4) > 0 => h.url.clone(),
-                        Some(h) => format!("{}#{}", h.url, r.pick(&WORDS)),
-                        None => url(r),
-                    }
-                } else {
-                    String::new()
-                };
-                let tab_title = match &h {
-                    Some(h) if r.int(3) > 0 => h.title.clone(),
-                    _ => title(r),
-                };
-                SourceTab {
-                    id: format!("t{i}"),
-                    url: tab_url,
-                    title: tab_title,
-                    custom_title: (r.int(3) == 0).then(|| title(r)),
-                    favicon: None,
-                }
-            })
-            .collect();
+                favicon: None,
+            },
+        }
+    }
+
+    /// The tab `t{i}`, often on a history page.
+    fn source_tab(r: &mut Rng, history: &[HistoryRow], i: usize) -> SourceTab {
+        let h = (r.int(2) > 0 && !history.is_empty()).then(|| r.pick(history).clone());
+        let tab_url = if r.int(15) > 0 {
+            match &h {
+                Some(h) if r.int(4) > 0 => h.url.clone(),
+                Some(h) => format!("{}#{}", h.url, r.pick(&WORDS)),
+                None => url(r),
+            }
+        } else {
+            String::new()
+        };
+        let tab_title = match &h {
+            Some(h) if r.int(3) > 0 => h.title.clone(),
+            _ => title(r),
+        };
+        SourceTab {
+            id: format!("t{i}"),
+            url: tab_url,
+            title: tab_title,
+            custom_title: (r.int(3) == 0).then(|| title(r)),
+            favicon: None,
+        }
+    }
+
+    fn profile(r: &mut Rng, size: usize) -> SuggestionSource {
+        let ties = r.int(2) == 0;
+        let history: Vec<HistoryRow> = (0..size).map(|_| history_row(r, ties)).collect();
+        let bookmarks = (0..size / 4).map(|_| bookmark_row(r, &history)).collect();
+        let tabs = (0..size / 6).map(|i| source_tab(r, &history, i)).collect();
         SuggestionSource {
             tabs,
             history,
@@ -993,26 +1189,8 @@ mod tests {
             renamed.clone(),
             renamed,
         ];
-        let mut target = r.pick(&targets).clone();
-        if r.int(5) == 0 {
-            target = target.to_uppercase();
-        }
-        if r.int(8) == 0 {
-            target = format!(" {target} ");
-        }
-        if r.int(12) == 0 {
-            target = format!("?{target}");
-        }
-        if r.int(12) == 0 {
-            target = format!("{} {target}", r.pick(&["yt", "gh", "g"]));
-        }
-        if r.int(8) == 0 {
-            target = if r.int(2) > 0 {
-                format!("{} {target}", r.pick(&["!gh", "!W", "!nope", "!"]))
-            } else {
-                format!("{target} {}", r.pick(&["!w", "!yt", "!", "!gh"]))
-            };
-        }
+        let target = r.pick(&targets).clone();
+        let target = decorate(r, target);
         let chars: Vec<char> = target.chars().collect();
         let up_to = chars.len().min(4 + r.int(24));
         let mut out: Vec<String> = (1..=up_to).map(|i| chars[..i].iter().collect()).collect();
@@ -1035,6 +1213,30 @@ mod tests {
             out.push(next);
         }
         out
+    }
+
+    /// Sometimes upper-cases, pads or prefixes `target` with `?`, a keyword or a bang.
+    fn decorate(r: &mut Rng, mut target: String) -> String {
+        if r.int(5) == 0 {
+            target = target.to_uppercase();
+        }
+        if r.int(8) == 0 {
+            target = format!(" {target} ");
+        }
+        if r.int(12) == 0 {
+            target = format!("?{target}");
+        }
+        if r.int(12) == 0 {
+            target = format!("{} {target}", r.pick(&["yt", "gh", "g"]));
+        }
+        if r.int(8) == 0 {
+            target = if r.int(2) > 0 {
+                format!("{} {target}", r.pick(&["!gh", "!W", "!nope", "!"]))
+            } else {
+                format!("{target} {}", r.pick(&["!w", "!yt", "!", "!gh"]))
+            };
+        }
+        target
     }
 
     fn actions() -> Vec<CommandAction> {
@@ -1118,76 +1320,9 @@ mod tests {
         let mut narrowing = Narrowing::default();
         let mut reference = Reference::default();
         for (i, q) in queries.iter().enumerate() {
-            let mut new_pool = false;
-            if r.int(7) == 0 && !p.history.is_empty() {
-                let mut h = r.pick(&p.history).clone();
-                source.history.retain(|x| *x != h);
-                h.visits += 1.0;
-                h.last_visit = NOW;
-                source.history.insert(0, h);
-                new_pool = true;
-            }
-            if r.int(11) == 0 {
-                new_pool = true;
-            }
-            if r.int(9) == 0 {
-                let n = r.int(3).min(source.tabs.len());
-                source.tabs.drain(..n);
-            }
-            if r.int(10) == 0 && !source.history.is_empty() {
-                let at = r.int(source.history.len());
-                source.history.remove(at);
-                new_pool = true;
-            }
-            if r.int(40) == 0 {
-                source.history.clear();
-                new_pool = true;
-            }
-            if r.int(10) == 0 && !source.tabs.is_empty() {
-                let at = r.int(source.tabs.len());
-                let t = &mut source.tabs[at];
-                t.title = format!("{} {}", r.pick(&WORDS), t.title);
-            }
-            if r.int(12) == 0 {
-                source.tabs.push(SourceTab {
-                    id: format!("new{i}"),
-                    url: format!("https://{}/{}", r.pick(&HOSTS), r.pick(&WORDS)),
-                    title: r.pick(&WORDS).to_string(),
-                    custom_title: None,
-                    favicon: None,
-                });
-            }
-            if r.int(8) == 0 && !source.tabs.is_empty() {
-                let at = r.int(source.tabs.len());
-                source.tabs[at].custom_title =
-                    (r.int(3) > 0).then(|| format!("{} {}", r.pick(&WORDS), r.pick(&WORDS)));
-            }
-            if r.int(10) == 0 {
-                let h = (!source.history.is_empty()).then(|| r.pick(&source.history).clone());
-                source.bookmarks.push(match h {
-                    Some(h) => BookmarkRow {
-                        url: h.url,
-                        title: h.title,
-                        favicon: None,
-                    },
-                    None => BookmarkRow {
-                        url: format!("https://{}/{}", r.pick(&HOSTS), r.pick(&WORDS)),
-                        title: r.pick(&WORDS).to_string(),
-                        favicon: None,
-                    },
-                });
-                new_pool = true;
-            }
-            if r.int(10) == 0 && !source.bookmarks.is_empty() {
-                let at = r.int(source.bookmarks.len());
-                source.bookmarks.remove(at);
-                new_pool = true;
-            }
-            if r.int(25) == 0 {
-                source = if on_p { other.clone() } else { p.clone() };
-                on_p = !on_p;
-                new_pool = true;
-            }
+            let mut new_pool = edit_history(&mut r, &mut source, &p);
+            edit_tabs(&mut r, &mut source, i);
+            new_pool |= edit_bookmarks(&mut r, &mut source, &p, &other, &mut on_p);
             if new_pool {
                 pool = Pool::new(&source.history, &source.bookmarks).expect("pool");
             }
@@ -1223,6 +1358,98 @@ mod tests {
             );
         }
         queries.len()
+    }
+
+    /// The history edits of one step of `compare_run`; true when they make a new pool.
+    fn edit_history(r: &mut Rng, source: &mut SuggestionSource, p: &SuggestionSource) -> bool {
+        let mut new_pool = false;
+        if r.int(7) == 0 && !p.history.is_empty() {
+            let mut h = r.pick(&p.history).clone();
+            source.history.retain(|x| *x != h);
+            h.visits += 1.0;
+            h.last_visit = NOW;
+            source.history.insert(0, h);
+            new_pool = true;
+        }
+        if r.int(11) == 0 {
+            new_pool = true;
+        }
+        if r.int(9) == 0 {
+            let n = r.int(3).min(source.tabs.len());
+            source.tabs.drain(..n);
+        }
+        if r.int(10) == 0 && !source.history.is_empty() {
+            let at = r.int(source.history.len());
+            source.history.remove(at);
+            new_pool = true;
+        }
+        if r.int(40) == 0 {
+            source.history.clear();
+            new_pool = true;
+        }
+        new_pool
+    }
+
+    /// The tab edits of step `i` of `compare_run`.
+    fn edit_tabs(r: &mut Rng, source: &mut SuggestionSource, i: usize) {
+        if r.int(10) == 0 && !source.tabs.is_empty() {
+            let at = r.int(source.tabs.len());
+            let t = &mut source.tabs[at];
+            t.title = format!("{} {}", r.pick(&WORDS), t.title);
+        }
+        if r.int(12) == 0 {
+            source.tabs.push(SourceTab {
+                id: format!("new{i}"),
+                url: format!("https://{}/{}", r.pick(&HOSTS), r.pick(&WORDS)),
+                title: r.pick(&WORDS).to_string(),
+                custom_title: None,
+                favicon: None,
+            });
+        }
+        if r.int(8) == 0 && !source.tabs.is_empty() {
+            let at = r.int(source.tabs.len());
+            source.tabs[at].custom_title =
+                (r.int(3) > 0).then(|| format!("{} {}", r.pick(&WORDS), r.pick(&WORDS)));
+        }
+    }
+
+    /// The bookmark edits and profile swap of one step of `compare_run`; true when they make
+    /// a new pool.
+    fn edit_bookmarks(
+        r: &mut Rng,
+        source: &mut SuggestionSource,
+        p: &SuggestionSource,
+        other: &SuggestionSource,
+        on_p: &mut bool,
+    ) -> bool {
+        let mut new_pool = false;
+        if r.int(10) == 0 {
+            let h = (!source.history.is_empty()).then(|| r.pick(&source.history).clone());
+            source.bookmarks.push(match h {
+                Some(h) => BookmarkRow {
+                    url: h.url,
+                    title: h.title,
+                    favicon: None,
+                },
+                None => BookmarkRow {
+                    url: format!("https://{}/{}", r.pick(&HOSTS), r.pick(&WORDS)),
+                    title: r.pick(&WORDS).to_string(),
+                    favicon: None,
+                },
+            });
+            new_pool = true;
+        }
+        if r.int(10) == 0 && !source.bookmarks.is_empty() {
+            let at = r.int(source.bookmarks.len());
+            source.bookmarks.remove(at);
+            new_pool = true;
+        }
+        if r.int(25) == 0 {
+            *source = if *on_p { other.clone() } else { p.clone() };
+            *on_p = !*on_p;
+            new_pool = true;
+        }
+        new_pool
     }
 
     #[test]
