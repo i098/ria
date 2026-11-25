@@ -13,6 +13,6 @@ mod profile;
 pub mod saved_document;
 pub mod saved_session;
 mod startup;
-mod strip_layer;
+pub mod strip_layer;
 pub mod system_signals;
 pub mod window_host;

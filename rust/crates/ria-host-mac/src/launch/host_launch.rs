@@ -29,7 +29,7 @@ use super::open_urls::{self, Entry, Inbox};
 use super::platform;
 use super::saved_session::SavedSession;
 use super::startup;
-use super::strip_layer::StripLayer;
+use super::strip_layer::{Row, StripLayer};
 use super::system_signals::{self, SystemSignals};
 use super::window_host::WindowHost;
 
@@ -42,6 +42,8 @@ pub enum LaunchEvent {
     TabTitle(String),
     /// The window host exists and knows the browser window.
     WindowHostReady(Rc<WindowHost>),
+    /// The Rune tab strip read a different tab list.
+    StripRows(Vec<Row>),
     /// `ArdiaEvents emit:data:` from the system-signals host, such as `downloads.changed`.
     Emit {
         topic: String,
@@ -241,7 +243,9 @@ impl Runtime {
         );
         self.host.set_main(Some(window.core().clone()));
         self.strip.borrow_mut().take();
-        match StripLayer::install(&self.host, window.core(), window.tab()) {
+        let observer = self.observer.clone();
+        let changed = Rc::new(move |rows: &[Row]| observer(LaunchEvent::StripRows(rows.to_vec())));
+        match StripLayer::install(&self.host, window.core(), window.tab(), changed) {
             Ok(strip) => *self.strip.borrow_mut() = Some(strip),
             Err(error) => eprintln!("[ria] tab strip layer: {error}"),
         }

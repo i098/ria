@@ -16,7 +16,7 @@ Check N runs the native launch unit tests.
 Check L makes a temporary app bundle with a new profile and a saved launch tab.
 It serves the fixture page over loopback HTTP.
 It checks engine start, one native window, one engine tab, the fixture page title, and engine shutdown.
-It clicks the Rune pin button and requires the launch tab to be pinned.
+It opens two more tabs and requires the Rune strip to show three. It clicks the strip to select a tab, pin a tab (the pinned tab moves first) and close a tab, and requires each result.
 It then relaunches on the same profile with a saved window layout and checks the restored frame (`windowFrame 1000x700`) and that the strip layer is present.
 It also downloads a `file:` payload and moves it into an approved folder through `system_signals::current()`, the app's host of `setApprovedDownloadFolders` and `moveCompletedDownload`.
 It requires a successful exit within 60 seconds and checks the temporary directory for crash reports.
@@ -74,5 +74,5 @@ RIA_DATA_DIR="$scratch/profile" "$app/MacOS/ria-app"
 
 `host_launch::run` builds one `WindowHost` (`ria-host-mac/src/launch/window_host.rs`): the `ChromeWindowHost`, its shared `TabStrips`, and the `Popups` built on them.
 The engine hooks for popup permissions and for popup windows that Chromium makes go to it, and `WindowHost::strip_command` routes `tabs.stripCommand` into the shared `TabStrips`.
-The browser window also hosts a Rune tab strip layer around the page (`strip_layer.rs`, through `ria-surface`): one tab button and one pin button. A press on the pin sends an Arrange command through `WindowHost::strip_command`. Check L covers the pin click and the restored-layout relaunch.
+The browser window also hosts a Rune tab strip layer around the page (`strip_layer.rs`, through `ria-surface`). The strip shows every tab of the window: a tab button, a pin button and a close button for each. A press selects, pins (the pinned tab moves first, by an Arrange command through `WindowHost::strip_command`) or closes the tab. The strip reads the tab list every 500 ms. Check L covers three tabs, the three presses and the restored-layout relaunch.
 `blaze test -p ria-host-mac --test live_windows` checks, through this host, that an Arrange command pins a popup tab and that moving the tab out of the popup clears the pin.
