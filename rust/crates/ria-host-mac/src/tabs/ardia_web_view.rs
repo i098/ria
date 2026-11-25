@@ -15,7 +15,7 @@ use std::cell::RefCell;
 use std::rc::{Rc, Weak as RcWeak};
 
 use objc2::rc::{Retained, Weak};
-use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, define_class, msg_send};
+use objc2::{MainThreadMarker, MainThreadOnly, define_class, msg_send};
 use objc2_app_kit::NSView;
 use objc2_foundation::NSRect;
 
