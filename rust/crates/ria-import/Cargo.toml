@@ -1,0 +1,15 @@
+[package]
+name = "ria-import"
+version = "0.0.0"
+description = "Ria import: logic port of Ardia packages/import (native readers come in a later slice)"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+ria-core = { path = "../ria-core" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }

@@ -1,0 +1,17 @@
+{
+  "unit": "packages/import/src/import.harness.ts",
+  "files": 1,
+  "fingerprint": "76e48fb38d948b29",
+  "coverage": {
+    "lines": 129,
+    "reached": 129,
+    "files": [
+      {
+        "file": "packages/import/src/import.harness.ts",
+        "lines": 129,
+        "reached": 129,
+        "missed": ""
+      }
+    ]
+  }
+}

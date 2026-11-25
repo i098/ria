@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../../.review-ardia-import",
+  "unit": "packages/import/src/import.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "import-rs",
+  "exports": [
+    {
+      "name": "replayImport",
+      "file": "packages/import/src/import.harness.ts",
+      "line": 22,
+      "params": [
+        {
+          "name": "input",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "Promise<unknown[]>",
+      "is_async": true,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}
