@@ -131,6 +131,10 @@ mod mac {
             "the app did not build a live page view for the launch tab"
         );
         assert!(
+            out.lines().any(|line| line == "attachLoading true"),
+            "the slow-load launch tab was not loading at attach"
+        );
+        assert!(
             out.lines().any(|line| line == "firstPaintHeld true"),
             "the launch page was not held for first paint at attach"
         );
@@ -585,6 +589,13 @@ mod mac {
                     facts.iter().any(|view| view.page_detached)
                 );
                 let view = host.hooks().live().all().remove(0);
+                let core = host.main().expect("browser window");
+                let profile = core.active_profile().expect("active profile");
+                let loading = core
+                    .tabs_for_profile(&profile)
+                    .firstObject()
+                    .is_some_and(|tab| tab.loading());
+                println!("attachLoading {loading}");
                 println!("firstPaintHeld {}", view.page_opacity() == Some(0.0));
                 reveal_poll(
                     view,
