@@ -1,0 +1,107 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginPageBar.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "plugin-page-bar-rs",
+  "exports": [
+    {
+      "name": "constantsCase",
+      "file": "apps/browser/src/lib/pluginPageBar.harness.ts",
+      "line": 6,
+      "params": [],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isHostActionCase",
+      "file": "apps/browser/src/lib/pluginPageBar.harness.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pageBarCase",
+      "file": "apps/browser/src/lib/pluginPageBar.harness.ts",
+      "line": 8,
+      "params": [
+        {
+          "name": "switches",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "bar",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "rows",
+          "ts_type": "{ key: string; type: string }[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "switchOriginCase",
+      "file": "apps/browser/src/lib/pluginPageBar.harness.ts",
+      "line": 14,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isLocalOriginCase",
+      "file": "apps/browser/src/lib/pluginPageBar.harness.ts",
+      "line": 15,
+      "params": [
+        {
+          "name": "origin",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

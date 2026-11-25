@@ -1,0 +1,125 @@
+{
+  "unit": "apps/browser/src/lib/pluginManifest.harness.ts",
+  "files": 1,
+  "fingerprint": "d8d823db22ef6270",
+  "coverage": {
+    "lines": 1517,
+    "reached": 1259,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginActivation.ts",
+        "lines": 53,
+        "reached": 53,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginChecks.ts",
+        "lines": 117,
+        "reached": 117,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginCommands.ts",
+        "lines": 88,
+        "reached": 88,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginContributions.ts",
+        "lines": 166,
+        "reached": 165,
+        "missed": "183"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginManifest.harness.ts",
+        "lines": 10,
+        "reached": 10,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginManifest.ts",
+        "lines": 203,
+        "reached": 203,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginMigrations.ts",
+        "lines": 39,
+        "reached": 39,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginNames.ts",
+        "lines": 28,
+        "reached": 27,
+        "missed": "25"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginNetwork.ts",
+        "lines": 52,
+        "reached": 31,
+        "missed": "9-12, 41-52, 55-59"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginPageBar.ts",
+        "lines": 96,
+        "reached": 74,
+        "missed": "51-53, 79, 86-90, 95-97, 100-109"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginPasswordManager.ts",
+        "lines": 48,
+        "reached": 48,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginPermissions.ts",
+        "lines": 97,
+        "reached": 74,
+        "missed": "46-48, 69, 75, 84-90, 92-96, 99-104"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginRows.ts",
+        "lines": 106,
+        "reached": 91,
+        "missed": "26-27, 44-46, 75-77, 87, 115-120"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginRuntime.ts",
+        "lines": 43,
+        "reached": 43,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginWhen.ts",
+        "lines": 196,
+        "reached": 134,
+        "missed": "92-94, 114-119, 138, 155-174, 179-182, 185-203, 208-216"
+      },
+      {
+        "file": "apps/browser/src/lib/savedDocument.ts",
+        "lines": 34,
+        "reached": 27,
+        "missed": "31-37"
+      },
+      {
+        "file": "apps/browser/src/lib/urlParts.ts",
+        "lines": 112,
+        "reached": 26,
+        "missed": "20-44, 50-62, 64-77, 80-107, 118-120, 123-125"
+      },
+      {
+        "file": "apps/browser/src/lib/versions.ts",
+        "lines": 21,
+        "reached": 1,
+        "missed": "2-21"
+      }
+    ]
+  }
+}

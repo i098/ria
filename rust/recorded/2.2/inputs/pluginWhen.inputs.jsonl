@@ -1,0 +1,704 @@
+{"fn":"parseWhen","args":[""]}
+{"fn":"whenHolds","args":["",{}]}
+{"fn":"whenHolds","args":["",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["",{}]}
+{"fn":"evaluateWhenCase","args":["",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":[" "]}
+{"fn":"whenHolds","args":[" ",{}]}
+{"fn":"whenHolds","args":[" ",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":[" ",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":[" ",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":[" ",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":[" ",{}]}
+{"fn":"evaluateWhenCase","args":[" ",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":[" ",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":[" ",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":[" ",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned"]}
+{"fn":"whenHolds","args":["isPinned",{}]}
+{"fn":"whenHolds","args":["isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["!isPinned"]}
+{"fn":"whenHolds","args":["!isPinned",{}]}
+{"fn":"whenHolds","args":["!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["!isPinned",{}]}
+{"fn":"evaluateWhenCase","args":["!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["!!isPinned"]}
+{"fn":"whenHolds","args":["!!isPinned",{}]}
+{"fn":"whenHolds","args":["!!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["!!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["!!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["!!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["!!isPinned",{}]}
+{"fn":"evaluateWhenCase","args":["!!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["!!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["!!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["!!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned && isActive"]}
+{"fn":"whenHolds","args":["isPinned && isActive",{}]}
+{"fn":"whenHolds","args":["isPinned && isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned && isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned && isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned && isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned || isActive"]}
+{"fn":"whenHolds","args":["isPinned || isActive",{}]}
+{"fn":"whenHolds","args":["isPinned || isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned || isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned || isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned || isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned && isActive || isSplit"]}
+{"fn":"whenHolds","args":["isPinned && isActive || isSplit",{}]}
+{"fn":"whenHolds","args":["isPinned && isActive || isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned && isActive || isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned && isActive || isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned && isActive || isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive || isSplit",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive || isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive || isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive || isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned && isActive || isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned || isActive && isSplit"]}
+{"fn":"whenHolds","args":["isPinned || isActive && isSplit",{}]}
+{"fn":"whenHolds","args":["isPinned || isActive && isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned || isActive && isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned || isActive && isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned || isActive && isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive && isSplit",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive && isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive && isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive && isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned || isActive && isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["(isPinned || isActive) && isSplit"]}
+{"fn":"whenHolds","args":["(isPinned || isActive) && isSplit",{}]}
+{"fn":"whenHolds","args":["(isPinned || isActive) && isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["(isPinned || isActive) && isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["(isPinned || isActive) && isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["(isPinned || isActive) && isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["(isPinned || isActive) && isSplit",{}]}
+{"fn":"evaluateWhenCase","args":["(isPinned || isActive) && isSplit",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["(isPinned || isActive) && isSplit",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["(isPinned || isActive) && isSplit",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["(isPinned || isActive) && isSplit",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["urlHost == \"example.com\""]}
+{"fn":"whenHolds","args":["urlHost == \"example.com\"",{}]}
+{"fn":"whenHolds","args":["urlHost == \"example.com\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["urlHost == \"example.com\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["urlHost == \"example.com\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["urlHost == \"example.com\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["urlHost == \"example.com\"",{}]}
+{"fn":"evaluateWhenCase","args":["urlHost == \"example.com\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["urlHost == \"example.com\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["urlHost == \"example.com\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["urlHost == \"example.com\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["urlHost != 'example.com'"]}
+{"fn":"whenHolds","args":["urlHost != 'example.com'",{}]}
+{"fn":"whenHolds","args":["urlHost != 'example.com'",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["urlHost != 'example.com'",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["urlHost != 'example.com'",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["urlHost != 'example.com'",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["urlHost != 'example.com'",{}]}
+{"fn":"evaluateWhenCase","args":["urlHost != 'example.com'",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["urlHost != 'example.com'",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["urlHost != 'example.com'",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["urlHost != 'example.com'",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["urlHost ~= \"*.example.com\""]}
+{"fn":"whenHolds","args":["urlHost ~= \"*.example.com\"",{}]}
+{"fn":"whenHolds","args":["urlHost ~= \"*.example.com\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["urlHost ~= \"*.example.com\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["urlHost ~= \"*.example.com\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["urlHost ~= \"*.example.com\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"*.example.com\"",{}]}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"*.example.com\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"*.example.com\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"*.example.com\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"*.example.com\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["urlScheme == \"https\""]}
+{"fn":"whenHolds","args":["urlScheme == \"https\"",{}]}
+{"fn":"whenHolds","args":["urlScheme == \"https\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["urlScheme == \"https\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["urlScheme == \"https\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["urlScheme == \"https\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["urlScheme == \"https\"",{}]}
+{"fn":"evaluateWhenCase","args":["urlScheme == \"https\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["urlScheme == \"https\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["urlScheme == \"https\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["urlScheme == \"https\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["tabCount == 3"]}
+{"fn":"whenHolds","args":["tabCount == 3",{}]}
+{"fn":"whenHolds","args":["tabCount == 3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["tabCount == 3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["tabCount == 3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["tabCount == 3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 3",{}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["tabCount != 3.5"]}
+{"fn":"whenHolds","args":["tabCount != 3.5",{}]}
+{"fn":"whenHolds","args":["tabCount != 3.5",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["tabCount != 3.5",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["tabCount != 3.5",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["tabCount != 3.5",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["tabCount != 3.5",{}]}
+{"fn":"evaluateWhenCase","args":["tabCount != 3.5",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["tabCount != 3.5",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["tabCount != 3.5",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["tabCount != 3.5",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["tabCount == 03"]}
+{"fn":"whenHolds","args":["tabCount == 03",{}]}
+{"fn":"whenHolds","args":["tabCount == 03",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["tabCount == 03",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["tabCount == 03",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["tabCount == 03",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 03",{}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 03",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 03",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 03",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 03",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["3 == tabCount"]}
+{"fn":"whenHolds","args":["3 == tabCount",{}]}
+{"fn":"whenHolds","args":["3 == tabCount",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["3 == tabCount",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["3 == tabCount",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["3 == tabCount",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["3 == tabCount",{}]}
+{"fn":"evaluateWhenCase","args":["3 == tabCount",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["3 == tabCount",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["3 == tabCount",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["3 == tabCount",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["true"]}
+{"fn":"whenHolds","args":["true",{}]}
+{"fn":"whenHolds","args":["true",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["true",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["true",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["true",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["true",{}]}
+{"fn":"evaluateWhenCase","args":["true",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["true",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["true",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["true",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["false"]}
+{"fn":"whenHolds","args":["false",{}]}
+{"fn":"whenHolds","args":["false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["false",{}]}
+{"fn":"evaluateWhenCase","args":["false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["true == isPinned"]}
+{"fn":"whenHolds","args":["true == isPinned",{}]}
+{"fn":"whenHolds","args":["true == isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["true == isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["true == isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["true == isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["true == isPinned",{}]}
+{"fn":"evaluateWhenCase","args":["true == isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["true == isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["true == isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["true == isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned == false"]}
+{"fn":"whenHolds","args":["isPinned == false",{}]}
+{"fn":"whenHolds","args":["isPinned == false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned == false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned == false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned == false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned == false",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned == false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned == false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned == false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned == false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["unknownKey"]}
+{"fn":"whenHolds","args":["unknownKey",{}]}
+{"fn":"whenHolds","args":["unknownKey",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["unknownKey",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["unknownKey",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["unknownKey",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["unknownKey",{}]}
+{"fn":"evaluateWhenCase","args":["unknownKey",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["unknownKey",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["unknownKey",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["unknownKey",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned &&"]}
+{"fn":"whenHolds","args":["isPinned &&",{}]}
+{"fn":"whenHolds","args":["isPinned &&",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned &&",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned &&",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned &&",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned &&",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned &&",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned &&",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned &&",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned &&",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["&& isPinned"]}
+{"fn":"whenHolds","args":["&& isPinned",{}]}
+{"fn":"whenHolds","args":["&& isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["&& isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["&& isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["&& isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["&& isPinned",{}]}
+{"fn":"evaluateWhenCase","args":["&& isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["&& isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["&& isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["&& isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["(isPinned"]}
+{"fn":"whenHolds","args":["(isPinned",{}]}
+{"fn":"whenHolds","args":["(isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["(isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["(isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["(isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["(isPinned",{}]}
+{"fn":"evaluateWhenCase","args":["(isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["(isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["(isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["(isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned)"]}
+{"fn":"whenHolds","args":["isPinned)",{}]}
+{"fn":"whenHolds","args":["isPinned)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned)",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["()"]}
+{"fn":"whenHolds","args":["()",{}]}
+{"fn":"whenHolds","args":["()",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["()",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["()",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["()",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["()",{}]}
+{"fn":"evaluateWhenCase","args":["()",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["()",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["()",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["()",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["\"unterminated"]}
+{"fn":"whenHolds","args":["\"unterminated",{}]}
+{"fn":"whenHolds","args":["\"unterminated",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["\"unterminated",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["\"unterminated",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["\"unterminated",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["\"unterminated",{}]}
+{"fn":"evaluateWhenCase","args":["\"unterminated",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["\"unterminated",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["\"unterminated",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["\"unterminated",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["'x' == 'x'"]}
+{"fn":"whenHolds","args":["'x' == 'x'",{}]}
+{"fn":"whenHolds","args":["'x' == 'x'",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["'x' == 'x'",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["'x' == 'x'",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["'x' == 'x'",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["'x' == 'x'",{}]}
+{"fn":"evaluateWhenCase","args":["'x' == 'x'",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["'x' == 'x'",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["'x' == 'x'",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["'x' == 'x'",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["\"a\\\"b\" == urlHost"]}
+{"fn":"whenHolds","args":["\"a\\\"b\" == urlHost",{}]}
+{"fn":"whenHolds","args":["\"a\\\"b\" == urlHost",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["\"a\\\"b\" == urlHost",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["\"a\\\"b\" == urlHost",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["\"a\\\"b\" == urlHost",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["\"a\\\"b\" == urlHost",{}]}
+{"fn":"evaluateWhenCase","args":["\"a\\\"b\" == urlHost",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["\"a\\\"b\" == urlHost",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["\"a\\\"b\" == urlHost",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["\"a\\\"b\" == urlHost",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["urlHost == \"é\""]}
+{"fn":"whenHolds","args":["urlHost == \"é\"",{}]}
+{"fn":"whenHolds","args":["urlHost == \"é\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["urlHost == \"é\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["urlHost == \"é\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["urlHost == \"é\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["urlHost == \"é\"",{}]}
+{"fn":"evaluateWhenCase","args":["urlHost == \"é\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["urlHost == \"é\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["urlHost == \"é\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["urlHost == \"é\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned & isActive"]}
+{"fn":"whenHolds","args":["isPinned & isActive",{}]}
+{"fn":"whenHolds","args":["isPinned & isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned & isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned & isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned & isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned & isActive",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned & isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned & isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned & isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned & isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned | isActive"]}
+{"fn":"whenHolds","args":["isPinned | isActive",{}]}
+{"fn":"whenHolds","args":["isPinned | isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned | isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned | isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned | isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned | isActive",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned | isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned | isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned | isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned | isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned = isActive"]}
+{"fn":"whenHolds","args":["isPinned = isActive",{}]}
+{"fn":"whenHolds","args":["isPinned = isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned = isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned = isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned = isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned = isActive",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned = isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned = isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned = isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned = isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["@"]}
+{"fn":"whenHolds","args":["@",{}]}
+{"fn":"whenHolds","args":["@",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["@",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["@",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["@",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["@",{}]}
+{"fn":"evaluateWhenCase","args":["@",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["@",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["@",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["@",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["1.2.3"]}
+{"fn":"whenHolds","args":["1.2.3",{}]}
+{"fn":"whenHolds","args":["1.2.3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["1.2.3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["1.2.3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["1.2.3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["1.2.3",{}]}
+{"fn":"evaluateWhenCase","args":["1.2.3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["1.2.3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["1.2.3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["1.2.3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["1."]}
+{"fn":"whenHolds","args":["1.",{}]}
+{"fn":"whenHolds","args":["1.",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["1.",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["1.",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["1.",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["1.",{}]}
+{"fn":"evaluateWhenCase","args":["1.",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["1.",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["1.",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["1.",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":[".5"]}
+{"fn":"whenHolds","args":[".5",{}]}
+{"fn":"whenHolds","args":[".5",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":[".5",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":[".5",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":[".5",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":[".5",{}]}
+{"fn":"evaluateWhenCase","args":[".5",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":[".5",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":[".5",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":[".5",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["-1 == tabCount"]}
+{"fn":"whenHolds","args":["-1 == tabCount",{}]}
+{"fn":"whenHolds","args":["-1 == tabCount",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["-1 == tabCount",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["-1 == tabCount",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["-1 == tabCount",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["-1 == tabCount",{}]}
+{"fn":"evaluateWhenCase","args":["-1 == tabCount",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["-1 == tabCount",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["-1 == tabCount",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["-1 == tabCount",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned isActive"]}
+{"fn":"whenHolds","args":["isPinned isActive",{}]}
+{"fn":"whenHolds","args":["isPinned isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned isActive",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["urlHost == urlScheme"]}
+{"fn":"whenHolds","args":["urlHost == urlScheme",{}]}
+{"fn":"whenHolds","args":["urlHost == urlScheme",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["urlHost == urlScheme",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["urlHost == urlScheme",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["urlHost == urlScheme",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["urlHost == urlScheme",{}]}
+{"fn":"evaluateWhenCase","args":["urlHost == urlScheme",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["urlHost == urlScheme",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["urlHost == urlScheme",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["urlHost == urlScheme",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["\tisPinned\t"]}
+{"fn":"whenHolds","args":["\tisPinned\t",{}]}
+{"fn":"whenHolds","args":["\tisPinned\t",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["\tisPinned\t",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["\tisPinned\t",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["\tisPinned\t",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["\tisPinned\t",{}]}
+{"fn":"evaluateWhenCase","args":["\tisPinned\t",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["\tisPinned\t",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["\tisPinned\t",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["\tisPinned\t",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned\n"]}
+{"fn":"whenHolds","args":["isPinned\n",{}]}
+{"fn":"whenHolds","args":["isPinned\n",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned\n",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned\n",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned\n",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned\n",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned\n",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned\n",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned\n",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned\n",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"whenHolds","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{}]}
+{"fn":"whenHolds","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{}]}
+{"fn":"evaluateWhenCase","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]}
+{"fn":"whenHolds","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{}]}
+{"fn":"whenHolds","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{}]}
+{"fn":"evaluateWhenCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["(((((((((((((((((isPinned)))))))))))))))))"]}
+{"fn":"whenHolds","args":["(((((((((((((((((isPinned)))))))))))))))))",{}]}
+{"fn":"whenHolds","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["(((((((((((((((((isPinned)))))))))))))))))",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((((isPinned)))))))))))))))))",{}]}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((((isPinned)))))))))))))))))",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((((isPinned)))))))))))))))))",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["(((((((((((((((isPinned)))))))))))))))"]}
+{"fn":"whenHolds","args":["(((((((((((((((isPinned)))))))))))))))",{}]}
+{"fn":"whenHolds","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["(((((((((((((((isPinned)))))))))))))))",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((isPinned)))))))))))))))",{}]}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((isPinned)))))))))))))))",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["(((((((((((((((isPinned)))))))))))))))",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["!!!!!!!!!!!!!!!!!!!!isPinned"]}
+{"fn":"whenHolds","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{}]}
+{"fn":"whenHolds","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{}]}
+{"fn":"evaluateWhenCase","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["!!!!!!!!!!!!!!!!!!!!isPinned",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned == == isActive"]}
+{"fn":"whenHolds","args":["isPinned == == isActive",{}]}
+{"fn":"whenHolds","args":["isPinned == == isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned == == isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned == == isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned == == isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned == == isActive",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned == == isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned == == isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned == == isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned == == isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["urlHost ~= \"**********************************************************************************************************************************\""]}
+{"fn":"whenHolds","args":["urlHost ~= \"**********************************************************************************************************************************\"",{}]}
+{"fn":"whenHolds","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"**********************************************************************************************************************************\"",{}]}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["urlHost ~= \"**********************************************************************************************************************************\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["_x"]}
+{"fn":"whenHolds","args":["_x",{}]}
+{"fn":"whenHolds","args":["_x",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["_x",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["_x",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["_x",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["_x",{}]}
+{"fn":"evaluateWhenCase","args":["_x",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["_x",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["_x",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["_x",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["X1"]}
+{"fn":"whenHolds","args":["X1",{}]}
+{"fn":"whenHolds","args":["X1",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["X1",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["X1",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["X1",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["X1",{}]}
+{"fn":"evaluateWhenCase","args":["X1",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["X1",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["X1",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["X1",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["tabCount == 1e3"]}
+{"fn":"whenHolds","args":["tabCount == 1e3",{}]}
+{"fn":"whenHolds","args":["tabCount == 1e3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["tabCount == 1e3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["tabCount == 1e3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["tabCount == 1e3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 1e3",{}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 1e3",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 1e3",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 1e3",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["tabCount == 1e3",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["123abc"]}
+{"fn":"whenHolds","args":["123abc",{}]}
+{"fn":"whenHolds","args":["123abc",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["123abc",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["123abc",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["123abc",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["123abc",{}]}
+{"fn":"evaluateWhenCase","args":["123abc",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["123abc",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["123abc",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["123abc",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["true && false"]}
+{"fn":"whenHolds","args":["true && false",{}]}
+{"fn":"whenHolds","args":["true && false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["true && false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["true && false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["true && false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["true && false",{}]}
+{"fn":"evaluateWhenCase","args":["true && false",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["true && false",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["true && false",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["true && false",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["\"\""]}
+{"fn":"whenHolds","args":["\"\"",{}]}
+{"fn":"whenHolds","args":["\"\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["\"\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["\"\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["\"\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["\"\"",{}]}
+{"fn":"evaluateWhenCase","args":["\"\"",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["\"\"",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["\"\"",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["\"\"",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isPinned ~= isActive"]}
+{"fn":"whenHolds","args":["isPinned ~= isActive",{}]}
+{"fn":"whenHolds","args":["isPinned ~= isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isPinned ~= isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isPinned ~= isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isPinned ~= isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isPinned ~= isActive",{}]}
+{"fn":"evaluateWhenCase","args":["isPinned ~= isActive",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isPinned ~= isActive",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isPinned ~= isActive",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isPinned ~= isActive",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["!(isPinned)"]}
+{"fn":"whenHolds","args":["!(isPinned)",{}]}
+{"fn":"whenHolds","args":["!(isPinned)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["!(isPinned)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["!(isPinned)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["!(isPinned)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["!(isPinned)",{}]}
+{"fn":"evaluateWhenCase","args":["!(isPinned)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["!(isPinned)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["!(isPinned)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["!(isPinned)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["!(isPinned == true)"]}
+{"fn":"whenHolds","args":["!(isPinned == true)",{}]}
+{"fn":"whenHolds","args":["!(isPinned == true)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["!(isPinned == true)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["!(isPinned == true)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["!(isPinned == true)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["!(isPinned == true)",{}]}
+{"fn":"evaluateWhenCase","args":["!(isPinned == true)",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["!(isPinned == true)",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["!(isPinned == true)",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["!(isPinned == true)",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"parseWhen","args":["isInGroup && !isSplit && tabCount != 0"]}
+{"fn":"whenHolds","args":["isInGroup && !isSplit && tabCount != 0",{}]}
+{"fn":"whenHolds","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":["isInGroup && !isSplit && tabCount != 0",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"evaluateWhenCase","args":["isInGroup && !isSplit && tabCount != 0",{}]}
+{"fn":"evaluateWhenCase","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"evaluateWhenCase","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"evaluateWhenCase","args":["isInGroup && !isSplit && tabCount != 0",{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"evaluateWhenCase","args":["isInGroup && !isSplit && tabCount != 0",{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"whenHolds","args":[{"$undefined":true},{}]}
+{"fn":"whenHolds","args":[null,{}]}
+{"fn":"whenHolds","args":[{"$undefined":true},{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":[null,{"isPinned":true,"isActive":false,"isSplit":true,"tabCount":3,"urlHost":"example.com","urlScheme":"https","isInGroup":true}]}
+{"fn":"whenHolds","args":[{"$undefined":true},{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":[null,{"isPinned":false,"isActive":true,"urlHost":"api.example.com","tabCount":0,"urlScheme":"http"}]}
+{"fn":"whenHolds","args":[{"$undefined":true},{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":[null,{"isPinned":"yes","tabCount":3.5,"urlHost":""}]}
+{"fn":"whenHolds","args":[{"$undefined":true},{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"whenHolds","args":[null,{"tabCount":{"$num":"NaN"},"urlHost":"É.example.com","isSplit":0}]}
+{"fn":"globMatches","args":["*",""]}
+{"fn":"globMatches","args":["*","abc"]}
+{"fn":"globMatches","args":["a*","abc"]}
+{"fn":"globMatches","args":["*c","abc"]}
+{"fn":"globMatches","args":["a*c","abc"]}
+{"fn":"globMatches","args":["a*c","ac"]}
+{"fn":"globMatches","args":["a*b*c","aXbYc"]}
+{"fn":"globMatches","args":["a*b*c","acb"]}
+{"fn":"globMatches","args":["",""]}
+{"fn":"globMatches","args":["","a"]}
+{"fn":"globMatches","args":["abc","abc"]}
+{"fn":"globMatches","args":["abc","ABC"]}
+{"fn":"globMatches","args":["*.example.com","api.example.com"]}
+{"fn":"globMatches","args":["*.example.com","example.com"]}
+{"fn":"globMatches","args":["**","x"]}
+{"fn":"globMatches","args":["a?c","abc"]}
+{"fn":"globMatches","args":[".*","x"]}
+{"fn":"globMatches","args":["[a]","a"]}
+{"fn":"globMatches","args":["*a😀b","xa😀b"]}
+{"fn":"globMatches","args":[{"$utf16":[55357,42]},"a😀b"]}
+{"fn":"globMatches","args":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]}
+{"fn":"globMatches","args":["********************************************************************************************************************************","abc"]}
+{"fn":"globMatches","args":["a*a*a*a*a*b","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}

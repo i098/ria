@@ -1,0 +1,102 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginNodes.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "plugin-nodes-rs",
+  "exports": [
+    {
+      "name": "checkPluginNode",
+      "file": "apps/browser/src/lib/pluginNodes.ts",
+      "line": 69,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({ ok: true; tree: ({ type: string; key?: string | number; props: Record<string, unknown>; children: (({ type: string; key?: string | number; props: Record<string, unknown>; children: (({ type: PluginNodeType; key?: string | number; props: Record<string, unknown>; children: (PluginNode | string)[] }) | string)[] }) | string)[] }) } | { ok: false; problem: string })",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "quickPickItemsOf",
+      "file": "apps/browser/src/lib/pluginNodes.ts",
+      "line": 82,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ id: string; title: string; subtitle?: string; icon?: string; badge?: string; keywords?: string[]; picked?: boolean }[] | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "quickPickOptionsOf",
+      "file": "apps/browser/src/lib/pluginNodes.ts",
+      "line": 107,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ title?: string; placeholder?: string; canPickMany?: boolean }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "inputBoxOptionsOf",
+      "file": "apps/browser/src/lib/pluginNodes.ts",
+      "line": 118,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ title: string; message?: string; placeholder?: string; value?: string; password?: boolean; confirmTitle?: string } | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "toolbarUpdateOf",
+      "file": "apps/browser/src/lib/pluginNodes.ts",
+      "line": 135,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({ icon?: string; label?: string | null; badge?: string | number | boolean | null; tooltip?: string | null; tone?: (\"default\" | \"secondary\" | \"tertiary\" | \"accent\" | \"success\" | \"warning\" | \"destructive\") }) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

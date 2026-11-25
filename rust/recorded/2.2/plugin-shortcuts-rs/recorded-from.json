@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+  "files": 1,
+  "fingerprint": "d524f7103782d27e",
+  "coverage": {
+    "lines": 206,
+    "reached": 206,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/pluginShortcuts.harness.ts",
+        "lines": 65,
+        "reached": 65,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginShortcuts.ts",
+        "lines": 141,
+        "reached": 141,
+        "missed": ""
+      }
+    ]
+  }
+}

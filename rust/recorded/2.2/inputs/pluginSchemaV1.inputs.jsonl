@@ -1,0 +1,4 @@
+{"fn": "legacyPluginBody", "args": [[]]}
+{"fn": "legacyPluginBody", "args": [["tab.opened"]]}
+{"fn": "legacyPluginBody", "args": [["window.opened","window.closed","window.focused","tab.opened","tab.closed","tab.activated","tab.navigated","settings.changed","app.launched","app.quitting","app.activated","app.deactivated","tab.idle","tab.resumed","media.started","media.stopped","tab.crashed","peek.opened","peek.closed","littleArdia.opened","split.created","split.closed","pin.added","pin.removed","tab.moved","profile.switched","system.sleep","system.wake","user.idle","user.active","page.error","bookmarks.changed","history.removed","download.changed","profile.changed"]]}
+{"fn": "legacyPluginBody", "args": [["", "ü", "😀", "a\"b\\c", "tab.opened", "tab.opened"]]}

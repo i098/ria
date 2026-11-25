@@ -1,0 +1,70 @@
+{"fn":"pluginWebUrl","args":[null],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[{"a":"b"}],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[true],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[0],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[[]],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[["a",1]],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[{}],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":["x"],"ok":{"problem":"isn't an http or https address with a host"}}
+{"fn":"pluginWebUrl","args":[{"a":{"b":"c"}}],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[[3,1,2]],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[{"$undefined":true}],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[null],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[1],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[true],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[[]],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[{}],"ok":{"problem":"isn't text"}}
+{"fn":"pluginWebUrl","args":[""],"ok":{"problem":"isn't an http or https address with a host"}}
+{"fn":"pluginWebUrl","args":["https://example.com"],"ok":{"url":"https://example.com/","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["http://example.com/"],"ok":{"url":"http://example.com/","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["HTTPS://EXAMPLE.com/a?b=1#c"],"ok":{"url":"https://example.com/a?b=1#c","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["https://example.com:443/"],"ok":{"url":"https://example.com/","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["https://example.com:8080/x"],"ok":{"url":"https://example.com:8080/x","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["https://example.com:0/"],"ok":{"problem":"isn't a valid address (check the host and that the port is 1 to 65535)"}}
+{"fn":"pluginWebUrl","args":["https://example.com:65535/"],"ok":{"url":"https://example.com:65535/","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["https://example.com:65536/"],"ok":{"problem":"isn't a valid address (check the host and that the port is 1 to 65535)"}}
+{"fn":"pluginWebUrl","args":["https://example.com:99999/"],"ok":{"problem":"isn't a valid address (check the host and that the port is 1 to 65535)"}}
+{"fn":"pluginWebUrl","args":["ftp://example.com"],"ok":{"problem":"isn't an http or https address with a host"}}
+{"fn":"pluginWebUrl","args":["javascript:alert(1)"],"ok":{"problem":"isn't an http or https address with a host"}}
+{"fn":"pluginWebUrl","args":["file:///etc/passwd"],"ok":{"problem":"isn't an http or https address with a host"}}
+{"fn":"pluginWebUrl","args":["ardia://settings"],"ok":{"problem":"isn't an http or https address with a host"}}
+{"fn":"pluginWebUrl","args":["/relative"],"ok":{"problem":"isn't an http or https address with a host"}}
+{"fn":"pluginWebUrl","args":["example.com"],"ok":{"problem":"isn't an http or https address with a host"}}
+{"fn":"pluginWebUrl","args":["https://"],"ok":{"problem":"isn't a valid address (check the host and that the port is 1 to 65535)"}}
+{"fn":"pluginWebUrl","args":["https:///x"],"ok":{"problem":"isn't a valid address (check the host and that the port is 1 to 65535)"}}
+{"fn":"pluginWebUrl","args":["https://user:pw@example.com/"],"ok":{"problem":"has credentials"}}
+{"fn":"pluginWebUrl","args":["https://user@example.com/"],"ok":{"problem":"has credentials"}}
+{"fn":"pluginWebUrl","args":["https://@example.com/"],"ok":{"problem":"has credentials"}}
+{"fn":"pluginWebUrl","args":["https://bücher.example/"],"ok":{"problem":"has a host that isn't ASCII; send an international name as punycode (xn--)"}}
+{"fn":"pluginWebUrl","args":["https://xn--bcher-kva.example/"],"ok":{"url":"https://xn--bcher-kva.example/","host":"xn--bcher-kva.example"}}
+{"fn":"pluginWebUrl","args":["https://example.com/é"],"ok":{"url":"https://example.com/%C3%A9","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["https://example.com/a b"],"ok":{"problem":"has a space; percent-encode it as %20"}}
+{"fn":"pluginWebUrl","args":["https://example.com/\u0000"],"ok":{"problem":"has a control character"}}
+{"fn":"pluginWebUrl","args":["https://exa mple.com/"],"ok":{"problem":"has a space; percent-encode it as %20"}}
+{"fn":"pluginWebUrl","args":["https://[::1]/"],"ok":{"url":"https://[::1]/","host":"[::1]"}}
+{"fn":"pluginWebUrl","args":["https://[::1]:8080/x"],"ok":{"url":"https://[::1]:8080/x","host":"[::1]"}}
+{"fn":"pluginWebUrl","args":["https://[0:0:0:0:0:0:0:1]/"],"ok":{"url":"https://[::1]/","host":"[::1]"}}
+{"fn":"pluginWebUrl","args":["https://[::1/"],"ok":{"problem":"isn't a valid address (check the host and that the port is 1 to 65535)"}}
+{"fn":"pluginWebUrl","args":["https://127.0.0.1/"],"ok":{"url":"https://127.0.0.1/","host":"127.0.0.1"}}
+{"fn":"pluginWebUrl","args":["https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":{"problem":"is over 2048 characters"}}
+{"fn":"pluginWebUrl","args":["https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"ok":{"url":"https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","host":"example.com"}}
+{"fn":"pluginWebUrl","args":[" https://example.com "],"ok":{"problem":"has a space; percent-encode it as %20"}}
+{"fn":"pluginWebUrl","args":[{"$utf16":[104,116,116,112,115,58,47,47,101,120,97,109,112,108,101,46,99,111,109,47,55296]}],"ok":{"problem":"has text that isn't valid Unicode"}}
+{"fn":"pluginWebUrl","args":[{"$utf16":[97,55296,98]}],"ok":{"problem":"isn't an http or https address with a host"}}
+{"fn":"pluginWebUrl","args":["https://example.com/a😀b"],"ok":{"url":"https://example.com/a%F0%9F%98%80b","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["https://example.com/?q=ü#ä"],"ok":{"url":"https://example.com/?q=%C3%BC#%C3%A4","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["https://ex\u0007ample.com/"],"ok":{"problem":"has a control character"}}
+{"fn":"pluginWebUrl","args":["https://例え.jp/"],"ok":{"problem":"has a host that isn't ASCII; send an international name as punycode (xn--)"}}
+{"fn":"pluginWebUrl","args":["https://example.com:/"],"ok":{"problem":"isn't a valid address (check the host and that the port is 1 to 65535)"}}
+{"fn":"pluginWebUrl","args":["https://example.com:abc/"],"ok":{"problem":"isn't a valid address (check the host and that the port is 1 to 65535)"}}
+{"fn":"pluginWebUrl","args":["https://a..b/"],"ok":{"problem":"isn't a valid address (check the host and that the port is 1 to 65535)"}}
+{"fn":"pluginWebUrl","args":["https://-a.com/"],"ok":{"url":"https://-a.com/","host":"-a.com"}}
+{"fn":"pluginWebUrl","args":["https://example.com\\@evil.com/"],"ok":{"problem":"has a backslash"}}
+{"fn":"pluginWebUrl","args":["https://example.com#frag"],"ok":{"url":"https://example.com/#frag","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["https://example.com?x"],"ok":{"url":"https://example.com/?x","host":"example.com"}}
+{"fn":"pluginWebUrl","args":["https://EXAMPLE.COM."],"ok":{"url":"https://example.com./","host":"example.com."}}
+{"fn":"pluginWebUrl","args":["https://ex%61mple.com/"],"ok":{"problem":"isn't a valid address (check the host and that the port is 1 to 65535)"}}
+{"fn":"pluginWebUrl","args":["http://a.b.c.d.e/"],"ok":{"url":"http://a.b.c.d.e/","host":"a.b.c.d.e"}}
+{"fn":"pluginWebUrl","args":["https://exam‎ple.com/"],"ok":{"problem":"has a host that isn't ASCII; send an international name as punycode (xn--)"}}

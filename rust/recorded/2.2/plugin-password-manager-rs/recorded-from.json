@@ -1,0 +1,29 @@
+{
+  "unit": "apps/browser/src/lib/pluginPasswordManager.harness.ts",
+  "files": 1,
+  "fingerprint": "89639a8401046aa3",
+  "coverage": {
+    "lines": 63,
+    "reached": 63,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginPasswordManager.harness.ts",
+        "lines": 7,
+        "reached": 7,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginPasswordManager.ts",
+        "lines": 48,
+        "reached": 48,
+        "missed": ""
+      }
+    ]
+  }
+}

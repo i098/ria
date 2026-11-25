@@ -1,0 +1,35 @@
+{
+  "unit": "apps/browser/src/lib/pluginChecks.harness.ts",
+  "files": 1,
+  "fingerprint": "eff58e81ec9a0ff8",
+  "coverage": {
+    "lines": 183,
+    "reached": 183,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+        "lines": 30,
+        "reached": 30,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginChecks.ts",
+        "lines": 117,
+        "reached": 117,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginNames.ts",
+        "lines": 28,
+        "reached": 28,
+        "missed": ""
+      }
+    ]
+  }
+}

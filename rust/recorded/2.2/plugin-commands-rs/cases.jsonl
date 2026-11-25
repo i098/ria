@@ -1,0 +1,821 @@
+{"fn":"splitSidesCase","args":[],"ok":["left","right","top","bottom"]}
+{"fn":"whenOfCase","args":["ünïcödé","x"],"ok":{"result":{"$undefined":true},"problems":["ünïcödé names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["a😀b😀c",true],"ok":{"result":{"$undefined":true},"problems":["a😀b😀c must be text"]}}
+{"fn":"whenOfCase","args":["ns:key.path",["a",1]],"ok":{"result":{"$undefined":true},"problems":["ns:key.path must be text"]}}
+{"fn":"whenOfCase","args":["line1\nline2",{}],"ok":{"result":{"$undefined":true},"problems":["line1\nline2 must be text"]}}
+{"fn":"whenOfCase","args":["trailing.",[]],"ok":{"result":{"$undefined":true},"problems":["trailing. must be text"]}}
+{"fn":"whenOfCase","args":["ünïcödéa.b.c",[]],"ok":{"result":{"$undefined":true},"problems":["ünïcödéa.b.c must be text"]}}
+{"fn":"whenOfCase","args":["é",true],"ok":{"result":{"$undefined":true},"problems":["é must be text"]}}
+{"fn":"whenOfCase","args":["ünïcödékey_name-1",[]],"ok":{"result":{"$undefined":true},"problems":["ünïcödékey_name-1 must be text"]}}
+{"fn":"whenOfCase","args":["HELLO",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["HELLO must be text"]}}
+{"fn":"whenOfCase","args":["hello",true],"ok":{"result":{"$undefined":true},"problems":["hello must be text"]}}
+{"fn":"whenOfCase","args":["a..b",null],"ok":{"result":{"$undefined":true},"problems":["a..b must be text"]}}
+{"fn":"whenOfCase","args":["ns:key.path",{}],"ok":{"result":{"$undefined":true},"problems":["ns:key.path must be text"]}}
+{"fn":"whenOfCase","args":["ünïcödéΣΊΣΥΦΟΣ",{}],"ok":{"result":{"$undefined":true},"problems":["ünïcödéΣΊΣΥΦΟΣ must be text"]}}
+{"fn":"whenOfCase","args":["ab","a"],"ok":{"result":{"$undefined":true},"problems":["ab names a, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["tab\tseparated",null],"ok":{"result":{"$undefined":true},"problems":["tab\tseparated must be text"]}}
+{"fn":"whenOfCase","args":["  padded  ",{}],"ok":{"result":{"$undefined":true},"problems":["  padded   must be text"]}}
+{"fn":"whenOfCase","args":["😀",0],"ok":{"result":{"$undefined":true},"problems":["😀 must be text"]}}
+{"fn":"whenOfCase","args":["line1\nline2",null],"ok":{"result":{"$undefined":true},"problems":["line1\nline2 must be text"]}}
+{"fn":"whenOfCase","args":["src/a/b.tsa:b:c",null],"ok":{"result":{"$undefined":true},"problems":["src/a/b.tsa:b:c must be text"]}}
+{"fn":"whenOfCase","args":["a..b",0],"ok":{"result":{"$undefined":true},"problems":["a..b must be text"]}}
+{"fn":"whenOfCase","args":["emoji 👍🏽 mix",null],"ok":{"result":{"$undefined":true},"problems":["emoji 👍🏽 mix must be text"]}}
+{"fn":"whenOfCase","args":["ΣΊΣΥΦΟΣ","x"],"ok":{"result":{"$undefined":true},"problems":["ΣΊΣΥΦΟΣ names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["ns:key.path",[]],"ok":{"result":{"$undefined":true},"problems":["ns:key.path must be text"]}}
+{"fn":"whenOfCase","args":["😀ünïcödé",[]],"ok":{"result":{"$undefined":true},"problems":["😀ünïcödé must be text"]}}
+{"fn":"whenOfCase","args":["İstanbul",["a",1]],"ok":{"result":{"$undefined":true},"problems":["İstanbul must be text"]}}
+{"fn":"whenOfCase","args":["{name} has {count} items",null],"ok":{"result":{"$undefined":true},"problems":["{name} has {count} items must be text"]}}
+{"fn":"whenOfCase","args":["😀",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["😀 must be text"]}}
+{"fn":"whenOfCase","args":["key_name-1",["a",1]],"ok":{"result":{"$undefined":true},"problems":["key_name-1 must be text"]}}
+{"fn":"whenOfCase","args":["tab\tseparated",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["tab\tseparated must be text"]}}
+{"fn":"whenOfCase","args":[":",[]],"ok":{"result":{"$undefined":true},"problems":[": must be text"]}}
+{"fn":"whenOfCase","args":["src/a/b.ts",null],"ok":{"result":{"$undefined":true},"problems":["src/a/b.ts must be text"]}}
+{"fn":"whenOfCase","args":["ab",null],"ok":{"result":{"$undefined":true},"problems":["ab must be text"]}}
+{"fn":"whenOfCase","args":["a.b.chello",["a",1]],"ok":{"result":{"$undefined":true},"problems":["a.b.chello must be text"]}}
+{"fn":"whenOfCase","args":["😀",true],"ok":{"result":{"$undefined":true},"problems":["😀 must be text"]}}
+{"fn":"whenOfCase","args":["日本語のテキスト",["a",1]],"ok":{"result":{"$undefined":true},"problems":["日本語のテキスト must be text"]}}
+{"fn":"whenOfCase","args":["HELLO",true],"ok":{"result":{"$undefined":true},"problems":["HELLO must be text"]}}
+{"fn":"whenOfCase","args":["./x/**/*.jsona..b",[]],"ok":{"result":{"$undefined":true},"problems":["./x/**/*.jsona..b must be text"]}}
+{"fn":"whenOfCase","args":["Hello World",["a",1]],"ok":{"result":{"$undefined":true},"problems":["Hello World must be text"]}}
+{"fn":"whenOfCase","args":["ΣΊΣΥΦΟΣa",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["ΣΊΣΥΦΟΣa must be text"]}}
+{"fn":"whenOfCase","args":["İstanbul","l"],"ok":{"result":{"$undefined":true},"problems":["İstanbul names l, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["İstanbulab",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["İstanbulab must be text"]}}
+{"fn":"whenOfCase","args":["",[]],"ok":{"result":{"$undefined":true},"problems":[" must be text"]}}
+{"fn":"whenOfCase","args":["日本語のテキスト",{}],"ok":{"result":{"$undefined":true},"problems":["日本語のテキスト must be text"]}}
+{"fn":"whenOfCase","args":["İstanbul",0],"ok":{"result":{"$undefined":true},"problems":["İstanbul must be text"]}}
+{"fn":"whenOfCase","args":["a:b:c",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["a:b:c must be text"]}}
+{"fn":"whenOfCase","args":["éa😀b😀c",true],"ok":{"result":{"$undefined":true},"problems":["éa😀b😀c must be text"]}}
+{"fn":"whenOfCase","args":["abc",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["abc must be text"]}}
+{"fn":"whenOfCase","args":["a.b.c",true],"ok":{"result":{"$undefined":true},"problems":["a.b.c must be text"]}}
+{"fn":"whenOfCase","args":["{name} has {count} items",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["{name} has {count} items must be text"]}}
+{"fn":"whenOfCase","args":["  padded  ",0],"ok":{"result":{"$undefined":true},"problems":["  padded   must be text"]}}
+{"fn":"whenOfCase","args":["a",[]],"ok":{"result":{"$undefined":true},"problems":["a must be text"]}}
+{"fn":"whenOfCase","args":["key_name-1trailing.",0],"ok":{"result":{"$undefined":true},"problems":["key_name-1trailing. must be text"]}}
+{"fn":"whenOfCase","args":["emoji 👍🏽 mixhello",{}],"ok":{"result":{"$undefined":true},"problems":["emoji 👍🏽 mixhello must be text"]}}
+{"fn":"whenOfCase","args":["é",{}],"ok":{"result":{"$undefined":true},"problems":["é must be text"]}}
+{"fn":"whenOfCase","args":["日本語のテキストΣΊΣΥΦΟΣ",true],"ok":{"result":{"$undefined":true},"problems":["日本語のテキストΣΊΣΥΦΟΣ must be text"]}}
+{"fn":"whenOfCase","args":["x","x"],"ok":{"result":{"$undefined":true},"problems":["x names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["a:b:c","x"],"ok":{"result":{"$undefined":true},"problems":["a:b:c names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["ns:key.path",0],"ok":{"result":{"$undefined":true},"problems":["ns:key.path must be text"]}}
+{"fn":"whenOfCase","args":["hello",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["hello must be text"]}}
+{"fn":"whenOfCase","args":["  padded  ","x"],"ok":{"result":{"$undefined":true},"problems":["  padded   names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":[".leading",[]],"ok":{"result":{"$undefined":true},"problems":[".leading must be text"]}}
+{"fn":"whenOfCase","args":["﻿bom",{}],"ok":{"result":{"$undefined":true},"problems":["﻿bom must be text"]}}
+{"fn":"whenOfCase","args":["",["a",1]],"ok":{"result":{"$undefined":true},"problems":[" must be text"]}}
+{"fn":"whenOfCase","args":["日本語のテキスト",0],"ok":{"result":{"$undefined":true},"problems":["日本語のテキスト must be text"]}}
+{"fn":"whenOfCase","args":["a:b:c",["a",1]],"ok":{"result":{"$undefined":true},"problems":["a:b:c must be text"]}}
+{"fn":"whenOfCase","args":["",0],"ok":{"result":{"$undefined":true},"problems":[" must be text"]}}
+{"fn":"whenOfCase","args":["😀key_name-1",{}],"ok":{"result":{"$undefined":true},"problems":["😀key_name-1 must be text"]}}
+{"fn":"whenOfCase","args":["é",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["é must be text"]}}
+{"fn":"whenOfCase","args":["😀",[]],"ok":{"result":{"$undefined":true},"problems":["😀 must be text"]}}
+{"fn":"whenOfCase","args":["line1\nline2",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["line1\nline2 must be text"]}}
+{"fn":"whenOfCase","args":["emoji 👍🏽 mix.leading",["a",1]],"ok":{"result":{"$undefined":true},"problems":["emoji 👍🏽 mix.leading must be text"]}}
+{"fn":"whenOfCase","args":["HELLOemoji 👍🏽 mix",0],"ok":{"result":{"$undefined":true},"problems":["HELLOemoji 👍🏽 mix must be text"]}}
+{"fn":"whenOfCase","args":["emoji 👍🏽 mix",true],"ok":{"result":{"$undefined":true},"problems":["emoji 👍🏽 mix must be text"]}}
+{"fn":"whenOfCase","args":["﻿bomstraße",null],"ok":{"result":{"$undefined":true},"problems":["﻿bomstraße must be text"]}}
+{"fn":"whenOfCase","args":["abc",0],"ok":{"result":{"$undefined":true},"problems":["abc must be text"]}}
+{"fn":"whenOfCase","args":["abc",{}],"ok":{"result":{"$undefined":true},"problems":["abc must be text"]}}
+{"fn":"whenOfCase","args":["  padded  ",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["  padded   must be text"]}}
+{"fn":"whenOfCase","args":[":.leading",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":[":.leading must be text"]}}
+{"fn":"whenOfCase","args":["a:b:c",[]],"ok":{"result":{"$undefined":true},"problems":["a:b:c must be text"]}}
+{"fn":"whenOfCase","args":["straße",["a",1]],"ok":{"result":{"$undefined":true},"problems":["straße must be text"]}}
+{"fn":"whenOfCase","args":["straße",{}],"ok":{"result":{"$undefined":true},"problems":["straße must be text"]}}
+{"fn":"whenOfCase","args":["./x/**/*.json",true],"ok":{"result":{"$undefined":true},"problems":["./x/**/*.json must be text"]}}
+{"fn":"whenOfCase","args":["ns:key.path","x"],"ok":{"result":{"$undefined":true},"problems":["ns:key.path names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["a:b:c",{}],"ok":{"result":{"$undefined":true},"problems":["a:b:c must be text"]}}
+{"fn":"whenOfCase","args":["a😀b😀c{name} has {count} items","x"],"ok":{"result":{"$undefined":true},"problems":["a😀b😀c{name} has {count} items names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["line1\nline2ünïcödé",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["line1\nline2ünïcödé must be text"]}}
+{"fn":"whenOfCase","args":["  padded  ",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["  padded   must be text"]}}
+{"fn":"whenOfCase","args":["a.b.c","x"],"ok":{"result":{"$undefined":true},"problems":["a.b.c names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["tab\tseparated",[]],"ok":{"result":{"$undefined":true},"problems":["tab\tseparated must be text"]}}
+{"fn":"whenOfCase","args":["src/a/b.ts",["a",1]],"ok":{"result":{"$undefined":true},"problems":["src/a/b.ts must be text"]}}
+{"fn":"whenOfCase","args":["a:b:c./x/**/*.json",0],"ok":{"result":{"$undefined":true},"problems":["a:b:c./x/**/*.json must be text"]}}
+{"fn":"whenOfCase","args":["a",{}],"ok":{"result":{"$undefined":true},"problems":["a must be text"]}}
+{"fn":"whenOfCase","args":["ΣΊΣΥΦΟΣ",null],"ok":{"result":{"$undefined":true},"problems":["ΣΊΣΥΦΟΣ must be text"]}}
+{"fn":"whenOfCase","args":["a:b:c",0],"ok":{"result":{"$undefined":true},"problems":["a:b:c must be text"]}}
+{"fn":"whenOfCase","args":["key_name-1",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["key_name-1 must be text"]}}
+{"fn":"whenOfCase","args":["﻿bom",null],"ok":{"result":{"$undefined":true},"problems":["﻿bom must be text"]}}
+{"fn":"whenOfCase","args":["tab\tseparated",{}],"ok":{"result":{"$undefined":true},"problems":["tab\tseparated must be text"]}}
+{"fn":"whenOfCase","args":["hello world",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["hello world must be text"]}}
+{"fn":"whenOfCase","args":["ΣΊΣΥΦΟΣ",["a",1]],"ok":{"result":{"$undefined":true},"problems":["ΣΊΣΥΦΟΣ must be text"]}}
+{"fn":"whenOfCase","args":["Hello World",{}],"ok":{"result":{"$undefined":true},"problems":["Hello World must be text"]}}
+{"fn":"whenOfCase","args":["a.b.c",null],"ok":{"result":{"$undefined":true},"problems":["a.b.c must be text"]}}
+{"fn":"whenOfCase","args":["😀",["a",1]],"ok":{"result":{"$undefined":true},"problems":["😀 must be text"]}}
+{"fn":"whenOfCase","args":["tab\tseparated","x"],"ok":{"result":{"$undefined":true},"problems":["tab\tseparated names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["hello",0],"ok":{"result":{"$undefined":true},"problems":["hello must be text"]}}
+{"fn":"whenOfCase","args":["hello",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["hello must be text"]}}
+{"fn":"whenOfCase","args":["a😀b😀c","x"],"ok":{"result":{"$undefined":true},"problems":["a😀b😀c names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["abc",true],"ok":{"result":{"$undefined":true},"problems":["abc must be text"]}}
+{"fn":"whenOfCase","args":["straße",null],"ok":{"result":{"$undefined":true},"problems":["straße must be text"]}}
+{"fn":"whenOfCase","args":["Hello World",0],"ok":{"result":{"$undefined":true},"problems":["Hello World must be text"]}}
+{"fn":"whenOfCase","args":["src/a/b.ts",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["src/a/b.ts must be text"]}}
+{"fn":"whenOfCase","args":["straße",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["straße must be text"]}}
+{"fn":"whenOfCase","args":["a:b:c",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["a:b:c must be text"]}}
+{"fn":"whenOfCase","args":["src/a/b.ts",{}],"ok":{"result":{"$undefined":true},"problems":["src/a/b.ts must be text"]}}
+{"fn":"whenOfCase","args":["hello world",true],"ok":{"result":{"$undefined":true},"problems":["hello world must be text"]}}
+{"fn":"whenOfCase","args":["﻿bom",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["﻿bom must be text"]}}
+{"fn":"whenOfCase","args":["a",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["a must be text"]}}
+{"fn":"whenOfCase","args":["a:b:c",null],"ok":{"result":{"$undefined":true},"problems":["a:b:c must be text"]}}
+{"fn":"whenOfCase","args":["a.b.c",[]],"ok":{"result":{"$undefined":true},"problems":["a.b.c must be text"]}}
+{"fn":"whenOfCase","args":["HELLO",{}],"ok":{"result":{"$undefined":true},"problems":["HELLO must be text"]}}
+{"fn":"whenOfCase","args":[".leading",null],"ok":{"result":{"$undefined":true},"problems":[".leading must be text"]}}
+{"fn":"whenOfCase","args":[":",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":[": must be text"]}}
+{"fn":"whenOfCase","args":["{name} has {count} items",{}],"ok":{"result":{"$undefined":true},"problems":["{name} has {count} items must be text"]}}
+{"fn":"whenOfCase","args":["HELLO",[]],"ok":{"result":{"$undefined":true},"problems":["HELLO must be text"]}}
+{"fn":"whenOfCase","args":[".leading",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":[".leading must be text"]}}
+{"fn":"whenOfCase","args":["  padded  ",null],"ok":{"result":{"$undefined":true},"problems":["  padded   must be text"]}}
+{"fn":"whenOfCase","args":["日本語のテキスト",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["日本語のテキスト must be text"]}}
+{"fn":"whenOfCase","args":["a.b.c",0],"ok":{"result":{"$undefined":true},"problems":["a.b.c must be text"]}}
+{"fn":"whenOfCase","args":["ünïcödé",[]],"ok":{"result":{"$undefined":true},"problems":["ünïcödé must be text"]}}
+{"fn":"whenOfCase","args":["hello日本語のテキスト",[]],"ok":{"result":{"$undefined":true},"problems":["hello日本語のテキスト must be text"]}}
+{"fn":"whenOfCase","args":["./x/**/*.json",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["./x/**/*.json must be text"]}}
+{"fn":"whenOfCase","args":["İstanbulstraße",0],"ok":{"result":{"$undefined":true},"problems":["İstanbulstraße must be text"]}}
+{"fn":"whenOfCase","args":["key_name-1",{}],"ok":{"result":{"$undefined":true},"problems":["key_name-1 must be text"]}}
+{"fn":"whenOfCase","args":["a😀b😀cHello World",["a",1]],"ok":{"result":{"$undefined":true},"problems":["a😀b😀cHello World must be text"]}}
+{"fn":"whenOfCase","args":["ns:key.path",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["ns:key.path must be text"]}}
+{"fn":"whenOfCase","args":["abc",["a",1]],"ok":{"result":{"$undefined":true},"problems":["abc must be text"]}}
+{"fn":"whenOfCase","args":["key_name-1",0],"ok":{"result":{"$undefined":true},"problems":["key_name-1 must be text"]}}
+{"fn":"whenOfCase","args":[".leading",0],"ok":{"result":{"$undefined":true},"problems":[".leading must be text"]}}
+{"fn":"whenOfCase","args":[":",["a",1]],"ok":{"result":{"$undefined":true},"problems":[": must be text"]}}
+{"fn":"whenOfCase","args":["İstanbul",[]],"ok":{"result":{"$undefined":true},"problems":["İstanbul must be text"]}}
+{"fn":"whenOfCase","args":["line1\nline2",["a",1]],"ok":{"result":{"$undefined":true},"problems":["line1\nline2 must be text"]}}
+{"fn":"whenOfCase","args":["ab",{}],"ok":{"result":{"$undefined":true},"problems":["ab must be text"]}}
+{"fn":"whenOfCase","args":["﻿bom",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["﻿bom must be text"]}}
+{"fn":"whenOfCase","args":["aba😀b😀c",["a",1]],"ok":{"result":{"$undefined":true},"problems":["aba😀b😀c must be text"]}}
+{"fn":"whenOfCase","args":["ab",[]],"ok":{"result":{"$undefined":true},"problems":["ab must be text"]}}
+{"fn":"whenOfCase","args":["src/a/b.ts",[]],"ok":{"result":{"$undefined":true},"problems":["src/a/b.ts must be text"]}}
+{"fn":"whenOfCase","args":["",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":[" must be text"]}}
+{"fn":"whenOfCase","args":["hello world",null],"ok":{"result":{"$undefined":true},"problems":["hello world must be text"]}}
+{"fn":"whenOfCase","args":["hello",{}],"ok":{"result":{"$undefined":true},"problems":["hello must be text"]}}
+{"fn":"whenOfCase","args":["a:b:c",true],"ok":{"result":{"$undefined":true},"problems":["a:b:c must be text"]}}
+{"fn":"whenOfCase","args":["﻿bom",[]],"ok":{"result":{"$undefined":true},"problems":["﻿bom must be text"]}}
+{"fn":"whenOfCase","args":["日本語のテキスト",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["日本語のテキスト must be text"]}}
+{"fn":"whenOfCase","args":["hello worlda..b",["a",1]],"ok":{"result":{"$undefined":true},"problems":["hello worlda..b must be text"]}}
+{"fn":"whenOfCase","args":["a",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["a must be text"]}}
+{"fn":"whenOfCase","args":["key_name-1",null],"ok":{"result":{"$undefined":true},"problems":["key_name-1 must be text"]}}
+{"fn":"whenOfCase","args":["src/a/b.ts",0],"ok":{"result":{"$undefined":true},"problems":["src/a/b.ts must be text"]}}
+{"fn":"whenOfCase","args":["abctrailing.",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["abctrailing. must be text"]}}
+{"fn":"whenOfCase","args":["tab\tseparated",true],"ok":{"result":{"$undefined":true},"problems":["tab\tseparated must be text"]}}
+{"fn":"whenOfCase","args":["a.b.c",["a",1]],"ok":{"result":{"$undefined":true},"problems":["a.b.c must be text"]}}
+{"fn":"whenOfCase","args":["hello world",0],"ok":{"result":{"$undefined":true},"problems":["hello world must be text"]}}
+{"fn":"whenOfCase","args":["ab",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["ab must be text"]}}
+{"fn":"whenOfCase","args":["é","x"],"ok":{"result":{"$undefined":true},"problems":["é names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["straße",true],"ok":{"result":{"$undefined":true},"problems":["straße must be text"]}}
+{"fn":"whenOfCase","args":["a.b.c",{}],"ok":{"result":{"$undefined":true},"problems":["a.b.c must be text"]}}
+{"fn":"whenOfCase","args":["ns:key.path",null],"ok":{"result":{"$undefined":true},"problems":["ns:key.path must be text"]}}
+{"fn":"whenOfCase","args":["trailing.a.b.c",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["trailing.a.b.c must be text"]}}
+{"fn":"whenOfCase","args":["aİstanbul","x"],"ok":{"result":{"$undefined":true},"problems":["aİstanbul names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["  padded  ",[]],"ok":{"result":{"$undefined":true},"problems":["  padded   must be text"]}}
+{"fn":"whenOfCase","args":["Hello World",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["Hello World must be text"]}}
+{"fn":"whenOfCase","args":["ünïcödé",null],"ok":{"result":{"$undefined":true},"problems":["ünïcödé must be text"]}}
+{"fn":"whenOfCase","args":["﻿bom",true],"ok":{"result":{"$undefined":true},"problems":["﻿bom must be text"]}}
+{"fn":"whenOfCase","args":[".leading",["a",1]],"ok":{"result":{"$undefined":true},"problems":[".leading must be text"]}}
+{"fn":"whenOfCase","args":["tab\tseparated.leading",0],"ok":{"result":{"$undefined":true},"problems":["tab\tseparated.leading must be text"]}}
+{"fn":"whenOfCase","args":[":",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":[": must be text"]}}
+{"fn":"whenOfCase","args":[":",0],"ok":{"result":{"$undefined":true},"problems":[": must be text"]}}
+{"fn":"whenOfCase","args":["HELLOline1\nline2",["a",1]],"ok":{"result":{"$undefined":true},"problems":["HELLOline1\nline2 must be text"]}}
+{"fn":"whenOfCase","args":["﻿bom","x"],"ok":{"result":{"$undefined":true},"problems":["﻿bom names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["  padded  é",{}],"ok":{"result":{"$undefined":true},"problems":["  padded  é must be text"]}}
+{"fn":"whenOfCase","args":["a😀b😀c","B"],"ok":{"result":{"$undefined":true},"problems":["a😀b😀c names B, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["Hello Worldé",[]],"ok":{"result":{"$undefined":true},"problems":["Hello Worldé must be text"]}}
+{"fn":"whenOfCase","args":["hello:",["a",1]],"ok":{"result":{"$undefined":true},"problems":["hello: must be text"]}}
+{"fn":"whenOfCase","args":[":a:b:c",[]],"ok":{"result":{"$undefined":true},"problems":[":a:b:c must be text"]}}
+{"fn":"whenOfCase","args":["src/a/b.ts./x/**/*.json",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["src/a/b.ts./x/**/*.json must be text"]}}
+{"fn":"whenOfCase","args":["ΣΊΣΥΦΟΣ",[]],"ok":{"result":{"$undefined":true},"problems":["ΣΊΣΥΦΟΣ must be text"]}}
+{"fn":"whenOfCase","args":["日本語のテキスト","x"],"ok":{"result":{"$undefined":true},"problems":["日本語のテキスト names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["./x/**/*.json",null],"ok":{"result":{"$undefined":true},"problems":["./x/**/*.json must be text"]}}
+{"fn":"whenOfCase","args":["hello",null],"ok":{"result":{"$undefined":true},"problems":["hello must be text"]}}
+{"fn":"whenOfCase","args":["😀ns:key.path",null],"ok":{"result":{"$undefined":true},"problems":["😀ns:key.path must be text"]}}
+{"fn":"whenOfCase","args":["",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":[" must be text"]}}
+{"fn":"whenOfCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["ΣΊΣΥΦΟΣ must be text"]}}
+{"fn":"whenOfCase","args":["İstanbul",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["İstanbul must be text"]}}
+{"fn":"whenOfCase","args":["X","x"],"ok":{"result":{"$undefined":true},"problems":["X names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["hello world",[]],"ok":{"result":{"$undefined":true},"problems":["hello world must be text"]}}
+{"fn":"whenOfCase","args":["ΣΊΣΥΦΟΣHello World",[]],"ok":{"result":{"$undefined":true},"problems":["ΣΊΣΥΦΟΣHello World must be text"]}}
+{"fn":"whenOfCase","args":["😀",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["😀 must be text"]}}
+{"fn":"whenOfCase","args":["a.b.c",{"a":"b"}],"ok":{"result":{"$undefined":true},"problems":["a.b.c must be text"]}}
+{"fn":"whenOfCase","args":["a😀b😀c",[]],"ok":{"result":{"$undefined":true},"problems":["a😀b😀c must be text"]}}
+{"fn":"whenOfCase","args":["日本語のテキストabc",["a",1]],"ok":{"result":{"$undefined":true},"problems":["日本語のテキストabc must be text"]}}
+{"fn":"whenOfCase","args":["ΣΊΣΥΦΟΣ",{"a":{"b":"c"}}],"ok":{"result":{"$undefined":true},"problems":["ΣΊΣΥΦΟΣ must be text"]}}
+{"fn":"whenOfCase","args":["key_name-1trailing.",true],"ok":{"result":{"$undefined":true},"problems":["key_name-1trailing. must be text"]}}
+{"fn":"whenOfCase","args":["emoji 👍🏽 mix","x"],"ok":{"result":{"$undefined":true},"problems":["emoji 👍🏽 mix names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["héllo wörld","x"],"ok":{"result":{"$undefined":true},"problems":["héllo wörld names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["👍🏽 thumbs","x"],"ok":{"result":{"$undefined":true},"problems":["👍🏽 thumbs names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["日本語","x"],"ok":{"result":{"$undefined":true},"problems":["日本語 names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["","x"],"ok":{"result":{"$undefined":true},"problems":[" names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["İstanbul","x"],"ok":{"result":{"$undefined":true},"problems":["İstanbul names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["straße","x"],"ok":{"result":{"$undefined":true},"problems":["straße names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["ılık ırmak","x"],"ok":{"result":{"$undefined":true},"problems":["ılık ırmak names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["👨‍👩‍👧 family","x"],"ok":{"result":{"$undefined":true},"problems":["👨‍👩‍👧 family names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["a b","x"],"ok":{"result":{"$undefined":true},"problems":["a b names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["a😀b","x"],"ok":{"result":{"$undefined":true},"problems":["a😀b names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["a²b x½ y①","x"],"ok":{"result":{"$undefined":true},"problems":["a²b x½ y① names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["aⅠb Ⅻ","x"],"ok":{"result":{"$undefined":true},"problems":["aⅠb Ⅻ names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["a𐐀b 𝐀bc","x"],"ok":{"result":{"$undefined":true},"problems":["a𐐀b 𝐀bc names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["कि ٣٤","x"],"ok":{"result":{"$undefined":true},"problems":["कि ٣٤ names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["ünïcödé",{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"result":{"$undefined":true},"problems":["ünïcödé must be text"]}}
+{"fn":"whenOfCase","args":["ünïcödé",{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"result":{"$undefined":true},"problems":["ünïcödé must be text"]}}
+{"fn":"whenOfCase","args":["ünïcödé",[3,1,2]],"ok":{"result":{"$undefined":true},"problems":["ünïcödé must be text"]}}
+{"fn":"whenOfCase","args":["ünïcödé",{}],"ok":{"result":{"$undefined":true},"problems":["ünïcödé must be text"]}}
+{"fn":"commandCase","args":["a:b:c",0,true],"ok":{"result":null,"problems":["a:b:c must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["{name} has {count} items",{"a":"b"},true],"ok":{"result":null,"problems":["{name} has {count} items.a isn't a key of {name} has {count} items","{name} has {count} items.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","{name} has {count} items.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["Hello World",{"a":"b"},false],"ok":{"result":null,"problems":["Hello World.a isn't a key of Hello World","Hello World.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","Hello World.title must be text of 1 to 60 characters","Hello World needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["a:b:c",["a",1],true],"ok":{"result":null,"problems":["a:b:c must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a",["a",1],true],"ok":{"result":null,"problems":["a must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ab",{"a":"b"},true],"ok":{"result":null,"problems":["ab.a isn't a key of ab","ab.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ab.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":[".leading",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":[".leading.a isn't a key of .leading",".leading.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".leading.title must be text of 1 to 60 characters",".leading needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["tab\tseparated",{"a":"b"},false],"ok":{"result":null,"problems":["tab\tseparated.a isn't a key of tab\tseparated","tab\tseparated.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","tab\tseparated.title must be text of 1 to 60 characters","tab\tseparated needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["abc",{"a":"b"},true],"ok":{"result":null,"problems":["abc.a isn't a key of abc","abc.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","abc.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["a:b:c",true,true],"ok":{"result":null,"problems":["a:b:c must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["é",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["é.a isn't a key of é","é.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","é.title must be text of 1 to 60 characters","é needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["a:b:c","x",true],"ok":{"result":null,"problems":["a:b:c must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[".leading",true,true],"ok":{"result":null,"problems":[".leading must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["﻿bom",{"a":"b"},true],"ok":{"result":null,"problems":["﻿bom.a isn't a key of ﻿bom","﻿bom.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","﻿bom.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["./x/**/*.json",{"a":"b"},true],"ok":{"result":null,"problems":["./x/**/*.json.a isn't a key of ./x/**/*.json","./x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","./x/**/*.json.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["hello",[],true],"ok":{"result":null,"problems":["hello must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ab",["a",1],true],"ok":{"result":null,"problems":["ab must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a.b.c",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["a.b.c.a isn't a key of a.b.c","a.b.c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a.b.c.title must be text of 1 to 60 characters","a.b.c needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["key_name-1",0,false],"ok":{"result":null,"problems":["key_name-1 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["hello","LO",false],"ok":{"result":null,"problems":["hello must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["日本語のテキスト",true,true],"ok":{"result":null,"problems":["日本語のテキスト must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ΣΊΣΥΦΟΣline1\nline2",null,true],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣline1\nline2 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a:b:ctrailing.",[],false],"ok":{"result":null,"problems":["a:b:ctrailing. must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["key_name-1",{"a":"b"},false],"ok":{"result":null,"problems":["key_name-1.a isn't a key of key_name-1","key_name-1.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","key_name-1.title must be text of 1 to 60 characters","key_name-1 needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["ab",0,false],"ok":{"result":null,"problems":["ab must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["hello world",0,false],"ok":{"result":null,"problems":["hello world must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["İstanbul",{"a":"b"},false],"ok":{"result":null,"problems":["İstanbul.a isn't a key of İstanbul","İstanbul.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","İstanbul.title must be text of 1 to 60 characters","İstanbul needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["日本語のテキスト",{"a":"b"},false],"ok":{"result":null,"problems":["日本語のテキスト.a isn't a key of 日本語のテキスト","日本語のテキスト.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","日本語のテキスト.title must be text of 1 to 60 characters","日本語のテキスト needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["emoji 👍🏽 mix日本語のテキスト",{"a":"b"},false],"ok":{"result":null,"problems":["emoji 👍🏽 mix日本語のテキスト.a isn't a key of emoji 👍🏽 mix日本語のテキスト","emoji 👍🏽 mix日本語のテキスト.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","emoji 👍🏽 mix日本語のテキスト.title must be text of 1 to 60 characters","emoji 👍🏽 mix日本語のテキスト needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["ns:key.path","x",false],"ok":{"result":null,"problems":["ns:key.path must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["😀:",{"a":"b"},false],"ok":{"result":null,"problems":["😀:.a isn't a key of 😀:","😀:.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","😀:.title must be text of 1 to 60 characters","😀: needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["ΣΊΣΥΦΟΣ",null,true],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["😀日本語のテキスト",[],false],"ok":{"result":null,"problems":["😀日本語のテキスト must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["HELLOa..b",[],true],"ok":{"result":null,"problems":["HELLOa..b must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a😀b😀c",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["a😀b😀c.a isn't a key of a😀b😀c","a😀b😀c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a😀b😀c.title must be text of 1 to 60 characters","a😀b😀c needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["ns:key.path",0,false],"ok":{"result":null,"problems":["ns:key.path must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[":",true,false],"ok":{"result":null,"problems":[": must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["İstanbul",{"a":"b"},true],"ok":{"result":null,"problems":["İstanbul.a isn't a key of İstanbul","İstanbul.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","İstanbul.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["key_name-1Hello World",0,false],"ok":{"result":null,"problems":["key_name-1Hello World must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["Hello World.leading",null,false],"ok":{"result":null,"problems":["Hello World.leading must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["./x/**/*.json",0,true],"ok":{"result":null,"problems":["./x/**/*.json must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["hello",true,true],"ok":{"result":null,"problems":["hello must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a.b.cünïcödé",{"a":"b"},true],"ok":{"result":null,"problems":["a.b.cünïcödé.a isn't a key of a.b.cünïcödé","a.b.cünïcödé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a.b.cünïcödé.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["  padded  ",true,false],"ok":{"result":null,"problems":["  padded   must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[".leading",null,false],"ok":{"result":null,"problems":[".leading must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ünïcödé",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["ünïcödé.a isn't a key of ünïcödé","ünïcödé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ünïcödé.title must be text of 1 to 60 characters","ünïcödé needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["a.b.c",null,false],"ok":{"result":null,"problems":["a.b.c must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["{name} has {count} itemsHELLO",{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["{name} has {count} itemsHELLO.a isn't a key of {name} has {count} itemsHELLO","{name} has {count} itemsHELLO.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","{name} has {count} itemsHELLO.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["key_name-1",null,false],"ok":{"result":null,"problems":["key_name-1 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ünïcödé",["a",1],false],"ok":{"result":null,"problems":["ünïcödé must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["  padded  ",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["  padded  .a isn't a key of   padded  ","  padded  .name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","  padded  .title must be text of 1 to 60 characters","  padded   needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["src/a/b.ts",0,false],"ok":{"result":null,"problems":["src/a/b.ts must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["emoji 👍🏽 mixa.b.c",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["emoji 👍🏽 mixa.b.c.a isn't a key of emoji 👍🏽 mixa.b.c","emoji 👍🏽 mixa.b.c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","emoji 👍🏽 mixa.b.c.title must be text of 1 to 60 characters","emoji 👍🏽 mixa.b.c needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["ns:key.path",null,true],"ok":{"result":null,"problems":["ns:key.path must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a",["a",1],false],"ok":{"result":null,"problems":["a must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["hello world",["a",1],false],"ok":{"result":null,"problems":["hello world must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["tab\tseparatedé",{"a":"b"},false],"ok":{"result":null,"problems":["tab\tseparatedé.a isn't a key of tab\tseparatedé","tab\tseparatedé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","tab\tseparatedé.title must be text of 1 to 60 characters","tab\tseparatedé needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["a",{"a":"b"},true],"ok":{"result":null,"problems":["a.a isn't a key of a","a.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["  padded  ",true,true],"ok":{"result":null,"problems":["  padded   must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["tab\tseparatedhello world","x",false],"ok":{"result":null,"problems":["tab\tseparatedhello world must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["x","x",false],"ok":{"result":null,"problems":["x must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a😀b😀c",{"a":"b"},true],"ok":{"result":null,"problems":["a😀b😀c.a isn't a key of a😀b😀c","a😀b😀c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a😀b😀c.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["Hello Worldns:key.path",{"a":"b"},false],"ok":{"result":null,"problems":["Hello Worldns:key.path.a isn't a key of Hello Worldns:key.path","Hello Worldns:key.path.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","Hello Worldns:key.path.title must be text of 1 to 60 characters","Hello Worldns:key.path needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["a😀b😀ca",{},false],"ok":{"result":null,"problems":["a😀b😀ca.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a😀b😀ca.title must be text of 1 to 60 characters","a😀b😀ca needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["key_name-1",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["key_name-1.a isn't a key of key_name-1","key_name-1.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","key_name-1.title must be text of 1 to 60 characters","key_name-1 needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["a..bünïcödé",{"a":"b"},true],"ok":{"result":null,"problems":["a..bünïcödé.a isn't a key of a..bünïcödé","a..bünïcödé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a..bünïcödé.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["Hello World",{},true],"ok":{"result":null,"problems":["Hello World.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","Hello World.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["Hello World",0,false],"ok":{"result":null,"problems":["Hello World must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a😀b😀c",null,true],"ok":{"result":null,"problems":["a😀b😀c must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["hello",null,true],"ok":{"result":null,"problems":["hello must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["{name} has {count} items",[],true],"ok":{"result":null,"problems":["{name} has {count} items must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["{name} has {count} items",[],false],"ok":{"result":null,"problems":["{name} has {count} items must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["{name} has {count} itemsHELLO",["a",1],false],"ok":{"result":null,"problems":["{name} has {count} itemsHELLO must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ünïcödé",[],false],"ok":{"result":null,"problems":["ünïcödé must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["日本語のテキスト",null,true],"ok":{"result":null,"problems":["日本語のテキスト must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["{name} has {count} items",{},false],"ok":{"result":null,"problems":["{name} has {count} items.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","{name} has {count} items.title must be text of 1 to 60 characters","{name} has {count} items needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["",{"a":"b"},true],"ok":{"result":null,"problems":["a isn't a key of a plugin",".name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["trailing.",true,false],"ok":{"result":null,"problems":["trailing. must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["Hello Worlda",[],false],"ok":{"result":null,"problems":["Hello Worlda must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["é",[],true],"ok":{"result":null,"problems":["é must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["Hello World",0,true],"ok":{"result":null,"problems":["Hello World must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[":Hello World",["a",1],true],"ok":{"result":null,"problems":[":Hello World must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a😀b😀c",["a",1],true],"ok":{"result":null,"problems":["a😀b😀c must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["src/a/b.ts",{"a":"b"},true],"ok":{"result":null,"problems":["src/a/b.ts.a isn't a key of src/a/b.ts","src/a/b.ts.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","src/a/b.ts.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["key_name-1",{},true],"ok":{"result":null,"problems":["key_name-1.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","key_name-1.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["HELLO日本語のテキスト",{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["HELLO日本語のテキスト.a isn't a key of HELLO日本語のテキスト","HELLO日本語のテキスト.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","HELLO日本語のテキスト.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["  padded  ",["a",1],false],"ok":{"result":null,"problems":["  padded   must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a..b:",".b",true],"ok":{"result":null,"problems":["a..b: must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a:b:c",{},false],"ok":{"result":null,"problems":["a:b:c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a:b:c.title must be text of 1 to 60 characters","a:b:c needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":[":","x",false],"ok":{"result":null,"problems":[": must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ns:key.path","x",true],"ok":{"result":null,"problems":["ns:key.path must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a.b.cline1\nline2",["a",1],true],"ok":{"result":null,"problems":["a.b.cline1\nline2 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["",{},true],"ok":{"result":null,"problems":[".name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["hello",0,true],"ok":{"result":null,"problems":["hello must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["abc",["a",1],false],"ok":{"result":null,"problems":["abc must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a.b.cstraße",[],true],"ok":{"result":null,"problems":["a.b.cstraße must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[":",{"a":"b"},true],"ok":{"result":null,"problems":[":.a isn't a key of :",":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["é",["a",1],true],"ok":{"result":null,"problems":["é must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["straße","x",false],"ok":{"result":null,"problems":["straße must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ab",[],false],"ok":{"result":null,"problems":["ab must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["hello world",{"a":"b"},true],"ok":{"result":null,"problems":["hello world.a isn't a key of hello world","hello world.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","hello world.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["abc",null,false],"ok":{"result":null,"problems":["abc must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["﻿bom",{"a":"b"},false],"ok":{"result":null,"problems":["﻿bom.a isn't a key of ﻿bom","﻿bom.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","﻿bom.title must be text of 1 to 60 characters","﻿bom needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["  padded  ",[],false],"ok":{"result":null,"problems":["  padded   must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[".leading",{},true],"ok":{"result":null,"problems":[".leading.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".leading.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["  padded  ",null,true],"ok":{"result":null,"problems":["  padded   must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["abc",{},true],"ok":{"result":null,"problems":["abc.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","abc.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["atrailing.",{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["atrailing..a isn't a key of atrailing.","atrailing..name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","atrailing..title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["./x/**/*.json",{},true],"ok":{"result":null,"problems":["./x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","./x/**/*.json.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["key_name-1",true,true],"ok":{"result":null,"problems":["key_name-1 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["HELLO",true,false],"ok":{"result":null,"problems":["HELLO must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["hello world",{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["hello world.a isn't a key of hello world","hello world.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","hello world.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["é","́",true],"ok":{"result":null,"problems":["é must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["a isn't a key of a plugin",".name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".title must be text of 1 to 60 characters"," needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["日本語のテキスト",0,false],"ok":{"result":null,"problems":["日本語のテキスト must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["İstanbulİstanbul",["a",1],false],"ok":{"result":null,"problems":["İstanbulİstanbul must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["key_name-1",null,true],"ok":{"result":null,"problems":["key_name-1 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["trailing.",true,true],"ok":{"result":null,"problems":["trailing. must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["😀",["a",1],true],"ok":{"result":null,"problems":["😀 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a",[],false],"ok":{"result":null,"problems":["a must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["trailing.",{"a":"b"},true],"ok":{"result":null,"problems":["trailing..a isn't a key of trailing.","trailing..name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","trailing..title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["ΣΊΣΥΦΟΣ",true,false],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["./x/**/*.json",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["./x/**/*.json.a isn't a key of ./x/**/*.json","./x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","./x/**/*.json.title must be text of 1 to 60 characters","./x/**/*.json needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["﻿bom",["a",1],false],"ok":{"result":null,"problems":["﻿bom must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a..b",{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["a..b.a isn't a key of a..b","a..b.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a..b.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["a..b",0,false],"ok":{"result":null,"problems":["a..b must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ünïcödé",null,true],"ok":{"result":null,"problems":["ünïcödé must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["﻿bom",0,false],"ok":{"result":null,"problems":["﻿bom must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[".leading",["a",1],false],"ok":{"result":null,"problems":[".leading must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["trailing.","x",true],"ok":{"result":null,"problems":["trailing. must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["straße",true,false],"ok":{"result":null,"problems":["straße must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a.b.c",{"a":"b"},false],"ok":{"result":null,"problems":["a.b.c.a isn't a key of a.b.c","a.b.c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a.b.c.title must be text of 1 to 60 characters","a.b.c needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":[":",{},true],"ok":{"result":null,"problems":[":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["key_name-1",[],true],"ok":{"result":null,"problems":["key_name-1 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["trailing.",0,true],"ok":{"result":null,"problems":["trailing. must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["{name} has {count} itemsemoji 👍🏽 mix",[],false],"ok":{"result":null,"problems":["{name} has {count} itemsemoji 👍🏽 mix must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["line1\nline2","x",false],"ok":{"result":null,"problems":["line1\nline2 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["  padded  ",{},false],"ok":{"result":null,"problems":["  padded  .name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","  padded  .title must be text of 1 to 60 characters","  padded   needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["ab",{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["ab.a isn't a key of ab","ab.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ab.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["é",{"a":"b"},true],"ok":{"result":null,"problems":["é.a isn't a key of é","é.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","é.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["ΣΊΣΥΦΟΣhello world",true,true],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣhello world must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["日本語のテキスト",["a",1],false],"ok":{"result":null,"problems":["日本語のテキスト must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["straße",{"a":"b"},false],"ok":{"result":null,"problems":["straße.a isn't a key of straße","straße.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","straße.title must be text of 1 to 60 characters","straße needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["line1\nline2",null,false],"ok":{"result":null,"problems":["line1\nline2 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["😀src/a/b.ts",{},false],"ok":{"result":null,"problems":["😀src/a/b.ts.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","😀src/a/b.ts.title must be text of 1 to 60 characters","😀src/a/b.ts needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["ns:key.path",{"a":"b"},true],"ok":{"result":null,"problems":["ns:key.path.a isn't a key of ns:key.path","ns:key.path.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ns:key.path.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["src/a/b.ts","x",true],"ok":{"result":null,"problems":["src/a/b.ts must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ns:key.path",[],true],"ok":{"result":null,"problems":["ns:key.path must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["straßeé",{"a":"b"},true],"ok":{"result":null,"problems":["straßeé.a isn't a key of straßeé","straßeé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","straßeé.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["a",[],true],"ok":{"result":null,"problems":["a must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["abc",["a",1],true],"ok":{"result":null,"problems":["abc must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[":",{"a":"b"},false],"ok":{"result":null,"problems":[":.a isn't a key of :",":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.title must be text of 1 to 60 characters",": needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["emoji 👍🏽 mix",["a",1],false],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["abckey_name-1",null,false],"ok":{"result":null,"problems":["abckey_name-1 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["İstanbul",[],true],"ok":{"result":null,"problems":["İstanbul must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["src/a/b.ts",true,false],"ok":{"result":null,"problems":["src/a/b.ts must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["src/a/b.ts",{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["src/a/b.ts.a isn't a key of src/a/b.ts","src/a/b.ts.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","src/a/b.ts.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["日本語のテキスト",{"a":"b"},true],"ok":{"result":null,"problems":["日本語のテキスト.a isn't a key of 日本語のテキスト","日本語のテキスト.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","日本語のテキスト.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["HELLO","x",false],"ok":{"result":null,"problems":["HELLO must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[":ns:key.path",0,true],"ok":{"result":null,"problems":[":ns:key.path must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["﻿bom",null,false],"ok":{"result":null,"problems":["﻿bom must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["HELLO",{},false],"ok":{"result":null,"problems":["HELLO.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","HELLO.title must be text of 1 to 60 characters","HELLO needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["{name} has {count} items","x",false],"ok":{"result":null,"problems":["{name} has {count} items must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[".leadingns:key.path","x",false],"ok":{"result":null,"problems":[".leadingns:key.path must be an object"],"kinds":null}}
+{"fn":"commandCase","args":[":",0,true],"ok":{"result":null,"problems":[": must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["aba:b:c",{},true],"ok":{"result":null,"problems":["aba:b:c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","aba:b:c.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["straße",["a",1],false],"ok":{"result":null,"problems":["straße must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["Hello World",["a",1],true],"ok":{"result":null,"problems":["Hello World must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["﻿bom","x",true],"ok":{"result":null,"problems":["﻿bom must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["trailing.",[],false],"ok":{"result":null,"problems":["trailing. must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["emoji 👍🏽 mix",true,true],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["{name} has {count} itemsé",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["{name} has {count} itemsé.a isn't a key of {name} has {count} itemsé","{name} has {count} itemsé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","{name} has {count} itemsé.title must be text of 1 to 60 characters","{name} has {count} itemsé needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["a..b",["a",1],false],"ok":{"result":null,"problems":["a..b must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["﻿bom",0,true],"ok":{"result":null,"problems":["﻿bom must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ünïcödétab\tseparated",0,true],"ok":{"result":null,"problems":["ünïcödétab\tseparated must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},true],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ.a isn't a key of ΣΊΣΥΦΟΣ","ΣΊΣΥΦΟΣ.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ΣΊΣΥΦΟΣ.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["ab",{"a":"b"},false],"ok":{"result":null,"problems":["ab.a isn't a key of ab","ab.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ab.title must be text of 1 to 60 characters","ab needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["ab",true,false],"ok":{"result":null,"problems":["ab must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["hello world",{},false],"ok":{"result":null,"problems":["hello world.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","hello world.title must be text of 1 to 60 characters","hello world needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["😀a",["a",1],false],"ok":{"result":null,"problems":["😀a must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["é",[],false],"ok":{"result":null,"problems":["é must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a..b",{},false],"ok":{"result":null,"problems":["a..b.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a..b.title must be text of 1 to 60 characters","a..b needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["Hello World",[],true],"ok":{"result":null,"problems":["Hello World must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["emoji 👍🏽 mix",["a",1],true],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["é",null,true],"ok":{"result":null,"problems":["é must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["tab\tseparated",true,true],"ok":{"result":null,"problems":["tab\tseparated must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ns:key.path",true,true],"ok":{"result":null,"problems":["ns:key.path must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ns:key.path",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["ns:key.path.a isn't a key of ns:key.path","ns:key.path.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ns:key.path.title must be text of 1 to 60 characters","ns:key.path needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["key_name-1a",{"a":"b"},true],"ok":{"result":null,"problems":["key_name-1a.a isn't a key of key_name-1a","key_name-1a.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","key_name-1a.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["Hello World",{"a":{"b":"c"}},false],"ok":{"result":null,"problems":["Hello World.a isn't a key of Hello World","Hello World.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","Hello World.title must be text of 1 to 60 characters","Hello World needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["  padded  ",[],true],"ok":{"result":null,"problems":["  padded   must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["HELLO",{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["HELLO.a isn't a key of HELLO","HELLO.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","HELLO.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["straße",{"a":"b"},true],"ok":{"result":null,"problems":["straße.a isn't a key of straße","straße.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","straße.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["abc",{},false],"ok":{"result":null,"problems":["abc.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","abc.title must be text of 1 to 60 characters","abc needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["src/a/b.tstab\tseparated",true,true],"ok":{"result":null,"problems":["src/a/b.tstab\tseparated must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a.b.c",{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["a.b.c.a isn't a key of a.b.c","a.b.c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a.b.c.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["abc",{"a":{"b":"c"}},true],"ok":{"result":null,"problems":["abc.a isn't a key of abc","abc.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","abc.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":[".leadinga.b.c",0,false],"ok":{"result":null,"problems":[".leadinga.b.c must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["日本語のテキスト./x/**/*.json",{"a":"b"},true],"ok":{"result":null,"problems":["日本語のテキスト./x/**/*.json.a isn't a key of 日本語のテキスト./x/**/*.json","日本語のテキスト./x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","日本語のテキスト./x/**/*.json.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["ns:key.path",[],false],"ok":{"result":null,"problems":["ns:key.path must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["héllo wörld",0,true],"ok":{"result":null,"problems":["héllo wörld must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["👍🏽 thumbs",0,true],"ok":{"result":null,"problems":["👍🏽 thumbs must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["日本語",0,true],"ok":{"result":null,"problems":["日本語 must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["",0,true],"ok":{"result":null,"problems":[" must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["é",0,true],"ok":{"result":null,"problems":["é must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["İstanbul",0,true],"ok":{"result":null,"problems":["İstanbul must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["straße",0,true],"ok":{"result":null,"problems":["straße must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ılık ırmak",0,true],"ok":{"result":null,"problems":["ılık ırmak must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["👨‍👩‍👧 family",0,true],"ok":{"result":null,"problems":["👨‍👩‍👧 family must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a b",0,true],"ok":{"result":null,"problems":["a b must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["ΣΊΣΥΦΟΣ",0,true],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a😀b",0,true],"ok":{"result":null,"problems":["a😀b must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a²b x½ y①",0,true],"ok":{"result":null,"problems":["a²b x½ y① must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["aⅠb Ⅻ",0,true],"ok":{"result":null,"problems":["aⅠb Ⅻ must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a𐐀b 𝐀bc",0,true],"ok":{"result":null,"problems":["a𐐀b 𝐀bc must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["कि ٣٤",0,true],"ok":{"result":null,"problems":["कि ٣٤ must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a:b:c",{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6},true],"ok":{"result":null,"problems":["a:b:c.2 isn't a key of a:b:c","a:b:c.10 isn't a key of a:b:c","a:b:c.zebra isn't a key of a:b:c","a:b:c.apple isn't a key of a:b:c","a:b:c.é isn't a key of a:b:c","a:b:c.Apple isn't a key of a:b:c","a:b:c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a:b:c.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["a:b:c",{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7},true],"ok":{"result":null,"problems":["a:b:c.n isn't a key of a:b:c","a:b:c.f isn't a key of a:b:c","a:b:c.t isn't a key of a:b:c","a:b:c.neg isn't a key of a:b:c","a:b:c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a:b:c.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["a:b:c",[3,1,2],true],"ok":{"result":null,"problems":["a:b:c must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["a:b:c",{},true],"ok":{"result":null,"problems":["a:b:c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a:b:c.title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"toolCase","args":["hello world",["a",1]],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"toolCase","args":["emoji 👍🏽 mix",{"a":"b"}],"ok":{"result":null,"problems":["emoji 👍🏽 mix.a isn't a key of emoji 👍🏽 mix","emoji 👍🏽 mix.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","emoji 👍🏽 mix.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ab",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ab.a isn't a key of ab","ab.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ab.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ünïcödéa..b",0],"ok":{"result":null,"problems":["ünïcödéa..b must be an object"]}}
+{"fn":"toolCase","args":["a.b.c",null],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"toolCase","args":["  padded  ",{"a":"b"}],"ok":{"result":null,"problems":["  padded  .a isn't a key of   padded  ","  padded  .name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","  padded  .title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["emoji 👍🏽 mix",true],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"toolCase","args":["tab\tseparated",true],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"toolCase","args":["emoji 👍🏽 mix",0],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"toolCase","args":["﻿bom",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["﻿bom.a isn't a key of ﻿bom","﻿bom.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","﻿bom.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ns:key.path",null],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"toolCase","args":["src/a/b.tsemoji 👍🏽 mix",true],"ok":{"result":null,"problems":["src/a/b.tsemoji 👍🏽 mix must be an object"]}}
+{"fn":"toolCase","args":["a.leading",null],"ok":{"result":null,"problems":["a.leading must be an object"]}}
+{"fn":"toolCase","args":["a:b:c",["a",1]],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"toolCase","args":["emoji 👍🏽 mixHELLO","x"],"ok":{"result":null,"problems":["emoji 👍🏽 mixHELLO must be an object"]}}
+{"fn":"toolCase","args":["HELLO",true],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"toolCase","args":["﻿bom",{"a":"b"}],"ok":{"result":null,"problems":["﻿bom.a isn't a key of ﻿bom","﻿bom.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","﻿bom.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["./x/**/*.json",["a",1]],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"toolCase","args":["ΣΊΣΥΦΟΣ",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ.a isn't a key of ΣΊΣΥΦΟΣ","ΣΊΣΥΦΟΣ.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ΣΊΣΥΦΟΣ.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ns:key.pathΣΊΣΥΦΟΣ","x"],"ok":{"result":null,"problems":["ns:key.pathΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"toolCase","args":["ΣΊΣΥΦΟΣ",{}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ΣΊΣΥΦΟΣ.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["hello world",true],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"toolCase","args":["a:b:c",{}],"ok":{"result":null,"problems":["a:b:c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a:b:c.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["line1\nline2",0],"ok":{"result":null,"problems":["line1\nline2 must be an object"]}}
+{"fn":"toolCase","args":["straße",0],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"toolCase","args":["key_name-1",{}],"ok":{"result":null,"problems":["key_name-1.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","key_name-1.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["a..b",true],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"toolCase","args":["emoji 👍🏽 mixa",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["emoji 👍🏽 mixa.a isn't a key of emoji 👍🏽 mixa","emoji 👍🏽 mixa.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","emoji 👍🏽 mixa.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["abc",null],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"toolCase","args":["",{"a":"b"}],"ok":{"result":null,"problems":["a isn't a key of a plugin",".name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ns:key.path",["a",1]],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"toolCase","args":["hello world","x"],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"toolCase","args":["straße.leading",true],"ok":{"result":null,"problems":["straße.leading must be an object"]}}
+{"fn":"toolCase","args":["ns:key.path",[]],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"toolCase","args":["a:b:c",[]],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"toolCase","args":["src/a/b.ts.leading",[]],"ok":{"result":null,"problems":["src/a/b.ts.leading must be an object"]}}
+{"fn":"toolCase","args":["line1\nline2",[]],"ok":{"result":null,"problems":["line1\nline2 must be an object"]}}
+{"fn":"toolCase","args":["a😀b😀c",true],"ok":{"result":null,"problems":["a😀b😀c must be an object"]}}
+{"fn":"toolCase","args":["hello",0],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"toolCase","args":["./x/**/*.json",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["./x/**/*.json.a isn't a key of ./x/**/*.json","./x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","./x/**/*.json.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["straße",{"a":"b"}],"ok":{"result":null,"problems":["straße.a isn't a key of straße","straße.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","straße.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["line1\nline2Hello World","x"],"ok":{"result":null,"problems":["line1\nline2Hello World must be an object"]}}
+{"fn":"toolCase","args":["ab","x"],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"toolCase","args":["trailing../x/**/*.json",{}],"ok":{"result":null,"problems":["trailing../x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","trailing../x/**/*.json.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["./x/**/*.json",[]],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"toolCase","args":[":",0],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"toolCase","args":["x","x"],"ok":{"result":null,"problems":["x must be an object"]}}
+{"fn":"toolCase","args":["Hello Worlda",true],"ok":{"result":null,"problems":["Hello Worlda must be an object"]}}
+{"fn":"toolCase","args":["tab\tseparated",{"a":"b"}],"ok":{"result":null,"problems":["tab\tseparated.a isn't a key of tab\tseparated","tab\tseparated.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","tab\tseparated.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["tab\tseparated",["a",1]],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"toolCase","args":["ns:key.pathünïcödé",true],"ok":{"result":null,"problems":["ns:key.pathünïcödé must be an object"]}}
+{"fn":"toolCase","args":["😀",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["😀.a isn't a key of 😀","😀.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","😀.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ünïcödé",{"a":"b"}],"ok":{"result":null,"problems":["ünïcödé.a isn't a key of ünïcödé","ünïcödé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ünïcödé.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ünïcödé",{}],"ok":{"result":null,"problems":["ünïcödé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ünïcödé.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":[".leading",{"a":"b"}],"ok":{"result":null,"problems":[".leading.a isn't a key of .leading",".leading.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".leading.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["",{}],"ok":{"result":null,"problems":[".name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",".title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["é  padded  ",[]],"ok":{"result":null,"problems":["é  padded   must be an object"]}}
+{"fn":"toolCase","args":["a",[]],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"toolCase","args":[".leading",true],"ok":{"result":null,"problems":[".leading must be an object"]}}
+{"fn":"toolCase","args":["日本語のテキスト",0],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"toolCase","args":["abc",{}],"ok":{"result":null,"problems":["abc.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","abc.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["éHello World",{}],"ok":{"result":null,"problems":["éHello World.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","éHello World.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ab",["a",1]],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"toolCase","args":["a:b:c",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a:b:c.a isn't a key of a:b:c","a:b:c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a:b:c.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["src/a/b.ts","x"],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"toolCase","args":["😀","x"],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"toolCase","args":["hello",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["hello.a isn't a key of hello","hello.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","hello.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["",[]],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"toolCase","args":["",null],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"toolCase","args":["ΣΊΣΥΦΟΣa..b",[]],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣa..b must be an object"]}}
+{"fn":"toolCase","args":["",["a",1]],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"toolCase","args":["./x/**/*.json",{"a":"b"}],"ok":{"result":null,"problems":["./x/**/*.json.a isn't a key of ./x/**/*.json","./x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","./x/**/*.json.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ns:key.path",{"a":"b"}],"ok":{"result":null,"problems":["ns:key.path.a isn't a key of ns:key.path","ns:key.path.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ns:key.path.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["a.b.c","x"],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"toolCase","args":["日本語のテキスト",{}],"ok":{"result":null,"problems":["日本語のテキスト.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","日本語のテキスト.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["é",0],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"toolCase","args":["./x/**/*.json",true],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"toolCase","args":["İstanbulabc",{}],"ok":{"result":null,"problems":["İstanbulabc.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","İstanbulabc.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":[":",{"a":"b"}],"ok":{"result":null,"problems":[":.a isn't a key of :",":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ns:key.patha.b.c",[]],"ok":{"result":null,"problems":["ns:key.patha.b.c must be an object"]}}
+{"fn":"toolCase","args":["a.b.c",{"a":"b"}],"ok":{"result":null,"problems":["a.b.c.a isn't a key of a.b.c","a.b.c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a.b.c.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["src/a/b.tsünïcödé",null],"ok":{"result":null,"problems":["src/a/b.tsünïcödé must be an object"]}}
+{"fn":"toolCase","args":["line1\nline2",{}],"ok":{"result":null,"problems":["line1\nline2.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","line1\nline2.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["trailing.straße",[]],"ok":{"result":null,"problems":["trailing.straße must be an object"]}}
+{"fn":"toolCase","args":["é",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["é.a isn't a key of é","é.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","é.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ünïcödé",[]],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"toolCase","args":["a..b",["a",1]],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"toolCase","args":["emoji 👍🏽 mixΣΊΣΥΦΟΣ",true],"ok":{"result":null,"problems":["emoji 👍🏽 mixΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"toolCase","args":["straße",[]],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"toolCase","args":["straße.leading","x"],"ok":{"result":null,"problems":["straße.leading must be an object"]}}
+{"fn":"toolCase","args":["straßeabc",true],"ok":{"result":null,"problems":["straßeabc must be an object"]}}
+{"fn":"toolCase","args":["  padded  abc","x"],"ok":{"result":null,"problems":["  padded  abc must be an object"]}}
+{"fn":"toolCase","args":["﻿bom",{}],"ok":{"result":null,"problems":["﻿bom.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","﻿bom.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":[":",[]],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"toolCase","args":["İstanbul",{"a":"b"}],"ok":{"result":null,"problems":["İstanbul.a isn't a key of İstanbul","İstanbul.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","İstanbul.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["日本語のテキストHello World",[]],"ok":{"result":null,"problems":["日本語のテキストHello World must be an object"]}}
+{"fn":"toolCase","args":["a😀b😀c{name} has {count} items",null],"ok":{"result":null,"problems":["a😀b😀c{name} has {count} items must be an object"]}}
+{"fn":"toolCase","args":["  padded  ",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["  padded  .a isn't a key of   padded  ","  padded  .name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","  padded  .title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["X","x"],"ok":{"result":null,"problems":["X must be an object"]}}
+{"fn":"toolCase","args":["src/a/b.ts",[]],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"toolCase","args":[".leading",["a",1]],"ok":{"result":null,"problems":[".leading must be an object"]}}
+{"fn":"toolCase","args":["ünïcödé",null],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"toolCase","args":["ünïcödé",["a",1]],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"toolCase","args":[":",{"a":{"b":"c"}}],"ok":{"result":null,"problems":[":.a isn't a key of :",":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["a:b:c","x"],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"toolCase","args":["a:b:ca..b",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a:b:ca..b.a isn't a key of a:b:ca..b","a:b:ca..b.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a:b:ca..b.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["emoji 👍🏽 mixtab\tseparated",{"a":"b"}],"ok":{"result":null,"problems":["emoji 👍🏽 mixtab\tseparated.a isn't a key of emoji 👍🏽 mixtab\tseparated","emoji 👍🏽 mixtab\tseparated.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","emoji 👍🏽 mixtab\tseparated.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["emoji 👍🏽 mix",["a",1]],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"toolCase","args":["😀",["a",1]],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"toolCase","args":["a:b:c",0],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"toolCase","args":["astraße",true],"ok":{"result":null,"problems":["astraße must be an object"]}}
+{"fn":"toolCase","args":["trailing.key_name-1",null],"ok":{"result":null,"problems":["trailing.key_name-1 must be an object"]}}
+{"fn":"toolCase","args":["İstanbul","x"],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"toolCase","args":["ünïcödé",true],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"toolCase","args":["é",true],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"toolCase","args":["tab\tseparated",{}],"ok":{"result":null,"problems":["tab\tseparated.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","tab\tseparated.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["emoji 👍🏽 mix",[]],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"toolCase","args":["straße",true],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"toolCase","args":["a..b",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a..b.a isn't a key of a..b","a..b.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a..b.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["😀",null],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"toolCase","args":["abc",[]],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"toolCase","args":["{name} has {count} items",true],"ok":{"result":null,"problems":["{name} has {count} items must be an object"]}}
+{"fn":"toolCase","args":["İstanbul",[]],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"toolCase","args":["line1\nline2",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["line1\nline2.a isn't a key of line1\nline2","line1\nline2.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","line1\nline2.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["  padded  ",[]],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"toolCase","args":["ünïcödé",0],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"toolCase","args":["line1\nline2a..b","x"],"ok":{"result":null,"problems":["line1\nline2a..b must be an object"]}}
+{"fn":"toolCase","args":["Hello World",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["Hello World.a isn't a key of Hello World","Hello World.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","Hello World.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["","x"],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"toolCase","args":["emoji 👍🏽 mixa",{}],"ok":{"result":null,"problems":["emoji 👍🏽 mixa.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","emoji 👍🏽 mixa.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["a..bHELLO",{}],"ok":{"result":null,"problems":["a..bHELLO.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a..bHELLO.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["tab\tseparated","x"],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"toolCase","args":["hello world",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["hello world.a isn't a key of hello world","hello world.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","hello world.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["é",[]],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"toolCase","args":["a😀b😀c",null],"ok":{"result":null,"problems":["a😀b😀c must be an object"]}}
+{"fn":"toolCase","args":["Hello World",true],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"toolCase","args":["İstanbul",null],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"toolCase","args":["abc日本語のテキスト",0],"ok":{"result":null,"problems":["abc日本語のテキスト must be an object"]}}
+{"fn":"toolCase","args":[":ünïcödé",[]],"ok":{"result":null,"problems":[":ünïcödé must be an object"]}}
+{"fn":"toolCase","args":["tab\tseparated",[]],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"toolCase","args":["a..b","x"],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"toolCase","args":["Hello World",0],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"toolCase","args":["a",["a",1]],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"toolCase","args":["trailing.",{}],"ok":{"result":null,"problems":["trailing..name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","trailing..title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ΣΊΣΥΦΟΣ",["a",1]],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"toolCase","args":["😀",0],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"toolCase","args":["key_name-1",0],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"toolCase","args":["abc",0],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"toolCase","args":["helloabc","x"],"ok":{"result":null,"problems":["helloabc must be an object"]}}
+{"fn":"toolCase","args":["straße",null],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"toolCase","args":["é",["a",1]],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"toolCase","args":["HELLO",{"a":"b"}],"ok":{"result":null,"problems":["HELLO.a isn't a key of HELLO","HELLO.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","HELLO.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["trailing.",null],"ok":{"result":null,"problems":["trailing. must be an object"]}}
+{"fn":"toolCase","args":["straße",["a",1]],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"toolCase","args":["abc","c"],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"toolCase","args":["abc:",[]],"ok":{"result":null,"problems":["abc: must be an object"]}}
+{"fn":"toolCase","args":["😀",{}],"ok":{"result":null,"problems":["😀.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","😀.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["{name} has {count} items",["a",1]],"ok":{"result":null,"problems":["{name} has {count} items must be an object"]}}
+{"fn":"toolCase","args":["😀",{"a":"b"}],"ok":{"result":null,"problems":["😀.a isn't a key of 😀","😀.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","😀.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ΣΊΣΥΦΟΣ",0],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"toolCase","args":["hello world",[]],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"toolCase","args":["key_name-1",{"a":"b"}],"ok":{"result":null,"problems":["key_name-1.a isn't a key of key_name-1","key_name-1.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","key_name-1.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ab",{}],"ok":{"result":null,"problems":["ab.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ab.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ΣΊΣΥΦΟΣ",null],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"toolCase","args":["  padded  ",{}],"ok":{"result":null,"problems":["  padded  .name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","  padded  .title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ΣΊΣΥΦΟΣ日本語のテキスト",{}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ日本語のテキスト.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ΣΊΣΥΦΟΣ日本語のテキスト.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ns:key.path",0],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"toolCase","args":["日本語のテキストa.b.c",{}],"ok":{"result":null,"problems":["日本語のテキストa.b.c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","日本語のテキストa.b.c.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["Hello Worldemoji 👍🏽 mix",[]],"ok":{"result":null,"problems":["Hello Worldemoji 👍🏽 mix must be an object"]}}
+{"fn":"toolCase","args":["  padded  ",0],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"toolCase","args":["src/a/b.ts",["a",1]],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"toolCase","args":["日本語のテキスト",{"a":"b"}],"ok":{"result":null,"problems":["日本語のテキスト.a isn't a key of 日本語のテキスト","日本語のテキスト.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","日本語のテキスト.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["{name} has {count} itemsa😀b😀c",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["{name} has {count} itemsa😀b😀c.a isn't a key of {name} has {count} itemsa😀b😀c","{name} has {count} itemsa😀b😀c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","{name} has {count} itemsa😀b😀c.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["﻿bom",true],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"toolCase","args":["abc","x"],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"toolCase","args":[":",{}],"ok":{"result":null,"problems":[":.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit",":.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["éa",null],"ok":{"result":null,"problems":["éa must be an object"]}}
+{"fn":"toolCase","args":["a.b.c",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a.b.c.a isn't a key of a.b.c","a.b.c.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","a.b.c.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ΣΊΣΥΦΟΣ","x"],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"toolCase","args":[".leading",0],"ok":{"result":null,"problems":[".leading must be an object"]}}
+{"fn":"toolCase","args":["straße./x/**/*.json",{"a":"b"}],"ok":{"result":null,"problems":["straße./x/**/*.json.a isn't a key of straße./x/**/*.json","straße./x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","straße./x/**/*.json.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["é",null],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"toolCase","args":["./x/**/*.json",{}],"ok":{"result":null,"problems":["./x/**/*.json.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","./x/**/*.json.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["ünïcödé﻿bom","x"],"ok":{"result":null,"problems":["ünïcödé﻿bom must be an object"]}}
+{"fn":"toolCase","args":["./x/**/*.jsonΣΊΣΥΦΟΣ",{"a":"b"}],"ok":{"result":null,"problems":["./x/**/*.jsonΣΊΣΥΦΟΣ.a isn't a key of ./x/**/*.jsonΣΊΣΥΦΟΣ","./x/**/*.jsonΣΊΣΥΦΟΣ.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","./x/**/*.jsonΣΊΣΥΦΟΣ.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["hello",{}],"ok":{"result":null,"problems":["hello.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","hello.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["﻿bom","x"],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"toolCase","args":["straße",{}],"ok":{"result":null,"problems":["straße.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","straße.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["straße",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["straße.a isn't a key of straße","straße.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","straße.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["hello world",0],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"toolCase","args":["İstanbul",true],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"toolCase","args":["ΣΊΣΥΦΟΣ","Σ"],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"toolCase","args":["line1\nline2",{"a":"b"}],"ok":{"result":null,"problems":["line1\nline2.a isn't a key of line1\nline2","line1\nline2.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","line1\nline2.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["key_name-1",true],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"toolCase","args":["a",true],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"toolCase","args":["ns:key.pathé",{}],"ok":{"result":null,"problems":["ns:key.pathé.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","ns:key.pathé.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["key_name-1",null],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"toolCase","args":["src/a/b.ts",{"a":"b"}],"ok":{"result":null,"problems":["src/a/b.ts.a isn't a key of src/a/b.ts","src/a/b.ts.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","src/a/b.ts.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["line1\nline2﻿bom",0],"ok":{"result":null,"problems":["line1\nline2﻿bom must be an object"]}}
+{"fn":"toolCase","args":["straßeline1\nline2",[]],"ok":{"result":null,"problems":["straßeline1\nline2 must be an object"]}}
+{"fn":"toolCase","args":["héllo wörld",["a",1]],"ok":{"result":null,"problems":["héllo wörld must be an object"]}}
+{"fn":"toolCase","args":["👍🏽 thumbs",["a",1]],"ok":{"result":null,"problems":["👍🏽 thumbs must be an object"]}}
+{"fn":"toolCase","args":["日本語",["a",1]],"ok":{"result":null,"problems":["日本語 must be an object"]}}
+{"fn":"toolCase","args":["İstanbul",["a",1]],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"toolCase","args":["ılık ırmak",["a",1]],"ok":{"result":null,"problems":["ılık ırmak must be an object"]}}
+{"fn":"toolCase","args":["👨‍👩‍👧 family",["a",1]],"ok":{"result":null,"problems":["👨‍👩‍👧 family must be an object"]}}
+{"fn":"toolCase","args":["a b",["a",1]],"ok":{"result":null,"problems":["a b must be an object"]}}
+{"fn":"toolCase","args":["a😀b",["a",1]],"ok":{"result":null,"problems":["a😀b must be an object"]}}
+{"fn":"toolCase","args":["﻿bom",["a",1]],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"toolCase","args":["a²b x½ y①",["a",1]],"ok":{"result":null,"problems":["a²b x½ y① must be an object"]}}
+{"fn":"toolCase","args":["aⅠb Ⅻ",["a",1]],"ok":{"result":null,"problems":["aⅠb Ⅻ must be an object"]}}
+{"fn":"toolCase","args":["a𐐀b 𝐀bc",["a",1]],"ok":{"result":null,"problems":["a𐐀b 𝐀bc must be an object"]}}
+{"fn":"toolCase","args":["कि ٣٤",["a",1]],"ok":{"result":null,"problems":["कि ٣٤ must be an object"]}}
+{"fn":"toolCase","args":["hello world",{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"result":null,"problems":["hello world.2 isn't a key of hello world","hello world.10 isn't a key of hello world","hello world.zebra isn't a key of hello world","hello world.apple isn't a key of hello world","hello world.é isn't a key of hello world","hello world.Apple isn't a key of hello world","hello world.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","hello world.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["hello world",{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"result":null,"problems":["hello world.n isn't a key of hello world","hello world.f isn't a key of hello world","hello world.t isn't a key of hello world","hello world.neg isn't a key of hello world","hello world.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","hello world.title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["hello world",[3,1,2]],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"toolCase","args":["hello world",{}],"ok":{"result":null,"problems":["hello world.name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","hello world.title must be text of 1 to 60 characters"]}}
+{"fn":"splitSidesCase","args":[],"ok":["left","right","top","bottom"]}
+{"fn":"whenOfCase","args":["commands[0].when",{"$undefined":true}],"ok":{"result":{"$undefined":true},"problems":[]}}
+{"fn":"whenOfCase","args":["commands[0].when",null],"ok":{"result":{"$undefined":true},"problems":["commands[0].when must be text"]}}
+{"fn":"whenOfCase","args":["commands[0].when",0],"ok":{"result":{"$undefined":true},"problems":["commands[0].when must be text"]}}
+{"fn":"whenOfCase","args":["commands[0].when",3],"ok":{"result":{"$undefined":true},"problems":["commands[0].when must be text"]}}
+{"fn":"whenOfCase","args":["commands[0].when",-1],"ok":{"result":{"$undefined":true},"problems":["commands[0].when must be text"]}}
+{"fn":"whenOfCase","args":["commands[0].when",true],"ok":{"result":{"$undefined":true},"problems":["commands[0].when must be text"]}}
+{"fn":"whenOfCase","args":["commands[0].when",false],"ok":{"result":{"$undefined":true},"problems":["commands[0].when must be text"]}}
+{"fn":"whenOfCase","args":["commands[0].when",""],"ok":{"result":{"$undefined":true},"problems":["commands[0].when is empty"]}}
+{"fn":"whenOfCase","args":["commands[0].when","x"],"ok":{"result":{"$undefined":true},"problems":["commands[0].when names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["commands[0].when",[]],"ok":{"result":{"$undefined":true},"problems":["commands[0].when must be text"]}}
+{"fn":"whenOfCase","args":["commands[0].when",{}],"ok":{"result":{"$undefined":true},"problems":["commands[0].when must be text"]}}
+{"fn":"whenOfCase","args":["commands[0].when",[1]],"ok":{"result":{"$undefined":true},"problems":["commands[0].when must be text"]}}
+{"fn":"whenOfCase","args":["commands[0].when",{"a":1}],"ok":{"result":{"$undefined":true},"problems":["commands[0].when must be text"]}}
+{"fn":"whenOfCase","args":["commands[0].when","view == 'x'"],"ok":{"result":{"$undefined":true},"problems":["commands[0].when names view, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["commands[0].when","a && b"],"ok":{"result":{"$undefined":true},"problems":["commands[0].when names a, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["commands[0].when","!("],"ok":{"result":{"$undefined":true},"problems":["commands[0].when ends too soon"]}}
+{"fn":"whenOfCase","args":["commands[0].when","x =~ /a/"],"ok":{"result":{"$undefined":true},"problems":["commands[0].when has an unexpected \"=\" at 2"]}}
+{"fn":"whenOfCase","args":["commands[0].when","x =="],"ok":{"result":{"$undefined":true},"problems":["commands[0].when names x, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"]}}
+{"fn":"whenOfCase","args":["commands[0].when","tab.url =~ /a(/"],"ok":{"result":{"$undefined":true},"problems":["commands[0].when has an unexpected \".\" at 3"]}}
+{"fn":"whenOfCase","args":["commands[0].when","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":{"result":{"$undefined":true},"problems":["commands[0].when is over 200 characters"]}}
+{"fn":"whenOfCase","args":["commands[0].when","a.b == 'c' || !d"],"ok":{"result":{"$undefined":true},"problems":["commands[0].when has an unexpected \".\" at 1"]}}
+{"fn":"whenOfCase","args":["commands[0].when","isPinned"],"ok":{"result":"isPinned","problems":[]}}
+{"fn":"whenOfCase","args":["commands[0].when","!isPinned && tabCount == 3"],"ok":{"result":"!isPinned && tabCount == 3","problems":[]}}
+{"fn":"whenOfCase","args":["commands[0].when","urlHost != 'example.com'"],"ok":{"result":"urlHost != 'example.com'","problems":[]}}
+{"fn":"whenOfCase","args":["commands[0].when","(isPinned || isActive) && isSplit"],"ok":{"result":"(isPinned || isActive) && isSplit","problems":[]}}
+{"fn":"whenOfCase","args":["commands[0].when","true"],"ok":{"result":"true","problems":[]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"$undefined":true},true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"$undefined":true},false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",null,true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",null,false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",0,true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",0,false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",3,true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",3,false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",-1,true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",-1,false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",true,true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",true,false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",false,true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",false,false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]","",true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]","",false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]","x",true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]","x",false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",[],true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",[],false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{},true],"ok":{"result":null,"problems":["contributes.commands[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","contributes.commands[0].title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{},false],"ok":{"result":null,"problems":["contributes.commands[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","contributes.commands[0].title must be text of 1 to 60 characters","contributes.commands[0] needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",[1],true],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",[1],false],"ok":{"result":null,"problems":["contributes.commands[0] must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"a":1},true],"ok":{"result":null,"problems":["contributes.commands[0].a isn't a key of contributes.commands[0]","contributes.commands[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","contributes.commands[0].title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"a":1},false],"ok":{"result":null,"problems":["contributes.commands[0].a isn't a key of contributes.commands[0]","contributes.commands[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","contributes.commands[0].title must be text of 1 to 60 characters","contributes.commands[0] needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"handler":true}},"problems":[],"kinds":[false,false,false,false,true]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go"},false],"ok":{"result":null,"problems":["contributes.commands[0] needs either tool (one of the plugin's tools) or open (\"tab\" or \"split\"), or a main to handle it"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"fetch"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"fetch","input":{}}},"problems":[],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"fetch"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"fetch","input":{}}},"problems":[],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"fetch","input":{"q":1,"nested":{"a":[1,"x"]}}},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"fetch","input":{"q":1,"nested":{"a":[1,"x"]}}}},"problems":[],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"fetch","input":{"q":1,"nested":{"a":[1,"x"]}}},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"fetch","input":{"q":1,"nested":{"a":[1,"x"]}}}},"problems":[],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"fetch","input":[]},true],"ok":{"result":null,"problems":["contributes.commands[0].input must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"fetch","input":[]},false],"ok":{"result":null,"problems":["contributes.commands[0].input must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"fetch","input":null},true],"ok":{"result":null,"problems":["contributes.commands[0].input must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"fetch","input":null},false],"ok":{"result":null,"problems":["contributes.commands[0].input must be an object"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"Bad Name"},true],"ok":{"result":null,"problems":["contributes.commands[0].tool must be a tool's name"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"Bad Name"},false],"ok":{"result":null,"problems":["contributes.commands[0].tool must be a tool's name"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":3},true],"ok":{"result":null,"problems":["contributes.commands[0].tool must be a tool's name"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":3},false],"ok":{"result":null,"problems":["contributes.commands[0].tool must be a tool's name"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"tab"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"tab","context":false,"side":"right","sideSetting":null,"path":""}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"tab"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"tab","context":false,"side":"right","sideSetting":null,"path":""}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"split","context":false,"side":"right","sideSetting":null,"path":""}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"split","context":false,"side":"right","sideSetting":null,"path":""}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"window"},true],"ok":{"result":null,"problems":["contributes.commands[0].open must be tab or split"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"window"},false],"ok":{"result":null,"problems":["contributes.commands[0].open must be tab or split"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"tab","input":{}},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"tab","context":false,"side":"right","sideSetting":null,"path":""}},"problems":["contributes.commands[0].input only goes with tool"],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"tab","input":{}},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"tab","context":false,"side":"right","sideSetting":null,"path":""}},"problems":["contributes.commands[0].input only goes with tool"],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","side":"left","sideSetting":"where","context":true,"path":"/a/b?q=1"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"split","context":true,"side":"left","sideSetting":"where","path":"/a/b?q=1"}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","side":"left","sideSetting":"where","context":true,"path":"/a/b?q=1"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"split","context":true,"side":"left","sideSetting":"where","path":"/a/b?q=1"}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","side":"middle","sideSetting":"bad key!","context":"yes","path":"no-slash"},true],"ok":{"result":null,"problems":["contributes.commands[0].context must be true or false","contributes.commands[0].side must be left, right, top or bottom","contributes.commands[0].sideSetting must be a row's key","contributes.commands[0].path must be /like/this?q=1"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","side":"middle","sideSetting":"bad key!","context":"yes","path":"no-slash"},false],"ok":{"result":null,"problems":["contributes.commands[0].context must be true or false","contributes.commands[0].side must be left, right, top or bottom","contributes.commands[0].sideSetting must be a row's key","contributes.commands[0].path must be /like/this?q=1"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"tab","side":"left"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"tab","context":false,"side":"left","sideSetting":null,"path":""}},"problems":["contributes.commands[0]: side and sideSetting only go with open: split"],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"tab","side":"left"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"tab","context":false,"side":"left","sideSetting":null,"path":""}},"problems":["contributes.commands[0]: side and sideSetting only go with open: split"],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"tab","sideSetting":"k"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"tab","context":false,"side":"right","sideSetting":"k","path":""}},"problems":["contributes.commands[0]: side and sideSetting only go with open: split"],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"tab","sideSetting":"k"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"tab","context":false,"side":"right","sideSetting":"k","path":""}},"problems":["contributes.commands[0]: side and sideSetting only go with open: split"],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","path":""},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"split","context":false,"side":"right","sideSetting":null,"path":""}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","path":""},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"split","context":false,"side":"right","sideSetting":null,"path":""}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","path":"/"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"split","context":false,"side":"right","sideSetting":null,"path":"/"}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","path":"/"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"split","context":false,"side":"right","sideSetting":null,"path":"/"}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","path":"//x"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"split","context":false,"side":"right","sideSetting":null,"path":"//x"}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","path":"//x"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"split","context":false,"side":"right","sideSetting":null,"path":"//x"}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","path":3},true],"ok":{"result":null,"problems":["contributes.commands[0].path must be /like/this?q=1"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"split","path":3},false],"ok":{"result":null,"problems":["contributes.commands[0].path must be /like/this?q=1"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"tab","context":false},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"tab","context":false,"side":"right","sideSetting":null,"path":""}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","open":"tab","context":false},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"open":"tab","context":false,"side":"right","sideSetting":null,"path":""}},"problems":[],"kinds":[false,true,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","view":"my-view"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"view":"my-view"}},"problems":[],"kinds":[false,false,true,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","view":"my-view"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"view":"my-view"}},"problems":[],"kinds":[false,false,true,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","view":"bad view"},true],"ok":{"result":null,"problems":["contributes.commands[0].view must be 1 to 40 letters, digits, - and _"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","view":"bad view"},false],"ok":{"result":null,"problems":["contributes.commands[0].view must be 1 to 40 letters, digits, - and _"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","panel":"p1"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"panel":"p1"}},"problems":[],"kinds":[false,false,false,true,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","panel":"p1"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"panel":"p1"}},"problems":[],"kinds":[false,false,false,true,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","panel":""},true],"ok":{"result":null,"problems":["contributes.commands[0].panel must be a panel's id"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","panel":""},false],"ok":{"result":null,"problems":["contributes.commands[0].panel must be a panel's id"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","handler":true},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"handler":true}},"problems":[],"kinds":[false,false,false,false,true]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","handler":true},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"handler":true}},"problems":[],"kinds":[false,false,false,false,true]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","handler":false},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"handler":true}},"problems":["contributes.commands[0].handler must be true"],"kinds":[false,false,false,false,true]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","handler":false},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"handler":true}},"problems":["contributes.commands[0].handler must be true"],"kinds":[false,false,false,false,true]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","handler":"yes"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"handler":true}},"problems":["contributes.commands[0].handler must be true"],"kinds":[false,false,false,false,true]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","handler":"yes"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"handler":true}},"problems":["contributes.commands[0].handler must be true"],"kinds":[false,false,false,false,true]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"a","open":"tab"},true],"ok":{"result":null,"problems":["contributes.commands[0] needs either tool, open, view, panel or handler, not more than one"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"a","open":"tab"},false],"ok":{"result":null,"problems":["contributes.commands[0] needs either tool, open, view, panel or handler, not more than one"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","view":"a","panel":"b","handler":true},true],"ok":{"result":null,"problems":["contributes.commands[0] needs either tool, open, view, panel or handler, not more than one"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","view":"a","panel":"b","handler":true},false],"ok":{"result":null,"problems":["contributes.commands[0] needs either tool, open, view, panel or handler, not more than one"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","view":"a","context":true,"side":"left","input":{}},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"view":"a"}},"problems":["contributes.commands[0].context only goes with open","contributes.commands[0].side only goes with open","contributes.commands[0].input only goes with tool"],"kinds":[false,false,true,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","view":"a","context":true,"side":"left","input":{}},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"view":"a"}},"problems":["contributes.commands[0].context only goes with open","contributes.commands[0].side only goes with open","contributes.commands[0].input only goes with tool"],"kinds":[false,false,true,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","panel":"a","input":{"x":1}},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"panel":"a"}},"problems":["contributes.commands[0].input only goes with tool"],"kinds":[false,false,false,true,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","panel":"a","input":{"x":1}},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"panel":"a"}},"problems":["contributes.commands[0].input only goes with tool"],"kinds":[false,false,false,true,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","handler":true,"path":"/x","sideSetting":"s"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"handler":true}},"problems":["contributes.commands[0].sideSetting only goes with open","contributes.commands[0].path only goes with open"],"kinds":[false,false,false,false,true]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","handler":true,"path":"/x","sideSetting":"s"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"handler":true}},"problems":["contributes.commands[0].sideSetting only goes with open","contributes.commands[0].path only goes with open"],"kinds":[false,false,false,false,true]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"a","side":"left"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].side only goes with open"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","tool":"a","side":"left"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].side only goes with open"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"Bad","title":"","tool":"a"},true],"ok":{"result":null,"problems":["contributes.commands[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","contributes.commands[0].title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"Bad","title":"","tool":"a"},false],"ok":{"result":null,"problems":["contributes.commands[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","contributes.commands[0].title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"title":"No name","tool":"a"},true],"ok":{"result":null,"problems":["contributes.commands[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"title":"No name","tool":"a"},false],"ok":{"result":null,"problems":["contributes.commands[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","tool":"a"},true],"ok":{"result":null,"problems":["contributes.commands[0].title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","tool":"a"},false],"ok":{"result":null,"problems":["contributes.commands[0].title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","tool":"a"},true],"ok":{"result":null,"problems":["contributes.commands[0].title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","tool":"a"},false],"ok":{"result":null,"problems":["contributes.commands[0].title must be text of 1 to 60 characters"],"kinds":null}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","icon":"star.fill","keywords":["one","two",3,"","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"when":"view == 'a'","tool":"a"},true],"ok":{"result":{"name":"go","title":"Go","icon":"star.fill","keywords":["one","two"],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].keywords[2] must be text of 1 to 40 characters","contributes.commands[0].keywords[3] must be text of 1 to 40 characters","contributes.commands[0].keywords[4] must be text of 1 to 40 characters","contributes.commands[0].when names view, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","icon":"star.fill","keywords":["one","two",3,"","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"when":"view == 'a'","tool":"a"},false],"ok":{"result":{"name":"go","title":"Go","icon":"star.fill","keywords":["one","two"],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].keywords[2] must be text of 1 to 40 characters","contributes.commands[0].keywords[3] must be text of 1 to 40 characters","contributes.commands[0].keywords[4] must be text of 1 to 40 characters","contributes.commands[0].when names view, which isn't one of urlHost, urlScheme, isPinned, isInGroup, isSplit, isActive, tabCount"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","icon":"Bad Icon","keywords":"one","when":5,"tool":"a"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].icon must be an SF Symbol name","contributes.commands[0].keywords must be a list of at most 8","contributes.commands[0].when must be text"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","icon":"Bad Icon","keywords":"one","when":5,"tool":"a"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].icon must be an SF Symbol name","contributes.commands[0].keywords must be a list of at most 8","contributes.commands[0].when must be text"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","keywords":["k0","k1","k2","k3","k4","k5","k6","k7","k8"],"tool":"a"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].keywords must be a list of at most 8"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","keywords":["k0","k1","k2","k3","k4","k5","k6","k7","k8"],"tool":"a"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].keywords must be a list of at most 8"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","when":"!(","tool":"a"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].when ends too soon"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","when":"!(","tool":"a"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].when ends too soon"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","when":"","tool":"a"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].when is empty"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","when":"","tool":"a"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].when is empty"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","extra":1,"other":2,"tool":"a"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].extra isn't a key of contributes.commands[0]","contributes.commands[0].other isn't a key of contributes.commands[0]"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"name":"go","title":"Go","extra":1,"other":2,"tool":"a"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].extra isn't a key of contributes.commands[0]","contributes.commands[0].other isn't a key of contributes.commands[0]"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"0":2,"1":1,"name":"go","title":"Go","z":3,"tool":"a"},true],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].0 isn't a key of contributes.commands[0]","contributes.commands[0].1 isn't a key of contributes.commands[0]","contributes.commands[0].z isn't a key of contributes.commands[0]"],"kinds":[true,false,false,false,false]}}
+{"fn":"commandCase","args":["contributes.commands[0]",{"0":2,"1":1,"name":"go","title":"Go","z":3,"tool":"a"},false],"ok":{"result":{"name":"go","title":"Go","icon":"puzzlepiece","keywords":[],"action":{"tool":"a","input":{}}},"problems":["contributes.commands[0].0 isn't a key of contributes.commands[0]","contributes.commands[0].1 isn't a key of contributes.commands[0]","contributes.commands[0].z isn't a key of contributes.commands[0]"],"kinds":[true,false,false,false,false]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"$undefined":true}],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",null],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",0],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",3],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",-1],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",true],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",false],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",""],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]","x"],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",[]],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{}],"ok":{"result":null,"problems":["contributes.tools[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","contributes.tools[0].title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",[1]],"ok":{"result":null,"problems":["contributes.tools[0] must be an object"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"a":1}],"ok":{"result":null,"problems":["contributes.tools[0].a isn't a key of contributes.tools[0]","contributes.tools[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","contributes.tools[0].title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"name":"fetch","title":"Fetch"}],"ok":{"result":{"name":"fetch","title":"Fetch","description":"","timeout":30},"problems":[]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"name":"fetch","title":"Fetch","description":"Gets a page","timeout":60}],"ok":{"result":{"name":"fetch","title":"Fetch","description":"Gets a page","timeout":60},"problems":[]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"name":"fetch","title":"Fetch","description":3,"timeout":0}],"ok":{"result":{"name":"fetch","title":"Fetch","description":"","timeout":30},"problems":["contributes.tools[0].description must be text of 1 to 200 characters","contributes.tools[0].timeout must be a whole number from 1 to 300"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"name":"fetch","title":"Fetch","description":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","timeout":301}],"ok":{"result":{"name":"fetch","title":"Fetch","description":"","timeout":30},"problems":["contributes.tools[0].description must be text of 1 to 200 characters","contributes.tools[0].timeout must be a whole number from 1 to 300"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"name":"fetch","title":"Fetch","timeout":1.5}],"ok":{"result":{"name":"fetch","title":"Fetch","description":"","timeout":30},"problems":["contributes.tools[0].timeout must be a whole number from 1 to 300"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"name":"fetch","title":"Fetch","timeout":"30"}],"ok":{"result":{"name":"fetch","title":"Fetch","description":"","timeout":30},"problems":["contributes.tools[0].timeout must be a whole number from 1 to 300"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"name":"fetch","title":"Fetch","timeout":300}],"ok":{"result":{"name":"fetch","title":"Fetch","description":"","timeout":300},"problems":[]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"name":"fetch","title":"Fetch","timeout":1}],"ok":{"result":{"name":"fetch","title":"Fetch","description":"","timeout":1},"problems":[]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"name":"Fetch!","title":""}],"ok":{"result":null,"problems":["contributes.tools[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit","contributes.tools[0].title must be text of 1 to 60 characters"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"title":"Fetch","extra":true}],"ok":{"result":null,"problems":["contributes.tools[0].extra isn't a key of contributes.tools[0]","contributes.tools[0].name must be 1 to 40 lowercase letters, digits and dashes, starting with a letter or digit"]}}
+{"fn":"toolCase","args":["contributes.tools[0]",{"name":"fetch","title":"Fetch","description":""}],"ok":{"result":{"name":"fetch","title":"Fetch","description":"","timeout":30},"problems":["contributes.tools[0].description must be text of 1 to 200 characters"]}}

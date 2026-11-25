@@ -1,0 +1,84 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginMarkdown.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "pluginmarkdown-rs",
+  "exports": [
+    {
+      "name": "markdownLink",
+      "file": "apps/browser/src/lib/pluginMarkdown.ts",
+      "line": 31,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | undefined",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "parseInline",
+      "file": "apps/browser/src/lib/pluginMarkdown.ts",
+      "line": 110,
+      "params": [
+        {
+          "name": "source",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "style",
+          "ts_type": "Omit<{ text: string; bold?: boolean; italic?: boolean; code?: boolean; url?: string }, \"text\">",
+          "optional": true,
+          "rest": false
+        },
+        {
+          "name": "depth",
+          "ts_type": "number",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "{ text: string; bold?: boolean; italic?: boolean; code?: boolean; url?: string }[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "parseMarkdown",
+      "file": "apps/browser/src/lib/pluginMarkdown.ts",
+      "line": 157,
+      "params": [
+        {
+          "name": "source",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "depth",
+          "ts_type": "number",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "(| { kind: \"heading\"; level: 1 | 2 | 3; spans: { text: string; bold?: boolean; italic?: boolean; code?: boolean; url?: string }[] }\n  | { kind: \"paragraph\"; spans: { text: string; bold?: boolean; italic?: boolean; code?: boolean; url?: string }[] }\n  | { kind: \"code\"; text: string; language?: string }\n  | { kind: \"list\"; ordered: boolean; items: { marker: string; depth: number; spans: { text: string; bold?: boolean; italic?: boolean; code?: boolean; url?: string }[] }[] }\n  | { kind: \"quote\"; blocks: (| { kind: \"heading\"; level: 1 | 2 | 3; spans: { text: string; bold?: boolean; italic?: boolean; code?: boolean; url?: string }[] }\n  | { kind: \"paragraph\"; spans: { text: string; bold?: boolean; italic?: boolean; code?: boolean; url?: string }[] }\n  | { kind: \"code\"; text: string; language?: string }\n  | { kind: \"list\"; ordered: boolean; items: { marker: string; depth: number; spans: { text: string; bold?: boolean; italic?: boolean; code?: boolean; url?: string }[] }[] }\n  | { kind: \"quote\"; blocks: (| { kind: \"heading\"; level: 1 | 2 | 3; spans: { text: string; bold?: boolean; italic?: boolean; code?: boolean; url?: string }[] }\n  | { kind: \"paragraph\"; spans: { text: string; bold?: boolean; italic?: boolean; code?: boolean; url?: string }[] }\n  | { kind: \"code\"; text: string; language?: string }\n  | { kind: \"list\"; ordered: boolean; items: { marker: string; depth: number; spans: MarkdownSpan[] }[] }\n  | { kind: \"quote\"; blocks: (| { kind: \"heading\"; level: 1 | 2 | 3; spans: MarkdownSpan[] }\n  | { kind: \"paragraph\"; spans: MarkdownSpan[] }\n  | { kind: \"code\"; text: string; language?: string }\n  | { kind: \"list\"; ordered: boolean; items: MarkdownListItem[] }\n  | { kind: \"quote\"; blocks: MarkdownBlock[] }\n  | { kind: \"rule\" })[] }\n  | { kind: \"rule\" })[] }\n  | { kind: \"rule\" })[] }\n  | { kind: \"rule\" })[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

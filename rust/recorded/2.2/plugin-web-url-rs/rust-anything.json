@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginWebUrl.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "pluginweburl-rs",
+  "exports": [
+    {
+      "name": "pluginWebUrl",
+      "file": "apps/browser/src/lib/pluginWebUrl.ts",
+      "line": 19,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({ url: string; host: string } | { problem: string })",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

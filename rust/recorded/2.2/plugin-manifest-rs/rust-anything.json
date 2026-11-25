@@ -1,0 +1,72 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginManifest.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "pluginmanifest-rs",
+  "exports": [
+    {
+      "name": "readManifestCase",
+      "file": "apps/browser/src/lib/pluginManifest.harness.ts",
+      "line": 4,
+      "params": [
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "checkManifestCase",
+      "file": "apps/browser/src/lib/pluginManifest.harness.ts",
+      "line": 6,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "declaredManifest",
+          "ts_type": "number",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "manifestUsesCase",
+      "file": "apps/browser/src/lib/pluginManifest.harness.ts",
+      "line": 10,
+      "params": [
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

@@ -1,0 +1,76 @@
+{"fn":"cssRoleName","args":["accent"]}
+{"fn":"cssRoleName","args":["accentText"]}
+{"fn":"cssRoleName","args":["sidebarBackground"]}
+{"fn":"cssRoleName","args":["a"]}
+{"fn":"cssRoleName","args":[""]}
+{"fn":"cssRoleName","args":["URL"]}
+{"fn":"cssRoleName","args":["aB1"]}
+{"fn":"cssRoleName","args":["with space"]}
+{"fn":"cssRoleName","args":["é"]}
+{"fn":"cssRoleName","args":["x-y"]}
+{"fn":"cssRoleName","args":["camelCaseRoleName"]}
+{"fn":"cssRoleName","args":["ABC"]}
+{"fn":"cssRoleValue","args":[{"$undefined":true}]}
+{"fn":"cssRoleValue","args":[null]}
+{"fn":"cssRoleValue","args":[1]}
+{"fn":"cssRoleValue","args":[true]}
+{"fn":"cssRoleValue","args":[""]}
+{"fn":"cssRoleValue","args":["#fff"]}
+{"fn":"cssRoleValue","args":["#FFFFFF"]}
+{"fn":"cssRoleValue","args":["#12345678"]}
+{"fn":"cssRoleValue","args":["#ggg"]}
+{"fn":"cssRoleValue","args":["red"]}
+{"fn":"cssRoleValue","args":["rgb(1, 2, 3)"]}
+{"fn":"cssRoleValue","args":["rgba(1,2,3,0.5)"]}
+{"fn":"cssRoleValue","args":["hsl(1 2% 3%)"]}
+{"fn":"cssRoleValue","args":["url(x)"]}
+{"fn":"cssRoleValue","args":["red; color: blue"]}
+{"fn":"cssRoleValue","args":["red}"]}
+{"fn":"cssRoleValue","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"cssRoleValue","args":["var(--x)"]}
+{"fn":"cssRoleValue","args":["transparent"]}
+{"fn":"cssRoleValue","args":["#fff "]}
+{"fn":"cssRoleValue","args":[" #fff"]}
+{"fn":"cssRoleValue","args":["é"]}
+{"fn":"cssRoleValue","args":["calc(1px)"]}
+{"fn":"cssRoleValue","args":["color-mix(in srgb, red, blue)"]}
+{"fn":"cssRoleValue","args":["red\n"]}
+{"fn":"cssRoleValue","args":["/* */"]}
+{"fn":"cssRoleValue","args":["Highlight"]}
+{"fn":"cssRoleValue","args":["rgb(1 2 3 / 50%)"]}
+{"fn":"cssRoleValue","args":["expression(alert(1))"]}
+{"fn":"pluginThemeVariables","args":[{}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"light","roles":{}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"dark","roles":{}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"","roles":{}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"other","roles":{}}]}
+{"fn":"pluginThemeVariables","args":[{"accent":"#f00"}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"light","roles":{"accent":"#f00"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"dark","roles":{"accent":"#f00"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"","roles":{"accent":"#f00"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"other","roles":{"accent":"#f00"}}]}
+{"fn":"pluginThemeVariables","args":[{"accent":"#f00","text":"red","bad":"red;}","num":1}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"light","roles":{"accent":"#f00","text":"red","bad":"red;}","num":1}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"dark","roles":{"accent":"#f00","text":"red","bad":"red;}","num":1}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"","roles":{"accent":"#f00","text":"red","bad":"red;}","num":1}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"other","roles":{"accent":"#f00","text":"red","bad":"red;}","num":1}}]}
+{"fn":"pluginThemeVariables","args":[{"with space":"#fff","":"#000","é":"#111"}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"light","roles":{"with space":"#fff","":"#000","é":"#111"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"dark","roles":{"with space":"#fff","":"#000","é":"#111"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"","roles":{"with space":"#fff","":"#000","é":"#111"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"other","roles":{"with space":"#fff","":"#000","é":"#111"}}]}
+{"fn":"pluginThemeVariables","args":[{"accent":"#f00","accentText":"#fff","selection":"#00f","background":"#000","text":"#fff","link":"#0af","linkText":"#0af"}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"light","roles":{"accent":"#f00","accentText":"#fff","selection":"#00f","background":"#000","text":"#fff","link":"#0af","linkText":"#0af"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"dark","roles":{"accent":"#f00","accentText":"#fff","selection":"#00f","background":"#000","text":"#fff","link":"#0af","linkText":"#0af"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"","roles":{"accent":"#f00","accentText":"#fff","selection":"#00f","background":"#000","text":"#fff","link":"#0af","linkText":"#0af"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"other","roles":{"accent":"#f00","accentText":"#fff","selection":"#00f","background":"#000","text":"#fff","link":"#0af","linkText":"#0af"}}]}
+{"fn":"pluginThemeVariables","args":[{"selection":"url(x)"}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"light","roles":{"selection":"url(x)"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"dark","roles":{"selection":"url(x)"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"","roles":{"selection":"url(x)"}}]}
+{"fn":"buildPluginThemeCss","args":[{"scheme":"other","roles":{"selection":"url(x)"}}]}
+{"fn":"pluginThemeVariables","args":[[]]}
+{"fn":"pluginThemeVariables","args":[["#fff"]]}
+{"fn":"pluginThemeVariables","args":["abc"]}
+{"fn":"pluginThemeVariables","args":[1]}
+{"fn":"pluginThemeVariables","args":[true]}

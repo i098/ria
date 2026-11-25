@@ -1,0 +1,927 @@
+{"fn":"rowTypesCase","args":[],"ok":["toggle","text","number","choice","secret"]}
+{"fn":"rowCase","args":["abc",[]],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"rowCase","args":["",0],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"rowCase","args":["key_name-1",null],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"rowCase","args":["hello",[]],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"rowCase","args":["tab\tseparated",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["tab\tseparated.a isn't a key of tab\tseparated","tab\tseparated.key must be 1 to 40 letters, digits, - and _","tab\tseparated.title must be text of 1 to 60 characters","tab\tseparated.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["﻿bom",["a",1]],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"rowCase","args":["ünïcödéa.b.c",[]],"ok":{"result":null,"problems":["ünïcödéa.b.c must be an object"]}}
+{"fn":"rowCase","args":["",{}],"ok":{"result":null,"problems":[".key must be 1 to 40 letters, digits, - and _",".title must be text of 1 to 60 characters",".type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["a..b",true],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"rowCase","args":["a😀b😀c",0],"ok":{"result":null,"problems":["a😀b😀c must be an object"]}}
+{"fn":"rowCase","args":["ünïcödé",true],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"rowCase","args":["İstanbul",0],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"rowCase","args":["a",["a",1]],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"rowCase","args":["tab\tseparated",{}],"ok":{"result":null,"problems":["tab\tseparated.key must be 1 to 40 letters, digits, - and _","tab\tseparated.title must be text of 1 to 60 characters","tab\tseparated.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["﻿boma",[]],"ok":{"result":null,"problems":["﻿boma must be an object"]}}
+{"fn":"rowCase","args":["é",null],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"rowCase","args":["日本語のテキスト",[]],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"rowCase","args":["hello worldİstanbul",true],"ok":{"result":null,"problems":["hello worldİstanbul must be an object"]}}
+{"fn":"rowCase","args":["  padded  ",{}],"ok":{"result":null,"problems":["  padded  .key must be 1 to 40 letters, digits, - and _","  padded  .title must be text of 1 to 60 characters","  padded  .type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["a.b.c",true],"ok":{"result":null,"problems":["a.b.c must be an object"]}}
+{"fn":"rowCase","args":["日本語のテキスト",{"a":"b"}],"ok":{"result":null,"problems":["日本語のテキスト.a isn't a key of 日本語のテキスト","日本語のテキスト.key must be 1 to 40 letters, digits, - and _","日本語のテキスト.title must be text of 1 to 60 characters","日本語のテキスト.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["  padded  ",true],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"rowCase","args":["straßea..b",true],"ok":{"result":null,"problems":["straßea..b must be an object"]}}
+{"fn":"rowCase","args":["ΣΊΣΥΦΟΣ","x"],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"rowCase","args":["  padded  ",null],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"rowCase","args":["é",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["é.a isn't a key of é","é.key must be 1 to 40 letters, digits, - and _","é.title must be text of 1 to 60 characters","é.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["hello world",0],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"rowCase","args":["ns:key.path",true],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"rowCase","args":["abc",{"a":"b"}],"ok":{"result":null,"problems":["abc.a isn't a key of abc","abc.key must be 1 to 40 letters, digits, - and _","abc.title must be text of 1 to 60 characters","abc.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["日本語のテキストhello",null],"ok":{"result":null,"problems":["日本語のテキストhello must be an object"]}}
+{"fn":"rowCase","args":["😀","x"],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"rowCase","args":["a","x"],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"rowCase","args":["./x/**/*.json",{"a":"b"}],"ok":{"result":null,"problems":["./x/**/*.json.a isn't a key of ./x/**/*.json","./x/**/*.json.key must be 1 to 40 letters, digits, - and _","./x/**/*.json.title must be text of 1 to 60 characters","./x/**/*.json.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["😀",{"a":"b"}],"ok":{"result":null,"problems":["😀.a isn't a key of 😀","😀.key must be 1 to 40 letters, digits, - and _","😀.title must be text of 1 to 60 characters","😀.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["X","x"],"ok":{"result":null,"problems":["X must be an object"]}}
+{"fn":"rowCase","args":["src/a/b.ts",true],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"rowCase","args":[":",{}],"ok":{"result":null,"problems":[":.key must be 1 to 40 letters, digits, - and _",":.title must be text of 1 to 60 characters",":.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["hello world",[]],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"rowCase","args":["日本語のテキストa.b.c",["a",1]],"ok":{"result":null,"problems":["日本語のテキストa.b.c must be an object"]}}
+{"fn":"rowCase","args":["tab\tseparated",null],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"rowCase","args":["aab",[]],"ok":{"result":null,"problems":["aab must be an object"]}}
+{"fn":"rowCase","args":["a😀b😀cstraße","x"],"ok":{"result":null,"problems":["a😀b😀cstraße must be an object"]}}
+{"fn":"rowCase","args":["src/a/b.ts",{}],"ok":{"result":null,"problems":["src/a/b.ts.key must be 1 to 40 letters, digits, - and _","src/a/b.ts.title must be text of 1 to 60 characters","src/a/b.ts.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":[".leadingab",[]],"ok":{"result":null,"problems":[".leadingab must be an object"]}}
+{"fn":"rowCase","args":["﻿bom",0],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"rowCase","args":["straße","x"],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"rowCase","args":[":","x"],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"rowCase","args":["src/a/b.ts",["a",1]],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"rowCase","args":["src/a/b.ts",{"a":"b"}],"ok":{"result":null,"problems":["src/a/b.ts.a isn't a key of src/a/b.ts","src/a/b.ts.key must be 1 to 40 letters, digits, - and _","src/a/b.ts.title must be text of 1 to 60 characters","src/a/b.ts.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["tab\tseparated😀",{}],"ok":{"result":null,"problems":["tab\tseparated😀.key must be 1 to 40 letters, digits, - and _","tab\tseparated😀.title must be text of 1 to 60 characters","tab\tseparated😀.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["ünïcödé",{"a":"b"}],"ok":{"result":null,"problems":["ünïcödé.a isn't a key of ünïcödé","ünïcödé.key must be 1 to 40 letters, digits, - and _","ünïcödé.title must be text of 1 to 60 characters","ünïcödé.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["a..b",null],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"rowCase","args":["./x/**/*.json",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["./x/**/*.json.a isn't a key of ./x/**/*.json","./x/**/*.json.key must be 1 to 40 letters, digits, - and _","./x/**/*.json.title must be text of 1 to 60 characters","./x/**/*.json.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["./x/**/*.json",0],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"rowCase","args":["HELLO",{"a":"b"}],"ok":{"result":null,"problems":["HELLO.a isn't a key of HELLO","HELLO.key must be 1 to 40 letters, digits, - and _","HELLO.title must be text of 1 to 60 characters","HELLO.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["trailing.",{"a":"b"}],"ok":{"result":null,"problems":["trailing..a isn't a key of trailing.","trailing..key must be 1 to 40 letters, digits, - and _","trailing..title must be text of 1 to 60 characters","trailing..type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["  padded  ","  padded"],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"rowCase","args":["a..b","x"],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"rowCase","args":["ab",{}],"ok":{"result":null,"problems":["ab.key must be 1 to 40 letters, digits, - and _","ab.title must be text of 1 to 60 characters","ab.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["日本語のテキスト","x"],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"rowCase","args":["a:b:c",[]],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"rowCase","args":["HELLO",[]],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"rowCase","args":["./x/**/*.json  padded  ",{}],"ok":{"result":null,"problems":["./x/**/*.json  padded  .key must be 1 to 40 letters, digits, - and _","./x/**/*.json  padded  .title must be text of 1 to 60 characters","./x/**/*.json  padded  .type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["ünïcödé",{}],"ok":{"result":null,"problems":["ünïcödé.key must be 1 to 40 letters, digits, - and _","ünïcödé.title must be text of 1 to 60 characters","ünïcödé.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["a..b",{}],"ok":{"result":null,"problems":["a..b.key must be 1 to 40 letters, digits, - and _","a..b.title must be text of 1 to 60 characters","a..b.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["a..b",["a",1]],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"rowCase","args":[".leading",0],"ok":{"result":null,"problems":[".leading must be an object"]}}
+{"fn":"rowCase","args":["ns:key.path",{}],"ok":{"result":null,"problems":["ns:key.path.key must be 1 to 40 letters, digits, - and _","ns:key.path.title must be text of 1 to 60 characters","ns:key.path.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ.a isn't a key of ΣΊΣΥΦΟΣ","ΣΊΣΥΦΟΣ.key must be 1 to 40 letters, digits, - and _","ΣΊΣΥΦΟΣ.title must be text of 1 to 60 characters","ΣΊΣΥΦΟΣ.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["ns:key.path","x"],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"rowCase","args":["ΣΊΣΥΦΟΣ",{}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ.key must be 1 to 40 letters, digits, - and _","ΣΊΣΥΦΟΣ.title must be text of 1 to 60 characters","ΣΊΣΥΦΟΣ.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["日本語のテキストsrc/a/b.ts",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["日本語のテキストsrc/a/b.ts.a isn't a key of 日本語のテキストsrc/a/b.ts","日本語のテキストsrc/a/b.ts.key must be 1 to 40 letters, digits, - and _","日本語のテキストsrc/a/b.ts.title must be text of 1 to 60 characters","日本語のテキストsrc/a/b.ts.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["ΣΊΣΥΦΟΣ",true],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"rowCase","args":["hello world",true],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"rowCase","args":["./x/**/*.json",[]],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"rowCase","args":["emoji 👍🏽 mix",0],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"rowCase","args":["{name} has {count} items",{}],"ok":{"result":null,"problems":["{name} has {count} items.key must be 1 to 40 letters, digits, - and _","{name} has {count} items.title must be text of 1 to 60 characters","{name} has {count} items.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["hello",0],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"rowCase","args":[":",{"a":"b"}],"ok":{"result":null,"problems":[":.a isn't a key of :",":.key must be 1 to 40 letters, digits, - and _",":.title must be text of 1 to 60 characters",":.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["a:b:c",true],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"rowCase","args":["ünïcödé",null],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"rowCase","args":["a😀b😀c",null],"ok":{"result":null,"problems":["a😀b😀c must be an object"]}}
+{"fn":"rowCase","args":["key_name-1",{"a":"b"}],"ok":{"result":null,"problems":["key_name-1.a isn't a key of key_name-1","key_name-1.key must be 1 to 40 letters, digits, - and _","key_name-1.title must be text of 1 to 60 characters","key_name-1.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["abc",["a",1]],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"rowCase","args":["a",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a.a isn't a key of a","a.key must be 1 to 40 letters, digits, - and _","a.title must be text of 1 to 60 characters","a.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["İstanbul",{}],"ok":{"result":null,"problems":["İstanbul.key must be 1 to 40 letters, digits, - and _","İstanbul.title must be text of 1 to 60 characters","İstanbul.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["é",{}],"ok":{"result":null,"problems":["é.key must be 1 to 40 letters, digits, - and _","é.title must be text of 1 to 60 characters","é.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["a:b:c",0],"ok":{"result":null,"problems":["a:b:c must be an object"]}}
+{"fn":"rowCase","args":["HELLO",true],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"rowCase","args":["ab",["a",1]],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"rowCase","args":["hello world{name} has {count} items",null],"ok":{"result":null,"problems":["hello world{name} has {count} items must be an object"]}}
+{"fn":"rowCase","args":["key_name-1emoji 👍🏽 mix",{}],"ok":{"result":null,"problems":["key_name-1emoji 👍🏽 mix.key must be 1 to 40 letters, digits, - and _","key_name-1emoji 👍🏽 mix.title must be text of 1 to 60 characters","key_name-1emoji 👍🏽 mix.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["ünïcödé","x"],"ok":{"result":null,"problems":["ünïcödé must be an object"]}}
+{"fn":"rowCase","args":["ab","x"],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"rowCase","args":["{name} has {count} items日本語のテキスト",null],"ok":{"result":null,"problems":["{name} has {count} items日本語のテキスト must be an object"]}}
+{"fn":"rowCase","args":["a:b:c",{}],"ok":{"result":null,"problems":["a:b:c.key must be 1 to 40 letters, digits, - and _","a:b:c.title must be text of 1 to 60 characters","a:b:c.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["straße",0],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"rowCase","args":["  padded  {name} has {count} items",{}],"ok":{"result":null,"problems":["  padded  {name} has {count} items.key must be 1 to 40 letters, digits, - and _","  padded  {name} has {count} items.title must be text of 1 to 60 characters","  padded  {name} has {count} items.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["line1\nline2😀",0],"ok":{"result":null,"problems":["line1\nline2😀 must be an object"]}}
+{"fn":"rowCase","args":["src/a/b.ts",0],"ok":{"result":null,"problems":["src/a/b.ts must be an object"]}}
+{"fn":"rowCase","args":["trailing.","trailing"],"ok":{"result":null,"problems":["trailing. must be an object"]}}
+{"fn":"rowCase","args":["İstanbul",null],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"rowCase","args":["a..b",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a..b.a isn't a key of a..b","a..b.key must be 1 to 40 letters, digits, - and _","a..b.title must be text of 1 to 60 characters","a..b.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["Hello World",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["Hello World.a isn't a key of Hello World","Hello World.key must be 1 to 40 letters, digits, - and _","Hello World.title must be text of 1 to 60 characters","Hello World.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["src/a/b.tsa.b.c",[]],"ok":{"result":null,"problems":["src/a/b.tsa.b.c must be an object"]}}
+{"fn":"rowCase","args":["tab\tseparated",["a",1]],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"rowCase","args":["a..b",[]],"ok":{"result":null,"problems":["a..b must be an object"]}}
+{"fn":"rowCase","args":["tab\tseparated","x"],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"rowCase","args":["a:b:c",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["a:b:c.a isn't a key of a:b:c","a:b:c.key must be 1 to 40 letters, digits, - and _","a:b:c.title must be text of 1 to 60 characters","a:b:c.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["😀abc",["a",1]],"ok":{"result":null,"problems":["😀abc must be an object"]}}
+{"fn":"rowCase","args":["",{"a":"b"}],"ok":{"result":null,"problems":["a isn't a key of a plugin",".key must be 1 to 40 letters, digits, - and _",".title must be text of 1 to 60 characters",".type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["﻿bomabc",{"a":"b"}],"ok":{"result":null,"problems":["﻿bomabc.a isn't a key of ﻿bomabc","﻿bomabc.key must be 1 to 40 letters, digits, - and _","﻿bomabc.title must be text of 1 to 60 characters","﻿bomabc.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["abc",{}],"ok":{"result":null,"problems":["abc.key must be 1 to 40 letters, digits, - and _","abc.title must be text of 1 to 60 characters","abc.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["Hello World",{}],"ok":{"result":null,"problems":["Hello World.key must be 1 to 40 letters, digits, - and _","Hello World.title must be text of 1 to 60 characters","Hello World.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["hello",true],"ok":{"result":null,"problems":["hello must be an object"]}}
+{"fn":"rowCase","args":["ns:key.path",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ns:key.path.a isn't a key of ns:key.path","ns:key.path.key must be 1 to 40 letters, digits, - and _","ns:key.path.title must be text of 1 to 60 characters","ns:key.path.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["a",true],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"rowCase","args":["{name} has {count} items",true],"ok":{"result":null,"problems":["{name} has {count} items must be an object"]}}
+{"fn":"rowCase","args":["ΣΊΣΥΦΟΣ.leading",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ.leading.a isn't a key of ΣΊΣΥΦΟΣ.leading","ΣΊΣΥΦΟΣ.leading.key must be 1 to 40 letters, digits, - and _","ΣΊΣΥΦΟΣ.leading.title must be text of 1 to 60 characters","ΣΊΣΥΦΟΣ.leading.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["trailing.",{}],"ok":{"result":null,"problems":["trailing..key must be 1 to 40 letters, digits, - and _","trailing..title must be text of 1 to 60 characters","trailing..type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["ünïcödéa.b.c",{"a":"b"}],"ok":{"result":null,"problems":["ünïcödéa.b.c.a isn't a key of ünïcödéa.b.c","ünïcödéa.b.c.key must be 1 to 40 letters, digits, - and _","ünïcödéa.b.c.title must be text of 1 to 60 characters","ünïcödéa.b.c.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["ab",true],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"rowCase","args":["İstanbul{name} has {count} items","tems"],"ok":{"result":null,"problems":["İstanbul{name} has {count} items must be an object"]}}
+{"fn":"rowCase","args":["ab",{"a":"b"}],"ok":{"result":null,"problems":["ab.a isn't a key of ab","ab.key must be 1 to 40 letters, digits, - and _","ab.title must be text of 1 to 60 characters","ab.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["😀",true],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"rowCase","args":["ünïcödéemoji 👍🏽 mix",true],"ok":{"result":null,"problems":["ünïcödéemoji 👍🏽 mix must be an object"]}}
+{"fn":"rowCase","args":["key_name-1","x"],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"rowCase","args":[":",["a",1]],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"rowCase","args":["😀",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["😀.a isn't a key of 😀","😀.key must be 1 to 40 letters, digits, - and _","😀.title must be text of 1 to 60 characters","😀.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["é",["a",1]],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"rowCase","args":[":",true],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"rowCase","args":["😀straße","x"],"ok":{"result":null,"problems":["😀straße must be an object"]}}
+{"fn":"rowCase","args":["a:b:cabc",{}],"ok":{"result":null,"problems":["a:b:cabc.key must be 1 to 40 letters, digits, - and _","a:b:cabc.title must be text of 1 to 60 characters","a:b:cabc.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["Hello World",null],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"rowCase","args":["日本語のテキストhello world",["a",1]],"ok":{"result":null,"problems":["日本語のテキストhello world must be an object"]}}
+{"fn":"rowCase","args":["src/a/b.ts",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["src/a/b.ts.a isn't a key of src/a/b.ts","src/a/b.ts.key must be 1 to 40 letters, digits, - and _","src/a/b.ts.title must be text of 1 to 60 characters","src/a/b.ts.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["﻿bom",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["﻿bom.a isn't a key of ﻿bom","﻿bom.key must be 1 to 40 letters, digits, - and _","﻿bom.title must be text of 1 to 60 characters","﻿bom.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["emoji 👍🏽 mix",true],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"rowCase","args":[":",{"a":{"b":"c"}}],"ok":{"result":null,"problems":[":.a isn't a key of :",":.key must be 1 to 40 letters, digits, - and _",":.title must be text of 1 to 60 characters",":.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["😀",["a",1]],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"rowCase","args":["straße",["a",1]],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"rowCase","args":["日本語のテキスト",true],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"rowCase","args":["Hello World",0],"ok":{"result":null,"problems":["Hello World must be an object"]}}
+{"fn":"rowCase","args":["./x/**/*.jsonhello world",{}],"ok":{"result":null,"problems":["./x/**/*.jsonhello world.key must be 1 to 40 letters, digits, - and _","./x/**/*.jsonhello world.title must be text of 1 to 60 characters","./x/**/*.jsonhello world.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["ab",null],"ok":{"result":null,"problems":["ab must be an object"]}}
+{"fn":"rowCase","args":["aba.b.c",{"a":"b"}],"ok":{"result":null,"problems":["aba.b.c.a isn't a key of aba.b.c","aba.b.c.key must be 1 to 40 letters, digits, - and _","aba.b.c.title must be text of 1 to 60 characters","aba.b.c.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":[":",null],"ok":{"result":null,"problems":[": must be an object"]}}
+{"fn":"rowCase","args":["./x/**/*.json",null],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"rowCase","args":["HELLOhello world",{}],"ok":{"result":null,"problems":["HELLOhello world.key must be 1 to 40 letters, digits, - and _","HELLOhello world.title must be text of 1 to 60 characters","HELLOhello world.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["hello world",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["hello world.a isn't a key of hello world","hello world.key must be 1 to 40 letters, digits, - and _","hello world.title must be text of 1 to 60 characters","hello world.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":[".leading",["a",1]],"ok":{"result":null,"problems":[".leading must be an object"]}}
+{"fn":"rowCase","args":[".leadingabc",0],"ok":{"result":null,"problems":[".leadingabc must be an object"]}}
+{"fn":"rowCase","args":["{name} has {count} itemsab",true],"ok":{"result":null,"problems":["{name} has {count} itemsab must be an object"]}}
+{"fn":"rowCase","args":["trailing.hello",true],"ok":{"result":null,"problems":["trailing.hello must be an object"]}}
+{"fn":"rowCase","args":["  padded  ",[]],"ok":{"result":null,"problems":["  padded   must be an object"]}}
+{"fn":"rowCase","args":[":emoji 👍🏽 mix",{"a":"b"}],"ok":{"result":null,"problems":[":emoji 👍🏽 mix.a isn't a key of :emoji 👍🏽 mix",":emoji 👍🏽 mix.key must be 1 to 40 letters, digits, - and _",":emoji 👍🏽 mix.title must be text of 1 to 60 characters",":emoji 👍🏽 mix.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["",[]],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"rowCase","args":["ΣΊΣΥΦΟΣ",["a",1]],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"rowCase","args":["ns:key.path",[]],"ok":{"result":null,"problems":["ns:key.path must be an object"]}}
+{"fn":"rowCase","args":["a😀b😀c",["a",1]],"ok":{"result":null,"problems":["a😀b😀c must be an object"]}}
+{"fn":"rowCase","args":["./x/**/*.json","x"],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"rowCase","args":["😀",0],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"rowCase","args":["x","x"],"ok":{"result":null,"problems":["x must be an object"]}}
+{"fn":"rowCase","args":["tab\tseparated",0],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"rowCase","args":["line1\nline2",0],"ok":{"result":null,"problems":["line1\nline2 must be an object"]}}
+{"fn":"rowCase","args":["  padded  İstanbul",true],"ok":{"result":null,"problems":["  padded  İstanbul must be an object"]}}
+{"fn":"rowCase","args":["",["a",1]],"ok":{"result":null,"problems":[" must be an object"]}}
+{"fn":"rowCase","args":["abc","x"],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"rowCase","args":["  padded  ",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["  padded  .a isn't a key of   padded  ","  padded  .key must be 1 to 40 letters, digits, - and _","  padded  .title must be text of 1 to 60 characters","  padded  .type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["straße",null],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"rowCase","args":["abc",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["abc.a isn't a key of abc","abc.key must be 1 to 40 letters, digits, - and _","abc.title must be text of 1 to 60 characters","abc.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["a.b.cemoji 👍🏽 mix",true],"ok":{"result":null,"problems":["a.b.cemoji 👍🏽 mix must be an object"]}}
+{"fn":"rowCase","args":["😀./x/**/*.json",{}],"ok":{"result":null,"problems":["😀./x/**/*.json.key must be 1 to 40 letters, digits, - and _","😀./x/**/*.json.title must be text of 1 to 60 characters","😀./x/**/*.json.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["﻿bom",true],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"rowCase","args":["İstanbul",true],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"rowCase","args":["straße",{"a":"b"}],"ok":{"result":null,"problems":["straße.a isn't a key of straße","straße.key must be 1 to 40 letters, digits, - and _","straße.title must be text of 1 to 60 characters","straße.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["HELLO",["a",1]],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"rowCase","args":["日本語のテキスト",["a",1]],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"rowCase","args":["./x/**/*.json",["a",1]],"ok":{"result":null,"problems":["./x/**/*.json must be an object"]}}
+{"fn":"rowCase","args":["{name} has {count} items",0],"ok":{"result":null,"problems":["{name} has {count} items must be an object"]}}
+{"fn":"rowCase","args":["ns:key.path",{"a":"b"}],"ok":{"result":null,"problems":["ns:key.path.a isn't a key of ns:key.path","ns:key.path.key must be 1 to 40 letters, digits, - and _","ns:key.path.title must be text of 1 to 60 characters","ns:key.path.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":[".leading",{}],"ok":{"result":null,"problems":[".leading.key must be 1 to 40 letters, digits, - and _",".leading.title must be text of 1 to 60 characters",".leading.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["HELLO","x"],"ok":{"result":null,"problems":["HELLO must be an object"]}}
+{"fn":"rowCase","args":["hello world",null],"ok":{"result":null,"problems":["hello world must be an object"]}}
+{"fn":"rowCase","args":["line1\nline2ab",0],"ok":{"result":null,"problems":["line1\nline2ab must be an object"]}}
+{"fn":"rowCase","args":["a:b:cHello World",0],"ok":{"result":null,"problems":["a:b:cHello World must be an object"]}}
+{"fn":"rowCase","args":["{name} has {count} items",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["{name} has {count} items.a isn't a key of {name} has {count} items","{name} has {count} items.key must be 1 to 40 letters, digits, - and _","{name} has {count} items.title must be text of 1 to 60 characters","{name} has {count} items.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["straße",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["straße.a isn't a key of straße","straße.key must be 1 to 40 letters, digits, - and _","straße.title must be text of 1 to 60 characters","straße.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["tab\tseparated",[]],"ok":{"result":null,"problems":["tab\tseparated must be an object"]}}
+{"fn":"rowCase","args":["ab",{"a":{"b":"c"}}],"ok":{"result":null,"problems":["ab.a isn't a key of ab","ab.key must be 1 to 40 letters, digits, - and _","ab.title must be text of 1 to 60 characters","ab.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["  padded  ",{"a":"b"}],"ok":{"result":null,"problems":["  padded  .a isn't a key of   padded  ","  padded  .key must be 1 to 40 letters, digits, - and _","  padded  .title must be text of 1 to 60 characters","  padded  .type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["a",[]],"ok":{"result":null,"problems":["a must be an object"]}}
+{"fn":"rowCase","args":["a😀b😀c日本語のテキスト",{"a":"b"}],"ok":{"result":null,"problems":["a😀b😀c日本語のテキスト.a isn't a key of a😀b😀c日本語のテキスト","a😀b😀c日本語のテキスト.key must be 1 to 40 letters, digits, - and _","a😀b😀c日本語のテキスト.title must be text of 1 to 60 characters","a😀b😀c日本語のテキスト.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["İstanbul.leading",{}],"ok":{"result":null,"problems":["İstanbul.leading.key must be 1 to 40 letters, digits, - and _","İstanbul.leading.title must be text of 1 to 60 characters","İstanbul.leading.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["trailing.",null],"ok":{"result":null,"problems":["trailing. must be an object"]}}
+{"fn":"rowCase","args":["日本語のテキスト",0],"ok":{"result":null,"problems":["日本語のテキスト must be an object"]}}
+{"fn":"rowCase","args":["key_name-1",0],"ok":{"result":null,"problems":["key_name-1 must be an object"]}}
+{"fn":"rowCase","args":["😀",[]],"ok":{"result":null,"problems":["😀 must be an object"]}}
+{"fn":"rowCase","args":["emoji 👍🏽 mix","ji 👍🏽 m"],"ok":{"result":null,"problems":["emoji 👍🏽 mix must be an object"]}}
+{"fn":"rowCase","args":["ΣΊΣΥΦΟΣ",0],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"rowCase","args":["héllo wörld",[]],"ok":{"result":null,"problems":["héllo wörld must be an object"]}}
+{"fn":"rowCase","args":["👍🏽 thumbs",[]],"ok":{"result":null,"problems":["👍🏽 thumbs must be an object"]}}
+{"fn":"rowCase","args":["日本語",[]],"ok":{"result":null,"problems":["日本語 must be an object"]}}
+{"fn":"rowCase","args":["é",[]],"ok":{"result":null,"problems":["é must be an object"]}}
+{"fn":"rowCase","args":["İstanbul",[]],"ok":{"result":null,"problems":["İstanbul must be an object"]}}
+{"fn":"rowCase","args":["straße",[]],"ok":{"result":null,"problems":["straße must be an object"]}}
+{"fn":"rowCase","args":["ılık ırmak",[]],"ok":{"result":null,"problems":["ılık ırmak must be an object"]}}
+{"fn":"rowCase","args":["👨‍👩‍👧 family",[]],"ok":{"result":null,"problems":["👨‍👩‍👧 family must be an object"]}}
+{"fn":"rowCase","args":["a b",[]],"ok":{"result":null,"problems":["a b must be an object"]}}
+{"fn":"rowCase","args":["ΣΊΣΥΦΟΣ",[]],"ok":{"result":null,"problems":["ΣΊΣΥΦΟΣ must be an object"]}}
+{"fn":"rowCase","args":["a😀b",[]],"ok":{"result":null,"problems":["a😀b must be an object"]}}
+{"fn":"rowCase","args":["﻿bom",[]],"ok":{"result":null,"problems":["﻿bom must be an object"]}}
+{"fn":"rowCase","args":["a²b x½ y①",[]],"ok":{"result":null,"problems":["a²b x½ y① must be an object"]}}
+{"fn":"rowCase","args":["aⅠb Ⅻ",[]],"ok":{"result":null,"problems":["aⅠb Ⅻ must be an object"]}}
+{"fn":"rowCase","args":["a𐐀b 𝐀bc",[]],"ok":{"result":null,"problems":["a𐐀b 𝐀bc must be an object"]}}
+{"fn":"rowCase","args":["कि ٣٤",[]],"ok":{"result":null,"problems":["कि ٣٤ must be an object"]}}
+{"fn":"rowCase","args":["abc",{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"result":null,"problems":["abc.2 isn't a key of abc","abc.10 isn't a key of abc","abc.zebra isn't a key of abc","abc.apple isn't a key of abc","abc.é isn't a key of abc","abc.Apple isn't a key of abc","abc.key must be 1 to 40 letters, digits, - and _","abc.title must be text of 1 to 60 characters","abc.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["abc",{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"result":null,"problems":["abc.n isn't a key of abc","abc.f isn't a key of abc","abc.t isn't a key of abc","abc.neg isn't a key of abc","abc.key must be 1 to 40 letters, digits, - and _","abc.title must be text of 1 to 60 characters","abc.type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["abc",[3,1,2]],"ok":{"result":null,"problems":["abc must be an object"]}}
+{"fn":"settingsOfCase","args":["﻿bom","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["﻿bom must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["src/a/b.ts.leading",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["src/a/b.ts.leading.a isn't a key of src/a/b.ts.leading"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["key_name-1tab\tseparated",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["key_name-1tab\tseparated must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a:b:c",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a:b:c.a isn't a key of a:b:c"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀c",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["hello",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["hello must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a:b:c",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a:b:c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["é",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["é must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["straße",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["straße must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["straße日本語のテキスト",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["straße日本語のテキスト must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ab",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ab.a isn't a key of ab"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a..b",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a..b must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["﻿bom:","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["﻿bom: must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["key_name-1",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["key_name-1 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["hello world",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["hello world must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["hello worldé",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["﻿bom",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["﻿bom must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ab",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ab must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["./x/**/*.json",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["./x/**/*.json must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ns:key.path",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ns:key.path.a isn't a key of ns:key.path"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ab",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ab.a isn't a key of ab"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["trailing.",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["line1\nline2",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["line1\nline2 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["﻿boma..b",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["日本語のテキスト",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["日本語のテキスト must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["key_name-1",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["key_name-1 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a..b",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a..b must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[":",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a.b.c",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a.b.c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["日本語のテキスト",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["é",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["é.a isn't a key of é"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["İstanbul.leading",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["İstanbul.leading must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a:b:c",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a:b:c.a isn't a key of a:b:c"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[".leading",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[".leading.a isn't a key of .leading"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a.b.c","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a.b.c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a.b.c",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a.b.c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a.a isn't a key of a"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["Hello World",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["Hello World.a isn't a key of Hello World"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ns:key.path",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ns:key.path.a isn't a key of ns:key.path"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ΣΊΣΥΦΟΣ",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ΣΊΣΥΦΟΣ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["tab\tseparated",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["tab\tseparated must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["HELLO",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["HELLO must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["emoji 👍🏽 mix",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["HELLO",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["HELLO must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ns:key.pathΣΊΣΥΦΟΣ",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ns:key.pathΣΊΣΥΦΟΣ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ΣΊΣΥΦΟΣ.a isn't a key of ΣΊΣΥΦΟΣ"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["İstanbul",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["İstanbul must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ΣΊΣΥΦΟΣünïcödé",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ΣΊΣΥΦΟΣünïcödé must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["  padded  ",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["  padded   must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["﻿bom",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a..babc",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a..babc must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["line1\nline2",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["line1\nline2 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ΣΊΣΥΦΟΣ",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ünïcödé",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ünïcödé must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["straße",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["straße.a isn't a key of straße"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["./x/**/*.jsonΣΊΣΥΦΟΣ",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["./x/**/*.jsonΣΊΣΥΦΟΣ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ΣΊΣΥΦΟΣHELLO",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ΣΊΣΥΦΟΣHELLO must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["src/a/b.ts  padded  ",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["src/a/b.ts  padded   must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ünïcödéab",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ünïcödéab must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["Hello Worlda:b:c",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["Hello Worlda:b:c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀c",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["x","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["x must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["  padded  ","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["  padded   must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["emoji 👍🏽 mix",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["emoji 👍🏽 mix.a isn't a key of emoji 👍🏽 mix"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["tab\tseparated",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["tab\tseparated.a isn't a key of tab\tseparated"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a:b:c",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a:b:c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[".leading",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[".leading.a isn't a key of .leading"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["﻿bom",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["﻿bom.a isn't a key of ﻿bom"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["aa:b:c",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["aa:b:c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["İstanbul",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["İstanbul.a isn't a key of İstanbul"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["{name} has {count} items",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["{name} has {count} items must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["abc:",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["😀line1\nline2",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["😀line1\nline2 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["hello world",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["hello world.a isn't a key of hello world"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[".leading",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":[".leading must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀cİstanbul",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀cİstanbul must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["{name} has {count} items",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["{name} has {count} items.a isn't a key of {name} has {count} items"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["src/a/b.ts",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["src/a/b.ts must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[":",":"],"ok":{"result":{"defaults":{},"rows":[]},"problems":[": must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["trailing.",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["trailing. must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["hello",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["hello must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["tab\tseparated",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["  padded  ",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["  padded   must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["tab\tseparated",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["tab\tseparated must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["Hello World﻿bom",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["Hello World﻿bom must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":[" must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["😀",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["😀.a isn't a key of 😀"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ahello",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ahello must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["hello world",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["hello world must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["./x/**/*.json",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["./x/**/*.json.a isn't a key of ./x/**/*.json"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["hello",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["hello.a isn't a key of hello"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[":",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":[": must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ΣΊΣΥΦΟΣ",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ΣΊΣΥΦΟΣ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["./x/**/*.json",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀c","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["abc",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["abc.a isn't a key of abc"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ünïcödé",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ünïcödé must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[":emoji 👍🏽 mix",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[":emoji 👍🏽 mix.a isn't a key of :emoji 👍🏽 mix"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a.b.c",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a.b.c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ΣΊΣΥΦΟΣhello",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ΣΊΣΥΦΟΣhello must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a.b.chello",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a.b.chello must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["abc",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["abc must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["{name} has {count} items",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["{name} has {count} items.a isn't a key of {name} has {count} items"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ünïcödé",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ünïcödé.a isn't a key of ünïcödé"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["éstraße","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["éstraße must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["﻿bomline1\nline2",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["﻿bomline1\nline2 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["İstanbul",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["İstanbul must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["hello world",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["hello world must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["日本語のテキスト",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["日本語のテキスト must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["Hello World",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["Hello World must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["key_name-1hello world",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["key_name-1hello world must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["😀",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["straßea",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["straßea must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ns:key.path",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ns:key.path must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["hello worlda..b",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["hello worlda..b must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ünïcödé",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ünïcödé must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["İstanbul",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["İstanbul.a isn't a key of İstanbul"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a:b:c",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀ca.b.c",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀ca.b.c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["Hello Worlda.b.c",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["Hello Worlda.b.c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["emoji 👍🏽 mix",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["emoji 👍🏽 mix must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["😀",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["😀 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["İstanbul{name} has {count} items",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["İstanbul{name} has {count} items must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["line1\nline2.leading",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["line1\nline2.leading must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["abc",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["abc must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["Hello World",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["src/a/b.ts",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["src/a/b.ts must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[":./x/**/*.json",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[":./x/**/*.json.a isn't a key of :./x/**/*.json"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀cünïcödé",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀cünïcödé.a isn't a key of a😀b😀cünïcödé"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["./x/**/*.json",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["./x/**/*.json must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["src/a/b.tsns:key.path","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["src/a/b.tsns:key.path must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀ca..b",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀ca..b must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["trailing.hello world",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["trailing.hello world must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["Hello Worldemoji 👍🏽 mix",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["Hello Worldemoji 👍🏽 mix must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[":key_name-1",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":[":key_name-1 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["trailing.",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["trailing. must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["abc",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["abc.a isn't a key of abc"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["key_name-1日本語のテキスト",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["key_name-1日本語のテキスト must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["Hello World  padded  ",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["Hello World  padded  .a isn't a key of Hello World  padded  "],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[".leadingünïcödé",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":[".leadingünïcödé must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ékey_name-1",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ékey_name-1 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a.b.chello world",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a.b.chello world must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a.b.c",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a.b.c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀c",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["straße",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["straße must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["key_name-1",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["key_name-1 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["emoji 👍🏽 mixa",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["emoji 👍🏽 mixa.a isn't a key of emoji 👍🏽 mixa"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["Hello World",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["Hello World must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["日本語のテキストsrc/a/b.ts",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["日本語のテキストsrc/a/b.ts must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["{name} has {count} itemsa..b",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["{name} has {count} itemsa..b must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[".leading",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a:b:c","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a:b:c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["  padded  ",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["  padded  .a isn't a key of   padded  "],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ünïcödéΣΊΣΥΦΟΣ",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ünïcödéΣΊΣΥΦΟΣ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ünïcödé",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ünïcödé must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["src/a/b.ts",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["src/a/b.ts must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["é",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["é must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["line1\nline2",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["İstanbul",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["İstanbul must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["  padded  ",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["src/a/b.ts",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["src/a/b.ts must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ns:key.pathns:key.path",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ns:key.pathns:key.path must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["hello","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["hello must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["日本語のテキスト",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["日本語のテキスト must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀cΣΊΣΥΦΟΣ",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀cΣΊΣΥΦΟΣ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ab",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ab must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":[" must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["HELLO",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["HELLO.a isn't a key of HELLO"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ΣΊΣΥΦΟΣ",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ΣΊΣΥΦΟΣ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["src/a/b.ts",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["src/a/b.ts must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ns:key.path",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ns:key.path must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["emoji 👍🏽 mix",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["emoji 👍🏽 mix must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["{name} has {count} items",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["{name} has {count} items must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["﻿bom  padded  ",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["﻿bom  padded   must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a isn't a key of a plugin"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀c",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["emoji 👍🏽 mix",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["emoji 👍🏽 mix must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ünïcödé",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ünïcödé must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["é",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["é must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["abünïcödé",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["trailing.","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["trailing. must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["trailing.",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["trailing..a isn't a key of trailing."],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀c",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀c must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["",["a",1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":[" must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ΣΊΣΥΦΟΣ",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ΣΊΣΥΦΟΣ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["Hello World","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["Hello World must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["😀trailing.",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":[":",{"a":"b"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[":.a isn't a key of :"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":[" must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["é",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["😀",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["😀.a isn't a key of 😀"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["trailing.emoji 👍🏽 mix","oj"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["trailing.emoji 👍🏽 mix must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b😀cemoji 👍🏽 mix",{"a":{"b":"c"}}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b😀cemoji 👍🏽 mix.a isn't a key of a😀b😀cemoji 👍🏽 mix"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["héllo wörld","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["héllo wörld must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["👍🏽 thumbs","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["👍🏽 thumbs must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["日本語","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["日本語 must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":[" must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["é","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["é must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["İstanbul","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["İstanbul must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["straße","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["straße must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ılık ırmak","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ılık ırmak must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["👨‍👩‍👧 family","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["👨‍👩‍👧 family must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a b","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a b must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["ΣΊΣΥΦΟΣ","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["ΣΊΣΥΦΟΣ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a😀b","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a😀b must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a²b x½ y①","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a²b x½ y① must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["aⅠb Ⅻ","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["aⅠb Ⅻ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["a𐐀b 𝐀bc","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["a𐐀b 𝐀bc must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["कि ٣٤","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["कि ٣٤ must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["﻿bom",{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["﻿bom.2 isn't a key of ﻿bom","﻿bom.10 isn't a key of ﻿bom","﻿bom.zebra isn't a key of ﻿bom","﻿bom.apple isn't a key of ﻿bom","﻿bom.é isn't a key of ﻿bom","﻿bom.Apple isn't a key of ﻿bom"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["﻿bom",{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["﻿bom.n isn't a key of ﻿bom","﻿bom.f isn't a key of ﻿bom","﻿bom.t isn't a key of ﻿bom","﻿bom.neg isn't a key of ﻿bom"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["﻿bom",[3,1,2]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["﻿bom must be an object"],"stored":[],"secret":[]}}
+{"fn":"rowValueCase","args":[{"a":"b"},true],"ok":null}
+{"fn":"rowValueCase","args":[{"a":{"b":"c"}},{}],"ok":null}
+{"fn":"rowValueCase","args":[true,null],"ok":null}
+{"fn":"rowValueCase","args":[[],{"a":{"b":"c"}}],"ok":null}
+{"fn":"rowValueCase","args":[0,["a",1]],"ok":null}
+{"fn":"rowValueCase","args":[0,null],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},{"a":"b"}],"ok":null}
+{"fn":"rowValueCase","args":[["a",1],[]],"ok":null}
+{"fn":"rowValueCase","args":[[],null],"ok":null}
+{"fn":"rowValueCase","args":[null,{"a":{"b":"c"}}],"ok":null}
+{"fn":"rowValueCase","args":[null,{}],"ok":null}
+{"fn":"rowValueCase","args":[["a",1],0],"ok":null}
+{"fn":"rowValueCase","args":[true,{"a":{"b":"c"}}],"ok":null}
+{"fn":"rowValueCase","args":[{},[]],"ok":null}
+{"fn":"rowValueCase","args":["x","x"],"ok":null}
+{"fn":"rowValueCase","args":[[],"x"],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},{}],"ok":null}
+{"fn":"rowValueCase","args":[true,[]],"ok":null}
+{"fn":"rowValueCase","args":[null,["a",1]],"ok":null}
+{"fn":"rowValueCase","args":[{"a":{"b":"c"}},{"a":{"b":"c"}}],"ok":null}
+{"fn":"rowValueCase","args":[{},{}],"ok":null}
+{"fn":"rowValueCase","args":[{},{"a":{"b":"c"}}],"ok":null}
+{"fn":"rowValueCase","args":[{},"x"],"ok":null}
+{"fn":"rowValueCase","args":[null,"x"],"ok":null}
+{"fn":"rowValueCase","args":[{},null],"ok":null}
+{"fn":"rowValueCase","args":[{},true],"ok":null}
+{"fn":"rowValueCase","args":[true,true],"ok":null}
+{"fn":"rowValueCase","args":[true,0],"ok":null}
+{"fn":"rowValueCase","args":[["a",1],"x"],"ok":null}
+{"fn":"rowValueCase","args":[[],true],"ok":null}
+{"fn":"rowValueCase","args":["x",null],"ok":null}
+{"fn":"rowValueCase","args":["x",[]],"ok":null}
+{"fn":"rowValueCase","args":[["a",1],{}],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},["a",1]],"ok":null}
+{"fn":"rowValueCase","args":[{"a":{"b":"c"}},null],"ok":null}
+{"fn":"rowValueCase","args":["x","X"],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},null],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},"x"],"ok":null}
+{"fn":"rowValueCase","args":[true,{}],"ok":null}
+{"fn":"rowValueCase","args":[0,"x"],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},0],"ok":null}
+{"fn":"rowValueCase","args":[{"a":{"b":"c"}},["a",1]],"ok":null}
+{"fn":"rowValueCase","args":[{},0],"ok":null}
+{"fn":"rowValueCase","args":[null,[]],"ok":null}
+{"fn":"rowValueCase","args":[[],["a",1]],"ok":null}
+{"fn":"rowValueCase","args":[null,null],"ok":null}
+{"fn":"rowValueCase","args":[{"a":{"b":"c"}},"x"],"ok":null}
+{"fn":"rowValueCase","args":[true,"x"],"ok":null}
+{"fn":"rowValueCase","args":[["a",1],true],"ok":null}
+{"fn":"rowValueCase","args":[[],{}],"ok":null}
+{"fn":"rowValueCase","args":[["a",1],null],"ok":null}
+{"fn":"rowValueCase","args":[0,{"a":{"b":"c"}}],"ok":null}
+{"fn":"rowValueCase","args":["x",{"a":{"b":"c"}}],"ok":null}
+{"fn":"rowValueCase","args":[0,true],"ok":null}
+{"fn":"rowValueCase","args":[null,{"a":"b"}],"ok":null}
+{"fn":"rowValueCase","args":[{"a":{"b":"c"}},true],"ok":null}
+{"fn":"rowValueCase","args":[["a",1],{"a":"b"}],"ok":null}
+{"fn":"rowValueCase","args":[null,0],"ok":null}
+{"fn":"rowValueCase","args":[{"a":{"b":"c"}},0],"ok":null}
+{"fn":"rowValueCase","args":[{"a":{"b":"c"}},[]],"ok":null}
+{"fn":"rowValueCase","args":[[],[]],"ok":null}
+{"fn":"rowValueCase","args":["x",0],"ok":null}
+{"fn":"rowValueCase","args":[{},["a",1]],"ok":null}
+{"fn":"rowValueCase","args":[["a",1],{"a":{"b":"c"}}],"ok":null}
+{"fn":"rowValueCase","args":[true,["a",1]],"ok":null}
+{"fn":"rowValueCase","args":[0,{"a":"b"}],"ok":null}
+{"fn":"rowValueCase","args":[[],{"a":"b"}],"ok":null}
+{"fn":"rowValueCase","args":[{},{"a":"b"}],"ok":null}
+{"fn":"rowValueCase","args":[0,[]],"ok":null}
+{"fn":"rowValueCase","args":[0,0],"ok":null}
+{"fn":"rowValueCase","args":[0,{}],"ok":null}
+{"fn":"rowValueCase","args":[true,{"a":"b"}],"ok":null}
+{"fn":"rowValueCase","args":["x",{}],"ok":null}
+{"fn":"rowValueCase","args":[null,true],"ok":null}
+{"fn":"rowValueCase","args":["x",["a",1]],"ok":null}
+{"fn":"rowValueCase","args":[[],0],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},[]],"ok":null}
+{"fn":"rowValueCase","args":["x",{"a":"b"}],"ok":null}
+{"fn":"rowValueCase","args":[["a",1],["a",1]],"ok":null}
+{"fn":"rowValueCase","args":["x",true],"ok":null}
+{"fn":"rowValueCase","args":[{"a":{"b":"c"}},{"a":"b"}],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},{"a":{"b":"c"}}],"ok":null}
+{"fn":"rowValueCase","args":["X","x"],"ok":null}
+{"fn":"rowValueCase","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6},true],"ok":null}
+{"fn":"rowValueCase","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7},true],"ok":null}
+{"fn":"rowValueCase","args":[[3,1,2],true],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":null}
+{"fn":"rowValueCase","args":[{"a":"b"},[3,1,2]],"ok":null}
+{"fn":"rowTypesCase","args":[],"ok":["toggle","text","number","choice","secret"]}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"$undefined":true}],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",null],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",0],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",3],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",-1],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",true],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",false],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",""],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]","x"],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",[]],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{}],"ok":{"result":null,"problems":["contributes.settings.rows[0].key must be 1 to 40 letters, digits, - and _","contributes.settings.rows[0].title must be text of 1 to 60 characters","contributes.settings.rows[0].type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",[1]],"ok":{"result":null,"problems":["contributes.settings.rows[0] must be an object"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"a":1}],"ok":{"result":null,"problems":["contributes.settings.rows[0].a isn't a key of contributes.settings.rows[0]","contributes.settings.rows[0].key must be 1 to 40 letters, digits, - and _","contributes.settings.rows[0].title must be text of 1 to 60 characters","contributes.settings.rows[0].type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"on","title":"On","type":"toggle"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be true or false"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"on","title":"On","type":"toggle","default":true}],"ok":{"result":{"key":"on","title":"On","type":"toggle","default":true},"problems":[]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"on","title":"On","type":"toggle","default":"yes"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be true or false"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"on","title":"On","type":"toggle","description":"Turns it on","min":1}],"ok":{"result":null,"problems":["contributes.settings.rows[0].min only goes with type number","contributes.settings.rows[0].default must be true or false"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"on","title":"On","type":"toggle","description":4}],"ok":{"result":null,"problems":["contributes.settings.rows[0].description must be text of 1 to 200 characters","contributes.settings.rows[0].default must be true or false"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"name","title":"Name","type":"text"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be text of at most 200 characters"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"name","title":"Name","type":"text","default":"Ann"}],"ok":{"result":{"key":"name","title":"Name","type":"text","default":"Ann"},"problems":[]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"name","title":"Name","type":"text","default":3}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be text of at most 200 characters"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"name","title":"Name","type":"text","default":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be text of at most 200 characters"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"name","title":"Name","type":"text","default":"a\u0007b"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be text of at most 200 characters"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"name","title":"Name","type":"text","default":"a‮b"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be text of at most 200 characters"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"name","title":"Name","type":"text","placeholder":"x","choices":[]}],"ok":{"result":null,"problems":["contributes.settings.rows[0].choices only goes with type choice","contributes.settings.rows[0].default must be text of at most 200 characters"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"n","title":"N","type":"number"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be a number between its min and max"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"n","title":"N","type":"number","default":5,"min":0,"max":10,"step":1}],"ok":{"result":{"key":"n","title":"N","type":"number","default":5,"min":0,"max":10,"step":1},"problems":[]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be a number between its min and max"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"n","title":"N","type":"number","default":-5,"min":0}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be a number between its min and max"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"n","title":"N","type":"number","default":5,"min":10,"max":0}],"ok":{"result":null,"problems":["contributes.settings.rows[0].min must be at most its max"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"n","title":"N","type":"number","default":10000000000000}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be a number between its min and max"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1}],"ok":{"result":null,"problems":["contributes.settings.rows[0].min must be a number","contributes.settings.rows[0].max must be a number","contributes.settings.rows[0].step must be above 0"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"n","title":"N","type":"number","step":0}],"ok":{"result":null,"problems":["contributes.settings.rows[0].step must be above 0"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"n","title":"N","type":"number","step":0.5,"min":-1000000000000,"max":1000000000000}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be a number between its min and max"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"n","title":"N","type":"number","placeholder":"p"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].placeholder only goes with type secret or text","contributes.settings.rows[0].default must be a number between its min and max"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}]}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be one of its choices' values"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"b"}],"ok":{"result":{"key":"c","title":"C","type":"choice","default":"b","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}]},"problems":[]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].default must be one of its choices' values"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]}],"ok":{"result":null,"problems":["contributes.settings.rows[0].choices must be a list of 2 to 12 choices"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"c","title":"C","type":"choice","choices":[{"value":"v0","title":"V0"},{"value":"v1","title":"V1"},{"value":"v2","title":"V2"},{"value":"v3","title":"V3"},{"value":"v4","title":"V4"},{"value":"v5","title":"V5"},{"value":"v6","title":"V6"},{"value":"v7","title":"V7"},{"value":"v8","title":"V8"},{"value":"v9","title":"V9"},{"value":"v10","title":"V10"},{"value":"v11","title":"V11"},{"value":"v12","title":"V12"}]}],"ok":{"result":null,"problems":["contributes.settings.rows[0].choices must be a list of 2 to 12 choices"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"a","title":"A2"}]}],"ok":{"result":null,"problems":["contributes.settings.rows[0].choices has two choices named a","contributes.settings.rows[0].default must be one of its choices' values"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"c","title":"C","type":"choice","choices":[{"value":"bad key","title":"A"},{"value":"b"},3,{"value":"c","title":"C","x":1}]}],"ok":{"result":null,"problems":["contributes.settings.rows[0].choices[0].value must be 1 to 40 letters, digits, - and _","contributes.settings.rows[0].choices[1].title must be text of 1 to 60 characters","contributes.settings.rows[0].choices[2] must be an object","contributes.settings.rows[0].choices[3].x isn't a key of contributes.settings.rows[0].choices[3]","contributes.settings.rows[0].default must be one of its choices' values"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"c","title":"C","type":"choice","choices":"a,b"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].choices must be a list of 2 to 12 choices"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"c","title":"C","type":"choice"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].choices must be a list of 2 to 12 choices"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"min":1,"placeholder":"p"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].min only goes with type number","contributes.settings.rows[0].placeholder only goes with type secret or text","contributes.settings.rows[0].default must be one of its choices' values"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"s","title":"S","type":"secret"}],"ok":{"result":{"key":"s","title":"S","type":"secret","default":""},"problems":[]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"s","title":"S","type":"secret","placeholder":"sk-…"}],"ok":{"result":{"key":"s","title":"S","type":"secret","default":"","placeholder":"sk-…"},"problems":[]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"s","title":"S","type":"secret","placeholder":3,"default":"x"}],"ok":{"result":{"key":"s","title":"S","type":"secret","default":""},"problems":["contributes.settings.rows[0].default can't go with a secret: it's kept in the Keychain, never in plugin.json","contributes.settings.rows[0].placeholder must be text of 1 to 60 characters"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"s","title":"S","type":"secret","placeholder":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}],"ok":{"result":{"key":"s","title":"S","type":"secret","default":""},"problems":["contributes.settings.rows[0].placeholder must be text of 1 to 60 characters"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"s","title":"S","type":"secret","default":""}],"ok":{"result":{"key":"s","title":"S","type":"secret","default":""},"problems":["contributes.settings.rows[0].default can't go with a secret: it's kept in the Keychain, never in plugin.json"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"x","title":"X","type":"slider"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"x","title":"X"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].type must be toggle, text, number, choice or secret"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"key":"bad key","title":"","type":"toggle"}],"ok":{"result":null,"problems":["contributes.settings.rows[0].key must be 1 to 40 letters, digits, - and _","contributes.settings.rows[0].title must be text of 1 to 60 characters"]}}
+{"fn":"rowCase","args":["contributes.settings.rows[0]",{"title":"X","type":"toggle","wat":1}],"ok":{"result":null,"problems":["contributes.settings.rows[0].wat isn't a key of contributes.settings.rows[0]","contributes.settings.rows[0].key must be 1 to 40 letters, digits, - and _"]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{"$undefined":true}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",null],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",0],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",3],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",-1],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",true],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",false],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",""],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings","x"],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",[]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{}],"ok":{"result":{"defaults":{},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",[1]],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{"a":1}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings.a isn't a key of contributes.settings"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{"defaults":{"a":1}}],"ok":{"result":{"defaults":{"a":1},"rows":[]},"problems":[],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{"defaults":[]}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings.defaults must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{"defaults":null,"rows":[]}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings.defaults must be an object"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{"rows":[{"key":"on","title":"On","type":"toggle"},{"key":"on","title":"On","type":"toggle","default":true},{"key":"on","title":"On","type":"toggle","default":"yes"},{"key":"on","title":"On","type":"toggle","description":"Turns it on","min":1},{"key":"on","title":"On","type":"toggle","description":4},{"key":"name","title":"Name","type":"text"},{"key":"name","title":"Name","type":"text","default":"Ann"},{"key":"name","title":"Name","type":"text","default":3},{"key":"name","title":"Name","type":"text","default":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"name","title":"Name","type":"text","default":"a\u0007b"},{"key":"name","title":"Name","type":"text","default":"a‮b"},{"key":"name","title":"Name","type":"text","placeholder":"x","choices":[]},{"key":"n","title":"N","type":"number"},{"key":"n","title":"N","type":"number","default":5,"min":0,"max":10,"step":1},{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},{"key":"n","title":"N","type":"number","default":-5,"min":0},{"key":"n","title":"N","type":"number","default":5,"min":10,"max":0},{"key":"n","title":"N","type":"number","default":10000000000000},{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},{"key":"n","title":"N","type":"number","step":0},{"key":"n","title":"N","type":"number","step":0.5,"min":-1000000000000,"max":1000000000000},{"key":"n","title":"N","type":"number","placeholder":"p"},{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}]},{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"b"},{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},{"key":"c","title":"C","type":"choice","choices":[{"value":"v0","title":"V0"},{"value":"v1","title":"V1"},{"value":"v2","title":"V2"},{"value":"v3","title":"V3"},{"value":"v4","title":"V4"},{"value":"v5","title":"V5"},{"value":"v6","title":"V6"},{"value":"v7","title":"V7"},{"value":"v8","title":"V8"},{"value":"v9","title":"V9"},{"value":"v10","title":"V10"},{"value":"v11","title":"V11"},{"value":"v12","title":"V12"}]},{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"a","title":"A2"}]},{"key":"c","title":"C","type":"choice","choices":[{"value":"bad key","title":"A"},{"value":"b"},3,{"value":"c","title":"C","x":1}]},{"key":"c","title":"C","type":"choice","choices":"a,b"},{"key":"c","title":"C","type":"choice"},{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"min":1,"placeholder":"p"},{"key":"s","title":"S","type":"secret"},{"key":"s","title":"S","type":"secret","placeholder":"sk-…"},{"key":"s","title":"S","type":"secret","placeholder":3,"default":"x"},{"key":"s","title":"S","type":"secret","placeholder":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},{"key":"s","title":"S","type":"secret","default":""}]}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings.rows must be a list of at most 20"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{"rows":[{"key":"on","title":"On","type":"toggle"},{"key":"on","title":"On","type":"toggle"}]}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings.rows[0].default must be true or false","contributes.settings.rows[1].default must be true or false"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{"rows":[{"key":"k0","title":"T","type":"toggle"},{"key":"k1","title":"T","type":"toggle"},{"key":"k2","title":"T","type":"toggle"},{"key":"k3","title":"T","type":"toggle"},{"key":"k4","title":"T","type":"toggle"},{"key":"k5","title":"T","type":"toggle"},{"key":"k6","title":"T","type":"toggle"},{"key":"k7","title":"T","type":"toggle"},{"key":"k8","title":"T","type":"toggle"},{"key":"k9","title":"T","type":"toggle"},{"key":"k10","title":"T","type":"toggle"},{"key":"k11","title":"T","type":"toggle"},{"key":"k12","title":"T","type":"toggle"},{"key":"k13","title":"T","type":"toggle"},{"key":"k14","title":"T","type":"toggle"},{"key":"k15","title":"T","type":"toggle"},{"key":"k16","title":"T","type":"toggle"},{"key":"k17","title":"T","type":"toggle"},{"key":"k18","title":"T","type":"toggle"},{"key":"k19","title":"T","type":"toggle"},{"key":"k20","title":"T","type":"toggle"}]}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings.rows must be a list of at most 20"],"stored":[],"secret":[]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{"rows":[{"key":"on","title":"On","type":"toggle"},{"key":"name","title":"Name","type":"text","default":"Ann"},{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},{"key":"s","title":"S","type":"secret","default":""}],"defaults":{"1":2,"on":true},"extra":1}],"ok":{"result":{"defaults":{"1":2,"on":true},"rows":[{"key":"name","title":"Name","type":"text","default":"Ann"},{"key":"s","title":"S","type":"secret","default":""}]},"problems":["contributes.settings.extra isn't a key of contributes.settings","contributes.settings.rows[0].default must be true or false","contributes.settings.rows[2].default must be one of its choices' values","contributes.settings.rows[3].default can't go with a secret: it's kept in the Keychain, never in plugin.json"],"stored":["name"],"secret":["s"]}}
+{"fn":"settingsOfCase","args":["contributes.settings",{"rows":"x"}],"ok":{"result":{"defaults":{},"rows":[]},"problems":["contributes.settings.rows must be a list of at most 20"],"stored":[],"secret":[]}}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},{"$undefined":true}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},null],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},true],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},false],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},""],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},"a"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},"b"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},"z"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},"a\u0001"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},0],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},-5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},11],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},1.5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},10000000000000],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},[]],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle"},{}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},{"$undefined":true}],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},null],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},true],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},false],"ok":false}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},""],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},"a"],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},"b"],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},"z"],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},"a\u0001"],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},0],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},5],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},-5],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},11],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},1.5],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},10000000000000],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},[]],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"on","title":"On","type":"toggle","default":true},{}],"ok":true}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},{"$undefined":true}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},null],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},true],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},false],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},""],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},"a"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},"b"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},"z"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},"a\u0001"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},0],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},-5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},11],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},1.5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},10000000000000],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},[]],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text"},{}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},{"$undefined":true}],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},null],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},true],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},false],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},""],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},"a"],"ok":"a"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},"b"],"ok":"b"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},"z"],"ok":"z"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},"a\u0001"],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},0],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},5],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},-5],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},11],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},1.5],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},10000000000000],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},[]],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"Ann"},{}],"ok":"Ann"}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},{"$undefined":true}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},null],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},true],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},false],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},""],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},"a"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},"b"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},"z"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},"a\u0001"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},0],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},-5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},11],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},1.5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},10000000000000],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},[]],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number"},{}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},{"$undefined":true}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},null],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},true],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},false],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},""],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},"a"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},"b"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},"z"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},"a\u0001"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},0],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},-5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},11],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},1.5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},10000000000000],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},[]],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":50,"min":0,"max":10},{}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},{"$undefined":true}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},null],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},true],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},false],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},""],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},"a"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},"b"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},"z"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},"a\u0001"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},0],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},-5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},11],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},1.5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},10000000000000],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},[]],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":"5","min":"0","max":null,"step":-1},{}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},{"$undefined":true}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},null],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},true],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},false],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},""],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},"a"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},"b"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},"z"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},"a\u0001"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},0],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},-5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},11],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},1.5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},10000000000000],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},[]],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","placeholder":"p"},{}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},{"$undefined":true}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},null],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},true],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},false],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},""],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},"a"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},"b"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},"z"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},"a\u0001"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},0],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},-5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},11],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},1.5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},10000000000000],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},[]],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"},{"value":"b","title":"B"}],"default":"z"},{}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},{"$undefined":true}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},null],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},true],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},false],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},""],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},"a"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},"b"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},"z"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},"a\u0001"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},0],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},-5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},11],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},1.5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},10000000000000],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},[]],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"c","title":"C","type":"choice","choices":[{"value":"a","title":"A"}]},{}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},{"$undefined":true}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},null],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},true],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},false],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},""],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},"a"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},"b"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},"z"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},"a\u0001"],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},0],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},-5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},11],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},1.5],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},10000000000000],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},[]],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"name","title":"Name","type":"text","default":"a‮b"},{}],"ok":null}
+{"fn":"rowValueCase","args":[3,{"$undefined":true}],"ok":null}
+{"fn":"rowValueCase","args":[3,null],"ok":null}
+{"fn":"rowValueCase","args":[3,true],"ok":null}
+{"fn":"rowValueCase","args":[3,false],"ok":null}
+{"fn":"rowValueCase","args":[3,""],"ok":null}
+{"fn":"rowValueCase","args":[3,"a"],"ok":null}
+{"fn":"rowValueCase","args":[3,"b"],"ok":null}
+{"fn":"rowValueCase","args":[3,"z"],"ok":null}
+{"fn":"rowValueCase","args":[3,"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[3,"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":null}
+{"fn":"rowValueCase","args":[3,"a\u0001"],"ok":null}
+{"fn":"rowValueCase","args":[3,0],"ok":null}
+{"fn":"rowValueCase","args":[3,5],"ok":null}
+{"fn":"rowValueCase","args":[3,-5],"ok":null}
+{"fn":"rowValueCase","args":[3,11],"ok":null}
+{"fn":"rowValueCase","args":[3,1.5],"ok":null}
+{"fn":"rowValueCase","args":[3,10000000000000],"ok":null}
+{"fn":"rowValueCase","args":[3,[]],"ok":null}
+{"fn":"rowValueCase","args":[3,{}],"ok":null}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},{"$undefined":true}],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},null],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},true],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},false],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},""],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},"a"],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},"b"],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},"z"],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},"a\u0001"],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},0],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},5],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},-5],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},11],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},1.5],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},10000000000000],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},[]],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"s","title":"S","type":"secret"},{}],"ok":""}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},{"$undefined":true}],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},null],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},true],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},false],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},""],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},"a"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},"b"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},"z"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},"a\u0001"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},0],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},5],"ok":5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},-5],"ok":-5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},11],"ok":11}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},1.5],"ok":1.5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},10000000000000],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},[]],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1},{}],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},{"$undefined":true}],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},null],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},true],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},false],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},""],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},"a"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},"b"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},"z"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},"a\u0001"],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},0],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},5],"ok":5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},-5],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},11],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},1.5],"ok":1.5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},10000000000000],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},[]],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":1,"min":0,"max":10},{}],"ok":1}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},{"$undefined":true}],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},null],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},true],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},false],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},""],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},"a"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},"b"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},"z"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},"a\u0001"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},0],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},5],"ok":5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},-5],"ok":-5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},11],"ok":11}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},1.5],"ok":1.5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},10000000000000],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},[]],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"min":-5},{}],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},{"$undefined":true}],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},null],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},true],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},false],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},""],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},"a"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},"b"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},"z"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},"a\u0001"],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},0],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},5],"ok":5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},-5],"ok":-5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},11],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},1.5],"ok":1.5}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},10000000000000],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},[]],"ok":0}
+{"fn":"rowValueCase","args":[{"key":"n","title":"N","type":"number","default":0,"max":5},{}],"ok":0}

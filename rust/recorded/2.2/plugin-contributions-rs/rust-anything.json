@@ -1,0 +1,47 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginContributions.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "plugin-contributions-rs",
+  "exports": [
+    {
+      "name": "constantsCase",
+      "file": "apps/browser/src/lib/pluginContributions.harness.ts",
+      "line": 6,
+      "params": [],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "contributesCase",
+      "file": "apps/browser/src/lib/pluginContributions.harness.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "hasMain",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

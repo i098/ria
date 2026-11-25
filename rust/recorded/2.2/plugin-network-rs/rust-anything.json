@@ -1,0 +1,114 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginNetwork.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "pluginnetwork-rs",
+  "exports": [
+    {
+      "name": "normalizedHost",
+      "file": "apps/browser/src/lib/pluginNetwork.ts",
+      "line": 8,
+      "params": [
+        {
+          "name": "host",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "hostPatternProblem",
+      "file": "apps/browser/src/lib/pluginNetwork.ts",
+      "line": 21,
+      "params": [
+        {
+          "name": "pattern",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isHostPattern",
+      "file": "apps/browser/src/lib/pluginNetwork.ts",
+      "line": 38,
+      "params": [
+        {
+          "name": "pattern",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "pattern is string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "matchesAllowedHost",
+      "file": "apps/browser/src/lib/pluginNetwork.ts",
+      "line": 40,
+      "params": [
+        {
+          "name": "host",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "allowedHosts",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "hostPatternCovers",
+      "file": "apps/browser/src/lib/pluginNetwork.ts",
+      "line": 54,
+      "params": [
+        {
+          "name": "broader",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "narrower",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

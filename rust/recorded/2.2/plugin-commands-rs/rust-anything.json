@@ -1,0 +1,101 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginCommands.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "plugin-commands-rs",
+  "exports": [
+    {
+      "name": "splitSidesCase",
+      "file": "apps/browser/src/lib/pluginCommands.harness.ts",
+      "line": 14,
+      "params": [],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "whenOfCase",
+      "file": "apps/browser/src/lib/pluginCommands.harness.ts",
+      "line": 15,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "commandCase",
+      "file": "apps/browser/src/lib/pluginCommands.harness.ts",
+      "line": 16,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "hasMain",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] } & { kinds: boolean[] | null }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "toolCase",
+      "file": "apps/browser/src/lib/pluginCommands.harness.ts",
+      "line": 21,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

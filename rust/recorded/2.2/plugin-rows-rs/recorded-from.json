@@ -1,0 +1,41 @@
+{
+  "unit": "apps/browser/src/lib/pluginRows.harness.ts",
+  "files": 1,
+  "fingerprint": "826b201e8d1bf649",
+  "coverage": {
+    "lines": 281,
+    "reached": 251,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginChecks.ts",
+        "lines": 117,
+        "reached": 97,
+        "missed": "73-75, 100-104, 107-111, 125-127, 132-135"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginNames.ts",
+        "lines": 28,
+        "reached": 18,
+        "missed": "20-29"
+      },
+      {
+        "file": "apps/browser/src/lib/pluginRows.harness.ts",
+        "lines": 22,
+        "reached": 22,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pluginRows.ts",
+        "lines": 106,
+        "reached": 106,
+        "missed": ""
+      }
+    ]
+  }
+}

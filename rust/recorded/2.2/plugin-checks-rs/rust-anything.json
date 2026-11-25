@@ -1,0 +1,437 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pluginChecks.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "pluginchecks-rs",
+  "exports": [
+    {
+      "name": "constantsCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 18,
+      "params": [],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "patternCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 19,
+      "params": [
+        {
+          "name": "name",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "atCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 20,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "key",
+          "ts_type": "string | number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "onlyCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 21,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "doc",
+          "ts_type": "Record<string, unknown>",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "keys",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "textCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 22,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "limit",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "required",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "matchingCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 23,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "pattern",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "rule",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "required",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "listCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 24,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "limit",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "objectCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 25,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "integerCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 26,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "min",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "max",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "fallback",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "flagCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 27,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "fallback",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "uniqueCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 28,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "names",
+          "ts_type": "(string | null)[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "what",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "symbolOfCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 29,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "fallback",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isPluginPathCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 30,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isArgumentCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 31,
+      "params": [
+        {
+          "name": "arg",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pluginFileCase",
+      "file": "apps/browser/src/lib/pluginChecks.harness.ts",
+      "line": 32,
+      "params": [
+        {
+          "name": "path",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "rule",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "extension",
+          "ts_type": "string | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ result: unknown; problems: string[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}
