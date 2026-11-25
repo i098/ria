@@ -332,22 +332,6 @@ impl ArdiaWebView {
         }
     }
 
-    /// Whether the first-paint hold hides the page now.
-    pub fn holding_first_paint(&self) -> bool {
-        self.state()
-            .paint_hold
-            .as_ref()
-            .is_some_and(|hold| hold.held())
-    }
-
-    /// `-[ArdiaWebView holdPageUntilPainted:]` for the tab the view shows, for callers that have no attach step.
-    pub fn hold_shown_page(&self, created: bool) {
-        let tab = self.state().attached.tab.clone();
-        if let Some(tab) = tab {
-            self.hold_page_until_painted(&tab, created);
-        }
-    }
-
     /// `-[ArdiaWebView layoutPage]` (`ArdiaWebView+Painting.mm:148`) without the fronted and stand-in pages, which no
     /// app code mounts yet.
     pub fn layout_page(&self) {
