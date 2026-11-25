@@ -10,14 +10,14 @@
 //! `gOnScreenAhead`, `gPresses`); here one `PageHooks` value holds the wake records and the `RevealInput`, and the
 //! host installs it once with `install`. The window root view and the app-wide key action are closures of the host
 //! because `windows/` and the key tables are not reachable from `tabs/`. The early-window veil has no Ria type, so
-//! the paint facts never report it. Not yet reached: no code in `tabs/` enters a reveal gap, sets `warm` or
+//! the paint facts never report it. `PageHooks::reveal_tab` begins a reveal when the strip selects a tab (`ArdiaWebView+Reveals.mm:98`); Ardia's JS trigger `setNativeTabSwitch` and the leave-screen step of `paintAfterReveal:` are not ported. Not yet reached: no code in `tabs/` enters a reveal gap, sets `warm` or
 //! `neighbour` on a view, or calls the field-timing marks of navigation and reveals (`ArdiaWebView.mm:283` is the
 //! one mark that `ArdiaWebView::set_visible` makes); those callers belong to the rest of #110. Still open: no
 //! production code calls `ChromiumTabView::make_page` or builds `LiveViews`, so nothing installs these hooks at
 //! runtime yet; no code calls `PageHooks::paint_probe` or `set_field_timing`; the engine `SwipeModule` calls into
 //! `swipe_module::call` and `dev_simulate`, and the `leaving` and `holding` terms, also have no host.
 
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
 use std::ptr;
 use std::rc::{Rc, Weak as RcWeak};
 use std::time::{Duration, Instant};
@@ -28,9 +28,11 @@ use objc2::{MainThreadMarker, Message};
 use objc2_app_kit::{NSEvent, NSView, NSWindow};
 use ria_engine::call::main_queue;
 
+use super::ardia_tab_presses::{PressId, TabPresses};
 use super::ardia_web_view::{ArdiaWebView, LiveViews};
 use super::ardia_web_view_painting::NeighbourWake;
 use super::ardia_web_view_reveal_input::RevealInput;
+use super::ardia_web_view_reveals::older_press;
 use crate::diagnostics::ardia_field_timing;
 use crate::diagnostics::ardia_paint_probe::PaintProbe;
 use crate::diagnostics::ardia_paint_probe_math::View;
@@ -53,6 +55,8 @@ pub struct PageHooks {
     root_view: RootView,
     app_wide_key: Box<dyn Fn(&NSEvent)>,
     input: RefCell<RevealInput>,
+    presses: RefCell<TabPresses>,
+    reveals: Cell<(u32, u32)>,
     wakes: RefCell<Vec<(Weak<NSWindow>, NeighbourWake)>>,
 }
 
@@ -88,6 +92,8 @@ impl PageHooks {
             root_view: Box::new(root_view),
             app_wide_key: Box::new(app_wide_key),
             input: RefCell::default(),
+            presses: RefCell::default(),
+            reveals: Cell::default(),
             wakes: RefCell::default(),
         })
     }
@@ -112,6 +118,56 @@ impl PageHooks {
     /// The reveal input of the gaps; the page host's reveal code enters and leaves gaps through it.
     pub fn reveal_input(&self) -> &RefCell<RevealInput> {
         &self.input
+    }
+
+    pub fn presses(&self) -> &RefCell<TabPresses> {
+        &self.presses
+    }
+
+    /// How many reveals began and ended through these hooks.
+    pub fn reveal_counts(&self) -> (u32, u32) {
+        self.reveals.get()
+    }
+
+    pub(super) fn count_reveal(&self, began: bool) {
+        let (begun, ended) = self.reveals.get();
+        self.reveals.set(if began {
+            (begun + 1, ended)
+        } else {
+            (begun, ended + 1)
+        });
+    }
+
+    /// `+[ArdiaWebView revealTab:press:]` (`ArdiaWebView+Reveals.mm:98`): the tab keyed `key` is about to be selected,
+    /// so show its page ahead of the selection. Ardia hops to the main queue first; the caller here is on it.
+    pub fn reveal_tab(&self, key: &str, press: Option<PressId>) {
+        if key.is_empty() {
+            return;
+        }
+        self.presses.borrow_mut().note_switch(key, press);
+        let views = self.live.all();
+        let Some(view) = views
+            .iter()
+            .find(|view| view.transfer_key().as_deref() == Some(key))
+        else {
+            return;
+        };
+        let Some(window) = view.window() else { return };
+        let later = views.iter().find(|other| {
+            !ptr::eq(&***other, &**view)
+                && other
+                    .window()
+                    .is_some_and(|owner| ptr::eq(&*owner, &*window))
+                && other.native_reveal().is_some()
+        });
+        if let Some(later) = later
+            && older_press(press, later.native_reveal().flatten())
+        {
+            return;
+        }
+        let keep: &NSView = view;
+        ArdiaWebView::drop_reveals_in_window(&views, self, &window, Some(keep));
+        view.reveal_ahead();
     }
 
     pub(super) fn asleep(&self, window: &NSWindow) -> bool {
