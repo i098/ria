@@ -129,7 +129,7 @@ fn incognito_profile() -> Profile {
     Profile {
         id: "incognito".into(),
         name: "Incognito".into(),
-        color: "neutral".into(),
+        color: ProfileColor::Neutral,
         icon: None,
         created_at: Number(0.0),
         ..Default::default()

@@ -24,7 +24,7 @@ pub type Frame = [Number; 4];
 pub struct Profile {
     pub id: String,
     pub name: String,
-    pub color: String,
+    pub color: ProfileColor,
     pub icon: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub switcher_dot: Option<bool>,
@@ -38,7 +38,7 @@ pub struct Profile {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub seen_theme: Option<Value>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub seen_color: Option<String>,
+    pub seen_color: Option<ProfileSeenColor>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pinned_collapsed: Option<bool>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -49,8 +49,60 @@ pub struct Profile {
     pub password_manager: Option<String>,
 }
 
+/// The profile colors (`lib/profileLook.ts`).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum ProfileColor {
+    #[default]
+    Plum,
+    Blue,
+    Purple,
+    Pink,
+    Red,
+    Orange,
+    Yellow,
+    Green,
+    Neutral,
+}
+
+/// `Profile.seenColor`: the same names as `ProfileColor`.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum ProfileSeenColor {
+    #[default]
+    Plum,
+    Blue,
+    Purple,
+    Pink,
+    Red,
+    Orange,
+    Yellow,
+    Green,
+    Neutral,
+}
+
 /// `PresetThemes` (`lib/profileLook.ts`): a theme for each profile color, each one optional.
-pub type ProfilePresetThemes = HashMap<String, Value>;
+#[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
+pub struct ProfilePresetThemes {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub plum: Option<Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub blue: Option<Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub purple: Option<Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub pink: Option<Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub red: Option<Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub orange: Option<Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub yellow: Option<Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub green: Option<Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub neutral: Option<Value>,
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]

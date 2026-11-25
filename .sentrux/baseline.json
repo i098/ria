@@ -1,12 +1,12 @@
 {
-  "timestamp": 1795645112.4323125,
-  "quality_signal": 0.4810910041495878,
-  "coupling_score": 0.28817204301075267,
+  "timestamp": 1795645749.1172478,
+  "quality_signal": 0.48200473793027143,
+  "coupling_score": 0.2796610169491525,
   "cycle_count": 2,
   "god_file_count": 1,
   "hotspot_count": 0,
-  "complex_fn_count": 548,
+  "complex_fn_count": 550,
   "max_depth": 6,
-  "total_import_edges": 465,
-  "cross_module_edges": 134
+  "total_import_edges": 472,
+  "cross_module_edges": 136
 }
