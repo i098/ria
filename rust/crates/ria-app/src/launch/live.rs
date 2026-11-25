@@ -436,11 +436,11 @@ mod mac {
                 .collect();
             println!("stripRows {keys:?}");
             match self.stage.get() {
-                1 if rows.len() == 3 && rows[2].active => {
+                1 if rows.len() == 3 => {
                     println!("stripTabs 3");
-                    self.shot_then("three-tabs", 2, Some(button_center(0, Button::Select)));
+                    self.shot_then("three-tabs", 2, Some(button_center(2, Button::Select)));
                 }
-                2 if rows.first().is_some_and(|row| row.active) => {
+                2 if rows.get(2).is_some_and(|row| row.active) => {
                     println!("stripSelected");
                     self.advance(3, Some(button_center(1, Button::Pin)));
                 }
