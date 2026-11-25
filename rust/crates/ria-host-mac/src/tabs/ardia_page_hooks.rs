@@ -93,7 +93,9 @@ impl PageHooks {
     /// Registers the hooks with the swipe unit and the reveal guards, and for the field-timing switch.
     /// The reveal guards keep the hooks of the first call.
     pub fn install(self: &Rc<Self>, mtm: MainThreadMarker) {
-        if INSTALLED.with_borrow(|installed| installed.upgrade().is_some_and(|i| Rc::ptr_eq(&i, self))) {
+        if INSTALLED
+            .with_borrow(|installed| installed.upgrade().is_some_and(|i| Rc::ptr_eq(&i, self)))
+        {
             return;
         }
         INSTALLED.set(Rc::downgrade(self));

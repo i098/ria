@@ -15,9 +15,9 @@ use serde_json::Value;
 
 use super::ardia_page_hooks::PageHooks;
 use super::ardia_web_view::ArdiaWebView;
-use crate::diagnostics::ardia_field_timing;
 use super::page_tab::PageTab;
 use super::page_tab_host::PageTabHost;
+use crate::diagnostics::ardia_field_timing;
 
 pub struct ChromiumTabView(PageTabHost);
 

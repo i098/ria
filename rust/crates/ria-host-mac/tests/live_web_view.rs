@@ -30,7 +30,10 @@ fn main() {
     assert_eq!(live.all().len(), 1, "make_page registers the view");
     let installed = ardia_swipe::hooks().expect("make_page installs the swipe hooks");
     assert!(
-        std::ptr::eq(Rc::as_ptr(&installed).cast::<()>(), Rc::as_ptr(&hooks).cast::<()>()),
+        std::ptr::eq(
+            Rc::as_ptr(&installed).cast::<()>(),
+            Rc::as_ptr(&hooks).cast::<()>()
+        ),
         "the installed swipe hooks are these hooks"
     );
 
