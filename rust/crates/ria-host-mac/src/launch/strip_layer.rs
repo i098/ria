@@ -19,8 +19,10 @@
 //! - A press on a tab sends `activate`; a press on its pin button sends `arrange` with the pinned tabs first
 //!   (`chromeTabs.ts:143-159`), and the reply sets the button. A press on its close button closes the tab. Ardia closes
 //!   through `tabs.close`; Ria calls `Tab::close`. The last tab has no effect, so the window keeps a page.
-//! - The active tab is tracked in the layer: a press sets it, and a new tab opened in the foreground becomes active.
-//!   Ardia reads it from `TabStrips::activated`, which no Ria code calls yet.
+//! - The active tab is tracked in the layer: the first read marks the first tab, a press sets it, and it stays until a
+//!   press or a close changes it. Known limit: the engine has no active-tab getter that Ria fills. `TabStrips::active`
+//!   is set only by `TabStrips::activated`, which no Ria code calls, and `Window::activate_tab` keeps no record. A tab that
+//!   becomes active outside the strip, such as a foreground open, does not move the active mark until it is pressed.
 //! - The page slot follows the active tab through `Surface::set_page`; Ardia shows each tab's page in its own page layer.
 //! - A restored window layout keeps its cover and cached picture. `ria-surface` `Surface::set_page` always moves the page
 //!   from the cover into the `page` slot below the strip, so the restored page rect is not kept. The cover stays behind
@@ -242,24 +244,14 @@ fn successor(rows: &[Row], key: &str) -> Option<String> {
         .map(|row| row.key.clone())
 }
 
-/// Carry the active mark over to `next`: keep the old active tab if it still exists, else the newest new tab, else the first.
+/// Carry the active mark over to `next`: keep the old active tab if it still exists, else the first.
 fn mark_active(previous: &[Row], next: &mut [Row]) {
-    let kept = previous
+    let key = previous
         .iter()
         .find(|row| row.active)
         .filter(|old| next.iter().any(|row| row.key == old.key))
-        .map(|old| old.key.clone());
-    let newest = next
-        .iter()
-        .rfind(|row| !previous.iter().any(|old| old.key == row.key))
-        .map(|row| row.key.clone());
-    // The first read has no previous rows: the launch tab is the only new one and becomes active.
-    let key = if previous.iter().any(|row| row.active) {
-        newest.or(kept)
-    } else {
-        newest
-    };
-    let key = key.or_else(|| next.first().map(|row| row.key.clone()));
+        .map(|old| old.key.clone())
+        .or_else(|| next.first().map(|row| row.key.clone()));
     for row in next.iter_mut() {
         row.active = Some(&row.key) == key.as_ref();
     }
@@ -540,19 +532,25 @@ mod tests {
     }
 
     #[test]
-    fn a_new_tab_becomes_active_and_a_closed_active_tab_falls_back() {
+    fn a_new_tab_stays_inactive_and_a_closed_active_tab_falls_back() {
         let first = [row("launch", true, false)];
         let mut next = vec![row("launch", false, false), row("tab:2", false, false)];
         mark_active(&first, &mut next);
-        assert!(next[1].active && !next[0].active);
-        let mut same = vec![row("launch", false, false), row("tab:2", false, false)];
-        mark_active(&next, &mut same);
-        assert!(same[1].active);
+        assert!(next[0].active && !next[1].active);
+        let mut pressed = vec![row("launch", false, false), row("tab:2", true, false)];
+        let mut same = vec![
+            row("launch", false, false),
+            row("tab:2", false, false),
+            row("tab:3", false, false),
+        ];
+        mark_active(&pressed, &mut same);
+        assert!(same[1].active && !same[2].active);
         let mut gone = vec![row("launch", false, false)];
-        mark_active(&next, &mut gone);
+        mark_active(&pressed, &mut gone);
         assert!(gone[0].active);
+        pressed.clear();
         let mut start = vec![row("launch", false, false)];
-        mark_active(&[], &mut start);
+        mark_active(&pressed, &mut start);
         assert!(start[0].active);
     }
 
