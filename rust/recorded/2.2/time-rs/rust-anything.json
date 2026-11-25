@@ -1,0 +1,96 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/time.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "time-rs",
+  "exports": [
+    {
+      "name": "ago",
+      "file": "apps/browser/src/lib/time.ts",
+      "line": 3,
+      "params": [
+        {
+          "name": "at",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "now",
+          "ts_type": "unknown",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "durationParts",
+      "file": "apps/browser/src/lib/time.ts",
+      "line": 24,
+      "params": [
+        {
+          "name": "minutes",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ amount: number; unit: (\"minutes\" | \"hours\" | \"days\") }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "durationTitle",
+      "file": "apps/browser/src/lib/time.ts",
+      "line": 30,
+      "params": [
+        {
+          "name": "minutes",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "durationMinutes",
+      "file": "apps/browser/src/lib/time.ts",
+      "line": 35,
+      "params": [
+        {
+          "name": "amount",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "unit",
+          "ts_type": "(\"minutes\" | \"hours\" | \"days\")",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

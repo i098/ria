@@ -1,0 +1,23 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/emojiData.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "emoji-data-rs",
+  "exports": [
+    {
+      "name": "emojiGroups",
+      "file": "apps/browser/src/lib/emojiData.harness.ts",
+      "line": 4,
+      "params": [],
+      "returns": "{ title: string; list: string }[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

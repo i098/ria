@@ -1,0 +1,667 @@
+{"fn": "withoutFragment", "args": ["https://www.example.com/a/b?q=1#top"]}
+{"fn": "withoutUserInfo", "args": ["https://www.example.com/a/b?q=1#top"]}
+{"fn": "isWebPageUrl", "args": ["https://www.example.com/a/b?q=1#top"]}
+{"fn": "displayHostOf", "args": ["https://www.example.com/a/b?q=1#top"]}
+{"fn": "pageHostLabel", "args": ["https://www.example.com/a/b?q=1#top"]}
+{"fn": "hostOrOrigin", "args": ["https://www.example.com/a/b?q=1#top"]}
+{"fn": "originForSecurityDisplay", "args": ["https://www.example.com/a/b?q=1#top"]}
+{"fn": "urlTrail", "args": ["https://www.example.com/a/b?q=1#top", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://www.example.com/a/b?q=1#top", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://www.example.com/a/b?q=1#top", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://www.example.com/a/b?q=1#top", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://www.example.com/a/b?q=1#top", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://www.example.com/a/b?q=1#top", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://www.example.com/a/b?q=1#top", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://www.example.com/a/b?q=1#top", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["https://example.com/docs/"]}
+{"fn": "withoutUserInfo", "args": ["https://example.com/docs/"]}
+{"fn": "isWebPageUrl", "args": ["https://example.com/docs/"]}
+{"fn": "displayHostOf", "args": ["https://example.com/docs/"]}
+{"fn": "pageHostLabel", "args": ["https://example.com/docs/"]}
+{"fn": "hostOrOrigin", "args": ["https://example.com/docs/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://example.com/docs/"]}
+{"fn": "urlTrail", "args": ["https://example.com/docs/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://example.com/docs/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://example.com/docs/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://example.com/docs/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://example.com/docs/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://example.com/docs/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://example.com/docs/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://example.com/docs/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["https://example.com/"]}
+{"fn": "withoutUserInfo", "args": ["https://example.com/"]}
+{"fn": "isWebPageUrl", "args": ["https://example.com/"]}
+{"fn": "displayHostOf", "args": ["https://example.com/"]}
+{"fn": "pageHostLabel", "args": ["https://example.com/"]}
+{"fn": "hostOrOrigin", "args": ["https://example.com/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://example.com/"]}
+{"fn": "urlTrail", "args": ["https://example.com/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://example.com/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://example.com/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://example.com/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://example.com/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://example.com/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://example.com/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://example.com/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["http://localhost:8080/x"]}
+{"fn": "withoutUserInfo", "args": ["http://localhost:8080/x"]}
+{"fn": "isWebPageUrl", "args": ["http://localhost:8080/x"]}
+{"fn": "displayHostOf", "args": ["http://localhost:8080/x"]}
+{"fn": "pageHostLabel", "args": ["http://localhost:8080/x"]}
+{"fn": "hostOrOrigin", "args": ["http://localhost:8080/x"]}
+{"fn": "originForSecurityDisplay", "args": ["http://localhost:8080/x"]}
+{"fn": "urlTrail", "args": ["http://localhost:8080/x", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://localhost:8080/x", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://localhost:8080/x", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["http://localhost:8080/x", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["http://localhost:8080/x", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://localhost:8080/x", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://localhost:8080/x", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["http://localhost:8080/x", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["ardia://settings/appearance"]}
+{"fn": "withoutUserInfo", "args": ["ardia://settings/appearance"]}
+{"fn": "isWebPageUrl", "args": ["ardia://settings/appearance"]}
+{"fn": "displayHostOf", "args": ["ardia://settings/appearance"]}
+{"fn": "pageHostLabel", "args": ["ardia://settings/appearance"]}
+{"fn": "hostOrOrigin", "args": ["ardia://settings/appearance"]}
+{"fn": "originForSecurityDisplay", "args": ["ardia://settings/appearance"]}
+{"fn": "urlTrail", "args": ["ardia://settings/appearance", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings/appearance", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings/appearance", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://settings/appearance", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://settings/appearance", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings/appearance", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings/appearance", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://settings/appearance", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["ardia://settings"]}
+{"fn": "withoutUserInfo", "args": ["ardia://settings"]}
+{"fn": "isWebPageUrl", "args": ["ardia://settings"]}
+{"fn": "displayHostOf", "args": ["ardia://settings"]}
+{"fn": "pageHostLabel", "args": ["ardia://settings"]}
+{"fn": "hostOrOrigin", "args": ["ardia://settings"]}
+{"fn": "originForSecurityDisplay", "args": ["ardia://settings"]}
+{"fn": "urlTrail", "args": ["ardia://settings", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://settings", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://settings", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://settings", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["chrome://extensions"]}
+{"fn": "withoutUserInfo", "args": ["chrome://extensions"]}
+{"fn": "isWebPageUrl", "args": ["chrome://extensions"]}
+{"fn": "displayHostOf", "args": ["chrome://extensions"]}
+{"fn": "pageHostLabel", "args": ["chrome://extensions"]}
+{"fn": "hostOrOrigin", "args": ["chrome://extensions"]}
+{"fn": "originForSecurityDisplay", "args": ["chrome://extensions"]}
+{"fn": "urlTrail", "args": ["chrome://extensions", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["chrome://extensions", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["chrome://extensions", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["chrome://extensions", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["chrome://extensions", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["chrome://extensions", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["chrome://extensions", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["chrome://extensions", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["ardia://history?q=x"]}
+{"fn": "withoutUserInfo", "args": ["ardia://history?q=x"]}
+{"fn": "isWebPageUrl", "args": ["ardia://history?q=x"]}
+{"fn": "displayHostOf", "args": ["ardia://history?q=x"]}
+{"fn": "pageHostLabel", "args": ["ardia://history?q=x"]}
+{"fn": "hostOrOrigin", "args": ["ardia://history?q=x"]}
+{"fn": "originForSecurityDisplay", "args": ["ardia://history?q=x"]}
+{"fn": "urlTrail", "args": ["ardia://history?q=x", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://history?q=x", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://history?q=x", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://history?q=x", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://history?q=x", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://history?q=x", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://history?q=x", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://history?q=x", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["file:///Users/me/a%20b.html"]}
+{"fn": "withoutUserInfo", "args": ["file:///Users/me/a%20b.html"]}
+{"fn": "isWebPageUrl", "args": ["file:///Users/me/a%20b.html"]}
+{"fn": "displayHostOf", "args": ["file:///Users/me/a%20b.html"]}
+{"fn": "pageHostLabel", "args": ["file:///Users/me/a%20b.html"]}
+{"fn": "hostOrOrigin", "args": ["file:///Users/me/a%20b.html"]}
+{"fn": "originForSecurityDisplay", "args": ["file:///Users/me/a%20b.html"]}
+{"fn": "urlTrail", "args": ["file:///Users/me/a%20b.html", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/a%20b.html", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/a%20b.html", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/a%20b.html", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/a%20b.html", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/a%20b.html", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/a%20b.html", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/a%20b.html", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["file:///Users/me/100%.html"]}
+{"fn": "withoutUserInfo", "args": ["file:///Users/me/100%.html"]}
+{"fn": "isWebPageUrl", "args": ["file:///Users/me/100%.html"]}
+{"fn": "displayHostOf", "args": ["file:///Users/me/100%.html"]}
+{"fn": "pageHostLabel", "args": ["file:///Users/me/100%.html"]}
+{"fn": "hostOrOrigin", "args": ["file:///Users/me/100%.html"]}
+{"fn": "originForSecurityDisplay", "args": ["file:///Users/me/100%.html"]}
+{"fn": "urlTrail", "args": ["file:///Users/me/100%.html", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/100%.html", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/100%.html", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/100%.html", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/100%.html", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/100%.html", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/100%.html", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:///Users/me/100%.html", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["file:"]}
+{"fn": "withoutUserInfo", "args": ["file:"]}
+{"fn": "isWebPageUrl", "args": ["file:"]}
+{"fn": "displayHostOf", "args": ["file:"]}
+{"fn": "pageHostLabel", "args": ["file:"]}
+{"fn": "hostOrOrigin", "args": ["file:"]}
+{"fn": "originForSecurityDisplay", "args": ["file:"]}
+{"fn": "urlTrail", "args": ["file:", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["file:/"]}
+{"fn": "withoutUserInfo", "args": ["file:/"]}
+{"fn": "isWebPageUrl", "args": ["file:/"]}
+{"fn": "displayHostOf", "args": ["file:/"]}
+{"fn": "pageHostLabel", "args": ["file:/"]}
+{"fn": "hostOrOrigin", "args": ["file:/"]}
+{"fn": "originForSecurityDisplay", "args": ["file:/"]}
+{"fn": "urlTrail", "args": ["file:/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["file:a😀b"]}
+{"fn": "withoutUserInfo", "args": ["file:a😀b"]}
+{"fn": "isWebPageUrl", "args": ["file:a😀b"]}
+{"fn": "displayHostOf", "args": ["file:a😀b"]}
+{"fn": "pageHostLabel", "args": ["file:a😀b"]}
+{"fn": "hostOrOrigin", "args": ["file:a😀b"]}
+{"fn": "originForSecurityDisplay", "args": ["file:a😀b"]}
+{"fn": "urlTrail", "args": ["file:a😀b", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:a😀b", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:a😀b", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:a😀b", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:a😀b", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:a😀b", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:a😀b", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:a😀b", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["file:é"]}
+{"fn": "withoutUserInfo", "args": ["file:é"]}
+{"fn": "isWebPageUrl", "args": ["file:é"]}
+{"fn": "displayHostOf", "args": ["file:é"]}
+{"fn": "pageHostLabel", "args": ["file:é"]}
+{"fn": "hostOrOrigin", "args": ["file:é"]}
+{"fn": "originForSecurityDisplay", "args": ["file:é"]}
+{"fn": "urlTrail", "args": ["file:é", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:é", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:é", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:é", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:é", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:é", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:é", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:é", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["file:ab%E2%82%AC"]}
+{"fn": "withoutUserInfo", "args": ["file:ab%E2%82%AC"]}
+{"fn": "isWebPageUrl", "args": ["file:ab%E2%82%AC"]}
+{"fn": "displayHostOf", "args": ["file:ab%E2%82%AC"]}
+{"fn": "pageHostLabel", "args": ["file:ab%E2%82%AC"]}
+{"fn": "hostOrOrigin", "args": ["file:ab%E2%82%AC"]}
+{"fn": "originForSecurityDisplay", "args": ["file:ab%E2%82%AC"]}
+{"fn": "urlTrail", "args": ["file:ab%E2%82%AC", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:ab%E2%82%AC", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:ab%E2%82%AC", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:ab%E2%82%AC", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:ab%E2%82%AC", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:ab%E2%82%AC", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:ab%E2%82%AC", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:ab%E2%82%AC", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["https://user:pw@Example.com:8443/p#f"]}
+{"fn": "withoutUserInfo", "args": ["https://user:pw@Example.com:8443/p#f"]}
+{"fn": "isWebPageUrl", "args": ["https://user:pw@Example.com:8443/p#f"]}
+{"fn": "displayHostOf", "args": ["https://user:pw@Example.com:8443/p#f"]}
+{"fn": "pageHostLabel", "args": ["https://user:pw@Example.com:8443/p#f"]}
+{"fn": "hostOrOrigin", "args": ["https://user:pw@Example.com:8443/p#f"]}
+{"fn": "originForSecurityDisplay", "args": ["https://user:pw@Example.com:8443/p#f"]}
+{"fn": "urlTrail", "args": ["https://user:pw@Example.com:8443/p#f", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://user:pw@Example.com:8443/p#f", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://user:pw@Example.com:8443/p#f", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://user:pw@Example.com:8443/p#f", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://user:pw@Example.com:8443/p#f", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://user:pw@Example.com:8443/p#f", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://user:pw@Example.com:8443/p#f", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://user:pw@Example.com:8443/p#f", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["HTTP://u@h/"]}
+{"fn": "withoutUserInfo", "args": ["HTTP://u@h/"]}
+{"fn": "isWebPageUrl", "args": ["HTTP://u@h/"]}
+{"fn": "displayHostOf", "args": ["HTTP://u@h/"]}
+{"fn": "pageHostLabel", "args": ["HTTP://u@h/"]}
+{"fn": "hostOrOrigin", "args": ["HTTP://u@h/"]}
+{"fn": "originForSecurityDisplay", "args": ["HTTP://u@h/"]}
+{"fn": "urlTrail", "args": ["HTTP://u@h/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["HTTP://u@h/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["HTTP://u@h/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["HTTP://u@h/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["HTTP://u@h/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["HTTP://u@h/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["HTTP://u@h/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["HTTP://u@h/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["ftp://a@b@c/x"]}
+{"fn": "withoutUserInfo", "args": ["ftp://a@b@c/x"]}
+{"fn": "isWebPageUrl", "args": ["ftp://a@b@c/x"]}
+{"fn": "displayHostOf", "args": ["ftp://a@b@c/x"]}
+{"fn": "pageHostLabel", "args": ["ftp://a@b@c/x"]}
+{"fn": "hostOrOrigin", "args": ["ftp://a@b@c/x"]}
+{"fn": "originForSecurityDisplay", "args": ["ftp://a@b@c/x"]}
+{"fn": "urlTrail", "args": ["ftp://a@b@c/x", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ftp://a@b@c/x", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ftp://a@b@c/x", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ftp://a@b@c/x", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ftp://a@b@c/x", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ftp://a@b@c/x", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ftp://a@b@c/x", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ftp://a@b@c/x", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["https://xn--bcher-kva.de/x"]}
+{"fn": "withoutUserInfo", "args": ["https://xn--bcher-kva.de/x"]}
+{"fn": "isWebPageUrl", "args": ["https://xn--bcher-kva.de/x"]}
+{"fn": "displayHostOf", "args": ["https://xn--bcher-kva.de/x"]}
+{"fn": "pageHostLabel", "args": ["https://xn--bcher-kva.de/x"]}
+{"fn": "hostOrOrigin", "args": ["https://xn--bcher-kva.de/x"]}
+{"fn": "originForSecurityDisplay", "args": ["https://xn--bcher-kva.de/x"]}
+{"fn": "urlTrail", "args": ["https://xn--bcher-kva.de/x", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://xn--bcher-kva.de/x", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://xn--bcher-kva.de/x", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://xn--bcher-kva.de/x", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://xn--bcher-kva.de/x", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://xn--bcher-kva.de/x", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://xn--bcher-kva.de/x", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://xn--bcher-kva.de/x", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["https://xn--80ak6aa92e.com/"]}
+{"fn": "withoutUserInfo", "args": ["https://xn--80ak6aa92e.com/"]}
+{"fn": "isWebPageUrl", "args": ["https://xn--80ak6aa92e.com/"]}
+{"fn": "displayHostOf", "args": ["https://xn--80ak6aa92e.com/"]}
+{"fn": "pageHostLabel", "args": ["https://xn--80ak6aa92e.com/"]}
+{"fn": "hostOrOrigin", "args": ["https://xn--80ak6aa92e.com/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://xn--80ak6aa92e.com/"]}
+{"fn": "urlTrail", "args": ["https://xn--80ak6aa92e.com/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://xn--80ak6aa92e.com/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://xn--80ak6aa92e.com/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://xn--80ak6aa92e.com/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://xn--80ak6aa92e.com/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://xn--80ak6aa92e.com/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://xn--80ak6aa92e.com/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://xn--80ak6aa92e.com/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["http://[::1]:80/"]}
+{"fn": "withoutUserInfo", "args": ["http://[::1]:80/"]}
+{"fn": "isWebPageUrl", "args": ["http://[::1]:80/"]}
+{"fn": "displayHostOf", "args": ["http://[::1]:80/"]}
+{"fn": "pageHostLabel", "args": ["http://[::1]:80/"]}
+{"fn": "hostOrOrigin", "args": ["http://[::1]:80/"]}
+{"fn": "originForSecurityDisplay", "args": ["http://[::1]:80/"]}
+{"fn": "urlTrail", "args": ["http://[::1]:80/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://[::1]:80/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://[::1]:80/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["http://[::1]:80/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["http://[::1]:80/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://[::1]:80/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://[::1]:80/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["http://[::1]:80/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["https://bücher.de/"]}
+{"fn": "withoutUserInfo", "args": ["https://bücher.de/"]}
+{"fn": "isWebPageUrl", "args": ["https://bücher.de/"]}
+{"fn": "displayHostOf", "args": ["https://bücher.de/"]}
+{"fn": "pageHostLabel", "args": ["https://bücher.de/"]}
+{"fn": "hostOrOrigin", "args": ["https://bücher.de/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://bücher.de/"]}
+{"fn": "urlTrail", "args": ["https://bücher.de/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://bücher.de/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://bücher.de/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://bücher.de/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://bücher.de/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://bücher.de/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://bücher.de/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://bücher.de/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["about:blank"]}
+{"fn": "withoutUserInfo", "args": ["about:blank"]}
+{"fn": "isWebPageUrl", "args": ["about:blank"]}
+{"fn": "displayHostOf", "args": ["about:blank"]}
+{"fn": "pageHostLabel", "args": ["about:blank"]}
+{"fn": "hostOrOrigin", "args": ["about:blank"]}
+{"fn": "originForSecurityDisplay", "args": ["about:blank"]}
+{"fn": "urlTrail", "args": ["about:blank", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["about:blank", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["about:blank", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["about:blank", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["about:blank", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["about:blank", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["about:blank", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["about:blank", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["data:text/plain,hi"]}
+{"fn": "withoutUserInfo", "args": ["data:text/plain,hi"]}
+{"fn": "isWebPageUrl", "args": ["data:text/plain,hi"]}
+{"fn": "displayHostOf", "args": ["data:text/plain,hi"]}
+{"fn": "pageHostLabel", "args": ["data:text/plain,hi"]}
+{"fn": "hostOrOrigin", "args": ["data:text/plain,hi"]}
+{"fn": "originForSecurityDisplay", "args": ["data:text/plain,hi"]}
+{"fn": "urlTrail", "args": ["data:text/plain,hi", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["data:text/plain,hi", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["data:text/plain,hi", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["data:text/plain,hi", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["data:text/plain,hi", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["data:text/plain,hi", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["data:text/plain,hi", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["data:text/plain,hi", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["javascript:alert(1)"]}
+{"fn": "withoutUserInfo", "args": ["javascript:alert(1)"]}
+{"fn": "isWebPageUrl", "args": ["javascript:alert(1)"]}
+{"fn": "displayHostOf", "args": ["javascript:alert(1)"]}
+{"fn": "pageHostLabel", "args": ["javascript:alert(1)"]}
+{"fn": "hostOrOrigin", "args": ["javascript:alert(1)"]}
+{"fn": "originForSecurityDisplay", "args": ["javascript:alert(1)"]}
+{"fn": "urlTrail", "args": ["javascript:alert(1)", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["javascript:alert(1)", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["javascript:alert(1)", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["javascript:alert(1)", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["javascript:alert(1)", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["javascript:alert(1)", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["javascript:alert(1)", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["javascript:alert(1)", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["a#b\nc#d"]}
+{"fn": "withoutUserInfo", "args": ["a#b\nc#d"]}
+{"fn": "isWebPageUrl", "args": ["a#b\nc#d"]}
+{"fn": "displayHostOf", "args": ["a#b\nc#d"]}
+{"fn": "pageHostLabel", "args": ["a#b\nc#d"]}
+{"fn": "hostOrOrigin", "args": ["a#b\nc#d"]}
+{"fn": "originForSecurityDisplay", "args": ["a#b\nc#d"]}
+{"fn": "urlTrail", "args": ["a#b\nc#d", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["a#b\nc#d", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["a#b\nc#d", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["a#b\nc#d", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["a#b\nc#d", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["a#b\nc#d", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["a#b\nc#d", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["a#b\nc#d", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["a#b c"]}
+{"fn": "withoutUserInfo", "args": ["a#b c"]}
+{"fn": "isWebPageUrl", "args": ["a#b c"]}
+{"fn": "displayHostOf", "args": ["a#b c"]}
+{"fn": "pageHostLabel", "args": ["a#b c"]}
+{"fn": "hostOrOrigin", "args": ["a#b c"]}
+{"fn": "originForSecurityDisplay", "args": ["a#b c"]}
+{"fn": "urlTrail", "args": ["a#b c", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["a#b c", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["a#b c", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["a#b c", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["a#b c", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["a#b c", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["a#b c", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["a#b c", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["#"]}
+{"fn": "withoutUserInfo", "args": ["#"]}
+{"fn": "isWebPageUrl", "args": ["#"]}
+{"fn": "displayHostOf", "args": ["#"]}
+{"fn": "pageHostLabel", "args": ["#"]}
+{"fn": "hostOrOrigin", "args": ["#"]}
+{"fn": "originForSecurityDisplay", "args": ["#"]}
+{"fn": "urlTrail", "args": ["#", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["#", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["#", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["#", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["#", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["#", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["#", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["#", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["x#y#z"]}
+{"fn": "withoutUserInfo", "args": ["x#y#z"]}
+{"fn": "isWebPageUrl", "args": ["x#y#z"]}
+{"fn": "displayHostOf", "args": ["x#y#z"]}
+{"fn": "pageHostLabel", "args": ["x#y#z"]}
+{"fn": "hostOrOrigin", "args": ["x#y#z"]}
+{"fn": "originForSecurityDisplay", "args": ["x#y#z"]}
+{"fn": "urlTrail", "args": ["x#y#z", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["x#y#z", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["x#y#z", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["x#y#z", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["x#y#z", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["x#y#z", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["x#y#z", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["x#y#z", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["https://a.com/#x/"]}
+{"fn": "withoutUserInfo", "args": ["https://a.com/#x/"]}
+{"fn": "isWebPageUrl", "args": ["https://a.com/#x/"]}
+{"fn": "displayHostOf", "args": ["https://a.com/#x/"]}
+{"fn": "pageHostLabel", "args": ["https://a.com/#x/"]}
+{"fn": "hostOrOrigin", "args": ["https://a.com/#x/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://a.com/#x/"]}
+{"fn": "urlTrail", "args": ["https://a.com/#x/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://a.com/#x/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://a.com/#x/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://a.com/#x/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://a.com/#x/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://a.com/#x/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://a.com/#x/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://a.com/#x/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["https://a.com//"]}
+{"fn": "withoutUserInfo", "args": ["https://a.com//"]}
+{"fn": "isWebPageUrl", "args": ["https://a.com//"]}
+{"fn": "displayHostOf", "args": ["https://a.com//"]}
+{"fn": "pageHostLabel", "args": ["https://a.com//"]}
+{"fn": "hostOrOrigin", "args": ["https://a.com//"]}
+{"fn": "originForSecurityDisplay", "args": ["https://a.com//"]}
+{"fn": "urlTrail", "args": ["https://a.com//", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://a.com//", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://a.com//", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://a.com//", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://a.com//", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://a.com//", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://a.com//", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://a.com//", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["ardia://x#a\nb"]}
+{"fn": "withoutUserInfo", "args": ["ardia://x#a\nb"]}
+{"fn": "isWebPageUrl", "args": ["ardia://x#a\nb"]}
+{"fn": "displayHostOf", "args": ["ardia://x#a\nb"]}
+{"fn": "pageHostLabel", "args": ["ardia://x#a\nb"]}
+{"fn": "hostOrOrigin", "args": ["ardia://x#a\nb"]}
+{"fn": "originForSecurityDisplay", "args": ["ardia://x#a\nb"]}
+{"fn": "urlTrail", "args": ["ardia://x#a\nb", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://x#a\nb", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://x#a\nb", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://x#a\nb", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://x#a\nb", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://x#a\nb", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://x#a\nb", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://x#a\nb", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["ardia://settings/"]}
+{"fn": "withoutUserInfo", "args": ["ardia://settings/"]}
+{"fn": "isWebPageUrl", "args": ["ardia://settings/"]}
+{"fn": "displayHostOf", "args": ["ardia://settings/"]}
+{"fn": "pageHostLabel", "args": ["ardia://settings/"]}
+{"fn": "hostOrOrigin", "args": ["ardia://settings/"]}
+{"fn": "originForSecurityDisplay", "args": ["ardia://settings/"]}
+{"fn": "urlTrail", "args": ["ardia://settings/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://settings/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://settings/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["ardia://settings/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["ardia://settings/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["netnyahoo://history"]}
+{"fn": "withoutUserInfo", "args": ["netnyahoo://history"]}
+{"fn": "isWebPageUrl", "args": ["netnyahoo://history"]}
+{"fn": "displayHostOf", "args": ["netnyahoo://history"]}
+{"fn": "pageHostLabel", "args": ["netnyahoo://history"]}
+{"fn": "hostOrOrigin", "args": ["netnyahoo://history"]}
+{"fn": "originForSecurityDisplay", "args": ["netnyahoo://history"]}
+{"fn": "urlTrail", "args": ["netnyahoo://history", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["netnyahoo://history", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["netnyahoo://history", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["netnyahoo://history", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["netnyahoo://history", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["netnyahoo://history", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["netnyahoo://history", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["netnyahoo://history", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["view-source:https://a.com/"]}
+{"fn": "withoutUserInfo", "args": ["view-source:https://a.com/"]}
+{"fn": "isWebPageUrl", "args": ["view-source:https://a.com/"]}
+{"fn": "displayHostOf", "args": ["view-source:https://a.com/"]}
+{"fn": "pageHostLabel", "args": ["view-source:https://a.com/"]}
+{"fn": "hostOrOrigin", "args": ["view-source:https://a.com/"]}
+{"fn": "originForSecurityDisplay", "args": ["view-source:https://a.com/"]}
+{"fn": "urlTrail", "args": ["view-source:https://a.com/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["view-source:https://a.com/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["view-source:https://a.com/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["view-source:https://a.com/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["view-source:https://a.com/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["view-source:https://a.com/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["view-source:https://a.com/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["view-source:https://a.com/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["file:///C:/x%ZZ"]}
+{"fn": "withoutUserInfo", "args": ["file:///C:/x%ZZ"]}
+{"fn": "isWebPageUrl", "args": ["file:///C:/x%ZZ"]}
+{"fn": "displayHostOf", "args": ["file:///C:/x%ZZ"]}
+{"fn": "pageHostLabel", "args": ["file:///C:/x%ZZ"]}
+{"fn": "hostOrOrigin", "args": ["file:///C:/x%ZZ"]}
+{"fn": "originForSecurityDisplay", "args": ["file:///C:/x%ZZ"]}
+{"fn": "urlTrail", "args": ["file:///C:/x%ZZ", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///C:/x%ZZ", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///C:/x%ZZ", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:///C:/x%ZZ", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:///C:/x%ZZ", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///C:/x%ZZ", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["file:///C:/x%ZZ", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["file:///C:/x%ZZ", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["chrome://newtab/"]}
+{"fn": "withoutUserInfo", "args": ["chrome://newtab/"]}
+{"fn": "isWebPageUrl", "args": ["chrome://newtab/"]}
+{"fn": "displayHostOf", "args": ["chrome://newtab/"]}
+{"fn": "pageHostLabel", "args": ["chrome://newtab/"]}
+{"fn": "hostOrOrigin", "args": ["chrome://newtab/"]}
+{"fn": "originForSecurityDisplay", "args": ["chrome://newtab/"]}
+{"fn": "urlTrail", "args": ["chrome://newtab/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["chrome://newtab/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["chrome://newtab/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["chrome://newtab/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["chrome://newtab/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["chrome://newtab/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["chrome://newtab/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["chrome://newtab/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["http://a:b@c/"]}
+{"fn": "withoutUserInfo", "args": ["http://a:b@c/"]}
+{"fn": "isWebPageUrl", "args": ["http://a:b@c/"]}
+{"fn": "displayHostOf", "args": ["http://a:b@c/"]}
+{"fn": "pageHostLabel", "args": ["http://a:b@c/"]}
+{"fn": "hostOrOrigin", "args": ["http://a:b@c/"]}
+{"fn": "originForSecurityDisplay", "args": ["http://a:b@c/"]}
+{"fn": "urlTrail", "args": ["http://a:b@c/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://a:b@c/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://a:b@c/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["http://a:b@c/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["http://a:b@c/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://a:b@c/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["http://a:b@c/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["http://a:b@c/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": [""]}
+{"fn": "withoutUserInfo", "args": [""]}
+{"fn": "isWebPageUrl", "args": [""]}
+{"fn": "displayHostOf", "args": [""]}
+{"fn": "pageHostLabel", "args": [""]}
+{"fn": "hostOrOrigin", "args": [""]}
+{"fn": "originForSecurityDisplay", "args": [""]}
+{"fn": "urlTrail", "args": ["", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["   "]}
+{"fn": "withoutUserInfo", "args": ["   "]}
+{"fn": "isWebPageUrl", "args": ["   "]}
+{"fn": "displayHostOf", "args": ["   "]}
+{"fn": "pageHostLabel", "args": ["   "]}
+{"fn": "hostOrOrigin", "args": ["   "]}
+{"fn": "originForSecurityDisplay", "args": ["   "]}
+{"fn": "urlTrail", "args": ["   ", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["   ", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["   ", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["   ", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["   ", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["   ", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["   ", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["   ", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["https://www.www.a.com/"]}
+{"fn": "withoutUserInfo", "args": ["https://www.www.a.com/"]}
+{"fn": "isWebPageUrl", "args": ["https://www.www.a.com/"]}
+{"fn": "displayHostOf", "args": ["https://www.www.a.com/"]}
+{"fn": "pageHostLabel", "args": ["https://www.www.a.com/"]}
+{"fn": "hostOrOrigin", "args": ["https://www.www.a.com/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://www.www.a.com/"]}
+{"fn": "urlTrail", "args": ["https://www.www.a.com/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://www.www.a.com/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://www.www.a.com/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://www.www.a.com/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://www.www.a.com/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://www.www.a.com/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://www.www.a.com/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://www.www.a.com/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "withoutFragment", "args": ["https://WWW.Example.com:443/"]}
+{"fn": "withoutUserInfo", "args": ["https://WWW.Example.com:443/"]}
+{"fn": "isWebPageUrl", "args": ["https://WWW.Example.com:443/"]}
+{"fn": "displayHostOf", "args": ["https://WWW.Example.com:443/"]}
+{"fn": "pageHostLabel", "args": ["https://WWW.Example.com:443/"]}
+{"fn": "hostOrOrigin", "args": ["https://WWW.Example.com:443/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://WWW.Example.com:443/"]}
+{"fn": "urlTrail", "args": ["https://WWW.Example.com:443/", "", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://WWW.Example.com:443/", "Title", {"hovered": false, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://WWW.Example.com:443/", "", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://WWW.Example.com:443/", "Title", {"hovered": false, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://WWW.Example.com:443/", "", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://WWW.Example.com:443/", "Title", {"hovered": true, "showFullUrl": false}]}
+{"fn": "urlTrail", "args": ["https://WWW.Example.com:443/", "", {"hovered": true, "showFullUrl": true}]}
+{"fn": "urlTrail", "args": ["https://WWW.Example.com:443/", "Title", {"hovered": true, "showFullUrl": true}]}
+{"fn": "samePage", "args": ["https://a.com/x#1", "https://a.com/x/#2"]}
+{"fn": "samePage", "args": ["https://a.com/x", "https://a.com/y"]}
+{"fn": "samePage", "args": ["a/", "a"]}
+{"fn": "samePage", "args": ["a//", "a"]}
+{"fn": "samePage", "args": ["a#b\nc", "a#b\nc/"]}
+{"fn": "samePage", "args": ["a\n#x", "a\n"]}
+{"fn": "samePage", "args": ["", ""]}
+{"fn": "samePage", "args": ["/", ""]}
+{"fn": "urlTrail", "args": ["https://a.com/x", "t", null]}
+{"fn": "urlTrail", "args": ["https://a.com/x", "t", {"$undefined": true}]}
+{"fn": "urlTrail", "args": ["https://a.com/x", "t", 0]}
+{"fn": "urlTrail", "args": ["https://a.com/x", "t", "a"]}
+{"fn": "urlTrail", "args": ["https://a.com/x", "t", [1]]}
+{"fn": "urlTrail", "args": ["https://a.com/x", "t", {"hovered": 1, "showFullUrl": 0}]}
+{"fn": "urlTrail", "args": ["https://a.com/x", "t", {"hovered": "", "showFullUrl": "y"}]}
+{"fn": "urlTrail", "args": ["https://a.com/x", "t", {"hovered": {"$num": "NaN"}}]}
+{"fn": "urlTrail", "args": ["https://a.com/x", "t", {"showFullUrl": []}]}
+{"fn": "originForSecurityDisplay", "args": ["https://EXAMPLE.com:443"]}
+{"fn": "originForSecurityDisplay", "args": ["http://example.com:8080"]}
+{"fn": "originForSecurityDisplay", "args": ["http://0x7f.1/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://[::1]:443/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://[0:0::1]:8443/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://bücher.de/"]}
+{"fn": "originForSecurityDisplay", "args": ["blob:https://a.com/x"]}
+{"fn": "originForSecurityDisplay", "args": ["ws://a.com"]}
+{"fn": "originForSecurityDisplay", "args": ["wss://a.com:443"]}
+{"fn": "originForSecurityDisplay", "args": ["file://host/x"]}
+{"fn": "originForSecurityDisplay", "args": ["file:///x"]}
+{"fn": "originForSecurityDisplay", "args": ["x:/y"]}
+{"fn": "originForSecurityDisplay", "args": ["x://y:1/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://a.com:0/"]}
+{"fn": "originForSecurityDisplay", "args": ["http://1.2.3/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://%41.com/"]}
+{"fn": "originForSecurityDisplay", "args": ["not a url"]}
+{"fn": "originForSecurityDisplay", "args": ["https://a b/"]}
+{"fn": "originForSecurityDisplay", "args": ["https://"]}
+{"fn": "originForSecurityDisplay", "args": [":"]}

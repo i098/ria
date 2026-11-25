@@ -1,0 +1,36 @@
+{"fn": "withDeadlineCase", "args": ["resolve", 1, 0, "late"]}
+{"fn": "withDeadlineCase", "args": ["resolve", "ok", 5, null]}
+{"fn": "withDeadlineCase", "args": ["resolve", {"$undefined": true}, 1, {"$undefined": true}]}
+{"fn": "withDeadlineCase", "args": ["resolve", {"a": [1, {"$num": "NaN"}]}, {"$num": "NaN"}, "fb"]}
+{"fn": "withDeadlineCase", "args": ["resolve", null, -5, 0]}
+{"fn": "withDeadlineCase", "args": ["resolve", "x", 10000000000.0, "fb"]}
+{"fn": "withDeadlineCase", "args": ["resolve", [], 2.5, {"b": 1}]}
+{"fn": "withDeadlineCase", "args": ["resolve", {"$num": "-0"}, 20, {"$num": "-0"}]}
+{"fn": "withDeadlineCase", "args": ["resolve", "ü", 30, "slow"]}
+{"fn": "withDeadlineCase", "args": ["reject", 1, 0, "late"]}
+{"fn": "withDeadlineCase", "args": ["reject", "ok", 5, null]}
+{"fn": "withDeadlineCase", "args": ["reject", {"$undefined": true}, 1, {"$undefined": true}]}
+{"fn": "withDeadlineCase", "args": ["reject", {"a": [1, {"$num": "NaN"}]}, {"$num": "NaN"}, "fb"]}
+{"fn": "withDeadlineCase", "args": ["reject", null, -5, 0]}
+{"fn": "withDeadlineCase", "args": ["reject", "x", 10000000000.0, "fb"]}
+{"fn": "withDeadlineCase", "args": ["reject", [], 2.5, {"b": 1}]}
+{"fn": "withDeadlineCase", "args": ["reject", {"$num": "-0"}, 20, {"$num": "-0"}]}
+{"fn": "withDeadlineCase", "args": ["reject", "ü", 30, "slow"]}
+{"fn": "withDeadlineCase", "args": ["never", 1, 0, "late"]}
+{"fn": "withDeadlineCase", "args": ["never", "ok", 5, null]}
+{"fn": "withDeadlineCase", "args": ["never", {"$undefined": true}, 1, {"$undefined": true}]}
+{"fn": "withDeadlineCase", "args": ["never", {"a": [1, {"$num": "NaN"}]}, {"$num": "NaN"}, "fb"]}
+{"fn": "withDeadlineCase", "args": ["never", null, -5, 0]}
+{"fn": "withDeadlineCase", "args": ["never", "x", 10000000000.0, "fb"]}
+{"fn": "withDeadlineCase", "args": ["never", [], 2.5, {"b": 1}]}
+{"fn": "withDeadlineCase", "args": ["never", {"$num": "-0"}, 20, {"$num": "-0"}]}
+{"fn": "withDeadlineCase", "args": ["never", "ü", 30, "slow"]}
+{"fn": "withDeadlineCase", "args": ["other", 1, 0, "late"]}
+{"fn": "withDeadlineCase", "args": ["other", "ok", 5, null]}
+{"fn": "withDeadlineCase", "args": ["other", {"$undefined": true}, 1, {"$undefined": true}]}
+{"fn": "withDeadlineCase", "args": ["other", {"a": [1, {"$num": "NaN"}]}, {"$num": "NaN"}, "fb"]}
+{"fn": "withDeadlineCase", "args": ["other", null, -5, 0]}
+{"fn": "withDeadlineCase", "args": ["other", "x", 10000000000.0, "fb"]}
+{"fn": "withDeadlineCase", "args": ["other", [], 2.5, {"b": 1}]}
+{"fn": "withDeadlineCase", "args": ["other", {"$num": "-0"}, 20, {"$num": "-0"}]}
+{"fn": "withDeadlineCase", "args": ["other", "ü", 30, "slow"]}

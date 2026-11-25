@@ -1,0 +1,83 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/webloc.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "webloc-rs",
+  "exports": [
+    {
+      "name": "weblocText",
+      "file": "apps/browser/src/lib/webloc.harness.ts",
+      "line": 3,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "id",
+          "ts_type": "string",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "parseWebloc",
+      "file": "apps/browser/src/lib/webloc.harness.ts",
+      "line": 4,
+      "params": [
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "weblocLinkId",
+      "file": "apps/browser/src/lib/webloc.harness.ts",
+      "line": 5,
+      "params": [
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "newLinkIdShape",
+      "file": "apps/browser/src/lib/webloc.harness.ts",
+      "line": 8,
+      "params": [],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

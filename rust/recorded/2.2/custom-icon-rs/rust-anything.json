@@ -1,0 +1,48 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/customIcon.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "customicon-rs",
+  "exports": [
+    {
+      "name": "symbolIcon",
+      "file": "apps/browser/src/lib/customIcon.ts",
+      "line": 3,
+      "params": [
+        {
+          "name": "name",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "iconSymbol",
+      "file": "apps/browser/src/lib/customIcon.ts",
+      "line": 5,
+      "params": [
+        {
+          "name": "icon",
+          "ts_type": "string | null | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

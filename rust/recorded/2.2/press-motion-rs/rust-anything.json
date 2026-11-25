@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/pressMotion.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "press-motion-rs",
+  "exports": [
+    {
+      "name": "replayPressMotion",
+      "file": "apps/browser/src/lib/pressMotion.harness.ts",
+      "line": 6,
+      "params": [
+        {
+          "name": "steps",
+          "ts_type": "string[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

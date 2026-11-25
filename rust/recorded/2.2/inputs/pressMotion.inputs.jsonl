@@ -1,0 +1,7 @@
+{"fn": "replayPressMotion", "args": [["now", "motions", "bounce", "now", "still", "now"]]}
+{"fn": "replayPressMotion", "args": [["subscribe", "subscribe", "bounce", "bounce", "still", "unsubscribe:0", "bounce", "unsubscribe:0", "unsubscribe:1", "still", "now"]]}
+{"fn": "replayPressMotion", "args": [["subscribe", "subscribe:0", "bounce", "unsubscribe:1", "unsubscribe:0", "still", "subscribe:5", "unsubscribe:9", "x", "subscribe: 0", "unsubscribe:-0", "still"]]}
+{"fn": "replayPressMotion", "args": [[]]}
+{"fn": "replayPressMotion", "args": [["bounce", "now"]]}
+{"fn": "replayPressMotion", "args": [["now"]]}
+{"fn": "replayPressMotion", "args": [["subscribe", "subscribe", "subscribe", "unsubscribe:1", "bounce", "subscribe:1", "still", "unsubscribe:1.5", "unsubscribe:2", "bounce"]]}

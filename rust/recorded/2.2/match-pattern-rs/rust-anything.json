@@ -1,0 +1,102 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/matchPattern.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "matchpattern-rs",
+  "exports": [
+    {
+      "name": "parseMatchPattern",
+      "file": "apps/browser/src/lib/matchPattern.ts",
+      "line": 17,
+      "params": [
+        {
+          "name": "pattern",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ all: boolean; schemes: string[]; host: string; sub: boolean; port: string; file: boolean; path: string } | { error: string }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "globMatches",
+      "file": "apps/browser/src/lib/matchPattern.ts",
+      "line": 60,
+      "params": [
+        {
+          "name": "glob",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "matchesUrl",
+      "file": "apps/browser/src/lib/matchPattern.ts",
+      "line": 92,
+      "params": [
+        {
+          "name": "spec",
+          "ts_type": "{ all: boolean; schemes: string[]; host: string; sub: boolean; port: string; file: boolean; path: string }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "href",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "anyMatches",
+      "file": "apps/browser/src/lib/matchPattern.ts",
+      "line": 107,
+      "params": [
+        {
+          "name": "specs",
+          "ts_type": "readonly { all: boolean; schemes: string[]; host: string; sub: boolean; port: string; file: boolean; path: string }[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "href",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

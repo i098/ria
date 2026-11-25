@@ -1,0 +1,150 @@
+{"fn": "passwordFailureCase", "args": ["Could not save the password", true]}
+{"fn": "passwordFailureCase", "args": ["Could not save the password", false]}
+{"fn": "passwordFailureCase", "args": ["Engine: Could not save the password (dup)", true]}
+{"fn": "passwordFailureCase", "args": ["Engine: Could not save the password (dup)", false]}
+{"fn": "passwordFailureCase", "args": ["the store didn't take the change", true]}
+{"fn": "passwordFailureCase", "args": ["the store didn't take the change", false]}
+{"fn": "passwordFailureCase", "args": ["didn't take the change", true]}
+{"fn": "passwordFailureCase", "args": ["didn't take the change", false]}
+{"fn": "passwordFailureCase", "args": ["could not save the password", true]}
+{"fn": "passwordFailureCase", "args": ["could not save the password", false]}
+{"fn": "passwordFailureCase", "args": ["other failure", true]}
+{"fn": "passwordFailureCase", "args": ["other failure", false]}
+{"fn": "passwordFailureCase", "args": ["", true]}
+{"fn": "passwordFailureCase", "args": ["", false]}
+{"fn": "passwordFailureCase", "args": [null, true]}
+{"fn": "passwordFailureCase", "args": [null, false]}
+{"fn": "passwordFailureCase", "args": [{"$undefined": true}, true]}
+{"fn": "passwordFailureCase", "args": [{"$undefined": true}, false]}
+{"fn": "passwordFailureCase", "args": [42, true]}
+{"fn": "passwordFailureCase", "args": [42, false]}
+{"fn": "passwordFailureCase", "args": [["Could not save the password"], true]}
+{"fn": "passwordFailureCase", "args": [["Could not save the password"], false]}
+{"fn": "passwordFailureCase", "args": [{"message": "Could not save the password"}, true]}
+{"fn": "passwordFailureCase", "args": [{"message": "Could not save the password"}, false]}
+{"fn": "orWarnCase", "args": [null, {"$undefined": true}, "boom", true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, {"$undefined": true}, "boom", true]}
+{"fn": "orWarnCase", "args": [0, {"$undefined": true}, "boom", true]}
+{"fn": "orWarnCase", "args": ["fallback", {"$undefined": true}, "boom", true]}
+{"fn": "orWarnCase", "args": [[1], {"$undefined": true}, "boom", true]}
+{"fn": "orWarnCase", "args": [{"k": {"$num": "NaN"}}, {"$undefined": true}, "boom", true]}
+{"fn": "orWarnCase", "args": [null, {"$undefined": true}, null, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, {"$undefined": true}, null, false]}
+{"fn": "orWarnCase", "args": [0, {"$undefined": true}, null, false]}
+{"fn": "orWarnCase", "args": ["fallback", {"$undefined": true}, null, false]}
+{"fn": "orWarnCase", "args": [[1], {"$undefined": true}, null, false]}
+{"fn": "orWarnCase", "args": [{"k": {"$num": "NaN"}}, {"$undefined": true}, null, false]}
+{"fn": "orWarnCase", "args": [null, {"$undefined": true}, {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, {"$undefined": true}, {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [0, {"$undefined": true}, {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": ["fallback", {"$undefined": true}, {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [[1], {"$undefined": true}, {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [{"k": {"$num": "NaN"}}, {"$undefined": true}, {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [null, {"$undefined": true}, {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, {"$undefined": true}, {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [0, {"$undefined": true}, {"a": 1}, false]}
+{"fn": "orWarnCase", "args": ["fallback", {"$undefined": true}, {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [[1], {"$undefined": true}, {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [{"k": {"$num": "NaN"}}, {"$undefined": true}, {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [null, {"$undefined": true}, [1, 2], true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, {"$undefined": true}, [1, 2], true]}
+{"fn": "orWarnCase", "args": [0, {"$undefined": true}, [1, 2], true]}
+{"fn": "orWarnCase", "args": ["fallback", {"$undefined": true}, [1, 2], true]}
+{"fn": "orWarnCase", "args": [[1], {"$undefined": true}, [1, 2], true]}
+{"fn": "orWarnCase", "args": [{"k": {"$num": "NaN"}}, {"$undefined": true}, [1, 2], true]}
+{"fn": "orWarnCase", "args": [null, {"$undefined": true}, {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, {"$undefined": true}, {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [0, {"$undefined": true}, {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": ["fallback", {"$undefined": true}, {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [[1], {"$undefined": true}, {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [{"k": {"$num": "NaN"}}, {"$undefined": true}, {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [null, "browser import", "boom", true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "browser import", "boom", true]}
+{"fn": "orWarnCase", "args": [0, "browser import", "boom", true]}
+{"fn": "orWarnCase", "args": [null, "browser import", null, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "browser import", null, false]}
+{"fn": "orWarnCase", "args": [0, "browser import", null, false]}
+{"fn": "orWarnCase", "args": [null, "browser import", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "browser import", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [0, "browser import", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [null, "browser import", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "browser import", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [0, "browser import", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [null, "browser import", [1, 2], true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "browser import", [1, 2], true]}
+{"fn": "orWarnCase", "args": [0, "browser import", [1, 2], true]}
+{"fn": "orWarnCase", "args": [null, "browser import", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "browser import", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [0, "browser import", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [null, "csv import", "boom", true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "csv import", "boom", true]}
+{"fn": "orWarnCase", "args": [0, "csv import", "boom", true]}
+{"fn": "orWarnCase", "args": [null, "csv import", null, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "csv import", null, false]}
+{"fn": "orWarnCase", "args": [0, "csv import", null, false]}
+{"fn": "orWarnCase", "args": [null, "csv import", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "csv import", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [0, "csv import", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [null, "csv import", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "csv import", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [0, "csv import", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [null, "csv import", [1, 2], true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "csv import", [1, 2], true]}
+{"fn": "orWarnCase", "args": [0, "csv import", [1, 2], true]}
+{"fn": "orWarnCase", "args": [null, "csv import", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "csv import", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [0, "csv import", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [null, "settings edit", "boom", true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings edit", "boom", true]}
+{"fn": "orWarnCase", "args": [0, "settings edit", "boom", true]}
+{"fn": "orWarnCase", "args": [null, "settings edit", null, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings edit", null, false]}
+{"fn": "orWarnCase", "args": [0, "settings edit", null, false]}
+{"fn": "orWarnCase", "args": [null, "settings edit", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings edit", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [0, "settings edit", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [null, "settings edit", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings edit", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [0, "settings edit", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [null, "settings edit", [1, 2], true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings edit", [1, 2], true]}
+{"fn": "orWarnCase", "args": [0, "settings edit", [1, 2], true]}
+{"fn": "orWarnCase", "args": [null, "settings edit", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings edit", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [0, "settings edit", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [null, "settings delete", "boom", true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings delete", "boom", true]}
+{"fn": "orWarnCase", "args": [0, "settings delete", "boom", true]}
+{"fn": "orWarnCase", "args": [null, "settings delete", null, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings delete", null, false]}
+{"fn": "orWarnCase", "args": [0, "settings delete", null, false]}
+{"fn": "orWarnCase", "args": [null, "settings delete", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings delete", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [0, "settings delete", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [null, "settings delete", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings delete", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [0, "settings delete", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [null, "settings delete", [1, 2], true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings delete", [1, 2], true]}
+{"fn": "orWarnCase", "args": [0, "settings delete", [1, 2], true]}
+{"fn": "orWarnCase", "args": [null, "settings delete", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "settings delete", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [0, "settings delete", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [null, "sync delete", "boom", true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "sync delete", "boom", true]}
+{"fn": "orWarnCase", "args": [0, "sync delete", "boom", true]}
+{"fn": "orWarnCase", "args": [null, "sync delete", null, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "sync delete", null, false]}
+{"fn": "orWarnCase", "args": [0, "sync delete", null, false]}
+{"fn": "orWarnCase", "args": [null, "sync delete", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "sync delete", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [0, "sync delete", {"$undefined": true}, false]}
+{"fn": "orWarnCase", "args": [null, "sync delete", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "sync delete", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [0, "sync delete", {"a": 1}, false]}
+{"fn": "orWarnCase", "args": [null, "sync delete", [1, 2], true]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "sync delete", [1, 2], true]}
+{"fn": "orWarnCase", "args": [0, "sync delete", [1, 2], true]}
+{"fn": "orWarnCase", "args": [null, "sync delete", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [{"$undefined": true}, "sync delete", {"$num": "NaN"}, false]}
+{"fn": "orWarnCase", "args": [0, "sync delete", {"$num": "NaN"}, false]}

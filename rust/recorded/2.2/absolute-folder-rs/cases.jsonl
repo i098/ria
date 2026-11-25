@@ -1,0 +1,220 @@
+{"fn":"isAbsoluteFolder","args":["a:b:c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["emoji 👍🏽 mixstraße"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straße"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a.b.c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["﻿bom"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["line1\nline2"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a..b"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ΣΊΣΥΦΟΣns:key.path"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["İstanbul"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["  padded  "],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hello"],"ok":false}
+{"fn":"isAbsoluteFolder","args":[""],"ok":false}
+{"fn":"isAbsoluteFolder","args":["HELLOHELLO"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["trailing."],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a😀b😀c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["{name} has {count} items"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["HELLOa.b.c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["{name} has {count} itemsns:key.path"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["abc"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["日本語のテキスト"],"ok":false}
+{"fn":"isAbsoluteFolder","args":[".leading"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["key_name-1"],"ok":false}
+{"fn":"isAbsoluteFolder","args":[":"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ab"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["emoji 👍🏽 mix"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["abctab\tseparated"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["src/a/b.ts"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["line1\nline2a😀b😀c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["emoji 👍🏽 mixİstanbul"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["./x/**/*.jsona..b"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hellotab\tseparated"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["key_name-1key_name-1"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["Hello World"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a..babc"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["./x/**/*.json"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hello world"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["tab\tseparated"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["HELLO"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["emoji 👍🏽 mixHello World"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hello worldHELLO"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ünïcödé"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ns:key.path"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["日本語のテキストtrailing."],"ok":false}
+{"fn":"isAbsoluteFolder","args":["key_name-1ab"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["日本語のテキスト.leading"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["./x/**/*.jsonstraße"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["é😀"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["emoji 👍🏽 mixΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ns:key.pathsrc/a/b.ts"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["Hello Worldabc"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hello world日本語のテキスト"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["é"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["aba.b.c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["😀"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["Hello World:"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["éünïcödé"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["{name} has {count} itemsab"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["trailing.é"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["src/a/b.tsab"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["Hello WorldΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["src/a/b.tsé"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a..b./x/**/*.json"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ΣΊΣΥΦΟΣa..b"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["{name} has {count} itemsa"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straße﻿bom"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hello world./x/**/*.json"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["😀é"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ünïcödéa:b:c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["HELLOΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["İstanbulab"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ΣΊΣΥΦΟΣé"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["HELLO日本語のテキスト"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["é{name} has {count} items"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straßens:key.path"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a.b.c{name} has {count} items"],"ok":false}
+{"fn":"isAbsoluteFolder","args":[":a😀b😀c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["tab\tseparated{name} has {count} items"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a.b.ckey_name-1"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["HELLOa:b:c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a:b:cemoji 👍🏽 mix"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["İstanbul😀"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["emoji 👍🏽 mixhello world"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["HELLOhello world"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["Hello Worldab"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["abcHello World"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hello worldtab\tseparated"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["trailing../x/**/*.json"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ΣΊΣΥΦΟΣİstanbul"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straßea😀b😀c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["İstanbulabc"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["😀  padded  "],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a:"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["tab\tseparatedemoji 👍🏽 mix"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straßea:b:c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ΣΊΣΥΦΟΣline1\nline2"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["line1\nline2日本語のテキスト"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["  padded  ./x/**/*.json"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["  padded  key_name-1"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hello:"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["aa:b:c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["./x/**/*.jsonns:key.path"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["tab\tseparated./x/**/*.json"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["éstraße"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hello  padded  "],"ok":false}
+{"fn":"isAbsoluteFolder","args":[".leadingHello World"],"ok":false}
+{"fn":"isAbsoluteFolder","args":[":line1\nline2"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a..b.leading"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["emoji 👍🏽 mixé"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["./x/**/*.json.leading"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a..b:"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["😀a:b:c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["key_name-1﻿bom"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["./x/**/*.jsonhello"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straßeHello World"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["./x/**/*.jsontab\tseparated"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straßea.b.c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["helloa:b:c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["emoji 👍🏽 mix  padded  "],"ok":false}
+{"fn":"isAbsoluteFolder","args":["trailing.日本語のテキスト"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a😀b😀cemoji 👍🏽 mix"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["abemoji 👍🏽 mix"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["abc./x/**/*.json"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["abcabc"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["İstanbul﻿bom"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ahello"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ünïcödé﻿bom"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hellostraße"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ns:key.pathé"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ns:key.pathHello World"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straße./x/**/*.json"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["İstanbul  padded  "],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straßeemoji 👍🏽 mix"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["line1\nline2HELLO"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a:b:ca"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a.leading"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["日本語のテキストline1\nline2"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["tab\tseparated😀"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["  padded  ünïcödé"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["./x/**/*.json{name} has {count} items"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["İstanbulİstanbul"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["./x/**/*.json😀"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straße.leading"],"ok":false}
+{"fn":"isAbsoluteFolder","args":[":a.b.c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ünïcödéa..b"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["line1\nline2{name} has {count} items"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["  padded  ns:key.path"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["emoji 👍🏽 mixtab\tseparated"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["tab\tseparatedtab\tseparated"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["./x/**/*.json﻿bom"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hellohello world"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ns:key.pathkey_name-1"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ΣΊΣΥΦΟΣ./x/**/*.json"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["日本語のテキストemoji 👍🏽 mix"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a😀b😀c./x/**/*.json"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a.b.c﻿bom"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["src/a/b.tsΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["atrailing."],"ok":false}
+{"fn":"isAbsoluteFolder","args":["😀straße"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["aa..b"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["tab\tseparatedünïcödé"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hello worldhello"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["😀ns:key.path"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["Hello Worldns:key.path"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a.b.ca:b:c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["line1\nline2a:b:c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a:b:cstraße"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["key_name-1.leading"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ns:key.pathline1\nline2"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["aé"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["helloa😀b😀c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["abcİstanbul"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["hello worldtrailing."],"ok":false}
+{"fn":"isAbsoluteFolder","args":["tab\tseparateda..b"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["tab\tseparatedtrailing."],"ok":false}
+{"fn":"isAbsoluteFolder","args":["İstanbula.b.c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["﻿bomhello world"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["😀a😀b😀c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["日本語のテキスト😀"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a.b.cstraße"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["helloΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["﻿bomtrailing."],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ünïcödéİstanbul"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ünïcödéemoji 👍🏽 mix"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a.b.ca😀b😀c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["key_name-1ns:key.path"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["src/a/b.tssrc/a/b.ts"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["😀HELLO"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["key_name-1a😀b😀c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a..ba:b:c"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["straße日本語のテキスト"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["😀hello world"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["  padded  hello"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["😀{name} has {count} items"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ns:key.path😀"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a..b﻿bom"],"ok":false}
+{"fn":"isAbsoluteFolder","args":[".leadingtab\tseparated"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["{name} has {count} items  padded  "],"ok":false}
+{"fn":"isAbsoluteFolder","args":["abtrailing."],"ok":false}
+{"fn":"isAbsoluteFolder","args":["héllo wörld"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["👍🏽 thumbs"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["日本語"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["ılık ırmak"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["👨‍👩‍👧 family"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a b"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a😀b"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a²b x½ y①"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["aⅠb Ⅻ"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["a𐐀b 𝐀bc"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["कि ٣٤"],"ok":false}
+{"fn":"isAbsoluteFolder","args":[""],"ok":false}
+{"fn":"isAbsoluteFolder","args":["/"],"ok":true}
+{"fn":"isAbsoluteFolder","args":["/Users/a"],"ok":true}
+{"fn":"isAbsoluteFolder","args":["~/x"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["relative/x"],"ok":false}
+{"fn":"isAbsoluteFolder","args":[" /x"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["\\x"],"ok":false}
+{"fn":"isAbsoluteFolder","args":["//net"],"ok":true}
+{"fn":"isAbsoluteFolder","args":["ü/"],"ok":false}

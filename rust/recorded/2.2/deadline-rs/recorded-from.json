@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/deadline.harness.ts",
+  "files": 1,
+  "fingerprint": "88b11f96f713a1db",
+  "coverage": {
+    "lines": 15,
+    "reached": 15,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/deadline.harness.ts",
+        "lines": 10,
+        "reached": 10,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/deadline.ts",
+        "lines": 5,
+        "reached": 5,
+        "missed": ""
+      }
+    ]
+  }
+}

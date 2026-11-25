@@ -1,0 +1,762 @@
+{"fn":"weblocText","args":[":","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["src/a/b.tsa:b:c",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>src/a/b.tsa:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ünïcödé.leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ünïcödé.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["src/a/b.ts","日本語のテキストhello world"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>src/a/b.ts</string>\n\t<key>ArdiaLink</key>\n\t<string>日本語のテキストhello world</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["src/a/b.ts",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>src/a/b.ts</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ns:key.path",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ns:key.path</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a..b"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a..b</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello","a😀b😀c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello</string>\n\t<key>ArdiaLink</key>\n\t<string>a😀b😀c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["emoji 👍🏽 mix./x/**/*.json",":"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>emoji 👍🏽 mix./x/**/*.json</string>\n\t<key>ArdiaLink</key>\n\t<string>:</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a","a.b.cab"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a</string>\n\t<key>ArdiaLink</key>\n\t<string>a.b.cab</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["S","src/a/b.ts"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>S</string>\n\t<key>ArdiaLink</key>\n\t<string>src/a/b.ts</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["abc","a:b:c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>abc</string>\n\t<key>ArdiaLink</key>\n\t<string>a:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["﻿bom"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>﻿bom</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["{name} has {count} items","N"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>{name} has {count} items</string>\n\t<key>ArdiaLink</key>\n\t<string>N</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[".leading",":"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>.leading</string>\n\t<key>ArdiaLink</key>\n\t<string>:</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["İstanbul","line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>İstanbul</string>\n\t<key>ArdiaLink</key>\n\t<string>line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["﻿bomhello world","İstanbul"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>﻿bomhello world</string>\n\t<key>ArdiaLink</key>\n\t<string>İstanbul</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a..ba..b","a:b:c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a..ba..b</string>\n\t<key>ArdiaLink</key>\n\t<string>a:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["am","key_name-1"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>am</string>\n\t<key>ArdiaLink</key>\n\t<string>key_name-1</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["emoji 👍🏽 mix","ΣΊΣΥΦΟΣ"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>emoji 👍🏽 mix</string>\n\t<key>ArdiaLink</key>\n\t<string>ΣΊΣΥΦΟΣ</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["abc","line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>abc</string>\n\t<key>ArdiaLink</key>\n\t<string>line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a","a"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a</string>\n\t<key>ArdiaLink</key>\n\t<string>a</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["straße","a"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>straße</string>\n\t<key>ArdiaLink</key>\n\t<string>a</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ns:key.path","日本語のテキスト"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ns:key.path</string>\n\t<key>ArdiaLink</key>\n\t<string>日本語のテキスト</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["abc","helloa😀b😀c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>abc</string>\n\t<key>ArdiaLink</key>\n\t<string>helloa😀b😀c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a..b./x/**/*.json",".leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a..b./x/**/*.json</string>\n\t<key>ArdiaLink</key>\n\t<string>.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello worldünïcödé","ns:key.path"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello worldünïcödé</string>\n\t<key>ArdiaLink</key>\n\t<string>ns:key.path</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["trailing.","﻿bom"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>trailing.</string>\n\t<key>ArdiaLink</key>\n\t<string>﻿bom</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["{name} has {count} items﻿bom",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>{name} has {count} items﻿bom</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["P","  padded  "],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>P</string>\n\t<key>ArdiaLink</key>\n\t<string>  padded  </string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["Ο","ΣΊΣΥΦΟΣ"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>Ο</string>\n\t<key>ArdiaLink</key>\n\t<string>ΣΊΣΥΦΟΣ</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello world"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello world</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["﻿bom","a:b:c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>﻿bom</string>\n\t<key>ArdiaLink</key>\n\t<string>a:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["é﻿bom","  padded  "],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>é﻿bom</string>\n\t<key>ArdiaLink</key>\n\t<string>  padded  </string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ns:key.path","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ns:key.path</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello world  padded  "],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello world  padded  </string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["trailing."],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>trailing.</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["straße"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>straße</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","é"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>é</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a😀b😀c","line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a😀b😀c</string>\n\t<key>ArdiaLink</key>\n\t<string>line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["İstanbul","trailing."],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>İstanbul</string>\n\t<key>ArdiaLink</key>\n\t<string>trailing.</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["İstanbul","abc"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>İstanbul</string>\n\t<key>ArdiaLink</key>\n\t<string>abc</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["İstanbul😀","  padded  "],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>İstanbul😀</string>\n\t<key>ArdiaLink</key>\n\t<string>  padded  </string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["İstanbul",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>İstanbul</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["trailing.a😀b😀c","trailing."],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>trailing.a😀b😀c</string>\n\t<key>ArdiaLink</key>\n\t<string>trailing.</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["HELLO","a😀b😀c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>HELLO</string>\n\t<key>ArdiaLink</key>\n\t<string>a😀b😀c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["  padded  ","trailing."],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>  padded  </string>\n\t<key>ArdiaLink</key>\n\t<string>trailing.</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["b:c","a:b:c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>b:c</string>\n\t<key>ArdiaLink</key>\n\t<string>a:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["emoji 👍🏽 mix","HELLO"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>emoji 👍🏽 mix</string>\n\t<key>ArdiaLink</key>\n\t<string>HELLO</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["emoji 👍🏽 mix"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>emoji 👍🏽 mix</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a.b.c","straße"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a.b.c</string>\n\t<key>ArdiaLink</key>\n\t<string>straße</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["straße",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>straße</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a:b:c😀",".leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a:b:c😀</string>\n\t<key>ArdiaLink</key>\n\t<string>.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["日本語のテキスト",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>日本語のテキスト</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ab","日本語のテキスト./x/**/*.json"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ab</string>\n\t<key>ArdiaLink</key>\n\t<string>日本語のテキスト./x/**/*.json</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["日本語のテキスト","hello world"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>日本語のテキスト</string>\n\t<key>ArdiaLink</key>\n\t<string>hello world</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[".leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["İstanbulemoji 👍🏽 mix","﻿bom.leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>İstanbulemoji 👍🏽 mix</string>\n\t<key>ArdiaLink</key>\n\t<string>﻿bom.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["﻿boma",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>﻿boma</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello world","trailing."],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello world</string>\n\t<key>ArdiaLink</key>\n\t<string>trailing.</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["C","abc"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>C</string>\n\t<key>ArdiaLink</key>\n\t<string>abc</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["NAME} HAS {COU","{name} has {count} items😀"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>NAME} HAS {COU</string>\n\t<key>ArdiaLink</key>\n\t<string>{name} has {count} items😀</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a.b.c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a.b.c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1","Hello World"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1</string>\n\t<key>ArdiaLink</key>\n\t<string>Hello World</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["﻿bomab","./x/**/*.json日本語のテキスト"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>﻿bomab</string>\n\t<key>ArdiaLink</key>\n\t<string>./x/**/*.json日本語のテキスト</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string></string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["é","./x/**/*.json"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>é</string>\n\t<key>ArdiaLink</key>\n\t<string>./x/**/*.json</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a..b","ΣΊΣΥΦΟΣ"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a..b</string>\n\t<key>ArdiaLink</key>\n\t<string>ΣΊΣΥΦΟΣ</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["2","line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>2</string>\n\t<key>ArdiaLink</key>\n\t<string>line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1","ns:key.pathtrailing."],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1</string>\n\t<key>ArdiaLink</key>\n\t<string>ns:key.pathtrailing.</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","trailing.line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>trailing.line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["src/a/b.ts","a/b.t"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>src/a/b.ts</string>\n\t<key>ArdiaLink</key>\n\t<string>a/b.t</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello world","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello world</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["line1\nline2","emoji 👍🏽 mix"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>line1\nline2</string>\n\t<key>ArdiaLink</key>\n\t<string>emoji 👍🏽 mix</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["trailing.","src/a/b.ts"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>trailing.</string>\n\t<key>ArdiaLink</key>\n\t<string>src/a/b.ts</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["b\tse","tab\tseparated"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>b\tse</string>\n\t<key>ArdiaLink</key>\n\t<string>tab\tseparated</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ns:key.path","ns:key.path"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ns:key.path</string>\n\t<key>ArdiaLink</key>\n\t<string>ns:key.path</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["Hello World","  padded  İstanbul"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>Hello World</string>\n\t<key>ArdiaLink</key>\n\t<string>  padded  İstanbul</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["É﻿BO","ünïcödé﻿bom"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>É﻿BO</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé﻿bom</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["😀:","😀"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>😀:</string>\n\t<key>ArdiaLink</key>\n\t<string>😀</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a😀b😀cns:key.path","a😀b😀c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a😀b😀cns:key.path</string>\n\t<key>ArdiaLink</key>\n\t<string>a😀b😀c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["./x/**/*.json","a😀b😀cemoji 👍🏽 mix"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>./x/**/*.json</string>\n\t<key>ArdiaLink</key>\n\t<string>a😀b😀cemoji 👍🏽 mix</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["abc.leading","a"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>abc.leading</string>\n\t<key>ArdiaLink</key>\n\t<string>a</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["{name} has {count} items"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>{name} has {count} items</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ΣΊΣΥΦΟΣ","./x/**/*.json"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ΣΊΣΥΦΟΣ</string>\n\t<key>ArdiaLink</key>\n\t<string>./x/**/*.json</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["﻿bom","😀"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>﻿bom</string>\n\t<key>ArdiaLink</key>\n\t<string>😀</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["","﻿bom"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string></string>\n\t<key>ArdiaLink</key>\n\t<string>﻿bom</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["İstanbul","anbul"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>İstanbul</string>\n\t<key>ArdiaLink</key>\n\t<string>anbul</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a😀b😀c",".leadingtrailing."],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a😀b😀c</string>\n\t<key>ArdiaLink</key>\n\t<string>.leadingtrailing.</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ΣΊΣΥΦΟΣab","a..b"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ΣΊΣΥΦΟΣab</string>\n\t<key>ArdiaLink</key>\n\t<string>a..b</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["{name} has {count} items﻿bom","ns:key.path"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>{name} has {count} items﻿bom</string>\n\t<key>ArdiaLink</key>\n\t<string>ns:key.path</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a","HELLOHELLO"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a</string>\n\t<key>ArdiaLink</key>\n\t<string>HELLOHELLO</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a😀b😀c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a😀b😀c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1","line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1</string>\n\t<key>ArdiaLink</key>\n\t<string>line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["bc","abc"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>bc</string>\n\t<key>ArdiaLink</key>\n\t<string>abc</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["abns:key.path","Hello Worldhello"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>abns:key.path</string>\n\t<key>ArdiaLink</key>\n\t<string>Hello Worldhello</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["😀","😀"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>😀</string>\n\t<key>ArdiaLink</key>\n\t<string>😀</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["😀hello","straße"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>😀hello</string>\n\t<key>ArdiaLink</key>\n\t<string>straße</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["line1\nline2straße","Hello World"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>line1\nline2straße</string>\n\t<key>ArdiaLink</key>\n\t<string>Hello World</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ab",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ab</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["😀"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>😀</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["emoji 👍🏽 mix","./x/**/*.json"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>emoji 👍🏽 mix</string>\n\t<key>ArdiaLink</key>\n\t<string>./x/**/*.json</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ab","line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ab</string>\n\t<key>ArdiaLink</key>\n\t<string>line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["  pa","  padded  "],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>  pa</string>\n\t<key>ArdiaLink</key>\n\t<string>  padded  </string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["abemoji 👍🏽 mix","emoji 👍🏽 mix"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>abemoji 👍🏽 mix</string>\n\t<key>ArdiaLink</key>\n\t<string>emoji 👍🏽 mix</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["./x/**/*.json","﻿bom"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>./x/**/*.json</string>\n\t<key>ArdiaLink</key>\n\t<string>﻿bom</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a.b.c",".leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a.b.c</string>\n\t<key>ArdiaLink</key>\n\t<string>.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ab","key_name-1日本語のテキスト"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ab</string>\n\t<key>ArdiaLink</key>\n\t<string>key_name-1日本語のテキスト</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["","a.b.c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string></string>\n\t<key>ArdiaLink</key>\n\t<string>a.b.c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a","straße"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a</string>\n\t<key>ArdiaLink</key>\n\t<string>straße</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a",".leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a</string>\n\t<key>ArdiaLink</key>\n\t<string>.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ulstr","İstanbulstraße"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ulstr</string>\n\t<key>ArdiaLink</key>\n\t<string>İstanbulstraße</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1日本語のテキスト","İstanbul"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1日本語のテキスト</string>\n\t<key>ArdiaLink</key>\n\t<string>İstanbul</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["HELLO","trailing."],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>HELLO</string>\n\t<key>ArdiaLink</key>\n\t<string>trailing.</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["é","tab\tseparated.leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>é</string>\n\t<key>ArdiaLink</key>\n\t<string>tab\tseparated.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ns:key.path","😀"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ns:key.path</string>\n\t<key>ArdiaLink</key>\n\t<string>😀</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["  padded  ","﻿bomsrc/a/b.ts"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>  padded  </string>\n\t<key>ArdiaLink</key>\n\t<string>﻿bomsrc/a/b.ts</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["HELLO","日本語のテキスト"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>HELLO</string>\n\t<key>ArdiaLink</key>\n\t<string>日本語のテキスト</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["A/B.TS","src/a/b.tsab"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>A/B.TS</string>\n\t<key>ArdiaLink</key>\n\t<string>src/a/b.tsab</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["  padded  ","a:b:c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>  padded  </string>\n\t<key>ArdiaLink</key>\n\t<string>a:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["Hello World"," Worl"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>Hello World</string>\n\t<key>ArdiaLink</key>\n\t<string> Worl</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["abc","﻿bomtab\tseparated"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>abc</string>\n\t<key>ArdiaLink</key>\n\t<string>﻿bomtab\tseparated</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["line1\nline2","HELLO"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>line1\nline2</string>\n\t<key>ArdiaLink</key>\n\t<string>HELLO</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a.b.c",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a.b.c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["日本語のテキスト","trailing."],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>日本語のテキスト</string>\n\t<key>ArdiaLink</key>\n\t<string>trailing.</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["./x/**/*.json:",""],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>./x/**/*.json:</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[".leading","line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>.leading</string>\n\t<key>ArdiaLink</key>\n\t<string>line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["{name} has {count} items","Hello World"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>{name} has {count} items</string>\n\t<key>ArdiaLink</key>\n\t<string>Hello World</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["line1\nline2a.b.c","a.b.c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>line1\nline2a.b.c</string>\n\t<key>ArdiaLink</key>\n\t<string>a.b.c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1",".leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1</string>\n\t<key>ArdiaLink</key>\n\t<string>.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["./x/**/*.json","hello world"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>./x/**/*.json</string>\n\t<key>ArdiaLink</key>\n\t<string>hello world</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["line1\nline2","e"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>line1\nline2</string>\n\t<key>ArdiaLink</key>\n\t<string>e</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["c","a:b:c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>c</string>\n\t<key>ArdiaLink</key>\n\t<string>a:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["./x/**/*.jsontrailing.","a:b:c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>./x/**/*.jsontrailing.</string>\n\t<key>ArdiaLink</key>\n\t<string>a:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["line1\nline2","line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>line1\nline2</string>\n\t<key>ArdiaLink</key>\n\t<string>line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["日本語のテキスト.leading","E"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>日本語のテキスト.leading</string>\n\t<key>ArdiaLink</key>\n\t<string>E</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["trailing.abc","a..b.leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>trailing.abc</string>\n\t<key>ArdiaLink</key>\n\t<string>a..b.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a..bkey_name-1","na"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a..bkey_name-1</string>\n\t<key>ArdiaLink</key>\n\t<string>na</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["  padded  "],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>  padded  </string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["","a..b"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string></string>\n\t<key>ArdiaLink</key>\n\t<string>a..b</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ab"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ab</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["eparate","tab\tseparated"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>eparate</string>\n\t<key>ArdiaLink</key>\n\t<string>tab\tseparated</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["  padded  ",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>  padded  </string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ns:key.path","a"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ns:key.path</string>\n\t<key>ArdiaLink</key>\n\t<string>a</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["é"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>é</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["{count} i","Hello World{name} has {count} items"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>{count} i</string>\n\t<key>ArdiaLink</key>\n\t<string>Hello World{name} has {count} items</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["LLO","hello"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>LLO</string>\n\t<key>ArdiaLink</key>\n\t<string>hello</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1","İstanbulİstanbul"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1</string>\n\t<key>ArdiaLink</key>\n\t<string>İstanbulİstanbul</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1straße","key_name-1"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1straße</string>\n\t<key>ArdiaLink</key>\n\t<string>key_name-1</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["line1\nline2","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>line1\nline2</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["HELLOline1\nline2","Hello World"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>HELLOline1\nline2</string>\n\t<key>ArdiaLink</key>\n\t<string>Hello World</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["helloa..b",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>helloa..b</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["trailing.",".leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>trailing.</string>\n\t<key>ArdiaLink</key>\n\t<string>.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["abca😀b😀c","a:b:c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>abca😀b😀c</string>\n\t<key>ArdiaLink</key>\n\t<string>a:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["","src/a/b.ts﻿bom"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string></string>\n\t<key>ArdiaLink</key>\n\t<string>src/a/b.ts﻿bom</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["tab\tseparated","line1\nline2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>tab\tseparated</string>\n\t<key>ArdiaLink</key>\n\t<string>line1\nline2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ab","ab"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ab</string>\n\t<key>ArdiaLink</key>\n\t<string>ab</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["src/a/b.ts","src/a/b.ts"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>src/a/b.ts</string>\n\t<key>ArdiaLink</key>\n\t<string>src/a/b.ts</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["",""],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string></string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello world",""],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello world</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["straße","a..b日本語のテキスト"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>straße</string>\n\t<key>ArdiaLink</key>\n\t<string>a..b日本語のテキスト</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["Hello World"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>Hello World</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1","ab"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1</string>\n\t<key>ArdiaLink</key>\n\t<string>ab</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a.b.c","emoji 👍🏽 mix"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a.b.c</string>\n\t<key>ArdiaLink</key>\n\t<string>emoji 👍🏽 mix</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ns:key.path","é"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ns:key.path</string>\n\t<key>ArdiaLink</key>\n\t<string>é</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["abc","hello world"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>abc</string>\n\t<key>ArdiaLink</key>\n\t<string>hello world</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["./x/**/*.json",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>./x/**/*.json</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ΣΊΣΥΦΟΣ","key_name-1"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ΣΊΣΥΦΟΣ</string>\n\t<key>ArdiaLink</key>\n\t<string>key_name-1</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["😀","  padded  "],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>😀</string>\n\t<key>ArdiaLink</key>\n\t<string>  padded  </string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[".leading",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["{name} has {count} items","a"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>{name} has {count} items</string>\n\t<key>ArdiaLink</key>\n\t<string>a</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ab","  padded  "],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ab</string>\n\t<key>ArdiaLink</key>\n\t<string>  padded  </string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ünïcödé",":"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ünïcödé</string>\n\t<key>ArdiaLink</key>\n\t<string>:</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a:b:","a:b:c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a:b:</string>\n\t<key>ArdiaLink</key>\n\t<string>a:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["  padded  ","  padded  "],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>  padded  </string>\n\t<key>ArdiaLink</key>\n\t<string>  padded  </string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1","a😀b😀c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1</string>\n\t<key>ArdiaLink</key>\n\t<string>a😀b😀c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["line1\nline2",":"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>line1\nline2</string>\n\t<key>ArdiaLink</key>\n\t<string>:</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["src/a/b.ts","﻿bom"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>src/a/b.ts</string>\n\t<key>ArdiaLink</key>\n\t<string>﻿bom</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["Hello World","RL"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>Hello World</string>\n\t<key>ArdiaLink</key>\n\t<string>RL</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ns:key.path:","a😀b😀c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ns:key.path:</string>\n\t<key>ArdiaLink</key>\n\t<string>a😀b😀c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello worldünïcödé",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello worldünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello","a:b:c"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello</string>\n\t<key>ArdiaLink</key>\n\t<string>a:b:c</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["O","hello"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>O</string>\n\t<key>ArdiaLink</key>\n\t<string>hello</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["line1\nline2","src/a/b.ts"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>line1\nline2</string>\n\t<key>ArdiaLink</key>\n\t<string>src/a/b.ts</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["日本語のテキスト","a"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>日本語のテキスト</string>\n\t<key>ArdiaLink</key>\n\t<string>a</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a..b","A.."],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a..b</string>\n\t<key>ArdiaLink</key>\n\t<string>A..</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["hello","ns:key.path"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>hello</string>\n\t<key>ArdiaLink</key>\n\t<string>ns:key.path</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["abc","ab"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>abc</string>\n\t<key>ArdiaLink</key>\n\t<string>ab</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":ab","line1\nline2HELLO"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:ab</string>\n\t<key>ArdiaLink</key>\n\t<string>line1\nline2HELLO</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[".leading😀"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>.leading😀</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["tab\tseparated","😀"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>tab\tseparated</string>\n\t<key>ArdiaLink</key>\n\t<string>😀</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["key_name-1","😀.leading"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>key_name-1</string>\n\t<key>ArdiaLink</key>\n\t<string>😀.leading</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["trailing.","ab"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>trailing.</string>\n\t<key>ArdiaLink</key>\n\t<string>ab</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["héllo wörld","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>héllo wörld</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["👍🏽 thumbs","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>👍🏽 thumbs</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["日本語","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>日本語</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string></string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["é","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>é</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["İstanbul","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>İstanbul</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["straße","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>straße</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ılık ırmak","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ılık ırmak</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["👨‍👩‍👧 family","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>👨‍👩‍👧 family</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a b","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a b</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ΣΊΣΥΦΟΣ","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ΣΊΣΥΦΟΣ</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a😀b","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a😀b</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["﻿bom","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>﻿bom</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a²b x½ y①","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a²b x½ y①</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["aⅠb Ⅻ","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>aⅠb Ⅻ</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a𐐀b 𝐀bc","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a𐐀b 𝐀bc</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["कि ٣٤","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>कि ٣٤</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["Iı İi","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>Iı İi</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["K K k","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>K K k</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ſ s S","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ſ s S</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["x‍y 👨‍👩‍👧","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>x‍y 👨‍👩‍👧</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["a b c　d","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>a b c　d</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["١٢٣ ٤٥","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>١٢٣ ٤٥</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["𝟘𝟙 ²³","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>𝟘𝟙 ²³</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["snake_case foo-bar o'neil","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>snake_case foo-bar o'neil</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ǅungla Ǆ","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ǅungla Ǆ</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["one\r\ntwo threefour","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>one\r\ntwo threefour</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["café café","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>café café</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["ΣΑΣ σας ς","ünïcödé"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>ΣΑΣ σας ς</string>\n\t<key>ArdiaLink</key>\n\t<string>ünïcödé</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","héllo wörld"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>héllo wörld</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","👍🏽 thumbs"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>👍🏽 thumbs</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","日本語"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>日本語</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":",""],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","İstanbul"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>İstanbul</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","straße"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>straße</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","ılık ırmak"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>ılık ırmak</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","👨‍👩‍👧 family"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>👨‍👩‍👧 family</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","a b"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>a b</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","ΣΊΣΥΦΟΣ"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>ΣΊΣΥΦΟΣ</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","a😀b"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>a😀b</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","﻿bom"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>﻿bom</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","a²b x½ y①"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>a²b x½ y①</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","aⅠb Ⅻ"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>aⅠb Ⅻ</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","a𐐀b 𝐀bc"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>a𐐀b 𝐀bc</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":[":","कि ٣٤"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>:</string>\n\t<key>ArdiaLink</key>\n\t<string>कि ٣٤</string>\n</dict>\n</plist>\n"}
+{"fn":"parseWebloc","args":["ünïcödé  padded  "],"ok":null}
+{"fn":"parseWebloc","args":["key_name-1"],"ok":null}
+{"fn":"parseWebloc","args":["hello worldns:key.path"],"ok":null}
+{"fn":"parseWebloc","args":["﻿bom"],"ok":null}
+{"fn":"parseWebloc","args":["ΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"parseWebloc","args":[":"],"ok":null}
+{"fn":"parseWebloc","args":["tab\tseparated"],"ok":null}
+{"fn":"parseWebloc","args":["hello world"],"ok":null}
+{"fn":"parseWebloc","args":["straße"],"ok":null}
+{"fn":"parseWebloc","args":["ΣΊΣΥΦΟΣ{name} has {count} items"],"ok":null}
+{"fn":"parseWebloc","args":["é"],"ok":null}
+{"fn":"parseWebloc","args":["{name} has {count} items"],"ok":null}
+{"fn":"parseWebloc","args":["﻿bomé"],"ok":null}
+{"fn":"parseWebloc","args":["trailing.﻿bom"],"ok":null}
+{"fn":"parseWebloc","args":["src/a/b.ts"],"ok":null}
+{"fn":"parseWebloc","args":["  padded  "],"ok":null}
+{"fn":"parseWebloc","args":["line1\nline2a"],"ok":null}
+{"fn":"parseWebloc","args":["a..bab"],"ok":null}
+{"fn":"parseWebloc","args":["emoji 👍🏽 mix"],"ok":null}
+{"fn":"parseWebloc","args":["ΣΊΣΥΦΟΣİstanbul"],"ok":null}
+{"fn":"parseWebloc","args":[":key_name-1"],"ok":null}
+{"fn":"parseWebloc","args":["ab"],"ok":null}
+{"fn":"parseWebloc","args":["abc"],"ok":null}
+{"fn":"parseWebloc","args":["İstanbultab\tseparated"],"ok":null}
+{"fn":"parseWebloc","args":["﻿bom./x/**/*.json"],"ok":null}
+{"fn":"parseWebloc","args":[".leading"],"ok":null}
+{"fn":"parseWebloc","args":["a"],"ok":null}
+{"fn":"parseWebloc","args":["a😀b😀c"],"ok":null}
+{"fn":"parseWebloc","args":["emoji 👍🏽 mixemoji 👍🏽 mix"],"ok":null}
+{"fn":"parseWebloc","args":["HELLOab"],"ok":null}
+{"fn":"parseWebloc","args":["a.b.cHello World"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:cΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"parseWebloc","args":["İstanbul"],"ok":null}
+{"fn":"parseWebloc","args":["Hello World"],"ok":null}
+{"fn":"parseWebloc","args":["a.b.c"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:c"],"ok":null}
+{"fn":"parseWebloc","args":["abctab\tseparated"],"ok":null}
+{"fn":"parseWebloc","args":["line1\nline2"],"ok":null}
+{"fn":"parseWebloc","args":["ünïcödé"],"ok":null}
+{"fn":"parseWebloc","args":["abHELLO"],"ok":null}
+{"fn":"parseWebloc","args":["日本語のテキスト"],"ok":null}
+{"fn":"parseWebloc","args":["src/a/b.tsns:key.path"],"ok":null}
+{"fn":"parseWebloc","args":[""],"ok":null}
+{"fn":"parseWebloc","args":["HELLO"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:chello"],"ok":null}
+{"fn":"parseWebloc","args":["éa:b:c"],"ok":null}
+{"fn":"parseWebloc","args":["😀"],"ok":null}
+{"fn":"parseWebloc","args":["hellons:key.path"],"ok":null}
+{"fn":"parseWebloc","args":["emoji 👍🏽 mixabc"],"ok":null}
+{"fn":"parseWebloc","args":["﻿bomemoji 👍🏽 mix"],"ok":null}
+{"fn":"parseWebloc","args":["./x/**/*.json"],"ok":null}
+{"fn":"parseWebloc","args":["a..b"],"ok":null}
+{"fn":"parseWebloc","args":["trailing."],"ok":null}
+{"fn":"parseWebloc","args":["./x/**/*.json  padded  "],"ok":null}
+{"fn":"parseWebloc","args":["hello"],"ok":null}
+{"fn":"parseWebloc","args":[":./x/**/*.json"],"ok":null}
+{"fn":"parseWebloc","args":["a😀b😀c./x/**/*.json"],"ok":null}
+{"fn":"parseWebloc","args":["a..ba😀b😀c"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:c.leading"],"ok":null}
+{"fn":"parseWebloc","args":["{name} has {count} itemsHello World"],"ok":null}
+{"fn":"parseWebloc","args":[":a:b:c"],"ok":null}
+{"fn":"parseWebloc","args":["ns:key.path"],"ok":null}
+{"fn":"parseWebloc","args":["atab\tseparated"],"ok":null}
+{"fn":"parseWebloc","args":["İstanbul﻿bom"],"ok":null}
+{"fn":"parseWebloc","args":["😀{name} has {count} items"],"ok":null}
+{"fn":"parseWebloc","args":["emoji 👍🏽 mixİstanbul"],"ok":null}
+{"fn":"parseWebloc","args":["﻿bom😀"],"ok":null}
+{"fn":"parseWebloc","args":["ünïcödéHELLO"],"ok":null}
+{"fn":"parseWebloc","args":["HELLOHello World"],"ok":null}
+{"fn":"parseWebloc","args":["Hello Worldhello"],"ok":null}
+{"fn":"parseWebloc","args":["key_name-1./x/**/*.json"],"ok":null}
+{"fn":"parseWebloc","args":[".leadinga😀b😀c"],"ok":null}
+{"fn":"parseWebloc","args":["straßea:b:c"],"ok":null}
+{"fn":"parseWebloc","args":["😀  padded  "],"ok":null}
+{"fn":"parseWebloc","args":["src/a/b.tsHello World"],"ok":null}
+{"fn":"parseWebloc","args":["trailing.straße"],"ok":null}
+{"fn":"parseWebloc","args":["a.b.ca..b"],"ok":null}
+{"fn":"parseWebloc","args":["asrc/a/b.ts"],"ok":null}
+{"fn":"parseWebloc","args":["İstanbulhello world"],"ok":null}
+{"fn":"parseWebloc","args":["tab\tseparatedabc"],"ok":null}
+{"fn":"parseWebloc","args":["straße  padded  "],"ok":null}
+{"fn":"parseWebloc","args":["./x/**/*.jsonhello world"],"ok":null}
+{"fn":"parseWebloc","args":["hello worldtrailing."],"ok":null}
+{"fn":"parseWebloc","args":["./x/**/*.jsonHELLO"],"ok":null}
+{"fn":"parseWebloc","args":["./x/**/*.json😀"],"ok":null}
+{"fn":"parseWebloc","args":["ünïcödé:"],"ok":null}
+{"fn":"parseWebloc","args":["tab\tseparated﻿bom"],"ok":null}
+{"fn":"parseWebloc","args":["ahello"],"ok":null}
+{"fn":"parseWebloc","args":["abcab"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:c./x/**/*.json"],"ok":null}
+{"fn":"parseWebloc","args":["hello worldİstanbul"],"ok":null}
+{"fn":"parseWebloc","args":["aab"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:cİstanbul"],"ok":null}
+{"fn":"parseWebloc","args":["{name} has {count} itemsstraße"],"ok":null}
+{"fn":"parseWebloc","args":["ünïcödé./x/**/*.json"],"ok":null}
+{"fn":"parseWebloc","args":["HELLO😀"],"ok":null}
+{"fn":"parseWebloc","args":["abca..b"],"ok":null}
+{"fn":"parseWebloc","args":["İstanbul😀"],"ok":null}
+{"fn":"parseWebloc","args":["src/a/b.tsé"],"ok":null}
+{"fn":"parseWebloc","args":["abé"],"ok":null}
+{"fn":"parseWebloc","args":["aba:b:c"],"ok":null}
+{"fn":"parseWebloc","args":["  padded  ﻿bom"],"ok":null}
+{"fn":"parseWebloc","args":["src/a/b.tsünïcödé"],"ok":null}
+{"fn":"parseWebloc","args":["line1\nline2a..b"],"ok":null}
+{"fn":"parseWebloc","args":[".leadingns:key.path"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:cünïcödé"],"ok":null}
+{"fn":"parseWebloc","args":["{name} has {count} itemstab\tseparated"],"ok":null}
+{"fn":"parseWebloc","args":["tab\tseparatedünïcödé"],"ok":null}
+{"fn":"parseWebloc","args":["éünïcödé"],"ok":null}
+{"fn":"parseWebloc","args":["ΣΊΣΥΦΟΣΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:ckey_name-1"],"ok":null}
+{"fn":"parseWebloc","args":["ab{name} has {count} items"],"ok":null}
+{"fn":"parseWebloc","args":["./x/**/*.jsonab"],"ok":null}
+{"fn":"parseWebloc","args":["ns:key.pathhello"],"ok":null}
+{"fn":"parseWebloc","args":["{name} has {count} itemsns:key.path"],"ok":null}
+{"fn":"parseWebloc","args":["😀emoji 👍🏽 mix"],"ok":null}
+{"fn":"parseWebloc","args":["tab\tseparatedtab\tseparated"],"ok":null}
+{"fn":"parseWebloc","args":["hello worldé"],"ok":null}
+{"fn":"parseWebloc","args":["ünïcödétab\tseparated"],"ok":null}
+{"fn":"parseWebloc","args":["ns:key.pathabc"],"ok":null}
+{"fn":"parseWebloc","args":["ΣΊΣΥΦΟΣab"],"ok":null}
+{"fn":"parseWebloc","args":["ünïcödéabc"],"ok":null}
+{"fn":"parseWebloc","args":["Hello WorldHELLO"],"ok":null}
+{"fn":"parseWebloc","args":["HELLOsrc/a/b.ts"],"ok":null}
+{"fn":"parseWebloc","args":["abcns:key.path"],"ok":null}
+{"fn":"parseWebloc","args":["é日本語のテキスト"],"ok":null}
+{"fn":"parseWebloc","args":["abc:"],"ok":null}
+{"fn":"parseWebloc","args":[".leadingünïcödé"],"ok":null}
+{"fn":"parseWebloc","args":["trailing.😀"],"ok":null}
+{"fn":"parseWebloc","args":["./x/**/*.json.leading"],"ok":null}
+{"fn":"parseWebloc","args":["tab\tseparatedHELLO"],"ok":null}
+{"fn":"parseWebloc","args":["tab\tseparatedtrailing."],"ok":null}
+{"fn":"parseWebloc","args":["line1\nline2line1\nline2"],"ok":null}
+{"fn":"parseWebloc","args":["straßestraße"],"ok":null}
+{"fn":"parseWebloc","args":["key_name-1ab"],"ok":null}
+{"fn":"parseWebloc","args":["HELLOhello world"],"ok":null}
+{"fn":"parseWebloc","args":["abc  padded  "],"ok":null}
+{"fn":"parseWebloc","args":["ünïcödé{name} has {count} items"],"ok":null}
+{"fn":"parseWebloc","args":["ΣΊΣΥΦΟΣ.leading"],"ok":null}
+{"fn":"parseWebloc","args":["abca.b.c"],"ok":null}
+{"fn":"parseWebloc","args":["😀trailing."],"ok":null}
+{"fn":"parseWebloc","args":["key_name-1é"],"ok":null}
+{"fn":"parseWebloc","args":["﻿bom:"],"ok":null}
+{"fn":"parseWebloc","args":["ünïcödéİstanbul"],"ok":null}
+{"fn":"parseWebloc","args":["tab\tseparated:"],"ok":null}
+{"fn":"parseWebloc","args":["  padded  é"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:cns:key.path"],"ok":null}
+{"fn":"parseWebloc","args":["ab😀"],"ok":null}
+{"fn":"parseWebloc","args":["key_name-1HELLO"],"ok":null}
+{"fn":"parseWebloc","args":["İstanbul{name} has {count} items"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:c  padded  "],"ok":null}
+{"fn":"parseWebloc","args":["ns:key.patha"],"ok":null}
+{"fn":"parseWebloc","args":["a😀b😀c﻿bom"],"ok":null}
+{"fn":"parseWebloc","args":["HELLOünïcödé"],"ok":null}
+{"fn":"parseWebloc","args":["a😀"],"ok":null}
+{"fn":"parseWebloc","args":["a😀b😀cHELLO"],"ok":null}
+{"fn":"parseWebloc","args":["a.b.cabc"],"ok":null}
+{"fn":"parseWebloc","args":[":ΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"parseWebloc","args":["hello worldΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"parseWebloc","args":["﻿boma😀b😀c"],"ok":null}
+{"fn":"parseWebloc","args":["./x/**/*.jsonünïcödé"],"ok":null}
+{"fn":"parseWebloc","args":["HELLO./x/**/*.json"],"ok":null}
+{"fn":"parseWebloc","args":["a..bns:key.path"],"ok":null}
+{"fn":"parseWebloc","args":["HELLO日本語のテキスト"],"ok":null}
+{"fn":"parseWebloc","args":["😀日本語のテキスト"],"ok":null}
+{"fn":"parseWebloc","args":["a.b.ca.b.c"],"ok":null}
+{"fn":"parseWebloc","args":[".leadingHELLO"],"ok":null}
+{"fn":"parseWebloc","args":["abc日本語のテキスト"],"ok":null}
+{"fn":"parseWebloc","args":["key_name-1  padded  "],"ok":null}
+{"fn":"parseWebloc","args":["{name} has {count} itemsa..b"],"ok":null}
+{"fn":"parseWebloc","args":["helloa..b"],"ok":null}
+{"fn":"parseWebloc","args":["﻿bom{name} has {count} items"],"ok":null}
+{"fn":"parseWebloc","args":["straßeİstanbul"],"ok":null}
+{"fn":"parseWebloc","args":["日本語のテキストé"],"ok":null}
+{"fn":"parseWebloc","args":["emoji 👍🏽 mixa.b.c"],"ok":null}
+{"fn":"parseWebloc","args":["abİstanbul"],"ok":null}
+{"fn":"parseWebloc","args":["ΣΊΣΥΦΟΣ😀"],"ok":null}
+{"fn":"parseWebloc","args":["﻿bom  padded  "],"ok":null}
+{"fn":"parseWebloc","args":["hellokey_name-1"],"ok":null}
+{"fn":"parseWebloc","args":["a..bstraße"],"ok":null}
+{"fn":"parseWebloc","args":["{name} has {count} items  padded  "],"ok":null}
+{"fn":"parseWebloc","args":["key_name-1a.b.c"],"ok":null}
+{"fn":"parseWebloc","args":["{name} has {count} itemshello"],"ok":null}
+{"fn":"parseWebloc","args":["trailing.ΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"parseWebloc","args":["a.b.ca"],"ok":null}
+{"fn":"parseWebloc","args":["é./x/**/*.json"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:c{name} has {count} items"],"ok":null}
+{"fn":"parseWebloc","args":["ns:key.pathé"],"ok":null}
+{"fn":"parseWebloc","args":["日本語のテキストa..b"],"ok":null}
+{"fn":"parseWebloc","args":["ünïcödéemoji 👍🏽 mix"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:cab"],"ok":null}
+{"fn":"parseWebloc","args":["﻿bom日本語のテキスト"],"ok":null}
+{"fn":"parseWebloc","args":["a😀b😀cab"],"ok":null}
+{"fn":"parseWebloc","args":["é{name} has {count} items"],"ok":null}
+{"fn":"parseWebloc","args":["ns:key.pathhello world"],"ok":null}
+{"fn":"parseWebloc","args":["./x/**/*.json﻿bom"],"ok":null}
+{"fn":"parseWebloc","args":["  padded  a:b:c"],"ok":null}
+{"fn":"parseWebloc","args":["a:b:cé"],"ok":null}
+{"fn":"parseWebloc","args":["hello worlda"],"ok":null}
+{"fn":"parseWebloc","args":["Hello Worlda"],"ok":null}
+{"fn":"parseWebloc","args":["héllo wörld"],"ok":null}
+{"fn":"parseWebloc","args":["👍🏽 thumbs"],"ok":null}
+{"fn":"parseWebloc","args":["日本語"],"ok":null}
+{"fn":"parseWebloc","args":["ılık ırmak"],"ok":null}
+{"fn":"parseWebloc","args":["👨‍👩‍👧 family"],"ok":null}
+{"fn":"parseWebloc","args":["a b"],"ok":null}
+{"fn":"parseWebloc","args":["a😀b"],"ok":null}
+{"fn":"parseWebloc","args":["a²b x½ y①"],"ok":null}
+{"fn":"parseWebloc","args":["aⅠb Ⅻ"],"ok":null}
+{"fn":"parseWebloc","args":["a𐐀b 𝐀bc"],"ok":null}
+{"fn":"parseWebloc","args":["कि ٣٤"],"ok":null}
+{"fn":"parseWebloc","args":["Iı İi"],"ok":null}
+{"fn":"parseWebloc","args":["K K k"],"ok":null}
+{"fn":"parseWebloc","args":["ſ s S"],"ok":null}
+{"fn":"parseWebloc","args":["x‍y 👨‍👩‍👧"],"ok":null}
+{"fn":"parseWebloc","args":["a b c　d"],"ok":null}
+{"fn":"parseWebloc","args":["١٢٣ ٤٥"],"ok":null}
+{"fn":"parseWebloc","args":["𝟘𝟙 ²³"],"ok":null}
+{"fn":"parseWebloc","args":["snake_case foo-bar o'neil"],"ok":null}
+{"fn":"parseWebloc","args":["ǅungla Ǆ"],"ok":null}
+{"fn":"parseWebloc","args":["one\r\ntwo threefour"],"ok":null}
+{"fn":"parseWebloc","args":["café café"],"ok":null}
+{"fn":"parseWebloc","args":["ΣΑΣ σας ς"],"ok":null}
+{"fn":"weblocLinkId","args":["Hello World"],"ok":null}
+{"fn":"weblocLinkId","args":["{name} has {count} items"],"ok":null}
+{"fn":"weblocLinkId","args":[".leading"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.ts"],"ok":null}
+{"fn":"weblocLinkId","args":["é"],"ok":null}
+{"fn":"weblocLinkId","args":["éΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"weblocLinkId","args":["key_name-1"],"ok":null}
+{"fn":"weblocLinkId","args":["  padded  "],"ok":null}
+{"fn":"weblocLinkId","args":["﻿bom"],"ok":null}
+{"fn":"weblocLinkId","args":["abc"],"ok":null}
+{"fn":"weblocLinkId","args":["emoji 👍🏽 mix"],"ok":null}
+{"fn":"weblocLinkId","args":["İstanbul"],"ok":null}
+{"fn":"weblocLinkId","args":["😀"],"ok":null}
+{"fn":"weblocLinkId","args":["  padded  line1\nline2"],"ok":null}
+{"fn":"weblocLinkId","args":["trailing."],"ok":null}
+{"fn":"weblocLinkId","args":["straße"],"ok":null}
+{"fn":"weblocLinkId","args":["hello world"],"ok":null}
+{"fn":"weblocLinkId","args":["tab\tseparated"],"ok":null}
+{"fn":"weblocLinkId","args":["line1\nline2straße"],"ok":null}
+{"fn":"weblocLinkId","args":["a:b:c"],"ok":null}
+{"fn":"weblocLinkId","args":["ΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"weblocLinkId","args":["a"],"ok":null}
+{"fn":"weblocLinkId","args":[":"],"ok":null}
+{"fn":"weblocLinkId","args":["a..b"],"ok":null}
+{"fn":"weblocLinkId","args":["ünïcödé"],"ok":null}
+{"fn":"weblocLinkId","args":["hello"],"ok":null}
+{"fn":"weblocLinkId","args":["日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["ns:key.path"],"ok":null}
+{"fn":"weblocLinkId","args":[""],"ok":null}
+{"fn":"weblocLinkId","args":[":src/a/b.ts"],"ok":null}
+{"fn":"weblocLinkId","args":["HELLOa😀b😀c"],"ok":null}
+{"fn":"weblocLinkId","args":[".leadinga:b:c"],"ok":null}
+{"fn":"weblocLinkId","args":["emoji 👍🏽 mixa:b:c"],"ok":null}
+{"fn":"weblocLinkId","args":["﻿boma"],"ok":null}
+{"fn":"weblocLinkId","args":["﻿bomemoji 👍🏽 mix"],"ok":null}
+{"fn":"weblocLinkId","args":["a:b:cns:key.path"],"ok":null}
+{"fn":"weblocLinkId","args":["HELLO"],"ok":null}
+{"fn":"weblocLinkId","args":["HELLOİstanbul"],"ok":null}
+{"fn":"weblocLinkId","args":[".leadingé"],"ok":null}
+{"fn":"weblocLinkId","args":["./x/**/*.jsonΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"weblocLinkId","args":["a.b.c"],"ok":null}
+{"fn":"weblocLinkId","args":["a😀b😀csrc/a/b.ts"],"ok":null}
+{"fn":"weblocLinkId","args":["tab\tseparatedtab\tseparated"],"ok":null}
+{"fn":"weblocLinkId","args":["line1\nline2"],"ok":null}
+{"fn":"weblocLinkId","args":["日本語のテキスト./x/**/*.json"],"ok":null}
+{"fn":"weblocLinkId","args":["./x/**/*.jsonab"],"ok":null}
+{"fn":"weblocLinkId","args":["Hello Worldemoji 👍🏽 mix"],"ok":null}
+{"fn":"weblocLinkId","args":["ab"],"ok":null}
+{"fn":"weblocLinkId","args":["ns:key.pathabc"],"ok":null}
+{"fn":"weblocLinkId","args":["straße😀"],"ok":null}
+{"fn":"weblocLinkId","args":["{name} has {count} itemsa😀b😀c"],"ok":null}
+{"fn":"weblocLinkId","args":["ékey_name-1"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.tsemoji 👍🏽 mix"],"ok":null}
+{"fn":"weblocLinkId","args":["./x/**/*.json"],"ok":null}
+{"fn":"weblocLinkId","args":["./x/**/*.jsonsrc/a/b.ts"],"ok":null}
+{"fn":"weblocLinkId","args":["a😀b😀c"],"ok":null}
+{"fn":"weblocLinkId","args":["日本語のテキスト日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["hello worlda"],"ok":null}
+{"fn":"weblocLinkId","args":[":HELLO"],"ok":null}
+{"fn":"weblocLinkId","args":[".leadingtrailing."],"ok":null}
+{"fn":"weblocLinkId","args":["ns:key.path日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["key_name-1ünïcödé"],"ok":null}
+{"fn":"weblocLinkId","args":["aa😀b😀c"],"ok":null}
+{"fn":"weblocLinkId","args":["ΣΊΣΥΦΟΣa😀b😀c"],"ok":null}
+{"fn":"weblocLinkId","args":["a:b:c{name} has {count} items"],"ok":null}
+{"fn":"weblocLinkId","args":["abca.b.c"],"ok":null}
+{"fn":"weblocLinkId","args":["ΣΊΣΥΦΟΣline1\nline2"],"ok":null}
+{"fn":"weblocLinkId","args":["a.b.csrc/a/b.ts"],"ok":null}
+{"fn":"weblocLinkId","args":["a😀b😀c日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["ünïcödé./x/**/*.json"],"ok":null}
+{"fn":"weblocLinkId","args":["  padded  Hello World"],"ok":null}
+{"fn":"weblocLinkId","args":[":😀"],"ok":null}
+{"fn":"weblocLinkId","args":["ΣΊΣΥΦΟΣkey_name-1"],"ok":null}
+{"fn":"weblocLinkId","args":["a.b.cstraße"],"ok":null}
+{"fn":"weblocLinkId","args":["a.b.ctrailing."],"ok":null}
+{"fn":"weblocLinkId","args":[".leadingtab\tseparated"],"ok":null}
+{"fn":"weblocLinkId","args":["éemoji 👍🏽 mix"],"ok":null}
+{"fn":"weblocLinkId","args":["straßeHello World"],"ok":null}
+{"fn":"weblocLinkId","args":["abab"],"ok":null}
+{"fn":"weblocLinkId","args":["😀a"],"ok":null}
+{"fn":"weblocLinkId","args":["abstraße"],"ok":null}
+{"fn":"weblocLinkId","args":[".leadingemoji 👍🏽 mix"],"ok":null}
+{"fn":"weblocLinkId","args":["hello worldns:key.path"],"ok":null}
+{"fn":"weblocLinkId","args":["a.b.ctab\tseparated"],"ok":null}
+{"fn":"weblocLinkId","args":["hello:"],"ok":null}
+{"fn":"weblocLinkId","args":["tab\tseparated😀"],"ok":null}
+{"fn":"weblocLinkId","args":["HELLOab"],"ok":null}
+{"fn":"weblocLinkId","args":["{name} has {count} itemsa.b.c"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.tskey_name-1"],"ok":null}
+{"fn":"weblocLinkId","args":["./x/**/*.json日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["tab\tseparatedHELLO"],"ok":null}
+{"fn":"weblocLinkId","args":["éa..b"],"ok":null}
+{"fn":"weblocLinkId","args":["ns:key.pathkey_name-1"],"ok":null}
+{"fn":"weblocLinkId","args":["trailing.日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["hello worlda.b.c"],"ok":null}
+{"fn":"weblocLinkId","args":["İstanbulünïcödé"],"ok":null}
+{"fn":"weblocLinkId","args":["straßekey_name-1"],"ok":null}
+{"fn":"weblocLinkId","args":[":./x/**/*.json"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.tsa"],"ok":null}
+{"fn":"weblocLinkId","args":["line1\nline2é"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.tsa..b"],"ok":null}
+{"fn":"weblocLinkId","args":["tab\tseparateda:b:c"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.ts:"],"ok":null}
+{"fn":"weblocLinkId","args":["İstanbulΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"weblocLinkId","args":["a😀b😀c./x/**/*.json"],"ok":null}
+{"fn":"weblocLinkId","args":[".leadinghello world"],"ok":null}
+{"fn":"weblocLinkId","args":["日本語のテキスト😀"],"ok":null}
+{"fn":"weblocLinkId","args":["abctab\tseparated"],"ok":null}
+{"fn":"weblocLinkId","args":["日本語のテキストhello world"],"ok":null}
+{"fn":"weblocLinkId","args":["abca😀b😀c"],"ok":null}
+{"fn":"weblocLinkId","args":["key_name-1😀"],"ok":null}
+{"fn":"weblocLinkId","args":["abİstanbul"],"ok":null}
+{"fn":"weblocLinkId","args":["ünïcödéns:key.path"],"ok":null}
+{"fn":"weblocLinkId","args":["line1\nline2ünïcödé"],"ok":null}
+{"fn":"weblocLinkId","args":["a日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["line1\nline2a"],"ok":null}
+{"fn":"weblocLinkId","args":["straßea😀b😀c"],"ok":null}
+{"fn":"weblocLinkId","args":["ns:key.pathHello World"],"ok":null}
+{"fn":"weblocLinkId","args":["HELLOHELLO"],"ok":null}
+{"fn":"weblocLinkId","args":["HELLOünïcödé"],"ok":null}
+{"fn":"weblocLinkId","args":["a😀b😀cstraße"],"ok":null}
+{"fn":"weblocLinkId","args":["trailing.{name} has {count} items"],"ok":null}
+{"fn":"weblocLinkId","args":[":a..b"],"ok":null}
+{"fn":"weblocLinkId","args":["{name} has {count} items日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["straßetab\tseparated"],"ok":null}
+{"fn":"weblocLinkId","args":[".leading.leading"],"ok":null}
+{"fn":"weblocLinkId","args":["ab{name} has {count} items"],"ok":null}
+{"fn":"weblocLinkId","args":["😀straße"],"ok":null}
+{"fn":"weblocLinkId","args":["ünïcödéa😀b😀c"],"ok":null}
+{"fn":"weblocLinkId","args":["HELLOtab\tseparated"],"ok":null}
+{"fn":"weblocLinkId","args":["ünïcödéHELLO"],"ok":null}
+{"fn":"weblocLinkId","args":["Hello World﻿bom"],"ok":null}
+{"fn":"weblocLinkId","args":["hello worldhello world"],"ok":null}
+{"fn":"weblocLinkId","args":["﻿bomhello world"],"ok":null}
+{"fn":"weblocLinkId","args":["key_name-1a:b:c"],"ok":null}
+{"fn":"weblocLinkId","args":["😀ns:key.path"],"ok":null}
+{"fn":"weblocLinkId","args":[".leadingab"],"ok":null}
+{"fn":"weblocLinkId","args":[".leading{name} has {count} items"],"ok":null}
+{"fn":"weblocLinkId","args":["abcab"],"ok":null}
+{"fn":"weblocLinkId","args":["😀ΣΊΣΥΦΟΣ"],"ok":null}
+{"fn":"weblocLinkId","args":["hello worldİstanbul"],"ok":null}
+{"fn":"weblocLinkId","args":["hellohello"],"ok":null}
+{"fn":"weblocLinkId","args":["{name} has {count} items{name} has {count} items"],"ok":null}
+{"fn":"weblocLinkId","args":["ΣΊΣΥΦΟΣé"],"ok":null}
+{"fn":"weblocLinkId","args":["İstanbul.leading"],"ok":null}
+{"fn":"weblocLinkId","args":["a:b:cline1\nline2"],"ok":null}
+{"fn":"weblocLinkId","args":["﻿bomstraße"],"ok":null}
+{"fn":"weblocLinkId","args":["ab  padded  "],"ok":null}
+{"fn":"weblocLinkId","args":["{name} has {count} items:"],"ok":null}
+{"fn":"weblocLinkId","args":["Hello World  padded  "],"ok":null}
+{"fn":"weblocLinkId","args":["Hello Worlda.b.c"],"ok":null}
+{"fn":"weblocLinkId","args":["{name} has {count} itemsİstanbul"],"ok":null}
+{"fn":"weblocLinkId","args":["hello world.leading"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.tsa😀b😀c"],"ok":null}
+{"fn":"weblocLinkId","args":["trailing.ünïcödé"],"ok":null}
+{"fn":"weblocLinkId","args":["emoji 👍🏽 mixab"],"ok":null}
+{"fn":"weblocLinkId","args":["./x/**/*.json.leading"],"ok":null}
+{"fn":"weblocLinkId","args":["﻿bomünïcödé"],"ok":null}
+{"fn":"weblocLinkId","args":["key_name-1key_name-1"],"ok":null}
+{"fn":"weblocLinkId","args":["helloHello World"],"ok":null}
+{"fn":"weblocLinkId","args":["a.b.ckey_name-1"],"ok":null}
+{"fn":"weblocLinkId","args":["a😀b😀c{name} has {count} items"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.tsünïcödé"],"ok":null}
+{"fn":"weblocLinkId","args":["éé"],"ok":null}
+{"fn":"weblocLinkId","args":["a:b:cab"],"ok":null}
+{"fn":"weblocLinkId","args":["trailing.a.b.c"],"ok":null}
+{"fn":"weblocLinkId","args":["HELLOa.b.c"],"ok":null}
+{"fn":"weblocLinkId","args":["  padded  hello"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.ts😀"],"ok":null}
+{"fn":"weblocLinkId","args":["ΣΊΣΥΦΟΣünïcödé"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.tsstraße"],"ok":null}
+{"fn":"weblocLinkId","args":["ΣΊΣΥΦΟΣa..b"],"ok":null}
+{"fn":"weblocLinkId","args":[":ns:key.path"],"ok":null}
+{"fn":"weblocLinkId","args":["a:b:c./x/**/*.json"],"ok":null}
+{"fn":"weblocLinkId","args":["abctrailing."],"ok":null}
+{"fn":"weblocLinkId","args":["line1\nline2  padded  "],"ok":null}
+{"fn":"weblocLinkId","args":["ΣΊΣΥΦΟΣ.leading"],"ok":null}
+{"fn":"weblocLinkId","args":["emoji 👍🏽 mix{name} has {count} items"],"ok":null}
+{"fn":"weblocLinkId","args":["Hello Worldns:key.path"],"ok":null}
+{"fn":"weblocLinkId","args":["éstraße"],"ok":null}
+{"fn":"weblocLinkId","args":["emoji 👍🏽 mixstraße"],"ok":null}
+{"fn":"weblocLinkId","args":["tab\tseparatedabc"],"ok":null}
+{"fn":"weblocLinkId","args":["Hello World日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["straßeemoji 👍🏽 mix"],"ok":null}
+{"fn":"weblocLinkId","args":["日本語のテキストa:b:c"],"ok":null}
+{"fn":"weblocLinkId","args":["a😀b😀c﻿bom"],"ok":null}
+{"fn":"weblocLinkId","args":["line1\nline2日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["straßeünïcödé"],"ok":null}
+{"fn":"weblocLinkId","args":["😀hello"],"ok":null}
+{"fn":"weblocLinkId","args":["İstanbul日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["a.b.chello"],"ok":null}
+{"fn":"weblocLinkId","args":["trailing.é"],"ok":null}
+{"fn":"weblocLinkId","args":["é./x/**/*.json"],"ok":null}
+{"fn":"weblocLinkId","args":["hellokey_name-1"],"ok":null}
+{"fn":"weblocLinkId","args":["src/a/b.ts日本語のテキスト"],"ok":null}
+{"fn":"weblocLinkId","args":["a..bHello World"],"ok":null}
+{"fn":"weblocLinkId","args":["abns:key.path"],"ok":null}
+{"fn":"weblocLinkId","args":["İstanbul﻿bom"],"ok":null}
+{"fn":"weblocLinkId","args":["aabc"],"ok":null}
+{"fn":"weblocLinkId","args":["a:b:ctab\tseparated"],"ok":null}
+{"fn":"weblocLinkId","args":["héllo wörld"],"ok":null}
+{"fn":"weblocLinkId","args":["👍🏽 thumbs"],"ok":null}
+{"fn":"weblocLinkId","args":["日本語"],"ok":null}
+{"fn":"weblocLinkId","args":["ılık ırmak"],"ok":null}
+{"fn":"weblocLinkId","args":["👨‍👩‍👧 family"],"ok":null}
+{"fn":"weblocLinkId","args":["a b"],"ok":null}
+{"fn":"weblocLinkId","args":["a😀b"],"ok":null}
+{"fn":"weblocLinkId","args":["a²b x½ y①"],"ok":null}
+{"fn":"weblocLinkId","args":["aⅠb Ⅻ"],"ok":null}
+{"fn":"weblocLinkId","args":["a𐐀b 𝐀bc"],"ok":null}
+{"fn":"weblocLinkId","args":["कि ٣٤"],"ok":null}
+{"fn":"weblocLinkId","args":["Iı İi"],"ok":null}
+{"fn":"weblocLinkId","args":["K K k"],"ok":null}
+{"fn":"weblocLinkId","args":["ſ s S"],"ok":null}
+{"fn":"weblocLinkId","args":["x‍y 👨‍👩‍👧"],"ok":null}
+{"fn":"weblocLinkId","args":["a b c　d"],"ok":null}
+{"fn":"weblocLinkId","args":["١٢٣ ٤٥"],"ok":null}
+{"fn":"weblocLinkId","args":["𝟘𝟙 ²³"],"ok":null}
+{"fn":"weblocLinkId","args":["snake_case foo-bar o'neil"],"ok":null}
+{"fn":"weblocLinkId","args":["ǅungla Ǆ"],"ok":null}
+{"fn":"weblocLinkId","args":["one\r\ntwo threefour"],"ok":null}
+{"fn":"weblocLinkId","args":["café café"],"ok":null}
+{"fn":"weblocLinkId","args":["ΣΑΣ σας ς"],"ok":null}
+{"fn":"newLinkIdShape","args":[],"ok":true}
+{"fn":"weblocText","args":["https://example.com/"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://example.com/</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://example.com/","lk1"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://example.com/</string>\n\t<key>ArdiaLink</key>\n\t<string>lk1</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://example.com/",null],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://example.com/</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://example.com/",""],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://example.com/</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://example.com/",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://example.com/</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://example.com/?a=1&b=<2>"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://example.com/?a=1&amp;b=&lt;2&gt;</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://example.com/?a=1&b=<2>","lk1"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://example.com/?a=1&amp;b=&lt;2&gt;</string>\n\t<key>ArdiaLink</key>\n\t<string>lk1</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://example.com/?a=1&b=<2>",null],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://example.com/?a=1&amp;b=&lt;2&gt;</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://example.com/?a=1&b=<2>",""],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://example.com/?a=1&amp;b=&lt;2&gt;</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://example.com/?a=1&b=<2>",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://example.com/?a=1&amp;b=&lt;2&gt;</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://例え.jp/パス"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://例え.jp/パス</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://例え.jp/パス","lk1"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://例え.jp/パス</string>\n\t<key>ArdiaLink</key>\n\t<string>lk1</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://例え.jp/パス",null],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://例え.jp/パス</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://例え.jp/パス",""],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://例え.jp/パス</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://例え.jp/パス",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://例え.jp/パス</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://a.com/?x=1&y=2"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://a.com/?x=1&amp;y=2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://a.com/?x=1&y=2","lk1"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://a.com/?x=1&amp;y=2</string>\n\t<key>ArdiaLink</key>\n\t<string>lk1</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://a.com/?x=1&y=2",null],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://a.com/?x=1&amp;y=2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://a.com/?x=1&y=2",""],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://a.com/?x=1&amp;y=2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://a.com/?x=1&y=2",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://a.com/?x=1&amp;y=2</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://a.example/"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://a.example/</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://a.example/","lk1"],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://a.example/</string>\n\t<key>ArdiaLink</key>\n\t<string>lk1</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://a.example/",null],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://a.example/</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://a.example/",""],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://a.example/</string>\n</dict>\n</plist>\n"}
+{"fn":"weblocText","args":["https://a.example/",{"$undefined":true}],"ok":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>URL</key>\n\t<string>https://a.example/</string>\n</dict>\n</plist>\n"}
+{"fn":"parseWebloc","args":["<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<plist version=\"1.0\">\n<dict>\n  <key>URL</key>\n  <string>https://news.ycombinator.com/item?id=1&amp;p=2&#38;q=&#x33;</string>\n</dict>\n</plist>"],"ok":"https://news.ycombinator.com/item?id=1&p=2&q=3"}
+{"fn":"weblocLinkId","args":["<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<plist version=\"1.0\">\n<dict>\n  <key>URL</key>\n  <string>https://news.ycombinator.com/item?id=1&amp;p=2&#38;q=&#x33;</string>\n</dict>\n</plist>"],"ok":null}
+{"fn":"parseWebloc","args":["<plist><dict><key>Name</key><string>x</string></dict></plist>"],"ok":null}
+{"fn":"weblocLinkId","args":["<plist><dict><key>Name</key><string>x</string></dict></plist>"],"ok":null}
+{"fn":"parseWebloc","args":["<plist><dict><key>URL</key><string>  </string></dict></plist>"],"ok":null}
+{"fn":"weblocLinkId","args":["<plist><dict><key>URL</key><string>  </string></dict></plist>"],"ok":null}
+{"fn":"parseWebloc","args":["not a plist"],"ok":null}
+{"fn":"weblocLinkId","args":["not a plist"],"ok":null}
+{"fn":"parseWebloc","args":["<plist version=\"1.0\"><dict><!-- <key>URL</key><string>https://evil.example/</string> --><key>URL</key><string>https://real.example/</string></dict></plist>"],"ok":"https://real.example/"}
+{"fn":"weblocLinkId","args":["<plist version=\"1.0\"><dict><!-- <key>URL</key><string>https://evil.example/</string> --><key>URL</key><string>https://real.example/</string></dict></plist>"],"ok":null}
+{"fn":"parseWebloc","args":["<KEY> url </Key>\n<STRING>&LT;a&Gt;&quot;&apos;&nbsp;&constructor;&Amp;</String>"],"ok":"<a>\"'&nbsp;function Object() { [native code] }&"}
+{"fn":"weblocLinkId","args":["<KEY> url </Key>\n<STRING>&LT;a&Gt;&quot;&apos;&nbsp;&constructor;&Amp;</String>"],"ok":null}
+{"fn":"parseWebloc","args":["<key>URL</key><string>&#0;&#x10FFFF;&#x110000;&#99999999999999999999;&#X41;&#x;&#;&#65</string>"],"ok":"\u0000􏿿&#x110000;&#99999999999999999999;A&#x;&#;&#65"}
+{"fn":"weblocLinkId","args":["<key>URL</key><string>&#0;&#x10FFFF;&#x110000;&#99999999999999999999;&#X41;&#x;&#;&#65</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<key>URL</key><string>&#xD800;x</string>"],"ok":{"$utf16":[55296,120]}}
+{"fn":"weblocLinkId","args":["<key>URL</key><string>&#xD800;x</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<key>URL</key><string>&#128512;&#x1F600;</string>"],"ok":"😀😀"}
+{"fn":"weblocLinkId","args":["<key>URL</key><string>&#128512;&#x1F600;</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<key>﻿URL </key> <string>a</string>"],"ok":"a"}
+{"fn":"weblocLinkId","args":["<key>﻿URL </key> <string>a</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<key>URL</key><string>a</string>"],"ok":null}
+{"fn":"weblocLinkId","args":["<key>URL</key><string>a</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<key>UR&#76;</key><string>a</string>"],"ok":null}
+{"fn":"weblocLinkId","args":["<key>UR&#76;</key><string>a</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<keſ>URL</key><string>a</string>"],"ok":null}
+{"fn":"weblocLinkId","args":["<keſ>URL</key><string>a</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<key>URL</key><ſtring>a</string>"],"ok":null}
+{"fn":"weblocLinkId","args":["<key>URL</key><ſtring>a</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<key>ArdiaLink</key><string> id-1 </string><key>URL</key><string>u</string>"],"ok":"u"}
+{"fn":"weblocLinkId","args":["<key>ArdiaLink</key><string> id-1 </string><key>URL</key><string>u</string>"],"ok":"id-1"}
+{"fn":"parseWebloc","args":["<key>ARDIALINK</key><string>x</string>"],"ok":null}
+{"fn":"weblocLinkId","args":["<key>ARDIALINK</key><string>x</string>"],"ok":"x"}
+{"fn":"parseWebloc","args":["<key>ArdiaLinK</key><string>x</string>"],"ok":null}
+{"fn":"weblocLinkId","args":["<key>ArdiaLinK</key><string>x</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<!-- unterminated <key>URL</key><string>a</string>"],"ok":"a"}
+{"fn":"weblocLinkId","args":["<!-- unterminated <key>URL</key><string>a</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<!----><key>URL</key><string>b</string><!-- -->"],"ok":"b"}
+{"fn":"weblocLinkId","args":["<!----><key>URL</key><string>b</string><!-- -->"],"ok":null}
+{"fn":"parseWebloc","args":["<key>URL</key><string>\n multi\nline \n</string>"],"ok":"multi\nline"}
+{"fn":"weblocLinkId","args":["<key>URL</key><string>\n multi\nline \n</string>"],"ok":null}
+{"fn":"parseWebloc","args":["<key>URL</key><string></string><key>URL</key><string>x</string>"],"ok":null}
+{"fn":"weblocLinkId","args":["<key>URL</key><string></string><key>URL</key><string>x</string>"],"ok":null}
+{"fn":"parseWebloc","args":[""],"ok":null}
+{"fn":"weblocLinkId","args":[""],"ok":null}

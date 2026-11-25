@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/errors.harness.ts",
+  "files": 1,
+  "fingerprint": "5f4d2f35ac0171ad",
+  "coverage": {
+    "lines": 4,
+    "reached": 4,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/errors.harness.ts",
+        "lines": 3,
+        "reached": 3,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/errors.ts",
+        "lines": 1,
+        "reached": 1,
+        "missed": ""
+      }
+    ]
+  }
+}

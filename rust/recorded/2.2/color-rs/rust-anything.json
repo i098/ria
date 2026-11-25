@@ -1,0 +1,282 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/color.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "color-rs",
+  "exports": [
+    {
+      "name": "isHexColor",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 5,
+      "params": [
+        {
+          "name": "color",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isRgbFunction",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "color",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "parseColor",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 9,
+      "params": [
+        {
+          "name": "color",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[r: number, g: number, b: number, a: number]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "toHex",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 21,
+      "params": [
+        {
+          "name": "channels",
+          "ts_type": "readonly number[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "mix",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 24,
+      "params": [
+        {
+          "name": "a",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "b",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "t",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "over",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 30,
+      "params": [
+        {
+          "name": "top",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "under",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "colorDistance",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 38,
+      "params": [
+        {
+          "name": "a",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "b",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "luminance",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 44,
+      "params": [
+        {
+          "name": "color",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "contrastRatio",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 53,
+      "params": [
+        {
+          "name": "a",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "b",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isLight",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 58,
+      "params": [
+        {
+          "name": "color",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "hslToRgb",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 63,
+      "params": [
+        {
+          "name": "h",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "s",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "l",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[number, number, number]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "rgbToHsl",
+      "file": "apps/browser/src/lib/color.ts",
+      "line": 74,
+      "params": [
+        {
+          "name": "r",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "g",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "b",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[number, number, number]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

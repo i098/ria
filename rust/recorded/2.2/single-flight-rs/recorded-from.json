@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/singleFlight.harness.ts",
+  "files": 1,
+  "fingerprint": "6754857716bf0034",
+  "coverage": {
+    "lines": 67,
+    "reached": 67,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/singleFlight.harness.ts",
+        "lines": 39,
+        "reached": 39,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/singleFlight.ts",
+        "lines": 28,
+        "reached": 28,
+        "missed": ""
+      }
+    ]
+  }
+}

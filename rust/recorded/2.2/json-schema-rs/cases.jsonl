@@ -1,0 +1,20 @@
+{"fn":"schemaJson","args":[true],"ok":"true\n"}
+{"fn":"schemaJson","args":[{"a":"b"}],"ok":"{\n  \"a\": \"b\"\n}\n"}
+{"fn":"schemaJson","args":["x"],"ok":"\"x\"\n"}
+{"fn":"schemaJson","args":[["a",1]],"ok":"[\n  \"a\",\n  1\n]\n"}
+{"fn":"schemaJson","args":[{"a":{"b":"c"}}],"ok":"{\n  \"a\": {\n    \"b\": \"c\"\n  }\n}\n"}
+{"fn":"schemaJson","args":[[]],"ok":"[]\n"}
+{"fn":"schemaJson","args":[{}],"ok":"{}\n"}
+{"fn":"schemaJson","args":[0],"ok":"0\n"}
+{"fn":"schemaJson","args":[null],"ok":"null\n"}
+{"fn":"schemaJson","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":"{\n  \"2\": 4,\n  \"10\": 3,\n  \"zebra\": 1,\n  \"apple\": 2,\n  \"é\": 5,\n  \"Apple\": 6\n}\n"}
+{"fn":"schemaJson","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":"{\n  \"n\": 9007199254740992,\n  \"f\": 1e+21,\n  \"t\": 0.1,\n  \"neg\": -7\n}\n"}
+{"fn":"schemaJson","args":[[3,1,2]],"ok":"[\n  3,\n  1,\n  2\n]\n"}
+{"fn":"schemaJson","args":[{}],"ok":"{}\n"}
+{"fn":"schemaJson","args":[[]],"ok":"[]\n"}
+{"fn":"schemaJson","args":[{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"a":{"type":["string","null"],"minimum":1.5,"maximum":1e+21,"exclusiveMinimum":1e-7}},"required":["a"],"additionalProperties":false}],"ok":"{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"a\": {\n      \"type\": [\n        \"string\",\n        \"null\"\n      ],\n      \"minimum\": 1.5,\n      \"maximum\": 1e+21,\n      \"exclusiveMinimum\": 1e-7\n    }\n  },\n  \"required\": [\n    \"a\"\n  ],\n  \"additionalProperties\": false\n}\n"}
+{"fn":"schemaJson","args":[{"1":{"z":[],"y":{}},"2":"two","b":1,"a":[1,[2,[3,{}]]]}],"ok":"{\n  \"1\": {\n    \"z\": [],\n    \"y\": {}\n  },\n  \"2\": \"two\",\n  \"b\": 1,\n  \"a\": [\n    1,\n    [\n      2,\n      [\n        3,\n        {}\n      ]\n    ]\n  ]\n}\n"}
+{"fn":"schemaJson","args":[{"s":"q\"\\\n\t\u0001 ü🎉","n":{"$num":"NaN"},"i":{"$num":"Infinity"},"z":{"$num":"-0"},"u":{"$undefined":true},"arr":[{"$undefined":true},{"$num":"NaN"},null]}],"ok":"{\n  \"s\": \"q\\\"\\\\\\n\\t\\u0001 ü🎉\",\n  \"n\": null,\n  \"i\": null,\n  \"z\": 0,\n  \"arr\": [\n    null,\n    null,\n    null\n  ]\n}\n"}
+{"fn":"schemaJson","args":[{"__proto__":{"x":1}}],"ok":"{\n  \"__proto__\": {\n    \"x\": 1\n  }\n}\n"}
+{"fn":"schemaJson","args":[{"enum":[true,false,null,0,-1.25,123456789012345680000]}],"ok":"{\n  \"enum\": [\n    true,\n    false,\n    null,\n    0,\n    -1.25,\n    123456789012345680000\n  ]\n}\n"}
+{"fn":"schemaJson","args":[[{"a":1}]],"ok":"[\n  {\n    \"a\": 1\n  }\n]\n"}

@@ -1,0 +1,119 @@
+{"fn": "ago", "args": [1000000000000, 1000000000000]}
+{"fn": "ago", "args": [999999999000, 1000000000000]}
+{"fn": "ago", "args": [999999941000, 1000000000000]}
+{"fn": "ago", "args": [999999940001.0, 1000000000000]}
+{"fn": "ago", "args": [999999940000, 1000000000000]}
+{"fn": "ago", "args": [999999939000, 1000000000000]}
+{"fn": "ago", "args": [999999881000, 1000000000000]}
+{"fn": "ago", "args": [999999880000, 1000000000000]}
+{"fn": "ago", "args": [999996401000, 1000000000000]}
+{"fn": "ago", "args": [999996400000, 1000000000000]}
+{"fn": "ago", "args": [999992801000, 1000000000000]}
+{"fn": "ago", "args": [999992800000, 1000000000000]}
+{"fn": "ago", "args": [999913601000, 1000000000000]}
+{"fn": "ago", "args": [999913600000, 1000000000000]}
+{"fn": "ago", "args": [999827201000, 1000000000000]}
+{"fn": "ago", "args": [999827200000, 1000000000000]}
+{"fn": "ago", "args": [999481600000, 1000000000000]}
+{"fn": "ago", "args": [999395201000, 1000000000000]}
+{"fn": "ago", "args": [999395200000, 1000000000000]}
+{"fn": "ago", "args": [998876800000, 1000000000000]}
+{"fn": "ago", "args": [998790400000, 1000000000000]}
+{"fn": "ago", "args": [997494400000, 1000000000000]}
+{"fn": "ago", "args": [997408000000, 1000000000000]}
+{"fn": "ago", "args": [994902400000, 1000000000000]}
+{"fn": "ago", "args": [994816000000, 1000000000000]}
+{"fn": "ago", "args": [968550400000, 1000000000000]}
+{"fn": "ago", "args": [968464000000, 1000000000000]}
+{"fn": "ago", "args": [936928000000, 1000000000000]}
+{"fn": "ago", "args": [684640000000, 1000000000000]}
+{"fn": "ago", "args": [1000000005000, 1000000000000]}
+{"fn": "ago", "args": [1000100000000, 1000000000000]}
+{"fn": "ago", "args": [{"$num": "NaN"}, 1000000000000]}
+{"fn": "ago", "args": [1000000000000, {"$num": "NaN"}]}
+{"fn": "ago", "args": [{"$num": "-Infinity"}, 1000000000000]}
+{"fn": "ago", "args": [{"$num": "Infinity"}, 1000000000000]}
+{"fn": "ago", "args": [-1e+300, 1e+300]}
+{"fn": "ago", "args": [0, {"$num": "-0"}]}
+{"fn": "ago", "args": [1000000000000, null]}
+{"fn": "ago", "args": [999996400000, {"$undefined": true}]}
+{"fn": "ago", "args": [999996400000]}
+{"fn": "durationParts", "args": [30]}
+{"fn": "durationParts", "args": [90]}
+{"fn": "durationParts", "args": [60]}
+{"fn": "durationParts", "args": [2160]}
+{"fn": "durationParts", "args": [1440]}
+{"fn": "durationParts", "args": [10080]}
+{"fn": "durationParts", "args": [0]}
+{"fn": "durationParts", "args": [{"$num": "-0"}]}
+{"fn": "durationParts", "args": [-60]}
+{"fn": "durationParts", "args": [-1440]}
+{"fn": "durationParts", "args": [1.5]}
+{"fn": "durationParts", "args": [90.5]}
+{"fn": "durationParts", "args": [{"$num": "NaN"}]}
+{"fn": "durationParts", "args": [{"$num": "Infinity"}]}
+{"fn": "durationParts", "args": [{"$num": "-Infinity"}]}
+{"fn": "durationParts", "args": [1e+300]}
+{"fn": "durationParts", "args": [1.44e+24]}
+{"fn": "durationParts", "args": [3600]}
+{"fn": "durationParts", "args": [525600]}
+{"fn": "durationTitle", "args": [1]}
+{"fn": "durationTitle", "args": [45]}
+{"fn": "durationTitle", "args": [60]}
+{"fn": "durationTitle", "args": [720]}
+{"fn": "durationTitle", "args": [1440]}
+{"fn": "durationTitle", "args": [2880]}
+{"fn": "durationTitle", "args": [43200]}
+{"fn": "durationTitle", "args": [1.5]}
+{"fn": "durationTitle", "args": [0]}
+{"fn": "durationTitle", "args": [{"$num": "-0"}]}
+{"fn": "durationTitle", "args": [-1]}
+{"fn": "durationTitle", "args": [-60]}
+{"fn": "durationTitle", "args": [-1440]}
+{"fn": "durationTitle", "args": [{"$num": "NaN"}]}
+{"fn": "durationTitle", "args": [{"$num": "Infinity"}]}
+{"fn": "durationTitle", "args": [1e+300]}
+{"fn": "durationTitle", "args": [1.44e+24]}
+{"fn": "durationTitle", "args": [0.5]}
+{"fn": "durationTitle", "args": [3600]}
+{"fn": "durationTitle", "args": [1e-07]}
+{"fn": "durationMinutes", "args": ["30", "minutes"]}
+{"fn": "durationMinutes", "args": [" 2 ", "hours"]}
+{"fn": "durationMinutes", "args": ["1.5", "hours"]}
+{"fn": "durationMinutes", "args": ["3", "days"]}
+{"fn": "durationMinutes", "args": ["365", "days"]}
+{"fn": "durationMinutes", "args": ["0", "minutes"]}
+{"fn": "durationMinutes", "args": ["0.2", "minutes"]}
+{"fn": "durationMinutes", "args": ["-5", "minutes"]}
+{"fn": "durationMinutes", "args": ["", "hours"]}
+{"fn": "durationMinutes", "args": ["abc", "days"]}
+{"fn": "durationMinutes", "args": ["1e3", "minutes"]}
+{"fn": "durationMinutes", "args": ["366", "days"]}
+{"fn": "durationMinutes", "args": [" 2.5 ", "hours"]}
+{"fn": "durationMinutes", "args": ["1.", "minutes"]}
+{"fn": "durationMinutes", "args": [".5", "hours"]}
+{"fn": "durationMinutes", "args": ["١٢", "minutes"]}
+{"fn": "durationMinutes", "args": ["１２", "minutes"]}
+{"fn": "durationMinutes", "args": [" 1﻿", "days"]}
+{"fn": "durationMinutes", "args": [" 1　", "hours"]}
+{"fn": "durationMinutes", "args": ["0.0001", "days"]}
+{"fn": "durationMinutes", "args": ["0.5", "minutes"]}
+{"fn": "durationMinutes", "args": ["0.49", "minutes"]}
+{"fn": "durationMinutes", "args": ["525600.4", "minutes"]}
+{"fn": "durationMinutes", "args": ["525600.5", "minutes"]}
+{"fn": "durationMinutes", "args": ["8760", "hours"]}
+{"fn": "durationMinutes", "args": ["8760.01", "hours"]}
+{"fn": "durationMinutes", "args": ["1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111", "minutes"]}
+{"fn": "durationMinutes", "args": ["5", "weeks"]}
+{"fn": "durationMinutes", "args": ["5", "toString"]}
+{"fn": "durationMinutes", "args": ["5", "__proto__"]}
+{"fn": "durationMinutes", "args": ["5", "constructor"]}
+{"fn": "durationMinutes", "args": ["5", ""]}
+{"fn": "durationMinutes", "args": ["+5", "minutes"]}
+{"fn": "durationMinutes", "args": ["-0", "minutes"]}
+{"fn": "durationMinutes", "args": ["1.2.3", "minutes"]}
+{"fn": "durationMinutes", "args": ["1 2", "minutes"]}
+{"fn": "durationMinutes", "args": ["00010", "minutes"]}
+{"fn": "durationMinutes", "args": ["1\n", "hours"]}
+{"fn": "durationMinutes", "args": ["1", "hours"]}
+{"fn": "durationMinutes", "args": ["ٌ5", "days"]}

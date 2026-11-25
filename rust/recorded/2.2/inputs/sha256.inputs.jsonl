@@ -1,0 +1,32 @@
+{"fn":"sha256","args":[""]}
+{"fn":"sha256","args":["abc"]}
+{"fn":"sha256","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"sha256","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"sha256","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"sha256","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"sha256","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"sha256","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"sha256","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"sha256","args":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}
+{"fn":"sha256","args":["héllo ✓ 日本"]}
+{"fn":"sha256","args":["dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk"]}
+{"fn":"sha256","args":["😀"]}
+{"fn":"sha256","args":["\u0000"]}
+{"fn":"sha256","args":["éééééééééééééééééééééééééééé"]}
+{"fn":"sha256","args":["日日日日日日日日日日日日日日日日日日日"]}
+{"fn":"sha256","args":["ünïcödé straße"]}
+{"fn":"base64Url","args":[[]]}
+{"fn":"base64Url","args":[[3]]}
+{"fn":"base64Url","args":[[3,80]]}
+{"fn":"base64Url","args":[[3,80,157]]}
+{"fn":"base64Url","args":[[3,80,157,234]]}
+{"fn":"base64Url","args":[[3,80,157,234,55]]}
+{"fn":"base64Url","args":[[3,80,157,234,55,132]]}
+{"fn":"base64Url","args":[[3,80,157,234,55,132,209,30,107,184,5,82,159,236,57,134,211,32,109,186,7,84,161,238,59,136,213,34,111,188,9]]}
+{"fn":"base64Url","args":[[3,80,157,234,55,132,209,30,107,184,5,82,159,236,57,134,211,32,109,186,7,84,161,238,59,136,213,34,111,188,9,86]]}
+{"fn":"base64Url","args":[[3,80,157,234,55,132,209,30,107,184,5,82,159,236,57,134,211,32,109,186,7,84,161,238,59,136,213,34,111,188,9,86,163]]}
+{"fn":"base64Url","args":[[255,255,255,0,0,0,251,239]]}
+{"fn":"base64Url","args":[[256,-1,3.7,-3.7,{"$num":"NaN"},{"$num":"Infinity"},{"$num":"-0"},10000000000,"7",true,null]]}
+{"fn":"base64Url","args":[null]}
+{"fn":"base64Url","args":["abc"]}
+{"fn":"base64Url","args":[[19,211,30,149,136,90,216,236,11,197,177,3,19,76,152,26,168,120,167,173,109,241,68,106,221,107,184,98,82,202,220,112,249,167]]}

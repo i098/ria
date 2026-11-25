@@ -1,0 +1,174 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/urlParts.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "urlparts-rs",
+  "exports": [
+    {
+      "name": "canonicalIpv6",
+      "file": "apps/browser/src/lib/urlParts.ts",
+      "line": 19,
+      "params": [
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "asciiHost",
+      "file": "apps/browser/src/lib/urlParts.ts",
+      "line": 49,
+      "params": [
+        {
+          "name": "host",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "urlParts",
+      "file": "apps/browser/src/lib/urlParts.ts",
+      "line": 79,
+      "params": [
+        {
+          "name": "href",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  scheme: string;\n  host: string;\n  port: string;\n  path: string;\n  query: string;\n  hash: string;\n  authority: boolean;\n} | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "effectivePort",
+      "file": "apps/browser/src/lib/urlParts.ts",
+      "line": 109,
+      "params": [
+        {
+          "name": "parts",
+          "ts_type": "{\n  scheme: string;\n  host: string;\n  port: string;\n  path: string;\n  query: string;\n  hash: string;\n  authority: boolean;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "hostWithPort",
+      "file": "apps/browser/src/lib/urlParts.ts",
+      "line": 111,
+      "params": [
+        {
+          "name": "parts",
+          "ts_type": "{\n  scheme: string;\n  host: string;\n  port: string;\n  path: string;\n  query: string;\n  hash: string;\n  authority: boolean;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "originOf",
+      "file": "apps/browser/src/lib/urlParts.ts",
+      "line": 113,
+      "params": [
+        {
+          "name": "parts",
+          "ts_type": "{\n  scheme: string;\n  host: string;\n  port: string;\n  path: string;\n  query: string;\n  hash: string;\n  authority: boolean;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "formatUrl",
+      "file": "apps/browser/src/lib/urlParts.ts",
+      "line": 115,
+      "params": [
+        {
+          "name": "parts",
+          "ts_type": "{\n  scheme: string;\n  host: string;\n  port: string;\n  path: string;\n  query: string;\n  hash: string;\n  authority: boolean;\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "webUrl",
+      "file": "apps/browser/src/lib/urlParts.ts",
+      "line": 117,
+      "params": [
+        {
+          "name": "href",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  scheme: string;\n  host: string;\n  port: string;\n  path: string;\n  query: string;\n  hash: string;\n  authority: boolean;\n} | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "minimizedUrl",
+      "file": "apps/browser/src/lib/urlParts.ts",
+      "line": 122,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

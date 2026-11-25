@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/pressMotion.harness.ts",
+  "files": 1,
+  "fingerprint": "c0e9e7e6dd3dd594",
+  "coverage": {
+    "lines": 49,
+    "reached": 49,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/pressMotion.harness.ts",
+        "lines": 35,
+        "reached": 35,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/pressMotion.ts",
+        "lines": 14,
+        "reached": 14,
+        "missed": ""
+      }
+    ]
+  }
+}

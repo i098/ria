@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/absoluteFolder.ts",
+  "files": 1,
+  "fingerprint": "a4d23a7af6eb5bd0",
+  "coverage": {
+    "lines": 1,
+    "reached": 1,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/absoluteFolder.ts",
+        "lines": 1,
+        "reached": 1,
+        "missed": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/legacy.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "legacy-rs",
+  "exports": [
+    {
+      "name": "fromLegacyUrl",
+      "file": "apps/browser/src/lib/legacy.harness.ts",
+      "line": 3,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "fromLegacyValue",
+      "file": "apps/browser/src/lib/legacy.harness.ts",
+      "line": 8,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[unknown, boolean]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

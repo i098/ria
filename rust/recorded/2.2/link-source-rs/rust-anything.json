@@ -1,0 +1,36 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/linkSource.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "linksource-rs",
+  "exports": [
+    {
+      "name": "sourceMatches",
+      "file": "apps/browser/src/lib/linkSource.ts",
+      "line": 3,
+      "params": [
+        {
+          "name": "names",
+          "ts_type": "readonly string[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "source",
+          "ts_type": "({ bundleId: string | null; appName: string | null } | null)",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

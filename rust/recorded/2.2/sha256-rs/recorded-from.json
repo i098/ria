@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/sha256.harness.ts",
+  "files": 1,
+  "fingerprint": "2788680a0bd1d144",
+  "coverage": {
+    "lines": 73,
+    "reached": 73,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/sha256.harness.ts",
+        "lines": 9,
+        "reached": 9,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/sha256.ts",
+        "lines": 64,
+        "reached": 64,
+        "missed": ""
+      }
+    ]
+  }
+}

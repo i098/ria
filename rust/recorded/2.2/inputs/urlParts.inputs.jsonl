@@ -1,0 +1,394 @@
+{"fn": "urlParts", "args": ["http://127.0.0.1:18800/page.html"]}
+{"fn": "webUrl", "args": ["http://127.0.0.1:18800/page.html"]}
+{"fn": "minimizedUrl", "args": ["http://127.0.0.1:18800/page.html"]}
+{"fn": "urlParts", "args": ["HTTPS://Example.COM/a?b=1#c"]}
+{"fn": "webUrl", "args": ["HTTPS://Example.COM/a?b=1#c"]}
+{"fn": "minimizedUrl", "args": ["HTTPS://Example.COM/a?b=1#c"]}
+{"fn": "urlParts", "args": ["HTTPS://Example.COM:443/a"]}
+{"fn": "webUrl", "args": ["HTTPS://Example.COM:443/a"]}
+{"fn": "minimizedUrl", "args": ["HTTPS://Example.COM:443/a"]}
+{"fn": "urlParts", "args": ["http://example.com:80/a"]}
+{"fn": "webUrl", "args": ["http://example.com:80/a"]}
+{"fn": "minimizedUrl", "args": ["http://example.com:80/a"]}
+{"fn": "urlParts", "args": ["https://example.com:80/a"]}
+{"fn": "webUrl", "args": ["https://example.com:80/a"]}
+{"fn": "minimizedUrl", "args": ["https://example.com:80/a"]}
+{"fn": "urlParts", "args": ["https://example.com"]}
+{"fn": "webUrl", "args": ["https://example.com"]}
+{"fn": "minimizedUrl", "args": ["https://example.com"]}
+{"fn": "urlParts", "args": ["https://user:pw@example.com/"]}
+{"fn": "webUrl", "args": ["https://user:pw@example.com/"]}
+{"fn": "minimizedUrl", "args": ["https://user:pw@example.com/"]}
+{"fn": "urlParts", "args": ["javascript:alert(1)"]}
+{"fn": "webUrl", "args": ["javascript:alert(1)"]}
+{"fn": "minimizedUrl", "args": ["javascript:alert(1)"]}
+{"fn": "urlParts", "args": ["https://exa mple.com/"]}
+{"fn": "webUrl", "args": ["https://exa mple.com/"]}
+{"fn": "minimizedUrl", "args": ["https://exa mple.com/"]}
+{"fn": "urlParts", "args": ["https:///nohost"]}
+{"fn": "webUrl", "args": ["https:///nohost"]}
+{"fn": "minimizedUrl", "args": ["https:///nohost"]}
+{"fn": "urlParts", "args": ["file:///tmp/x"]}
+{"fn": "webUrl", "args": ["file:///tmp/x"]}
+{"fn": "minimizedUrl", "args": ["file:///tmp/x"]}
+{"fn": "urlParts", "args": ["https://evil.example\\@bank.example/pay?tracking=1"]}
+{"fn": "webUrl", "args": ["https://evil.example\\@bank.example/pay?tracking=1"]}
+{"fn": "minimizedUrl", "args": ["https://evil.example\\@bank.example/pay?tracking=1"]}
+{"fn": "urlParts", "args": ["https://evil.example\\bank.example/pay"]}
+{"fn": "webUrl", "args": ["https://evil.example\\bank.example/pay"]}
+{"fn": "minimizedUrl", "args": ["https://evil.example\\bank.example/pay"]}
+{"fn": "urlParts", "args": ["https://user@bank.example/pay"]}
+{"fn": "webUrl", "args": ["https://user@bank.example/pay"]}
+{"fn": "minimizedUrl", "args": ["https://user@bank.example/pay"]}
+{"fn": "urlParts", "args": ["https://%62ank.example/pay"]}
+{"fn": "webUrl", "args": ["https://%62ank.example/pay"]}
+{"fn": "minimizedUrl", "args": ["https://%62ank.example/pay"]}
+{"fn": "urlParts", "args": ["https://127.1/pay"]}
+{"fn": "webUrl", "args": ["https://127.1/pay"]}
+{"fn": "minimizedUrl", "args": ["https://127.1/pay"]}
+{"fn": "urlParts", "args": ["https://0177.0.0.1/pay"]}
+{"fn": "webUrl", "args": ["https://0177.0.0.1/pay"]}
+{"fn": "minimizedUrl", "args": ["https://0177.0.0.1/pay"]}
+{"fn": "urlParts", "args": ["https://0x7f.0.0.1/pay"]}
+{"fn": "webUrl", "args": ["https://0x7f.0.0.1/pay"]}
+{"fn": "minimizedUrl", "args": ["https://0x7f.0.0.1/pay"]}
+{"fn": "urlParts", "args": ["https://2130706433/pay"]}
+{"fn": "webUrl", "args": ["https://2130706433/pay"]}
+{"fn": "minimizedUrl", "args": ["https://2130706433/pay"]}
+{"fn": "urlParts", "args": ["https://1.2.3.04/pay"]}
+{"fn": "webUrl", "args": ["https://1.2.3.04/pay"]}
+{"fn": "minimizedUrl", "args": ["https://1.2.3.04/pay"]}
+{"fn": "urlParts", "args": ["https://[0:0:0:0:0:0:0:1]/pay"]}
+{"fn": "webUrl", "args": ["https://[0:0:0:0:0:0:0:1]/pay"]}
+{"fn": "minimizedUrl", "args": ["https://[0:0:0:0:0:0:0:1]/pay"]}
+{"fn": "urlParts", "args": ["https://[::FFFF:1]/pay"]}
+{"fn": "webUrl", "args": ["https://[::FFFF:1]/pay"]}
+{"fn": "minimizedUrl", "args": ["https://[::FFFF:1]/pay"]}
+{"fn": "urlParts", "args": ["https://bank.example:0443/pay"]}
+{"fn": "webUrl", "args": ["https://bank.example:0443/pay"]}
+{"fn": "minimizedUrl", "args": ["https://bank.example:0443/pay"]}
+{"fn": "urlParts", "args": ["https://bank.example:0/pay"]}
+{"fn": "webUrl", "args": ["https://bank.example:0/pay"]}
+{"fn": "minimizedUrl", "args": ["https://bank.example:0/pay"]}
+{"fn": "urlParts", "args": ["https://bank.example:65536/pay"]}
+{"fn": "webUrl", "args": ["https://bank.example:65536/pay"]}
+{"fn": "minimizedUrl", "args": ["https://bank.example:65536/pay"]}
+{"fn": "urlParts", "args": ["https://bank.example:65535/pay"]}
+{"fn": "webUrl", "args": ["https://bank.example:65535/pay"]}
+{"fn": "minimizedUrl", "args": ["https://bank.example:65535/pay"]}
+{"fn": "urlParts", "args": ["https://bank.example:/pay"]}
+{"fn": "webUrl", "args": ["https://bank.example:/pay"]}
+{"fn": "minimizedUrl", "args": ["https://bank.example:/pay"]}
+{"fn": "urlParts", "args": ["https://bank .example/pay"]}
+{"fn": "webUrl", "args": ["https://bank .example/pay"]}
+{"fn": "minimizedUrl", "args": ["https://bank .example/pay"]}
+{"fn": "urlParts", "args": ["https://bank.example/pa\ty"]}
+{"fn": "webUrl", "args": ["https://bank.example/pa\ty"]}
+{"fn": "minimizedUrl", "args": ["https://bank.example/pa\ty"]}
+{"fn": "urlParts", "args": ["https://127.0.0.1/x"]}
+{"fn": "webUrl", "args": ["https://127.0.0.1/x"]}
+{"fn": "minimizedUrl", "args": ["https://127.0.0.1/x"]}
+{"fn": "urlParts", "args": ["https://[::1]/x"]}
+{"fn": "webUrl", "args": ["https://[::1]/x"]}
+{"fn": "minimizedUrl", "args": ["https://[::1]/x"]}
+{"fn": "urlParts", "args": ["https://[2001:db8::1]/x"]}
+{"fn": "webUrl", "args": ["https://[2001:db8::1]/x"]}
+{"fn": "minimizedUrl", "args": ["https://[2001:db8::1]/x"]}
+{"fn": "urlParts", "args": ["https://xn--bnk-sna.example/x"]}
+{"fn": "webUrl", "args": ["https://xn--bnk-sna.example/x"]}
+{"fn": "minimizedUrl", "args": ["https://xn--bnk-sna.example/x"]}
+{"fn": "urlParts", "args": ["https://bank.example:8443/x"]}
+{"fn": "webUrl", "args": ["https://bank.example:8443/x"]}
+{"fn": "minimizedUrl", "args": ["https://bank.example:8443/x"]}
+{"fn": "urlParts", "args": ["https://bücher.de/x"]}
+{"fn": "webUrl", "args": ["https://bücher.de/x"]}
+{"fn": "minimizedUrl", "args": ["https://bücher.de/x"]}
+{"fn": "urlParts", "args": ["https://BÜCHER.de/x"]}
+{"fn": "webUrl", "args": ["https://BÜCHER.de/x"]}
+{"fn": "minimizedUrl", "args": ["https://BÜCHER.de/x"]}
+{"fn": "urlParts", "args": ["https://xn--bcher-kva.de/x"]}
+{"fn": "webUrl", "args": ["https://xn--bcher-kva.de/x"]}
+{"fn": "minimizedUrl", "args": ["https://xn--bcher-kva.de/x"]}
+{"fn": "urlParts", "args": ["https://straße.de/"]}
+{"fn": "webUrl", "args": ["https://straße.de/"]}
+{"fn": "minimizedUrl", "args": ["https://straße.de/"]}
+{"fn": "urlParts", "args": ["https://bücher。de/"]}
+{"fn": "webUrl", "args": ["https://bücher。de/"]}
+{"fn": "minimizedUrl", "args": ["https://bücher。de/"]}
+{"fn": "urlParts", "args": ["https://ｂücher.de/"]}
+{"fn": "webUrl", "args": ["https://ｂücher.de/"]}
+{"fn": "minimizedUrl", "args": ["https://ｂücher.de/"]}
+{"fn": "urlParts", "args": ["https://bü cher.de/"]}
+{"fn": "webUrl", "args": ["https://bü cher.de/"]}
+{"fn": "minimizedUrl", "args": ["https://bü cher.de/"]}
+{"fn": "urlParts", "args": ["https://bü%63her.de/"]}
+{"fn": "webUrl", "args": ["https://bü%63her.de/"]}
+{"fn": "minimizedUrl", "args": ["https://bü%63her.de/"]}
+{"fn": "urlParts", "args": ["https://аррӏе.com/"]}
+{"fn": "webUrl", "args": ["https://аррӏе.com/"]}
+{"fn": "minimizedUrl", "args": ["https://аррӏе.com/"]}
+{"fn": "urlParts", "args": ["https://u@bücher.de/"]}
+{"fn": "webUrl", "args": ["https://u@bücher.de/"]}
+{"fn": "minimizedUrl", "args": ["https://u@bücher.de/"]}
+{"fn": "urlParts", "args": ["ftp://a.b:21/x"]}
+{"fn": "webUrl", "args": ["ftp://a.b:21/x"]}
+{"fn": "minimizedUrl", "args": ["ftp://a.b:21/x"]}
+{"fn": "urlParts", "args": ["ftp://a.b:22/x"]}
+{"fn": "webUrl", "args": ["ftp://a.b:22/x"]}
+{"fn": "minimizedUrl", "args": ["ftp://a.b:22/x"]}
+{"fn": "urlParts", "args": ["mailto:x@y"]}
+{"fn": "webUrl", "args": ["mailto:x@y"]}
+{"fn": "minimizedUrl", "args": ["mailto:x@y"]}
+{"fn": "urlParts", "args": ["x:"]}
+{"fn": "webUrl", "args": ["x:"]}
+{"fn": "minimizedUrl", "args": ["x:"]}
+{"fn": "urlParts", "args": ["x://"]}
+{"fn": "webUrl", "args": ["x://"]}
+{"fn": "minimizedUrl", "args": ["x://"]}
+{"fn": "urlParts", "args": ["x://:5/"]}
+{"fn": "webUrl", "args": ["x://:5/"]}
+{"fn": "minimizedUrl", "args": ["x://:5/"]}
+{"fn": "urlParts", "args": ["x://[::1"]}
+{"fn": "webUrl", "args": ["x://[::1"]}
+{"fn": "minimizedUrl", "args": ["x://[::1"]}
+{"fn": "urlParts", "args": ["x://[::1]x"]}
+{"fn": "webUrl", "args": ["x://[::1]x"]}
+{"fn": "minimizedUrl", "args": ["x://[::1]x"]}
+{"fn": "urlParts", "args": ["x://[]"]}
+{"fn": "webUrl", "args": ["x://[]"]}
+{"fn": "minimizedUrl", "args": ["x://[]"]}
+{"fn": "urlParts", "args": ["x://[::1]:80"]}
+{"fn": "webUrl", "args": ["x://[::1]:80"]}
+{"fn": "minimizedUrl", "args": ["x://[::1]:80"]}
+{"fn": "urlParts", "args": ["https://a.com./"]}
+{"fn": "webUrl", "args": ["https://a.com./"]}
+{"fn": "minimizedUrl", "args": ["https://a.com./"]}
+{"fn": "urlParts", "args": ["https://a..com/"]}
+{"fn": "webUrl", "args": ["https://a..com/"]}
+{"fn": "minimizedUrl", "args": ["https://a..com/"]}
+{"fn": "urlParts", "args": ["https://-a.com/"]}
+{"fn": "webUrl", "args": ["https://-a.com/"]}
+{"fn": "minimizedUrl", "args": ["https://-a.com/"]}
+{"fn": "urlParts", "args": ["https://a.com#h x"]}
+{"fn": "webUrl", "args": ["https://a.com#h x"]}
+{"fn": "minimizedUrl", "args": ["https://a.com#h x"]}
+{"fn": "urlParts", "args": ["https://a.com?q #x"]}
+{"fn": "webUrl", "args": ["https://a.com?q #x"]}
+{"fn": "minimizedUrl", "args": ["https://a.com?q #x"]}
+{"fn": "urlParts", "args": ["https://a.com/p "]}
+{"fn": "webUrl", "args": ["https://a.com/p "]}
+{"fn": "minimizedUrl", "args": ["https://a.com/p "]}
+{"fn": "urlParts", "args": ["https://a.com/x#y#z"]}
+{"fn": "webUrl", "args": ["https://a.com/x#y#z"]}
+{"fn": "minimizedUrl", "args": ["https://a.com/x#y#z"]}
+{"fn": "urlParts", "args": ["https://é-.com/"]}
+{"fn": "webUrl", "args": ["https://é-.com/"]}
+{"fn": "minimizedUrl", "args": ["https://é-.com/"]}
+{"fn": "urlParts", "args": ["https://-é.com/"]}
+{"fn": "webUrl", "args": ["https://-é.com/"]}
+{"fn": "minimizedUrl", "args": ["https://-é.com/"]}
+{"fn": "urlParts", "args": ["https://éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé.com/"]}
+{"fn": "webUrl", "args": ["https://éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé.com/"]}
+{"fn": "minimizedUrl", "args": ["https://éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé.com/"]}
+{"fn": "urlParts", "args": ["https://a.123/"]}
+{"fn": "webUrl", "args": ["https://a.123/"]}
+{"fn": "minimizedUrl", "args": ["https://a.123/"]}
+{"fn": "urlParts", "args": ["https://1.2.3.4./"]}
+{"fn": "webUrl", "args": ["https://1.2.3.4./"]}
+{"fn": "minimizedUrl", "args": ["https://1.2.3.4./"]}
+{"fn": "urlParts", "args": ["https://0x1/"]}
+{"fn": "webUrl", "args": ["https://0x1/"]}
+{"fn": "minimizedUrl", "args": ["https://0x1/"]}
+{"fn": "urlParts", "args": ["https://a.0x/"]}
+{"fn": "webUrl", "args": ["https://a.0x/"]}
+{"fn": "minimizedUrl", "args": ["https://a.0x/"]}
+{"fn": "urlParts", "args": ["https://日本.jp/"]}
+{"fn": "webUrl", "args": ["https://日本.jp/"]}
+{"fn": "minimizedUrl", "args": ["https://日本.jp/"]}
+{"fn": "urlParts", "args": ["https://Ⅷ.com/"]}
+{"fn": "webUrl", "args": ["https://Ⅷ.com/"]}
+{"fn": "minimizedUrl", "args": ["https://Ⅷ.com/"]}
+{"fn": "urlParts", "args": ["https://ﬁ.com/"]}
+{"fn": "webUrl", "args": ["https://ﬁ.com/"]}
+{"fn": "minimizedUrl", "args": ["https://ﬁ.com/"]}
+{"fn": "urlParts", "args": ["https://a‍.com/"]}
+{"fn": "webUrl", "args": ["https://a‍.com/"]}
+{"fn": "minimizedUrl", "args": ["https://a‍.com/"]}
+{"fn": "urlParts", "args": ["1http://a/"]}
+{"fn": "webUrl", "args": ["1http://a/"]}
+{"fn": "minimizedUrl", "args": ["1http://a/"]}
+{"fn": "urlParts", "args": ["a+b.c-d://x"]}
+{"fn": "webUrl", "args": ["a+b.c-d://x"]}
+{"fn": "minimizedUrl", "args": ["a+b.c-d://x"]}
+{"fn": "urlParts", "args": ["https://a.com:99999/"]}
+{"fn": "webUrl", "args": ["https://a.com:99999/"]}
+{"fn": "minimizedUrl", "args": ["https://a.com:99999/"]}
+{"fn": "urlParts", "args": ["https://a.com:1234567/"]}
+{"fn": "webUrl", "args": ["https://a.com:1234567/"]}
+{"fn": "minimizedUrl", "args": ["https://a.com:1234567/"]}
+{"fn": "urlParts", "args": ["https://[1:2:3:4:5:6:7:8]/"]}
+{"fn": "webUrl", "args": ["https://[1:2:3:4:5:6:7:8]/"]}
+{"fn": "minimizedUrl", "args": ["https://[1:2:3:4:5:6:7:8]/"]}
+{"fn": "urlParts", "args": ["https://[::]/"]}
+{"fn": "webUrl", "args": ["https://[::]/"]}
+{"fn": "minimizedUrl", "args": ["https://[::]/"]}
+{"fn": "urlParts", "args": ["https://[1::]/"]}
+{"fn": "webUrl", "args": ["https://[1::]/"]}
+{"fn": "minimizedUrl", "args": ["https://[1::]/"]}
+{"fn": "urlParts", "args": ["https://[::1:0:0:1]/"]}
+{"fn": "webUrl", "args": ["https://[::1:0:0:1]/"]}
+{"fn": "minimizedUrl", "args": ["https://[::1:0:0:1]/"]}
+{"fn": "urlParts", "args": ["https://[1:0:0:2:0:0:0:3]/"]}
+{"fn": "webUrl", "args": ["https://[1:0:0:2:0:0:0:3]/"]}
+{"fn": "minimizedUrl", "args": ["https://[1:0:0:2:0:0:0:3]/"]}
+{"fn": "urlParts", "args": ["https://[1:0:0:2:0:0:3:4]/"]}
+{"fn": "webUrl", "args": ["https://[1:0:0:2:0:0:3:4]/"]}
+{"fn": "minimizedUrl", "args": ["https://[1:0:0:2:0:0:3:4]/"]}
+{"fn": "urlParts", "args": ["https://[0001::1]/"]}
+{"fn": "webUrl", "args": ["https://[0001::1]/"]}
+{"fn": "minimizedUrl", "args": ["https://[0001::1]/"]}
+{"fn": "urlParts", "args": ["https://[1:::2]/"]}
+{"fn": "webUrl", "args": ["https://[1:::2]/"]}
+{"fn": "minimizedUrl", "args": ["https://[1:::2]/"]}
+{"fn": "urlParts", "args": ["https://[1::2::3]/"]}
+{"fn": "webUrl", "args": ["https://[1::2::3]/"]}
+{"fn": "minimizedUrl", "args": ["https://[1::2::3]/"]}
+{"fn": "urlParts", "args": ["https://[12345::]/"]}
+{"fn": "webUrl", "args": ["https://[12345::]/"]}
+{"fn": "minimizedUrl", "args": ["https://[12345::]/"]}
+{"fn": "urlParts", "args": ["https://[a:b]/"]}
+{"fn": "webUrl", "args": ["https://[a:b]/"]}
+{"fn": "minimizedUrl", "args": ["https://[a:b]/"]}
+{"fn": "urlParts", "args": ["https://ŉ.com/"]}
+{"fn": "webUrl", "args": ["https://ŉ.com/"]}
+{"fn": "minimizedUrl", "args": ["https://ŉ.com/"]}
+{"fn": "urlParts", "args": [""]}
+{"fn": "webUrl", "args": [""]}
+{"fn": "minimizedUrl", "args": [""]}
+{"fn": "canonicalIpv6", "args": ["::"]}
+{"fn": "canonicalIpv6", "args": ["::1"]}
+{"fn": "canonicalIpv6", "args": ["1::"]}
+{"fn": "canonicalIpv6", "args": ["1:2:3:4:5:6:7:8"]}
+{"fn": "canonicalIpv6", "args": ["1:2:3:4:5:6:7"]}
+{"fn": "canonicalIpv6", "args": ["1:2:3:4:5:6:7:8:9"]}
+{"fn": "canonicalIpv6", "args": ["::1:2:3:4:5:6:7"]}
+{"fn": "canonicalIpv6", "args": ["1:2:3:4:5:6:7::"]}
+{"fn": "canonicalIpv6", "args": ["0:0:0:0:0:0:0:0"]}
+{"fn": "canonicalIpv6", "args": ["1:0:0:2:0:0:0:3"]}
+{"fn": "canonicalIpv6", "args": ["1:0:2:0:3:0:4:0"]}
+{"fn": "canonicalIpv6", "args": ["00a0::"]}
+{"fn": "canonicalIpv6", "args": ["abcd::ef01"]}
+{"fn": "canonicalIpv6", "args": ["ABCD::"]}
+{"fn": "canonicalIpv6", "args": ["1:::2"]}
+{"fn": "canonicalIpv6", "args": [":::"]}
+{"fn": "canonicalIpv6", "args": ["1::2::3"]}
+{"fn": "canonicalIpv6", "args": ["12345::"]}
+{"fn": "canonicalIpv6", "args": [""]}
+{"fn": "canonicalIpv6", "args": ["g::"]}
+{"fn": "canonicalIpv6", "args": ["0:0:1:0:0:1:0:0"]}
+{"fn": "canonicalIpv6", "args": ["::ffff:1.2.3.4"]}
+{"fn": "canonicalIpv6", "args": [":1:2:3:4:5:6:7:8"]}
+{"fn": "asciiHost", "args": ["bücher.de"]}
+{"fn": "asciiHost", "args": ["BÜCHER.DE"]}
+{"fn": "asciiHost", "args": ["straße.de"]}
+{"fn": "asciiHost", "args": ["bücher。de"]}
+{"fn": "asciiHost", "args": ["ｂücher.de"]}
+{"fn": "asciiHost", "args": ["аррӏе.com"]}
+{"fn": "asciiHost", "args": ["日本.jp"]}
+{"fn": "asciiHost", "args": ["é-.com"]}
+{"fn": "asciiHost", "args": ["-é.com"]}
+{"fn": "asciiHost", "args": ["éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé"]}
+{"fn": "asciiHost", "args": ["a‌.com"]}
+{"fn": "asciiHost", "args": ["ﬁ.com"]}
+{"fn": "asciiHost", "args": ["Ⅷ.com"]}
+{"fn": "asciiHost", "args": ["é.é.é"]}
+{"fn": "asciiHost", "args": ["é..com"]}
+{"fn": "asciiHost", "args": ["xn--é"]}
+{"fn": "asciiHost", "args": ["é_x.com"]}
+{"fn": "asciiHost", "args": ["é.com"]}
+{"fn": "asciiHost", "args": ["ascii.com"]}
+{"fn": "asciiHost", "args": [""]}
+{"fn": "effectivePort", "args": [{"scheme": "https", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "hostWithPort", "args": [{"scheme": "https", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "originOf", "args": [{"scheme": "https", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "formatUrl", "args": [{"scheme": "https", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "effectivePort", "args": [{"scheme": "https", "host": "a.com", "port": "8080", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "hostWithPort", "args": [{"scheme": "https", "host": "a.com", "port": "8080", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "originOf", "args": [{"scheme": "https", "host": "a.com", "port": "8080", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "formatUrl", "args": [{"scheme": "https", "host": "a.com", "port": "8080", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "effectivePort", "args": [{"scheme": "http", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "hostWithPort", "args": [{"scheme": "http", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "originOf", "args": [{"scheme": "http", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "formatUrl", "args": [{"scheme": "http", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "effectivePort", "args": [{"scheme": "ftp", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "hostWithPort", "args": [{"scheme": "ftp", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "originOf", "args": [{"scheme": "ftp", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "formatUrl", "args": [{"scheme": "ftp", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "effectivePort", "args": [{"scheme": "x", "host": "", "port": "", "path": "y", "query": "", "hash": "", "authority": false}]}
+{"fn": "hostWithPort", "args": [{"scheme": "x", "host": "", "port": "", "path": "y", "query": "", "hash": "", "authority": false}]}
+{"fn": "originOf", "args": [{"scheme": "x", "host": "", "port": "", "path": "y", "query": "", "hash": "", "authority": false}]}
+{"fn": "formatUrl", "args": [{"scheme": "x", "host": "", "port": "", "path": "y", "query": "", "hash": "", "authority": false}]}
+{"fn": "effectivePort", "args": [{"scheme": "constructor", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "hostWithPort", "args": [{"scheme": "constructor", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "originOf", "args": [{"scheme": "constructor", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "formatUrl", "args": [{"scheme": "constructor", "host": "a.com", "port": "", "path": "/", "query": "", "hash": "", "authority": true}]}
+{"fn": "effectivePort", "args": [{"scheme": "https", "host": "a.com", "port": "", "path": "/", "query": "?q", "hash": "#h", "authority": true}]}
+{"fn": "hostWithPort", "args": [{"scheme": "https", "host": "a.com", "port": "", "path": "/", "query": "?q", "hash": "#h", "authority": true}]}
+{"fn": "originOf", "args": [{"scheme": "https", "host": "a.com", "port": "", "path": "/", "query": "?q", "hash": "#h", "authority": true}]}
+{"fn": "formatUrl", "args": [{"scheme": "https", "host": "a.com", "port": "", "path": "/", "query": "?q", "hash": "#h", "authority": true}]}
+{"fn": "effectivePort", "args": [{"port": "1"}]}
+{"fn": "hostWithPort", "args": [{"port": "1"}]}
+{"fn": "originOf", "args": [{"port": "1"}]}
+{"fn": "formatUrl", "args": [{"port": "1"}]}
+{"fn": "effectivePort", "args": [{"scheme": "http"}]}
+{"fn": "hostWithPort", "args": [{"scheme": "http"}]}
+{"fn": "originOf", "args": [{"scheme": "http"}]}
+{"fn": "formatUrl", "args": [{"scheme": "http"}]}
+{"fn": "effectivePort", "args": [{"authority": 1, "scheme": "x", "host": "h", "port": 0, "path": null, "query": [1, null], "hash": {}}]}
+{"fn": "hostWithPort", "args": [{"authority": 1, "scheme": "x", "host": "h", "port": 0, "path": null, "query": [1, null], "hash": {}}]}
+{"fn": "originOf", "args": [{"authority": 1, "scheme": "x", "host": "h", "port": 0, "path": null, "query": [1, null], "hash": {}}]}
+{"fn": "formatUrl", "args": [{"authority": 1, "scheme": "x", "host": "h", "port": 0, "path": null, "query": [1, null], "hash": {}}]}
+{"fn": "effectivePort", "args": [{"port": {"$num": "NaN"}, "scheme": "https"}]}
+{"fn": "hostWithPort", "args": [{"port": {"$num": "NaN"}, "scheme": "https"}]}
+{"fn": "originOf", "args": [{"port": {"$num": "NaN"}, "scheme": "https"}]}
+{"fn": "formatUrl", "args": [{"port": {"$num": "NaN"}, "scheme": "https"}]}
+{"fn": "effectivePort", "args": [{"port": {"$num": "-0"}, "host": "h"}]}
+{"fn": "hostWithPort", "args": [{"port": {"$num": "-0"}, "host": "h"}]}
+{"fn": "originOf", "args": [{"port": {"$num": "-0"}, "host": "h"}]}
+{"fn": "formatUrl", "args": [{"port": {"$num": "-0"}, "host": "h"}]}
+{"fn": "effectivePort", "args": [{"port": 2.5, "host": "h"}]}
+{"fn": "hostWithPort", "args": [{"port": 2.5, "host": "h"}]}
+{"fn": "originOf", "args": [{"port": 2.5, "host": "h"}]}
+{"fn": "formatUrl", "args": [{"port": 2.5, "host": "h"}]}
+{"fn": "effectivePort", "args": [null]}
+{"fn": "hostWithPort", "args": [null]}
+{"fn": "originOf", "args": [null]}
+{"fn": "formatUrl", "args": [null]}
+{"fn": "effectivePort", "args": [{"$undefined": true}]}
+{"fn": "hostWithPort", "args": [{"$undefined": true}]}
+{"fn": "originOf", "args": [{"$undefined": true}]}
+{"fn": "formatUrl", "args": [{"$undefined": true}]}
+{"fn": "effectivePort", "args": ["a"]}
+{"fn": "hostWithPort", "args": ["a"]}
+{"fn": "originOf", "args": ["a"]}
+{"fn": "formatUrl", "args": ["a"]}
+{"fn": "effectivePort", "args": [0]}
+{"fn": "hostWithPort", "args": [0]}
+{"fn": "originOf", "args": [0]}
+{"fn": "formatUrl", "args": [0]}
+{"fn": "effectivePort", "args": [true]}
+{"fn": "hostWithPort", "args": [true]}
+{"fn": "originOf", "args": [true]}
+{"fn": "formatUrl", "args": [true]}
+{"fn": "effectivePort", "args": [[]]}
+{"fn": "hostWithPort", "args": [[]]}
+{"fn": "originOf", "args": [[]]}
+{"fn": "formatUrl", "args": [[]]}
+{"fn": "effectivePort", "args": [[1, "a"]]}
+{"fn": "hostWithPort", "args": [[1, "a"]]}
+{"fn": "originOf", "args": [[1, "a"]]}
+{"fn": "formatUrl", "args": [[1, "a"]]}
+{"fn": "effectivePort", "args": [{"authority": false, "scheme": {"$utf16": [55296]}}]}
+{"fn": "hostWithPort", "args": [{"authority": false, "scheme": {"$utf16": [55296]}}]}
+{"fn": "originOf", "args": [{"authority": false, "scheme": {"$utf16": [55296]}}]}
+{"fn": "formatUrl", "args": [{"authority": false, "scheme": {"$utf16": [55296]}}]}

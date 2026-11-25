@@ -1,0 +1,9 @@
+{"fn": "isAbsoluteFolder", "args": [""]}
+{"fn": "isAbsoluteFolder", "args": ["/"]}
+{"fn": "isAbsoluteFolder", "args": ["/Users/a"]}
+{"fn": "isAbsoluteFolder", "args": ["~/x"]}
+{"fn": "isAbsoluteFolder", "args": ["relative/x"]}
+{"fn": "isAbsoluteFolder", "args": [" /x"]}
+{"fn": "isAbsoluteFolder", "args": ["\\x"]}
+{"fn": "isAbsoluteFolder", "args": ["//net"]}
+{"fn": "isAbsoluteFolder", "args": ["ü/"]}

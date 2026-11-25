@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/customIcon.ts",
+  "files": 1,
+  "fingerprint": "91900717f170d966",
+  "coverage": {
+    "lines": 3,
+    "reached": 3,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/customIcon.ts",
+        "lines": 3,
+        "reached": 3,
+        "missed": ""
+      }
+    ]
+  }
+}

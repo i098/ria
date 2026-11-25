@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/toolbarRow.ts",
+  "files": 1,
+  "fingerprint": "0c08f1e4cb28dbd7",
+  "coverage": {
+    "lines": 37,
+    "reached": 37,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/toolbarRow.ts",
+        "lines": 37,
+        "reached": 37,
+        "missed": ""
+      }
+    ]
+  }
+}

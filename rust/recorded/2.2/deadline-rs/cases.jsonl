@@ -1,0 +1,268 @@
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["a:b:c:",{"a":"b"},2147483648,":b:c"],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",[],{"$num":"NaN"},{}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["a",{"a":"b"},42,"x"],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["  padded  tab\tseparated",null,42,{"a":{"b":"c"}}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["a:b:c",["a",1],-1,true],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":[".leading",true,10,true],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["hello world",true,42,["a",1]],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["tab\tseparated",{"a":{"b":"c"}},2147483648,[]],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["trailing.",null,2,[]],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["tab\tseparated:",["a",1],{"$num":"-Infinity"},{"a":{"b":"c"}}],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["日本語のテキスト",{"a":{"b":"c"}},2,[]],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["straße",true,9007199254740992,["a",1]],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["./x/**/*.json",0,100,0],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["trailing.ünïcödé",[],42,null],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["  padded  ",[],9007199254740992,{"a":{"b":"c"}}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["hello world",{"a":{"b":"c"}},100,{"a":"b"}],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["./x/**/*.json",{"a":"b"},1000000,[]],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["a😀b😀c",0,1,["a",1]],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["😀",0,-2.5,["a",1]],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",true,2,null],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["./x/**/*.json",{},2147483648,null],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["İstanbul",{"a":{"b":"c"}},{"$num":"NaN"},"x"],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":{"b":"c"}},0,0],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["src/a/b.ts",0,9007199254740992,null],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",true,1,{}],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["a😀b😀c",true,{"$num":"-Infinity"},"x"],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["",[],{"$num":"Infinity"},["a",1]],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["é",{},3,["a",1]],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["hello",["a",1],1000000,{}],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["x","x",100,0],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":[".leading",["a",1],42,"x"],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ","x",42,{}],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["Hello World",null,{"$num":"-0"},["a",1]],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["ab",[],-1,["a",1]],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":[":",0,3,[]],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["  padded  ",{"a":{"b":"c"}},-1,true],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["ünïcödé",0,0.5,{}],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["a","x",42,0],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["",[],-2.5,{}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["line1\nline2","x",42,{"a":{"b":"c"}}],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["",true,{"$num":"-Infinity"},"x"],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["line1\nline2",0,0.5,{}],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["  padded  ",0,2147483648,null],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["",null,0,{}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["helloa😀b😀c",{},0,true],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["é",["a",1],9007199254740992,{"a":{"b":"c"}}],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["a",{"a":"b"},1000000,0],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["日本語のテキスト",["a",1],3,["a",1]],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["a..b",true,100,"x"],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["X","x",3,null],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["ünïcödé",{"a":"b"},2,{}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["key_name-1","x",0.5,null],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["😀a",[],0,{}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["日本語のテキスト",0,-2.5,{"a":"b"}],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["emoji 👍🏽 mix",{},{"$num":"Infinity"},true],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["  padded  ",[],0.5,{}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["a:b:c",{"a":"b"},-2.5,{}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ünïcödéa..b",{"a":"b"},-2.5,[]],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["é",{},1000000,[]],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["a..b",0,100,null],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["a:b:c","x",-1,0],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["straße",0,-1,{"a":{"b":"c"}}],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["😀",{"a":"b"},0,{"a":{"b":"c"}}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["./x/**/*.json",true,3,["a",1]],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["﻿bom","m",{"$num":"Infinity"},{}],"ok":{"value":"m"}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ","x",42,["a",1]],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["./x/**/*.json.leading",{},2147483648,0],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["{name} has {count} itemskey_name-1",null,0.5,[]],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["a😀b😀c","x",0.5,{"a":"b"}],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["ab",{},1,0],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["a",true,-1,[]],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["hello world",["a",1],{"$num":"-0"},"L"],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["straße",["a",1],0,{}],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["src/a/b.tsa",{},1000000,"x"],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":[".leading",null,9007199254740992,{}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["abc",{"a":{"b":"c"}},10,"x"],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ","x",-2.5,null],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["{name} has {count} items",null,{"$num":"-0"},null],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["é","x",-2.5,0],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["key_name-1line1\nline2",{},3,true],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["key_name-1tab\tseparated",[],2147483648,[]],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["ünïcödéHELLO",{"a":"b"},100,0],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["key_name-1",{"a":{"b":"c"}},9007199254740992,["a",1]],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["İstanbul",{"a":{"b":"c"}},9007199254740992,"x"],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["日本語のテキスト",[],3,["a",1]],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["straße",["a",1],{"$num":"-0"},null],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["{name} has {count} items{name} has {count} items","x",0.5,{}],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["{name} has {count} items",0,3,{"a":{"b":"c"}}],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["a..b",{},42,{"a":{"b":"c"}}],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["é",{},-1,["a",1]],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["trailing.",{},42,0],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["src/a/b.ts",{},{"$num":"NaN"},["a",1]],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["key_name-1",[],-2.5,{"a":{"b":"c"}}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["Hello World",{"a":"b"},100,0],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ünïcödé",0,{"$num":"Infinity"},0],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["a.b.c",null,-1,{"a":"b"}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["a.b.c",true,2147483648,true],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{},3,{"a":"b"}],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["a..b",null,0.5,{"a":{"b":"c"}}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["key_name-1",null,{"$num":"-0"},["a",1]],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["HELLOa.b.c",{"a":"b"},{"$num":"NaN"},{"a":"b"}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["{name} has {count} items",["a",1],-1,true],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["ab",null,10,[]],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["{name} has {count} items",true,-1,{"a":{"b":"c"}}],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["😀",true,2,0],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["x","x",9007199254740992,["a",1]],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["﻿bomab",true,{"$num":"Infinity"},0],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["tab\tseparated",[],3,{"a":"b"}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["helloa:b:c",null,42,"x"],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["straße",true,{"$num":"-Infinity"},"x"],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["line1\nline2",null,{"$num":"Infinity"},0],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",["a",1],2147483648,true],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["İstanbulemoji 👍🏽 mix",["a",1],2147483648,[]],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["a..b",null,10,{"a":{"b":"c"}}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["İstanbul",{"a":{"b":"c"}},{"$num":"Infinity"},{"a":{"b":"c"}}],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["{name} has {count} items",["a",1],-2.5,true],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["ns:key.path",{"a":{"b":"c"}},{"$num":"NaN"},{"a":{"b":"c"}}],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["straße",[],1,"x"],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["abc",["a",1],{"$num":"Infinity"},{"a":{"b":"c"}}],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["a😀b😀cİstanbul",{"a":"b"},0.5,true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["a:b:cé",0,9007199254740992,["a",1]],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["src/a/b.ts",{},42,true],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":[":",{"a":"b"},0,{"a":"b"}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["a..b",{"a":{"b":"c"}},42,true],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["{name} has {count} items",["a",1],10,"x"],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["ünïcödé",true,1000000,["a",1]],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["HELLO","x",2,{}],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["abc",[],2,0],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["tab\tseparateda:b:c",[],3,null],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["./x/**/*.json",null,2147483648,{}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["a😀b😀c",0,1000000,[]],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["",{"a":"b"},42,0],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["HELLO",true,{"$num":"Infinity"},["a",1]],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":[".leading",null,2147483648,[]],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["trailing.","x",2147483648,["a",1]],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["a😀b😀c",[],3,null],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":[":",["a",1],1000000,{"a":{"b":"c"}}],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["﻿bom",true,3,0],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["  padded  HELLO",["a",1],42,["a",1]],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["İstanbul",0,-1,null],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["tab\tseparated",[],1000000,{}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["","x",1,null],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["abc",true,-2.5,{"a":"b"}],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["a..b",0,{"$num":"-Infinity"},"x"],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["HELLO",{"a":{"b":"c"}},2,{"a":"b"}],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["a",null,-2.5,"x"],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["HELLO",[],{"$num":"-Infinity"},null],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["./x/**/*.json﻿bom",{"a":{"b":"c"}},100,true],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",null,42,{}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["x","x",{"$num":"-0"},true],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["hello",[],0,"x"],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣİstanbul",["a",1],9007199254740992,true],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["straßehello",null,1,[]],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["abünïcödé",true,2147483648,{}],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["hello world",[],1000000,["a",1]],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{},3,{}],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["a😀b😀c",[],2147483648,["a",1]],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["İstanbul","x",{"$num":"-Infinity"},{"a":"b"}],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["日本語のテキスト",{},9007199254740992,null],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["key_name-1a😀b😀c",null,{"$num":"Infinity"},[]],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["a..b",{"a":{"b":"c"}},0,null],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["ünïcödéhello world",0,42,["a",1]],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["ünïcödé",["a",1],0,true],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["a😀b😀c",{},0.5,0],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["aa😀b😀c",0,42,true],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["abc",true,100,{}],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["  padded  ",[],{"$num":"Infinity"},{"a":{"b":"c"}}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":[":",{},1,[]],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["日本語のテキストstraße",{"a":{"b":"c"}},42,{"a":"b"}],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["  padded  ",["a",1],{"$num":"-0"},0],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["line1\nline2",true,-1,{}],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["HELLO",[],1000000,{"a":"b"}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["",[],-2.5,null],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["a😀b😀c",null,-2.5,"x"],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["日本語のテキスト  padded  ",true,{"$num":"NaN"},[]],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["abns:key.path",0,2147483648,{"a":{"b":"c"}}],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["😀",["a",1],-2.5,{}],"ok":{"value":["a",1]}}
+{"fn":"withDeadlineCase","args":["﻿bom",{},100,true],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["src/a/b.ts",{},-2.5,{"a":{"b":"c"}}],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["trailing.",0,{"$num":"-0"},[]],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["İstanbul",null,1000000,{}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["",0,{"$num":"Infinity"},["a",1]],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["tab\tseparated",{"a":"b"},0.5,{"a":"b"}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["HELLO",true,9007199254740992,{"a":{"b":"c"}}],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["日本語のテキスト",null,{"$num":"NaN"},{"a":{"b":"c"}}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["ab",null,1,{"a":"b"}],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣtrailing.","x",{"$num":"-0"},0],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["日本語のテキスト",true,{"$num":"-Infinity"},0],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["﻿bom",{},10,null],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":[":",{"a":{"b":"c"}},1000,{"a":"b"}],"ok":{"value":{"a":{"b":"c"}}}}
+{"fn":"withDeadlineCase","args":["ünïcödé",[],-2.5,{}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["﻿bom",{"a":"b"},-1,{"a":{"b":"c"}}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["a..b",0,{"$num":"-0"},null],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":[":",true,{"$num":"Infinity"},{}],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":["",true,3,0],"ok":{"value":true}}
+{"fn":"withDeadlineCase","args":[":",{"a":"b"},2147483648,{}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["Hello World",{},42,["a",1]],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["😀",{},{"$num":"NaN"},{}],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["a","x",1000000,true],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["héllo wörld",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["👍🏽 thumbs",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["日本語",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["é",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["İstanbul",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["straße",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ılık ırmak",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["👨‍👩‍👧 family",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["a b",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["a😀b",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["﻿bom",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["a²b x½ y①",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["aⅠb Ⅻ",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["a𐐀b 𝐀bc",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["कि ٣٤",{"a":"b"},{"$num":"-0"},true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6},{"$num":"-0"},true],"ok":{"value":{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7},{"$num":"-0"},true],"ok":{"value":{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",[3,1,2],{"$num":"-0"},true],"ok":{"value":[3,1,2]}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{},{"$num":"-0"},true],"ok":{"value":{}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},-7.5,true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},0.1,true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},0.30000000000000004,true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},1e+21,true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},1e-7,true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},5e-324,true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},1.7976931348623157e+308,true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},9007199254740992,true],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},{"$num":"-0"},{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},{"$num":"-0"},{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},{"$num":"-0"},[3,1,2]],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["ΣΊΣΥΦΟΣ",{"a":"b"},{"$num":"-0"},{}],"ok":{"value":{"a":"b"}}}
+{"fn":"withDeadlineCase","args":["resolve",1,0,"late"],"ok":{"value":1}}
+{"fn":"withDeadlineCase","args":["resolve","ok",5,null],"ok":{"value":"ok"}}
+{"fn":"withDeadlineCase","args":["resolve",{"$undefined":true},1,{"$undefined":true}],"ok":{"value":{"$undefined":true}}}
+{"fn":"withDeadlineCase","args":["resolve",{"a":[1,{"$num":"NaN"}]},{"$num":"NaN"},"fb"],"ok":{"value":{"a":[1,{"$num":"NaN"}]}}}
+{"fn":"withDeadlineCase","args":["resolve",null,-5,0],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["resolve","x",10000000000,"fb"],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["resolve",[],2.5,{"b":1}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["resolve",{"$num":"-0"},20,{"$num":"-0"}],"ok":{"value":{"$num":"-0"}}}
+{"fn":"withDeadlineCase","args":["resolve","ü",30,"slow"],"ok":{"value":"ü"}}
+{"fn":"withDeadlineCase","args":["reject",1,0,"late"],"ok":{"rejected":1}}
+{"fn":"withDeadlineCase","args":["reject","ok",5,null],"ok":{"rejected":"ok"}}
+{"fn":"withDeadlineCase","args":["reject",{"$undefined":true},1,{"$undefined":true}],"ok":{"rejected":{"$undefined":true}}}
+{"fn":"withDeadlineCase","args":["reject",{"a":[1,{"$num":"NaN"}]},{"$num":"NaN"},"fb"],"ok":{"rejected":{"a":[1,{"$num":"NaN"}]}}}
+{"fn":"withDeadlineCase","args":["reject",null,-5,0],"ok":{"rejected":null}}
+{"fn":"withDeadlineCase","args":["reject","x",10000000000,"fb"],"ok":{"rejected":"x"}}
+{"fn":"withDeadlineCase","args":["reject",[],2.5,{"b":1}],"ok":{"rejected":[]}}
+{"fn":"withDeadlineCase","args":["reject",{"$num":"-0"},20,{"$num":"-0"}],"ok":{"rejected":{"$num":"-0"}}}
+{"fn":"withDeadlineCase","args":["reject","ü",30,"slow"],"ok":{"rejected":"ü"}}
+{"fn":"withDeadlineCase","args":["never",1,0,"late"],"ok":{"value":"late"}}
+{"fn":"withDeadlineCase","args":["never","ok",5,null],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["never",{"$undefined":true},1,{"$undefined":true}],"ok":{"value":{"$undefined":true}}}
+{"fn":"withDeadlineCase","args":["never",{"a":[1,{"$num":"NaN"}]},{"$num":"NaN"},"fb"],"ok":{"value":"fb"}}
+{"fn":"withDeadlineCase","args":["never",null,-5,0],"ok":{"value":0}}
+{"fn":"withDeadlineCase","args":["never","x",10000000000,"fb"],"ok":{"value":"fb"}}
+{"fn":"withDeadlineCase","args":["never",[],2.5,{"b":1}],"ok":{"value":{"b":1}}}
+{"fn":"withDeadlineCase","args":["never",{"$num":"-0"},20,{"$num":"-0"}],"ok":{"value":{"$num":"-0"}}}
+{"fn":"withDeadlineCase","args":["never","ü",30,"slow"],"ok":{"value":"slow"}}
+{"fn":"withDeadlineCase","args":["other",1,0,"late"],"ok":{"value":1}}
+{"fn":"withDeadlineCase","args":["other","ok",5,null],"ok":{"value":"ok"}}
+{"fn":"withDeadlineCase","args":["other",{"$undefined":true},1,{"$undefined":true}],"ok":{"value":{"$undefined":true}}}
+{"fn":"withDeadlineCase","args":["other",{"a":[1,{"$num":"NaN"}]},{"$num":"NaN"},"fb"],"ok":{"value":{"a":[1,{"$num":"NaN"}]}}}
+{"fn":"withDeadlineCase","args":["other",null,-5,0],"ok":{"value":null}}
+{"fn":"withDeadlineCase","args":["other","x",10000000000,"fb"],"ok":{"value":"x"}}
+{"fn":"withDeadlineCase","args":["other",[],2.5,{"b":1}],"ok":{"value":[]}}
+{"fn":"withDeadlineCase","args":["other",{"$num":"-0"},20,{"$num":"-0"}],"ok":{"value":{"$num":"-0"}}}
+{"fn":"withDeadlineCase","args":["other","ü",30,"slow"],"ok":{"value":"ü"}}

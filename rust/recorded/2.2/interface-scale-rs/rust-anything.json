@@ -1,0 +1,180 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/interfaceScale.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "interfacescale-rs",
+  "exports": [
+    {
+      "name": "interfaceScalePercent",
+      "file": "apps/browser/src/lib/interfaceScale.ts",
+      "line": 9,
+      "params": [
+        {
+          "name": "scale",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "validInterfaceScale",
+      "file": "apps/browser/src/lib/interfaceScale.ts",
+      "line": 11,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "value is number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "steppedInterfaceScale",
+      "file": "apps/browser/src/lib/interfaceScale.ts",
+      "line": 17,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "sameInterfaceScale",
+      "file": "apps/browser/src/lib/interfaceScale.ts",
+      "line": 23,
+      "params": [
+        {
+          "name": "a",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "b",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "interfaceScaleLabel",
+      "file": "apps/browser/src/lib/interfaceScale.ts",
+      "line": 25,
+      "params": [
+        {
+          "name": "scale",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "rootLength",
+      "file": "apps/browser/src/lib/interfaceScale.ts",
+      "line": 27,
+      "params": [
+        {
+          "name": "windowLength",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "scale",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "windowLength",
+      "file": "apps/browser/src/lib/interfaceScale.ts",
+      "line": 29,
+      "params": [
+        {
+          "name": "rootPoints",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "scale",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "snappedToGrid",
+      "file": "apps/browser/src/lib/interfaceScale.ts",
+      "line": 31,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "pixelsPerPoint",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

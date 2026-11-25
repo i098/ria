@@ -42,6 +42,7 @@ pub mod release_notes;
 pub mod report;
 pub mod session;
 pub mod settings;
+pub mod shared;
 pub mod shared_folders;
 pub mod sidebar;
 pub mod site;

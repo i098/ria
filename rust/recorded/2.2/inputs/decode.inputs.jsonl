@@ -1,0 +1,264 @@
+{"fn": "isFields", "args": [null]}
+{"fn": "isString", "args": [null]}
+{"fn": "isNumber", "args": [null]}
+{"fn": "isStringList", "args": [null]}
+{"fn": "listOf", "args": [null]}
+{"fn": "stringOr", "args": [null, null]}
+{"fn": "stringOr", "args": [null, "fb"]}
+{"fn": "stringOr", "args": [null, {"$undefined": true}]}
+{"fn": "numberOr", "args": [null, 0]}
+{"fn": "numberOr", "args": [null, null]}
+{"fn": "numberOr", "args": [null, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [{"$undefined": true}]}
+{"fn": "isString", "args": [{"$undefined": true}]}
+{"fn": "isNumber", "args": [{"$undefined": true}]}
+{"fn": "isStringList", "args": [{"$undefined": true}]}
+{"fn": "listOf", "args": [{"$undefined": true}]}
+{"fn": "stringOr", "args": [{"$undefined": true}, null]}
+{"fn": "stringOr", "args": [{"$undefined": true}, "fb"]}
+{"fn": "stringOr", "args": [{"$undefined": true}, {"$undefined": true}]}
+{"fn": "numberOr", "args": [{"$undefined": true}, 0]}
+{"fn": "numberOr", "args": [{"$undefined": true}, null]}
+{"fn": "numberOr", "args": [{"$undefined": true}, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [true]}
+{"fn": "isString", "args": [true]}
+{"fn": "isNumber", "args": [true]}
+{"fn": "isStringList", "args": [true]}
+{"fn": "listOf", "args": [true]}
+{"fn": "stringOr", "args": [true, null]}
+{"fn": "stringOr", "args": [true, "fb"]}
+{"fn": "stringOr", "args": [true, {"$undefined": true}]}
+{"fn": "numberOr", "args": [true, 0]}
+{"fn": "numberOr", "args": [true, null]}
+{"fn": "numberOr", "args": [true, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [false]}
+{"fn": "isString", "args": [false]}
+{"fn": "isNumber", "args": [false]}
+{"fn": "isStringList", "args": [false]}
+{"fn": "listOf", "args": [false]}
+{"fn": "stringOr", "args": [false, null]}
+{"fn": "stringOr", "args": [false, "fb"]}
+{"fn": "stringOr", "args": [false, {"$undefined": true}]}
+{"fn": "numberOr", "args": [false, 0]}
+{"fn": "numberOr", "args": [false, null]}
+{"fn": "numberOr", "args": [false, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [0]}
+{"fn": "isString", "args": [0]}
+{"fn": "isNumber", "args": [0]}
+{"fn": "isStringList", "args": [0]}
+{"fn": "listOf", "args": [0]}
+{"fn": "stringOr", "args": [0, null]}
+{"fn": "stringOr", "args": [0, "fb"]}
+{"fn": "stringOr", "args": [0, {"$undefined": true}]}
+{"fn": "numberOr", "args": [0, 0]}
+{"fn": "numberOr", "args": [0, null]}
+{"fn": "numberOr", "args": [0, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [{"$num": "-0"}]}
+{"fn": "isString", "args": [{"$num": "-0"}]}
+{"fn": "isNumber", "args": [{"$num": "-0"}]}
+{"fn": "isStringList", "args": [{"$num": "-0"}]}
+{"fn": "listOf", "args": [{"$num": "-0"}]}
+{"fn": "stringOr", "args": [{"$num": "-0"}, null]}
+{"fn": "stringOr", "args": [{"$num": "-0"}, "fb"]}
+{"fn": "stringOr", "args": [{"$num": "-0"}, {"$undefined": true}]}
+{"fn": "numberOr", "args": [{"$num": "-0"}, 0]}
+{"fn": "numberOr", "args": [{"$num": "-0"}, null]}
+{"fn": "numberOr", "args": [{"$num": "-0"}, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [1.5]}
+{"fn": "isString", "args": [1.5]}
+{"fn": "isNumber", "args": [1.5]}
+{"fn": "isStringList", "args": [1.5]}
+{"fn": "listOf", "args": [1.5]}
+{"fn": "stringOr", "args": [1.5, null]}
+{"fn": "stringOr", "args": [1.5, "fb"]}
+{"fn": "stringOr", "args": [1.5, {"$undefined": true}]}
+{"fn": "numberOr", "args": [1.5, 0]}
+{"fn": "numberOr", "args": [1.5, null]}
+{"fn": "numberOr", "args": [1.5, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [-3]}
+{"fn": "isString", "args": [-3]}
+{"fn": "isNumber", "args": [-3]}
+{"fn": "isStringList", "args": [-3]}
+{"fn": "listOf", "args": [-3]}
+{"fn": "stringOr", "args": [-3, null]}
+{"fn": "stringOr", "args": [-3, "fb"]}
+{"fn": "stringOr", "args": [-3, {"$undefined": true}]}
+{"fn": "numberOr", "args": [-3, 0]}
+{"fn": "numberOr", "args": [-3, null]}
+{"fn": "numberOr", "args": [-3, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [{"$num": "NaN"}]}
+{"fn": "isString", "args": [{"$num": "NaN"}]}
+{"fn": "isNumber", "args": [{"$num": "NaN"}]}
+{"fn": "isStringList", "args": [{"$num": "NaN"}]}
+{"fn": "listOf", "args": [{"$num": "NaN"}]}
+{"fn": "stringOr", "args": [{"$num": "NaN"}, null]}
+{"fn": "stringOr", "args": [{"$num": "NaN"}, "fb"]}
+{"fn": "stringOr", "args": [{"$num": "NaN"}, {"$undefined": true}]}
+{"fn": "numberOr", "args": [{"$num": "NaN"}, 0]}
+{"fn": "numberOr", "args": [{"$num": "NaN"}, null]}
+{"fn": "numberOr", "args": [{"$num": "NaN"}, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [{"$num": "Infinity"}]}
+{"fn": "isString", "args": [{"$num": "Infinity"}]}
+{"fn": "isNumber", "args": [{"$num": "Infinity"}]}
+{"fn": "isStringList", "args": [{"$num": "Infinity"}]}
+{"fn": "listOf", "args": [{"$num": "Infinity"}]}
+{"fn": "stringOr", "args": [{"$num": "Infinity"}, null]}
+{"fn": "stringOr", "args": [{"$num": "Infinity"}, "fb"]}
+{"fn": "stringOr", "args": [{"$num": "Infinity"}, {"$undefined": true}]}
+{"fn": "numberOr", "args": [{"$num": "Infinity"}, 0]}
+{"fn": "numberOr", "args": [{"$num": "Infinity"}, null]}
+{"fn": "numberOr", "args": [{"$num": "Infinity"}, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [{"$num": "-Infinity"}]}
+{"fn": "isString", "args": [{"$num": "-Infinity"}]}
+{"fn": "isNumber", "args": [{"$num": "-Infinity"}]}
+{"fn": "isStringList", "args": [{"$num": "-Infinity"}]}
+{"fn": "listOf", "args": [{"$num": "-Infinity"}]}
+{"fn": "stringOr", "args": [{"$num": "-Infinity"}, null]}
+{"fn": "stringOr", "args": [{"$num": "-Infinity"}, "fb"]}
+{"fn": "stringOr", "args": [{"$num": "-Infinity"}, {"$undefined": true}]}
+{"fn": "numberOr", "args": [{"$num": "-Infinity"}, 0]}
+{"fn": "numberOr", "args": [{"$num": "-Infinity"}, null]}
+{"fn": "numberOr", "args": [{"$num": "-Infinity"}, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [""]}
+{"fn": "isString", "args": [""]}
+{"fn": "isNumber", "args": [""]}
+{"fn": "isStringList", "args": [""]}
+{"fn": "listOf", "args": [""]}
+{"fn": "stringOr", "args": ["", null]}
+{"fn": "stringOr", "args": ["", "fb"]}
+{"fn": "stringOr", "args": ["", {"$undefined": true}]}
+{"fn": "numberOr", "args": ["", 0]}
+{"fn": "numberOr", "args": ["", null]}
+{"fn": "numberOr", "args": ["", {"$num": "NaN"}]}
+{"fn": "isFields", "args": ["x"]}
+{"fn": "isString", "args": ["x"]}
+{"fn": "isNumber", "args": ["x"]}
+{"fn": "isStringList", "args": ["x"]}
+{"fn": "listOf", "args": ["x"]}
+{"fn": "stringOr", "args": ["x", null]}
+{"fn": "stringOr", "args": ["x", "fb"]}
+{"fn": "stringOr", "args": ["x", {"$undefined": true}]}
+{"fn": "numberOr", "args": ["x", 0]}
+{"fn": "numberOr", "args": ["x", null]}
+{"fn": "numberOr", "args": ["x", {"$num": "NaN"}]}
+{"fn": "isFields", "args": ["ünï 🎉"]}
+{"fn": "isString", "args": ["ünï 🎉"]}
+{"fn": "isNumber", "args": ["ünï 🎉"]}
+{"fn": "isStringList", "args": ["ünï 🎉"]}
+{"fn": "listOf", "args": ["ünï 🎉"]}
+{"fn": "stringOr", "args": ["ünï 🎉", null]}
+{"fn": "stringOr", "args": ["ünï 🎉", "fb"]}
+{"fn": "stringOr", "args": ["ünï 🎉", {"$undefined": true}]}
+{"fn": "numberOr", "args": ["ünï 🎉", 0]}
+{"fn": "numberOr", "args": ["ünï 🎉", null]}
+{"fn": "numberOr", "args": ["ünï 🎉", {"$num": "NaN"}]}
+{"fn": "isFields", "args": [[]]}
+{"fn": "isString", "args": [[]]}
+{"fn": "isNumber", "args": [[]]}
+{"fn": "isStringList", "args": [[]]}
+{"fn": "listOf", "args": [[]]}
+{"fn": "stringOr", "args": [[], null]}
+{"fn": "stringOr", "args": [[], "fb"]}
+{"fn": "stringOr", "args": [[], {"$undefined": true}]}
+{"fn": "numberOr", "args": [[], 0]}
+{"fn": "numberOr", "args": [[], null]}
+{"fn": "numberOr", "args": [[], {"$num": "NaN"}]}
+{"fn": "isFields", "args": [[1, "a"]]}
+{"fn": "isString", "args": [[1, "a"]]}
+{"fn": "isNumber", "args": [[1, "a"]]}
+{"fn": "isStringList", "args": [[1, "a"]]}
+{"fn": "listOf", "args": [[1, "a"]]}
+{"fn": "stringOr", "args": [[1, "a"], null]}
+{"fn": "stringOr", "args": [[1, "a"], "fb"]}
+{"fn": "stringOr", "args": [[1, "a"], {"$undefined": true}]}
+{"fn": "numberOr", "args": [[1, "a"], 0]}
+{"fn": "numberOr", "args": [[1, "a"], null]}
+{"fn": "numberOr", "args": [[1, "a"], {"$num": "NaN"}]}
+{"fn": "isFields", "args": [["a", "b"]]}
+{"fn": "isString", "args": [["a", "b"]]}
+{"fn": "isNumber", "args": [["a", "b"]]}
+{"fn": "isStringList", "args": [["a", "b"]]}
+{"fn": "listOf", "args": [["a", "b"]]}
+{"fn": "stringOr", "args": [["a", "b"], null]}
+{"fn": "stringOr", "args": [["a", "b"], "fb"]}
+{"fn": "stringOr", "args": [["a", "b"], {"$undefined": true}]}
+{"fn": "numberOr", "args": [["a", "b"], 0]}
+{"fn": "numberOr", "args": [["a", "b"], null]}
+{"fn": "numberOr", "args": [["a", "b"], {"$num": "NaN"}]}
+{"fn": "isFields", "args": [["a", null]]}
+{"fn": "isString", "args": [["a", null]]}
+{"fn": "isNumber", "args": [["a", null]]}
+{"fn": "isStringList", "args": [["a", null]]}
+{"fn": "listOf", "args": [["a", null]]}
+{"fn": "stringOr", "args": [["a", null], null]}
+{"fn": "stringOr", "args": [["a", null], "fb"]}
+{"fn": "stringOr", "args": [["a", null], {"$undefined": true}]}
+{"fn": "numberOr", "args": [["a", null], 0]}
+{"fn": "numberOr", "args": [["a", null], null]}
+{"fn": "numberOr", "args": [["a", null], {"$num": "NaN"}]}
+{"fn": "isFields", "args": [[{"$undefined": true}]]}
+{"fn": "isString", "args": [[{"$undefined": true}]]}
+{"fn": "isNumber", "args": [[{"$undefined": true}]]}
+{"fn": "isStringList", "args": [[{"$undefined": true}]]}
+{"fn": "listOf", "args": [[{"$undefined": true}]]}
+{"fn": "stringOr", "args": [[{"$undefined": true}], null]}
+{"fn": "stringOr", "args": [[{"$undefined": true}], "fb"]}
+{"fn": "stringOr", "args": [[{"$undefined": true}], {"$undefined": true}]}
+{"fn": "numberOr", "args": [[{"$undefined": true}], 0]}
+{"fn": "numberOr", "args": [[{"$undefined": true}], null]}
+{"fn": "numberOr", "args": [[{"$undefined": true}], {"$num": "NaN"}]}
+{"fn": "isFields", "args": [{}]}
+{"fn": "isString", "args": [{}]}
+{"fn": "isNumber", "args": [{}]}
+{"fn": "isStringList", "args": [{}]}
+{"fn": "listOf", "args": [{}]}
+{"fn": "stringOr", "args": [{}, null]}
+{"fn": "stringOr", "args": [{}, "fb"]}
+{"fn": "stringOr", "args": [{}, {"$undefined": true}]}
+{"fn": "numberOr", "args": [{}, 0]}
+{"fn": "numberOr", "args": [{}, null]}
+{"fn": "numberOr", "args": [{}, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [{"a": 1}]}
+{"fn": "isString", "args": [{"a": 1}]}
+{"fn": "isNumber", "args": [{"a": 1}]}
+{"fn": "isStringList", "args": [{"a": 1}]}
+{"fn": "listOf", "args": [{"a": 1}]}
+{"fn": "stringOr", "args": [{"a": 1}, null]}
+{"fn": "stringOr", "args": [{"a": 1}, "fb"]}
+{"fn": "stringOr", "args": [{"a": 1}, {"$undefined": true}]}
+{"fn": "numberOr", "args": [{"a": 1}, 0]}
+{"fn": "numberOr", "args": [{"a": 1}, null]}
+{"fn": "numberOr", "args": [{"a": 1}, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}]}
+{"fn": "isString", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}]}
+{"fn": "isNumber", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}]}
+{"fn": "isStringList", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}]}
+{"fn": "listOf", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}]}
+{"fn": "stringOr", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}, null]}
+{"fn": "stringOr", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}, "fb"]}
+{"fn": "stringOr", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}, {"$undefined": true}]}
+{"fn": "numberOr", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}, 0]}
+{"fn": "numberOr", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}, null]}
+{"fn": "numberOr", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}, {"$num": "NaN"}]}
+{"fn": "isFields", "args": [[[1, 2], [3]]]}
+{"fn": "isString", "args": [[[1, 2], [3]]]}
+{"fn": "isNumber", "args": [[[1, 2], [3]]]}
+{"fn": "isStringList", "args": [[[1, 2], [3]]]}
+{"fn": "listOf", "args": [[[1, 2], [3]]]}
+{"fn": "stringOr", "args": [[[1, 2], [3]], null]}
+{"fn": "stringOr", "args": [[[1, 2], [3]], "fb"]}
+{"fn": "stringOr", "args": [[[1, 2], [3]], {"$undefined": true}]}
+{"fn": "numberOr", "args": [[[1, 2], [3]], 0]}
+{"fn": "numberOr", "args": [[[1, 2], [3]], null]}
+{"fn": "numberOr", "args": [[[1, 2], [3]], {"$num": "NaN"}]}
+{"fn": "isFields", "args": [{"$x": 1}]}
+{"fn": "isString", "args": [{"$x": 1}]}
+{"fn": "isNumber", "args": [{"$x": 1}]}
+{"fn": "isStringList", "args": [{"$x": 1}]}
+{"fn": "listOf", "args": [{"$x": 1}]}
+{"fn": "stringOr", "args": [{"$x": 1}, null]}
+{"fn": "stringOr", "args": [{"$x": 1}, "fb"]}
+{"fn": "stringOr", "args": [{"$x": 1}, {"$undefined": true}]}
+{"fn": "numberOr", "args": [{"$x": 1}, 0]}
+{"fn": "numberOr", "args": [{"$x": 1}, null]}
+{"fn": "numberOr", "args": [{"$x": 1}, {"$num": "NaN"}]}

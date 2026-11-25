@@ -1,0 +1,64 @@
+{"fn": "errorTextCase", "args": [null, false]}
+{"fn": "errorTextCase", "args": [null, true]}
+{"fn": "errorTextCase", "args": [{"$undefined": true}, false]}
+{"fn": "errorTextCase", "args": [{"$undefined": true}, true]}
+{"fn": "errorTextCase", "args": [true, false]}
+{"fn": "errorTextCase", "args": [true, true]}
+{"fn": "errorTextCase", "args": [false, false]}
+{"fn": "errorTextCase", "args": [false, true]}
+{"fn": "errorTextCase", "args": [0, false]}
+{"fn": "errorTextCase", "args": [0, true]}
+{"fn": "errorTextCase", "args": [{"$num": "-0"}, false]}
+{"fn": "errorTextCase", "args": [{"$num": "-0"}, true]}
+{"fn": "errorTextCase", "args": [1.5, false]}
+{"fn": "errorTextCase", "args": [1.5, true]}
+{"fn": "errorTextCase", "args": [-3, false]}
+{"fn": "errorTextCase", "args": [-3, true]}
+{"fn": "errorTextCase", "args": [{"$num": "NaN"}, false]}
+{"fn": "errorTextCase", "args": [{"$num": "NaN"}, true]}
+{"fn": "errorTextCase", "args": [{"$num": "Infinity"}, false]}
+{"fn": "errorTextCase", "args": [{"$num": "Infinity"}, true]}
+{"fn": "errorTextCase", "args": [{"$num": "-Infinity"}, false]}
+{"fn": "errorTextCase", "args": [{"$num": "-Infinity"}, true]}
+{"fn": "errorTextCase", "args": ["", false]}
+{"fn": "errorTextCase", "args": ["", true]}
+{"fn": "errorTextCase", "args": ["x", false]}
+{"fn": "errorTextCase", "args": ["x", true]}
+{"fn": "errorTextCase", "args": ["ünï 🎉", false]}
+{"fn": "errorTextCase", "args": ["ünï 🎉", true]}
+{"fn": "errorTextCase", "args": [[], false]}
+{"fn": "errorTextCase", "args": [[], true]}
+{"fn": "errorTextCase", "args": [[1, "a"], false]}
+{"fn": "errorTextCase", "args": [[1, "a"], true]}
+{"fn": "errorTextCase", "args": [["a", "b"], false]}
+{"fn": "errorTextCase", "args": [["a", "b"], true]}
+{"fn": "errorTextCase", "args": [["a", null], false]}
+{"fn": "errorTextCase", "args": [["a", null], true]}
+{"fn": "errorTextCase", "args": [[{"$undefined": true}], false]}
+{"fn": "errorTextCase", "args": [[{"$undefined": true}], true]}
+{"fn": "errorTextCase", "args": [{}, false]}
+{"fn": "errorTextCase", "args": [{}, true]}
+{"fn": "errorTextCase", "args": [{"a": 1}, false]}
+{"fn": "errorTextCase", "args": [{"a": 1}, true]}
+{"fn": "errorTextCase", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}, false]}
+{"fn": "errorTextCase", "args": [{"a": {"$undefined": true}, "b": [{"$num": "NaN"}]}, true]}
+{"fn": "errorTextCase", "args": [[[1, 2], [3]], false]}
+{"fn": "errorTextCase", "args": [[[1, 2], [3]], true]}
+{"fn": "errorTextCase", "args": [{"$x": 1}, false]}
+{"fn": "errorTextCase", "args": [{"$x": 1}, true]}
+{"fn": "errorTextCase", "args": [1e+21, false]}
+{"fn": "errorTextCase", "args": [1e+21, true]}
+{"fn": "errorTextCase", "args": [1e-07, false]}
+{"fn": "errorTextCase", "args": [1e-07, true]}
+{"fn": "errorTextCase", "args": [123.456, false]}
+{"fn": "errorTextCase", "args": [123.456, true]}
+{"fn": "errorTextCase", "args": [-1e-07, false]}
+{"fn": "errorTextCase", "args": [-1e-07, true]}
+{"fn": "errorTextCase", "args": [9007199254740992, false]}
+{"fn": "errorTextCase", "args": [9007199254740992, true]}
+{"fn": "errorTextCase", "args": [[null, {"$undefined": true}, 1], false]}
+{"fn": "errorTextCase", "args": [[null, {"$undefined": true}, 1], true]}
+{"fn": "errorTextCase", "args": [[{"a": 1}, []], false]}
+{"fn": "errorTextCase", "args": [[{"a": 1}, []], true]}
+{"fn": "errorTextCase", "args": ["Could not save the password", false]}
+{"fn": "errorTextCase", "args": ["Could not save the password", true]}

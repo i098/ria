@@ -1,0 +1,216 @@
+{"fn":"parseMatchPattern","args":["<all_urls>"]}
+{"fn":"parseMatchPattern","args":["https://example.com/zed"]}
+{"fn":"parseMatchPattern","args":["https://*.Example.com/*"]}
+{"fn":"parseMatchPattern","args":["https://bank.example/*"]}
+{"fn":"parseMatchPattern","args":["https://bücher.de/*"]}
+{"fn":"parseMatchPattern","args":["https://*.xn--bcher-kva.de/*"]}
+{"fn":"parseMatchPattern","args":["a\u0000://x/"]}
+{"fn":"parseMatchPattern","args":["nope"]}
+{"fn":"parseMatchPattern","args":["gopher://x/"]}
+{"fn":"parseMatchPattern","args":["*://x/"]}
+{"fn":"parseMatchPattern","args":["*://x:80/"]}
+{"fn":"parseMatchPattern","args":["file://"]}
+{"fn":"parseMatchPattern","args":["file:///*"]}
+{"fn":"parseMatchPattern","args":["file://localhost/x"]}
+{"fn":"parseMatchPattern","args":["file://host/x"]}
+{"fn":"parseMatchPattern","args":["file:///"]}
+{"fn":"parseMatchPattern","args":["http://"]}
+{"fn":"parseMatchPattern","args":["http:///x"]}
+{"fn":"parseMatchPattern","args":["http://x"]}
+{"fn":"parseMatchPattern","args":["http://x:/"]}
+{"fn":"parseMatchPattern","args":["http://x:a/"]}
+{"fn":"parseMatchPattern","args":["http://x:080/"]}
+{"fn":"parseMatchPattern","args":["http://x:0/"]}
+{"fn":"parseMatchPattern","args":["http://x:65535/"]}
+{"fn":"parseMatchPattern","args":["http://x:65536/"]}
+{"fn":"parseMatchPattern","args":["http://x:99999999999999999999/"]}
+{"fn":"parseMatchPattern","args":["http://x:*/"]}
+{"fn":"parseMatchPattern","args":["http://*/*"]}
+{"fn":"parseMatchPattern","args":["http://*./"]}
+{"fn":"parseMatchPattern","args":["http://*.a.com/"]}
+{"fn":"parseMatchPattern","args":["http://a*b/"]}
+{"fn":"parseMatchPattern","args":["http://*.*/"]}
+{"fn":"parseMatchPattern","args":["http://a%b/"]}
+{"fn":"parseMatchPattern","args":["http://[::1]/*"]}
+{"fn":"parseMatchPattern","args":["http://[::1]:8080/*"]}
+{"fn":"parseMatchPattern","args":["http://[::1/"]}
+{"fn":"parseMatchPattern","args":["http://:80/"]}
+{"fn":"parseMatchPattern","args":["http://a b/"]}
+{"fn":"parseMatchPattern","args":["http://a.com./*"]}
+{"fn":"parseMatchPattern","args":["http://A.COM/p?q"]}
+{"fn":"parseMatchPattern","args":["http://*.com/"]}
+{"fn":"parseMatchPattern","args":["ftp://a/*"]}
+{"fn":"parseMatchPattern","args":["https://[::1]x:5/"]}
+{"fn":"parseMatchPattern","args":["http://a?b/"]}
+{"fn":"parseMatchPattern","args":["http://é/"]}
+{"fn":"parseMatchPattern","args":["http://xn--zz/"]}
+{"fn":"parseMatchPattern","args":["*://*/*"]}
+{"fn":"parseMatchPattern","args":["http:/x/"]}
+{"fn":"parseMatchPattern","args":["*.com://x/"]}
+{"fn":"parseMatchPattern","args":["http://a.com/*/b"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["https"],"host":"example.com","sub":false,"port":"*","file":false,"path":"/zed"},"https://example.com/zed"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["https"],"host":"example.com","sub":true,"port":"*","file":false,"path":"/*"},"https://A.example.com/x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["https"],"host":"bank.example","sub":false,"port":"*","file":false,"path":"/*"},"https://evil.example\\@bank.example/pay"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["https"],"host":"xn--bcher-kva.de","sub":false,"port":"*","file":false,"path":"/*"},"https://xn--bcher-kva.de/x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["https"],"host":"xn--bcher-kva.de","sub":true,"port":"*","file":false,"path":"/*"},"https://shop.bücher.de/x"]}
+{"fn":"matchesUrl","args":[{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},"ftp://a.com/"]}
+{"fn":"matchesUrl","args":[{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},"chrome://x/"]}
+{"fn":"matchesUrl","args":[{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},"nope"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http","https"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},"http://a/"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http","https"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},"file:///x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["file"],"host":"","sub":false,"port":"*","file":true,"path":"/*"},"file:///tmp/x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["file"],"host":"","sub":false,"port":"*","file":true,"path":"/tmp/*"},"file://h/tmp/x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*"},"http://a.com./x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com.","sub":false,"port":"*","file":false,"path":"/*"},"http://a.com/x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},"http://a.com/"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},"http://b.a.com/"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},"http://ba.com/"]}
+{"fn":"matchesUrl","args":[{"error":"the host has characters a hostname can't have"},"http://4.1.2.3/"]}
+{"fn":"matchesUrl","args":[{"error":"the host has characters a hostname can't have"},"http://127.0.0.1/"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},"http://[::1]/"]}
+{"fn":"matchesUrl","args":[{"error":"the host has characters a hostname can't have"},"http://[::1]/"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"8080","file":false,"path":"/*"},"http://a.com:8080/x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"8080","file":false,"path":"/*"},"http://a.com/x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"80","file":false,"path":"/*"},"http://a.com/x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["https"],"host":"a.com","sub":false,"port":"443","file":false,"path":"/*"},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["ftp"],"host":"a.com","sub":false,"port":"21","file":false,"path":"/*"},"ftp://a.com/"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},"http://a.com/x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x?y/*"},"http://a.com/x?y"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/a b*"},"http://a.com/a%20b"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/a%20b"},"http://a.com/a%20b"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/é"},"http://a.com/%C3%A9"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},"http://a.com/x%2F"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},"http://a.com/%E0%A4%A"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*?q=*"},"http://a.com/p?q=1"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*b*c"},"http://a.com/abxbc"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*b*c"},"http://a.com/abxbd"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/😀*"},"http://a.com/%F0%9F%98%80x"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"[::1]","sub":false,"port":"*","file":false,"path":"/*"},"http://[::1]/z"]}
+{"fn":"matchesUrl","args":[{"all":false,"schemes":["http"],"host":"[::1]","sub":false,"port":"8080","file":false,"path":"/*"},"http://[::1]:8080/z"]}
+{"fn":"matchesUrl","args":[null,"https://a.com/x"]}
+{"fn":"matchesUrl","args":[null,"https://a.com/"]}
+{"fn":"matchesUrl","args":[null,"bad url"]}
+{"fn":"matchesUrl","args":[null,"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"$undefined":true},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"$undefined":true},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"$undefined":true},"bad url"]}
+{"fn":"matchesUrl","args":[{"$undefined":true},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":["a","https://a.com/x"]}
+{"fn":"matchesUrl","args":["a","https://a.com/"]}
+{"fn":"matchesUrl","args":["a","bad url"]}
+{"fn":"matchesUrl","args":["a","https://b.a.com/x"]}
+{"fn":"matchesUrl","args":["","https://a.com/x"]}
+{"fn":"matchesUrl","args":["","https://a.com/"]}
+{"fn":"matchesUrl","args":["","bad url"]}
+{"fn":"matchesUrl","args":["","https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[0,"https://a.com/x"]}
+{"fn":"matchesUrl","args":[0,"https://a.com/"]}
+{"fn":"matchesUrl","args":[0,"bad url"]}
+{"fn":"matchesUrl","args":[0,"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[1,"https://a.com/x"]}
+{"fn":"matchesUrl","args":[1,"https://a.com/"]}
+{"fn":"matchesUrl","args":[1,"bad url"]}
+{"fn":"matchesUrl","args":[1,"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[true,"https://a.com/x"]}
+{"fn":"matchesUrl","args":[true,"https://a.com/"]}
+{"fn":"matchesUrl","args":[true,"bad url"]}
+{"fn":"matchesUrl","args":[true,"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[[],"https://a.com/x"]}
+{"fn":"matchesUrl","args":[[],"https://a.com/"]}
+{"fn":"matchesUrl","args":[[],"bad url"]}
+{"fn":"matchesUrl","args":[[],"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[[1,"a"],"https://a.com/x"]}
+{"fn":"matchesUrl","args":[[1,"a"],"https://a.com/"]}
+{"fn":"matchesUrl","args":[[1,"a"],"bad url"]}
+{"fn":"matchesUrl","args":[[1,"a"],"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"a":"b"},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"a":"b"},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"a":"b"},"bad url"]}
+{"fn":"matchesUrl","args":[{"a":"b"},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":null},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":null},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":null},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":null},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":"xhttps"},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":"xhttps"},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":"xhttps"},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":"xhttps"},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":"ftp"},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":"ftp"},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":"ftp"},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":"ftp"},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":5},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":5},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":5},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":5},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"all":1},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"all":1},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"all":1},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"all":1},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"file":true,"port":"*","path":"/*"},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"file":true,"port":"*","path":"/*"},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"file":true,"port":"*","path":"/*"},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"file":true,"port":"*","path":"/*"},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":null},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":null},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":null},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":null},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":5},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":5},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":5},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":5},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","sub":1,"port":443,"path":"/"},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","sub":1,"port":443,"path":"/"},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","sub":1,"port":443,"path":"/"},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","sub":1,"port":443,"path":"/"},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"","sub":"y","port":"*","path":["/","*"]},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"","sub":"y","port":"*","path":["/","*"]},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"","sub":"y","port":"*","path":["/","*"]},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"","sub":"y","port":"*","path":["/","*"]},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":null},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":null},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":null},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":null},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":5},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":5},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":5},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":5},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":["/","x"]},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":["/","x"]},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":["/","x"]},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*","path":["/","x"]},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"443","path":"/x/*"},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"443","path":"/x/*"},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"443","path":"/x/*"},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"443","path":"/x/*"},"https://b.a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*"},"https://a.com/x"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*"},"https://a.com/"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*"},"bad url"]}
+{"fn":"matchesUrl","args":[{"schemes":["https"],"host":"a.com","port":"*"},"https://b.a.com/x"]}
+{"fn":"globMatches","args":["",""]}
+{"fn":"globMatches","args":["*",""]}
+{"fn":"globMatches","args":["","a"]}
+{"fn":"globMatches","args":["a*","abc"]}
+{"fn":"globMatches","args":["*c","abc"]}
+{"fn":"globMatches","args":["a*c*e","abcde"]}
+{"fn":"globMatches","args":["a*c*e","abcdf"]}
+{"fn":"globMatches","args":["**","x"]}
+{"fn":"globMatches","args":["a?c","abc"]}
+{"fn":"globMatches","args":["😀*","😀x"]}
+{"fn":"globMatches","args":[{"$utf16":[55357,42]},"😀"]}
+{"fn":"globMatches","args":["*b","aaab"]}
+{"fn":"globMatches","args":["a*b*b","abab"]}
+{"fn":"globMatches","args":["x","x"]}
+{"fn":"globMatches","args":["x","y"]}
+{"fn":"anyMatches","args":[[{"all":false,"schemes":["https"],"host":"example.com","sub":false,"port":"*","file":false,"path":"/zed"},{"all":false,"schemes":["https"],"host":"example.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"bank.example","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"xn--bcher-kva.de","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"xn--bcher-kva.de","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http","https"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http","https"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["file"],"host":"","sub":false,"port":"*","file":true,"path":"/*"},{"all":false,"schemes":["file"],"host":"","sub":false,"port":"*","file":true,"path":"/tmp/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com.","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"8080","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"8080","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"80","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"a.com","sub":false,"port":"443","file":false,"path":"/*"},{"all":false,"schemes":["ftp"],"host":"a.com","sub":false,"port":"21","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x?y/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/a b*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/a%20b"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/é"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*?q=*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*b*c"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*b*c"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/😀*"},{"all":false,"schemes":["http"],"host":"[::1]","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"[::1]","sub":false,"port":"8080","file":false,"path":"/*"}],"https://example.com/zed"]}
+{"fn":"anyMatches","args":[[{"all":false,"schemes":["https"],"host":"example.com","sub":false,"port":"*","file":false,"path":"/zed"},{"all":false,"schemes":["https"],"host":"example.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"bank.example","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"xn--bcher-kva.de","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"xn--bcher-kva.de","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http","https"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http","https"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["file"],"host":"","sub":false,"port":"*","file":true,"path":"/*"},{"all":false,"schemes":["file"],"host":"","sub":false,"port":"*","file":true,"path":"/tmp/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com.","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"8080","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"8080","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"80","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"a.com","sub":false,"port":"443","file":false,"path":"/*"},{"all":false,"schemes":["ftp"],"host":"a.com","sub":false,"port":"21","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x?y/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/a b*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/a%20b"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/é"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*?q=*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*b*c"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*b*c"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/😀*"},{"all":false,"schemes":["http"],"host":"[::1]","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"[::1]","sub":false,"port":"8080","file":false,"path":"/*"}],"nope"]}
+{"fn":"anyMatches","args":[[],"https://a.com/"]}
+{"fn":"anyMatches","args":[null,"x"]}
+{"fn":"anyMatches","args":[{"$undefined":true},"x"]}
+{"fn":"anyMatches","args":["s","x"]}
+{"fn":"anyMatches","args":[5,"x"]}
+{"fn":"anyMatches","args":[{},"x"]}
+{"fn":"anyMatches","args":[[{"all":false,"schemes":["https"],"host":"example.com","sub":false,"port":"*","file":false,"path":"/zed"},{"all":false,"schemes":["https"],"host":"example.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"bank.example","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"xn--bcher-kva.de","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"xn--bcher-kva.de","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http","https"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http","https"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["file"],"host":"","sub":false,"port":"*","file":true,"path":"/*"},{"all":false,"schemes":["file"],"host":"","sub":false,"port":"*","file":true,"path":"/tmp/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com.","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"8080","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"8080","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"80","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"a.com","sub":false,"port":"443","file":false,"path":"/*"},{"all":false,"schemes":["ftp"],"host":"a.com","sub":false,"port":"21","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x?y/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/a b*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/a%20b"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/é"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*?q=*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*b*c"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*b*c"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/😀*"},{"all":false,"schemes":["http"],"host":"[::1]","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"[::1]","sub":false,"port":"8080","file":false,"path":"/*"},null],"https://zzz.com/"]}
+{"fn":"anyMatches","args":[[null,{"all":false,"schemes":["https"],"host":"example.com","sub":false,"port":"*","file":false,"path":"/zed"},{"all":false,"schemes":["https"],"host":"example.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"bank.example","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"xn--bcher-kva.de","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"xn--bcher-kva.de","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":true,"schemes":["http","https","file","ftp"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http","https"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http","https"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["file"],"host":"","sub":false,"port":"*","file":true,"path":"/*"},{"all":false,"schemes":["file"],"host":"","sub":false,"port":"*","file":true,"path":"/tmp/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com.","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"","sub":true,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"8080","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"8080","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"80","file":false,"path":"/*"},{"all":false,"schemes":["https"],"host":"a.com","sub":false,"port":"443","file":false,"path":"/*"},{"all":false,"schemes":["ftp"],"host":"a.com","sub":false,"port":"21","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x?y/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/a b*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/a%20b"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/é"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/x/*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*?q=*"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*b*c"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/*b*c"},{"all":false,"schemes":["http"],"host":"a.com","sub":false,"port":"*","file":false,"path":"/😀*"},{"all":false,"schemes":["http"],"host":"[::1]","sub":false,"port":"*","file":false,"path":"/*"},{"all":false,"schemes":["http"],"host":"[::1]","sub":false,"port":"8080","file":false,"path":"/*"}],"https://example.com/zed"]}
+{"fn":"anyMatches","args":[["x"],"nope"]}

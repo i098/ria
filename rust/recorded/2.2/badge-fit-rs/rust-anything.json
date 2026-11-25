@@ -1,0 +1,60 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/badgeFit.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "badgefit-rs",
+  "exports": [
+    {
+      "name": "badgeFit",
+      "file": "apps/browser/src/lib/badgeFit.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "arg0",
+          "ts_type": "{ textWidth: number; room: number; roomyPad: number; tightPad: number; minScale: number }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ pad: number; scale: number }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "badgeTextWidth",
+      "file": "apps/browser/src/lib/badgeFit.ts",
+      "line": 16,
+      "params": [
+        {
+          "name": "measured",
+          "ts_type": "{ text: string; fontSize: number; width: number }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "fontSize",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

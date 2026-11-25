@@ -1,0 +1,1282 @@
+{"fn":"compareVersions","args":["a.b.cline1\nline2","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a..b","ΣΊΣΥΦΟΣ"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["key_name-1","straße"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ns:key.pathünïcödé","key_name-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["hello","src/a/b.ts"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","ΣΊΣΥΦΟΣHello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["src/a/b.tsns:key.path","😀{name} has {count} items"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[".","a..b"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["line1\nline2","abc"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["﻿bom","trailing."],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[".leading","hello world.leading"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["C","a:b:c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ns:key.pathΣΊΣΥΦΟΣ","a😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["hello world",":tab\tseparated"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[".leading","emoji 👍🏽 mix"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀","line1\nline2"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["HELLO","a"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["{name} has {count} items","日本語のテキスト"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["tab\tseparated","emoji 👍🏽 mix"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a","hello world"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["﻿bom","bo"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["src/a/b.tsHello World","İstanbul"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["straße","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["日本語のテキスト","テキス"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["straßestraße","hello"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ΣΊΣΥΦΟΣ","straße"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ahello","EL"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ns:key.path  padded  ","ünïcödé"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a😀b😀c","ns:key.path"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["{name} has {count} itemsHello World","ab"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["hello world","a😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[":abc","a:b:c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["straße","tab\tseparated"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["src/a/b.ts","ünïcödé"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["emoji 👍🏽 mix","straße{name} has {count} items"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["RL","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["é","ünïcödé"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["straße",":./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["日本語のテキスト","語の"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["c","abc"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["","key_name-1trailing."],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a..b","..b"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ΣΊΣΥΦΟΣΣΊΣΥΦΟΣ","line1\nline2ΣΊΣΥΦΟΣ"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["trailing.","a"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a😀b😀c","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["﻿bom","src/a/b.ts"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["é","src/a/b.ts"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["﻿bom😀","😀"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ns:key.path","trailing.trailing."],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ab","trailing.😀"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[":",":"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["src/a/b.ts",".leading"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ünïcödé","src/a/b.ts"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["trailing.","  padded  "],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ns:key.path","hello"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["trailing.","a..b"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["  padded  ",""],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["日本語のテキスト","key_name-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["src/a/b.ts","akey_name-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a😀b😀c","hello world"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ab","{name} has {count} items"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["src/a/b.ts",":"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[":","./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["Hello World","a😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["tab\tseparated","日本語のテキスト"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[":a😀b😀c","İstanbul"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["./x/**/*.json",".leading﻿bom"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ab","a😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀","tab\tseparated"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["é","😀"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["./x/**/*.json","./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["HELLO","﻿bom"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[" ","  padded  "],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[":","a:b:c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["./x/**/*.json","hello world"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["abc","a:b:ckey_name-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["{name} has {count} items","ahello"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a😀b😀c","a:b:c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["İstanbul","u"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ΣΊΣΥΦΟΣ","key_name-1ünïcödé"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["HELLO","line1\nline2hello world"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ΣΊΣΥΦΟΣ","ünïcödé"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["straße﻿bom","İstanbulİstanbul"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a:b:ckey_name-1",""],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a","a"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","abhello"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["key_name-1",":"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["key_name-1","﻿bomünïcödé"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["emoji 👍🏽 mix","a😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["./x/**/*.json","straße"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["line1\nline2","日本語のテキスト"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["straße",""],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["é","E"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["el","hello"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["","😀"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ns:key.path","key_name-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["key_name-1hello world","a"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["tab\tseparated",""],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["**/*.js","./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["HELLO","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀","straßea😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["key_name-1","e"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["é","straße"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["é","é"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a:b:","a:b:c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["MI","emoji 👍🏽 mixhello"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["emoji 👍🏽 mix","j"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["emoji 👍🏽 mix","İstanbul"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[".leadi",".leading"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["HELLOemoji 👍🏽 mix","HELLO"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["G",".leading"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀","ab"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀😀","a:b:c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀hello world","./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[".leading","a..b"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ns:key.path",".leadinga"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["hello world","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["tab\tseparated","ünïcödé"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["src/a/b.ts","hello"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["emoji 👍🏽 mix",""],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ab","aba"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["line1\nline2a..b","emoji 👍🏽 mix"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["İstanbul","İstanbul"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["hello world","ns:key.path"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a","ünïcödéns:key.path"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["HELLO",".leading"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["-","key_name-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["hello world","a..b"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀","😀"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["trailing.","n"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ünïcödé./x/**/*.json","./X/**/*"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[".leading","﻿bom"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["trailing.","src/a/b.tsΣΊΣΥΦΟΣ"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["C","abc"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["aHELLO","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["aİstanbul","a.b.ca😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["日本語のテキストa..b","./x/**/*.jsontab\tseparated"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a😀b😀ca😀b😀c","😀B😀"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","line1\nline2"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["İstanbul",":"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["  padded  ","a😀b😀cline1\nline2"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a:b:c","./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a..b","a"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀straße","tab\tseparated./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["{name} has {count} items","😀"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["src/a/b.tsHELLO","hello world"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ünïcödé",""],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["Hello World","HELLO"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["","﻿bom"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["  padded  ","ΣΊΣΥΦΟΣ"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["",".leading"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[":","trailing."],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["trailing.","{name} has {count} itemsHello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["é","e"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["","  padded  "],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ns:key.path","TH"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a..b","a:b:c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ünïcödé","  padded  "],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["src/a/b.tsab","﻿boma😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["Σ","ΣΊΣΥΦΟΣ"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["HELLOa😀b😀c","emoji 👍🏽 mixns:key.path"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["hello","ll"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[".leading  padded  ","é"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["hello world","a😀b😀c./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["hello","﻿boma😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["tab\tseparateda.b.c",".leading  padded  "],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["hello worldHELLO","hello"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cHello World","hello world"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀",""],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["src/a/b.tsİstanbul","hello world"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["  padded  ","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["./x/**/*.json","İstanbul"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a:b:c","a😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ns:key.path😀","tab\tseparateda😀b😀c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀","ΣΊΣΥΦΟΣ:"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["straße",".leading"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","ab"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ünïcödéemoji 👍🏽 mix","src/a/b.ts"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["key_name-1","name-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["straßeΣΊΣΥΦΟΣ","key_name-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["","tab\tseparated"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["﻿bomemoji 👍🏽 mix","ns:key.path"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["straße","日本語のテキスト"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a..b","hello world"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a:b:c","tab\tseparated"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["İstanbul","anb"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a:b:c","key_name-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ab","a"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a😀b😀c日本語のテキスト","﻿bom"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["/**","./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["Hello World","trailing.:"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["emoji 👍🏽 mix","日本語のテキスト"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ünïcödé","😀./x/**/*.json"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["HELLO","  padded  "],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ünïcödé","helloa"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["😀é","😀"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a","trailing."],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["key_name-1","hello"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["héllo wörld","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["👍🏽 thumbs","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["日本語","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["é","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["İstanbul","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["straße","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ılık ırmak","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["👨‍👩‍👧 family","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a b","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ΣΊΣΥΦΟΣ","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a😀b","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["﻿bom","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a²b x½ y①","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["aⅠb Ⅻ","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a𐐀b 𝐀bc","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["कि ٣٤","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["Iı İi","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["K K k","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ſ s S","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["x‍y 👨‍👩‍👧","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a b c　d","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["١٢٣ ٤٥","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["𝟘𝟙 ²³","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["snake_case foo-bar o'neil","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ǅungla Ǆ","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["one\r\ntwo threefour","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["café café","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["ΣΑΣ σας ς","Hello World"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","héllo wörld"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","👍🏽 thumbs"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","日本語"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2",""],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","é"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","İstanbul"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","straße"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","ılık ırmak"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","👨‍👩‍👧 family"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","a b"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","ΣΊΣΥΦΟΣ"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","a😀b"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","﻿bom"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","a²b x½ y①"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","aⅠb Ⅻ"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","a𐐀b 𝐀bc"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","कि ٣٤"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","Iı İi"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","K K k"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","ſ s S"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","x‍y 👨‍👩‍👧"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","a b c　d"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","١٢٣ ٤٥"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","𝟘𝟙 ²³"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","snake_case foo-bar o'neil"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","ǅungla Ǆ"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","one\r\ntwo threefour"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","café café"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.cline1\nline2","ΣΑΣ σας ς"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3","1.2.3"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-rc.1-x"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3","1.2.3.4"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-α"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-𝒜"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-｡"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3"," 1 .2.3"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.4"],"ok":0}
+{"fn":"compareVersions","args":["1.2.4","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.4","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.4","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.4","1.2"],"ok":4}
+{"fn":"compareVersions","args":["1.2.4","1.2.0"],"ok":4}
+{"fn":"compareVersions","args":["1.2.4","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.4",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-rc.1-x"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.4","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.4","1.2.3.4"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-α"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-𝒜"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-｡"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.4","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.4"," 1 .2.3"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.4","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.10.0","1.2.3"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.4"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.10.0"],"ok":0}
+{"fn":"compareVersions","args":["1.10.0","1.9.9"],"ok":1}
+{"fn":"compareVersions","args":["1.10.0","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.10.0","1.2"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.0"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1"],"ok":10}
+{"fn":"compareVersions","args":["1.10.0",""],"ok":1}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-alpha"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-beta"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-alpha.1"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-alpha.2"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-alpha.10"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-alpha.beta"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-1"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-01"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-rc.1-x"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.10.0","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.10.0","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.10.0","1.2.3.4"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-α"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-𝒜"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-｡"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.10.0","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.10.0"," 1 .2.3"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-alpha.1.1"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-99999999999999999999"],"ok":8}
+{"fn":"compareVersions","args":["1.10.0","1.2.3-99999999999999999998"],"ok":8}
+{"fn":"compareVersions","args":["1.9.9","1.2.3"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.4"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.10.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.9.9","1.9.9"],"ok":0}
+{"fn":"compareVersions","args":["1.9.9","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.9.9","1.2"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.0"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1"],"ok":9}
+{"fn":"compareVersions","args":["1.9.9",""],"ok":1}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-alpha"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-beta"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-alpha.1"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-alpha.2"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-alpha.10"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-alpha.beta"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-1"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-01"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-rc.1-x"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.9.9","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.9.9","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.9.9","1.2.3.4"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-α"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-𝒜"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-｡"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.9.9","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.9.9"," 1 .2.3"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-alpha.1.1"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-99999999999999999999"],"ok":7}
+{"fn":"compareVersions","args":["1.9.9","1.2.3-99999999999999999998"],"ok":7}
+{"fn":"compareVersions","args":["2.0.0","1.2.3"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.4"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.10.0"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.9.9"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","2.0.0"],"ok":0}
+{"fn":"compareVersions","args":["2.0.0","1.2"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.0"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0",""],"ok":2}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-beta"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-rc.1-x"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","-1"],"ok":2}
+{"fn":"compareVersions","args":["2.0.0","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["2.0.0","1.x.3"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3.4"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-α"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-𝒜"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-｡"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","0x10.1.1"],"ok":-14}
+{"fn":"compareVersions","args":["2.0.0","1e3.0.0"],"ok":-998}
+{"fn":"compareVersions","args":["2.0.0"," 1 .2.3"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["2.0.0","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2","1.2.3"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.4"],"ok":-4}
+{"fn":"compareVersions","args":["1.2","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2","1.2"],"ok":0}
+{"fn":"compareVersions","args":["1.2","1.2.0"],"ok":0}
+{"fn":"compareVersions","args":["1.2","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2",""],"ok":1}
+{"fn":"compareVersions","args":["1.2","1.2.3-alpha"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-beta"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-alpha.1"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-alpha.2"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-alpha.10"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-alpha.beta"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-1"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-01"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-rc.1-x"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2","1.2.3.4"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-α"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-𝒜"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-｡"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2"," 1 .2.3"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-alpha.1.1"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-99999999999999999999"],"ok":-3}
+{"fn":"compareVersions","args":["1.2","1.2.3-99999999999999999998"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.4"],"ok":-4}
+{"fn":"compareVersions","args":["1.2.0","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.0","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.0","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.0","1.2"],"ok":0}
+{"fn":"compareVersions","args":["1.2.0","1.2.0"],"ok":0}
+{"fn":"compareVersions","args":["1.2.0","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.0",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-alpha"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-beta"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-alpha.1"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-alpha.2"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-alpha.10"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-alpha.beta"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-1"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-01"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-rc.1-x"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.0","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.0","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.0","1.2.3.4"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-α"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-𝒜"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-｡"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.0","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.0"," 1 .2.3"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-alpha.1.1"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-99999999999999999999"],"ok":-3}
+{"fn":"compareVersions","args":["1.2.0","1.2.3-99999999999999999998"],"ok":-3}
+{"fn":"compareVersions","args":["1","1.2.3"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.4"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.10.0"],"ok":-10}
+{"fn":"compareVersions","args":["1","1.9.9"],"ok":-9}
+{"fn":"compareVersions","args":["1","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1","1.2"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.0"],"ok":-2}
+{"fn":"compareVersions","args":["1","1"],"ok":0}
+{"fn":"compareVersions","args":["1",""],"ok":1}
+{"fn":"compareVersions","args":["1","1.2.3-alpha"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-beta"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-alpha.1"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-alpha.2"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-alpha.10"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-alpha.beta"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-1"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-01"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-rc.1-x"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-"],"ok":-2}
+{"fn":"compareVersions","args":["1","-1"],"ok":1}
+{"fn":"compareVersions","args":["1","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1","1.2.3.4"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-α"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-𝒜"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-｡"],"ok":-2}
+{"fn":"compareVersions","args":["1","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1"," 1 .2.3"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-alpha.1.1"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-99999999999999999999"],"ok":-2}
+{"fn":"compareVersions","args":["1","1.2.3-99999999999999999998"],"ok":-2}
+{"fn":"compareVersions","args":["","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["","1.10.0"],"ok":-1}
+{"fn":"compareVersions","args":["","1.9.9"],"ok":-1}
+{"fn":"compareVersions","args":["","2.0.0"],"ok":-2}
+{"fn":"compareVersions","args":["","1.2"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.0"],"ok":-1}
+{"fn":"compareVersions","args":["","1"],"ok":-1}
+{"fn":"compareVersions","args":["",""],"ok":0}
+{"fn":"compareVersions","args":["","1.2.3-alpha"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-alpha.1"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-alpha.2"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-alpha.10"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-1"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-01"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["","-1"],"ok":1}
+{"fn":"compareVersions","args":["","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["","1.x.3"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["","0x10.1.1"],"ok":-16}
+{"fn":"compareVersions","args":["","1e3.0.0"],"ok":-1000}
+{"fn":"compareVersions","args":[""," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-alpha.1.1"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-99999999999999999999"],"ok":-1}
+{"fn":"compareVersions","args":["","1.2.3-99999999999999999998"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-alpha","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-alpha",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-alpha"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-alpha.1"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-alpha.2"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-alpha.10"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-alpha","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-alpha"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-alpha.1.1"],"ok":-2}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-beta","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-beta","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-beta","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-beta",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-beta"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-beta","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-beta","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-beta","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-beta","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-beta"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-beta","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-alpha.1",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-alpha.1"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-alpha.2"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-alpha.10"],"ok":-9}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-alpha.1"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-alpha.1.1"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-alpha.2",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-alpha.2"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-alpha.10"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-alpha.2"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.2","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-alpha.10",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-alpha.1"],"ok":9}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-alpha.2"],"ok":8}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-alpha.10"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-alpha.10"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-alpha.1.1"],"ok":9}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.10","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-alpha.beta"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.beta","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-1","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-1","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-1","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-1",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-alpha"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-alpha.1"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-alpha.2"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-alpha.10"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-1"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-01"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-1","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-1","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-1","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-1"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-alpha.1.1"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-99999999999999999999"],"ok":-100000000000000000000}
+{"fn":"compareVersions","args":["1.2.3-1","1.2.3-99999999999999999998"],"ok":-100000000000000000000}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-01","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-01","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-01","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-01",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-alpha"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-alpha.1"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-alpha.2"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-alpha.10"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-1"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-01"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-01","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-01","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-01","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-01"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-alpha.1.1"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-99999999999999999999"],"ok":-100000000000000000000}
+{"fn":"compareVersions","args":["1.2.3-01","1.2.3-99999999999999999998"],"ok":-100000000000000000000}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-rc.1-x"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-rc.1-x","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-rc.1-x"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3.4"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-α"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-𝒜"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-｡"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-"," 1 .2.3"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["-1","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.10.0"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.9.9"],"ok":-1}
+{"fn":"compareVersions","args":["-1","2.0.0"],"ok":-2}
+{"fn":"compareVersions","args":["-1","1.2"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.0"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1"],"ok":-1}
+{"fn":"compareVersions","args":["-1",""],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-alpha"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-alpha.1"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-alpha.2"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-alpha.10"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-1"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-01"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["-1","-1"],"ok":0}
+{"fn":"compareVersions","args":["-1","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["-1","1.x.3"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["-1","0x10.1.1"],"ok":-16}
+{"fn":"compareVersions","args":["-1","1e3.0.0"],"ok":-1000}
+{"fn":"compareVersions","args":["-1"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-alpha.1.1"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-99999999999999999999"],"ok":-1}
+{"fn":"compareVersions","args":["-1","1.2.3-99999999999999999998"],"ok":-1}
+{"fn":"compareVersions","args":["a.b.c","1.2.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.4"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.10.0"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.9.9"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","2.0.0"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.0"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c",""],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-alpha"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-beta"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-alpha.1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-alpha.2"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-alpha.10"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-alpha.beta"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-01"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-rc.1-x"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3.4"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-α"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-𝒜"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-｡"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","0x10.1.1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1e3.0.0"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c"," 1 .2.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-alpha.1.1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-99999999999999999999"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["a.b.c","1.2.3-99999999999999999998"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.4"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.10.0"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.9.9"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.x.3","1.2"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.0"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3",""],"ok":1}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-alpha"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-beta"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-alpha.1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-alpha.2"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-alpha.10"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-alpha.beta"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-01"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-rc.1-x"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.x.3","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3.4"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-α"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-𝒜"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-｡"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.x.3","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.x.3"," 1 .2.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-alpha.1.1"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-99999999999999999999"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.x.3","1.2.3-99999999999999999998"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3.4","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3.4","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3.4","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3.4","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3.4",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-rc.1-x"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3.4","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3.4","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3.4"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-α"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-𝒜"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-｡"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3.4","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3.4"," 1 .2.3"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3.4","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-α","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-α","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-α","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-α","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-α",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-rc.1-x"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-α","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-α","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-α"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-α","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-α","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-α"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-α","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-𝒜","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-𝒜",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-rc.1-x"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-α"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-𝒜"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-𝒜"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-𝒜","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-｡","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-｡","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-｡","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-｡",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-rc.1-x"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-｡","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-｡","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-α"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-𝒜"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-｡"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-｡","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-｡","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-｡"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-｡","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.4"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.10.0"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.9.9"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","2.0.0"],"ok":14}
+{"fn":"compareVersions","args":["0x10.1.1","1.2"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.0"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1",""],"ok":16}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-alpha"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-beta"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-alpha.1"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-alpha.2"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-alpha.10"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-alpha.beta"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-1"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-01"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-rc.1-x"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","-1"],"ok":16}
+{"fn":"compareVersions","args":["0x10.1.1","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["0x10.1.1","1.x.3"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3.4"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-α"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-𝒜"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-｡"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","0x10.1.1"],"ok":0}
+{"fn":"compareVersions","args":["0x10.1.1","1e3.0.0"],"ok":-984}
+{"fn":"compareVersions","args":["0x10.1.1"," 1 .2.3"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-alpha.1.1"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-99999999999999999999"],"ok":15}
+{"fn":"compareVersions","args":["0x10.1.1","1.2.3-99999999999999999998"],"ok":15}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.4"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.10.0"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.9.9"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","2.0.0"],"ok":998}
+{"fn":"compareVersions","args":["1e3.0.0","1.2"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.0"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0",""],"ok":1000}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-alpha"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-beta"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-alpha.1"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-alpha.2"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-alpha.10"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-alpha.beta"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-1"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-01"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-rc.1-x"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","-1"],"ok":1000}
+{"fn":"compareVersions","args":["1e3.0.0","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1e3.0.0","1.x.3"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3.4"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-α"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-𝒜"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-｡"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","0x10.1.1"],"ok":984}
+{"fn":"compareVersions","args":["1e3.0.0","1e3.0.0"],"ok":0}
+{"fn":"compareVersions","args":["1e3.0.0"," 1 .2.3"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-alpha.1.1"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-99999999999999999999"],"ok":999}
+{"fn":"compareVersions","args":["1e3.0.0","1.2.3-99999999999999999998"],"ok":999}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3"],"ok":0}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":[" 1 .2.3","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":[" 1 .2.3","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2"],"ok":3}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":[" 1 .2.3","1"],"ok":2}
+{"fn":"compareVersions","args":[" 1 .2.3",""],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-alpha"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-beta"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-alpha.2"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-alpha.10"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-alpha.beta"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-rc.1-x"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-"],"ok":0}
+{"fn":"compareVersions","args":[" 1 .2.3","-1"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[" 1 .2.3","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3.4"],"ok":0}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-α"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-𝒜"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-｡"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":[" 1 .2.3","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":[" 1 .2.3"," 1 .2.3"],"ok":0}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-alpha.1.1"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":[" 1 .2.3","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-alpha"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-alpha.1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-alpha.2"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-alpha.10"],"ok":-9}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-01"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-alpha.1.1"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-99999999999999999999"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-alpha.1.1","1.2.3-99999999999999999998"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-alpha"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-alpha.1"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-alpha.2"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-alpha.10"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-1"],"ok":100000000000000000000}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-01"],"ok":100000000000000000000}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-alpha.1.1"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-99999999999999999999"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999999","1.2.3-99999999999999999998"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.10.0"],"ok":-8}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.9.9"],"ok":-7}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","2.0.0"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.0"],"ok":3}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1"],"ok":2}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998",""],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-alpha"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-alpha.1"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-alpha.2"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-alpha.10"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-alpha.beta"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-1"],"ok":100000000000000000000}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-01"],"ok":100000000000000000000}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-rc.1-x"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","-1"],"ok":1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","a.b.c"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.x.3"],"ok":{"$num":"NaN"}}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3.4"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-α"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-𝒜"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-｡"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","0x10.1.1"],"ok":-15}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1e3.0.0"],"ok":-999}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998"," 1 .2.3"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-alpha.1.1"],"ok":-1}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-99999999999999999999"],"ok":0}
+{"fn":"compareVersions","args":["1.2.3-99999999999999999998","1.2.3-99999999999999999998"],"ok":0}

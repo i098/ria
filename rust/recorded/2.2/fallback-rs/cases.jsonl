@@ -1,0 +1,397 @@
+{"fn":"passwordFailureCase","args":[null,false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[null,true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{"a":"b"},true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{},false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[true,false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[[],true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[["a",1],true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[["a",1],false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[true,true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[0,false],"ok":"other"}
+{"fn":"passwordFailureCase","args":["x",true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{},true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[[],false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[0,true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{"a":{"b":"c"}},true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{"a":"b"},false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{"a":{"b":"c"}},false],"ok":"other"}
+{"fn":"passwordFailureCase","args":["x",false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6},false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7},false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[[3,1,2],false],"ok":"other"}
+{"fn":"orWarnCase","args":[{"a":"b"},"ünïcödé",true,false],"ok":{"error":"not a PasswordAction: ünïcödé"}}
+{"fn":"orWarnCase","args":[0,"./x/**/*.json",0,true],"ok":{"error":"not a PasswordAction: ./x/**/*.json"}}
+{"fn":"orWarnCase","args":[null,"a{name} has {count} items",[],false],"ok":{"error":"not a PasswordAction: a{name} has {count} items"}}
+{"fn":"orWarnCase","args":[["a",1],"a..btrailing.","x",true],"ok":{"error":"not a PasswordAction: a..btrailing."}}
+{"fn":"orWarnCase","args":[["a",1],"hello",null,true],"ok":{"error":"not a PasswordAction: hello"}}
+{"fn":"orWarnCase","args":[[],{"$undefined":true},[],true],"ok":{"result":[],"warned":["[engine] "]}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"src/a/b.ts",[],true],"ok":{"error":"not a PasswordAction: src/a/b.ts"}}
+{"fn":"orWarnCase","args":[0,"x","x",false],"ok":{"error":"not a PasswordAction: x"}}
+{"fn":"orWarnCase","args":[{},"{name} has {count} items",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: {name} has {count} items"}}
+{"fn":"orWarnCase","args":[0,"key_name-1",0,false],"ok":{"error":"not a PasswordAction: key_name-1"}}
+{"fn":"orWarnCase","args":[{},"日本語のテキスト",{"a":"b"},true],"ok":{"error":"not a PasswordAction: 日本語のテキスト"}}
+{"fn":"orWarnCase","args":[[],"src/a/b.ts",{"a":"b"},false],"ok":{"error":"not a PasswordAction: src/a/b.ts"}}
+{"fn":"orWarnCase","args":[0,".leading",[],true],"ok":{"error":"not a PasswordAction: .leading"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"straße",{"a":"b"},false],"ok":{"error":"not a PasswordAction: straße"}}
+{"fn":"orWarnCase","args":[{},"﻿bom",null,true],"ok":{"error":"not a PasswordAction: ﻿bom"}}
+{"fn":"orWarnCase","args":[true,{"$undefined":true},true,true],"ok":{"result":true,"warned":["[engine] true"]}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"a..b",[],true],"ok":{"error":"not a PasswordAction: a..b"}}
+{"fn":"orWarnCase","args":[["a",1],{"$undefined":true},{"a":{"b":"c"}},false],"ok":{"result":["a",1],"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":["c","abc",null,false],"ok":{"error":"not a PasswordAction: abc"}}
+{"fn":"orWarnCase","args":[0,":key_name-1",true,false],"ok":{"error":"not a PasswordAction: :key_name-1"}}
+{"fn":"orWarnCase","args":["x",{"$undefined":true},0,true],"ok":{"result":"x","warned":["[engine] 0"]}}
+{"fn":"orWarnCase","args":[0,"ΣΊΣΥΦΟΣ",null,false],"ok":{"error":"not a PasswordAction: ΣΊΣΥΦΟΣ"}}
+{"fn":"orWarnCase","args":[0,"a",[],false],"ok":{"error":"not a PasswordAction: a"}}
+{"fn":"orWarnCase","args":["x",{"$undefined":true},[],false],"ok":{"result":"x","warned":["[engine] "]}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},{"$undefined":true},{},false],"ok":{"result":{"a":{"b":"c"}},"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},true,false],"ok":{"result":0,"warned":["[engine] true"]}}
+{"fn":"orWarnCase","args":["x","ns:key.path",{},false],"ok":{"error":"not a PasswordAction: ns:key.path"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"key_name-1",[],true],"ok":{"error":"not a PasswordAction: key_name-1"}}
+{"fn":"orWarnCase","args":[["a",1],"src/a/b.ts",{},false],"ok":{"error":"not a PasswordAction: src/a/b.ts"}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},{},false],"ok":{"result":0,"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[{},"ΣΊΣΥΦΟΣ",{},false],"ok":{"error":"not a PasswordAction: ΣΊΣΥΦΟΣ"}}
+{"fn":"orWarnCase","args":[true,{"$undefined":true},{"a":{"b":"c"}},true],"ok":{"result":true,"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":["x","abc",null,true],"ok":{"error":"not a PasswordAction: abc"}}
+{"fn":"orWarnCase","args":[0,"a😀b😀c",["a",1],false],"ok":{"error":"not a PasswordAction: a😀b😀c"}}
+{"fn":"orWarnCase","args":["x","a:b:c",0,false],"ok":{"error":"not a PasswordAction: a:b:c"}}
+{"fn":"orWarnCase","args":[null,{"$undefined":true},null,false],"ok":{"result":null,"warned":["[engine] null"]}}
+{"fn":"orWarnCase","args":[{"a":"b"},"a",true,true],"ok":{"error":"not a PasswordAction: a"}}
+{"fn":"orWarnCase","args":[[],"Hello World",true,false],"ok":{"error":"not a PasswordAction: Hello World"}}
+{"fn":"orWarnCase","args":["x","abc",0,true],"ok":{"error":"not a PasswordAction: abc"}}
+{"fn":"orWarnCase","args":[true,"日本語のテキスト",["a",1],true],"ok":{"error":"not a PasswordAction: 日本語のテキスト"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"a.b.c",[],true],"ok":{"error":"not a PasswordAction: a.b.c"}}
+{"fn":"orWarnCase","args":[0,"line1\nline2",["a",1],false],"ok":{"error":"not a PasswordAction: line1\nline2"}}
+{"fn":"orWarnCase","args":["x","tab\tseparated",0,false],"ok":{"error":"not a PasswordAction: tab\tseparated"}}
+{"fn":"orWarnCase","args":[["a",1],"a:b:ca..b",{"a":{"b":"c"}},false],"ok":{"error":"not a PasswordAction: a:b:ca..b"}}
+{"fn":"orWarnCase","args":["x","ab",null,false],"ok":{"error":"not a PasswordAction: ab"}}
+{"fn":"orWarnCase","args":["x","straße",null,true],"ok":{"error":"not a PasswordAction: straße"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"line1\nline2",null,false],"ok":{"error":"not a PasswordAction: line1\nline2"}}
+{"fn":"orWarnCase","args":[[],{"$undefined":true},{"a":{"b":"c"}},true],"ok":{"result":[],"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[["a",1],{"$undefined":true},{"a":{"b":"c"}},true],"ok":{"result":["a",1],"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[{},"  padded  ",["a",1],false],"ok":{"error":"not a PasswordAction:   padded  "}}
+{"fn":"orWarnCase","args":[0,"😀",{},true],"ok":{"error":"not a PasswordAction: 😀"}}
+{"fn":"orWarnCase","args":[["a",1],":hello",[],true],"ok":{"error":"not a PasswordAction: :hello"}}
+{"fn":"orWarnCase","args":[true,"Hello World",{"a":"b"},false],"ok":{"error":"not a PasswordAction: Hello World"}}
+{"fn":"orWarnCase","args":[{},"﻿bomtrailing.",["a",1],false],"ok":{"error":"not a PasswordAction: ﻿bomtrailing."}}
+{"fn":"orWarnCase","args":[true,{"$undefined":true},0,true],"ok":{"result":true,"warned":["[engine] 0"]}}
+{"fn":"orWarnCase","args":[[],"a😀b😀c",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: a😀b😀c"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"key_name-1",{},false],"ok":{"error":"not a PasswordAction: key_name-1"}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},{"a":{"b":"c"}},true],"ok":{"result":0,"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},":",[],true],"ok":{"error":"not a PasswordAction: :"}}
+{"fn":"orWarnCase","args":[null,"  padded  ",["a",1],false],"ok":{"error":"not a PasswordAction:   padded  "}}
+{"fn":"orWarnCase","args":[{"a":"b"},"hello world",null,false],"ok":{"error":"not a PasswordAction: hello world"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"tab\tseparated日本語のテキスト",true,false],"ok":{"error":"not a PasswordAction: tab\tseparated日本語のテキスト"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"a.b.c","x",true],"ok":{"error":"not a PasswordAction: a.b.c"}}
+{"fn":"orWarnCase","args":[0,"😀",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: 😀"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"İstanbul{name} has {count} items",[],false],"ok":{"error":"not a PasswordAction: İstanbul{name} has {count} items"}}
+{"fn":"orWarnCase","args":[0,"a😀b😀c","x",false],"ok":{"error":"not a PasswordAction: a😀b😀c"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"tab\tseparated",["a",1],true],"ok":{"error":"not a PasswordAction: tab\tseparated"}}
+{"fn":"orWarnCase","args":[[],"İstanbulab",["a",1],true],"ok":{"error":"not a PasswordAction: İstanbulab"}}
+{"fn":"orWarnCase","args":[0,"trailing.",null,true],"ok":{"error":"not a PasswordAction: trailing."}}
+{"fn":"orWarnCase","args":[{},"😀İstanbul",null,true],"ok":{"error":"not a PasswordAction: 😀İstanbul"}}
+{"fn":"orWarnCase","args":[[],"abstraße","x",true],"ok":{"error":"not a PasswordAction: abstraße"}}
+{"fn":"orWarnCase","args":[{},"{name} has {count} items",[],true],"ok":{"error":"not a PasswordAction: {name} has {count} items"}}
+{"fn":"orWarnCase","args":[{},"ΣΊΣΥΦΟΣ","x",false],"ok":{"error":"not a PasswordAction: ΣΊΣΥΦΟΣ"}}
+{"fn":"orWarnCase","args":[[],"a.b.c","x",false],"ok":{"error":"not a PasswordAction: a.b.c"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"﻿bom",[],true],"ok":{"error":"not a PasswordAction: ﻿bom"}}
+{"fn":"orWarnCase","args":["x",{"$undefined":true},true,false],"ok":{"result":"x","warned":["[engine] true"]}}
+{"fn":"orWarnCase","args":[["a",1],{"$undefined":true},true,true],"ok":{"result":["a",1],"warned":["[engine] true"]}}
+{"fn":"orWarnCase","args":[{"a":"b"},"éhello",true,true],"ok":{"error":"not a PasswordAction: éhello"}}
+{"fn":"orWarnCase","args":[[],"ab",null,false],"ok":{"error":"not a PasswordAction: ab"}}
+{"fn":"orWarnCase","args":[{"a":"b"},{"$undefined":true},true,true],"ok":{"result":{"a":"b"},"warned":["[engine] true"]}}
+{"fn":"orWarnCase","args":[0,"straße",0,false],"ok":{"error":"not a PasswordAction: straße"}}
+{"fn":"orWarnCase","args":[{},"straße",[],false],"ok":{"error":"not a PasswordAction: straße"}}
+{"fn":"orWarnCase","args":[["a",1],"src/a/b.ts","/b.ts",true],"ok":{"error":"not a PasswordAction: src/a/b.ts"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"{name} has {count} items",true,false],"ok":{"error":"not a PasswordAction: {name} has {count} items"}}
+{"fn":"orWarnCase","args":[null,"",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: "}}
+{"fn":"orWarnCase","args":[null,{"$undefined":true},{"a":{"b":"c"}},false],"ok":{"result":null,"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[["a",1],"emoji 👍🏽 mix",0,false],"ok":{"error":"not a PasswordAction: emoji 👍🏽 mix"}}
+{"fn":"orWarnCase","args":[true,"src/a/b.ts",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: src/a/b.ts"}}
+{"fn":"orWarnCase","args":[["a",1],{"$undefined":true},{"a":"b"},false],"ok":{"result":["a",1],"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},{"$undefined":true},0,false],"ok":{"result":{"a":{"b":"c"}},"warned":["[engine] 0"]}}
+{"fn":"orWarnCase","args":[null,{"$undefined":true},0,true],"ok":{"result":null,"warned":["[engine] 0"]}}
+{"fn":"orWarnCase","args":[0,"abc","x",false],"ok":{"error":"not a PasswordAction: abc"}}
+{"fn":"orWarnCase","args":[{},"{name} has {count} items",{"a":{"b":"c"}},false],"ok":{"error":"not a PasswordAction: {name} has {count} items"}}
+{"fn":"orWarnCase","args":[[],"ΣΊΣΥΦΟΣ",{"a":"b"},true],"ok":{"error":"not a PasswordAction: ΣΊΣΥΦΟΣ"}}
+{"fn":"orWarnCase","args":[true,"",{},false],"ok":{"error":"not a PasswordAction: "}}
+{"fn":"orWarnCase","args":["x","ΣΊΣΥΦΟΣ",{"a":{"b":"c"}},false],"ok":{"error":"not a PasswordAction: ΣΊΣΥΦΟΣ"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"日本語のテキスト.leading",0,true],"ok":{"error":"not a PasswordAction: 日本語のテキスト.leading"}}
+{"fn":"orWarnCase","args":[0,"a😀b😀c",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: a😀b😀c"}}
+{"fn":"orWarnCase","args":[["a",1],"😀",true,true],"ok":{"error":"not a PasswordAction: 😀"}}
+{"fn":"orWarnCase","args":[["a",1],"ünïcödé",true,true],"ok":{"error":"not a PasswordAction: ünïcödé"}}
+{"fn":"orWarnCase","args":[{"a":"b"},".leading",[],true],"ok":{"error":"not a PasswordAction: .leading"}}
+{"fn":"orWarnCase","args":[{},"ΣΊΣΥΦΟΣ",true,false],"ok":{"error":"not a PasswordAction: ΣΊΣΥΦΟΣ"}}
+{"fn":"orWarnCase","args":[{"a":"b"},{"$undefined":true},[],false],"ok":{"result":{"a":"b"},"warned":["[engine] "]}}
+{"fn":"orWarnCase","args":[{},"x","x",true],"ok":{"error":"not a PasswordAction: x"}}
+{"fn":"orWarnCase","args":[[],"key_name-1",true,false],"ok":{"error":"not a PasswordAction: key_name-1"}}
+{"fn":"orWarnCase","args":[{},{"$undefined":true},["a",1],false],"ok":{"result":{},"warned":["[engine] a,1"]}}
+{"fn":"orWarnCase","args":[0,"İstanbul",{"a":"b"},false],"ok":{"error":"not a PasswordAction: İstanbul"}}
+{"fn":"orWarnCase","args":[["a",1],"hello",{},true],"ok":{"error":"not a PasswordAction: hello"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"a.b.cé",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: a.b.cé"}}
+{"fn":"orWarnCase","args":[["a",1],"straßetab\tseparated",{},true],"ok":{"error":"not a PasswordAction: straßetab\tseparated"}}
+{"fn":"orWarnCase","args":[["a",1],"a",null,true],"ok":{"error":"not a PasswordAction: a"}}
+{"fn":"orWarnCase","args":[{},"é",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: é"}}
+{"fn":"orWarnCase","args":[{},{"$undefined":true},{"a":{"b":"c"}},false],"ok":{"result":{},"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[true,"hello",null,false],"ok":{"error":"not a PasswordAction: hello"}}
+{"fn":"orWarnCase","args":[[],{"$undefined":true},{"a":"b"},true],"ok":{"result":[],"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[true,"line1\nline2",0,true],"ok":{"error":"not a PasswordAction: line1\nline2"}}
+{"fn":"orWarnCase","args":[{},"abc",[],true],"ok":{"error":"not a PasswordAction: abc"}}
+{"fn":"orWarnCase","args":[["a",1],"hello",[],true],"ok":{"error":"not a PasswordAction: hello"}}
+{"fn":"orWarnCase","args":["x","a😀b😀c",{"a":{"b":"c"}},false],"ok":{"error":"not a PasswordAction: a😀b😀c"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},":",["a",1],false],"ok":{"error":"not a PasswordAction: :"}}
+{"fn":"orWarnCase","args":[true,"trailing.key_name-1","key_na",false],"ok":{"error":"not a PasswordAction: trailing.key_name-1"}}
+{"fn":"orWarnCase","args":[[],"emoji 👍🏽 mix",0,false],"ok":{"error":"not a PasswordAction: emoji 👍🏽 mix"}}
+{"fn":"orWarnCase","args":[true,{"$undefined":true},[],true],"ok":{"result":true,"warned":["[engine] "]}}
+{"fn":"orWarnCase","args":[true,"İstanbul",{},false],"ok":{"error":"not a PasswordAction: İstanbul"}}
+{"fn":"orWarnCase","args":[["a",1],"line1\nline2src/a/b.ts",0,true],"ok":{"error":"not a PasswordAction: line1\nline2src/a/b.ts"}}
+{"fn":"orWarnCase","args":["x","x",true,true],"ok":{"error":"not a PasswordAction: x"}}
+{"fn":"orWarnCase","args":[null,":",[],false],"ok":{"error":"not a PasswordAction: :"}}
+{"fn":"orWarnCase","args":[["a",1],"İstanbul",{"a":"b"},true],"ok":{"error":"not a PasswordAction: İstanbul"}}
+{"fn":"orWarnCase","args":[0,"straße",{},false],"ok":{"error":"not a PasswordAction: straße"}}
+{"fn":"orWarnCase","args":["x",{"$undefined":true},{},false],"ok":{"result":"x","warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":["x","Hello World",{},false],"ok":{"error":"not a PasswordAction: Hello World"}}
+{"fn":"orWarnCase","args":[["a",1],{"$undefined":true},["a",1],false],"ok":{"result":["a",1],"warned":["[engine] a,1"]}}
+{"fn":"orWarnCase","args":[null,"HELLO",null,true],"ok":{"error":"not a PasswordAction: HELLO"}}
+{"fn":"orWarnCase","args":["x","ab",0,false],"ok":{"error":"not a PasswordAction: ab"}}
+{"fn":"orWarnCase","args":["ARA","tab\tseparated",{"a":"b"},false],"ok":{"error":"not a PasswordAction: tab\tseparated"}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},[],true],"ok":{"result":0,"warned":["[engine] "]}}
+{"fn":"orWarnCase","args":[null,"ns:key.path",{"a":{"b":"c"}},false],"ok":{"error":"not a PasswordAction: ns:key.path"}}
+{"fn":"orWarnCase","args":[0,"straße",{"a":"b"},false],"ok":{"error":"not a PasswordAction: straße"}}
+{"fn":"orWarnCase","args":[[],"ab",null,true],"ok":{"error":"not a PasswordAction: ab"}}
+{"fn":"orWarnCase","args":["x","x",{"a":{"b":"c"}},false],"ok":{"error":"not a PasswordAction: x"}}
+{"fn":"orWarnCase","args":[true,"Hello World","x",false],"ok":{"error":"not a PasswordAction: Hello World"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"{name} has {count} items",null,false],"ok":{"error":"not a PasswordAction: {name} has {count} items"}}
+{"fn":"orWarnCase","args":[null,"Hello World",{"a":"b"},false],"ok":{"error":"not a PasswordAction: Hello World"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},{"$undefined":true},{"a":"b"},true],"ok":{"result":{"a":{"b":"c"}},"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":["B😀","a😀b😀c",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: a😀b😀c"}}
+{"fn":"orWarnCase","args":[["a",1],"src/a/b.ts",true,true],"ok":{"error":"not a PasswordAction: src/a/b.ts"}}
+{"fn":"orWarnCase","args":[{},"key_name-1hello","x",true],"ok":{"error":"not a PasswordAction: key_name-1hello"}}
+{"fn":"orWarnCase","args":[["a",1],"  padded  ",["a",1],false],"ok":{"error":"not a PasswordAction:   padded  "}}
+{"fn":"orWarnCase","args":[{"a":"b"},"src/a/b.ts",{"a":"b"},true],"ok":{"error":"not a PasswordAction: src/a/b.ts"}}
+{"fn":"orWarnCase","args":[true,"line1\nline2",["a",1],false],"ok":{"error":"not a PasswordAction: line1\nline2"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"  padded  ",{},false],"ok":{"error":"not a PasswordAction:   padded  "}}
+{"fn":"orWarnCase","args":[0,"HELLO","x",false],"ok":{"error":"not a PasswordAction: HELLO"}}
+{"fn":"orWarnCase","args":[null,"😀emoji 👍🏽 mix",[],false],"ok":{"error":"not a PasswordAction: 😀emoji 👍🏽 mix"}}
+{"fn":"orWarnCase","args":[null,"./x/**/*.json",{"a":"b"},true],"ok":{"error":"not a PasswordAction: ./x/**/*.json"}}
+{"fn":"orWarnCase","args":[null,"a.b.c",{},true],"ok":{"error":"not a PasswordAction: a.b.c"}}
+{"fn":"orWarnCase","args":[["a",1],"key_name-1",{"a":"b"},true],"ok":{"error":"not a PasswordAction: key_name-1"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},{"$undefined":true},null,false],"ok":{"result":{"a":{"b":"c"}},"warned":["[engine] null"]}}
+{"fn":"orWarnCase","args":[["a",1],"Hello WorldHELLO","ldHE",false],"ok":{"error":"not a PasswordAction: Hello WorldHELLO"}}
+{"fn":"orWarnCase","args":[[],"src/a/b.ts.leading",{"a":"b"},false],"ok":{"error":"not a PasswordAction: src/a/b.ts.leading"}}
+{"fn":"orWarnCase","args":[null,{"$undefined":true},[],false],"ok":{"result":null,"warned":["[engine] "]}}
+{"fn":"orWarnCase","args":[{"a":"b"},"日本語のテキスト",[],true],"ok":{"error":"not a PasswordAction: 日本語のテキスト"}}
+{"fn":"orWarnCase","args":[[],"İstanbultrailing.",{},true],"ok":{"error":"not a PasswordAction: İstanbultrailing."}}
+{"fn":"orWarnCase","args":[true,"line1\nline2a:b:c",{"a":"b"},false],"ok":{"error":"not a PasswordAction: line1\nline2a:b:c"}}
+{"fn":"orWarnCase","args":[[],{"$undefined":true},0,true],"ok":{"result":[],"warned":["[engine] 0"]}}
+{"fn":"orWarnCase","args":[["a",1],"ns:key.path",["a",1],false],"ok":{"error":"not a PasswordAction: ns:key.path"}}
+{"fn":"orWarnCase","args":["x",{"$undefined":true},["a",1],false],"ok":{"result":"x","warned":["[engine] a,1"]}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"./x/**/*.json",true,false],"ok":{"error":"not a PasswordAction: ./x/**/*.json"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},{"$undefined":true},{"a":"b"},false],"ok":{"result":{"a":{"b":"c"}},"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":["x","trailing.","x",true],"ok":{"error":"not a PasswordAction: trailing."}}
+{"fn":"orWarnCase","args":[null,"ΣΊΣΥΦΟΣ",["a",1],true],"ok":{"error":"not a PasswordAction: ΣΊΣΥΦΟΣ"}}
+{"fn":"orWarnCase","args":["x","a..b",null,false],"ok":{"error":"not a PasswordAction: a..b"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"a",true,false],"ok":{"error":"not a PasswordAction: a"}}
+{"fn":"orWarnCase","args":[{},"ns:key.path",null,false],"ok":{"error":"not a PasswordAction: ns:key.path"}}
+{"fn":"orWarnCase","args":[null,"tab\tseparated",{"a":"b"},false],"ok":{"error":"not a PasswordAction: tab\tseparated"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"a:b:c",null,true],"ok":{"error":"not a PasswordAction: a:b:c"}}
+{"fn":"orWarnCase","args":["x","{name} has {count} items",null,true],"ok":{"error":"not a PasswordAction: {name} has {count} items"}}
+{"fn":"orWarnCase","args":[null,"a..b",{"a":{"b":"c"}},false],"ok":{"error":"not a PasswordAction: a..b"}}
+{"fn":"orWarnCase","args":[true,"{name} has {count} items",{"a":"b"},true],"ok":{"error":"not a PasswordAction: {name} has {count} items"}}
+{"fn":"orWarnCase","args":[["a",1],"a😀b😀ca..b",null,true],"ok":{"error":"not a PasswordAction: a😀b😀ca..b"}}
+{"fn":"orWarnCase","args":[["a",1],"Hello Worldé",true,true],"ok":{"error":"not a PasswordAction: Hello Worldé"}}
+{"fn":"orWarnCase","args":[[],"src/a/b.tsa:b:c",0,true],"ok":{"error":"not a PasswordAction: src/a/b.tsa:b:c"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"﻿bom",[],true],"ok":{"error":"not a PasswordAction: ﻿bom"}}
+{"fn":"orWarnCase","args":[null,"abc",{"a":"b"},false],"ok":{"error":"not a PasswordAction: abc"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"line1\nline2",{"a":{"b":"c"}},false],"ok":{"error":"not a PasswordAction: line1\nline2"}}
+{"fn":"orWarnCase","args":[{},"a..b","x",true],"ok":{"error":"not a PasswordAction: a..b"}}
+{"fn":"orWarnCase","args":[true,"  padded  :",["a",1],true],"ok":{"error":"not a PasswordAction:   padded  :"}}
+{"fn":"orWarnCase","args":[["a",1],"a..b./x/**/*.json","x",true],"ok":{"error":"not a PasswordAction: a..b./x/**/*.json"}}
+{"fn":"orWarnCase","args":[["a",1],"ab",[],false],"ok":{"error":"not a PasswordAction: ab"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"  padded  ",null,false],"ok":{"error":"not a PasswordAction:   padded  "}}
+{"fn":"orWarnCase","args":[[],"a",["a",1],false],"ok":{"error":"not a PasswordAction: a"}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},0,true],"ok":{"result":0,"warned":["[engine] 0"]}}
+{"fn":"orWarnCase","args":[{},"😀İstanbul",{},false],"ok":{"error":"not a PasswordAction: 😀İstanbul"}}
+{"fn":"orWarnCase","args":[{"a":{"b":"c"}},"",["a",1],true],"ok":{"error":"not a PasswordAction: "}}
+{"fn":"orWarnCase","args":["x","{name} has {count} items",{},false],"ok":{"error":"not a PasswordAction: {name} has {count} items"}}
+{"fn":"orWarnCase","args":[true,"emoji 👍🏽 mix",0,true],"ok":{"error":"not a PasswordAction: emoji 👍🏽 mix"}}
+{"fn":"orWarnCase","args":[{},"trailing.",null,true],"ok":{"error":"not a PasswordAction: trailing."}}
+{"fn":"orWarnCase","args":["x","key_name-1",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: key_name-1"}}
+{"fn":"orWarnCase","args":[[],"trailing../x/**/*.json",{"a":"b"},false],"ok":{"error":"not a PasswordAction: trailing../x/**/*.json"}}
+{"fn":"orWarnCase","args":[["a",1],"éstraße",["a",1],false],"ok":{"error":"not a PasswordAction: éstraße"}}
+{"fn":"orWarnCase","args":[null,"日本語のテキスト",{"a":{"b":"c"}},true],"ok":{"error":"not a PasswordAction: 日本語のテキスト"}}
+{"fn":"orWarnCase","args":[{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6},"ünïcödé",true,false],"ok":{"error":"not a PasswordAction: ünïcödé"}}
+{"fn":"orWarnCase","args":[{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7},"ünïcödé",true,false],"ok":{"error":"not a PasswordAction: ünïcödé"}}
+{"fn":"orWarnCase","args":[[3,1,2],"ünïcödé",true,false],"ok":{"error":"not a PasswordAction: ünïcödé"}}
+{"fn":"orWarnCase","args":[{},"ünïcödé",true,false],"ok":{"error":"not a PasswordAction: ünïcödé"}}
+{"fn":"orWarnCase","args":[{"a":"b"},{"$undefined":true},true,false],"ok":{"result":{"a":"b"},"warned":["[engine] true"]}}
+{"fn":"orWarnCase","args":[{"a":"b"},"héllo wörld",true,false],"ok":{"error":"not a PasswordAction: héllo wörld"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"👍🏽 thumbs",true,false],"ok":{"error":"not a PasswordAction: 👍🏽 thumbs"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"日本語",true,false],"ok":{"error":"not a PasswordAction: 日本語"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"",true,false],"ok":{"error":"not a PasswordAction: "}}
+{"fn":"orWarnCase","args":[{"a":"b"},"é",true,false],"ok":{"error":"not a PasswordAction: é"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"İstanbul",true,false],"ok":{"error":"not a PasswordAction: İstanbul"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"straße",true,false],"ok":{"error":"not a PasswordAction: straße"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"ılık ırmak",true,false],"ok":{"error":"not a PasswordAction: ılık ırmak"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"👨‍👩‍👧 family",true,false],"ok":{"error":"not a PasswordAction: 👨‍👩‍👧 family"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"a b",true,false],"ok":{"error":"not a PasswordAction: a b"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"ΣΊΣΥΦΟΣ",true,false],"ok":{"error":"not a PasswordAction: ΣΊΣΥΦΟΣ"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"a😀b",true,false],"ok":{"error":"not a PasswordAction: a😀b"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"﻿bom",true,false],"ok":{"error":"not a PasswordAction: ﻿bom"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"a²b x½ y①",true,false],"ok":{"error":"not a PasswordAction: a²b x½ y①"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"aⅠb Ⅻ",true,false],"ok":{"error":"not a PasswordAction: aⅠb Ⅻ"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"a𐐀b 𝐀bc",true,false],"ok":{"error":"not a PasswordAction: a𐐀b 𝐀bc"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"कि ٣٤",true,false],"ok":{"error":"not a PasswordAction: कि ٣٤"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"ünïcödé",{"2":4,"10":3,"zebra":1,"apple":2,"é":5,"Apple":6},false],"ok":{"error":"not a PasswordAction: ünïcödé"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"ünïcödé",{"n":9007199254740992,"f":1e+21,"t":0.1,"neg":-7},false],"ok":{"error":"not a PasswordAction: ünïcödé"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"ünïcödé",[3,1,2],false],"ok":{"error":"not a PasswordAction: ünïcödé"}}
+{"fn":"orWarnCase","args":[{"a":"b"},"ünïcödé",{},false],"ok":{"error":"not a PasswordAction: ünïcödé"}}
+{"fn":"passwordFailureCase","args":["Could not save the password",true],"ok":"refused-or-already-saved"}
+{"fn":"passwordFailureCase","args":["Could not save the password",false],"ok":"refused-or-already-saved"}
+{"fn":"passwordFailureCase","args":["Engine: Could not save the password (dup)",true],"ok":"refused-or-already-saved"}
+{"fn":"passwordFailureCase","args":["Engine: Could not save the password (dup)",false],"ok":"refused-or-already-saved"}
+{"fn":"passwordFailureCase","args":["the store didn't take the change",true],"ok":"not-landed-in-time"}
+{"fn":"passwordFailureCase","args":["the store didn't take the change",false],"ok":"not-landed-in-time"}
+{"fn":"passwordFailureCase","args":["didn't take the change",true],"ok":"not-landed-in-time"}
+{"fn":"passwordFailureCase","args":["didn't take the change",false],"ok":"not-landed-in-time"}
+{"fn":"passwordFailureCase","args":["could not save the password",true],"ok":"other"}
+{"fn":"passwordFailureCase","args":["could not save the password",false],"ok":"other"}
+{"fn":"passwordFailureCase","args":["other failure",true],"ok":"other"}
+{"fn":"passwordFailureCase","args":["other failure",false],"ok":"other"}
+{"fn":"passwordFailureCase","args":["",true],"ok":"other"}
+{"fn":"passwordFailureCase","args":["",false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[null,true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[null,false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{"$undefined":true},true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{"$undefined":true},false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[42,true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[42,false],"ok":"other"}
+{"fn":"passwordFailureCase","args":[["Could not save the password"],true],"ok":"refused-or-already-saved"}
+{"fn":"passwordFailureCase","args":[["Could not save the password"],false],"ok":"refused-or-already-saved"}
+{"fn":"passwordFailureCase","args":[{"message":"Could not save the password"},true],"ok":"other"}
+{"fn":"passwordFailureCase","args":[{"message":"Could not save the password"},false],"ok":"other"}
+{"fn":"orWarnCase","args":[null,{"$undefined":true},"boom",true],"ok":{"result":null,"warned":["[engine] boom"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},{"$undefined":true},"boom",true],"ok":{"result":{"$undefined":true},"warned":["[engine] boom"]}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},"boom",true],"ok":{"result":0,"warned":["[engine] boom"]}}
+{"fn":"orWarnCase","args":["fallback",{"$undefined":true},"boom",true],"ok":{"result":"fallback","warned":["[engine] boom"]}}
+{"fn":"orWarnCase","args":[[1],{"$undefined":true},"boom",true],"ok":{"result":[1],"warned":["[engine] boom"]}}
+{"fn":"orWarnCase","args":[{"k":{"$num":"NaN"}},{"$undefined":true},"boom",true],"ok":{"result":{"k":{"$num":"NaN"}},"warned":["[engine] boom"]}}
+{"fn":"orWarnCase","args":[null,{"$undefined":true},null,false],"ok":{"result":null,"warned":["[engine] null"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},{"$undefined":true},null,false],"ok":{"result":{"$undefined":true},"warned":["[engine] null"]}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},null,false],"ok":{"result":0,"warned":["[engine] null"]}}
+{"fn":"orWarnCase","args":["fallback",{"$undefined":true},null,false],"ok":{"result":"fallback","warned":["[engine] null"]}}
+{"fn":"orWarnCase","args":[[1],{"$undefined":true},null,false],"ok":{"result":[1],"warned":["[engine] null"]}}
+{"fn":"orWarnCase","args":[{"k":{"$num":"NaN"}},{"$undefined":true},null,false],"ok":{"result":{"k":{"$num":"NaN"}},"warned":["[engine] null"]}}
+{"fn":"orWarnCase","args":[null,{"$undefined":true},{"$undefined":true},false],"ok":{"result":null,"warned":["[engine] undefined"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},{"$undefined":true},{"$undefined":true},false],"ok":{"result":{"$undefined":true},"warned":["[engine] undefined"]}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},{"$undefined":true},false],"ok":{"result":0,"warned":["[engine] undefined"]}}
+{"fn":"orWarnCase","args":["fallback",{"$undefined":true},{"$undefined":true},false],"ok":{"result":"fallback","warned":["[engine] undefined"]}}
+{"fn":"orWarnCase","args":[[1],{"$undefined":true},{"$undefined":true},false],"ok":{"result":[1],"warned":["[engine] undefined"]}}
+{"fn":"orWarnCase","args":[{"k":{"$num":"NaN"}},{"$undefined":true},{"$undefined":true},false],"ok":{"result":{"k":{"$num":"NaN"}},"warned":["[engine] undefined"]}}
+{"fn":"orWarnCase","args":[null,{"$undefined":true},{"a":1},false],"ok":{"result":null,"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},{"$undefined":true},{"a":1},false],"ok":{"result":{"$undefined":true},"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},{"a":1},false],"ok":{"result":0,"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":["fallback",{"$undefined":true},{"a":1},false],"ok":{"result":"fallback","warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[[1],{"$undefined":true},{"a":1},false],"ok":{"result":[1],"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[{"k":{"$num":"NaN"}},{"$undefined":true},{"a":1},false],"ok":{"result":{"k":{"$num":"NaN"}},"warned":["[engine] [object Object]"]}}
+{"fn":"orWarnCase","args":[null,{"$undefined":true},[1,2],true],"ok":{"result":null,"warned":["[engine] 1,2"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},{"$undefined":true},[1,2],true],"ok":{"result":{"$undefined":true},"warned":["[engine] 1,2"]}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},[1,2],true],"ok":{"result":0,"warned":["[engine] 1,2"]}}
+{"fn":"orWarnCase","args":["fallback",{"$undefined":true},[1,2],true],"ok":{"result":"fallback","warned":["[engine] 1,2"]}}
+{"fn":"orWarnCase","args":[[1],{"$undefined":true},[1,2],true],"ok":{"result":[1],"warned":["[engine] 1,2"]}}
+{"fn":"orWarnCase","args":[{"k":{"$num":"NaN"}},{"$undefined":true},[1,2],true],"ok":{"result":{"k":{"$num":"NaN"}},"warned":["[engine] 1,2"]}}
+{"fn":"orWarnCase","args":[null,{"$undefined":true},{"$num":"NaN"},false],"ok":{"result":null,"warned":["[engine] NaN"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},{"$undefined":true},{"$num":"NaN"},false],"ok":{"result":{"$undefined":true},"warned":["[engine] NaN"]}}
+{"fn":"orWarnCase","args":[0,{"$undefined":true},{"$num":"NaN"},false],"ok":{"result":0,"warned":["[engine] NaN"]}}
+{"fn":"orWarnCase","args":["fallback",{"$undefined":true},{"$num":"NaN"},false],"ok":{"result":"fallback","warned":["[engine] NaN"]}}
+{"fn":"orWarnCase","args":[[1],{"$undefined":true},{"$num":"NaN"},false],"ok":{"result":[1],"warned":["[engine] NaN"]}}
+{"fn":"orWarnCase","args":[{"k":{"$num":"NaN"}},{"$undefined":true},{"$num":"NaN"},false],"ok":{"result":{"k":{"$num":"NaN"}},"warned":["[engine] NaN"]}}
+{"fn":"orWarnCase","args":[null,"browser import","boom",true],"ok":{"result":null,"warned":["[engine] browser import: boom"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"browser import","boom",true],"ok":{"result":{"$undefined":true},"warned":["[engine] browser import: boom"]}}
+{"fn":"orWarnCase","args":[0,"browser import","boom",true],"ok":{"result":0,"warned":["[engine] browser import: boom"]}}
+{"fn":"orWarnCase","args":[null,"browser import",null,false],"ok":{"result":null,"warned":["[engine] browser import: null"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"browser import",null,false],"ok":{"result":{"$undefined":true},"warned":["[engine] browser import: null"]}}
+{"fn":"orWarnCase","args":[0,"browser import",null,false],"ok":{"result":0,"warned":["[engine] browser import: null"]}}
+{"fn":"orWarnCase","args":[null,"browser import",{"$undefined":true},false],"ok":{"result":null,"warned":["[engine] browser import: undefined"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"browser import",{"$undefined":true},false],"ok":{"result":{"$undefined":true},"warned":["[engine] browser import: undefined"]}}
+{"fn":"orWarnCase","args":[0,"browser import",{"$undefined":true},false],"ok":{"result":0,"warned":["[engine] browser import: undefined"]}}
+{"fn":"orWarnCase","args":[null,"browser import",{"a":1},false],"ok":{"result":null,"warned":["[engine] browser import: [object Object]"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"browser import",{"a":1},false],"ok":{"result":{"$undefined":true},"warned":["[engine] browser import: [object Object]"]}}
+{"fn":"orWarnCase","args":[0,"browser import",{"a":1},false],"ok":{"result":0,"warned":["[engine] browser import: [object Object]"]}}
+{"fn":"orWarnCase","args":[null,"browser import",[1,2],true],"ok":{"result":null,"warned":["[engine] browser import: 1,2"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"browser import",[1,2],true],"ok":{"result":{"$undefined":true},"warned":["[engine] browser import: 1,2"]}}
+{"fn":"orWarnCase","args":[0,"browser import",[1,2],true],"ok":{"result":0,"warned":["[engine] browser import: 1,2"]}}
+{"fn":"orWarnCase","args":[null,"browser import",{"$num":"NaN"},false],"ok":{"result":null,"warned":["[engine] browser import: NaN"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"browser import",{"$num":"NaN"},false],"ok":{"result":{"$undefined":true},"warned":["[engine] browser import: NaN"]}}
+{"fn":"orWarnCase","args":[0,"browser import",{"$num":"NaN"},false],"ok":{"result":0,"warned":["[engine] browser import: NaN"]}}
+{"fn":"orWarnCase","args":[null,"csv import","boom",true],"ok":{"result":null,"warned":["[engine] csv import: boom"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"csv import","boom",true],"ok":{"result":{"$undefined":true},"warned":["[engine] csv import: boom"]}}
+{"fn":"orWarnCase","args":[0,"csv import","boom",true],"ok":{"result":0,"warned":["[engine] csv import: boom"]}}
+{"fn":"orWarnCase","args":[null,"csv import",null,false],"ok":{"result":null,"warned":["[engine] csv import: null"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"csv import",null,false],"ok":{"result":{"$undefined":true},"warned":["[engine] csv import: null"]}}
+{"fn":"orWarnCase","args":[0,"csv import",null,false],"ok":{"result":0,"warned":["[engine] csv import: null"]}}
+{"fn":"orWarnCase","args":[null,"csv import",{"$undefined":true},false],"ok":{"result":null,"warned":["[engine] csv import: undefined"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"csv import",{"$undefined":true},false],"ok":{"result":{"$undefined":true},"warned":["[engine] csv import: undefined"]}}
+{"fn":"orWarnCase","args":[0,"csv import",{"$undefined":true},false],"ok":{"result":0,"warned":["[engine] csv import: undefined"]}}
+{"fn":"orWarnCase","args":[null,"csv import",{"a":1},false],"ok":{"result":null,"warned":["[engine] csv import: [object Object]"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"csv import",{"a":1},false],"ok":{"result":{"$undefined":true},"warned":["[engine] csv import: [object Object]"]}}
+{"fn":"orWarnCase","args":[0,"csv import",{"a":1},false],"ok":{"result":0,"warned":["[engine] csv import: [object Object]"]}}
+{"fn":"orWarnCase","args":[null,"csv import",[1,2],true],"ok":{"result":null,"warned":["[engine] csv import: 1,2"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"csv import",[1,2],true],"ok":{"result":{"$undefined":true},"warned":["[engine] csv import: 1,2"]}}
+{"fn":"orWarnCase","args":[0,"csv import",[1,2],true],"ok":{"result":0,"warned":["[engine] csv import: 1,2"]}}
+{"fn":"orWarnCase","args":[null,"csv import",{"$num":"NaN"},false],"ok":{"result":null,"warned":["[engine] csv import: NaN"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"csv import",{"$num":"NaN"},false],"ok":{"result":{"$undefined":true},"warned":["[engine] csv import: NaN"]}}
+{"fn":"orWarnCase","args":[0,"csv import",{"$num":"NaN"},false],"ok":{"result":0,"warned":["[engine] csv import: NaN"]}}
+{"fn":"orWarnCase","args":[null,"settings edit","boom",true],"ok":{"result":null,"warned":["[engine] settings edit: boom"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings edit","boom",true],"ok":{"result":{"$undefined":true},"warned":["[engine] settings edit: boom"]}}
+{"fn":"orWarnCase","args":[0,"settings edit","boom",true],"ok":{"result":0,"warned":["[engine] settings edit: boom"]}}
+{"fn":"orWarnCase","args":[null,"settings edit",null,false],"ok":{"result":null,"warned":["[engine] settings edit: null"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings edit",null,false],"ok":{"result":{"$undefined":true},"warned":["[engine] settings edit: null"]}}
+{"fn":"orWarnCase","args":[0,"settings edit",null,false],"ok":{"result":0,"warned":["[engine] settings edit: null"]}}
+{"fn":"orWarnCase","args":[null,"settings edit",{"$undefined":true},false],"ok":{"result":null,"warned":["[engine] settings edit: undefined"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings edit",{"$undefined":true},false],"ok":{"result":{"$undefined":true},"warned":["[engine] settings edit: undefined"]}}
+{"fn":"orWarnCase","args":[0,"settings edit",{"$undefined":true},false],"ok":{"result":0,"warned":["[engine] settings edit: undefined"]}}
+{"fn":"orWarnCase","args":[null,"settings edit",{"a":1},false],"ok":{"result":null,"warned":["[engine] settings edit: [object Object]"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings edit",{"a":1},false],"ok":{"result":{"$undefined":true},"warned":["[engine] settings edit: [object Object]"]}}
+{"fn":"orWarnCase","args":[0,"settings edit",{"a":1},false],"ok":{"result":0,"warned":["[engine] settings edit: [object Object]"]}}
+{"fn":"orWarnCase","args":[null,"settings edit",[1,2],true],"ok":{"result":null,"warned":["[engine] settings edit: 1,2"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings edit",[1,2],true],"ok":{"result":{"$undefined":true},"warned":["[engine] settings edit: 1,2"]}}
+{"fn":"orWarnCase","args":[0,"settings edit",[1,2],true],"ok":{"result":0,"warned":["[engine] settings edit: 1,2"]}}
+{"fn":"orWarnCase","args":[null,"settings edit",{"$num":"NaN"},false],"ok":{"result":null,"warned":["[engine] settings edit: NaN"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings edit",{"$num":"NaN"},false],"ok":{"result":{"$undefined":true},"warned":["[engine] settings edit: NaN"]}}
+{"fn":"orWarnCase","args":[0,"settings edit",{"$num":"NaN"},false],"ok":{"result":0,"warned":["[engine] settings edit: NaN"]}}
+{"fn":"orWarnCase","args":[null,"settings delete","boom",true],"ok":{"result":null,"warned":["[engine] settings delete: boom"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings delete","boom",true],"ok":{"result":{"$undefined":true},"warned":["[engine] settings delete: boom"]}}
+{"fn":"orWarnCase","args":[0,"settings delete","boom",true],"ok":{"result":0,"warned":["[engine] settings delete: boom"]}}
+{"fn":"orWarnCase","args":[null,"settings delete",null,false],"ok":{"result":null,"warned":["[engine] settings delete: null"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings delete",null,false],"ok":{"result":{"$undefined":true},"warned":["[engine] settings delete: null"]}}
+{"fn":"orWarnCase","args":[0,"settings delete",null,false],"ok":{"result":0,"warned":["[engine] settings delete: null"]}}
+{"fn":"orWarnCase","args":[null,"settings delete",{"$undefined":true},false],"ok":{"result":null,"warned":["[engine] settings delete: undefined"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings delete",{"$undefined":true},false],"ok":{"result":{"$undefined":true},"warned":["[engine] settings delete: undefined"]}}
+{"fn":"orWarnCase","args":[0,"settings delete",{"$undefined":true},false],"ok":{"result":0,"warned":["[engine] settings delete: undefined"]}}
+{"fn":"orWarnCase","args":[null,"settings delete",{"a":1},false],"ok":{"result":null,"warned":["[engine] settings delete: [object Object]"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings delete",{"a":1},false],"ok":{"result":{"$undefined":true},"warned":["[engine] settings delete: [object Object]"]}}
+{"fn":"orWarnCase","args":[0,"settings delete",{"a":1},false],"ok":{"result":0,"warned":["[engine] settings delete: [object Object]"]}}
+{"fn":"orWarnCase","args":[null,"settings delete",[1,2],true],"ok":{"result":null,"warned":["[engine] settings delete: 1,2"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings delete",[1,2],true],"ok":{"result":{"$undefined":true},"warned":["[engine] settings delete: 1,2"]}}
+{"fn":"orWarnCase","args":[0,"settings delete",[1,2],true],"ok":{"result":0,"warned":["[engine] settings delete: 1,2"]}}
+{"fn":"orWarnCase","args":[null,"settings delete",{"$num":"NaN"},false],"ok":{"result":null,"warned":["[engine] settings delete: NaN"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"settings delete",{"$num":"NaN"},false],"ok":{"result":{"$undefined":true},"warned":["[engine] settings delete: NaN"]}}
+{"fn":"orWarnCase","args":[0,"settings delete",{"$num":"NaN"},false],"ok":{"result":0,"warned":["[engine] settings delete: NaN"]}}
+{"fn":"orWarnCase","args":[null,"sync delete","boom",true],"ok":{"result":null,"warned":["[engine] sync delete: boom"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"sync delete","boom",true],"ok":{"result":{"$undefined":true},"warned":["[engine] sync delete: boom"]}}
+{"fn":"orWarnCase","args":[0,"sync delete","boom",true],"ok":{"result":0,"warned":["[engine] sync delete: boom"]}}
+{"fn":"orWarnCase","args":[null,"sync delete",null,false],"ok":{"result":null,"warned":["[engine] sync delete: null"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"sync delete",null,false],"ok":{"result":{"$undefined":true},"warned":["[engine] sync delete: null"]}}
+{"fn":"orWarnCase","args":[0,"sync delete",null,false],"ok":{"result":0,"warned":["[engine] sync delete: null"]}}
+{"fn":"orWarnCase","args":[null,"sync delete",{"$undefined":true},false],"ok":{"result":null,"warned":["[engine] sync delete: undefined"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"sync delete",{"$undefined":true},false],"ok":{"result":{"$undefined":true},"warned":["[engine] sync delete: undefined"]}}
+{"fn":"orWarnCase","args":[0,"sync delete",{"$undefined":true},false],"ok":{"result":0,"warned":["[engine] sync delete: undefined"]}}
+{"fn":"orWarnCase","args":[null,"sync delete",{"a":1},false],"ok":{"result":null,"warned":["[engine] sync delete: [object Object]"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"sync delete",{"a":1},false],"ok":{"result":{"$undefined":true},"warned":["[engine] sync delete: [object Object]"]}}
+{"fn":"orWarnCase","args":[0,"sync delete",{"a":1},false],"ok":{"result":0,"warned":["[engine] sync delete: [object Object]"]}}
+{"fn":"orWarnCase","args":[null,"sync delete",[1,2],true],"ok":{"result":null,"warned":["[engine] sync delete: 1,2"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"sync delete",[1,2],true],"ok":{"result":{"$undefined":true},"warned":["[engine] sync delete: 1,2"]}}
+{"fn":"orWarnCase","args":[0,"sync delete",[1,2],true],"ok":{"result":0,"warned":["[engine] sync delete: 1,2"]}}
+{"fn":"orWarnCase","args":[null,"sync delete",{"$num":"NaN"},false],"ok":{"result":null,"warned":["[engine] sync delete: NaN"]}}
+{"fn":"orWarnCase","args":[{"$undefined":true},"sync delete",{"$num":"NaN"},false],"ok":{"result":{"$undefined":true},"warned":["[engine] sync delete: NaN"]}}
+{"fn":"orWarnCase","args":[0,"sync delete",{"$num":"NaN"},false],"ok":{"result":0,"warned":["[engine] sync delete: NaN"]}}

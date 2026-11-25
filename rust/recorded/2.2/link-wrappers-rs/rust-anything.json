@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/linkWrappers.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "linkwrappers-rs",
+  "exports": [
+    {
+      "name": "linkDestination",
+      "file": "apps/browser/src/lib/linkWrappers.ts",
+      "line": 47,
+      "params": [
+        {
+          "name": "url",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}
