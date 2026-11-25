@@ -421,18 +421,13 @@ fn union_times(a: &[f64], b: &[f64]) -> Vec<f64> {
     out.split_off(cut)
 }
 
-/// Port of `keptTimes` (`packages/sync/src/companion/adapters.ts:77`) for times that are numbers.
-fn kept_times(times: Vec<f64>) -> Vec<f64> {
-    if times.len() > MAX_VISIT_TIMES {
-        union_times(
-            &times
-                .into_iter()
-                .filter(|t| t.is_finite())
-                .collect::<Vec<_>>(),
-            &[],
-        )
+/// Port of `keptTimes` (`packages/sync/src/companion/adapters.ts:77`): the length test is on the raw array.
+fn kept_times(vt: &[Value]) -> Vec<f64> {
+    let numbers: Vec<f64> = vt.iter().filter_map(Value::as_f64).collect();
+    if vt.len() > MAX_VISIT_TIMES {
+        union_times(&numbers, &[])
     } else {
-        times
+        numbers
     }
 }
 
@@ -564,7 +559,7 @@ impl HistoryAdapter {
                 known
                     .get("vt")
                     .and_then(Value::as_array)
-                    .map_or_else(Vec::new, |vt| vt.iter().filter_map(Value::as_f64).collect()),
+                    .map_or(&[][..], Vec::as_slice),
             );
             let oldest = oldest_kept(&known_times);
             if !local.iter().any(|&t| t >= oldest && !near(&known_times, t)) {
@@ -608,9 +603,7 @@ impl HistoryAdapter {
                     continue;
                 };
                 let times = match value.get("vt").and_then(Value::as_array) {
-                    Some(vt) if vt.len() > MAX_VISIT_TIMES => {
-                        kept_times(vt.iter().filter_map(Value::as_f64).collect())
-                    }
+                    Some(vt) if vt.len() > MAX_VISIT_TIMES => kept_times(vt),
                     Some(vt) => vt.iter().map(to_number).collect(),
                     None => Vec::new(),
                 };
@@ -972,6 +965,16 @@ mod tests {
         );
         let many: Vec<f64> = (0..60).map(|i| f64::from(i) * 10.0).collect();
         assert_eq!(union_times(&many, &[]).first(), Some(&100.0));
+    }
+
+    #[test]
+    fn kept_times_merges_when_the_raw_array_is_over_the_cap() {
+        let mut vt = vec![json!(null), json!(1000), json!(1001)];
+        vt.extend((0..48).map(|i| json!(1_000_000 + i * 1_000_000)));
+        assert_eq!(vt.len(), 51);
+        let kept = kept_times(&vt);
+        assert_eq!(kept.len(), 49);
+        assert_eq!(oldest_kept(&kept), f64::NEG_INFINITY);
     }
 
     #[test]
