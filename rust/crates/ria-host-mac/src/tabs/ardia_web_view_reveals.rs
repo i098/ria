@@ -106,6 +106,10 @@ pub fn drop_reveals(
             ended(host.host, change);
         }
     }
+    if let DropReveals::Press(press) = filter {
+        // Ardia `+dropTabPress:` (Reveals.mm 254-261) forgets the press even when no reveal holds it.
+        presses.forget_switches(press);
+    }
 }
 
 /// Return the discarded tab so the caller can close it after releasing its registry borrow.
@@ -539,5 +543,14 @@ mod tests {
         assert!(!older_press(None, PressId::new(2)));
         assert!(!older_press(PressId::new(2), PressId::new(2)));
         assert!(older_press(PressId::new(1), PressId::new(2)));
+    }
+
+    #[test]
+    fn dropping_a_press_forgets_its_switch_notes_without_any_reveal() {
+        let mut presses = TabPresses::default();
+        let press = presses.began("tab", 1.0);
+        presses.note_switch("tab", Some(press));
+        drop_reveals(&[], DropReveals::Press(press), &mut presses, |_, _| {});
+        assert_eq!(presses.take_switch("tab"), None);
     }
 }
