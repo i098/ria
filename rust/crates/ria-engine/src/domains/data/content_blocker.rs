@@ -2,6 +2,11 @@
 // Copyright 2026 Mantra Patel, Apache-2.0.
 // This file is a Rust port of that file, with changes.
 //
+// Deviation from Ardia (issue #56, approved by the order to resolve every open issue): `restoreElements:inProfile:`
+// maps a private session to its regular profile and saves that filter file (`ArdiaContentBlocker.mm:534-539`), so a
+// private window could delete a saved hidden element. Here `restore_elements` refuses a private profile, like
+// `hide_elements` (ADR-V4).
+//
 // Deviation from Ardia (issue 69, approved by the order to resolve every open issue): `ADD_LIST` finds an existing list
 // by an address that equals the added one without its scheme, where Ardia matches any address that ends with it
 // (`ArdiaContentBlocker.mm:463`), so a list at another origin whose path holds the text is no longer taken as the same.
