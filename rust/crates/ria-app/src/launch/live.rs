@@ -40,6 +40,7 @@ mod mac {
     use ria_host_mac::launch::strip_layer::{Button, Row, button_center};
     use ria_host_mac::launch::system_signals;
     use ria_host_mac::launch::window_host::WindowHost;
+    use ria_host_mac::tabs::ardia_web_view_first_paint::PaintEnd;
     use serde_json::{Value, json};
 
     const TITLE: &str = "Ria proof page";
@@ -119,6 +120,11 @@ mod mac {
             out.lines()
                 .any(|line| line == "liveViews 1 paintViews 1 detached false"),
             "the app did not build a live page view for the launch tab"
+        );
+        assert!(
+            out.lines().any(|line| line == "firstPaintHeld true")
+                && out.lines().any(|line| line == "firstPaintShown true"),
+            "the first-paint hold did not hide the launch page and show it again"
         );
         assert!(
             out.lines().any(|line| line == "fieldTiming on")
@@ -513,6 +519,11 @@ mod mac {
                     facts.len(),
                     facts.iter().any(|view| view.page_detached)
                 );
+                let view = host.hooks().live().all().remove(0);
+                view.hold_shown_page(true);
+                println!("firstPaintHeld {}", view.holding_first_paint());
+                view.show_held_page(PaintEnd::Detached);
+                println!("firstPaintShown {}", !view.holding_first_paint());
                 let signals = system_signals::current().expect("the app has a system-signals host");
                 signals.call(
                     "ACFieldTiming.setEnabled",

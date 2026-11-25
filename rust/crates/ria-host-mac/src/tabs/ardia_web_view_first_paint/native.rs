@@ -40,6 +40,11 @@ impl PagePaintHold {
         self.state.borrow_mut().reset(created);
     }
 
+    /// Whether the hold hides the page now.
+    pub fn held(&self) -> bool {
+        self.state.borrow().load_wait().is_some()
+    }
+
     pub fn note_scripted(&self, scripted: bool) {
         self.state.borrow_mut().scripted = scripted;
     }

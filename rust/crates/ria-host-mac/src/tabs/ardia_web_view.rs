@@ -9,7 +9,10 @@
 //! - The host supplies the weak registry instead of using a process-wide set.
 //! - The factory registers the view at creation. Ardia registers it when a tab attaches.
 //! - `attach_tab` is the part of `-[ArdiaWebView ensureTab]` that mounts a tab that already exists. The first-paint
-//!   hold, reveal and focus steps of `attach` are skipped until those modules are ported (#110).
+//!   hold (`holdPageUntilPainted:`) runs in its attach step, but `created` is always false there, so only a view in a
+//!   small window holds. The reveal and focus steps are skipped until those modules are ported (#110). The
+//!   settle callers (`showHeldPageAfterLoad`, the `firstPaint` page message, `detach`) wait for `NoteEvent` and
+//!   `PageTab`; the 4 s timeout is the only end that runs by itself.
 //! - Painting: `schedule_painting` posts one paint per view to the main queue, where Ardia drains a set of views in one
 //!   run-loop observer in a fixed order (hidden views first). `apply_painting` leaves out `leaveScreen`, the holder
 //!   (`holdFor:`, `keepPaneBelow:`), drop acceptance, focus and the swap report. The frame hold begins only when a
@@ -40,8 +43,7 @@ use crate::windows::ardia_window_controller::Controller;
 use super::ardia_page_hooks::PageHooks;
 use super::ardia_tab_registry::TabRegistry;
 use super::ardia_web_view_context_menu::ElementPick;
-use super::ardia_web_view_first_paint::FRAME_INTERVAL;
-use super::ardia_web_view_first_paint::FirstPaint;
+use super::ardia_web_view_first_paint::{FRAME_INTERVAL, PagePaintHold, PaintEnd, PaintSurface};
 use super::ardia_web_view_focus::PageFocus;
 use super::ardia_web_view_navigation::{NavigationReports, NavigationRequest};
 use super::ardia_web_view_page_commands::PageCommands;
@@ -68,7 +70,7 @@ struct State {
     stashed: StashedReports<NavigationReports>,
     controller: RcWeak<Controller>,
     requests: NavigationRequest,
-    first_paint: FirstPaint,
+    paint_hold: Option<Rc<PagePaintHold>>,
     frame_hold: FrameHold,
     stand_in: StandIn,
     reveal: Rc<RefCell<Reveal>>,
@@ -129,6 +131,9 @@ impl ArdiaWebView {
             selected: true,
             tab_index: -1,
             hooks: Rc::downgrade(hooks),
+            // shortcut: the consent epoch is empty, so cold-paint counts are not recorded; read it from the app once
+            // the engine caller of `ArdiaEvents.consentEpoch` exists (#111).
+            paint_hold: Some(PagePaintHold::new(String::new)),
             ..State::default()
         })));
         // SAFETY: The subclass ivars are initialized before the NSView initializer runs.
@@ -268,9 +273,15 @@ impl ArdiaWebView {
             &mut stashed,
             |_, _| {},
             |step| {
-                if let AttachStep::LayoutAndPaint = step {
-                    // The attached tab is out of `state` here, so lay the page out from `page_tab`.
-                    layout_page(self, Some(&*page_tab), None, None, None, true);
+                match step {
+                    AttachStep::LayoutAndPaint => {
+                        // The attached tab is out of `state` here, so lay the page out from `page_tab`.
+                        layout_page(self, Some(&*page_tab), None, None, None, true);
+                    }
+                    AttachStep::HoldForFirstPaint { created } => {
+                        self.hold_page_until_painted(&page_tab, created);
+                    }
+                    _ => {}
                 }
             },
         );
@@ -280,6 +291,61 @@ impl ArdiaWebView {
         drop(state);
         self.schedule_painting();
         adoption
+    }
+
+    /// `-[ArdiaWebView holdPageUntilPainted:]` (`ArdiaWebView+FirstPaint.mm:46`): hide the page of `tab` until its
+    /// first paint, unless the view is not a cold tab.
+    fn hold_page_until_painted(&self, tab: &Tab, created: bool) {
+        let (hold, surface) = {
+            let state = self.state();
+            (
+                state.paint_hold.clone(),
+                PaintSurface {
+                    attached: true,
+                    small_window: small_window(self.window().as_deref()),
+                    temporary: false,
+                    standalone: state.standalone,
+                    extension_host: false,
+                    visible_or_revealing: state.visible || state.reveal.borrow().active(),
+                    opacity: 1.0,
+                },
+            )
+        };
+        if let Some(hold) = hold {
+            hold.hold(tab, self, created, surface);
+        }
+    }
+
+    /// `-[ArdiaWebView showHeldPage:]` (`ArdiaWebView+FirstPaint.mm:73`).
+    pub fn show_held_page(&self, end: PaintEnd) {
+        let hold = self.state().paint_hold.clone();
+        if let Some(hold) = hold {
+            hold.show(end);
+        }
+    }
+
+    /// `-[ArdiaWebView showHeldPageAfterLoad]` (`ArdiaWebView+FirstPaint.mm:103`).
+    pub fn show_held_page_after_load(&self) {
+        let hold = self.state().paint_hold.clone();
+        if let Some(hold) = hold {
+            hold.show_after_load();
+        }
+    }
+
+    /// Whether the first-paint hold hides the page now.
+    pub fn holding_first_paint(&self) -> bool {
+        self.state()
+            .paint_hold
+            .as_ref()
+            .is_some_and(|hold| hold.held())
+    }
+
+    /// `-[ArdiaWebView holdPageUntilPainted:]` for the tab the view shows, for callers that have no attach step.
+    pub fn hold_shown_page(&self, created: bool) {
+        let tab = self.state().attached.tab.clone();
+        if let Some(tab) = tab {
+            self.hold_page_until_painted(&tab, created);
+        }
     }
 
     /// `-[ArdiaWebView layoutPage]` (`ArdiaWebView+Painting.mm:148`) without the fronted and stand-in pages, which no
