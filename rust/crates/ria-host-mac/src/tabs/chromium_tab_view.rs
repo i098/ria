@@ -13,16 +13,24 @@ use objc2::MainThreadMarker;
 use objc2::rc::Retained;
 use serde_json::Value;
 
-use super::ardia_web_view::{ArdiaWebView, LiveViews};
+use super::ardia_page_hooks::PageHooks;
+use super::ardia_web_view::ArdiaWebView;
+use crate::diagnostics::ardia_field_timing;
 use super::page_tab::PageTab;
 use super::page_tab_host::PageTabHost;
 
 pub struct ChromiumTabView(PageTabHost);
 
 impl ChromiumTabView {
-    /// `makePage`: Create a zero-frame Chromium view and register it.
-    pub fn make_page(mtm: MainThreadMarker, live: &LiveViews) -> Retained<ArdiaWebView> {
-        ArdiaWebView::new(mtm, live)
+    /// `makePage`: Create a zero-frame Chromium view and register it. The first call installs `hooks`;
+    /// a view made while field timing is on joins it.
+    pub fn make_page(mtm: MainThreadMarker, hooks: &Rc<PageHooks>) -> Retained<ArdiaWebView> {
+        hooks.install(mtm);
+        let view = ArdiaWebView::new(mtm, hooks.live());
+        if ardia_field_timing::enabled() {
+            view.send_field_timing(true);
+        }
+        view
     }
 
     /// `init`: Send the supplied page's events through the host.

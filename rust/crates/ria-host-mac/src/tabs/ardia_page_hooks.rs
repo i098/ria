@@ -12,7 +12,10 @@
 //! because `windows/` and the key tables are not reachable from `tabs/`. The early-window veil has no Ria type, so
 //! the paint facts never report it. Not yet reached: no code in `tabs/` enters a reveal gap, sets `warm` or
 //! `neighbour` on a view, or calls the field-timing marks of navigation and reveals (`ArdiaWebView.mm:283` is the
-//! one mark that `ArdiaWebView::set_visible` makes); those callers belong to the rest of #110.
+//! one mark that `ArdiaWebView::set_visible` makes); those callers belong to the rest of #110. Still open: no
+//! production code calls `ChromiumTabView::make_page` or builds `LiveViews`, so nothing installs these hooks at
+//! runtime yet; no code calls `PageHooks::paint_probe` or `set_field_timing`; the engine `SwipeModule` calls into
+//! `swipe_module::call` and `dev_simulate`, and the `leaving` and `holding` terms, also have no host.
 
 use std::cell::RefCell;
 use std::ptr;
@@ -90,9 +93,16 @@ impl PageHooks {
     /// Registers the hooks with the swipe unit and the reveal guards, and for the field-timing switch.
     /// The reveal guards keep the hooks of the first call.
     pub fn install(self: &Rc<Self>, mtm: MainThreadMarker) {
+        if INSTALLED.with_borrow(|installed| installed.upgrade().is_some_and(|i| Rc::ptr_eq(&i, self))) {
+            return;
+        }
         INSTALLED.set(Rc::downgrade(self));
         ardia_swipe::set_hooks(self.clone());
         ardia_reveal_guards::install(mtm, self.clone());
+    }
+
+    pub fn live(&self) -> &LiveViews {
+        &self.live
     }
 
     /// The reveal input of the gaps; the page host's reveal code enters and leaves gaps through it.
