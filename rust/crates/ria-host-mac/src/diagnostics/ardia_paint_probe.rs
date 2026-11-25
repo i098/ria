@@ -5,7 +5,8 @@
 //! Changes from Ardia: the probe is a `PaintProbe` value and not file globals. The page host gives the paint
 //! facts of each visible web view through `views`, and the events and consent epoch come as closures.
 //! `tabs::ardia_page_hooks::PageHooks::paint_probe` supplies `views` from `ArdiaWebView::paint_facts`, which calls
-//! `view_facts`. The early-window veil still has no Ria type, so the veil is never reported; the stand-in and
+//! `view_facts`. `launch::window_host::WindowHost::new` builds and starts the probe (`watch`) for the app, where Ardia starts it in
+//! `ArdiaFocusState.mm:185`. The early-window veil still has no Ria type, so the veil is never reported; the stand-in and
 //! frame-hold facts come from the view's `StandIn` and `FrameHold`.
 
 use std::cell::{Cell, RefCell};

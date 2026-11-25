@@ -8,6 +8,8 @@
 //! Changes from Ardia:
 //! - The host supplies the weak registry instead of using a process-wide set.
 //! - The factory registers the view at creation. Ardia registers it when a tab attaches.
+//! - `attach_tab` is the part of `-[ArdiaWebView ensureTab]` that mounts a tab that already exists. The first-paint
+//!   hold, reveal and focus steps of `attach` are skipped until those modules are ported (#110).
 //! - `repaint` takes whether the window's neighbour pages are asleep from the caller
 //!   (`tabs::ardia_page_hooks`), where Ardia reads a file-level map of wake records. It leaves out the
 //!   leave-screen and frame-hold `holding` terms of `-[ArdiaWebView paints]`: neither exists in `State` yet.
@@ -19,16 +21,16 @@ use std::rc::{Rc, Weak as RcWeak};
 
 use objc2::rc::{Retained, Weak};
 use objc2::{DefinedClass, MainThreadMarker, MainThreadOnly, define_class, msg_send};
-use objc2_app_kit::NSView;
+use objc2_app_kit::{NSAutoresizingMaskOptions, NSView};
 use objc2_foundation::NSRect;
 
-use crate::core::bindings::Tab;
+use crate::core::bindings::{Adoption, Tab};
 use crate::diagnostics::ardia_field_timing;
 use crate::diagnostics::ardia_paint_probe::view_facts;
 use crate::diagnostics::ardia_paint_probe_math::View;
 use crate::windows::ardia_window_controller::Controller;
 
-use super::ardia_tab_lifecycle::TabLifecycle;
+use super::ardia_tab_registry::TabRegistry;
 use super::ardia_web_view_context_menu::ElementPick;
 use super::ardia_web_view_first_paint::FirstPaint;
 use super::ardia_web_view_focus::PageFocus;
@@ -42,6 +44,7 @@ use super::ardia_web_view_painting::{FrameHold, PaintingVisibility};
 use super::ardia_web_view_picture_in_picture::PictureInPicture;
 use super::ardia_web_view_reveals::Reveal;
 use super::ardia_web_view_stand_in::StandIn;
+use super::ardia_web_view_tab::{Attach, AttachStep, AttachedTab, StashedReports};
 
 #[derive(Default)]
 #[allow(
@@ -49,11 +52,10 @@ use super::ardia_web_view_stand_in::StandIn;
     reason = "#110: the modules read these fields once they are wired"
 )]
 struct State {
-    tab: Option<Retained<Tab>>,
+    attached: AttachedTab<NavigationReports>,
+    stashed: StashedReports<NavigationReports>,
     controller: RcWeak<Controller>,
-    life: TabLifecycle,
     requests: NavigationRequest,
-    reports: NavigationReports,
     first_paint: FirstPaint,
     frame_hold: FrameHold,
     stand_in: StandIn,
@@ -165,7 +167,7 @@ impl ArdiaWebView {
     /// window veil has no Ria type, so it is never up here.
     pub fn paint_facts(&self) -> View {
         let state = self.state();
-        let page = state.tab.as_ref().and_then(|tab| tab.view());
+        let page = state.attached.tab.as_ref().and_then(|tab| tab.view());
         view_facts(
             self,
             page.as_deref(),
@@ -197,9 +199,73 @@ impl ArdiaWebView {
         visibility.apply(self);
     }
 
+    /// `-[ArdiaWebView ensureTab]` for a tab that already exists (`ArdiaWebView+Tab.mm`): mount the tab's page in
+    /// this view, key the view in `registry` under `app_id`, and lay the page out. The steps that need the
+    /// unported first-paint, reveal and focus code are skipped (#110).
+    pub fn attach_tab(
+        &self,
+        tab: Retained<Tab>,
+        app_id: String,
+        registry: &RefCell<TabRegistry>,
+    ) -> Adoption {
+        // The steps repaint through `state`, so the attached tab is out of it while they run.
+        let (mut attached, mut stashed) = {
+            let mut state = self.state();
+            (
+                std::mem::take(&mut state.attached),
+                std::mem::take(&mut state.stashed),
+            )
+        };
+        let page_tab = tab.clone();
+        let adoption = attached.attach(
+            tab,
+            Attach {
+                host: self,
+                app_id,
+                window: None,
+                placement: None,
+                shown_early: false,
+                created: false,
+                temporary: false,
+                muted: false,
+                page_background: None,
+                contents_background: None,
+                page_color: None,
+            },
+            registry,
+            &mut stashed,
+            |_, _| {},
+            |step| {
+                if let AttachStep::LayoutAndPaint = step {
+                    if let Some(page) = page_tab.view() {
+                        page.setFrame(self.bounds());
+                        page.setAutoresizingMask(
+                            NSAutoresizingMaskOptions::ViewWidthSizable
+                                | NSAutoresizingMaskOptions::ViewHeightSizable,
+                        );
+                    }
+                    self.repaint(false);
+                }
+            },
+        );
+        let mut state = self.state();
+        state.attached = attached;
+        state.stashed = stashed;
+        adoption
+    }
+
+    /// Whether the view's tab has closed, or it has no tab.
+    pub fn tab_closed(&self) -> bool {
+        self.state()
+            .attached
+            .tab
+            .as_ref()
+            .is_none_or(|tab| tab.closed())
+    }
+
     /// `ArdiaWebViewsSetFieldTiming` for one view: tells the page script of its tab.
     pub fn send_field_timing(&self, on: bool) {
-        if let Some(tab) = &self.state().tab {
+        if let Some(tab) = &self.state().attached.tab {
             let json = if on {
                 r#"{"on":true}"#
             } else {

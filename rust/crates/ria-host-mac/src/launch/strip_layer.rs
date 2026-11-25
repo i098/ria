@@ -262,19 +262,28 @@ fn mark_active(previous: &[Row], next: &mut [Row]) {
 fn read_rows(host: &WindowHost, previous: &[Row]) -> Option<Vec<Row>> {
     let window = host.main()?;
     let profile = window.active_profile()?;
-    let mut registry = host.chrome().tab_registry().borrow_mut();
     let strips = host.strips().borrow();
     let mut rows = Vec::new();
     for tab in window.tabs_for_profile(&profile).iter() {
         if tab.closed() {
             continue;
         }
-        let key = match registry.app_tab_id(&tab).map(str::to_owned) {
+        let known = host
+            .chrome()
+            .tab_registry()
+            .borrow()
+            .app_tab_id(&tab)
+            .map(str::to_owned);
+        let key = match known {
             Some(key) => key,
             None => {
-                let Some(view) = tab.view() else { continue };
-                let key = format!("tab:{}", registry.browser_id(&tab));
-                registry.set_view(&tab, Some((&view, key.clone())));
+                let key = format!(
+                    "tab:{}",
+                    host.chrome().tab_registry().borrow_mut().browser_id(&tab)
+                );
+                if host.page_for(&tab, &key).is_none() {
+                    continue;
+                }
                 key
             }
         };
@@ -314,11 +323,9 @@ impl StripLayer {
         changed: ChangedFn,
     ) -> Result<Self, String> {
         let profile = core.active_profile().ok_or("the window has no profile")?;
-        let page = tab.view().ok_or("the launch tab has no view")?;
-        host.chrome()
-            .tab_registry()
-            .borrow_mut()
-            .set_view(tab, Some((&page, LAUNCH_KEY.into())));
+        let page = host
+            .page_for(tab, LAUNCH_KEY)
+            .ok_or("the launch tab has no view")?;
         let state = Rc::new(RefCell::new(StripState {
             strip: core.chrome_window_id_for_profile(&profile),
             rows: Vec::new(),
@@ -377,7 +384,9 @@ fn refresh(host: &WindowHost, surface: &Surface<StripState>, state: &Shared) {
             .tab_with_app_id(&row.key)
     });
     // The page slot shows the active tab, so a new or selected tab does not cover the strip.
-    if let Some(view) = page.and_then(|tab| tab.view()) {
+    if let Some((tab, key)) = page.zip(active.map(|row| row.key.as_str()))
+        && let Some(view) = host.page_for(&tab, key)
+    {
         surface.set_page(Some(&view));
     }
     if touched || rows != previous {
