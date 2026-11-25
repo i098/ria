@@ -5,6 +5,9 @@
 //! Omnibox input: URL fixup, spaced addresses, search URLs, paste handling, breadcrumbs and
 //! display URLs. The regexes of the original are spelled out as string scans: without the `u`
 //! flag their classes and case folding are ASCII, and `\s` is the JS whitespace set.
+//!
+//! Changes from Ardia: `fixup` and `spacedAddress` are split into helpers for the complexity
+//! gate with unchanged behavior.
 
 use std::collections::HashSet;
 use std::sync::LazyLock;
@@ -335,19 +338,7 @@ fn spaced_address(input: &str) -> Option<SpacedAddress> {
     if is_known_scheme(&name) || name == "javascript" {
         return None;
     }
-    let has_port = !host.port.is_empty();
-    let port: u32 = host.port.get(1..).and_then(|d| d.parse().ok()).unwrap_or(0);
-    if has_port && !(1..=65535).contains(&port) {
-        return None;
-    }
-    let dotted = name.contains('.') && !is_numeric(&name);
-    let ip = name.starts_with('[') || is_ipv4(&name);
-    let local = name == "localhost"
-        || ip
-        || (has_port && !(dotted && !is_local_host(&name) && (port == 80 || port == 443)));
-    if !dotted && !local {
-        return None;
-    }
+    let local = spaced_local_host(&name, host.port)?;
     let rest = &input[host.authority.len()..];
     let wiki = is_wiki_host(&name)
         && rest
@@ -358,6 +349,25 @@ fn spaced_address(input: &str) -> Option<SpacedAddress> {
         escaped: input.replace(' ', "%20"),
         certain: local || wiki || has_query_param(rest),
     })
+}
+
+/// The port and host checks of `spacedAddress`: `None` rejects the address, else whether the
+/// host is local.
+fn spaced_local_host(name: &str, port_text: &str) -> Option<bool> {
+    let has_port = !port_text.is_empty();
+    let port: u32 = port_text.get(1..).and_then(|d| d.parse().ok()).unwrap_or(0);
+    if has_port && !(1..=65535).contains(&port) {
+        return None;
+    }
+    let dotted = name.contains('.') && !is_numeric(name);
+    let ip = name.starts_with('[') || is_ipv4(name);
+    let local = name == "localhost"
+        || ip
+        || (has_port && !(dotted && !is_local_host(name) && (port == 80 || port == 443)));
+    if !dotted && !local {
+        return None;
+    }
+    Some(local)
 }
 
 /// `asciiLabel` (`omnibox.ts:102`).
@@ -465,6 +475,14 @@ fn fixup(raw: &str) -> Option<String> {
     if input.is_empty() || (input.contains(is_js_space) && !address_start) {
         return None;
     }
+    if let Some(url) = scheme_fixup(input, scheme) {
+        return Some(url);
+    }
+    host_fixup(input)
+}
+
+/// The `fixup` steps for a scheme or a file path; `None` when none of them applies.
+fn scheme_fixup(input: &str, scheme: Option<(&str, &str)>) -> Option<String> {
     if [
         "about",
         "data",
@@ -492,6 +510,11 @@ fn fixup(raw: &str) -> Option<String> {
     if input.starts_with('/') && !input.starts_with("//") {
         return Some(format!("file://{}", escape_spaces(input)));
     }
+    None
+}
+
+/// The `fixup` steps that read the host of an input without a scheme.
+fn host_fixup(input: &str) -> Option<String> {
     if !input.contains(['.', ':', '/', '?', '#', '[']) {
         return (input.to_lowercase() == "localhost").then(|| format!("http://{input}"));
     }
@@ -501,22 +524,33 @@ fn fixup(raw: &str) -> Option<String> {
     if numeric && !name.contains('.') {
         return None;
     }
-    let dotted = name.contains('.') && !numeric && !name.starts_with('[');
-    let tld = match name.rfind('.') {
-        Some(dot) if dotted => &name[dot + 1..],
-        _ => "",
-    };
     let rest = &input[host.authority.len()..];
-    let special = name == "localhost" || name.starts_with('[') || numeric;
     let proto = if is_local_host(&name) {
         "http"
     } else {
         "https"
     };
-    if special || (dotted && (known_tld(tld) || tld.starts_with("xn--"))) {
+    if is_bare_host(&name, numeric) {
         return Some(format!("{proto}://{input}"));
     }
-    let has_port = !host.port.is_empty();
+    port_or_path_fixup(input, rest, !host.port.is_empty(), proto)
+}
+
+/// Whether `fixup` takes the host `name` alone as an address: localhost, an IP, or a name with
+/// a known TLD.
+fn is_bare_host(name: &str, numeric: bool) -> bool {
+    let dotted = name.contains('.') && !numeric && !name.starts_with('[');
+    let tld = match name.rfind('.') {
+        Some(dot) if dotted => &name[dot + 1..],
+        _ => "",
+    };
+    let special = name == "localhost" || name.starts_with('[') || numeric;
+    special || (dotted && (known_tld(tld) || tld.starts_with("xn--")))
+}
+
+/// The last `fixup` step: a host with an unknown TLD is an address only with a port, a path
+/// ending in `/`, or two of port, path, query and fragment.
+fn port_or_path_fixup(input: &str, rest: &str, has_port: bool, proto: &str) -> Option<String> {
     if !has_port && !rest.contains(['/', '?', '#']) {
         return None;
     }

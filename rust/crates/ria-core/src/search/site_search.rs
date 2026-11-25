@@ -5,6 +5,9 @@
 //! Site search in the address bar: which engine, site, visited host or provider a typed word
 //! scopes the search to, the URL of a scoped search, and the Tab, space and Backspace keys that
 //! enter and leave a scope.
+//!
+//! Changes from Ardia: `findScope` is split into helpers for the complexity gate, with unchanged
+//! behavior.
 
 use std::sync::LazyLock;
 
@@ -278,22 +281,16 @@ pub fn find_scope(text: &str, sources: &ScopeSources) -> Option<SearchScope> {
     {
         return Some(engine_scope(e));
     }
-    for e in sources.engines.iter().filter(|e| !e.custom) {
-        let e_host = engine_host(&e.url);
-        if e.keyword.to_lowercase() == host || e_host == host || (long && t == site_label(&e_host))
-        {
-            return Some(engine_scope(e));
-        }
+    if let Some(e) = sources
+        .engines
+        .iter()
+        .filter(|e| !e.custom)
+        .find(|e| builtin_engine_matches(e, &t, &host, long))
+    {
+        return Some(engine_scope(e));
     }
     let sites = sources.sites.unwrap_or(&POPULAR_SITE_SEARCHES);
-    let site = sites.iter().find(|s| {
-        s.host == host
-            || host
-                .strip_suffix(s.host.as_str())
-                .is_some_and(|rest| rest.ends_with('.'))
-            || s.keyword.as_deref() == Some(t.as_str())
-            || (t == host && long && s.host.split('.').count() == 2 && site_label(&s.host) == t)
-    });
+    let site = sites.iter().find(|s| site_matches(s, &t, &host, long));
     if let Some(s) = site {
         return Some(SearchScope {
             kind: ScopeKind::Site,
@@ -312,6 +309,22 @@ pub fn find_scope(text: &str, sources: &ScopeSources) -> Option<SearchScope> {
         engine_id: None,
         provider_id: None,
     })
+}
+
+/// The built-in engine test of `findScope`: its keyword, its host, or, for a long word, its label.
+fn builtin_engine_matches(e: &SearchEngine, t: &str, host: &str, long: bool) -> bool {
+    let e_host = engine_host(&e.url);
+    e.keyword.to_lowercase() == host || e_host == host || (long && t == site_label(&e_host))
+}
+
+/// The site test of `findScope`: its host or a subdomain, its keyword, or its label.
+fn site_matches(s: &SiteSearch, t: &str, host: &str, long: bool) -> bool {
+    s.host == host
+        || host
+            .strip_suffix(s.host.as_str())
+            .is_some_and(|rest| rest.ends_with('.'))
+        || s.keyword.as_deref() == Some(t)
+        || (t == host && long && s.host.split('.').count() == 2 && site_label(&s.host) == t)
 }
 
 /// `engineScope` (`siteSearch.ts:91`).

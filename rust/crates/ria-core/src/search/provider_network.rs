@@ -3,6 +3,9 @@
 // This file is a Rust port of that file, with changes.
 
 //! Which provider endpoints Ria may call, and the approval key of a provider definition.
+//!
+//! Changes from Ardia: `plainAuthority` and the number formatting are split into helpers for
+//! the complexity gate, with unchanged behavior.
 
 use super::provider_rows::{JsValue, provider_url};
 
@@ -77,16 +80,21 @@ fn plain_authority(url: &str) -> Option<Authority<'_>> {
         Some((host, port)) => (host, Some(port)),
         None => (authority, None),
     };
-    if let Some(port) = port {
-        let valid = (1..=5).contains(&port.len())
-            && !port.starts_with('0')
-            && port.bytes().all(|b| b.is_ascii_digit())
-            && port.parse::<u32>().is_ok_and(|p| p <= 65535);
-        if !valid || port == if scheme == "https" { "443" } else { "80" } {
-            return None;
-        }
+    if let Some(port) = port
+        && !port_allowed(&scheme, port)
+    {
+        return None;
     }
     Some(Authority { scheme, host })
+}
+
+/// The port part of `plainAuthority`: 1 to 65535 without a leading zero, not the default port.
+fn port_allowed(scheme: &str, port: &str) -> bool {
+    let valid = (1..=5).contains(&port.len())
+        && !port.starts_with('0')
+        && port.bytes().all(|b| b.is_ascii_digit())
+        && port.parse::<u32>().is_ok_and(|p| p <= 65535);
+    valid && port != if scheme == "https" { "443" } else { "80" }
 }
 
 /// Port of `remoteRequestAllowed` (`providerNetwork.ts:31`): https to a public host, or, when
@@ -128,15 +136,20 @@ pub(crate) fn js_number_string(n: f64) -> String {
     } else if -6 < point && point <= 0 {
         format!("0.{}{digits}", "0".repeat((-point) as usize))
     } else {
-        let sign = if point > 0 { '+' } else { '-' };
-        let rest = if k > 1 {
-            format!(".{}", &digits[1..])
-        } else {
-            String::new()
-        };
-        format!("{}{rest}e{sign}{}", &digits[..1], (point - 1).abs())
+        js_exponent_form(&digits, point)
     };
     if n < 0.0 { format!("-{body}") } else { body }
+}
+
+/// The exponent form of `js_number_string` (`d.ddde±x`) for the decimal point at `point`.
+fn js_exponent_form(digits: &str, point: i32) -> String {
+    let sign = if point > 0 { '+' } else { '-' };
+    let rest = if digits.len() > 1 {
+        format!(".{}", &digits[1..])
+    } else {
+        String::new()
+    };
+    format!("{}{rest}e{sign}{}", &digits[..1], (point - 1).abs())
 }
 
 /// `JSON.stringify(text)`.

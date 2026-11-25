@@ -11,6 +11,9 @@
 //! engine. Here the parser counts the frames the source would use and gives `None` past
 //! `MAX_FRAMES`; V8 took 1500 nested parentheses (9000 frames) and failed at 3000 (18000), so the
 //! real limit lies between. Upgrade only if a caller needs the same limit as V8.
+//!
+//! Changes from Ardia: `tokenize`, `Parser::term`, `js_exp`, and `call` are split into helpers
+//! (`call` into a table) for the complexity gate, with unchanged behavior.
 
 use std::f64::consts::{E, PI};
 use std::sync::LazyLock;
@@ -93,43 +96,56 @@ fn number_end(chars: &[char], i: usize) -> Option<usize> {
     Some(end)
 }
 
+/// The `**` or single-character operator token at `i`, with its end.
+fn operator_token(chars: &[char], i: usize) -> Option<(Token, usize)> {
+    let c = chars[i];
+    if c == '*' && chars.get(i + 1) == Some(&'*') {
+        return Some((Token::Op('^'), i + 2));
+    }
+    if !"-+*/^%!(),×·÷−–°".contains(c) {
+        return None;
+    }
+    let op = match c {
+        '×' | '·' => '*',
+        '÷' => '/',
+        '−' | '–' => '-',
+        other => other,
+    };
+    Some((Token::Op(op), i + 1))
+}
+
+/// The identifier token (ASCII word, `π` or `τ`) at `i`, with its end.
+fn identifier_token(chars: &[char], i: usize) -> Option<(Token, usize)> {
+    let c = chars[i];
+    if c.is_ascii_alphabetic() {
+        let mut end = i + 1;
+        while end < chars.len() && chars[end].is_ascii_alphanumeric() {
+            end += 1;
+        }
+        let id = chars[i..end].iter().collect::<String>().to_lowercase();
+        return Some((Token::Id(id), end));
+    }
+    if is_pi(c) || is_tau(c) {
+        return Some((Token::Id(c.to_lowercase().collect()), i + 1));
+    }
+    None
+}
+
 fn tokenize(source: &str) -> Option<Vec<Token>> {
     let chars: Vec<char> = source.chars().collect();
     let mut tokens = Vec::new();
     let mut i = 0;
     while i < chars.len() {
-        let c = chars[i];
-        if is_js_space(c) {
+        if is_js_space(chars[i]) {
             i = skip_space(&chars, i);
         } else if let Some(end) = number_end(&chars, i) {
             let text: String = chars[i..end].iter().collect();
             tokens.push(Token::Num(text.parse().ok()?));
             i = end;
-        } else if c == '*' && chars.get(i + 1) == Some(&'*') {
-            tokens.push(Token::Op('^'));
-            i += 2;
-        } else if "-+*/^%!(),×·÷−–°".contains(c) {
-            tokens.push(Token::Op(match c {
-                '×' | '·' => '*',
-                '÷' => '/',
-                '−' | '–' => '-',
-                other => other,
-            }));
-            i += 1;
-        } else if c.is_ascii_alphabetic() {
-            let mut end = i + 1;
-            while end < chars.len() && chars[end].is_ascii_alphanumeric() {
-                end += 1;
-            }
-            tokens.push(Token::Id(
-                chars[i..end].iter().collect::<String>().to_lowercase(),
-            ));
-            i = end;
-        } else if is_pi(c) || is_tau(c) {
-            tokens.push(Token::Id(c.to_lowercase().collect()));
-            i += 1;
         } else {
-            return None;
+            let (token, end) = operator_token(&chars, i).or_else(|| identifier_token(&chars, i))?;
+            tokens.push(token);
+            i = end;
         }
     }
     Some(tokens)
@@ -179,6 +195,43 @@ fn js_round(x: f64) -> f64 {
     }
 }
 
+/// The `Math.exp` result for a large `|x|` (`hx >= 0x40862e42`), where fdlibm returns early.
+#[expect(clippy::excessive_precision, reason = "fdlibm constants as published")]
+fn exp_overflow(x: f64, hx: u32, negative: bool) -> Option<f64> {
+    if hx < 0x4086_2e42 {
+        return None;
+    }
+    if x.is_nan() {
+        return Some(x);
+    }
+    if x.is_infinite() {
+        return Some(if negative { 0.0 } else { x });
+    }
+    if x > 7.097_827_128_933_839_730_96e+02 {
+        return Some(f64::INFINITY);
+    }
+    if x < -7.451_332_191_019_411_084_20e+02 {
+        return Some(0.0);
+    }
+    None
+}
+
+/// `y * 2^k` as fdlibm scales the `Math.exp` result.
+#[expect(clippy::excessive_precision, reason = "fdlibm constants as published")]
+fn exp_scale(y: f64, k: i32) -> f64 {
+    let two_pow =
+        |k: i32| f64::from_bits(u64::from(0x3ff0_0000_i32.wrapping_add(k << 20) as u32) << 32);
+    if k >= -1021 {
+        if k == 1024 {
+            y * 2.0 * 8.988_465_674_311_579_539e307
+        } else {
+            y * two_pow(k)
+        }
+    } else {
+        y * two_pow(k + 1000) * 9.332_636_185_032_188_789_90e-302
+    }
+}
+
 /// `Math.exp` as V8 computes it (fdlibm `e_exp.c`): glibc's `exp` differs from it in the last bit.
 #[expect(
     clippy::excessive_precision,
@@ -199,19 +252,8 @@ fn js_exp(x: f64) -> f64 {
     let bits = x.to_bits();
     let negative = bits >> 63 == 1;
     let hx = ((bits >> 32) & 0x7fff_ffff) as u32;
-    if hx >= 0x4086_2e42 {
-        if x.is_nan() {
-            return x;
-        }
-        if x.is_infinite() {
-            return if negative { 0.0 } else { x };
-        }
-        if x > 7.097_827_128_933_839_730_96e+02 {
-            return f64::INFINITY;
-        }
-        if x < -7.451_332_191_019_411_084_20e+02 {
-            return 0.0;
-        }
+    if let Some(out) = exp_overflow(x, hx, negative) {
+        return out;
     }
     let (k, hi, lo, x) = if hx > 0x3fd6_2e42 {
         let (k, hi, lo) = if hx < 0x3ff0_a2b2 {
@@ -239,18 +281,7 @@ fn js_exp(x: f64) -> f64 {
     if k == 0 {
         return 1.0 - ((x * c) / (c - 2.0) - x);
     }
-    let y = 1.0 - ((lo - (x * c) / (2.0 - c)) - hi);
-    let two_pow =
-        |k: i32| f64::from_bits(u64::from(0x3ff0_0000_i32.wrapping_add(k << 20) as u32) << 32);
-    if k >= -1021 {
-        if k == 1024 {
-            y * 2.0 * 8.988_465_674_311_579_539e307
-        } else {
-            y * two_pow(k)
-        }
-    } else {
-        y * two_pow(k + 1000) * 9.332_636_185_032_188_789_90e-302
-    }
+    exp_scale(1.0 - ((lo - (x * c) / (2.0 - c)) - hi), k)
 }
 
 fn js_extreme(args: &[f64], want_min: bool) -> f64 {
@@ -271,36 +302,44 @@ fn js_extreme(args: &[f64], want_min: bool) -> f64 {
     out
 }
 
+/// The functions of one argument, by name.
+type UnaryFunction = (&'static str, fn(f64) -> f64);
+const UNARY_FUNCTIONS: [UnaryFunction; 19] = [
+    ("sqrt", f64::sqrt),
+    ("cbrt", f64::cbrt),
+    ("abs", f64::abs),
+    ("sin", f64::sin),
+    ("cos", f64::cos),
+    ("tan", f64::tan),
+    ("asin", f64::asin),
+    ("acos", f64::acos),
+    ("atan", f64::atan),
+    ("sinh", f64::sinh),
+    ("cosh", f64::cosh),
+    ("tanh", f64::tanh),
+    ("ln", f64::ln),
+    ("log2", f64::log2),
+    ("log10", f64::log10),
+    ("exp", js_exp),
+    ("floor", f64::floor),
+    ("ceil", f64::ceil),
+    ("round", js_round),
+];
+
 fn call(name: &str, args: &[f64]) -> f64 {
     let x = args.first().copied().unwrap_or(f64::NAN);
     match name {
-        "sqrt" => x.sqrt(),
-        "cbrt" => x.cbrt(),
-        "abs" => x.abs(),
-        "sin" => x.sin(),
-        "cos" => x.cos(),
-        "tan" => x.tan(),
-        "asin" => x.asin(),
-        "acos" => x.acos(),
-        "atan" => x.atan(),
-        "sinh" => x.sinh(),
-        "cosh" => x.cosh(),
-        "tanh" => x.tanh(),
-        "ln" => x.ln(),
         "log" => match args.get(1) {
             None => x.log10(),
             Some(base) => x.ln() / base.ln(),
         },
-        "log2" => x.log2(),
-        "log10" => x.log10(),
-        "exp" => js_exp(x),
-        "floor" => x.floor(),
-        "ceil" => x.ceil(),
-        "round" => js_round(x),
         "min" => js_extreme(args, true),
         "max" => js_extreme(args, false),
         "pow" => js_pow(x, args.get(1).copied().unwrap_or(f64::NAN)),
-        _ => f64::NAN,
+        _ => UNARY_FUNCTIONS
+            .iter()
+            .find(|(n, _)| *n == name)
+            .map_or(f64::NAN, |(_, f)| f(x)),
     }
 }
 
@@ -373,15 +412,19 @@ impl Parser {
         Ok(value)
     }
 
+    /// `*`, `/`, `mod`, `of`, or `x` at the cursor.
+    fn at_multiplicative(&self) -> bool {
+        self.is_op('*', 0)
+            || self.is_op('/', 0)
+            || self.is_id("mod", 0)
+            || self.is_id("of", 0)
+            || self.is_id("x", 0)
+    }
+
     fn term(&mut self) -> Parsed {
         let mut value = self.unary()?;
         loop {
-            if self.is_op('*', 0)
-                || self.is_op('/', 0)
-                || self.is_id("mod", 0)
-                || self.is_id("of", 0)
-                || self.is_id("x", 0)
-            {
+            if self.at_multiplicative() {
                 let divide = self.is_op('/', 0);
                 let modulo = self.is_id("mod", 0);
                 self.i += 1;

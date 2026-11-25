@@ -168,21 +168,7 @@ impl<'a> Scanner<'a> {
             return Token::End;
         }
         if (u16::from(b'0')..=u16::from(b'9')).contains(&ch) {
-            let (mut n, mut digits) = (0i64, 0usize);
-            while self.ch() == u16::from(b'0') {
-                self.pos += 1;
-            }
-            while (u16::from(b'0')..=u16::from(b'9')).contains(&self.ch()) {
-                if digits < MAX_SIGNIFICANT_DIGITS {
-                    n = n * 10 + i64::from(self.ch() - u16::from(b'0'));
-                }
-                digits += 1;
-                self.pos += 1;
-            }
-            return Token::Number {
-                n,
-                len: self.pos - start,
-            };
+            return self.scan_number(start);
         }
         if let Some(c) = [':', '-', '+', '.', ')']
             .into_iter()
@@ -192,39 +178,65 @@ impl<'a> Scanner<'a> {
             return Token::Symbol(c);
         }
         if self.is_word_char() {
-            let (mut prefix, mut len) = ([0u8; 3], 0usize);
-            while self.is_word_char() {
-                if len < 3 {
-                    // `AsciiAlphaToLower`: a unit above 0xff never equals a table letter.
-                    prefix[len] = u8::try_from(self.ch() | 0x20).unwrap_or(0xff);
-                }
-                self.pos += 1;
-                len += 1;
-            }
-            let (kind, value) = lookup(&prefix, len);
-            return Token::Keyword { kind, value, len };
+            return self.scan_word();
         }
         if self.is_space() {
             self.pos += 1;
             return Token::WhiteSpace;
         }
         if ch == u16::from(b'(') {
-            let mut balance = 0;
-            loop {
-                match self.ch() {
-                    c if c == u16::from(b')') => balance -= 1,
-                    c if c == u16::from(b'(') => balance += 1,
-                    _ => {}
-                }
-                self.pos += 1;
-                if balance <= 0 || self.ch() == 0 {
-                    break;
-                }
-            }
+            self.skip_parenthesized();
             return Token::Unknown;
         }
         self.pos += 1;
         Token::Unknown
+    }
+
+    fn scan_number(&mut self, start: usize) -> Token {
+        let (mut n, mut digits) = (0i64, 0usize);
+        while self.ch() == u16::from(b'0') {
+            self.pos += 1;
+        }
+        while (u16::from(b'0')..=u16::from(b'9')).contains(&self.ch()) {
+            if digits < MAX_SIGNIFICANT_DIGITS {
+                n = n * 10 + i64::from(self.ch() - u16::from(b'0'));
+            }
+            digits += 1;
+            self.pos += 1;
+        }
+        Token::Number {
+            n,
+            len: self.pos - start,
+        }
+    }
+
+    fn scan_word(&mut self) -> Token {
+        let (mut prefix, mut len) = ([0u8; 3], 0usize);
+        while self.is_word_char() {
+            if len < 3 {
+                // `AsciiAlphaToLower`: a unit above 0xff never equals a table letter.
+                prefix[len] = u8::try_from(self.ch() | 0x20).unwrap_or(0xff);
+            }
+            self.pos += 1;
+            len += 1;
+        }
+        let (kind, value) = lookup(&prefix, len);
+        Token::Keyword { kind, value, len }
+    }
+
+    fn skip_parenthesized(&mut self) {
+        let mut balance = 0;
+        loop {
+            match self.ch() {
+                c if c == u16::from(b')') => balance -= 1,
+                c if c == u16::from(b'(') => balance += 1,
+                _ => {}
+            }
+            self.pos += 1;
+            if balance <= 0 || self.ch() == 0 {
+                break;
+            }
+        }
     }
 
     fn peek(&self) -> Token {
@@ -425,32 +437,8 @@ fn milliseconds(n: i64, len: usize) -> i64 {
 
 /// `ParseES5DateTime`: the token the legacy parser starts with, or `Invalid`.
 fn parse_es5(s: &mut Scanner, day: &mut Day, time: &mut Time, zone: &mut Zone) -> Token {
-    if s.peek().is_sign() {
-        let sign_token = s.next();
-        if !s.peek().is_fixed_number(6) {
-            return sign_token;
-        }
-        let year = s.next().number();
-        if sign_token.sign() < 0 && year == 0 {
-            return sign_token;
-        }
-        day.add(sign_token.sign() * year);
-    } else if s.peek().is_fixed_number(4) {
-        day.add(s.next().number());
-    } else {
-        return s.next();
-    }
-    if s.skip_symbol('-') {
-        if !s.peek().is_fixed_number(2) || !between(s.peek().number(), 1, 12) {
-            return s.next();
-        }
-        day.add(s.next().number());
-        if s.skip_symbol('-') {
-            if !s.peek().is_fixed_number(2) || !between(s.peek().number(), 1, 31) {
-                return s.next();
-            }
-            day.add(s.next().number());
-        }
+    if let Err(token) = es5_date(s, day) {
+        return token;
     }
     let is_t = matches!(
         s.peek(),
@@ -463,70 +451,121 @@ fn parse_es5(s: &mut Scanner, day: &mut Day, time: &mut Time, zone: &mut Zone) -
         if s.peek() != Token::End {
             return s.next();
         }
-    } else {
-        s.next();
-        let hour_is_24 = s.peek().number() == 24;
-        let two =
-            |s: &Scanner, hi: i64| s.peek().is_fixed_number(2) && between(s.peek().number(), 0, hi);
-        if !two(s, 24) {
-            return Token::Invalid;
-        }
-        time.add(s.next().number());
-        if !s.skip_symbol(':') {
-            return Token::Invalid;
-        }
-        if !two(s, 59) || (hour_is_24 && s.peek().number() > 0) {
-            return Token::Invalid;
-        }
-        time.add(s.next().number());
-        if s.skip_symbol(':') {
-            if !two(s, 59) || (hour_is_24 && s.peek().number() > 0) {
-                return Token::Invalid;
-            }
-            time.add(s.next().number());
-            if s.skip_symbol('.') {
-                if !s.peek().is_number() || (hour_is_24 && s.peek().number() > 0) {
-                    return Token::Invalid;
-                }
-                let Token::Number { n, len } = s.next() else {
-                    return Token::Invalid;
-                };
-                time.add(milliseconds(n, len));
-            }
-        }
-        if s.peek().is_keyword_z() {
-            s.next();
-            zone.set(0);
-        } else if s.peek().is_sign() {
-            zone.sign = s.next().sign();
-            if s.peek().is_fixed_number(4) {
-                let hour_min = s.next().number();
-                let (hour, min) = (hour_min / 100, hour_min % 100);
-                if !between(hour, 0, 23) || !between(min, 0, 59) {
-                    return Token::Invalid;
-                }
-                zone.hour = hour;
-                zone.minute = min;
-            } else {
-                if !two(s, 23) {
-                    return Token::Invalid;
-                }
-                zone.hour = s.next().number();
-                if !s.skip_symbol(':') || !two(s, 59) {
-                    return Token::Invalid;
-                }
-                zone.minute = s.next().number();
-            }
-        }
-        if s.peek() != Token::End {
-            return Token::Invalid;
-        }
+    } else if let Err(token) = es5_time(s, time, zone) {
+        return token;
     }
     if zone.is_empty() && time.index == 0 {
         zone.set(0);
     }
     day.iso = true;
     Token::End
+}
+
+/// The year, month and day of `parse_es5`; `Err` holds the token it returns early.
+fn es5_date(s: &mut Scanner, day: &mut Day) -> Result<(), Token> {
+    es5_year(s, day)?;
+    if s.skip_symbol('-') {
+        if !s.peek().is_fixed_number(2) || !between(s.peek().number(), 1, 12) {
+            return Err(s.next());
+        }
+        day.add(s.next().number());
+        if s.skip_symbol('-') {
+            if !s.peek().is_fixed_number(2) || !between(s.peek().number(), 1, 31) {
+                return Err(s.next());
+            }
+            day.add(s.next().number());
+        }
+    }
+    Ok(())
+}
+
+fn es5_year(s: &mut Scanner, day: &mut Day) -> Result<(), Token> {
+    if s.peek().is_sign() {
+        let sign_token = s.next();
+        if !s.peek().is_fixed_number(6) {
+            return Err(sign_token);
+        }
+        let year = s.next().number();
+        if sign_token.sign() < 0 && year == 0 {
+            return Err(sign_token);
+        }
+        day.add(sign_token.sign() * year);
+    } else if s.peek().is_fixed_number(4) {
+        day.add(s.next().number());
+    } else {
+        return Err(s.next());
+    }
+    Ok(())
+}
+
+/// Whether the next token is a two-digit number in `0..=hi`.
+fn two_digits(s: &Scanner, hi: i64) -> bool {
+    s.peek().is_fixed_number(2) && between(s.peek().number(), 0, hi)
+}
+
+/// The part of `parse_es5` after `T`; `Err` holds the token it returns early.
+fn es5_time(s: &mut Scanner, time: &mut Time, zone: &mut Zone) -> Result<(), Token> {
+    s.next();
+    let hour_is_24 = s.peek().number() == 24;
+    if !two_digits(s, 24) {
+        return Err(Token::Invalid);
+    }
+    time.add(s.next().number());
+    if !s.skip_symbol(':') {
+        return Err(Token::Invalid);
+    }
+    if !two_digits(s, 59) || (hour_is_24 && s.peek().number() > 0) {
+        return Err(Token::Invalid);
+    }
+    time.add(s.next().number());
+    if s.skip_symbol(':') {
+        if !two_digits(s, 59) || (hour_is_24 && s.peek().number() > 0) {
+            return Err(Token::Invalid);
+        }
+        time.add(s.next().number());
+        if s.skip_symbol('.') {
+            if !s.peek().is_number() || (hour_is_24 && s.peek().number() > 0) {
+                return Err(Token::Invalid);
+            }
+            let Token::Number { n, len } = s.next() else {
+                return Err(Token::Invalid);
+            };
+            time.add(milliseconds(n, len));
+        }
+    }
+    es5_zone(s, zone)?;
+    if s.peek() != Token::End {
+        return Err(Token::Invalid);
+    }
+    Ok(())
+}
+
+fn es5_zone(s: &mut Scanner, zone: &mut Zone) -> Result<(), Token> {
+    if s.peek().is_keyword_z() {
+        s.next();
+        zone.set(0);
+    } else if s.peek().is_sign() {
+        zone.sign = s.next().sign();
+        if s.peek().is_fixed_number(4) {
+            let hour_min = s.next().number();
+            let (hour, min) = (hour_min / 100, hour_min % 100);
+            if !between(hour, 0, 23) || !between(min, 0, 59) {
+                return Err(Token::Invalid);
+            }
+            zone.hour = hour;
+            zone.minute = min;
+        } else {
+            if !two_digits(s, 23) {
+                return Err(Token::Invalid);
+            }
+            zone.hour = s.next().number();
+            if !s.skip_symbol(':') || !two_digits(s, 59) {
+                return Err(Token::Invalid);
+            }
+            zone.minute = s.next().number();
+        }
+    }
+    Ok(())
 }
 
 /// `DateParser::Parse` and `ParseDateTimeString`: the time value in ms, or `None` for NaN.
@@ -543,86 +582,132 @@ pub fn parse_date(text: &str) -> Option<f64> {
         match token {
             Token::Number { n, .. } => {
                 has_number = true;
-                if s.skip_symbol(':') {
-                    if s.skip_symbol(':') {
-                        if time.index != 0 {
-                            return None;
-                        }
-                        time.add(n);
-                        time.add(0);
-                    } else {
-                        if !time.add(n) {
-                            return None;
-                        }
-                        if s.peek().is_symbol('.') {
-                            s.next();
-                        }
-                    }
-                } else if s.skip_symbol('.') && time.is_expecting(n) {
-                    time.add(n);
-                    let Token::Number { n: ms, len } = s.peek() else {
-                        return None;
-                    };
-                    s.next();
-                    time.add_final(milliseconds(ms, len));
-                } else if zone.is_expecting(n) {
-                    zone.minute = n;
-                } else if time.is_expecting(n) {
-                    time.add_final(n);
-                    let peek = s.peek();
-                    if !(peek == Token::End
-                        || peek == Token::WhiteSpace
-                        || peek.is_keyword_z()
-                        || peek.is_sign())
-                    {
-                        return None;
-                    }
-                } else {
-                    if !day.add(n) {
-                        return None;
-                    }
-                    s.skip_symbol('-');
-                }
+                legacy_number(&mut s, n, &mut day, &mut time, &mut zone)?;
             }
-            Token::Keyword { kind, value, .. } => match kind {
-                Keyword::AmPm if time.index != 0 => time.hour_offset = value,
-                Keyword::Month => {
-                    day.named_month = Some(value);
-                    s.skip_symbol('-');
-                }
-                Keyword::Zone if has_number => zone.set(value),
-                _ => {
-                    if has_number || s.peek().is_number() {
-                        return None;
-                    }
-                }
-            },
+            Token::Keyword { kind, value, .. } => {
+                legacy_keyword(
+                    &mut s, kind, value, has_number, &mut day, &mut time, &mut zone,
+                )?;
+            }
             t if t.is_sign() && (zone.is_utc() || time.index != 0) => {
                 zone.sign = t.sign();
-                let (mut n, mut len) = (0, 0);
-                if let Token::Number { n: v, len: l } = s.peek() {
-                    s.next();
-                    (n, len) = (v, l);
-                }
                 has_number = true;
-                if s.peek().is_symbol(':') {
-                    zone.hour = n;
-                    zone.minute = NONE;
-                } else if len == 1 || len == 2 {
-                    zone.hour = n;
-                    zone.minute = 0;
-                } else if len == 3 || len == 4 {
-                    zone.hour = n / 100;
-                    zone.minute = n % 100;
-                } else {
-                    return None;
-                }
+                legacy_offset(&mut s, &mut zone)?;
             }
             t if (t.is_sign() || t.is_symbol(')')) && has_number => return None,
             _ => {}
         }
         token = s.next();
     }
+    time_value(&mut day, &mut time, &zone)
+}
+
+/// A number token of the legacy format; `None` means the date is NaN.
+fn legacy_number(
+    s: &mut Scanner,
+    n: i64,
+    day: &mut Day,
+    time: &mut Time,
+    zone: &mut Zone,
+) -> Option<()> {
+    if s.skip_symbol(':') {
+        legacy_clock(s, n, time)?;
+    } else if s.skip_symbol('.') && time.is_expecting(n) {
+        time.add(n);
+        let Token::Number { n: ms, len } = s.peek() else {
+            return None;
+        };
+        s.next();
+        time.add_final(milliseconds(ms, len));
+    } else if zone.is_expecting(n) {
+        zone.minute = n;
+    } else if time.is_expecting(n) {
+        time.add_final(n);
+        let peek = s.peek();
+        if !(peek == Token::End
+            || peek == Token::WhiteSpace
+            || peek.is_keyword_z()
+            || peek.is_sign())
+        {
+            return None;
+        }
+    } else {
+        if !day.add(n) {
+            return None;
+        }
+        s.skip_symbol('-');
+    }
+    Some(())
+}
+
+/// A number followed by `:`, which `legacy_number` skipped already.
+fn legacy_clock(s: &mut Scanner, n: i64, time: &mut Time) -> Option<()> {
+    if s.skip_symbol(':') {
+        if time.index != 0 {
+            return None;
+        }
+        time.add(n);
+        time.add(0);
+    } else {
+        if !time.add(n) {
+            return None;
+        }
+        if s.peek().is_symbol('.') {
+            s.next();
+        }
+    }
+    Some(())
+}
+
+fn legacy_keyword(
+    s: &mut Scanner,
+    kind: Keyword,
+    value: i64,
+    has_number: bool,
+    day: &mut Day,
+    time: &mut Time,
+    zone: &mut Zone,
+) -> Option<()> {
+    match kind {
+        Keyword::AmPm if time.index != 0 => time.hour_offset = value,
+        Keyword::Month => {
+            day.named_month = Some(value);
+            s.skip_symbol('-');
+        }
+        Keyword::Zone if has_number => zone.set(value),
+        _ => {
+            if has_number || s.peek().is_number() {
+                return None;
+            }
+        }
+    }
+    Some(())
+}
+
+/// The numeral after a sign token that starts a zone offset.
+fn legacy_offset(s: &mut Scanner, zone: &mut Zone) -> Option<()> {
+    let (mut n, mut len) = (0, 0);
+    if let Token::Number { n: v, len: l } = s.peek() {
+        s.next();
+        (n, len) = (v, l);
+    }
+    if s.peek().is_symbol(':') {
+        zone.hour = n;
+        zone.minute = NONE;
+    } else if len == 1 || len == 2 {
+        zone.hour = n;
+        zone.minute = 0;
+    } else if len == 3 || len == 4 {
+        zone.hour = n / 100;
+        zone.minute = n % 100;
+    } else {
+        return None;
+    }
+    Some(())
+}
+
+/// `MakeDate` from the parsed parts, minus the zone offset.
+fn time_value(day: &mut Day, time: &mut Time, zone: &Zone) -> Option<f64> {
     let [year, month, d] = day.write()?;
     let [hour, minute, second, ms] = time.write()?;
     let offset = zone.write().ok()?;

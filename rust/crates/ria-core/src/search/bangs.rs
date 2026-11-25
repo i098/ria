@@ -262,41 +262,8 @@ impl<'a> JsonParser<'a> {
         let mut stack: Vec<Frame> = Vec::new();
         'produce: loop {
             let mut value = loop {
-                self.skip_whitespace();
-                match self.peek() {
-                    Some(b'"') => {
-                        self.at += 1;
-                        break Json::String(self.string()?);
-                    }
-                    Some(b'-' | b'0'..=b'9') => break Json::Number(self.number()?),
-                    Some(b'{') => {
-                        self.at += 1;
-                        if self.check(b'}') {
-                            break Json::Object(Vec::new());
-                        }
-                        let key = self.key("Expected property name or '}'")?;
-                        stack.push(Frame::Object(Vec::new(), key));
-                    }
-                    Some(b'[') => {
-                        self.at += 1;
-                        if self.check(b']') {
-                            break Json::Array(Vec::new());
-                        }
-                        stack.push(Frame::Array(Vec::new()));
-                    }
-                    Some(b't') => {
-                        self.literal("true")?;
-                        break Json::Bool(true);
-                    }
-                    Some(b'f') => {
-                        self.literal("false")?;
-                        break Json::Bool(false);
-                    }
-                    Some(b'n') => {
-                        self.literal("null")?;
-                        break Json::Null;
-                    }
-                    _ => return Err(self.unexpected()),
+                if let Some(value) = self.open_value(&mut stack)? {
+                    break value;
                 }
             };
             loop {
@@ -329,6 +296,48 @@ impl<'a> JsonParser<'a> {
                 }
             }
         }
+    }
+
+    /// One step of `parse`: a whole scalar or empty container, or `None` after it pushed the frame
+    /// of a container that has members.
+    fn open_value(&mut self, stack: &mut Vec<Frame>) -> Result<Option<Json>, JsonError> {
+        self.skip_whitespace();
+        match self.peek() {
+            Some(b'"') => {
+                self.at += 1;
+                return Ok(Some(Json::String(self.string()?)));
+            }
+            Some(b'-' | b'0'..=b'9') => return Ok(Some(Json::Number(self.number()?))),
+            Some(b'{') => {
+                self.at += 1;
+                if self.check(b'}') {
+                    return Ok(Some(Json::Object(Vec::new())));
+                }
+                let key = self.key("Expected property name or '}'")?;
+                stack.push(Frame::Object(Vec::new(), key));
+            }
+            Some(b'[') => {
+                self.at += 1;
+                if self.check(b']') {
+                    return Ok(Some(Json::Array(Vec::new())));
+                }
+                stack.push(Frame::Array(Vec::new()));
+            }
+            Some(b't') => {
+                self.literal("true")?;
+                return Ok(Some(Json::Bool(true)));
+            }
+            Some(b'f') => {
+                self.literal("false")?;
+                return Ok(Some(Json::Bool(false)));
+            }
+            Some(b'n') => {
+                self.literal("null")?;
+                return Ok(Some(Json::Null));
+            }
+            _ => return Err(self.unexpected()),
+        }
+        Ok(None)
     }
 
     fn check_end(&mut self) -> bool {
@@ -419,32 +428,38 @@ impl<'a> JsonParser<'a> {
                 }
                 Some(b'\\') => {
                     self.at += 1;
-                    let Some(c) = self.text[self.at..].chars().next() else {
-                        return Err(self.unexpected());
-                    };
-                    let plain = match c {
-                        '"' | '\\' | '/' => c,
-                        'b' => '\u{8}',
-                        'f' => '\u{c}',
-                        'n' => '\n',
-                        'r' => '\r',
-                        't' => '\t',
-                        'u' => {
-                            let unit = self.unicode_escape()?;
-                            push_unit(&mut out, &mut high, unit);
-                            self.at += 1;
-                            continue;
-                        }
-                        c if u32::from(c) > 0xff => return Err(self.unexpected()),
-                        _ => return Err(self.error("Bad escaped character")),
-                    };
-                    flush_high(&mut out, &mut high);
-                    out.push(plain);
-                    self.at += 1;
+                    self.escape(&mut out, &mut high)?;
                 }
                 Some(_) => return Err(self.error("Bad control character in string literal")),
             }
         }
+    }
+
+    /// The escape after a `\` in `string`; leaves `at` after it.
+    fn escape(&mut self, out: &mut String, high: &mut Option<u16>) -> Result<(), JsonError> {
+        let Some(c) = self.text[self.at..].chars().next() else {
+            return Err(self.unexpected());
+        };
+        let plain = match c {
+            '"' | '\\' | '/' => c,
+            'b' => '\u{8}',
+            'f' => '\u{c}',
+            'n' => '\n',
+            'r' => '\r',
+            't' => '\t',
+            'u' => {
+                let unit = self.unicode_escape()?;
+                push_unit(out, high, unit);
+                self.at += 1;
+                return Ok(());
+            }
+            c if u32::from(c) > 0xff => return Err(self.unexpected()),
+            _ => return Err(self.error("Bad escaped character")),
+        };
+        flush_high(out, high);
+        out.push(plain);
+        self.at += 1;
+        Ok(())
     }
 
     /// The four hex digits after `\u`; leaves `at` on the last one.

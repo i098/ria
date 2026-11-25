@@ -8,6 +8,9 @@
 //! The original keeps the chain in a module variable and compares pools by identity; here
 //! `MatchedChain` is a value that the caller owns, and `P` compares pools (an id, or a
 //! pointer wrapper). `C` is the `Candidate` of `candidatePool.ts`, which another module ports.
+//!
+//! Changes from Ardia: `match_score` and `match_score_word` are split into helpers for the
+//! complexity gate, with unchanged behavior.
 
 use super::js_len;
 use super::page_text::PageText;
@@ -62,38 +65,27 @@ pub fn parse_query(q: &str, tokens: &[&str]) -> Query {
     }
 }
 
-/// Port of `matchScore` (`pageMatch.ts:26`).
-pub fn match_score(t: &mut PageText, query: &Query) -> f64 {
+/// The `matchScore` points for where `q` falls in a shown text that has a blank.
+fn shown_score(shown: &str, query: &Query) -> f64 {
     let q = query.q.as_str();
-    if !t.shown_lower.contains(&query.needle) && !t.title_lower.contains(&query.needle) {
-        return 0.0;
+    if shown.starts_with(q) {
+        100.0
+    } else if query
+        .segment_starts
+        .as_ref()
+        .is_some_and(|(a, b)| shown.contains(a) || shown.contains(b))
+    {
+        60.0
+    } else if shown.contains(q) {
+        30.0
+    } else {
+        0.0
     }
+}
+
+/// The `matchScore` points when every token matches somewhere, else `0`.
+fn tokens_score(t: &mut PageText, query: &Query) -> f64 {
     let mut s = 0.0;
-    let blank = *t
-        .shown_blank
-        .get_or_insert_with(|| t.shown_lower.contains(is_js_space));
-    if blank {
-        let shown = &t.shown_lower;
-        if shown.starts_with(q) {
-            s = 100.0;
-        } else if query
-            .segment_starts
-            .as_ref()
-            .is_some_and(|(a, b)| shown.contains(a) || shown.contains(b))
-        {
-            s = 60.0;
-        } else if shown.contains(q) {
-            s = 30.0;
-        }
-    }
-    match t.title_lower.find(q) {
-        Some(0) => s += 40.0,
-        Some(_) => s += 20.0,
-        None => {}
-    }
-    if s > 0.0 {
-        return s;
-    }
     for token in &query.tokens {
         if token.word && t.title_words.contains(&token.spaced) {
             s += 15.0;
@@ -108,6 +100,30 @@ pub fn match_score(t: &mut PageText, query: &Query) -> f64 {
         }
     }
     s
+}
+
+/// Port of `matchScore` (`pageMatch.ts:26`).
+pub fn match_score(t: &mut PageText, query: &Query) -> f64 {
+    let q = query.q.as_str();
+    if !t.shown_lower.contains(&query.needle) && !t.title_lower.contains(&query.needle) {
+        return 0.0;
+    }
+    let mut s = 0.0;
+    let blank = *t
+        .shown_blank
+        .get_or_insert_with(|| t.shown_lower.contains(is_js_space));
+    if blank {
+        s = shown_score(&t.shown_lower, query);
+    }
+    match t.title_lower.find(q) {
+        Some(0) => s += 40.0,
+        Some(_) => s += 20.0,
+        None => {}
+    }
+    if s > 0.0 {
+        return s;
+    }
+    tokens_score(t, query)
 }
 
 /// Port of `matchScoreWord` (`pageMatch.ts:51`).
@@ -134,16 +150,22 @@ pub fn match_score_word(t: &PageText, query: &Query) -> f64 {
         }
         None => {}
     }
+    s + title_word_score(t, query, ti)
+}
+
+/// The `matchScoreWord` points for the title, given where `q` falls in it.
+fn title_word_score(t: &PageText, query: &Query, ti: Option<usize>) -> f64 {
     if ti == Some(0) {
-        s += 40.0;
-    } else if if js_len(q) >= 2 {
+        40.0
+    } else if if js_len(&query.q) >= 2 {
         ti.is_some()
     } else {
         query.word && t.title_words.contains(&query.spaced)
     } {
-        s += 20.0;
+        20.0
+    } else {
+        0.0
     }
-    s
 }
 
 /// One remembered query result.
