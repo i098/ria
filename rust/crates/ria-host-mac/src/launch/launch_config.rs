@@ -9,9 +9,13 @@
 //!   whether the volume ignores case.
 //! - A switch cache that cannot be read from the admitted directory turns every switch without an override off.
 //!   A missing cache still leaves the defaults.
-//! - A scratch data directory goes to the engine as `/.vol/<device>/<inode>` of the admitted directory, so the
-//!   engine opens that directory even if the path is swapped later. A normal launch passes no data directory, so
-//!   the engine opens the default path itself; that gap stays open.
+//! - The engine gets the profile at the normal data path plus `Chromium`, and an isolated launch also passes
+//!   the admitted directory as `/.vol/<device>/<inode>` for `--ardia-data-dir`. A swap of the path after
+//!   admission cannot redirect the scratch data argument.
+//! - After Chromium opens the profile, Ria checks the profile path again.
+//!   Ria also requires the `SingletonLock` in the admitted `Chromium` directory to name this process.
+//!   If the profile path changed, these checks reject the launch before the first window opens.
+//!   Chromium can still open the replacement path before these checks.
 
 use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
@@ -229,10 +233,14 @@ impl LaunchConfig {
         &self.data_directory
     }
 
-    /// The data directory as the engine opens it: named by device and inode of the admitted directory,
-    /// so a swap of the path after admission cannot redirect the engine.
-    fn handoff_directory(&self) -> io::Result<PathBuf> {
+    /// The identity path for the isolated launch's `--ardia-data-dir`, not Chromium's `--user-data-dir`.
+    pub(super) fn handoff_directory(&self) -> io::Result<PathBuf> {
         profile::identity_path(&self.data_handle)
+    }
+
+    /// Requires the engine's singleton lock in the admitted directory to name this process.
+    pub(super) fn check_singleton(&self) -> io::Result<()> {
+        profile::check_singleton(&self.data_handle)
     }
 
     pub(super) fn check_profile_directory(&self) -> io::Result<()> {

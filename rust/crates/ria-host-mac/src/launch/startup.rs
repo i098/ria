@@ -251,12 +251,14 @@ mod tests {
             assert!(argv.contains(&"--use-mock-keychain"));
             assert!(argv.iter().all(|arg| !arg.starts_with("--type")));
             assert!(!argv.contains(&"--remote-allow-origins=*"));
-            assert_eq!(
-                argv.iter()
-                    .filter(|arg| arg.starts_with("--user-data-dir="))
-                    .count(),
-                1
-            );
+            let profile: Vec<_> = argv
+                .iter()
+                .filter(|arg| arg.starts_with("--user-data-dir="))
+                .collect();
+            assert_eq!(profile.len(), 1);
+            assert!(profile[0].starts_with("--user-data-dir="));
+            assert!(!profile[0].starts_with("--user-data-dir=/.vol/"));
+            assert!(profile[0].ends_with("/Chromium"));
             assert!(!argv.iter().any(|arg| arg.contains("foreign")));
             assert!(argv.ends_with(&["--", "--disable-features=Positional"]));
             let debugger: Vec<_> = argv

@@ -84,8 +84,8 @@ fn run_in_pool(mtm: MainThreadMarker, observer: Observer) -> io::Result<i32> {
     )?;
     let argv = startup::engine_arguments(&config, &executable, std::env::args().skip(1))?;
     if !config.isolated {
-        let chromium = config.data_directory().join("Chromium");
         config.check_profile_directory()?;
+        let chromium = config.data_directory().join("Chromium");
         ria_engine::domains::browser::native_messaging::sync_hosts(&chromium);
     }
     let session = SavedSession::read(&config);
@@ -173,6 +173,9 @@ impl Runtime {
             return self.fail("engine did not become available");
         };
         if self.config.check_profile_directory().is_err() {
+            return self.fail("launch profile directory changed");
+        }
+        if self.config.check_singleton().is_err() {
             return self.fail("launch profile directory changed");
         }
         let directory = self

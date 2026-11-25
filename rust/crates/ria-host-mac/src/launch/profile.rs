@@ -199,6 +199,37 @@ pub(super) fn directory_exists(path: &Path) -> io::Result<bool> {
     }
 }
 
+/// Requires the engine's singleton lock to sit in the admitted `Chromium` directory and name this process.
+/// Use the admitted handle because Chromium writes the lock in the directory it opened.
+pub(super) fn check_singleton(data: &File) -> io::Result<()> {
+    let root = open_child(data, "Chromium".as_ref())?;
+    let name = CString::new("SingletonLock")?;
+    let mut buffer = vec![0u8; libc::PATH_MAX as usize];
+    let len = unsafe {
+        libc::readlinkat(
+            root.as_raw_fd(),
+            name.as_ptr(),
+            buffer.as_mut_ptr().cast(),
+            buffer.len(),
+        )
+    };
+    if len < 0 {
+        let error = io::Error::last_os_error();
+        return Err(if error.kind() == ErrorKind::NotFound {
+            ErrorKind::InvalidInput.into()
+        } else {
+            error
+        });
+    }
+    buffer.truncate(len as usize);
+    let target = std::ffi::OsString::from_vec(buffer);
+    let pid = unsafe { libc::getpid() };
+    if !target.to_string_lossy().ends_with(&format!("-{pid}")) {
+        return Err(ErrorKind::InvalidInput.into());
+    }
+    Ok(())
+}
+
 /// Checks the links under the `Chromium` directory of the admitted data directory, reached through its handle.
 pub(super) fn check_tree(data: &File, root_links: &[&str]) -> io::Result<()> {
     let root = match open_child(data, "Chromium".as_ref()) {
@@ -284,8 +315,43 @@ fn if_present<T>(result: io::Result<T>) -> io::Result<Option<T>> {
 
 #[cfg(test)]
 mod tests {
-    use super::{check_entries, check_link, directory_path, entries, identity_path, open_child};
+    use super::{
+        check_entries, check_link, check_singleton, directory_path, entries, identity_path,
+        open_child,
+    };
     use std::{fs, fs::File, os::unix::fs::symlink};
+
+    #[test]
+    fn singleton_lock_proves_the_opened_directory_after_a_swap() {
+        let base = std::env::temp_dir().join(format!("ria-singleton-{}", std::process::id()));
+        let admitted = base.join("admitted");
+        let moved = base.join("moved");
+        fs::create_dir_all(admitted.join("Chromium")).unwrap();
+        let handle = File::open(&admitted).unwrap();
+        let pid = unsafe { libc::getpid() };
+        symlink(
+            format!("host-{pid}"),
+            admitted.join("Chromium/SingletonLock"),
+        )
+        .unwrap();
+        check_singleton(&handle).unwrap();
+        fs::rename(&admitted, &moved).unwrap();
+        fs::create_dir_all(admitted.join("Chromium")).unwrap();
+        symlink(
+            format!("host-{pid}"),
+            admitted.join("Chromium/SingletonLock"),
+        )
+        .unwrap();
+        fs::remove_file(moved.join("Chromium/SingletonLock")).unwrap();
+        symlink(
+            format!("host-{}", pid + 1),
+            moved.join("Chromium/SingletonLock"),
+        )
+        .unwrap();
+        // The engine opened the swapped-in path under this process's pid; the admitted inode does not hold it.
+        assert!(check_singleton(&handle).is_err());
+        fs::remove_dir_all(base).unwrap();
+    }
 
     #[test]
     fn ignores_a_chromium_directory_or_link_removed_after_listing() {
