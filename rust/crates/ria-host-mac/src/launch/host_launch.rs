@@ -246,6 +246,10 @@ impl Runtime {
             show,
             self.config.background,
             &self.observer,
+            {
+                let host = self.host.clone();
+                Rc::new(move |tab: &Tab| host.tab_loaded(tab))
+            },
         );
         self.host.set_main(Some(window.core().clone()));
         self.strip.borrow_mut().take();

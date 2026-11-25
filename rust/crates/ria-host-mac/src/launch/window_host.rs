@@ -20,6 +20,7 @@ use objc2_app_kit::NSView;
 use ria_engine::types::{Number, TabStripCommand};
 use serde_json::Value;
 
+use super::strip_layer::LAUNCH_KEY;
 use crate::core::bindings::{Tab, Window};
 use crate::core::host::State;
 use crate::diagnostics::ardia_paint_probe::PaintProbe;
@@ -91,7 +92,14 @@ impl WindowHost {
         }
         let mtm = MainThreadMarker::new()?;
         let page = ChromiumTabView::make_page(mtm, &self.hooks);
-        page.attach_tab(tab.retain(), key.to_owned(), self.chrome.tab_registry());
+        let url = tab.url().to_string();
+        let created = key == LAUNCH_KEY && !url.is_empty() && !url.starts_with("about:");
+        page.attach_tab(
+            tab.retain(),
+            key.to_owned(),
+            self.chrome.tab_registry(),
+            created,
+        );
         let mut pages = self.pages.borrow_mut();
         pages.retain(|page| !page.tab_closed());
         pages.push(page.clone());
@@ -101,6 +109,20 @@ impl WindowHost {
     /// Release the page views, before the engine shuts down.
     pub fn drop_pages(&self) {
         self.pages.borrow_mut().clear();
+    }
+
+    /// `-[ArdiaWebView tabDidChangeLoading:]` (`ArdiaWebView+Navigation.mm:138`): a tab finished loading a page, so
+    /// its view shows the page held for first paint.
+    pub fn tab_loaded(&self, tab: &Tab) {
+        let page = self
+            .pages
+            .borrow()
+            .iter()
+            .find(|page| page.shows_tab(tab))
+            .cloned();
+        if let Some(page) = page {
+            page.show_held_page_after_load();
+        }
     }
 
     pub fn chrome(&self) -> &ChromeWindowHost {

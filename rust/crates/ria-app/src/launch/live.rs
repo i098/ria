@@ -40,6 +40,7 @@ mod mac {
     use ria_host_mac::launch::strip_layer::{Button, Row, button_center};
     use ria_host_mac::launch::system_signals;
     use ria_host_mac::launch::window_host::WindowHost;
+    use ria_host_mac::tabs::ardia_web_view::ArdiaWebView;
     use serde_json::{Value, json};
 
     const TITLE: &str = "Ria proof page";
@@ -119,6 +120,23 @@ mod mac {
             out.lines()
                 .any(|line| line == "liveViews 1 paintViews 1 detached false"),
             "the app did not build a live page view for the launch tab"
+        );
+        assert!(
+            out.lines().any(|line| line == "firstPaintHeld true"),
+            "the launch page was not held for first paint at attach"
+        );
+        let reveal_ms = out
+            .lines()
+            .find_map(|line| line.strip_prefix("firstPaintRevealMs "))
+            .and_then(|ms| ms.parse::<u64>().ok())
+            .expect("the held launch page was never revealed");
+        assert!(
+            reveal_ms < 3000,
+            "the launch page waited {reveal_ms} ms: the load-finished reveal did not run before the 4 s timeout"
+        );
+        assert!(
+            out.lines().any(|line| line == "firstPaintOpacity 1"),
+            "the launch page is not opaque after the reveal"
         );
         assert!(
             out.lines().any(|line| line == "fieldTiming on")
@@ -219,6 +237,7 @@ mod mac {
             Err(error) => panic!("accept fixture connection: {error}"),
         };
         stream.set_nonblocking(false).unwrap();
+        std::thread::sleep(Duration::from_millis(300));
         let timeout = Some(Duration::from_millis(100));
         stream.set_read_timeout(timeout).unwrap();
         stream.set_write_timeout(timeout).unwrap();
@@ -359,6 +378,24 @@ mod mac {
         }
     }
 
+    /// Prints the time from the first-paint hold to the reveal of the launch page, and the opacity after it.
+    fn reveal_poll(
+        view: Retained<ArdiaWebView>,
+        held: Instant,
+        revealed: Rc<Cell<bool>>,
+        done: Rc<dyn Fn()>,
+    ) {
+        if view.page_opacity() == Some(1.0) {
+            println!("firstPaintRevealMs {}", held.elapsed().as_millis());
+            println!("firstPaintOpacity 1");
+            revealed.set(true);
+            done();
+        } else if held.elapsed() < Duration::from_secs(10) {
+            host_launch::after(Duration::from_millis(10), move || {
+                reveal_poll(view, held, revealed, done)
+            });
+        }
+    }
     fn all_set(flags: &[&Cell<bool>]) -> bool {
         flags.iter().all(|flag| flag.get())
     }
@@ -474,11 +511,17 @@ mod mac {
         let shutdown = Rc::new(Cell::new(false));
         let moving = Move::new();
         let pinned = Rc::new(Cell::new(false));
-        // Quit when both the fixture title and the download move are done.
+        let revealed = Rc::new(Cell::new(false));
+        // Quit when the fixture title, the download move, the pin and the first-paint reveal are done.
         let quit_when_done: Rc<dyn Fn()> = {
-            let (matched, moving, pinned) = (matched.clone(), moving.clone(), pinned.clone());
+            let (matched, moving, pinned, revealed) = (
+                matched.clone(),
+                moving.clone(),
+                pinned.clone(),
+                revealed.clone(),
+            );
             Rc::new(move || {
-                if all_set(&[&matched, &moving.done, &pinned]) {
+                if all_set(&[&matched, &moving.done, &pinned, &revealed]) {
                     host_launch::later(host_launch::quit);
                 }
             })
@@ -487,6 +530,7 @@ mod mac {
         let check_drive = drive.clone();
         let check_title = matched.clone();
         let check_pin = pinned.clone();
+        let check_revealed = revealed.clone();
         let check_shutdown = shutdown.clone();
         let check_moving = moving.clone();
         let status = super::app_launch::start(Rc::new(move |event| match event {
@@ -512,6 +556,14 @@ mod mac {
                     host.hooks().live().all().len(),
                     facts.len(),
                     facts.iter().any(|view| view.page_detached)
+                );
+                let view = host.hooks().live().all().remove(0);
+                println!("firstPaintHeld {}", view.page_opacity() == Some(0.0));
+                reveal_poll(
+                    view,
+                    Instant::now(),
+                    check_revealed.clone(),
+                    quit_when_done.clone(),
                 );
                 let signals = system_signals::current().expect("the app has a system-signals host");
                 signals.call(
@@ -569,7 +621,7 @@ mod mac {
             LaunchEvent::Error(error) => eprintln!("{error}"),
             _ => {}
         }));
-        if all_set(&[&matched, &shutdown, &moving.done, &check_pin]) {
+        if all_set(&[&matched, &shutdown, &moving.done, &check_pin, &revealed]) {
             status
         } else {
             ExitCode::FAILURE
