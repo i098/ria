@@ -103,16 +103,7 @@ mod mac {
             ),
         )
         .unwrap();
-        let out = launch(
-            &bin,
-            &home,
-            &data,
-            root,
-            &listener,
-            1,
-            "",
-            Duration::from_millis(300),
-        );
+        let out = launch(root, &listener, 1, "", Duration::from_millis(300));
         assert!(out.contains("engineDidStart"));
         assert!(
             out.lines()
@@ -180,16 +171,7 @@ mod mac {
             r#"{"version":5,"windows":{"w":{"state":"{}","page":[8,44,8,8],"card":[8,44,8,8],"radius":10}}}"#,
         )
         .unwrap();
-        let again = launch(
-            &bin,
-            &home,
-            &data,
-            root,
-            &listener,
-            2,
-            "launchTab=on",
-            Duration::ZERO,
-        );
+        let again = launch(root, &listener, 2, "launchTab=on", Duration::ZERO);
         assert!(
             again.lines().any(|line| line == "attachLoading fast false"),
             "the fast-case tab was still loading when it was attached"
@@ -234,18 +216,17 @@ mod mac {
 
     /// Run the app once on `data` and return what it printed.
     fn launch(
-        bin: &Path,
-        home: &Path,
-        data: &Path,
         root: &Path,
         listener: &TcpListener,
         launch: u32,
         switches: &str,
         delay: Duration,
     ) -> String {
+        let bin = root.join("Ria.app/Contents/MacOS/ria-app");
+        let (home, data) = (root.join("home"), root.join("profile"));
         let stdout = root.join(format!("stdout-{launch}"));
         let stderr = root.join(format!("stderr-{launch}"));
-        let mut child = Command::new(&bin)
+        let mut child = Command::new(bin)
             .arg("--live-child")
             .env("HOME", &home)
             .env("CFFIXED_USER_HOME", &home)
@@ -271,7 +252,7 @@ mod mac {
                 child.wait().expect("reap Ria after timeout");
                 break None;
             }
-            serve_fixture(&listener, delay);
+            serve_fixture(listener, delay);
             std::thread::sleep(Duration::from_millis(50));
         };
         let out = fs::read(&stdout).unwrap();

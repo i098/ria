@@ -47,7 +47,7 @@ jobs:
         with:
           workspaces: rust
       - name: Check Mac host bindings
-        run: cargo clippy --locked --manifest-path rust/Cargo.toml -p ria-host-mac --all-targets -- -D warnings
+        run: cargo clippy --locked --manifest-path rust/Cargo.toml -p ria-host-mac -p ria-app --all-targets -- -D warnings
 
   test:
     name: test
