@@ -65,7 +65,7 @@ Slice 3.3 provides the data domains in `ria-engine`. The app does not use them y
 | mac | `apps/browser/src/components/window/` | TypeScript/JavaScript | 3306 | keep | `rust/crates/ria-ui/src/window/` | analyze | todo | 4.5 | port |
 | mac | `apps/browser/src/lib/` | TypeScript/JavaScript | 6174 | caution | `rust/crates/ria-state/src/shared/`, `rust/recorded/2.2/` | analyze | todo | 2.2 | port |
 | mac | `apps/browser/src/main.tsx` | TypeScript/JavaScript | 102 | keep | `rust/crates/ria-host-mac/src/launch/`, `rust/crates/ria-app/Cargo.toml`, `rust/crates/ria-app/src/main.rs`, `rust/crates/ria-app/src/launch/` | analyze | todo | 3.6 | port |
-| mac | `apps/browser/src/platform/` | TypeScript/JavaScript | 1752 | keep | `rust/crates/ria-state/src/platform/` | analyze | todo | 2.3 | port |
+| mac | `apps/browser/src/platform/` | TypeScript/JavaScript | 1752 | keep | `rust/crates/ria-state/src/platform/` | analyze | implemented | 2.3 | port |
 | mac | `apps/browser/src/state/airTraffic/` | TypeScript/JavaScript | 478 | keep | `rust/crates/ria-state/src/air_traffic/`, `rust/replay/air_traffic/` | analyze | todo | 2.39 | port |
 | mac | `apps/browser/src/state/app/` | TypeScript/JavaScript | 1637 | keep | `rust/crates/ria-state/src/app/`, `rust/replay/app/` | analyze | todo | 2.10 | port |
 | mac | `apps/browser/src/state/automation/` | TypeScript/JavaScript | 7311 | keep | `rust/crates/ria-state/src/automation/`, `rust/replay/automation/` | analyze | todo | 2.29 | port |
