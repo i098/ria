@@ -45,10 +45,12 @@ thread_local! {
     static INSTALLED: RefCell<RcWeak<PageHooks>> = const { RefCell::new(RcWeak::new()) };
 }
 
+type RootView = Box<dyn Fn(&NSWindow) -> Option<Retained<NSView>>>;
+
 pub struct PageHooks {
     me: RcWeak<PageHooks>,
     live: Rc<LiveViews>,
-    root_view: Box<dyn Fn(&NSWindow) -> Option<Retained<NSView>>>,
+    root_view: RootView,
     app_wide_key: Box<dyn Fn(&NSEvent)>,
     input: RefCell<RevealInput>,
     wakes: RefCell<Vec<(Weak<NSWindow>, NeighbourWake)>>,
