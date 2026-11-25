@@ -392,6 +392,16 @@ impl DeferredFocus {
     }
 }
 
+/// `-leavingScreenAhead` (RevealInput.mm 163-165): hidden, still in a window, and held for a frame.
+pub fn leaving_screen_ahead(visible: bool, has_window: bool, holding_frame: bool) -> bool {
+    !visible && has_window && holding_frame
+}
+
+/// `-settleOnScreenAhead` (RevealInput.mm 167-170): whether the page leaves the screen-ahead state now.
+pub fn settles_screen_ahead(on_screen: bool, native_reveal: bool, leaving: bool) -> bool {
+    on_screen && !native_reveal && !leaving
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -600,5 +610,16 @@ mod tests {
             }
             assert!(buttons.windows.iter().all(Option::is_none));
         }
+    }
+
+    #[test]
+    fn screen_ahead_settles_only_when_not_a_native_reveal_and_not_leaving() {
+        assert!(leaving_screen_ahead(false, true, true));
+        assert!(!leaving_screen_ahead(true, true, true));
+        assert!(!leaving_screen_ahead(false, false, true));
+        assert!(settles_screen_ahead(true, false, false));
+        assert!(!settles_screen_ahead(false, false, false));
+        assert!(!settles_screen_ahead(true, true, false));
+        assert!(!settles_screen_ahead(true, false, true));
     }
 }

@@ -32,6 +32,47 @@ pub fn window_takes(window: Option<&Window>, tab: &Tab) -> Adoption {
     window.map_or(Adoption::Adopted, |window| window.can_adopt_tab(tab))
 }
 
+/// What `-holdTransferOf:` (Tab.mm 41-53) and `-adoptMovedPage` (Tab.mm 72-84) do after the window answers.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum TransferAnswer {
+    Proceed,
+    /// Run `ensureTab` or `adoptMovedPage` again on the next main-queue turn.
+    Retry,
+    /// Emit `transferRefused` with the `from` window id.
+    Refuse,
+}
+
+pub fn transfer_answer(adoption: Adoption) -> TransferAnswer {
+    match adoption {
+        Adoption::Adopted => TransferAnswer::Proceed,
+        Adoption::Busy => TransferAnswer::Retry,
+        Adoption::Refused => TransferAnswer::Refuse,
+    }
+}
+
+/// `-tabActivatedByChrome:` (Tab.mm 359-368): what Chrome activating the tab does to focus.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum ChromeActivation {
+    Ignore,
+    KeepFocus,
+    RestoreFocus,
+}
+
+pub fn chrome_activation(
+    standalone: bool,
+    by_chrome: bool,
+    visible: bool,
+    selected: bool,
+) -> ChromeActivation {
+    if standalone {
+        ChromeActivation::Ignore
+    } else if by_chrome && visible && !selected {
+        ChromeActivation::KeepFocus
+    } else {
+        ChromeActivation::RestoreFocus
+    }
+}
+
 pub fn adopt_into_window(
     window: Option<&Window>,
     tab: &Tab,
@@ -563,5 +604,22 @@ mod tests {
             links.take("other", "second", true, now).as_deref(),
             Some("first")
         );
+    }
+
+    #[test]
+    fn adoption_answers_map_to_the_ardia_branches() {
+        assert_eq!(transfer_answer(Adoption::Adopted), TransferAnswer::Proceed);
+        assert_eq!(transfer_answer(Adoption::Busy), TransferAnswer::Retry);
+        assert_eq!(transfer_answer(Adoption::Refused), TransferAnswer::Refuse);
+    }
+
+    #[test]
+    fn chrome_activation_keeps_focus_only_in_an_unselected_visible_pane() {
+        use ChromeActivation::*;
+        assert_eq!(chrome_activation(true, true, true, false), Ignore);
+        assert_eq!(chrome_activation(false, true, true, false), KeepFocus);
+        assert_eq!(chrome_activation(false, true, true, true), RestoreFocus);
+        assert_eq!(chrome_activation(false, true, false, false), RestoreFocus);
+        assert_eq!(chrome_activation(false, false, true, false), RestoreFocus);
     }
 }

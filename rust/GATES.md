@@ -310,3 +310,33 @@ Mac tests ran on an arm64 Mac with the prebuilt Chromium 158.0.8127.36 engine (`
 | `cargo test -p ria-host-mac --lib diagnostics` | exit 0; 24 passed, 0 failed |
 | `cargo test -p ria-host-mac --test live_swipe` | exit 0; "live_swipe: swipe, pager settle, switch, step, wheel and helpers checked"; "engine shut down cleanly" |
 | `cargo test -p ria-host-mac --test live_diagnostics` | exit 0; "live_diagnostics: freeze record, stack sample, field timing, pointer trace, hover, paint, pixel grid and reveal guards checked"; "engine shut down cleanly" |
+
+## Slice 3.8 Part 3 record
+
+Refs issue 84. This record does not close it. Base: `origin/main` `7a5fb89e41454afb07e766d7d8584cc5b5e6f49e`; the Mac ran a copy of the working tree on top of it (arm64, prebuilt engine `/private/tmp/halyard-p0-abc/engine`, `ulimit -n 10240`, lock `/tmp/ria-mac.lock` held and released, background only).
+
+Gap list (Ardia `ArdiaWebView+<Unit>.mm` at `551d3c13c` against `rust/crates/ria-host-mac/src/tabs/ardia_web_view_<unit>.rs`): no unit has `todo!`, `unimplemented!` or an empty body. Each unit ports free helpers; no code outside the unit files calls them, so the Ardia methods that need an `ArdiaWebView` instance or `LiveViews` are Part 4 work.
+
+| Unit | Still missing (pure) | Ported in this change | Left to Part 4 |
+| --- | --- | --- | --- |
+| Peek | `PeekTrace` writer (Peek.mm 89-106), `peekModifierInUse` | none | view emits, trace |
+| Picture-in-Picture | trace helpers (110-135), "left to Chrome" branch (225-234) | none | `playsForAutoPictureInPictureInWindow`, `RCTView` swizzle |
+| Recording | `recordingControlsOfWindow` (47-49) | none | recorder wiring |
+| Reveal input | `leavingScreenAhead` (163-165), `settleOnScreenAhead` (167-170) | `leaving_screen_ahead`, `settles_screen_ahead` | `hidePageIdentityAfterMount`, `revealGapChangedIn:` |
+| Reveals | `dropTabPress:` forgets the press with no reveal (254-261) | `drop_reveals` now forgets it for `DropReveals::Press` | `revealForPress:`, `replaceRevealsInWindow:` |
+| Site | `security`, `externalApp` emits (15-17, 88-90) | none | emits |
+| Site data | none | none | none |
+| Stand-in | `lentTo` back-pointer | none | holder search |
+| Tab | `holdTransferOf:`/`adoptMovedPage` branches (41-84), `tabActivatedByChrome:` (359-368); `takeReports:` keeps `seenByUser` (186-190) is not ported because `NavigationReports` has no such field | `transfer_answer`, `chrome_activation` | attach and detach side effects |
+
+Changes from Ardia: none in behavior. `transfer_answer` and `chrome_activation` return an enum where Ardia acts in place; the caller does the dispatch and emit.
+
+| Command (Mac, `/tmp/ria-84`, manifest `rust/Cargo.toml`) | Result |
+| --- | --- |
+| `cargo test -p ria-host-mac --lib dropping_a_press` with the fix removed | exit 101; 0 passed, 1 failed (`left: Some(1)`, `right: None`) |
+| `cargo test -p ria-host-mac --lib dropping_a_press` | exit 0; 1 passed |
+| `--lib adoption_answers` / `chrome_activation` / `screen_ahead_settles` | exit 0; 1 passed each |
+| `--lib reveals` / `ardia_web_view_tab` / `reveal_input` / `ardia_web_view_peek` / `picture_in_picture` / `site_data` | exit 0; 2 / 3 / 5 / 1 / 1 / 3 passed, 0 failed |
+| `--test live_tabs` | exit 0; "page controls, registry, parking, and strip events: true" |
+| `--test live_pip` | exit 0; "live_pip: ok" |
+| `--test live_web_view` | exit 0; "live_web_view: ok" |
