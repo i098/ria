@@ -1,0 +1,29 @@
+{
+  "unit": "packages/sync/src/file-health.harness.ts",
+  "files": 1,
+  "fingerprint": "ef90f60d8614c681",
+  "coverage": {
+    "lines": 148,
+    "reached": 148,
+    "files": [
+      {
+        "file": "packages/sync/src/file-health.harness.ts",
+        "lines": 19,
+        "reached": 19,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/fileHealth.ts",
+        "lines": 25,
+        "reached": 25,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/scopeState.ts",
+        "lines": 104,
+        "reached": 104,
+        "missed": ""
+      }
+    ]
+  }
+}

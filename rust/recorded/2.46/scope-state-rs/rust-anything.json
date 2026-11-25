@@ -1,0 +1,23 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "packages/sync/src/scopeState.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "scope-state-rs",
+  "exports": [
+    {
+      "name": "emptyScope",
+      "file": "packages/sync/src/scopeState.ts",
+      "line": 41,
+      "params": [],
+      "returns": "({\n  records: Record<string, { h: string; v: unknown; o: [device: string, seq: number] }>;\n  base: Record<string, string>;\n  unapplied: string[];\n  vv: Record<string, number>;\n  extra: Record<string, number[]>;\n  files: Record<string, ({ d: string; k: \"log\" | \"snapshot\" | \"bad\"; s?: number; vv?: Record<string, number>; at: number; b?: number })>;\n  damaged: Record<string, number>;\n  pendingSince?: Record<string, number>;\n  seq: number;\n  outbox: { k: string; h: string; v: unknown }[];\n  journal?: { v: 1; kind: \"log\"; device: string; seq: number; at: number; ops: { k: string; h: string; v: unknown }[] }[];\n  seen: Record<string, number>;\n  joined: boolean;\n  awaitRemote?: boolean;\n  applyAs?: Record<string, \"joined\" | \"joining\">;\n  snapshotAt: number;\n  pending: number;\n})",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

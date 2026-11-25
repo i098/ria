@@ -1,0 +1,23 @@
+{
+  "unit": "packages/sync/src/hlc.harness.ts",
+  "files": 1,
+  "fingerprint": "f9136c7bf8e82c21",
+  "coverage": {
+    "lines": 70,
+    "reached": 70,
+    "files": [
+      {
+        "file": "packages/sync/src/hlc.harness.ts",
+        "lines": 22,
+        "reached": 22,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/hlc.ts",
+        "lines": 48,
+        "reached": 48,
+        "missed": ""
+      }
+    ]
+  }
+}

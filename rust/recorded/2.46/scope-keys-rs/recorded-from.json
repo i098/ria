@@ -1,0 +1,35 @@
+{
+  "unit": "packages/sync/src/scope-keys.harness.ts",
+  "files": 1,
+  "fingerprint": "34c9de321a36b688",
+  "coverage": {
+    "lines": 265,
+    "reached": 265,
+    "files": [
+      {
+        "file": "packages/sync/src/canon.ts",
+        "lines": 15,
+        "reached": 15,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/scope-keys.harness.ts",
+        "lines": 62,
+        "reached": 62,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/scopeKeys.ts",
+        "lines": 84,
+        "reached": 84,
+        "missed": ""
+      },
+      {
+        "file": "packages/sync/src/scopeState.ts",
+        "lines": 104,
+        "reached": 104,
+        "missed": ""
+      }
+    ]
+  }
+}

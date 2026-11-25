@@ -1,0 +1,17 @@
+{
+  "unit": "packages/sync/src/order.ts",
+  "files": 1,
+  "fingerprint": "323873c4c467afcd",
+  "coverage": {
+    "lines": 52,
+    "reached": 52,
+    "files": [
+      {
+        "file": "packages/sync/src/order.ts",
+        "lines": 52,
+        "reached": 52,
+        "missed": ""
+      }
+    ]
+  }
+}

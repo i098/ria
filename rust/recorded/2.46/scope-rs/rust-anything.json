@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "packages/sync/src/scope.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "scope-rs",
+  "exports": [
+    {
+      "name": "replayScope",
+      "file": "packages/sync/src/scope.harness.ts",
+      "line": 282,
+      "params": [
+        {
+          "name": "input",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "Promise<unknown[]>",
+      "is_async": true,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

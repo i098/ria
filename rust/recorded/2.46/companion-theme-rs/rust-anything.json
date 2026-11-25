@@ -1,0 +1,42 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "packages/sync/src/companion/theme.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "theme-rs",
+  "exports": [
+    {
+      "name": "themeOf",
+      "file": "packages/sync/src/companion/theme.ts",
+      "line": 53,
+      "params": [
+        {
+          "name": "app",
+          "ts_type": "({\n  records: Record<string, { h: string; v: unknown; o: [device: string, seq: number] }>;\n  base: Record<string, string>;\n  unapplied: string[];\n  vv: Record<string, number>;\n  extra: Record<string, number[]>;\n  files: Record<string, ({ d: string; k: \"log\" | \"snapshot\" | \"bad\"; s?: number; vv?: Record<string, number>; at: number; b?: number })>;\n  damaged: Record<string, number>;\n  pendingSince?: Record<string, number>;\n  seq: number;\n  outbox: { k: string; h: string; v: unknown }[];\n  journal?: { v: 1; kind: \"log\"; device: string; seq: number; at: number; ops: { k: string; h: string; v: unknown }[] }[];\n  seen: Record<string, number>;\n  joined: boolean;\n  awaitRemote?: boolean;\n  applyAs?: Record<string, \"joined\" | \"joining\">;\n  snapshotAt: number;\n  pending: number;\n})",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "syncId",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "profileTheme",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({ colors: string[]; darkColors: string[] | null; mode: \"auto\" | \"light\" | \"dark\"; look: { stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[]; intensity: number; grain: number; texture: (\"grain\" | \"sand\" | \"denim\" | \"tweed\"); translucency: number; angle: number }; dark: { stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[]; intensity: number; grain: number; texture: (\"grain\" | \"sand\" | \"denim\" | \"tweed\"); translucency: number; angle: number } | null }) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

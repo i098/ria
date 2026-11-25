@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "packages/sync/src/folders.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "folders-rs",
+  "exports": [
+    {
+      "name": "replayFolders",
+      "file": "packages/sync/src/folders.harness.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "input",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}
