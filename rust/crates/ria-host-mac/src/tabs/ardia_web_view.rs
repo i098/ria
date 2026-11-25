@@ -120,27 +120,7 @@ impl LiveViews {
     }
 }
 
-impl super::page_engine::LiveViews for LiveViews {
-    fn begin_handing_off(&self, key: &str) {
-        for view in self.all() {
-            let mut state = view.state().borrow_mut();
-            if state.tab.is_some() && state.transfer_key.as_deref() == Some(key) {
-                state.life.handing_off = true;
-            }
-        }
-    }
-
-    fn release_transfer(&self, key: &str) {
-        for view in self.all() {
-            let mut state = view.state().borrow_mut();
-            if state.transfer_key.as_deref() == Some(key) {
-                state.life.handing_off = false;
-            }
-        }
-    }
-}
-
 #[cfg(debug_assertions)]
 mod debug_events;
 #[cfg(debug_assertions)]
-pub use debug_events::{note_event, recent_events};
+pub use debug_events::note_event;
