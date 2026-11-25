@@ -9,9 +9,15 @@
 
 use serde::{Deserialize, Serialize};
 
-#[allow(unused_imports)]
 use crate::kernel::Number;
 use crate::kernel::{AppState, Effects};
+
+pub mod actions;
+pub mod hooks;
+pub mod lanes;
+mod pending_siblings;
+#[allow(clippy::module_inception)]
+pub mod splits;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
 pub enum SplitSide {
@@ -280,8 +286,120 @@ pub enum Action {
     UpdateSplit { id: String, patch: UpdateSplitPatch },
 }
 
-/// Applies `action` to `app`. Slice 2.14 writes the body.
+/// Applies `action` to `app` (`actions.ts` and the store methods of `splits.ts`).
 pub fn apply(app: &mut AppState, action: Action, fx: &mut Effects) {
-    let _ = (app, action, fx);
-    todo!("slice 2.14")
+    use crate::browser::SplitViewOrientation as Orientation;
+    match action {
+        Action::ClosePane { tab_id } => actions::close_pane(app, &tab_id, fx),
+        Action::CloseSplitView { split_id } => actions::close_split_view(app, &split_id, fx),
+        Action::CreateSplit {
+            tab_ids,
+            orientation,
+        } => {
+            let orientation = match orientation.unwrap_or_default() {
+                CreateSplitOrientation::Horizontal => Orientation::Horizontal,
+                CreateSplitOrientation::Vertical => Orientation::Vertical,
+            };
+            splits::create_split(app, &tab_ids, orientation);
+        }
+        Action::DropTabIntoSplit {
+            tab_id,
+            target_tab_id,
+            side,
+        } => {
+            actions::drop_tab_into_split(app, &tab_id, &target_tab_id, side, fx);
+        }
+        Action::DropTabOnRow {
+            tab_id,
+            row_tab_id,
+            side,
+        } => {
+            actions::drop_tab_on_row(app, &tab_id, &row_tab_id, side, fx);
+        }
+        Action::FlipSplit { split_id } => splits::flip_split(app, &split_id),
+        Action::FocusPane { window_id, delta } => {
+            if let Some(pane) = splits::pane_to_focus(app, &window_id, delta.0 as i64) {
+                crate::tabs::apply(app, crate::tabs::Action::Activate { id: pane }, fx);
+            }
+        }
+        Action::FocusSplitPane { window_id, delta } => {
+            actions::focus_split_pane(app, &window_id, delta.0 as i64, fx);
+        }
+        Action::MovePane { tab_id, delta } => splits::move_pane(app, &tab_id, delta.0 as i64),
+        Action::OpenInSplit { tab_id, side } => {
+            actions::open_in_split(app, &tab_id, side.unwrap_or(SplitSide::Right), fx);
+        }
+        Action::OpenLinkInSplit {
+            source_tab_id,
+            url,
+            adopt_id,
+        } => {
+            actions::open_link_in_split(app, &source_tab_id, &url, adopt_id.as_ref(), fx);
+        }
+        Action::OpenNewTabInSplit { window_id } => {
+            actions::open_new_tab_in_split(app, &window_id, fx)
+        }
+        Action::OpenSplitPane { window_id, options } => {
+            actions::open_split_pane(app, &window_id, &options.unwrap_or_default(), fx);
+        }
+        Action::RemoveTabFromSplit { tab_id } => splits::remove_tab_from_split(app, &tab_id),
+        Action::ReplaceSplitPane {
+            pane_tab_id,
+            tab_id,
+        } => {
+            if let Some(id) = splits::replace_split_pane(app, &pane_tab_id, &tab_id) {
+                crate::tabs::apply(app, crate::tabs::Action::Activate { id }, fx);
+            }
+        }
+        Action::SeparateSplit { split_id } => splits::separate_split(app, &split_id),
+        Action::ShowSplitMenu { tab_id } => pending_siblings::show_split_menu(&tab_id),
+        Action::ToggleSplitOrientation { split_id } => {
+            splits::toggle_split_orientation(app, &split_id)
+        }
+        Action::ToggleTabLayout { window_id } => splits::toggle_tab_layout(app, &window_id),
+        Action::UpdateSplit { id, patch } => splits::update_split(app, &id, &patch),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::browser::{SplitSlot, SplitSlotVariant0, SplitView, SplitViewOrientation};
+
+    fn slot(id: &str) -> SplitSlot {
+        SplitSlot::Other0(SplitSlotVariant0 {
+            size: Number(0.5),
+            tab_id: id.into(),
+        })
+    }
+
+    #[test]
+    fn flip_and_toggle_change_the_split_in_place() {
+        let mut app = AppState::default();
+        let split = SplitView {
+            id: "s1".into(),
+            window_id: "w1".into(),
+            orientation: SplitViewOrientation::Horizontal,
+            slots: vec![slot("a"), slot("b")],
+        };
+        app.get_mut::<State>().splits.insert("s1".into(), split);
+        let mut fx = Effects::default();
+        apply(
+            &mut app,
+            Action::FlipSplit {
+                split_id: "s1".into(),
+            },
+            &mut fx,
+        );
+        apply(
+            &mut app,
+            Action::ToggleSplitOrientation {
+                split_id: "s1".into(),
+            },
+            &mut fx,
+        );
+        let s = &app.get::<State>().splits["s1"];
+        assert_eq!(s.slots, vec![slot("b"), slot("a")]);
+        assert_eq!(s.orientation, SplitViewOrientation::Vertical);
+    }
 }

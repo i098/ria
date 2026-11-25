@@ -119,6 +119,10 @@ mod mac {
             "the Rune strip did not show, select, pin and close tabs"
         );
         assert!(
+            out.lines().any(|line| line == "mountedPages 3"),
+            "the strip did not keep every tab's page mounted"
+        );
+        assert!(
             out.lines().any(|line| line == "focusAfterSwitch true"),
             "a press that selected a tab did not move focus to its page"
         );
@@ -576,6 +580,19 @@ mod mac {
             match self.stage.get() {
                 1 if rows.len() == 3 => {
                     println!("stripTabs 3");
+                    let window = self.host.main().expect("browser window").window();
+                    let mounted = self
+                        .host
+                        .hooks()
+                        .live()
+                        .all()
+                        .iter()
+                        .filter(|view| {
+                            view.window()
+                                .is_some_and(|owner| std::ptr::eq(&*owner, &*window))
+                        })
+                        .count();
+                    println!("mountedPages {mounted}");
                     self.shot_then("three-tabs", 2, Some(button_center(2, Button::Select)));
                 }
                 2 if rows.get(2).is_some_and(|row| row.active) => {
