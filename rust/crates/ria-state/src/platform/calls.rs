@@ -1,6 +1,6 @@
-// Ported from ardia apps/browser/src/platform/*.ts at 551d3c13c.
+// Ported from ardia apps/browser/src/platform at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
-// This file is a Rust port of those files, with changes.
+// This file is a Rust port of that file, with changes.
 
 //! The native calls of Ardia: one [`PlatformCall`] variant for each `call(..)` of `ardiacore` and each method of a
 //! `nativeModule(..)` that a `src/platform` wrapper makes.
