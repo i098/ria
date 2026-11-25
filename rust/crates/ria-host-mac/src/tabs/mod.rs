@@ -3,6 +3,7 @@
 pub mod ardia_page_cover;
 pub mod ardia_page_cursor;
 pub mod ardia_page_draw_wait;
+pub mod ardia_page_hooks;
 pub mod ardia_renderer_scroll_observer;
 pub mod ardia_tab_lifecycle;
 pub mod ardia_tab_parking;
