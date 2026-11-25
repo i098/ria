@@ -5,9 +5,8 @@
 //! Changes from Ardia: `install` takes the reveal-input answers as `RevealHooks`, where Ardia calls the
 //! `ArdiaWebView` class methods. The walk from an accessibility element to its view, the first half of
 //! `+[ArdiaWebView refusesInputAheadOfSwitch:]`, is here; the hooks answer for the view.
-// Part 4 of slice 3.8 is not merged: no `ArdiaWebView` type holds the `RevealInput` of
-// `tabs::ardia_web_view_reveal_input` yet. That part must implement `RevealHooks` on it and call `install`
-// where Ardia's input monitors call `installRevealGuards`.
+//! The native view does not supply `tabs::ardia_web_view_reveal_input::RevealInput` to the guards.
+//! Connect it through `RevealHooks` and call `install` where Ardia's input monitors call `installRevealGuards`.
 
 use std::cell::{Cell, RefCell};
 use std::ffi::CStr;

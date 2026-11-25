@@ -4,9 +4,8 @@
 
 //! Changes from Ardia: the probe is a `PaintProbe` value and not file globals. The page host gives the paint
 //! facts of each visible web view through `views`, and the events and consent epoch come as closures.
-// Part 4 of slice 3.8 is not merged: `ArdiaWebView`, its live views, frame hold, stand-in and the early-window
-// veil have no Ria type yet. That part must call `view_facts` for each visible web view of the window and pass
-// the result as `views`.
+// `ArdiaWebView` exists but does not supply paint facts to this probe. The early-window veil still has no Ria type.
+// Call `view_facts` for each visible web view in the window and pass the results as `views`.
 
 use std::cell::{Cell, RefCell};
 use std::ptr::NonNull;

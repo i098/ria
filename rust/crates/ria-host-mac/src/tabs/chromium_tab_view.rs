@@ -3,20 +3,29 @@
 // This file is a Rust port of that file, with changes.
 
 //! `ChromiumTabView`: the page host of the Chromium page view. Events of the page go to the `onPageEvent` channel.
+//!
+//! Changes from Ardia: The factory returns a native view. The host takes a separate `PageTab` until the port implements that trait.
 
 use std::ops::Deref;
 use std::rc::Rc;
 
 use objc2::MainThreadMarker;
+use objc2::rc::Retained;
 use serde_json::Value;
 
+use super::ardia_web_view::{ArdiaWebView, LiveViews};
 use super::page_tab::PageTab;
 use super::page_tab_host::PageTabHost;
 
 pub struct ChromiumTabView(PageTabHost);
 
 impl ChromiumTabView {
-    /// `init`: `page` is the `ArdiaWebView` of `makePage`; its events go to `send` (`webView:event:payload:`).
+    /// `makePage`: Create a zero-frame Chromium view and register it.
+    pub fn make_page(mtm: MainThreadMarker, live: &LiveViews) -> Retained<ArdiaWebView> {
+        ArdiaWebView::new(mtm, live)
+    }
+
+    /// `init`: Send the supplied page's events through the host.
     pub fn new(
         mtm: MainThreadMarker,
         page: Box<dyn PageTab>,

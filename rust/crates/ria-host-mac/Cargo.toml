@@ -48,3 +48,8 @@ harness = false
 name = "live_diagnostics"
 path = "tests/live_diagnostics.rs"
 harness = false
+
+[[test]]
+name = "live_web_view"
+path = "tests/live_web_view.rs"
+harness = false
