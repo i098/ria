@@ -1,0 +1,36 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/platformChrome.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "platformchrome-rs",
+  "exports": [
+    {
+      "name": "applyWindowButtonStyle",
+      "file": "apps/browser/src/lib/platformChrome.ts",
+      "line": 22,
+      "params": [
+        {
+          "name": "_style",
+          "ts_type": "(\"native\" | \"trafficLights\" | \"hidden\")",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "_layout",
+          "ts_type": "{ leading: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[]; trailing: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[] }",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/profileLook.ts",
+  "files": 1,
+  "fingerprint": "5773b4306df51a57",
+  "coverage": {
+    "lines": 144,
+    "reached": 104,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/color.ts",
+        "lines": 66,
+        "reached": 26,
+        "missed": "25-28, 31-34, 39-42, 45-51, 54-56, 59-61, 64-72, 75-80"
+      },
+      {
+        "file": "apps/browser/src/lib/profileLook.ts",
+        "lines": 78,
+        "reached": 78,
+        "missed": ""
+      }
+    ]
+  }
+}

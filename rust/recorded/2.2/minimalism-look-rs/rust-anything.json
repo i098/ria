@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/minimalismLook.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "minimalismlook-rs",
+  "exports": [
+    {
+      "name": "minimalismLookCase",
+      "file": "apps/browser/src/lib/minimalismLook.harness.ts",
+      "line": 9,
+      "params": [
+        {
+          "name": "doc",
+          "ts_type": "Record<string, unknown> | null",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

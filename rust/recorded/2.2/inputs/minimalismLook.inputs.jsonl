@@ -1,0 +1,22 @@
+{"fn": "minimalismLookCase", "args": [null]}
+{"fn": "minimalismLookCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}]}
+{"fn": "minimalismLookCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}]}
+{"fn": "minimalismLookCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}]}
+{"fn": "minimalismLookCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}]}
+{"fn": "minimalismLookCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}]}
+{"fn": "minimalismLookCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}]}
+{"fn": "minimalismLookCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}]}
+{"fn": "minimalismLookCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}]}
+{"fn": "minimalismLookCase", "args": [{"icons": {}}]}
+{"fn": "minimalismLookCase", "args": [{"layout": {"hide": []}}]}
+{"fn": "minimalismLookCase", "args": [{}]}
+{"fn": "minimalismLookCase", "args": [{"metrics": {"rowHeight": 100}}]}
+{"fn": "minimalismLookCase", "args": ["text"]}
+{"fn": "minimalismLookCase", "args": [42]}
+{"fn": "minimalismLookCase", "args": [[]]}
+{"fn": "minimalismLookCase", "args": [{"icons": "plus"}]}
+{"fn": "minimalismLookCase", "args": [{"$undefined": true}]}
+{"fn": "minimalismLookCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}]}
+{"fn": "minimalismLookCase", "args": [{"metrics": {"rowHeight": 28, "rowGap": 2, "pinnedHeight": 34, "radius": {"row": 9, "pinned": 9}}}]}
+{"fn": "minimalismLookCase", "args": [{"metrics": {"rowHeight": 40, "rowGap": 0, "pinnedHeight": 60, "radius": {"row": 0, "pinned": 24}}}]}
+{"fn": "minimalismLookCase", "args": [{"metrics": {"rowHeight": 24, "rowGap": 12, "pinnedHeight": 72, "radius": {"row": 24, "pinned": 0}}}]}

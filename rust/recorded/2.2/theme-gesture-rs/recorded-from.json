@@ -1,0 +1,23 @@
+{
+  "unit": "apps/browser/src/lib/themeGesture.harness.ts",
+  "files": 1,
+  "fingerprint": "a43cc78e758b5f22",
+  "coverage": {
+    "lines": 144,
+    "reached": 144,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/themeGesture.harness.ts",
+        "lines": 67,
+        "reached": 67,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/themeGesture.ts",
+        "lines": 77,
+        "reached": 77,
+        "missed": ""
+      }
+    ]
+  }
+}

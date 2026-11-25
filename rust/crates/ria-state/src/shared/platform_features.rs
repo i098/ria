@@ -1,0 +1,138 @@
+// Ported from ardia apps/browser/src/lib/platformFeatures.ts at 551d3c13c.
+// Copyright 2026 Mantra Patel, Apache-2.0.
+// This file is a Rust port of that file, with changes.
+
+//! What the Mac build of Ardia can do: one switch for each platform feature.
+//! The file exports only a type and a constant, so it has no bridge crate and no recorded cases.
+//!
+//! Not ported: `platformFeatures.linux.ts` and `platformFeatures.windows.ts` (the Linux and Windows
+//! builds); this port is the Mac build only.
+//!
+//! Changes from Ardia: `findsBrowsersBy` is an enum, not a string union; `hiddenBrowserSources` is a
+//! static slice. The fields keep the order of the TS type (`platformFeatures.ts:1`).
+
+/// `PlatformFeatures["findsBrowsersBy"]` (`platformFeatures.ts:13`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum FindsBrowsersBy {
+    AppBundle,
+    ImportList,
+}
+
+/// `PlatformFeatures` (`platformFeatures.ts:1`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct PlatformFeatures {
+    pub shares_files: bool,
+    pub syncs_with_phone: bool,
+    pub syncs_passwords: bool,
+    pub unloads_idle_profiles: bool,
+    pub sleeps_tabs_over_budget: bool,
+    pub dock: bool,
+    pub app_icon: bool,
+    pub menu_bar: bool,
+    pub memory_pressure: bool,
+    pub escape_closes_downloads: bool,
+    pub unpacks_archives_silently: bool,
+    pub finds_browsers_by: FindsBrowsersBy,
+    pub hidden_browser_sources: &'static [&'static str],
+    pub split_view: bool,
+    pub sets_default_browser: bool,
+    pub exports_bookmarks_and_passwords: bool,
+    pub sync: bool,
+    pub calendar: bool,
+    pub web_kit: bool,
+    pub content_blocker: bool,
+    pub trackpad_gestures: bool,
+    pub video_upscaling: bool,
+    pub thin_scroll_bars: bool,
+    pub haptics: bool,
+    pub launch_load: bool,
+    pub freeze_watch: bool,
+    pub quits_with_last_window: bool,
+    pub keeps_new_tab_links_in_little_ardia: bool,
+    pub little_ardia_shortcut_from_any_app: bool,
+    pub mouse_shortcuts: bool,
+    pub command_scroll_zoom: bool,
+    pub password_autofill_switch: bool,
+    pub blocks_autoplay: bool,
+    pub answers_permission_requests: bool,
+    pub tab_reaches_under_overlays: bool,
+    pub new_tab_bar_first: bool,
+    pub new_tab_waits_for_first_frame: bool,
+    pub text_input_reverts_first_change: bool,
+    pub default_cloud_drive: bool,
+    pub moves_sync_folder: bool,
+    pub interface_size: bool,
+    pub ardia_command: bool,
+    pub dev_tools_panels: bool,
+    pub reads_search_engine: bool,
+    pub tint_needs_new_image: bool,
+    pub window_geometry: bool,
+    pub claims_follow_focus: bool,
+    pub inline_writes_echo: bool,
+    pub holds_cold_pages_until_painted: bool,
+    pub preload_pages: bool,
+    pub snaps_text_baselines: bool,
+    pub native_tab_switch: bool,
+    pub plugins: bool,
+    pub system_password_managers: bool,
+    pub native_peek_motion: bool,
+}
+
+/// `PLATFORM_FEATURES` (`platformFeatures.ts:59`).
+pub const PLATFORM_FEATURES: PlatformFeatures = PlatformFeatures {
+    shares_files: true,
+    syncs_with_phone: true,
+    syncs_passwords: true,
+    unloads_idle_profiles: true,
+    sleeps_tabs_over_budget: true,
+    dock: true,
+    app_icon: true,
+    menu_bar: true,
+    memory_pressure: true,
+    escape_closes_downloads: false,
+    unpacks_archives_silently: true,
+    finds_browsers_by: FindsBrowsersBy::AppBundle,
+    hidden_browser_sources: &[],
+    split_view: true,
+    sets_default_browser: true,
+    exports_bookmarks_and_passwords: true,
+    sync: true,
+    calendar: true,
+    web_kit: true,
+    content_blocker: true,
+    trackpad_gestures: true,
+    video_upscaling: true,
+    thin_scroll_bars: true,
+    haptics: true,
+    launch_load: true,
+    freeze_watch: true,
+    quits_with_last_window: false,
+    keeps_new_tab_links_in_little_ardia: true,
+    little_ardia_shortcut_from_any_app: true,
+    mouse_shortcuts: true,
+    command_scroll_zoom: true,
+    password_autofill_switch: true,
+    blocks_autoplay: true,
+    answers_permission_requests: true,
+    tab_reaches_under_overlays: false,
+    new_tab_bar_first: false,
+    new_tab_waits_for_first_frame: true,
+    text_input_reverts_first_change: false,
+    default_cloud_drive: true,
+    moves_sync_folder: false,
+    interface_size: true,
+    ardia_command: true,
+    dev_tools_panels: true,
+    reads_search_engine: true,
+    tint_needs_new_image: true,
+    window_geometry: true,
+    claims_follow_focus: false,
+    inline_writes_echo: true,
+    holds_cold_pages_until_painted: true,
+    preload_pages: true,
+    snaps_text_baselines: true,
+    native_tab_switch: true,
+    plugins: true,
+    system_password_managers: true,
+    native_peek_motion: true,
+};

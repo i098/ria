@@ -1,0 +1,147 @@
+{"fn": "activeLookCase", "args": [null]}
+{"fn": "activeLookCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}]}
+{"fn": "activeLookCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}]}
+{"fn": "activeLookCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}]}
+{"fn": "activeLookCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}]}
+{"fn": "activeLookCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}]}
+{"fn": "activeLookCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}]}
+{"fn": "activeLookCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}]}
+{"fn": "activeLookCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}]}
+{"fn": "activeLookCase", "args": [{"icons": {}}]}
+{"fn": "activeLookCase", "args": [{"layout": {"hide": []}}]}
+{"fn": "activeLookCase", "args": [{}]}
+{"fn": "activeLookCase", "args": [{"metrics": {"rowHeight": 100}}]}
+{"fn": "activeLookCase", "args": ["text"]}
+{"fn": "activeLookCase", "args": [42]}
+{"fn": "activeLookCase", "args": [[]]}
+{"fn": "activeLookCase", "args": [{"icons": "plus"}]}
+{"fn": "activeLookCase", "args": [{"$undefined": true}]}
+{"fn": "iconNameCase", "args": [null, "plus"]}
+{"fn": "iconNameCase", "args": [null, "trash"]}
+{"fn": "iconNameCase", "args": [null, "star"]}
+{"fn": "iconNameCase", "args": [null, "gear"]}
+{"fn": "iconNameCase", "args": [null, "1"]}
+{"fn": "iconNameCase", "args": [null, ""]}
+{"fn": "iconNameCase", "args": [null, "Plus"]}
+{"fn": "iconNameCase", "args": [null, "é😀"]}
+{"fn": "withIconNamesCase", "args": [null, [{"id": "a", "title": "A", "symbol": "plus"}, {"separator": true}, {"id": "b", "title": "B", "children": [{"id": "c", "title": "C", "symbol": "trash"}]}]]}
+{"fn": "withIconNamesCase", "args": [null, [{"symbol": "star", "id": "s", "children": []}, {"separator": false, "symbol": "plus"}, {"symbol": "gear"}, {"title": "no symbol"}, {"children": [{"children": [{"symbol": "plus"}]}], "symbol": "trash"}, {"symbol": null}, {"symbol": 5}, {"children": null, "symbol": "1"}, {"children": 0}, {"children": "", "symbol": "é"}]]}
+{"fn": "withIconNamesCase", "args": [null, []]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, "plus"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, "trash"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, "star"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, "gear"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, "1"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, ""]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, "Plus"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, "é😀"]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, [{"id": "a", "title": "A", "symbol": "plus"}, {"separator": true}, {"id": "b", "title": "B", "children": [{"id": "c", "title": "C", "symbol": "trash"}]}]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, [{"symbol": "star", "id": "s", "children": []}, {"separator": false, "symbol": "plus"}, {"symbol": "gear"}, {"title": "no symbol"}, {"children": [{"children": [{"symbol": "plus"}]}], "symbol": "trash"}, {"symbol": null}, {"symbol": 5}, {"children": null, "symbol": "1"}, {"children": 0}, {"children": "", "symbol": "é"}]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle", "trash": "trash.fill"}}, []]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, "plus"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, "trash"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, "star"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, "gear"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, "1"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, ""]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, "Plus"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, "é😀"]}
+{"fn": "withIconNamesCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, [{"id": "a", "title": "A", "symbol": "plus"}, {"separator": true}, {"id": "b", "title": "B", "children": [{"id": "c", "title": "C", "symbol": "trash"}]}]]}
+{"fn": "withIconNamesCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, [{"symbol": "star", "id": "s", "children": []}, {"separator": false, "symbol": "plus"}, {"symbol": "gear"}, {"title": "no symbol"}, {"children": [{"children": [{"symbol": "plus"}]}], "symbol": "trash"}, {"symbol": null}, {"symbol": 5}, {"children": null, "symbol": "1"}, {"children": 0}, {"children": "", "symbol": "é"}]]}
+{"fn": "withIconNamesCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, []]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, "plus"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, "trash"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, "star"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, "gear"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, "1"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, ""]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, "Plus"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, "é😀"]}
+{"fn": "withIconNamesCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, [{"id": "a", "title": "A", "symbol": "plus"}, {"separator": true}, {"id": "b", "title": "B", "children": [{"id": "c", "title": "C", "symbol": "trash"}]}]]}
+{"fn": "withIconNamesCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, [{"symbol": "star", "id": "s", "children": []}, {"separator": false, "symbol": "plus"}, {"symbol": "gear"}, {"title": "no symbol"}, {"children": [{"children": [{"symbol": "plus"}]}], "symbol": "trash"}, {"symbol": null}, {"symbol": 5}, {"children": null, "symbol": "1"}, {"children": 0}, {"children": "", "symbol": "é"}]]}
+{"fn": "withIconNamesCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, []]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, "plus"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, "trash"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, "star"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, "gear"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, "1"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, ""]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, "Plus"]}
+{"fn": "iconNameCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, "é😀"]}
+{"fn": "withIconNamesCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, [{"id": "a", "title": "A", "symbol": "plus"}, {"separator": true}, {"id": "b", "title": "B", "children": [{"id": "c", "title": "C", "symbol": "trash"}]}]]}
+{"fn": "withIconNamesCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, [{"symbol": "star", "id": "s", "children": []}, {"separator": false, "symbol": "plus"}, {"symbol": "gear"}, {"title": "no symbol"}, {"children": [{"children": [{"symbol": "plus"}]}], "symbol": "trash"}, {"symbol": null}, {"symbol": 5}, {"children": null, "symbol": "1"}, {"children": 0}, {"children": "", "symbol": "é"}]]}
+{"fn": "withIconNamesCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, []]}
+{"fn": "iconNameCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, "plus"]}
+{"fn": "iconNameCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, "trash"]}
+{"fn": "iconNameCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, "star"]}
+{"fn": "iconNameCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, "gear"]}
+{"fn": "iconNameCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, "1"]}
+{"fn": "iconNameCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, ""]}
+{"fn": "iconNameCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, "Plus"]}
+{"fn": "iconNameCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, "é😀"]}
+{"fn": "withIconNamesCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, [{"id": "a", "title": "A", "symbol": "plus"}, {"separator": true}, {"id": "b", "title": "B", "children": [{"id": "c", "title": "C", "symbol": "trash"}]}]]}
+{"fn": "withIconNamesCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, [{"symbol": "star", "id": "s", "children": []}, {"separator": false, "symbol": "plus"}, {"symbol": "gear"}, {"title": "no symbol"}, {"children": [{"children": [{"symbol": "plus"}]}], "symbol": "trash"}, {"symbol": null}, {"symbol": 5}, {"children": null, "symbol": "1"}, {"children": 0}, {"children": "", "symbol": "é"}]]}
+{"fn": "withIconNamesCase", "args": [{"layout": {"hide": ["addressField", "navButtons", "sidebarButton", "downloads", "profile"]}}, []]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, "plus"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, "trash"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, "star"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, "gear"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, "1"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, ""]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, "Plus"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, "é😀"]}
+{"fn": "withIconNamesCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, [{"id": "a", "title": "A", "symbol": "plus"}, {"separator": true}, {"id": "b", "title": "B", "children": [{"id": "c", "title": "C", "symbol": "trash"}]}]]}
+{"fn": "withIconNamesCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, [{"symbol": "star", "id": "s", "children": []}, {"separator": false, "symbol": "plus"}, {"symbol": "gear"}, {"title": "no symbol"}, {"children": [{"children": [{"symbol": "plus"}]}], "symbol": "trash"}, {"symbol": null}, {"symbol": 5}, {"children": null, "symbol": "1"}, {"children": 0}, {"children": "", "symbol": "é"}]]}
+{"fn": "withIconNamesCase", "args": [{"type": {"family": "Avenir Next", "mono": "SF Mono", "scale": 1.2, "sizes": {"body": 14}, "weights": {"bold": "800", "regular": 300}}, "icons": {"star": "star.fill"}}, []]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, "plus"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, "trash"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, "star"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, "gear"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, "1"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, ""]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, "Plus"]}
+{"fn": "iconNameCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, "é😀"]}
+{"fn": "withIconNamesCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, [{"id": "a", "title": "A", "symbol": "plus"}, {"separator": true}, {"id": "b", "title": "B", "children": [{"id": "c", "title": "C", "symbol": "trash"}]}]]}
+{"fn": "withIconNamesCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, [{"symbol": "star", "id": "s", "children": []}, {"separator": false, "symbol": "plus"}, {"symbol": "gear"}, {"title": "no symbol"}, {"children": [{"children": [{"symbol": "plus"}]}], "symbol": "trash"}, {"symbol": null}, {"symbol": 5}, {"children": null, "symbol": "1"}, {"children": 0}, {"children": "", "symbol": "é"}]]}
+{"fn": "withIconNamesCase", "args": [{"type": {"family": "Ünïcödé Sans 😀"}, "layout": {"newTab": "bottom"}}, []]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, "plus"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, "trash"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, "star"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, "gear"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, "1"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, ""]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, "Plus"]}
+{"fn": "iconNameCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, "é😀"]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, [{"id": "a", "title": "A", "symbol": "plus"}, {"separator": true}, {"id": "b", "title": "B", "children": [{"id": "c", "title": "C", "symbol": "trash"}]}]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, [{"symbol": "star", "id": "s", "children": []}, {"separator": false, "symbol": "plus"}, {"symbol": "gear"}, {"title": "no symbol"}, {"children": [{"children": [{"symbol": "plus"}]}], "symbol": "trash"}, {"symbol": null}, {"symbol": 5}, {"children": null, "symbol": "1"}, {"children": 0}, {"children": "", "symbol": "é"}]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle", "Bad": "x", "gear": "BAD NAME", "1": "one.circle"}}, []]}
+{"fn": "iconNameCase", "args": [{"icons": {}}, "plus"]}
+{"fn": "iconNameCase", "args": [{"icons": {}}, "trash"]}
+{"fn": "iconNameCase", "args": [{"icons": {}}, "star"]}
+{"fn": "iconNameCase", "args": [{"icons": {}}, "gear"]}
+{"fn": "iconNameCase", "args": [{"icons": {}}, "1"]}
+{"fn": "iconNameCase", "args": [{"icons": {}}, ""]}
+{"fn": "iconNameCase", "args": [{"icons": {}}, "Plus"]}
+{"fn": "iconNameCase", "args": [{"icons": {}}, "é😀"]}
+{"fn": "withIconNamesCase", "args": [{"icons": {}}, [{"id": "a", "title": "A", "symbol": "plus"}, {"separator": true}, {"id": "b", "title": "B", "children": [{"id": "c", "title": "C", "symbol": "trash"}]}]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {}}, [{"symbol": "star", "id": "s", "children": []}, {"separator": false, "symbol": "plus"}, {"symbol": "gear"}, {"title": "no symbol"}, {"children": [{"children": [{"symbol": "plus"}]}], "symbol": "trash"}, {"symbol": null}, {"symbol": 5}, {"children": null, "symbol": "1"}, {"children": 0}, {"children": "", "symbol": "é"}]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {}}, []]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle"}}, [1]]}
+{"fn": "withIconNamesCase", "args": [null, [1]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle"}}, ["x"]]}
+{"fn": "withIconNamesCase", "args": [null, ["x"]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle"}}, [null]]}
+{"fn": "withIconNamesCase", "args": [null, [null]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle"}}, [[1]]]}
+{"fn": "withIconNamesCase", "args": [null, [[1]]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle"}}, [{"children": "x"}]]}
+{"fn": "withIconNamesCase", "args": [null, [{"children": "x"}]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle"}}, [{"children": {"a": 1}}]]}
+{"fn": "withIconNamesCase", "args": [null, [{"children": {"a": 1}}]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle"}}, [{"children": [3]}]]}
+{"fn": "withIconNamesCase", "args": [null, [{"children": [3]}]]}
+{"fn": "withIconNamesCase", "args": [{"icons": {"plus": "plus.circle"}}, [{"separator": true}, 7]]}
+{"fn": "withIconNamesCase", "args": [null, [{"separator": true}, 7]]}
+{"fn":"withIconNamesCase","args":[{"icons":{"plus":"plus.circle"}},[["a",1],{"symbol":"plus"}]]}
+{"fn":"withIconNamesCase","args":[{"icons":{"plus":"plus.circle"}},[{"symbol":"plus","children":[[],{"symbol":"x"}]}]]}
+{"fn":"withIconNamesCase","args":[{"icons":{"plus":"plus.circle"}},[{"symbol":5},{"symbol":null},{"children":0}]]}

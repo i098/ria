@@ -1,0 +1,47 @@
+{
+  "unit": "apps/browser/src/lib/themeFile.ts",
+  "files": 1,
+  "fingerprint": "17275f28d583de8c",
+  "coverage": {
+    "lines": 596,
+    "reached": 424,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/color.ts",
+        "lines": 66,
+        "reached": 16,
+        "missed": "10-19, 25-28, 31-34, 39-42, 45-51, 54-56, 59-61, 64-72, 75-80"
+      },
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/jsonSchema.ts",
+        "lines": 24,
+        "reached": 24,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/themeFile.ts",
+        "lines": 117,
+        "reached": 117,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/themeLook.ts",
+        "lines": 328,
+        "reached": 236,
+        "missed": "151-154, 157-164, 171-173, 176, 182-184, 199-200, 210-212, 255-283, 288-299, 304-315, 342-356"
+      },
+      {
+        "file": "apps/browser/src/lib/windowLayout.ts",
+        "lines": 53,
+        "reached": 23,
+        "missed": "25-38, 41-46, 57-66"
+      }
+    ]
+  }
+}

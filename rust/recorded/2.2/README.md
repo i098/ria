@@ -97,3 +97,26 @@ Crates with differences that the Rust `String` forces (lone surrogates and simil
 
 `pluginProtocol.ts` holds only types: it has a Rust port (`shared/plugin_protocol.rs`) and no crate.
 Crates with known differences (lone surrogates and similar) have a `known-diffs.jsonl`; lines the cases do not reach are in `UNREACHED.md`.
+
+## Part 3 (issue 175)
+
+| Crate | Unit (`apps/browser/src/lib/`) |
+| --- | --- |
+| `active-look-rs` | `activeLook.ts` |
+| `minimalism-look-rs` | `minimalismLook.ts` |
+| `platform-chrome-rs` | `platformChrome.ts` |
+| `preset-look-harness-rs` | `presetLookHarness.ts` |
+| `preset-look-rs` | `presetLook.ts` |
+| `profile-look-rs` | `profileLook.ts` |
+| `selection-contrast-rs` | `selectionContrast.ts` |
+| `tab-corners-rs` | `tabCorners.ts` |
+| `theme-file-rs` | `themeFile.ts` |
+| `theme-gesture-rs` | `themeGesture.ts` |
+| `theme-look-rs` | `themeLook.ts` |
+| `window-button-layout-rs` | `windowButtonLayout.ts` |
+| `window-chrome-rs` | `windowChrome.ts` |
+| `window-layout-rs` | `windowLayout.ts` |
+| `window-tint-rs` | `windowTint.ts` |
+
+`sidebarMetrics.ts`, `platformFeatures.ts` and `platformTerms.ts` export only constants and types: they have Rust ports and no crate. The crates of `presetLook`, `activeLook`, `minimalismLook`, `tabCorners` and `themeGesture` use a `*.harness.ts` file because the wire cannot carry their values.
+Arguments outside the TS types are not recorded (`record --count 0`); each README has a fuzz scope note.

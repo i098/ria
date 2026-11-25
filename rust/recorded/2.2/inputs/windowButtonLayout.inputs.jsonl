@@ -1,0 +1,105 @@
+{"fn": "parseButtonLayout", "args": [":minimize,maximize,close"]}
+{"fn": "parseButtonLayout", "args": ["appmenu:close"]}
+{"fn": "parseButtonLayout", "args": ["menu:close"]}
+{"fn": "parseButtonLayout", "args": ["close,minimize,maximize:"]}
+{"fn": "parseButtonLayout", "args": ["close:maximize"]}
+{"fn": "parseButtonLayout", "args": ["icon:minimize,maximize,close"]}
+{"fn": "parseButtonLayout", "args": ["close,maximize,minimize:menu"]}
+{"fn": "parseButtonLayout", "args": [":minimize,spacer,maximize,close"]}
+{"fn": "parseButtonLayout", "args": [""]}
+{"fn": "parseButtonLayout", "args": [":"]}
+{"fn": "parseButtonLayout", "args": ["appmenu:"]}
+{"fn": "parseButtonLayout", "args": ["close,minimize"]}
+{"fn": "parseButtonLayout", "args": ["close:minimize:maximize"]}
+{"fn": "parseButtonLayout", "args": [":Close,MAXIMIZE"]}
+{"fn": "parseButtonLayout", "args": [": close"]}
+{"fn": "parseButtonLayout", "args": [":minimize,,close"]}
+{"fn": "parseButtonLayout", "args": ["close:close,maximize"]}
+{"fn": "parseButtonLayout", "args": ["appmenu,menu:close,menu"]}
+{"fn": "parseButtonLayout", "args": [":frobnicate,toString,constructor,close"]}
+{"fn": "parseButtonLayout", "args": ["close,maximize:minimize"]}
+{"fn": "parseButtonLayout", "args": ["maximize,close,minimize"]}
+{"fn": "parseButtonLayout", "args": ["clóse:minimize"]}
+{"fn": "parseButtonLayout", "args": ["😀:close,é"]}
+{"fn": "parseButtonLayout", "args": ["ｃlose:minimize"]}
+{"fn": "parseButtonLayout", "args": ["close:minimize,maximize,close,minimize"]}
+{"fn": "parseButtonLayout", "args": [",,,:,,,"]}
+{"fn": "parseButtonLayout", "args": ["close\t:minimize"]}
+{"fn": "parseButtonLayout", "args": [null]}
+{"fn": "parseButtonLayout", "args": []}
+{"fn": "parseButtonLayout", "args": [{"$undefined": true}]}
+{"fn": "parseButtonLayout", "args": [42]}
+{"fn": "parseButtonLayout", "args": [{"$utf16": [55357, 58]}]}
+{"fn": "parseButtonLayout", "args": [["close"]]}
+{"fn": "windowControlsWidth", "args": [0]}
+{"fn": "windowControlsWidth", "args": [4]}
+{"fn": "windowControlsWidth", "args": [3]}
+{"fn": "windowControlsWidth", "args": [1]}
+{"fn": "windowControlsWidth", "args": [2]}
+{"fn": "windowControlsWidth", "args": [-1]}
+{"fn": "windowControlsWidth", "args": [0.5]}
+{"fn": "windowControlsWidth", "args": [{"$num": "NaN"}]}
+{"fn": "windowControlsWidth", "args": [{"$num": "-0"}]}
+{"fn": "windowControlsWidth", "args": [{"$num": "Infinity"}]}
+{"fn": "windowControlsWidth", "args": []}
+{"fn": "windowButtonsFor", "args": [["close", "maximize"], {"menu": false}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize"], {"menu": false}]}
+{"fn": "windowButtonsFor", "args": [["close", "maximize"], {"menu": false, "maximizable": false}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize"], {"menu": false, "maximizable": false}]}
+{"fn": "windowButtonsFor", "args": [["close", "maximize"], {"menu": true}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize"], {"menu": true}]}
+{"fn": "windowButtonsFor", "args": [["close", "maximize"], {"menu": false, "minimizable": false}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize"], {"menu": false, "minimizable": false}]}
+{"fn": "windowButtonsFor", "args": [["close", "maximize"], {}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize"], {}]}
+{"fn": "windowButtonsFor", "args": [["close", "maximize"], {"menu": 0}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize"], {"menu": 0}]}
+{"fn": "windowButtonsFor", "args": [["close", "maximize"], {"menu": "x"}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize"], {"menu": "x"}]}
+{"fn": "windowButtonsFor", "args": [["close", "maximize"], {"menu": null}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize"], {"menu": null}]}
+{"fn": "windowButtonsFor", "args": [["close", "maximize"], {"minimizable": {"$undefined": true}}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize"], {"minimizable": {"$undefined": true}}]}
+{"fn": "windowButtonsFor", "args": [["close", "maximize"], {"maximizable": ""}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize"], {"maximizable": ""}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize", "maximize", "close"], {"menu": false}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize", "maximize", "close"], {"minimizable": false}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize", "maximize", "close"], {"maximizable": false}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize", "maximize", "close"], {"menu": false, "minimizable": false, "maximizable": false}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize", "maximize", "close"], null]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize", "maximize", "close"], {"$undefined": true}]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize", "maximize", "close"], 5]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize", "maximize", "close"], "menu"]}
+{"fn": "windowButtonsFor", "args": [["menu", "minimize", "maximize", "close"], []]}
+{"fn": "windowButtonsFor", "args": [["Menu", "é", "😀", "close"], {"menu": false}]}
+{"fn": "windowButtonsFor", "args": [[], {"menu": false}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": [], "trailing": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": [], "trailing": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": [], "trailing": ["menu", "close"]}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": [], "trailing": ["menu", "close"]}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": ["close", "minimize", "maximize"], "trailing": ["menu"]}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": ["close", "minimize", "maximize"], "trailing": ["menu"]}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": ["close"], "trailing": ["menu", "maximize"]}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": ["close"], "trailing": ["menu", "maximize"]}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": [], "trailing": ["menu"]}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": [], "trailing": ["menu"]}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": [], "trailing": ["menu", "close"]}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": [], "trailing": ["menu", "close"]}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": [], "trailing": ["menu"]}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": [], "trailing": ["menu"]}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": [], "trailing": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": [], "trailing": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "buttonLayoutSide", "args": [null]}
+{"fn": "buttonLayoutCount", "args": [null]}
+{"fn": "buttonLayoutSide", "args": [0]}
+{"fn": "buttonLayoutCount", "args": [0]}
+{"fn": "buttonLayoutSide", "args": ["x"]}
+{"fn": "buttonLayoutCount", "args": ["x"]}
+{"fn": "buttonLayoutSide", "args": [{"leading": []}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": []}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": "close", "trailing": []}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": "close", "trailing": []}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": [], "trailing": ["menu", "menu"]}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": [], "trailing": ["menu", "menu"]}]}
+{"fn": "buttonLayoutSide", "args": [{"leading": ["menu"], "trailing": ["menu"]}]}
+{"fn": "buttonLayoutCount", "args": [{"leading": ["menu"], "trailing": ["menu"]}]}

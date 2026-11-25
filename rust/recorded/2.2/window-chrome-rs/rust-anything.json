@@ -1,0 +1,179 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/windowChrome.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "windowchrome-rs",
+  "exports": [
+    {
+      "name": "captionRoom",
+      "file": "apps/browser/src/lib/windowChrome.ts",
+      "line": 6,
+      "params": [
+        {
+          "name": "fromRight",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "fromTop",
+          "ts_type": "number",
+          "optional": true,
+          "rest": false
+        },
+        {
+          "name": "chrome",
+          "ts_type": "{\n  leadingWidth: number;\n  trailingWidth: number;\n  titleBarHeight: number;\n  leadingButtons: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[];\n  trailingButtons: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[];\n}",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "captionClearTop",
+      "file": "apps/browser/src/lib/windowChrome.ts",
+      "line": 11,
+      "params": [
+        {
+          "name": "top",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "rowHeight",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "fromRight",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "chrome",
+          "ts_type": "{\n  leadingWidth: number;\n  trailingWidth: number;\n  titleBarHeight: number;\n  leadingButtons: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[];\n  trailingButtons: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[];\n}",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "trailingClearance",
+      "file": "apps/browser/src/lib/windowChrome.ts",
+      "line": 16,
+      "params": [
+        {
+          "name": "top",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "margin",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "controlsBottom",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "chrome",
+          "ts_type": "{\n  leadingWidth: number;\n  trailingWidth: number;\n  titleBarHeight: number;\n  leadingButtons: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[];\n  trailingButtons: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[];\n}",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "trafficLightsDrawn",
+      "file": "apps/browser/src/lib/windowChrome.ts",
+      "line": 22,
+      "params": [
+        {
+          "name": "chrome",
+          "ts_type": "{\n  leadingWidth: number;\n  trailingWidth: number;\n  titleBarHeight: number;\n  leadingButtons: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[];\n  trailingButtons: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[];\n}",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "windowControlsDrawn",
+      "file": "apps/browser/src/lib/windowChrome.ts",
+      "line": 24,
+      "params": [
+        {
+          "name": "chrome",
+          "ts_type": "{\n  leadingWidth: number;\n  trailingWidth: number;\n  titleBarHeight: number;\n  leadingButtons: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[];\n  trailingButtons: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[];\n}",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "windowChromeVersion",
+      "file": "apps/browser/src/lib/windowChrome.ts",
+      "line": 29,
+      "params": [],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "noteWindowChromeChanged",
+      "file": "apps/browser/src/lib/windowChrome.ts",
+      "line": 36,
+      "params": [],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": [
+    {
+      "name": "onWindowChromeChange",
+      "file": "apps/browser/src/lib/windowChrome.ts",
+      "line": 31,
+      "reason": "takes or returns a function"
+    }
+  ]
+}

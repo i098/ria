@@ -1,0 +1,41 @@
+{"fn": "hexColor", "args": ["#3366ff"]}
+{"fn": "hexColor", "args": ["#000"]}
+{"fn": "hexColor", "args": ["#fff"]}
+{"fn": "hexColor", "args": ["#ffffff80"]}
+{"fn": "hexColor", "args": ["rgb(10, 20, 30)"]}
+{"fn": "hexColor", "args": ["rgba(200,100,50,0.5)"]}
+{"fn": "hexColor", "args": [""]}
+{"fn": "hexColor", "args": ["bogus"]}
+{"fn": "hexColor", "args": ["#123"]}
+{"fn": "hexColor", "args": ["#808080"]}
+{"fn": "hexColor", "args": ["#f5f5f5"]}
+{"fn": "hexColor", "args": ["#1e1e1e"]}
+{"fn": "hexColor", "args": ["#abcdef"]}
+{"fn": "hexColor", "args": ["#ABCDEF"]}
+{"fn": "spaceLookSource", "args": [{"spacesFollowAppearance": true}]}
+{"fn": "spaceLookSource", "args": [{"spacesFollowAppearance": false}]}
+{"fn": "spaceLookSource", "args": [{}]}
+{"fn": "spaceLookSource", "args": [{"spacesFollowAppearance": 1}]}
+{"fn": "spaceLookSource", "args": [{"spacesFollowAppearance": ""}]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.1, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 0.5, "mode": "auto", "grain": 0, "texture": "grain", "translucency": 1}, true]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.1, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 0.5, "mode": "auto", "grain": 0, "texture": "grain", "translucency": 1}, false]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.9, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 0.8, "mode": "auto", "grain": 0, "texture": "grain", "translucency": 1}, true]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.9, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 0.8, "mode": "auto", "grain": 0, "texture": "grain", "translucency": 1}, false]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.9, "g": 0.4, "b": 0.8, "a": 1}}, {"x": 0.8, "y": 0.3, "color": {"r": 0.2, "g": 0.7, "b": 0.5, "a": 1}}], "intensity": 0.8, "mode": "auto", "grain": 0.3, "texture": "sand", "translucency": 0.5, "angle": 200}, true]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.9, "g": 0.4, "b": 0.8, "a": 1}}, {"x": 0.8, "y": 0.3, "color": {"r": 0.2, "g": 0.7, "b": 0.5, "a": 1}}], "intensity": 0.8, "mode": "auto", "grain": 0.3, "texture": "sand", "translucency": 0.5, "angle": 200}, false]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.9, "g": 0.4, "b": 0.8, "a": 1}}, {"x": 0.8, "y": 0.3, "color": {"r": 0.2, "g": 0.7, "b": 0.5, "a": 1}}, {"x": 0.2, "y": 0.7, "color": {"r": 0.9, "g": 0.4, "b": 0.8, "a": 1}}, {"x": 0.8, "y": 0.3, "color": {"r": 0.2, "g": 0.7, "b": 0.5, "a": 1}}], "intensity": 0.8, "mode": "auto", "grain": 0.3, "texture": "tweed", "translucency": 0.5, "angle": 200}, true]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.9, "g": 0.4, "b": 0.8, "a": 1}}, {"x": 0.8, "y": 0.3, "color": {"r": 0.2, "g": 0.7, "b": 0.5, "a": 1}}, {"x": 0.2, "y": 0.7, "color": {"r": 0.9, "g": 0.4, "b": 0.8, "a": 1}}, {"x": 0.8, "y": 0.3, "color": {"r": 0.2, "g": 0.7, "b": 0.5, "a": 1}}], "intensity": 0.8, "mode": "auto", "grain": 0.3, "texture": "tweed", "translucency": 0.5, "angle": 200}, false]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.5, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 0, "mode": "dark", "grain": 0, "texture": "grain", "translucency": 1}, true]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.5, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 0, "mode": "dark", "grain": 0, "texture": "grain", "translucency": 1}, false]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.5, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 1, "mode": "light", "grain": 1, "texture": "denim", "translucency": 0}, true]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.5, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 1, "mode": "light", "grain": 1, "texture": "denim", "translucency": 0}, false]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.3, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 0.5, "mode": "auto", "grain": 0, "texture": "grain", "translucency": 1, "dark": {"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.1, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 0.2, "mode": "auto", "grain": 0, "texture": "grain", "translucency": 1}}, true]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.3, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 0.5, "mode": "auto", "grain": 0, "texture": "grain", "translucency": 1, "dark": {"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.1, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 0.2, "mode": "auto", "grain": 0, "texture": "grain", "translucency": 1}}, false]}
+{"fn": "themeBackdrop", "args": [{"stops": [], "intensity": 0.5, "mode": "auto", "grain": 0, "texture": "grain", "translucency": 1}, true]}
+{"fn": "themeBackdrop", "args": [{"stops": [], "intensity": 0.5, "mode": "auto", "grain": 0, "texture": "grain", "translucency": 1}, false]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.5, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 2, "mode": "auto", "grain": -1, "texture": "grain", "translucency": 3, "angle": -30}, true]}
+{"fn": "themeBackdrop", "args": [{"stops": [{"x": 0.2, "y": 0.7, "color": {"r": 0.5, "g": 0.4, "b": 0.8, "a": 1}}], "intensity": 2, "mode": "auto", "grain": -1, "texture": "grain", "translucency": 3, "angle": -30}, false]}
+{"fn": "spaceLookSource", "args": [null]}
+{"fn": "spaceLookSource", "args": [{"$undefined": true}]}
+{"fn": "themeBackdrop", "args": [null, true]}
+{"fn": "themeBackdrop", "args": [{"$undefined": true}, false]}

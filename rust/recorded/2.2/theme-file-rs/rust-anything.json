@@ -1,0 +1,132 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/themeFile.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "theme-file-rs",
+  "exports": [
+    {
+      "name": "themeColor",
+      "file": "apps/browser/src/lib/themeFile.ts",
+      "line": 23,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "roleKind",
+      "file": "apps/browser/src/lib/themeFile.ts",
+      "line": 45,
+      "params": [
+        {
+          "name": "role",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "value",
+          "ts_type": "(string | number | boolean | readonly [string, string])",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({ kind: \"color\" } | { kind: \"pair\" } | { kind: \"number\"; minimum?: number; maximum?: number }) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "parseThemeFile",
+      "file": "apps/browser/src/lib/themeFile.ts",
+      "line": 69,
+      "params": [
+        {
+          "name": "file",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "text",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "defaults",
+          "ts_type": "{ readonly dark: Readonly<Record<string, (string | number | boolean | readonly [string, string])>>; readonly light: Readonly<Record<string, (string | number | boolean | readonly [string, string])>> }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({ roles: { readonly dark: Readonly<Record<string, (string | number | boolean | readonly [string, string])>>; readonly light: Readonly<Record<string, (string | number | boolean | readonly [string, string])>> } | null; look: { type?: Record<string, unknown>; metrics?: Record<string, unknown>; layout?: Record<string, unknown>; icons?: Record<string, string> } | null; problems: string[] })",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "mergedPalettes",
+      "file": "apps/browser/src/lib/themeFile.ts",
+      "line": 102,
+      "params": [
+        {
+          "name": "defaults",
+          "ts_type": "{ readonly dark: Readonly<Record<string, (string | number | boolean | readonly [string, string])>>; readonly light: Readonly<Record<string, (string | number | boolean | readonly [string, string])>> }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "roles",
+          "ts_type": "{ readonly dark: Readonly<Record<string, (string | number | boolean | readonly [string, string])>>; readonly light: Readonly<Record<string, (string | number | boolean | readonly [string, string])>> } | null",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "revision",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ readonly dark: Readonly<Record<string, (string | number | boolean | readonly [string, string])>>; readonly light: Readonly<Record<string, (string | number | boolean | readonly [string, string])>> } & { readonly revision: number }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themeSchema",
+      "file": "apps/browser/src/lib/themeFile.ts",
+      "line": 123,
+      "params": [
+        {
+          "name": "defaults",
+          "ts_type": "{ readonly dark: Readonly<Record<string, (string | number | boolean | readonly [string, string])>>; readonly light: Readonly<Record<string, (string | number | boolean | readonly [string, string])>> }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "object",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

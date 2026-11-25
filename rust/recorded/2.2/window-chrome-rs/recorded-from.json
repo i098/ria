@@ -1,0 +1,29 @@
+{
+  "unit": "apps/browser/src/lib/windowChrome.ts",
+  "files": 1,
+  "fingerprint": "47f21d46e0c6e0f7",
+  "coverage": {
+    "lines": 81,
+    "reached": 74,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/platformChrome.ts",
+        "lines": 19,
+        "reached": 19,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/windowButtonLayout.ts",
+        "lines": 34,
+        "reached": 30,
+        "missed": "43-46"
+      },
+      {
+        "file": "apps/browser/src/lib/windowChrome.ts",
+        "lines": 28,
+        "reached": 25,
+        "missed": "32-34"
+      }
+    ]
+  }
+}

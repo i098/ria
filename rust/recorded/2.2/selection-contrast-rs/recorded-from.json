@@ -1,0 +1,29 @@
+{
+  "unit": "apps/browser/src/lib/selectionContrast.ts",
+  "files": 1,
+  "fingerprint": "5c4d9609687655d3",
+  "coverage": {
+    "lines": 172,
+    "reached": 121,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/color.ts",
+        "lines": 66,
+        "reached": 30,
+        "missed": "25-28, 39-42, 45-51, 54-56, 59-61, 64-72, 75-80"
+      },
+      {
+        "file": "apps/browser/src/lib/profileLook.ts",
+        "lines": 78,
+        "reached": 63,
+        "missed": "71-73, 76-77, 80-89"
+      },
+      {
+        "file": "apps/browser/src/lib/selectionContrast.ts",
+        "lines": 28,
+        "reached": 28,
+        "missed": ""
+      }
+    ]
+  }
+}

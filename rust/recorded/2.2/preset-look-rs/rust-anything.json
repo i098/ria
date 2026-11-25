@@ -1,0 +1,337 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/presetLook.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "preset-look-rs",
+  "exports": [
+    {
+      "name": "presetStartingTheme",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 3,
+      "params": [
+        {
+          "name": "swatch",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "presetThemeOf",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 10,
+      "params": [
+        {
+          "name": "profile",
+          "ts_type": "({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n} | null }) & { presetThemes?: Partial<Record<(typeof PROFILE_COLOR_NAMES)[number], {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n}>> }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "color",
+          "ts_type": "(typeof PROFILE_COLOR_NAMES)[number]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "snapToStart",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 31,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "start",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "trackPixels",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "snapPointToStart",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 35,
+      "params": [
+        {
+          "name": "point",
+          "ts_type": "{ x: number; y: number }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "start",
+          "ts_type": "{ x: number; y: number }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "padPixels",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ x: number; y: number }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "isUntouched",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 39,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "start",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "sameTheme",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 43,
+      "params": [
+        {
+          "name": "a",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null | undefined",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "b",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withOwnLook",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 51,
+      "params": [
+        {
+          "name": "profile",
+          "ts_type": "({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n} | null }) & { presetThemes?: Partial<Record<(typeof PROFILE_COLOR_NAMES)[number], {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n}>> }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({ theme: {\n  stops: { color: ThemeColor; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: ThemeColor; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null; presetThemes: Partial<Record<(typeof PROFILE_COLOR_NAMES)[number], {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n}>> })",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withPresetChosen",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 58,
+      "params": [
+        {
+          "name": "profile",
+          "ts_type": "({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n} | null }) & { presetThemes?: Partial<Record<(typeof PROFILE_COLOR_NAMES)[number], {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n}>> }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "color",
+          "ts_type": "(typeof PROFILE_COLOR_NAMES)[number]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme: {\n  stops: { color: ThemeColor; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: ThemeColor; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null }) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withSyncedColor",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 65,
+      "params": [
+        {
+          "name": "profile",
+          "ts_type": "({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n} | null }) & { presetThemes?: Partial<Record<(typeof PROFILE_COLOR_NAMES)[number], {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n}>> }",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "color",
+          "ts_type": "(typeof PROFILE_COLOR_NAMES)[number]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "synced",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme: {\n  stops: { color: ThemeColor; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: ThemeColor; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null | undefined }) | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "editedPresetCount",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 69,
+      "params": [
+        {
+          "name": "profile",
+          "ts_type": "({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n} | null }) & { presetThemes?: Partial<Record<(typeof PROFILE_COLOR_NAMES)[number], {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n}>> }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withOwnLooksSeeded",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 73,
+      "params": [
+        {
+          "name": "profile",
+          "ts_type": "(({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n} | null }) & { presetThemes?: Partial<Record<(typeof PROFILE_COLOR_NAMES)[number], {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n}>> } & { seenTheme?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null; seenColor?: (typeof PROFILE_COLOR_NAMES)[number] })",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "(({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n} | null }) & { presetThemes?: Partial<Record<(typeof PROFILE_COLOR_NAMES)[number], {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n}>> } & { seenTheme?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n} | null; seenColor?: (typeof PROFILE_COLOR_NAMES)[number] })",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "profilesWithOwnLooks",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 84,
+      "params": [
+        {
+          "name": "profiles",
+          "ts_type": "Record<string, (({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n} | null }) & { presetThemes?: Partial<Record<(typeof PROFILE_COLOR_NAMES)[number], {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n}>> })>",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "Record<string, (({ color: (typeof PROFILE_COLOR_NAMES)[number]; theme?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n} | null }) & { presetThemes?: Partial<Record<(typeof PROFILE_COLOR_NAMES)[number], {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: ThemeStop[];\n  intensity: number;\n  grain: number;\n  texture: ThemeTexture;\n  translucency: number;\n  angle?: number;\n};\n}>> })>",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "trackValueAt",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 100,
+      "params": [
+        {
+          "name": "pageX",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "trackX",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "trackPixels",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "snapTo",
+          "ts_type": "number | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number | null",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": [
+    {
+      "name": "trackPress",
+      "file": "apps/browser/src/lib/presetLook.ts",
+      "line": 87,
+      "reason": "returns closures; replayed by presetLook.harness.ts in preset-look-harness-rs"
+    }
+  ]
+}

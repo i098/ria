@@ -1,0 +1,78 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/activeLook.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "activelook-rs",
+  "exports": [
+    {
+      "name": "activeLookCase",
+      "file": "apps/browser/src/lib/activeLook.harness.ts",
+      "line": 19,
+      "params": [
+        {
+          "name": "doc",
+          "ts_type": "Record<string, unknown> | null",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "iconNameCase",
+      "file": "apps/browser/src/lib/activeLook.harness.ts",
+      "line": 21,
+      "params": [
+        {
+          "name": "doc",
+          "ts_type": "Record<string, unknown> | null",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "name",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withIconNamesCase",
+      "file": "apps/browser/src/lib/activeLook.harness.ts",
+      "line": 24,
+      "params": [
+        {
+          "name": "doc",
+          "ts_type": "Record<string, unknown> | null",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "items",
+          "ts_type": "unknown[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ items: unknown[]; same: boolean }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

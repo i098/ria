@@ -1,0 +1,233 @@
+{"fn": "captionRoom", "args": [0, 0]}
+{"fn": "captionRoom", "args": [9, 9]}
+{"fn": "captionRoom", "args": [0, 40]}
+{"fn": "captionRoom", "args": [200, 0]}
+{"fn": "captionRoom", "args": [0]}
+{"fn": "captionRoom", "args": [5, {"$undefined": true}, {"$undefined": true}]}
+{"fn": "captionClearTop", "args": [9, 0, 9]}
+{"fn": "captionClearTop", "args": [9, 28, 9]}
+{"fn": "captionClearTop", "args": [9, 41, 9]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [9, 9, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [9, 31, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [9, 32, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [9, 42, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [171, 0, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [190, 0, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [0, {"$num": "NaN"}, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [{"$num": "NaN"}, 0, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [-5, 0, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionClearTop", "args": [9, 41, 9, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionClearTop", "args": [9, 28, 9, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionClearTop", "args": [9, 16, 9, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionClearTop", "args": [9, 0, 190, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionClearTop", "args": [{"$num": "NaN"}, 0, 9, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionClearTop", "args": [9, {"$num": "NaN"}, 9, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionClearTop", "args": [9, 0, {"$num": "NaN"}, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionClearTop", "args": [40, 0, 9, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": 78, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": 78, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": 78, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": 78, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": 78, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": 78, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": 78, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": 78, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": 0, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": 0, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": 0, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": 0, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": 0, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": 0, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": 0, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": 0, "trailingWidth": 0, "titleBarHeight": 0, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": 0, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "close"]}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": 0, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "close"]}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": 0, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "close"]}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": 0, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "close"]}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": 0, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "close"]}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": 0, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "close"]}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": 0, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "close"]}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": 0, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "close"]}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": 108, "trailingWidth": 72, "titleBarHeight": 32, "leadingButtons": ["close", "minimize", "maximize"], "trailingButtons": ["menu"]}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": 108, "trailingWidth": 72, "titleBarHeight": 32, "leadingButtons": ["close", "minimize", "maximize"], "trailingButtons": ["menu"]}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": 108, "trailingWidth": 72, "titleBarHeight": 32, "leadingButtons": ["close", "minimize", "maximize"], "trailingButtons": ["menu"]}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": 108, "trailingWidth": 72, "titleBarHeight": 32, "leadingButtons": ["close", "minimize", "maximize"], "trailingButtons": ["menu"]}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": 108, "trailingWidth": 72, "titleBarHeight": 32, "leadingButtons": ["close", "minimize", "maximize"], "trailingButtons": ["menu"]}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": 108, "trailingWidth": 72, "titleBarHeight": 32, "leadingButtons": ["close", "minimize", "maximize"], "trailingButtons": ["menu"]}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": 108, "trailingWidth": 72, "titleBarHeight": 32, "leadingButtons": ["close", "minimize", "maximize"], "trailingButtons": ["menu"]}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": 108, "trailingWidth": 72, "titleBarHeight": 32, "leadingButtons": ["close", "minimize", "maximize"], "trailingButtons": ["menu"]}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": 42, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": ["close"], "trailingButtons": ["menu", "maximize"]}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": 42, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": ["close"], "trailingButtons": ["menu", "maximize"]}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": 42, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": ["close"], "trailingButtons": ["menu", "maximize"]}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": 42, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": ["close"], "trailingButtons": ["menu", "maximize"]}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": 42, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": ["close"], "trailingButtons": ["menu", "maximize"]}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": 42, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": ["close"], "trailingButtons": ["menu", "maximize"]}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": 42, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": ["close"], "trailingButtons": ["menu", "maximize"]}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": 42, "trailingWidth": 105, "titleBarHeight": 32, "leadingButtons": ["close"], "trailingButtons": ["menu", "maximize"]}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": "78", "trailingWidth": "171", "titleBarHeight": "32", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": "78", "trailingWidth": "171", "titleBarHeight": "32", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": "78", "trailingWidth": "171", "titleBarHeight": "32", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": "78", "trailingWidth": "171", "titleBarHeight": "32", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": "78", "trailingWidth": "171", "titleBarHeight": "32", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": "78", "trailingWidth": "171", "titleBarHeight": "32", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": "78", "trailingWidth": "171", "titleBarHeight": "32", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": "78", "trailingWidth": "171", "titleBarHeight": "32", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": true, "trailingWidth": null, "titleBarHeight": false, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": true, "trailingWidth": null, "titleBarHeight": false, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": true, "trailingWidth": null, "titleBarHeight": false, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": true, "trailingWidth": null, "titleBarHeight": false, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": true, "trailingWidth": null, "titleBarHeight": false, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": true, "trailingWidth": null, "titleBarHeight": false, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": true, "trailingWidth": null, "titleBarHeight": false, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": true, "trailingWidth": null, "titleBarHeight": false, "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": [5], "trailingWidth": [], "titleBarHeight": [1, 2], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": [5], "trailingWidth": [], "titleBarHeight": [1, 2], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": [5], "trailingWidth": [], "titleBarHeight": [1, 2], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": [5], "trailingWidth": [], "titleBarHeight": [1, 2], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": [5], "trailingWidth": [], "titleBarHeight": [1, 2], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": [5], "trailingWidth": [], "titleBarHeight": [1, 2], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": [5], "trailingWidth": [], "titleBarHeight": [1, 2], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": [5], "trailingWidth": [], "titleBarHeight": [1, 2], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": {"a": 1}, "trailingWidth": " 40 ", "titleBarHeight": "0x20", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": {"a": 1}, "trailingWidth": " 40 ", "titleBarHeight": "0x20", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": {"a": 1}, "trailingWidth": " 40 ", "titleBarHeight": "0x20", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": {"a": 1}, "trailingWidth": " 40 ", "titleBarHeight": "0x20", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": {"a": 1}, "trailingWidth": " 40 ", "titleBarHeight": "0x20", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": {"a": 1}, "trailingWidth": " 40 ", "titleBarHeight": "0x20", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": {"a": 1}, "trailingWidth": " 40 ", "titleBarHeight": "0x20", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": {"a": 1}, "trailingWidth": " 40 ", "titleBarHeight": "0x20", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": [[3]], "trailingWidth": [null], "titleBarHeight": [true], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": [[3]], "trailingWidth": [null], "titleBarHeight": [true], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": [[3]], "trailingWidth": [null], "titleBarHeight": [true], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": [[3]], "trailingWidth": [null], "titleBarHeight": [true], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": [[3]], "trailingWidth": [null], "titleBarHeight": [true], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": [[3]], "trailingWidth": [null], "titleBarHeight": [true], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": [[3]], "trailingWidth": [null], "titleBarHeight": [true], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": [[3]], "trailingWidth": [null], "titleBarHeight": [true], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": [{"$undefined": true}], "trailingWidth": [{"a": 1}], "titleBarHeight": [{"$num": "-0"}], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": [{"$undefined": true}], "trailingWidth": [{"a": 1}], "titleBarHeight": [{"$num": "-0"}], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": [{"$undefined": true}], "trailingWidth": [{"a": 1}], "titleBarHeight": [{"$num": "-0"}], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": [{"$undefined": true}], "trailingWidth": [{"a": 1}], "titleBarHeight": [{"$num": "-0"}], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": [{"$undefined": true}], "trailingWidth": [{"a": 1}], "titleBarHeight": [{"$num": "-0"}], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": [{"$undefined": true}], "trailingWidth": [{"a": 1}], "titleBarHeight": [{"$num": "-0"}], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": [{"$undefined": true}], "trailingWidth": [{"a": 1}], "titleBarHeight": [{"$num": "-0"}], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": [{"$undefined": true}], "trailingWidth": [{"a": 1}], "titleBarHeight": [{"$num": "-0"}], "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": [2.5], "trailingWidth": ["é"], "titleBarHeight": "", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": [2.5], "trailingWidth": ["é"], "titleBarHeight": "", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": [2.5], "trailingWidth": ["é"], "titleBarHeight": "", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": [2.5], "trailingWidth": ["é"], "titleBarHeight": "", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": [2.5], "trailingWidth": ["é"], "titleBarHeight": "", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": [2.5], "trailingWidth": ["é"], "titleBarHeight": "", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": [2.5], "trailingWidth": ["é"], "titleBarHeight": "", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": [2.5], "trailingWidth": ["é"], "titleBarHeight": "", "leadingButtons": [], "trailingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": 10}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": 10}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": 10}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": 10}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": 10}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": 10}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": 10}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": 10}]}
+{"fn": "captionRoom", "args": [0, 0, {"trailingWidth": 50, "titleBarHeight": 40}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"trailingWidth": 50, "titleBarHeight": 40}]}
+{"fn": "trafficLightsDrawn", "args": [{"trailingWidth": 50, "titleBarHeight": 40}]}
+{"fn": "windowControlsDrawn", "args": [{"trailingWidth": 50, "titleBarHeight": 40}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"trailingWidth": 50, "titleBarHeight": 40}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"trailingWidth": 50, "titleBarHeight": 40}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"trailingWidth": 50, "titleBarHeight": 40}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"trailingWidth": 50, "titleBarHeight": 40}]}
+{"fn": "captionRoom", "args": [0, 0, {}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {}]}
+{"fn": "trafficLightsDrawn", "args": [{}]}
+{"fn": "windowControlsDrawn", "args": [{}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": 10, "leadingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": 10, "leadingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": 10, "leadingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": 10, "leadingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": 10, "leadingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": 10, "leadingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": 10, "leadingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": 10, "leadingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": 0, "leadingButtons": "x", "trailingButtons": []}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": 0, "leadingButtons": "x", "trailingButtons": []}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": 0, "leadingButtons": "x", "trailingButtons": []}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": 0, "leadingButtons": "x", "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": 0, "leadingButtons": "x", "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": 0, "leadingButtons": "x", "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": 0, "leadingButtons": "x", "trailingButtons": []}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": 0, "leadingButtons": "x", "trailingButtons": []}]}
+{"fn": "captionRoom", "args": [0, 0, {"leadingWidth": {"$undefined": true}, "trailingWidth": {"$undefined": true}, "titleBarHeight": {"$undefined": true}, "leadingButtons": [], "trailingButtons": {"$undefined": true}}]}
+{"fn": "captionClearTop", "args": [9, 0, 9, {"leadingWidth": {"$undefined": true}, "trailingWidth": {"$undefined": true}, "titleBarHeight": {"$undefined": true}, "leadingButtons": [], "trailingButtons": {"$undefined": true}}]}
+{"fn": "trafficLightsDrawn", "args": [{"leadingWidth": {"$undefined": true}, "trailingWidth": {"$undefined": true}, "titleBarHeight": {"$undefined": true}, "leadingButtons": [], "trailingButtons": {"$undefined": true}}]}
+{"fn": "windowControlsDrawn", "args": [{"leadingWidth": {"$undefined": true}, "trailingWidth": {"$undefined": true}, "titleBarHeight": {"$undefined": true}, "leadingButtons": [], "trailingButtons": {"$undefined": true}}]}
+{"fn": "trailingClearance", "args": [0, 12, 32, {"leadingWidth": {"$undefined": true}, "trailingWidth": {"$undefined": true}, "titleBarHeight": {"$undefined": true}, "leadingButtons": [], "trailingButtons": {"$undefined": true}}]}
+{"fn": "trailingClearance", "args": [40, 12, 32, {"leadingWidth": {"$undefined": true}, "trailingWidth": {"$undefined": true}, "titleBarHeight": {"$undefined": true}, "leadingButtons": [], "trailingButtons": {"$undefined": true}}]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, {"leadingWidth": {"$undefined": true}, "trailingWidth": {"$undefined": true}, "titleBarHeight": {"$undefined": true}, "leadingButtons": [], "trailingButtons": {"$undefined": true}}]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, {"leadingWidth": {"$undefined": true}, "trailingWidth": {"$undefined": true}, "titleBarHeight": {"$undefined": true}, "leadingButtons": [], "trailingButtons": {"$undefined": true}}]}
+{"fn": "captionRoom", "args": [0, 0, null]}
+{"fn": "captionClearTop", "args": [9, 0, 9, null]}
+{"fn": "trafficLightsDrawn", "args": [null]}
+{"fn": "windowControlsDrawn", "args": [null]}
+{"fn": "trailingClearance", "args": [0, 12, 32, null]}
+{"fn": "trailingClearance", "args": [40, 12, 32, null]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, null]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, null]}
+{"fn": "captionRoom", "args": [0, 0, 0]}
+{"fn": "captionClearTop", "args": [9, 0, 9, 0]}
+{"fn": "trafficLightsDrawn", "args": [0]}
+{"fn": "windowControlsDrawn", "args": [0]}
+{"fn": "trailingClearance", "args": [0, 12, 32, 0]}
+{"fn": "trailingClearance", "args": [40, 12, 32, 0]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, 0]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, 0]}
+{"fn": "captionRoom", "args": [0, 0, "x"]}
+{"fn": "captionClearTop", "args": [9, 0, 9, "x"]}
+{"fn": "trafficLightsDrawn", "args": ["x"]}
+{"fn": "windowControlsDrawn", "args": ["x"]}
+{"fn": "trailingClearance", "args": [0, 12, 32, "x"]}
+{"fn": "trailingClearance", "args": [40, 12, 32, "x"]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, "x"]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, "x"]}
+{"fn": "captionRoom", "args": [0, 0, []]}
+{"fn": "captionClearTop", "args": [9, 0, 9, []]}
+{"fn": "trafficLightsDrawn", "args": [[]]}
+{"fn": "windowControlsDrawn", "args": [[]]}
+{"fn": "trailingClearance", "args": [0, 12, 32, []]}
+{"fn": "trailingClearance", "args": [40, 12, 32, []]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, []]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, []]}
+{"fn": "captionRoom", "args": [0, 0, true]}
+{"fn": "captionClearTop", "args": [9, 0, 9, true]}
+{"fn": "trafficLightsDrawn", "args": [true]}
+{"fn": "windowControlsDrawn", "args": [true]}
+{"fn": "trailingClearance", "args": [0, 12, 32, true]}
+{"fn": "trailingClearance", "args": [40, 12, 32, true]}
+{"fn": "trailingClearance", "args": [{"$num": "NaN"}, 12, 32, true]}
+{"fn": "trailingClearance", "args": [0, 12, {"$num": "NaN"}, true]}
+{"fn": "trafficLightsDrawn", "args": []}
+{"fn": "trafficLightsDrawn", "args": [{"$undefined": true}]}
+{"fn": "windowControlsDrawn", "args": []}
+{"fn": "windowControlsDrawn", "args": [{"$undefined": true}]}
+{"fn": "trailingClearance", "args": [0, 12, 32]}
+{"fn": "trailingClearance", "args": [0, -12, 32]}
+{"fn": "trailingClearance", "args": [0, {"$num": "NaN"}, 32, {"leadingWidth": 0, "trailingWidth": 171, "titleBarHeight": 32, "leadingButtons": [], "trailingButtons": ["menu", "minimize", "maximize", "close"]}]}
+{"fn": "windowChromeVersion", "args": []}
+{"fn": "noteWindowChromeChanged", "args": []}
+{"fn": "windowChromeVersion", "args": []}
+{"fn": "noteWindowChromeChanged", "args": []}
+{"fn": "noteWindowChromeChanged", "args": []}
+{"fn": "windowChromeVersion", "args": []}
