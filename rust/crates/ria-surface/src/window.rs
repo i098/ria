@@ -133,19 +133,16 @@ impl<S: 'static> WindowHost<S> {
     /// Shows the given engine page view. Pass `None` when no page is selected.
     ///
     /// Changes from Ardia: Ardia mounts every tab's page in a sibling pane. Here the page that was shown stays
-    /// mounted in the same slot, hidden, until `retain_pages` drops it, so the next switch finds its page mounted.
+    /// mounted in the same slot, unhidden, until `retain_pages` drops it, so the next switch finds its page mounted.
     pub fn set_page(&self, view: Option<&NSView>) {
         let same = self.core.page.borrow().as_deref().map(std::ptr::from_ref)
             == view.map(std::ptr::from_ref);
         if same && view.is_none_or(|view| self.core.mounted(view)) {
             return;
         }
-        if let Some(old) = self.core.page.take() {
-            old.setHidden(true);
-        }
+        self.core.page.take();
         if let Some(view) = view {
             self.core.mount(view);
-            view.setHidden(false);
             *self.core.page.borrow_mut() = Some(view.retain());
         }
         self.core
@@ -153,15 +150,10 @@ impl<S: 'static> WindowHost<S> {
         self.core.update_ax_order();
     }
 
-    /// Mounts `view` in the page slot, hidden, beside the shown page. A mounted view stays where it is.
+    /// Mounts `view` in the page slot beside the shown page. A mounted view stays where it is.
     pub fn mount_page(&self, view: &NSView) {
         if !self.core.mounted(view) {
             self.core.mount(view);
-            if self.core.page.borrow().as_deref().map(std::ptr::from_ref)
-                != Some(std::ptr::from_ref(view))
-            {
-                view.setHidden(true);
-            }
             self.core
                 .place_page(self.core.chrome.slot(self.core.page_slot));
         }

@@ -119,6 +119,10 @@ mod mac {
             "the Rune strip did not show, select, pin and close tabs"
         );
         assert!(
+            out.lines().any(|line| line == "revealCounts 1 1"),
+            "selecting a tab did not begin and end one reveal"
+        );
+        assert!(
             out.lines().any(|line| line == "mountedPages 3"),
             "the strip did not keep every tab's page mounted"
         );
@@ -558,7 +562,8 @@ mod mac {
             if let Some(window) = self.host.main() {
                 let profile = window.active_profile().expect("window profile");
                 for _ in 0..2 {
-                    let tab = window.open_tab(&NSString::from_str("about:blank"), &profile, true);
+                    let tab =
+                        window.open_tab(&NSString::from_str("file:///etc/hosts"), &profile, true);
                     window.activate_tab(&tab);
                 }
             }
@@ -597,6 +602,8 @@ mod mac {
                 }
                 2 if rows.get(2).is_some_and(|row| row.active) => {
                     println!("stripSelected");
+                    let (began, ended) = self.host.hooks().reveal_counts();
+                    println!("revealCounts {began} {ended}");
                     self.focus_after_switch(3, Some(button_center(1, Button::Pin)));
                 }
                 3 if rows.first().is_some_and(|row| row.pinned) => {
