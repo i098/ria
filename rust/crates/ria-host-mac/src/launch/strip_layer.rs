@@ -108,9 +108,10 @@ pub struct StripState {
     /// A press changed the active mark since the last read; the next read reports it.
     touched: bool,
     /// Called with the rows each time they change.
-    changed: Option<Rc<dyn Fn(&[Row])>>,
+    changed: Option<ChangedFn>,
 }
 
+type ChangedFn = Rc<dyn Fn(&[Row])>;
 type Shared = Rc<RefCell<StripState>>;
 
 fn chrome(state: &Shared, cx: &mut Cx<Shared>) -> El {
@@ -310,7 +311,7 @@ impl StripLayer {
         host: &Rc<WindowHost>,
         core: &Window,
         tab: &Tab,
-        changed: Rc<dyn Fn(&[Row])>,
+        changed: ChangedFn,
     ) -> Result<Self, String> {
         let profile = core.active_profile().ok_or("the window has no profile")?;
         let page = tab.view().ok_or("the launch tab has no view")?;
