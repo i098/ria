@@ -200,8 +200,7 @@ pub(super) fn directory_exists(path: &Path) -> io::Result<bool> {
 }
 
 /// Requires the engine's singleton lock to sit in the admitted `Chromium` directory and name this process.
-/// Chromium writes that lock into the directory it opened, so the lock proves the engine took the admitted
-/// directory and not a swapped path. It only proves the moment of the check, not later opens.
+/// Use the admitted handle because Chromium writes the lock in the directory it opened.
 pub(super) fn check_singleton(data: &File) -> io::Result<()> {
     let root = open_child(data, "Chromium".as_ref())?;
     let name = CString::new("SingletonLock")?;

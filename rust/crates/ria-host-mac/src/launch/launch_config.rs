@@ -12,10 +12,10 @@
 //! - The engine gets the profile at the normal data path plus `Chromium`, and an isolated launch also passes
 //!   the admitted directory as `/.vol/<device>/<inode>` for `--ardia-data-dir`. A swap of the path after
 //!   admission cannot redirect the scratch data argument.
-//! - The gap left by the last identity check is closed by a recheck after the engine opened its profile: the
-//!   `SingletonLock` that Chromium writes into the opened directory must sit in the admitted `Chromium`
-//!   directory and name this process (`profile::check_singleton`). That proves the moment of the check only;
-//!   a swap after it is not covered.
+//! - After Chromium opens the profile, Ria checks the profile path again.
+//!   Ria also requires the `SingletonLock` in the admitted `Chromium` directory to name this process.
+//!   If the profile path changed, these checks reject the launch before the first window opens.
+//!   Chromium can still open the replacement path before these checks.
 
 use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
