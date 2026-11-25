@@ -11,7 +11,6 @@ use std::rc::Rc;
 
 use objc2::MainThreadMarker;
 use objc2::rc::Retained;
-use objc2_foundation::NSRect;
 use serde_json::Value;
 
 use super::ardia_web_view::{ArdiaWebView, LiveViews};
@@ -23,7 +22,7 @@ pub struct ChromiumTabView(PageTabHost);
 impl ChromiumTabView {
     /// `makePage`: Create a zero-frame Chromium view and register it.
     pub fn make_page(mtm: MainThreadMarker, live: &LiveViews) -> Retained<ArdiaWebView> {
-        ArdiaWebView::new(mtm, NSRect::ZERO, live)
+        ArdiaWebView::new(mtm, live)
     }
 
     /// `init`: Send the supplied page's events through the host.

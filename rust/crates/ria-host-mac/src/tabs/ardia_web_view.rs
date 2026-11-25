@@ -40,7 +40,7 @@ use super::ardia_web_view_stand_in::StandIn;
     dead_code,
     reason = "#110: the modules read these fields once they are wired"
 )]
-pub struct State {
+struct State {
     tab: Option<Retained<Tab>>,
     controller: RcWeak<Controller>,
     life: TabLifecycle,
@@ -65,11 +65,17 @@ pub struct State {
     tab_index: isize,
 }
 
+#[allow(
+    dead_code,
+    reason = "#110: the modules read the state once they are wired"
+)]
+pub struct Ivars(RefCell<State>);
+
 define_class!(
     #[unsafe(super(NSView))]
     #[thread_kind = MainThreadOnly]
     #[name = "RiaArdiaWebView"]
-    #[ivars = RefCell<State>]
+    #[ivars = Ivars]
     pub struct ArdiaWebView;
 
     impl ArdiaWebView {
@@ -81,15 +87,15 @@ define_class!(
 );
 
 impl ArdiaWebView {
-    pub fn new(mtm: MainThreadMarker, frame: NSRect, live: &LiveViews) -> Retained<Self> {
-        let view = Self::alloc(mtm).set_ivars(RefCell::new(State {
+    pub(super) fn new(mtm: MainThreadMarker, live: &LiveViews) -> Retained<Self> {
+        let view = Self::alloc(mtm).set_ivars(Ivars(RefCell::new(State {
             visible: true,
             selected: true,
             tab_index: -1,
             ..State::default()
-        }));
+        })));
         // SAFETY: The subclass ivars are initialized before the NSView initializer runs.
-        let view: Retained<Self> = unsafe { msg_send![super(view), initWithFrame: frame] };
+        let view: Retained<Self> = unsafe { msg_send![super(view), initWithFrame: NSRect::ZERO] };
         view.setWantsLayer(true);
         live.register(&view);
         view
