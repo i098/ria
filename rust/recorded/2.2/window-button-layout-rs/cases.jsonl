@@ -1,0 +1,937 @@
+{"fn":"windowControlsWidth","args":[],"ok":96}
+{"fn":"windowControlsWidth","args":[{"$num":"Infinity"}],"ok":{"$num":"Infinity"}}
+{"fn":"windowControlsWidth","args":[0.5],"ok":13.5}
+{"fn":"windowControlsWidth","args":[1000],"ok":32997}
+{"fn":"windowControlsWidth","args":[1],"ok":30}
+{"fn":"windowControlsWidth","args":[1000000],"ok":32999997}
+{"fn":"windowControlsWidth","args":[{"$num":"-0"}],"ok":0}
+{"fn":"windowControlsWidth","args":[0],"ok":0}
+{"fn":"windowControlsWidth","args":[42],"ok":1383}
+{"fn":"windowControlsWidth","args":[-2.5],"ok":0}
+{"fn":"windowControlsWidth","args":[3],"ok":96}
+{"fn":"windowControlsWidth","args":[9007199254740992],"ok":297237575406452740}
+{"fn":"windowControlsWidth","args":[{"$undefined":true}],"ok":96}
+{"fn":"windowControlsWidth","args":[2147483648],"ok":70866960381}
+{"fn":"windowControlsWidth","args":[2],"ok":63}
+{"fn":"windowControlsWidth","args":[{"$num":"NaN"}],"ok":0}
+{"fn":"windowControlsWidth","args":[{"$num":"-Infinity"}],"ok":0}
+{"fn":"windowControlsWidth","args":[10],"ok":327}
+{"fn":"windowControlsWidth","args":[100],"ok":3297}
+{"fn":"windowControlsWidth","args":[-1],"ok":0}
+{"fn":"parseButtonLayout","args":["a😀b😀c"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["straße"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[{"$undefined":true}],"ok":{"leading":[],"trailing":["menu","minimize","maximize","close"]}}
+{"fn":"parseButtonLayout","args":["İstanbul"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["key_name-1é"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a:b:c"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[".leading.leading"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["key_name-1"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[":"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ab"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[],"ok":{"leading":[],"trailing":["menu","minimize","maximize","close"]}}
+{"fn":"parseButtonLayout","args":["abcHello World"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["emoji 👍🏽 mix"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["abc"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a😀b😀ctrailing."],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["./x/**/*.json"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a😀b😀cabc"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[".leading"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["﻿bom"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["😀"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a.b.cab"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["Hello World"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ünïcödé"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["  padded  "],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[""],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["emoji 👍🏽 mix{name} has {count} items"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["line1\nline2src/a/b.ts"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["./x/**/*.jsonİstanbul"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["hello"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[".leading:"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["é"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["İstanbulHELLO"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["日本語のテキスト"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["hello world"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a..b"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a.b.c./x/**/*.json"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["Hello Worldtab\tseparated"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["src/a/b.ts"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["😀ns:key.path"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} items"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["HELLO"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a😀b😀ca"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a.b.c"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["abcns:key.path"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["  padded  src/a/b.ts"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["😀a😀b😀c"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["abΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ns:key.path"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["line1\nline2"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["trailing."],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} itemsΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["trailing.src/a/b.ts"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["tab\tseparated"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} items./x/**/*.json"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["abcΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["abtrailing."],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["Hello Worldhello"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["tab\tseparatedİstanbul"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["aé"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["İstanbulsrc/a/b.ts"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["trailing.ΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["src/a/b.ts﻿bom"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["straßeemoji 👍🏽 mix"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a:b:chello"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["helloa"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a😀b😀cns:key.path"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["straßekey_name-1"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["src/a/b.tsa..b"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["日本語のテキストline1\nline2"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} itemsabc"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ΣΊΣΥΦΟΣ日本語のテキスト"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["key_name-1😀"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["helloabc"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["./x/**/*.jsontab\tseparated"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a﻿bom"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a:b:c./x/**/*.json"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["﻿bomé"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["helloΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["line1\nline2😀"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["src/a/b.tsHELLO"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["HELLOstraße"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["src/a/b.tsünïcödé"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["abc﻿bom"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ns:key.pathΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[".leadingline1\nline2"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[":Hello World"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["./x/**/*.json  padded  "],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[".leading  padded  "],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ΣΊΣΥΦΟΣ﻿bom"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["abns:key.path"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["abca..b"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ans:key.path"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a..bİstanbul"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a😀b😀cünïcödé"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ΣΊΣΥΦΟΣabc"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ns:key.path:"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ns:key.pathHELLO"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["aΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ns:key.path{name} has {count} items"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["hello worldΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ünïcödé.leading"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["日本語のテキストab"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["İstanbultrailing."],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ns:key.pathkey_name-1"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a.b.ctrailing."],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ΣΊΣΥΦΟΣa:b:c"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["emoji 👍🏽 mix./x/**/*.json"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a😀b😀c😀"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["Hello World  padded  "],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["İstanbulstraße"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["trailing.key_name-1"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a.b.c.leading"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["helloline1\nline2"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["key_name-1Hello World"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[".leadinga"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["日本語のテキスト.leading"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["straßestraße"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ns:key.pathhello"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a.b.cΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["./x/**/*.jsonns:key.path"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["line1\nline2HELLO"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["İstanbul日本語のテキスト"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ΣΊΣΥΦΟΣsrc/a/b.ts"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a.b.cé"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} itemsİstanbul"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} itemshello"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["İstanbula:b:c"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["hello worldHello World"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[":é"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["HELLO日本語のテキスト"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a😀b😀cstraße"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["abc  padded  "],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} itemsa😀b😀c"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a.b.cHELLO"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["İstanbulemoji 👍🏽 mix"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["﻿bomemoji 👍🏽 mix"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a日本語のテキスト"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} itemsstraße"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["İstanbulünïcödé"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["trailing.{name} has {count} items"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["src/a/b.ts  padded  "],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["😀😀"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["tab\tseparatedabc"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["trailing.hello world"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["tab\tseparatedΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[".leadinga😀b😀c"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["😀hello world"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a:b:cΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[":HELLO"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} itemsé"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["hello:"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["😀trailing."],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["Hello World:"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a:b:ca:b:c"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["straßehello world"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a:b:c日本語のテキスト"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} itemssrc/a/b.ts"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ΣΊΣΥΦΟΣtab\tseparated"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["😀a.b.c"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a:b:cab"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ünïcödéstraße"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["éhello world"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["İstanbul﻿bom"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ΣΊΣΥΦΟΣ./x/**/*.json"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} itemsns:key.path"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["😀.leading"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["abhello"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["key_name-1hello world"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["HELLOHello World"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[".leading﻿bom"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["Hello WorldHello World"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ünïcödéline1\nline2"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ünïcödé😀"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ab日本語のテキスト"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["  padded  ns:key.path"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["HELLOtrailing."],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["日本語のテキストa..b"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["key_name-1ΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a..ba..b"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["  padded  ab"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ünïcödétrailing."],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["İstanbulns:key.path"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["  padded  a..b"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["tab\tseparatedtrailing."],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["hello日本語のテキスト"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["line1\nline2emoji 👍🏽 mix"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["HELLOΣΊΣΥΦΟΣ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["src/a/b.ts.leading"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["straßeünïcödé"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ünïcödé  padded  "],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["日本語のテキストsrc/a/b.ts"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["emoji 👍🏽 mixé"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["{name} has {count} itemstab\tseparated"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["emoji 👍🏽 mixline1\nline2"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["tab\tseparateda..b"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a:b:c{name} has {count} items"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["src/a/b.tshello world"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[".leading./x/**/*.json"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["héllo wörld"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["👍🏽 thumbs"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["日本語"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["ılık ırmak"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["👨‍👩‍👧 family"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a b"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a😀b"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a²b x½ y①"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["aⅠb Ⅻ"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["a𐐀b 𝐀bc"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["कि ٣٤"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"windowButtonsFor","args":[["line1\nline2","a:b:c"],{"minimizable":false,"maximizable":false}],"ok":["line1\nline2","a:b:c"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":true,"maximizable":false}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["a..b","a","ns:key.path"],{"minimizable":false}],"ok":["a..b","a","ns:key.path"]}
+{"fn":"windowButtonsFor","args":[[],{"a":{"b":"c"}}],"ok":[]}
+{"fn":"windowButtonsFor","args":[[],{}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["a"],0],"ok":["a"]}
+{"fn":"windowButtonsFor","args":[["tab\tseparated","","日本語のテキスト"],{"menu":true,"minimizable":false}],"ok":["tab\tseparated","","日本語のテキスト"]}
+{"fn":"windowButtonsFor","args":[[],{"minimizable":true,"maximizable":false}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["HELLO","  padded  "],{"menu":false,"minimizable":true,"maximizable":false}],"ok":["HELLO","  padded  "]}
+{"fn":"windowButtonsFor","args":[["a..b",":","a😀b😀c"],{"menu":true,"minimizable":true,"maximizable":false}],"ok":["a..b",":","a😀b😀c"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":true,"minimizable":false}],"ok":[]}
+{"fn":"windowButtonsFor","args":[[],{"minimizable":false}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["straße","ns:key.path","./x/**/*.json﻿bom"],{"minimizable":true}],"ok":["straße","ns:key.path","./x/**/*.json﻿bom"]}
+{"fn":"windowButtonsFor","args":[["İstanbul","./x/**/*.jsonİstanbul","hello"],{"menu":false,"minimizable":true}],"ok":["İstanbul","./x/**/*.jsonİstanbul","hello"]}
+{"fn":"windowButtonsFor","args":[["emoji 👍🏽 mix","key_name-1"],{"menu":true,"maximizable":false}],"ok":["emoji 👍🏽 mix","key_name-1"]}
+{"fn":"windowButtonsFor","args":[["é","a..b"],{"menu":false,"minimizable":true}],"ok":["é","a..b"]}
+{"fn":"windowButtonsFor","args":[["a.b.cabc","a😀b😀c","﻿bom"],{"menu":true,"maximizable":true}],"ok":["a.b.cabc","a😀b😀c","﻿bom"]}
+{"fn":"windowButtonsFor","args":[["a😀b😀c","emoji 👍🏽 mix"],{"minimizable":true,"maximizable":true}],"ok":["a😀b😀c","emoji 👍🏽 mix"]}
+{"fn":"windowButtonsFor","args":[["ΣΊΣΥΦΟΣ","Hello World"],{"menu":false,"minimizable":true}],"ok":["ΣΊΣΥΦΟΣ","Hello World"]}
+{"fn":"windowButtonsFor","args":[["a😀b😀c","abc"],{"menu":true,"minimizable":false,"maximizable":true}],"ok":["a😀b😀c","abc"]}
+{"fn":"windowButtonsFor","args":[["ΣΊΣΥΦΟΣ",""],{"menu":false,"maximizable":false}],"ok":["ΣΊΣΥΦΟΣ",""]}
+{"fn":"windowButtonsFor","args":[["ns:key.path{name} has {count} items"],{"menu":false,"maximizable":false}],"ok":["ns:key.path{name} has {count} items"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":false,"minimizable":true,"maximizable":false}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["trailing.hello world","","emoji 👍🏽 mix"],{"menu":true,"maximizable":true}],"ok":["trailing.hello world","","emoji 👍🏽 mix"]}
+{"fn":"windowButtonsFor","args":[["  padded  "],{"menu":true,"minimizable":true,"maximizable":false}],"ok":["  padded  "]}
+{"fn":"windowButtonsFor","args":[[],"x"],"ok":[]}
+{"fn":"windowButtonsFor","args":[["src/a/b.ts"],{"menu":false,"minimizable":false,"maximizable":false}],"ok":["src/a/b.ts"]}
+{"fn":"windowButtonsFor","args":[["","ab"],{"menu":false,"minimizable":false,"maximizable":false}],"ok":["","ab"]}
+{"fn":"windowButtonsFor","args":[["  padded  "],{"minimizable":false}],"ok":["  padded  "]}
+{"fn":"windowButtonsFor","args":[[],{"menu":true,"minimizable":false,"maximizable":false}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["{name} has {count} items"],{"menu":false,"minimizable":true,"maximizable":true}],"ok":["{name} has {count} items"]}
+{"fn":"windowButtonsFor","args":[["hello world","straße","a.b.ctab\tseparated"],{"menu":false,"maximizable":false}],"ok":["hello world","straße","a.b.ctab\tseparated"]}
+{"fn":"windowButtonsFor","args":[["  padded  ","HELLO"],{"minimizable":false,"maximizable":true}],"ok":["  padded  ","HELLO"]}
+{"fn":"windowButtonsFor","args":[[],{"minimizable":true,"maximizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["straße","  padded  "],{"menu":true,"minimizable":false,"maximizable":false}],"ok":["straße","  padded  "]}
+{"fn":"windowButtonsFor","args":[["key_name-1ab","hello world","日本語のテキストa"],{"menu":false,"minimizable":false,"maximizable":true}],"ok":["key_name-1ab","hello world","日本語のテキストa"]}
+{"fn":"windowButtonsFor","args":[[],{"maximizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["key_name-1"],{"a":{"b":"c"}}],"ok":["key_name-1"]}
+{"fn":"windowButtonsFor","args":[[],true],"ok":[]}
+{"fn":"windowButtonsFor","args":[["a.b.c",""],{"menu":false,"minimizable":false,"maximizable":false}],"ok":["a.b.c",""]}
+{"fn":"windowButtonsFor","args":[["hello world","tab\tseparated","straße"],{"minimizable":false,"maximizable":true}],"ok":["hello world","tab\tseparated","straße"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":false,"minimizable":false,"maximizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["HELLO"],{"minimizable":true,"maximizable":false}],"ok":["HELLO"]}
+{"fn":"windowButtonsFor","args":[[],{"minimizable":false,"maximizable":false}],"ok":[]}
+{"fn":"windowButtonsFor","args":[[],{"menu":true,"minimizable":true,"maximizable":false}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["İstanbul"],{"menu":false,"minimizable":true,"maximizable":false}],"ok":["İstanbul"]}
+{"fn":"windowButtonsFor","args":[["emoji 👍🏽 mix","日本語のテキストtab\tseparated"],{"menu":false,"maximizable":true}],"ok":["emoji 👍🏽 mix","日本語のテキストtab\tseparated"]}
+{"fn":"windowButtonsFor","args":[["a:b:c日本語のテキスト","﻿bom"],null],"error":"Cannot read properties of null (reading 'menu')"}
+{"fn":"windowButtonsFor","args":[["ns:key.path","line1\nline2./x/**/*.json","İstanbul"],{"minimizable":true}],"ok":["ns:key.path","line1\nline2./x/**/*.json","İstanbul"]}
+{"fn":"windowButtonsFor","args":[["é","a:b:c","a..b"],{"menu":false,"minimizable":false,"maximizable":true}],"ok":["é","a:b:c","a..b"]}
+{"fn":"windowButtonsFor","args":[["tab\tseparated","HELLO","key_name-1trailing."],{"menu":true,"maximizable":false}],"ok":["tab\tseparated","HELLO","key_name-1trailing."]}
+{"fn":"windowButtonsFor","args":[[":","Hello Worldhello"],{"menu":false,"minimizable":true,"maximizable":true}],"ok":[":","Hello Worldhello"]}
+{"fn":"windowButtonsFor","args":[["ns:key.path"],{"menu":true,"minimizable":true}],"ok":["ns:key.path"]}
+{"fn":"windowButtonsFor","args":[[],{"minimizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["line1\nline2"],{"menu":false,"minimizable":true,"maximizable":true}],"ok":["line1\nline2"]}
+{"fn":"windowButtonsFor","args":[["hello"],{"menu":false,"minimizable":false}],"ok":["hello"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":true,"minimizable":true,"maximizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["hello","src/a/b.ts"],"x"],"ok":["hello","src/a/b.ts"]}
+{"fn":"windowButtonsFor","args":[["a"],["a",1]],"ok":["a"]}
+{"fn":"windowButtonsFor","args":[["a😀b😀c","Hello World"],{"menu":false,"minimizable":false}],"ok":["a😀b😀c","Hello World"]}
+{"fn":"windowButtonsFor","args":[["é","key_name-1","﻿bom"],{"minimizable":true,"maximizable":true}],"ok":["é","key_name-1","﻿bom"]}
+{"fn":"windowButtonsFor","args":[["é","line1\nline2"],{"menu":true,"minimizable":false,"maximizable":false}],"ok":["é","line1\nline2"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":true,"minimizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["abctab\tseparated","trailing."],{"menu":false,"maximizable":true}],"ok":["abctab\tseparated","trailing."]}
+{"fn":"windowButtonsFor","args":[["ab","ünïcödéİstanbul"],{"menu":true,"minimizable":true}],"ok":["ab","ünïcödéİstanbul"]}
+{"fn":"windowButtonsFor","args":[["{name} has {count} itemshello"],{"menu":false,"minimizable":true,"maximizable":false}],"ok":["{name} has {count} itemshello"]}
+{"fn":"windowButtonsFor","args":[["abca..b","HELLO"],{"menu":false,"minimizable":false,"maximizable":false}],"ok":["abca..b","HELLO"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["line1\nline2","a😀b😀c﻿bom","HELLO"],{"menu":false,"minimizable":false}],"ok":["line1\nline2","a😀b😀c﻿bom","HELLO"]}
+{"fn":"windowButtonsFor","args":[["ΣΊΣΥΦΟΣ"],{"menu":true}],"ok":["ΣΊΣΥΦΟΣ"]}
+{"fn":"windowButtonsFor","args":[[".leading","src/a/b.ts"],["a",1]],"ok":[".leading","src/a/b.ts"]}
+{"fn":"windowButtonsFor","args":[["./x/**/*.json","straße","straße"],{"menu":true,"minimizable":true,"maximizable":true}],"ok":["./x/**/*.json","straße","straße"]}
+{"fn":"windowButtonsFor","args":[["a..b",".leading","HELLO"],"x"],"ok":["a..b",".leading","HELLO"]}
+{"fn":"windowButtonsFor","args":[["a:b:c","src/a/b.ts"],{}],"ok":["a:b:c","src/a/b.ts"]}
+{"fn":"windowButtonsFor","args":[["abc","line1\nline2"],{"menu":false,"maximizable":false}],"ok":["abc","line1\nline2"]}
+{"fn":"windowButtonsFor","args":[["😀"],{"menu":true,"minimizable":false}],"ok":["😀"]}
+{"fn":"windowButtonsFor","args":[[".leading"],{"menu":true,"minimizable":false,"maximizable":true}],"ok":[".leading"]}
+{"fn":"windowButtonsFor","args":[["line1\nline2"],{"menu":true,"minimizable":true}],"ok":["line1\nline2"]}
+{"fn":"windowButtonsFor","args":[["{name} has {count} items",".leadingkey_name-1","src/a/b.ts"],{"menu":true,"minimizable":true,"maximizable":false}],"ok":["{name} has {count} items",".leadingkey_name-1","src/a/b.ts"]}
+{"fn":"windowButtonsFor","args":[["日本語のテキストİstanbul","Hello World","ns:key.pathé"],{"menu":false,"maximizable":true}],"ok":["日本語のテキストİstanbul","Hello World","ns:key.pathé"]}
+{"fn":"windowButtonsFor","args":[["ns:key.path./x/**/*.json","straße"],{"menu":true,"minimizable":false}],"ok":["ns:key.path./x/**/*.json","straße"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":false,"minimizable":true,"maximizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[[],0],"ok":[]}
+{"fn":"windowButtonsFor","args":[["line1\nline2"],{"a":"b"}],"ok":["line1\nline2"]}
+{"fn":"windowButtonsFor","args":[["Hello World"],{"menu":true,"minimizable":true,"maximizable":false}],"ok":["Hello World"]}
+{"fn":"windowButtonsFor","args":[["a😀b😀c","hello world"],{"menu":false,"minimizable":true,"maximizable":false}],"ok":["a😀b😀c","hello world"]}
+{"fn":"windowButtonsFor","args":[["a.b.c"],{"menu":true,"minimizable":true,"maximizable":false}],"ok":["a.b.c"]}
+{"fn":"windowButtonsFor","args":[["HELLO","trailing."],{"menu":false,"minimizable":false,"maximizable":false}],"ok":["HELLO","trailing."]}
+{"fn":"windowButtonsFor","args":[["a"],{"minimizable":false,"maximizable":true}],"ok":["a"]}
+{"fn":"windowButtonsFor","args":[["tab\tseparated"],{"minimizable":false}],"ok":["tab\tseparated"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":true,"minimizable":false,"maximizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[[":"],{"menu":false}],"ok":[":"]}
+{"fn":"windowButtonsFor","args":[["İstanbul"],{"minimizable":true,"maximizable":false}],"ok":["İstanbul"]}
+{"fn":"windowButtonsFor","args":[["a.b.c","ns:key.path"],{"menu":true,"minimizable":true,"maximizable":true}],"ok":["a.b.c","ns:key.path"]}
+{"fn":"windowButtonsFor","args":[["{name} has {count} items","a😀b😀c"],{"menu":true}],"ok":["{name} has {count} items","a😀b😀c"]}
+{"fn":"windowButtonsFor","args":[["trailing.","﻿bomabc"],{"menu":true,"minimizable":false}],"ok":["trailing.","﻿bomabc"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":true,"maximizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[[":",".leadingemoji 👍🏽 mix"],{"minimizable":false,"maximizable":false}],"ok":[":",".leadingemoji 👍🏽 mix"]}
+{"fn":"windowButtonsFor","args":[["key_name-1"],{"menu":true,"minimizable":false,"maximizable":true}],"ok":["key_name-1"]}
+{"fn":"windowButtonsFor","args":[["ünïcödé","ns:key.path"],{"minimizable":false,"maximizable":false}],"ok":["ünïcödé","ns:key.path"]}
+{"fn":"windowButtonsFor","args":[[],null],"error":"Cannot read properties of null (reading 'menu')"}
+{"fn":"windowButtonsFor","args":[[],{"menu":false,"maximizable":false}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["é",":a:b:c"],{"menu":false,"minimizable":false}],"ok":["é",":a:b:c"]}
+{"fn":"windowButtonsFor","args":[["key_name-1"],{"menu":true,"minimizable":true}],"ok":["key_name-1"]}
+{"fn":"windowButtonsFor","args":[["a","straße"],{"maximizable":false}],"ok":["a","straße"]}
+{"fn":"windowButtonsFor","args":[["src/a/b.tsab","a","é"],{"minimizable":true}],"ok":["src/a/b.tsab","a","é"]}
+{"fn":"windowButtonsFor","args":[["ab"],{"menu":true,"minimizable":true,"maximizable":true}],"ok":["ab"]}
+{"fn":"windowButtonsFor","args":[["{name} has {count} items","key_name-1","{name} has {count} itemsns:key.path"],{"menu":true}],"ok":["{name} has {count} items","key_name-1","{name} has {count} itemsns:key.path"]}
+{"fn":"windowButtonsFor","args":[["a.b.c","a😀b😀cemoji 👍🏽 mix","abc"],{"menu":true,"minimizable":true}],"ok":["a.b.c","a😀b😀cemoji 👍🏽 mix","abc"]}
+{"fn":"windowButtonsFor","args":[["./x/**/*.json"],[]],"ok":["./x/**/*.json"]}
+{"fn":"windowButtonsFor","args":[["é"],0],"ok":["é"]}
+{"fn":"windowButtonsFor","args":[["a😀b😀cİstanbul","abc"],["a",1]],"ok":["a😀b😀cİstanbul","abc"]}
+{"fn":"windowButtonsFor","args":[["hello world.leading","😀"],{"minimizable":false,"maximizable":false}],"ok":["hello world.leading","😀"]}
+{"fn":"windowButtonsFor","args":[["./x/**/*.json","a..b"],{"minimizable":true,"maximizable":false}],"ok":["./x/**/*.json","a..b"]}
+{"fn":"windowButtonsFor","args":[["{name} has {count} itemsa:b:c","straße","src/a/b.ts"],[]],"ok":["{name} has {count} itemsa:b:c","straße","src/a/b.ts"]}
+{"fn":"windowButtonsFor","args":[["hello worldHELLO"],{"menu":true,"minimizable":false}],"ok":["hello worldHELLO"]}
+{"fn":"windowButtonsFor","args":[["é"],{"menu":true,"minimizable":false}],"ok":["é"]}
+{"fn":"windowButtonsFor","args":[["abc"],{}],"ok":["abc"]}
+{"fn":"windowButtonsFor","args":[["a..b"],{"maximizable":true}],"ok":["a..b"]}
+{"fn":"windowButtonsFor","args":[["a","ΣΊΣΥΦΟΣ"],{"menu":true,"minimizable":true}],"ok":["a","ΣΊΣΥΦΟΣ"]}
+{"fn":"windowButtonsFor","args":[[],[]],"ok":[]}
+{"fn":"windowButtonsFor","args":[["a:b:c","{name} has {count} items","line1\nline2"],{"maximizable":false}],"ok":["a:b:c","{name} has {count} items","line1\nline2"]}
+{"fn":"windowButtonsFor","args":[["a:b:c"],{"minimizable":false,"maximizable":false}],"ok":["a:b:c"]}
+{"fn":"windowButtonsFor","args":[["src/a/b.ts","src/a/b.ts","line1\nline2"],{"a":{"b":"c"}}],"ok":["src/a/b.ts","src/a/b.ts","line1\nline2"]}
+{"fn":"windowButtonsFor","args":[["trailing.","HELLO",""],{"minimizable":false,"maximizable":true}],"ok":["trailing.","HELLO",""]}
+{"fn":"windowButtonsFor","args":[["src/a/b.ts","./x/**/*.json"],{}],"ok":["src/a/b.ts","./x/**/*.json"]}
+{"fn":"windowButtonsFor","args":[[":abc","key_name-1"],{"menu":true,"minimizable":false,"maximizable":true}],"ok":[":abc","key_name-1"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":false,"maximizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["abc","","line1\nline2"],{"minimizable":true,"maximizable":false}],"ok":["abc","","line1\nline2"]}
+{"fn":"windowButtonsFor","args":[["a.b.c","a.b.c","straße"],{"minimizable":false,"maximizable":false}],"ok":["a.b.c","a.b.c","straße"]}
+{"fn":"windowButtonsFor","args":[["a:b:c","😀",".leading"],["a",1]],"ok":["a:b:c","😀",".leading"]}
+{"fn":"windowButtonsFor","args":[["İstanbul","éHELLO","  padded  "],{"minimizable":false}],"ok":["İstanbul","éHELLO","  padded  "]}
+{"fn":"windowButtonsFor","args":[["a","😀"],0],"ok":["a","😀"]}
+{"fn":"windowButtonsFor","args":[["./x/**/*.json","line1\nline2"],{"menu":true,"minimizable":false}],"ok":["./x/**/*.json","line1\nline2"]}
+{"fn":"windowButtonsFor","args":[[":","a:b:c","﻿bom:"],{"minimizable":true}],"ok":[":","a:b:c","﻿bom:"]}
+{"fn":"windowButtonsFor","args":[[""],{"menu":true,"minimizable":false,"maximizable":true}],"ok":[""]}
+{"fn":"windowButtonsFor","args":[[".leading",":","key_name-1"],{"menu":true,"minimizable":true,"maximizable":true}],"ok":[".leading",":","key_name-1"]}
+{"fn":"windowButtonsFor","args":[["İstanbul"],{"menu":true,"minimizable":true,"maximizable":true}],"ok":["İstanbul"]}
+{"fn":"windowButtonsFor","args":[["src/a/b.ts","{name} has {count} items"],{"menu":true}],"ok":["src/a/b.ts","{name} has {count} items"]}
+{"fn":"windowButtonsFor","args":[["😀key_name-1","hello","tab\tseparated"],{"menu":false,"minimizable":false,"maximizable":true}],"ok":["😀key_name-1","hello","tab\tseparated"]}
+{"fn":"windowButtonsFor","args":[["src/a/b.ts","a..ba..b"],{"menu":true,"minimizable":true,"maximizable":true}],"ok":["src/a/b.ts","a..ba..b"]}
+{"fn":"windowButtonsFor","args":[["HELLO"],{"menu":true,"minimizable":true}],"ok":["HELLO"]}
+{"fn":"windowButtonsFor","args":[["./x/**/*.json","hello worldline1\nline2"],{"menu":false,"minimizable":false,"maximizable":true}],"ok":["./x/**/*.json","hello worldline1\nline2"]}
+{"fn":"windowButtonsFor","args":[[":"],{"a":{"b":"c"}}],"ok":[":"]}
+{"fn":"windowButtonsFor","args":[[":","hello world","emoji 👍🏽 mix"],0],"ok":[":","hello world","emoji 👍🏽 mix"]}
+{"fn":"windowButtonsFor","args":[["  padded  abc","ns:key.path"],null],"error":"Cannot read properties of null (reading 'menu')"}
+{"fn":"windowButtonsFor","args":[["{name} has {count} itemsa:b:c","abc","hello world"],{"minimizable":true}],"ok":["{name} has {count} itemsa:b:c","abc","hello world"]}
+{"fn":"windowButtonsFor","args":[["a😀b😀c",".leading","HELLO"],{"menu":false,"minimizable":true}],"ok":["a😀b😀c",".leading","HELLO"]}
+{"fn":"windowButtonsFor","args":[["é"],{"minimizable":true,"maximizable":true}],"ok":["é"]}
+{"fn":"windowButtonsFor","args":[["  padded  ","a😀b😀c","ΣΊΣΥΦΟΣ"],[]],"ok":["  padded  ","a😀b😀c","ΣΊΣΥΦΟΣ"]}
+{"fn":"windowButtonsFor","args":[["straße","é","trailing."],[]],"ok":["straße","é","trailing."]}
+{"fn":"windowButtonsFor","args":[["./x/**/*.json","emoji 👍🏽 mix","HELLO"],{}],"ok":["./x/**/*.json","emoji 👍🏽 mix","HELLO"]}
+{"fn":"windowButtonsFor","args":[["tab\tseparated"],{"menu":true,"maximizable":true}],"ok":["tab\tseparated"]}
+{"fn":"windowButtonsFor","args":[["😀","./x/**/*.json"],{"menu":false,"minimizable":false}],"ok":["😀","./x/**/*.json"]}
+{"fn":"windowButtonsFor","args":[["trailing."],{"menu":true,"minimizable":true}],"ok":["trailing."]}
+{"fn":"windowButtonsFor","args":[["a","ns:key.path","ab"],{"menu":false,"minimizable":false,"maximizable":true}],"ok":["a","ns:key.path","ab"]}
+{"fn":"windowButtonsFor","args":[["﻿bom"],true],"ok":["﻿bom"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":false,"minimizable":true}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["a:b:c","./x/**/*.json","emoji 👍🏽 mix"],{"menu":true,"maximizable":true}],"ok":["a:b:c","./x/**/*.json","emoji 👍🏽 mix"]}
+{"fn":"windowButtonsFor","args":[["  padded  ","ünïcödé"],{"menu":true}],"ok":["  padded  ","ünïcödé"]}
+{"fn":"windowButtonsFor","args":[["hello﻿bom"],{"minimizable":false}],"ok":["hello﻿bom"]}
+{"fn":"windowButtonsFor","args":[["ΣΊΣΥΦΟΣ"],{"menu":true,"maximizable":true}],"ok":["ΣΊΣΥΦΟΣ"]}
+{"fn":"windowButtonsFor","args":[["é"],{"menu":true,"minimizable":false,"maximizable":false}],"ok":["é"]}
+{"fn":"windowButtonsFor","args":[["Hello World","ab  padded  ","abc"],{"menu":true,"minimizable":false,"maximizable":true}],"ok":["Hello World","ab  padded  ","abc"]}
+{"fn":"windowButtonsFor","args":[["tab\tseparated","  padded  ",".leading"],{"menu":false,"minimizable":false,"maximizable":false}],"ok":["tab\tseparated","  padded  ",".leading"]}
+{"fn":"windowButtonsFor","args":[["a.b.cHello World","abc","  padded  "],{"menu":true,"minimizable":false,"maximizable":false}],"ok":["a.b.cHello World","abc","  padded  "]}
+{"fn":"windowButtonsFor","args":[["a😀b😀c","  padded  "],{"menu":true,"minimizable":true}],"ok":["a😀b😀c","  padded  "]}
+{"fn":"windowButtonsFor","args":[["a:b:c"],{"menu":true,"minimizable":false,"maximizable":true}],"ok":["a:b:c"]}
+{"fn":"windowButtonsFor","args":[["  padded  ","abc"],{"menu":false,"minimizable":true}],"ok":["  padded  ","abc"]}
+{"fn":"windowButtonsFor","args":[["Hello World","{name} has {count} items","a😀b😀chello"],{"minimizable":true,"maximizable":false}],"ok":["Hello World","{name} has {count} items","a😀b😀chello"]}
+{"fn":"windowButtonsFor","args":[["abc","é","ünïcödé"],{"menu":true,"minimizable":false,"maximizable":true}],"ok":["abc","é","ünïcödé"]}
+{"fn":"windowButtonsFor","args":[["ΣΊΣΥΦΟΣ","﻿bom"],{"menu":false,"minimizable":true,"maximizable":false}],"ok":["ΣΊΣΥΦΟΣ","﻿bom"]}
+{"fn":"windowButtonsFor","args":[["a.b.c"],{"menu":false,"minimizable":true}],"ok":["a.b.c"]}
+{"fn":"windowButtonsFor","args":[["😀","é","tab\tseparated"],{"minimizable":false,"maximizable":false}],"ok":["😀","é","tab\tseparated"]}
+{"fn":"windowButtonsFor","args":[["a😀b😀c"],{"minimizable":false}],"ok":["a😀b😀c"]}
+{"fn":"windowButtonsFor","args":[["日本語のテキスト","İstanbul","﻿bom"],{}],"ok":["日本語のテキスト","İstanbul","﻿bom"]}
+{"fn":"windowButtonsFor","args":[["😀","é","emoji 👍🏽 mix"],{"minimizable":false,"maximizable":true}],"ok":["😀","é","emoji 👍🏽 mix"]}
+{"fn":"windowButtonsFor","args":[["emoji 👍🏽 mix"],{"maximizable":true}],"ok":["emoji 👍🏽 mix"]}
+{"fn":"windowButtonsFor","args":[["日本語のテキスト"],{"menu":true,"maximizable":true}],"ok":["日本語のテキスト"]}
+{"fn":"windowButtonsFor","args":[["./x/**/*.json","éhello world"],{"minimizable":true,"maximizable":false}],"ok":["./x/**/*.json","éhello world"]}
+{"fn":"windowButtonsFor","args":[["Hello World","HELLO","hello world"],{"menu":false,"minimizable":false}],"ok":["Hello World","HELLO","hello world"]}
+{"fn":"windowButtonsFor","args":[["src/a/b.ts","hello world"],{"menu":false,"maximizable":false}],"ok":["src/a/b.ts","hello world"]}
+{"fn":"windowButtonsFor","args":[["a😀b😀c"],{"menu":true,"minimizable":true,"maximizable":true}],"ok":["a😀b😀c"]}
+{"fn":"windowButtonsFor","args":[["abc","ünïcödé"],{"maximizable":true}],"ok":["abc","ünïcödé"]}
+{"fn":"windowButtonsFor","args":[["{name} has {count} itemstab\tseparated"],{"menu":true,"minimizable":true,"maximizable":false}],"ok":["{name} has {count} itemstab\tseparated"]}
+{"fn":"windowButtonsFor","args":[["key_name-1"],{"minimizable":true}],"ok":["key_name-1"]}
+{"fn":"windowButtonsFor","args":[[".leading"],{"menu":false,"maximizable":false}],"ok":[".leading"]}
+{"fn":"windowButtonsFor","args":[["İstanbul","tab\tseparated"],{"menu":true}],"ok":["İstanbul","tab\tseparated"]}
+{"fn":"windowButtonsFor","args":[["straßea.b.c",":","./x/**/*.json"],{"menu":true,"maximizable":true}],"ok":["straßea.b.c",":","./x/**/*.json"]}
+{"fn":"windowButtonsFor","args":[["İstanbul","a.b.c"],{}],"ok":["İstanbul","a.b.c"]}
+{"fn":"windowButtonsFor","args":[["日本語のテキスト","日本語のテキスト","ab"],{"menu":true,"maximizable":true}],"ok":["日本語のテキスト","日本語のテキスト","ab"]}
+{"fn":"windowButtonsFor","args":[["./x/**/*.json","a","a.b.c"],{"menu":true,"maximizable":true}],"ok":["./x/**/*.json","a","a.b.c"]}
+{"fn":"windowButtonsFor","args":[["abc  padded  ","{name} has {count} itemshello world"],{"menu":false,"minimizable":false}],"ok":["abc  padded  ","{name} has {count} itemshello world"]}
+{"fn":"windowButtonsFor","args":[["./x/**/*.jsonkey_name-1","emoji 👍🏽 mix","a😀b😀c"],"x"],"ok":["./x/**/*.jsonkey_name-1","emoji 👍🏽 mix","a😀b😀c"]}
+{"fn":"windowButtonsFor","args":[["  padded  "],{"a":"b"}],"ok":["  padded  "]}
+{"fn":"windowButtonsFor","args":[["﻿bom","hello world","a..b"],{"menu":false,"minimizable":false}],"ok":["﻿bom","hello world","a..b"]}
+{"fn":"windowButtonsFor","args":[["ns:key.pathtab\tseparated"],{"menu":false,"maximizable":false}],"ok":["ns:key.pathtab\tseparated"]}
+{"fn":"windowButtonsFor","args":[["ΣΊΣΥΦΟΣ","﻿bom","é😀"],{"menu":true,"maximizable":false}],"ok":["ΣΊΣΥΦΟΣ","﻿bom","é😀"]}
+{"fn":"windowButtonsFor","args":[["a","emoji 👍🏽 mix"],{"menu":true,"minimizable":true,"maximizable":false}],"ok":["a","emoji 👍🏽 mix"]}
+{"fn":"windowButtonsFor","args":[["éünïcödé"],{"menu":true,"minimizable":true,"maximizable":false}],"ok":["éünïcödé"]}
+{"fn":"windowButtonsFor","args":[["b","a","B","é","10","9","a"],{"minimizable":false,"maximizable":false}],"ok":["b","a","B","é","10","9","a"]}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","menu"],"trailing":["maximize","minimize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","close","maximize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[["a",1]],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize"],"trailing":["minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","maximize"],"trailing":["minimize","maximize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":[]}],"ok":"none"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu"],"trailing":[]}],"ok":"none"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"a":"b"}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","minimize","minimize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize"],"trailing":["minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","menu"],"trailing":[]}],"ok":"none"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","close"],"trailing":["menu","minimize","menu"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","menu"]}],"ok":"none"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":["maximize","minimize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu"],"trailing":["menu","close"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu","menu"],"trailing":["close","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[null],"error":"Cannot read properties of null (reading 'leading')"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize"],"trailing":["maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu"],"trailing":["minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","menu"],"trailing":["minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["close","maximize","maximize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu"],"trailing":["minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["maximize","maximize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","menu","close"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","menu","close"],"trailing":["close","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["minimize","menu"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":["minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","close"],"trailing":["minimize","minimize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize"],"trailing":["minimize","menu"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","close"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","minimize","maximize"],"trailing":["close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":["x"],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","menu","maximize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","minimize","close"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","maximize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","maximize","menu"],"trailing":["close","minimize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","maximize","maximize"],"trailing":["minimize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize"],"trailing":["menu","close","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","minimize","maximize"],"trailing":["minimize","maximize","menu"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu","maximize"],"trailing":["minimize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","maximize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu"],"trailing":["menu"]}],"ok":"none"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","close","maximize"],"trailing":["close","minimize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize"],"trailing":["minimize","menu"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize"],"trailing":["menu","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu","maximize"],"trailing":["minimize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize"],"trailing":["minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","minimize","close"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","maximize"],"trailing":["close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","close"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["minimize","maximize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"a":{"b":"c"}}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","minimize","menu"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize"],"trailing":["maximize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["minimize","maximize","menu"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[true],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","menu","maximize"],"trailing":["minimize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","menu"],"trailing":["menu","maximize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":["minimize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu"],"trailing":["minimize","maximize","minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","minimize"],"trailing":["menu","maximize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","close","menu"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","minimize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["maximize","close"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":["close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","close","maximize"],"trailing":["menu","menu","menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize"],"trailing":["minimize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize"],"trailing":["maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","maximize","minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":["minimize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":["minimize","minimize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[0],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","menu"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["close","minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize"],"trailing":["menu","menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize"],"trailing":["close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","maximize","minimize"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","menu"],"trailing":["close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["close","close"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","minimize","close"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize"],"trailing":["maximize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","minimize","close"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[[]],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","close"],"trailing":["minimize","close","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","maximize","close"],"trailing":["close","minimize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["maximize","minimize","maximize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu"],"trailing":["maximize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["maximize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize","menu"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","minimize","close"],"trailing":["maximize","menu"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize","close"],"trailing":["minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","close","menu"],"trailing":["minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu"],"trailing":["close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","maximize","maximize"],"trailing":["maximize","menu","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["minimize","close","minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize"],"trailing":["maximize","maximize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","minimize","close"],"trailing":["close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","maximize","minimize"],"trailing":["maximize","maximize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","minimize"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","minimize","menu"],"trailing":["maximize","menu","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu","maximize"],"trailing":["maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","close"],"trailing":["menu","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","maximize","close"],"trailing":["close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","minimize","close"],"trailing":["menu","minimize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu","menu"],"trailing":["menu","menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["maximize","maximize","menu"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize"],"trailing":["close","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","maximize","maximize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","minimize"],"trailing":["close","maximize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize","menu"],"trailing":["maximize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize"],"trailing":["maximize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","menu"],"trailing":["close","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","menu","minimize"],"trailing":["maximize","close","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["maximize","close","menu"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["close"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","minimize","maximize"],"trailing":["close","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","minimize"],"trailing":["close","maximize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":["close","maximize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu"]}],"ok":"none"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","menu","maximize"],"trailing":["maximize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","close","minimize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","minimize","minimize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","close","minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","close"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu"],"trailing":["menu","close","close"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","menu"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","close"],"trailing":["maximize","minimize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","minimize","close"],"trailing":["minimize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","minimize"],"trailing":["menu","menu","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu"],"trailing":["minimize","menu","close"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","menu"],"trailing":["menu","menu"]}],"ok":"none"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","menu","maximize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","menu","minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","close"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","maximize"],"trailing":["minimize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","minimize"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize","menu"],"trailing":["maximize","minimize","menu"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","maximize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":["close","menu"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["close","menu"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","menu"],"trailing":["menu","menu","menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","minimize","minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","menu","menu"],"trailing":["close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","close","close"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","close"],"trailing":["maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","menu"],"trailing":["minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","maximize","menu"],"trailing":["maximize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","close"],"trailing":["close","minimize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["maximize","minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","maximize","maximize"],"trailing":["maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu","minimize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","maximize"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","close"],"trailing":["minimize","menu","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","menu","minimize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["minimize","close"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","minimize","close"],"trailing":["minimize","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["maximize","minimize","close"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","close","menu"],"trailing":["close","minimize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","minimize"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","maximize","maximize"],"trailing":["menu","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":["menu","menu"]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu"],"trailing":["close","close","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","maximize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","minimize","maximize"],"trailing":["maximize","minimize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","menu","minimize"],"trailing":["minimize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","maximize","menu"],"trailing":["maximize","menu","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","maximize","menu"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","minimize"],"trailing":["maximize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize"],"trailing":["maximize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","maximize"],"trailing":["maximize","close","menu"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","menu","maximize"],"trailing":["maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","close"],"trailing":["close","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","maximize"],"trailing":["close"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","menu"],"trailing":["menu","maximize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","close"],"trailing":["minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","minimize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","maximize"],"trailing":["close","menu","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","menu","close"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","maximize","menu"],"trailing":["maximize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","menu","menu"],"trailing":["menu","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","menu"],"trailing":["menu","minimize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["maximize","maximize","maximize"],"trailing":["maximize","maximize","minimize"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu","maximize","close"],"trailing":["maximize","menu"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["maximize","minimize","menu"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","maximize","minimize"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize","close"],"trailing":[]}],"ok":"left"}
+{"fn":"buttonLayoutSide","args":[{"leading":["minimize"],"trailing":["close","menu"]}],"ok":"both"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["close","maximize"]}],"ok":"right"}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","maximize"],"trailing":["minimize","minimize","close"]}],"ok":"both"}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize","menu"],"trailing":["maximize","maximize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["maximize","minimize","maximize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":["close","maximize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu","minimize"],"trailing":["close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","close","menu"],"trailing":["close","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","menu"],"trailing":["maximize","minimize","menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","minimize","close"],"trailing":[]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":["minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["minimize","close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":[]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[["a",1]],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["close","minimize","maximize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"a":{"b":"c"}}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":["menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize","minimize"],"trailing":["close","close","menu"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":[]}],"ok":0}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","close"],"trailing":["minimize","maximize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["maximize","menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"a":"b"}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["menu","maximize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["minimize"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["minimize","menu","close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","minimize","minimize"],"trailing":["close","maximize"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","menu"],"trailing":["minimize","maximize","close"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu"],"trailing":["maximize"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu"],"trailing":["maximize","close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":["x"],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","close"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu","maximize"],"trailing":["maximize","menu","menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","maximize"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","maximize"],"trailing":["maximize","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["maximize","maximize","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu"],"trailing":[]}],"ok":0}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":["maximize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","close","menu"],"trailing":["maximize","menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","menu","menu"],"trailing":["minimize","minimize","maximize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu"],"trailing":["close"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["maximize"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu","minimize"],"trailing":["minimize","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["close"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["maximize","maximize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["maximize","close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","maximize"],"trailing":["maximize","close","maximize"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["minimize","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[0],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu"],"trailing":["close","menu","minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","maximize","close"],"trailing":[]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu"],"trailing":[]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","minimize"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","close"],"trailing":["close","minimize","minimize"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["maximize","menu","menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","close"],"trailing":["minimize","menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":[]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","maximize"],"trailing":[]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["close","close","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["close","close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","menu"],"trailing":["menu"]}],"ok":0}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["close","minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":["close","close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","menu","close"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","maximize"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","minimize"],"trailing":["menu","menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","close"],"trailing":["minimize","close","minimize"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize","close"],"trailing":["menu","minimize","maximize"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize"],"trailing":["minimize","menu","maximize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[true],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["maximize","minimize","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","menu","close"],"trailing":[]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","minimize"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[[]],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","close"],"trailing":["maximize","menu","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","maximize"],"trailing":["minimize","close","menu"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","menu"],"trailing":["minimize","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":[]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["menu","close","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":["close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","maximize","close"],"trailing":[]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","minimize"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu"],"trailing":["maximize","minimize","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","maximize","minimize"],"trailing":["menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["maximize","minimize","menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","menu","maximize"],"trailing":["menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[null],"error":"Cannot read properties of null (reading 'leading')"}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","menu","maximize"],"trailing":["menu","menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize"],"trailing":[]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","close","maximize"],"trailing":["minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","close","menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","menu"],"trailing":["maximize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize"],"trailing":["minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","menu","close"],"trailing":["close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["minimize","menu","close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","minimize","menu"],"trailing":["close","close","close"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","close"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","maximize","maximize"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","maximize","maximize"],"trailing":[]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","maximize"],"trailing":["close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize","minimize"],"trailing":["close","close","maximize"]}],"ok":6}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":["maximize","maximize","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","menu","maximize"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["close","close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":["minimize","maximize","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","close","minimize"],"trailing":["maximize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["minimize","close","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","close","menu"],"trailing":["minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","maximize"],"trailing":["menu","menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["close","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu","menu"],"trailing":["maximize","menu","maximize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","menu"],"trailing":["menu","close","minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","close","close"],"trailing":[]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize"],"trailing":["close","menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["menu","maximize","menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["maximize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":["maximize","maximize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["close","close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["maximize","maximize","close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","maximize"],"trailing":["minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu","close"],"trailing":["maximize","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize","maximize"],"trailing":["close","close","menu"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","minimize","close"],"trailing":["maximize","maximize"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu"],"trailing":["minimize"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","maximize","maximize"],"trailing":["close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize","menu"],"trailing":["menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","maximize"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","minimize"],"trailing":["menu","minimize","menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","close","close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","maximize","close"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","minimize"],"trailing":["close","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","close","close"],"trailing":["menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","menu"],"trailing":["minimize","close","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","close","maximize"],"trailing":["close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","close","minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","close","close"],"trailing":[]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","maximize"],"trailing":["close","menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["maximize","minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["maximize","close","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","menu"]}],"ok":0}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","close"],"trailing":["maximize","menu","menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize","maximize"],"trailing":["maximize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","close"],"trailing":["minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["minimize","close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","maximize"],"trailing":["minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","menu"],"trailing":["close","maximize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize","maximize"],"trailing":["minimize","close","menu"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize","maximize"],"trailing":["menu","close"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["close","menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","menu","menu"],"trailing":["close","close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","close"],"trailing":["close","minimize","maximize"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","close","close"],"trailing":["maximize","close"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu"]}],"ok":0}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["close","menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","close","minimize"],"trailing":["maximize","maximize","close"]}],"ok":6}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","minimize","close"],"trailing":["menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize","close"],"trailing":["maximize","close","maximize"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","maximize","menu"],"trailing":["menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","maximize"],"trailing":["menu","minimize","close"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","menu"],"trailing":["close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize","close"],"trailing":["close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["close","maximize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu"],"trailing":["maximize","menu","maximize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["close","menu","maximize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu","menu"],"trailing":["menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","close","minimize"],"trailing":["menu","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","close","close"],"trailing":["menu","close","menu"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","menu","close"],"trailing":["close","maximize","menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize"],"trailing":["menu","minimize"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","close"],"trailing":["menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu","maximize"],"trailing":["menu","close","close"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize","menu"],"trailing":["maximize","menu","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","close","minimize"],"trailing":["minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize","maximize"],"trailing":["close","minimize"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","menu"],"trailing":["minimize","menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","maximize","maximize"],"trailing":["minimize","menu"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","menu","close"],"trailing":["maximize","menu","minimize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","minimize","menu"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize"],"trailing":["minimize","close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize","minimize"],"trailing":["close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize"],"trailing":["menu","close"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["close","menu","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu"],"trailing":["close","close","menu"]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","menu"],"trailing":[]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","menu","minimize"],"trailing":["close","maximize","maximize"]}],"ok":4}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","menu","menu"],"trailing":[]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["maximize","maximize","menu"],"trailing":[]}],"ok":2}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","maximize"],"trailing":["close","maximize","maximize"]}],"ok":5}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu"],"trailing":["menu"]}],"ok":0}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","maximize","maximize"],"trailing":["menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["minimize","close","minimize"],"trailing":[]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","close"],"trailing":["maximize","menu"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","minimize","menu"],"trailing":["minimize","close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["close","menu","menu"]}],"ok":1}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu","maximize","minimize"],"trailing":["close"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["close","maximize","minimize"]}],"ok":3}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu"],"trailing":["close","minimize"]}],"ok":2}
+{"fn":"parseButtonLayout","args":[":minimize,maximize,close"],"ok":{"leading":[],"trailing":["menu","minimize","maximize","close"]}}
+{"fn":"parseButtonLayout","args":["appmenu:close"],"ok":{"leading":[],"trailing":["menu","close"]}}
+{"fn":"parseButtonLayout","args":["menu:close"],"ok":{"leading":[],"trailing":["menu","close"]}}
+{"fn":"parseButtonLayout","args":["close,minimize,maximize:"],"ok":{"leading":["close","minimize","maximize"],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["close:maximize"],"ok":{"leading":["close"],"trailing":["menu","maximize"]}}
+{"fn":"parseButtonLayout","args":["icon:minimize,maximize,close"],"ok":{"leading":[],"trailing":["menu","minimize","maximize","close"]}}
+{"fn":"parseButtonLayout","args":["close,maximize,minimize:menu"],"ok":{"leading":["close","maximize","minimize"],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[":minimize,spacer,maximize,close"],"ok":{"leading":[],"trailing":["menu","minimize","maximize","close"]}}
+{"fn":"parseButtonLayout","args":[""],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[":"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["appmenu:"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["close,minimize"],"ok":{"leading":["close","minimize"],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["close:minimize:maximize"],"ok":{"leading":["close"],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[":Close,MAXIMIZE"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[": close"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[":minimize,,close"],"ok":{"leading":[],"trailing":["menu","minimize","close"]}}
+{"fn":"parseButtonLayout","args":["close:close,maximize"],"ok":{"leading":["close"],"trailing":["menu","maximize"]}}
+{"fn":"parseButtonLayout","args":["appmenu,menu:close,menu"],"ok":{"leading":[],"trailing":["menu","close"]}}
+{"fn":"parseButtonLayout","args":[":frobnicate,toString,constructor,close"],"ok":{"leading":[],"trailing":["menu","close"]}}
+{"fn":"parseButtonLayout","args":["close,maximize:minimize"],"ok":{"leading":["close","maximize"],"trailing":["menu","minimize"]}}
+{"fn":"parseButtonLayout","args":["maximize,close,minimize"],"ok":{"leading":["maximize","close","minimize"],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["clóse:minimize"],"ok":{"leading":[],"trailing":["menu","minimize"]}}
+{"fn":"parseButtonLayout","args":["😀:close,é"],"ok":{"leading":[],"trailing":["menu","close"]}}
+{"fn":"parseButtonLayout","args":["ｃlose:minimize"],"ok":{"leading":[],"trailing":["menu","minimize"]}}
+{"fn":"parseButtonLayout","args":["close:minimize,maximize,close,minimize"],"ok":{"leading":["close"],"trailing":["menu","minimize","maximize"]}}
+{"fn":"parseButtonLayout","args":[",,,:,,,"],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":["close\t:minimize"],"ok":{"leading":[],"trailing":["menu","minimize"]}}
+{"fn":"parseButtonLayout","args":[null],"ok":{"leading":[],"trailing":["menu","minimize","maximize","close"]}}
+{"fn":"parseButtonLayout","args":[],"ok":{"leading":[],"trailing":["menu","minimize","maximize","close"]}}
+{"fn":"parseButtonLayout","args":[{"$undefined":true}],"ok":{"leading":[],"trailing":["menu","minimize","maximize","close"]}}
+{"fn":"parseButtonLayout","args":[42],"ok":{"leading":[],"trailing":["menu","minimize","maximize","close"]}}
+{"fn":"parseButtonLayout","args":[{"$utf16":[55357,58]}],"ok":{"leading":[],"trailing":["menu"]}}
+{"fn":"parseButtonLayout","args":[["close"]],"ok":{"leading":[],"trailing":["menu","minimize","maximize","close"]}}
+{"fn":"windowControlsWidth","args":[0],"ok":0}
+{"fn":"windowControlsWidth","args":[4],"ok":129}
+{"fn":"windowControlsWidth","args":[3],"ok":96}
+{"fn":"windowControlsWidth","args":[1],"ok":30}
+{"fn":"windowControlsWidth","args":[2],"ok":63}
+{"fn":"windowControlsWidth","args":[-1],"ok":0}
+{"fn":"windowControlsWidth","args":[0.5],"ok":13.5}
+{"fn":"windowControlsWidth","args":[{"$num":"NaN"}],"ok":0}
+{"fn":"windowControlsWidth","args":[{"$num":"-0"}],"ok":0}
+{"fn":"windowControlsWidth","args":[{"$num":"Infinity"}],"ok":{"$num":"Infinity"}}
+{"fn":"windowControlsWidth","args":[],"ok":96}
+{"fn":"windowButtonsFor","args":[["close","maximize"],{"menu":false}],"ok":["close","maximize"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize"],{"menu":false}],"ok":["minimize"]}
+{"fn":"windowButtonsFor","args":[["close","maximize"],{"menu":false,"maximizable":false}],"ok":["close"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize"],{"menu":false,"maximizable":false}],"ok":["minimize"]}
+{"fn":"windowButtonsFor","args":[["close","maximize"],{"menu":true}],"ok":["close","maximize"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize"],{"menu":true}],"ok":["menu","minimize"]}
+{"fn":"windowButtonsFor","args":[["close","maximize"],{"menu":false,"minimizable":false}],"ok":["close","maximize"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize"],{"menu":false,"minimizable":false}],"ok":[]}
+{"fn":"windowButtonsFor","args":[["close","maximize"],{}],"ok":["close","maximize"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize"],{}],"ok":["menu","minimize"]}
+{"fn":"windowButtonsFor","args":[["close","maximize"],{"menu":0}],"ok":["close","maximize"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize"],{"menu":0}],"ok":["minimize"]}
+{"fn":"windowButtonsFor","args":[["close","maximize"],{"menu":"x"}],"ok":["close","maximize"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize"],{"menu":"x"}],"ok":["menu","minimize"]}
+{"fn":"windowButtonsFor","args":[["close","maximize"],{"menu":null}],"ok":["close","maximize"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize"],{"menu":null}],"ok":["minimize"]}
+{"fn":"windowButtonsFor","args":[["close","maximize"],{"minimizable":{"$undefined":true}}],"ok":["close","maximize"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize"],{"minimizable":{"$undefined":true}}],"ok":["menu","minimize"]}
+{"fn":"windowButtonsFor","args":[["close","maximize"],{"maximizable":""}],"ok":["close"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize"],{"maximizable":""}],"ok":["menu","minimize"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize","maximize","close"],{"menu":false}],"ok":["minimize","maximize","close"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize","maximize","close"],{"minimizable":false}],"ok":["menu","maximize","close"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize","maximize","close"],{"maximizable":false}],"ok":["menu","minimize","close"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize","maximize","close"],{"menu":false,"minimizable":false,"maximizable":false}],"ok":["close"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize","maximize","close"],null],"error":"Cannot read properties of null (reading 'menu')"}
+{"fn":"windowButtonsFor","args":[["menu","minimize","maximize","close"],{"$undefined":true}],"error":"Cannot read properties of undefined (reading 'menu')"}
+{"fn":"windowButtonsFor","args":[["menu","minimize","maximize","close"],5],"ok":["menu","minimize","maximize","close"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize","maximize","close"],"menu"],"ok":["menu","minimize","maximize","close"]}
+{"fn":"windowButtonsFor","args":[["menu","minimize","maximize","close"],[]],"ok":["menu","minimize","maximize","close"]}
+{"fn":"windowButtonsFor","args":[["Menu","é","😀","close"],{"menu":false}],"ok":["Menu","é","😀","close"]}
+{"fn":"windowButtonsFor","args":[[],{"menu":false}],"ok":[]}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","minimize","maximize","close"]}],"ok":"right"}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","minimize","maximize","close"]}],"ok":3}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","close"]}],"ok":"right"}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","close"]}],"ok":1}
+{"fn":"buttonLayoutSide","args":[{"leading":["close","minimize","maximize"],"trailing":["menu"]}],"ok":"left"}
+{"fn":"buttonLayoutCount","args":[{"leading":["close","minimize","maximize"],"trailing":["menu"]}],"ok":3}
+{"fn":"buttonLayoutSide","args":[{"leading":["close"],"trailing":["menu","maximize"]}],"ok":"both"}
+{"fn":"buttonLayoutCount","args":[{"leading":["close"],"trailing":["menu","maximize"]}],"ok":2}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu"]}],"ok":"none"}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu"]}],"ok":0}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","close"]}],"ok":"right"}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","close"]}],"ok":1}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu"]}],"ok":"none"}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu"]}],"ok":0}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","minimize","maximize","close"]}],"ok":"right"}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","minimize","maximize","close"]}],"ok":3}
+{"fn":"buttonLayoutSide","args":[null],"error":"Cannot read properties of null (reading 'leading')"}
+{"fn":"buttonLayoutCount","args":[null],"error":"Cannot read properties of null (reading 'leading')"}
+{"fn":"buttonLayoutSide","args":[0],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":[0],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":["x"],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":["x"],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":[{"leading":[]}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutCount","args":[{"leading":[]}],"error":"Cannot read properties of undefined (reading 'filter')"}
+{"fn":"buttonLayoutSide","args":[{"leading":"close","trailing":[]}],"error":"buttons.filter is not a function"}
+{"fn":"buttonLayoutCount","args":[{"leading":"close","trailing":[]}],"error":"buttons.filter is not a function"}
+{"fn":"buttonLayoutSide","args":[{"leading":[],"trailing":["menu","menu"]}],"ok":"none"}
+{"fn":"buttonLayoutCount","args":[{"leading":[],"trailing":["menu","menu"]}],"ok":0}
+{"fn":"buttonLayoutSide","args":[{"leading":["menu"],"trailing":["menu"]}],"ok":"none"}
+{"fn":"buttonLayoutCount","args":[{"leading":["menu"],"trailing":["menu"]}],"ok":0}

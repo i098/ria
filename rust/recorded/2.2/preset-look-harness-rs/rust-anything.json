@@ -1,0 +1,30 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/presetLook.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "preset-look-harness-rs",
+  "exports": [
+    {
+      "name": "replayTrackPress",
+      "file": "apps/browser/src/lib/presetLook.harness.ts",
+      "line": 7,
+      "params": [
+        {
+          "name": "steps",
+          "ts_type": "{ op?: unknown; trackPixels?: unknown; pageX?: unknown; trackX?: unknown; snapTo?: unknown }[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

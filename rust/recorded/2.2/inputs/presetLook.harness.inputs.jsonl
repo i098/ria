@@ -1,0 +1,2 @@
+{"fn": "replayTrackPress", "args": [[{"op": "armed"}, {"op": "at", "pageX": 50, "trackX": 0, "trackPixels": 100}, {"op": "grant", "trackPixels": 100}, {"op": "armed"}, {"op": "at", "pageX": 50, "trackX": 0, "trackPixels": 100}, {"op": "at", "pageX": 50, "trackX": 0, "trackPixels": 100, "snapTo": 0.502}]]}
+{"fn": "replayTrackPress", "args": [[{"op": "grant", "trackPixels": 0}, {"op": "armed"}, {"op": "grant", "trackPixels": {"$num": "NaN"}}, {"op": "armed"}, {"op": "grant", "trackPixels": 5}, {"op": "at", "pageX": 9, "trackX": 0, "trackPixels": 0}, {"op": "nope"}, null, 7]]}

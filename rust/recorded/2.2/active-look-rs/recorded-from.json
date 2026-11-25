@@ -1,0 +1,41 @@
+{
+  "unit": "apps/browser/src/lib/activeLook.harness.ts",
+  "files": 1,
+  "fingerprint": "3cebc47df300f4b3",
+  "coverage": {
+    "lines": 429,
+    "reached": 321,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/activeLook.harness.ts",
+        "lines": 24,
+        "reached": 24,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/activeLook.ts",
+        "lines": 16,
+        "reached": 16,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/themeLook.ts",
+        "lines": 328,
+        "reached": 250,
+        "missed": "153-160, 163-164, 176, 180-181, 184, 190, 210-212, 288-299, 304-315, 317-335, 338-339, 342-356"
+      },
+      {
+        "file": "apps/browser/src/lib/windowLayout.ts",
+        "lines": 53,
+        "reached": 23,
+        "missed": "25-38, 41-46, 57-66"
+      }
+    ]
+  }
+}

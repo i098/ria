@@ -1,0 +1,17 @@
+{
+  "unit": "apps/browser/src/lib/windowLayout.ts",
+  "files": 1,
+  "fingerprint": "d60fbd1ab54a2e7c",
+  "coverage": {
+    "lines": 53,
+    "reached": 53,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/windowLayout.ts",
+        "lines": 53,
+        "reached": 53,
+        "missed": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/themeGesture.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "theme-gesture-rs",
+  "exports": [
+    {
+      "name": "replayThemeGesture",
+      "file": "apps/browser/src/lib/themeGesture.harness.ts",
+      "line": 11,
+      "params": [
+        {
+          "name": "showing",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "steps",
+          "ts_type": "{ op?: unknown; target?: unknown; intensity?: unknown; settle?: unknown }[]",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

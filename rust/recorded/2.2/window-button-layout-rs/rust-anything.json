@@ -1,0 +1,108 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/windowButtonLayout.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "windowbuttonlayout-rs",
+  "exports": [
+    {
+      "name": "windowControlsWidth",
+      "file": "apps/browser/src/lib/windowButtonLayout.ts",
+      "line": 9,
+      "params": [
+        {
+          "name": "count",
+          "ts_type": "number",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "parseButtonLayout",
+      "file": "apps/browser/src/lib/windowButtonLayout.ts",
+      "line": 17,
+      "params": [
+        {
+          "name": "raw",
+          "ts_type": "string | null | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ leading: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[]; trailing: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[] }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "windowButtonsFor",
+      "file": "apps/browser/src/lib/windowButtonLayout.ts",
+      "line": 37,
+      "params": [
+        {
+          "name": "buttons",
+          "ts_type": "readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[]",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "arg1",
+          "ts_type": "{ menu?: boolean; minimizable?: boolean; maximizable?: boolean }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "(\"menu\" | \"minimize\" | \"maximize\" | \"close\")[]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "buttonLayoutSide",
+      "file": "apps/browser/src/lib/windowButtonLayout.ts",
+      "line": 42,
+      "params": [
+        {
+          "name": "layout",
+          "ts_type": "{ leading: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[]; trailing: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[] }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "(\"right\" | \"left\" | \"both\" | \"none\")",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "buttonLayoutCount",
+      "file": "apps/browser/src/lib/windowButtonLayout.ts",
+      "line": 48,
+      "params": [
+        {
+          "name": "layout",
+          "ts_type": "{ leading: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[]; trailing: readonly (\"menu\" | \"minimize\" | \"maximize\" | \"close\")[] }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

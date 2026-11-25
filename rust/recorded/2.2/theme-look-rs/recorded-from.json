@@ -1,0 +1,29 @@
+{
+  "unit": "apps/browser/src/lib/themeLook.ts",
+  "files": 1,
+  "fingerprint": "67f33bb627caba6b",
+  "coverage": {
+    "lines": 389,
+    "reached": 359,
+    "files": [
+      {
+        "file": "apps/browser/src/lib/decode.ts",
+        "lines": 8,
+        "reached": 8,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/themeLook.ts",
+        "lines": 328,
+        "reached": 328,
+        "missed": ""
+      },
+      {
+        "file": "apps/browser/src/lib/windowLayout.ts",
+        "lines": 53,
+        "reached": 23,
+        "missed": "25-38, 41-46, 57-66"
+      }
+    ]
+  }
+}

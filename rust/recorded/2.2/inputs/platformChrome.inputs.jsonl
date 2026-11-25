@@ -1,0 +1,8 @@
+{"fn":"applyWindowButtonStyle","args":["native"]}
+{"fn":"applyWindowButtonStyle","args":["trafficLights"]}
+{"fn":"applyWindowButtonStyle","args":["hidden"]}
+{"fn":"applyWindowButtonStyle","args":["native",{"leading":["close"],"trailing":["menu"]}]}
+{"fn":"applyWindowButtonStyle","args":["trafficLights",{"$undefined":true}]}
+{"fn":"applyWindowButtonStyle","args":["hidden",null]}
+{"fn":"applyWindowButtonStyle","args":["",{"leading":[],"trailing":[]}]}
+{"fn":"applyWindowButtonStyle","args":["Ünïcode 😀"]}

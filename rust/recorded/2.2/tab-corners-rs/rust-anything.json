@@ -1,0 +1,78 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/tabCorners.harness.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "tabcorners-rs",
+  "exports": [
+    {
+      "name": "validTabCornersCase",
+      "file": "apps/browser/src/lib/tabCorners.harness.ts",
+      "line": 10,
+      "params": [
+        {
+          "name": "value",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "boolean",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "withTabCornersCase",
+      "file": "apps/browser/src/lib/tabCorners.harness.ts",
+      "line": 12,
+      "params": [
+        {
+          "name": "doc",
+          "ts_type": "Record<string, unknown> | null",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "corners",
+          "ts_type": "number | null",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ look: unknown; same: boolean }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "tabCornersControlCase",
+      "file": "apps/browser/src/lib/tabCorners.harness.ts",
+      "line": 18,
+      "params": [
+        {
+          "name": "inForce",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "chosen",
+          "ts_type": "number | null",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "unknown",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

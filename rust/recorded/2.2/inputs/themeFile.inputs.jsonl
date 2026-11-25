@@ -1,0 +1,64 @@
+{"fn": "themeColor", "args": ["#abc"]}
+{"fn": "themeColor", "args": ["#ABCDEF"]}
+{"fn": "themeColor", "args": ["#abcdef80"]}
+{"fn": "themeColor", "args": ["#abcd"]}
+{"fn": "themeColor", "args": ["#ab"]}
+{"fn": "themeColor", "args": ["rgb(1,2,3)"]}
+{"fn": "themeColor", "args": ["rgb( 255 , 0 , 10 )"]}
+{"fn": "themeColor", "args": ["rgba(1,2,3,0.5)"]}
+{"fn": "themeColor", "args": ["rgba(1,2,3,1)"]}
+{"fn": "themeColor", "args": ["rgba(1,2,3,1.000)"]}
+{"fn": "themeColor", "args": ["rgba(1,2,3,.25)"]}
+{"fn": "themeColor", "args": ["rgba(1,2,3,0)"]}
+{"fn": "themeColor", "args": ["rgb(256,0,0)"]}
+{"fn": "themeColor", "args": ["rgb(01,2,3)"]}
+{"fn": "themeColor", "args": ["rgba(1,2,3,1.5)"]}
+{"fn": "themeColor", "args": ["RGB(1,2,3)"]}
+{"fn": "themeColor", "args": ["red"]}
+{"fn": "themeColor", "args": [""]}
+{"fn": "themeColor", "args": [5]}
+{"fn": "themeColor", "args": [null]}
+{"fn": "themeColor", "args": [["#fff"]]}
+{"fn": "themeColor", "args": ["#fff "]}
+{"fn": "themeColor", "args": ["\u00a0#fff"]}
+{"fn": "themeColor", "args": ["rgb(\u00a01,2,3)"]}
+{"fn": "themeColor", "args": ["rgba(10,20,30,0.333)"]}
+{"fn": "roleKind", "args": ["text", "#fff"]}
+{"fn": "roleKind", "args": ["grain", 0.5]}
+{"fn": "roleKind", "args": ["panelOpacity", 1]}
+{"fn": "roleKind", "args": ["cardRadius", 3]}
+{"fn": "roleKind", "args": ["blur", 2]}
+{"fn": "roleKind", "args": ["gradient", ["#000", "#111"]]}
+{"fn": "roleKind", "args": ["gradient", []]}
+{"fn": "roleKind", "args": ["flag", true]}
+{"fn": "roleKind", "args": ["x", null]}
+{"fn": "roleKind", "args": ["x", {"a": 1}]}
+{"fn": "roleKind", "args": ["x", ""]}
+{"fn": "parseThemeFile", "args": ["mine.json", "{}", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "{", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "[1]", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "\"s\"", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "null", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "{\"dark\":{\"text\":\"#fff\"}}", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "{\"$schema\":\"x\",\"dark\":{\"text\":\"#fff\",\"accent\":\"nope\",\"grain\":2,\"panelOpacity\":\"0.5\",\"cardRadius\":101,\"blur\":\"a\",\"gradient\":[\"#000\",\"#111\"],\"flag\":true,\"nope\":1},\"light\":{\"gradient\":[\"#000\"],\"blur\":-5,\"cardRadius\":0}}", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "{\"dark\":5,\"light\":[],\"zz\":1}", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "{\"light\":{\"text\":\"rgba(1,2,3,0.5)\",\"gradient\":[\"#000\",\"bad\"]},\"type\":{\"family\":\"Inter\",\"weights\":{\"bold\":\"750\"}},\"layout\":{\"hide\":[\"x\"]},\"icons\":{\"A\":\"b\"}}", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "{\"dark\":{\"toString\":\"#fff\",\"constructor\":\"#000\",\"__proto__\":{\"a\":1}}}", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "{\"dark\":{\"grain\":1e400}}", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "{\"dark\":{\"text\":\"#fff\",}}", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "NaN", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["mine.json", "{\"a\":1}x", {"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "parseThemeFile", "args": ["e.json", "{\"dark\":{\"text\":\"#fff\"}}", {"dark": {}, "light": {}}]}
+{"fn": "mergedPalettes", "args": [{"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}, null, 1]}
+{"fn": "mergedPalettes", "args": [{"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}, {"$undefined": true}, 0]}
+{"fn": "mergedPalettes", "args": [{"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}, {"dark": {"text": "#FF0000", "new": "#00FF00"}, "light": {}}, 7]}
+{"fn": "mergedPalettes", "args": [{"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}, {"dark": {}, "light": {"gradient": ["#000000", "#000001"], "grain": 0}}, {"$num": "NaN"}]}
+{"fn": "themeSchema", "args": [{"dark": {"text": "#FFFFFF", "accent": "#3366FF", "grain": 0.3, "panelOpacity": 0.8, "cardRadius": 10, "blur": 20, "gradient": ["#000000", "#111111"], "flag": true}, "light": {"text": "#000000", "accent": "#0044CC", "grain": 0.1, "panelOpacity": 0.9, "cardRadius": 8, "blur": 10, "gradient": ["#FFFFFF", "#EEEEEE"], "flag": false}}]}
+{"fn": "themeSchema", "args": [{"dark": {}, "light": {}}]}
+{"fn": "mergedPalettes", "args": [null, null, 1]}
+{"fn": "mergedPalettes", "args": [null, {"dark": {}, "light": {}}, 1]}
+{"fn": "themeSchema", "args": [null]}
+{"fn": "themeSchema", "args": [{"$undefined": true}]}
+{"fn": "themeSchema", "args": [{"dark": {}}]}
+{"fn": "themeSchema", "args": [{"light": {}, "dark": null}]}

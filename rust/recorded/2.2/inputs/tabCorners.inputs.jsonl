@@ -1,0 +1,77 @@
+{"fn": "validTabCornersCase", "args": [null]}
+{"fn": "validTabCornersCase", "args": [0]}
+{"fn": "validTabCornersCase", "args": [20]}
+{"fn": "validTabCornersCase", "args": [10]}
+{"fn": "validTabCornersCase", "args": [-1]}
+{"fn": "validTabCornersCase", "args": [21]}
+{"fn": "validTabCornersCase", "args": [1.5]}
+{"fn": "validTabCornersCase", "args": [{"$num": "NaN"}]}
+{"fn": "validTabCornersCase", "args": [{"$num": "-0"}]}
+{"fn": "validTabCornersCase", "args": [{"$num": "Infinity"}]}
+{"fn": "validTabCornersCase", "args": ["10"]}
+{"fn": "validTabCornersCase", "args": [true]}
+{"fn": "validTabCornersCase", "args": [[]]}
+{"fn": "validTabCornersCase", "args": [{}]}
+{"fn": "validTabCornersCase", "args": [{"$undefined": true}]}
+{"fn": "validTabCornersCase", "args": [19.999999]}
+{"fn": "validTabCornersCase", "args": [1e-300]}
+{"fn": "validTabCornersCase", "args": []}
+{"fn": "tabCornersControlCase", "args": [24, null]}
+{"fn": "tabCornersControlCase", "args": [10, null]}
+{"fn": "tabCornersControlCase", "args": [0, 0]}
+{"fn": "tabCornersControlCase", "args": [10, 10]}
+{"fn": "tabCornersControlCase", "args": [20, null]}
+{"fn": "tabCornersControlCase", "args": [-5, 3]}
+{"fn": "tabCornersControlCase", "args": [{"$num": "NaN"}, null]}
+{"fn": "tabCornersControlCase", "args": [{"$num": "-0"}, null]}
+{"fn": "tabCornersControlCase", "args": [0.5, 1]}
+{"fn": "tabCornersControlCase", "args": [1e+21, null]}
+{"fn": "tabCornersControlCase", "args": [0.3333333333333333, null]}
+{"fn": "tabCornersControlCase", "args": [{"$num": "Infinity"}, 2]}
+{"fn": "tabCornersControlCase", "args": [15, {"$undefined": true}]}
+{"fn": "tabCornersControlCase", "args": [7, 0]}
+{"fn": "withTabCornersCase", "args": [null, null]}
+{"fn": "withTabCornersCase", "args": [null, 10]}
+{"fn": "withTabCornersCase", "args": [null, 0]}
+{"fn": "withTabCornersCase", "args": [null, 4]}
+{"fn": "withTabCornersCase", "args": [null, 20]}
+{"fn": "withTabCornersCase", "args": [null, 24]}
+{"fn": "withTabCornersCase", "args": [null, {"$num": "NaN"}]}
+{"fn": "withTabCornersCase", "args": [null, {"$num": "-0"}]}
+{"fn": "withTabCornersCase", "args": [null, 9]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, null]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, 10]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, 0]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, 4]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, 20]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, 24]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, {"$num": "NaN"}]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, {"$num": "-0"}]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41, "radius": {"row": 10, "pinned": 10}}}, 9]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, null]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, 10]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, 0]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, 4]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, 20]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, 24]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, {"$num": "NaN"}]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, {"$num": "-0"}]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 30, "rowGap": 5, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"row": 4, "pinned": 0, "tile": 6}}}, 9]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, null]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, 10]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, 0]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, 4]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, 20]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, 24]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, {"$num": "NaN"}]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, {"$num": "-0"}]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"rowHeight": 28, "radius": {"row": 9}}, "layout": {"hide": ["profile", "pinned", "downloads", "profile"], "addressField": "bottom", "newTab": "top"}}, 9]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"radius": {"row": 0}}}, null]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"radius": {"row": 0}}}, 10]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"radius": {"row": 0}}}, 0]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"radius": {"row": 0}}}, 4]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"radius": {"row": 0}}}, 20]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"radius": {"row": 0}}}, 24]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"radius": {"row": 0}}}, {"$num": "NaN"}]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"radius": {"row": 0}}}, {"$num": "-0"}]}
+{"fn": "withTabCornersCase", "args": [{"metrics": {"radius": {"row": 0}}}, 9]}

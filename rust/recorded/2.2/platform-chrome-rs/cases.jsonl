@@ -1,0 +1,208 @@
+{"fn":"applyWindowButtonStyle","args":["HELLO"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[":",{"leading":["menu","close"],"trailing":["close","minimize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["line1\nline2",{"leading":["menu","minimize","minimize"],"trailing":["minimize","close","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[":",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a.b.c",{"leading":["maximize"],"trailing":["close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["HELLO",{"leading":["menu","maximize","menu"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["HELLO",[]],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["Hello World"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["Hello World",{"leading":[],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["./x/**/*.jsonkey_name-1",{"leading":["maximize","maximize"],"trailing":["close","close","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.path",{"leading":[],"trailing":["minimize","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["tab\tseparated",{"leading":["maximize","maximize"],"trailing":["menu","menu","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["  padded  ",{"leading":[],"trailing":["close","close","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["straße",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a😀b😀c",["a",1]],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["line1\nline2",{"leading":["minimize","maximize"],"trailing":["menu","minimize","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["é",{"leading":["menu"],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["straße",{"leading":["minimize","menu","maximize"],"trailing":["maximize","close","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello world"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["trailing."],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ab",{"leading":["close","maximize"],"trailing":["maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["src/a/b.ts",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ünïcödé﻿bom"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["tab\tseparated",true],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["",{"leading":[],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello",{"leading":["close"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["İstanbul",{"leading":[],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ΣΊΣΥΦΟΣ"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["src/a/b.tsa.b.c",{"leading":[],"trailing":["maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.path",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a.b.c",{"leading":["minimize","menu"],"trailing":["minimize","close","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["tab\tseparated",{"leading":["maximize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["HELLO",{"leading":[],"trailing":["maximize","close","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["﻿bom",{"a":{"b":"c"}}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["{name} has {count} items",{"leading":[],"trailing":["menu","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[".leading",{"leading":["close"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["abc",{"leading":["maximize"],"trailing":["menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["日本語のテキスト",{"leading":["minimize","maximize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["😀a",{"leading":["close"],"trailing":["menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["src/a/b.tsa:b:c"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a..bline1\nline2",{"leading":["close","menu","close"],"trailing":["maximize","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["key_name-1a..b",{"leading":["close","menu"],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["tab\tseparated",{"leading":[],"trailing":["close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["emoji 👍🏽 mix",[]],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["trailing.ünïcödé",{"leading":["minimize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["src/a/b.tsemoji 👍🏽 mix",{"a":{"b":"c"}}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["  padded  ",{"leading":["menu","close"],"trailing":["menu","maximize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a..b",{"leading":[],"trailing":["minimize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["./x/**/*.json",{"leading":[],"trailing":["menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["HELLO",{"leading":["close"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["  padded  ",{"leading":["minimize","maximize","close"],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[".leadinghello",{"leading":["maximize","maximize","minimize"],"trailing":["maximize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ünïcödé",{"leading":["close","minimize","close"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a..b",{"leading":["maximize","menu","minimize"],"trailing":["maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a..b",{"leading":["minimize","minimize","minimize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["src/a/b.ts",{"leading":["maximize","maximize","close"],"trailing":["maximize","maximize","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["straße",{"leading":["menu","maximize","menu"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["line1\nline2",{"a":"b"}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["tab\tseparated",{"leading":["maximize","minimize"],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[".leading",{"leading":[],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a:b:c",{"leading":["maximize","menu"],"trailing":["maximize","maximize","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["  padded  ",{"leading":["menu","minimize","close"],"trailing":["close","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[""],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["  padded  ",{"leading":["minimize"],"trailing":["close","maximize","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[":",{"leading":["menu"],"trailing":["close","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a.b.c",{"leading":["minimize"],"trailing":["close","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["tab\tseparated",null],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ab",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["﻿bom",{"leading":["menu","minimize","maximize"],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello world",{"leading":[],"trailing":["menu","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[":",{"leading":["maximize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["Hello World",{"leading":[],"trailing":["minimize","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.path",{"leading":["menu","menu"],"trailing":["menu","minimize","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello﻿bom",{"leading":[],"trailing":["menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["tab\tseparateda😀b😀c"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["😀",{"leading":["maximize","menu"],"trailing":["close","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a:b:c",{"leading":["maximize","menu"],"trailing":["minimize","maximize","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["Hello World",["a",1]],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a.b.c",{"leading":["menu"],"trailing":["maximize","maximize","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a.b.ca:b:c",true],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["emoji 👍🏽 mix",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.pathabc",{"leading":["menu","close"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[":tab\tseparated",{"leading":["close","close","minimize"],"trailing":["close","menu","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["HELLO",{"leading":["maximize","menu"],"trailing":["menu","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["  padded  ",{"leading":["menu"],"trailing":["close","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["HELLO",{"leading":["minimize","maximize","menu"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ab",{"leading":["menu","close"],"trailing":["close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["key_name-1Hello World"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["﻿bom",{"leading":["maximize","close"],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["emoji 👍🏽 mix",{"leading":["maximize","close"],"trailing":["maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["{name} has {count} items",{"leading":["maximize","close"],"trailing":["minimize","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a",{"leading":["maximize"],"trailing":["maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["./x/**/*.jsoné",{"leading":["minimize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ΣΊΣΥΦΟΣ",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.path",{"leading":["close"],"trailing":["maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["key_name-1"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a..b日本語のテキスト",{"a":"b"}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a",{"leading":[],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["emoji 👍🏽 mix",{"leading":[],"trailing":["menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ünïcödé{name} has {count} items",{"leading":["maximize"],"trailing":["close","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["",{"leading":["minimize","maximize","menu"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["./x/**/*.json",{"leading":["maximize","minimize"],"trailing":["maximize","close","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["line1\nline2"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.path",{}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ünïcödé",{"leading":["close"],"trailing":["close","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a😀b😀c",{"leading":["minimize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["﻿bom",{"leading":["minimize","minimize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["tab\tseparatedns:key.path",{"leading":["minimize"],"trailing":["close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["abc{name} has {count} items",{"leading":[],"trailing":["close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a:b:c",{"leading":[],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello world",{"leading":["menu"],"trailing":["menu","menu","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[":",{"leading":["menu","maximize"],"trailing":["maximize","maximize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["./x/**/*.json:",{"leading":["close"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["日本語のテキスト",["a",1]],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["Hello World",{"leading":[],"trailing":["maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a..b",true],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["😀",[]],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ab",{"leading":["menu"],"trailing":["minimize","maximize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a",{"leading":[],"trailing":["menu","minimize","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a",{"leading":["menu"],"trailing":["maximize","minimize","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["./x/**/*.json",true],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["日本語のテキスト",{"a":{"b":"c"}}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["日本語のテキスト","x"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["emoji 👍🏽 mix",{"leading":["close"],"trailing":["close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["",{"leading":["close","close"],"trailing":["close","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a",{"leading":["maximize","menu"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["./x/**/*.json",{"leading":["maximize","menu"],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[".leading",{"leading":["minimize","close"],"trailing":["maximize","minimize","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["src/a/b.ts",{"leading":["close","maximize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["key_name-1trailing.",{"leading":["close","close","menu"],"trailing":["maximize","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["﻿bom",{"leading":["minimize","menu"],"trailing":["close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a:b:c",{"leading":["minimize","menu"],"trailing":["close","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.path"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["  padded  ",{"leading":[],"trailing":["minimize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["😀",{"leading":[],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["﻿bom",{}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["./x/**/*.json",{"leading":[],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["{name} has {count} items",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["tab\tseparated.leading",{"leading":["maximize","minimize"],"trailing":["close","maximize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.path",{"leading":["minimize","minimize","menu"],"trailing":["close","close","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello",{"leading":["maximize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ΣΊΣΥΦΟΣé",{"leading":[],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["  padded  ",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["key_name-1﻿bom",[]],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["key_name-1",[]],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[":",["a",1]],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["",{"leading":["menu","maximize","minimize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello world",{"leading":["close"],"trailing":["minimize","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["aΣΊΣΥΦΟΣ",{"leading":["menu"],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.path",{"leading":["minimize","close","menu"],"trailing":["close","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a😀b😀cabc",{"leading":["maximize","close"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["İstanbul",{"leading":["close","minimize","maximize"],"trailing":["minimize","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[":"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["tab\tseparated",{"leading":["menu","maximize","close"],"trailing":["maximize","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a:b:c",{"leading":["menu"],"trailing":["close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["é.leading",{"leading":[],"trailing":["menu","maximize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["abcHELLO",{"leading":["menu","minimize","close"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["src/a/b.ts",{"leading":[],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[".leading",{"leading":["minimize","close","close"],"trailing":["close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["straße",{"leading":["maximize","maximize","menu"],"trailing":["close","minimize","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["abcabc",null],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["  padded  ",{"leading":["minimize"],"trailing":["minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ab",{}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["日本語のテキスト",{}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello",{"leading":["close","menu"],"trailing":["close","minimize","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["HELLO",{"leading":["minimize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["İstanbul",{"leading":[],"trailing":["maximize","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[".leading",{"leading":[],"trailing":["close","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[".leading",{"leading":["minimize","menu","close"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[":",{"leading":["menu","maximize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a",{"leading":["minimize","minimize"],"trailing":["menu","minimize","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.path",{"leading":["menu","close","maximize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["İstanbul.leading",{"leading":["maximize","close","minimize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ns:key.path",{"leading":["minimize","close","menu"],"trailing":["close","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["日本語のテキスト.leading",{"leading":["maximize","minimize","menu"],"trailing":["close","maximize","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["{name} has {count} items"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["abc",{"leading":["menu"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["src/a/b.tsHello World",{"leading":[],"trailing":["maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["trailing.{name} has {count} items",{"leading":["close"],"trailing":["minimize","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a.b.c",{"leading":["maximize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a.b.c"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["",{"leading":["menu"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello world",{"leading":["minimize"],"trailing":["menu","menu","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ünïcödé",{"leading":[],"trailing":["maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a:b:c",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ab",{"leading":[],"trailing":["menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["abc",{"leading":[],"trailing":["minimize","maximize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["😀",0],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello world",{"leading":["menu"],"trailing":["close","maximize","maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[".leading",{"leading":[],"trailing":["menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":[":",{"leading":["close","minimize","close"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["./x/**/*.jsonünïcödé",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a..b",{"leading":[],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["trailing.",{"leading":["menu","maximize"],"trailing":["minimize","close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a..b",{"leading":["maximize"],"trailing":["close"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hello world",{"leading":["maximize","minimize"],"trailing":["minimize","maximize","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["straßeé",{"leading":["menu","close","minimize"],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a.b.c",{"leading":["minimize","menu"],"trailing":["minimize","minimize","menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["ΣΊΣΥΦΟΣ",{"leading":["maximize"],"trailing":["maximize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["a.b.c",{"leading":[],"trailing":["menu","minimize","minimize"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["native"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["trafficLights"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hidden"],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["native",{"leading":["close"],"trailing":["menu"]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["trafficLights",{"$undefined":true}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["hidden",null],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["",{"leading":[],"trailing":[]}],"ok":false}
+{"fn":"applyWindowButtonStyle","args":["Ünïcode 😀"],"ok":false}

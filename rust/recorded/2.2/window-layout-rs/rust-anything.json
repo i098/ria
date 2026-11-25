@@ -1,0 +1,144 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/windowLayout.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "window-layout-rs",
+  "exports": [
+    {
+      "name": "sidebarWidthLimit",
+      "file": "apps/browser/src/lib/windowLayout.ts",
+      "line": 10,
+      "params": [
+        {
+          "name": "windowWidth",
+          "ts_type": "number | null | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "shownSidebarWidth",
+      "file": "apps/browser/src/lib/windowLayout.ts",
+      "line": 13,
+      "params": [
+        {
+          "name": "saved",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "windowWidth",
+          "ts_type": "number | null | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "validPageFrame",
+      "file": "apps/browser/src/lib/windowLayout.ts",
+      "line": 22,
+      "params": [
+        {
+          "name": "v",
+          "ts_type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "v is number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pageFrameInsetOf",
+      "file": "apps/browser/src/lib/windowLayout.ts",
+      "line": 24,
+      "params": [
+        {
+          "name": "inset",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "opts",
+          "ts_type": "{\n    borderlessMode?: boolean;\n    zeroInFullScreen: boolean;\n    fullScreen: boolean;\n    zeroWhenTabsHidden: boolean;\n    tabsHidden: boolean;\n  }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pageFrameInset",
+      "file": "apps/browser/src/lib/windowLayout.ts",
+      "line": 40,
+      "params": [
+        {
+          "name": "settings",
+          "ts_type": "{ pageFrame: number; borderlessMode?: boolean }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "number",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "pageFrameOf",
+      "file": "apps/browser/src/lib/windowLayout.ts",
+      "line": 56,
+      "params": [
+        {
+          "name": "inset",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "windowRadius",
+          "ts_type": "number",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "drawnWindowRadius",
+          "ts_type": "unknown",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  inset: number;\n  radius: number;\n  splitGap: number;\n  peek: { left: number; top: number; bottom: number; radius: number };\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

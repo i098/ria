@@ -1,0 +1,53 @@
+{"fn": "resolveLook", "args": [{}]}
+{"fn": "lookUse", "args": [{}]}
+{"fn": "resolveLook", "args": [null]}
+{"fn": "lookUse", "args": [null]}
+{"fn": "resolveLook", "args": [{"$undefined": true}]}
+{"fn": "lookUse", "args": [{"$undefined": true}]}
+{"fn": "resolveLook", "args": [5]}
+{"fn": "lookUse", "args": [5]}
+{"fn": "resolveLook", "args": [{"type": {}}]}
+{"fn": "lookUse", "args": [{"type": {}}]}
+{"fn": "resolveLook", "args": [{"type": {"family": "Inter", "mono": "JetBrains Mono", "scale": 1.2, "sizes": {"body": 14, "title": 18}, "weights": {"medium": "600"}}}]}
+{"fn": "lookUse", "args": [{"type": {"family": "Inter", "mono": "JetBrains Mono", "scale": 1.2, "sizes": {"body": 14, "title": 18}, "weights": {"medium": "600"}}}]}
+{"fn": "resolveLook", "args": [{"metrics": {"rowHeight": 40, "rowGap": 4, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"card": 14, "control": 6, "tile": 3}}}]}
+{"fn": "lookUse", "args": [{"metrics": {"rowHeight": 40, "rowGap": 4, "pinnedHeight": 50, "sidebarWidth": 240, "radius": {"card": 14, "control": 6, "tile": 3}}}]}
+{"fn": "resolveLook", "args": [{"layout": {"hide": ["newTabButton", "sidebarToggle", "newTabButton"], "addressField": "bottom", "newTab": "top"}}]}
+{"fn": "lookUse", "args": [{"layout": {"hide": ["newTabButton", "sidebarToggle", "newTabButton"], "addressField": "bottom", "newTab": "top"}}]}
+{"fn": "resolveLook", "args": [{"layout": {"hide": [], "addressField": "top", "newTab": "middle"}}]}
+{"fn": "lookUse", "args": [{"layout": {"hide": [], "addressField": "top", "newTab": "middle"}}]}
+{"fn": "resolveLook", "args": [{"icons": {"plus": "plus.circle", "gear": "gearshape.fill"}}]}
+{"fn": "lookUse", "args": [{"icons": {"plus": "plus.circle", "gear": "gearshape.fill"}}]}
+{"fn": "resolveLook", "args": [{"icons": {}}]}
+{"fn": "lookUse", "args": [{"icons": {}}]}
+{"fn": "resolveLook", "args": [{"type": {"sizes": {}}}]}
+{"fn": "lookUse", "args": [{"type": {"sizes": {}}}]}
+{"fn": "resolveLook", "args": [{"layout": {"hide": []}}]}
+{"fn": "lookUse", "args": [{"layout": {"hide": []}}]}
+{"fn": "resolveLook", "args": [{"type": {"scale": "big", "sizes": {"body": "x", "tiny": 9.555}}, "metrics": {"rowHeight": "tall", "sidebarWidth": "w"}}]}
+{"fn": "lookUse", "args": [{"type": {"scale": "big", "sizes": {"body": "x", "tiny": 9.555}}, "metrics": {"rowHeight": "tall", "sidebarWidth": "w"}}]}
+{"fn": "resolveLook", "args": [{"type": {"scale": 0.877}, "metrics": {}, "layout": {"newTab": "bottom"}, "icons": {"a": "b"}}]}
+{"fn": "lookUse", "args": [{"type": {"scale": 0.877}, "metrics": {}, "layout": {"newTab": "bottom"}, "icons": {"a": "b"}}]}
+{"fn": "parseLookBlocks", "args": ["t.json", {}, []]}
+{"fn": "parseLookBlocks", "args": ["t.json", {"type": {"family": " bad", "mono": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "weight": 5, "weights": {"bold": "750", "medium": 500, "heavy": "900"}}}, []]}
+{"fn": "parseLookBlocks", "args": ["t.json", {"type": {"sizes": {"body": 99, "title": 15, "giant": 3}, "scale": 3}, "metrics": {"rowHeight": -1, "radius": {"card": 99, "blob": 1}, "sidebarWidth": 10}}, []]}
+{"fn": "parseLookBlocks", "args": ["t.json", {"layout": {"hide": ["newTabButton", 3, "nope"], "addressField": "left", "newTab": "top", "wat": 1}}, []]}
+{"fn": "parseLookBlocks", "args": ["t.json", {"icons": {"Plus": "x", "plus": "Bad Name", "gear": "gearshape", "dot": 5}}, []]}
+{"fn": "parseLookBlocks", "args": ["t.json", {"type": "x", "metrics": [1], "layout": null, "icons": []}, []]}
+{"fn": "parseLookBlocks", "args": ["t.json", {"type": {"family": "Helvetica Neue", "mono": "Menlo"}}, []]}
+{"fn": "parseLookBlocks", "args": ["t.json", {"other": 1, "dark": {}}, []]}
+{"fn": "parseLookBlocks", "args": ["t.json", [1, 2], []]}
+{"fn": "parseLookBlocks", "args": ["f", null, ["old"]]}
+{"fn": "lookSchemas", "args": []}
+{"fn": "lookDefaults", "args": []}
+{"fn": "withSidebarText", "args": [{"family": null, "mono": "Menlo", "sizes": {"badge": 9, "tiny": 10, "caption": 11, "small": 12, "body": 13, "title": 15, "large": 17}, "weights": {"regular": "400", "medium": "500", "semibold": "600", "bold": "700"}, "metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41}, "sidebarWidth": null, "sidebarScale": 1, "radii": {"none": 0, "hair": 2, "control": 4, "tile": 8, "panel": 12, "sheet": 16, "hero": 20, "chrome": 10, "toolbar": 7, "pinned": 10}, "hidden": {"$set": []}, "addressField": "top", "newTab": null, "icons": {"$map": []}}, "default"]}
+{"fn": "withSidebarText", "args": [{"family": null, "mono": "Menlo", "sizes": {"badge": 9, "tiny": 10, "caption": 11, "small": 12, "body": 13, "title": 15, "large": 17}, "weights": {"regular": "400", "medium": "500", "semibold": "600", "bold": "700"}, "metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41}, "sidebarWidth": null, "sidebarScale": 1, "radii": {"none": 0, "hair": 2, "control": 4, "tile": 8, "panel": 12, "sheet": 16, "hero": 20, "chrome": 10, "toolbar": 7, "pinned": 10}, "hidden": {"$set": []}, "addressField": "top", "newTab": null, "icons": {"$map": []}}, "large"]}
+{"fn": "withSidebarText", "args": [{"family": null, "mono": "Menlo", "sizes": {"badge": 9, "tiny": 10, "caption": 11, "small": 12, "body": 13, "title": 15, "large": 17}, "weights": {"regular": "400", "medium": "500", "semibold": "600", "bold": "700"}, "metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41}, "sidebarWidth": null, "sidebarScale": 1, "radii": {"none": 0, "hair": 2, "control": 4, "tile": 8, "panel": 12, "sheet": 16, "hero": 20, "chrome": 10, "toolbar": 7, "pinned": 10}, "hidden": {"$set": []}, "addressField": "top", "newTab": null, "icons": {"$map": []}}, "larger"]}
+{"fn": "withSidebarText", "args": [{"family": null, "mono": "Menlo", "sizes": {"badge": 9, "tiny": 10, "caption": 11, "small": 12, "body": 13, "title": 15, "large": 17}, "weights": {"regular": "400", "medium": "500", "semibold": "600", "bold": "700"}, "metrics": {"rowHeight": 34, "rowGap": 3, "pinnedHeight": 41}, "sidebarWidth": null, "sidebarScale": 1, "radii": {"none": 0, "hair": 2, "control": 4, "tile": 8, "panel": 12, "sheet": 16, "hero": 20, "chrome": 10, "toolbar": 7, "pinned": 10}, "hidden": {"$set": []}, "addressField": "top", "newTab": null, "icons": {"$map": []}}, "huge"]}
+{"fn": "withSidebarText", "args": [{"family": "Inter", "mono": "Menlo", "sizes": {"badge": 9, "tiny": 10, "caption": 11, "small": 12, "body": 13, "title": 15, "large": 17}, "weights": {"regular": "400", "medium": "500", "semibold": "600", "bold": "700"}, "metrics": {"rowHeight": 40, "rowGap": 5, "pinnedHeight": 47.5}, "sidebarWidth": 240, "sidebarScale": 1, "radii": {"none": 0, "hair": 2, "control": 4, "tile": 8, "panel": 12, "sheet": 16, "hero": 20, "chrome": 10, "toolbar": 7, "pinned": 10}, "hidden": {"$set": ["newTabButton"]}, "addressField": "bottom", "newTab": "bottom", "icons": {"$map": [["plus", "plus.circle"]]}}, "default"]}
+{"fn": "withSidebarText", "args": [{"family": "Inter", "mono": "Menlo", "sizes": {"badge": 9, "tiny": 10, "caption": 11, "small": 12, "body": 13, "title": 15, "large": 17}, "weights": {"regular": "400", "medium": "500", "semibold": "600", "bold": "700"}, "metrics": {"rowHeight": 40, "rowGap": 5, "pinnedHeight": 47.5}, "sidebarWidth": 240, "sidebarScale": 1, "radii": {"none": 0, "hair": 2, "control": 4, "tile": 8, "panel": 12, "sheet": 16, "hero": 20, "chrome": 10, "toolbar": 7, "pinned": 10}, "hidden": {"$set": ["newTabButton"]}, "addressField": "bottom", "newTab": "bottom", "icons": {"$map": [["plus", "plus.circle"]]}}, "large"]}
+{"fn": "withSidebarText", "args": [{"family": "Inter", "mono": "Menlo", "sizes": {"badge": 9, "tiny": 10, "caption": 11, "small": 12, "body": 13, "title": 15, "large": 17}, "weights": {"regular": "400", "medium": "500", "semibold": "600", "bold": "700"}, "metrics": {"rowHeight": 40, "rowGap": 5, "pinnedHeight": 47.5}, "sidebarWidth": 240, "sidebarScale": 1, "radii": {"none": 0, "hair": 2, "control": 4, "tile": 8, "panel": 12, "sheet": 16, "hero": 20, "chrome": 10, "toolbar": 7, "pinned": 10}, "hidden": {"$set": ["newTabButton"]}, "addressField": "bottom", "newTab": "bottom", "icons": {"$map": [["plus", "plus.circle"]]}}, "larger"]}
+{"fn": "withSidebarText", "args": [{"family": "Inter", "mono": "Menlo", "sizes": {"badge": 9, "tiny": 10, "caption": 11, "small": 12, "body": 13, "title": 15, "large": 17}, "weights": {"regular": "400", "medium": "500", "semibold": "600", "bold": "700"}, "metrics": {"rowHeight": 40, "rowGap": 5, "pinnedHeight": 47.5}, "sidebarWidth": 240, "sidebarScale": 1, "radii": {"none": 0, "hair": 2, "control": 4, "tile": 8, "panel": 12, "sheet": 16, "hero": 20, "chrome": 10, "toolbar": 7, "pinned": 10}, "hidden": {"$set": ["newTabButton"]}, "addressField": "bottom", "newTab": "bottom", "icons": {"$map": [["plus", "plus.circle"]]}}, "huge"]}
+{"fn": "parseLookBlocks", "args": ["t.json", {"layout": {"hide": "x"}}, []]}
+{"fn": "parseLookBlocks", "args": ["f", null, []]}
+{"fn": "parseLookBlocks", "args": ["f", {"$undefined": true}, []]}

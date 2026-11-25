@@ -1,0 +1,72 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/profileLook.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "profile-look-rs",
+  "exports": [
+    {
+      "name": "hexColor",
+      "file": "apps/browser/src/lib/profileLook.ts",
+      "line": 70,
+      "params": [
+        {
+          "name": "hex",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{ r: number; g: number; b: number; a: number }",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "spaceLookSource",
+      "file": "apps/browser/src/lib/profileLook.ts",
+      "line": 75,
+      "params": [
+        {
+          "name": "settings",
+          "ts_type": "{ spacesFollowAppearance: boolean }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "(\"own\" | \"app\" | \"utility\")",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "themeBackdrop",
+      "file": "apps/browser/src/lib/profileLook.ts",
+      "line": 79,
+      "params": [
+        {
+          "name": "theme",
+          "ts_type": "{\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n} & {\n  mode: (\"auto\" | \"light\" | \"dark\");\n  dark?: {\n  stops: { color: { r: number; g: number; b: number; a: number }; x: number; y: number }[];\n  intensity: number;\n  grain: number;\n  texture: (typeof THEME_TEXTURES)[number];\n  translucency: number;\n  angle?: number;\n};\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "dark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  themeColors: number[];\n  themeOpacity: number;\n  themeBaseAlpha: number;\n  themeGrain: number;\n  themeTexture: (typeof THEME_TEXTURES)[number];\n  themeAppearance: (\"auto\" | \"light\" | \"dark\");\n  themeAngle: number;\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

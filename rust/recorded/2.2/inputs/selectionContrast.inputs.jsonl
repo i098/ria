@@ -1,0 +1,544 @@
+{"fn": "selectionLightnessDelta", "args": ["#3366ff", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["#3366ff", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["#3366ff", []]}
+{"fn": "selectionLightnessDelta", "args": ["#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["#3366ff", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["#3366ff", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["#000", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["#000", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#000", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#000", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["#000", []]}
+{"fn": "selectionLightnessDelta", "args": ["#000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["#000", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["#000", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["#fff", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["#fff", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#fff", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#fff", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["#fff", []]}
+{"fn": "selectionLightnessDelta", "args": ["#fff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["#fff", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["#fff", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["#ffffff80", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["#ffffff80", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#ffffff80", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#ffffff80", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["#ffffff80", []]}
+{"fn": "selectionLightnessDelta", "args": ["#ffffff80", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["#ffffff80", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["#ffffff80", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgb(10, 20, 30)", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgb(10, 20, 30)", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgb(10, 20, 30)", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgb(10, 20, 30)", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgb(10, 20, 30)", []]}
+{"fn": "selectionLightnessDelta", "args": ["rgb(10, 20, 30)", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgb(10, 20, 30)", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgb(10, 20, 30)", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgba(200,100,50,0.5)", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgba(200,100,50,0.5)", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgba(200,100,50,0.5)", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgba(200,100,50,0.5)", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgba(200,100,50,0.5)", []]}
+{"fn": "selectionLightnessDelta", "args": ["rgba(200,100,50,0.5)", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgba(200,100,50,0.5)", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["rgba(200,100,50,0.5)", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["", []]}
+{"fn": "selectionLightnessDelta", "args": ["", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["bogus", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["bogus", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["bogus", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["bogus", []]}
+{"fn": "selectionLightnessDelta", "args": ["bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["bogus", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["bogus", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["#123", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["#123", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#123", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#123", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["#123", []]}
+{"fn": "selectionLightnessDelta", "args": ["#123", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["#123", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["#123", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["#808080", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["#808080", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#808080", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#808080", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["#808080", []]}
+{"fn": "selectionLightnessDelta", "args": ["#808080", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["#808080", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["#808080", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["#f5f5f5", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["#f5f5f5", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#f5f5f5", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#f5f5f5", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["#f5f5f5", []]}
+{"fn": "selectionLightnessDelta", "args": ["#f5f5f5", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["#f5f5f5", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["#f5f5f5", ["bogus"]]}
+{"fn": "selectionLightnessDelta", "args": ["#1e1e1e", ["#ffffff"]]}
+{"fn": "selectionLightnessDelta", "args": ["#1e1e1e", ["#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#1e1e1e", ["#ffffff", "#000000"]]}
+{"fn": "selectionLightnessDelta", "args": ["#1e1e1e", ["#808080", "#7f7f7f"]]}
+{"fn": "selectionLightnessDelta", "args": ["#1e1e1e", []]}
+{"fn": "selectionLightnessDelta", "args": ["#1e1e1e", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "selectionLightnessDelta", "args": ["#1e1e1e", ["#1e1e1e"]]}
+{"fn": "selectionLightnessDelta", "args": ["#1e1e1e", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#3366ff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#3366ff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#3366ff", []]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#3366ff", []]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#3366ff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#3366ff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#000000", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#000000", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#000000", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#000000", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#000000", []]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#000000", []]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#000000", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#000000", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#ffffff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#ffffff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#ffffff", []]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#ffffff", []]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "#ffffff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "#ffffff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "bogus", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "bogus", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "bogus", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "bogus", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "bogus", []]}
+{"fn": "visibleLine", "args": ["#3366ff40", "bogus", []]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#3366ff40", "bogus", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#3366ff40", "bogus", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#3366ff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#3366ff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#3366ff", []]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#3366ff", []]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#3366ff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#3366ff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#000000", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#000000", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#000000", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#000000", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#000000", []]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#000000", []]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#000000", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#000000", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#ffffff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#ffffff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#ffffff", []]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#ffffff", []]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "#ffffff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "#ffffff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "bogus", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "bogus", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "bogus", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "bogus", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "bogus", []]}
+{"fn": "visibleLine", "args": ["#ffffff10", "bogus", []]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#ffffff10", "bogus", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#ffffff10", "bogus", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#3366ff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#3366ff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#3366ff", []]}
+{"fn": "visibleLine", "args": ["#00000010", "#3366ff", []]}
+{"fn": "visibleSelection", "args": ["#00000010", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#3366ff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#3366ff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#000000", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#000000", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#000000", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#000000", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#000000", []]}
+{"fn": "visibleLine", "args": ["#00000010", "#000000", []]}
+{"fn": "visibleSelection", "args": ["#00000010", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#000000", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#000000", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#ffffff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#ffffff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#ffffff", []]}
+{"fn": "visibleLine", "args": ["#00000010", "#ffffff", []]}
+{"fn": "visibleSelection", "args": ["#00000010", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "#ffffff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#00000010", "#ffffff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "bogus", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#00000010", "bogus", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "bogus", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#00000010", "bogus", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#00000010", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#00000010", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "bogus", []]}
+{"fn": "visibleLine", "args": ["#00000010", "bogus", []]}
+{"fn": "visibleSelection", "args": ["#00000010", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#00000010", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#00000010", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#00000010", "bogus", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#00000010", "bogus", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#3366ff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#3366ff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#3366ff", []]}
+{"fn": "visibleLine", "args": ["#80808020", "#3366ff", []]}
+{"fn": "visibleSelection", "args": ["#80808020", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#3366ff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#3366ff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#000000", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#000000", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#000000", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#000000", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#000000", []]}
+{"fn": "visibleLine", "args": ["#80808020", "#000000", []]}
+{"fn": "visibleSelection", "args": ["#80808020", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#000000", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#000000", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#ffffff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#ffffff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#ffffff", []]}
+{"fn": "visibleLine", "args": ["#80808020", "#ffffff", []]}
+{"fn": "visibleSelection", "args": ["#80808020", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "#ffffff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#80808020", "#ffffff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "bogus", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#80808020", "bogus", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "bogus", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#80808020", "bogus", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#80808020", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#80808020", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "bogus", []]}
+{"fn": "visibleLine", "args": ["#80808020", "bogus", []]}
+{"fn": "visibleSelection", "args": ["#80808020", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#80808020", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#80808020", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#80808020", "bogus", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#80808020", "bogus", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["bogus", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#3366ff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["bogus", "#3366ff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["bogus", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["bogus", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#3366ff", []]}
+{"fn": "visibleLine", "args": ["bogus", "#3366ff", []]}
+{"fn": "visibleSelection", "args": ["bogus", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["bogus", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["bogus", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#3366ff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["bogus", "#3366ff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#000000", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["bogus", "#000000", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#000000", ["#000000"]]}
+{"fn": "visibleLine", "args": ["bogus", "#000000", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["bogus", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["bogus", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#000000", []]}
+{"fn": "visibleLine", "args": ["bogus", "#000000", []]}
+{"fn": "visibleSelection", "args": ["bogus", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["bogus", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["bogus", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#000000", ["bogus"]]}
+{"fn": "visibleLine", "args": ["bogus", "#000000", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["bogus", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#ffffff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["bogus", "#ffffff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["bogus", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["bogus", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#ffffff", []]}
+{"fn": "visibleLine", "args": ["bogus", "#ffffff", []]}
+{"fn": "visibleSelection", "args": ["bogus", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["bogus", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["bogus", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["bogus", "#ffffff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["bogus", "#ffffff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["bogus", "bogus", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["bogus", "bogus", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["bogus", "bogus", ["#000000"]]}
+{"fn": "visibleLine", "args": ["bogus", "bogus", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["bogus", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["bogus", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["bogus", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["bogus", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["bogus", "bogus", []]}
+{"fn": "visibleLine", "args": ["bogus", "bogus", []]}
+{"fn": "visibleSelection", "args": ["bogus", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["bogus", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["bogus", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["bogus", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["bogus", "bogus", ["bogus"]]}
+{"fn": "visibleLine", "args": ["bogus", "bogus", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#3366ff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#3366ff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#3366ff", []]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#3366ff", []]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#3366ff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#3366ff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#000000", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#000000", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#000000", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#000000", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#000000", []]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#000000", []]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#000000", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#000000", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#ffffff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#ffffff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#ffffff", []]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#ffffff", []]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "#ffffff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "#ffffff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "bogus", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "bogus", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "bogus", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "bogus", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "bogus", []]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "bogus", []]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#f6f6f6", "bogus", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#f6f6f6", "bogus", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#3366ff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#3366ff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#3366ff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#3366ff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#3366ff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#3366ff", []]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#3366ff", []]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#3366ff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#3366ff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#3366ff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#3366ff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#000000", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#000000", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#000000", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#000000", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#000000", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#000000", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#000000", []]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#000000", []]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#000000", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#000000", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#000000", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#000000", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#ffffff", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#ffffff", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#ffffff", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#ffffff", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#ffffff", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#ffffff", []]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#ffffff", []]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#ffffff", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#ffffff", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "#ffffff", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "#ffffff", ["bogus"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "bogus", ["#ffffff"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "bogus", ["#ffffff"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "bogus", ["#000000"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "bogus", ["#000000"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "bogus", ["#ffffff", "#000000"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "bogus", ["#808080", "#7f7f7f"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "bogus", []]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "bogus", []]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "bogus", ["#f5f5f5", "#e0e0e0"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "bogus", ["#1e1e1e"]]}
+{"fn": "visibleSelection", "args": ["#2a2a2a", "bogus", ["bogus"]]}
+{"fn": "visibleLine", "args": ["#2a2a2a", "bogus", ["bogus"]]}

@@ -1,0 +1,84 @@
+{
+  "schema": "rust-anything/bridge@1",
+  "root": "../.oracle",
+  "unit": "apps/browser/src/lib/windowTint.ts",
+  "language": "ts",
+  "kind": "napi",
+  "crate_name": "window-tint-rs",
+  "exports": [
+    {
+      "name": "backdropTint",
+      "file": "apps/browser/src/lib/windowTint.ts",
+      "line": 11,
+      "params": [
+        {
+          "name": "color",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "neutral",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "{\n  tintColor: string;\n  tintAlpha: number;\n  tintLightness: number;\n}",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "opaqueTint",
+      "file": "apps/browser/src/lib/windowTint.ts",
+      "line": 17,
+      "params": [
+        {
+          "name": "tint",
+          "ts_type": "{\n  tintColor: string;\n  tintAlpha: number;\n  tintLightness: number;\n}",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "dark",
+          "ts_type": "boolean",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "returns": "[string, string]",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    },
+    {
+      "name": "tintForHue",
+      "file": "apps/browser/src/lib/windowTint.ts",
+      "line": 26,
+      "params": [
+        {
+          "name": "swatch",
+          "ts_type": "string",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "grey",
+          "ts_type": "boolean",
+          "optional": true,
+          "rest": false
+        }
+      ],
+      "returns": "string",
+      "is_async": false,
+      "is_generator": false,
+      "type_params": [],
+      "uses_instanceof": false
+    }
+  ],
+  "classes": [],
+  "js_only": []
+}

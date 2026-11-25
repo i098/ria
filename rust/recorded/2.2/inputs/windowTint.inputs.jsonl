@@ -1,0 +1,221 @@
+{"fn": "backdropTint", "args": ["#3366ff", true]}
+{"fn": "backdropTint", "args": ["#3366ff", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#3366ff", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["#3366ff", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["#3366ff", true]}
+{"fn": "tintForHue", "args": ["#3366ff", false]}
+{"fn": "backdropTint", "args": ["#000", true]}
+{"fn": "backdropTint", "args": ["#000", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#000", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["#000", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["#000", true]}
+{"fn": "tintForHue", "args": ["#000", false]}
+{"fn": "backdropTint", "args": ["#fff", true]}
+{"fn": "backdropTint", "args": ["#fff", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#fff", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["#fff", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["#fff", true]}
+{"fn": "tintForHue", "args": ["#fff", false]}
+{"fn": "backdropTint", "args": ["#ffffff80", true]}
+{"fn": "backdropTint", "args": ["#ffffff80", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#ffffff80", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["#ffffff80", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["#ffffff80", true]}
+{"fn": "tintForHue", "args": ["#ffffff80", false]}
+{"fn": "backdropTint", "args": ["rgb(10, 20, 30)", true]}
+{"fn": "backdropTint", "args": ["rgb(10, 20, 30)", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgb(10, 20, 30)", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["rgb(10, 20, 30)", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["rgb(10, 20, 30)", true]}
+{"fn": "tintForHue", "args": ["rgb(10, 20, 30)", false]}
+{"fn": "backdropTint", "args": ["rgba(200,100,50,0.5)", true]}
+{"fn": "backdropTint", "args": ["rgba(200,100,50,0.5)", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "rgba(200,100,50,0.5)", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["rgba(200,100,50,0.5)", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["rgba(200,100,50,0.5)", true]}
+{"fn": "tintForHue", "args": ["rgba(200,100,50,0.5)", false]}
+{"fn": "backdropTint", "args": ["", true]}
+{"fn": "backdropTint", "args": ["", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["", true]}
+{"fn": "tintForHue", "args": ["", false]}
+{"fn": "backdropTint", "args": ["bogus", true]}
+{"fn": "backdropTint", "args": ["bogus", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "bogus", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["bogus", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["bogus", true]}
+{"fn": "tintForHue", "args": ["bogus", false]}
+{"fn": "backdropTint", "args": ["#123", true]}
+{"fn": "backdropTint", "args": ["#123", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#123", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["#123", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["#123", true]}
+{"fn": "tintForHue", "args": ["#123", false]}
+{"fn": "backdropTint", "args": ["#808080", true]}
+{"fn": "backdropTint", "args": ["#808080", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#808080", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["#808080", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["#808080", true]}
+{"fn": "tintForHue", "args": ["#808080", false]}
+{"fn": "backdropTint", "args": ["#f5f5f5", true]}
+{"fn": "backdropTint", "args": ["#f5f5f5", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#f5f5f5", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["#f5f5f5", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["#f5f5f5", true]}
+{"fn": "tintForHue", "args": ["#f5f5f5", false]}
+{"fn": "backdropTint", "args": ["#1e1e1e", true]}
+{"fn": "backdropTint", "args": ["#1e1e1e", false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": 0.12, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": 0.36, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": 0, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": 1, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": 0.36, "tintLightness": -0.5}, true]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": 0.12, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": 0.36, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": 0, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": 1, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": {"$num": "NaN"}, "tintLightness": 0.25}, false]}
+{"fn": "opaqueTint", "args": [{"tintColor": "#1e1e1e", "tintAlpha": 0.36, "tintLightness": -0.5}, false]}
+{"fn": "tintForHue", "args": ["#1e1e1e", {"$undefined": true}]}
+{"fn": "tintForHue", "args": ["#1e1e1e", true]}
+{"fn": "tintForHue", "args": ["#1e1e1e", false]}
+{"fn": "tintForHue", "args": ["#ff0000"]}
+{"fn": "tintForHue", "args": ["#ff0000", true]}
+{"fn": "tintForHue", "args": ["#00ff00"]}
+{"fn": "tintForHue", "args": ["#00ff00", true]}
+{"fn": "tintForHue", "args": ["#0000ff"]}
+{"fn": "tintForHue", "args": ["#0000ff", true]}
+{"fn": "tintForHue", "args": ["#ff00ff"]}
+{"fn": "tintForHue", "args": ["#ff00ff", true]}
+{"fn": "tintForHue", "args": ["#ffff00"]}
+{"fn": "tintForHue", "args": ["#ffff00", true]}
+{"fn": "tintForHue", "args": ["#00ffff"]}
+{"fn": "tintForHue", "args": ["#00ffff", true]}
+{"fn": "tintForHue", "args": ["#cc6699"]}
+{"fn": "tintForHue", "args": ["#cc6699", true]}
+{"fn": "opaqueTint", "args": [null, true]}
+{"fn": "opaqueTint", "args": [{"$undefined": true}, false]}
+{"fn": "opaqueTint", "args": [{"tintAlpha": 0.3, "tintLightness": 0.25}, true]}

@@ -14,6 +14,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Ria has no rel
 - [State replay kit](rust/replay/kit/README.md) with a find sample.
 - [Shared helpers](rust/recorded/2.2/README.md) of `apps/browser/src/lib` in `ria-state::shared` (slice 2.2 part 1: leaf helpers, url, emoji data), checked against Ardia.
 - Shared helpers part 2: plugin manifest helpers of `apps/browser/src/lib` in `ria-state::shared` (slice 2.2 part 2), checked against Ardia.
+- Shared helpers part 3: theme and window helpers of `apps/browser/src/lib` in `ria-state::shared` (slice 2.2 part 3), checked against Ardia.
 - Phase 1 core logic: Rust ports of the Phase 1 units, checked against Ardia. All checks passed for [gate G1](rust/GATES.md#g1-record).
 - [Import logic](rust/crates/ria-import/src/logic/index.rs): Rust port of `packages/import/src`, checked against Ardia by the [recorded cases of slice 2.47](rust/recorded/2.47/README.md).
 - Open-source community files, issue forms and PR template.
