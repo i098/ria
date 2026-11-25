@@ -36,29 +36,33 @@ use super::ardia_web_view_reveals::Reveal;
 use super::ardia_web_view_stand_in::StandIn;
 
 #[derive(Default)]
+#[allow(
+    dead_code,
+    reason = "#110: the modules read these fields once they are wired"
+)]
 pub struct State {
-    pub tab: Option<Retained<Tab>>,
-    pub controller: RcWeak<Controller>,
-    pub life: TabLifecycle,
-    pub requests: NavigationRequest,
-    pub reports: NavigationReports,
-    pub first_paint: FirstPaint,
-    pub frame_hold: FrameHold,
-    pub stand_in: StandIn,
-    pub reveal: Rc<RefCell<Reveal>>,
-    pub focus: PageFocus,
-    pub element_pick: ElementPick,
-    pub commands: PageCommands,
-    pub script_frames: ScriptFrames,
-    pub notifications: NotificationFrames,
-    pub display_requests: DisplayRequests,
-    pub picture_in_picture: PictureInPicture,
-    pub link_drop: LinkDrop,
-    pub profile: String,
-    pub transfer_key: Option<String>,
-    pub visible: bool,
-    pub selected: bool,
-    pub tab_index: isize,
+    tab: Option<Retained<Tab>>,
+    controller: RcWeak<Controller>,
+    life: TabLifecycle,
+    requests: NavigationRequest,
+    reports: NavigationReports,
+    first_paint: FirstPaint,
+    frame_hold: FrameHold,
+    stand_in: StandIn,
+    reveal: Rc<RefCell<Reveal>>,
+    focus: PageFocus,
+    element_pick: ElementPick,
+    commands: PageCommands,
+    script_frames: ScriptFrames,
+    notifications: NotificationFrames,
+    display_requests: DisplayRequests,
+    picture_in_picture: PictureInPicture,
+    link_drop: LinkDrop,
+    profile: String,
+    transfer_key: Option<String>,
+    visible: bool,
+    selected: bool,
+    tab_index: isize,
 }
 
 define_class!(
@@ -90,10 +94,6 @@ impl ArdiaWebView {
         live.register(&view);
         view
     }
-
-    pub fn state(&self) -> &RefCell<State> {
-        self.ivars()
-    }
 }
 
 /// The weak set from `ArdiaWebView.mm:33–36`.
@@ -120,8 +120,3 @@ impl LiveViews {
         live
     }
 }
-
-#[cfg(debug_assertions)]
-mod debug_events;
-#[cfg(debug_assertions)]
-pub use debug_events::note_event;
