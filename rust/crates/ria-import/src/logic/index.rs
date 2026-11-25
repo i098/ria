@@ -116,12 +116,16 @@ impl AbortSignal {
         self.lock().listeners.len()
     }
 
-    fn add_listener(&self, listener: AbortListener) -> u64 {
+    /// `None` when the signal is already aborted; the listener is then not registered.
+    fn add_listener(&self, listener: AbortListener) -> Option<u64> {
         let mut state = self.lock();
+        if state.aborted {
+            return None;
+        }
         state.next_id += 1;
         let id = state.next_id;
         state.listeners.push((id, listener));
-        id
+        Some(id)
     }
 
     fn remove_listener(&self, id: u64) {
@@ -214,11 +218,16 @@ impl<N: ImportNative> ImportClient<N> {
                 _ => {}
             })
         });
-        let abort = signal.as_ref().map(|s| {
+        let mut abort = None;
+        if let Some(s) = &signal {
             let native = Arc::clone(&self.native);
-            let job_id = job_id.clone();
-            s.add_listener(Arc::new(move || native.cancel_import(&job_id)))
-        });
+            let id = job_id.clone();
+            abort = s.add_listener(Arc::new(move || native.cancel_import(&id)));
+            if abort.is_none() {
+                sub.remove();
+                return Err(ArdiaError::new("cancelled", "Import cancelled"));
+            }
+        }
         let result = call(start(&job_id));
         if let (Some(s), Some(id)) = (&signal, abort) {
             s.remove_listener(id);
