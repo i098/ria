@@ -1,6 +1,6 @@
-// Ported from ardia apps/browser/src/state/app/programControl.ts, programControlSetting.ts and controlCaller.ts at 551d3c13c.
+// Ported from ardia apps/browser/src/state/app/programControl.ts at 551d3c13c.
 // Copyright 2026 Mantra Patel, Apache-2.0.
-// This file is a Rust port of those files, with changes.
+// This file is a Rust port of that file, with changes.
 
 //! The control indicator, the control server status, and the program-control sync.
 //!
