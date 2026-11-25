@@ -3,9 +3,9 @@
 // This file is a Rust port of that file, with changes.
 
 //! The parts of `ArdiaWebView+Transfer.mm` that need no `ArdiaWebView` object: the saved tab history of a transfer
-//! key, the keys bound to a restore, and the rule for which tab a view may take. `ensureTab`, `cloneTab`,
-//! `takeTransferredTab`, `closeBrowser`, `StartParkedPage` and the `LiveViews` loops need the view object and stay
-//! open (see `rust/MAP.md`). The two class methods `prepareTransfer:` and `releaseTransfer:` are in `page_engine.rs`.
+//! key, the keys bound to a restore, and the rule for which tab a view may take.
+//! See the ArdiaWebView entry in `rust/MAP.md` for pending integration.
+//! The two class methods `prepareTransfer:` and `releaseTransfer:` are in `page_engine.rs`.
 
 use std::collections::HashSet;
 use std::fmt::Write;

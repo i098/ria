@@ -8,7 +8,8 @@
 //! Changes from Ardia:
 //! - The host supplies the weak registry instead of using a process-wide set.
 //! - The factory registers the view at creation. Ardia registers it when a tab attaches.
-//! - `PageTab`, window observers, and painting, reveal, focus, and transfer orchestration stay open.
+//!
+//! See the ArdiaWebView entry in `rust/MAP.md` for pending integration.
 
 use std::cell::RefCell;
 use std::rc::{Rc, Weak as RcWeak};
