@@ -495,8 +495,14 @@ impl<'a> JsonParser<'a> {
             i += 1;
         }
         let column = 1 + js_length(&self.text[line_start..self.at]);
+        // V8 words the trailing-text message "...after JSON at position", without "in JSON".
+        let in_json = if message.ends_with("after JSON") {
+            ""
+        } else {
+            " in JSON"
+        };
         JsonError(format!(
-            "{message} in JSON at position {} (line {line} column {column})",
+            "{message}{in_json} at position {} (line {line} column {column})",
             self.position()
         ))
     }
@@ -984,6 +990,13 @@ mod tests {
             message("[1"),
             Some(
                 "Expected ',' or ']' after array element in JSON at position 2 (line 1 column 3)"
+                    .into()
+            )
+        );
+        assert_eq!(
+            message("{\"a\":1}x"),
+            Some(
+                "Unexpected non-whitespace character after JSON at position 7 (line 1 column 8)"
                     .into()
             )
         );
