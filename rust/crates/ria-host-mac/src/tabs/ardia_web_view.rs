@@ -281,7 +281,7 @@ impl ArdiaWebView {
                         layout_page(self, Some(&*page_tab), None, None, None, true);
                     }
                     AttachStep::HoldForFirstPaint { created } => {
-                        if created {
+                        if created && page_tab.loading() {
                             self.hold_page_until_painted(&page_tab, created);
                         }
                     }

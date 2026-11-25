@@ -101,7 +101,16 @@ mod mac {
             ),
         )
         .unwrap();
-        let out = launch(&bin, &home, &data, root, &listener, 1, "");
+        let out = launch(
+            &bin,
+            &home,
+            &data,
+            root,
+            &listener,
+            1,
+            "",
+            Duration::from_millis(300),
+        );
         assert!(out.contains("engineDidStart"));
         assert!(
             out.lines()
@@ -125,14 +134,10 @@ mod mac {
             out.lines().any(|line| line == "firstPaintHeld true"),
             "the launch page was not held for first paint at attach"
         );
-        let reveal_ms = out
-            .lines()
-            .find_map(|line| line.strip_prefix("firstPaintRevealMs "))
-            .and_then(|ms| ms.parse::<u64>().ok())
-            .expect("the held launch page was never revealed");
+        let reveal_ms = revealed_after_ms(&out);
         assert!(
-            reveal_ms < 3000,
-            "the launch page waited {reveal_ms} ms: the load-finished reveal did not run before the 4 s timeout"
+            reveal_ms < 1500,
+            "the slow-load launch page waited {reveal_ms} ms: the load-finished reveal did not run before the 4 s timeout"
         );
         assert!(
             out.lines().any(|line| line == "firstPaintOpacity 1"),
@@ -165,7 +170,21 @@ mod mac {
             r#"{"version":5,"windows":{"w":{"state":"{}","page":[8,44,8,8],"card":[8,44,8,8],"radius":10}}}"#,
         )
         .unwrap();
-        let again = launch(&bin, &home, &data, root, &listener, 2, "launchTab=on");
+        let again = launch(
+            &bin,
+            &home,
+            &data,
+            root,
+            &listener,
+            2,
+            "launchTab=on",
+            Duration::ZERO,
+        );
+        let reveal_ms = revealed_after_ms(&again);
+        assert!(
+            reveal_ms < 1500,
+            "the fast-load launch page waited {reveal_ms} ms for its reveal"
+        );
         assert!(
             again.contains("windowFrame 1000x700"),
             "the saved layout was not restored"
@@ -181,6 +200,13 @@ mod mac {
         );
     }
 
+    fn revealed_after_ms(out: &str) -> u64 {
+        out.lines()
+            .find_map(|line| line.strip_prefix("firstPaintRevealMs "))
+            .and_then(|ms| ms.parse().ok())
+            .expect("the launch page was never revealed")
+    }
+
     /// Run the app once on `data` and return what it printed.
     fn launch(
         bin: &Path,
@@ -190,6 +216,7 @@ mod mac {
         listener: &TcpListener,
         launch: u32,
         switches: &str,
+        delay: Duration,
     ) -> String {
         let stdout = root.join(format!("stdout-{launch}"));
         let stderr = root.join(format!("stderr-{launch}"));
@@ -218,7 +245,7 @@ mod mac {
                 child.wait().expect("reap Ria after timeout");
                 break None;
             }
-            serve_fixture(&listener);
+            serve_fixture(&listener, delay);
             std::thread::sleep(Duration::from_millis(50));
         };
         let out = fs::read(&stdout).unwrap();
@@ -230,14 +257,14 @@ mod mac {
         out
     }
 
-    fn serve_fixture(listener: &TcpListener) {
+    fn serve_fixture(listener: &TcpListener, delay: Duration) {
         let mut stream = match listener.accept() {
             Ok((stream, _)) => stream,
             Err(error) if error.kind() == ErrorKind::WouldBlock => return,
             Err(error) => panic!("accept fixture connection: {error}"),
         };
         stream.set_nonblocking(false).unwrap();
-        std::thread::sleep(Duration::from_millis(300));
+        std::thread::sleep(delay);
         let timeout = Some(Duration::from_millis(100));
         stream.set_read_timeout(timeout).unwrap();
         stream.set_write_timeout(timeout).unwrap();
