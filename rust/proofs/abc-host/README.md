@@ -18,5 +18,15 @@ The load-case numbers in `rust/RESOURCES.md` were measured with `cargo build --r
 ## Proof B and C results (Mac arm64, macOS 26.2)
 
 - Proof B: `./run.sh b` (blaze build) passes: 22 checks, 0 fail (tab delegate, pointer, click, wheel, focus, text keys, Backspace, Cmd+A, arrows, IME preedit and commit through `NSTextInputClient`, candidate rectangle, 100 moves + 20 wheels + 50 keys with no lost event, dark mode, live resize, frame times). Check "Hiragana input source" is NOT run: it needs the app in front (`ABC_IME_FOREGROUND=1 ./run.sh b`). The queue drain during menu tracking and during a user's live resize are NOT run (they need the window in front and a pointer drag).
-- Proof C: `./run.sh c` (blaze build) passes: 11 checks, 0 fail (transparent layer, z order page/glass/Rune, click over the page reaches the layer only, 2 layers read one counter, accessibility children, AXButton label). VoiceOver itself and the omnibox case are NOT run (VoiceOver needs the app in front).
+- Proof C: `./run.sh c` (blaze build) passes: 11 checks, 0 fail, measured before the check `ax_chrome_text_field` was added and not re-run since (transparent layer, z order page/glass/Rune, click over the page reaches the layer only, 2 layers read one counter, accessibility children, AXButton label). VoiceOver itself and the omnibox case are NOT run (VoiceOver needs the app in front).
 - Load case: `./run.sh b --load 1` and `./run.sh c --load 2`; numbers in `rust/RESOURCES.md`.
+
+## Surface checks in the agent desktop (issue 102)
+
+Changes from Ardia: none in product code. The fixture gains these test hooks:
+
+- Proof C has a chrome layer (button and text field) and an overlay layer (suggestion list). New check `ax_chrome_text_field` fails on the old fixture, which had no text field.
+- `ABC_IME_EXTERNAL_KEYS=1`: another process posts the Hiragana keys as real key events. Synthetic `sendEvent` keys do not reach the input method.
+- `ABC_AX_HOLD_SECS=<n>`: how long proof C holds the accessibility tree for a screen reader (default 12).
+
+Result in a Tart macOS 15.7.7 guest (arm64, no graphics): proof B Hiragana checks `ime_hiragana_marked` and `ime_hiragana` pass (marked text `日本`, field `日本`); 24 checks, 1 failure (`frame_times_600`, 608 frames at 58.9 Hz, 9 over 20.7 ms, a virtual GPU limit). VoiceOver: not tested. The guest has no audio output, and the VoiceOver first-run dialog and a screen-recording prompt covered the fixture, so no VoiceOver cursor reading was captured.

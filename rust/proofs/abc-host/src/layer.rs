@@ -33,6 +33,8 @@ pub enum Mode {
     Beside,
     /// Proof C: a transparent layer above the page view (and above a glass view).
     Above,
+    /// Proof C: a second transparent layer above the page view, drawing the suggestion list.
+    Overlay,
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -45,6 +47,9 @@ pub struct State {
     pub phase: f32,
     pub dark: bool,
     pub field: TextEdit,
+    /// Proof C: the second layer is the overlay (a list of suggestion rows); the first is the chrome (button and text field).
+    pub overlay: bool,
+    pub transparent: bool,
 }
 
 thread_local! {
@@ -52,7 +57,6 @@ thread_local! {
     pub static SCROLL_Y: Cell<f32> = const { Cell::new(0.0) };
     /// The one counter every layer reads (the proof's stand-in for the one `AppState`).
     static SHARED: Cell<u32> = const { Cell::new(0) };
-    static TRANSPARENT: Cell<bool> = const { Cell::new(false) };
     /// The appearance the view reported on the last tick, and the theme the last built tree used.
     static SYSTEM_DARK: Cell<bool> = const { Cell::new(true) };
     pub static DRAWN_DARK: Cell<bool> = const { Cell::new(true) };
@@ -61,7 +65,7 @@ thread_local! {
 fn view(s: &State, _: &mut Cx<State>) -> El {
     DRAWN_DARK.with(|c| c.set(s.dark));
     let t = tok::theme(s.dark);
-    let transparent = TRANSPARENT.with(Cell::get);
+    let transparent = s.transparent;
     let button = el()
         .key("inc")
         .role("button")
@@ -87,8 +91,15 @@ fn view(s: &State, _: &mut Cx<State>) -> El {
     let root = col().w_full().h_full().padding(12.0).gap(10.0);
     let title = text("Ria layer").font(type_::TITLE).color(t.text);
     if transparent {
-        // Proof C: a title and one button over the glass, nothing else.
-        return root.child(title).child(button).child(text(format!("Shared {}", s.shown)).key("shared").font(type_::BODY).color(t.text)).child(bar);
+        // Proof C: the chrome layer has the title, the button and the text field; the overlay layer has the shared counter and a suggestion list.
+        let shared = text(format!("Shared {}", s.shown)).key("shared").font(type_::BODY).color(t.text);
+        if s.overlay {
+            let rows = (0..4).fold(col().key("suggestions").role("list").label("Suggestions").w_full().gap(4.0), |c, i| {
+                c.child(text(format!("Suggestion {i}")).key(format!("suggestion-{i}")).role("listitem").label(format!("Suggestion {i}")).focusable(true).font(type_::BODY).color(t.text).h(22.0))
+            });
+            return root.child(shared).child(rows);
+        }
+        return root.child(title).child(button).child(field).child(shared).child(bar);
     }
     root.fill(t.bg)
         .child(title)
@@ -112,7 +123,7 @@ fn poll(s: &mut State, t: f64, _tx: &mut Tx) -> bool {
 fn spec() -> AppSpec<State> {
     AppSpec {
         poll: Some(poll),
-        ..AppSpec::new("Ria layer", (320.0, 560.0), || State { presses: 0, shown: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new("") }, view)
+        ..AppSpec::new("Ria layer", (320.0, 560.0), || State { presses: 0, shown: 0, hover: false, phase: 0.0, dark: true, field: TextEdit::new(""), overlay: false, transparent: false }, view)
     }
 }
 
@@ -586,7 +597,6 @@ fn mods(event: &NSEvent) -> Mods {
 
 impl RuneView {
     pub fn new(mtm: MainThreadMarker, mode: Mode, frame: NSRect) -> Retained<Self> {
-        TRANSPARENT.with(|t| t.set(mode == Mode::Above));
         let ivars = Ivars {
             rect_frames: Cell::new(0),
             rect_bad: Cell::new(0),
@@ -676,12 +686,14 @@ impl RuneView {
         let layer: *mut AnyObject = unsafe { msg_send![self, layer] };
         let scale = self.scale();
         let _: () = unsafe { msg_send![layer, setContentsScale: scale as f64] };
-        let transparent = self.ivars().mode == Mode::Above;
+        let transparent = self.ivars().mode != Mode::Beside;
         let spec = spec();
+        // The view's mode, not creation order, picks the tree (`init` is a plain fn pointer and cannot capture it).
+        let state = State { overlay: self.ivars().mode == Mode::Overlay, transparent, ..(spec.init)() };
         // SAFETY: `layer` is this view's CAMetalLayer; it lives as long as the view, which owns
         // the host, and this runs on the main thread.
         let made = unsafe {
-            LayerHost::from_core_animation_layer(layer.cast::<c_void>(), &spec, (spec.init)(), (size.width as f32, size.height as f32), scale, true, Arc::new(|| {}))
+            LayerHost::from_core_animation_layer(layer.cast::<c_void>(), &spec, state, (size.width as f32, size.height as f32), scale, true, Arc::new(|| {}))
         };
         match made {
             Ok(mut host) => {
@@ -762,7 +774,7 @@ impl RuneView {
         let (drew, cpu_us) = {
             let mut guard = iv.host.borrow_mut();
             let Some(host) = guard.as_mut() else { return };
-            if iv.mode == Mode::Above {
+            if iv.mode != Mode::Beside {
                 // wgpu marks a configured layer opaque; the layer must stay translucent.
                 let layer: *mut AnyObject = unsafe { msg_send![self, layer] };
                 let _: () = unsafe { msg_send![layer, setOpaque: false] };

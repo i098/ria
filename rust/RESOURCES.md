@@ -9,7 +9,7 @@ Ardia numbers: not measured in slices 0.7 and 0.8 (open for the owner of the RES
 
 Mac arm64, macOS 26.2, 24 GB, Chromium 158.0.8127.36 from the prebuilt engine, debug info on, built with `cargo build --release` (before the blaze patch; not repeated with blaze).
 Command: `ENGINE_DIR=... OUT_DIR=... ./run.sh b --load 1` (1 Rune layer in each window, proof B) and `./run.sh c --load 2` (2 layers, proof C).
-Each case ran 5 times. The Rune views are the proof views, not empty views: a button, a text field, a list of 60 rows and a bar (layer 1); the layer in 2-layer runs is the transparent view with a title, a button and a counter. [INFERENCE: this is a heavier view than "empty"; the numbers are an upper bound for the views.]
+Each case ran 5 times. The Rune views are the proof views, not empty views: a button, a text field, a list of 60 rows and a bar (layer 1); the layer in 2-layer runs is the transparent view with a title, a button and a counter. Later fixture changes (the overlay view now also has a text field) are not in these figures; they were not re-measured. [INFERENCE: this is a heavier view than "empty"; the numbers are an upper bound for the views.]
 
 | Number | 1 layer per window (B), 5 runs | 2 layers per window (C), 5 runs |
 | --- | --- | --- |
