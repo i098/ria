@@ -40,6 +40,7 @@ fn main() {
     objc2::rc::autoreleasepool(|_| drop(page));
     assert!(live.all().is_empty(), "the registry holds views weakly");
     neighbour_wake_repaints_warm_views(mtm);
+    visibility_change_paints_on_the_next_turn(mtm);
     println!("live_web_view: ok");
 }
 
@@ -101,5 +102,40 @@ fn neighbour_wake_repaints_warm_views(mtm: objc2::MainThreadMarker) {
     assert!(
         page.paint_facts().page_detached,
         "a view with no tab has no page"
+    );
+}
+
+/// `setVisible:` schedules `applyPainting` (`ArdiaWebView+Painting.mm:283,329`): the subviews hide on the next
+/// main-queue turn without a call to `repaint`.
+#[cfg(target_os = "macos")]
+fn visibility_change_paints_on_the_next_turn(mtm: objc2::MainThreadMarker) {
+    use std::rc::Rc;
+
+    use objc2::MainThreadOnly;
+    use objc2_app_kit::NSView;
+    use objc2_foundation::{NSPoint, NSRect, NSSize};
+    use ria_host_mac::tabs::ardia_page_hooks::PageHooks;
+    use ria_host_mac::tabs::ardia_web_view::LiveViews;
+    use ria_host_mac::tabs::chromium_tab_view::ChromiumTabView;
+
+    unsafe extern "C" {
+        static kCFRunLoopDefaultMode: *const std::ffi::c_void;
+        fn CFRunLoopRunInMode(mode: *const std::ffi::c_void, seconds: f64, once: u8) -> i32;
+    }
+
+    let live = Rc::new(LiveViews::default());
+    let hooks = PageHooks::new(live.clone(), |_| None, |_| {});
+    let frame = NSRect::new(NSPoint::new(0.0, 0.0), NSSize::new(100.0, 100.0));
+    let page = ChromiumTabView::make_page(mtm, &hooks);
+    let child = NSView::initWithFrame(NSView::alloc(mtm), frame);
+    page.addSubview(&child);
+    page.set_visible(true);
+    assert!(page.set_visible(false));
+    assert!(!child.isHidden(), "nothing paints before the turn ends");
+    // SAFETY: Runs the main thread's run loop for one short slice.
+    unsafe { CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.05, 0) };
+    assert!(
+        child.isHidden(),
+        "the scheduled paint hides a view that is not visible"
     );
 }

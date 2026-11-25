@@ -26,7 +26,7 @@ impl ChromiumTabView {
     /// a view made while field timing is on joins it.
     pub fn make_page(mtm: MainThreadMarker, hooks: &Rc<PageHooks>) -> Retained<ArdiaWebView> {
         hooks.install(mtm);
-        let view = ArdiaWebView::new(mtm, hooks.live());
+        let view = ArdiaWebView::new(mtm, hooks);
         if ardia_field_timing::enabled() {
             view.send_field_timing(true);
         }
