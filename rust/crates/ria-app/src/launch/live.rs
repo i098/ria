@@ -31,6 +31,7 @@ mod mac {
     use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
     use objc2::rc::Retained;
+    use objc2::{MainThreadMarker, Message};
     use objc2::{class, msg_send};
     use objc2_foundation::{NSPoint, NSRect, NSSize, NSString};
     use ria_host_mac::core::bindings::{Engine, Tab, Window};
@@ -40,6 +41,8 @@ mod mac {
     use ria_host_mac::launch::strip_layer::{Button, Row, button_center};
     use ria_host_mac::launch::system_signals;
     use ria_host_mac::launch::window_host::WindowHost;
+    use ria_host_mac::tabs::ardia_web_view::ArdiaWebView;
+    use ria_host_mac::tabs::chromium_tab_view::ChromiumTabView;
     use serde_json::{Value, json};
 
     const TITLE: &str = "Ria proof page";
@@ -100,7 +103,16 @@ mod mac {
             ),
         )
         .unwrap();
-        let out = launch(&bin, &home, &data, root, &listener, 1, "");
+        let out = launch(
+            &bin,
+            &home,
+            &data,
+            root,
+            &listener,
+            1,
+            "",
+            Duration::from_millis(300),
+        );
         assert!(out.contains("engineDidStart"));
         assert!(
             out.lines()
@@ -116,9 +128,30 @@ mod mac {
             "the Rune strip did not show, select, pin and close tabs"
         );
         assert!(
+            out.lines().any(|line| line == "pageFocused true"),
+            "the launch page did not take focus after its load"
+        );
+        assert!(
             out.lines()
                 .any(|line| line == "liveViews 1 paintViews 1 detached false"),
             "the app did not build a live page view for the launch tab"
+        );
+        assert!(
+            out.lines().any(|line| line == "attachLoading slow true"),
+            "the slow-load launch tab was not loading at attach"
+        );
+        assert!(
+            out.lines().any(|line| line == "firstPaintHeld true"),
+            "the launch page was not held for first paint at attach"
+        );
+        let reveal_ms = revealed_after_ms(&out, "slow");
+        assert!(
+            reveal_ms < 1500,
+            "the slow-load launch page waited {reveal_ms} ms: the load-finished reveal did not run before the 4 s timeout"
+        );
+        assert!(
+            out.lines().any(|line| line == "firstPaintOpacity 1"),
+            "the launch page is not opaque after the reveal"
         );
         assert!(
             out.lines().any(|line| line == "fieldTiming on")
@@ -147,7 +180,35 @@ mod mac {
             r#"{"version":5,"windows":{"w":{"state":"{}","page":[8,44,8,8],"card":[8,44,8,8],"radius":10}}}"#,
         )
         .unwrap();
-        let again = launch(&bin, &home, &data, root, &listener, 2, "launchTab=on");
+        let again = launch(
+            &bin,
+            &home,
+            &data,
+            root,
+            &listener,
+            2,
+            "launchTab=on",
+            Duration::ZERO,
+        );
+        assert!(
+            again.lines().any(|line| line == "attachLoading fast false"),
+            "the fast-case tab was still loading when it was attached"
+        );
+        assert!(
+            again.lines().any(|line| line == "firstPaintHeldFast false"),
+            "a tab that finished loading was held for first paint"
+        );
+        assert!(
+            again
+                .lines()
+                .any(|line| line == "firstPaintOpacityAtAttachFast 1"),
+            "the page was not opaque at attach"
+        );
+        let reveal_ms = revealed_after_ms(&again, "fast");
+        assert!(
+            reveal_ms < 1500,
+            "the fast-load launch page waited {reveal_ms} ms for its reveal"
+        );
         assert!(
             again.contains("windowFrame 1000x700"),
             "the saved layout was not restored"
@@ -163,6 +224,14 @@ mod mac {
         );
     }
 
+    fn revealed_after_ms(out: &str, case: &str) -> u64 {
+        let prefix = format!("firstPaintRevealMs {case} ");
+        out.lines()
+            .find_map(|line| line.strip_prefix(prefix.as_str()))
+            .and_then(|ms| ms.parse().ok())
+            .expect("the launch page was never revealed")
+    }
+
     /// Run the app once on `data` and return what it printed.
     fn launch(
         bin: &Path,
@@ -172,6 +241,7 @@ mod mac {
         listener: &TcpListener,
         launch: u32,
         switches: &str,
+        delay: Duration,
     ) -> String {
         let stdout = root.join(format!("stdout-{launch}"));
         let stderr = root.join(format!("stderr-{launch}"));
@@ -181,6 +251,7 @@ mod mac {
             .env("CFFIXED_USER_HOME", &home)
             .env("RIA_DATA_DIR", &data)
             .env("RIA_BACKGROUND", "1")
+            .envs(delay.is_zero().then_some(("RIA_LIVE_FAST", "1")))
             .env_remove("RIA_INSTANCE")
             .env("RIA_SWITCHES", switches)
             .env_remove("RIA_TEST")
@@ -200,7 +271,7 @@ mod mac {
                 child.wait().expect("reap Ria after timeout");
                 break None;
             }
-            serve_fixture(&listener);
+            serve_fixture(&listener, delay);
             std::thread::sleep(Duration::from_millis(50));
         };
         let out = fs::read(&stdout).unwrap();
@@ -212,13 +283,14 @@ mod mac {
         out
     }
 
-    fn serve_fixture(listener: &TcpListener) {
+    fn serve_fixture(listener: &TcpListener, delay: Duration) {
         let mut stream = match listener.accept() {
             Ok((stream, _)) => stream,
             Err(error) if error.kind() == ErrorKind::WouldBlock => return,
             Err(error) => panic!("accept fixture connection: {error}"),
         };
         stream.set_nonblocking(false).unwrap();
+        std::thread::sleep(delay);
         let timeout = Some(Duration::from_millis(100));
         stream.set_read_timeout(timeout).unwrap();
         stream.set_write_timeout(timeout).unwrap();
@@ -359,6 +431,58 @@ mod mac {
         }
     }
 
+    /// Prints the time from the first-paint hold to the reveal of the launch page, and the opacity after it.
+    fn reveal_poll(
+        view: Retained<ArdiaWebView>,
+        held: Instant,
+        case: &'static str,
+        revealed: Rc<Cell<bool>>,
+        done: Rc<dyn Fn()>,
+    ) {
+        if view.page_opacity() == Some(1.0) {
+            if case == "slow" {
+                println!("firstPaintRevealMs {case} {}", held.elapsed().as_millis());
+            }
+            println!("firstPaintOpacity 1");
+            if case == "slow" {
+                println!("pageFocused {}", view.has_page_focus());
+            }
+            revealed.set(true);
+            done();
+        } else if held.elapsed() < Duration::from_secs(10) {
+            host_launch::after(Duration::from_millis(10), move || {
+                reveal_poll(view, held, case, revealed, done)
+            });
+        }
+    }
+
+    /// The launch page is revealed, so its tab finished loading: attach the tab to a new view the way `page_for` does.
+    fn attach_after_load(host: &WindowHost) {
+        let core = host.main().expect("browser window");
+        let profile = core.active_profile().expect("active profile");
+        let tab = core
+            .tabs_for_profile(&profile)
+            .firstObject()
+            .expect("launch tab");
+        assert!(!tab.loading(), "the launch tab is still loading");
+        let mtm = MainThreadMarker::new().expect("main thread");
+        let page = ChromiumTabView::make_page(mtm, host.hooks());
+        let attached = Instant::now();
+        let _ = page.attach_tab(
+            tab.retain(),
+            "fastproof".into(),
+            host.chrome().tab_registry(),
+            true,
+        );
+        println!("attachLoading fast {}", tab.loading());
+        println!("firstPaintHeldFast {}", page.page_opacity() == Some(0.0));
+        println!(
+            "firstPaintOpacityAtAttachFast {}",
+            page.page_opacity().unwrap_or(-1.0)
+        );
+        println!("firstPaintRevealMs fast {}", attached.elapsed().as_millis());
+    }
+
     fn all_set(flags: &[&Cell<bool>]) -> bool {
         flags.iter().all(|flag| flag.get())
     }
@@ -474,11 +598,26 @@ mod mac {
         let shutdown = Rc::new(Cell::new(false));
         let moving = Move::new();
         let pinned = Rc::new(Cell::new(false));
-        // Quit when both the fixture title and the download move are done.
+        let revealed = Rc::new(Cell::new(false));
+        let fast = std::env::var_os("RIA_LIVE_FAST").is_some();
+        let case = if fast { "fast" } else { "slow" };
+        let ready_host: Rc<RefCell<Option<Rc<WindowHost>>>> = Rc::default();
+        // Quit when the fixture title, the download move, the pin and the first-paint reveal are done.
         let quit_when_done: Rc<dyn Fn()> = {
-            let (matched, moving, pinned) = (matched.clone(), moving.clone(), pinned.clone());
+            let (matched, moving, pinned, revealed) = (
+                matched.clone(),
+                moving.clone(),
+                pinned.clone(),
+                revealed.clone(),
+            );
+            let ready_host = ready_host.clone();
+            let proven = Cell::new(false);
             Rc::new(move || {
-                if all_set(&[&matched, &moving.done, &pinned]) {
+                if all_set(&[&matched, &moving.done, &pinned, &revealed]) {
+                    if fast && !proven.replace(true) {
+                        let host = ready_host.borrow().clone();
+                        attach_after_load(&host.expect("the window host was ready"));
+                    }
                     host_launch::later(host_launch::quit);
                 }
             })
@@ -487,6 +626,8 @@ mod mac {
         let check_drive = drive.clone();
         let check_title = matched.clone();
         let check_pin = pinned.clone();
+        let check_revealed = revealed.clone();
+        let check_ready = ready_host.clone();
         let check_shutdown = shutdown.clone();
         let check_moving = moving.clone();
         let status = super::app_launch::start(Rc::new(move |event| match event {
@@ -512,6 +653,21 @@ mod mac {
                     host.hooks().live().all().len(),
                     facts.len(),
                     facts.iter().any(|view| view.page_detached)
+                );
+                *check_ready.borrow_mut() = Some(host.clone());
+                let view = host.hooks().live().all().remove(0);
+                println!(
+                    "attachLoading {case} {}",
+                    host.launch_attach_loading()
+                        .expect("the launch tab attached")
+                );
+                println!("firstPaintHeld {}", view.page_opacity() == Some(0.0));
+                reveal_poll(
+                    view,
+                    Instant::now(),
+                    case,
+                    check_revealed.clone(),
+                    quit_when_done.clone(),
                 );
                 let signals = system_signals::current().expect("the app has a system-signals host");
                 signals.call(
@@ -569,7 +725,7 @@ mod mac {
             LaunchEvent::Error(error) => eprintln!("{error}"),
             _ => {}
         }));
-        if all_set(&[&matched, &shutdown, &moving.done, &check_pin]) {
+        if all_set(&[&matched, &shutdown, &moving.done, &check_pin, &revealed]) {
             status
         } else {
             ExitCode::FAILURE

@@ -114,7 +114,7 @@ impl PageHooks {
         &self.input
     }
 
-    fn asleep(&self, window: &NSWindow) -> bool {
+    pub(super) fn asleep(&self, window: &NSWindow) -> bool {
         let now = Instant::now();
         self.wakes
             .borrow()

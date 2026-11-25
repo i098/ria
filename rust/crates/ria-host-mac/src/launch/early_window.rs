@@ -46,6 +46,7 @@ impl BrowserWindow {
         show: bool,
         inactive: bool,
         observer: &Observer,
+        loaded: Rc<dyn Fn(&Tab)>,
     ) -> Self {
         let mtm = MainThreadMarker::new().expect("open launch window on the main thread");
         let rect = layout.as_ref().map_or_else(
@@ -74,7 +75,7 @@ impl BrowserWindow {
             profile.warm_spare_renderer();
         }
         let tab = core.open_tab(&NSString::from_str(url), profile, true);
-        let delegate = TabDelegate::new(window.clone(), observer.clone());
+        let delegate = TabDelegate::new(window.clone(), observer.clone(), loaded);
         // SAFETY: the delegate implements the optional callbacks we use and stays owned by this window.
         unsafe { tab.set_delegate(Some(&delegate)) };
         core.activate_tab(&tab);
@@ -245,6 +246,7 @@ struct TabIvars {
     observer: Observer,
     picture: RefCell<Option<Retained<NSImageView>>>,
     resize_observer: RefCell<Option<Retained<ProtocolObject<dyn NSObjectProtocol>>>>,
+    loaded: Rc<dyn Fn(&Tab)>,
 }
 
 define_class!(
@@ -262,6 +264,10 @@ define_class!(
         #[unsafe(method(tabDidChangeLoading:))]
         fn loading_changed(&self, tab: &Tab) {
             if !tab.loading() {
+                let url = tab.url().to_string();
+                if !url.is_empty() && !url.starts_with("about:") {
+                    (self.ivars().loaded)(tab);
+                }
                 self.drop_picture();
             }
         }
@@ -274,12 +280,17 @@ define_class!(
 );
 
 impl TabDelegate {
-    fn new(window: Retained<NSWindow>, observer: Observer) -> Retained<Self> {
+    fn new(
+        window: Retained<NSWindow>,
+        observer: Observer,
+        loaded: Rc<dyn Fn(&Tab)>,
+    ) -> Retained<Self> {
         let this = Self::alloc().set_ivars(TabIvars {
             window,
             observer,
             picture: RefCell::default(),
             resize_observer: RefCell::default(),
+            loaded,
         });
         // SAFETY: ivars are set and NSObject's initializer takes no arguments.
         unsafe { msg_send![super(this), init] }
