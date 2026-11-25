@@ -21,8 +21,7 @@ use std::collections::{HashMap, HashSet};
 use super::lanes::{crosses_lane, is_pinned_row};
 use super::pending_siblings::{self as siblings, Placement};
 use crate::browser::{
-    BrowserWindow, SplitSlot, SplitSlotVariant0, SplitSlotVariant1, SplitView,
-    SplitViewOrientation, Tab, TabGroup,
+    BrowserWindow, Orientation as SplitViewOrientation, SplitSlot, SplitView, Tab, TabGroup,
 };
 use crate::kernel::{AppState, Number};
 use crate::shared::platform_features::PLATFORM_FEATURES;
@@ -76,23 +75,21 @@ pub fn pane_chunks(ids: &[String]) -> Vec<Vec<String>> {
 
 pub fn slot_tab_ids(slot: &SplitSlot) -> Vec<String> {
     match slot {
-        SplitSlot::Other0(s) => vec![s.tab_id.clone()],
-        SplitSlot::Other1(s) => vec![s.stack.0.clone(), s.stack.1.clone()],
+        SplitSlot::Single { tab_id, .. } => vec![tab_id.clone()],
+        SplitSlot::Stack { stack, .. } => stack.to_vec(),
     }
 }
 
 pub fn slot_size(slot: &SplitSlot) -> f64 {
     match slot {
-        SplitSlot::Other0(s) => s.size.0,
-        SplitSlot::Other1(s) => s.size.0,
+        SplitSlot::Single { size, .. } | SplitSlot::Stack { size, .. } => size.0,
     }
 }
 
-fn with_size(slot: &SplitSlot, size: f64) -> SplitSlot {
+fn with_size(slot: &SplitSlot, new_size: f64) -> SplitSlot {
     let mut slot = slot.clone();
     match &mut slot {
-        SplitSlot::Other0(s) => s.size = Number(size),
-        SplitSlot::Other1(s) => s.size = Number(size),
+        SplitSlot::Single { size, .. } | SplitSlot::Stack { size, .. } => *size = Number(new_size),
     }
     slot
 }
@@ -106,19 +103,18 @@ pub fn split_tab_ids_of(split: Option<&SplitView>) -> Option<Vec<String>> {
 }
 
 pub fn is_stacked(split: &SplitView, tab_id: &str) -> bool {
-    split.slots.iter().any(
-        |slot| matches!(slot, SplitSlot::Other1(s) if s.stack.0 == tab_id || s.stack.1 == tab_id),
-    )
+    split
+        .slots
+        .iter()
+        .any(|slot| matches!(slot, SplitSlot::Stack { stack, .. } if stack[0] == tab_id || stack[1] == tab_id))
 }
 
 pub fn even_slots(ids: &[String]) -> Vec<SplitSlot> {
     let size = Number(1.0 / ids.len() as f64);
     ids.iter()
-        .map(|tab_id| {
-            SplitSlot::Other0(SplitSlotVariant0 {
-                size,
-                tab_id: tab_id.clone(),
-            })
+        .map(|tab_id| SplitSlot::Single {
+            size,
+            tab_id: tab_id.clone(),
         })
         .collect()
 }
@@ -132,14 +128,19 @@ pub fn map_slot_ids(slots: &[SplitSlot], f: impl Fn(&str) -> String) -> Vec<Spli
     slots
         .iter()
         .map(|slot| match slot {
-            SplitSlot::Other1(s) => SplitSlot::Other1(SplitSlotVariant1 {
-                stack: (f(&s.stack.0), f(&s.stack.1)),
-                ..s.clone()
-            }),
-            SplitSlot::Other0(s) => SplitSlot::Other0(SplitSlotVariant0 {
-                tab_id: f(&s.tab_id),
-                ..s.clone()
-            }),
+            SplitSlot::Stack {
+                size,
+                stack,
+                stack_sizes,
+            } => SplitSlot::Stack {
+                size: *size,
+                stack: [f(&stack[0]), f(&stack[1])],
+                stack_sizes: *stack_sizes,
+            },
+            SplitSlot::Single { size, tab_id } => SplitSlot::Single {
+                size: *size,
+                tab_id: f(tab_id),
+            },
         })
         .collect()
 }
@@ -149,7 +150,7 @@ pub fn stack_at(split: &SplitView) -> i32 {
     split
         .slots
         .iter()
-        .position(|slot| matches!(slot, SplitSlot::Other1(_)))
+        .position(|slot| matches!(slot, SplitSlot::Stack { .. }))
         .map_or(-1, |i| i as i32)
 }
 
@@ -159,18 +160,21 @@ pub fn with_pane_ids(split: &SplitView, ids: &[String]) -> SplitView {
         .slots
         .iter()
         .map(|slot| match slot {
-            SplitSlot::Other1(s) => {
+            SplitSlot::Stack {
+                size, stack_sizes, ..
+            } => {
                 let a = it.next().expect("with_pane_ids: too few ids");
                 let b = it.next().expect("with_pane_ids: too few ids");
-                SplitSlot::Other1(SplitSlotVariant1 {
-                    stack: (a, b),
-                    ..s.clone()
-                })
+                SplitSlot::Stack {
+                    size: *size,
+                    stack: [a, b],
+                    stack_sizes: *stack_sizes,
+                }
             }
-            SplitSlot::Other0(s) => SplitSlot::Other0(SplitSlotVariant0 {
+            SplitSlot::Single { size, .. } => SplitSlot::Single {
+                size: *size,
                 tab_id: it.next().expect("with_pane_ids: too few ids"),
-                ..s.clone()
-            }),
+            },
         })
         .collect();
     SplitView {
@@ -288,18 +292,16 @@ pub fn remove_from_splits(
             .slots
             .iter()
             .flat_map(|slot| match slot {
-                SplitSlot::Other0(s) => (!gone.contains(&s.tab_id)).then(|| slot.clone()),
-                SplitSlot::Other1(s) => {
-                    let left: Vec<&String> = [&s.stack.0, &s.stack.1]
-                        .into_iter()
-                        .filter(|id| !gone.contains(*id))
-                        .collect();
+                SplitSlot::Single { tab_id, .. } => (!gone.contains(tab_id)).then(|| slot.clone()),
+                SplitSlot::Stack { size, stack, .. } => {
+                    let left: Vec<&String> =
+                        stack.iter().filter(|id| !gone.contains(*id)).collect();
                     match left.len() {
                         2 => Some(slot.clone()),
-                        1 => Some(SplitSlot::Other0(SplitSlotVariant0 {
-                            size: s.size,
+                        1 => Some(SplitSlot::Single {
+                            size: *size,
                             tab_id: left[0].clone(),
-                        })),
+                        }),
                         _ => None,
                     }
                 }
@@ -357,55 +359,23 @@ pub fn sanitize_splits(
 }
 
 pub fn window_id(w: &BrowserWindow) -> &str {
-    match w {
-        BrowserWindow::Main { id, .. }
-        | BrowserWindow::Private { id, .. }
-        | BrowserWindow::Small { id, .. } => id,
-    }
+    &w.id
 }
 
 pub fn window_profile_id(w: &BrowserWindow) -> &str {
-    match w {
-        BrowserWindow::Main { profile_id, .. }
-        | BrowserWindow::Private { profile_id, .. }
-        | BrowserWindow::Small { profile_id, .. } => profile_id,
-    }
+    &w.profile_id
 }
 
 pub fn window_tab_ids(w: &BrowserWindow) -> &Vec<String> {
-    match w {
-        BrowserWindow::Main { tab_ids, .. }
-        | BrowserWindow::Private { tab_ids, .. }
-        | BrowserWindow::Small { tab_ids, .. } => tab_ids,
-    }
+    &w.tab_ids
 }
 
 pub fn window_tab_ids_mut(w: &mut BrowserWindow) -> &mut Vec<String> {
-    match w {
-        BrowserWindow::Main { tab_ids, .. }
-        | BrowserWindow::Private { tab_ids, .. }
-        | BrowserWindow::Small { tab_ids, .. } => tab_ids,
-    }
+    &mut w.tab_ids
 }
 
 pub fn window_active_tab(w: &BrowserWindow) -> Option<&String> {
-    match w {
-        BrowserWindow::Main {
-            active_tab_ids,
-            profile_id,
-            ..
-        }
-        | BrowserWindow::Private {
-            active_tab_ids,
-            profile_id,
-            ..
-        }
-        | BrowserWindow::Small {
-            active_tab_ids,
-            profile_id,
-            ..
-        } => active_tab_ids.get(profile_id),
-    }
+    w.active_tab_ids.get(&w.profile_id)
 }
 
 /// A copy of the 4 modules that a split action reads and writes.
@@ -667,10 +637,10 @@ fn with_pane(
     if (existing.orientation == SplitViewOrientation::Horizontal) == horizontal {
         slots.insert(
             if before { k } else { k + 1 },
-            SplitSlot::Other0(SplitSlotVariant0 {
+            SplitSlot::Single {
                 size: Number(0.0),
                 tab_id: tab,
-            }),
+            },
         );
         return Some(SplitView {
             slots: evened(&slots),
@@ -678,11 +648,11 @@ fn with_pane(
         });
     }
     match slots[k].clone() {
-        SplitSlot::Other1(slot) => {
+        SplitSlot::Stack { stack, .. } => {
             if slots.len() > 1 {
                 return None;
             }
-            let mut ids = vec![slot.stack.0, slot.stack.1];
+            let mut ids = stack.to_vec();
             let at = (index_of(&ids, &anchor) + if before { 0 } else { 1 }) as usize;
             ids.insert(at, tab);
             Some(SplitView {
@@ -691,13 +661,13 @@ fn with_pane(
                 ..existing.clone()
             })
         }
-        SplitSlot::Other0(slot) => {
-            let stack = if before { (tab, anchor) } else { (anchor, tab) };
-            slots[k] = SplitSlot::Other1(SplitSlotVariant1 {
-                size: slot.size,
+        SplitSlot::Single { size, .. } => {
+            let stack = if before { [tab, anchor] } else { [anchor, tab] };
+            slots[k] = SplitSlot::Stack {
+                size,
                 stack,
-                stack_sizes: (Number(0.5), Number(0.5)),
-            });
+                stack_sizes: [Number(0.5), Number(0.5)],
+            };
             Some(SplitView {
                 slots,
                 ..existing.clone()
@@ -941,8 +911,10 @@ pub fn update_split(app: &mut AppState, id: &str, patch: &UpdateSplitPatch) {
                 _ => slot_size(slot),
             };
             let mut slot = with_size(slot, size);
-            if let (SplitSlot::Other1(s), Some(stack_sizes)) = (&mut slot, patch.stack_sizes) {
-                s.stack_sizes = stack_sizes;
+            if let (SplitSlot::Stack { stack_sizes, .. }, Some(new_sizes)) =
+                (&mut slot, patch.stack_sizes)
+            {
+                *stack_sizes = [new_sizes.0, new_sizes.1];
             }
             slot
         })
@@ -1012,25 +984,17 @@ pub fn pane_to_focus(app: &AppState, window_id: &str, delta: i64) -> Option<Stri
 
 /// `toggleTabLayout` (`splits.ts:397`).
 pub fn toggle_tab_layout(app: &mut AppState, window_id: &str) {
-    use crate::browser::{
-        BrowserWindowMainTabLayout as M, BrowserWindowPrivateTabLayout as P,
-        BrowserWindowSmallTabLayout as S,
-    };
+    use crate::browser::TabLayout;
     if !app.get::<windows::State>().windows.contains_key(window_id) {
         return;
     }
     let to_sidebar = siblings::tab_layout_of(app, window_id) != "sidebar";
-    match app.get_mut::<windows::State>().windows.get_mut(window_id) {
-        Some(BrowserWindow::Main { tab_layout, .. }) => {
-            *tab_layout = Some(if to_sidebar { M::Sidebar } else { M::Top })
-        }
-        Some(BrowserWindow::Private { tab_layout, .. }) => {
-            *tab_layout = Some(if to_sidebar { P::Sidebar } else { P::Top })
-        }
-        Some(BrowserWindow::Small { tab_layout, .. }) => {
-            *tab_layout = Some(if to_sidebar { S::Sidebar } else { S::Top })
-        }
-        None => {}
+    if let Some(w) = app.get_mut::<windows::State>().windows.get_mut(window_id) {
+        w.tab_layout = Some(if to_sidebar {
+            TabLayout::Sidebar
+        } else {
+            TabLayout::Top
+        });
     }
     siblings::choose_tab_layout(app, if to_sidebar { "sidebar" } else { "top" });
 }

@@ -3,7 +3,7 @@
 Create one `WindowHost` for each macOS window.
 Pass the window's content view, the shared app state handle, and the app's main-thread `ActionQueue`.
 Pass the engine tab's `NSView` to `set_page` when the active tab changes.
-The host keeps every page it has shown mounted in the page slot, hidden unless active.
+The host keeps every page it has shown mounted in the page slot, in the same slot; the page view paints only while it is visible.
 Call `mount_page` to mount a tab's page ahead of its first switch, and `retain_pages` to unmount the pages of closed tabs.
 Give the chrome layout an element whose key matches `WindowSpec::page_slot`.
 The host uses the element's rectangle to place the page.
