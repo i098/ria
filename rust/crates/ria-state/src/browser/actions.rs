@@ -119,10 +119,10 @@ pub fn cycle_profile(s: &mut BrowserState, window_id: &str, delta: i64) {
         return;
     }
     let profile_order = s.profile_order.clone();
-    if !step_pager(window_id, delta, &profile_order) {
-        if let Some(target) = cycle_target(s, window_id, delta) {
-            switch_profile_action(s, window_id, &target, true);
-        }
+    if !step_pager(window_id, delta, &profile_order)
+        && let Some(target) = cycle_target(s, window_id, delta)
+    {
+        switch_profile_action(s, window_id, &target, true);
     }
 }
 
