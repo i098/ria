@@ -9,9 +9,9 @@
 //!   whether the volume ignores case.
 //! - A switch cache that cannot be read from the admitted directory turns every switch without an override off.
 //!   A missing cache still leaves the defaults.
-//! - A scratch data directory goes to the engine as `/.vol/<device>/<inode>` of the admitted directory, so the
-//!   engine opens that directory even if the path is swapped later. A normal launch passes no data directory, so
-//!   the engine opens the default path itself; that gap stays open.
+//! - The engine gets the admitted directory as `/.vol/<device>/<inode>`: `--user-data-dir` is that path plus
+//!   `Chromium`, and a scratch launch also passes it as `--ardia-data-dir`. A swap of the path after admission
+//!   cannot redirect the engine, for a normal launch as well as a scratch one.
 
 use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
@@ -231,7 +231,7 @@ impl LaunchConfig {
 
     /// The data directory as the engine opens it: named by device and inode of the admitted directory,
     /// so a swap of the path after admission cannot redirect the engine.
-    fn handoff_directory(&self) -> io::Result<PathBuf> {
+    pub(super) fn handoff_directory(&self) -> io::Result<PathBuf> {
         profile::identity_path(&self.data_handle)
     }
 
