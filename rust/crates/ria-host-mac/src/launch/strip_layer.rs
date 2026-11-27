@@ -28,6 +28,9 @@
 //! - A restored window layout keeps its cover and cached picture. `ria-surface` `Surface::set_page` always moves the page
 //!   from the cover into the `page` slot below the strip, so the restored page rect is not kept. The cover stays behind
 //!   the page as a placeholder. Keeping the page in its cover needs a `ria-surface` call that leaves the page's parent.
+//! - The strip saves the window's ordered tab URLs, pins, and selection to the admitted profile. The existing poll
+//!   records page navigation and tab changes outside the native controls. Shutdown saves the last complete strip,
+//!   because the engine can start to close tabs before shutdown.
 
 use std::cell::RefCell;
 use std::rc::{Rc, Weak};
@@ -46,6 +49,7 @@ use crate::core::bindings::{Tab, Window};
 use crate::tabs::ardia_tab_strip::StripCommandResult;
 
 use super::host_launch::after;
+use super::saved_session::{BLANK_URL, StripTab};
 use super::window_host::WindowHost;
 
 /// The tab key of the launch tab.
@@ -66,8 +70,6 @@ const BUTTON_H: f64 = 28.0;
 const TITLE_CHARS: usize = 12;
 const TOOLBAR_H: f32 = 40.0;
 const NAV_W: f64 = 32.0;
-/// The page a new tab shows: Ria has no new-tab page yet, so the address field takes the first input.
-const NEW_TAB_URL: &str = "about:blank";
 // shortcut: the default search engine is fixed to Google, upgrade when the settings store (slice 2.x) is wired in.
 const SEARCH: &str = "https://www.google.com/search?q=%s";
 
@@ -123,9 +125,21 @@ pub fn toolbar_center(tool: Tool) -> (f64, f64) {
 #[derive(Clone, Debug, PartialEq)]
 pub struct Row {
     pub key: String,
+    pub url: String,
     pub title: String,
     pub active: bool,
     pub pinned: bool,
+}
+
+impl Row {
+    pub(super) fn session_tab(&self) -> StripTab<'_> {
+        StripTab {
+            key: &self.key,
+            url: &self.url,
+            pinned: self.pinned,
+            active: self.active,
+        }
+    }
 }
 
 /// A press in the strip or the toolbar.
@@ -161,6 +175,7 @@ pub struct StripState {
     touched: bool,
     /// Called with the rows each time they change.
     changed: Option<ChangedFn>,
+    save: Option<ChangedFn>,
     nav: Nav,
     /// A tab that a press opened: it becomes active when the next read lists it.
     want_active: Option<String>,
@@ -434,14 +449,12 @@ fn read_rows(host: &WindowHost, previous: &[Row]) -> Option<Vec<Row>> {
                 key
             }
         };
+        let url = tab.url().to_string();
         let title = tab.title().to_string();
-        let title = if title.is_empty() {
-            tab.url().to_string()
-        } else {
-            title
-        };
+        let title = if title.is_empty() { url.clone() } else { title };
         rows.push(Row {
             key,
+            url,
             title,
             active: false,
             pinned: strips.is_pinned(&tab),
@@ -459,15 +472,17 @@ fn read_rows(host: &WindowHost, previous: &[Row]) -> Option<Vec<Row>> {
 pub struct StripLayer {
     /// Keeps the surface alive until drop.
     _surface: Rc<Surface<ChromeState>>,
+    state: Shared,
 }
 
 impl StripLayer {
     /// Key the launch tab, host the Rune layers in the window, and show the page inside them.
-    pub fn install(
+    pub(super) fn install(
         host: &Rc<WindowHost>,
         core: &Window,
         tab: &Tab,
         changed: ChangedFn,
+        save: ChangedFn,
     ) -> Result<Self, String> {
         let profile = core.active_profile().ok_or("the window has no profile")?;
         let page = host
@@ -476,6 +491,8 @@ impl StripLayer {
         let state = Rc::new(RefCell::new(StripState {
             strip: core.chrome_window_id_for_profile(&profile),
             changed: Some(changed),
+            save: Some(save),
+            want_active: Some(LAUNCH_KEY.to_owned()),
             ..StripState::default()
         }));
         let queue = ActionQueue::new();
@@ -518,7 +535,32 @@ impl StripLayer {
             state_weak.clone(),
         ));
         poll(host, surface_weak, state_weak);
-        Ok(Self { _surface: surface })
+        Ok(Self {
+            _surface: surface,
+            state,
+        })
+    }
+
+    pub(super) fn save_session(&self, host: &WindowHost) {
+        // Keep the last complete strip, but take newer URLs from tabs that are still open.
+        let state = self.state.borrow();
+        if let Some(save) = &state.save {
+            let mut rows = state.rows.clone();
+            let registry = host.chrome().tab_registry().borrow();
+            for row in &mut rows {
+                if let Some(tab) = registry
+                    .tab_with_app_id(&row.key)
+                    .filter(|tab| !tab.closed())
+                {
+                    let url = tab.url();
+                    if url.length() != 0 {
+                        row.url = url.to_string();
+                    }
+                }
+            }
+            drop(registry);
+            save(&rows);
+        }
     }
 }
 
@@ -558,8 +600,8 @@ fn refresh(host: &WindowHost, surface: &Surface<ChromeState>, state: &Shared) {
     }
     let active = active_tab(host, &rows);
     // The page slot shows the active tab, so a new or selected tab does not cover the strip.
-    if let Some((key, tab)) = &active
-        && let Some(view) = host.page_for(tab, key)
+    if let Some((row, tab)) = &active
+        && let Some(view) = host.page_for(tab, &row.key)
     {
         surface.set_page(Some(&view));
     }
@@ -581,6 +623,11 @@ fn refresh(host: &WindowHost, surface: &Surface<ChromeState>, state: &Shared) {
     surface.retain_pages(&views.iter().map(|view| &**view).collect::<Vec<_>>());
     mark_selected(host, &rows);
     sync_nav(surface, state, active.as_ref());
+    if (touched || session_changed(&previous, &rows))
+        && let Some(save) = &state.borrow().save
+    {
+        save(&rows);
+    }
     if touched || rows != previous {
         let changed = {
             let mut state = state.borrow_mut();
@@ -592,6 +639,13 @@ fn refresh(host: &WindowHost, surface: &Surface<ChromeState>, state: &Shared) {
             changed(&rows);
         }
     }
+}
+
+fn session_changed(old: &[Row], new: &[Row]) -> bool {
+    old.len() != new.len()
+        || old.iter().zip(new).any(|(a, b)| {
+            a.key != b.key || a.url != b.url || a.pinned != b.pinned || a.active != b.active
+        })
 }
 
 fn poll(
@@ -631,15 +685,19 @@ fn sender(
 }
 
 /// The active row's key and tab.
-fn active_tab(host: &WindowHost, rows: &[Row]) -> Option<(String, Retained<Tab>)> {
-    let key = &rows.iter().find(|row| row.active)?.key;
-    let tab = host.chrome().tab_registry().borrow().tab_with_app_id(key)?;
-    Some((key.clone(), tab))
+fn active_tab<'a>(host: &WindowHost, rows: &'a [Row]) -> Option<(&'a Row, Retained<Tab>)> {
+    let row = rows.iter().find(|row| row.active)?;
+    let tab = host
+        .chrome()
+        .tab_registry()
+        .borrow()
+        .tab_with_app_id(&row.key)?;
+    Some((row, tab))
 }
 
 /// What the address field shows for a tab's URL: a blank tab shows the empty field and its hint.
 fn address_text(url: &str) -> &str {
-    if url == NEW_TAB_URL { "" } else { url }
+    if url == BLANK_URL { "" } else { url }
 }
 
 /// Show the active tab's URL and history in the toolbar. The address text changes only when the tab or its URL
@@ -648,14 +706,14 @@ fn address_text(url: &str) -> &str {
 fn sync_nav(
     surface: &Surface<ChromeState>,
     state: &Shared,
-    active: Option<&(String, Retained<Tab>)>,
+    active: Option<&(&Row, Retained<Tab>)>,
 ) {
-    let Some((key, tab)) = active else {
+    let Some((row, tab)) = active else {
         return;
     };
     let nav = Nav {
-        key: key.clone(),
-        url: tab.url().to_string(),
+        key: row.key.clone(),
+        url: row.url.clone(),
         back: tab.can_go_back(),
         forward: tab.can_go_forward(),
     };
@@ -736,7 +794,7 @@ fn run(host: &WindowHost, state: &Shared, action: Action) {
             let Some(profile) = window.active_profile() else {
                 return;
             };
-            let tab = window.open_tab(&NSString::from_str(NEW_TAB_URL), &profile, true);
+            let tab = window.open_tab(&NSString::from_str(BLANK_URL), &profile, true);
             window.activate_tab(&tab);
             let id = host.chrome().tab_registry().borrow_mut().browser_id(&tab);
             state.borrow_mut().want_active = Some(format!("tab:{id}"));
@@ -779,6 +837,7 @@ mod tests {
     fn row(key: &str, active: bool, pinned: bool) -> Row {
         Row {
             key: key.into(),
+            url: BLANK_URL.into(),
             title: key.into(),
             active,
             pinned,
@@ -852,7 +911,7 @@ mod tests {
 
     #[test]
     fn a_blank_tab_shows_an_empty_address_field() {
-        assert_eq!(address_text(NEW_TAB_URL), "");
+        assert_eq!(address_text(BLANK_URL), "");
         assert_eq!(address_text("https://example.com/"), "https://example.com/");
     }
 }

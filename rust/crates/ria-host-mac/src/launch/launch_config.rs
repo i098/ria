@@ -20,8 +20,8 @@
 use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs::File;
-use std::io::{self, ErrorKind};
-use std::os::unix::fs::MetadataExt;
+use std::io::{self, ErrorKind, Write};
+use std::os::unix::fs::{MetadataExt, OpenOptionsExt};
 use std::path::{Component, Path, PathBuf};
 use std::sync::OnceLock;
 
@@ -254,12 +254,38 @@ impl LaunchConfig {
     }
 
     /// Reads a file of the admitted data directory.
-    fn read_admitted_file(&self, name: &Path) -> io::Result<Vec<u8>> {
+    pub(super) fn read_admitted_file(&self, name: &Path) -> io::Result<Vec<u8>> {
         if name.file_name().map(Path::new) != Some(name) || !profile::has_marker(&self.data_handle)
         {
             return Err(ErrorKind::InvalidInput.into());
         }
         profile::read(&self.data_directory, &self.data_handle, name)
+    }
+
+    /// Replace a file without following a swapped profile path or leaving a partial document.
+    pub(super) fn replace_data_file(&self, name: &Path, bytes: &[u8]) -> io::Result<()> {
+        if name.file_name().map(Path::new) != Some(name) || !profile::has_marker(&self.data_handle)
+        {
+            return Err(ErrorKind::InvalidInput.into());
+        }
+        profile::ensure_identity(&self.data_directory, &self.data_handle)?;
+        let root = self.handoff_directory()?;
+        let temporary = root.join(format!(".ria-session-{}.tmp", std::process::id()));
+        let mut file = std::fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .mode(0o600)
+            .open(&temporary)?;
+        let result = (|| {
+            file.write_all(bytes)?;
+            file.sync_all()?;
+            profile::ensure_identity(&self.data_directory, &self.data_handle)?;
+            std::fs::rename(&temporary, root.join(name))
+        })();
+        if result.is_err() {
+            let _ = std::fs::remove_file(temporary);
+        }
+        result
     }
 
     pub fn read_config_file(&self, name: &Path) -> io::Result<Vec<u8>> {

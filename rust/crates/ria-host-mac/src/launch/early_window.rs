@@ -14,8 +14,8 @@ use objc2::{
     AllocAnyThread, DefinedClass, MainThreadMarker, MainThreadOnly, class, define_class, msg_send,
 };
 use objc2_app_kit::{
-    NSApplication, NSAutoresizingMaskOptions, NSColor, NSImage, NSImageView, NSScreen, NSView,
-    NSWindow, NSWindowDidResizeNotification, NSWindowWillCloseNotification,
+    NSAutoresizingMaskOptions, NSColor, NSImage, NSImageView, NSScreen, NSView, NSWindow,
+    NSWindowDidResizeNotification, NSWindowWillCloseNotification,
 };
 use objc2_foundation::{
     NSData, NSNotification, NSNotificationCenter, NSObjectProtocol, NSPoint, NSRect, NSSize,
@@ -164,10 +164,6 @@ impl BrowserWindow {
                 window.makeKeyAndOrderFront(None);
             }
         }
-        observer(LaunchEvent::WindowOpened {
-            windows: NSApplication::sharedApplication(mtm).windows().count(),
-            tabs: core.tabs_for_profile(profile).count(),
-        });
         let title = tab.title();
         if title.length() != 0 {
             delegate.report_title(&title);

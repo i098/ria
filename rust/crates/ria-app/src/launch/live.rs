@@ -185,6 +185,28 @@ mod mac {
             out.contains("downloadMoved ok"),
             "the app's system-signals host did not move the download"
         );
+        let before = format!(
+            r#"sessionStrip [("file:///etc/hosts", true, false), ("{url}", false, false), ("{url}nav-b", false, true)]"#
+        );
+        assert!(
+            out.lines().any(|line| line == before),
+            "native tabs did not reach the expected state"
+        );
+        // Ria has no main menu, so Cmd-Q has no handler. The child quits through `Engine::quit`, as `quit_when_done` does.
+        let restarted = launch(root, &listener, 2, "", Duration::ZERO);
+        assert!(restarted.contains("windowOpened windows=1 tabs=3"));
+        assert!(
+            restarted.lines().any(|line| line == before),
+            "restart changed the native strip"
+        );
+        assert!(
+            restarted
+                .lines()
+                .any(|line| line == "restoredPage /nav-b hit 1")
+        );
+        assert!(restarted.contains("engineWillShutDown"));
+        println!("session restart: exact native tab URLs, order, pins and selection restored");
+
         // The saved layout only restores under the appearance it was saved in.
         let dark = Command::new("defaults")
             .args(["read", "-g", "AppleInterfaceStyle"])
@@ -203,7 +225,7 @@ mod mac {
             r#"{"version":5,"windows":{"w":{"state":"{}","page":[8,44,8,8],"card":[8,44,8,8],"radius":10}}}"#,
         )
         .unwrap();
-        let again = launch(root, &listener, 2, "launchTab=on", Duration::ZERO);
+        let again = launch(root, &listener, 3, "launchTab=on", Duration::ZERO);
         assert!(
             again.lines().any(|line| line == "attachLoading fast false"),
             "the fast-case tab was still loading when it was attached"
@@ -265,6 +287,7 @@ mod mac {
             .env("RIA_DATA_DIR", &data)
             .env("RIA_BACKGROUND", "1")
             .envs(delay.is_zero().then_some(("RIA_LIVE_FAST", "1")))
+            .env("RIA_LIVE_RESTART", launch.to_string())
             .env(
                 "RIA_LIVE_BASE",
                 format!("http://{}", listener.local_addr().unwrap()),
@@ -811,6 +834,7 @@ mod mac {
                             };
                             this.step_history(Tool::Back, Tab::can_go_back, at_a, move |this| {
                                 println!("navBack");
+                                let in_strip = b.clone();
                                 let at_b = move |d: &Drive| {
                                     d.tab_is(|tab| tab.url().to_string() == b && !tab.loading())
                                 };
@@ -818,10 +842,26 @@ mod mac {
                                     Tool::Forward,
                                     Tab::can_go_forward,
                                     at_b,
-                                    |this| {
+                                    move |this| {
                                         println!("navForward");
-                                        this.navigated.set(true);
-                                        (this.done)();
+                                        // The strip reads the tab on its poll; save and print only after it shows the page.
+                                        let shown = move |d: &Drive| {
+                                            d.rows
+                                                .borrow()
+                                                .iter()
+                                                .any(|row| row.active && row.url == in_strip)
+                                        };
+                                        this.until(
+                                            "strip shows page",
+                                            Instant::now(),
+                                            shown,
+                                            |this| {
+                                                this.shot("before-quit");
+                                                print_session_strip(&this.rows.borrow());
+                                                this.navigated.set(true);
+                                                (this.done)();
+                                            },
+                                        );
                                     },
                                 );
                             });
@@ -832,7 +872,57 @@ mod mac {
         }
     }
 
+    fn print_session_strip(rows: &[Row]) {
+        let tabs: Vec<_> = rows
+            .iter()
+            .map(|tab| (tab.url.as_str(), tab.pinned, tab.active))
+            .collect();
+        println!("sessionStrip {tabs:?}");
+    }
+
+    fn restored_child() -> ExitCode {
+        let host: Rc<RefCell<Option<Rc<WindowHost>>>> = Rc::default();
+        super::app_launch::start(Rc::new(move |event| match event {
+            LaunchEvent::EngineStarted => {
+                host_launch::after(Duration::from_secs(12), host_launch::quit);
+            }
+            LaunchEvent::WindowOpened { windows, tabs } => {
+                println!("windowOpened windows={windows} tabs={tabs}");
+            }
+            LaunchEvent::WindowHostReady(window) => *host.borrow_mut() = Some(window),
+            LaunchEvent::StripRows(rows) => {
+                print_session_strip(&rows);
+                if rows
+                    .iter()
+                    .any(|row| row.active && row.title == "/nav-b hit 1")
+                    && let Some(host) = host.borrow_mut().take()
+                {
+                    let drive = Drive {
+                        host,
+                        stage: Cell::new(0),
+                        pinned: Rc::default(),
+                        done: Rc::new(|| {}),
+                        nav: None,
+                        navigated: Rc::default(),
+                        rows: RefCell::default(),
+                    };
+                    host_launch::after(Duration::from_millis(800), move || {
+                        drive.shot("after-restart");
+                        println!("restoredPage /nav-b hit 1");
+                        host_launch::quit();
+                    });
+                }
+            }
+            LaunchEvent::EngineWillShutDown => println!("engineWillShutDown"),
+            LaunchEvent::Error(error) => eprintln!("{error}"),
+            _ => {}
+        }))
+    }
+
     pub fn child() -> ExitCode {
+        if std::env::var("RIA_LIVE_RESTART").as_deref() == Ok("2") {
+            return restored_child();
+        }
         let matched = Rc::new(Cell::new(false));
         let shutdown = Rc::new(Cell::new(false));
         let moving = Move::new();

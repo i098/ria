@@ -33,6 +33,7 @@ It then drives the toolbar with real pointer and key events, not engine calls: a
 It then relaunches on the same profile with a saved window layout and checks the restored frame (`windowFrame 1000x700`) and that the strip layer is present.
 It also downloads a `file:` payload and moves it into an approved folder through `system_signals::current()`, the app's host of `setApprovedDownloadFolders` and `moveCompletedDownload`.
 It requires one live page view for the launch tab (`liveViews 1 paintViews 1 detached false`) and that `ACFieldTiming.setEnabled` switches field timing on and then off through the same host.
+It prints the strip's tab URLs, pins and selection (`sessionStrip`) before it quits. It then starts the app a second time on the same profile and requires the same URLs, order, pins and selected tab, and the selected page loaded again (`session restart`).
 It requires a successful exit within 60 seconds and checks the temporary directory for crash reports.
 It calls the shared launch entry point from the test executable, not from the `ria-app` binary.
 
@@ -48,13 +49,14 @@ Ria reports `launch profile directory changed` and does not open the first windo
 See the [launch configuration module](../../../ria-host-mac/src/launch/launch_config.rs) for the Chromium handoff and its limits.
 See [ADR-D1](../../../../DECISIONS.md#adr-d1-own-identity-and-own-data-ad-hoc-signature) for the keychain policy.
 
-Ria reopens a saved launch tab only for an HTTP or HTTPS URL, a nonempty tab ID, and a usable profile.
-Ria does not restore launch tabs from private or deleted profiles.
-If the saved launch tab is not eligible, Ria opens `about:blank` in the default profile.
+Ria saves the strip of the browser window in `session.json` of the profile when the strip changes and at shutdown. The file keeps its other fields.
+On launch, Ria opens the saved tabs of the focused regular window in the loaded profile, with their order, pins and selected tab. Pinned tabs come first.
+A saved URL that is not `http`, `https`, `file` or `data` opens as `about:blank`. Ria does not restore tabs from private profiles.
+If the file has no eligible tabs, Ria reopens the saved launch tab for an HTTP or HTTPS URL, a nonempty tab ID and a usable profile. Without one, Ria opens `about:blank` in the default profile.
 On a normal foreground launch, Ria uses the saved layout if it passes the layout checks.
 The cached picture must match the content signature.
 Ria removes the picture when the window changes size.
-This startup path does not restore all saved windows and tabs.
+This startup path restores one window. It does not restore other saved windows or their tabs.
 
 Ria opens an `http` or `https` URL that another macOS app sends in a new tab of the browser window, and drops every other scheme.
 `Info.plist` declares `CFBundleURLTypes` for `http` and `https`, so LaunchServices sends those URLs to Ria; Ria does not set itself as the default browser.
@@ -101,8 +103,7 @@ open -g -a /path/to/Ria.app https://example.com
 ```
 
 Ria opens it in a new tab.
-On the next launch, Ria shows `about:blank` or reopens the saved launch tab if the profile contains one.
-Ria does not save open tabs.
+On the next launch, Ria restores the saved tabs, or shows `about:blank` if the profile has none.
 
 ## Window host
 

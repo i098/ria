@@ -7,11 +7,11 @@ A native Rust and [Rune](https://github.com/anomalyco/rune) port of the [Ardia](
 ## What works today
 
 The macOS app starts the prebuilt Chromium engine and opens a native window with a tab strip.
-It uses its own profile and can reopen a saved launch tab.
+It uses its own profile and restores the tabs of the last window after a restart: their URLs, order, pins and selected tab.
 Use the address field to load a page.
 Use the toolbar to go back, go forward, reload, or open a tab.
 There is no settings screen yet.
-It does not save open tabs. Another app can send it a page URL.
+Another app can send it a page URL.
 
 The Mac proofs of Phase 0 (Rust host on the Ardia engine, Rune layers, accessibility) and the Linux proof of the port loop passed. Results: [`rust/GATES.md`](rust/GATES.md).
 

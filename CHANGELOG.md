@@ -7,6 +7,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Ria has no rel
 ### Added
 
 - [Native macOS launch](rust/crates/ria-app/src/launch/README.md).
+- Restore the browser window's tabs after a restart: URLs, order, pins and the selected tab are saved to `session.json`.
 - [Surface host](rust/crates/ria-surface/README.md): AppKit window host for Rune chrome and engine pages, with AX press and text input.
 - Browser domain routing in the Rust engine, including unpacked extension inspection and shared extension management calls for the Mac host.
 - Mac host ports of Ardia swipe (back swipe, native pager) and diagnostics (reveal guards, hover probe, freeze capture, paint probe).
