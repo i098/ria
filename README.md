@@ -8,31 +8,16 @@ A native Rust and [Rune](https://github.com/anomalyco/rune) port of the [Ardia](
 
 The macOS app starts the prebuilt Chromium engine and opens a native window with a tab strip.
 It uses its own profile and can reopen a saved launch tab.
-It has no address bar, toolbar, new-tab button or settings screen yet, and it does not save open tabs. Another app can open a page in it (`open -a`).
-To fetch the engine, build a local app bundle and start Ria, follow the [macOS launch guide](rust/crates/ria-app/src/launch/README.md).
-
-```sh
-(cd rust && blaze check)                                     # workspace compiles (Linux; on macOS use `-p ria-app`)
-cargo fmt --manifest-path rust/Cargo.toml --check            # format
-cargo clippy --manifest-path rust/Cargo.toml                 # lint
-node rust/parity/compare.selftest.mjs                        # parity comparer: 15 checks passed
-(cd rust/parity/captures/states && sha256sum -c SHA256SUMS)  # reference captures: all OK
-```
-
-Run these from the repository root.
+It has no address bar, toolbar, new-tab button or settings screen yet.
+It does not save open tabs. Another app can send it a page URL.
 
 The Mac proofs of Phase 0 (Rust host on the Ardia engine, Rune layers, accessibility) and the Linux proof of the port loop passed. Results: [`rust/GATES.md`](rust/GATES.md).
 
 ## Build and test
 
-```sh
-git clone --recurse-submodules https://github.com/i098/ria
-cd ria
-rust/tools/blaze/install.sh     # installs the patched blaze into ~/.cargo/bin; 10 to 15 minutes cold
-(cd rust && blaze check)        # on macOS: (cd rust && blaze check -p ria-app)
-```
-
-Ria builds with [blaze](https://github.com/indexable-inc/blaze) at one pinned commit plus three patches kept in [`rust/tools/blaze/`](rust/tools/blaze/README.md). On a machine that has no blaze, `install.sh` needs a blaze toolchain first; on macOS, set `ulimit -n 10240` before any `blaze` command and run `blaze stop` if it failed with `Too many open files`. Both steps are in [`setup.md`](setup.md). Without blaze, run `cargo fmt` and `cargo clippy` (first block above); they check the workspace. Blaze is the only supported build tool, so say in your PR that you could not run `blaze check`.
+Start with [Setup](setup.md) to clone the repository and install the patched [Blaze](https://github.com/indexable-inc/blaze) build tool.
+On macOS, follow the [macOS launch guide](rust/crates/ria-app/src/launch/README.md) to fetch the engine, build `Ria.app` and start it.
+Use `blaze check -p ria-app` from `rust/` on macOS. The workspace-wide check includes a Linux-only target.
 
 ## Phases
 

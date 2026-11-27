@@ -7,7 +7,8 @@ Finish the [setup](../../../../../setup.md#install) first: it installs blaze.
 
 ```sh
 ulimit -n 10240
-ENGINE_DIR=$(dirname "$(../ardia/packages/ardiacore/scripts/fetch-engine.sh)")
+framework=$(../ardia/packages/ardiacore/scripts/fetch-engine.sh) &&
+  ENGINE_DIR=$(dirname "$framework")
 ```
 
 `fetch-engine.sh` downloads the prebuilt Chromium engine for the pinned Ardia commit into `ardia/apps/browser/build-ardiacore/prebuilt/<key>/`.
@@ -79,6 +80,7 @@ cp crates/ria-app/src/launch/Info.plist "$app/Info.plist"
 cp target/debug/ria-app "$app/MacOS/ria-app"
 cp -cR "$ENGINE_DIR/Chromium Framework.framework" "$app/Frameworks/"
 codesign --force --sign - "$app/MacOS/ria-app"
+printf 'Bundle: %s\n' "$scratch/Ria.app"
 RIA_DATA_DIR="$scratch/profile" "$app/MacOS/ria-app"
 ```
 
@@ -86,15 +88,14 @@ RIA_DATA_DIR="$scratch/profile" "$app/MacOS/ria-app"
 
 Ria opens one window with a tab strip and one `about:blank` tab.
 It has no address bar, toolbar or new-tab button yet.
-To open a page, send a URL to the running app from another shell or app:
+To open a page, run this command in another shell. Replace `/path/to/Ria.app` with the bundle path printed above.
 
 ```sh
-open -a "$scratch/Ria.app" https://example.com
+open -g -a /path/to/Ria.app https://example.com
 ```
 
 Ria opens it in a new tab.
-Ria saves no tab list yet, so a new start on the same profile shows `about:blank` (or the saved launch tab, if one exists).
-No one has tested quit by Cmd-Q or from the Dock by hand.
+On the next launch, Ria shows `about:blank` or reopens the saved launch tab if the profile contains one.
 
 ## Window host
 
