@@ -27,7 +27,7 @@ use super::launch_sequence::{
 };
 use super::open_urls::{self, Entry, Inbox};
 use super::platform;
-use super::saved_session::SavedSession;
+use super::saved_session::{self, BLANK_URL, SavedSession, StripTab};
 use super::startup;
 use super::strip_layer::{Row, StripLayer};
 use super::system_signals::{self, SystemSignals};
@@ -189,10 +189,16 @@ impl Runtime {
         let directory = self
             .session
             .as_ref()
-            .and_then(|session| session.launch_profile_directory(self.config.data_directory()));
+            .filter(|_| !self.reopening.get())
+            .and_then(|session| {
+                let root = self.config.data_directory();
+                session
+                    .focused_profile_directory(root)
+                    .or_else(|| session.launch_profile_directory(root))
+            });
         let restore_hint = directory.is_some();
         let weak = self.this.clone();
-        let directory_name = directory.clone().unwrap_or_else(|| "Default".to_owned());
+        let directory_name = directory.unwrap_or_else(|| "Default".to_owned());
         let name = NSString::from_str(&directory_name);
         engine.load_profile(&name, move |profile| {
             let weak = weak.clone();
@@ -229,6 +235,7 @@ impl Runtime {
         let show = reopened
             || reason != LaunchReason::Hidden
                 && !NSApplication::sharedApplication(self.mtm).isHidden();
+        let profile_id = directory_name.strip_prefix("Profile ").unwrap_or_default();
         let session = self.session.as_ref().filter(|_| restore_hint);
         let layout = session
             .filter(|_| show && reason == LaunchReason::Normal)
@@ -236,9 +243,23 @@ impl Runtime {
                 early_window_layouts::read(&self.config, session, activation::dark(self.mtm))
             });
         self.sequence.reach(APP_READY);
-        let url = session
-            .and_then(|session| session.launch_tab.as_ref())
-            .map_or("about:blank", |tab| tab.url.as_str());
+        let tabs = session.map_or_else(Vec::new, |session| session.restore_strip(profile_id));
+        let active = tabs.iter().position(|tab| tab.active).unwrap_or_default();
+        let url = tabs
+            .get(active)
+            .map(|tab| tab.url)
+            .or_else(|| {
+                session
+                    .filter(|session| {
+                        session
+                            .launch_profile_directory(self.config.data_directory())
+                            .as_deref()
+                            == Some(directory_name)
+                    })
+                    .and_then(|session| session.launch_tab.as_ref())
+                    .map(|tab| tab.url.as_str())
+            })
+            .unwrap_or(BLANK_URL);
         let window = BrowserWindow::open(
             profile,
             url,
@@ -252,16 +273,66 @@ impl Runtime {
             },
         );
         self.host.set_main(Some(window.core().clone()));
+        self.restore_strip(&window, profile, &tabs, active);
+        (self.observer)(LaunchEvent::WindowOpened {
+            windows: NSApplication::sharedApplication(self.mtm).windows().count(),
+            tabs: window.core().tabs_for_profile(profile).count(),
+        });
         self.strip.borrow_mut().take();
         let observer = self.observer.clone();
         let changed = Rc::new(move |rows: &[Row]| observer(LaunchEvent::StripRows(rows.to_vec())));
-        match StripLayer::install(&self.host, window.core(), window.tab(), changed) {
+        let runtime = self.this.clone();
+        let profile_id = profile_id.to_owned();
+        let save = Rc::new(move |rows: &[Row]| {
+            if let Some(runtime) = runtime.upgrade()
+                && let Err(error) = saved_session::write_strip(
+                    &runtime.config,
+                    &profile_id,
+                    rows.iter().map(Row::session_tab),
+                )
+            {
+                eprintln!("[ria] could not save tabs: {error}");
+            }
+        });
+        match StripLayer::install(&self.host, window.core(), window.tab(), changed, save) {
             Ok(strip) => *self.strip.borrow_mut() = Some(strip),
             Err(error) => eprintln!("[ria] tab strip layer: {error}"),
         }
         *self.window.borrow_mut() = Some(window);
         (self.observer)(LaunchEvent::WindowHostReady(self.host.clone()));
         self.inbox.flush(|urls| self.deliver(urls));
+    }
+
+    fn restore_strip(
+        &self,
+        window: &BrowserWindow,
+        profile: &Profile,
+        tabs: &[StripTab<'_>],
+        active: usize,
+    ) {
+        if tabs.is_empty() {
+            return;
+        }
+        let core = window.core();
+        let opened: Vec<_> = tabs
+            .iter()
+            .enumerate()
+            .map(|(index, tab)| {
+                if index == active {
+                    window.tab().clone()
+                } else {
+                    core.open_tab(&NSString::from_str(tab.url), profile, false)
+                }
+            })
+            .collect();
+        for (index, (tab, saved)) in opened.iter().zip(tabs).enumerate() {
+            core.place_tab(tab, index as i32, saved.pinned);
+            self.host
+                .strips()
+                .borrow_mut()
+                .set_pinned(tab, saved.pinned);
+        }
+        core.activate_tab(window.tab());
     }
 
     /// `OpenURLInbox.receive`. Queue the URLs until the window is ready. If every window is closed, open one.
@@ -332,6 +403,9 @@ impl Hooks for Runtime {
     fn engine_shut_down(&self) {
         SystemSignals::stop();
         self.sequence.engine_shutdown();
+        if let Some(strip) = self.strip.borrow().as_ref() {
+            strip.save_session(&self.host);
+        }
         self.strip.borrow_mut().take();
         self.host.drop_pages();
         (self.observer)(LaunchEvent::EngineWillShutDown);
