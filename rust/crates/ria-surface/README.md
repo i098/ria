@@ -1,7 +1,7 @@
 # Ria surface host
 
 Create one `WindowHost` for each macOS window.
-Pass the window's content view, the shared app state handle, and the app's main-thread `ActionQueue`.
+Pass the window's content view, the app state (`Clone`: each layer gets its own clone, so share data through an `Rc<RefCell<..>>` field), and the app's main-thread `ActionQueue`.
 Pass the engine tab's `NSView` to `set_page` when the active tab changes.
 The host keeps every page it has shown mounted in the page slot, in the same slot; the page view paints only while it is visible.
 Call `mount_page` to mount a tab's page ahead of its first switch, and `retain_pages` to unmount the pages of closed tabs.
@@ -9,6 +9,7 @@ Give the chrome layout an element whose key matches `WindowSpec::page_slot`.
 The host uses the element's rectangle to place the page.
 Use `set_overlay_visible` when the app shows or closes an overlay.
 After the app changes shared state, call `mark_dirty` for each layer that reads the new state.
+Use `edit_chrome` to change the chrome layer's own copy, such as the `TextEdit` of a text field.
 Drop the window hosts before the engine shuts down.
 
 The native views queue input and display ticks instead of calling the app from AppKit callbacks.
