@@ -362,7 +362,7 @@ mod mac {
     fn check_frames(
         window: &NSWindow,
         views: &NSArray<NSView>,
-        host: &WindowHost<Log>,
+        host: &WindowHost<State>,
         queue: &ActionQueue,
     ) {
         let chrome = views.objectAtIndex(1);

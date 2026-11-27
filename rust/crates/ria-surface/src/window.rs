@@ -28,13 +28,14 @@ use rune::{AccessibilityLink, AppSpec, Color, Runtime, SystemAccent};
 use crate::input::{Input, TextInputSnapshot};
 use crate::view::{RuneView, ViewHost, Viewport, boundary};
 
-type Shared<S> = Rc<RefCell<S>>;
-type TextSnapshot<S> = fn(&Runtime<Shared<S>>) -> Option<Rc<TextInputSnapshot>>;
+type TextSnapshot<S> = fn(&Runtime<S>) -> Option<Rc<TextInputSnapshot>>;
 
-/// Rune views for one window. Both runtimes receive the same state handle.
+/// Rune views for one window. `S` is the Rune state of each layer: the chrome and the overlay each get a clone, so
+/// a clone that shares data (an `Rc<RefCell<..>>`) is shared state, and a plain field, such as a `TextEdit` that a
+/// text field binds with `on_edit`, belongs to its layer. Reach the chrome's own copy with `WindowHost::edit_chrome`.
 pub struct WindowSpec<S: 'static> {
-    pub chrome: AppSpec<Shared<S>>,
-    pub overlay: AppSpec<Shared<S>>,
+    pub chrome: AppSpec<S>,
+    pub overlay: AppSpec<S>,
     /// Key of the chrome element that defines the native page's rectangle.
     pub page_slot: &'static str,
     /// Returns the text AppKit can query for reconversion, if a field has focus.
@@ -52,10 +53,13 @@ impl<S: 'static> WindowHost<S> {
     /// Installs the surface in a window's content view. The view must already belong to the window.
     pub fn new(
         container: &NSView,
-        state: Shared<S>,
+        state: S,
         spec: WindowSpec<S>,
         queue: Rc<ActionQueue>,
-    ) -> Result<Self, String> {
+    ) -> Result<Self, String>
+    where
+        S: Clone,
+    {
         let window = container
             .window()
             .ok_or("The surface container has no window")?;
@@ -196,6 +200,17 @@ impl<S: 'static> WindowHost<S> {
         }
     }
 
+    /// Runs `edit` on the chrome layer's own copy of the state and redraws the chrome. Returns None, and does not
+    /// run `edit`, while the layer handles input or a frame.
+    pub fn edit_chrome<R>(&self, edit: impl FnOnce(&mut S) -> R) -> Option<R> {
+        let result = {
+            let mut rune = self.core.chrome.entry.rune.try_borrow_mut().ok()?;
+            edit(&mut rune.as_mut()?.runtime_mut().state)
+        };
+        self.core.chrome.invalidate();
+        Some(result)
+    }
+
     /// The latest display link target timestamp processed by the queue.
     pub fn presentation_time(&self) -> Option<f64> {
         self.core.presentation_time.get()
@@ -323,8 +338,8 @@ impl<S: 'static> Layer<S> {
     fn new(
         mount: Mount,
         overlay: bool,
-        state: Shared<S>,
-        spec: &AppSpec<Shared<S>>,
+        state: S,
+        spec: &AppSpec<S>,
         text_snapshot: TextSnapshot<S>,
         queue: Rc<ActionQueue>,
     ) -> Result<Self, String> {
@@ -492,7 +507,7 @@ impl<S: 'static> Layer<S> {
 }
 
 struct LayerEntry<S: 'static> {
-    rune: RefCell<Option<LayerHost<Shared<S>>>>,
+    rune: RefCell<Option<LayerHost<S>>>,
     adapter: RefCell<Option<SubclassingAdapter>>,
     a11y: RefCell<AccessibilityLink>,
     surface: RefCell<Option<Retained<CAMetalLayer>>>,
@@ -506,7 +521,7 @@ struct LayerEntry<S: 'static> {
 }
 
 impl<S: 'static> LayerEntry<S> {
-    fn runtime<R>(&self, read: impl FnOnce(&Runtime<Shared<S>>) -> R) -> Option<R> {
+    fn runtime<R>(&self, read: impl FnOnce(&Runtime<S>) -> R) -> Option<R> {
         match self.rune.try_borrow() {
             Ok(host) => host.as_ref().map(|host| read(host.runtime())),
             Err(_) => {

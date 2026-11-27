@@ -22,6 +22,7 @@ fn main() -> std::process::ExitCode {
 #[cfg(target_os = "macos")]
 mod mac {
     use std::cell::{Cell, RefCell};
+    use std::collections::HashMap;
     use std::fs;
     use std::io::{BufRead, BufReader, ErrorKind, Read, Write};
     use std::net::TcpListener;
@@ -38,7 +39,7 @@ mod mac {
     use ria_host_mac::diagnostics::ardia_field_timing;
     use ria_host_mac::launch::host_launch::{self, LaunchEvent};
     use ria_host_mac::launch::launch_config::LaunchConfig;
-    use ria_host_mac::launch::strip_layer::{Button, Row, button_center};
+    use ria_host_mac::launch::strip_layer::{Button, Row, Tool, button_center, toolbar_center};
     use ria_host_mac::launch::system_signals;
     use ria_host_mac::launch::window_host::WindowHost;
     use ria_host_mac::tabs::ardia_web_view::ArdiaWebView;
@@ -125,6 +126,25 @@ mod mac {
         assert!(
             out.lines().any(|line| line == "mountedPages 3"),
             "the strip did not keep every tab's page mounted"
+        );
+        for line in [
+            "navNewTab",
+            "navLoaded",
+            "navEdited",
+            "navReload",
+            "navBack",
+            "navForward",
+        ] {
+            assert!(
+                out.lines().any(|out| out == line),
+                "the toolbar did not reach {line}"
+            );
+        }
+        assert!(
+            out.lines()
+                .filter_map(|line| line.strip_prefix("fixtureHit /nav-b "))
+                .any(|count| count.parse::<u32>().is_ok_and(|count| count >= 2)),
+            "the reload did not request the page again"
         );
         assert!(
             out.lines().any(|line| line == "focusAfterSwitch true"),
@@ -214,7 +234,7 @@ mod mac {
         assert!(again.contains("engineWillShutDown"));
         assert!(!has_crash_report(root), "a crash report exists");
         println!(
-            "launch live: engine exit 0; one window; one tab; fixture title; Rune strip shows 3 tabs and real clicks select, pin and close them; restored-layout relaunch on the same profile keeps the strip; download moved by the app's system-signals host; shutdown; no crash report"
+            "launch live: engine exit 0; one window; one tab; fixture title; Rune strip shows 3 tabs and real clicks select, pin and close them; real clicks and keys in the toolbar open a tab, load a typed address, reload, go back and forward; restored-layout relaunch on the same profile keeps the strip; download moved by the app's system-signals host; shutdown; no crash report"
         );
     }
 
@@ -245,6 +265,10 @@ mod mac {
             .env("RIA_DATA_DIR", &data)
             .env("RIA_BACKGROUND", "1")
             .envs(delay.is_zero().then_some(("RIA_LIVE_FAST", "1")))
+            .env(
+                "RIA_LIVE_BASE",
+                format!("http://{}", listener.local_addr().unwrap()),
+            )
             .env_remove("RIA_INSTANCE")
             .env("RIA_SWITCHES", switches)
             .env_remove("RIA_TEST")
@@ -254,6 +278,7 @@ mod mac {
             .stderr(fs::File::create(&stderr).unwrap())
             .spawn()
             .expect("run Ria in a new profile");
+        let mut hits = HashMap::new();
         let deadline = Instant::now() + Duration::from_secs(60);
         let status = loop {
             if let Some(status) = child.try_wait().expect("wait for Ria") {
@@ -264,11 +289,14 @@ mod mac {
                 child.wait().expect("reap Ria after timeout");
                 break None;
             }
-            serve_fixture(listener, delay);
+            serve_fixture(listener, delay, &mut hits);
             std::thread::sleep(Duration::from_millis(50));
         };
         let out = fs::read(&stdout).unwrap();
-        let out = String::from_utf8_lossy(&out).into_owned();
+        let mut out = String::from_utf8_lossy(&out).into_owned();
+        for (path, count) in &hits {
+            out.push_str(&format!("fixtureHit {path} {count}\n"));
+        }
         eprint!("{}", String::from_utf8_lossy(&fs::read(&stderr).unwrap()));
         print!("{out}");
         let status = status.expect("Ria did not exit within 60 seconds");
@@ -276,7 +304,8 @@ mod mac {
         out
     }
 
-    fn serve_fixture(listener: &TcpListener, delay: Duration) {
+    /// Answer one request. The navigation pages show their path and request count in the title.
+    fn serve_fixture(listener: &TcpListener, delay: Duration, hits: &mut HashMap<String, u32>) {
         let mut stream = match listener.accept() {
             Ok((stream, _)) => stream,
             Err(error) if error.kind() == ErrorKind::WouldBlock => return,
@@ -289,19 +318,34 @@ mod mac {
         stream.set_write_timeout(timeout).unwrap();
         let mut request = BufReader::new((&mut stream).take(4096));
         let mut line = Vec::new();
+        let mut path = None;
         loop {
             line.clear();
             if !request.read_until(b'\n', &mut line).is_ok_and(|n| n > 0) {
                 return;
             }
+            if path.is_none() {
+                path = String::from_utf8_lossy(&line)
+                    .split(' ')
+                    .nth(1)
+                    .map(str::to_owned);
+            }
             if line == b"\r\n" {
                 break;
             }
         }
+        let page = match path.as_deref() {
+            Some(path @ ("/nav-a" | "/nav-b")) => {
+                let count = hits.entry(path.to_owned()).or_default();
+                *count += 1;
+                format!("<!doctype html><title>{path} hit {count}</title><p>navigation fixture</p>")
+            }
+            _ => PAGE.to_owned(),
+        };
         let _ = write!(
             stream,
-            "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{PAGE}",
-            PAGE.len()
+            "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{page}",
+            page.len()
         );
     }
 
@@ -480,12 +524,17 @@ mod mac {
         flags.iter().all(|flag| flag.get())
     }
 
-    /// Drives the Rune strip with real clicks: three tabs show, a press selects one, pins one and closes one.
+    /// Drives the Rune strip with real clicks: three tabs show, a press selects one, pins one and closes one. Then,
+    /// in the first launch, it drives the toolbar with real clicks and keys.
     struct Drive {
         host: Rc<WindowHost>,
         stage: Cell<u32>,
         pinned: Rc<Cell<bool>>,
         done: Rc<dyn Fn()>,
+        /// The fixture server's address when the toolbar check runs.
+        nav: Option<String>,
+        navigated: Rc<Cell<bool>>,
+        rows: RefCell<Vec<Row>>,
     }
 
     impl Drive {
@@ -551,7 +600,11 @@ mod mac {
                 this.shot(&format!("{}-{name}", std::process::id()));
                 this.advance(next, at);
                 if next == 5 {
-                    (this.done)();
+                    if this.nav.is_some() {
+                        this.navigate();
+                    } else {
+                        (this.done)();
+                    }
                 }
             });
         }
@@ -570,6 +623,7 @@ mod mac {
         }
 
         fn rows(self: &Rc<Self>, rows: &[Row]) {
+            *self.rows.borrow_mut() = rows.to_vec();
             let keys: Vec<_> = rows
                 .iter()
                 .map(|row| {
@@ -618,6 +672,164 @@ mod mac {
                 _ => {}
             }
         }
+
+        /// A real event through the window, as the strip clicks go. Returns the dev action's reply.
+        fn dev(&self, action: &str) -> String {
+            let window = self.host.main().expect("browser window").window();
+            self.host
+                .chrome()
+                .dev_action(&window, action, true)
+                .unwrap_or_default()
+        }
+
+        fn click(&self, at: (f64, f64)) {
+            self.dev(&format!("click:{},{}", at.0, at.1));
+        }
+
+        fn tab_is(&self, check: impl Fn(&Tab) -> bool) -> bool {
+            let key = self
+                .rows
+                .borrow()
+                .iter()
+                .find(|row| row.active)
+                .map(|row| row.key.clone());
+            let tab = key.and_then(|key| {
+                self.host
+                    .chrome()
+                    .tab_registry()
+                    .borrow()
+                    .tab_with_app_id(&key)
+            });
+            tab.is_some_and(|tab| check(&tab))
+        }
+
+        /// Run `then` once `ready` holds, polled every 100 ms. After 20 s print `navTimeout` and end the run.
+        fn until(
+            self: &Rc<Self>,
+            what: &'static str,
+            since: Instant,
+            ready: impl Fn(&Drive) -> bool + 'static,
+            then: impl FnOnce(&Rc<Self>) + 'static,
+        ) {
+            if ready(self) {
+                return then(self);
+            }
+            if since.elapsed() > Duration::from_secs(20) {
+                println!("navTimeout {what}");
+                self.navigated.set(true);
+                (self.done)();
+                return;
+            }
+            let this = self.clone();
+            host_launch::after(Duration::from_millis(100), move || {
+                this.until(what, since, ready, then)
+            });
+        }
+
+        /// Click the address field, type `url` and press Return, then wait until the active tab shows it. With
+        /// `select_all` the typed text replaces what the field held.
+        fn go_to(
+            self: &Rc<Self>,
+            url: String,
+            select_all: bool,
+            then: impl FnOnce(&Rc<Self>) + 'static,
+        ) {
+            self.click(toolbar_center(Tool::Address));
+            let this = self.clone();
+            host_launch::after(Duration::from_millis(700), move || {
+                if select_all {
+                    println!("navSelectAll {}", this.dev("keys:1048576:a:0"));
+                }
+                println!("navType {}", this.dev(&format!("type:{url}")));
+                host_launch::after(Duration::from_millis(300), move || {
+                    println!("navReturn {}", this.dev("keys:0:\r:36"));
+                    let loaded = move |d: &Drive| {
+                        d.tab_is(|tab| tab.url().to_string() == url && !tab.loading())
+                            && d.rows.borrow().iter().any(|row| {
+                                row.active
+                                    && row
+                                        .title
+                                        .strip_suffix(" hit 1")
+                                        .is_some_and(|path| url.ends_with(path))
+                            })
+                    };
+                    this.until("load", Instant::now(), loaded, then);
+                });
+            });
+        }
+
+        /// Click a toolbar button that is dim until the tab has history, then wait for `ready`.
+        fn step_history(
+            self: &Rc<Self>,
+            tool: Tool,
+            enabled: fn(&Tab) -> bool,
+            ready: impl Fn(&Drive) -> bool + 'static,
+            then: impl FnOnce(&Rc<Self>) + 'static,
+        ) {
+            self.until(
+                "history",
+                Instant::now(),
+                move |d| d.tab_is(enabled),
+                move |this| {
+                    // The toolbar reads the tab every 500 ms; wait for it to draw the button enabled.
+                    let this = this.clone();
+                    host_launch::after(Duration::from_millis(1000), move || {
+                        this.click(toolbar_center(tool));
+                        this.until("history step", Instant::now(), ready, then);
+                    });
+                },
+            );
+        }
+
+        /// New tab, a typed address, a retyped address, reload, back, forward: each by real clicks and keys.
+        fn navigate(self: &Rc<Self>) {
+            let base = self
+                .nav
+                .clone()
+                .expect("the toolbar check has the fixture address");
+            let (a, b) = (format!("{base}/nav-a"), format!("{base}/nav-b"));
+            let tabs = self.rows.borrow().len();
+            self.click(toolbar_center(Tool::NewTab));
+            let opened = move |d: &Drive| {
+                d.rows.borrow().len() == tabs + 1
+                    && d.tab_is(|tab| tab.url().to_string() == "about:blank")
+            };
+            self.until("new tab", Instant::now(), opened, move |this| {
+                println!("navNewTab");
+                let (a2, b2) = (a.clone(), b.clone());
+                this.go_to(a.clone(), false, move |this| {
+                    println!("navLoaded");
+                    this.go_to(b2.clone(), true, move |this| {
+                        println!("navEdited");
+                        this.click(toolbar_center(Tool::Reload));
+                        let reloaded =
+                            |d: &Drive| d.tab_is(|tab| tab.title().to_string() == "/nav-b hit 2");
+                        this.until("reload", Instant::now(), reloaded, move |this| {
+                            println!("navReload");
+                            let at_a = move |d: &Drive| {
+                                d.tab_is(|tab| tab.url().to_string() == a2 && !tab.loading())
+                            };
+                            this.step_history(Tool::Back, Tab::can_go_back, at_a, move |this| {
+                                println!("navBack");
+                                let at_b = move |d: &Drive| {
+                                    d.tab_is(|tab| tab.url().to_string() == b && !tab.loading())
+                                };
+                                this.step_history(
+                                    Tool::Forward,
+                                    Tab::can_go_forward,
+                                    at_b,
+                                    |this| {
+                                        println!("navForward");
+                                        this.navigated.set(true);
+                                        (this.done)();
+                                    },
+                                );
+                            });
+                        });
+                    });
+                });
+            });
+        }
     }
 
     pub fn child() -> ExitCode {
@@ -627,20 +839,22 @@ mod mac {
         let pinned = Rc::new(Cell::new(false));
         let revealed = Rc::new(Cell::new(false));
         let fast = std::env::var_os("RIA_LIVE_FAST").is_some();
+        let navigated = Rc::new(Cell::new(fast));
         let case = if fast { "fast" } else { "slow" };
         let ready_host: Rc<RefCell<Option<Rc<WindowHost>>>> = Rc::default();
         // Quit when the fixture title, the download move, the pin and the first-paint reveal are done.
         let quit_when_done: Rc<dyn Fn()> = {
-            let (matched, moving, pinned, revealed) = (
+            let (matched, moving, pinned, revealed, navigated) = (
                 matched.clone(),
                 moving.clone(),
                 pinned.clone(),
                 revealed.clone(),
+                navigated.clone(),
             );
             let ready_host = ready_host.clone();
             let proven = Cell::new(false);
             Rc::new(move || {
-                if all_set(&[&matched, &moving.done, &pinned, &revealed]) {
+                if all_set(&[&matched, &moving.done, &pinned, &revealed, &navigated]) {
                     if fast && !proven.replace(true) {
                         let host = ready_host.borrow().clone();
                         attach_after_load(&host.expect("the window host was ready"));
@@ -657,6 +871,7 @@ mod mac {
         let check_ready = ready_host.clone();
         let check_shutdown = shutdown.clone();
         let check_moving = moving.clone();
+        let check_navigated = navigated.clone();
         let status = super::app_launch::start(Rc::new(move |event| match event {
             LaunchEvent::EngineStarted => {
                 println!("engineDidStart");
@@ -728,6 +943,11 @@ mod mac {
                     stage: Cell::new(0),
                     pinned: pinned.clone(),
                     done: quit_when_done.clone(),
+                    nav: (!fast).then(|| {
+                        std::env::var("RIA_LIVE_BASE").expect("the parent sets the fixture address")
+                    }),
+                    navigated: check_navigated.clone(),
+                    rows: RefCell::default(),
                 });
                 *check_drive.borrow_mut() = Some(drive.clone());
                 host_launch::later(move || drive.start());
@@ -752,7 +972,14 @@ mod mac {
             LaunchEvent::Error(error) => eprintln!("{error}"),
             _ => {}
         }));
-        if all_set(&[&matched, &shutdown, &moving.done, &check_pin, &revealed]) {
+        if all_set(&[
+            &matched,
+            &shutdown,
+            &moving.done,
+            &check_pin,
+            &revealed,
+            &navigated,
+        ]) {
             status
         } else {
             ExitCode::FAILURE

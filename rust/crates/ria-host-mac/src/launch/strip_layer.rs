@@ -33,11 +33,14 @@ use std::cell::RefCell;
 use std::rc::{Rc, Weak};
 use std::time::Duration;
 
+use objc2::rc::Retained;
+use objc2_foundation::NSString;
+use ria_core::omnibox::omnibox::resolve_input;
 use ria_engine::call::{ActionQueue, main_queue};
 use ria_engine::types::{Number, TabStripCommand};
 use ria_surface::{WindowHost as Surface, WindowSpec};
 use rune::tok::{self, type_};
-use rune::{AppSpec, Color, Cx, El, col, el, row, text};
+use rune::{AppSpec, Color, Cx, El, TextEdit, col, edit_access, el, row, text, text_input};
 
 use crate::core::bindings::{Tab, Window};
 use crate::tabs::ardia_tab_strip::StripCommandResult;
@@ -61,6 +64,12 @@ const PIN_W: f64 = 40.0;
 const CLOSE_W: f64 = 28.0;
 const BUTTON_H: f64 = 28.0;
 const TITLE_CHARS: usize = 12;
+const TOOLBAR_H: f32 = 40.0;
+const NAV_W: f64 = 32.0;
+/// The page a new tab shows: Ria has no new-tab page yet, so the address field takes the first input.
+const NEW_TAB_URL: &str = "about:blank";
+// shortcut: the default search engine is fixed to Google, upgrade when the settings store (slice 2.x) is wired in.
+const SEARCH: &str = "https://www.google.com/search?q=%s";
 
 /// The three buttons of a tab in the strip.
 #[derive(Clone, Copy)]
@@ -84,6 +93,32 @@ pub fn button_center(index: usize, button: Button) -> (f64, f64) {
     )
 }
 
+/// The controls of the toolbar row, left to right, then the address field.
+#[derive(Clone, Copy)]
+pub enum Tool {
+    Back,
+    Forward,
+    Reload,
+    NewTab,
+    Address,
+}
+
+/// The window point of the center of a toolbar control, as the dev `click` action takes it. The address point is
+/// 60 points inside the field, clear of its padding.
+pub fn toolbar_center(tool: Tool) -> (f64, f64) {
+    let index = tool as usize;
+    let left = PAD + index as f64 * (NAV_W + GAP);
+    let x = if matches!(tool, Tool::Address) {
+        left + 60.0
+    } else {
+        left + NAV_W / 2.0
+    };
+    (
+        x,
+        TITLE_BAR + f64::from(HEIGHT) + f64::from(TOOLBAR_H) / 2.0,
+    )
+}
+
 /// One tab as the strip draws it.
 #[derive(Clone, Debug, PartialEq)]
 pub struct Row {
@@ -93,11 +128,27 @@ pub struct Row {
     pub pinned: bool,
 }
 
-/// A press in the strip.
+/// A press in the strip or the toolbar.
+#[derive(Clone)]
 enum Action {
     Select(String),
     TogglePin(String),
     Close(String),
+    Back,
+    Forward,
+    Reload,
+    NewTab,
+    /// The text of the address field, as the user typed it.
+    Go(String),
+}
+
+/// What the active tab shows in the toolbar.
+#[derive(Clone, Default, PartialEq)]
+struct Nav {
+    key: String,
+    url: String,
+    back: bool,
+    forward: bool,
 }
 
 /// What the chrome layer draws and sends.
@@ -110,48 +161,147 @@ pub struct StripState {
     touched: bool,
     /// Called with the rows each time they change.
     changed: Option<ChangedFn>,
+    nav: Nav,
+    /// A tab that a press opened: it becomes active when the next read lists it.
+    want_active: Option<String>,
 }
 
 type ChangedFn = Rc<dyn Fn(&[Row])>;
 type Shared = Rc<RefCell<StripState>>;
 
-fn chrome(state: &Shared, cx: &mut Cx<Shared>) -> El {
+/// The state of each Rune layer. The strip state is shared by both layers; the address text belongs to the chrome
+/// layer (`WindowHost::edit_chrome`).
+#[derive(Clone, Default)]
+struct ChromeState {
+    strip: Shared,
+    address: TextEdit,
+}
+
+impl ChromeState {
+    fn send(&self, action: Action) {
+        if let Some(send) = &self.strip.borrow().send {
+            send(action);
+        }
+    }
+}
+
+fn chrome(state: &ChromeState, cx: &mut Cx<ChromeState>) -> El {
     let dark = cx.system_dark();
-    let tabs = state
-        .borrow()
-        .rows
-        .iter()
-        .fold(row().gap(GAP as f32), |strip, tab| {
-            strip.child(tab_group(tab, dark))
-        });
+    let strip = state.strip.borrow();
+    let tabs = strip.rows.iter().fold(row().gap(GAP as f32), |tabs, tab| {
+        tabs.child(tab_group(tab, dark))
+    });
     col()
         .w_full()
         .h_full()
         .fill(Color::TRANSPARENT)
         .child(tabs.w_full().h(HEIGHT).px(PAD as f32).center_y())
+        .child(toolbar(state, &strip.nav, dark))
         .child(el().key("page").w_full().grow(1.0))
 }
 
-fn tab_group(tab: &Row, dark: bool) -> El {
+/// Back, forward, reload and new tab, then the address field. A key such as `back` is the name a test finds the
+/// control by.
+fn toolbar(state: &ChromeState, nav: &Nav, dark: bool) -> El {
     let theme = tok::theme(dark);
-    let fill = |on| {
-        if on {
-            tok::accent(0, dark)
+    let tool = |key: &str, label: &str, caption: &str, enabled: bool, action: Action| {
+        let tool = button(
+            dark,
+            key.into(),
+            "button",
+            label.into(),
+            NAV_W,
+            false,
+            caption.into(),
+        );
+        if enabled {
+            tool.on_press(move |state: &mut ChromeState| state.send(action.clone()))
         } else {
-            theme.control_off
+            tool.disabled(true).opacity(0.4)
         }
     };
+    let field = text_input(&state.address, type_::BODY)
+        .single_line()
+        .key("address")
+        .label("Address")
+        .grow(1.0)
+        .min_w(0.0)
+        .color(theme.text)
+        .placeholder("Search or enter address", theme.text_secondary)
+        .caret(theme.text, tok::accent(0, dark).alpha(0.4))
+        .on_edit(edit_access(|state: &mut ChromeState| &mut state.address))
+        .on_submit(|state: &mut ChromeState, _| {
+            let text = state.address.text.clone();
+            state.send(Action::Go(text));
+        });
+    row()
+        .w_full()
+        .h(TOOLBAR_H)
+        .px(PAD as f32)
+        .gap(GAP as f32)
+        .center_y()
+        .child(tool("back", "Back", "\u{2190}", nav.back, Action::Back))
+        .child(tool(
+            "forward",
+            "Forward",
+            "\u{2192}",
+            nav.forward,
+            Action::Forward,
+        ))
+        .child(tool("reload", "Reload", "\u{21bb}", true, Action::Reload))
+        .child(tool("new-tab", "New tab", "+", true, Action::NewTab))
+        .child(
+            row()
+                .h(BUTTON_H as f32)
+                .grow(1.0)
+                .min_w(0.0)
+                .px(10.0)
+                .radius(8.0)
+                .fill(theme.control_off)
+                .center_y()
+                .child(field),
+        )
+}
+
+/// One rounded control of the strip or the toolbar; `on` fills it with the accent.
+fn button(
+    dark: bool,
+    key: String,
+    role: &'static str,
+    label: String,
+    width: f64,
+    on: bool,
+    caption: String,
+) -> El {
+    let theme = tok::theme(dark);
+    let fill = if on {
+        tok::accent(0, dark)
+    } else {
+        theme.control_off
+    };
+    el().key(key)
+        .role(role)
+        .label(label)
+        .focusable(true)
+        .h(BUTTON_H as f32)
+        .w(width as f32)
+        .radius(8.0)
+        .fill(fill)
+        .center()
+        .child(text(caption).font(type_::LABEL).color(theme.text))
+}
+
+fn tab_group(tab: &Row, dark: bool) -> El {
     let button = |name: &str, role: &'static str, label: String, width, on, caption: String| {
-        el().key(format!("{name}:{}", tab.key))
-            .role(role)
-            .label(label)
-            .focusable(true)
-            .h(BUTTON_H as f32)
-            .w(width as f32)
-            .radius(8.0)
-            .fill(fill(on))
-            .center()
-            .child(text(caption).font(type_::LABEL).color(theme.text))
+        button(
+            dark,
+            format!("{name}:{}", tab.key),
+            role,
+            label,
+            width,
+            on,
+            caption,
+        )
     };
     let (select, pin, close) = (
         action_key(&tab.key, Action::Select),
@@ -196,13 +346,9 @@ fn tab_group(tab: &Row, dark: bool) -> El {
 }
 
 /// The press handler that sends `make(key)` through the layer.
-fn action_key(key: &str, make: fn(String) -> Action) -> impl Fn(&mut Shared) + 'static {
+fn action_key(key: &str, make: fn(String) -> Action) -> impl Fn(&mut ChromeState) + 'static {
     let key = key.to_owned();
-    move |state: &mut Shared| {
-        if let Some(send) = &state.borrow().send {
-            send(make(key.clone()));
-        }
-    }
+    move |state: &mut ChromeState| state.send(make(key.clone()))
 }
 
 fn short(title: &str) -> String {
@@ -213,7 +359,7 @@ fn short(title: &str) -> String {
     format!("{head}\u{2026}")
 }
 
-fn overlay(_: &Shared, _: &mut Cx<Shared>) -> El {
+fn overlay(_: &ChromeState, _: &mut Cx<ChromeState>) -> El {
     col().w_full().h_full()
 }
 
@@ -312,7 +458,7 @@ fn read_rows(host: &WindowHost, previous: &[Row]) -> Option<Vec<Row>> {
 /// The strip layer and the surface it owns. Drop it before the engine shuts down.
 pub struct StripLayer {
     /// Keeps the surface alive until drop.
-    _surface: Rc<Surface<StripState>>,
+    _surface: Rc<Surface<ChromeState>>,
 }
 
 impl StripLayer {
@@ -329,10 +475,8 @@ impl StripLayer {
             .ok_or("the launch tab has no view")?;
         let state = Rc::new(RefCell::new(StripState {
             strip: core.chrome_window_id_for_profile(&profile),
-            rows: Vec::new(),
-            send: None,
-            touched: false,
             changed: Some(changed),
+            ..StripState::default()
         }));
         let queue = ActionQueue::new();
         let weak_queue = Rc::downgrade(&queue);
@@ -345,12 +489,22 @@ impl StripLayer {
             }));
         });
         let spec = WindowSpec {
-            chrome: AppSpec::new("Ria strip", (1360.0, 860.0), Shared::default, chrome),
-            overlay: AppSpec::new("Ria overlay", (1360.0, 860.0), Shared::default, overlay),
+            chrome: AppSpec::new("Ria strip", (1360.0, 860.0), ChromeState::default, chrome),
+            overlay: AppSpec::new(
+                "Ria overlay",
+                (1360.0, 860.0),
+                ChromeState::default,
+                overlay,
+            ),
             page_slot: "page",
+            // shortcut: no IME reconversion in the address field, upgrade with the Rune UI text fields (phase 4).
             text_snapshot: |_| None,
         };
-        let surface = Rc::new(Surface::new(&core.host_view(), state.clone(), spec, queue)?);
+        let chrome_state = ChromeState {
+            strip: state.clone(),
+            address: TextEdit::default(),
+        };
+        let surface = Rc::new(Surface::new(&core.host_view(), chrome_state, spec, queue)?);
         surface.set_page(Some(&page));
         refresh(host, &surface, &state);
         let (host, surface_weak, state_weak) = (
@@ -384,24 +538,28 @@ fn mark_selected(host: &WindowHost, rows: &[Row]) {
 }
 
 /// Read the tab list again and redraw when it changed. Stop when the layer is gone.
-fn refresh(host: &WindowHost, surface: &Surface<StripState>, state: &Shared) {
-    let (previous, touched) = {
+fn refresh(host: &WindowHost, surface: &Surface<ChromeState>, state: &Shared) {
+    let (previous, touched, want) = {
         let mut state = state.borrow_mut();
-        (state.rows.clone(), std::mem::take(&mut state.touched))
+        (
+            state.rows.clone(),
+            std::mem::take(&mut state.touched),
+            state.want_active.clone(),
+        )
     };
-    let Some(rows) = read_rows(host, &previous) else {
+    let Some(mut rows) = read_rows(host, &previous) else {
         return;
     };
-    let active = rows.iter().find(|row| row.active);
-    let page = active.and_then(|row| {
-        host.chrome()
-            .tab_registry()
-            .borrow()
-            .tab_with_app_id(&row.key)
-    });
+    if let Some(key) = want.filter(|key| rows.iter().any(|row| row.key == *key)) {
+        for row in &mut rows {
+            row.active = row.key == key;
+        }
+        state.borrow_mut().want_active = None;
+    }
+    let active = active_tab(host, &rows);
     // The page slot shows the active tab, so a new or selected tab does not cover the strip.
-    if let Some((tab, key)) = page.zip(active.map(|row| row.key.as_str()))
-        && let Some(view) = host.page_for(&tab, key)
+    if let Some((key, tab)) = &active
+        && let Some(view) = host.page_for(tab, key)
     {
         surface.set_page(Some(&view));
     }
@@ -422,6 +580,7 @@ fn refresh(host: &WindowHost, surface: &Surface<StripState>, state: &Shared) {
     }
     surface.retain_pages(&views.iter().map(|view| &**view).collect::<Vec<_>>());
     mark_selected(host, &rows);
+    sync_nav(surface, state, active.as_ref());
     if touched || rows != previous {
         let changed = {
             let mut state = state.borrow_mut();
@@ -437,7 +596,7 @@ fn refresh(host: &WindowHost, surface: &Surface<StripState>, state: &Shared) {
 
 fn poll(
     host: Weak<WindowHost>,
-    surface: Weak<Surface<StripState>>,
+    surface: Weak<Surface<ChromeState>>,
     state: Weak<RefCell<StripState>>,
 ) {
     after(POLL, move || {
@@ -454,7 +613,7 @@ fn poll(
 /// Run an action from the layer on a later main-queue turn, then read the tab list again.
 fn sender(
     host: Weak<WindowHost>,
-    surface: Weak<Surface<StripState>>,
+    surface: Weak<Surface<ChromeState>>,
     state: Weak<RefCell<StripState>>,
 ) -> Box<dyn Fn(Action)> {
     Box::new(move |action| {
@@ -469,6 +628,53 @@ fn sender(
             refresh(&host, &surface, &state);
         }));
     })
+}
+
+/// The active row's key and tab.
+fn active_tab(host: &WindowHost, rows: &[Row]) -> Option<(String, Retained<Tab>)> {
+    let key = &rows.iter().find(|row| row.active)?.key;
+    let tab = host.chrome().tab_registry().borrow().tab_with_app_id(key)?;
+    Some((key.clone(), tab))
+}
+
+/// What the address field shows for a tab's URL: a blank tab shows the empty field and its hint.
+fn address_text(url: &str) -> &str {
+    if url == NEW_TAB_URL { "" } else { url }
+}
+
+/// Show the active tab's URL and history in the toolbar. The address text changes only when the tab or its URL
+/// changed since the last read, so a read does not overwrite what the user is typing. When the chrome layer is busy
+/// the change waits for the next read.
+fn sync_nav(
+    surface: &Surface<ChromeState>,
+    state: &Shared,
+    active: Option<&(String, Retained<Tab>)>,
+) {
+    let Some((key, tab)) = active else {
+        return;
+    };
+    let nav = Nav {
+        key: key.clone(),
+        url: tab.url().to_string(),
+        back: tab.can_go_back(),
+        forward: tab.can_go_forward(),
+    };
+    let moved = {
+        let state = state.borrow();
+        if nav == state.nav {
+            return;
+        }
+        nav.key != state.nav.key || nav.url != state.nav.url
+    };
+    if moved
+        && surface
+            .edit_chrome(|chrome| chrome.address.replace_text(address_text(&nav.url)))
+            .is_none()
+    {
+        return;
+    }
+    state.borrow_mut().nav = nav;
+    surface.mark_dirty(true, false);
 }
 
 fn run(host: &WindowHost, state: &Shared, action: Action) {
@@ -523,6 +729,38 @@ fn run(host: &WindowHost, state: &Shared, action: Action) {
             }
             tab.close();
         }
+        Action::NewTab => {
+            let Some(window) = host.main() else {
+                return;
+            };
+            let Some(profile) = window.active_profile() else {
+                return;
+            };
+            let tab = window.open_tab(&NSString::from_str(NEW_TAB_URL), &profile, true);
+            window.activate_tab(&tab);
+            let id = host.chrome().tab_registry().borrow_mut().browser_id(&tab);
+            state.borrow_mut().want_active = Some(format!("tab:{id}"));
+        }
+        action @ (Action::Back | Action::Forward | Action::Reload | Action::Go(_)) => {
+            if let Some((_, tab)) = active_tab(host, &rows) {
+                navigate_tab(&tab, action);
+            }
+        }
+    }
+}
+
+fn navigate_tab(tab: &Tab, action: Action) {
+    match action {
+        Action::Back if tab.can_go_back() => tab.go_back(),
+        Action::Forward if tab.can_go_forward() => tab.go_forward(),
+        Action::Reload => tab.reload(),
+        Action::Go(text) => {
+            let url = resolve_input(&text, SEARCH);
+            if !url.is_empty() {
+                tab.load_url(&NSString::from_str(&url), true);
+            }
+        }
+        _ => {}
     }
 }
 
@@ -610,5 +848,11 @@ mod tests {
             button_center(2, Button::Close).0,
             12.0 + 2.0 * 196.0 + 160.0 + 14.0
         );
+    }
+
+    #[test]
+    fn a_blank_tab_shows_an_empty_address_field() {
+        assert_eq!(address_text(NEW_TAB_URL), "");
+        assert_eq!(address_text("https://example.com/"), "https://example.com/");
     }
 }
