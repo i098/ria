@@ -19,13 +19,22 @@ Use a Mac with Apple silicon. Blaze does not support Intel Macs.
 
 ## Install
 
+Start with a clean build shell. If you already use Blaze, isolate its files in a temporary home for this setup:
+
+```sh
+export HOME="$(mktemp -d)"
+unset CARGO_HOME BLAZE_HOME RUSTUP_HOME
+```
+
+Run the remaining build and launch commands in that shell. Close the shell when you finish.
+
 ```sh
 git clone --recurse-submodules https://github.com/i098/ria
 cd ria
 export PATH="${CARGO_HOME:-$HOME/.cargo}/bin:$PATH"
 ```
 
-If `~/.blaze/toolchains` does not contain the Blaze nightly toolchain, run this command to download it:
+Install the pinned Blaze v1 release to get its Rust nightly:
 
 ```sh
 curl -fsSL https://ix.dev/blaze | sh -s -- --version 0.20261027.0
@@ -37,7 +46,9 @@ Keep `--version 0.20261027.0`. The newer Blaze v2 installer does not download th
 rust/tools/blaze/install.sh "${TMPDIR:-/tmp}/ria-blaze"
 ```
 
-Both installers write to `${CARGO_HOME:-$HOME/.cargo}/bin`. Set `CARGO_HOME` before either installation to keep an existing Blaze installation.
+Both installers write to `${CARGO_HOME:-$HOME/.cargo}/bin`.
+The bootstrap also changes Blaze state in `~/.blaze`; setting `CARGO_HOME` alone does not isolate it.
+The Ria script selects the last nightly by directory name in `~/.blaze/toolchains`. Use the clean shell above if you have other Blaze toolchains.
 The Ria script builds Blaze at a pinned commit, applies the [Ria patches](rust/tools/blaze/README.md), and installs the patched binaries.
 
 ## macOS: open file limit
@@ -72,11 +83,26 @@ Use `blaze check -p ria-app` on macOS.
 
 ## Test and lint
 
+Install Rust stable with `rustfmt` and Clippy for these development checks.
+Run them from the checkout in your normal shell.
+Run the format check on either platform:
+
 ```sh
+cargo fmt --manifest-path rust/Cargo.toml --check
+```
+
+On macOS, lint the app and host crates:
+
+```sh
+cargo clippy --locked --manifest-path rust/Cargo.toml -p ria-host-mac -p ria-app --all-targets -- -D warnings
+```
+
+On Linux, lint the workspace and check the parity captures:
+
+```sh
+cargo clippy --manifest-path rust/Cargo.toml
 node rust/parity/compare.selftest.mjs
 (cd rust/parity/captures/states && sha256sum -c SHA256SUMS)
-cargo fmt --manifest-path rust/Cargo.toml --check
-cargo clippy --manifest-path rust/Cargo.toml
 ```
 
 ## Run
