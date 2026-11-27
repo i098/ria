@@ -4,6 +4,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Ria has no rel
 
 ## [Unreleased]
 
+### Changed
+
+- macOS setup docs: blaze bootstrap, open file limit, engine fetch, `blaze check -p ria-app` as the macOS check, how to open a page in the app ([#205](https://github.com/i098/ria/issues/205)).
+
 ### Added
 
 - [Native macOS launch](rust/crates/ria-app/src/launch/README.md).
