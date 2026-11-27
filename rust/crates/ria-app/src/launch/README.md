@@ -1,7 +1,19 @@
 # macOS launch
 
-Set `ENGINE_DIR` to the directory that contains the prebuilt `Chromium Framework.framework`.
-Run the commands below from `rust/` on macOS.
+Run the commands below from `rust/` on macOS (Apple silicon, Xcode), in one shell.
+Finish the [setup](../../../../../setup.md#install) first: it installs blaze.
+
+## Prepare
+
+```sh
+ulimit -n 10240
+framework=$(../ardia/packages/ardiacore/scripts/fetch-engine.sh) &&
+  ENGINE_DIR=$(dirname "$framework")
+```
+
+`fetch-engine.sh` downloads the prebuilt Chromium engine for the pinned Ardia commit into `ardia/apps/browser/build-ardiacore/prebuilt/<key>/`.
+It prints the path of `Chromium Framework.framework`; `ENGINE_DIR` is the directory that contains it.
+It needs the `ardia` submodule (`git clone --recurse-submodules`) and keeps the engine for later runs.
 
 ## Launch checks
 
@@ -10,7 +22,7 @@ blaze test -p ria-host-mac --lib launch::
 ENGINE_DIR="$ENGINE_DIR" blaze test -p ria-app --test live
 ```
 
-If Blaze reports `Too many open files`, use `cargo` in place of `blaze`.
+If Blaze reports `Too many open files`, run `ulimit -n 10240` and `blaze stop`, then run the command again (see [setup](../../../../../setup.md#macos-open-file-limit)).
 
 Check N runs the native launch unit tests.
 Check L makes a temporary app bundle with a new profile and a saved launch tab.
@@ -68,8 +80,22 @@ cp crates/ria-app/src/launch/Info.plist "$app/Info.plist"
 cp target/debug/ria-app "$app/MacOS/ria-app"
 cp -cR "$ENGINE_DIR/Chromium Framework.framework" "$app/Frameworks/"
 codesign --force --sign - "$app/MacOS/ria-app"
+printf 'Bundle: %s\n' "$scratch/Ria.app"
 RIA_DATA_DIR="$scratch/profile" "$app/MacOS/ria-app"
 ```
+
+## Use the app
+
+Ria opens one window with a tab strip and one `about:blank` tab.
+It has no address bar, toolbar or new-tab button yet.
+To open a page, run this command in another shell. Replace `/path/to/Ria.app` with the bundle path printed above.
+
+```sh
+open -g -a /path/to/Ria.app https://example.com
+```
+
+Ria opens it in a new tab.
+On the next launch, Ria shows `about:blank` or reopens the saved launch tab if the profile contains one.
 
 ## Window host
 
