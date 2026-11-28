@@ -274,24 +274,19 @@ fn toolbar(state: &ChromeState, nav: &Nav, dark: bool) -> El {
                 .radius(8.0)
                 .fill(theme.control_off)
                 .center_y()
-                .child(field),
-        )
-        // A key press needs the key window. A press on this button loads the typed address without one, so an
-        // assistive client can set the field value and confirm it while Ria runs in the background.
-        .child(
-            button(
-                dark,
-                "go".into(),
-                "button",
-                "Go".into(),
-                NAV_W,
-                false,
-                "Go".into(),
-            )
-            .on_press(|state: &mut ChromeState| {
-                let text = state.address.text.clone();
-                state.send(Action::Go(text));
-            }),
+                .child(field)
+                // A key event needs the key window, so an assistive client cannot press Return while Ria runs in the
+                // background. This control takes the same action and draws nothing: zero size, no gap, no padding.
+                .child(
+                    el().key("go")
+                        .role("button")
+                        .label("Go")
+                        .size(0.0, 0.0)
+                        .on_press(|state: &mut ChromeState| {
+                            let text = state.address.text.clone();
+                            state.send(Action::Go(text));
+                        }),
+                ),
         )
 }
 
