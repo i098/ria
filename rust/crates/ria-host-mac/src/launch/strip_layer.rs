@@ -274,7 +274,19 @@ fn toolbar(state: &ChromeState, nav: &Nav, dark: bool) -> El {
                 .radius(8.0)
                 .fill(theme.control_off)
                 .center_y()
-                .child(field),
+                .child(field)
+                // A key event needs the key window, so an assistive client cannot press Return while Ria runs in the
+                // background. This control takes the same action and draws nothing: zero size, no gap, no padding.
+                .child(
+                    el().key("go")
+                        .role("button")
+                        .label("Go")
+                        .size(0.0, 0.0)
+                        .on_press(|state: &mut ChromeState| {
+                            let text = state.address.text.clone();
+                            state.send(Action::Go(text));
+                        }),
+                ),
         )
 }
 
@@ -334,6 +346,8 @@ fn tab_group(tab: &Row, dark: bool) -> El {
                 tab.active,
                 short(&tab.title),
             )
+            .focus_selected(tab.active)
+            .checked(tab.active)
             .on_press(select),
         )
         .child(
@@ -913,5 +927,51 @@ mod tests {
     fn a_blank_tab_shows_an_empty_address_field() {
         assert_eq!(address_text(BLANK_URL), "");
         assert_eq!(address_text("https://example.com/"), "https://example.com/");
+    }
+
+    /// The background route of issue #206: an assistive client sets the address value and presses Go; no key event or
+    /// key window is involved. The selected tab reports its state to the same client.
+    #[test]
+    fn a_value_set_and_a_go_press_load_the_typed_address() {
+        use rune::accesskit::{Action as Ak, ActionData, Toggled};
+        use rune::{Env, Runtime};
+
+        let sent: Rc<RefCell<Vec<String>>> = Rc::default();
+        let strip = Rc::new(RefCell::new(StripState {
+            rows: vec![row("a", false, false), row("b", true, false)],
+            ..StripState::default()
+        }));
+        let log = sent.clone();
+        strip.borrow_mut().send = Some(Box::new(move |action| {
+            if let Action::Go(text) = action {
+                log.borrow_mut().push(text);
+            }
+        }));
+        let state = ChromeState {
+            strip,
+            address: TextEdit::default(),
+        };
+        let mut rt = Runtime::new(state, chrome, (900.0, 200.0), Env::new(true, 1.0));
+        rt.frame(0.0);
+        assert!(rt.accessibility_action(
+            "address",
+            Ak::SetValue,
+            Some(ActionData::Value("example.com".into()))
+        ));
+        rt.frame(0.0);
+        assert!(sent.borrow().is_empty(), "setting the value does not load");
+        assert!(rt.accessibility_action("go", Ak::Click, None));
+        rt.frame(0.0);
+        assert_eq!(*sent.borrow(), ["example.com"]);
+
+        let tree = rt.accessibility_tree();
+        let toggled = |key: &str| {
+            tree.nodes
+                .iter()
+                .find(|(_, node)| node.author_id() == Some(key))
+                .and_then(|(_, node)| node.toggled())
+        };
+        assert_eq!(toggled("select:b"), Some(Toggled::True));
+        assert_eq!(toggled("select:a"), Some(Toggled::False));
     }
 }
