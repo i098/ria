@@ -16,6 +16,17 @@ Use that command to keep the test profile separate from the normal Ria profile.
 Add `RIA_BACKGROUND=1` before `RIA_DATA_DIR=...` to start Ria without bringing it to the front.
 Remove the new directory after you quit Ria if you no longer need the bundle or profile.
 
+## Publish a prerelease
+
+From a pushed commit of `main` on the same Mac, with `gh` signed in:
+
+```sh
+rust/tools/bundle/release-mac.sh
+```
+
+It builds the bundle, zips it with `ditto` as `Ria-mac-arm64-<commit>.zip`, and creates the prerelease `mac-<commit>` with that asset.
+GitHub Actions cannot do this: the build needs the patched Blaze ([setup](../../../setup.md)).
+
 ## Signing limits
 
 The script ad hoc signs the Ria executable and keeps the engine framework as supplied.

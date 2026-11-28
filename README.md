@@ -2,7 +2,7 @@
 
 A native Rust and [Rune](https://github.com/anomalyco/rune) port of the [Ardia](https://github.com/ardia-browser/ardia) browser for macOS.
 
-**State: early.** Phase 0 (proofs) and Phase 1 (core logic) passed their gates. There is no app to download yet.
+**State: early.** Phase 0 (proofs) and Phase 1 (core logic) passed their gates. A test build for the Mac is on the [releases page](https://github.com/i098/ria/releases).
 
 ## What works today
 
@@ -14,6 +14,18 @@ There is no settings screen yet.
 Another app can send it a page URL.
 
 The Mac proofs of Phase 0 (Rust host on the Ardia engine, Rune layers, accessibility) and the Linux proof of the port loop passed. Results: [`rust/GATES.md`](rust/GATES.md).
+
+## Install (Mac, Apple silicon)
+
+1. Download `Ria-mac-arm64-<commit>.zip` from the newest prerelease on the [releases page](https://github.com/i098/ria/releases). The repository is private: sign in to GitHub, or run `gh release download --repo i098/ria --pattern 'Ria-mac-*.zip'`.
+2. Unzip it. Use `ditto -x -k Ria-mac-*.zip .` in a shell, or double-click the file.
+3. Open `Ria.app`. The build is unsigned (ad hoc signature, no notarization), so macOS blocks a double-click open: right-click the app, choose Open, then confirm. In a shell, run `xattr -dr com.apple.quarantine Ria.app` first.
+
+The first launch opens one window with a tab strip, a toolbar and an `about:blank` tab. Type a URL in the address field and press Return to load a page.
+To test without touching a real profile, run `RIA_BACKGROUND=1 RIA_DATA_DIR="$(mktemp -d)" Ria.app/Contents/MacOS/ria-app`.
+The build is a debug build and the profile uses a mock keychain: do not use real passwords.
+
+Maintainers publish a build with `rust/tools/bundle/release-mac.sh` (see [the bundle guide](rust/tools/bundle/README.md#publish-a-prerelease)).
 
 ## Build and test
 
